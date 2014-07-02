@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"unsafe"
 )
 
 type Example struct {
@@ -12,43 +11,37 @@ type Example struct {
 }
 
 func main() {
+	// Declare variable of type Example and init using
+	// a composite literal.
 	example := Example{
 		BoolValue:  true,
 		IntValue:   10,
 		FloatValue: 3.141592,
 	}
 
-	exampleNext := Example{
-		BoolValue:  true,
-		IntValue:   10,
-		FloatValue: 3.141592,
+	// Declare a variable of an anonymous type and init
+	// using a composite literal.
+	anon := struct {
+		name string
+	}{
+		name: "Jill",
 	}
 
-	alignmentBoundary := unsafe.Alignof(example)
+	// Declare a variable of an anonymous type that contains
+	// an anonymous inner type and init using a composite literal.
+	anon2 := struct {
+		inner struct {
+			name string
+		}
+		age int
+	}{
+		inner: struct {
+			name string
+		}{"Bill"},
+		age: 45,
+	}
 
-	sizeBool := unsafe.Sizeof(example.BoolValue)
-	offsetBool := unsafe.Offsetof(example.BoolValue)
-
-	sizeInt := unsafe.Sizeof(example.IntValue)
-	offsetInt := unsafe.Offsetof(example.IntValue)
-
-	sizeFloat := unsafe.Sizeof(example.FloatValue)
-	offsetFloat := unsafe.Offsetof(example.FloatValue)
-
-	sizeBoolNext := unsafe.Sizeof(exampleNext.BoolValue)
-	offsetBoolNext := unsafe.Offsetof(exampleNext.BoolValue)
-
-	fmt.Printf("Alignment Boundary: %d\n", alignmentBoundary)
-
-	fmt.Printf("BoolValue = Size: %d Offset: %d Addr: %v\n",
-		sizeBool, offsetBool, &example.BoolValue)
-
-	fmt.Printf("IntValue = Size: %d Offset: %d Addr: %v\n",
-		sizeInt, offsetInt, &example.IntValue)
-
-	fmt.Printf("FloatValue = Size: %d Offset: %d Addr: %v\n",
-		sizeFloat, offsetFloat, &example.FloatValue)
-
-	fmt.Printf("Next = Size: %d Offset: %d Addr: %v\n",
-		sizeBoolNext, offsetBoolNext, &exampleNext.BoolValue)
+	fmt.Println(example)
+	fmt.Println(anon)
+	fmt.Println(anon2)
 }

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// Max integer value on 64 bit arch.
+// Max integer value on 64 bit architecture.
 const maxInt = 9223372036854775807
 
 // Much larger value than int64.

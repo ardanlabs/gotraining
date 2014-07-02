@@ -1,3 +1,6 @@
+// Alignment is about placing types on boundaries that make the
+// CPU access the fastest.
+
 package main
 
 import (
@@ -6,38 +9,49 @@ import (
 )
 
 type Example struct {
-	IntValue int16
-	spacer   int
+	BoolValue  bool
+	IntValue   int16
+	FloatValue float32
 }
 
 func main() {
 	example := Example{
-		IntValue: 10,
+		BoolValue:  true,
+		IntValue:   10,
+		FloatValue: 3.141592,
 	}
 
 	exampleNext := Example{
-		IntValue: 10,
+		BoolValue:  true,
+		IntValue:   10,
+		FloatValue: 3.141592,
 	}
 
 	alignmentBoundary := unsafe.Alignof(example)
 
-	sizeBool := unsafe.Sizeof(example.IntValue)
-	offsetBool := unsafe.Offsetof(example.IntValue)
+	sizeBool := unsafe.Sizeof(example.BoolValue)
+	offsetBool := unsafe.Offsetof(example.BoolValue)
 
-	sizeS := unsafe.Sizeof(example.spacer)
-	offsetS := unsafe.Offsetof(example.spacer)
+	sizeInt := unsafe.Sizeof(example.IntValue)
+	offsetInt := unsafe.Offsetof(example.IntValue)
 
-	sizeBoolNext := unsafe.Sizeof(exampleNext.IntValue)
-	offsetBoolNext := unsafe.Offsetof(exampleNext.IntValue)
+	sizeFloat := unsafe.Sizeof(example.FloatValue)
+	offsetFloat := unsafe.Offsetof(example.FloatValue)
+
+	sizeBoolNext := unsafe.Sizeof(exampleNext.BoolValue)
+	offsetBoolNext := unsafe.Offsetof(exampleNext.BoolValue)
 
 	fmt.Printf("Alignment Boundary: %d\n", alignmentBoundary)
 
-	fmt.Printf("IntValue = Size: %d Offset: %d Addr: %p\n",
-		sizeBool, offsetBool, &example.IntValue)
+	fmt.Printf("BoolValue = Size: %d Offset: %d Addr: %v\n",
+		sizeBool, offsetBool, &example.BoolValue)
 
-	fmt.Printf("spacer = Size: %d Offset: %d Addr: %p\n",
-		sizeS, offsetS, &example.spacer)
+	fmt.Printf("IntValue = Size: %d Offset: %d Addr: %v\n",
+		sizeInt, offsetInt, &example.IntValue)
 
-	fmt.Printf("Next = Size: %d Offset: %d Addr: %p\n",
-		sizeBoolNext, offsetBoolNext, &exampleNext.IntValue)
+	fmt.Printf("FloatValue = Size: %d Offset: %d Addr: %v\n",
+		sizeFloat, offsetFloat, &example.FloatValue)
+
+	fmt.Printf("Next = Size: %d Offset: %d Addr: %v\n",
+		sizeBoolNext, offsetBoolNext, &exampleNext.BoolValue)
 }
