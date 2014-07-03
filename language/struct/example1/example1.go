@@ -4,19 +4,19 @@ import (
 	"fmt"
 )
 
-type Example struct {
-	BoolValue  bool
-	IntValue   int16
-	FloatValue float32
+type example struct {
+	flag    bool
+	counter int16
+	pi      float32
 }
 
 func main() {
-	// Declare variable of type Example and init using
+	// Declare variable of type example and init using
 	// a composite literal.
-	example := Example{
-		BoolValue:  true,
-		IntValue:   10,
-		FloatValue: 3.141592,
+	e := example{
+		flag:    true,
+		counter: 10,
+		pi:      3.141592,
 	}
 
 	// Declare a variable of an anonymous type and init
@@ -41,7 +41,7 @@ func main() {
 		age: 45,
 	}
 
-	fmt.Println(example)
+	fmt.Println(e)
 	fmt.Println(anon)
 	fmt.Println(anon2)
 }
