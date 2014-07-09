@@ -1,5 +1,6 @@
-// Example shows how to takes slices of slices to create different
-// views of and make changes to the underlying array.
+// Example proves a slice is a reference type that contains a three
+// word header with a pointer, the length and capacity of the
+// underlying array.
 package main
 
 import (
@@ -8,33 +9,14 @@ import (
 )
 
 func main() {
-	slice1 := make([]string, 5, 8)
-	slice1[0] = "Apple"
-	slice1[1] = "Orange"
-	slice1[2] = "Banana"
-	slice1[3] = "Grape"
-	slice1[4] = "Plum"
+	slice := make([]string, 5, 8)
+	slice[0] = "Apple"
+	slice[1] = "Orange"
+	slice[2] = "Banana"
+	slice[3] = "Grape"
+	slice[4] = "Plum"
 
-	InspectSlice(slice1)
-
-	// For slice[i:j] with an underlying array of capacity k
-	// Length: j - i
-	// Capacity: k - i
-
-	// Slice slice1 from element two for length 4 - 2
-	// With a capacity of 8 - 2
-	slice2 := slice1[2:4]
-	InspectSlice(slice2)
-
-	// Slice slice2 from element one for length 6 - 1
-	// With a capacity 6 - 1
-	slice3 := slice2[1:cap(slice2)]
-	InspectSlice(slice3)
-
-	slice3[0] = "CHANGED"
-	fmt.Println("slice1[3]", slice1[3])
-	fmt.Println("slice2[1]", slice2[1])
-	fmt.Println("slice3[0]", slice3[0])
+	InspectSlice(slice)
 }
 
 func InspectSlice(slice []string) {

@@ -1,5 +1,4 @@
-// Example shows how to takes slices of slices to create different
-// views of and make changes to the underlying array.
+// Example shows the practical use of using a third index slice.
 package main
 
 import (
@@ -8,33 +7,21 @@ import (
 )
 
 func main() {
-	slice1 := make([]string, 5, 8)
-	slice1[0] = "Apple"
-	slice1[1] = "Orange"
-	slice1[2] = "Banana"
-	slice1[3] = "Grape"
-	slice1[4] = "Plum"
+	slice := []string{"Apple", "Orange", "Banana", "Grape", "Plum"}
+	InspectSlice(slice)
 
-	InspectSlice(slice1)
+	takeOne := slice[2:3]
+	InspectSlice(takeOne)
 
-	// For slice[i:j] with an underlying array of capacity k
-	// Length: j - i
+	// For slice[ i : j : k ] the
+	// Length:   j - i
 	// Capacity: k - i
 
-	// Slice slice1 from element two for length 4 - 2
-	// With a capacity of 8 - 2
-	slice2 := slice1[2:4]
-	InspectSlice(slice2)
+	takeOneCapOne := slice[2:3:3] // Use the third index position to
+	InspectSlice(takeOneCapOne)   // set the capacity
 
-	// Slice slice2 from element one for length 6 - 1
-	// With a capacity 6 - 1
-	slice3 := slice2[1:cap(slice2)]
-	InspectSlice(slice3)
-
-	slice3[0] = "CHANGED"
-	fmt.Println("slice1[3]", slice1[3])
-	fmt.Println("slice2[1]", slice2[1])
-	fmt.Println("slice3[0]", slice3[0])
+	takeOneCapOne = append(takeOneCapOne, "Kiwi")
+	InspectSlice(takeOneCapOne)
 }
 
 func InspectSlice(slice []string) {
