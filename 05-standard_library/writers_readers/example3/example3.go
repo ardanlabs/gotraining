@@ -1,67 +1,38 @@
-// https://github.com/extemporalgenome/watchpost/blob/master/main.go
-// Sample code provided by Kevin Gillette
+// https://gist.github.com/jmoiron/e9f72720cef51862b967#file-01-curl-go
+// Sample code provided by Jason Moiron
 
-// Sample program to show how io.Writes can be embedded within
-// other Writer calls to perform complex writes.
+// ./example4 http://www.goinggo.net/feeds/posts/default
+
+// Sample program to show how to write a simple version of curl using
+// the io.Reader and io.Writer interface support.
 package main
 
 import (
-	"crypto"
-	_ "crypto/sha1"
-	"encoding/hex"
 	"fmt"
 	"io"
-	"mime/multipart"
+	"net/http"
 	"os"
 )
 
+// init is called before main.
+func init() {
+	if len(os.Args) != 2 {
+		fmt.Println("Usage: ./example4 <url>")
+		os.Exit(-1)
+	}
+}
+
 // main is the entry point for the application.
 func main() {
-	// Open the file.
-	file, err := os.Open("data.json")
+	// r here is a response, and r.Body is an io.Reader
+	r, err := http.Get(os.Args[1])
 	if err != nil {
-		fmt.Println("Open File", err)
+		fmt.Println(err)
 		return
 	}
-
-	// Schedule the file to be closed once
-	// the function returns.
-	defer file.Close()
-
-	// Create a synchronous in-memory pipe. This pipe will
-	// allow us to use a Writer as a Reader.
-	pipeReader, pipeWriter := io.Pipe()
-
-	// Create a goroutine to perform the write since
-	// the Reader will block until the Writer is closed.
-	go func() {
-		// Create an SHA1 hash value which implements io.Writer.
-		hash := crypto.SHA1.New()
-
-		// Create a Reader that writes to the hash what it reads
-		// from the file.
-		hashReader := io.TeeReader(file, hash)
-
-		// Create the multipart writer to put everything together.
-		mpWriter := multipart.NewWriter(pipeWriter)
-		fileWriter, err := mpWriter.CreateFormFile("file", "data.json")
-
-		// Write the contents of the file to the multipart form.
-		_, err = io.Copy(fileWriter, hashReader)
-		if err != nil {
-			fmt.Println("Write File", err)
-			return
-		}
-
-		// Add the SHA hash key we generated.
-		mpWriter.WriteField("sha1", hex.EncodeToString(hash.Sum(nil)))
-
-		// Close the Writer which will cause the Reader to unblock.
-		mpWriter.Close()
-		pipeWriter.Close()
-	}()
-
-	// Wait until the Writer is closed, then write the
-	// Pipe to Stdout.
-	io.Copy(os.Stdout, pipeReader)
+	// io.Copy(dst io.Writer, src io.Reader), copies from the Body to Stdout
+	io.Copy(os.Stdout, r.Body)
+	if err := r.Body.Close(); err != nil {
+		fmt.Println(err)
+	}
 }
