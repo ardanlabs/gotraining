@@ -1,0 +1,83 @@
+[
+{
+  "condition": {
+    "wind_speed_milehour": 17.895520000000001204,
+    "wind_direction_degnorth": 190,
+    "gust_wind_speed_milehour": 22.36939999999999884
+  },
+  "image": "http://www.ndbc.noaa.gov/images/stations/3m.jpg",
+  "image_small": "http://www.ndbc.noaa.gov/images/stations/3m_mini.jpg",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -84.516999999999995907,
+      28.5
+    ]
+  },
+  "location_desc": "112 NM WNW of Tampa, FL",
+  "name": "Station 42036 - West Tampa",
+  "owned": "National Data Buoy Center",
+  "payload": "ARES 4.4",
+  "region": "Gulf Of Mexico",
+  "rss_data": "http://www.ndbc.noaa.gov/data/latest_obs/42036.rss",
+  "station_id": "42036",
+  "station_page": "http://www.ndbc.noaa.gov/station_page.php?station=42036",
+  "station_type": "3-Meter Discus Buoy",
+  "surface": "ocean",
+  "txt_data_45": "http://www.ndbc.noaa.gov/data/realtime2/42036.txt"
+},
+{
+  "condition": {
+    "gust_wind_speed_milehour": 10.289923786668779826,
+    "wind_speed_milehour": 8.052983786668777455,
+    "wind_direction_degnorth": 300
+  },
+  "image": null,
+  "image_small": null,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -82.552999999999997272,
+      27.85800000000000054
+    ]
+  },
+  "location_desc": "Old Port Tampa, FL",
+  "name": "Station OPTF1 - 8726607",
+  "owned": "NOAA's National Ocean Service",
+  "payload": null,
+  "region": "Gulf Of Mexico",
+  "rss_data": "http://www.ndbc.noaa.gov/data/latest_obs/optf1.rss",
+  "station_id": "optf1",
+  "station_page": "http://www.ndbc.noaa.gov/station_page.php?station=optf1",
+  "station_type": "Water Level Observation Network",
+  "surface": "bayline",
+  "txt_data_45": "http://www.ndbc.noaa.gov/data/realtime2/OPTF1.txt"
+},
+{
+  "condition": {
+    "wind_direction_degnorth": 350,
+    "wind_speed_milehour": 4.6975737866687765631,
+    "gust_wind_speed_milehour": 5.8160437866687777486
+  },
+  "image": null,
+  "image_small": null,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -82.444999999999993179,
+      27.922999999999998266
+    ]
+  },
+  "location_desc": "Seabulk, Tampa, FL",
+  "name": "Station SBLF1 - 8726673",
+  "owned": "NOAA's National Ocean Service",
+  "payload": null,
+  "region": "Gulf Of Mexico",
+  "rss_data": "http://www.ndbc.noaa.gov/data/latest_obs/sblf1.rss",
+  "station_id": "sblf1",
+  "station_page": "http://www.ndbc.noaa.gov/station_page.php?station=sblf1",
+  "station_type": "Water Level Observation Network",
+  "surface": "coastline",
+  "txt_data_45": "http://www.ndbc.noaa.gov/data/realtime2/SBLF1.txt"
+}
+]
