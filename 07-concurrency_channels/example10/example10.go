@@ -1,6 +1,5 @@
-// This sample program demonstrates how to use a buffered
-// channel to work on multiple tasks with a predefined number
-// of goroutines.
+// Sample program to show how to use a buffered channel to work
+// on multiple tasks with a predefined number of goroutines.
 package main
 
 import (
@@ -62,7 +61,7 @@ func worker(tasks chan string, worker int) {
 		// Display we finished the work.
 		fmt.Printf("Worker: %d : Completed %s\n", worker, task)
 
-		// Report this task is complete
+		// Report this task is complete.
 		wg.Done()
 	}
 }
