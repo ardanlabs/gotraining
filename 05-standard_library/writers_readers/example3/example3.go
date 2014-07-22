@@ -38,16 +38,16 @@ func main() {
 		// Create an SHA1 hash value which implements io.Writer.
 		hash := crypto.SHA1.New()
 
-		// Stream the file directly through the hash function to
-		// create a hash key.
-		io.TeeReader(file, hash)
+		// Create a Reader that writes to the hash what it reads
+		// from the file.
+		hashReader := io.TeeReader(file, hash)
 
 		// Create the multipart writer to put everything together.
 		mpWriter := multipart.NewWriter(pipeWriter)
-		fw, err := mpWriter.CreateFormFile("file", "data.json")
+		fileWriter, err := mpWriter.CreateFormFile("file", "data.json")
 
 		// Write the contents of the file to the multipart form.
-		_, err = io.Copy(fw, file)
+		_, err = io.Copy(fileWriter, hashReader)
 		if err != nil {
 			fmt.Println("Write File", err)
 			return
