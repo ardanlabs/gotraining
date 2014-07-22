@@ -10,7 +10,7 @@ const dataFile = "data/data.json"
 // Feed contains information we need to process a feed.
 type Feed struct {
 	Name string `json:"site"`
-	Uri  string `json:"link"`
+	URI  string `json:"link"`
 	Type string `json:"type"`
 }
 

@@ -1,4 +1,4 @@
-// Sample program to show how to create constants and their
+// Sample program to show how to declare constants and their
 // implementation in Go.
 package main
 

@@ -1,4 +1,4 @@
-// Sample program to show how to create and use struct types.
+// Sample program to show how to declare and initalize struct types.
 package main
 
 import (

@@ -6,7 +6,7 @@ import (
 )
 
 // A map of registered matchers for searching.
-var matchers map[string]Matcher = make(map[string]Matcher)
+var matchers = make(map[string]Matcher)
 
 // Run performs the search logic.
 func Run(searchTerm string) {

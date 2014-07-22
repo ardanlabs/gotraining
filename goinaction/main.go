@@ -16,7 +16,6 @@ func init() {
 
 // main is the entry point for the program.
 func main() {
-	log.Println("V1")
 	// Perform the search for the specified term.
 	search.Run("president")
 }
