@@ -32,20 +32,23 @@ import (
 	"time"
 )
 
-// ./example2.go:37: cannot use time.Duration(5) * time.Second
-// (type time.Duration) as type int64 in const initializer
-const fiveSeconds int64 = 5 * time.Second
+// fiveSeconds is an untyped constant of kind integer.
+// time.Duration(5) * time.Second
+const fiveSeconds = 5 * time.Second
 
 // main is the entry point for the application.
 func main() {
 	// Use the time package to get the current date/time.
 	now := time.Now()
 
-	// Subtract 5 seconds from now time using a literal constant.
-	lessFiveNanoseconds := now.Add(-5)
+	// Convert the literal constant -5 to a value of type int64.
+	minusFive := int64(-5)
 
-	// ./example2.go:48: cannot use -fiveSeconds (type int64) as
-	// type time.Duration in argument to now.Add
+	// ./example2.go:48: cannot use minusFive (type int64) as type
+	// time.Duration in argument to now.Add
+	lessFiveNanoseconds := now.Add(minusFive)
+
+	// Substract 5 seconds from now using a declared constant.
 	lessFiveSeconds := now.Add(-fiveSeconds)
 
 	// Display the values.

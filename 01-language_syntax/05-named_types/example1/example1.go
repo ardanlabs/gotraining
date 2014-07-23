@@ -1,54 +1,27 @@
-// http://golang.org/pkg/time/
-
-/*
-// A Duration represents the elapsed time between two instants as
-// an int64 nanosecond count. The representation limits the largest
-// representable duration to approximately 290 years.
-
-type Duration int64
-
-// Common durations. There is no definition for units of Day or larger
-// to avoid confusion across daylight savings time zone transitions.
-
-const (
-        Nanosecond  Duration = 1
-        Microsecond          = 1000 * Nanosecond
-        Millisecond          = 1000 * Microsecond
-        Second               = 1000 * Millisecond
-        Minute               = 60 * Second
-        Hour                 = 60 * Minute
-)
-
-// Add returns the time t+d.
-func (t Time) Add(d Duration) Time
-*/
-
-// Sample program to show a idiomatic use of named types from the
-// standard library and how they work in concert with other Go concepts.
+// Sample program to show how to declare and use a named type.
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
-// fiveSeconds is an untyped constant of kind integer.
-// time.Duration(5) * time.Second
-const fiveSeconds = 5 * time.Second
+// Duration is a named type that represents a duration
+// of time in Nanosecond.
+type Duration int64
 
-// main is the entry point for the application.
 func main() {
-	// Use the time package to get the current date/time.
-	now := time.Now()
+	// Declare a variable of type Duration
+	var duration Duration
+	fmt.Println(duration)
 
-	// Subtract 5 seconds from now time using a literal constant.
-	lessFiveNanoseconds := now.Add(-5)
+	// Declare a variable of type int and assign a value.
+	nanosecond := 10
 
-	// Substract 5 seconds from now using a declared constant.
-	lessFiveSeconds := now.Add(-fiveSeconds)
+	// Attemped to assign a variable of type int (base type of Duration) to
+	// a variable of type Duration.
+	// duration = nanosecond
 
-	// Display the values.
-	fmt.Printf("Now     : %v\n", now)
-	fmt.Printf("Nano    : %v\n", lessFiveNanoseconds)
-	fmt.Printf("Seconds : %v\n", lessFiveSeconds)
+	// ./example1.go:20: cannot use value (type int) as type Duration in assignment
+
+	// Convert a value of type int to type Duration.
+	duration = Duration(nanosecond)
+	fmt.Println(duration)
 }
