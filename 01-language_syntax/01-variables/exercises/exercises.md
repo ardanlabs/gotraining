@@ -1,4 +1,4 @@
-# Exercises
+# Language Syntax - Exercises
 
 ## Variables
 

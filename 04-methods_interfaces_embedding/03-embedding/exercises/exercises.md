@@ -1,4 +1,4 @@
-# Exercises
+# Methods, Interfaces and Embedding - Exercises
 
 ## Embedding
 

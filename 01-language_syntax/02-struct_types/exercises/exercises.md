@@ -1,6 +1,6 @@
-# Exercises
+# Language Syntax - Exercises
 
-## Struct Type Exercises
+## Struct Type
 
 ### Exercise 1
 Declare a struct type to maintain information about a user. Create a value of this type and display the values.

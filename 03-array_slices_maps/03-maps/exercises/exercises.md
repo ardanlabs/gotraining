@@ -1,4 +1,4 @@
-# Exercises
+# Arrays, Slices and Maps - Exercises
 
 ## Maps
 

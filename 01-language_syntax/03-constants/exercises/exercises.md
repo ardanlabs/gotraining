@@ -1,6 +1,6 @@
-# Exercises
+# Language Syntax - Exercises
 
-## Constants Exercises
+## Constants
 
 ### Exercise 1
 Declare an untyped and typed constant and display their values.

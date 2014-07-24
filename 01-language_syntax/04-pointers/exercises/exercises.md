@@ -1,6 +1,6 @@
-# Exercises
+# Language Syntax - Exercises
 
-## Pointer Exercises
+## Pointers
 
 ### Exercise 1
 Declare and initalize a variable of type int with the value of 20. Display the _address of_ and _value of_ the variable.

@@ -1,6 +1,6 @@
-# Exercises
+# Language Syntax - Exercises
 
-## Named Typed Exercises
+## Named Typed
 
 ### Exercise 1
 Declare a named type called counter with a base type of int. Decalre and initalize a variable of this named type to its zero value. Display the value of this variable and the variables type.

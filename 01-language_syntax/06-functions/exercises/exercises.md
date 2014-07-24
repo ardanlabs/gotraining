@@ -1,6 +1,6 @@
-# Exercises
+# Language Syntax - Exercises
 
-## Functions Exercises
+## Functions
 
 ### Exercise 1
 Declare a struct type to maintain information about a user. Declare a function that creates and returns pointers of this type and an error value. Write a main function that tests this function.  
