@@ -1,4 +1,4 @@
-## Writers/Readers - Standard Library - Exercises
+## Writers/Readers - Standard Library
 
 ### Code Review
 
