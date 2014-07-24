@@ -20,3 +20,8 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 ### Exercise 1
 Write new tests for the FindRegion function found in the buoy package. Write a standard test, table test and benchmark.
+
+___
+[![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

@@ -11,3 +11,8 @@ Declare a struct type to maintain information about a hobby. Declare a method th
 
 ### Exercise 2
 Declare a struct that represents a baseball player. Include Name, AtBats and Hits. Declare a method that calculates a players batting average. The formula is Hits / AtBats. Declare a slice of this type and initalize the slice with several players. Iterate over the slice displaying the players name and batting average.
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

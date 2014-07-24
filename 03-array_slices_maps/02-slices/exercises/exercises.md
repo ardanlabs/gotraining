@@ -24,3 +24,8 @@ Declare a slice of five strings and initialize the slice with string literal val
 
 ### Exercise 3
 Declare a slice of five strings and initialize this slice with string literal values. Take a slice of the second element with a capacity of one. Display the length and capacity of the slice. Iterate over the slice and display the address and value of each element. Append a new value to the slice and display everything again.
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

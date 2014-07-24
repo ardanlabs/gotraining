@@ -15,3 +15,8 @@ Declare and make a map of strings with an integer as the key. Populate the map w
 
 ### Exercise 2
 Declare a named type who's base type is a map of integers with a string as the key. Declare a slice of this map type. Populate the slice with values of the map type. Display the value of the slice and the individual maps.
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

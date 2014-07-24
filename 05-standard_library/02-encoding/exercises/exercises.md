@@ -13,3 +13,7 @@ Create a file with an array of JSON documents. Declare a struct type that maps t
 
 ### Exercise 2
 From example 1, Marshal the slice into pretty print strings and display each element.
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

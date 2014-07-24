@@ -19,3 +19,8 @@ Create a package that exports functions that can be used to perform simple math 
 
 ### Exercise 2
 Create a package with an unexported struct type with exported fields. In the package, declare an exported factory function named New to create and return pointers of this unexported type. Write a main function that uses this package to create values of this type, then initialize and display those values.
+
+___
+[![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

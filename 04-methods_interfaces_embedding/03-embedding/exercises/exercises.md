@@ -19,3 +19,8 @@ From exercise 2, add an interface named Speaker with a single method called Yelp
 
 ### Exercise 4
 From exercise 3, implement the Speaker interface for the Dog type. Call the method Yelp again from the value of type Speaker.
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

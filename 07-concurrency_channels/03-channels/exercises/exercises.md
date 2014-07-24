@@ -21,3 +21,8 @@ Review the provided program that will be used for future exercises. Program uses
 ### Exercise 2
 From exercise 1, use channels instead of the sync package.
 [Simple Solution](final/final.go)
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
