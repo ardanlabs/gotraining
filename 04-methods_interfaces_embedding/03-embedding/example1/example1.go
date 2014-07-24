@@ -46,7 +46,7 @@ func main() {
 	}
 
 	// Send the admin user a notification.
-	// The embeeded inner type's implementation of the
+	// The embedded inner type's implementation of the
 	// interface is "promoted" to the outer type.
 	sendNotification(&admin)
 

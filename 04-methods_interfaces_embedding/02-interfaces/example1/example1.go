@@ -1,5 +1,5 @@
 // Sample program to show how to use an interface in Go. In this case,
-// Go will not deference a value to support the interface.
+// Go will NOT deference a value to support the interface.
 package main
 
 import (

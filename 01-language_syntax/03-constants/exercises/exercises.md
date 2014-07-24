@@ -1,5 +1,6 @@
-Constants Exercises
-==========
+# Exercises
+
+## Constants Exercises
 
 ### Exercise 1
 Declare an untyped and typed constant and display their values.

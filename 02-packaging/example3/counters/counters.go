@@ -5,8 +5,8 @@ package counters
 // contains an integer counter for alerts.
 type alertCounter int
 
-// NewAlertCounter creates and returns objects of
+// New creates and returns objects of
 // the unexported type alertCounter.
-func NewAlertCounter(value int) alertCounter {
+func New(value int) alertCounter {
 	return alertCounter(value)
 }
