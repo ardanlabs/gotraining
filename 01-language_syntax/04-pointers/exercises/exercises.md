@@ -2,8 +2,10 @@
 
 ### Code Review
 
-[Pass by value](../example1/example1.go) | 
-[Using a pointer to share data I](../example2/example2.go) | 
+[Pass by value](../example1/example1.go)
+
+[Using a pointer to share data I](../example2/example2.go)
+
 [using a pointer to share data II](../example3/example3.go)
 
 ### Exercises

@@ -2,7 +2,8 @@
 
 ### Code Review
 
-[Declare and initalize struct types](../example1/example1.go) | 
+[Declare and initalize struct types](../example1/example1.go)
+
 (Advanced) [Struct types align on boundaries](../advanced/example1/example1.go)
 
 ### Exercises
