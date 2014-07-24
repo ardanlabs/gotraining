@@ -26,3 +26,6 @@
 [Logging](../05-standard_library/01-logging/exercises/exercises.md") | 
 [Encoding](../05-standard_library/02-encoding/exercises/exercises.md") | 
 [Writers/Readers](../05-standard_library/03-writers_readers/exercises/exercises.md")
+
+## Reflection
+[Reflection](../06-reflection/exercises/exercises.md")
