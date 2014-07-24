@@ -7,7 +7,7 @@
 [Constants](../01-language_syntax/03-constants/exercises/exercises.md) | 
 [Pointers](../01-language_syntax/04-pointers/exercises/exercises.md) | 
 [Named Types](../01-language_syntax/05-named_types/exercises/exercises.md) | 
-[Functions](../01-language_syntax/06-functions/exercises/exercises.md")
+[Functions](../01-language_syntax/06-functions/exercises/exercises.md)
 
 ### Packaging
 [Packaging](../02-packaging/exercises/exercises.md)
