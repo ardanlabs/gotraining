@@ -29,3 +29,8 @@
 
 ### Reflection
 [Reflection](../06-reflection/exercises/exercises.md)
+
+### Concurrency and Channels
+[Goroutines](../07-concurrency_channels/01-goroutines/exercises/exercises.md) | 
+[Race Conditions](../07-concurrency_channels/02-race_conditions/exercises/exercises.md) | 
+[Goroutines](../07-concurrency_channels/03-channels/exercises/exercises.md)
