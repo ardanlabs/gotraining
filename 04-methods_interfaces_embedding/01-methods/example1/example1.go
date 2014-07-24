@@ -1,4 +1,4 @@
-// Sample program to show how to create methods and how the Go
+// Sample program to show how to declare methods and how the Go
 // compiler supports them.
 package main
 

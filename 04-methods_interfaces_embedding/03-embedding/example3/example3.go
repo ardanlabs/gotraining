@@ -1,4 +1,4 @@
-// Sample program to show what happens when the outer and innter
+// Sample program to show what happens when the outer and inner
 // type implement the same interface.
 package main
 

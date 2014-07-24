@@ -1,4 +1,4 @@
-// Sample program to show how to create methods against
+// Sample program to show how to declare methods against
 // a named type.
 package main
 
