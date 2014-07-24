@@ -1,6 +1,12 @@
-# Methods, Interfaces and Embedding - Exercises
-
 ## Embedding
+
+### Code Review
+
+[Embedding types](../example1/example1.go)
+
+[Embedded types and interfaces](../example2/example2.go)
+
+[Outer and inner type interface implementations](../example3/example3.go)
 
 ### Exercise 1
 Declare a struct type named Animal with two fields associated with all animals. Declare a struct type named Dog with two field associated with a dog. Embed the Animal type into the Dog type. Declare and initalize a value of type Dog. Display the value of the variable.
