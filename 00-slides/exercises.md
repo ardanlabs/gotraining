@@ -34,3 +34,6 @@
 [Goroutines](../07-concurrency_channels/01-goroutines/exercises/exercises.md) | 
 [Race Conditions](../07-concurrency_channels/02-race_conditions/exercises/exercises.md) | 
 [Channels](../07-concurrency_channels/03-channels/exercises/exercises.md)
+
+### Testing
+[Database Program](../08-testing/exercises/exercises.md)
