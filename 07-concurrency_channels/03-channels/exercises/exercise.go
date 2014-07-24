@@ -1,5 +1,6 @@
-// Program uses a function type and closure and creates goroutines
-// to calculate Fibonacci numbers. This code is goroutine safe.
+// Program uses a function type, closures and creates goroutines to
+// calculate Fibonacci numbers. This program is goroutine safe thanks
+// to the sync package.
 package main
 
 import (

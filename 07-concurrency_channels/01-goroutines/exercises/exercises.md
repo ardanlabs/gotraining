@@ -9,7 +9,7 @@
 [Goroutines and parallelism](../example3/example3.go)
 
 ### Exercise 1
-Review the provided program that will be used for future exercises. Program uses a function type and closure to create a recursive call that maintains its own state to calculate Fibonacci numbers.
+Review the provided program that will be used for future exercises. Program uses a function type and closures to create a recursive call that maintains its own state to calculate Fibonacci numbers.
 [Starter Program](exercise.go)
 
 ### Exercise 2

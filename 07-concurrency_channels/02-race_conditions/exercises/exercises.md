@@ -11,7 +11,7 @@
 [Mutex](../example4/example4.go)
 
 ### Exercise 1
-Review the provided program that will be used for future exercises. Program uses a function type and closure and creates goroutines to calculate Fibonacci numbers. This program contains a Data Race.
+Review the provided program that will be used for future exercises. Program uses a function type, closures and goroutines to calculate Fibonacci numbers. This program contains a Data Race.
 [Starter Program](exercise.go)
 
 ### Exercise 2

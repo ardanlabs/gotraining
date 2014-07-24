@@ -1,5 +1,5 @@
-// Program uses a function type and closure and creates goroutines
-// to calculate Fibonacci numbers. This code uses channels.
+// Program uses a function type, closures, goroutines and channels
+// to calculate Fibonacci numbers.
 package main
 
 import (

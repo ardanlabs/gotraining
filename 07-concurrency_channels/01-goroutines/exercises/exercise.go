@@ -1,4 +1,4 @@
-// Program uses a function type and closure to create a recursive call
+// Program uses a function type and closures to create a recursive call
 // that maintains its own state to calculate Fibonacci numbers.
 package main
 

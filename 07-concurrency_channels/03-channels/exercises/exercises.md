@@ -15,7 +15,7 @@
 (Advanced) [Pooling](../advanced/pool)
 
 ### Exercise 1
-Review the provided program that will be used for future exercises. Program uses a function type and closure and creates goroutines to calculate Fibonacci numbers. This program is goroutine safe.
+Review the provided program that will be used for future exercises. Program uses a function type, closures and creates goroutines to calculate Fibonacci numbers. This program is goroutine safe thanks to the sync package.
 [Starter Program](exercise.go)
 
 ### Exercise 2
