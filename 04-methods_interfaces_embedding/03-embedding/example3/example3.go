@@ -1,4 +1,5 @@
-// Sample program to show how an embedded types works with interfaces.
+// Sample program to show what happens when the outer and innter
+// type implement the same interface.
 package main
 
 import (
@@ -33,6 +34,14 @@ func (u *User) Notify() {
 		u.Email)
 }
 
+// Notify implements a method that can be called via
+// a value of type Admin.
+func (a *Admin) Notify() {
+	fmt.Printf("User: Sending Admin Email To %s<%s>\n",
+		a.Name,
+		a.Email)
+}
+
 // main is the entry point for the application.
 func main() {
 	// Create an admin user.
@@ -48,6 +57,12 @@ func main() {
 	// The embedded inner type's implementation of the
 	// interface is "promoted" to the outer type.
 	sendNotification(&admin)
+
+	// We can acces the inner type's method direectly.
+	admin.User.Notify()
+
+	// The inner type's method is promoted.
+	admin.Notify()
 }
 
 // sendNotification accepts values that implement the Notifier

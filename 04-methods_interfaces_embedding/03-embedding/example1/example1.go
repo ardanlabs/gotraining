@@ -1,5 +1,5 @@
 // Sample program to show how to embed a type into another type and
-// the corresponding behavior.
+// the relationship between the inner and outer type.
 package main
 
 import (
@@ -7,12 +7,6 @@ import (
 )
 
 type (
-	// Notifier is an interface that defined notification
-	// type behavior.
-	Notifier interface {
-		Notify()
-	}
-
 	// User defines a user in the program.
 	User struct {
 		Name  string
@@ -45,20 +39,9 @@ func main() {
 		Level: "super",
 	}
 
-	// Send the admin user a notification.
-	// The embedded inner type's implementation of the
-	// interface is "promoted" to the outer type.
-	sendNotification(&admin)
-
 	// We can acces the inner type's method direectly.
 	admin.User.Notify()
 
 	// The inner type's method is promoted.
 	admin.Notify()
-}
-
-// sendNotification accepts values that implement the Notifier
-// interface and sends notifications.
-func sendNotification(notify Notifier) {
-	notify.Notify()
 }

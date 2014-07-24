@@ -21,3 +21,6 @@
 [Methods](../04-methods_interfaces_embedding/01-methods/exercises/exercises.md") | 
 [Interfaces](../04-methods_interfaces_embedding/02-interfaces/exercises/exercises.md") | 
 [Embedding](../04-methods_interfaces_embedding/03-embedding/exercises/exercises.md")
+
+## Standard Library
+[Logging](../05-standard_library/01-logging/exercises/exercises.md") | 
