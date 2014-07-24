@@ -4,9 +4,7 @@
 
 [Sample program to show how to declare and initalize struct types](../example1/example1.go)
 
-#### Advanced Code
-
-[Sample program to show how struct types align on boundaries](../advanced/example1/example1.go)
+(Advanced) [Sample program to show how struct types align on boundaries](../advanced/example1/example1.go)
 
 ### Exercises
 
