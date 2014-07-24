@@ -2,8 +2,10 @@
 
 ### Code Review
 
-[Declare constants and their implementation in Go](../example1/example1.go) | 
-[Constants have a parallel type system I](../example2/example2.go) | 
+[Declare constants and their implementation in Go](../example1/example1.go)
+
+[Constants have a parallel type system I](../example2/example2.go)
+
 [Constants have a parallel type system II](../example3/example3.go)
 
 ### Exercises
