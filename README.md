@@ -182,3 +182,7 @@ On this day we learn how to use Go to build a full application. The program impl
 	* Run basic profiling to test the performance.
 * Race Detection
 	* Run the race detector.
+
+___
+
+[![GoingGoTraining](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net) [![GoingGoTraining](00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
