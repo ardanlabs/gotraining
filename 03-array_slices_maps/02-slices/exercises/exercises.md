@@ -14,7 +14,7 @@
 
 [Three index slicing](../example6/example6.go)
 
-(Advanced) [practical use of slices](../advanced/example1/example1.go)
+(Advanced) [Practical use of slices](../advanced/example1/example1.go)
 
 ### Exercise 1
 Declare a nil slice of integers. Create a loop that increments a counter variable by 10 five times and appends these values to the slice. Iterate over the slice and display each value.

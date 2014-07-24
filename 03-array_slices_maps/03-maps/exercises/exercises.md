@@ -1,6 +1,14 @@
-# Arrays, Slices and Maps - Exercises
-
 ## Maps
+
+### Code Review
+
+[Declare, initialize and iterate](../example1/example1.go)
+
+[Composite literal initialization](../example2/example2.go)
+
+[Map key restrictions](../example3/example3.go)
+
+[Composing maps of maps](../example4/example4.go)
 
 ### Exercise 1
 Declare and make a map of strings with an integer as the key. Populate the map with five values and iterate over the map to display the key/value pairs.
