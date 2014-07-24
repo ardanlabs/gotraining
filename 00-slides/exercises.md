@@ -4,6 +4,11 @@
 
 On this day we take a tour of the language. We learn the keywords, built-in functions and syntax. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
+#### Slides
+
+[Opening Slide Deck](day1/opening/slide1.md) | 
+[Closing Slide Deck](day1/closing/slide1.md) 
+
 #### Language Syntax
 
 [Variables](../01-language_syntax/01-variables/exercises/exercises.md) | 

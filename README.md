@@ -184,4 +184,6 @@ On this day we learn how to use Go to build a full application. The program impl
 	* Run the race detector.
 
 ___
-[![GoingGoTraining](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net) [![GoingGoTraining](00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Training](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](00-slides/images/ggb_logo.png)](http://www.goinggo.net)

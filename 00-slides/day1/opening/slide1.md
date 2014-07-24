@@ -18,4 +18,6 @@ We believe it's worth trying again with a new language, a concurrent, garbage-co
 
 ### [Next](slide2.md)
 ___
-[![GoingGoTraining](../images/ggt_logo.png)](http://www.goinggotraining.net) [![GoingGoTraining](../images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../images/ggb_logo.png)](http://www.goinggo.net)
