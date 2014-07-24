@@ -1,8 +1,10 @@
 ## Go Course Outline
 
-This is a 2 day, 15 hour bootcamp style course for existing developers who are looking to gain a working understanding of Go.
+This is a 2 day, 14 hour bootcamp style course for existing developers who are looking to gain a working understanding of Go.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
+
+[Click Here To Review The Course Material](00-slides/exercises.md)
 
 __Minimal Qualified Student:__
 
@@ -31,7 +33,7 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 	* Installing Go
 	* Installing Editor
 	* Github Account
-	* Git, Hg, Bzr
+	* Git, Hg
 * Language and Syntax
 	* Variables
 	* Keyword var
