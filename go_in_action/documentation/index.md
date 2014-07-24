@@ -25,4 +25,4 @@ The program is broken into several distinct steps that run across many different
 
 The code is organized into these four folders which are listed in alphabetical order. The folder contains a JSON document of data feeds data the program will retrieve and process to match the search term. The matchers folder contains the code for the different types of feeds the program supports. Currently the program only supports one matcher that processes RSS type feeds. The search folder contains the business logic for using the different matchers to search content. Finally we have the parent folder called sample that contains the main.go code file which is the entry point for the program.
 
-Now that we have seen where all the code for the program is, we can begin to explore and understand how the program works. Let's start with the entry point for the program.
+Now that we have seen where all the code for the program is, we can begin to explore and understand how the program works.
