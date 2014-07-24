@@ -1,6 +1,13 @@
-# Arrays, Slices and Maps - Exercises
-
 ## Arrays
+
+### Code Review
+
+[Declare, initalize and iterate](../example1/example1.go)
+
+[Different type arrays](../example2/example2.go)
+
+[Contigous memory allocations](../example3/example3.go)
+
 
 ### Exercise 1
 Declare an array of 5 strings with each element initialized to its zero value. Declare a second array of 5 strings and initialize this array with literal string values. Assign the second array to the first and display the results of the first array.

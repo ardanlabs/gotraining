@@ -1,6 +1,18 @@
-# Packaging - Exercises
-
 ## Packaging
+
+### Code Review
+
+[Declare and access exported identifiers](../example1/example1.go)
+
+[Declare unexported identifiers and restrictions](../example2/example2.go)
+
+[Access values of unexported identifiers](../example3/example3.go)
+
+[Unexported struct type fields](../example4/example4.go)
+
+[Exported embedded types](../example5/example5.go)
+
+[unexported embedded types](../example6/example6.go)
 
 ### Exercise 1
 Create a package that exports functions that can be used to perform simple math operations (add, subtract, multiplication and division). Write a main function that uses this package to perform and display these mathematical operations. 
