@@ -1,4 +1,4 @@
-# Go Course Outline
+## Go Course Outline
 
 This is a 2 day, 15 hour bootcamp style course for existing developers who are looking to gain a working understanding of Go. 
 
@@ -21,7 +21,7 @@ __What a student is expected to learn:__
     * Learn how to write maintainable and solid programs that are production ready.
     * Walk away with patterns and techniques for solving common problems. 
 
-## Day 1
+### Day 1
 
 On this day we take a tour of the language. We learn the keywords, built-in functions and syntax. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
@@ -139,7 +139,7 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 * Advanced Topics
 	* Advanced code samples for above topics
 
-## Day II
+### Day II
 
 On this day we learn how to use Go to build a full application. The program implements functionality that can be found in many Go programs being developed today. The program pulls different data feeds from the web and compares the content against a search term. The content that matches is then displayed to the terminal window. The program reads text files, makes web calls, decodes both XML and JSON into struct type values and finally does all of this using Go concurrency to make things fast.
 
