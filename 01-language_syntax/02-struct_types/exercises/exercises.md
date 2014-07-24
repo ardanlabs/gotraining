@@ -2,9 +2,9 @@
 
 ### Code Review
 
-[Sample program to show how to declare and initalize struct types](../example1/example1.go)
+[Declare and initalize struct types](../example1/example1.go)
 
-(Advanced) [Sample program to show how struct types align on boundaries](../advanced/example1/example1.go)
+(Advanced) [Struct types align on boundaries](../advanced/example1/example1.go)
 
 ### Exercises
 

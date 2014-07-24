@@ -2,7 +2,7 @@
 
 ### Code Review
 
-[Sample program to show how to declare variables](../example1/example1.go)
+[Declare variables](../example1/example1.go)
 
 ### Exercises
 
