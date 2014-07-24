@@ -18,3 +18,8 @@ Change the main function in the last exercise to ignore the error value being re
 
 ### Exercise 3
 Declares a function that causes a panic. Trap the panic in the function and display the error. Write a main function to test the function.
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

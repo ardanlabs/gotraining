@@ -16,3 +16,8 @@ Declare and initialize a pointer variable of type int that points to a variable 
 
 ### Exercise 3
 Declare a struct type and create a value of this type. Declare a function that can change the value of this struct type. Display the original value of the struct type and after the function call.
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)

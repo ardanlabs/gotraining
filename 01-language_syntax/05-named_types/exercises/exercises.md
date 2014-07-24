@@ -15,3 +15,8 @@ Declare a named type called counter with a base type of int. Decalre and initali
 
 ### Exercise 2
 Declare a named type called counter with a base type of int. Declare a variable called value of type int and assign the value of 10. Declare a variable of the named types and assign the value of the value variable.
+
+___
+[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
