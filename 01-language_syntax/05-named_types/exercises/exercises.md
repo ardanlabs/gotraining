@@ -2,15 +2,13 @@
 
 ### Code Review
 
-[Declare and use a named type](../example1/example1.go)
+[Declare, create and initalize named types](../example1/example1.go)
 
 [Named types in the standard library](../example2/example2.go)
 
 [Named types and conversion I](../example3/example3.go)
 
 [Named types and conversion II](../example4/example4.go)
-
-### Exercises
 
 ### Exercise 1
 Declare a named type called counter with a base type of int. Decalre and initalize a variable of this named type to its zero value. Display the value of this variable and the variables type.

@@ -1,4 +1,4 @@
-// Sample program to show how to create and use variadic functions.
+// Sample program to show how to declare and use variadic functions.
 package main
 
 import "fmt"
