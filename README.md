@@ -69,6 +69,7 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 		* Declaring, initializing and assignments
 		* Unique types
 		* Iteration
+		* Exercises
 	* Slices
 		* Declaring, initializing and assignments
 		* Length vs. Capacity
@@ -83,6 +84,7 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 		* Declaring, initializing and assigning
 		* Restrictions on key values
 		* Composition
+		* Exercises
 * Methods, Interfaces and Embedding
 	* Methods
 		* Declaring methods
