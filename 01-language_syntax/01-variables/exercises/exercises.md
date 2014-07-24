@@ -1,6 +1,10 @@
-## Language Syntax - Exercises
+## Variables - Language Syntax
 
-### Variables
+## Code Review
+
+[Sample program to show how to declare variables](../example1/example1.go)
+
+## Exercises
 
 #### Exercise 1
 Declare three variables that are initalized to their zero value. Declare a variable of type string, int and bool. Display the values of those variables.
