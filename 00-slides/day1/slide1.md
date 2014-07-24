@@ -16,7 +16,6 @@ We believe it's worth trying again with a new language, a concurrent, garbage-co
 * Go is fully garbage-collected and provides fundamental support for concurrent execution and communication.
 * By its design, Go proposes an approach for the construction of system software on multicore machines.
 
-___
 ### [Next](slide2.md)
-
+___
 [![GoingGoTraining](../images/ggt_logo.png)](http://www.goinggotraining.net) [![GoingGoTraining](../images/ardan_logo.png)](http://www.ardanstudios.com)
