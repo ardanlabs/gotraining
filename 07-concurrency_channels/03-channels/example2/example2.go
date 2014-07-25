@@ -1,3 +1,5 @@
+// http://play.golang.org/p/5B1MxmDuZI
+
 // Sample program to show how to use an unbuffered channel to
 // simulate a relay race between four goroutines.
 package main

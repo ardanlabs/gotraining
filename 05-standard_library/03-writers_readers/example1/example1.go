@@ -1,3 +1,5 @@
+// http://play.golang.org/p/6pZ8RYzIN5
+
 // The io.Reader and io.Writer interfaces allow you to compose all of these different bits together.
 
 // Sample program to show how different functions from

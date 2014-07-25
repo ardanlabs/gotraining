@@ -1,3 +1,7 @@
+// http://play.golang.org/p/Qh4MFV--hV
+
+// go build -race
+
 // Program uses a function type, closures and goroutines to
 // calculate Fibonacci numbers. This program contains a Data Race.
 package main

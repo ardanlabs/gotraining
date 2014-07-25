@@ -1,3 +1,5 @@
+// http://play.golang.org/p/W4_O9x-a1n
+
 // Program uses a function type, closures, goroutines and channels
 // to calculate Fibonacci numbers.
 package main

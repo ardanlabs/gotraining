@@ -1,3 +1,5 @@
+// http://play.golang.org/p/008KxiH7Yj
+
 /*
 func New(out io.Writer, prefix string, flag int) *Logger
 

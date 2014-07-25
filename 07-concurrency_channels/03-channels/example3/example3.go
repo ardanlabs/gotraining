@@ -1,3 +1,5 @@
+// http://play.golang.org/p/sUmggCrshL
+
 // Sample program to show how to use a buffered channel to work
 // on multiple tasks with a predefined number of goroutines.
 package main

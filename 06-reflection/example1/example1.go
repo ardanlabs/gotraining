@@ -1,3 +1,5 @@
+// http://play.golang.org/p/OSeD9F_P46
+
 /*
 An interface is a reference type who's header is a two word value. The
 first word represents the type of the value and the second is the data

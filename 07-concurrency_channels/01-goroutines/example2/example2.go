@@ -1,3 +1,5 @@
+// http://play.golang.org/p/viYA-f4zBI
+
 // Sample program to show how the goroutine scheduler
 // will time slice goroutines on a single thread.
 package main

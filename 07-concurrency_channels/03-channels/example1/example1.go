@@ -1,3 +1,5 @@
+// http://play.golang.org/p/hMkJbUHJaI
+
 // Sample program to show how to use an unbuffered channel to
 // simulate a game of tennis between two goroutines.
 package main
@@ -46,14 +48,14 @@ func player(name string, ball chan int) {
 
 		// If the value is 0, the channel was closed.
 		if value == 0 {
-			fmt.Printf("Player %s Won\\n", name)
+			fmt.Printf("Player %s Won\n", name)
 			return
 		}
 
 		// Pick a random number and see if we miss the ball.
 		n := rand.Intn(100)
 		if n%13 == 0 {
-			fmt.Printf("Player %s Lost\\n", name)
+			fmt.Printf("Player %s Lost\n", name)
 
 			// Close the channel to signal we lost.
 			close(ball)
@@ -61,7 +63,7 @@ func player(name string, ball chan int) {
 		}
 
 		// Display and then increment the hit count by one.
-		fmt.Printf("Player %s Hit %d\\n", name, value)
+		fmt.Printf("Player %s Hit %d\n", name, value)
 		value++
 
 		// Hit the ball back to the opposing player.

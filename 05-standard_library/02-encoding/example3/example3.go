@@ -1,3 +1,5 @@
+// http://play.golang.org/p/rLDpqYbnGR
+
 // Sample program to show how to marshal a user defined
 // struct type into a string.
 package main

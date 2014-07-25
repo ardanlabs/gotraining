@@ -1,3 +1,7 @@
+// http://play.golang.org/p/Pvq-Dp7HnG
+
+// go build -race
+
 // Sample program to show how to create race conditions in
 // our programs. We don't want to do this.
 package main

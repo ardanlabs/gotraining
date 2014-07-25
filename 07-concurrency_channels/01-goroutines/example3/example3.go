@@ -1,3 +1,5 @@
+// http://play.golang.org/p/TSxqwvy65o
+
 // Sample program to show how to create goroutines and
 // how the goroutine scheduler behaves with two contexts.
 package main

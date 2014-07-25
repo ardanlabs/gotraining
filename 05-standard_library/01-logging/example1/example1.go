@@ -1,3 +1,5 @@
+// http://play.golang.org/p/xO5OuPOJef
+
 // Sample program to show how to use the log package
 // from the standard library.
 package main

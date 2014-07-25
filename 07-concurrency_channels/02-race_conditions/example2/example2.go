@@ -1,3 +1,7 @@
+// http://play.golang.org/p/4CaNFVZaXn
+
+// go build -race
+
 // Sample program to show how to use the atomic package to
 // provide safe access to numeric types.
 package main

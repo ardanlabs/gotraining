@@ -2,15 +2,15 @@
 
 ### Code Review
 
-[io.Writer interface](../example1/example1.go)
+[io.Writer interface](../example1/example1.go) ([Go Playground](http://play.golang.org/p/6pZ8RYzIN5))
 
 [Simple curl with io.Reader and io.Writer](../example2/example2.go)
 
 [MultiWriters with curl example](../example3/example3.go)
 
-(Advanced) [TeeReader and io composition](../advanced/example1/example1.go)
+[Advanced] [TeeReader and io composition](../advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
 
-(Advanced) [Gzip and Md5 support with curl example](../advanced/example2/example2.go)
+[Advanced] [Gzip and Md5 support with curl example](../advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
 
 ### Exercise 1
 Download any document from the web and display the content in the terminal and write it to a file at the same time.

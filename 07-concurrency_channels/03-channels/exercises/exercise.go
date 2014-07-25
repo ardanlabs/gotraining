@@ -1,3 +1,5 @@
+// http://play.golang.org/p/0nAEgCR2F2
+
 // Program uses a function type, closures and creates goroutines to
 // calculate Fibonacci numbers. This program is goroutine safe thanks
 // to the sync package.

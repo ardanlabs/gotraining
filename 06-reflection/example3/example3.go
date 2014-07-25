@@ -1,3 +1,5 @@
+// http://play.golang.org/p/bWQ6hiVECQ
+
 // https://github.com/goinggo/mapstructure
 // Sample code provided by Mitchell Hashimoto
 

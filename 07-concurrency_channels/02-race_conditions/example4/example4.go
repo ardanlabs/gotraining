@@ -1,3 +1,7 @@
+// http://play.golang.org/p/At-ytL7Om_
+
+// go build -race
+
 // Sample program to show how to use a mutex to define critical
 // sections of code that need synchronous access.
 package main

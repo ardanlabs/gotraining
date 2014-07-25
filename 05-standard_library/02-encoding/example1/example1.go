@@ -1,3 +1,5 @@
+// http://play.golang.org/p/ocxFH62yaw
+
 // Sample program to show how to unmarshal a JSON document into
 // a user defined struct type.
 package main
