@@ -1,3 +1,5 @@
+// http://play.golang.org/p/szU0NsUhCR
+
 // Sample program to show the basic concept of using a pointer
 // to share data.
 package main

@@ -1,3 +1,5 @@
+// http://play.golang.org/p/-Hg3nUdO5p
+
 // Sample program to show how the behavior of the for range and
 // how memory for an array is contigous.
 package main

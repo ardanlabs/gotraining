@@ -1,3 +1,5 @@
+// http://play.golang.org/p/jpf5IrVIxf
+
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.
 package main

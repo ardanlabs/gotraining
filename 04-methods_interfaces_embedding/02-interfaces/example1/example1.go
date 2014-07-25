@@ -1,3 +1,5 @@
+// http://play.golang.org/p/YXhZE1HPUH
+
 // Sample program to show how to use an interface in Go. In this case,
 // Go will NOT deference a value to support the interface.
 package main

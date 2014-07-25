@@ -1,3 +1,5 @@
+// http://play.golang.org/p/33Jn6_xCEN
+
 // Sample program to show how to declare, initalize and iterate
 // over a map. Shows how iterating over a map is random.
 package main

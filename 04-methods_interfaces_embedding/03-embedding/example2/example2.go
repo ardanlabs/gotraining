@@ -1,3 +1,5 @@
+// http://play.golang.org/p/8vI4KDm2sG
+
 // Sample program to show how an embedded types works with interfaces.
 package main
 

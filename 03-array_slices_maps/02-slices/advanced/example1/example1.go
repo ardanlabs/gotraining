@@ -1,3 +1,5 @@
+// http://play.golang.org/p/-qQgO7NbLm
+
 // Sample program to show the practical use of slices.
 package main
 

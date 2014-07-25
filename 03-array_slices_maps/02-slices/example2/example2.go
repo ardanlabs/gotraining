@@ -1,3 +1,5 @@
+// http://play.golang.org/p/6XprrmIVhx
+
 // Sample program to show how a slice is a reference type
 // that contains a three word header with a pointer, the
 // length and capacity of the underlying array.

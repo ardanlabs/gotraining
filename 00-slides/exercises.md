@@ -6,8 +6,7 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 
 #### Slides
 
-[Opening Slide Deck](day1/opening/slide1.md) | 
-[Closing Slide Deck](day1/closing/slide1.md) 
+[Opening Slide Deck](day1/opening/slide1.md)
 
 #### Language Syntax
 

@@ -1,3 +1,5 @@
+// http://play.golang.org/p/dtv7G51SBi
+
 // Sample program to show how constants do have a parallel type system.
 package main
 

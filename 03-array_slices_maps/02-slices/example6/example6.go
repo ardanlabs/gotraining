@@ -1,3 +1,5 @@
+// http://play.golang.org/p/zN7btAZFV1
+
 // Sample program to show how to use a third index slice.
 package main
 

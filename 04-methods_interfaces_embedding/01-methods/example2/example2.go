@@ -1,3 +1,5 @@
+// http://play.golang.org/p/KKttmFKTVg
+
 // Sample program to show how to declare methods against
 // a named type.
 package main

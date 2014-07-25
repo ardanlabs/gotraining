@@ -2,11 +2,11 @@
 
 ### Code Review
 
-[Declare, initalize and iterate](../example1/example1.go)
+[Declare, initalize and iterate](../example1/example1.go) ([Go Playground](http://play.golang.org/p/uH5ElZsGHe))
 
-[Different type arrays](../example2/example2.go)
+[Different type arrays](../example2/example2.go) ([Go Playground](http://play.golang.org/p/LVD43cYBNS))
 
-[Contigous memory allocations](../example3/example3.go)
+[Contigous memory allocations](../example3/example3.go) ([Go Playground](http://play.golang.org/p/-Hg3nUdO5p))
 
 
 ### Exercise 1

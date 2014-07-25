@@ -1,3 +1,5 @@
+// http://play.golang.org/p/UzmwiMWDwd
+
 // Sample program to show how to grow a slice using the built-in function append
 // and how append grows the capacity of the underlying array.
 package main

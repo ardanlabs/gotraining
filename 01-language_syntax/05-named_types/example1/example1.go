@@ -1,3 +1,5 @@
+// http://play.golang.org/p/rHVQ0tGgiT
+
 // Sample program to show how to declare and use a named type.
 package main
 

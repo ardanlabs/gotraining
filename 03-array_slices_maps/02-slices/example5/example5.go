@@ -1,3 +1,5 @@
+// http://play.golang.org/p/elJFBPKREQ
+
 // Sample program to show how to iterate over a slice.
 package main
 

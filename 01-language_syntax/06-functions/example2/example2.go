@@ -1,3 +1,5 @@
+// http://play.golang.org/p/2t1PFm1FGY
+
 // Sample program to show how we can use the blank identifier to ignore return values.
 package main
 

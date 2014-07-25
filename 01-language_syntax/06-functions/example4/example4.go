@@ -1,3 +1,5 @@
+// http://play.golang.org/p/pftXmrhXU6
+
 // Sample program to show how to declare and use variadic functions.
 package main
 

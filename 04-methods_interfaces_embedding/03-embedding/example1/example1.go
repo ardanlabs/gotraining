@@ -1,3 +1,5 @@
+// http://play.golang.org/p/ND55kR3Zzt
+
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
 package main

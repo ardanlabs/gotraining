@@ -1,3 +1,5 @@
+// http://play.golang.org/p/TEK2rfDrNx
+
 // Sample program to show how to use an interface in Go. In this case,
 // a pointer is used to support the interface call.
 package main

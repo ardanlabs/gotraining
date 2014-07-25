@@ -1,3 +1,5 @@
+// http://play.golang.org/p/OOND0xS19E
+
 // Sample program to show how to declare constants and their
 // implementation in Go.
 package main

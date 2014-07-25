@@ -1,3 +1,5 @@
+// http://play.golang.org/p/eg14ClW4_y
+
 // Sample program to show how to trap panics that can occur from the Go runtime.
 package main
 

@@ -2,13 +2,13 @@
 
 ### Code Review
 
-[Return multiple values](../example1/example1.go)
+[Return multiple values](../example1/example1.go) ([Go Playground](http://play.golang.org/p/8EAEBGjWcv))
 
-[Blank identifier](../example2/example2.go)
+[Blank identifier](../example2/example2.go) ([Go Playground](http://play.golang.org/p/2t1PFm1FGY))
 
-[Trapping panics](../example3/example3.go)
+[Trapping panics](../example3/example3.go) ([Go Playground](http://play.golang.org/p/eg14ClW4_y))
 
-[Variadic functions](../example4/example4.go)
+[Variadic functions](../example4/example4.go) ([Go Playground](http://play.golang.org/p/pftXmrhXU6))
 
 ### Exercise 1
 Declare a struct type to maintain information about a user. Declare a function that creates and returns pointers of this type and an error value. Write a main function that tests this function.  

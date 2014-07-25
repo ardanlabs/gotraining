@@ -2,11 +2,11 @@
 
 ### Code Review
 
-[Declare and inialize constants](../example1/example1.go)
+[Declare and inialize constants](../example1/example1.go) ([Go Playground](http://play.golang.org/p/OOND0xS19E))
 
-[Parallel type system I](../example2/example2.go)
+[Parallel type system I](../example2/example2.go) ([Go Playground](http://play.golang.org/p/SIYt7refne))
 
-[Parallel type system II](../example3/example3.go)
+[Parallel type system II](../example3/example3.go) ([Go Playground](http://play.golang.org/p/dtv7G51SBi))
 
 ### Exercise 1
 Declare an untyped and typed constant and display their values.

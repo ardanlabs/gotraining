@@ -1,3 +1,5 @@
+// http://play.golang.org/p/CFlITKut6d
+
 // Sample program to show how to declare variables.
 package main
 

@@ -1,3 +1,5 @@
+// http://play.golang.org/p/W5qjLAsJbI
+
 // Sample program to show the basic concept of pass by value.
 package main
 

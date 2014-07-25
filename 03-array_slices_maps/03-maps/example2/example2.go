@@ -1,3 +1,5 @@
+// http://play.golang.org/p/Qy_nYK9zmb
+
 // Sample program to show how to declare and initalize a map
 // using a composite literal.
 package main

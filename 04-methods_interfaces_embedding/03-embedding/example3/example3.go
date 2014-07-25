@@ -1,3 +1,5 @@
+// http://play.golang.org/p/W89veLizhb
+
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
 package main

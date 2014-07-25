@@ -2,13 +2,13 @@
 
 ### Code Review
 
-[Declare, initialize and iterate](../example1/example1.go)
+[Declare, initialize and iterate](../example1/example1.go) ([Go Playground](http://play.golang.org/p/33Jn6_xCEN))
 
-[Composite literal initialization](../example2/example2.go)
+[Composite literal initialization](../example2/example2.go) ([Go Playground](http://play.golang.org/p/Qy_nYK9zmb))
 
-[Map key restrictions](../example3/example3.go)
+[Map key restrictions](../example3/example3.go) ([Go Playground](http://play.golang.org/p/1eZogI1d_o))
 
-[Composing maps of maps](../example4/example4.go)
+[Composing maps of maps](../example4/example4.go) ([Go Playground](http://play.golang.org/p/pQsoB02pDl))
 
 ### Exercise 1
 Declare and make a map of strings with an integer as the key. Populate the map with five values and iterate over the map to display the key/value pairs.

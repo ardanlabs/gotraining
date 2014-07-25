@@ -1,4 +1,4 @@
-// http://golang.org/pkg/time/
+// http://play.golang.org/p/ZJZJy-Xgft
 
 /*
 // A Duration represents the elapsed time between two instants as
@@ -44,9 +44,11 @@ func main() {
 	// Convert the literal constant -5 to a value of type int64.
 	minusFive := int64(-5)
 
+	// Attempt to use the variable of type int64.
+	lessFiveNanoseconds := now.Add(minusFive)
+
 	// ./example2.go:48: cannot use minusFive (type int64) as type
 	// time.Duration in argument to now.Add
-	lessFiveNanoseconds := now.Add(minusFive)
 
 	// Substract 5 seconds from now using a declared constant.
 	lessFiveSeconds := now.Add(-fiveSeconds)

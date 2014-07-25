@@ -1,3 +1,5 @@
+// http://play.golang.org/p/LVD43cYBNS
+
 // Sample program to show how arrays of different sizes are
 // not of the same type.
 package main

@@ -1,3 +1,5 @@
+// http://play.golang.org/p/zU_00KiuyS
+
 // Sample program to show how the capacity of the slice
 // is not available for use.
 package main

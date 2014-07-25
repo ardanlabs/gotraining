@@ -1,3 +1,5 @@
+// http://play.golang.org/p/uH5ElZsGHe
+
 // Sample program to show how to declare and iterate over
 // arrays of different types.
 package main

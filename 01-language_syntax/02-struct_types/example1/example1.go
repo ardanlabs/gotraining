@@ -1,3 +1,5 @@
+// http://play.golang.org/p/zsV8YptNRo
+
 // Sample program to show how to declare and initalize struct types.
 package main
 

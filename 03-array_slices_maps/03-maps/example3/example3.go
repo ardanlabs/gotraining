@@ -1,3 +1,5 @@
+// http://play.golang.org/p/1eZogI1d_o
+
 // Sample program to show how only types that can have
 // equality defined on them can be a map key.
 package main

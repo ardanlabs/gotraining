@@ -1,4 +1,4 @@
-// http://golang.org/pkg/time/
+// http://play.golang.org/p/cdDTRdA9yn
 
 /*
 // A Duration represents the elapsed time between two instants as
@@ -32,9 +32,11 @@ import (
 	"time"
 )
 
-// ./example2.go:37: cannot use time.Duration(5) * time.Second
-// (type time.Duration) as type int64 in const initializer
+// Declare a types constant and multiple with type Duration.
 const fiveSeconds int64 = 5 * time.Second
+
+// ./example2.go:36: cannot use time.Duration(5) * time.Second
+// (type time.Duration) as type int64 in const initializer
 
 // main is the entry point for the application.
 func main() {
@@ -44,9 +46,11 @@ func main() {
 	// Subtract 5 seconds from now time using a literal constant.
 	lessFiveNanoseconds := now.Add(-5)
 
-	// ./example2.go:48: cannot use -fiveSeconds (type int64) as
-	// type time.Duration in argument to now.Add
+	// Attempt to use the constant of type int64.
 	lessFiveSeconds := now.Add(-fiveSeconds)
+
+	// ./example2.go:50: cannot use -fiveSeconds (type int64) as
+	// type time.Duration in argument to now.Add
 
 	// Display the values.
 	fmt.Printf("Now     : %v\n", now)

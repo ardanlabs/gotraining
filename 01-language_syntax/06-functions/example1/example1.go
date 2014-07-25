@@ -1,3 +1,5 @@
+// http://play.golang.org/p/8EAEBGjWcv
+
 // Sample program to show how functions can return multiple values while using
 // named and struct types.
 package main

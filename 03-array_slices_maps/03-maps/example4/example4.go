@@ -1,3 +1,5 @@
+// http://play.golang.org/p/pQsoB02pDl
+
 // Sample program to show how to compose maps of maps.
 package main
 

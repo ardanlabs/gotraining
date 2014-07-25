@@ -2,11 +2,11 @@
 
 ### Code Review
 
-[Embedding types](../example1/example1.go)
+[Embedding types](../example1/example1.go) ([Go Playground](http://play.golang.org/p/ND55kR3Zzt))
 
-[Embedded types and interfaces](../example2/example2.go)
+[Embedded types and interfaces](../example2/example2.go) ([Go Playground](http://play.golang.org/p/8vI4KDm2sG))
 
-[Outer and inner type interface implementations](../example3/example3.go)
+[Outer and inner type interface implementations](../example3/example3.go) ([Go Playground](http://play.golang.org/p/W89veLizhb))
 
 ### Exercise 1
 Declare a struct type named Animal with two fields associated with all animals. Declare a struct type named Dog with two field associated with a dog. Embed the Animal type into the Dog type. Declare and initalize a value of type Dog. Display the value of the variable.

@@ -1,3 +1,5 @@
+// http://play.golang.org/p/7sTeMjrtcL
+
 // Sample program to show how to takes slices of slices to create different
 // views of and make changes to the underlying array.
 package main

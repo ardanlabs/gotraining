@@ -3,6 +3,8 @@ Alignment is about placing types on boundaries that make the
 CPU access the fastest.
 */
 
+// http://play.golang.org/p/ZuB82kgz2K
+
 // Sample program to show how struct types align on boundaries.
 package main
 
