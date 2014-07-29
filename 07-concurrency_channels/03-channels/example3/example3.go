@@ -1,4 +1,4 @@
-// http://play.golang.org/p/7S_ShOXv-2
+// http://play.golang.org/p/0-pNMYNmOZ
 
 // This sample program demonstrates how to use a buffered
 // channel to work on multiple tasks with a predefined number
@@ -54,6 +54,7 @@ func main() {
 // worker is launched as a goroutine to process work from
 // the buffered channel queue.
 func worker(tasks chan string, worker int) {
+	// Report that we just returned.
 	defer wg.Done()
 
 	for {
