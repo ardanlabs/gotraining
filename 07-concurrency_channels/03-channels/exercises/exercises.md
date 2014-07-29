@@ -2,11 +2,11 @@
 
 ### Code Review
 
-[Unbuffered channels - Tennis game](../example1/example1.go) ([Go Playground](http://play.golang.org/p/hMkJbUHJaI))
+[Unbuffered channels - Tennis game](../example1/example1.go) ([Go Playground](http://play.golang.org/p/PMnyLciVcS))
 
 [Unbuffered channels - Relay race](../example2/example2.go) ([Go Playground](http://play.golang.org/p/5B1MxmDuZI))
 
-[Buffered channels - Control concurrency](../example3/example3.go) ([Go Playground](http://play.golang.org/p/sUmggCrshL))
+[Buffered channels - Control concurrency](../example3/example3.go) ([Go Playground](http://play.golang.org/p/7CyKiw2e3S))
 
 (Advanced) [Timers](../advanced/timer)
 

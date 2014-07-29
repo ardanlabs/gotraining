@@ -1,4 +1,4 @@
-// http://play.golang.org/p/hMkJbUHJaI
+// http://play.golang.org/p/PMnyLciVcS
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a game of tennis between two goroutines.

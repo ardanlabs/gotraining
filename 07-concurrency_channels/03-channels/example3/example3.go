@@ -1,7 +1,8 @@
-// http://play.golang.org/p/sUmggCrshL
+// http://play.golang.org/p/7S_ShOXv-2
 
-// Sample program to show how to use a buffered channel to work
-// on multiple tasks with a predefined number of goroutines.
+// This sample program demonstrates how to use a buffered
+// channel to work on multiple tasks with a predefined number
+// of goroutines.
 package main
 
 import (
@@ -32,15 +33,19 @@ func main() {
 	tasks := make(chan string, taskLoad)
 
 	// Launch goroutines to handle the work.
+	wg.Add(numberGoroutines)
 	for gr := 1; gr <= numberGoroutines; gr++ {
 		go worker(tasks, gr)
 	}
 
 	// Add a bunch of work to get done.
-	wg.Add(taskLoad)
 	for post := 1; post <= taskLoad; post++ {
 		tasks <- fmt.Sprintf("Task : %d", post)
 	}
+
+	// Close the channel so the goroutine will quit
+	// when all the work is done.
+	close(tasks)
 
 	// Wait for all the work to get done.
 	wg.Wait()
@@ -49,21 +54,27 @@ func main() {
 // worker is launched as a goroutine to process work from
 // the buffered channel queue.
 func worker(tasks chan string, worker int) {
+	defer wg.Done()
+
 	for {
 		// Wait for work to be assigned.
 		task := <-tasks
+
+		// If we get the default value for a string the
+		// channel was closed so quit.
+		if task == "" {
+			fmt.Printf("Worker: %d : Shutting Down\n", worker)
+			return
+		}
 
 		// Display we are starting the work.
 		fmt.Printf("Worker: %d : Started %s\n", worker, task)
 
 		// Randomly wait to simulate work time.
-		sleep := rand.Intn(100)
+		sleep := rand.Int63n(100)
 		time.Sleep(time.Duration(sleep) * time.Millisecond)
 
 		// Display we finished the work.
 		fmt.Printf("Worker: %d : Completed %s\n", worker, task)
-
-		// Report this task is complete.
-		wg.Done()
 	}
 }
