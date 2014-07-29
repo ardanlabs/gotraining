@@ -6,7 +6,7 @@
 
 [Unbuffered channels - Relay race](../example2/example2.go) ([Go Playground](http://play.golang.org/p/5B1MxmDuZI))
 
-[Buffered channels - Control concurrency](../example3/example3.go) ([Go Playground](http://play.golang.org/p/0-pNMYNmOZ))
+[Buffered channels - Control concurrency](../example3/example3.go) ([Go Playground](http://play.golang.org/p/G9Gfy1drox))
 
 (Advanced) [Timers](../advanced/timer)
 
