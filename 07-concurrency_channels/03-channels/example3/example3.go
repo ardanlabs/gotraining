@@ -43,7 +43,7 @@ func main() {
 		tasks <- fmt.Sprintf("Task : %d", post)
 	}
 
-	// Close the channel so the goroutine will quit
+	// Close the channel so the goroutines will quit
 	// when all the work is done.
 	close(tasks)
 
