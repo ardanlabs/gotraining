@@ -44,10 +44,9 @@ func player(name string, court chan int) {
 
 	for {
 		// Wait for the ball to be hit back to us.
-		ball := <-court
-
-		// If the value of the ball is 0, the channel was closed.
-		if ball == 0 {
+		ball, ok := <-court
+		if !ok {
+			// If the channel was closed we won.
 			fmt.Printf("Player %s Won\n", name)
 			return
 		}
