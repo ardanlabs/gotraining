@@ -23,13 +23,13 @@ func TestTableStation(t *testing.T) {
 		station, err := buoy.FindStation(stationID)
 
 		// We should not get an error.
-		t.Logf("There should be no error after the call to FindStation.")
+		t.Log("There should be no error after the call to FindStation.")
 		if err != nil {
 			t.Fatalf("ERROR : %s", err)
 		}
 
 		// We should not have a nil pointer for the station.
-		t.Logf("We should not have a nil pointer for the station.")
+		t.Log("We should not have a nil pointer for the station.")
 		if station == nil {
 			t.Fatalf("ERROR : %s", err)
 		}

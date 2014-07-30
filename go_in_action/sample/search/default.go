@@ -1,3 +1,9 @@
+// default.go provides the implementation for the default matcher. This
+// allows the program to not have to fail if an improper matcher type
+// is provided.
+
+// Package search contains the framework for using matchers to retreive
+// and search different types of content.
 package search
 
 // defaultMatcher implements the default matcher.

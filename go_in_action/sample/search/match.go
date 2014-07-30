@@ -1,3 +1,9 @@
+// match.go provides the interfaces and generic implementation of
+// using different matcher values to retrieve content and perform
+// searches. It also provides support for displaying results.
+
+// Package search contains the framework for using matchers to retreive
+// and search different types of content.
 package search
 
 import (

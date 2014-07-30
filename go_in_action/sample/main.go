@@ -1,11 +1,14 @@
+// This sample program demonstrates how to write idiomatic Go. The sample
+// uses many features from the language to provide a well rounded
+// view Go's capabilities and how to apply them.
 package main
 
 import (
 	"log"
 	"os"
 
-	_ "github.com/ArdanStudios/gotraining/sample/matchers"
-	"github.com/ArdanStudios/gotraining/sample/search"
+	_ "github.com/ArdanStudios/gotraining/go_in_action/sample/matchers"
+	"github.com/ArdanStudios/gotraining/go_in_action/sample/search"
 )
 
 // init is called prior to main.

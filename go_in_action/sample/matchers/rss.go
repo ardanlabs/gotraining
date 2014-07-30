@@ -1,3 +1,7 @@
+// rss.go implements a matcher that can retrieve and search RSS feed documents.
+
+// Package matchers provides different types of matchers that know
+// how to retrieve and search content.
 package matchers
 
 import (
@@ -8,7 +12,7 @@ import (
 	"net/http"
 	"regexp"
 
-	"github.com/ArdanStudios/gotraining/sample/search"
+	"github.com/ArdanStudios/gotraining/go_in_action/sample/search"
 )
 
 type (
@@ -70,7 +74,7 @@ func init() {
 func (m rssMatcher) Search(feed *search.Feed, searchTerm string) ([]*search.Result, error) {
 	var results []*search.Result
 
-	log.Printf("Search Feed Type[%s] Site[%s] For Uri[%s]\n", feed.Type, feed.Name, feed.Uri)
+	log.Printf("Search Feed Type[%s] Site[%s] For URI[%s]\n", feed.Type, feed.Name, feed.URI)
 
 	// Retrieve the data to search.
 	document, err := m.retrieve(feed)
@@ -113,12 +117,12 @@ func (m rssMatcher) Search(feed *search.Feed, searchTerm string) ([]*search.Resu
 
 // retrieve performs a HTTP Get request for the rss feed and decodes the results.
 func (m rssMatcher) retrieve(feed *search.Feed) (*rssDocument, error) {
-	if feed.Uri == "" {
+	if feed.URI == "" {
 		return nil, errors.New("No rss feed uri provided")
 	}
 
 	// Retrieve the rss feed document from the web.
-	resp, err := http.Get(feed.Uri)
+	resp, err := http.Get(feed.URI)
 	if err != nil {
 		return nil, err
 	}

@@ -1,3 +1,8 @@
+// feed.go provides support for reading the JSON file of feeds and
+// returning a slice for application processing.
+
+// Package search contains the framework for using matchers to retreive
+// and search different types of content.
 package search
 
 import (
@@ -5,7 +10,7 @@ import (
 	"os"
 )
 
-const dataFile = "data/data.json"
+var dataFile = "data/data.json"
 
 // Feed contains information we need to process a feed.
 type Feed struct {
@@ -15,7 +20,13 @@ type Feed struct {
 }
 
 // RetrieveFeeds reads and unmarshals the feed data file.
-func RetrieveFeeds() ([]Feed, error) {
+func RetrieveFeeds(path ...string) ([]Feed, error) {
+	// Using a variadic argument to create an optional parameter.
+	// Used by testing to manipulate the path to the file.
+	if path != nil {
+		dataFile = path[0] + dataFile
+	}
+
 	// Open the file.
 	file, err := os.Open(dataFile)
 	if err != nil {

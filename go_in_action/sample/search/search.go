@@ -1,3 +1,5 @@
+// Package search contains the framework for using matchers to retreive
+// and search different types of content.
 package search
 
 import (
@@ -28,11 +30,8 @@ func Run(searchTerm string) {
 
 	// Launch a goroutine for each feed to find the results.
 	for _, feed := range feeds {
-		// Retrieve a matcher for the search.
-		matcher, exists := matchers[feed.Type]
-		if !exists {
-			matcher = matchers["default"]
-		}
+		// Retrieve a matcher for the search
+		matcher := FindMatcher(feed.Type)
 
 		// Launch the goroutine to perform the search.
 		go func(matcher Matcher, feed Feed) {
@@ -64,4 +63,14 @@ func Register(feedType string, matcher Matcher) {
 
 	log.Println("Register", feedType, "matcher")
 	matchers[feedType] = matcher
+}
+
+// FindMatcher locates a matcher from the specified type.
+func FindMatcher(feedType string) Matcher {
+	matcher, exists := matchers[feedType]
+	if !exists {
+		matcher = matchers["default"]
+	}
+
+	return matcher
 }
