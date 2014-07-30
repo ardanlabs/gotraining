@@ -59,11 +59,9 @@ func worker(tasks chan string, worker int) {
 
 	for {
 		// Wait for work to be assigned.
-		task := <-tasks
-
-		// If we get the default value for a string the
-		// channel was closed so quit.
-		if task == "" {
+		task, ok := <-tasks
+		if !ok {
+			// This means the channel is empty and closed.
 			fmt.Printf("Worker: %d : Shutting Down\n", worker)
 			return
 		}
