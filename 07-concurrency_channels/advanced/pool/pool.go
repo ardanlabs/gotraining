@@ -1,6 +1,6 @@
 // Package pool manages a user defined set of resources.
 // Based on the work by Fatih Arslan with his pool package.
-// https://github.com/fatih/pool/tree/v2.0.0
+// https://github.com/fatih/pool/tree/v1.0.0
 package pool
 
 import (
@@ -29,6 +29,7 @@ type (
 		mutex     sync.Mutex
 		resources queue
 		factory   Factory
+		closed    bool
 	}
 )
 
@@ -46,33 +47,12 @@ func New(factory Factory, capacity int) (*Pool, error) {
 	}, nil
 }
 
-// getQueue returns a safe copy of the resource queue.
-func (p *Pool) getQueue() queue {
-	var resources queue
-	p.mutex.Lock()
-	{
-		resources = p.resources
-	}
-	p.mutex.Unlock()
-
-	return resources
-}
-
 // Acquire retrieves a resource	from the pool.
 func (p *Pool) Acquire() (Resource, error) {
-	// Get a safe copy of the queue and check
-	// if the queue has been closed.
-	resources := p.getQueue()
-	if resources == nil {
-		return nil, errors.New("Pool has been closed.")
-	}
-
-	// The queue is still open so acquire a resource.
-
 	select {
-	case resource := <-resources:
+	case resource, ok := <-p.resources:
 		fmt.Println("Acquire:", "Shared Resource")
-		if resource == nil {
+		if !ok {
 			return nil, errors.New("Pool has been closed.")
 		}
 		return resource, nil
@@ -86,11 +66,12 @@ func (p *Pool) Acquire() (Resource, error) {
 // Release places the resource back into the queue or closes
 // the resource for good.
 func (p *Pool) Release(resource Resource) {
+	// Secure this operation with the Close operation.
 	p.mutex.Lock()
 	defer p.mutex.Unlock()
 
-	// If the queue is closed, close the resource before returning.
-	if p.resources == nil {
+	// If the poll is closed, close the resource before returning.
+	if p.closed {
 		resource.Close()
 		return
 	}
@@ -98,9 +79,8 @@ func (p *Pool) Release(resource Resource) {
 	// The queue is still open so release the resource.
 
 	select {
-	// Attempt to place the resource back into the queue first.
-	// If the queue is full, this will block and the default case
-	// will be executed.
+	// Attempt to place the resource back into the queue first. If the queue
+	// is full, then the default case  will be executed.
 	case p.resources <- resource:
 		fmt.Println("Release:", "In Queue")
 
@@ -113,23 +93,18 @@ func (p *Pool) Release(resource Resource) {
 
 // Close will shutdown the pool and close all existing resources.
 func (p *Pool) Close() {
-	// Get a safe copy of the queue and set the queue to nil.
-	var resources queue
+	// Secure this operation with the Release operation.
 	p.mutex.Lock()
-	{
-		resources = p.resources
-		p.resources = nil
-	}
-	p.mutex.Unlock()
+	defer p.mutex.Unlock()
 
-	// Is the queue already closed.
-	if resources == nil {
-		return
-	}
+	// If the pool is not closed, the close it down.
+	if !p.closed {
+		p.closed = true
 
-	// Close the queue and close all existing resources.
-	close(resources)
-	for resource := range resources {
-		resource.Close()
+		// Close the queue and close all existing resources.
+		close(p.resources)
+		for resource := range p.resources {
+			resource.Close()
+		}
 	}
 }

@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/goinaction/code/chapter6/patterns/pool"
+	"github.com/ArdanStudios/gotraining/07-concurrency_channels/advanced/pool"
 )
 
 const (
@@ -64,7 +64,10 @@ func main() {
 
 	// Create the buffered channel to hold
 	// and manage the connections.
-	p := pool.New(createConnection, pooledResources)
+	p, err := pool.New(createConnection, pooledResources)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	// Perform queries using a connection from the pool.
 	for query := 0; query < maxGoroutines; query++ {
