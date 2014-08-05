@@ -2,23 +2,41 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"log"
 	"net/http"
+)
+
+type (
+	// hello holds a message.
+	hello struct {
+		Message string
+	}
 )
 
 // main is the entry point for the application.
 func main() {
-	http.HandleFunc("/", helloWorld)
-	http.HandleFunc("/chinese", helloWorldChinese)
+	http.HandleFunc("/english", helloEnglish)
+	http.HandleFunc("/chinese", helloChinese)
 	http.ListenAndServe("localhost:9999", nil)
 }
 
-// helloWorld handles the index route.
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<H1>Hello World</H1>")
+// helloEnglish sends a greeting in English.
+func helloEnglish(w http.ResponseWriter, r *http.Request) {
+	err := json.NewEncoder(w).Encode(hello{"Hello World"})
+	if err != nil {
+		log.Println("Error encoding JSON", err)
+		return
+	}
+	log.Println("Sent English")
 }
 
-// helloWorldChinese handles the chinese route.
-func helloWorldChinese(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<H1>你好世界</H1>")
+// helloChinese sends a greeting in Chinese.
+func helloChinese(w http.ResponseWriter, r *http.Request) {
+	err := json.NewEncoder(w).Encode(hello{"你好世界"})
+	if err != nil {
+		log.Println("Error encoding JSON", err)
+		return
+	}
+	log.Println("Sent Chinese")
 }
