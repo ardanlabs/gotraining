@@ -1,62 +1,36 @@
-// http://play.golang.org/p/eg14ClW4_y
+// http://play.golang.org/p/RoP6pNPgKl
 
-// Sample program to show how to trap panics that can occur from the Go runtime.
+// Sample program to show how to declare and use variadic functions.
 package main
 
-import (
-	"fmt"
-	"runtime"
-)
+import "fmt"
+
+// user is a struct type that declares user information.
+type user struct {
+	ID   int
+	Name string
+}
 
 // main is the entry point for the application.
 func main() {
-	// Call the testPanic function to run the test.
-	if err := testPanic(); err != nil {
-		fmt.Println("Error:", err)
+	// Declare and initalize a value of type user.
+	u1 := user{
+		ID:   1432,
+		Name: "Betty",
 	}
-}
 
-// catchPanic catches panics and processes the error.
-func catchPanic(err *error) {
-	// Check if a panic occurred.
-	if r := recover(); r != nil {
-		fmt.Println("PANIC Defered")
-
-		// Capture the stack trace
-		buf := make([]byte, 10000)
-		runtime.Stack(buf, false)
-		fmt.Println("Stack Trace:", string(buf))
-
-		// If the caller wants the error back provide it.
-		if err != nil {
-			*err = fmt.Errorf("%v", r)
-		}
+	// Declare and initalize a value of type user.
+	u2 := user{
+		ID:   4367,
+		Name: "Janet",
 	}
+
+	display(u1, u2)
 }
 
-// mimicError is a function that simulates an error for
-// testing the code.
-func mimicError(key string) error {
-	return fmt.Errorf("Mimic Error : %s", key)
-}
-
-// testPanic simulates a function that encounters a panic to
-// test our catchPanic function.
-func testPanic() (err error) {
-	// Schedule the catchPanic function to be called when
-	// the testPanic function returns.
-	defer catchPanic(&err)
-
-	fmt.Println("Start Test")
-
-	// Mimic a traditional error from a function.
-	err = mimicError("1")
-
-	// Trying to dereference a nil pointer will cause the
-	// runtime to panic.
-	var p *int
-	*p = 10
-
-	fmt.Println("End Test")
-	return err
+// display can accept and display multiple values of user types.
+func display(users ...user) {
+	for i := 0; i < len(users); i++ {
+		fmt.Printf("%+v\n", users[i])
+	}
 }

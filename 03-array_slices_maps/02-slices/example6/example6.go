@@ -1,11 +1,10 @@
-// http://play.golang.org/p/zN7btAZFV1
+// http://play.golang.org/p/v3ZHknDvSx
 
 // Sample program to show how to use a third index slice.
 package main
 
 import (
 	"fmt"
-	"unsafe"
 )
 
 // main is the entry point for the application.
@@ -14,8 +13,10 @@ func main() {
 	slice := []string{"Apple", "Orange", "Banana", "Grape", "Plum"}
 	inspectSlice(slice)
 
-	// Take a slice from element two for length 3 - 2
-	// with a capacity of 5 - 3
+	// Take a slice of slice. We want just elements 2
+	// takeOne[0] = "Banana"
+	// Length:   3 - 2
+	// Capacity: 5 - 2
 	takeOne := slice[2:3]
 	inspectSlice(takeOne)
 
@@ -23,10 +24,12 @@ func main() {
 	// Length:   j - i
 	// Capacity: k - i
 
-	// Take a slice from element two for length 3-2
-	// with a capacity of 3 - 2
+	// Take a slice of just element 2 with a length and capacity of 1
+	// takeOneCapOne[0] = "Banana"
+	// Length:   3 - 2
+	// Capacity: 3 - 2
 	takeOneCapOne := slice[2:3:3] // Use the third index position to
-	inspectSlice(takeOneCapOne)   // set the capacity.
+	inspectSlice(takeOneCapOne)   // set the capacity to 1.
 
 	// Append a new element which will create a new
 	// underlying array to increase capacity.
@@ -36,35 +39,11 @@ func main() {
 
 // inspectSlice exposes the slice header for review.
 func inspectSlice(slice []string) {
-	// Capture the address to the slice structure.
-	address := unsafe.Pointer(&slice)
-
-	// Capture the address where the length and cap size is stored.
-	lenAddr := uintptr(address) + uintptr(8)
-	capAddr := uintptr(address) + uintptr(16)
-
-	// Create pointers to the length and cap size.
-	lenPtr := (*int)(unsafe.Pointer(lenAddr))
-	capPtr := (*int)(unsafe.Pointer(capAddr))
-
-	// Create a pointer to the underlying array.
-	addPtr := (*[8]string)(unsafe.Pointer(*(*uintptr)(address)))
-
-	fmt.Printf("Slice Addr[%p] Len Addr[0x%x] Cap Addr[0x%x]\n",
-		address,
-		lenAddr,
-		capAddr)
-
-	fmt.Printf("Slice Length[%d] Cap[%d]\n",
-		*lenPtr,
-		*capPtr)
-
-	for index := 0; index < *lenPtr; index++ {
+	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
+	for index, value := range slice {
 		fmt.Printf("[%d] %p %s\n",
 			index,
-			&(*addPtr)[index],
-			(*addPtr)[index])
+			&slice[index],
+			value)
 	}
-
-	fmt.Printf("\n\n")
 }

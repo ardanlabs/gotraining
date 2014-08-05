@@ -1,4 +1,4 @@
-// http://play.golang.org/p/8EAEBGjWcv
+// http://play.golang.org/p/kTKdUJolAU
 
 // Sample program to show how functions can return multiple values while using
 // named and struct types.
@@ -9,16 +9,11 @@ import (
 	"fmt"
 )
 
-type (
-	// bson is a named type that declares a map of key/value pairs.
-	bson map[string]interface{}
-
-	// user is a struct type that declares user information.
-	user struct {
-		ID   int
-		Name string
-	}
-)
+// user is a struct type that declares user information.
+type user struct {
+	ID   int
+	Name string
+}
 
 // main is the entry point for the application.
 func main() {

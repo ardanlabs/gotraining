@@ -2,7 +2,7 @@
 
 ### Code Review
 
-[Embedding types](../example1/example1.go) ([Go Playground](http://play.golang.org/p/ND55kR3Zzt))
+[Embedding types](../example1/example1.go) ([Go Playground](http://play.golang.org/p/AQlYR3zQqw))
 
 [Embedded types and interfaces](../example2/example2.go) ([Go Playground](http://play.golang.org/p/8vI4KDm2sG))
 

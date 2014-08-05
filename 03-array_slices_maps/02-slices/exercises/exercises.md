@@ -2,17 +2,17 @@
 
 ### Code Review
 
-[Declare, Capacity and Length](../example1/example1.go) ([Go Playground](http://play.golang.org/p/zU_00KiuyS))
+[Declare, Capacity and Length](../example1/example1.go) ([Go Playground](http://play.golang.org/p/4r90uFQwJn))
 
-[Reference Types](../example2/example2.go) ([Go Playground](http://play.golang.org/p/6XprrmIVhx))
+[Reference Types](../example2/example2.go) ([Go Playground](http://play.golang.org/p/DB8hwJ0hw9)
 
-[Taking slices of slices](../example3/example3.go) ([Go Playground](http://play.golang.org/p/7sTeMjrtcL))
+[Taking slices of slices](../example3/example3.go) ([Go Playground](http://play.golang.org/p/PyZthd9EFl))
 
 [Appending slices](../example4/example4.go) ([Go Playground](http://play.golang.org/p/UzmwiMWDwd))
 
-[Iterating over slices](../example5/example5.go) ([Go Playground](http://play.golang.org/p/elJFBPKREQ))
+[Iterating over slices](../example5/example5.go) ([Go Playground](http://play.golang.org/p/HV5t0VrRie))
 
-[Three index slicing](../example6/example6.go) ([Go Playground](http://play.golang.org/p/zN7btAZFV1))
+[Three index slicing](../example6/example6.go) ([Go Playground](http://play.golang.org/p/v3ZHknDvSx))
 
 (Advanced) [Practical use of slices](../advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/-qQgO7NbLm))
 

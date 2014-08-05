@@ -1,4 +1,4 @@
-// http://play.golang.org/p/ND55kR3Zzt
+// http://play.golang.org/p/AQlYR3zQqw
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
@@ -15,9 +15,16 @@ type (
 		Email string
 	}
 
+	// Security defines security rights.
+	Security struct {
+		AccessLevel int
+		Auth        bool
+	}
+
 	// Admin represents an admin user with privileges.
 	Admin struct {
-		User
+		User  // Embedded Type
+		Sec   Security
 		Level string
 	}
 )
@@ -37,6 +44,10 @@ func main() {
 		User: User{
 			Name:  "john smith",
 			Email: "john@email.com",
+		},
+		Sec: Security{
+			AccessLevel: 10,
+			Auth:        false,
 		},
 		Level: "super",
 	}

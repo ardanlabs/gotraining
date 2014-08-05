@@ -1,4 +1,4 @@
-// http://play.golang.org/p/zU_00KiuyS
+// http://play.golang.org/p/4r90uFQwJn
 
 // Sample program to show how the capacity of the slice
 // is not available for use.
@@ -10,8 +10,8 @@ import (
 
 // main is the entry point for the application.
 func main() {
-	// Create a slice with a length of 5 elements and a capacity of 8.
-	slice := make([]string, 5, 8)
+	// Create a slice with a length of 5 elements.
+	slice := make([]string, 5)
 	slice[0] = "Apple"
 	slice[1] = "Orange"
 	slice[2] = "Banana"
