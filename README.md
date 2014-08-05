@@ -36,38 +36,31 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 	* Git, Hg
 * Language and Syntax
 	* Variables
-	* Keyword var
-	* Short variable declaration operator
-	* Conversions
-	* Exercises
-* Struct Types
-	* Declare and initialize
-	* Exercises
-* Constants
-	* Declare and initialize
-	* Parallel type system
-	* Exercises
-* Pointers
-	* Pass by value
-	* Sharing data
-	* Exercises
-* Named Types
-	* Declare and initialize
-	* Support with constants
-	* Exercises
-* Functions
-	* Return multiple values
-	* Blank identifiers
-	* Trapping panics
-	* Variadic functions
-	* Exercises
-* Packaging
-	* Naming conventions
-	* Exporting / Unexporting identifiers
-	* Unexported value access
-	* Exporting / Unexporting fields
-	* Embedded types
-	* Exercises
+		* Keyword var
+		* Short variable declaration operator
+		* Conversions
+		* Exercises
+	* Struct Types
+		* Declare and initialize
+		* Exercises
+	* Constants
+		* Declare and initialize
+		* Parallel type system
+		* Exercises
+	* Pointers
+		* Pass by value
+		* Sharing data
+		* Exercises
+	* Named Types
+		* Declare and initialize
+		* Support with constants
+		* Exercises
+	* Functions
+		* Return multiple values
+		* Blank identifiers
+		* Trapping panics
+		* Variadic functions
+		* Exercises
 * Arrays, Slices and Maps
 	* Arrays
 		* Declaring, initializing and assignments
@@ -103,6 +96,32 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 		* Use with interface
 		* Promotion
 		* Exercises
+* Concurrency and Channels
+	* Scheduler and Goroutines
+		* Create goroutines
+		* Concurrency
+		* Parallelism
+		* Exercises
+	* Race Conditions
+		* Atomic Operations
+		* Mutexes
+		* Exercises
+	* Channels
+		* Unbuffered
+		* Buffered
+		* Exercises
+* Testing
+	* Standard tests
+	* Table tests
+	* Benchmarking
+	* Exercises
+* Packaging
+	* Naming conventions
+	* Exporting / Unexporting identifiers
+	* Unexported value access
+	* Exporting / Unexporting fields
+	* Embedded types
+	* Exercises
 * Standard Library
 	* Logging
 		* Configuration
@@ -123,25 +142,6 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 	* Reflect struct types and tags
 	* Decoding values into types
 	* Exercises
-* Concurrency and Channels
-	* Scheduler and Goroutines
-		* Create goroutines
-		* Concurrency
-		* Parallelism
-		* Exercises
-	* Race Conditions
-		* Atomic Operations
-		* Mutexes
-		* Exercises
-	* Channels
-		* Unbuffered
-		* Buffered
-		* Exercises
-	* Testing
-		* Standard tests
-		* Table tests
-		* Benchmarking
-		* Exercises
 * Advanced Topics
 	* Advanced code samples for above topics
 

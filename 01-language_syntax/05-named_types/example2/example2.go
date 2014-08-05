@@ -1,4 +1,4 @@
-// http://play.golang.org/p/sNj9aYeaXH
+// http://play.golang.org/p/EO2WWrZ39N
 
 /*
 // A Duration represents the elapsed time between two instants as
@@ -41,7 +41,7 @@ func main() {
 	// Use the time package to get the current date/time.
 	now := time.Now()
 
-	// Subtract 5 seconds from now time using a literal constant.
+	// Subtract 5 nanoseconds from now time using a literal constant.
 	lessFiveNanoseconds := now.Add(-5)
 
 	// Substract 5 seconds from now using a declared constant.

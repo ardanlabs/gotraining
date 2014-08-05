@@ -1,4 +1,4 @@
-// http://play.golang.org/p/szU0NsUhCR
+// http://play.golang.org/p/0ovhZVUor7
 
 // Sample program to show the basic concept of using a pointer
 // to share data.
@@ -11,46 +11,38 @@ type animal struct {
 	name    string
 	breed   string
 	hasTail bool
-}
-
-// dog is a type that describes a dog.
-type dog struct {
-	animal animal
-	bark   int
+	bark    int
 }
 
 // main is the entry point for the application.
 func main() {
-	// Declare and initialize a variable named bart of type dog.
-	bart := dog{
-		animal: animal{
-			name:    "Bart",
-			breed:   "Lab",
-			hasTail: true,
-		},
-		bark: 10,
+	// Declare and initialize a variable named bart of type animal.
+	bart := animal{
+		name:    "Bart",
+		breed:   "Lab",
+		hasTail: true,
+		bark:    10,
 	}
 
-	// Display the "value of" bart and the "address of" each field member.
-	fmt.Printf("%+v &Name[%p] &Breed[%p] &HasTail[%p] &Bark[%p]\n",
-		&bart, &bart.animal.name, &bart.animal.breed, &bart.animal.hasTail, &bart.bark)
+	// Pass the "address of" the bart value.
+	display(&bart)
 
 	// Pass the "address of" the Bark field from within the bart value.
-	inc(&bart.bark)
+	increment(&bart.bark)
 
 	// Pass the "address of" the bart value.
 	display(&bart)
 }
 
-// inc declares bark as a pointer variable whose value is
+// increment declares bark as a pointer variable whose value is
 // always an address and points to values of type int.
-func inc(bark *int) {
+func increment(bark *int) {
 	*bark++
 	fmt.Printf("&bark[%p] bark[%p] *bark[%d]\n", &bark, bark, *bark)
 }
 
-// display declares d as a pointer variable whose value is always an address
-// and points to values of type dog.
-func display(d *dog) {
-	fmt.Printf("%+v\n", d)
+// display declares a as a pointer variable whose value is always an address
+// and points to values of type animal.
+func display(a *animal) {
+	fmt.Printf("%p\t%+v\n", a, *a)
 }

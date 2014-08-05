@@ -1,21 +1,34 @@
-## Special Features Of Go - [Caleb Doxsey](http://www.doxsey.net/blog/go-and-assembly/)
+## Documentation
 
-* Go's compiler is fast
-* Go comes with a robust standard library
-* Go works on a multitude of platforms
-* Go comes with a complete set of documentation available from the command line / a local web server / the internet
-* All Go code is statically compiled so deployment is trivial
-* The entirety of the Go source code is available for perusal in an easy format online (like this)
-* Go has a well defined (and documented) grammar for parsing. (unlike C++ or Ruby)
-* Go comes with a package management tool. go get X (for example go get code.google.com/p/go.net/websocket)
-* Like all languages Go has a set of style guidelines, some enforced by the compiler (like Uppercase vs lowercase) and others merely conventional, but it also has a tool to clean up code: gofmt name_of_file.go.
-* And there's also go fix which can automatically convert Go code designed for earlier versions to newer versions
-* Go comes with a tool to test packages: go test /path/to/package. It can do benchmarks too.
-* Go is debuggable and can be profiled.
-* Did you know there's a playground to try out Go online?
-* Go can interact with C libraries via cgo.
+Go contains a wealth of documentation and a great community.
 
-### [Previous Slide](slide1.md) | [Start Training](../../exercises.md)
+### Gopher
+<table>
+<tr><td><a href="http://blog.golang.org/gopher">Gopher Explained</a></td></tr>
+</table>
+
+### Offical Documentation
+<table>
+<tr><td><a href="http://golang.org">Offical Website</a></td><td><a href="http://golang.org/doc">Documentation</a></td><td><a href="http://golang.org/doc/faq">FAQ</a></td><td><a href="http://golang.org/doc/effective_go.html">Effective Go</a></td><td><a href="http://golang.org/doc/code.html">How To Write Go</a></td></tr>
+<tr><td><a href="https://code.google.com/p/go-wiki/wiki/Projects">Wiki</a></td><td><a href="http://golang.org/pkg">Packages</a></td><td><a href="http://golang.org/cmd">Commands/Tools</a></td><td><a href="http://golang.org/ref/mem">Memory Model</a></td><td></td></tr>
+</table>
+
+### Blogs
+<table>
+<tr><td><a href="http://blog.golang.org">Go Blog</a></td><td><a href="http://goinggo.net">Going Go</a></td><td><a href="http://dave.cheney.net/">Dave Cheney</a></td><td><a href="http://blog.labix.org">Labix</a></td></tr>
+</table>
+
+### Videos
+<table>
+<tr><td><a href="http://gophervids.appspot.com">Gopher Videos</a></td></tr>
+</table>
+
+### Community
+<table>
+<tr><td><a href="https://groups.google.com/forum/#!forum/golang-nuts">Go Nuts</a></td><td><a href="https://groups.google.com/forum/#!forum/golang-dev">Go Dev</a></td><td><a href="https://gophers.slack.com">Gophers Slack</a></td><td><a href="http://www.reddit.com/r/golang">Reddit Golang</a></td><td><a href="http://stackoverflow.com/questions/tagged/go">Stackoverflow</a></td></tr>
+</table>
+
+### [Previous Slide](slide1.md) | [Next Slide](slide3.md)
 ___
 [![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)

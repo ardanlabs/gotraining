@@ -1,4 +1,4 @@
-// http://play.golang.org/p/zsV8YptNRo
+// http://play.golang.org/p/lgXBEs4nx2
 
 // Sample program to show how to declare and initalize struct types.
 package main
@@ -24,30 +24,9 @@ func main() {
 		pi:      3.141592,
 	}
 
-	// Declare a variable of an anonymous type and init
-	// using a composite literal.
-	anon := struct {
-		name string
-	}{
-		name: "Jill",
-	}
-
-	// Declare a variable of an anonymous type that contains
-	// an anonymous inner type and init using a composite literal.
-	anon2 := struct {
-		inner struct {
-			name string
-		}
-		age int
-	}{
-		inner: struct {
-			name string
-		}{"Bill"},
-		age: 45,
-	}
-
 	// Display the values.
-	fmt.Println(e)
-	fmt.Println(anon)
-	fmt.Println(anon2)
+	fmt.Printf("%+v\n", e)
+	fmt.Println("Flag", e.flag)
+	fmt.Println("Counter", e.counter)
+	fmt.Println("Pi", e.pi)
 }

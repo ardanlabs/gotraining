@@ -2,11 +2,11 @@
 
 ### Code Review
 
-[Pass by value](../example1/example1.go) ([Go Playground](http://play.golang.org/p/W5qjLAsJbI))
+[Pass by value](../example1/example1.go) ([Go Playground](http://play.golang.org/p/POH6kq8KLL))
 
-[Sharing data I](../example2/example2.go) ([Go Playground](http://play.golang.org/p/JEVXsBtt8Z))
+[Sharing data I](../example2/example2.go) ([Go Playground](http://play.golang.org/p/izcdKq-Qa-))
 
-[Sharing data II](../example3/example3.go) ([Go Playground](http://play.golang.org/p/szU0NsUhCR))
+[Sharing data II](../example3/example3.go) ([Go Playground](http://play.golang.org/p/0ovhZVUor7))
 
 ### Exercise 1
 Declare and initalize a variable of type int with the value of 20. Display the _address of_ and _value of_ the variable.

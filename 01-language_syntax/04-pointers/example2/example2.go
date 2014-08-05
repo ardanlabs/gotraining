@@ -1,4 +1,4 @@
-// http://play.golang.org/p/JEVXsBtt8Z
+// http://play.golang.org/p/izcdKq-Qa-
 
 // Sample program to show the basic concept of using a pointer
 // to share data.
@@ -15,14 +15,14 @@ func main() {
 	fmt.Println("Before:", count, &count)
 
 	// Pass the "address of" the variable count.
-	inc(&count)
+	increment(&count)
 
 	fmt.Println("After:", count, &count)
 }
 
-// inc declares count as a pointer variable whose value is
+// increment declares count as a pointer variable whose value is
 // always an address and points to values of type int.
-func inc(count *int) {
+func increment(count *int) {
 	// Increment the value that the "pointer points to". (de-referencing)
 	*count++
 	fmt.Println("Inc:", &count, count, *count)

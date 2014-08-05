@@ -1,4 +1,4 @@
-// http://play.golang.org/p/cdDTRdA9yn
+// http://play.golang.org/p/c7viyKC6fC
 
 /*
 // A Duration represents the elapsed time between two instants as

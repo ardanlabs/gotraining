@@ -1,4 +1,4 @@
-// http://play.golang.org/p/W5qjLAsJbI
+// http://play.golang.org/p/POH6kq8KLL
 
 // Sample program to show the basic concept of pass by value.
 package main
@@ -14,14 +14,14 @@ func main() {
 	fmt.Println("Before:", count, &count)
 
 	// Pass the "value of" the variable count.
-	inc(count)
+	increment(count)
 
 	fmt.Println("After:", count, &count)
 }
 
-// inc declares count as a variable whose value is
+// increment declares count as a variable whose value is
 // always an integer.
-func inc(count int) {
+func increment(count int) {
 	// Increment the "value of" count.
 	count++
 	fmt.Println("Inc:", count, &count)

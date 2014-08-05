@@ -2,7 +2,9 @@
 
 ### Code Review
 
-[Declare, create and initalize struct types](../example1/example1.go) ([Go Playground](http://play.golang.org/p/zsV8YptNRo))
+[Declare, create and initalize struct types](../example1/example1.go) ([Go Playground](http://play.golang.org/p/lgXBEs4nx2))
+
+[Anonymous struct types](../example2/example2.go) ([Go Playground](http://play.golang.org/p/ncYlNX7pcN))
 
 [Advanced] [Struct type alignments](../advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/ZuB82kgz2K))
 
