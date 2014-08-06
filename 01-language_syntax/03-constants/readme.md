@@ -9,10 +9,12 @@ Constants are a way to create a named identifier who's value can never change. T
 
 [Parallel type system II](example3/example3.go) ([Go Playground](http://play.golang.org/p/dtv7G51SBi))
 
-### Exercise 1
+### Exercises
+
+#### Exercise 1
 Declare an untyped and typed constant and display their values.
 
-### Exercise 2
+#### Exercise 2
 Multiply two literal constants into a typed variable and display the values of both the contants and variables.
 
 ___

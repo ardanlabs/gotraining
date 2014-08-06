@@ -1,4 +1,5 @@
 ## Reflection
+Reflection is the ability to inspect a value to derive type or other meta-data. Reflection can give our program incredibility flexibility to work with data of different types or create values on the fly. Reflection is critical for the encoding and decoding of data.
 
 ### Code Review
 
@@ -6,9 +7,13 @@
 
 [Reflect struct types with tags](example2/example2.go) ([Go Playground](http://play.golang.org/p/y0WyYezH05))
 
-[Advanced] [Decoding function for integers](example3/example3.go) ([Go Playground](http://play.golang.org/p/bWQ6hiVECQ))
+### Advanced Code Review
 
-### Exercise 1
+[Decoding function for integers](example3/example3.go) ([Go Playground](http://play.golang.org/p/bWQ6hiVECQ))
+
+### Exercises
+
+#### Exercise 1
 Declare a struct type that represents a request for a customer invoice. Include a CustomerID and InvoiceID field. Define tags that can be used to validate the request. Define tags that specify both the length and range for the ID to be valid. Declare a function named validate that accepts values of any type and processes the tags. Display the resutls of the validation.
 
 ___

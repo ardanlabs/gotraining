@@ -1,4 +1,5 @@
 ## Encoding - Standard Library
+Encoding is the process or marshaling or unmarshaling data into different forms. Taking JSON string documents and convert them to values of our user defined types is a very common practice in many go programs today. Go's support for encoding is amazing and improves and gets faster with every release.
 
 ## Code Review
 
@@ -8,10 +9,12 @@
 
 [Marshal a user defined type](example3/example3.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
 
-### Exercise 1
+### Exercises
+
+#### Exercise 1
 Create a file with an array of JSON documents. Declare a struct type that maps to the JSON document. Using the json package, read the file and create a slice of this struct type. Display the slice.
 
-### Exercise 2
+#### Exercise 2
 From example 1, Marshal the slice into pretty print strings and display each element.
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

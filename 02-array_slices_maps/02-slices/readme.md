@@ -13,17 +13,21 @@ Slices are an incredibly important data structure in Go. They form the basis for
 
 [Iterating over slices](example5/example5.go) ([Go Playground](http://play.golang.org/p/HV5t0VrRie))
 
-[Advanced] [Practical use of slices](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/-qQgO7NbLm))
+### Advanced Code Review
 
-[Advanced] [Three index slicing](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/v3ZHknDvSx))
+[Practical use of slices](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/-qQgO7NbLm))
 
-### Exercise 1
+[Three index slicing](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/v3ZHknDvSx))
+
+### Exercies
+
+#### Exercise 1
 Declare a nil slice of integers. Create a loop that increments a counter variable by 10 five times and appends these values to the slice. Iterate over the slice and display each value.
 
-### Exercise 2
+#### Exercise 2
 Declare a slice of five strings and initialize the slice with string literal values. Take a slice of the first, second and third elements and display the index position and value of each element for both slices.
 
-### Exercise 3
+#### Exercise 3
 Declare a slice of five strings and initialize this slice with string literal values. Take a slice of the second element with a capacity of one. Display the length and capacity of the slice. Iterate over the slice and display the address and value of each element. Append a new value to the slice and display everything again.
 
 ___

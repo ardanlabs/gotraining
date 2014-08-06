@@ -1,4 +1,5 @@
 ## Testing
+Testing is built right into the go tools and the standard library. Testing needs to be a vital part of the development process because it can save you a tremendous amount of time throughout the life cycle of the project. Benchmarking is also a very powerful tool tied to the testing functionality. Aspect of your code can be setup to be benchmarked for performance reviews. 
 
 ### Code Review
 
@@ -18,7 +19,9 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 [Benchmarks that test the performance of the MongoDB find](advanced/tests/example1_bench_test.go)
 
-### Exercise 1
+### Exercises
+
+#### Exercise 1
 Write new tests for the FindRegion function found in the buoy package. Write a standard test, table test and benchmark.
 
 ___

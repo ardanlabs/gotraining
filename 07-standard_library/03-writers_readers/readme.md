@@ -1,4 +1,5 @@
 ## Writers/Readers - Standard Library
+The ability to stream and pass data around is incredibility important. Data is constantly coming at our programs whether over a socket, file, device, etc. Many times this data needs to just be moved from one stream. Sometimes it needs to be encrypted, hashed or stored for safe keeping. The Writer and Reader interfaces may be the most heavily used and supported interfaces in both the standard library and the community.
 
 ### Code Review
 
@@ -8,11 +9,15 @@
 
 [MultiWriters with curl example](example3/example3.go)
 
-[Advanced] [TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
+### Advanced Code Review
 
-[Advanced] [Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
+[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
 
-### Exercise 1
+[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
+
+### Exercises
+
+#### Exercise 1
 Download any document from the web and display the content in the terminal and write it to a file at the same time.
 
 ___

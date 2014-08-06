@@ -9,15 +9,19 @@ Function are at the core of the language. They provide a mechanism to group and 
 
 [Variadic functions](example3/example3.go) ([Go Playground](http://play.golang.org/p/RoP6pNPgKl))
 
-[Advanced] [Trapping panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/eg14ClW4_y))
+### Advanced Code Review
 
-### Exercise 1
+[Trapping panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/eg14ClW4_y))
+
+### Exercises
+
+#### Exercise 1
 Declare a struct type to maintain information about a user. Declare a function that creates and returns pointers of this type and an error value. Write a main function that tests this function.  
 
-### Exercise 2
+#### Exercise 2
 Change the main function in the last exercise to ignore the error value being returned from the function.
 
-### Exercise 3
+#### Exercise 3
 Declares a function that causes a panic. Trap the panic in the function and display the error. Write a main function to test the function.
 
 ___

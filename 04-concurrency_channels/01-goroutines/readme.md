@@ -1,4 +1,5 @@
 # Goroutines - Concurrency and Channels
+Goroutines are functions that are created and scheduled to be run indenpently. Goroutines are multiplexed against a shared thread that is own by context. The scheduler is responsible for the management and execution of goroutines.
 
 ### Code Review
 
@@ -8,7 +9,9 @@
 
 [Goroutines and parallelism](example3/example3.go) ([Go Playground](http://play.golang.org/p/TSxqwvy65o))
 
-### Exercise 1
+### Exercises
+
+#### Exercise 1
 Create a program that declares two anonymous functions. Once that counts up to 100 from 0 and one that counts down to 0 from 100. Display each number with an unique identifier for each goroutine. Then create goroutines from these functions and don't let main return until the goroutines complete.
 
 ___

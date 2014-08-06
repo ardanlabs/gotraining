@@ -7,10 +7,12 @@ Methods are functions that are declared with a receiver which binds the method t
 
 [Named typed methods](example2/example2.go) ([Go Playground](http://play.golang.org/p/KKttmFKTVg))
 
-### Exercise 1
+### Exercises
+
+#### Exercise 1
 Declare a struct type to maintain information about a hobby. Declare a method that displays a pretty print view of the type's fields. Declare and intialize a value of this type and use the method to display its value.
 
-### Exercise 2
+#### Exercise 2
 Declare a struct that represents a baseball player. Include Name, AtBats and Hits. Declare a method that calculates a players batting average. The formula is Hits / AtBats. Declare a slice of this type and initalize the slice with several players. Iterate over the slice displaying the players name and batting average.
 
 ___

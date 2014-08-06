@@ -1,4 +1,5 @@
 # Channels - Concurrency and Channels
+Channels are a reference type that provide a safe mechanism to share data between goroutines. Unbuffered channel give a guarantee of delivery that data has passed from one goroutine to the other. Buffered channels allow for data to pass through the channel without such guarantees. Unbuffered channels require both a sending and receiving goroutine to be ready at the same instant before any send or receive operation can complete. Buffered channels don't force goroutines to be ready at the same instant to perform sends and receives.
 
 ### Code Review
 
@@ -8,13 +9,17 @@
 
 [Buffered channels - Control concurrency](example3/example3.go) ([Go Playground](http://play.golang.org/p/G9Gfy1drox))
 
-(Advanced) [Timers](advanced/timer/timer.go)
+### Advanced Code Review
 
-(Advanced) [Semaphores](advanced/semaphore/semaphore.go)
+[Timers](advanced/timer/timer.go)
 
-(Advanced) [Pooling](advanced/pool/pool.go)
+[Semaphores](advanced/semaphore/semaphore.go)
 
-### Exercise 1
+[Pooling](advanced/pool/pool.go)
+
+### Exercises
+
+#### Exercise 1
 Given the following program, convert it to use a channel. [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/ncWam67dS1))
 
 	// http://play.golang.org/p/vW-48gPin1

@@ -7,13 +7,15 @@ Here is a link to the Go specification about some of the built-in types in Go th
 
 [Declare and initalize variables](example1/example1.go) ([Go Playground](http://play.golang.org/p/m4PJ0FpSwX))
 
-### Exercise 1
+### Exercises
+
+#### Exercise 1
 Declare three variables that are initalized to their zero value. Declare a variable of type string, int and bool. Display the values of those variables.
 
-### Exercise 2
+#### Exercise 2
 Declare three variable that are initalized with a literal value. Declare a variable of type string, int and bool. Display the values of those variables.
 
-### Exercise 3
+#### Exercise 3
 Declare and initialize a variable of type float32 by converting the literal value of Pi (3.14).
 
 ___
