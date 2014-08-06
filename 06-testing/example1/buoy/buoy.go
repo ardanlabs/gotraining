@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ArdanStudios/gotraining/08-testing/example1/mongodb"
+	"github.com/ArdanStudios/gotraining/06-testing/example1/mongodb"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

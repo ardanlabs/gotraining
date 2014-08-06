@@ -27,10 +27,10 @@ func main() {
 	wg.Add(2)
 
 	// Launch two players.
-	go player("A", court)
-	go player("B", court)
+	go player("Nadal", court)
+	go player("Djokovic", court)
 
-	// Start the lobby.
+	// Start the set.
 	court <- 1
 
 	// Wait for the game to finish.
