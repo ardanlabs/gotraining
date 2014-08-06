@@ -1,4 +1,4 @@
-// http://play.golang.org/p/vYVpq_l3gw
+// http://play.golang.org/p/zW9bjwLzzH
 
 // go build -race
 
@@ -31,7 +31,7 @@ func main() {
 	go doWork("B")
 
 	// Give the goroutines time to run.
-	time.Sleep(1 * time.Second)
+	time.Sleep(time.Second)
 
 	// Safely flag it is time to shutdown.
 	fmt.Println("Shutdown Now")

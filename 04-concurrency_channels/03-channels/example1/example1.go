@@ -1,4 +1,4 @@
-// http://play.golang.org/p/PMnyLciVcS
+// http://play.golang.org/p/7WO_eOJx_G
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a game of tennis between two goroutines.
@@ -27,8 +27,8 @@ func main() {
 	wg.Add(2)
 
 	// Launch two players.
-	go player("Nadal", court)
-	go player("Djokovic", court)
+	go player("Serena", court)
+	go player("Venus", court)
 
 	// Start the set.
 	court <- 1

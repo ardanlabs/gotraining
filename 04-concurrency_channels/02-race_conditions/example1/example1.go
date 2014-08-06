@@ -1,4 +1,4 @@
-// http://play.golang.org/p/Pvq-Dp7HnG
+// http://play.golang.org/p/DCkt7qIzB8
 
 // go build -race
 
@@ -44,6 +44,7 @@ func incCounter(id int) {
 		value := counter
 
 		// Yield the thread and be placed back in queue.
+		// DO NOT USE IN PRODUCTION CODE!
 		runtime.Gosched()
 
 		// Increment our local value of Counter.
