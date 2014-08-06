@@ -2,7 +2,7 @@
 
 ### Code Review
 
-[Declare and initalize variables](example1/example1.go) ([Go Playground](http://play.golang.org/p/CFlITKut6d))
+[Declare and initalize variables](example1/example1.go) ([Go Playground](http://play.golang.org/p/m4PJ0FpSwX))
 
 ### Exercise 1
 Declare three variables that are initalized to their zero value. Declare a variable of type string, int and bool. Display the values of those variables.
