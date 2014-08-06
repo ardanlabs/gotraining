@@ -15,7 +15,7 @@ import (
 
 var (
 	// shutdown is a flag to alert running goroutines to shutdown.
-	shutdown int64 = 0
+	shutdown int64
 
 	// wg is used to wait for the program to finish.
 	wg sync.WaitGroup

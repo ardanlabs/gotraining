@@ -8,7 +8,7 @@ Let's make sure of local development environment is working.
 
 [Hello World Web](../quick/helloHTTP/helloHTTP.go)
 
-### [Previous Slide](slide3.md) | [Start Training](../../exercises.md)
+### [Previous Slide](slide3.md) | [Start Training](../../readme.md)
 ___
 [![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)

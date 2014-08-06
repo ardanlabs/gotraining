@@ -1,34 +1,24 @@
 ## Keywords, Built-In Functions. Operators and Packages
 
 ### Keywords
+Keyword are at the heart of every programming language and Go is no exception. These are reserved words that provide the core functionality in the language. The highlighted keyword have unique characteristics and provide interesting functionality in the language.
+
 <table>
-<tr><td>break</td><td>default</td><td>func</td><td>interface</td><td>select</td><td>case</td><td>defer</td><td>go</td><td>map</td><td>struct</td></tr>
-<tr><td>chan</td><td>else</td><td>goto</td><td>package</td><td>switch</td><td>const</td><td>fallthrough</td><td>if</td><td>range</td><td>type</td></tr>
-<tr><td>continue</td><td>for</td><td>import</td><td>return</td><td colspan="6"></td></tr>
+<tr><td>break</td><td>case</td><td><b>chan</b></td><td>const</td><td>continue</td><td>default</td><td><b>defer</b></td><td>else</td><td>fallthrough</td><td><b>for</b></td></tr>
+<tr><td><b>func</b></td><td><b>go</b></td><td>goto</td><td>if</td><td><b>import</b></td><td><b>interface</b></td><td>map</td><td><b>package</b></td><td><b>range</b></td><td>return</td></tr>
+<tr><td><b>select</b></td><td>struct</td><td>switch</td><td>type</td><td colspan="6"></td></tr>
 </table>
 
 ### Built-In Functions
+Built-in functions enhance the programming language by providing functionality that in many other languages are left up to the developer to implement. Many of these functions make writing code in Go easier, more consistent and less prone to errors. The highlighted built-in functions are functions that are very important and will be used often in the class.
+
 <table>
-<tr><td>append</td><td>cap</td><td>close</td><td>complex</td><td>copy</td><td>delete</td><td>imag</td><td>len</td><td>make</td><td>new</td></tr>
-<tr><td>panic</td><td>real</td><td>recover</td><td colspan="7"></td></tr>
+<tr><td><b>append</b></td><td>cap</td><td><b>close</b></td><td>complex</td><td>copy</td><td>delete</td><td>imag</td><td><b>len</b>b</td><td><b>make</b></td><td>new</td></tr>
+<tr><td>panic</td><td>real</td><td><b>recover</b></td><td colspan="7"></td></tr>
 </table>
 
-### Operators
-<table>
-<tr><td>+</td><td>&amp;</td><td>+=</td><td>&amp;=</td><td>&amp;&amp;</td><td>==</td><td>!=</td><td>( )</td><td>-</td><td>|</td></tr>
-<tr><td>-=</td><td>|=</td><td>||</td><td>&lt;</td><td>&lt;=</td><td>[ ]</td><td>*</td><td>^</td><td>*=</td><td>^=</td></tr>
-<tr><td>&lt;-</td><td>&gt;</td><td>&gt;=</td><td>{ }</td><td>/</td><td>&lt;&lt;</td><td>/=</td><td>&lt;&lt;=</td><td>++</td><td>=</td></tr>
-<tr><td>:=</td><td>,</td><td>;</td><td>%</td><td>&gt;&gt;</td><td>%=</td><td>&gt;&gt;=</td><td>--</td><td>!</td><td>...</td></tr>
-<tr><td>.</td><td>:</td><td>&amp;^</td><td>&amp;^=</td><td colspan="6"></td></tr>
-</table>
-
-### Root Level Packages
-<table>
-<tr><td>archive</td><td>bufio</td><td>bytes</td><td>compress</td><td>container</td><td>crypto</td><td>database</td><td>debug</td><td>encoding</td><td>errors</td></tr>
-<tr><td>expvar</td><td>flag</td><td>fmt</td><td>go</td><td>hash</td><td>html</td><td>image</td><td>index</td><td>io</td><td>log</td></tr>
-<tr><td>math</td><td>mime</td><td>net</td><td>os</td><td>path</td><td>reflect</td><td>regexp</td><td>runtime</td><td>sort</td><td>strconv</td></tr>
-<tr><td>strings</td><td>sync</td><td>syscall</td><td>testing</td><td>text</td><td>time</td><td>unicode</td><td>unsafe</td><td></td><td></td></tr>
-</table>
+### Standard Library
+Go's standard library is rich with packages that provide just about all the functionality a systems programmer would ever need. Check out the link and see for yourself. [Standard Library](http://golang.org/pkg/)
 
 ### [Previous Slide](slide2.md) | [Next Slide](slide4.md)
 ___

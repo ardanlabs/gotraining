@@ -1,4 +1,5 @@
 ## Struct Types - Language Syntax - Exercises
+Struct types are a way of creating complex types that group fields of data together. They are a great way of organizing and sharing the different aspects of the data your program consumes.
 
 ### Code Review
 

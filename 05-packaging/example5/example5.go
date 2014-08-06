@@ -19,5 +19,5 @@ func main() {
 		BarkStrength: 10,
 	}
 
-	fmt.Printf("Counter: %#v\n", dog)
+	fmt.Printf("Dog: %#v\n", dog)
 }

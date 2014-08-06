@@ -1,6 +1,6 @@
 ## Special Features Of Go
 
-I may be biased but I truly believe Go is an amazing language. It balances between being a lower level language with all the features that modern languages have today to help make you more productive. In Go you can write less code and do so much more. Here are some other special features about the language.
+I may be biased but I truly believe Go is an amazing language. It balances between being a lower level systems language but with all the features that modern languages have today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control. In Go you can write less code and do so much more. Here are some other special features about the language.
 
 #### * Go comes with a robust standard library.
 

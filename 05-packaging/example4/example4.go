@@ -20,5 +20,5 @@ func main() {
 		age:          5,
 	}
 
-	fmt.Printf("Counter: %#v\n", dog)
+	fmt.Printf("Dog: %#v\n", dog)
 }

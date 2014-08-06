@@ -1,8 +1,10 @@
-## Go Training Exercises
+## Go Training
+This is a 3 day, 21 hour bootcamp style course for existing developers who are looking to gain a working understanding of Go.
+
+*Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 ## Day 1
-
-On this day we take a tour of the language. We learn the keywords, built-in functions and syntax. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
+On this day we take our initial tour of the language. We learn about variables, types, data structures, interfaces and concurrency. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
 #### Slides
 
@@ -32,6 +34,9 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 [Race Conditions](../04-concurrency_channels/02-race_conditions/readme.md) | 
 [Channels](../04-concurrency_channels/03-channels/readme.md)
 
+## Day 2
+On this day we take go deeper into Go. We learn about testing, packaging, logging, encoding, io and reflection.
+
 #### Packaging
 [Packaging](../05-packaging/readme.md)
 
@@ -46,7 +51,7 @@ On this day we take a tour of the language. We learn the keywords, built-in func
 #### Reflection
 [Reflection](../08-reflection/readme.md)
 
-## Day 2
+## Day 3
 
 On this day we learn how to use Go to build a full application. The program implements functionality that can be found in many Go programs being developed today. The program pulls different data feeds from the web and compares the content against a search term. The content that matches is then displayed to the terminal window. The program reads text files, makes web calls, decodes both XML and JSON into struct type values and finally does all of this using Go concurrency to make things fast.
 

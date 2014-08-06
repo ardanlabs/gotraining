@@ -14,7 +14,7 @@ import (
 
 var (
 	// counter is a variable incremented by all goroutines.
-	counter = 0
+	counter int
 
 	// wg is used to wait for the program to finish.
 	wg sync.WaitGroup
