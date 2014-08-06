@@ -1,4 +1,4 @@
-// http://play.golang.org/p/33Jn6_xCEN
+// http://play.golang.org/p/2VPO773zPK
 
 // Sample program to show how to declare, initalize and iterate
 // over a map. Shows how iterating over a map is random.
@@ -35,7 +35,7 @@ func main() {
 
 	// Iterate over the map and notice the
 	// results are different.
-	for key, value := range users {
-		fmt.Println(key, value)
+	for key := range users {
+		fmt.Println(key)
 	}
 }

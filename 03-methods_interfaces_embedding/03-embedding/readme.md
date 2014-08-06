@@ -3,11 +3,13 @@ Embedding types provides the final piece of sharing types and inheriting behavio
 
 ### Code Review
 
-[Embedding types](example1/example1.go) ([Go Playground](http://play.golang.org/p/AQlYR3zQqw))
+[Declaring Fields](example1/example1.go) ([Go Playground](http://play.golang.org/p/-jGSPA8q1u))
 
-[Embedded types and interfaces](example2/example2.go) ([Go Playground](http://play.golang.org/p/8vI4KDm2sG))
+[Embedding types](example2/example2.go) ([Go Playground](http://play.golang.org/p/PcvnGRztwW))
 
-[Outer and inner type interface implementations](example3/example3.go) ([Go Playground](http://play.golang.org/p/W89veLizhb))
+[Embedded types and interfaces](example3/example3.go) ([Go Playground](http://play.golang.org/p/o3wBYH-LB6))
+
+[Outer and inner type interface implementations](example4/example5.go) ([Go Playground](http://play.golang.org/p/CrRUeKGGO-))
 
 ### Exercise 1
 Declare a struct type named Animal with two fields associated with all animals. Declare a struct type named Dog with two field associated with a dog. Embed the Animal type into the Dog type. Declare and initalize a value of type Dog. Display the value of the variable.

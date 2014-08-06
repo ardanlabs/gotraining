@@ -1,4 +1,4 @@
-// http://play.golang.org/p/PyZthd9EFl
+// http://play.golang.org/p/vlRlYsfLwb
 
 // Sample program to show how to takes slices of slices to create different
 // views of and make changes to the underlying array.
@@ -32,23 +32,14 @@ func main() {
 	slice2 := slice1[2:4]
 	inspectSlice(slice2)
 
-	// Take a slice of slice2. We want all the elements from 1.
-	// slice3[0] = "Grape"
-	// slice3[1] = "Plum"
-	// Length:   6 - 1
-	// Capacity: 6 - 1
-	slice3 := slice2[1:cap(slice2)]
-	inspectSlice(slice3)
-
 	fmt.Println("*************************")
 
 	// Change the value of the first element of slice3.
-	slice3[0] = "CHANGED"
+	slice2[0] = "CHANGED"
 
 	// Display the change across all existing slices.
 	inspectSlice(slice1)
 	inspectSlice(slice2)
-	inspectSlice(slice3)
 }
 
 // inspectSlice exposes the slice header for review.

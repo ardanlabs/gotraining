@@ -1,7 +1,7 @@
-// http://play.golang.org/p/AQlYR3zQqw
+// http://play.golang.org/p/-jGSPA8q1u
 
-// Sample program to show how to embed a type into another type and
-// the relationship between the inner and outer type.
+// Sample program to show how what we are doing is NOT embedding
+// a type but just using a type as a field.
 package main
 
 import (
@@ -15,17 +15,10 @@ type (
 		Email string
 	}
 
-	// Security defines security rights.
-	Security struct {
-		AccessLevel int
-		Auth        bool
-	}
-
 	// Admin represents an admin user with privileges.
 	Admin struct {
-		User  // Embedded Type
-		Sec   Security
-		Level string
+		Person User // NOT Embedding
+		Level  string
 	}
 )
 
@@ -41,20 +34,13 @@ func (u *User) Notify() {
 func main() {
 	// Create an admin user.
 	admin := Admin{
-		User: User{
+		Person: User{
 			Name:  "john smith",
-			Email: "john@email.com",
-		},
-		Sec: Security{
-			AccessLevel: 10,
-			Auth:        false,
+			Email: "john@yahoo.com",
 		},
 		Level: "super",
 	}
 
-	// We can acces the inner type's method direectly.
-	admin.User.Notify()
-
-	// The inner type's method is promoted.
-	admin.Notify()
+	// We can acces fields methods.
+	admin.Person.Notify()
 }

@@ -1,6 +1,7 @@
-// http://play.golang.org/p/8vI4KDm2sG
+// http://play.golang.org/p/PcvnGRztwW
 
-// Sample program to show how an embedded types works with interfaces.
+// Sample program to show how to embed a type into another type and
+// the relationship between the inner and outer type.
 package main
 
 import (
@@ -8,12 +9,6 @@ import (
 )
 
 type (
-	// Notifier is an interface that defined notification
-	// type behavior.
-	Notifier interface {
-		Notify()
-	}
-
 	// User defines a user in the program.
 	User struct {
 		Name  string
@@ -22,7 +17,7 @@ type (
 
 	// Admin represents an admin user with privileges.
 	Admin struct {
-		User
+		User  // Embedded Type
 		Level string
 	}
 )
@@ -41,19 +36,14 @@ func main() {
 	admin := Admin{
 		User: User{
 			Name:  "john smith",
-			Email: "john@email.com",
+			Email: "john@yahoo.com",
 		},
 		Level: "super",
 	}
 
-	// Send the admin user a notification.
-	// The embedded inner type's implementation of the
-	// interface is "promoted" to the outer type.
-	sendNotification(&admin)
-}
+	// We can acces the inner type's method direectly.
+	admin.User.Notify()
 
-// sendNotification accepts values that implement the Notifier
-// interface and sends notifications.
-func sendNotification(notify Notifier) {
-	notify.Notify()
+	// The inner type's method is promoted.
+	admin.Notify()
 }
