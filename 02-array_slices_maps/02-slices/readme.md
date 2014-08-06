@@ -1,8 +1,9 @@
 ## Slices
+Slices are an incredibly important data structure in Go. They form the basis for how we manage and manipulate data in a flexible, performant and dynamic way. It is incredibly important for all Go programmers to learn how to uses slices.
 
 ### Code Review
 
-[Declare, Capacity and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/4r90uFQwJn))
+[Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/4r90uFQwJn))
 
 [Reference Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/DB8hwJ0hw9)
 

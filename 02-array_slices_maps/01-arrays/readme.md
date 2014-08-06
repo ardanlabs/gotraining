@@ -1,8 +1,9 @@
 ## Arrays
+Arrays are a special data structure in Go that allow us to allocate contiguous blocks of fixed size memory. Arrays have some special features in Go related to how they are declared and viewed as types.
 
 ### Code Review
 
-[Declare, initalize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/uH5ElZsGHe))
+[Declare, initalize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/irrA08aCkm))
 
 [Different type arrays](example2/example2.go) ([Go Playground](http://play.golang.org/p/LVD43cYBNS))
 

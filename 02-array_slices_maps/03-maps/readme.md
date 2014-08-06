@@ -1,4 +1,5 @@
 ## Maps
+Maps provide a data structure that allow for the storage and management of key/value pair data.
 
 ### Code Review
 

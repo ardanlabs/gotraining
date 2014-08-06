@@ -1,4 +1,5 @@
 ## Interfaces
+Interfaces provide a way to declare types that define behavior. Then struct and named type can declare methods and implement this behavior. When a struct or named type implements the behavior declare by an interface, it satisfies the interface and can be assigned as values of the interface type. This leads to providing polymorphic behavior in our programs.
 
 ### Code Review
 

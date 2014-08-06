@@ -1,4 +1,5 @@
 ## Pointers - Language Syntax - Exercises
+Pointers provide a way to share data across function boundaries. Having the ability to share and reference data with a pointer provides flexbility. It also helps our programs minimize the amount of memory they need and can add some extra performance.
 
 ### Code Review
 
@@ -6,7 +7,7 @@
 
 [Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/izcdKq-Qa-))
 
-[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/0ovhZVUor7))
+[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/45qPXTLif_))
 
 ### Exercise 1
 Declare and initalize a variable of type int with the value of 20. Display the _address of_ and _value of_ the variable.

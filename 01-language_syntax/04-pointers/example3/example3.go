@@ -1,4 +1,4 @@
-// http://play.golang.org/p/0ovhZVUor7
+// http://play.golang.org/p/45qPXTLif_
 
 // Sample program to show the basic concept of using a pointer
 // to share data.
@@ -6,20 +6,18 @@ package main
 
 import "fmt"
 
-// animal is a type that describes any animal.
-type animal struct {
+// dog is a type that describes any dog.
+type dog struct {
 	name    string
-	breed   string
 	hasTail bool
 	bark    int
 }
 
 // main is the entry point for the application.
 func main() {
-	// Declare and initialize a variable named bart of type animal.
-	bart := animal{
+	// Declare and initialize a variable named bart of type dog.
+	bart := dog{
 		name:    "Bart",
-		breed:   "Lab",
 		hasTail: true,
 		bark:    10,
 	}
@@ -42,7 +40,7 @@ func increment(bark *int) {
 }
 
 // display declares a as a pointer variable whose value is always an address
-// and points to values of type animal.
-func display(a *animal) {
+// and points to values of type dog.
+func display(a *dog) {
 	fmt.Printf("%p\t%+v\n", a, *a)
 }

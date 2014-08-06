@@ -1,4 +1,4 @@
-// http://play.golang.org/p/2t1PFm1FGY
+// http://play.golang.org/p/dDZpl7ti1I
 
 // Sample program to show how we can use the blank identifier to ignore return values.
 package main
@@ -45,16 +45,13 @@ func main() {
 
 // updateUser updates the specified user document.
 func updateUser(u *user) (*updateStats, error) {
-	// Make a call to post the update.
-	r, err := postUpdate(u)
-	if err != nil {
-		return nil, err
-	}
+	// response simulates a JSON response.
+	response := `{"modified":1, "duration":0.005, "success" : true, "message": "updated"}`
 
 	// Unmarshal the json document into a value of
 	// the userStats struct type.
 	var us updateStats
-	if err = json.Unmarshal([]byte(r), &us); err != nil {
+	if err := json.Unmarshal([]byte(response), &us); err != nil {
 		return nil, err
 	}
 
@@ -65,11 +62,4 @@ func updateUser(u *user) (*updateStats, error) {
 	}
 
 	return &us, nil
-}
-
-// postUpdate simulates a web call that returns a json
-// document for the specified user update.
-func postUpdate(u *user) (string, error) {
-	response := `{"modified":1, "duration":0.005, "success" : true, "message": "updated"}`
-	return response, nil
 }

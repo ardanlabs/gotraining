@@ -1,4 +1,4 @@
-// http://play.golang.org/p/qTozDpZ1Tz
+// http://play.golang.org/p/UKKDife-Wb
 
 // Sample program to show how to declare and use a named type.
 package main
@@ -17,7 +17,7 @@ func main() {
 	// Declare a variable of type int64 and assign a value.
 	nanosecond := int64(10)
 
-	// Attemped to assign a variable of type int (base type of Duration) to
+	// Attemped to assign a variable of type int64 (base type of Duration) to
 	// a variable of type Duration.
 	// duration = nanosecond
 

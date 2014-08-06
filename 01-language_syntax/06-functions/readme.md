@@ -1,10 +1,11 @@
 ## Functions - Language Syntax - Exercises
+Function are at the core of the language. They provide a mechanism to group and organize our code to separate and distinct pieces of functionality. They can be used to provide an API to the packages we write and are a core compontent to concurrency.
 
 ### Code Review
 
 [Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/kTKdUJolAU))
 
-[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/2t1PFm1FGY))
+[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/dDZpl7ti1I))
 
 [Variadic functions](example3/example3.go) ([Go Playground](http://play.golang.org/p/RoP6pNPgKl))
 

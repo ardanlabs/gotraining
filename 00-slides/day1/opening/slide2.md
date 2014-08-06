@@ -9,8 +9,8 @@ Go contains a wealth of documentation and a great community.
 
 ### Offical Documentation
 <table>
-<tr><td><a href="http://golang.org">Offical Website</a></td><td><a href="http://golang.org/doc">Documentation</a></td><td><a href="http://golang.org/doc/faq">FAQ</a></td><td><a href="http://golang.org/doc/effective_go.html">Effective Go</a></td><td><a href="http://golang.org/doc/code.html">How To Write Go</a></td></tr>
-<tr><td><a href="https://code.google.com/p/go-wiki/wiki/Projects">Wiki</a></td><td><a href="http://golang.org/pkg">Packages</a></td><td><a href="http://golang.org/cmd">Commands/Tools</a></td><td><a href="http://golang.org/ref/mem">Memory Model</a></td><td></td></tr>
+<tr><td><a href="http://golang.org">Offical Website</a></td><td><a href="http://golang.org/doc">Documentation</a></td><td><a href="http://golang.org/doc/faq">FAQ</a></td><td><a href="http://golang.org/doc/effective_go.html">Effective Go</a></td><td><a href="http://golang.org/doc/code.html">How To Write Go</a></td><td><a href="https://code.google.com/p/go-wiki/wiki/Projects">Wiki</a></td></tr>
+<tr><td><a href="http://golang.org/pkg">Packages</a></td><td><a href="http://golang.org/cmd">Commands/Tools</a></td><td colspan="2"></td></tr>
 </table>
 
 ### Blogs

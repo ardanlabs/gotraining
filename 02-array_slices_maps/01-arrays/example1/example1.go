@@ -1,4 +1,4 @@
-// http://play.golang.org/p/uH5ElZsGHe
+// http://play.golang.org/p/irrA08aCkm
 
 // Sample program to show how to declare and iterate over
 // arrays of different types.
@@ -29,7 +29,7 @@ func main() {
 	numbers := [4]int{10, 20, 30, 40}
 
 	// Iterate over the array of numbers.
-	for index, number := range numbers {
-		fmt.Println(index, number)
+	for index := 0; index < len(numbers); index++ {
+		fmt.Println(index, numbers[index])
 	}
 }
