@@ -4,7 +4,7 @@ This is a 2 day, 14 hour bootcamp style course for existing developers who are l
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-[Click Here To Review The Course Material](00-slides/exercises.md)
+[Click Here To Review The Course Material](00-slides/readme.md)
 
 __Minimal Qualified Student:__
 
