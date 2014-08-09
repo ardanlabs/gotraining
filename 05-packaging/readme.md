@@ -18,7 +18,11 @@ Packages contain the basic unit of code. All code is built into packages that ca
 ### Exercises
 
 #### Exercise 1
-Create a package with an unexported struct type with exported fields. In the package, declare an exported factory function named New to create and return pointers of this unexported type. Write a main function that uses this package to create values of this type, then initialize and display those values.
+**Part A** Create a package named toy with a single unexported struct type named bat. Add the exported fields Height and Weight to the bat type. Then create an exported factory method called NewBat that returns pointers of type bat that are initialized to their zero value.
+
+**Part B** Create a program that imports the toy package. Use the NewBat function to create a value of bat and populate the values of Height and Width. Then display the value of the bat variable.
+
+[Answer](exercises/exercise1/exercise1.go)
 
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
