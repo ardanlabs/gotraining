@@ -1,4 +1,4 @@
-// http://play.golang.org/p/PcvnGRztwW
+// NEED PLAYGROUND
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
@@ -9,41 +9,41 @@ import (
 )
 
 type (
-	// User defines a user in the program.
-	User struct {
-		Name  string
-		Email string
+	// user defines a user in the program.
+	user struct {
+		name  string
+		email string
 	}
 
-	// Admin represents an admin user with privileges.
-	Admin struct {
-		User  // Embedded Type
-		Level string
+	// admin represents an admin user with privileges.
+	admin struct {
+		user  // Embedded Type
+		level string
 	}
 )
 
-// Notify implements a method that can be called via
-// a value of type User.
-func (u *User) Notify() {
-	fmt.Printf("User: Sending User Email To %s<%s>\n",
-		u.Name,
-		u.Email)
+// notify implements a method that can be called via
+// a value of type user.
+func (u *user) notify() {
+	fmt.Printf("user: Sending user email To %s<%s>\n",
+		u.name,
+		u.email)
 }
 
 // main is the entry point for the application.
 func main() {
 	// Create an admin user.
-	admin := Admin{
-		User: User{
-			Name:  "john smith",
-			Email: "john@yahoo.com",
+	ad := admin{
+		user: user{
+			name:  "john smith",
+			email: "john@yahoo.com",
 		},
-		Level: "super",
+		level: "super",
 	}
 
 	// We can acces the inner type's method direectly.
-	admin.User.Notify()
+	ad.user.notify()
 
 	// The inner type's method is promoted.
-	admin.Notify()
+	ad.notify()
 }

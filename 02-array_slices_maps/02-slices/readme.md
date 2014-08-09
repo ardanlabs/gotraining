@@ -1,4 +1,5 @@
 ## Slices - Arrays, Slices and Maps
+
 Slices are an incredibly important data structure in Go. They form the basis for how we manage and manipulate data in a flexible, performant and dynamic way. It is incredibly important for all Go programmers to learn how to uses slices.
 
 ## Notes
@@ -28,6 +29,7 @@ Slices are an incredibly important data structure in Go. They form the basis for
 ## Exercies
 
 ### Exercise 1
+
 **Part A** Declare a nil slice of integers. Create a loop that increments a counter variable by 10 five times and appends these values to the slice. Iterate over the slice and display each value.
 
 **Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of the second and third elements (index 1 and 2) and display the index position and value of each element in the new slice.

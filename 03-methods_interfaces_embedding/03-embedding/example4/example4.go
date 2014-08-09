@@ -1,4 +1,4 @@
-// http://play.golang.org/p/CrRUeKGGO-
+// NEED PLAYGROUND
 
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
@@ -9,66 +9,66 @@ import (
 )
 
 type (
-	// Notifier is an interface that defined notification
+	// notifier is an interface that defined notification
 	// type behavior.
-	Notifier interface {
-		Notify()
+	notifier interface {
+		notify()
 	}
 
-	// User defines a user in the program.
-	User struct {
-		Name  string
-		Email string
+	// user defines a user in the program.
+	user struct {
+		name  string
+		email string
 	}
 
-	// Admin represents an admin user with privileges.
-	Admin struct {
-		User
-		Level string
+	// admin represents an admin user with privileges.
+	admin struct {
+		user
+		level string
 	}
 )
 
-// Notify implements a method that can be called via
-// a value of type User.
-func (u *User) Notify() {
-	fmt.Printf("User: Sending User Email To %s<%s>\n",
-		u.Name,
-		u.Email)
+// notify implements a method that can be called via
+// a value of type user.
+func (u *user) notify() {
+	fmt.Printf("user: Sending user email To %s<%s>\n",
+		u.name,
+		u.email)
 }
 
-// Notify implements a method that can be called via
+// notify implements a method that can be called via
 // a value of type Admin.
-func (a *Admin) Notify() {
+func (a *admin) notify() {
 	fmt.Printf("User: Sending Admin Email To %s<%s>\n",
-		a.Name,
-		a.Email)
+		a.name,
+		a.email)
 }
 
 // main is the entry point for the application.
 func main() {
 	// Create an admin user.
-	admin := Admin{
-		User: User{
-			Name:  "john smith",
-			Email: "john@yahoo.com",
+	ad := admin{
+		user: user{
+			name:  "john smith",
+			email: "john@yahoo.com",
 		},
-		Level: "super",
+		level: "super",
 	}
 
 	// Send the admin user a notification.
 	// The embedded inner type's implementation of the
-	// interface is "promoted" to the outer type.
-	sendNotification(&admin)
+	// interface is NOT "promoted" to the outer type.
+	sendNotification(&ad)
 
 	// We can acces the inner type's method direectly.
-	admin.User.Notify()
+	ad.user.notify()
 
 	// The inner type's method is promoted.
-	admin.Notify()
+	ad.notify()
 }
 
-// sendNotification accepts values that implement the Notifier
+// sendNotification accepts values that implement the notifier
 // interface and sends notifications.
-func sendNotification(notify Notifier) {
-	notify.Notify()
+func sendNotification(n notifier) {
+	n.notify()
 }

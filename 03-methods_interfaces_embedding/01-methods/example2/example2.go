@@ -1,4 +1,4 @@
-// http://play.golang.org/p/KKttmFKTVg
+// NEED PLAYGROUND
 
 // Sample program to show how to declare methods against
 // a named type.
@@ -8,31 +8,31 @@ import (
 	"fmt"
 )
 
-// Duration is a named type that represents a duration
+// duration is a named type that represents a duration
 // of time in Nanosecond.
-type Duration int64
+type duration int64
 
-// SetSeconds can change the value of Duration type variables.
-func (d *Duration) SetSeconds(seconds Duration) {
+// SetSeconds can change the value of duration type variables.
+func (d *duration) SetSeconds(seconds duration) {
 	*d = 1e9 * seconds
 }
 
 // Seconds returns a formatted string of duration in seconds.
-func (d Duration) Seconds() string {
+func (d duration) Seconds() string {
 	seconds := d / 1e9
 	return fmt.Sprintf("%d Seconds", seconds)
 }
 
 // main is the entry point for the application.
 func main() {
-	// Declare a variable of type Duration set to
+	// Declare a variable of type duration set to
 	// its zero value.
-	var duration Duration
+	var dur duration
 
-	// Change the value of duration to equal
+	// Change the value of dur to equal
 	// five seconds.
-	duration.SetSeconds(5)
+	dur.SetSeconds(5)
 
-	// Display the new value of duration.
-	fmt.Println(duration.Seconds())
+	// Display the new value of dur.
+	fmt.Println(dur.Seconds())
 }

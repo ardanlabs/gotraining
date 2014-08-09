@@ -1,4 +1,5 @@
 ## Functions - Language Syntax
+
 Function are at the core of the language. They provide a mechanism to group and organize our code to separate and distinct pieces of functionality. They can be used to provide an API to the packages we write and are a core compontent to concurrency.
 
 ## Notes
@@ -22,6 +23,7 @@ Function are at the core of the language. They provide a mechanism to group and 
 ## Exercises
 
 ### Exercise 1
+
 **Part A** Declare a struct type to maintain information about a user. Declare a function that creates value of and returns pointers of this type and an error value. Call this function from main and display the value.
 
 **Part B** Make a second call to your function but this time ignore the value and just test the error value.

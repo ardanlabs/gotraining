@@ -1,4 +1,5 @@
 ## Pointers - Language Syntax
+
 Pointers provide a way to share data across function boundaries. Having the ability to share and reference data with a pointer provides flexbility. It also helps our programs minimize the amount of memory they need and can add some extra performance.
 
 ## Notes
@@ -19,6 +20,7 @@ Pointers provide a way to share data across function boundaries. Having the abil
 ## Exercises
 
 ### Exercise 1
+
 **Part A** Declare and initalize a variable of type int with the value of 20. Display the _address of_ and _value of_ the variable.
 
 **Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of and the _value that the pointer points to_.
@@ -26,6 +28,7 @@ Pointers provide a way to share data across function boundaries. Having the abil
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
 
 ### Exercise 2
+
 Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
 
 [Answer](exercises/exercise2/exercise2.go) ([Go Playground](NEED PLAYGROUND))

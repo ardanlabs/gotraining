@@ -1,4 +1,5 @@
 ## Maps - Arrays, Slices and Maps
+
 Maps provide a data structure that allow for the storage and management of key/value pair data.
 
 ## Notes
@@ -22,6 +23,7 @@ Maps provide a data structure that allow for the storage and management of key/v
 ## Exercises
 
 ### Exercise 1
+
 Declare and make a map of integer values with a string as the key. Populate the map with five values and iterate over the map to display the key/value pairs.
 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))

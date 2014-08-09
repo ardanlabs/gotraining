@@ -7,22 +7,22 @@ import "fmt"
 
 // user is a struct type that declares user information.
 type user struct {
-	ID   int
-	Name string
+	id   int
+	name string
 }
 
 // main is the entry point for the application.
 func main() {
 	// Declare and initalize a value of type user.
 	u1 := user{
-		ID:   1432,
-		Name: "Betty",
+		id:   1432,
+		name: "Betty",
 	}
 
 	// Declare and initalize a value of type user.
 	u2 := user{
-		ID:   4367,
-		Name: "Janet",
+		id:   4367,
+		name: "Janet",
 	}
 
 	// Display both user values.

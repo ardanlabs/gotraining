@@ -1,4 +1,5 @@
 ## Struct Types - Language Syntax
+
 Struct types are a way of creating complex types that group fields of data together. They are a great way of organizing and sharing the different aspects of the data your program consumes.
 
 ## Notes
@@ -20,6 +21,7 @@ Struct types are a way of creating complex types that group fields of data toget
 ## Exercises
 
 ### Exercise 1
+
 **Part A:** Declare a struct type to maintain information about a user (name, email and age). Create a value of this type, initalize with values and display each field.
 
 **Part B:** Declare and initialize an anonymous struct type with the same three fields. Display the value.

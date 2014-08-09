@@ -1,4 +1,5 @@
 ## Named Types - Language Syntax
+
 Named types are another way to create user defined types. They provide some interesting feature/functionality that is not always available in other languages. The standard library in Go used named types very effectively.
 
 ## Notes
@@ -19,6 +20,7 @@ Named types are another way to create user defined types. They provide some inte
 ## Exercises
 
 ### Exercise 1
+
 **Part A** Declare a named type called counter with a base type of int. Declare and initalize a variable of this named type to its zero value. Display the value of this variable and the variables type.
 
 **Part B** Declare a new variable of the named type assign it the value of 10. Display the value.

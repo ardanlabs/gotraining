@@ -47,16 +47,16 @@ On this day we take our initial tour of the language. We learn about variables, 
 	* Methods
 	* Interfaces
 	* Embedding Types
-* Concurrency
+* Concurrency and Channels
 	* Scheduler and Goroutines
 	* Race Conditions
 
 ### Day 2
 On this day we take go deeper into Go. We learn about testing, packaging, logging, encoding, io and reflection.
 
-* Channels
-	* Unbuffered
-	* Buffered
+* Concurrency and Channels
+	* Unbuffered Channels
+	* Buffered Channels
 * Testing
 	* Standard testing
 	* Table tests

@@ -1,11 +1,13 @@
 // NEED PLAYGROUND
 
-// Write a problem that uses a buffered channel to maintain a buffer
-// of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
-// into the channel. Then create 20 goroutines that receive a string
-// from the channel, display the value and then send the string back
-// into the channel. Once each goroutine is done performing that task,
-// allow the goroutine to terminate.
+/*
+Write a problem that uses a buffered channel to maintain a buffer
+of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
+into the channel. Then create 20 goroutines that receive a string
+from the channel, display the value and then send the string back
+into the channel. Once each goroutine is done performing that task,
+allow the goroutine to terminate.
+*/
 package main
 
 import (

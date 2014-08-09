@@ -1,7 +1,7 @@
-// http://play.golang.org/p/YXhZE1HPUH
+// NEED PLAYGROUND
 
 // Sample program to show how to use an interface in Go. In this case,
-// Go will NOT deference a value to support the interface.
+// Go will NOT deference a pointer value to support the interface.
 package main
 
 import (
@@ -9,39 +9,40 @@ import (
 )
 
 type (
-	// Notifier is an interface that defined notification
+	// notifier is an interface that defined notification
 	// type behavior.
-	Notifier interface {
-		Notify()
+	notifier interface {
+		notify()
 	}
 
-	// User defines a user in the program.
-	User struct {
-		Name  string
-		Email string
+	// user defines a user in the program.
+	user struct {
+		name  string
+		email string
 	}
 )
 
-// Notify implements a method that can be called via
-// a value of type User.
-func (u *User) Notify() {
+// notify implements a method that can be called via
+// a value of type user.
+func (u *user) notify() {
 	fmt.Printf("User: Sending User Email To %s<%s>\n",
-		u.Name,
-		u.Email)
+		u.name,
+		u.email)
 }
 
 // main is the entry point for the application.
 func main() {
 	// Create a value of type User and send a notification.
-	user1 := User{"Bill", "bill@email.com"}
+	user1 := user{"Bill", "bill@email.com"}
 
-	// ./example2.go:38: cannot use user1 (type User) as type Notifier in argument to sendNotification:
-	//   User does not implement Notifier (Notify method has pointer receiver)
 	sendNotification(user1)
+
+	// ./example2.go:38: cannot use user1 (type User) as type notifier in argument to sendNotification:
+	//   User does not implement notifier (notify method has pointer receiver)
 }
 
-// sendNotification accepts values that implement the Notifier
+// sendNotification accepts values that implement the notifier
 // interface and sends notifications.
-func sendNotification(notify Notifier) {
-	notify.Notify()
+func sendNotification(notify notifier) {
+	notify.notify()
 }

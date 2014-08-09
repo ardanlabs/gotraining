@@ -8,36 +8,36 @@ import (
 	"fmt"
 )
 
-// User defines a user in the program.
-type User struct {
+// user defines a user in the program.
+type user struct {
 	name  string
 	email string
 }
 
 // Notify implements a method that can be called via
-// a value of type User.
-func (u User) Notify() {
+// a value of type user.
+func (u user) Notify() {
 	fmt.Printf("User: Sending User Email To %s<%s>\n",
 		u.name,
 		u.email)
 }
 
 // ChangeEmail implements a method that can be called via
-// a pointer of type User.
-func (u *User) ChangeEmail(email string) {
+// a pointer of type user.
+func (u *user) ChangeEmail(email string) {
 	u.email = email
 }
 
 // main is the entry point for the application.
 func main() {
-	// Value of type User can be used to call the method
+	// Value of type user can be used to call the method
 	// with a value receiver.
-	user1 := User{"Bill", "bill@email.com"}
+	user1 := user{"Bill", "bill@email.com"}
 	user1.Notify()
 
-	// Pointer of type User can also be used to call a method
+	// Pointer of type user can also be used to call a method
 	// with a value receiver.
-	user2 := &User{"Jill", "jill@email.com"}
+	user2 := &user{"Jill", "jill@email.com"}
 	user2.Notify()
 
 	// Value of type User can be used to call the method

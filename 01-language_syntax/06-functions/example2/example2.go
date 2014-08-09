@@ -1,4 +1,4 @@
-// http://play.golang.org/p/dDZpl7ti1I
+// NEED PLAYGROUND
 
 // Sample program to show how we can use the blank identifier to ignore return values.
 package main
@@ -12,16 +12,16 @@ import (
 type (
 	// user is a struct type that declares user information.
 	user struct {
-		ID   int
-		Name string
+		id   int
+		name string
 	}
 
 	// updateStats provides update stats.
 	updateStats struct {
-		Modified int
-		Duration float64
-		Success  bool
-		Message  string
+		modified int
+		duration float64
+		success  bool
+		message  string
 	}
 )
 
@@ -29,8 +29,8 @@ type (
 func main() {
 	// Declare and initalize a value of type user.
 	u := user{
-		ID:   1432,
-		Name: "Betty",
+		id:   1432,
+		name: "Betty",
 	}
 
 	// Update the user name. Don't care about the update stats.
@@ -40,7 +40,7 @@ func main() {
 	}
 
 	// Display the update was successful.
-	fmt.Println("Updated user record for ID", u.ID)
+	fmt.Println("Updated user record for id", u.id)
 }
 
 // updateUser updates the specified user document.
@@ -57,8 +57,8 @@ func updateUser(u *user) (*updateStats, error) {
 
 	// Check the update status to verify the update
 	// was successful.
-	if us.Success != true {
-		return nil, errors.New(us.Message)
+	if us.success != true {
+		return nil, errors.New(us.message)
 	}
 
 	return &us, nil

@@ -1,4 +1,5 @@
 ## Constants - Language Syntax
+
 Constants are a way to create a named identifier who's value can never change. They also provide an incredible amount of flexibility to the language. The way constants are implemented in Go is very unique.
 
 ## Notes
@@ -17,6 +18,7 @@ Constants are a way to create a named identifier who's value can never change. T
 ## Exercises
 
 ### Exercise 1
+
 **Part A:** Declare an untyped and typed constant and display their values.
 
 **Part B:** Multiply two literal constants into a typed variable and display the value.

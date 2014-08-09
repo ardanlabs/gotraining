@@ -1,7 +1,16 @@
 ## Embedding - Methods, Interfaces and Embedding
-Embedding types provides the final piece of sharing types and inheriting behavior by declaring inner types. Through the use of inner type promotion, an inner types fields and methods can be directly access by references from the outer type.
 
-### Code Review
+Embedding types provides the final piece of sharing and reusing state and behavior between types. Through the use of inner type promotion, an inner type's fields and methods can be directly access by references of the outer type.
+
+## Notes
+
+* Embedding types allow us to share state or behvior between types.
+* The inner type never loses its identity.
+* This is not inheritance.
+* Through promotion, inner type fields and methods can be accessed through the outer type.
+* The outer type can override the inner type's behavior.
+
+## Code Review
 
 [Declaring Fields](example1/example1.go) ([Go Playground](http://play.golang.org/p/-jGSPA8q1u))
 
@@ -11,19 +20,19 @@ Embedding types provides the final piece of sharing types and inheriting behavio
 
 [Outer and inner type interface implementations](example4/example5.go) ([Go Playground](http://play.golang.org/p/CrRUeKGGO-))
 
-### Exercises
+## Exercises
 
-#### Exercise 1
-Declare a struct type named Animal with two fields associated with all animals. Declare a struct type named Dog with two field associated with a dog. Embed the Animal type into the Dog type. Declare and initalize a value of type Dog. Display the value of the variable.
+### Exercise 1
 
-#### Exercise 2
-From exercise 1, add a method to the Animal type using a pointer reciever named Yelp which displays the literal string "Not Implemented". Call the method from the value of type Dog.
+**Part A** Declare a struct type named animal with two fields name and age. Declare a struct type named dog with the field bark. Embed the animal type into the dog type. Declare and initalize a value of type dog. Display the value of the variable.
 
-#### Exercise 3
-From exercise 2, add an interface named Speaker with a single method called Yelp. Declare a value of type Speaker and assign the address of the value of type Dog. Call the method Yelp.
+**Part B** Add a method to the animal type using a pointer reciever named yelp which displays the literal string "Not Implemented". Call the method from the value of type dog.
 
-#### Exercise 4
-From exercise 3, implement the Speaker interface for the Dog type. Call the method Yelp again from the value of type Speaker.
+**Part C** Add an interface named speaker with a single method called yelp. Declare a value of type speaker and assign the address of the value of type dog. Call the method yelp.
+
+**Part D** Implement the speaker interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type speaker.
+
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

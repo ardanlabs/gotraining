@@ -1,4 +1,5 @@
 ## Variables - Language Syntax
+
 Variables are at the heart of the langugage and provide the ability to read from and write to memory. In Go, access to memory is type safe. This means the compiler takes type serious and will not allow us to use variables outside the scope of how they are declared.
 
 Here is a link to the Go specification about some of the built-in types in Go that can be used to declare variables: [Built-In Types](http://golang.org/ref/spec#Boolean_types)
@@ -15,6 +16,7 @@ Here is a link to the Go specification about some of the built-in types in Go th
 ## Exercises
 
 ### Exercise 1 
+
 **Part A:** Declare three variables that are initalized to their zero value and three declared with a literal value. Declare variables of type string, int and bool. Display the values of those variables.
 
 **Part B:** Declare a new variable of type float32 and initalize the variable by converting the literal value of Pi (3.14).
