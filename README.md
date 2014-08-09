@@ -57,7 +57,7 @@ On this day we take go deeper into Go. We learn about testing, packaging, loggin
 * Concurrency and Channels
 	* Unbuffered Channels
 	* Buffered Channels
-* Testing
+* Testing and Benchmarking
 	* Standard testing
 	* Table tests
 	* Benchmarking

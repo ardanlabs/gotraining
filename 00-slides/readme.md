@@ -42,7 +42,7 @@ On this day we take go deeper into Go. We learn about channels, testing, packagi
 #### Packaging
 [Packaging](../05-packaging/readme.md)
 
-#### Testing
+#### Testing and Benchmarking
 [Database Program](../06-testing/readme.md)
 
 #### Standard Library
