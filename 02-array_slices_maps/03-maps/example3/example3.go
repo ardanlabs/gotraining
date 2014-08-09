@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/0v_VHlYF7f
 
 // Sample program to show how only types that can have
 // equality defined on them can be a map key.

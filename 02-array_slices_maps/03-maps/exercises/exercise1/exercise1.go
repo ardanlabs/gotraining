@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/wtQ54cnEpk
 
 /*
 Declare and make a map of integer values with a string as the key. Populate the

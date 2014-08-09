@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/PvjKR2uU2H
 
 /*
 Declare an array of 5 strings with each element initialized to its zero value.

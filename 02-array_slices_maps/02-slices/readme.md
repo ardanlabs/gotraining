@@ -34,7 +34,7 @@ Slices are an incredibly important data structure in Go. They form the basis for
 
 **Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of the second and third elements (index 1 and 2) and display the index position and value of each element in the new slice.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/9ir4vinceh))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

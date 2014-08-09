@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/voXAyiydFf
 
 // Sample program to show how to declare, initalize and iterate
 // over a map. Shows how iterating over a map is random.

@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/htR56-yyqC
 
 // Sample program to show how to declare and initalize a map
 // using a composite literal.

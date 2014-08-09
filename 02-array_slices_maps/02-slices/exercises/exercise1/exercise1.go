@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/9ir4vinceh
 
 /*
 Declare a nil slice of integers. Create a loop that increments a counter variable
