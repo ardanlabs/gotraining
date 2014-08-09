@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/B9npiUVveE
 
 /*
 Write a problem that uses a buffered channel to maintain a buffer

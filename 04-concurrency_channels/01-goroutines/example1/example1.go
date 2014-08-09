@@ -1,4 +1,4 @@
-// NEED NEW
+// http://play.golang.org/p/sFfYEQQJFW
 
 // Sample program to show how to create goroutines and
 // how the scheduler behaves.

@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/3ry3sCIfaC
 
 /*
 Write a program where two goroutines pass an integer back and forth

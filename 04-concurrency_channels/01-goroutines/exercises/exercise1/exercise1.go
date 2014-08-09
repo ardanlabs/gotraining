@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/4ox2oCSn42
 
 /*
 Create a program that declares two anonymous functions. Once that counts up to
