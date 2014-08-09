@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/EMY2xb1csT
 
 // Sample program to show how to declare methods against
 // a named type.

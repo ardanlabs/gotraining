@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/EZrIvPzfjh
 
 /*
 Declare a struct that represents a baseball player. Include name, atBats and hits.

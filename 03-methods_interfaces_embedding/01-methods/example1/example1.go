@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/mF2Z5ZPQFi
 
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.

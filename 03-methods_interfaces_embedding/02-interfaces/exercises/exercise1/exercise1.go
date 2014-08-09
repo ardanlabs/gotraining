@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/pbcD5WmTX9
 
 /*
 Declare an interface named Speaker with a method named SayHello. Declare a struct

@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/5LlI_KJ2ZT
 
 // Sample program to show how what we are doing is NOT embedding
 // a type but just using a type as a field.

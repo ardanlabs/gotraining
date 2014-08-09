@@ -12,13 +12,13 @@ Embedding types provides the final piece of sharing and reusing state and behavi
 
 ## Code Review
 
-[Declaring Fields](example1/example1.go) ([Go Playground](http://play.golang.org/p/-jGSPA8q1u))
+[Declaring Fields](example1/example1.go) ([Go Playground](http://play.golang.org/p/5LlI_KJ2ZT))
 
-[Embedding types](example2/example2.go) ([Go Playground](http://play.golang.org/p/PcvnGRztwW))
+[Embedding types](example2/example2.go) ([Go Playground](http://play.golang.org/p/gqsDjMd5bG))
 
-[Embedded types and interfaces](example3/example3.go) ([Go Playground](http://play.golang.org/p/o3wBYH-LB6))
+[Embedded types and interfaces](example3/example3.go) ([Go Playground](http://play.golang.org/p/3UVTkwprkM))
 
-[Outer and inner type interface implementations](example4/example5.go) ([Go Playground](http://play.golang.org/p/CrRUeKGGO-))
+[Outer and inner type interface implementations](example4/example5.go) ([Go Playground](http://play.golang.org/p/Qn32CmIAIn))
 
 ## Exercises
 
@@ -32,7 +32,7 @@ Embedding types provides the final piece of sharing and reusing state and behavi
 
 **Part D** Implement the speaker interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type speaker.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/YtdNsTwAN7))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

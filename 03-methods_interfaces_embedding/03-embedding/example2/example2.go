@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/gqsDjMd5bG
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.

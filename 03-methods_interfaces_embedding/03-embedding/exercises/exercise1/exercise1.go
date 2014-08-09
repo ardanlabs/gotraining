@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/YtdNsTwAN7
 
 /*
 Declare a struct type named animal with two fields name and age. Declare a struct

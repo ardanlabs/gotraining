@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/3UVTkwprkM
 
 // Sample program to show how an embedded types works with interfaces.
 package main

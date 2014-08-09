@@ -11,9 +11,9 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 
 ## Code Review
 
-[Declare, implement and method call restrictions I](example1/example1.go) ([Go Playground](http://play.golang.org/p/YXhZE1HPUH))
+[Declare, implement and method call restrictions I](example1/example1.go) ([Go Playground](http://play.golang.org/p/7q3zw-sVwn))
 
-[Declare, implement and method call restrictions II](example2/example2.go) ([Go Playground](http://play.golang.org/p/TEK2rfDrNx))
+[Declare, implement and method call restrictions II](example2/example2.go) ([Go Playground](http://play.golang.org/p/byYKqtmHFU))
 
 ## Exercises
 
@@ -23,7 +23,7 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 
 **Part B** From exercise 1, add a new function named SayHello that accepts a value of type Speaker. Implement that function to call the SayHello method on the interface value. Then create new values of each type and use the function.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/pbcD5WmTX9))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

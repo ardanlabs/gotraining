@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/7q3zw-sVwn
 
 // Sample program to show how to use an interface in Go. In this case,
 // Go will NOT deference a pointer value to support the interface.

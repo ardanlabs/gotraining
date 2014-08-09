@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/byYKqtmHFU
 
 // Sample program to show how to use an interface in Go. In this case,
 // a pointer is used to support the interface call.
