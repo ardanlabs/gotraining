@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/cK1_GFyDOo
 
 // Sample program to show the basic concept of using a pointer
 // to share data.

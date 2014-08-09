@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/44wgDZ-U2t
 
 /*
 Declare an untyped and typed constant and display their values.

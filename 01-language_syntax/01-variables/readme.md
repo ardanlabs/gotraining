@@ -21,7 +21,7 @@ Here is a link to the Go specification about some of the built-in types in Go th
 
 **Part B:** Declare a new variable of type float32 and initalize the variable by converting the literal value of Pi (3.14).
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/Kr7CaO6LdF))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

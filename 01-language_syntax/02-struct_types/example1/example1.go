@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/Sl-vYp7pp_
 
 // Sample program to show how to declare and initalize struct types.
 package main

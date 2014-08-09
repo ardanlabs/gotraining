@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/GJZXstEkBY
 
 /*
 Declare a struct type and create a value of this type. Declare a function

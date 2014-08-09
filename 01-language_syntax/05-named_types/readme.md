@@ -9,7 +9,7 @@ Named types are another way to create user defined types. They provide some inte
 
 ## Code Review
 
-[Declare, create and initalize named types](example1/example1.go) ([Go Playground](http://play.golang.org/p/UKKDife-Wb))
+[Declare, create and initalize named types](example1/example1.go) ([Go Playground](http://play.golang.org/p/mhKlxSyuxr))
 
 [Named types in the standard library](example2/example2.go) ([Go Playground](http://play.golang.org/p/XnNUdf_cjh))
 
@@ -27,7 +27,7 @@ Named types are another way to create user defined types. They provide some inte
 
 **Part C** Declare a variable of the same base type as your named typed. Attempt to assign the value of your named type variable to your new base type variable. Does the compiler allow the assignment?
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/_zBf2HVsAU))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

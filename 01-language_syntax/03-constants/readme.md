@@ -11,9 +11,9 @@ Constants are a way to create a named identifier who's value can never change. T
 
 ## Code Review
 
-[Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/OOND0xS19E))
+[Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/r-po84hGuz))
 
-[Parallel type system (Kind)](example2/example2.go) ([Go Playground](http://play.golang.org/p/SIYt7refne))
+[Parallel type system (Kind)](example2/example2.go) ([Go Playground](http://play.golang.org/p/ExxRWe6jUz))
 
 ## Exercises
 
@@ -23,7 +23,7 @@ Constants are a way to create a named identifier who's value can never change. T
 
 **Part B:** Multiply two literal constants into a typed variable and display the value.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/44wgDZ-U2t))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

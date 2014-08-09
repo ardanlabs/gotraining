@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/mhKlxSyuxr
 
 // Sample program to show how to declare and use a named type.
 package main

@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/cK3y_qYUgd
 
 // Sample program to show how to declare and use variadic functions.
 package main

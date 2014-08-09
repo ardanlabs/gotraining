@@ -1,6 +1,6 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/wPVvgwPlHw
 
-// Sample program to show how we can use the blank identifier to ignore return values.
+// Sample program to show how we can use the blank IDentifier to ignore return values.
 package main
 
 import (
@@ -12,16 +12,16 @@ import (
 type (
 	// user is a struct type that declares user information.
 	user struct {
-		id   int
-		name string
+		ID   int
+		Name string
 	}
 
-	// updateStats provides update stats.
+	// updateStats provIDes update stats.
 	updateStats struct {
-		modified int
-		duration float64
-		success  bool
-		message  string
+		Modified int
+		Duration float64
+		Success  bool
+		Message  string
 	}
 )
 
@@ -29,24 +29,24 @@ type (
 func main() {
 	// Declare and initalize a value of type user.
 	u := user{
-		id:   1432,
-		name: "Betty",
+		ID:   1432,
+		Name: "Betty",
 	}
 
-	// Update the user name. Don't care about the update stats.
+	// Update the user Name. Don't care about the update stats.
 	if _, err := updateUser(&u); err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// Display the update was successful.
-	fmt.Println("Updated user record for id", u.id)
+	// Display the update was Successful.
+	fmt.Println("Updated user record for ID", u.ID)
 }
 
 // updateUser updates the specified user document.
 func updateUser(u *user) (*updateStats, error) {
 	// response simulates a JSON response.
-	response := `{"modified":1, "duration":0.005, "success" : true, "message": "updated"}`
+	response := `{"Modified":1, "Duration":0.005, "Success" : true, "Message": "updated"}`
 
 	// Unmarshal the json document into a value of
 	// the userStats struct type.
@@ -56,9 +56,9 @@ func updateUser(u *user) (*updateStats, error) {
 	}
 
 	// Check the update status to verify the update
-	// was successful.
-	if us.success != true {
-		return nil, errors.New(us.message)
+	// was Successful.
+	if us.Success != true {
+		return nil, errors.New(us.Message)
 	}
 
 	return &us, nil

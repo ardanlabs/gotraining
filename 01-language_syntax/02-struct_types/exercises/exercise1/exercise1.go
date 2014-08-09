@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/-SBwG9FnfJ
 
 /*
 Declare a struct type to maintain information about a user (name, email and age).

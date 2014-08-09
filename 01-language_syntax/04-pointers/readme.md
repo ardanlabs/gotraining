@@ -15,7 +15,7 @@ Pointers provide a way to share data across function boundaries. Having the abil
 
 [Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/izcdKq-Qa-))
 
-[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/45qPXTLif_))
+[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/cK1_GFyDOo))
 
 ## Exercises
 
@@ -25,13 +25,13 @@ Pointers provide a way to share data across function boundaries. Having the abil
 
 **Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of and the _value that the pointer points to_.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/9XIYSnptUF))
 
 ### Exercise 2
 
 Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/GJZXstEkBY))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

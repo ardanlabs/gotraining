@@ -10,11 +10,11 @@ Function are at the core of the language. They provide a mechanism to group and 
 
 ## Code Review
 
-[Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/kTKdUJolAU))
+[Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/bYY-TRjfH0))
 
-[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/dDZpl7ti1I))
+[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/wPVvgwPlHw))
 
-[Variadic functions](example3/example3.go) ([Go Playground](http://play.golang.org/p/RoP6pNPgKl))
+[Variadic functions](example3/example3.go) ([Go Playground](http://play.golang.org/p/cK3y_qYUgd))
 
 ## Advanced Code Review
 
@@ -28,7 +28,7 @@ Function are at the core of the language. They provide a mechanism to group and 
 
 **Part B** Make a second call to your function but this time ignore the value and just test the error value.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hJ532ON6Xb))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

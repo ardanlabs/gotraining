@@ -10,9 +10,9 @@ Struct types are a way of creating complex types that group fields of data toget
 
 ## Code Review
 
-[Declare, create and initalize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/lgXBEs4nx2))
+[Declare, create and initalize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/Sl-vYp7pp_))
 
-[Anonymous struct types](example2/example2.go) ([Go Playground](http://play.golang.org/p/ncYlNX7pcN))
+[Anonymous struct types](example2/example2.go) ([Go Playground](http://play.golang.org/p/N2DjPVAWLJ))
 
 ## Advanced Code Review
 
@@ -26,7 +26,7 @@ Struct types are a way of creating complex types that group fields of data toget
 
 **Part B:** Declare and initialize an anonymous struct type with the same three fields. Display the value.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/-SBwG9FnfJ))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/hJ532ON6Xb
 
 /*
 Declare a struct type to maintain information about a user. Declare a function

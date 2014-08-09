@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/ExxRWe6jUz
 
 // Sample program to show how constants do have a parallel type system.
 package main

@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/9XIYSnptUF
 
 /*
 Declare and initalize a variable of type int with the value of 20. Display

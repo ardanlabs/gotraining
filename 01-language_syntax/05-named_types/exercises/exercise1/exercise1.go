@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/_zBf2HVsAU
 
 /*
 Declare a named type called counter with a base type of int. Declare and initalize

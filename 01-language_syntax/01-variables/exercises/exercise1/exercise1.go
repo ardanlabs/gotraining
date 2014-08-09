@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/Kr7CaO6LdF
 
 /*
 Declare three variables that are initalized to their zero value and three

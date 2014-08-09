@@ -1,4 +1,4 @@
-// http://play.golang.org/p/ncYlNX7pcN
+// http://play.golang.org/p/N2DjPVAWLJ
 
 // Sample program to show how to declare and initalize anonymous
 // struct types.

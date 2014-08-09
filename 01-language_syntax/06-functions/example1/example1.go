@@ -1,4 +1,4 @@
-// NEED PLAYGROUND
+// http://play.golang.org/p/bYY-TRjfH0
 
 // Sample program to show how functions can return multiple values while using
 // named and struct types.
@@ -11,8 +11,8 @@ import (
 
 // user is a struct type that declares user information.
 type user struct {
-	id   int
-	name string
+	ID   int
+	Name string
 }
 
 // main is the entry point for the application.
