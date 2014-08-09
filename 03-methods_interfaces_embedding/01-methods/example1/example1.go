@@ -1,4 +1,4 @@
-// http://play.golang.org/p/jpf5IrVIxf
+// NEED PLAYGROUND
 
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.
@@ -10,22 +10,22 @@ import (
 
 // User defines a user in the program.
 type User struct {
-	Name  string
-	Email string
+	name  string
+	email string
 }
 
 // Notify implements a method that can be called via
 // a value of type User.
 func (u User) Notify() {
 	fmt.Printf("User: Sending User Email To %s<%s>\n",
-		u.Name,
-		u.Email)
+		u.name,
+		u.email)
 }
 
 // ChangeEmail implements a method that can be called via
 // a pointer of type User.
 func (u *User) ChangeEmail(email string) {
-	u.Email = email
+	u.email = email
 }
 
 // main is the entry point for the application.

@@ -1,4 +1,4 @@
-// http://play.golang.org/p/RoP6pNPgKl
+// NEED PLAYGROUND
 
 // Sample program to show how to declare and use variadic functions.
 package main
@@ -25,6 +25,7 @@ func main() {
 		Name: "Janet",
 	}
 
+	// Display both user values.
 	display(u1, u2)
 }
 

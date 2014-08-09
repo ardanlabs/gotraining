@@ -3,11 +3,11 @@ Goroutines are functions that are created and scheduled to be run indenpently. G
 
 ### Code Review
 
-[Goroutines and concurrency](example1/example1.go) ([Go Playground](http://play.golang.org/p/0oFF3hg4-L)
+[Goroutines and concurrency](example1/example1.go) ([Go Playground](UPDATE))
 
 [Goroutine time slicing](example2/example2.go) ([Go Playground](http://play.golang.org/p/viYA-f4zBI))
 
-[Goroutines and parallelism](example3/example3.go) ([Go Playground](http://play.golang.org/p/TSxqwvy65o))
+[Goroutines and parallelism](example3/example3.go) ([Go Playground](UPDATE))
 
 ### Exercises
 

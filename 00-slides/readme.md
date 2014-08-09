@@ -29,13 +29,15 @@ On this day we take our initial tour of the language. We learn about variables, 
 [Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md) | 
 [Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
 
-#### Concurrency and Channels
+#### Concurrency
 [Goroutines](../04-concurrency_channels/01-goroutines/readme.md) | 
 [Race Conditions](../04-concurrency_channels/02-race_conditions/readme.md) | 
-[Channels](../04-concurrency_channels/03-channels/readme.md)
 
 ## Day 2
-On this day we take go deeper into Go. We learn about testing, packaging, logging, encoding, io and reflection.
+On this day we take go deeper into Go. We learn about channels, testing, packaging, logging, encoding, io and reflection.
+
+#### Channels
+[Channels](../04-concurrency_channels/03-channels/readme.md)
 
 #### Packaging
 [Packaging](../05-packaging/readme.md)

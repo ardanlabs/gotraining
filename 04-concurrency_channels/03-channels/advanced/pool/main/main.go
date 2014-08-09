@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/07-concurrency_channels/advanced/pool"
+	"github.com/ArdanStudios/gotraining/04-concurrency_channels/03-channels/advanced/pool"
 )
 
 const (
@@ -23,9 +23,6 @@ const (
 var (
 	// connectionID maintains a counter.
 	connectionID int32
-
-	// mutex provides safe increments of ids
-	mutex sync.Mutex
 
 	// wg is used to wait for the program to finish.
 	wg sync.WaitGroup
@@ -46,12 +43,7 @@ func (dbConn *dbConnection) Close() {
 // createConnection is a factory method called by the pool
 // framework when new connections are needed.
 func createConnection() (pool.Resource, error) {
-	var id int32
-	mutex.Lock()
-	{
-		id = atomic.AddInt32(&connectionID, 1)
-	}
-	mutex.Unlock()
+	id := atomic.AddInt32(&connectionID, 1)
 
 	fmt.Println("Create: New Connection", id)
 	return &dbConnection{id}, nil
@@ -69,6 +61,9 @@ func main() {
 		fmt.Println(err)
 	}
 
+	// Schedule the pool to be closed when main returns.
+	defer p.Close()
+
 	// Perform queries using a connection from the pool.
 	for query := 0; query < maxGoroutines; query++ {
 		go performQueries(query, p)
@@ -80,7 +75,7 @@ func main() {
 
 	// Close the pool.
 	fmt.Println("*****> Shutdown Program.")
-	p.Close()
+
 }
 
 // performQueries tests the resource pool of connections.

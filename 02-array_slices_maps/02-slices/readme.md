@@ -1,7 +1,13 @@
-## Slices
+## Slices - Arrays, Slices and Maps
 Slices are an incredibly important data structure in Go. They form the basis for how we manage and manipulate data in a flexible, performant and dynamic way. It is incredibly important for all Go programmers to learn how to uses slices.
 
-### Code Review
+## Notes
+
+* Slices are like dynamic arrays with special and built-in functionality.
+* There is a difference between a slices length and capacity and they each service a purpose.
+* Slices allow for multiple "views" of the same underlying array.
+
+## Code Review
 
 [Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/4r90uFQwJn))
 
@@ -13,22 +19,20 @@ Slices are an incredibly important data structure in Go. They form the basis for
 
 [Iterating over slices](example5/example5.go) ([Go Playground](http://play.golang.org/p/HV5t0VrRie))
 
-### Advanced Code Review
+## Advanced Code Review
 
 [Practical use of slices](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/-qQgO7NbLm))
 
 [Three index slicing](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/v3ZHknDvSx))
 
-### Exercies
+## Exercies
 
-#### Exercise 1
-Declare a nil slice of integers. Create a loop that increments a counter variable by 10 five times and appends these values to the slice. Iterate over the slice and display each value.
+### Exercise 1
+**Part A** Declare a nil slice of integers. Create a loop that increments a counter variable by 10 five times and appends these values to the slice. Iterate over the slice and display each value.
 
-#### Exercise 2
-Declare a slice of five strings and initialize the slice with string literal values. Take a slice of the first, second and third elements and display the index position and value of each element for both slices.
+**Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of the second and third elements (index 1 and 2) and display the index position and value of each element in the new slice.
 
-#### Exercise 3
-Declare a slice of five strings and initialize this slice with string literal values. Take a slice of the second element with a capacity of one. Display the length and capacity of the slice. Iterate over the slice and display the address and value of each element. Append a new value to the slice and display everything again.
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

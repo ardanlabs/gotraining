@@ -1,7 +1,13 @@
-## Functions - Language Syntax - Exercises
+## Functions - Language Syntax
 Function are at the core of the language. They provide a mechanism to group and organize our code to separate and distinct pieces of functionality. They can be used to provide an API to the packages we write and are a core compontent to concurrency.
 
-### Code Review
+## Notes
+
+* Functions can return mulitple values are most return an error value.
+* The error value should always be checked as part of the programming logic.
+* The blank identifier can be used to ignore return values.
+
+## Code Review
 
 [Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/kTKdUJolAU))
 
@@ -9,20 +15,18 @@ Function are at the core of the language. They provide a mechanism to group and 
 
 [Variadic functions](example3/example3.go) ([Go Playground](http://play.golang.org/p/RoP6pNPgKl))
 
-### Advanced Code Review
+## Advanced Code Review
 
 [Trapping panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/eg14ClW4_y))
 
-### Exercises
+## Exercises
 
-#### Exercise 1
-Declare a struct type to maintain information about a user. Declare a function that creates and returns pointers of this type and an error value. Write a main function that tests this function.  
+### Exercise 1
+**Part A** Declare a struct type to maintain information about a user. Declare a function that creates value of and returns pointers of this type and an error value. Call this function from main and display the value.
 
-#### Exercise 2
-Change the main function in the last exercise to ignore the error value being returned from the function.
+**Part B** Make a second call to your function but this time ignore the value and just test the error value.
 
-#### Exercise 3
-Declares a function that causes a panic. Trap the panic in the function and display the error. Write a main function to test the function.
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

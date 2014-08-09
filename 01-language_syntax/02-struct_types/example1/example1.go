@@ -1,4 +1,4 @@
-// http://play.golang.org/p/lgXBEs4nx2
+// NEED PLAYGROUND
 
 // Sample program to show how to declare and initalize struct types.
 package main
@@ -16,17 +16,23 @@ type example struct {
 
 // main is the entry point for the application.
 func main() {
-	// Declare variable of type example and init using
+	// Declare a variable of type example set to its
+	// zero value.
+	var e1 example
+
+	// Display the value.
+	fmt.Printf("%+v\n", e1)
+
+	// Declare a variable of type example and init using
 	// a composite literal.
-	e := example{
+	e2 := example{
 		flag:    true,
 		counter: 10,
 		pi:      3.141592,
 	}
 
-	// Display the values.
-	fmt.Printf("%+v\n", e)
-	fmt.Println("Flag", e.flag)
-	fmt.Println("Counter", e.counter)
-	fmt.Println("Pi", e.pi)
+	// Display the field values.
+	fmt.Println("Flag", e2.flag)
+	fmt.Println("Counter", e2.counter)
+	fmt.Println("Pi", e2.pi)
 }

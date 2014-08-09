@@ -1,69 +1,62 @@
-// http://play.golang.org/p/ncWam67dS1
+// http://play.golang.org/p/uRqlIIbiRP
 
-// Answer for exercise 1 of Channels.
+// Write a program where two goroutines pass an integer back and forth
+// ten times. Display when each goroutine receives the integer. Increment
+// the integer with each pass. Once the interger equals ten, terminate
+// the program cleanly.
 package main
 
 import (
 	"fmt"
-	"math/rand"
 	"sync"
-	"time"
 )
 
-var (
-	// numbers maintains a set of random numbers.
-	numbers []int
-
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
-
-	// number is a channel that will receive random numbers.
-	number = make(chan int)
-)
-
-// init is called prior to main.
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
 // main is the entry point for all Go programs.
 func main() {
-	// Add a count for each goroutine we will create.
-	wg.Add(3)
+	// Create an unbuffered channel.
+	share := make(chan int)
 
-	// Create three goroutines to generate random numbers.
-	go random(10)
-	go random(10)
-	go random(10)
+	// Add a count of two, one for each goroutine.
+	wg.Add(2)
 
-	// Create a goroutine to monitor when all the numbers
-	// have been generated.
-	go func() {
-		wg.Wait()
-		close(number)
-	}()
+	// Launch two goroutines.
+	go goroutine("Bill", share)
+	go goroutine("Lisa", share)
 
-	// Wait for and collect the numbers.
-	for value := range number {
-		numbers = append(numbers, value)
-	}
+	// Start the sharing.
+	share <- 1
 
-	// Display the set of random numbers.
-	for index, value := range numbers {
-		fmt.Println(index, value)
-	}
+	// Wait for the program to finish.
+	wg.Wait()
 }
 
-// random generates random numbers and stores them into a slice.
-func random(amount int) {
+// goroutine simulates sharing a value.
+func goroutine(name string, share chan int) {
 	// Schedule the call to Done to tell main we are done.
 	defer wg.Done()
+	defer fmt.Printf("Goroutine %s Down\n", name)
 
-	// Generate as many random numbers as specified.
-	for i := 0; i < amount; i++ {
-		n := rand.Intn(100)
+	for {
+		// Wait for the ball to be hit back to us.
+		value, ok := <-share
+		if !ok {
+			// If the channel was closed, shutdown.
+			return
+		}
 
-		// Send the number into the channel.
-		number <- n
+		// Display the value.
+		fmt.Printf("Goroutine %s Inc %d\n", name, value)
+
+		// Terminate when the value is 10.
+		if value == 10 {
+			close(share)
+			return
+		}
+
+		// Share the value.
+		share <- (value + 1)
 	}
 }

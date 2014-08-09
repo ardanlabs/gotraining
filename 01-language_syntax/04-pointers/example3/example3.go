@@ -1,4 +1,4 @@
-// http://play.golang.org/p/45qPXTLif_
+// NEED PLAYGROUND
 
 // Sample program to show the basic concept of using a pointer
 // to share data.
@@ -6,41 +6,43 @@ package main
 
 import "fmt"
 
-// dog is a type that describes any dog.
-type dog struct {
-	name    string
-	hasTail bool
-	bark    int
+// user represents a user in the system.
+type user struct {
+	name   string
+	email  string
+	logins int
 }
 
 // main is the entry point for the application.
 func main() {
-	// Declare and initialize a variable named bart of type dog.
-	bart := dog{
-		name:    "Bart",
-		hasTail: true,
-		bark:    10,
+	// Declare and initialize a variable named bill of type user.
+	bill := user{
+		name:  "Bill",
+		email: "bill@ardanstudios.com",
 	}
 
-	// Pass the "address of" the bart value.
-	display(&bart)
+	//** We don't need to include all the fields when specifying field
+	// names with a composite literal.
 
-	// Pass the "address of" the Bark field from within the bart value.
-	increment(&bart.bark)
+	// Pass the "address of" the bill value.
+	display(&bill)
 
-	// Pass the "address of" the bart value.
-	display(&bart)
+	// Pass the "address of" the logins field from within the bill value.
+	increment(&bill.logins)
+
+	// Pass the "address of" the bill value.
+	display(&bill)
 }
 
-// increment declares bark as a pointer variable whose value is
+// increment declares logins as a pointer variable whose value is
 // always an address and points to values of type int.
-func increment(bark *int) {
-	*bark++
-	fmt.Printf("&bark[%p] bark[%p] *bark[%d]\n", &bark, bark, *bark)
+func increment(logins *int) {
+	*logins++
+	fmt.Printf("&logins[%p] logins[%p] *logins[%d]\n", &logins, logins, *logins)
 }
 
-// display declares a as a pointer variable whose value is always an address
+// display declares u as user pointer variable whose value is always an address
 // and points to values of type dog.
-func display(a *dog) {
-	fmt.Printf("%p\t%+v\n", a, *a)
+func display(u *user) {
+	fmt.Printf("%p\t%+v\n", u, *u)
 }

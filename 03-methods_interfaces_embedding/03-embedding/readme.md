@@ -1,4 +1,4 @@
-## Embedding
+## Embedding - Methods, Interfaces and Embedding
 Embedding types provides the final piece of sharing types and inheriting behavior by declaring inner types. Through the use of inner type promotion, an inner types fields and methods can be directly access by references from the outer type.
 
 ### Code Review

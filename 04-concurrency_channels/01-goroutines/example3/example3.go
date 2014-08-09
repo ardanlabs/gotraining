@@ -1,4 +1,4 @@
-// http://play.golang.org/p/TSxqwvy65o
+// NEED NEW
 
 // Sample program to show how to create goroutines and
 // how the goroutine scheduler behaves with two contexts.
@@ -29,8 +29,8 @@ func main() {
 
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
-			for char := 'a'; char < 'a'+26; char++ {
-				fmt.Printf("%c ", char)
+			for rune := 'a'; rune < 'a'+26; rune++ {
+				fmt.Printf("%c ", rune)
 			}
 		}
 	}()
@@ -42,8 +42,8 @@ func main() {
 
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
-			for char := 'A'; char < 'A'+26; char++ {
-				fmt.Printf("%c ", char)
+			for rune := 'A'; rune < 'A'+26; rune++ {
+				fmt.Printf("%c ", rune)
 			}
 		}
 	}()

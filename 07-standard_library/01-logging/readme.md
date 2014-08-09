@@ -5,9 +5,7 @@ Logging is an important part of every program. Logs are our eyes and history to 
 
 [Use of log package](example1/example1.go) ([Go Playground](http://play.golang.org/p/xO5OuPOJef))
 
-### Advanced Code Review
-
-[Customizing your own log](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/008KxiH7Yj))
+[Customizing your own log](example2/example2.go) ([Go Playground](http://play.golang.org/p/008KxiH7Yj))
 
 ### Exercises
 

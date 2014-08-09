@@ -3,20 +3,23 @@ Variables are at the heart of the langugage and provide the ability to read from
 
 Here is a link to the Go specification about some of the built-in types in Go that can be used to declare variables: [Built-In Types](http://golang.org/ref/spec#Boolean_types)
 
-### Code Review
+## Notes
+
+* Variables declared to their zero value.
+* Variable declared using the short variable declaration opertator.
+
+## Code Review
 
 [Declare and initalize variables](example1/example1.go) ([Go Playground](http://play.golang.org/p/m4PJ0FpSwX))
 
-### Exercises
+## Exercises
 
-#### Exercise 1
-Declare three variables that are initalized to their zero value. Declare a variable of type string, int and bool. Display the values of those variables.
+### Exercise 1 
+**Part A:** Declare three variables that are initalized to their zero value and three declared with a literal value. Declare variables of type string, int and bool. Display the values of those variables.
 
-#### Exercise 2
-Declare three variable that are initalized with a literal value. Declare a variable of type string, int and bool. Display the values of those variables.
+**Part B:** Declare a new variable of type float32 and initalize the variable by converting the literal value of Pi (3.14).
 
-#### Exercise 3
-Declare and initialize a variable of type float32 by converting the literal value of Pi (3.14).
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

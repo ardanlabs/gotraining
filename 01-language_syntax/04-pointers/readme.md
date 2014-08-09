@@ -1,7 +1,14 @@
-## Pointers - Language Syntax - Exercises
+## Pointers - Language Syntax
 Pointers provide a way to share data across function boundaries. Having the ability to share and reference data with a pointer provides flexbility. It also helps our programs minimize the amount of memory they need and can add some extra performance.
 
-### Code Review
+## Notes
+
+* Use pointers to share data.
+* Values in Go are always pass by value.
+* "Value of", what's in the box. "Address of" ( **&** ), where is the box.
+* ( ***** ) Declare pointer and the "Value that the pointer points to".
+
+## Code Review
 
 [Pass by value](example1/example1.go) ([Go Playground](http://play.golang.org/p/POH6kq8KLL))
 
@@ -9,16 +16,19 @@ Pointers provide a way to share data across function boundaries. Having the abil
 
 [Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/45qPXTLif_))
 
-### Exercises
+## Exercises
 
-#### Exercise 1
-Declare and initalize a variable of type int with the value of 20. Display the _address of_ and _value of_ the variable.
+### Exercise 1
+**Part A** Declare and initalize a variable of type int with the value of 20. Display the _address of_ and _value of_ the variable.
 
-#### Exercise 2
-Declare and initialize a pointer variable of type int that points to a variable of type int with the value of 42. Display the _address of_ , _value of_ and the _value that the pointer points to_ of the pointer variable.
+**Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of and the _value that the pointer points to_.
 
-#### Exercise 3
-Declare a struct type and create a value of this type. Declare a function that can change the value of this struct type. Display the original value of the struct type and after the function call.
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](NEED PLAYGROUND))
+
+### Exercise 2
+Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
+
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](NEED PLAYGROUND))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

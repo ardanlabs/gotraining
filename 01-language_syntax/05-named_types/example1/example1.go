@@ -1,4 +1,4 @@
-// http://play.golang.org/p/UKKDife-Wb
+// NEED PLAYGROUND
 
 // Sample program to show how to declare and use a named type.
 package main
@@ -10,7 +10,7 @@ import "fmt"
 type Duration int64
 
 func main() {
-	// Declare a variable of type Duration
+	// Declare a variable of type Duration.
 	var duration Duration
 	fmt.Println(duration)
 

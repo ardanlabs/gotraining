@@ -7,11 +7,11 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 
 [Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/5B1MxmDuZI))
 
-[Buffered channels - Control concurrency](example3/example3.go) ([Go Playground](http://play.golang.org/p/G9Gfy1drox))
+[Buffered channels - Manage concurrency](example3/example3.go) ([Go Playground](http://play.golang.org/p/G9Gfy1drox))
+
+[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/XazqxkgLSS))
 
 ### Advanced Code Review
-
-[Timers](advanced/timer/timer.go)
 
 [Semaphores](advanced/semaphore/semaphore.go)
 
@@ -20,70 +20,10 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 ### Exercises
 
 #### Exercise 1
-Given the following program, convert it to use a channel. [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/ncWam67dS1))
+Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the interger equals ten, terminate the program cleanly. [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/uRqlIIbiRP))
 
-	// http://play.golang.org/p/vW-48gPin1
-
-	// Answer for exercise 1 of Race Conditions.
-	package main
-
-	import (
-		"fmt"
-		"math/rand"
-		"sync"
-		"time"
-	)
-
-	var (
-		// numbers maintains a set of random numbers.
-		numbers []int
-
-		// wg is used to wait for the program to finish.
-		wg sync.WaitGroup
-
-		// mutex will help protect the slice.
-		mutex sync.Mutex
-	)
-
-	// init is called prior to main.
-	func init() {
-		rand.Seed(time.Now().UnixNano())
-	}
-
-	// main is the entry point for all Go programs.
-	func main() {
-		// Add a count for each goroutine we will create.
-		wg.Add(3)
-
-		// Create three goroutines to generate random numbers.
-		go random(10)
-		go random(10)
-		go random(10)
-
-		// Wait for all the goroutines to finish.
-		wg.Wait()
-
-		// Display the set of random numbers.
-		for index, number := range numbers {
-			fmt.Println(index, number)
-		}
-	}
-
-	// random generates random numbers and stores them into a slice.
-	func random(amount int) {
-		// Schedule the call to Done to tell main we are done.
-		defer wg.Done()
-
-		// Generate as many random numbers as specified.
-		for i := 0; i < amount; i++ {
-			n := rand.Intn(100)
-			mutex.Lock()
-			{
-				numbers = append(numbers, n)
-			}
-			mutex.Unlock()
-		}
-	}
+#### Exercise 2
+Write a problem that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate. [Answer](exercises/exercise2/exercise2.go) ([Go Playground](NEED PLAYGROUND))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
