@@ -1,3 +1,5 @@
+// http://play.golang.org/p/opoZfMNhng
+
 // Sample program to show how to implement a semaphore using
 // channels that can allow multiple reads but a single write.
 //

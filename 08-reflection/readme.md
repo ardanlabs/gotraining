@@ -23,6 +23,8 @@ Reflection is the ability to inspect a value to derive type or other meta-data. 
 ### Exercise 1
 Declare a struct type that represents a request for a customer invoice. Include a CustomerID and InvoiceID field. Define tags that can be used to validate the request. Define tags that specify both the length and range for the ID to be valid. Declare a function named validate that accepts values of any type and processes the tags. Display the resutls of the validation.
 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/ben9PaXNWJ))
+
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)

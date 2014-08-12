@@ -1,7 +1,9 @@
+// http://play.golang.org/p/W3YoitIiT-
+
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-01-curl-go
 // Sample code provided by Jason Moiron
 
-// ./example4 http://www.goinggo.net/feeds/posts/default
+// ./example2 http://www.goinggo.net/feeds/posts/default
 
 // Sample program to show how to write a simple version of curl using
 // the io.Reader and io.Writer interface support.

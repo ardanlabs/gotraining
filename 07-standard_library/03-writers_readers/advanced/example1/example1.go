@@ -1,3 +1,5 @@
+// http://play.golang.org/p/Tmt7v3fIQF
+
 // https://github.com/extemporalgenome/watchpost/blob/master/main.go
 // Sample code provided by Kevin Gillette
 

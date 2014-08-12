@@ -1,3 +1,5 @@
+// http://play.golang.org/p/4S7VHk7IJb
+
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-03-curl-go
 // Sample code provided by Jason Moiron
 

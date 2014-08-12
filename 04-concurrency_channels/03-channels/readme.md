@@ -19,7 +19,8 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 
 ## Advanced Code Review
 
-[Semaphores](advanced/semaphore/semaphore.go)
+[Semaphores](advanced/semaphore/semaphore.go) ([Go Playground](http://play.golang.org/p/opoZfMNhng))
+
 
 [Pooling](advanced/pool/pool.go)
 

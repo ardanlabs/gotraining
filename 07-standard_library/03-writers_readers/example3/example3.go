@@ -1,7 +1,9 @@
+// http://play.golang.org/p/2PwJ2KDxDM
+
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-02-curl-go
 // Sample code provided by Jason Moiron
 
-// ./example5 -o goinggo.rss -s http://www.goinggo.net/feeds/posts/default
+// ./example3 -o goinggo.rss -s http://www.goinggo.net/feeds/posts/default
 
 // Sample program to show how to use a MultiWriter to perform writes to
 // multiple devices with one write call.

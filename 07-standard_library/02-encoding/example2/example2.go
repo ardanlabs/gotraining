@@ -1,3 +1,5 @@
+// http://play.golang.org/p/IWfOJbmMdL
+
 // Sample program to show how to unmarshal a JSON document into
 // a user defined struct type from a file.
 package main
@@ -45,8 +47,7 @@ func main() {
 	// the function returns.
 	defer file.Close()
 
-	// Decode the file into a slice of pointers
-	// to Feed values.
+	// Decode the file into a slice of buoy stations.
 	var stations []buoyStation
 	err = json.NewDecoder(file).Decode(&stations)
 	if err != nil {

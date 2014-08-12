@@ -12,21 +12,23 @@ The ability to stream and pass data around is incredibility important. Data is c
 
 [io.Writer interface](example1/example1.go) ([Go Playground](http://play.golang.org/p/6pZ8RYzIN5))
 
-[Simple curl with io.Reader and io.Writer](example2/example2.go)
+[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/W3YoitIiT-))
 
-[MultiWriters with curl example](example3/example3.go)
+[MultiWriters with curl example](example3/example3.go) ([Go Playground](http://play.golang.org/p/2PwJ2KDxDM))
 
 ## Advanced Code Review
 
-[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
+[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/Tmt7v3fIQF))
 
-[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
+[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/4S7VHk7IJb))
 
 ## Exercises
 
 ### Exercise 1
 
 Download any document from the web and display the content in the terminal and write it to a file at the same time.
+
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/3s-weLqNZC))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

@@ -30,7 +30,9 @@ The sample program implements support for accessing a MongoDB database from Mong
 ## Exercises
 
 ### Exercise 1
-Write new tests for the FindRegion function found in the buoy package. Write a standard test, table test and benchmark.
+Write three benchmark tests for converting an integer into a string. First use the fmt.Sprintf function, then the strconv.FormatInt function and finally the strconv.Itoa. Identify which function performs the best.
+
+[Answer](exercises/exercise1/bench_test.go)
 
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
