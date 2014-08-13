@@ -13,7 +13,7 @@ Keyword are at the heart of every programming language and Go is no exception. T
 Built-in functions enhance the programming language by providing functionality that in many other languages are left up to the developer to implement. Many of these functions make writing code in Go easier, more consistent and less prone to errors. The highlighted built-in functions are functions that are very important and will be used often in the class.
 
 <table>
-<tr><td><b>append</b></td><td>cap</td><td><b>close</b></td><td>complex</td><td>copy</td><td>delete</td><td>imag</td><td><b>len</b>b</td><td><b>make</b></td><td>new</td></tr>
+<tr><td><b>append</b></td><td>cap</td><td><b>close</b></td><td>complex</td><td>copy</td><td>delete</td><td>imag</td><td><b>len</b></td><td><b>make</b></td><td>new</td></tr>
 <tr><td>panic</td><td>real</td><td><b>recover</b></td><td colspan="7"></td></tr>
 </table>
 

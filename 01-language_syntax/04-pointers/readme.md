@@ -7,7 +7,7 @@ Pointers provide a way to share data across function boundaries. Having the abil
 * Use pointers to share data.
 * Values in Go are always pass by value.
 * "Value of", what's in the box. "Address of" ( **&** ), where is the box.
-* ( ***** ) Declare pointer and the "Value that the pointer points to".
+* ( * ) Declare pointer and the "Value that the pointer points to".
 
 ## Code Review
 
