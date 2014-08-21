@@ -1,5 +1,5 @@
 ## Go Training
-This is a 3 day, 21 hour bootcamp style course for existing developers who are looking to gain a working understanding of Go.
+This is a 3 day, 21 hour accelerated style course for existing developers who are looking to gain a working understanding of Go.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
