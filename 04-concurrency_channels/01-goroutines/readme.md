@@ -6,8 +6,11 @@ Goroutines are functions that are created and scheduled to be run indenpently. G
 
 * Goroutines are functions that are scheduled to run independent.
 * The scheduler uses a context that owns an OS thread and goroutine run queue.
-* Concurrency is not parallelism.
 * We must always maintain an accounting of running goroutines and shutdown cleanly.
+* Concurrency is not parallelism.
+	* Concurrency is about dealing with lots of things at once.
+	* Parallelism is about doing lots of things at once.
+* http://talks.golang.org/2013/distsys.slide
 
 ## Code Review
 
