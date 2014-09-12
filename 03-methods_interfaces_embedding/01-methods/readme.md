@@ -11,6 +11,7 @@ Methods are functions that are declared with a receiver which binds the method t
 ## Links
 
 https://golang.org/doc/effective_go.html#methods
+
 http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review

@@ -12,6 +12,7 @@ Here is a link to the Go specification about some of the built-in types in Go th
 ## Links
 
 https://golang.org/doc/effective_go.html#variables
+
 http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 
 ## Code Review

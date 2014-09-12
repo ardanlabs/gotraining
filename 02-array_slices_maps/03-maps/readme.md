@@ -11,6 +11,7 @@ Maps provide a data structure that allow for the storage and management of key/v
 ## Links
 
 http://blog.golang.org/go-maps-in-action
+
 http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 ## Code Review

@@ -11,6 +11,7 @@ A race condition is when two or more goroutines attempt to read and write to the
 ## Links
 
 http://blog.golang.org/race-detector
+
 http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
 ## Code Review

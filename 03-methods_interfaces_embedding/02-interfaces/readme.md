@@ -12,7 +12,9 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 ## Links
 
 https://golang.org/doc/effective_go.html#interfaces
+
 http://blog.golang.org/laws-of-reflection
+
 http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review

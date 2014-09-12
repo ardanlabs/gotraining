@@ -13,7 +13,9 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 ## Links
 
 http://blog.golang.org/pipelines
+
 http://blog.golang.org/share-memory-by-communicating
+
 http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review

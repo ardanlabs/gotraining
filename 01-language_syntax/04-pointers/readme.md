@@ -12,6 +12,7 @@ Pointers provide a way to share data across function boundaries. Having the abil
 ## Links
 
 https://golang.org/doc/effective_go.html#pointers_vs_values
+
 http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 ## Code Review

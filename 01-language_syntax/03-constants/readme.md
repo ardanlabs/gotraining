@@ -12,6 +12,7 @@ Constants are a way to create a named identifier who's value can never change. T
 ## Links
 
 http://blog.golang.org/constants
+
 http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 ## Code Review

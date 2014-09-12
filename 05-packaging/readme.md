@@ -12,7 +12,9 @@ Packages contain the basic unit of code. All code is built into packages that ca
 ## Links
 
 http://blog.golang.org/organizing-go-code
+
 http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html
+
 http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 
 ## Code Review
