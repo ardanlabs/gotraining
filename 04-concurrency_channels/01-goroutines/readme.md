@@ -13,9 +13,11 @@ Goroutines are functions that are created and scheduled to be run indenpently. G
 
 ## Links
 
-	http://blog.golang.org/advanced-go-concurrency-patterns
-	http://blog.golang.org/context
-	http://blog.golang.org/concurrency-is-not-parallelism
+http://blog.golang.org/advanced-go-concurrency-patterns
+
+http://blog.golang.org/context
+
+http://blog.golang.org/concurrency-is-not-parallelism
 
 http://talks.golang.org/2013/distsys.slide
 
