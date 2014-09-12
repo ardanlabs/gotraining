@@ -6,6 +6,10 @@ This is a 3 day, 21 hour accelerated style course for existing developers who ar
 ## Day 1
 On this day we take our initial tour of the language. We learn about variables, types, data structures, interfaces and concurrency. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
+#### Installation Mac
+
+http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
+
 #### Slides
 
 [Opening Slide Deck](day1/opening/slide1.md)

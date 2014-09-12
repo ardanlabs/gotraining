@@ -7,6 +7,10 @@ Logging is an important part of every program. Logs are our eyes and history to 
 * Support for logging is already built into the standard library.
 * The log package can be easily extended to meet your logging needs.
 
+## Links
+
+http://www.goinggo.net/2013/11/using-log-package-in-go.html
+
 ## Code Review
 
 [Use of log package](example1/example1.go) ([Go Playground](http://play.golang.org/p/xO5OuPOJef))

@@ -9,6 +9,11 @@ Constants are a way to create a named identifier who's value can never change. T
 * They can be implictly converted where variables can't.
 * Think of constants as having a Kind, not a Type.
 
+## Links
+
+http://blog.golang.org/constants
+http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
+
 ## Code Review
 
 [Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/r-po84hGuz))

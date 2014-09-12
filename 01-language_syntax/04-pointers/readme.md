@@ -9,6 +9,11 @@ Pointers provide a way to share data across function boundaries. Having the abil
 * "Value of", what's in the box. "Address of" ( **&** ), where is the box.
 * ( * ) Declare pointer and the "Value that the pointer points to".
 
+## Links
+
+https://golang.org/doc/effective_go.html#pointers_vs_values
+http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
+
 ## Code Review
 
 [Pass by value](example1/example1.go) ([Go Playground](http://play.golang.org/p/POH6kq8KLL))

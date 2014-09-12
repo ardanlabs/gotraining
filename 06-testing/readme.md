@@ -9,6 +9,11 @@ Testing is built right into the go tools and the standard library. Testing needs
 * Writes tests and you develop.
 * Benchmark through the dev, qa and release cycles.
 
+## Links
+
+http://golang.org/pkg/testing/
+http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go
+
 ## Code Review
 
 The sample program implements support for accessing a MongoDB database from MongoLab. The program implements two different find calls that return documents that are unmarshaled into user defined types.

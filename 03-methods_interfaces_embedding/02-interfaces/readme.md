@@ -9,6 +9,12 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
+## Links
+
+https://golang.org/doc/effective_go.html#interfaces
+http://blog.golang.org/laws-of-reflection
+http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
+
 ## Code Review
 
 [Declare, implement and method call restrictions I](example1/example1.go) ([Go Playground](http://play.golang.org/p/7q3zw-sVwn))

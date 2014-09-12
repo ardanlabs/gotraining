@@ -8,6 +8,10 @@ Struct types are a way of creating complex types that group fields of data toget
 * Accessing individual fields of a struct type value.
 * Anonymous structs.
 
+## Links
+
+http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
+
 ## Code Review
 
 [Declare, create and initalize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/Sl-vYp7pp_))

@@ -8,6 +8,10 @@ Reflection is the ability to inspect a value to derive type or other meta-data. 
 * We can add "tags" to our struct fields to store and use meta-data.
 * Encoding package leverages reflection and we can as well.
 
+## Links
+
+http://blog.golang.org/laws-of-reflection
+
 ## Code Review
 
 [Empty Interface](example1/example1.go) ([Go Playground](http://play.golang.org/p/OSeD9F_P46))

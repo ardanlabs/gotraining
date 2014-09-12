@@ -10,7 +10,14 @@ Goroutines are functions that are created and scheduled to be run indenpently. G
 * Concurrency is not parallelism.
 	* Concurrency is about dealing with lots of things at once.
 	* Parallelism is about doing lots of things at once.
-* http://talks.golang.org/2013/distsys.slide
+
+## Links
+
+http://blog.golang.org/advanced-go-concurrency-patterns
+http://blog.golang.org/context
+http://blog.golang.org/concurrency-is-not-parallelism
+http://talks.golang.org/2013/distsys.slide
+http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 ## Code Review
 

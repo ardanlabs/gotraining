@@ -8,6 +8,17 @@ Slices are an incredibly important data structure in Go. They form the basis for
 * There is a difference between a slices length and capacity and they each service a purpose.
 * Slices allow for multiple "views" of the same underlying array.
 
+## Links
+
+http://blog.golang.org/go-slices-usage-and-internals
+http://blog.golang.org/slices
+
+http://www.goinggo.net/2013/08/understanding-slices-in-go-programming.html
+http://www.goinggo.net/2013/08/collections-of-unknown-length-in-go.html
+http://www.goinggo.net/2013/09/iterating-over-slices-in-go.html
+http://www.goinggo.net/2013/09/slices-of-slices-of-slices-in-go.html
+http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
+
 ## Code Review
 
 [Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/4r90uFQwJn))

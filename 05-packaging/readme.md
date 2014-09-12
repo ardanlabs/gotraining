@@ -9,6 +9,12 @@ Packages contain the basic unit of code. All code is built into packages that ca
 * We import packages to access exported identifiers.
 * Any package can use a value of an unexported type.
 
+## Links
+
+http://blog.golang.org/organizing-go-code
+http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html
+http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
+
 ## Code Review
 
 [Declare and access exported identifiers](example1/example1.go)

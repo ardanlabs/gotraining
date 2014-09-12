@@ -10,6 +10,10 @@ Embedding types provides the final piece of sharing and reusing state and behavi
 * Through promotion, inner type fields and methods can be accessed through the outer type.
 * The outer type can override the inner type's behavior.
 
+## Links
+
+http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
+
 ## Code Review
 
 [Declaring Fields](example1/example1.go) ([Go Playground](http://play.golang.org/p/5LlI_KJ2ZT))

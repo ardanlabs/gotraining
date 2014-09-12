@@ -8,6 +8,11 @@ Maps provide a data structure that allow for the storage and management of key/v
 * The map key must be a value that can be used in an assignment statement.
 * Iterating over a map is always random.
 
+## Links
+
+http://blog.golang.org/go-maps-in-action
+http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
+
 ## Code Review
 
 [Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/voXAyiydFf))

@@ -8,6 +8,12 @@ Function are at the core of the language. They provide a mechanism to group and 
 * The error value should always be checked as part of the programming logic.
 * The blank identifier can be used to ignore return values.
 
+## Links
+
+https://golang.org/doc/effective_go.html#functions
+http://www.goinggo.net/2013/10/functions-and-naked-returns-in-go.html
+http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
+
 ## Code Review
 
 [Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/bYY-TRjfH0))

@@ -10,6 +10,12 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 * A receive from an unbuffered channel happens before the send on that channel completes.
 * The closing of a channel happens before a receive that returns a zero value because the channel is closed.
 
+## Links
+
+http://blog.golang.org/pipelines
+http://blog.golang.org/share-memory-by-communicating
+http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
+
 ## Code Review
 
 [Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](http://play.golang.org/p/7WO_eOJx_G))
@@ -23,7 +29,6 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 ## Advanced Code Review
 
 [Semaphores](advanced/semaphore/semaphore.go) ([Go Playground](http://play.golang.org/p/opoZfMNhng))
-
 
 [Pooling](advanced/pool/pool.go)
 

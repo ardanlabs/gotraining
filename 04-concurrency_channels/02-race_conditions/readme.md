@@ -8,6 +8,11 @@ A race condition is when two or more goroutines attempt to read and write to the
 * When two or more goroutines attempt to access the same resource, we have a race condition.
 * Atomic functions and mutexes can provide the support we need.
 
+## Links
+
+http://blog.golang.org/race-detector
+http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
+
 ## Code Review
 
 [Race Condition](example1/example1.go) ([Go Playground](http://play.golang.org/p/DCkt7qIzB8))
