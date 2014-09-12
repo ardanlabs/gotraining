@@ -10,6 +10,8 @@ Struct types are a way of creating complex types that group fields of data toget
 
 ## Links
 
+http://www.goinggo.net/2013/07/understanding-type-in-go.html
+
 http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 ## Code Review
