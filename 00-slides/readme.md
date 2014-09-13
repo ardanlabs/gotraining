@@ -38,7 +38,7 @@ On this day we take go deeper into Go. We learn about channels, testing, packagi
 
 #### Concurrency and Channels
 [Goroutines](../04-concurrency_channels/01-goroutines/readme.md) | 
-[Race Conditions](../04-concurrency_channels/02-race_conditions/readme.md)
+[Race Conditions](../04-concurrency_channels/02-race_conditions/readme.md) | 
 [Channels](../04-concurrency_channels/03-channels/readme.md)
 
 #### Packaging
