@@ -13,7 +13,7 @@ func main() {
 	slice := []string{"Apple", "Orange", "Banana", "Grape", "Plum"}
 	inspectSlice(slice)
 
-	// Take a slice of slice. We want just elements 2
+	// Take a slice of slice. We want just index 2
 	// takeOne[0] = "Banana"
 	// Length:   3 - 2
 	// Capacity: 5 - 2
@@ -24,7 +24,7 @@ func main() {
 	// Length:   j - i
 	// Capacity: k - i
 
-	// Take a slice of just element 2 with a length and capacity of 1
+	// Take a slice of just index 2 with a length and capacity of 1
 	// takeOneCapOne[0] = "Banana"
 	// Length:   3 - 2
 	// Capacity: 3 - 2

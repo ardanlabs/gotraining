@@ -21,20 +21,22 @@ func main() {
 	inspectSlice(slice1)
 
 	// For slice[i:j] with an underlying array of capacity k
-	// Length: j - i
-	// Capacity: k - i
+	// Final Length: j - i
+	// Final Capacity: k - i
 
-	// Take a slice of slice1. We want just elements 2 and 3.
+	// Take a slice of slice1. We want just indexes 2 and 3.
 	// slice2[0] = "Banana"
 	// slice2[1] = "Grape"
 	// Length:   4 - 2
 	// Capacity: 8 - 2
+
+	// Parameters are starting index : ending index + 1
 	slice2 := slice1[2:4]
 	inspectSlice(slice2)
 
 	fmt.Println("*************************")
 
-	// Change the value of the first element of slice3.
+	// Change the value of the index 0 of slice3.
 	slice2[0] = "CHANGED"
 
 	// Display the change across all existing slices.

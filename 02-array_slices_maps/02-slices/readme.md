@@ -48,7 +48,7 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 **Part A** Declare a nil slice of integers. Create a loop that increments a counter variable by 10 five times and appends these values to the slice. Iterate over the slice and display each value.
 
-**Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of the second and third elements (index 1 and 2) and display the index position and value of each element in the new slice.
+**Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of the first and second indexes and display the index position and value of each element in the new slice.
 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/9ir4vinceh))
 

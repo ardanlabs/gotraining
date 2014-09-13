@@ -1,6 +1,8 @@
 // http://play.golang.org/p/HV5t0VrRie
 
-// Sample program to show how to iterate over a slice.
+// Sample program to use a composite literal to initialize
+// a slice to a length and capacity. Iterate over a slice using
+// a for range.
 package main
 
 import (
