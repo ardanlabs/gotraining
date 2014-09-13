@@ -31,7 +31,7 @@ func init() {
 	flag.Parse()
 
 	if len(flag.Args()) != 1 {
-		fmt.Println("Usage: ./example5 [options] <url>")
+		fmt.Println("Usage: ./example3 [options] <url>")
 		os.Exit(-1)
 	}
 }
