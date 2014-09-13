@@ -1,6 +1,9 @@
 /*
 http://golang.org/cmd/go/#hdr-Description_of_testing_flags
-go test -run=XXX -bench=BenchmarkStation
+go test -run=XXX -bench=BenchmarkStation -benchmem
+
+Add Later
+-benchtime=20s
 
 The benchmark will call the function first with a value of b.N being 1. Then it will
 continue to call the function for a minimum of 1 second to complete the test.
