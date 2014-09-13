@@ -19,7 +19,7 @@ import (
 // init is called before main.
 func init() {
 	if len(os.Args) != 2 {
-		fmt.Println("Usage: ./example4 <url>")
+		fmt.Println("Usage: ./example2 <url>")
 		os.Exit(-1)
 	}
 }
