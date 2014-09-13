@@ -35,8 +35,8 @@ On this day we take our initial tour of the language. We learn about variables, 
 * Language and Syntax
 	* Variables
 	* Struct Types
-	* Constants
 	* Pointers
+	* Constants
 	* Named Types
 	* Functions
 * Arrays, Slices and Maps
@@ -47,14 +47,13 @@ On this day we take our initial tour of the language. We learn about variables, 
 	* Methods
 	* Interfaces
 	* Embedding Types
-* Concurrency and Channels
-	* Scheduler and Goroutines
-	* Race Conditions
 
 ### Day 2
 On this day we take go deeper into Go. We learn about testing, packaging, logging, encoding, io and reflection.
 
 * Concurrency and Channels
+    * Scheduler and Goroutines
+	* Race Conditions
 	* Unbuffered Channels
 	* Buffered Channels
 * Testing and Benchmarking

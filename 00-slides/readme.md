@@ -18,8 +18,8 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
 [Variables](../01-language_syntax/01-variables/readme.md) | 
 [Struct Types](../01-language_syntax/02-struct_types/readme.md) | 
-[Constants](../01-language_syntax/03-constants/readme.md) | 
-[Pointers](../01-language_syntax/04-pointers/readme.md) | 
+[Pointers](../01-language_syntax/03-pointers/readme.md) | 
+[Constants](../01-language_syntax/04-constants/readme.md) | 
 [Named Types](../01-language_syntax/05-named_types/readme.md) | 
 [Functions](../01-language_syntax/06-functions/readme.md)
 
@@ -33,14 +33,12 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 [Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md) | 
 [Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
 
-#### Concurrency and Channels - Part I
-[Goroutines](../04-concurrency_channels/01-goroutines/readme.md) | 
-[Race Conditions](../04-concurrency_channels/02-race_conditions/readme.md)
-
 ## Day 2
 On this day we take go deeper into Go. We learn about channels, testing, packaging, logging, encoding, io and reflection.
 
-#### Concurrency and Channels - Part II
+#### Concurrency and Channels
+[Goroutines](../04-concurrency_channels/01-goroutines/readme.md) | 
+[Race Conditions](../04-concurrency_channels/02-race_conditions/readme.md)
 [Channels](../04-concurrency_channels/03-channels/readme.md)
 
 #### Packaging

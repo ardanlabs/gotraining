@@ -8,6 +8,10 @@ Function are at the core of the language. They provide a mechanism to group and 
 * The error value should always be checked as part of the programming logic.
 * The blank identifier can be used to ignore return values.
 
+## ADD
+
+Function Variables
+
 ## Links
 
 https://golang.org/doc/effective_go.html#functions
