@@ -27,7 +27,7 @@ type speaker interface {
 type english struct{}
 
 // sayHello implements the speaker interface.
-func (e *english) sayHello() {
+func (e english) sayHello() {
 	fmt.Println("Hello World")
 }
 
@@ -35,7 +35,7 @@ func (e *english) sayHello() {
 type chinese struct{}
 
 // sayHello implements the speaker interface.
-func (c *chinese) sayHello() {
+func (c chinese) sayHello() {
 	fmt.Println("你好世界")
 }
 

@@ -59,11 +59,9 @@ func worker(worker int) {
 		return
 	}
 
-	// Defer an anonymous function to return the resource.
-	defer func() {
-		resources <- value
-	}()
-
 	// Display the value.
 	fmt.Printf("Worker: %d : %s\n", worker, value)
+
+	// Place the resource back.
+	resources <- value
 }

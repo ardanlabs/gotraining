@@ -30,7 +30,8 @@ func main() {
 	go doWork("A")
 	go doWork("B")
 
-	// Give the goroutines time to run.
+	// Give the goroutines time to run so we can see
+	// the shutdown flag work.
 	time.Sleep(time.Second)
 
 	// Safely flag it is time to shutdown.
