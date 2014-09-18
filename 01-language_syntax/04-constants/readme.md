@@ -6,10 +6,12 @@ Constants are a way to create a named identifier who's value can never change. T
 
 * Constants are not variables.
 * They existing only within compilation.
-* They can be implictly converted where variables can't.
-* Think of constants as having a Kind, not a Type.
+* Untyped constants can be implictly converted where typed constants and variables can't.
+* Think of untyped constants as having a Kind, not a Type.
 
 ## Links
+
+https://golang.org/ref/spec#Constants
 
 http://blog.golang.org/constants
 
