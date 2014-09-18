@@ -1,4 +1,4 @@
-// http://play.golang.org/p/r-po84hGuz
+// http://play.golang.org/p/HU2ohDLoEr
 
 // Sample program to show how to declare constants and their
 // implementation in Go.
@@ -8,8 +8,9 @@ import "fmt"
 
 // main is the entry point for the application.
 func main() {
-	// Constants live within the compiler. They have a paralell type system.
-	// Compiler can perform implicit conversions of constants.
+	// Constants live within the compiler.
+	// They have a paralell type system. Really a Kind system.
+	// Compiler can perform implicit conversions of untyped constants.
 
 	// Untyped Constants.
 	const ui = 12345    // kind: integer
@@ -31,26 +32,27 @@ func main() {
 	fmt.Printf("const ti int = 12345 \t %T [%v]\n", ti, ti)
 	fmt.Printf("const tf float64 = 3.141592 \t %T [%v]\n", tf, tf)
 
-	// Kind Promotion allows for the use of constants with arithmetic operations.
-	// answer will be of type floating point.
-	var answer = 3 * 0.333 // float64(3) / 3.0
+	// Constant arithmetic supports different kinds.
+	// Kind Promotion is used to determine kind in these scenarios.
+	// Variable answer will be implicitly converted to type floating point.
+	var answer = 3 * 0.333 // KindInt(3) / KindFloat(3.0)
 
 	fmt.Printf("var answer = 3 * 0.333 \t %T [%v]\n", answer, answer)
 
-	// third will be of kind floating point.
-	const third = 1 / 3.0 // float64(1) / 3.0
+	// Variable third will be of kind floating point.
+	const third = 1 / 3.0 // KindInt(1) / KindFloat(3.0)
 
-	// zero will be of kind integer.
-	const zero = 1 / 3
+	// Variable zero will be of kind integer.
+	const zero = 1 / 3 // KindInt(1) / KindInt(3)
 
 	// Constants in this context requires a converstion to a built-in type.
 	fmt.Printf("const third = 1 / 3.0 \t %T [%v]\n", third, third)
 	fmt.Printf("const zero = 1 / 3 \t %T [%v]\n", zero, zero)
 
 	// This is an example of constant arithmetic between typed and
-	// untyped constants.
+	// untyped constants. Typed constant is promoted.
 	const one int8 = 1
-	const two = 2 * one
+	const two = 2 * one // KindInt(2) * int8(1) = int8(2)
 
 	// Constants in this context requires a converstion to a built-in type.
 	fmt.Printf("const two = 2 * one \t %T [%v]\n", two, two)
