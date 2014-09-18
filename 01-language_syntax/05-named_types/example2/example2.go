@@ -1,4 +1,4 @@
-// http://play.golang.org/p/Mze3pLMcPE
+// http://play.golang.org/p/XJ4Ia1lMWl
 
 /*
 // A Duration represents the elapsed time between two instants as
@@ -32,8 +32,8 @@ import (
 	"time"
 )
 
-// fiveSeconds is an untyped constant of type Duration.
-const fiveSeconds = 5 * time.Second // KindInt(5) * Duration(1000000000)
+// fiveSeconds is an typed constant of type Duration.
+const fiveSeconds = 5 * time.Second // Duration(5) * Duration(1000000000)
 
 // main is the entry point for the application.
 func main() {

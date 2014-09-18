@@ -1,4 +1,4 @@
-// http://play.golang.org/p/HU2ohDLoEr
+// http://play.golang.org/p/OLuzwK1oHT
 
 // Sample program to show how to declare constants and their
 // implementation in Go.
@@ -9,7 +9,7 @@ import "fmt"
 // main is the entry point for the application.
 func main() {
 	// Constants live within the compiler.
-	// They have a paralell type system. Really a Kind system.
+	// They have a paralell type system.
 	// Compiler can perform implicit conversions of untyped constants.
 
 	// Untyped Constants.
@@ -22,8 +22,8 @@ func main() {
 
 	// Typed Constants still use the constant type system but their precision
 	// is restricted.
-	const ti int = 12345        // kind: integer with int64 precision restrictions.
-	const tf float64 = 3.141592 // kind: floating-point with float64 precision restrictions.
+	const ti int = 12345        // type: int64
+	const tf float64 = 3.141592 // type: float64
 
 	// ./constants.go:14: constant 1000 overflows uint8
 	// const myUint8 uint8 = 1000
@@ -50,9 +50,9 @@ func main() {
 	fmt.Printf("const zero = 1 / 3 \t %T [%v]\n", zero, zero)
 
 	// This is an example of constant arithmetic between typed and
-	// untyped constants. Typed constant is promoted.
+	// untyped constants. Must have like types to perform math.
 	const one int8 = 1
-	const two = 2 * one // KindInt(2) * int8(1) = int8(2)
+	const two = 2 * one // int8(2) * int8(1)
 
 	// Constants in this context requires a converstion to a built-in type.
 	fmt.Printf("const two = 2 * one \t %T [%v]\n", two, two)

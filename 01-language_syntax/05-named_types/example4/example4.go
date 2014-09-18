@@ -1,4 +1,4 @@
-// http://play.golang.org/p/gsoqhIUtvw
+// http://play.golang.org/p/B75FURdQ7t
 
 /*
 // A Duration represents the elapsed time between two instants as
@@ -32,8 +32,8 @@ import (
 	"time"
 )
 
-// Declare a types constant and multiple with type Duration.
-const fiveSeconds int64 = 5 * time.Second
+// fiveSeconds is a typed constant of type int64.
+const fiveSeconds int64 = 5 * time.Second // Duration(5) * Duration(1000000000)
 
 // ./example2.go:36: cannot use time.Duration(5) * time.Second
 // (type time.Duration) as type int64 in const initializer

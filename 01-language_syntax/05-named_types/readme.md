@@ -11,11 +11,11 @@ Named types are another way to create user defined types. They provide some inte
 
 [Declare, create and initalize named types](example1/example1.go) ([Go Playground](http://play.golang.org/p/mhKlxSyuxr))
 
-[Named types in the standard library](example2/example2.go) ([Go Playground](http://play.golang.org/p/Mze3pLMcPE))
+[Named types in the standard library](example2/example2.go) ([Go Playground](http://play.golang.org/p/XJ4Ia1lMWl))
 
-[Named types and conversion I](example3/example3.go) ([Go Playground](http://play.golang.org/p/Y7gqBwo7Vg))
+[Named types and conversion I](example3/example3.go) ([Go Playground](http://play.golang.org/p/Rgoqvg8dNv))
 
-[Named types and conversion II](example4/example4.go) ([Go Playground](http://play.golang.org/p/gsoqhIUtvw))
+[Named types and conversion II](example4/example4.go) ([Go Playground](http://play.golang.org/p/B75FURdQ7t))
 
 ## Exercises
 
