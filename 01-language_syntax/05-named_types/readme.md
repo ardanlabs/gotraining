@@ -1,6 +1,6 @@
 ## Named Types - Language Syntax
 
-Named types are another way to create user defined types. They provide some interesting feature/functionality that is not always available in other languages. The standard library in Go used named types very effectively.
+Named types are another way to create user defined types. They provide some interesting feature/functionality that is not always available in other languages. The standard library in Go used named types very effectively. In these examples a named type is used to declare a set of typed constants to act as part of the API for the time package.
 
 ## Notes
 
