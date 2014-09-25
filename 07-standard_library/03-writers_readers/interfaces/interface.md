@@ -1,3 +1,6 @@
+## Writes/Reader Interfaces - Standard Library
+
+### Writer
 
 	type Writer interface {
 	        Write(p []byte) (n int, err error)
@@ -14,7 +17,7 @@
 
 * The byte slice must never be modify in any way.
 
-
+### Reader
 
 	type Reader interface {
 	        Read(p []byte) (n int, err error)
