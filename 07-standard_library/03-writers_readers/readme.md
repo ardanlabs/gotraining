@@ -8,13 +8,13 @@ The ability to stream and pass data around is incredibility important. Data is c
 * If we implement the Reader and Writer interfaces in our own types, we get this functionality for free.
 * Implementing interfaces to existing functionality saves us from both development time and bugs.
 
+[Interface Declarations](interfaces/interface.md)
+
 ## Links
 
 http://golang.org/pkg/io/
 
 ## Code Review
-
-[interfaces](interfaces/interface.md)
 
 [io.Writer interface](example1/example1.go) ([Go Playground](http://play.golang.org/p/6pZ8RYzIN5))
 
