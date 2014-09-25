@@ -14,6 +14,8 @@ http://golang.org/pkg/io/
 
 ## Code Review
 
+[interfaces](interfaces/interface.go)
+
 [io.Writer interface](example1/example1.go) ([Go Playground](http://play.golang.org/p/6pZ8RYzIN5))
 
 [Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/W3YoitIiT-))
