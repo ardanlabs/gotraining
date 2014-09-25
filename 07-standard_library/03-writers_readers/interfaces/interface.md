@@ -1,6 +1,7 @@
-type Writer interface {
-        Write(p []byte) (n int, err error)
-}
+
+	type Writer interface {
+	        Write(p []byte) (n int, err error)
+	}
 
 /*
 	* The implementation of the Write method should attempt to write the entire length
@@ -10,15 +11,15 @@ type Writer interface {
 	  return an error.
 
 	* The number of bytes reported as written can be less then the length of the byte
-      slice but never more.
+	  slice but never more.
 
-    * The byte slice must never be modify in any way.
+	* The byte slice must never be modify in any way.
 */
 
 
-type Reader interface {
-        Read(p []byte) (n int, err error)
-}
+	type Reader interface {
+	        Read(p []byte) (n int, err error)
+	}
 
 /*
 	* The implementation should attempt to read the entire length of the byte slice that
@@ -34,5 +35,5 @@ type Reader interface {
 	  checking the error value for an EOF or other error value.
 
 	* The implementation must never return a 0 byte read count with an error value of nil.
-      Reads that result in no byte read should always return an error.
+	  Reads that result in no byte read should always return an error.
 */

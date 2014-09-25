@@ -14,7 +14,7 @@ http://golang.org/pkg/io/
 
 ## Code Review
 
-[interfaces](interfaces/interface.go)
+[interfaces](interfaces/interface.md)
 
 [io.Writer interface](example1/example1.go) ([Go Playground](http://play.golang.org/p/6pZ8RYzIN5))
 
