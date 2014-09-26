@@ -9,6 +9,10 @@ Testing is built right into the go tools and the standard library. Testing needs
 * Writes tests and you develop.
 * Benchmark through the dev, qa and release cycles.
 
+## Add
+
+* Profiling
+
 ## Links
 
 http://golang.org/pkg/testing/
