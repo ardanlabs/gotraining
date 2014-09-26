@@ -4,7 +4,7 @@ The ability to stream and pass data around is incredibility important. Data is c
 
 ## Notes
 
-* The standard library provide all the infrastructure we need to streaming and working with data.
+* The standard library provides all the infrastructure we need to stream and work with data.
 * If we implement the Reader and Writer interfaces in our own types, we get this functionality for free.
 * Implementing interfaces to existing functionality saves us from both development time and bugs.
 
