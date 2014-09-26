@@ -10,6 +10,10 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 * A receive from an unbuffered channel happens before the send on that channel completes.
 * The closing of a channel happens before a receive that returns a zero value because the channel is closed.
 
+## Documentation
+
+[Channel Diagrams](documentation/channels.md)
+
 ## Links
 
 http://blog.golang.org/pipelines

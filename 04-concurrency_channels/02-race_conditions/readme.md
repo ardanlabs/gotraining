@@ -14,6 +14,10 @@ http://blog.golang.org/race-detector
 
 http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
+## Documentation
+
+[Race Condition Diagram](documentation/race_condition.md)
+
 ## Code Review
 
 [Race Condition](example1/example1.go) ([Go Playground](http://play.golang.org/p/DCkt7qIzB8))
