@@ -7,6 +7,7 @@ Slices are an incredibly important data structure in Go. They form the basis for
 * Slices are like dynamic arrays with special and built-in functionality.
 * There is a difference between a slices length and capacity and they each service a purpose.
 * Slices allow for multiple "views" of the same underlying array.
+* Slices can grow through the use of the built-in function append.
 
 ## Links
 

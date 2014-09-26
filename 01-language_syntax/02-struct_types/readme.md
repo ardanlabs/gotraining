@@ -4,9 +4,9 @@ Struct types are a way of creating complex types that group fields of data toget
 
 ## Notes
 
-* Use of composite literals.
-* Accessing individual fields of a struct type value.
-* Anonymous structs.
+* We can use the composite literal form to intialize a value from a struct type.
+* The dot (.) operator allows us to access individual field values.
+* We can create anonymous structs.
 
 ## Links
 

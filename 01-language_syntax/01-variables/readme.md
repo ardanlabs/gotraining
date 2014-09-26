@@ -2,14 +2,15 @@
 
 Variables are at the heart of the langugage and provide the ability to read from and write to memory. In Go, access to memory is type safe. This means the compiler takes type serious and will not allow us to use variables outside the scope of how they are declared.
 
-Here is a link to the Go specification about some of the built-in types in Go that can be used to declare variables: [Built-In Types](http://golang.org/ref/spec#Boolean_types)
-
 ## Notes
 
-* Variables declared to their zero value.
-* Variable declared using the short variable declaration opertator.
+* When variables are being declared to their zero value, use the keyword var.
+* When variables are being declared and initialized, use the short variable declaration opertator.
+* Escape analysis is used to determine when a value escapes to the heap.
 
 ## Links
+
+[Built-In Types](http://golang.org/ref/spec#Boolean_types)
 
 https://golang.org/doc/effective_go.html#variables
 

@@ -4,7 +4,7 @@ Function are at the core of the language. They provide a mechanism to group and 
 
 ## Notes
 
-* Functions can return mulitple values are most return an error value.
+* Functions can return mulitple values and most return an error value.
 * The error value should always be checked as part of the programming logic.
 * The blank identifier can be used to ignore return values.
 

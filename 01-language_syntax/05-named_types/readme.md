@@ -6,6 +6,7 @@ Named types are another way to create user defined types. They provide some inte
 
 * Declare a type based on another single type including built-in and user defined types.
 * See the power of constants and their use in the standard library.
+* Use typed constants are part of the API for your package functions and methods.
 
 ## Code Review
 

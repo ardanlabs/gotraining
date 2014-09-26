@@ -5,7 +5,7 @@ Constants are a way to create a named identifier who's value can never change. T
 ## Notes
 
 * Constants are not variables.
-* They existing only within compilation.
+* They existing only at compilation.
 * Untyped constants can be implictly converted where typed constants and variables can't.
 * Think of untyped constants as having a Kind, not a Type.
 
