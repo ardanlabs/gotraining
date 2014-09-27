@@ -25,7 +25,7 @@ __What a student is expected to learn:__
     * Walk away with patterns and techniques for solving common problems. 
 
 ### Day 1
-On this day we take our initial tour of the language. We learn about variables, types, data structures, interfaces and concurrency. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
+On this day we take our initial tour of the language. We learn about variables, types, data structures and interfaces. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
 * Setting Up Your Environment ( Pre-Hour )
 	* Installing Go
@@ -49,7 +49,7 @@ On this day we take our initial tour of the language. We learn about variables, 
 	* Embedding Types
 
 ### Day 2
-On this day we take go deeper into Go. We learn about testing, packaging, logging, encoding, io and reflection.
+On this day we take go deeper into Go. We learn about concurrency, race conditions, channels, testing, packaging, logging, encoding, io and reflection.
 
 * Concurrency and Channels
     * Scheduler and Goroutines
