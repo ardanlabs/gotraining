@@ -3,7 +3,7 @@
 // The io.Reader and io.Writer interfaces allow you to compose all of these different bits together.
 
 // Sample program to show how different functions from the
-// standard library use the io.Writer and io.Reader interfaces.
+// standard library use the io.Writer interface.
 package main
 
 import (
@@ -24,6 +24,6 @@ func main() {
 	fmt.Fprintf(&b, "World!")
 
 	// Write the content of the Buffer to the stdout device.
-	// Using the io.Reader implementation for Buffer.
+	// Using the io.Writer implementation for os.File.
 	b.WriteTo(os.Stdout)
 }
