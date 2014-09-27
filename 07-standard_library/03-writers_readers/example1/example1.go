@@ -1,9 +1,9 @@
-// http://play.golang.org/p/6pZ8RYzIN5
+// http://play.golang.org/p/jlTo1IV1RQ
 
 // The io.Reader and io.Writer interfaces allow you to compose all of these different bits together.
 
-// Sample program to show how different functions from
-// the standard library use the io.Writer interface.
+// Sample program to show how different functions from the
+// standard library use the io.Writer and io.Reader interfaces.
 package main
 
 import (
@@ -14,16 +14,16 @@ import (
 
 // main is the entry point for the application.
 func main() {
-	// Create a Buffer value and write a string
-	// to the buffer.
+	// Create a Buffer value and write a string to the buffer.
+	// Using the io.Writer implementation for Buffer.
 	var b bytes.Buffer
 	b.Write([]byte("Hello "))
 
 	// Use Fprintf to write the string to the Buffer.
-	// This is possible because Buffer implements the io.Writer interface.
-	fmt.Fprintf(&b, "world!")
+	// Using the io.Writer implementation for Buffer.
+	fmt.Fprintf(&b, "World!")
 
 	// Write the content of the Buffer to the stdout device.
-	// os.File types implement the io.Writer interface.
+	// Using the io.Reader implementation for Buffer.
 	b.WriteTo(os.Stdout)
 }
