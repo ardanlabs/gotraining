@@ -4,7 +4,7 @@ This is a 3 day, 21 hour accelerated style course for existing developers who ar
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 ## Day 1
-On this day we take our initial tour of the language. We learn about variables, types, data structures, interfaces and concurrency. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
+On this day we take our initial tour of the language. We learn about variables, types, data structures and interfaces. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
 #### Installation Mac
 
@@ -34,7 +34,7 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 [Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
 
 ## Day 2
-On this day we take go deeper into Go. We learn about channels, testing, packaging, logging, encoding, io and reflection.
+On this day we take go deeper into Go. We learn about concurrency, race conditions, channels, testing, packaging, logging, encoding, io and reflection.
 
 #### Concurrency and Channels
 [Goroutines](../04-concurrency_channels/01-goroutines/readme.md) | 
