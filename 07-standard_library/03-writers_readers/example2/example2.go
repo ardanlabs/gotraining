@@ -32,6 +32,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+
 	// io.Copy(dst io.Writer, src io.Reader), copies from the Body to Stdout
 	io.Copy(os.Stdout, r.Body)
 	if err := r.Body.Close(); err != nil {
