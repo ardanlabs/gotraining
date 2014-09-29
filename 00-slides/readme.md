@@ -48,9 +48,7 @@ On this day we take go deeper into Go. We learn about concurrency, race conditio
 [Database Program](../06-testing/readme.md)
 
 #### Standard Library
-[Logging](../07-standard_library/01-logging/readme.md) | 
-[Encoding](../07-standard_library/02-encoding/readme.md) | 
-[Writers/Readers](../07-standard_library/03-writers_readers/readme.md)
+[Standard Library](../07-standard_library/readme.md)
 
 #### Reflection
 [Reflection](../08-reflection/readme.md)
