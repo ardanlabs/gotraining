@@ -14,8 +14,11 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 #### Classes
 
 [One Hour Training](01_1hour_training.md)
+
 [Two Hour Training](02_2hour_training.md)
+
 [Two Day Training](03_2day_training.md)
+
 [Advanced Day Training](04_advanced_training.md)
 
 ___
