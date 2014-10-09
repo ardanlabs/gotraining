@@ -28,7 +28,7 @@ Go contains a wealth of documentation and a great community.
 <tr><td><a href="https://groups.google.com/forum/#!forum/golang-nuts">Go Nuts</a></td><td><a href="https://groups.google.com/forum/#!forum/golang-dev">Go Dev</a></td><td><a href="https://gophers.slack.com">Gophers Slack</a></td><td><a href="http://www.reddit.com/r/golang">Reddit Golang</a></td><td><a href="http://stackoverflow.com/questions/tagged/go">Stackoverflow</a></td></tr>
 </table>
 
-### [Previous Slide](slide1.md) | [Next Slide](slide3.md)
+#### [Previous Slide](slide1.md) | [Next Slide](slide3.md)
 ___
 [![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)

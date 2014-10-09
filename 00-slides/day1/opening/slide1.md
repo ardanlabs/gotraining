@@ -14,7 +14,7 @@ I may be biased but I truly believe Go is an amazing language. It balances betwe
 
 #### * Can interact with C libraries via cgo.
 
-### [Next Slide](slide2.md)
+#### [Next Slide](slide2.md)
 ___
 [![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)

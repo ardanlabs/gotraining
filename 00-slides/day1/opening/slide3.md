@@ -20,7 +20,7 @@ Built-in functions enhance the programming language by providing functionality t
 ### Standard Library
 Go's standard library is rich with functionality that provide a lot of functionality without having to use 3rd party packages. Check out the link and see for yourself. [Standard Library](http://golang.org/pkg/)
 
-### [Previous Slide](slide2.md) | [Next Slide](slide4.md)
+#### [Previous Slide](slide2.md) | [Next Slide](slide4.md)
 ___
 [![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)
