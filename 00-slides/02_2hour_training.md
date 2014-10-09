@@ -27,7 +27,7 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
 ## Sample Web Application
 
-In this day we talk about more advanced topics and learn how to use Go to build a web application. The program implements functionality that can be found in many Go programs being developed today. The program provides a sample to the html package to create a simple search engine. The engine supports Google, Bing and Blekko searches. You can request results for all three engines or ask for just the first result. Searches are performed concurrently. Use the GOMAXPROCS environment variables to run the searches in parallel.
+In this hour we look at a program that implements functionality that can be found in many Go programs being developed today. The program provides a sample to the html package to create a simple search engine. The engine supports Google, Bing and Blekko searches. You can request results for all three engines or ask for just the first result. Searches are performed concurrently. Use the GOMAXPROCS environment variables to run the searches in parallel.
 
 [Program Documentation](../web_app/readme.md)
 
