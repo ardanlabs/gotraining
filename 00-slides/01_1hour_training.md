@@ -21,8 +21,10 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 [Pointers](../01-language_syntax/03-pointers/readme.md) | 
 [Constants](../01-language_syntax/04-constants/readme.md) | 
 [Named Types](../01-language_syntax/05-named_types/readme.md) | 
-[Functions](../01-language_syntax/06-functions/readme.md) |
-[Methods](../03-methods_interfaces_embedding/01-methods/readme.md) |
+[Functions](../01-language_syntax/06-functions/readme.md)
+
+#### Methods and Interfaces
+[Methods](../03-methods_interfaces_embedding/01-methods/readme.md) | 
 [Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md)
 
 ___
