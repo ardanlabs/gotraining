@@ -11,15 +11,19 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
 [Opening Slide Deck](day1/opening/slide1.md)
 
-#### Classes
+#### Classes - Hourly
 
-[One Hour Training](01_1hour_training.md)
+[Hour One Training](hour_1_training.md)
 
-[Two Hour Training](02_2hour_training.md)
+[Hour Two Training](hour_2_training.md)
 
-[Two Day Training](03_2day_training.md)
+#### Classes - Daily
 
-[Advanced Day Training](04_advanced_training.md)
+[Day One Training](day_1_training.md)
+
+[Day Two Training](day_2_training.md)
+
+[Day Three Training](day_3_training.md)
 
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
