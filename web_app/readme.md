@@ -31,7 +31,7 @@ The program is broken into several distinct steps that run across different goro
 
 The code is built within two packages. The service package handles the processing of HTTP requests and responses. HTML templates are used to render the views. The search package handles the processing of searches agains the different search engines. An interface called Searcher is declared to support the implementation of new Searchers.
 
-## Getting, Building and Running The Code
+## Getting, Building and Running the Code
 
 Follow these instructions to download all the training material and run this example
 

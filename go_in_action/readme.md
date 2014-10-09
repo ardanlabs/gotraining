@@ -26,7 +26,7 @@ The code is organized into these four folders which are listed in alphabetical o
 
 Now that we have seen where all the code for the program is, we can begin to explore and understand how the program works.
 
-## Getting, Building and Running The Code
+## Getting, Building and Running the Code
 
 Follow these instructions to download all the training material and run this example
 
