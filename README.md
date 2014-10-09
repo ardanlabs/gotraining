@@ -29,6 +29,11 @@ __What a student is expected to learn:__
 * One and Two Hour Classes
 * One, Two and Three Day Classes
 
+## Getting the Material
+
+    -- Get all the material
+    go get github.com/ArdanStudios/gotraining
+
 ___
 [![GoingGo Training](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
