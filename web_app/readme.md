@@ -10,23 +10,23 @@ The program is broken into several distinct steps that run across different goro
 
 * **sample**
 	* **search**
-		* [bing.go](../sample/search/bing.go) -- Performs searches against Bing
-		* [blekko.go](../sample/search/blekko.go) -- Performs searches against Blekko
-		* [google.go](../sample/search/google.go)-- Performs searches against Google
-		* [rss.go](../sample/search/rss.go)-- Boilerplate code for handling RSS feeds
-		* [search.go](../sample/search/search.go)-- Searching framework code
+		* [bing.go](sample/search/bing.go) -- Performs searches against Bing
+		* [blekko.go](sample/search/blekko.go) -- Performs searches against Blekko
+		* [google.go](sample/search/google.go)-- Performs searches against Google
+		* [rss.go](sample/search/rss.go)-- Boilerplate code for handling RSS feeds
+		* [search.go](sample/search/search.go)-- Searching framework code
 	* **service**
-		* [index.go](../sample/service/index.go)-- Handles the rendering of the index page
-		* [service.go](../sample/service/service.go)-- Initializes and runs the web app
-		* [templates.go](../sample/service/templates.go)-- Support for handling html templates
+		* [index.go](sample/service/index.go)-- Handles the rendering of the index page
+		* [service.go](sample/service/service.go)-- Initializes and runs the web app
+		* [templates.go](sample/service/templates.go)-- Support for handling html templates
 	* **static/css**
-		* [main.css](../sample/static/css/main.css)-- Stylesheet for web app
+		* [main.css](sample/static/css/main.css)-- Stylesheet for web app
 	* **tests**
-		* [endpoint_test.go](../sample/tests/endpoint_test.go)-- Tests for endpoint testing
+		* [endpoint_test.go](sample/tests/endpoint_test.go)-- Tests for endpoint testing
 	* **views**
-		* [basic-layout.html](../sample/views/basic-layout.html)-- Layout HTML for the web app
-		* [index.html](../sample/views/index.html)-- HTML for the index page
-		* [results.html](../sample/views/resuls.html)-- HTML for rendering the search results
-	* [main.go](../sample/main.go) -- Programs entry point
+		* [basic-layout.html](sample/views/basic-layout.html)-- Layout HTML for the web app
+		* [index.html](sample/views/index.html)-- HTML for the index page
+		* [results.html](sample/views/resuls.html)-- HTML for rendering the search results
+	* [main.go](sample/main.go) -- Programs entry point
 
 The code is built within two packages. The service package handles the processing of HTTP requests and responses. HTML templates are used to render the views. The search package handles the processing of searches agains the different search engines. An interface called Searcher is declared to support the implementation of new Searchers.
