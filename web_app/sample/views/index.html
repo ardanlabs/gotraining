@@ -1,0 +1,32 @@
+<div class="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><i class="glyphicon glyphicon-search"></i> SEARCH FOR ANYTHING</h1>
+                <form action="/search" method="post">
+                    <input class="form-control" name="searchterm" type="text" value="{{.searchterm}}"/>
+                    <div class="check-boxes">
+                    	<span>
+                        	<input name="google" {{.google}} type="checkbox"/>&nbsp;Google &nbsp;
+                        </span>
+                        <span>
+                        	<input name="bing" {{.bing}} type="checkbox"/>&nbsp;Bing &nbsp;
+                        </span>
+                        <span>
+                        	<input name="blekko" {{.blekko}} type="checkbox"/>&nbsp;Blekko &nbsp;
+                        </span>
+                        <span>
+                        	<input name="first" {{.first}} type="checkbox"/>&nbsp;First
+                        </span>
+                    </div><!-- check-boxes -->
+                    <input class="btn btn-default" type="submit" value="Search" style="font-size: 16px;"/>
+                </form>
+            </div><!-- col-md-12 -->
+        </div><!-- row -->
+    </div><!-- container -->
+    <div class="clearfix"></div>
+</div><!-- top -->
+
+<div class="results-wrapper">
+	{{.Results}}
+</div>
