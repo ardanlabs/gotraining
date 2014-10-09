@@ -6,14 +6,6 @@ This is a 2 hour accelerated style course for existing developers who are lookin
 ## Hour 1
 In this hour we take our initial tour of the language. We learn about variables, types, data structures and interfaces. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
-#### Installation Mac
-
-http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
-
-#### Slides
-
-[Opening Slide Deck](day1/opening/slide1.md)
-
 #### Language Syntax, Methods and Interfaces
 
 [Variables](../01-language_syntax/01-variables/readme.md) | 
