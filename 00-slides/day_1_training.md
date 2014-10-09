@@ -1,5 +1,5 @@
 ## Go Training
-This is a 2 day, 14 hour accelerated style course for existing developers who are looking to gain a working understanding of Go.
+This is a 1 day of the accelerated style course for existing developers who are looking to gain a working understanding of Go.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
@@ -24,26 +24,6 @@ On this day we take our initial tour of the language. We learn about variables, 
 [Methods](../03-methods_interfaces_embedding/01-methods/readme.md) | 
 [Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md) | 
 [Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
-
-## Day 2
-On this day we take go deeper into Go. We learn about concurrency, race conditions, channels, testing, packaging, logging, encoding, io and reflection.
-
-#### Concurrency and Channels
-[Goroutines](../04-concurrency_channels/01-goroutines/readme.md) | 
-[Race Conditions](../04-concurrency_channels/02-race_conditions/readme.md) | 
-[Channels](../04-concurrency_channels/03-channels/readme.md)
-
-#### Packaging
-[Packaging](../05-packaging/readme.md)
-
-#### Testing and Benchmarking
-[Database Program](../06-testing/readme.md)
-
-#### Standard Library
-[Standard Library](../07-standard_library/readme.md)
-
-#### Reflection
-[Reflection](../08-reflection/readme.md)
 
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
