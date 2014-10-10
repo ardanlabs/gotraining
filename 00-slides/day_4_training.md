@@ -5,7 +5,7 @@ On this day we build a program that implements functionality that can be found i
 
 #### Sample Program
 
-![Image of App.](../web_app/architecture.png)
+![Image of App.](../feed_app/architecture.png)
 
 [Program Documentation](../feed_app/readme.md)
 
