@@ -32,6 +32,6 @@ The program is broken into several distinct steps that run across different goro
 The code is organized within two packages. The service package handles the processing of HTTP requests and responses. HTML templates are used to render the views. The search package handles the processing of searches agains the different search engines. An interface called Searcher is declared to support the implementation of new Searchers.
 
 ___
-[![GoingGo Training](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
-[![Ardan Studios](00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
-[![GoingGo Blog](00-slides/images/ggb_logo.png)](http://www.goinggo.net)
+[![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
