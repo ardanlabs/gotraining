@@ -36,7 +36,9 @@ __What a student is expected to learn:__
 
 ## Pricing
 
-Day Training classes are at $2,500 USD a day plus travel expenses. The hour training classes 
+Day Training classes are at $2,500 USD a day plus travel expenses.
+
+Hour training classes are used for workshops and exclude time for working through the exercises. Email for workshop pricing.
 
 ## Contact
 
