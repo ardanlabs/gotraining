@@ -3,7 +3,7 @@ Training is broken into hourly and daily classes. The length of the class will d
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-__Minimal Qualified Student:__
+**Minimal Qualified Student:**
 
 * Programming
 	* Studied CS in school or has a minimum of two years of experience programming full time professionally.
@@ -15,7 +15,7 @@ __Minimal Qualified Student:__
     	* Knows how to maneuver around the file system.
     	* Understands what environment variables are.
 
-__What a student is expected to learn:__
+**What a student is expected to learn:**
 
 * Understand what is available in the language.
     * Get a feel for writing code in an idiomatic style and syntax.
@@ -39,6 +39,8 @@ __What a student is expected to learn:__
 Full Day training classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 Hour training classes are used for workshops and exclude time for working through the exercises. Email for workshop pricing.
+
+**If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
 
 ## Contact
 
