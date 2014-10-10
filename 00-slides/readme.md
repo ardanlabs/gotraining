@@ -13,18 +13,14 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
 #### Classes - Hourly
 
-[Hour One Training](hour_1_training.md)
-
+[Hour One Training](hour_1_training.md)  
 [Hour Two Training](hour_2_training.md)
 
 #### Classes - Daily
 
-[Day One Training](day_1_training.md)
-
-[Day Two Training](day_2_training.md)
-
-[Day Three Training](day_3_training.md)
-
+[Day One Training](day_1_training.md)  
+[Day Two Training](day_2_training.md)  
+[Day Three Training](day_3_training.md)  
 [Day Four Training](day_4_training.md)
 
 ___
