@@ -42,7 +42,7 @@ Hour training classes are used for workshops and exclude time for working throug
 
 ## Contact
 
-William Kennedy
+William Kennedy  
 Ardan Studios  
 12973 SW 112 ST, Suite 153  
 Miami, FL 33186  
