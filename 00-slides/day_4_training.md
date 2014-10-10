@@ -7,7 +7,7 @@ On this day we build a program that implements functionality that can be found i
 
 ![Image of App.](../feed_app/architecture.png)
 
-[Program Documentation](../feed_app/readme.md)
+#### [Program Documentation](../feed_app/readme.md)
 
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
