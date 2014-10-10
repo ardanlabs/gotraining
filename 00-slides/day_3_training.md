@@ -5,6 +5,8 @@ On this day we build a program that implements functionality that can be found i
 
 #### Sample Program
 
+![Image of App.](../web_app/client_image.png)
+
 [Program Documentation](../web_app/readme.md)
 
 ___
