@@ -36,7 +36,7 @@ __What a student is expected to learn:__
 
 ## Pricing
 
-Day training classes are at $2,500 USD a day plus travel expenses.
+Full Day training classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 Hour training classes are used for workshops and exclude time for working through the exercises. Email for workshop pricing.
 
