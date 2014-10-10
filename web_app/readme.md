@@ -1,4 +1,4 @@
-## Sample Program
+## Search Engine Application
 
 To see Go in action we are going to build a complete Go program. The program implements functionality that can be found in many Go programs being developed today. The program provides a sample to the html package to create a simple search engine. The engine supports Google, Bing and Blekko searches. You can request results for all three engines or ask for just the first result. Searches are performed concurrently. Use the GOMAXPROCS environment variables to run the searches in parallel.
 

@@ -6,7 +6,7 @@ package tests
 import (
 	"testing"
 
-	"github.com/ArdanStudios/gotraining/go_in_action/sample/search"
+	"github.com/ArdanStudios/gotraining/feed_app/sample/search"
 )
 
 // testMatcher implements the test matcher.

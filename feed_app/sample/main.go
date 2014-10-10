@@ -7,8 +7,8 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/ArdanStudios/gotraining/go_in_action/sample/matchers"
-	"github.com/ArdanStudios/gotraining/go_in_action/sample/search"
+	_ "github.com/ArdanStudios/gotraining/feed_app/sample/matchers"
+	"github.com/ArdanStudios/gotraining/feed_app/sample/search"
 )
 
 // init is called prior to main.

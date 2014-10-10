@@ -5,7 +5,7 @@ On this day we build a program that implements functionality that can be found i
 
 #### Sample Program
 
-[Program Documentation](../go_in_action/readme.md)
+[Program Documentation](../feed_app/readme.md)
 
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
