@@ -1,22 +1,16 @@
 ## Go Training - Hour 1
-In this hour we take a very quick and initial tour of the language. We learn about variables, types, data structures and interfaces. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
+In this hour we take a very quick and initial tour of the language. We learn about variables, types, pointers and functions. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 ***Note: There is no time to spend working on the examples.***
 
-#### Language Syntax, Methods and Interfaces
+#### Basic Language Syntax
 
 [Variables](../01-language_syntax/01-variables/readme.md) | 
 [Struct Types](../01-language_syntax/02-struct_types/readme.md) | 
 [Pointers](../01-language_syntax/03-pointers/readme.md) | 
-[Constants](../01-language_syntax/04-constants/readme.md) | 
-[Named Types](../01-language_syntax/05-named_types/readme.md) | 
 [Functions](../01-language_syntax/06-functions/readme.md)
-
-#### Methods and Interfaces
-[Methods](../03-methods_interfaces_embedding/01-methods/readme.md) | 
-[Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md)
 
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)

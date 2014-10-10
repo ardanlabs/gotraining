@@ -27,12 +27,24 @@ __What a student is expected to learn:__
 [Click Here To Review The Course Material](00-slides/readme.md)
 
 * One and Two Hour Classes
-* One, Two and Three Day Classes
+* One, Two, Three and Four Day Classes
 
 ## Getting the Material
 
     -- Get all the material
     go get github.com/ArdanStudios/gotraining
+
+## Pricing
+
+Day Training classes are at $2,500 USD a day plus travel expenses. The hour training classes 
+
+## Contact
+
+William Kennedy
+Ardan Studios  
+12973 SW 112 ST, Suite 153  
+Miami, FL 33186  
+bill@ardanstudios.com
 
 ___
 [![GoingGo Training](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

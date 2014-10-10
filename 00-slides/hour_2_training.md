@@ -1,11 +1,14 @@
 ## Go Training - Hour 2
-In this hour we look at a program that implements functionality that can be found in many Go programs being developed today. The program provides a sample to the html package to create a simple search engine. The engine supports Google, Bing and Blekko searches. You can request results for all three engines or ask for just the first result. Searches are performed concurrently. Use the GOMAXPROCS environment variables to run the searches in parallel.
+In this hour we take a deeper tour of the language. We learn about methods, interfaces and embedding. We continue to explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-#### Example Program
+***Note: There is no time to spend working on the examples.***
 
-[Program Documentation](../web_app/readme.md)
+#### Methods, Interfaces and Embedding
+[Methods](../03-methods_interfaces_embedding/01-methods/readme.md) | 
+[Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md) | 
+[Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
 
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)

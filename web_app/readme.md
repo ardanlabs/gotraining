@@ -1,6 +1,6 @@
 ## Sample Program
 
-To see Go in action we are going to review a complete Go program. The program implements functionality that can be found in many Go programs being developed today. The program provides a sample to the html package to create a simple search engine. The engine supports Google, Bing and Blekko searches. You can request results for all three engines or ask for just the first result. Searches are performed concurrently. Use the GOMAXPROCS environment variables to run the searches in parallel.
+To see Go in action we are going to build a complete Go program. The program implements functionality that can be found in many Go programs being developed today. The program provides a sample to the html package to create a simple search engine. The engine supports Google, Bing and Blekko searches. You can request results for all three engines or ask for just the first result. Searches are performed concurrently. Use the GOMAXPROCS environment variables to run the searches in parallel.
 
 ## Program Architecture
 
@@ -29,19 +29,9 @@ The program is broken into several distinct steps that run across different goro
 		* [results.html](sample/views/resuls.html)-- HTML for rendering the search results
 	* [main.go](sample/main.go) -- Programs entry point
 
-The code is built within two packages. The service package handles the processing of HTTP requests and responses. HTML templates are used to render the views. The search package handles the processing of searches agains the different search engines. An interface called Searcher is declared to support the implementation of new Searchers.
+The code is organized within two packages. The service package handles the processing of HTTP requests and responses. HTML templates are used to render the views. The search package handles the processing of searches agains the different search engines. An interface called Searcher is declared to support the implementation of new Searchers.
 
-## Getting, Building and Running the Code
-
-Follow these instructions to download all the training material and run this example
-
-	-- Get all the material
-	go get github.com/ArdanStudios/gotraining
-
-	-- Build the code
-	cd $GOPATH/src/github.com/ArdanStudios/gotraining/web_app/sample
-	go build
-
-	-- Run the web application
-	./sample
-	http://localhost:9999/search
+___
+[![GoingGo Training](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Studios](00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](00-slides/images/ggb_logo.png)](http://www.goinggo.net)
