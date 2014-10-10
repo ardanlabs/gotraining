@@ -4,6 +4,8 @@ To see Go in action we are going to build a complete Go program. The program imp
 
 ## Program Architecture
 
+![Image of App.](client_image.png)
+
 The program is broken into several distinct steps that run across different goroutines. We will explore the code as it flows from the main goroutine into the searching goroutines and then back to the main goroutine. To start, let's review the structure of the project:
 
 *cd $GOPATH/src/github.com/ArdanStudios/web_app/sample*
