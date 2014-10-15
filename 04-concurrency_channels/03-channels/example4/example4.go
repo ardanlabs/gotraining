@@ -1,6 +1,6 @@
-// http://play.golang.org/p/xIpMqh4Fis
+// http://play.golang.org/p/nO7Spa5zLz
 
-// Sample program to show how to use a timer channel and hook
+// This sample program demonstrations how to use a timer channel and hook
 // into the OS using a channel to receive OS events.
 package main
 
@@ -45,7 +45,13 @@ ControlLoop:
 		case <-sigChan:
 			// Interrupt event signaled by the operation system.
 			log.Println("OS INTERRUPT - Shutting Down Early")
+
+			// Close the channel to signal to the processor
+			// it needs to shutdown.
 			close(shutdown)
+
+			// Set the channel to nil so we no longer process
+			// any more of these events.
 			sigChan = nil
 
 		case <-timeout:
@@ -62,29 +68,29 @@ ControlLoop:
 
 	// Program finished.
 	log.Println("Process Ended")
-	return
 }
 
 // processor provides the main program logic for the program.
 func processor(complete chan<- error) {
 	log.Println("Processor - Starting")
 
-	// Message returned through the complete channel.
+	// Variable to store any error that occurs.
+	// Passed into the defer function via closures.
 	var err error
 
-	// Schedule this anonymous function to be executed when
-	// the function returns.
+	// Defer the send on the channel so it happens
+	// regardless of how this function terminates.
 	defer func() {
 		log.Println("Processor - Completed")
 
-		// Signal the goroutine is shutdown.
+		// Signal the goroutine we have shutdown.
 		complete <- err
 	}()
 
 	// Simulate some iterative work.
 	for work := 0; work < 5; work++ {
-		log.Println("Processor - Doing Work")
-		time.Sleep(1 * time.Second)
+		// Perform some work.
+		err = doWork()
 
 		select {
 		case <-shutdown:
@@ -97,4 +103,12 @@ func processor(complete chan<- error) {
 			// presume with normal processing.
 		}
 	}
+}
+
+// doWork simulates a function we call to get our work done.
+func doWork() error {
+	log.Println("Processor - Doing Work")
+	time.Sleep(1 * time.Second)
+
+	return nil
 }
