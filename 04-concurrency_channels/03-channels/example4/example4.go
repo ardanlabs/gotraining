@@ -1,7 +1,8 @@
-// http://play.golang.org/p/11XB0CVvOS
+// http://play.golang.org/p/JZqcrb1Ode
 
-// This sample program demonstrations how to use a timer channel and hook
-// into the OS using a channel to receive OS events.
+// This sample program demonstrations you can use a channel to
+// monitor the amount of time the program is running and terminate
+// the program if it runs too long.
 package main
 
 import (
