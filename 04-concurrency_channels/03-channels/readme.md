@@ -30,11 +30,11 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 [Buffered channels - Manage concurrency](example3/example3.go) ([Go Playground](http://play.golang.org/p/G9Gfy1drox))
 
-[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/JZqcrb1Ode))
+[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/KuMG3o_7-C))
 
 ## Advanced Code Review
 
-[Semaphores](advanced/semaphore/semaphore.go) ([Go Playground](http://play.golang.org/p/LN2ZAMCybp))
+[Semaphores](advanced/semaphore/semaphore.go) ([Go Playground](http://play.golang.org/p/ezGmsjAbiC))
 
 [Pooling](advanced/pool/pool.go)
 
