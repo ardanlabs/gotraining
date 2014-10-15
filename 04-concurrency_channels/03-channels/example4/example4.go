@@ -1,18 +1,19 @@
-// http://play.golang.org/p/nO7Spa5zLz
+// http://play.golang.org/p/11XB0CVvOS
 
 // This sample program demonstrations how to use a timer channel and hook
 // into the OS using a channel to receive OS events.
 package main
 
 import (
+	"errors"
 	"log"
 	"os"
 	"os/signal"
 	"time"
 )
 
-// Give the program 5 seconds to complete the work.
-const timeoutSeconds = 5 * time.Second
+// Give the program 3 seconds to complete the work.
+const timeoutSeconds = 3 * time.Second
 
 var (
 	// sigChan receives os signals.
@@ -44,7 +45,7 @@ ControlLoop:
 		select {
 		case <-sigChan:
 			// Interrupt event signaled by the operation system.
-			log.Println("OS INTERRUPT - Shutting Down Early")
+			log.Println("OS INTERRUPT")
 
 			// Close the channel to signal to the processor
 			// it needs to shutdown.
@@ -60,14 +61,31 @@ ControlLoop:
 			os.Exit(1)
 
 		case err := <-complete:
-			// Everything complete within the time given.
-			log.Printf("Task Complete: Error[%s]", err)
+			// Everything completed within the time given.
+			log.Printf("Task Completed: Error[%s]", err)
 			break ControlLoop
 		}
 	}
 
 	// Program finished.
 	log.Println("Process Ended")
+}
+
+// checkShutdown checks the shutdown flag to determine
+// if we have been asked to interrupt processing.
+func checkShutdown() bool {
+	select {
+	case <-shutdown:
+		// We have been asked to shutdown cleanly.
+		log.Println("checkShutdown - Shutdown Early")
+		return true
+
+	default:
+		// If the shutdown channel was not closed,
+		// presume with normal processing.
+	}
+
+	return false
 }
 
 // processor provides the main program logic for the program.
@@ -81,33 +99,38 @@ func processor(complete chan<- error) {
 	// Defer the send on the channel so it happens
 	// regardless of how this function terminates.
 	defer func() {
-		log.Println("Processor - Completed")
+		// Capture any potential panic.
+		if r := recover(); r != nil {
+			log.Println("Processor - Panic", r)
+		}
 
 		// Signal the goroutine we have shutdown.
 		complete <- err
 	}()
 
-	// Simulate some iterative work.
-	for work := 0; work < 5; work++ {
-		// Perform some work.
-		err = doWork()
+	// Perform the work.
+	err = doWork()
 
-		select {
-		case <-shutdown:
-			log.Println("Processor - Shutdown Early")
-			// We have been asked to shutdown cleanly.
-			return
-
-		default:
-			// If the shutdown channel was not closed,
-			// presume with normal processing.
-		}
-	}
+	log.Println("Processor - Completed")
 }
 
-// doWork simulates a function we call to get our work done.
+// doWork simulates task work.
 func doWork() error {
-	log.Println("Processor - Doing Work")
+	log.Println("Processor - Task 1")
+	time.Sleep(2 * time.Second)
+
+	if checkShutdown() {
+		return errors.New("Early Shutdown")
+	}
+
+	log.Println("Processor - Task 2")
+	time.Sleep(1 * time.Second)
+
+	if checkShutdown() {
+		return errors.New("Early Shutdown")
+	}
+
+	log.Println("Processor - Task 3")
 	time.Sleep(1 * time.Second)
 
 	return nil
