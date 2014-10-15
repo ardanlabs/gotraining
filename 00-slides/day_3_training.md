@@ -13,3 +13,5 @@ ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](images/ggb_logo.png)](http://www.goinggo.net)
+___
+All material is licensed under the [GNU Free Documentation License](https://github.com/ArdanStudios/gotraining/blob/master/LICENSE).

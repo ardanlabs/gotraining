@@ -20,4 +20,4 @@ ___
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../images/ggb_logo.png)](http://www.goinggo.net)
 ___
-All material licensed under the [GNU Free Documentation License](https://github.com/ArdanStudios/gotraining/blob/master/LICENSE).
+All material is licensed under the [GNU Free Documentation License](https://github.com/ArdanStudios/gotraining/blob/master/LICENSE).
