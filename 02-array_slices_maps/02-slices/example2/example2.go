@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/DB8hwJ0hw9
 
 // Sample program to show the components of a slice. It has a

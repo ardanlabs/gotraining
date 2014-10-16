@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/5LlI_KJ2ZT
 
 // Sample program to show how what we are doing is NOT embedding

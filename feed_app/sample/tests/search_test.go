@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // go test -v search_test.go
 
 // Tests for the search package

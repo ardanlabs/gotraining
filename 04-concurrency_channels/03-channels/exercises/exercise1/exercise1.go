@@ -1,11 +1,12 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/3ry3sCIfaC
 
-/*
-Write a program where two goroutines pass an integer back and forth
-ten times. Display when each goroutine receives the integer. Increment
-the integer with each pass. Once the interger equals ten, terminate
-the program cleanly.
-*/
+// Write a program where two goroutines pass an integer back and forth
+// ten times. Display when each goroutine receives the integer. Increment
+// the integer with each pass. Once the interger equals ten, terminate
+// the program cleanly.
 package main
 
 import (

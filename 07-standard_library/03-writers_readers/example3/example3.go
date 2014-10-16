@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/2PwJ2KDxDM
 
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-02-curl-go

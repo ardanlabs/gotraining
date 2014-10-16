@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/vW-48gPin1
 
 // Answer for exercise 1 of Race Conditions.

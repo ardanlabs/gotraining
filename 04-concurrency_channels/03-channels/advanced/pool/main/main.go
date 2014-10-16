@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // This sample program demostrates how to use the pool package
 // to share a simulated set of database connections.
 package main

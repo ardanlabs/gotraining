@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // rss.go implements a matcher that can retrieve and search RSS feed documents.
 
 // Package matchers provides different types of matchers that know

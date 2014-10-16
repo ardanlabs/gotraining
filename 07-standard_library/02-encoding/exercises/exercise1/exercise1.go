@@ -1,12 +1,13 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/Huf8jEDUJO
 
-/*
-Create a file with an array of JSON documents that contain a user name and email address. Declare a struct
-type that maps to the JSON document. Using the json package, read the file and create a slice of this struct
-type. Display the slice.
-
-From example 1, Marshal the slice into pretty print strings and display each element.
-*/
+// Create a file with an array of JSON documents that contain a user name and email address. Declare a struct
+// type that maps to the JSON document. Using the json package, read the file and create a slice of this struct
+// type. Display the slice.
+//
+// From example 1, Marshal the slice into pretty print strings and display each element.
 package main
 
 import (

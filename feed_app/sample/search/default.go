@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // default.go provides the implementation for the default matcher. This
 // allows the program to not have to fail if an improper matcher type
 // is provided.

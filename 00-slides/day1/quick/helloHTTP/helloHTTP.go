@@ -1,3 +1,8 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
+// http://play.golang.org/p/c44Q5OiX5z
+
 // Sample program to show off Go and check programming environment.
 package main
 

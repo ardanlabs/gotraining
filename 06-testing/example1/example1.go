@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // Sample program to show how to write tests for a practical
 // program that makes database requests to MongoDB.
 package main

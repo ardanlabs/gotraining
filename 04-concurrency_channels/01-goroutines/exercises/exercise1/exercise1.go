@@ -1,11 +1,12 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/4ox2oCSn42
 
-/*
-Create a program that declares two anonymous functions. Once that counts up to
-100 from 0 and one that counts down to 0 from 100. Display each number with an
-unique identifier for each goroutine. Then create goroutines from these functions
-and don't let main return until the goroutines complete.
-*/
+// Create a program that declares two anonymous functions. Once that counts up to
+// 100 from 0 and one that counts down to 0 from 100. Display each number with an
+// unique identifier for each goroutine. Then create goroutines from these functions
+// and don't let main return until the goroutines complete.
 package main
 
 import (

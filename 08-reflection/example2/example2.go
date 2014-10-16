@@ -1,9 +1,12 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/y0WyYezH05
 
 /*
 ValueOf returns a new Value initialized to the concrete value stored in the interface i.
 ValueOf(nil) returns the zero Value.
-func ValueOf(i interface{}) Value
+func ValueOf(i interface{}) Value {
 */
 
 // Sample program to show how to reflect on a struct type with tags.

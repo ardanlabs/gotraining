@@ -1,11 +1,12 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/-SBwG9FnfJ
 
-/*
-Declare a struct type to maintain information about a user (name, email and age).
-Create a value of this type, initalize with values and display each field.
-
-Declare and initialize an anonymous struct type with the same three fields. Display the value.
-*/
+// Declare a struct type to maintain information about a user (name, email and age).
+// Create a value of this type, initalize with values and display each field.
+//
+// Declare and initialize an anonymous struct type with the same three fields. Display the value.
 package main
 
 import (

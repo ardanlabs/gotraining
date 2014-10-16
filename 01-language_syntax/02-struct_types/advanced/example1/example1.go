@@ -1,9 +1,10 @@
-/*
-Alignment is about placing types on boundaries that make the
-CPU access the fastest.
-*/
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
 // http://play.golang.org/p/ZuB82kgz2K
+
+// Alignment is about placing types on boundaries that make the
+// CPU access the fastest.
 
 // Sample program to show how struct types align on boundaries.
 package main

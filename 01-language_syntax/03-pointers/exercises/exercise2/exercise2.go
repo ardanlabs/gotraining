@@ -1,10 +1,11 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/GJZXstEkBY
 
-/*
-Declare a struct type and create a value of this type. Declare a function
-that can change the value of some field in this struct type. Display the
-value before and after the call to your function.
-*/
+// Declare a struct type and create a value of this type. Declare a function
+// that can change the value of some field in this struct type. Display the
+// value before and after the call to your function.
 package main
 
 import "fmt"

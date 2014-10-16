@@ -1,8 +1,10 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/3s-weLqNZC
 
-/*
-Download any document from the web and display the content in the terminal and write it to a file at the same time.
-*/
+// Download any document from the web and display the content in
+// the terminal and write it to a file at the same time.
 package main
 
 import (

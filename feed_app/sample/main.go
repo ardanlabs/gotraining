@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // This sample program demonstrates how to write idiomatic Go. The sample
 // uses many features from the language to provide a well rounded
 // view Go's capabilities and how to apply them.

@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // match.go provides the interfaces and generic implementation of
 // using different matcher values to retrieve content and perform
 // searches. It also provides support for displaying results.

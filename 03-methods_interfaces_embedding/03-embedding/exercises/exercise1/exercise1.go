@@ -1,19 +1,20 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/YtdNsTwAN7
 
-/*
-Declare a struct type named animal with two fields name and age. Declare a struct
-type named dog with the field bark. Embed the animal type into the dog type. Declare
-and initalize a value of type dog. Display the value of the variable.
-
-Declare a method named yelp to the animal type using a pointer reciever which displays the
-literal string "Not Implemented". Call the method from the value of type dog.
-
-Declare an interface named speaker with a single method called yelp. Declare a value of
-type speaker and assign the address of the value of type dog. Call the method yelp.
-
-Implement the speaker interface for the dog type. Be creative with the
-bark field. Call the method yelp again from the value of type speaker.
-*/
+// Declare a struct type named animal with two fields name and age. Declare a struct
+// type named dog with the field bark. Embed the animal type into the dog type. Declare
+// and initalize a value of type dog. Display the value of the variable.
+//
+// Declare a method named yelp to the animal type using a pointer reciever which displays the
+// literal string "Not Implemented". Call the method from the value of type dog.
+//
+// Declare an interface named speaker with a single method called yelp. Declare a value of
+// type speaker and assign the address of the value of type dog. Call the method yelp.
+//
+// Implement the speaker interface for the dog type. Be creative with the
+// bark field. Call the method yelp again from the value of type speaker.
 package main
 
 import (

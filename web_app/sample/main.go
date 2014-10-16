@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // This program provides a sample web service that uses concurrency
 // and channels to perform a coordinated set of asynchronous searches.
 package main

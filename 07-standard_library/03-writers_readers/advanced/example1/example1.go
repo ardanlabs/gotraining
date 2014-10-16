@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/Tmt7v3fIQF
 
 // https://github.com/extemporalgenome/watchpost/blob/master/main.go

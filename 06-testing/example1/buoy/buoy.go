@@ -1,6 +1,5 @@
-// Copyright 2013 Ardan Studios. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE handle.
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
 // Package buoy contains the models and services for
 // working with buoy data.

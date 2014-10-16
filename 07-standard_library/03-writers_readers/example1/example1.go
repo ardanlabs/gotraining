@@ -1,3 +1,6 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
 // http://play.golang.org/p/jlTo1IV1RQ
 
 // The io.Reader and io.Writer interfaces allow you to compose all of these different bits together.
