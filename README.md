@@ -36,7 +36,10 @@ Training is broken into hourly and daily classes. The length of the class will d
 
 ## Pricing
 
-Full Day training classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
+Corporate full day training classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
+
+Individual enrollment classes are scheduled periodically and cost $500 per student plus fees. There is a class scheduled for Miami on November 21st/22nd 2014:  
+[https://www.eventbrite.com/e/go-programming-bootcamp-tickets-13757443885](https://www.eventbrite.com/e/go-programming-bootcamp-tickets-13757443885)
 
 Hour training classes are used for workshops and exclude time for working through the exercises. Email for workshop pricing.
 
