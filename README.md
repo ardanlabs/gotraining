@@ -53,7 +53,7 @@ Hour training classes are used for workshops and meetups and exclude time for wo
 [Ironhack Dolphin Stadium - Oct 25th](http://www.meetup.com/Ironhack/events/212503912/)
 
 **_Currently Scheduled Meetups:_**   
-Available
+None
 
 **If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
 
