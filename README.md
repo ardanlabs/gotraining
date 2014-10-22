@@ -39,7 +39,7 @@ Training is broken into hourly and daily classes. The length of the class will d
 Corporate full day training classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 _Currently Scheduled Corporate Classes:_  
-[GothamGo](http://gothamgo.com/schedule/index)
+[GothamGo](http://gothamgo.com/schedule/index)  
 [Gophercon India](http://www.gophercon.in/go-workshop/)
 
 Individual enrollment classes are scheduled periodically and cost $500 per student plus fees.
