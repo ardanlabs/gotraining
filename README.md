@@ -47,10 +47,13 @@ Individual enrollment classes are scheduled periodically and cost $500 per stude
 **_Currently Scheduled Enrollment Classes:_**  
 [Miami Go Bootcamp - Nov 21st/22nd](https://www.eventbrite.com/e/go-programming-bootcamp-tickets-13757443885)
 
-Hour training classes are used for workshops and exclude time for working through the exercises. Email for workshop pricing.
+Hour training classes are used for workshops and meetups and exclude time for working through the exercises. These events are free.
 
 **_Currently Scheduled Workshops:_**   
 [Ironhack Dolphin Stadium - Oct 25th](http://www.meetup.com/Ironhack/events/212503912/)
+
+**_Currently Scheduled Meetups:_**   
+Available
 
 **If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
 
@@ -60,7 +63,10 @@ Hour training classes are used for workshops and exclude time for working throug
 Wrecking Ball Media - Miami, FL - Sep 2014  
 Comcast - Sunnyvale, CA - Aug 2014
 
-**_Workshops / Meetups:_**  
+**_Workshops:_**  
+Rackspace Workshop - Sep 2014
+
+**_Meetups:_**  
 GoSF Meetup - Sep 2014  
 Goningen Meetup - Sep 2014  
 Go-Miami Meetup - 2014
