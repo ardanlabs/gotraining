@@ -54,7 +54,18 @@ Hour training classes are used for workshops and exclude time for working throug
 
 **If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
 
-## Contact
+## Past Events
+
+**_Corporate Classes:_**  
+Comcast - Sunnyvale, CA  
+Wrecking Ball Media - Miami, FL
+
+**_Workshops / Meetups:_**  
+Go-Miami Meetup  
+Goningen Meetup  
+GoSF Meetup
+
+## Contact Information
 
 William Kennedy  
 Ardan Studios  
