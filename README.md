@@ -57,13 +57,13 @@ Hour training classes are used for workshops and exclude time for working throug
 ## Past Events
 
 **_Corporate Classes:_**  
-Comcast - Sunnyvale, CA  
-Wrecking Ball Media - Miami, FL
+Wrecking Ball Media - Miami, FL - Sep 2014  
+Comcast - Sunnyvale, CA - Aug 2014
 
 **_Workshops / Meetups:_**  
-Go-Miami Meetup  
-Goningen Meetup  
-GoSF Meetup
+GoSF Meetup - Sep 2014  
+Goningen Meetup - Sep 2014  
+Go-Miami Meetup - 2014
 
 ## Contact Information
 
