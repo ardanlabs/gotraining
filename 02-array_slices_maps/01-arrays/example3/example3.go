@@ -1,10 +1,10 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/-Hg3nUdO5p
+// http://play.golang.org/p/VqqCxINwyd
 
 // Sample program to show how the behavior of the for range and
-// how memory for an array is contigous.
+// how memory for an array is contiguous.
 package main
 
 import (

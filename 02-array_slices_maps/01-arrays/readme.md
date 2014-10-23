@@ -6,7 +6,7 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 
 * Arrays are fixed length data structures that can't change.
 * Arrays of different sizes are considered to be of different types.
-* Memory is allocated as a contigous block.
+* Memory is allocated as a contiguous block.
 
 ## Code Review
 
@@ -14,7 +14,7 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 
 [Different type arrays](example2/example2.go) ([Go Playground](http://play.golang.org/p/LVD43cYBNS))
 
-[Contigous memory allocations](example3/example3.go) ([Go Playground](http://play.golang.org/p/-Hg3nUdO5p))
+[Contiguous memory allocations](example3/example3.go) ([Go Playground](http://play.golang.org/p/VqqCxINwyd))
 
 ## Exercises
 
