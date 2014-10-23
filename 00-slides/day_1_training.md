@@ -9,7 +9,7 @@ On this day we take our initial tour of the language. We learn about variables, 
 [Struct Types](../01-language_syntax/02-struct_types/readme.md) | 
 [Pointers](../01-language_syntax/03-pointers/readme.md) | 
 [Constants](../01-language_syntax/04-constants/readme.md) | 
-[Named Types](../01-language_syntax/05-named_types/readme.md) | 
+[Type Conversions](../01-language_syntax/05-type_conversions/readme.md) | 
 [Functions](../01-language_syntax/06-functions/readme.md)
 
 #### Arrays, Slices and Maps

@@ -1,10 +1,11 @@
-## Named Types - Language Syntax
+## Type Conversions - Language Syntax
 
-Named types are another way to create user defined types. They provide some interesting feature/functionality that is not always available in other languages. The standard library in Go used named types very effectively. In these examples a named type is used to declare a set of typed constants to act as part of the API for the time package.
+There is no casting in Go. Go is a strict type safe lanaguage so typed values must be explicitly converted from one type to the other. Untyped constants on the other hand can be implicitly converted by the compiler. These values exist in a kind system and have more flexibility. In these examples we will learn about named types and how the time package uses them, in conjuction with constants, to provide both a flexible and type safe API.
 
 ## Notes
 
-* Declare a type based on another single type including built-in and user defined types.
+* Declare a type based on another type including built-in and user defined types.
+* Learn about explicit and implicit conversions.
 * See the power of constants and their use in the standard library.
 * Use typed constants are part of the API for your package functions and methods.
 
@@ -14,9 +15,9 @@ Named types are another way to create user defined types. They provide some inte
 
 [Named types in the standard library](example2/example2.go) ([Go Playground](http://play.golang.org/p/XJ4Ia1lMWl))
 
-[Named types and conversion I](example3/example3.go) ([Go Playground](http://play.golang.org/p/Rgoqvg8dNv))
+[Conversions I](example3/example3.go) ([Go Playground](http://play.golang.org/p/Rgoqvg8dNv))
 
-[Named types and conversion II](example4/example4.go) ([Go Playground](http://play.golang.org/p/B75FURdQ7t))
+[Conversions II](example4/example4.go) ([Go Playground](http://play.golang.org/p/B75FURdQ7t))
 
 ## Exercises
 
