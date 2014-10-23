@@ -29,7 +29,7 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 [Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/4r90uFQwJn))
 
-[Reference Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/DB8hwJ0hw9)
+[Reference Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/DB8hwJ0hw9))
 
 [Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/vlRlYsfLwb))
 
