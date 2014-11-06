@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Package search manages the searching of results against Google, Yahoo and Bing.
+// Package search manages the searching of results against Google, Blekko and Bing.
 package search
 
 import (

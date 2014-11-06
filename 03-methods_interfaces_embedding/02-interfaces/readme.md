@@ -4,8 +4,10 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 
 ## Notes
 
-* Methods that implement interfaces with a value receiver support values and pointer calls.
-* Methods that implement interfaces with a pointer receiver require pointer calls only.
+* Interface method calls using a value, only support value receivers.
+* Interface method calls using a pointer, support both pointer and value receivers.
+* Methods that implement interfaces with a value receiver, support calls against values and pointers.
+* Methods that implement interfaces with a pointer receiver, only support calls against pointers.
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
@@ -19,7 +21,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Declare, implement and method call restrictions I](example1/example1.go) ([Go Playground](http://play.golang.org/p/7q3zw-sVwn))
+[Declare, implement and method call restrictions I](example1/example1.go) ([Go Playground](http://play.golang.org/p/h5Q9dQgnzS))
 
 [Declare, implement and method call restrictions II](example2/example2.go) ([Go Playground](http://play.golang.org/p/byYKqtmHFU))
 
