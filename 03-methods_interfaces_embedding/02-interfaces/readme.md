@@ -6,8 +6,6 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 
 * Interface method calls using a value, only support value receivers.
 * Interface method calls using a pointer, support both pointer and value receivers.
-* Methods that implement interfaces with a value receiver, support calls against values and pointers.
-* Methods that implement interfaces with a pointer receiver, only support calls against pointers.
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
