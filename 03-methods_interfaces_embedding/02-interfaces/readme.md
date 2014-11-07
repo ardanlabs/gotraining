@@ -4,8 +4,8 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 
 ## Notes
 
-* The method set for a value are only those methods implemented with a value reciever.
-* The method set for a pointer are those methods implemented with both pointer and value recievers.
+* The method set for a value, only include methods implemented with a value reciever.
+* The method set for a pointer, include methods implemented with both pointer and value recievers.
 * Interface values with an underlying value, can only call interface methods implemented with a value receiver.
 * Interface values with an underlying pointer, can call interface methods implemented with both pointer and value receivers.
 * The rules for method calls with concrete typed values do not apply.
