@@ -4,10 +4,11 @@ Interfaces provide a way to declare types that define behavior. Then struct and 
 
 ## Notes
 
+* The method set for a value are only those methods implemented with a value reciever.
+* The method set for a pointer are those methods implemented with both pointer and value recievers.
 * Interface values with an underlying value, can only call interface methods implemented with a value receiver.
 * Interface values with an underlying pointer, can call interface methods implemented with both pointer and value receivers.
-* Interface methods implemented with a pointer receiver, can only be called with interface values that contains an underlying pointer.
-* Interface methods implemented with a value receiver, can be called with interface values that contain both underlying pointers and values.
+* The rules for method calls with concrete typed values do not apply.
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
