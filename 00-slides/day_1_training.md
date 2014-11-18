@@ -11,7 +11,6 @@ On this day we take our initial tour of the language. We learn about variables, 
 [Constants](../01-language_syntax/04-constants/readme.md) | 
 [Type Conversions](../01-language_syntax/05-type_conversions/readme.md) | 
 [Functions](../01-language_syntax/06-functions/readme.md) | 
-Error Handling
 
 #### Arrays, Slices and Maps
 [Arrays](../02-array_slices_maps/01-arrays/readme.md) | 
