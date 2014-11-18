@@ -44,7 +44,7 @@ Corporate full day training classes are at $2,500 USD a day plus travel expenses
 Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
 
 **_Currently Scheduled Enrollment Classes:_**  
-[Miami 2 Day Bootcamp - Nov 21st/22nd](https://www.eventbrite.com/e/go-programming-bootcamp-tickets-13757443885)
+[Miami 2 Day Bootcamp - Nov 21st/22nd](https://www.eventbrite.com/e/go-programming-bootcamp-tickets-13757443885)  
 [Edmonton 1 Day Bootcamp - Jan 24th](http://edmontongo.org/workshop/) ** Discounted Pricing
 
 Hour training classes are used for workshops and meetups and exclude time for working through the exercises. These events are free.
