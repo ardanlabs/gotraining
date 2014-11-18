@@ -65,7 +65,7 @@ Wrecking Ball Media - Miami, FL - Sep 2014
 Comcast - Sunnyvale, CA - Aug 2014
 
 **_Workshops:_**  
-IronHack Dolphin Stadium - Oct 2014
+IronHack Dolphin Stadium - Oct 2014  
 Rackspace Workshop - Sep 2014
 
 **_Meetups:_**  
