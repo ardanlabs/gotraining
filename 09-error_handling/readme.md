@@ -21,7 +21,7 @@ http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html
 
 [Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/8x6kDZxPWK))
 
-[Error Variables](example2/example2.go) ([Go Playground](http://play.golang.org/p/kKVIMMDpjb))
+[Error Variables](example2/example2.go) ([Go Playground](http://play.golang.org/p/Zo1o0LFThp))
 
 [Custom Error Types](example3/example3.go) ([Go Playground](http://play.golang.org/p/Eu3X54PnWm))
 
