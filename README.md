@@ -60,7 +60,7 @@ None
 ## Past Events
 
 **_Corporate Classes:_**  
-GothamGo - NYC, NY, - Nov 2014
+GothamGo - NYC, NY, - Nov 2014  
 Wrecking Ball Media - Miami, FL - Sep 2014  
 Comcast - Sunnyvale, CA - Aug 2014
 
