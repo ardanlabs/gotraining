@@ -1,5 +1,5 @@
 ## Go Training - Day 2
-On this day we take go deeper into Go. We learn about concurrency, race conditions, channels, testing, packaging, logging, encoding, io and reflection.
+On this day we take go deeper into Go. We learn about concurrency, race conditions, channels, testing, packaging, logging, encoding, io, reflection and error handling.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
@@ -19,6 +19,9 @@ On this day we take go deeper into Go. We learn about concurrency, race conditio
 
 #### Reflection
 [Reflection](../08-reflection/readme.md)
+
+#### Error Handling
+[Error Handling](../09-error_handling/readme.md)
 
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)

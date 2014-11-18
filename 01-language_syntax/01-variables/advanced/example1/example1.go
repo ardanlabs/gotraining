@@ -23,7 +23,7 @@ func stayOnStack() {
 	println("Stack Addr:", &x)
 }
 
-// escapeToHeap shows how the variables does escape.
+// escapeToHeap shows how the variable does escape.
 func escapeToHeap() {
 	// Declare a variable of type integer.
 	var x int
