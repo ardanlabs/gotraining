@@ -3,6 +3,8 @@
 
 // http://play.golang.org/p/a0gQyj6TBb
 
+// go build -gcflags -m
+
 // Sample program to show varaibles stay on or escape from the stack.
 package main
 
