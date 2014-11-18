@@ -20,7 +20,7 @@ http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 
 [Declare and initalize variables](example1/example1.go) ([Go Playground](http://play.golang.org/p/m4PJ0FpSwX))
 
-[Stack vs Heap](example1/example2.go) ([Go Playground](http://play.golang.org/p/a0gQyj6TBb))
+[Stack vs Heap](example2/example2.go) ([Go Playground](http://play.golang.org/p/a0gQyj6TBb))
 
 ## Exercises
 
