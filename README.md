@@ -53,7 +53,7 @@ Hour training classes are used for workshops and meetups and exclude time for wo
 [ITPalooza Miami - Dec 4th](http://itpalooza.com/session/intro-to-go-programming/)
 
 **_Currently Scheduled Meetups:_**   
-None
+[Go Miami - Nov 20th](http://www.meetup.com/Go-Miami/events/218025392/)
 
 **If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
 
