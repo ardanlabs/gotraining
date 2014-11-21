@@ -32,7 +32,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part B** Add a method to the animal type using a pointer reciever named yelp which displays the literal string "Not Implemented". Call the method from the value of type dog.
 
-**Part C** Add an interface named speaker with a single method called yelp. Declare a value of type speaker and assign the address of the value of type dog. Call the method yelp.
+**Part C** Add an interface named yelper with a single method called yelp. Declare a value of type speaker and assign the address of the value of type dog. Call the method yelp.
 
 **Part D** Implement the speaker interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type speaker.
 
