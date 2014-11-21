@@ -15,12 +15,12 @@ func main() {
 	count := 10
 
 	// Display the "value of" and "address of" count.
-	fmt.Println("Before:", count, &count)
+	println("Before:", count, &count)
 
 	// Pass the "address of" the variable count.
 	increment(&count)
 
-	fmt.Println("After:", count, &count)
+	println("After:", count, &count)
 }
 
 // increment declares count as a pointer variable whose value is
@@ -28,5 +28,9 @@ func main() {
 func increment(count *int) {
 	// Increment the value that the "pointer points to". (de-referencing)
 	*count++
-	fmt.Println("Inc:", &count, count, *count)
+	println("Inc:", &count, count, *count)
+
+	// Do this to prevent inlining.
+	var x int
+	fmt.Sprintf("Prevent Inlining: %d", x)
 }

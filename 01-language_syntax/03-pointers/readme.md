@@ -17,11 +17,15 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 ## Code Review
 
-[Pass by value](example1/example1.go) ([Go Playground](http://play.golang.org/p/POH6kq8KLL))
+[Pass by value](example1/example1.go) ([Go Playground](http://play.golang.org/p/cpCcLsdbM6))
 
-[Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/izcdKq-Qa-))
+[Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/j4uDMFJqiF))
 
 [Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/cK1_GFyDOo))
+
+## Advanced Code Review
+
+[Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/a0gQyj6TBb))
 
 ## Exercises
 

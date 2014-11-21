@@ -20,10 +20,6 @@ http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 
 [Declare and initalize variables](example1/example1.go) ([Go Playground](http://play.golang.org/p/m4PJ0FpSwX))
 
-## Advanced Code Review
-
-[Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/a0gQyj6TBb))
-
 ## Exercises
 
 ### Exercise 1 
