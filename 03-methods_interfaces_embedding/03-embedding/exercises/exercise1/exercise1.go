@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/YtdNsTwAN7
+// http://play.golang.org/p/hvVA4zB9Bf
 
 // Declare a struct type named animal with two fields name and age. Declare a struct
 // type named dog with the field bark. Embed the animal type into the dog type. Declare
@@ -10,19 +10,19 @@
 // Declare a method named yelp to the animal type using a pointer reciever which displays the
 // literal string "Not Implemented". Call the method from the value of type dog.
 //
-// Declare an interface named speaker with a single method called yelp. Declare a value of
-// type speaker and assign the address of the value of type dog. Call the method yelp.
+// Declare an interface named yelper with a single method called yelp. Declare a value of
+// type yelper and assign the address of the value of type dog. Call the method yelp.
 //
-// Implement the speaker interface for the dog type. Be creative with the
-// bark field. Call the method yelp again from the value of type speaker.
+// Implement the yelper interface for the dog type. Be creative with the
+// bark field. Call the method yelp again from the value of type yelper.
 package main
 
 import (
 	"fmt"
 )
 
-// speaker represents talking animals.
-type speaker interface {
+// yelper represents talking animals.
+type yelper interface {
 	yelp()
 }
 
@@ -66,7 +66,7 @@ func main() {
 	fmt.Println(d)
 
 	// Use the interface.
-	var s speaker
-	s = &d
-	s.yelp()
+	var y yelper
+	y = &d
+	y.yelp()
 }
