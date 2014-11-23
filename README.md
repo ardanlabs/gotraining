@@ -26,9 +26,9 @@ _Note: This material has been designed to be taught in a classroom environment. 
 
 [Click Here To Review The Course Material](00-slides/readme.md)
 
-* Hourly Classes
-* Three Day Language Classes
-* One and Two Day Advanced Classes
+* Workshop Classes
+* Two and Three Day Bootcamp Language Classes
+* One and Two Day Bootcamp Advanced Classes
 
 ## Getting the Material
 
@@ -37,12 +37,12 @@ _Note: This material has been designed to be taught in a classroom environment. 
 
 ## Classes and Pricing
 
-Corporate full day training classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
+Corporate full day bootcamp classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 **_Currently Scheduled Corporate Classes:_**  
 Comcast VA - Dec 2014
 
-Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
+Individual enrollment bootcamp classes are scheduled periodically and cost $250 per day/student plus fees.
 
 **_Currently Scheduled Enrollment Classes:_**  
 [Edmonton 1 Day Bootcamp - Jan 24th](http://edmontongo.org/workshop/) ** Discounted Pricing  
@@ -70,7 +70,7 @@ Wrecking Ball Media - Miami, FL - Sep 2014
 Comcast - Sunnyvale, CA - Aug 2014
 
 **_Enrollment Classes:_**  
-Miami 2 Day Bootcamp - Nov 2014
+Miami 2 Day Bootcamp - Nov 2014  
 GothamGo - NYC, NY, - Nov 2014  
 
 **_Workshops:_**  
