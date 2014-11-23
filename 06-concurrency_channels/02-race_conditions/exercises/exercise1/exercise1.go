@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/vW-48gPin1
+// http://play.golang.org/p/yEY1XHdXu_
 
 // Answer for exercise 1 of Race Conditions.
 package main
@@ -50,9 +50,6 @@ func main() {
 
 // random generates random numbers and stores them into a slice.
 func random(amount int) {
-	// Schedule the call to Done to tell main we are done.
-	defer wg.Done()
-
 	// Generate as many random numbers as specified.
 	for i := 0; i < amount; i++ {
 		n := rand.Intn(100)
@@ -62,4 +59,7 @@ func random(amount int) {
 		}
 		mutex.Unlock()
 	}
+
+	// Tell main we are done.
+	wg.Done()
 }

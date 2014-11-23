@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/zW9bjwLzzH
+// http://play.golang.org/p/o8xu201CF-
 
 // go build -race
 
@@ -48,9 +48,6 @@ func main() {
 // doWork simulates a goroutine performing work and
 // checking the Shutdown flag to terminate early.
 func doWork(name string) {
-	// Schedule the call to Done to tell main we are done.
-	defer wg.Done()
-
 	for {
 		fmt.Printf("Doing %s Work\n", name)
 		time.Sleep(250 * time.Millisecond)
@@ -61,4 +58,7 @@ func doWork(name string) {
 			break
 		}
 	}
+
+	// Tell main we are done.
+	wg.Done()
 }

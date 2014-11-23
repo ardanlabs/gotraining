@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/4ZPCUnWyV5
+// http://play.golang.org/p/UTPzriWXWq
 
 // go build -race
 
@@ -43,9 +43,6 @@ func main() {
 // incCounter increments the package level Counter variable
 // using the Mutex to synchronize and provide safe access.
 func incCounter(id int) {
-	// Schedule the call to Done to tell main we are done.
-	defer wg.Done()
-
 	for count := 0; count < 2; count++ {
 		// Only allow one goroutine through this
 		// critical section at a time.
@@ -63,8 +60,11 @@ func incCounter(id int) {
 			// Store the value back into counter.
 			counter = value
 		}
+		mutex.Unlock()
 		// Release the lock and allow any
 		// waiting goroutine through.
-		mutex.Unlock()
 	}
+
+	// Tell main we are done.
+	wg.Done()
 }

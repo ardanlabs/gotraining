@@ -22,18 +22,18 @@ http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
 [Race Condition](example1/example1.go) ([Go Playground](http://play.golang.org/p/E_pi2bqD4P))
 
-[Atomic Increments](example2/example2.go) ([Go Playground](http://play.golang.org/p/4CaNFVZaXn))
+[Atomic Increments](example2/example2.go) ([Go Playground](http://play.golang.org/p/lRNiGIUAwV))
 
-[Atomic Store/Load](example3/example3.go) ([Go Playground](http://play.golang.org/p/zW9bjwLzzH))
+[Atomic Store/Load](example3/example3.go) ([Go Playground](http://play.golang.org/p/o8xu201CF-))
 
-[Mutex](example4/example4.go) ([Go Playground](http://play.golang.org/p/4ZPCUnWyV5))
+[Mutex](example4/example4.go) ([Go Playground](http://play.golang.org/p/UTPzriWXWq))
 
 ## Exercises
 
 ### Exercise 1
 Given the following program, use the race detector to find and correct the race condition.
 
-	// http://play.golang.org/p/rxBadio1I2
+	// http://play.golang.org/p/9-if--6ZBn
 
 	// Program for an exercise to fix a race condition.
 	package main
@@ -79,17 +79,17 @@ Given the following program, use the race detector to find and correct the race 
 
 	// random generates random numbers and stores them into a slice.
 	func random(amount int) {
-		// Schedule the call to Done to tell main we are done.
-		defer wg.Done()
-
 		// Generate as many random numbers as specified.
 		for i := 0; i < amount; i++ {
 			n := rand.Intn(100)
 			numbers = append(numbers, n)
 		}
+
+		// Tell main we are done.
+	    wg.Done()
 	}
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/vW-48gPin1))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/yEY1XHdXu_))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

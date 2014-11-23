@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/4CaNFVZaXn
+// http://play.golang.org/p/lRNiGIUAwV
 
 // go build -race
 
@@ -42,9 +42,6 @@ func main() {
 
 // incCounter increments the package level counter variable.
 func incCounter(id int) {
-	// Schedule the call to Done to tell main we are done.
-	defer wg.Done()
-
 	for count := 0; count < 2; count++ {
 		// Safely Add One To Counter.
 		atomic.AddInt64(&counter, 1)
@@ -52,4 +49,7 @@ func incCounter(id int) {
 		// Yield the thread and be placed back in queue.
 		runtime.Gosched()
 	}
+
+	// Tell main we are done.
+	wg.Done()
 }

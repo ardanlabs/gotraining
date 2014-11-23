@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/3ry3sCIfaC
+// http://play.golang.org/p/V2_L3tS4eO
 
 // Write a program where two goroutines pass an integer back and forth
 // ten times. Display when each goroutine receives the integer. Increment
@@ -38,9 +38,11 @@ func main() {
 
 // goroutine simulates sharing a value.
 func goroutine(name string, share chan int) {
-	// Schedule the call to Done to tell main we are done.
-	defer wg.Done()
-	defer fmt.Printf("Goroutine %s Down\n", name)
+	// Schedule this code when the function returns.
+	defer func() {
+		fmt.Printf("Goroutine %s Down\n", name)
+		wg.Done()
+	}()
 
 	for {
 		// Wait for the ball to be hit back to us.

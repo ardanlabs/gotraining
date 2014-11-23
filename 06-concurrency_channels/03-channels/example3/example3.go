@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/G9Gfy1drox
+// http://play.golang.org/p/o5wBWJ7fQP
 
 // This sample program demonstrates how to use a buffered
 // channel to work on multiple tasks with a predefined number
@@ -57,15 +57,13 @@ func main() {
 // worker is launched as a goroutine to process work from
 // the buffered channel.
 func worker(tasks chan string, worker int) {
-	// Report that we just returned.
-	defer wg.Done()
-
 	for {
 		// Wait for work to be assigned.
 		task, ok := <-tasks
 		if !ok {
 			// This means the channel is empty and closed.
 			fmt.Printf("Worker: %d : Shutting Down\n", worker)
+			wg.Done()
 			return
 		}
 

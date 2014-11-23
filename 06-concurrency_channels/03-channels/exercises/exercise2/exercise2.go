@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/B9npiUVveE
+// http://play.golang.org/p/x1HRyyAYhc
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -49,20 +49,15 @@ func main() {
 // worker is launched as a goroutine to process work from
 // the buffered channel.
 func worker(worker int) {
-	// Report that we just returned.
-	defer wg.Done()
-
 	// Receive a resource from the channel.
-	value, ok := <-resources
-	if !ok {
-		// This means the channel is empty and closed.
-		fmt.Printf("Worker: %d : Shutting Down\n", worker)
-		return
-	}
+	value := <-resources
 
 	// Display the value.
 	fmt.Printf("Worker: %d : %s\n", worker, value)
 
 	// Place the resource back.
 	resources <- value
+
+	// Tell main we are done.
+	wg.Done()
 }
