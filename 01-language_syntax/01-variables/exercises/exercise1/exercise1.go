@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/Kr7CaO6LdF
+// http://play.golang.org/p/BaT3B2wRnQ
 
 // Declare three variables that are initalized to their zero value and three
 // declared with a literal value. Declare variables of type string, int and
@@ -20,6 +20,7 @@ func main() {
 	var name string
 	var legal bool
 
+	// Display the value of those variables.
 	fmt.Println(age)
 	fmt.Println(name)
 	fmt.Println(legal)
@@ -30,6 +31,7 @@ func main() {
 	dayOfWeek := "Tuesday"
 	happy := true
 
+	// Display the value of those variables.
 	fmt.Println(month)
 	fmt.Println(dayOfWeek)
 	fmt.Println(happy)
@@ -37,5 +39,6 @@ func main() {
 	// Specify type and perform a conversion.
 	pi := float32(3.14)
 
+	// Display the value of the variable.
 	fmt.Printf("%T [%v]\n", pi, pi)
 }

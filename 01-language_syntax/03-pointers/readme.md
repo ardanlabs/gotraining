@@ -35,13 +35,15 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 **Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of and the _value that the pointer points to_.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/9XIYSnptUF))
+[Template](exercises/template1.go) ([Go Playground](http://play.golang.org/p/qME9Al2ARf)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/lArdMk8kJJ))
 
 ### Exercise 2
 
 Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/GJZXstEkBY))
+[Template](exercises/template2.go) ([Go Playground](http://play.golang.org/p/MqHBFmlEod) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/oEtveMoO1s))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
