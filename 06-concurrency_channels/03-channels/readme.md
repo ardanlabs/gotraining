@@ -32,11 +32,11 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 [Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/KuMG3o_7-C))
 
-## Advanced Code Review
+## Concurrency Patterns
 
-[Semaphores](advanced/semaphore/semaphore.go) ([Go Playground](http://play.golang.org/p/ezGmsjAbiC))
+[Pooling](advanced/pool)
 
-[Pooling](advanced/pool/pool.go)
+[Search](advanced/search)
 
 ## Exercises
 

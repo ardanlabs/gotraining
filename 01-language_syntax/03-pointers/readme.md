@@ -25,7 +25,7 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 ## Advanced Code Review
 
-[Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/a0gQyj6TBb))
+[Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/931Cw6uzsn))
 
 ## Exercises
 

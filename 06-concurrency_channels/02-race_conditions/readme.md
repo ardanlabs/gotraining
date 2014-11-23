@@ -28,6 +28,8 @@ http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
 [Mutex](example4/example4.go) ([Go Playground](http://play.golang.org/p/UTPzriWXWq))
 
+[RWMutex](example5/example5.go) TDB
+
 ## Exercises
 
 ### Exercise 1

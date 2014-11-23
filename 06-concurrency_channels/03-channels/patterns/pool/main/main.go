@@ -1,34 +1,26 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
+// This example is provided with help by Gabriel Aszalos.
+
 // This sample program demostrates how to use the pool package
 // to share a simulated set of database connections.
 package main
 
 import (
 	"fmt"
+	"io"
 	"math/rand"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/04-concurrency_channels/03-channels/advanced/pool"
+	"github.com/ArdanStudios/gotraining/06-concurrency_channels/03-channels/patterns/pool"
 )
 
 const (
-	// maxGoroutines is the number of routines to use.
-	maxGoroutines = 25
-
-	// pooledResources is the number of resources to pool.
-	pooledResources = 2
-)
-
-var (
-	// connectionID maintains a counter.
-	connectionID int32
-
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
+	maxGoroutines   = 25 // the number of routines to use.
+	pooledResources = 2  // number of resources in the pool
 )
 
 // dbConnection simulates a resource to share.
@@ -36,40 +28,47 @@ type dbConnection struct {
 	ID int32
 }
 
-// Close implements the interface for the pool package.
-// Close performs any resource release management.
-func (dbConn *dbConnection) Close() {
+// Close implements the io.Closer interface so dbConnection
+// can be managed by the pool. Close performs any resource
+// release management.
+func (dbConn *dbConnection) Close() error {
 	fmt.Println("Close: Connection", dbConn.ID)
-	return
+	return nil
 }
 
-// createConnection is a factory method called by the pool
-// framework when new connections are needed.
-func createConnection() (pool.Resource, error) {
-	id := atomic.AddInt32(&connectionID, 1)
+// idCounter provides support for giving each connection a unique id.
+var idCounter int32
 
+// createConnection is a factory method that will be called by
+// the pool when a new connection is needed.
+func createConnection() (io.Closer, error) {
+	id := atomic.AddInt32(&idCounter, 1)
 	fmt.Println("Create: New Connection", id)
+
 	return &dbConnection{id}, nil
 }
 
 // main is the entry point for all Go programs.
 func main() {
-	// Add a count for each goroutine.
+	var wg sync.WaitGroup
 	wg.Add(maxGoroutines)
 
-	// Create the buffered channel to hold
-	// and manage the connections.
+	// Create the pool to manage our connections.
 	p, err := pool.New(createConnection, pooledResources)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	// Schedule the pool to be closed when main returns.
-	defer p.Close()
-
-	// Perform queries using a connection from the pool.
+	// Perform queries using connections from the pool.
 	for query := 0; query < maxGoroutines; query++ {
-		go performQueries(query, p)
+		// Each goroutine needs its own copy of the query
+		// value else they will all be sharing the same query
+		// variable.
+		go func(q int) {
+			performQueries(q, p)
+			wg.Done()
+		}(query)
+
 		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
 	}
 
@@ -78,14 +77,11 @@ func main() {
 
 	// Close the pool.
 	fmt.Println("*****> Shutdown Program.")
-
+	p.Close()
 }
 
 // performQueries tests the resource pool of connections.
 func performQueries(query int, p *pool.Pool) {
-	// Schedule the call to Done to tell main we are done.
-	defer wg.Done()
-
 	// Acquire a connection from the pool.
 	conn, err := p.Acquire()
 	if err != nil {
