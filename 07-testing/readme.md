@@ -1,6 +1,6 @@
-## Testing and Benchmarking
+## Testing, Benchmarking and Profiling
 
-Testing is built right into the go tools and the standard library. Testing needs to be a vital part of the development process because it can save you a tremendous amount of time throughout the life cycle of the project. Benchmarking is also a very powerful tool tied to the testing functionality. Aspect of your code can be setup to be benchmarked for performance reviews. 
+Testing is built right into the go tools and the standard library. Testing needs to be a vital part of the development process because it can save you a tremendous amount of time throughout the life cycle of the project. Benchmarking is also a very powerful tool tied to the testing functionality. Aspect of your code can be setup to be benchmarked for performance reviews. Profiling provides a view of the interations between functions and which functions are most heavlily used.
 
 ## Notes
 
@@ -8,6 +8,7 @@ Testing is built right into the go tools and the standard library. Testing needs
 * The tools are very flexible and give you many options.
 * Writes tests and you develop.
 * Benchmark through the dev, qa and release cycles.
+* Profile your code to see what functions to focus on.
 
 ## Add
 
@@ -43,6 +44,9 @@ The sample program implements support for accessing a MongoDB database from Mong
 Write three benchmark tests for converting an integer into a string. First use the fmt.Sprintf function, then the strconv.FormatInt function and finally the strconv.Itoa. Identify which function performs the best.
 
 [Answer](exercises/exercise1/bench_test.go)
+
+### Exercise 2
+TBD
 
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
