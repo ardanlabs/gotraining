@@ -33,9 +33,9 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 ## Exercises
 
 ### Exercise 1
-Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the interger equals ten, terminate the program cleanly.
+Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the integer equals ten, terminate the program cleanly.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/V2_L3tS4eO))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/nBUfOWxS66))
 
 ### Exercise 2
 Write a program that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate.

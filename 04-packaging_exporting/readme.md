@@ -29,7 +29,7 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 
 [Exported embedded types](example5/example5.go)
 
-[unexported embedded types](example6/example6.go)
+[Unexported embedded types](example6/example6.go)
 
 ## Exercises
 
