@@ -26,9 +26,9 @@ _Note: This material has been designed to be taught in a classroom environment. 
 
 [Click Here To Review The Course Material](00-slides/readme.md)
 
-* One and Two Hour Classes
+* Hourly Classes
 * Three Day Language Classes
-* Two Day Advanced Classes
+* One and Two Day Advanced Classes
 
 ## Getting the Material
 
@@ -45,12 +45,12 @@ Comcast VA - Dec 2014
 Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
 
 **_Currently Scheduled Enrollment Classes:_**  
-[Edmonton 1 Day Bootcamp - Jan 24th](http://edmontongo.org/workshop/) ** Discounted Pricing
-[Gophercon India - Feb 19th](http://www.gophercon.in/go-workshop/)
-San Francisco, CA - March 2015
-Denver, CO - April 2015
-Washington D.C. - May 2015
-NYC, NY - June 2015
+[Edmonton 1 Day Bootcamp - Jan 24th](http://edmontongo.org/workshop/) ** Discounted Pricing  
+[Gophercon India - Feb 19th](http://www.gophercon.in/go-workshop/)  
+San Francisco, CA - March 2015  
+Denver, CO - April 2015  
+Washington D.C. - May 2015  
+NYC, NY - June 2015  
 Gophercon USA - July 2015
 
 Hour training classes are used for workshops and meetups and exclude time for working through the exercises. These events are free.
