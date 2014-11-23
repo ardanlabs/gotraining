@@ -22,7 +22,7 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 [Day Two Training](day_2_training.md)  
 [Day Three Training](day_3_training.md)
 
-### Advanced Classes - Daily
+#### Advanced Classes - Daily
 
 [Day Four Training](day_4_training.md)  
 [Day Five Training](day_5_training.md)
