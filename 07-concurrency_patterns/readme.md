@@ -18,9 +18,9 @@ http://blog.golang.org/advanced-go-concurrency-patterns
 
 ## Code Review
 
-[Pooling](patterns/pool)
+[Pooling](pool)
 
-[Search](patterns/search)
+[Search](search)
 
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
