@@ -16,8 +16,6 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 
 ## Links
 
-http://blog.golang.org/pipelines
-
 http://blog.golang.org/share-memory-by-communicating
 
 http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
@@ -31,12 +29,6 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 [Buffered channels - Manage concurrency](example3/example3.go) ([Go Playground](http://play.golang.org/p/o5wBWJ7fQP))
 
 [Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/KuMG3o_7-C))
-
-## Concurrency Patterns
-
-[Pooling](patterns/pool)
-
-[Search](patterns/search)
 
 ## Exercises
 

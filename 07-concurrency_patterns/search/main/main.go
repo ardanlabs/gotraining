@@ -8,7 +8,7 @@ package main
 import (
 	"log"
 
-	"github.com/ArdanStudios/gotraining/06-concurrency_channels/03-channels/patterns3/search"
+	"github.com/ArdanStudios/gotraining/07-concurrency_patterns/search"
 )
 
 // main is the entry point for all Go programs.
