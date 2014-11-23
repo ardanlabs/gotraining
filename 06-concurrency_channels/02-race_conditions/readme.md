@@ -20,7 +20,7 @@ http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
 ## Code Review
 
-[Race Condition](example1/example1.go) ([Go Playground](http://play.golang.org/p/DCkt7qIzB8))
+[Race Condition](example1/example1.go) ([Go Playground](http://play.golang.org/p/E_pi2bqD4P))
 
 [Atomic Increments](example2/example2.go) ([Go Playground](http://play.golang.org/p/4CaNFVZaXn))
 

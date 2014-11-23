@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/DCkt7qIzB8
+// http://play.golang.org/p/E_pi2bqD4P
 
 // go build -race
 
@@ -39,9 +39,6 @@ func main() {
 
 // incCounter increments the package level counter variable.
 func incCounter(id int) {
-	// Schedule the call to Done to tell main we are done.
-	defer wg.Done()
-
 	for count := 0; count < 2; count++ {
 		// Capture the value of Counter.
 		value := counter
@@ -56,4 +53,30 @@ func incCounter(id int) {
 		// Store the value back into Counter.
 		counter = value
 	}
+
+	// Tell main we are done.
+	wg.Done()
 }
+
+/*
+==================
+WARNING: DATA RACE
+Write by goroutine 5:
+  main.incCounter()
+      /Users/bill/Spaces/Go/Projects/src/github.com/ArdanStudios/gotraining/06-concurrency_channels/02-race_conditions/example1/example1.go:54 +0x76
+
+Previous read by goroutine 6:
+  main.incCounter()
+      /Users/bill/Spaces/Go/Projects/src/github.com/ArdanStudios/gotraining/06-concurrency_channels/02-race_conditions/example1/example1.go:44 +0x46
+
+Goroutine 5 (running) created at:
+  main.main()
+      /Users/bill/Spaces/Go/Projects/src/github.com/ArdanStudios/gotraining/06-concurrency_channels/02-race_conditions/example1/example1.go:32 +0x61
+
+Goroutine 6 (running) created at:
+  main.main()
+      /Users/bill/Spaces/Go/Projects/src/github.com/ArdanStudios/gotraining/06-concurrency_channels/02-race_conditions/example1/example1.go:33 +0x78
+==================
+Final Counter: 2
+Found 1 data race(s)
+*/

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/IqrtC7x7Ic
+// http://play.golang.org/p/cqsHoPD30n
 
 // Sample program to show how to create goroutines and
 // how the goroutine scheduler behaves with two contexts.
@@ -27,28 +27,28 @@ func main() {
 
 	// Declare an anonymous function and create a goroutine.
 	go func() {
-		// Schedule the call to Done to tell main we are done.
-		defer wg.Done()
-
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
 			for rune := 'a'; rune < 'a'+26; rune++ {
 				fmt.Printf("%c ", rune)
 			}
 		}
+
+		// Tell main we are done.
+		wg.Done()
 	}()
 
 	// Declare an anonymous function and create a goroutine.
 	go func() {
-		// Schedule the call to Done to tell main we are done.
-		defer wg.Done()
-
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
 			for rune := 'A'; rune < 'A'+26; rune++ {
 				fmt.Printf("%c ", rune)
 			}
 		}
+
+		// Tell main we are done.
+		wg.Done()
 	}()
 
 	// Wait for the goroutines to finish.
