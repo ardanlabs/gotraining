@@ -29,7 +29,8 @@ Go is a strict type safe lanaguage so typed values must be explicitly converted 
 
 **Part C** Declare a variable of the same base type as your named typed. Attempt to assign the value of your named type variable to your new base type variable. Does the compiler allow the assignment?
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/_zBf2HVsAU))
+[Template](exercises/template1.go) ([Go Playground](http://play.golang.org/p/RKWpU9bora)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/x-a-6J0s-_))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
