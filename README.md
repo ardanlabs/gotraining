@@ -27,7 +27,8 @@ _Note: This material has been designed to be taught in a classroom environment. 
 [Click Here To Review The Course Material](00-slides/readme.md)
 
 * One and Two Hour Classes
-* One, Two, Three and Four Day Classes
+* Three Day Language Classes
+* Two Day Advanced Classes
 
 ## Getting the Material
 
@@ -39,13 +40,18 @@ _Note: This material has been designed to be taught in a classroom environment. 
 Corporate full day training classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 **_Currently Scheduled Corporate Classes:_**  
-[Gophercon India - Feb 19th](http://www.gophercon.in/go-workshop/)
+Comcast VA - Dec 2014
 
 Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
 
 **_Currently Scheduled Enrollment Classes:_**  
-[Miami 2 Day Bootcamp - Nov 21st/22nd](https://www.eventbrite.com/e/go-programming-bootcamp-tickets-13757443885)  
 [Edmonton 1 Day Bootcamp - Jan 24th](http://edmontongo.org/workshop/) ** Discounted Pricing
+[Gophercon India - Feb 19th](http://www.gophercon.in/go-workshop/)
+San Francisco, CA - March 2015
+Denver, CO - April 2015
+Washington D.C. - May 2015
+NYC, NY - June 2015
+Gophercon USA - July 2015
 
 Hour training classes are used for workshops and meetups and exclude time for working through the exercises. These events are free.
 
@@ -53,16 +59,19 @@ Hour training classes are used for workshops and meetups and exclude time for wo
 [ITPalooza Miami - Dec 4th](http://itpalooza.com/session/intro-to-go-programming/)
 
 **_Currently Scheduled Meetups:_**   
-[Go Miami - Nov 20th](http://www.meetup.com/Go-Miami/events/218025392/)
+Go Dominican Republic - TBA
 
 **If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
 
 ## Past Events
 
 **_Corporate Classes:_**  
-GothamGo - NYC, NY, - Nov 2014  
 Wrecking Ball Media - Miami, FL - Sep 2014  
 Comcast - Sunnyvale, CA - Aug 2014
+
+**_Enrollment Classes:_**  
+Miami 2 Day Bootcamp - Nov 2014
+GothamGo - NYC, NY, - Nov 2014  
 
 **_Workshops:_**  
 IronHack Dolphin Stadium - Oct 2014  

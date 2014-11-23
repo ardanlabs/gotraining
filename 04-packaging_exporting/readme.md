@@ -1,6 +1,6 @@
-## Packaging
+## Package and Exporting
 
-Packages contain the basic unit of code. All code is built into packages that can be imported into and shared between projects. The Go toolset seeing packaging as a very important part of the dependency management story with tool like "go get", which can pull down source code for projects that live in version control systems and also pull all the dependent code at the same time. Learning how to package our code is vital to building robust and scalable code in Go.
+Packages contain the basic unit of compiled code. They define a scope for the indentifiers that are declared within them. Learning how to package our code is vital to building robust and scalable code in Go because exported identifiers become part of the packages API.
 
 ## Notes
 
