@@ -34,9 +34,9 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Concurrency Patterns
 
-[Pooling](advanced/pool)
+[Pooling](patterns/pool)
 
-[Search](advanced/search)
+[Search](patterns/search)
 
 ## Exercises
 
