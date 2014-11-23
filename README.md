@@ -27,7 +27,7 @@ _Note: This material has been designed to be taught in a classroom environment. 
 [Click Here To Review The Course Material](00-slides/readme.md)
 
 * Workshop Classes
-* Two and Three Day Language Classes
+* One, Two and Three Day Language Classes
 * One and Two Day Advanced Classes
 
 ## Getting the Material
@@ -40,7 +40,7 @@ _Note: This material has been designed to be taught in a classroom environment. 
 Corporate full day classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 **_Currently Scheduled Corporate Classes:_**  
-Comcast VA - Dec 2014
+Comcast VA - Dec 2014 - 3 Day Class
 
 Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
 
@@ -56,7 +56,7 @@ Denver, CO - April 2015
 Washington D.C. - May 2015  
 NYC, NY - June 2015  
 
-Hour training classes are used for workshops and meetups and exclude time for working through the exercises. These events are free.
+Hourly training classes are used for workshops or meetups and exclude time for working through the exercises. These events are free.
 
 **_Currently Scheduled Workshops:_**   
 [ITPalooza Miami - Dec 4th](http://itpalooza.com/session/intro-to-go-programming/)
