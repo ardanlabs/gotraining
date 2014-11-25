@@ -50,7 +50,7 @@ Individual enrollment classes are scheduled periodically and cost $250 per day/s
 [Gophercon India - Feb 19th](http://www.gophercon.in/go-workshop/)  
 Gophercon USA - July 2015  
 
-**2 Day Classes**  
+**3 Day Classes**  
 San Francisco, CA - March 2015  
 Denver, CO - April 2015  
 Washington D.C. - May 2015  
