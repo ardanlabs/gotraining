@@ -22,7 +22,8 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 
 Declare an array of 5 strings with each element initialized to its zero value. Declare a second array of 5 strings and initialize this array with literal string values. Assign the second array to the first and display the results of the first array.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/PvjKR2uU2H))
+[Template](exercises/template1.go) ([Go Playground](http://play.golang.org/p/na3pcrNRgX)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/Pa3mrTCcpB))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

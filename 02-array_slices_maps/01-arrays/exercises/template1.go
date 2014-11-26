@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/Pa3mrTCcpB
+// http://play.golang.org/p/na3pcrNRgX
 
 // Declare an array of 5 strings with each element initialized to its zero value.
 //
@@ -9,21 +9,27 @@
 // values. Assign the second array to the first and display the results of the first array.
 package main
 
-import "fmt"
-
 // main is the entry point for the application.
 func main() {
 	// Declare string arrays to hold names.
-	var names [5]string
+	/*
+		var array_name1 [N]type
+	*/
 
 	// Declare an array pre-populated with friend's names.
-	friends := [5]string{"Joe", "Ed", "Jim", "Erick", "Bill"}
+	/*
+		array_name2 := [N]type{Initalize values here}
+	*/
 
 	// Asssign the array of friends to the names array.
-	names = friends
+	/*
+		array_name1 = array_name2
+	*/
 
 	// Display each name in names.
-	for _, name := range names {
-		fmt.Println(name)
-	}
+	/*
+		for _, value_name := range array_name1 {
+			fmt.Println(value_name)
+		}
+	*/
 }
