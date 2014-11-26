@@ -43,6 +43,7 @@ The sample program implements support for accessing a MongoDB database from Mong
 ### Exercise 1
 Write three benchmark tests for converting an integer into a string. First use the fmt.Sprintf function, then the strconv.FormatInt function and finally the strconv.Itoa. Identify which function performs the best.
 
+[Template](exercises/template1/bench_test.go) | 
 [Answer](exercises/exercise1/bench_test.go)
 
 ### Exercise 2

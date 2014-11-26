@@ -27,6 +27,7 @@ http://www.goinggo.net/2014/01/decode-json-documents-in-go.html
 
 **Part B** From example 1, Marshal the slice into pretty print strings and display each element.
 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/tHy_2p4obQ) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/Huf8jEDUJO))
 
 ___

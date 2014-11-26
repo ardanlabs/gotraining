@@ -36,6 +36,7 @@ http://golang.org/pkg/io/
 
 Download any document from the web and display the content in the terminal and write it to a file at the same time.
 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/6JAjLK8Tpw) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/3s-weLqNZC))
 
 ___
