@@ -38,7 +38,8 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 
 **Part B** Create a program that imports the toy package. Use the NewBat function to create a value of bat and populate the values of Height and Width. Then display the value of the bat variable.
 
-[Answer](exercises/exercise1/exercise1.go)
+[Template](exercises/template1) | 
+[Answer](exercises/exercise1)
 
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
