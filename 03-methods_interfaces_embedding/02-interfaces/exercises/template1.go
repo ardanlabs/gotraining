@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/HQMkLBAjvR
+// http://play.golang.org/p/sgCkOodyYf
 
 // Declare an interface named speaker with a method named sayHello. Declare a struct
 // named English that represents a person who speaks english and declare a struct named
@@ -15,54 +15,70 @@
 // new values of each type and use the function.
 package main
 
-import (
-	"fmt"
-)
-
 // speaker implements the voice of anyone.
-type speaker interface {
-	sayHello()
-}
+/*
+	type interface_type_name interface {
+		method_name()
+	}
+*/
 
 // english represents an english speaking person.
-type english struct{}
+/*
+	type english_type_name struct{}
+*/
 
 // sayHello implements the speaker interface.
-func (e english) sayHello() {
-	fmt.Println("Hello World")
-}
+/*
+	func (receiver_name english_type_name) method_name() {
+		fmt.Println("Hello World")
+	}
+*/
 
 // chinese represents a chinese speaking person.
-type chinese struct{}
+/*
+	type chinese_type_name struct{}
+*/
 
 // sayHello implements the speaker interface.
-func (c chinese) sayHello() {
-	fmt.Println("你好世界")
-}
+/*
+	func (receiver_name chinese_type_name) method_name() {
+		fmt.Println("你好世界")
+	}
+*/
 
 // main is the entry point for the application.
 func main() {
 	// Declare a variable of the interfafe type.
-	var sp speaker
+	/*
+		var variable_name interface_type_name
+	*/
 
 	// Assign a value to the interface type and
 	// call the interface method.
-	var e english
-	sp = e
-	sp.sayHello()
+	/*
+		var variable_name english_type_name
+		sp = variable_name
+		sp.method_name()
+	*/
 
 	// Assign a different value to the interface type and
 	// call the interface method.
-	var c chinese
-	sp = c
-	sp.sayHello()
+	/*
+		var variable_name chinese_type_name
+		sp = variable_name
+		sp.method_name()
+	*/
 
 	// Create new values and call the function.
-	sayHello(new(english))
-	sayHello(new(chinese))
+	/*
+		function_name(new(english_type_name))
+		function_name(new(chinese_type_name))
+	*/
 }
 
 // SatHello abstracts speaking functionality.
-func sayHello(sp speaker) {
-	sp.sayHello()
-}
+/*
+	func function_name(variable_name interface_type_name) {
+		variable_name.method_name()
+	}
+*/
