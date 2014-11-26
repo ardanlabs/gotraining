@@ -51,7 +51,7 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 **Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of the first and second indexes and display the index position and value of each element in the new slice.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/UGqE3nH5M_)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ASdQF3Tgv2)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/9ir4vinceh))
 
 ___

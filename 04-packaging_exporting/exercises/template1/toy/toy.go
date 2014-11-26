@@ -5,16 +5,12 @@
 package toy
 
 // bat represents the bat we sell.
-/*
-	type type_name struct {
-		field_name type
-		field_name type
-	}
-*/
+type type_name struct {
+	field_name type
+	field_name type
+}
 
 // NewBat creates values of type bat.
-/*
-	func NewFunction() *type_name {
-		return new(type_name)
-	}
-*/
+func function_name() [operator]type_name {
+	return new(type_name)
+}

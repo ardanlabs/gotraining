@@ -11,17 +11,15 @@
 // the bat variable.
 package main
 
+import "fmt"
+
 // main is the entry point for the application.
 func main() {
 	// Create a value of type bat.
-	/*
-		variable_name := toy.NewFunction()
-		variable_name.field_name = value
-		variable_name.field_name = value
-	*/
+	variable_name := toy.function_name()
+	variable_name.field_name = value
+	variable_name.field_name = value
 
 	// Display the value.
-	/*
-		fmt.Println(variable_name)
-	*/
+	fmt.Println(variable_name)
 }

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/cIVJqLzm4d
+// http://play.golang.org/p/1aOj5jLslq
 
 // Create two error variables, one called InvalidValueError and the other
 // called AmountToLargeError. Provide the static message for each variable.
@@ -12,55 +12,50 @@
 // function and check the return error value. Display a proper message to the screen.
 package main
 
-import (
-	"errors"
-	"fmt"
-)
-
 // InvalidValueError indicates the value is invalid.
-var InvalidValueError = errors.New("Invalid Value")
+var error_variable_name1 = errors.New("Error Message")
 
 // AmountToLargeError indicates the value beyond the upper bound.
-var AmountToLargeError = errors.New("Amount To Large")
+var error_variable_name2 = errors.New("Error Message")
 
 // main is the entry point for the application.
 func main() {
 	// Call the function and get the error.
-	if err := checkAmount(0); err != nil {
+	if variable_name := function_name(0); err != nil {
 		switch err {
 		// Check if the error is an InvalidValueError.
-		case InvalidValueError:
-			fmt.Println("Value provided is not valid.")
+		case error_variable_name1:
+			fmt.Println("custom error messsage")
 			return
 
 		// Check if the error is an InvalidValueError.
-		case AmountToLargeError:
-			fmt.Println("Value provided is too large.")
+		case error_variable_name2:
+			fmt.Println("custom error messsage")
 			return
 
 		// Handle the default error.
 		default:
-			fmt.Println(err)
+			fmt.Println(variable_name)
 			return
 		}
 	}
 
 	// Display everything is good.
-	fmt.Println("Everything checks out.")
+	fmt.Println("message")
 }
 
 // checkAmount validates the value passed in.
-func checkAmount(f float64) error {
+func function_name(variable_name type) error_type {
 	// Is the parameter equal to zero.
-	if f == 0 {
-		return InvalidValueError
+	if variable_name == N {
+		return error_variable_name1
 	}
 
 	// Is the parameter greater than 1000.
-	if f > 1000 {
-		return AmountToLargeError
+	if variable_name > N {
+		return error_variable_name2
 	}
 
 	// Return nil for the error value.
-	return nil
+	return no_error
 }

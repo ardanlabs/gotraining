@@ -43,7 +43,8 @@ http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 **Part B** Run the program in parallel.
 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/kNfv_athDy))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/NLbAplGD0T)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/5hUtwFAGEn))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

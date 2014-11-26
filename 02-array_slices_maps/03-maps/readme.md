@@ -32,7 +32,7 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 Declare and make a map of integer values with a string as the key. Populate the map with five values and iterate over the map to display the key/value pairs.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/TBZJBNhoO4)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZAfGN7mxLD)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/8K-IZgJFSg))
 
 ___
