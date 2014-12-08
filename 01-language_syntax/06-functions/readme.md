@@ -24,6 +24,8 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 [Variadic functions](example3/example3.go) ([Go Playground](http://play.golang.org/p/cK3y_qYUgd))
 
+[Redeclarations](example4/example4.go) ([Go Playground](http://play.golang.org/p/XQS-twjrtl))
+
 ## Advanced Code Review
 
 [Trapping panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/eg14ClW4_y))
