@@ -9,7 +9,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ArdanStudios/gotraining/06-testing/example1/buoy"
+	"github.com/ArdanStudios/gotraining/08-testing/example1/buoy"
 )
 
 // init is called before main.
@@ -27,26 +27,28 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	// Retrieve a document for station 42002.
-	stationID := "42002"
-	station, err := buoy.FindStation(stationID)
-	if err != nil {
-		log.Printf("main : ERROR : %s\n", err)
-		os.Exit(1)
-	}
+	for i := 0; i < 20; i++ {
+		// Retrieve a document for station 42002.
+		stationID := "42002"
+		station, err := buoy.FindStation(stationID)
+		if err != nil {
+			log.Printf("main : ERROR : %s\n", err)
+			os.Exit(1)
+		}
 
-	buoy.Print(station)
+		buoy.Print(station)
 
-	// Retrieve a slice of documents for the
-	// Gulf Of Mexico region.
-	region := "Gulf Of Mexico"
-	stations, err := buoy.FindRegion(region, 5)
-	if err != nil {
-		log.Printf("main : ERROR : %s\n", err)
-		os.Exit(1)
-	}
+		// Retrieve a slice of documents for the
+		// Gulf Of Mexico region.
+		region := "Gulf Of Mexico"
+		stations, err := buoy.FindRegion(region, 5)
+		if err != nil {
+			log.Printf("main : ERROR : %s\n", err)
+			os.Exit(1)
+		}
 
-	for _, station := range stations {
-		buoy.Print(&station)
+		for _, station := range stations {
+			buoy.Print(&station)
+		}
 	}
 }

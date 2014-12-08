@@ -10,15 +10,15 @@ Testing is built right into the go tools and the standard library. Testing needs
 * Benchmark through the dev, qa and release cycles.
 * Profile your code to see what functions to focus on.
 
-## Add
-
-* Profiling
-
 ## Links
 
 http://golang.org/pkg/testing/
 
 http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go
+
+http://saml.rilspace.org/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof
+
+http://golang.org/pkg/net/http/pprof/
 
 ## Code Review
 
@@ -38,6 +38,10 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 [Benchmarks that test the performance of the MongoDB find](advanced/tests/example1_bench_test.go)
 
+## Profiling
+
+[Installation Of Tooling](example1/pprof.md)
+
 ## Exercises
 
 ### Exercise 1
@@ -45,9 +49,6 @@ Write three benchmark tests for converting an integer into a string. First use t
 
 [Template](exercises/template1/bench_test.go) | 
 [Answer](exercises/exercise1/bench_test.go)
-
-### Exercise 2
-TBD
 
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
