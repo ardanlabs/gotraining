@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/goinaction/code/temp/workman"
+	"github.com/ArdanStudios/gotraining/07-concurrency_patterns/work"
 )
 
 // names provides a set of names to display.
@@ -44,7 +44,7 @@ func (m *namePrinter) Work() {
 // main is the entry point for all Go programs.
 func main() {
 	// Create a work value with 2 goroutines.
-	w := workman.New(2)
+	w := work.New(2)
 
 	// Iterate over the slice of names.
 	for _, name := range names {
