@@ -3,6 +3,7 @@ There are lots of different patterns we can create with goroutines and channels.
 
 ## Notes
 
+* The work code provides a pattern for giving work to a set number of goroutines without losing the gaurentee.
 * The resource pooling code provides a pattern for managing resources that goroutines may need to acquire and release.
 * The search code provides a pattern for using multiple goroutines to perform concurrent work.
 
