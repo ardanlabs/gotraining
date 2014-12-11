@@ -31,7 +31,7 @@ var ErrInvalidCapacity = errors.New("Capacity needs to be greater than zero.")
 // that can allocate a new resource and the number of resources that can
 // be allocated.
 func New(fn func() (io.Closer, error), capacity uint) (*Pool, error) {
-	if capacity == 0 {
+	if capacity <= 0 {
 		return nil, ErrInvalidCapacity
 	}
 
