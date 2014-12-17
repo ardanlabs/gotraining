@@ -32,7 +32,7 @@ http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 **Part B:** Declare and initialize an anonymous struct type with the same three fields. Display the value.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/aJciAZop3Q)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/KX0uprJT0w)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/dKXc_T3Thk))
 
 ___
