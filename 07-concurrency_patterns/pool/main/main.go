@@ -39,10 +39,24 @@ func (dbConn *dbConnection) Close() error {
 // idCounter provides support for giving each connection a unique id.
 var idCounter int32
 
+// DbError is a customer error type for factory issues.
+type DbError struct {
+	ID int32
+}
+
+// Error implements the error interface.
+func (d *DbError) Error() string {
+	return fmt.Sprintf("Error Creating db conneciton: %d", d.ID)
+}
+
 // createConnection is a factory method that will be called by
 // the pool when a new connection is needed.
 func createConnection() (io.Closer, error) {
 	id := atomic.AddInt32(&idCounter, 1)
+	if id == 13 {
+		return nil, &DbError{ID: id}
+	}
+
 	fmt.Println("Create: New Connection", id)
 
 	return &dbConnection{id}, nil
@@ -57,6 +71,7 @@ func main() {
 	p, err := pool.New(createConnection, pooledResources)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	// Perform queries using connections from the pool.
@@ -85,7 +100,16 @@ func performQueries(query int, p *pool.Pool) {
 	// Acquire a connection from the pool.
 	conn, err := p.Acquire()
 	if err != nil {
-		fmt.Println(err)
+		switch e := err.(type) {
+		case *DbError:
+			fmt.Println("Customer DB Error Type", e)
+		default:
+			if err == pool.ErrPoolClosed {
+				fmt.Println("Error Pool Closed", err)
+			} else {
+				fmt.Println("Default", err)
+			}
+		}
 		return
 	}
 

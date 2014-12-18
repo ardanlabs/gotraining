@@ -27,6 +27,9 @@ type Pool struct {
 // unbuffered pool.
 var ErrInvalidCapacity = errors.New("Capacity needs to be greater than zero.")
 
+// ErrPoolClosed is returned when the pool is close and access is attempted.
+var ErrPoolClosed = errors.New("Pool has been closed.")
+
 // New creates a pool that manages resources. A pool requires a function
 // that can allocate a new resource and the number of resources that can
 // be allocated.
@@ -48,7 +51,7 @@ func (p *Pool) Acquire() (io.Closer, error) {
 	case r, ok := <-p.resources:
 		fmt.Println("Acquire:", "Shared Resource")
 		if !ok {
-			return nil, errors.New("Pool has been closed.")
+			return nil, ErrPoolClosed
 		}
 		return r, nil
 
