@@ -35,7 +35,7 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 **Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of and the _value that the pointer points to_.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/FBVAkNb7mT)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZimrbQmxFU)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/lArdMk8kJJ))
 
 ### Exercise 2
