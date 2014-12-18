@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/Qn32CmIAIn
+// http://play.golang.org/p/f5teopGU1J
 
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
@@ -63,10 +63,10 @@ func main() {
 	// interface is NOT "promoted" to the outer type.
 	sendNotification(&ad)
 
-	// We can acces the inner type's method direectly.
+	// We can access the inner type's method directly.
 	ad.user.notify()
 
-	// The inner type's method is promoted.
+	// The inner type's method is NOT promoted.
 	ad.notify()
 }
 

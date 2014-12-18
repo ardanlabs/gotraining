@@ -33,7 +33,7 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 **Part A** Declare and initalize a variable of type int with the value of 20. Display the _address of_ and _value of_ the variable.
 
-**Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of and the _value that the pointer points to_.
+**Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of_ and the _value that the pointer points to_.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZimrbQmxFU)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/lArdMk8kJJ))
@@ -42,7 +42,7 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/EWmHE4OgPO) | 
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/EWmHE4OgPO)) | 
 [Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/oEtveMoO1s))
 
 ___

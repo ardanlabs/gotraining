@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/7BOjiq6U2z
+// http://play.golang.org/p/myewV2u_B_
 
 // Declare a struct type to maintain information about a user. Declare a function
 // that creates value of and returns pointers of this type and an error value. Call
@@ -33,7 +33,7 @@ func main() {
 
 	// Create a value of type user and ignore the second value being returned.
 	variable_name, _ := function_name()
-	fmt.Println(function_name)
+	fmt.Println(variable_name)
 }
 
 // newUser creates and returns pointers of user type values.
