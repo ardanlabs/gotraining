@@ -17,68 +17,54 @@
 // bark field. Call the method yelp again from the value of type yelper.
 package main
 
+import "fmt"
+
 // yelper represents talking animals.
-/*
-	type interface_type_name interface {
-		method_name()
-	}
-*/
+type interface_type_name interface {
+	method_name()
+}
 
 // animal represents all animals.
-/*
-	type type_name struct {
-		field_name type
-		field_name type
-	}
-*/
+type type_name struct {
+	field_name type
+	field_name type
+}
 
 // yelp represents how an animal can speak.
-/*
 func (receiver_name *type_name) method_name() {
 	fmt.Println("Not Implemented")
 }
-*/
 
 // dog represents a dog.
-/*
-	type type_name struct {
-		embedded_type_name
-		field_name type_name
-	}
-*/
+type type_name struct {
+	embedded_type_name
+	field_name type_name
+}
 
 // yelp represents how an animal can speak.
-/*
-	func (receiver_name *type_name) method_name() {
-		for variable_name := 0; variable_name < receiver_name.field_name; variable_name++ {
-			fmt.Print("BARK ")
-		}
-		fmt.Println()
+func (receiver_name *type_name) method_name() {
+	for variable_name := 0; variable_name < receiver_name.field_name; variable_name++ {
+		fmt.Print("BARK ")
 	}
-*/
+	fmt.Println()
+}
 
 // main is the entry point for the application.
 func main() {
 	// Create a value of type dog.
-	/*
-		variable_name := type_name{
-			embedded_type_name: embedded_type_name{
-				field_name: value,
-				field_name: 1,
-			},
+	variable_name := type_name{
+		embedded_type_name: embedded_type_name{
 			field_name: value,
-		}
-	*/
+			field_name: 1,
+		},
+		field_name: value,
+	}
 
 	// Display the value.
-	/*
-		fmt.Println(variable_name)
-	*/
+	fmt.Println(variable_name)
 
 	// Use the interface.
-	/*
-		var variable_name2 interface_type_name
-		variable_name2 = &variable_name
-		variable_name2.method_name()
-	*/
+	var variable_name2 interface_type_name
+	variable_name2 = &variable_name
+	variable_name2.method_name()
 }

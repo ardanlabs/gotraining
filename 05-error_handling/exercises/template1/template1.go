@@ -12,6 +12,8 @@
 // function and check the return error value. Display a proper message to the screen.
 package main
 
+import "fmt"
+
 // InvalidValueError indicates the value is invalid.
 var error_variable_name1 = errors.New("Error Message")
 

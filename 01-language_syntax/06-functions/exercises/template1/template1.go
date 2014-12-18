@@ -11,6 +11,8 @@
 // the error value.
 package main
 
+import "fmt"
+
 // user represents a user in the system.
 type type_name struct {
 	field_name type

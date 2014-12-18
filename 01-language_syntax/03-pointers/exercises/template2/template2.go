@@ -8,6 +8,8 @@
 // value before and after the call to your function.
 package main
 
+import "fmt"
+
 // user represents a user in the system.
 type type_name struct {
 	field_name type

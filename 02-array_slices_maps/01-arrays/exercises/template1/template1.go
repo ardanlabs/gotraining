@@ -9,6 +9,8 @@
 // values. Assign the second array to the first and display the results of the first array.
 package main
 
+import "fmt"
+
 // main is the entry point for the application.
 func main() {
 	// Declare string arrays to hold names.

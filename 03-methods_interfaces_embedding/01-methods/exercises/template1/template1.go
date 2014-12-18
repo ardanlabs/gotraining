@@ -9,6 +9,8 @@
 // the slice displaying the players name and batting average.
 package main
 
+import "fmt"
+
 // batter represents a playing in the game.
 type type_name struct {
 	field_name type

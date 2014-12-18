@@ -12,6 +12,8 @@
 // and display the index position and value of each element in the new slice.
 package main
 
+import "fmt"
+
 // main is the entry point for the application.
 func main() {
 	// Declare a nil slice of integers.

@@ -11,6 +11,8 @@
 // converting the literal value of Pi (3.14).
 package main
 
+import "fmt"
+
 // main is the entry point for the application.
 func main() {
 	// Declare variables that are set to their zero value.
