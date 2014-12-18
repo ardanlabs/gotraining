@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/OYLnGQmvAi
+// http://play.golang.org/p/dVzWOjaLmZ
 
 // Declare a struct type to maintain information about a user (name, email and age).
 // Create a value of this type, initalize with values and display each field.

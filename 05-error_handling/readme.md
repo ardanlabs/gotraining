@@ -30,7 +30,7 @@ http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html
 ### Exercise 1
 Create two error variables, one called InvalidValueError and the other called AmountToLargeError. Provide the static message for each variable. Then write a function called checkAmount that accepts a float64 type value and returns an error value. Check the value for zero and if it is, return the InvalidValueError. Check the value for greater than $1,000 and if it is, reutrn the AmountToLargeError. Write a main function to call the checkAmount function and check the return error value. Display a proper message to the screen.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/1aOj5jLslq)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/qhSysWgcJ_)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/cIVJqLzm4d))
 
 ### Exercise 2

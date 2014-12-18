@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/M4e2J96wsw
+// http://play.golang.org/p/LL_-2T-6wa
 
 // Declare three variables that are initalized to their zero value and three
 // declared with a literal value. Declare variables of type string, int and

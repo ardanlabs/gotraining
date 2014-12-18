@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/0K0dlgG9yq
+// http://play.golang.org/p/ZGhNuXhAkI
 
 // Declare an array of 5 strings with each element initialized to its zero value.
 //

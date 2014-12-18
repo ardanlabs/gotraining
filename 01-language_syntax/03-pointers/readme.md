@@ -42,7 +42,7 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/aJciAZop3Q) | 
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/EWmHE4OgPO) | 
 [Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/oEtveMoO1s))
 
 ___

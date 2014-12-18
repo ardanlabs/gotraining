@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/1aOj5jLslq
+// http://play.golang.org/p/qhSysWgcJ_
 
 // Create two error variables, one called InvalidValueError and the other
 // called AmountToLargeError. Provide the static message for each variable.

@@ -36,7 +36,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part D** Implement the speaker interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type yelper.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/C-Wd9jntwb)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/aikeov9gA-)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hvVA4zB9Bf))
 
 ___

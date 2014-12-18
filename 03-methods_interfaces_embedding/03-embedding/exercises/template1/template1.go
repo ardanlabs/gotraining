@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/C-Wd9jntwb
+// https://play.golang.org/p/aikeov9gA-
 
 // Declare a struct type named animal with two fields name and age. Declare a struct
 // type named dog with the field bark. Embed the animal type into the dog type. Declare

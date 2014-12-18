@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/aJciAZop3Q
+// http://play.golang.org/p/EWmHE4OgPO
 
 // Declare a struct type and create a value of this type. Declare a function
 // that can change the value of some field in this struct type. Display the

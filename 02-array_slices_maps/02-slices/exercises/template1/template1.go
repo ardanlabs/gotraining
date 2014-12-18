@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/ASdQF3Tgv2
+// http://play.golang.org/p/uf5A7BhCq-
 
 // Declare a nil slice of integers. Create a loop that increments a counter variable
 // by 10 five times and appends these values to the slice. Iterate over the slice and

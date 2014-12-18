@@ -28,7 +28,7 @@ http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 
 **Part B:** Declare a new variable of type float32 and initalize the variable by converting the literal value of Pi (3.14).
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/M4e2J96wsw)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/LL_-2T-6wa)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/BaT3B2wRnQ))
 
 ___
