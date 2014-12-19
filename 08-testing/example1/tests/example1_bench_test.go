@@ -18,7 +18,7 @@ package main
 import (
 	"testing"
 
-	"github.com/ArdanStudios/gotraining/06-testing/example1/buoy"
+	"github.com/ArdanStudios/gotraining/08-testing/example1/buoy"
 )
 
 // BenchmarkStation provides stats for how this code is performing.
