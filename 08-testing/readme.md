@@ -9,6 +9,7 @@ Testing is built right into the go tools and the standard library. Testing needs
 * Writes tests and you develop.
 * Benchmark through the dev, qa and release cycles.
 * Profile your code to see what functions to focus on.
+* The tools can interfere with each other. For example, precise memory profiling skews CPU profiles, goroutine blocking profiling affects scheduler trace, etc. Use tools in isolation to get more precise info.
 
 ## Links
 
@@ -19,6 +20,8 @@ http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go
 http://saml.rilspace.org/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof
 
 http://golang.org/pkg/net/http/pprof/
+
+https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs
 
 ## Code Review
 

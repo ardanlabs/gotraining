@@ -27,6 +27,8 @@ This is not an easy step for Mac users since there is no prebuilt distribution.
 ### Code Changes
 We need to add some changes to main to get the profiling data we need.
 
+    import "github.com/davecheney/profile"
+
 	// main is the entry point for the application.
 	func main() {
 		cfg := profile.Config{
@@ -48,3 +50,10 @@ We need to add some changes to main to get the profiling data we need.
 	go build
 	./example1
     go tool pprof --pdf ./example1 cpu.pprof > callgraph.pdf
+    go tool pprof --pdf ./example1 mem.pprof > callgraph.pdf
+
+### Peek into the runtime scheduler:
+GODEBUG=schedtrace=1000,scheddetail=1 ./example1.go
+
+### Important Read
+[Go Debugging](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs)
