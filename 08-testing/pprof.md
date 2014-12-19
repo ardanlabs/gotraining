@@ -53,7 +53,8 @@ We need to add some changes to main to get the profiling data we need.
     go tool pprof --pdf ./example1 mem.pprof > callgraph.pdf
 
 ### Peek into the runtime scheduler:
-http://golang.org/pkg/runtime/  
+http://golang.org/pkg/runtime/
+
 	GODEBUG=schedtrace=1000,scheddetail=1 ./example1.go
 
 	*allocfreetrace*: setting allocfreetrace=1 causes every allocation to be
