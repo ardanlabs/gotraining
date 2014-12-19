@@ -43,7 +43,7 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 ## Profiling
 
-[Go Tooling](example1/pprof.md)
+[Go Tooling](pprof.md)
 
 ## Exercises
 

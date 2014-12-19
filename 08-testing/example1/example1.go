@@ -1,9 +1,6 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Peek into the runtime scheduler:
-// GODEBUG=schedtrace=1000,scheddetail=1 ./example1.go
-
 // Sample program to show how to write tests for a practical
 // program that makes database requests to MongoDB.
 package main
