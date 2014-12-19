@@ -54,7 +54,7 @@ We need to add some changes to main to get the profiling data we need.
 
 ### Peek into the runtime scheduler:
 http://golang.org/pkg/runtime/  
-GODEBUG=schedtrace=1000,scheddetail=1 ./example1.go
+	GODEBUG=schedtrace=1000,scheddetail=1 ./example1.go
 
 	*allocfreetrace*: setting allocfreetrace=1 causes every allocation to be
 	profiled and a stack trace printed on each object's allocation and free.
