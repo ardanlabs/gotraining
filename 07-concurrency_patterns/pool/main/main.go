@@ -3,7 +3,7 @@
 
 // This example is provided with help by Gabriel Aszalos.
 
-// This sample program demostrates how to use the pool package
+// This sample program demonstrates how to use the pool package
 // to share a simulated set of database connections.
 package main
 
@@ -83,8 +83,6 @@ func main() {
 			performQueries(q, p)
 			wg.Done()
 		}(query)
-
-		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
 	}
 
 	// Wait for the goroutines to finish.
