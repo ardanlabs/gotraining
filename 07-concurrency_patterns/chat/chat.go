@@ -18,7 +18,7 @@ type message struct {
 	conn net.Conn
 }
 
-// client represents every connection in the room.
+// client represents a single connection in the room.
 type client struct {
 	name   string
 	cr     *ChatRoom
@@ -34,7 +34,7 @@ func (c *client) read() {
 		// Wait for a message to arrive.
 		line, err := c.reader.ReadString('\n')
 		if err != nil {
-			// Assume this happens right now on shutdown.
+			// Assume this happens right now only on shutdown.
 			c.wg.Done()
 			return
 		}
