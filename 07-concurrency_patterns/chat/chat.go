@@ -28,10 +28,6 @@ type client struct {
 	conn   net.Conn
 }
 
-func init() {
-	log.SetFlags(log.Lshortfile)
-}
-
 // read waits for message and sends it to the chatroom for procesing.
 func (c *client) read() {
 	for {
