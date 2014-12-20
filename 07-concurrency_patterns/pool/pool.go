@@ -4,7 +4,7 @@
 // This example is provided with help by Gabriel Aszalos.
 
 // Package pool manages a user defined set of resources.
-// Based on the work by Fatih Arslan with his pool package.
+// Example provided with help from Fatih Arslan and Gabriel Aszalos.
 package pool
 
 import (
@@ -14,33 +14,31 @@ import (
 	"sync"
 )
 
-// Pool manages a set of resources that can be shared safely by multiple goroutines.
-// The resource being managed must implement to io.Closer interface.
+// Pool manages a set of resources that can be shared safely by
+// multiple goroutines. The resource being managed must implement
+// the io.Closer interface.
 type Pool struct {
-	sync.Mutex
+	m         sync.Mutex
 	resources chan io.Closer
 	factory   func() (io.Closer, error)
 	closed    bool
 }
 
-// ErrInvalidCapacity is returned when there has been an attempt to create an
-// unbuffered pool.
-var ErrInvalidCapacity = errors.New("Capacity needs to be greater than zero.")
-
-// ErrPoolClosed is returned when the pool is close and access is attempted.
+// ErrPoolClosed is returned when an acquier returns on a
+// closed pool.
 var ErrPoolClosed = errors.New("Pool has been closed.")
 
-// New creates a pool that manages resources. A pool requires a function
-// that can allocate a new resource and the number of resources that can
-// be allocated.
-func New(fn func() (io.Closer, error), capacity uint) (*Pool, error) {
-	if capacity <= 0 {
-		return nil, ErrInvalidCapacity
+// New creates a pool that manages resources. A pool requires a
+// function that can allocate a new resource and the number of
+// resources that can be allocated.
+func New(fn func() (io.Closer, error), cap uint) (*Pool, error) {
+	if cap <= 0 {
+		return nil, errors.New("Capacity value too small.")
 	}
 
 	return &Pool{
 		factory:   fn,
-		resources: make(chan io.Closer, capacity),
+		resources: make(chan io.Closer, cap),
 	}, nil
 }
 
@@ -65,8 +63,8 @@ func (p *Pool) Acquire() (io.Closer, error) {
 // Release places a new resource onto the pool.
 func (p *Pool) Release(r io.Closer) {
 	// Secure this operation with the Close operation.
-	p.Lock()
-	defer p.Unlock()
+	p.m.Lock()
+	defer p.m.Unlock()
 
 	// If the pool is closed, discard the resource.
 	if p.closed {
@@ -79,7 +77,7 @@ func (p *Pool) Release(r io.Closer) {
 	case p.resources <- r:
 		fmt.Println("Release:", "In Queue")
 
-	// If the queue is already at capacity we close the resource.
+	// If the queue is already at cap we close the resource.
 	default:
 		fmt.Println("Release:", "Closing")
 		r.Close()
@@ -89,8 +87,8 @@ func (p *Pool) Release(r io.Closer) {
 // Close will shutdown the pool and close all existing resources.
 func (p *Pool) Close() {
 	// Secure this operation with the Release operation.
-	p.Lock()
-	defer p.Unlock()
+	p.m.Lock()
+	defer p.m.Unlock()
 
 	// If the pool is already close, don't do anything.
 	if p.closed {
