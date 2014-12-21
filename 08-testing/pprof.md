@@ -14,13 +14,13 @@ We can use the go tooling in conjunction with the Graph Visualization Tools and 
 ### Graph Visualization Tools
 Download the package for your target OS/Arch
 
-	[http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
+[http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
 
 ### Ghostscript
 This is not an easy step for Mac users since there is no prebuilt distribution.
 
-	Download and uncompress the source code:
-	[http://ghostscript.com/download/gsdnld.html](http://ghostscript.com/download/gsdnld.html)
+Download and uncompress the source code:
+[http://ghostscript.com/download/gsdnld.html](http://ghostscript.com/download/gsdnld.html)
 
 	./configure
 	make
