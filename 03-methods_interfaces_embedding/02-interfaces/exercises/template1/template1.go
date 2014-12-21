@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/vQr6PHsYIn
+// http://play.golang.org/p/pKgSRPXBqC
 
 // Declare an interface named speaker with a method named sayHello. Declare a struct
 // named English that represents a person who speaks english and declare a struct named
@@ -10,57 +10,41 @@
 // Declare a variable of type speaker and assign the _address of_ a value of type English
 // and call the method. Do it again for a value of type Chinese.
 //
-// From exercise 1, add a new function named sayHello that accepts a value of type speaker.
+// Add a new function named sayHello that accepts a value of type speaker.
 // Implement that function to call the sayHello method on the interface value. Then create
 // new values of each type and use the function.
 package main
 
-import "fmt"
+// Add imports.
 
-// speaker implements the voice of anyone.
-type interface_type_name interface {
-	method_name()
-}
+// Declare the speaker interface with a single method called sayHello.
 
-// english represents an english speaking person.
-type english_type_name struct{}
+// Declare an empty struct type named english.
 
-// sayHello implements the speaker interface.
-func (receiver_name english_type_name) method_name() {
-	fmt.Println("Hello World")
-}
+// Declare a method named sayHello for the english type
+// using a value receiver. "Hello World"
 
-// chinese represents a chinese speaking person.
-type chinese_type_name struct{}
+// Declare an empty struct type named chinese.
 
-// sayHello implements the speaker interface.
-func (receiver_name chinese_type_name) method_name() {
-	fmt.Println("你好世界")
+// Declare a method named sayHello for the chinese type
+// using a value receiver. "你好世界"
+
+// sayHello accepts values of the interface type.
+func sayHello( /* Declare parameter */ ) {
+	// Call the sayHello() method from the interface parameter.
 }
 
 // main is the entry point for the application.
 func main() {
-	// Declare a variable of the interfafe type.
-	var variable_name interface_type_name
+	// Declare a variable of the interface type set to its zero value.
 
-	// Assign a value to the interface type and
-	// call the interface method.
-	var variable_name english_type_name
-	sp = variable_name
-	sp.method_name()
+	// Declare a variable of type english and assign it to
+	// the interface variable.
+	// Call the sayHello() method from the interface variable.
 
-	// Assign a different value to the interface type and
-	// call the interface method.
-	var variable_name chinese_type_name
-	sp = variable_name
-	sp.method_name()
+	// Declare a variable of type chinese and assign it to
+	// the interface variable.
+	// Call the sayHello() method from the interface variable.
 
-	// Create new values and call the function.
-	function_name(new(english_type_name))
-	function_name(new(chinese_type_name))
-}
-
-// SatHello abstracts speaking functionality.
-func function_name(variable_name interface_type_name) {
-	variable_name.method_name()
+	// Call the sayHello function passing each concrete type.
 }

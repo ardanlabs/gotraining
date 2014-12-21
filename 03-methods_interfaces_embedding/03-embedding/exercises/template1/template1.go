@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/aikeov9gA-
+// http://play.golang.org/p/a-Nzng_E6Z
 
 // Declare a struct type named animal with two fields name and age. Declare a struct
 // type named dog with the field bark. Embed the animal type into the dog type. Declare
@@ -17,54 +17,32 @@
 // bark field. Call the method yelp again from the value of type yelper.
 package main
 
-import "fmt"
+// Add imports.
 
-// yelper represents talking animals.
-type interface_type_name interface {
-	method_name()
-}
+// Declare an interface type named yelper that has a
+// single method called yelp().
 
-// animal represents all animals.
-type type_name struct {
-	field_name type
-	field_name type
-}
+// Declare a struct type named animal with two fields
+// name of type string and age of type in.
 
-// yelp represents how an animal can speak.
-func (receiver_name *type_name) method_name() {
-	fmt.Println("Not Implemented")
-}
+// Declare a method for the animal struct that implements
+// the yelper interface using a pointer receiver.
 
-// dog represents a dog.
-type type_name struct {
-	embedded_type_name
-	field_name type_name
-}
+// Declare a struct type named dog that embeds the animal
+// type and has a field named bark of type int.
 
-// yelp represents how an animal can speak.
-func (receiver_name *type_name) method_name() {
-	for variable_name := 0; variable_name < receiver_name.field_name; variable_name++ {
-		fmt.Print("BARK ")
-	}
-	fmt.Println()
-}
+// Declare a method for the dog struct that implements
+// the yelper interface using a pointer receiver.
 
 // main is the entry point for the application.
 func main() {
-	// Create a value of type dog.
-	variable_name := type_name{
-		embedded_type_name: embedded_type_name{
-			field_name: value,
-			field_name: 1,
-		},
-		field_name: value,
-	}
+	// Declare and initialize a variable of type dog.
 
-	// Display the value.
-	fmt.Println(variable_name)
+	// Display the value of the variable.
 
-	// Use the interface.
-	var variable_name2 interface_type_name
-	variable_name2 = &variable_name
-	variable_name2.method_name()
+	// Declare a variable of the yelper interface type.
+	var y yelper
+
+	// Assign the dog variable to the iterface variable.
+	// The call the interface method.
 }

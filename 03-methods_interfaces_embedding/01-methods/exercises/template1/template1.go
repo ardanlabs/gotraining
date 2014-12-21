@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/BMOdLQfhdY
+// http://play.golang.org/p/Rj0QfwVPhX
 
 // Declare a struct that represents a baseball player. Include name, atBats and hits.
 // Declare a method that calculates a players batting average. The formula is Hits / AtBats.
@@ -9,31 +9,19 @@
 // the slice displaying the players name and batting average.
 package main
 
-import "fmt"
+// Add imports.
 
-// batter represents a playing in the game.
-type type_name struct {
-	field_name type
-	field_name type
-	field_name type
+// Declare a struct that represents a ball player.
+// Include field called name, atBats and hits.
+
+// Declare a method that calculates the batting average for a batter.
+func ( /* receiver */ ) average() /* return type */ {
 }
 
 // main is the entry point for the application.
 func main() {
-	// Create a few players.
-	slice_name := []type_name{
-		type_name{value, value, value},
-		type_name{value, value, value},
-		type_name{value, value, value},
-	}
+	// Create a slice of players and populate each player
+	// with field values.
 
-	// Display the batting average for each player.
-	for _, variable_name := range slice_name {
-		fmt.Printf("%s: AVG[%.3f]\n", variable_name.field_name, variable_name.method_name())
-	}
-}
-
-// average calculates the batting average for a batter.
-func (receiver_name *type_name) method_name() return_type {
-	return float64(receiver_name.field_name) / float64(receiver_name.field_name)
+	// Display the batting average for each player in the slice.
 }

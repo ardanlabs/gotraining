@@ -4,13 +4,21 @@
 // Package toy contains support for managing toy inventory.
 package toy
 
-// bat represents the bat we sell.
-type type_name struct {
-	field_name type
-	field_name type
-}
+// Declare a struct type named Toy with four fields. Name string,
+// Weight int, onHand int and sold int.
 
-// NewBat creates values of type bat.
-func function_name() [operator]type_name {
-	return new(type_name)
-}
+// Declare a function named New that accepts values for the
+// exported fields. Return a pointer of type Toy that is initialized
+// with the parameters.
+
+// Declare a method named OnHand with a pointer receiver that
+// returns the current on hand count.
+
+// Declare a method named UpdateOnHand with a pointer receiver that
+// update and returns the current on hand count.
+
+// Declare a method named Sold with a pointer receiver that
+// returns the current sold count.
+
+// Declare a method named UpdateSold with a pointer receiver that
+// update and returns the current sold count.

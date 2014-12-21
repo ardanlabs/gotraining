@@ -1,25 +1,26 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Create a package named toy with a single unexported struct type named bat. Add
-// the exported fields Height and Weight to the bat type. Then create an exported
-// factory method called NewBat that returns pointers of type bat that are initialized
-// to their zero value.
+// Create a package named toy with a single exported struct type named Toy. Add
+// the exported fields Name and Weight. Then add two unexported fields named
+// onHand and sold. Declare a factory function called New to create values of
+// type toy and accept parameters for the exported fields. Then declare methods
+// that return and update values for the unexported fields.
 //
-// Create a program that imports the toy package. Use the NewBat function to create a
-// value of bat and populate the values of Height and Width. Then display the value of
-// the bat variable.
+// Create a program that imports the toy package. Use the New function to create a
+// value of type toy. Then use the methods to set the counts and display the
+// field values of that toy value.
 package main
 
-import "fmt"
+// Add imports.
 
 // main is the entry point for the application.
 func main() {
-	// Create a value of type bat.
-	variable_name := toy.function_name()
-	variable_name.field_name = value
-	variable_name.field_name = value
+	// Use the New function from the toy package to create a value of
+	// type toy.
 
-	// Display the value.
-	fmt.Println(variable_name)
+	// Use the methods from the toy value to set some intialize
+	// values.
+
+	// Display each field separately from the toy value.
 }

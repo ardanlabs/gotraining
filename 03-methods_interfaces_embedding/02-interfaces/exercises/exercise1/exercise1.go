@@ -10,7 +10,7 @@
 // Declare a variable of type speaker and assign the _address of_ a value of type English
 // and call the method. Do it again for a value of type Chinese.
 //
-// From exercise 1, add a new function named sayHello that accepts a value of type speaker.
+// Add a new function named sayHello that accepts a value of type speaker.
 // Implement that function to call the sayHello method on the interface value. Then create
 // new values of each type and use the function.
 package main
@@ -42,7 +42,7 @@ func (c chinese) sayHello() {
 
 // main is the entry point for the application.
 func main() {
-	// Declare a variable of the interfafe type.
+	// Declare a variable of the interface type.
 	var sp speaker
 
 	// Assign a value to the interface type and

@@ -4,13 +4,42 @@
 // Package toy contains support for managing toy inventory.
 package toy
 
-// bat represents the bat we sell.
-type bat struct {
-	Height int
+// Toy represents a toy we sell.
+type Toy struct {
+	Name   string
 	Weight int
+	onHand int
+	sold   int
 }
 
-// NewBat creates values of type bat.
-func NewBat() *bat {
-	return new(bat)
+// New creates values of type toy.
+func New(name string, weight int) *Toy {
+	return &Toy{
+		Name:   name,
+		Weight: weight,
+	}
+}
+
+// OnHand returns the current number of this
+// toy on hand.
+func (t *Toy) OnHand() int {
+	return t.onHand
+}
+
+// UpdateOnHand updates the on hand count and
+// returns the current value.
+func (t *Toy) UpdateOnHand(count int) int {
+	return t.onHand + count
+}
+
+// Sold returns the current number of this
+// toy sold.
+func (t *Toy) Sold() int {
+	return t.sold
+}
+
+// UpdateSold updates the sold count and
+// returns the current value.
+func (t *Toy) UpdateSold(count int) int {
+	return t.sold + count
 }

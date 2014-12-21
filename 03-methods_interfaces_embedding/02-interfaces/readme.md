@@ -32,9 +32,9 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part A** Declare an interface named Speaker with a method named SayHello. Declare a struct named English that represents a person who speaks english and declare a struct named Chinese for someone who speaks chinese. Implement the Speaker interface for each struct using a pointer receiver and these literal strings "Hello World" and "你好世界". Declare a variable of type Speaker and assign the _address of_ a value of type English and call the method. Do it again for a value of type Chinese.
 
-**Part B** From exercise 1, add a new function named SayHello that accepts a value of type Speaker. Implement that function to call the SayHello method on the interface value. Then create new values of each type and use the function.
+**Part B** Add a new function named SayHello that accepts a value of type Speaker. Implement that function to call the SayHello method on the interface value. Then create new values of each type and use the function.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/vQr6PHsYIn)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/pKgSRPXBqC)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/Kleh75YUx4))
 
 ___
