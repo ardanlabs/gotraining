@@ -7,7 +7,7 @@ On this day we continue go deeper into Go. We learn about concurrency patterns, 
 [Concurrency Patterns](../07-concurrency_patterns/readme.md)
 
 #### Testing, Benchmarking and Profiling
-[Database Program](../08-testing/readme.md)
+[Testing, Benchmarking and Profiling](../08-testing/readme.md)
 
 #### Logging, Encoding and IO
 [Standard Library](../09-standard_library/readme.md)
