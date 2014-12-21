@@ -39,6 +39,10 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 [helloHTTP.go](example2/helloHTTP.go)
 
+### Example 3
+
+[GODEBUG Profiling](example3/example3.go)
+
 ## Tests
 
 [Standard tests for testing calls to MongoDB](example1/tests/example1_test.go)
