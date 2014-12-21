@@ -27,11 +27,11 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 ## Code Review
 
-[Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/4r90uFQwJn))
+[Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/fWJR3Kln4Y))
 
 [Reference Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/DB8hwJ0hw9))
 
-[Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/vlRlYsfLwb))
+[Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/BoNloVfW37))
 
 [Appending slices](example4/example4.go) ([Go Playground](http://play.golang.org/p/UzmwiMWDwd))
 
@@ -41,18 +41,18 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 [Practical use of slices](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/-qQgO7NbLm))
 
-[Three index slicing](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/v3ZHknDvSx))
+[Three index slicing](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/dJk2eycWhH))
 
 ## Exercies
 
 ### Exercise 1
 
-**Part A** Declare a nil slice of integers. Create a loop that increments a counter variable by 10 five times and appends these values to the slice. Iterate over the slice and display each value.
+**Part A** Declare a nil slice of integers. Create a loop that appends 10 values to the slice. Iterate over the slice and display each value.
 
 **Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of the first and second indexes and display the index position and value of each element in the new slice.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/uf5A7BhCq-)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/9ir4vinceh))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/5skpU4iFL5)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/lABnNlP7jm))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

@@ -1,14 +1,14 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/9ir4vinceh
+// http://play.golang.org/p/lABnNlP7jm
 
-// Declare a nil slice of integers. Create a loop that increments a counter variable
-// by 10 five times and appends these values to the slice. Iterate over the slice and
-// display each value.
+// Declare a nil slice of integers. Declare a nil slice of integers. Create a
+// loop that appends 10 values to the slice. Iterate over the slice and display
+// each value. Iterate over the slice and display each value.
 //
 // Declare a slice of five strings and initialize the slice with string literal
-// values. Display all the elements. Take a slice of the second and third elements (index 1 and 2)
+// values. Display all the elements. Take a slice of the first and second index
 // and display the index position and value of each element in the new slice.
 package main
 
@@ -37,7 +37,7 @@ func main() {
 		fmt.Printf("Index: %d  Name: %s\n", index, name)
 	}
 
-	// Take a slice of the second and third elements.
+	// Take a slice of the first and second index.
 	slice := names[1:3]
 
 	// Display the value of the new slice.

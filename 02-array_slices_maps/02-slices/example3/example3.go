@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/vlRlYsfLwb
+// http://play.golang.org/p/BoNloVfW37
 
 // Sample program to show how to takes slices of slices to create different
 // views of and make changes to the underlying array.

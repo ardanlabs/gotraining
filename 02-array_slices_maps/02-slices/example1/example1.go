@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/4r90uFQwJn
+// http://play.golang.org/p/fWJR3Kln4Y
 
 // Sample program to show how the capacity of the slice
 // is not available for use.
@@ -21,7 +21,7 @@ func main() {
 	slice[3] = "Grape"
 	slice[4] = "Plum"
 
-	// You can't access an element of a slice beyond its length.
+	// You can't access an index of a slice beyond its length.
 	slice[5] = "Runtime error"
 
 	// Error: panic: runtime error: index out of range
