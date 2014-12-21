@@ -12,8 +12,7 @@ We can use the go tooling in conjunction with the Graph Visualization Tools and 
 	go get github.com/davecheney/profile
 
 ### Graph Visualization Tools
-Download the package for your target OS/Arch
-
+Download the package for your target OS/Arch:
 [http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
 
 ### Ghostscript
