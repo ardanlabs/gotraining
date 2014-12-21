@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/myewV2u_B_
+// http://play.golang.org/p/p0vlsW5sVL
 
 // Declare a struct type to maintain information about a user. Declare a function
 // that creates value of and returns pointers of this type and an error value. Call
@@ -11,32 +11,22 @@
 // the error value.
 package main
 
-import "fmt"
+// Add imports.
 
-// user represents a user in the system.
-type type_name struct {
-	field_name type
-	field_name type
+// Declare a type named user.
+
+// Declare a function that creates user type values and returns a pointer
+// to that value and an error value of nil.
+func funcName() /* (pointer return arg, error return arg) */ {
+	// Create a value of type user and return the proper values.
 }
 
 // main is the entry point for the application.
 func main() {
-	// Create a value of type user.
-	variable_name, variable_name := function_name()
-	if variable_name != nil {
-		fmt.Println(variable_name)
-		return
-	}
+	// Use the function to create a value of type user. Check
+	// the error being returned.
 
-	// Display the value.
-	fmt.Println(variable_name)
+	// Display the value that the pointer points to.
 
-	// Create a value of type user and ignore the second value being returned.
-	variable_name, _ := function_name()
-	fmt.Println(variable_name)
-}
-
-// newUser creates and returns pointers of user type values.
-func function_name() ([operator]type, error_type) {
-	return [operator]type{"value", "value"}, nil
+	// Call the function again and just check the error.
 }

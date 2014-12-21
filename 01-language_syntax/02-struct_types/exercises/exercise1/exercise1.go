@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/dKXc_T3Thk
+// https://play.golang.org/p/uR27dgf4EI
 
 // Declare a struct type to maintain information about a user (name, email and age).
 // Create a value of this type, initalize with values and display each field.
@@ -29,7 +29,7 @@ func main() {
 		age:   45,
 	}
 
-	// Display the values.
+	// Display the field values.
 	fmt.Println("Name", bill.name)
 	fmt.Println("Email", bill.email)
 	fmt.Println("Age", bill.age)
@@ -45,7 +45,7 @@ func main() {
 		age:   46,
 	}
 
-	// Display the values.
+	// Display the field values.
 	fmt.Println("Name", ed.name)
 	fmt.Println("Email", ed.email)
 	fmt.Println("Age", ed.age)

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/lArdMk8kJJ
+// http://play.golang.org/p/pUtHSTN0Ef
 
 // Declare and initalize a variable of type int with the value of 20. Display
 // the _address of_ and _value of_ the variable.
@@ -22,7 +22,7 @@ func main() {
 	fmt.Println("Address Of:", &value, "Value Of:", value)
 
 	// Declare a pointer variable of type int. Assign the
-	// address of the integer variable.
+	// address of the integer variable above.
 	p := &value
 
 	// Display the address of, value of and the value the pointer

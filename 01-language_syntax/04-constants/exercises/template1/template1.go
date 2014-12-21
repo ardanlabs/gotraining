@@ -1,28 +1,25 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/wZLDs_AVDO
+// http://play.golang.org/p/kzZZ24O23g
 
 // Declare an untyped and typed constant and display their values.
 //
 // Multiply two literal constants into a typed variable and display the value.
 package main
 
-import "fmt"
+// Add imports.
 
-// server is the IP address for connecting.
-const constant_name1 = "N.N.N.N"
+// Declare a constant of kind string and assign a value.
 
-// port is the port to make that connection.
-const constant_name2 type = N
+// Declare a constant of type integer and assign a value.
 
 // main is the entry point for the application.
 func main() {
-	// Display the server information.
-	fmt.Println(constant_name1)
-	fmt.Println(constant_name2)
+	// Display the value of both constants.
 
-	// Calculate the number of minutes in 5320 seconds.
-	variable_name := N / N.N
-	fmt.Println(variable_name)
+	// Divide a constant of kind integer and kind floating point and
+	// assign the result to a variable.
+
+	// Display the value of the variable.
 }

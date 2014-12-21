@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/H_9Vm6fkuF
+// http://play.golang.org/p/Eg9m_rYm4V
 
 // Declare a named type called counter with a base type of int. Declare and initalize
 // a variable of this named type to its zero value. Display the value of this variable
@@ -14,21 +14,20 @@
 // allow the assignment?
 package main
 
-import "fmt"
+// Add imports.
 
-// Counter is a named type for counting.
-type type_name type
+// Declare the counter named type with a base type of int.
 
 func main() {
-	// Declare a variable of type Counter.
-	var variable_name type_name
-	fmt.Println(variable_name)
+	// Declare and display the variable of the named type
+	// to its zero value.
 
-	// Initalize a new variable.
-	variable_name := type_name(value)
-	fmt.Println(variable_name)
+	// Declare and display the variable of the named type
+	// to the value of 10.
 
-	// Will not compile
-	variable_name := value
-	variable_name = variable_name
+	// Declare a variable of type int initialized to 1.
+
+	// Assign this new variable to one of the named variables.
+
+	// Did you get a compiler error on the above assignment?
 }

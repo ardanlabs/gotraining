@@ -38,8 +38,8 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 **Part B** Make a second call to your function but this time ignore the value and just test the error value.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/myewV2u_B_)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/nlgkntCNN8))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/p0vlsW5sVL)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/fSjQ3caTy1))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
