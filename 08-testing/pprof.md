@@ -14,13 +14,13 @@ We can use the go tooling in conjunction with the Graph Visualization Tools and 
 ### Graph Visualization Tools
 Download the package for your target OS/Arch
 
-	http://www.graphviz.org/Download.php
+	[http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
 
 ### Ghostscript
 This is not an easy step for Mac users since there is no prebuilt distribution.
 
 	Download and uncompress the source code:
-	http://ghostscript.com/download/gsdnld.html
+	[http://ghostscript.com/download/gsdnld.html](http://ghostscript.com/download/gsdnld.html)
 
 	./configure
 	make
@@ -55,7 +55,7 @@ We need to add some changes to main to get the profiling data we need.
     go tool pprof --pdf ./example1 mem.pprof > callgraph.pdf
 
 ### Peek into the runtime scheduler:
-http://golang.org/pkg/runtime/
+[http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
 	GODEBUG=schedtrace=1000,scheddetail=1 ./example1.go
 
