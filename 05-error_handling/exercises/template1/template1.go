@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/qhSysWgcJ_
+// http://play.golang.org/p/Rt3O-7ndtJ
 
 // Create two error variables, one called InvalidValueError and the other
 // called AmountToLargeError. Provide the static message for each variable.
@@ -12,52 +12,31 @@
 // function and check the return error value. Display a proper message to the screen.
 package main
 
-import "fmt"
+// Add imports.
 
-// InvalidValueError indicates the value is invalid.
-var error_variable_name1 = errors.New("Error Message")
+// Declare an error variable named InvalidValueError using the New
+// function from the errors package.
 
-// AmountToLargeError indicates the value beyond the upper bound.
-var error_variable_name2 = errors.New("Error Message")
+// Declare an error variable named AmountToLargeError using the New
+// function from the errors package.
+
+// Declare a function named checkAmount that accepts a value of
+// type float64 and returns an error interface value.
+func checkAmount( /* parameter */ ) /* return arg */ {
+	// Is the parameter equal to zero. If so then return
+	// the error variable.
+
+	// Is the parameter greater than 1000. If so then return
+	// the other error variable.
+
+	// Return nil for the error value.
+}
 
 // main is the entry point for the application.
 func main() {
-	// Call the function and get the error.
-	if variable_name := function_name(0); err != nil {
-		switch err {
-		// Check if the error is an InvalidValueError.
-		case error_variable_name1:
-			fmt.Println("custom error messsage")
-			return
-
-		// Check if the error is an InvalidValueError.
-		case error_variable_name2:
-			fmt.Println("custom error messsage")
-			return
-
-		// Handle the default error.
-		default:
-			fmt.Println(variable_name)
-			return
-		}
-	}
+	// Call the checkAmount function and check the error. Then
+	// use a switch/case to compare the error with each variable.
+	// Add a default case. Return if there is an error.
 
 	// Display everything is good.
-	fmt.Println("message")
-}
-
-// checkAmount validates the value passed in.
-func function_name(variable_name type) error_type {
-	// Is the parameter equal to zero.
-	if variable_name == N {
-		return error_variable_name1
-	}
-
-	// Is the parameter greater than 1000.
-	if variable_name > N {
-		return error_variable_name2
-	}
-
-	// Return nil for the error value.
-	return no_error
 }

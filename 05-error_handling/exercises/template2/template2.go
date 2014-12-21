@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/GbWvjprxcc
+// http://play.golang.org/p/x6UimVQMMQ
 
 // Create a custom error type called appError that contains three fields, Err error,
 // Message string and Code int. Implement the error interface providing your own message
@@ -11,47 +11,31 @@
 // checkFlag function and check the error for the concrete type.
 package main
 
-import (
-	"errors"
-	"fmt"
-)
+// Add imports.
 
-// appError is a custom error type for the program.
-type type_name struct {
-	field_name type
-	field_name type
-	field_name type
-}
+// Declare a struct type named appError with three fields, Err of type error,
+// Message of type string and Code of type int.
 
-// Error implements the error interface for appError.
-func (receiver_name [operator]type_name) method_name() string {
-	return fmt.Sprintf("App Error[%s] Message[%s] Code[%d]", receiver_name.field_name, receiver_name.field_name, receiver_name.field_name)
+// Declare a method for the appError struct type that implements the
+// error interface.
+
+// Declare a function named checkFlag that accepts a boolean value and
+// returns an error interface value.
+func checkFlag( /* parameter */ ) /* return arg */ {
+	// If the parameter is false return an appError.
+
+	// Return a default error.
 }
 
 // main is the entry point for the application.
 func main() {
-	// Call the function to simulate an error of the
+	// Call the checkFlag function to simulate an error of the
 	// concrete type.
-	variable_name1 := function_name(false)
 
 	// Check the concrete type and handle appropriately.
-	switch variable_name2 := variable_name1.(type) {
-	case [operator]type_name:
-		fmt.Printf("App Error: Code[%d] Message[%s] Err[%s]", variable_name2.field_name, variable_name2.field_name, variable_name2.field_name)
-		return
-	default:
-		fmt.Println(variable_name2)
-		return
-	}
-}
+	switch e := err.(type) {
+	// Apply the case for the default error type.
 
-// checkFlag returns one of two errors based on the value of the parameter.
-func function_name(parameter_name type) error_type {
-	// If the parameter is false return an appError.
-	if !parameter_name {
-		return [operator]type_name{errors.New("error message"), "error message", N}
+	// Apply the default case.
 	}
-
-	// Return a default error.
-	return errors.New("error message")
 }
