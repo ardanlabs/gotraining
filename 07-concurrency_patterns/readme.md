@@ -23,6 +23,8 @@ http://blog.golang.org/advanced-go-concurrency-patterns
 
 [Pooling](pool)
 
+[Chat](chat)
+
 ## Advanced Code Review
 
 [Search](search)

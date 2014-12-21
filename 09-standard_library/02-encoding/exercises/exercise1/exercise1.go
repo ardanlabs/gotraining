@@ -7,7 +7,7 @@
 // type that maps to the JSON document. Using the json package, read the file and create a slice of this struct
 // type. Display the slice.
 //
-// From example 1, Marshal the slice into pretty print strings and display each element.
+// Marshal the slice into pretty print strings and display each element.
 package main
 
 import (

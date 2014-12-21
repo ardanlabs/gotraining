@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/5hUtwFAGEn
+// http://play.golang.org/p/mB4QslSNoA
 
 // Create a program that declares two anonymous functions. Once that counts up to
 // 100 from 0 and one that counts down to 0 from 100. Display each number with an
@@ -30,7 +30,7 @@ func main() {
 
 	// Declare an anonymous function and create a goroutine.
 	go func() {
-		// Display the alphabet three times.
+		// Count down from 100 to 0.
 		for count := 100; count >= 0; count-- {
 			fmt.Printf("[A:%d]", count)
 		}
@@ -41,7 +41,7 @@ func main() {
 
 	// Declare an anonymous function and create a goroutine.
 	go func() {
-		// Display the alphabet three times.
+		// Count up from 0 to 100.
 		for count := 0; count < 100; count++ {
 			fmt.Printf("[B:%d]", count)
 		}

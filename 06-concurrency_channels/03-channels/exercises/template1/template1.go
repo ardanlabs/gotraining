@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/oaCmWz6_CR
+// http://play.golang.org/p/h0nMS_l1rO
 
 // Write a program where two goroutines pass an integer back and forth
 // ten times. Display when each goroutine receives the integer. Increment
@@ -9,59 +9,42 @@
 // the program cleanly.
 package main
 
-import (
-	"fmt"
-	"sync"
-)
+// Add imports.
 
-// wg is used to wait for the program to finish.
-var waitgroup_name sync.waitgroup_type
+// Declare a wait group variable.
+
+// Declare a function for the goroutine. Pass in a name for the
+// routine and a channel used to share the value back and forth.
+func goroutine( /* parameters */ ) {
+	for {
+		// Receive on the channel, waiting for the integer. Check
+		// if the channel is closed.
+
+		// Display the integer value received.
+
+		// Terminate the goroutine when the value is 10.
+		{
+			// Close the channel.
+			// Wait on the wait group to hit 0.
+			// Display the goroutine is finished and return.
+		}
+
+		// Increment the value and send in back through
+		// the channel.
+	}
+}
 
 // main is the entry point for all Go programs.
 func main() {
-	// Create an unbuffered channel.
-	channel_name := make(chan type)
+	// Declare and initialize an unbuffered channel
+	// of type int.
 
-	// Add a count of two, one for each goroutine.
-	waitgroup_name.add_method(N)
+	// Increment the wait group for each goroutine
+	// to be created.
 
-	// Launch two goroutines.
-	keyword function_name("Name", channel_name)
-	keywprd function_name("Name", channel_name)
+	// Create the two goroutines.
 
-	// Start the sharing.
-	channel_name [operator] N
+	// Send the initial integer value into the channel.
 
-	// Wait for the program to finish.
-	waitgroup_name.wait_method()
-}
-
-// goroutine simulates sharing a value.
-func function_name(parameter_name type, channel_name chan type) {
-	// Schedule this code when the function returns.
-	defer func() {
-		fmt.Printf("Goroutine %s Down\n", parameter_name)
-		waitgroup_name.done_method()
-	}()
-
-	for {
-		// Wait for the ball to be hit back to us.
-		variable_name, flag_name := [operator]channel_name
-		if !flag_name {
-			// If the channel was closed, shutdown.
-			return
-		}
-
-		// Display the value.
-		fmt.Printf("Goroutine %s Inc %d\n", parameter_name, variable_name)
-
-		// Terminate when the value is 10.
-		if variable_name == N {
-			close(channel_name)
-			return
-		}
-
-		// Share the value.
-		channel_name [operator] (variable_name + N)
-	}
+	// Wait for all the goroutines to finish.
 }

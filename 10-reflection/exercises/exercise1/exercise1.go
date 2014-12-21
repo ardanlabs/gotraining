@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/ben9PaXNWJ
+// http://play.golang.org/p/xy-wyPrsjz
 
 // Declare a struct type that represents a request for a customer invoice. Include a CustomerID and InvoiceID field. Define
 // tags that can be used to validate the request. Define tags that specify both the length and range for the ID to be valid.
@@ -24,7 +24,7 @@ type Customer struct {
 
 // main is the entry point for the application.
 func main() {
-	// Declare a variable of type user.
+	// Declare a variable of type Customer.
 	customer := Customer{
 		CustomerID: 202,
 		InvoiceID:  76545,

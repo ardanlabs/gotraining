@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/kymUTeRoFv
+// http://play.golang.org/p/1-l_QmaSvy
 
 // Setup a new program to use the log package. Set the Prefix to your first name and on each log line show
 // the date and long path for the code file.
@@ -46,6 +46,4 @@ func main() {
 	log.Printf("These are named %+v\n", names)
 
 	log.Fatalln("Terminate Program")
-
-	log.Println("main function ended")
 }

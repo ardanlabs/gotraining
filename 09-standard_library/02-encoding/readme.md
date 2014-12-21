@@ -25,9 +25,9 @@ http://www.goinggo.net/2014/01/decode-json-documents-in-go.html
 
 **Part A** Create a file with an array of JSON documents that contain a user name and email address. Declare a struct type that maps to the JSON document. Using the json package, read the file and create a slice of this struct type. Display the slice.
 
-**Part B** From example 1, Marshal the slice into pretty print strings and display each element.
+**Part B** Marshal the slice into pretty print strings and display each element.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/tHy_2p4obQ) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/OkIHsVwMQ7) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/Huf8jEDUJO))
 
 ___

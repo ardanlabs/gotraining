@@ -27,11 +27,17 @@ https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-i
 
 The sample program implements support for accessing a MongoDB database from MongoLab. The program implements two different find calls that return documents that are unmarshaled into user defined types.
 
+### Example 1
+
 [example1.go](example1/example1.go)
 
 [buoy/buoy.go](example1/buoy/buoy.go)
 
 [mongodb/mongodb.go](example1/mongodb/mongodb.go)
+
+### Example 2
+
+[helloHTTP.go](example2/helloHTTP.go)
 
 ## Tests
 

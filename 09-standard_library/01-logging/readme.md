@@ -23,8 +23,8 @@ http://www.goinggo.net/2013/11/using-log-package-in-go.html
 
 Setup a new program to use the log package. Set the Prefix to your first name and on each log line show the date and long path for the code file.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/uTJZcDi1iu) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/kymUTeRoFv))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/9eVWni05Ma) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/1-l_QmaSvy))
 
 ___
 [![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)

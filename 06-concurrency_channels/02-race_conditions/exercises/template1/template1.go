@@ -1,9 +1,9 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/4TNxrwaHc5
+// http://play.golang.org/p/9-if--6ZBn
 
-// Template answer for exercise 1 of Race Conditions.
+// Fix the race condition in this program.
 package main
 
 import (
@@ -19,9 +19,6 @@ var (
 
 	// wg is used to wait for the program to finish.
 	wg sync.WaitGroup
-
-	// mutex will help protect the slice.
-	variable_name sync.mutex_type
 )
 
 // init is called prior to main.
@@ -53,13 +50,7 @@ func random(amount int) {
 	// Generate as many random numbers as specified.
 	for i := 0; i < amount; i++ {
 		n := rand.Intn(100)
-
-		// Protect this append to keep access safe.
-		variable_name.lock_method()
-		{
-			numbers = append(numbers, n)
-		}
-		variable_name.unlock_method()
+		numbers = append(numbers, n)
 	}
 
 	// Tell main we are done.

@@ -14,35 +14,13 @@ go test -run=XXX -bench=BenchmarkAtoi
 // Identify which function performs the best.
 package main
 
-import (
-	"fmt"
-	"strconv"
-	"testing"
-)
+// Add imports.
 
-// BenchmarkSprintf provides performance numbers for the fmt.Sprintf function
-func function_name(parameter_name [operator]testing.type) {
-	variable_name := N
+// BenchmarkSprintf provides performance numbers for the fmt.Sprintf function.
+// fmt.Sprintf("%d", number)
 
-	for i := 0; i < parameter_name.N; i++ {
-		fmt.Sprintf("%d", variable_name)
-	}
-}
+// BenchmarkFormat provides performance numbers for the strconv.FormatInt function.
+// strconv.FormatInt(number, 10)
 
-// BenchmarkFormat provides performance numbers for the strconv.FormatInt function
-func function_name(parameter_name [operator]testing.type) {
-	variable_name := int64(N)
-
-	for i := 0; i < parameter_name.N; i++ {
-		strconv.FormatInt(variable_name, N)
-	}
-}
-
-// BenchmarkAtoi provides performance numbers for the strconv.Atoi function
-func function_name(parameter_name [operator]testing.type) {
-	variable_name := N
-
-	for i := 0; i < parameter_name.N; i++ {
-		strconv.Itoa(variable_name)
-	}
-}
+// BenchmarkAtoi provides performance numbers for the strconv.Atoi function.
+// strconv.Itoa(number)
