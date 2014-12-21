@@ -32,10 +32,14 @@ func main() {
 		go goroutine(i)
 	}
 
+	// Wait for all the goroutines to complete.
 	wg.Wait()
+
+	// Wait to see the global runqueue deplete.
 	time.Sleep(3 * time.Second)
 }
 
+// goroutine does some CPU intensive work.
 func goroutine(i int) {
 	time.Sleep(time.Second)
 
