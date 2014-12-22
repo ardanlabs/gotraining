@@ -19,10 +19,9 @@ _Note: This material has been designed to be taught in a classroom environment. 
 
 **What a student is expected to learn:**
 
-* Understand what is available in the language.
-    * Get a feel for writing code in an idiomatic style and syntax.
-    * Learn how to write maintainable and solid programs that are production ready.
-    * Walk away with patterns and techniques for solving common problems. 
+* Thorough understanding of the language syntax and implementation.
+* A feel for writing code in an idiomatic style and syntax.
+* Walk away with patterns and techniques for solving common problems. 
 
 ## Class Options
 
