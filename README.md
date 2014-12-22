@@ -39,7 +39,7 @@ _Note: This material has been designed to be taught in a classroom environment. 
 Corporate full day classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 **_Currently Scheduled Corporate Classes:_**  
-Comcast VA - Dec 2014 - 3 Day Class
+None at this time
 
 Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
 
@@ -58,7 +58,7 @@ NYC, NY - June 2015
 Hourly training classes are used for workshops or meetups and exclude time for working through the exercises. These events are free.
 
 **_Currently Scheduled Workshops:_**   
-[ITPalooza Miami - Dec 4th](http://itpalooza.com/session/intro-to-go-programming/)
+None at this time
 
 **_Currently Scheduled Meetups:_**   
 Go Dominican Republic - TBA
@@ -68,6 +68,7 @@ Go Dominican Republic - TBA
 ## Past Events
 
 **_Corporate Classes:_**  
+Comcast - Reston, VA - Dec 2014  
 Wrecking Ball Media - Miami, FL - Sep 2014  
 Comcast - Sunnyvale, CA - Aug 2014
 
@@ -76,6 +77,7 @@ Miami 2 Day Bootcamp - Nov 2014
 GothamGo - NYC, NY, - Nov 2014  
 
 **_Workshops:_**  
+ITPalooza Miami - Dec 4th  
 IronHack Dolphin Stadium - Oct 2014  
 Rackspace Workshop - Sep 2014
 
