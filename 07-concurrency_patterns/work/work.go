@@ -28,10 +28,10 @@ type Stats struct {
 // tasks that are submitted.
 type Work struct {
 	tasks    chan Worker    // Unbuffered channel that work is sent into.
-	wg       sync.WaitGroup // Manages the number of goroutines for shutdown.
+	kill     chan struct{}  // Unbuffered channel to signal for a goroutine to die.
 	shutdown chan struct{}  // Closed when the Work pool is being shutdown.
+	wg       sync.WaitGroup // Manages the number of goroutines for shutdown.
 	mutex    sync.Mutex     // Provides synchronization for managing the pool.
-	remove   int            // The number of goroutines to remove.
 	stats    Stats          // Stats about the health of the pool.
 }
 
@@ -39,6 +39,7 @@ type Work struct {
 func New(goroutines int) *Work {
 	w := Work{
 		tasks:    make(chan Worker),
+		kill:     make(chan struct{}),
 		shutdown: make(chan struct{}),
 	}
 
@@ -101,9 +102,11 @@ func (w *Work) Add(goroutines int) {
 				goroutines = current
 			}
 
-			// Set this value so when goroutine's are done processing work
-			// they can check to see if they should quit.
-			w.remove = goroutines
+			// Send the kill signal and wait for these goroutines
+			// to die.
+			for i := 0; i < goroutines; i++ {
+				w.kill <- struct{}{}
+			}
 		}
 	}
 	w.mutex.Unlock()
@@ -111,36 +114,25 @@ func (w *Work) Add(goroutines int) {
 
 // work performs the users work and keeps stats.
 func (w *Work) work() {
-	// The for range will block until this goroutine is
-	// asked to perform some work.
-	for t := range w.tasks {
-		atomic.AddInt64(&w.stats.Active, 1)
-		t.Work()
-		atomic.AddInt64(&w.stats.Active, -1)
+done:
+	for {
+		select {
+		case t, ok := <-w.tasks:
+			if !ok {
+				break done
+			}
 
-		if w.shouldDie() {
-			break
+			atomic.AddInt64(&w.stats.Active, 1)
+			t.Work()
+			atomic.AddInt64(&w.stats.Active, -1)
+
+		case <-w.kill:
+			break done
 		}
 	}
 
 	atomic.AddInt64(&w.stats.Goroutines, -1)
 	w.wg.Done()
-}
-
-// shouldDie checks if there has been a request to remove some
-// goroutines from the pool.
-func (w *Work) shouldDie() bool {
-	d := false
-	w.mutex.Lock()
-	{
-		if w.remove > 0 {
-			w.remove--
-			d = true
-		}
-	}
-	w.mutex.Unlock()
-
-	return d
 }
 
 // Run wait for the goroutine pool to take the work
