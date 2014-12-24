@@ -9,6 +9,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 
 	"github.com/ArdanStudios/gotraining/07-concurrency_patterns/work"
@@ -21,13 +22,6 @@ var names = []string{
 	"mary",
 	"therese",
 	"jason",
-	"kelly",
-	"paul",
-	"dina",
-	"chris",
-	"lisa",
-	"tom",
-	"travis",
 }
 
 // namePrinter provides special support for printing names.
@@ -45,19 +39,40 @@ func (m *namePrinter) Work() {
 func main() {
 	// Create a work value with 2 goroutines.
 	w := work.New(2)
+	w.LogStats(100 * time.Millisecond)
 
-	// Iterate over the slice of names.
-	for _, name := range names {
-		// Create a namePrinter and provide the
-		// specfic name.
-		np := namePrinter{
-			name: name,
+	var wg sync.WaitGroup
+	wg.Add(10 * len(names))
+
+	for i := 0; i < 10; i++ {
+		// Iterate over the slice of names.
+		for _, name := range names {
+			// Create a namePrinter and provide the
+			// specfic name.
+			np := namePrinter{
+				name: name,
+			}
+
+			go func() {
+				// Submit the task to be worked on. When RunTask
+				// returns we know it is being handled.
+				w.Run(&np)
+				wg.Done()
+			}()
+		}
+	}
+
+	for {
+		var c int
+		fmt.Scanf("%d", &c)
+		if c == 0 {
+			break
 		}
 
-		// Submit the task to be worked on. When RunTask
-		// returns we know it is being handled.
-		w.RunTask(&np)
+		w.Add(c)
 	}
+
+	wg.Wait()
 
 	// Shutdown the work and wait for all existing work
 	// to be completed.
