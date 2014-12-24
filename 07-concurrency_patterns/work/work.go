@@ -103,7 +103,7 @@ func (w *Work) Add(goroutines int) {
 			}
 
 			// Send the kill signal and wait for these goroutines
-			// to die.
+			// to get the signal to die.
 			for i := 0; i < goroutines; i++ {
 				w.kill <- struct{}{}
 			}
