@@ -36,7 +36,7 @@ _Note: This material has been designed to be taught in a classroom environment. 
 
 ## Classes and Pricing
 
-Corporate full day classes are at $2,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
+Corporate full day classes are at $3,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 **_Currently Scheduled Corporate Classes:_**  
 None at this time

@@ -43,7 +43,10 @@ func logger(message string) {
 // main is the entry point for all Go programs.
 func main() {
 	// Create a work value with 2 goroutines.
-	w, _ := work.New(2, time.Second, logger)
+	w, err := work.New(2, time.Second, logger)
+	if err != nil {
+		return
+	}
 
 	var wg sync.WaitGroup
 	wg.Add(100 * len(names))
