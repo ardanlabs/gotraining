@@ -4,7 +4,7 @@ Embedding types provides the final piece of sharing and reusing state and behavi
 
 ## Notes
 
-* Embedding types allow us to share state or behvior between types.
+* Embedding types allow us to share state or behavior between types.
 * The inner type never loses its identity.
 * This is not inheritance.
 * Through promotion, inner type fields and methods can be accessed through the outer type.
