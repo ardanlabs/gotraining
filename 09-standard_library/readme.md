@@ -12,11 +12,11 @@ The Go standard library is a set of core packages that enhance and extend the la
 
 ## Package Review
 
-[Logging](../08-standard_library/01-logging/readme.md)
+[Logging](../09-standard_library/01-logging/readme.md)
 
-[Encoding](../08-standard_library/02-encoding/readme.md)
+[Encoding](../09-standard_library/02-encoding/readme.md)
 
-[Writers/Readers](../08-standard_library/03-writers_readers/readme.md)
+[Writers/Readers](../09-standard_library/03-writers_readers/readme.md)
 
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
