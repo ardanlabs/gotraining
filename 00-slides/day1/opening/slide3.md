@@ -5,7 +5,7 @@ Keyword are at the heart of every programming language and Go is no exception. T
 
 <table>
 <tr><td>break</td><td>case</td><td><b>chan</b></td><td>const</td><td>continue</td><td>default</td><td><b>defer</b></td><td>else</td><td>fallthrough</td><td><b>for</b></td></tr>
-<tr><td><b>func</b></td><td><b>go</b></td><td>goto</td><td>if</td><td><b>import</b></td><td><b>interface</b></td><td>map</td><td><b>package</b></td><td><b>range</b></td><td>return</td></tr>
+<tr><td><b>func</b></td><td><b>go</b></td><td>goto</td><td>if</td><td><b>import</b></td><td><b>interface</b></td><td><b>map</b></td><td><b>package</b></td><td><b>range</b></td><td>return</td></tr>
 <tr><td><b>select</b></td><td>struct</td><td>switch</td><td>type</td><td colspan="6"></td></tr>
 </table>
 
