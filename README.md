@@ -31,7 +31,7 @@ _Note: This material has been designed to be taught in a classroom environment. 
 
 ## Testimonials
 
-Todd Rafferty (@webrat)  
+Todd Rafferty ([@webrat](https://twitter.com/webRat))  
 _I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels._
 
 ## Getting the Material
