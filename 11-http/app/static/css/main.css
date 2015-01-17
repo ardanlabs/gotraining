@@ -1,0 +1,44 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.top {
+	background: none repeat scroll 0 0 #1f5ea4;
+	color: #FFFFFF;
+    padding: 50px 0;
+    width: 100%;
+}
+.top .container h1 {
+	color: #ffffff;
+    margin: 20px 0;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.top .container h1 i {
+	color: #4a81bd;
+}
+.top .container form  {
+	text-align: center;
+}
+.top .container form .form-control {
+	font-size: 18px;
+    height: 50px;
+    margin: 20px auto 25px;
+    width: 65%;
+}
+.top .container form .checkboxes {
+	color: #FFFFFF;
+}
+.top .container form span {
+	background: rgba(255,255,255,0.2);
+	border-radius: 4px 4px 4px 4px;
+	padding: 10px;
+	margin-right: 10px;
+}
+.top .container form .btn {
+	background: none repeat scroll 0 0 #da552f;
+    border: medium none;
+    color: #ffffff;
+    margin-top: 25px;
+    padding: 10px 50px;
+    text-shadow: none;
+}

@@ -25,10 +25,6 @@ http://blog.golang.org/advanced-go-concurrency-patterns
 
 [Chat](chat)
 
-## Advanced Code Review
-
-[Search](search)
-
 ___
 [![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
