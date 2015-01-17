@@ -15,6 +15,9 @@ On this day we continue go deeper into Go. We learn about concurrency patterns, 
 #### Reflection
 [Reflection](../10-reflection/readme.md)
 
+#### HTTP
+[HTTP](../11-http/readme.md)
+
 ___
 [![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
