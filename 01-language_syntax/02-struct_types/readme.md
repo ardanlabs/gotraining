@@ -22,7 +22,7 @@ http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 ## Advanced Code Review
 
-[Struct type alignments](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/ZuB82kgz2K))
+[Struct type alignments](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/ZuB82kgz2K))
 
 ## Exercises
 
