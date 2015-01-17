@@ -19,8 +19,8 @@ https://github.com/bradfitz/http2
 
 ## Code Review
 
-This sample app provides a working model for building web applications with basic endpoints and views.  
-[Web Aopp](app)
+[Web App](app)  
+The code is built within two packages. The service package handles the processing of HTTP requests and responses. HTML templates are used to render the views. The search package handles the processing of searches agains the different search engines. An interface called Searcher is declared to support the implementation of new Searchers.
 
 ## Exercises
 

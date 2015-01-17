@@ -2,6 +2,7 @@
 package service
 
 import (
+	"log"
 	"net/http"
 )
 
@@ -15,13 +16,15 @@ func init() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	// Setup a route for our search.
-	http.HandleFunc("/search", index)
+	// Setup a route for the home page.
+	http.HandleFunc("/", index)
 }
 
 // Run binds the service to a port and starts listening
 // for requests.
 func Run() {
+	log.Println("Listing on: http://localhost:9999")
+
 	// Listen for our HTTP requests.
 	http.ListenAndServe("localhost:9999", nil)
 }
