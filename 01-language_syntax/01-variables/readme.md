@@ -1,6 +1,6 @@
 ## Variables - Language Syntax
 
-Variables are at the heart of the langugage and provide the ability to read from and write to memory. In Go, access to memory is type safe. This means the compiler takes type serious and will not allow us to use variables outside the scope of how they are declared.
+Variables are at the heart of the langugage and provide the ability to read from and write to memory. In Go, access to memory is type safe. This means the compiler takes type seriously and will not allow us to use variables outside the scope of how they are declared.
 
 ## Notes
 
