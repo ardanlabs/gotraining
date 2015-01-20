@@ -1,6 +1,14 @@
 ## Go Training Classes
 [Click Here To Review The Course Material](00-slides/readme.md)
 
+## Go Bootcamp Tour
+
+Ardan Labs is running a Go Bootcamp class in a different city every month this year. We are coming to NYC on June 10th-12th. This 3 day class provides a comprehensive and idiomatic view of the Go programming language plus some best practices along the way. If you are interested in getting a jump start on learning Go, or want to understand more about the language sign up now.
+
+[Bootcamp Tour](http://www.ardanlabs.com/go-bootcamp-tour)
+
+## Training
+
 Training is broken into hourly and daily classes. The length of the class will determine which material is covered and whether exercises are used and to what extent.
 
 _Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class._
