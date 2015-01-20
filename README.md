@@ -32,7 +32,10 @@ _Note: This material has been designed to be taught in a classroom environment. 
 ## Testimonials
 
 Todd Rafferty ([@webrat](https://twitter.com/webRat))  
-_I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels._
+_"I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels."_
+
+Georgi Knox ([@webrat](https://twitter.com/GeorgiCodes))  
+_"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
 
 ## Getting the Material
 
