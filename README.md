@@ -3,7 +3,7 @@
 
 ## Bootcamp Tour
 
-Ardan Labs is running a Go Bootcamp class in a different city every month this year. We are coming to NYC on June 10th-12th. This 3 day class provides a comprehensive and idiomatic view of the Go programming language plus some best practices along the way. If you are interested in getting a jump start on learning Go, or want to understand more about the language sign up now.
+Ardan Labs is running a Go Bootcamp class in a different city every month this year. This 3 day class provides a comprehensive and idiomatic view of the Go programming language plus some best practices along the way. If you are interested in getting a jump start on learning Go, or want to understand more about the language sign up now.
 
 [Bootcamp Tour](http://www.ardanlabs.com/go-bootcamp-tour)
 
