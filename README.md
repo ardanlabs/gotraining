@@ -45,6 +45,9 @@ _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is ext
 Georgi Knox ([@GeorgiCodes](https://twitter.com/GeorgiCodes))  
 _"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
 
+Jackie Heitzer ([@JackieHeitzer](https://twitter.com/JackieHeitzer))  
+_"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
+
 ## Getting the Material
 
     -- Get all the material
