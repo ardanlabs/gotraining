@@ -33,7 +33,7 @@ func main() {
 	}
 
 	// Declare a function variable for the method
-	// bound to the d varaible.
+	// bound to the d variable.
 	f1 := d.displayName
 
 	// Call the method via the variable.
@@ -47,7 +47,7 @@ func main() {
 	f2(d)
 
 	// Declare a function variable for the method
-	// bound to the d varaible.
+	// bound to the d variable.
 	f3 := d.setAge
 
 	// Call the method via the variable passing the parameter.
