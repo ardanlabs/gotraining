@@ -68,7 +68,7 @@ If you are interested in holding an event in your area please let me know. I wil
 Open
 
 **_Corporate:_**  
-None at this time
+Open
 
 **_Bootcamps_**  
 San Francisco, CA - March 2015  
@@ -80,7 +80,7 @@ Chicago, IL - September 2015
 
 **_Conferences_**  
 [Gophercon India - Feb 2015](http://www.gophercon.in/go-workshop/)  
-[FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)
+[FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
 Gophercon USA - July 2015  
 
 ## Past Events
@@ -91,7 +91,7 @@ Goningen Meetup - Sep 2014
 Go-Miami Meetup - 2014
 
 **_Workshops:_**  
-Edmonton Bootcamp - Jan 24th
+Edmonton Bootcamp - Jan 24th  
 ITPalooza Miami - Dec 4th  
 IronHack Dolphin Stadium - Oct 2014  
 Rackspace Workshop - Sep 2014
@@ -105,7 +105,7 @@ Comcast - Sunnyvale, CA - Aug 2014
 Miami 2 Day Bootcamp - Nov 2014  
 
 **Conferences:_**  
-GothamGo - NYC, NY, - Nov 2014  
+GothamGo - NYC, NY - Nov 2014  
 
 ## Contact Information
 
