@@ -3,7 +3,7 @@
 
 ## Bootcamp Tour
 
-Ardan Labs is running a Go Bootcamp class in a different city every month this year. This 3 day class provides a comprehensive and idiomatic view of the Go programming language plus some best practices along the way. If you are interested in getting a jump start on learning Go, or want to understand more about the language sign up now.
+The Ardan Labs Go Bootcamp is a 3 day class providing a comprehensive and idiomatic view of the Go programming language. The class covers topics ranging from language syntax, OOP, concurrency, channels, testing, debugging and more. Great for anyone interested in getting a jump start on learning Go or wanting to understand more about the language and internals.
 
 [Bootcamp Tour](http://www.ardanlabs.com/go-bootcamp-tour)
 
@@ -57,32 +57,30 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 Corporate full day classes are at $3,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
-**_Currently Scheduled Corporate Classes:_**  
+If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.
+
+**_Corporate Classes:_**  
 None at this time
 
-Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
-
-**_Currently Scheduled Enrollment Classes:_**  
-**1 Day Classes**  
-[Edmonton Bootcamp - Jan 24th](http://edmontongo.org/workshop/) ** Discounted Pricing  
-[Gophercon India - Feb 19th](http://www.gophercon.in/go-workshop/)  
-Gophercon USA - July 2015  
-
-**3 Day Classes**  
+**_3 Day Classes_**  
 San Francisco, CA - March 2015  
 Denver, CO - April 2015  
 Washington D.C. - May 2015  
 NYC, NY - June 2015  
+Huston, TX - August 2015  
+Chicago, IL - September 2015  
 
-Hourly training classes are used for workshops or meetups and exclude time for working through the exercises. These events are free.
+**_Workshops:_**   
+Open
 
-**_Currently Scheduled Workshops:_**   
-None at this time
+**_Meetups:_**   
+[GoDublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)
 
-**_Currently Scheduled Meetups:_**   
-Go Dominican Republic - TBA
+## Conference Workshops
 
-**If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
+[Gophercon India - Feb 2015](http://www.gophercon.in/go-workshop/)  
+[FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)
+Gophercon USA - July 2015  
 
 ## Past Events
 
@@ -93,9 +91,12 @@ Comcast - Sunnyvale, CA - Aug 2014
 
 **_Enrollment Classes:_**  
 Miami 2 Day Bootcamp - Nov 2014  
+
+**Conference Workshops:_**  
 GothamGo - NYC, NY, - Nov 2014  
 
 **_Workshops:_**  
+Edmonton Bootcamp - Jan 24th
 ITPalooza Miami - Dec 4th  
 IronHack Dolphin Stadium - Oct 2014  
 Rackspace Workshop - Sep 2014
