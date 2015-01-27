@@ -1,12 +1,14 @@
 ## Keywords, Built-In Functions. Operators and Packages
 
 ### Keywords
-Keyword are at the heart of every programming language and Go is no exception. These are reserved words that provide the core functionality in the language. The highlighted keyword have unique characteristics and provide interesting functionality in the language.
+Keywords are at the heart of most programming languages, and Go is no exception. These are reserved words that provide structure and meaning to the language. The emphasized keywords that follow have unique or uncommon characteristics and lend distinctiveness to the Go language.
 
 <table>
-<tr><td>break</td><td>case</td><td><b>chan</b></td><td>const</td><td>continue</td><td>default</td><td><b>defer</b></td><td>else</td><td>fallthrough</td><td><b>for</b></td></tr>
-<tr><td><b>func</b></td><td><b>go</b></td><td>goto</td><td>if</td><td><b>import</b></td><td><b>interface</b></td><td><b>map</b></td><td><b>package</b></td><td><b>range</b></td><td>return</td></tr>
-<tr><td><b>select</b></td><td>struct</td><td>switch</td><td>type</td><td colspan="6"></td></tr>
+<tr><td>break</td><td>case</td><td><b>chan</b></td><td><b>const</b></td><td>continue</td></tr>
+<tr><td>default</td><td><b>defer</b></td><td>else</td><td>fallthrough</td><td><b>for</b></td></tr>
+<tr><td><b>func</b></td><td><b>go</b></td><td>goto</td><td>if</td><td><b>import</b></td></tr>
+<tr><td><b>interface</b></td><td><b>map</b></td><td><b>package</b></td><td><b>range</b></td><td>return</td></tr>
+<tr><td><b>select</b></td><td>struct</td><td>switch</td><td><b>type</b></td><td>var</td></tr>
 </table>
 
 ### Built-In Functions
