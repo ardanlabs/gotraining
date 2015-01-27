@@ -75,6 +75,7 @@ San Francisco, CA - March 2015
 Denver, CO - April 2015  
 Washington D.C. - May 2015  
 NYC, NY - June 2015  
+Denver, CO - July 2015 (GopherCon)  
 Huston, TX - August 2015  
 Chicago, IL - September 2015  
 
@@ -86,6 +87,7 @@ Gophercon USA - July 2015
 ## Past Events
 
 **_Meetups:_**  
+Edmonton Go - Jan 2015  
 GoSF Meetup - Sep 2014  
 Goningen Meetup - Sep 2014  
 Go-Miami Meetup - 2014
