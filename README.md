@@ -75,6 +75,7 @@ San Francisco, CA - March 2015
 Denver, CO - April 2015  
 Washington D.C. - May 2015  
 NYC, NY - June 2015  
+Denver, CO - July 2015  
 Huston, TX - August 2015  
 Chicago, IL - September 2015  
 
