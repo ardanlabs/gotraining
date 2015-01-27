@@ -86,6 +86,7 @@ Gophercon USA - July 2015
 ## Past Events
 
 **_Meetups:_**  
+Edmonton Go - Jan 2015  
 GoSF Meetup - Sep 2014  
 Goningen Meetup - Sep 2014  
 Go-Miami Meetup - 2014
