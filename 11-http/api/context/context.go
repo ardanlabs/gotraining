@@ -6,64 +6,67 @@ import (
 	"log"
 	"net/http"
 
+	"code.google.com/p/go-uuid/uuid"
+	"github.com/ArdanStudios/gotraining/11-http/api/mongodb"
 	"github.com/sqs/mux"
 	"gopkg.in/mgo.v2"
 )
 
 // Context contains data in context with all requests.
 type Context struct {
-	Session *mgo.Session
-	Writer  http.ResponseWriter
-	Request *http.Request
+	Session   *mgo.Session
+	Writer    http.ResponseWriter
+	Request   *http.Request
+	SessionID string
 }
 
 // AddRoute allows routes to be injected into the middleware with the context.
 func AddRoute(router *mux.Router, path string, userHandler func(c *Context)) {
 	f := func(w http.ResponseWriter, r *http.Request) {
+		uid := uuid.New()
+		log.Printf("%s : context : handler : Started : Path[%s] URL[%s]\n", uid, path, r.URL.RequestURI())
+
 		c := Context{
-			Writer:  w,
-			Request: r,
+			Writer:    w,
+			Request:   r,
+			Session:   mongodb.GetSession(),
+			SessionID: uid,
 		}
 
+		defer func() {
+			if r := recover(); r != nil {
+				log.Println(uid, ": context : handler : PANIC :", r)
+			}
+
+			c.Session.Close()
+			log.Println(uid, ": context : handler : Completed")
+		}()
+
 		if err := c.authenticate(); err != nil {
+			log.Println(uid, ": context : handler : ERROR :", err)
 			return
 		}
 
-		c.before()
 		userHandler(&c)
-		c.after()
 	}
 
 	router.HandleFunc(path, f)
+	log.Printf("main : context : AddRoute : Added : Path[%s]\n", path)
 }
 
 // authenticate handles the authentication of each request.
 func (c *Context) authenticate() error {
-	log.Printf("controllers : authenticate : Started : Route[%s]\n", c.Request.URL.RequestURI())
+	log.Println(c.SessionID, ": context : authenticate : Started")
 
 	// ServeError(w, errors.New("Auth Error"), http.StatusUnauthorized)
 
-	log.Println("controllers : authenticate : Completed")
+	log.Println(c.SessionID, ": context : authenticate : Completed")
 	return nil
-}
-
-// before handles the setup of processing the request.
-func (c *Context) before() {
-	log.Printf("controllers : before : Started")
-
-	log.Println("controllers : before : Completed")
-}
-
-// after handles the setup of processing the request.
-func (c *Context) after() {
-	log.Printf("controllers : after : Started")
-
-	log.Println("controllers : after : Completed")
 }
 
 // ServeError handles application errors
 func (c *Context) ServeError(err error, statusCode int) {
-	log.Printf("controllers : ServeError : Started : Error[%s]\n", err)
+	log.Printf("%s : context : ServeError : Started : Error[%s]\n", c.SessionID, err)
 
 	e := struct {
 		Err string
@@ -78,12 +81,12 @@ func (c *Context) ServeError(err error, statusCode int) {
 	}
 
 	http.Error(c.Writer, string(data), statusCode)
-	log.Println("controllers : ServeError : Completed")
+	log.Println(c.SessionID, ": context : ServeError : Completed")
 }
 
 // ServeJSON handles serving values as JSON.
 func (c *Context) ServeJSON(v interface{}) {
-	log.Printf("controllers : ServeJSON : Started : Error[%+v]\n", v)
+	log.Printf("%s : context : ServeJSON : Started : Error[%+v]\n", c.SessionID, v)
 
 	data, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
@@ -92,5 +95,5 @@ func (c *Context) ServeJSON(v interface{}) {
 	}
 
 	fmt.Fprintf(c.Writer, string(data))
-	log.Println("controllers : ServeJSON : Completed")
+	log.Println(c.SessionID, ": context : ServeJSON : Completed")
 }

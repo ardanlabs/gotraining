@@ -11,7 +11,7 @@ import (
 
 // Run binds the service to a port and starts listening for requests.
 func Run() {
-	log.Println("Listing on: http://localhost:9000")
+	log.Println("main : routes : Run : Started : Listing on: http://localhost:9000")
 
 	http.ListenAndServe(":9000", routes())
 }

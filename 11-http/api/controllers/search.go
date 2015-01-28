@@ -9,7 +9,7 @@ import (
 
 // Search processes the search api.
 func Search(c *context.Context) {
-	log.Println("controllers : Search : Started")
+	log.Println(c.SessionID, ": controllers : Search : Started")
 
 	d := struct {
 		Name string
@@ -21,5 +21,5 @@ func Search(c *context.Context) {
 
 	c.ServeJSON(d)
 
-	log.Println("controllers : Search : Completed")
+	log.Println(c.SessionID, ": controllers : Search : Completed")
 }

@@ -1,6 +1,3 @@
-// All material is licensed under the GNU Free Documentation License
-// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
-
 // Package mongodb provides driver support.
 package mongodb
 
@@ -65,12 +62,17 @@ func Log(value interface{}) string {
 	return string(json)
 }
 
+// GetSession returns a copy of the master session for use.
+func GetSession() *mgo.Session {
+	return session.Copy()
+}
+
 // Execute the MongoDB literal function.
-func Execute(collectionName string, dbCall DBCall) error {
+func Execute(session *mgo.Session, collectionName string, dbCall DBCall) error {
 	log.Printf("Execute : Started : Collection[%s]\n", collectionName)
 
 	// Capture the specified collection.
-	collection := getCollection(session.Copy(), collectionName)
+	collection := session.DB(testDatabase).C(collectionName)
 	if collection == nil {
 		err := fmt.Errorf("Collection %s does not exist", collectionName)
 		log.Println("Execute : ERROR :", err)
@@ -86,9 +88,4 @@ func Execute(collectionName string, dbCall DBCall) error {
 
 	log.Println("Execute Completed")
 	return nil
-}
-
-// getCollection returns a reference to a collection for the specified database and collection name.
-func getCollection(mongoSession *mgo.Session, useCollection string) *mgo.Collection {
-	return mongoSession.DB(testDatabase).C(useCollection)
 }
