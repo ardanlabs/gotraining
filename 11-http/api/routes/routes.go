@@ -26,9 +26,8 @@ func routes() *mux.Router {
 func Run() {
 	log.Println("Listing on: http://localhost:9000")
 
-	n := negroni.New(ctrl.Authentication{}, ctrl.BeforeRequest{})
+	n := negroni.New(ctrl.Authentication{}, ctrl.BeforeAfterRequest{})
 	n.UseHandler(routes())
-	n.Use(ctrl.AfterRequest{})
 
 	http.ListenAndServe(":9000", n)
 }

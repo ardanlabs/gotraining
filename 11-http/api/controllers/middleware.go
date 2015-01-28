@@ -19,24 +19,26 @@ func (a Authentication) ServeHTTP(w http.ResponseWriter, r *http.Request, next h
 	next(w, r)
 }
 
-// BeforeRequest is middleware for setting up context prior to the request.
-type BeforeRequest struct{}
+// BeforeAfterRequest is middleware for setting up context prior to the request.
+type BeforeAfterRequest struct{}
 
 // BeforeRequest handles the setup of processing the request.
-func (b BeforeRequest) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	log.Printf("controllers : BeforeRequest : Started")
-
-	log.Println("controllers : BeforeRequest : Completed")
+func (b BeforeAfterRequest) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	b.before()
 	next(w, r)
+	b.after()
 }
 
-// AfterRequest is middleware for cleaning up context after to the request.
-type AfterRequest struct{}
+// before is executed prior to the route begin executed.
+func (b BeforeAfterRequest) before() {
+	log.Printf("controllers : before : Started")
 
-// BeforeRequest handles the setup of processing the request.
-func (a AfterRequest) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	log.Printf("controllers : AfterRequest : Started")
+	log.Println("controllers : before : Completed")
+}
 
-	log.Println("controllers : AfterRequest : Completed")
-	next(w, r)
+// before is executed after to the route is executed.
+func (b BeforeAfterRequest) after() {
+	log.Printf("controllers : after : Started")
+
+	log.Println("controllers : after : Completed")
 }
