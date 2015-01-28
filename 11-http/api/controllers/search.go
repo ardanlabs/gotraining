@@ -3,11 +3,12 @@ package controllers
 
 import (
 	"log"
-	"net/http"
+
+	"github.com/ArdanStudios/gotraining/11-http/api/context"
 )
 
 // Search processes the search api.
-func Search(w http.ResponseWriter, r *http.Request) {
+func Search(c *context.Context) {
 	log.Println("controllers : Search : Started")
 
 	d := struct {
@@ -18,7 +19,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		Age:  45,
 	}
 
-	ServeJSON(w, d)
+	c.ServeJSON(d)
 
 	log.Println("controllers : Search : Completed")
 }

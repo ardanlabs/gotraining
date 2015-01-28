@@ -15,11 +15,11 @@ import (
 
 // MongoDB connection information.
 const (
-	mongoDBHosts = "ds035428.mongolab.com:35428"
-	authDatabase = "goinggo"
-	authUserName = "guest"
-	authPassword = "welcome"
-	testDatabase = "goinggo"
+	mongoDBHosts = "ds039441.mongolab.com:39441"
+	authDatabase = "gotraining"
+	authUserName = "got"
+	authPassword = "got2015"
+	testDatabase = "gotraining"
 )
 
 // DBCall defines a type of function that can be used

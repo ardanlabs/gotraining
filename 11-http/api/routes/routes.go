@@ -1,33 +1,26 @@
-// Package routes maintains the start and routes logic.
 package routes
 
 import (
 	"log"
 	"net/http"
 
+	"github.com/ArdanStudios/gotraining/11-http/api/context"
 	ctrl "github.com/ArdanStudios/gotraining/11-http/api/controllers"
-	"github.com/codegangsta/negroni"
-	"github.com/gorilla/mux"
+	"github.com/sqs/mux"
 )
-
-// routes binds the routes and handlers for the web service.
-func routes() *mux.Router {
-	r := mux.NewRouter()
-
-	// 404 processing
-	r.NotFoundHandler = http.HandlerFunc(ctrl.NotFound)
-
-	// Custom routes
-	r.HandleFunc("/search", ctrl.Search)
-	return r
-}
 
 // Run binds the service to a port and starts listening for requests.
 func Run() {
 	log.Println("Listing on: http://localhost:9000")
 
-	n := negroni.New(ctrl.Authentication{}, ctrl.BeforeAfterRequest{})
-	n.UseHandler(routes())
+	http.ListenAndServe(":9000", routes())
+}
 
-	http.ListenAndServe(":9000", n)
+// routes binds the routes and handlers for the web service.
+func routes() *mux.Router {
+	r := mux.NewRouter()
+
+	// Custom routes
+	context.AddRoute(r, "/search", ctrl.Search)
+	return r
 }
