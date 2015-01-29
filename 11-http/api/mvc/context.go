@@ -71,7 +71,7 @@ func (c *Context) authenticate() error {
 
 // ServeError handles application errors
 func (c *Context) ServeError(err error, statusCode int) {
-	log.Printf("%s : mvc : ServeError : Started : Error[%s]\n", c.SessionID, err)
+	log.Printf("%s : mvc : ServeError : Started : Status[%d]\n", c.SessionID, statusCode)
 
 	e := struct {
 		Err string
@@ -85,13 +85,16 @@ func (c *Context) ServeError(err error, statusCode int) {
 		return
 	}
 
-	http.Error(c.Writer, string(data), statusCode)
+	s := string(data)
+	log.Printf("%s : mvc : ServeError : Response\n%s\n", c.SessionID, s)
+
+	http.Error(c.Writer, s, statusCode)
 	log.Println(c.SessionID, ": mvc : ServeError : Completed")
 }
 
 // ServeJSON handles serving values as JSON.
 func (c *Context) ServeJSON(v interface{}) {
-	log.Printf("%s : mvc : ServeJSON : Started : Error[%+v]\n", c.SessionID, v)
+	log.Printf("%s : mvc : ServeJSON : Started\n", c.SessionID)
 
 	data, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
@@ -99,6 +102,9 @@ func (c *Context) ServeJSON(v interface{}) {
 		return
 	}
 
-	fmt.Fprintf(c.Writer, string(data))
+	s := string(data)
+	log.Printf("%s : mvc : ServeError : Response\n%s\n", c.SessionID, s)
+
+	fmt.Fprintf(c.Writer, s)
 	log.Println(c.SessionID, ": mvc : ServeJSON : Completed")
 }
