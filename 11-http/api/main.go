@@ -5,7 +5,7 @@ package main
 import (
 	"log"
 
-	"github.com/ArdanStudios/gotraining/11-http/api/routes"
+	"github.com/ArdanStudios/gotraining/11-http/api/mvc"
 )
 
 // init is called before main. We are using init to
@@ -16,5 +16,5 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	routes.Run()
+	mvc.Run()
 }

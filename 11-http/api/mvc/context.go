@@ -1,4 +1,4 @@
-package context
+package mvc
 
 import (
 	"encoding/json"
@@ -24,7 +24,7 @@ type Context struct {
 func AddRoute(router *mux.Router, path string, userHandler func(c *Context), actions ...string) {
 	f := func(w http.ResponseWriter, r *http.Request) {
 		uid := uuid.New()
-		log.Printf("%s : context : handler : Started : Path[%s] URL[%s]\n", uid, path, r.URL.RequestURI())
+		log.Printf("%s : mvc : handler : Started : Path[%s] URL[%s]\n", uid, path, r.URL.RequestURI())
 
 		c := Context{
 			Writer:    w,
@@ -35,15 +35,15 @@ func AddRoute(router *mux.Router, path string, userHandler func(c *Context), act
 
 		defer func() {
 			if r := recover(); r != nil {
-				log.Println(uid, ": context : handler : PANIC :", r)
+				log.Println(uid, ": mvc : handler : PANIC :", r)
 			}
 
 			c.Session.Close()
-			log.Println(uid, ": context : handler : Completed")
+			log.Println(uid, ": mvc : handler : Completed")
 		}()
 
 		if err := c.authenticate(); err != nil {
-			log.Println(uid, ": context : handler : ERROR :", err)
+			log.Println(uid, ": mvc : handler : ERROR :", err)
 			return
 		}
 
@@ -56,22 +56,22 @@ func AddRoute(router *mux.Router, path string, userHandler func(c *Context), act
 		router.HandleFunc(path, f).Methods(actions...)
 	}
 
-	log.Printf("main : context : AddRoute : Added : Path[%s]\n", path)
+	log.Printf("main : mvc : AddRoute : Added : Path[%s]\n", path)
 }
 
 // authenticate handles the authentication of each request.
 func (c *Context) authenticate() error {
-	log.Println(c.SessionID, ": context : authenticate : Started")
+	log.Println(c.SessionID, ": mvc : authenticate : Started")
 
 	// ServeError(w, errors.New("Auth Error"), http.StatusUnauthorized)
 
-	log.Println(c.SessionID, ": context : authenticate : Completed")
+	log.Println(c.SessionID, ": mvc : authenticate : Completed")
 	return nil
 }
 
 // ServeError handles application errors
 func (c *Context) ServeError(err error, statusCode int) {
-	log.Printf("%s : context : ServeError : Started : Error[%s]\n", c.SessionID, err)
+	log.Printf("%s : mvc : ServeError : Started : Error[%s]\n", c.SessionID, err)
 
 	e := struct {
 		Err string
@@ -86,12 +86,12 @@ func (c *Context) ServeError(err error, statusCode int) {
 	}
 
 	http.Error(c.Writer, string(data), statusCode)
-	log.Println(c.SessionID, ": context : ServeError : Completed")
+	log.Println(c.SessionID, ": mvc : ServeError : Completed")
 }
 
 // ServeJSON handles serving values as JSON.
 func (c *Context) ServeJSON(v interface{}) {
-	log.Printf("%s : context : ServeJSON : Started : Error[%+v]\n", c.SessionID, v)
+	log.Printf("%s : mvc : ServeJSON : Started : Error[%+v]\n", c.SessionID, v)
 
 	data, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
@@ -100,5 +100,5 @@ func (c *Context) ServeJSON(v interface{}) {
 	}
 
 	fmt.Fprintf(c.Writer, string(data))
-	log.Println(c.SessionID, ": context : ServeJSON : Completed")
+	log.Println(c.SessionID, ": mvc : ServeJSON : Completed")
 }
