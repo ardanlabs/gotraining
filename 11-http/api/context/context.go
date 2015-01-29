@@ -21,7 +21,7 @@ type Context struct {
 }
 
 // AddRoute allows routes to be injected into the middleware with the context.
-func AddRoute(router *mux.Router, path string, userHandler func(c *Context)) {
+func AddRoute(router *mux.Router, path string, userHandler func(c *Context), actions ...string) {
 	f := func(w http.ResponseWriter, r *http.Request) {
 		uid := uuid.New()
 		log.Printf("%s : context : handler : Started : Path[%s] URL[%s]\n", uid, path, r.URL.RequestURI())
@@ -50,7 +50,12 @@ func AddRoute(router *mux.Router, path string, userHandler func(c *Context)) {
 		userHandler(&c)
 	}
 
-	router.HandleFunc(path, f)
+	if len(actions) == 0 {
+		router.HandleFunc(path, f)
+	} else {
+		router.HandleFunc(path, f).Methods(actions...)
+	}
+
 	log.Printf("main : context : AddRoute : Added : Path[%s]\n", path)
 }
 

@@ -20,7 +20,11 @@ func Run() {
 func routes() *mux.Router {
 	r := mux.NewRouter()
 
-	// Custom routes
-	context.AddRoute(r, "/search", ctrl.Search)
+	// Custom user routes
+	context.AddRoute(r, "/user", ctrl.GetUser, "GET")
+	context.AddRoute(r, "/user", ctrl.InsUser, "POST")
+	context.AddRoute(r, "/user", ctrl.UpdUser, "PUT")
+	context.AddRoute(r, "/user", ctrl.DelUser, "DELETE")
+
 	return r
 }
