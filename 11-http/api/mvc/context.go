@@ -8,7 +8,7 @@ import (
 
 	"code.google.com/p/go-uuid/uuid"
 	"github.com/ArdanStudios/gotraining/11-http/api/mongodb"
-	"github.com/sqs/mux"
+	"github.com/dimfeld/httptreemux"
 	"gopkg.in/mgo.v2"
 )
 
@@ -17,19 +17,21 @@ type Context struct {
 	Session   *mgo.Session
 	Writer    http.ResponseWriter
 	Request   *http.Request
+	Params    map[string]string
 	SessionID string
 }
 
 // AddRoute allows routes to be injected into the middleware with the context.
-func AddRoute(router *mux.Router, path string, userHandler func(c *Context), actions ...string) {
-	f := func(w http.ResponseWriter, r *http.Request) {
+func AddRoute(router *httptreemux.TreeMux, path string, userHandler func(c *Context), verb string) {
+	f := func(w http.ResponseWriter, r *http.Request, p map[string]string) {
 		uid := uuid.New()
 		log.Printf("%s : mvc : handler : Started : Path[%s] URL[%s]\n", uid, path, r.URL.RequestURI())
 
 		c := Context{
+			Session:   mongodb.GetSession(),
 			Writer:    w,
 			Request:   r,
-			Session:   mongodb.GetSession(),
+			Params:    p,
 			SessionID: uid,
 		}
 
@@ -50,11 +52,7 @@ func AddRoute(router *mux.Router, path string, userHandler func(c *Context), act
 		userHandler(&c)
 	}
 
-	if len(actions) == 0 {
-		router.HandleFunc(path, f)
-	} else {
-		router.HandleFunc(path, f).Methods(actions...)
-	}
+	router.Handle(verb, path, f)
 
 	log.Printf("main : mvc : AddRoute : Added : Path[%s]\n", path)
 }

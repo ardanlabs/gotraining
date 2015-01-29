@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/sqs/mux"
+	"github.com/dimfeld/httptreemux"
 )
 
 // Run binds the service to a port and starts listening for requests.
@@ -15,8 +15,8 @@ func Run() {
 }
 
 // routes binds the routes and handlers for the web service.
-func routes() *mux.Router {
-	r := mux.NewRouter()
+func routes() *httptreemux.TreeMux {
+	r := httptreemux.New()
 
 	// Custom user routes
 	AddRoute(r, "/user", GetUser, "GET")
