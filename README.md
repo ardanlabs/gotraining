@@ -57,7 +57,7 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 ## Classes and Pricing
 
-Corporate full day classes are at $3,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
+Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.
 
