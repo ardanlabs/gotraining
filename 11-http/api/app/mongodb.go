@@ -1,5 +1,4 @@
-// Package mongodb provides driver support.
-package mongodb
+package app
 
 import (
 	"encoding/json"
@@ -16,18 +15,16 @@ const (
 	authDatabase = "gotraining"
 	authUserName = "got"
 	authPassword = "got2015"
-	testDatabase = "gotraining"
+	DB           = "gotraining"
 )
-
-// DBCall defines a type of function that can be used
-// to excecute code against MongoDB.
-type DBCall func(*mgo.Collection) error
 
 // session maintains the master session
 var session *mgo.Session
 
 // init sets up the MongoDB environment.
 func init() {
+	log.Printf("api : mongodb : init : Started : Host[%s] Database[%s]\n", mongoDBHosts, DB)
+
 	// We need this object to establish a session to our MongoDB.
 	mongoDBDialInfo := mgo.DialInfo{
 		Addrs:    []string{mongoDBHosts},
@@ -50,10 +47,12 @@ func init() {
 	// within the session will be observed in following queries (read-your-writes).
 	// http://godoc.org/labix.org/v2/mgo#Session.SetMode
 	session.SetMode(mgo.Monotonic, true)
+
+	log.Printf("api : mongodb : init : Completed : Host[%s] Database[%s]\n", mongoDBHosts, DB)
 }
 
-// Log provides a string version of the value
-func Log(value interface{}) string {
+// Query provides a string version of the value
+func Query(value interface{}) string {
 	json, err := json.Marshal(value)
 	if err != nil {
 		return ""
@@ -67,25 +66,24 @@ func GetSession() *mgo.Session {
 	return session.Copy()
 }
 
-// Execute the MongoDB literal function.
-func Execute(session *mgo.Session, collectionName string, dbCall DBCall) error {
-	log.Printf("Execute : Started : Collection[%s]\n", collectionName)
+// ExecuteDB the MongoDB literal function.
+func ExecuteDB(session *mgo.Session, collectionName string, f func(*mgo.Collection) error) error {
+	log.Printf("api : mongodb : ExecuteDB : Started : Collection[%s]\n", collectionName)
 
 	// Capture the specified collection.
-	collection := session.DB(testDatabase).C(collectionName)
+	collection := session.DB(DB).C(collectionName)
 	if collection == nil {
 		err := fmt.Errorf("Collection %s does not exist", collectionName)
-		log.Println("Execute : ERROR :", err)
+		log.Println("api : mongodb : ExecuteDB : Completed : ERROR :", err)
 		return err
 	}
 
 	// Execute the MongoDB call.
-	err := dbCall(collection)
-	if err != nil {
-		log.Println("Execute : ERROR :", err)
+	if err := f(collection); err != nil {
+		log.Println("api : mongodb : ExecuteDB : Completed : ERROR :", err)
 		return err
 	}
 
-	log.Println("Execute Completed")
+	log.Println("api : mongodb : ExecuteDB : Completed")
 	return nil
 }

@@ -1,11 +1,13 @@
-// This program provides a sample web service that uses concurrency
-// and channels to perform a coordinated set of asynchronous searches.
+// This program provides a sample web service implements a RESTFul CRUD
+// related API against a MongoDB database.
 package main
 
 import (
 	"log"
+	"net/http"
 
-	"github.com/ArdanStudios/gotraining/11-http/api/mvc"
+	"github.com/ArdanStudios/gotraining/11-http/api/routes"
+	"github.com/dimfeld/httptreemux"
 )
 
 // init is called before main. We are using init to
@@ -16,5 +18,10 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	mvc.Run()
+	log.Println("main : Started : Listing on: http://localhost:9000")
+
+	r := httptreemux.New()
+	routes.Users(r)
+
+	http.ListenAndServe(":9000", r)
 }
