@@ -14,7 +14,7 @@ import (
 func ListUsers(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : ListUsers : Started")
 
-	u, err := models.ListUsers(c)
+	u, err := models.UsersList(c)
 	if err != nil {
 		c.RespondInternal500(err)
 		log.Println(c.SessionID, ": ctrls : ListUsers : Completed : 500 :", err)

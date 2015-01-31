@@ -58,22 +58,22 @@ func (u *User) Validate() ([]app.Invalid, error) {
 	return nil, nil
 }
 
-// ListUsers retrieves a list of existing users from the database.
-func ListUsers(c *app.Context) ([]User, error) {
-	log.Println(c.SessionID, ": services : ListUsers : Started")
+// UsersList retrieves a list of existing users from the database.
+func UsersList(c *app.Context) ([]User, error) {
+	log.Println(c.SessionID, ": services : UsersList : Started")
 
 	var users []User
 	f := func(collection *mgo.Collection) error {
-		log.Println(c.SessionID, ": services : ListUsers: MGO :\n\ndb.users.find()")
+		log.Println(c.SessionID, ": services : UsersList: MGO :\n\ndb.users.find()")
 		return collection.Find(nil).All(&users)
 	}
 
 	if err := app.ExecuteDB(c.Session, app.DB, f); err != nil {
-		log.Println(c.SessionID, ": services : ListUsers : Completed : ERROR :", err)
+		log.Println(c.SessionID, ": services : UsersList : Completed : ERROR :", err)
 		return nil, err
 	}
 
-	log.Println(c.SessionID, ": services : ListUsers : Completed")
+	log.Println(c.SessionID, ": services : UsersList : Completed")
 	return users, nil
 }
 
