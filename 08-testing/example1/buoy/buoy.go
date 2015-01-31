@@ -55,13 +55,14 @@ func FindStation(stationID string) (*Station, error) {
 	log.Printf("FindStation : Started : stationID[%s]\n", stationID)
 
 	var buoyStation *Station
-	if err := mongodb.Execute("buoy_stations",
-		func(collection *mgo.Collection) error {
-			queryMap := bson.M{"station_id": stationID}
+	f := func(collection *mgo.Collection) error {
+		queryMap := bson.M{"station_id": stationID}
 
-			log.Printf("FindStation : MGO : db.buoy_stations.find(%s).limit(1)\n", mongodb.Log(queryMap))
-			return collection.Find(queryMap).One(&buoyStation)
-		}); err != nil {
+		log.Printf("FindStation : MGO : db.buoy_stations.find(%s).limit(1)\n", mongodb.Log(queryMap))
+		return collection.Find(queryMap).One(&buoyStation)
+	}
+
+	if err := mongodb.Execute("buoy_stations", f); err != nil {
 		if err != mgo.ErrNotFound {
 			log.Println("FindStation :", err)
 			return nil, err
@@ -77,13 +78,14 @@ func FindRegion(region string, limit int) ([]Station, error) {
 	log.Printf("FindRegion : Started : region[%s]\n", region)
 
 	var buoyStations []Station
-	if err := mongodb.Execute("buoy_stations",
-		func(collection *mgo.Collection) error {
-			queryMap := bson.M{"region": region}
+	f := func(collection *mgo.Collection) error {
+		queryMap := bson.M{"region": region}
 
-			log.Printf("FindRegion : MGO : db.buoy_stations.find(%s).limit(%d)\n", mongodb.Log(queryMap), limit)
-			return collection.Find(queryMap).Limit(limit).All(&buoyStations)
-		}); err != nil {
+		log.Printf("FindRegion : MGO : db.buoy_stations.find(%s).limit(%d)\n", mongodb.Log(queryMap), limit)
+		return collection.Find(queryMap).Limit(limit).All(&buoyStations)
+	}
+
+	if err := mongodb.Execute("buoy_stations", f); err != nil {
 		if err != mgo.ErrNotFound {
 			log.Println("FindRegion :", err)
 			return nil, err

@@ -22,10 +22,6 @@ const (
 	testDatabase = "goinggo"
 )
 
-// DBCall defines a type of function that can be used
-// to excecute code against MongoDB.
-type DBCall func(*mgo.Collection) error
-
 // session maintains the master session
 var session *mgo.Session
 
@@ -66,7 +62,7 @@ func Log(value interface{}) string {
 }
 
 // Execute the MongoDB literal function.
-func Execute(collectionName string, dbCall DBCall) error {
+func Execute(collectionName string, f func(*mgo.Collection) error) error {
 	log.Printf("Execute : Started : Collection[%s]\n", collectionName)
 
 	// Capture the specified collection.
@@ -78,8 +74,7 @@ func Execute(collectionName string, dbCall DBCall) error {
 	}
 
 	// Execute the MongoDB call.
-	err := dbCall(collection)
-	if err != nil {
+	if err := f(collection); err != nil {
 		log.Println("Execute : ERROR :", err)
 		return err
 	}
