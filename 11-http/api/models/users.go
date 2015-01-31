@@ -58,8 +58,8 @@ func (u *User) Validate() ([]app.Invalid, error) {
 	return nil, nil
 }
 
-// UsersList retrieves a list of existing users from the database.
-func UsersList(c *app.Context) ([]User, error) {
+// UserList retrieves a list of existing users from the database.
+func UserList(c *app.Context) ([]User, error) {
 	log.Println(c.SessionID, ": services : UsersList : Started")
 
 	var users []User
