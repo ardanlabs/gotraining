@@ -45,7 +45,7 @@ Write a program that uses a buffered channel to maintain a buffer of four string
 [Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/x1HRyyAYhc))
 
 ___
-[![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___

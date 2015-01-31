@@ -16,7 +16,7 @@ I may be biased, but I truly believe Go is an amazing language. It balances the 
 
 #### [Next Slide](slide2.md)
 ___
-[![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../images/ggb_logo.png)](http://www.goinggo.net)
 ___

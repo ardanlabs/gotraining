@@ -40,7 +40,7 @@ Create a custom error type called appError that contains three fields, Err error
 [Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/-v-sxBl_ER))
 
 ___
-[![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___

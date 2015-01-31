@@ -24,7 +24,7 @@ Go's standard library is rich with functionality that provide a lot of functiona
 
 #### [Previous Slide](slide2.md) | [Next Slide](slide4.md)
 ___
-[![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../images/ggb_logo.png)](http://www.goinggo.net)
 ___

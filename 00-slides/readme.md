@@ -28,7 +28,7 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 [Day Five Training](day_5_training.md)
 
 ___
-[![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](images/ggb_logo.png)](http://www.goinggo.net)
 ___

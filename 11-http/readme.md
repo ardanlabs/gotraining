@@ -29,7 +29,7 @@ The code is built within two packages. The service package handles the processin
 TBD
 
 ___
-[![GoingGo Training](../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___

@@ -32,7 +32,7 @@ http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/d2M0Q3mRnd))
 
 ___
-[![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___

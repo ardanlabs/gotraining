@@ -13,7 +13,7 @@ In this hour we take a very quick and initial tour of the language. We learn abo
 [Functions](../01-language_syntax/06-functions/readme.md)
 
 ___
-[![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](images/ggb_logo.png)](http://www.goinggo.net)
 ___

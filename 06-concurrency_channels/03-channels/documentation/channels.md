@@ -2,14 +2,14 @@
 
 ### Diagram of how an unbuffered channel works.
 
-![GoingGo Training](unbuffered.png)
+![Ardan Labs](unbuffered.png)
 
 ### Diagram of how a buffered channel works.
 
-![GoingGo Training](buffered.png)
+![Ardan Labs](buffered.png)
 
 ___
-[![GoingGo Training](../../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___

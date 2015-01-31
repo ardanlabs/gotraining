@@ -15,7 +15,7 @@ On this day we take go deeper into Go. We learn about packaging, exporting, erro
 [Channels](../06-concurrency_channels/03-channels/readme.md)
 
 ___
-[![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](images/ggb_logo.png)](http://www.goinggo.net)
 ___

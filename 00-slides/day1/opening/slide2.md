@@ -30,7 +30,7 @@ Go contains a wealth of documentation and a great community.
 
 #### [Previous Slide](slide1.md) | [Next Slide](slide3.md)
 ___
-[![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../images/ggb_logo.png)](http://www.goinggo.net)
 ___

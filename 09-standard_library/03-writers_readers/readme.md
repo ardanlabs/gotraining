@@ -40,7 +40,7 @@ Download any document from the web and display the content in the terminal and w
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/_3-IOOYYFa))
 
 ___
-[![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___
