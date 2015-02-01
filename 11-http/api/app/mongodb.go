@@ -15,7 +15,7 @@ const (
 	authDatabase = "gotraining"
 	authUserName = "got"
 	authPassword = "got2015"
-	DB           = "gotraining"
+	database     = "gotraining"
 )
 
 // session maintains the master session
@@ -23,7 +23,7 @@ var session *mgo.Session
 
 // init sets up the MongoDB environment.
 func init() {
-	log.Printf("api : mongodb : init : Started : Host[%s] Database[%s]\n", mongoDBHosts, DB)
+	log.Printf("api : mongodb : init : Started : Host[%s] Database[%s]\n", mongoDBHosts, database)
 
 	// We need this object to establish a session to our MongoDB.
 	mongoDBDialInfo := mgo.DialInfo{
@@ -48,7 +48,7 @@ func init() {
 	// http://godoc.org/labix.org/v2/mgo#Session.SetMode
 	session.SetMode(mgo.Monotonic, true)
 
-	log.Printf("api : mongodb : init : Completed : Host[%s] Database[%s]\n", mongoDBHosts, DB)
+	log.Printf("api : mongodb : init : Completed : Host[%s] Database[%s]\n", mongoDBHosts, database)
 }
 
 // Query provides a string version of the value
@@ -71,7 +71,7 @@ func ExecuteDB(session *mgo.Session, collectionName string, f func(*mgo.Collecti
 	log.Printf("api : mongodb : ExecuteDB : Started : Collection[%s]\n", collectionName)
 
 	// Capture the specified collection.
-	collection := session.DB(DB).C(collectionName)
+	collection := session.DB(database).C(collectionName)
 	if collection == nil {
 		err := fmt.Errorf("Collection %s does not exist", collectionName)
 		log.Println("api : mongodb : ExecuteDB : Completed : ERROR :", err)
