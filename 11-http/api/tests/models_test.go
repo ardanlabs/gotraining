@@ -51,13 +51,31 @@ func Test_CreateUser(t *testing.T) {
 		},
 	}
 
-	t.Log("Attempt to create a user.")
-	if err := u.Create(c); err != nil {
-		t.Fatalf("Unable to create a user.", err)
-	}
+	t.Log("Given the need to add a new user to the system.")
 
-	t.Log("User value should contain a unique ID")
-	if u.ID.Hex() == "" {
-		t.Fatalf("User value does not contain a unique ID.")
+	if _, err := u.Validate(); err != nil {
+		t.Fatal("\tThe user value should validate.", failed)
 	}
+	t.Log("\tThe user value should validate.", checkBox)
+
+	if err := u.Create(c); err != nil {
+		t.Fatal("\tThe user should be able to be ceated in the system.", failed)
+	}
+	t.Log("\tThe user should be able to be ceated in the system.", checkBox)
+
+	if u.ID.Hex() == "" {
+		t.Fatal("\tThe new user id should not be blank.", failed)
+	}
+	t.Log("\tThe new user id should not be blank.", checkBox)
+
+	ur, err := models.Retrieve(c, u.ID)
+	if err != nil {
+		t.Fatal("\tThe user should be able to be retrieved from the system.", failed)
+	}
+	t.Log("\tThe user should be able to be retrieved from the system.", checkBox)
+
+	if ur == nil || u.ID.Hex() != ur.ID.Hex() {
+		t.Fatal("\tThe user returned should match the one inserted.", failed)
+	}
+	t.Log("\tThe user returned should match the one inserted.", checkBox)
 }

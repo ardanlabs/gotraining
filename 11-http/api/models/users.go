@@ -44,6 +44,45 @@ type User struct {
 	DateCreated  time.Time     `bson:"date_created" json:"-"`
 }
 
+// UserList retrieves a list of existing users from the database.
+func UserList(c *app.Context) ([]User, error) {
+	log.Println(c.SessionID, ": services : scheddetail : Started")
+
+	var users []User
+	f := func(collection *mgo.Collection) error {
+		log.Println(c.SessionID, ": services : scheddetail: MGO :\n\ndb.users.find()\n\n")
+		return collection.Find(nil).All(&users)
+	}
+
+	if err := app.ExecuteDB(c.Session, collection, f); err != nil {
+		log.Println(c.SessionID, ": services : scheddetail : Completed : ERROR :", err)
+		return nil, err
+	}
+
+	log.Println(c.SessionID, ": services : scheddetail : Completed")
+	return users, nil
+}
+
+// Retrieve gets the specified user from the database.
+func Retrieve(c *app.Context, id bson.ObjectId) (*User, error) {
+	log.Println(c.SessionID, ": services : Retrieve : Started")
+
+	var u *User
+	f := func(collection *mgo.Collection) error {
+		q := bson.M{"_id": id}
+		log.Printf("%s : services : Retrieve: MGO :\n\ndb.users.find(%s)\n\n", c.SessionID, app.Query(q))
+		return collection.Find(q).One(&u)
+	}
+
+	if err := app.ExecuteDB(c.Session, collection, f); err != nil {
+		log.Println(c.SessionID, ": services : Retrieve : Completed : ERROR :", err)
+		return nil, err
+	}
+
+	log.Println(c.SessionID, ": services : Retrieve : Completed")
+	return u, nil
+}
+
 // Validate checks the fields for verify the value is in a proper state.
 func (u *User) Validate() ([]app.Invalid, error) {
 	var v []app.Invalid
@@ -59,25 +98,6 @@ func (u *User) Validate() ([]app.Invalid, error) {
 	return nil, nil
 }
 
-// UserList retrieves a list of existing users from the database.
-func UserList(c *app.Context) ([]User, error) {
-	log.Println(c.SessionID, ": services : scheddetail : Started")
-
-	var users []User
-	f := func(collection *mgo.Collection) error {
-		log.Println(c.SessionID, ": services : scheddetail: MGO :\n\ndb.users.find()")
-		return collection.Find(nil).All(&users)
-	}
-
-	if err := app.ExecuteDB(c.Session, collection, f); err != nil {
-		log.Println(c.SessionID, ": services : scheddetail : Completed : ERROR :", err)
-		return nil, err
-	}
-
-	log.Println(c.SessionID, ": services : scheddetail : Completed")
-	return users, nil
-}
-
 // Create inserts a new user into the database.
 func (u *User) Create(c *app.Context) error {
 	log.Println(c.SessionID, ": services : CreateUser : Started")
@@ -85,7 +105,7 @@ func (u *User) Create(c *app.Context) error {
 	u.ID = bson.NewObjectId()
 
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : services : CreateUser: MGO :\n\ndb.users.insert(%s)\n", c.SessionID, app.Query(u))
+		log.Printf("%s : services : CreateUser: MGO :\n\ndb.users.insert(%s)\n\n", c.SessionID, app.Query(u))
 		return collection.Insert(u)
 	}
 
