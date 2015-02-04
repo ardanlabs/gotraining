@@ -15,7 +15,7 @@ import (
 func UsersList(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : UsersList : Started")
 
-	u, err := services.UsersList(c)
+	u, err := services.Users.List(c)
 	if err != nil {
 		c.RespondInternal500(err)
 		log.Println(c.SessionID, ": ctrls : UsersList : Completed : 500 :", err)
@@ -45,7 +45,7 @@ func UsersCreate(c *app.Context) {
 		return
 	}
 
-	if err := services.UsersCreate(c, &u); err != nil {
+	if err := services.Users.Create(c, &u); err != nil {
 		c.RespondInternal500(err)
 		log.Println(c.SessionID, ": ctrls : UsersCreate : Completed : 500 :", err)
 		return

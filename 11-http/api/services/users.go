@@ -13,48 +13,54 @@ import (
 
 const usersCollection = "users"
 
-// UsersList retrieves a list of existing users from the database.
-func UsersList(c *app.Context) ([]models.User, error) {
-	log.Println(c.SessionID, ": services : UsersList : Started")
+// usersService maintains the set of services for the users api.
+type usersService struct{}
+
+// Users fronts the access to the users service functionality.
+var Users usersService
+
+// List retrieves a list of existing users from the database.
+func (us usersService) List(c *app.Context) ([]models.User, error) {
+	log.Println(c.SessionID, ": services : Users : List : Started")
 
 	var users []models.User
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : services : UsersList: MGO :\n\ndb.users.find()\n\n", c.SessionID)
+		log.Printf("%s : services : Users : List: MGO :\n\ndb.users.find()\n\n", c.SessionID)
 		return collection.Find(nil).All(&users)
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
-		log.Println(c.SessionID, ": services : UsersList : Completed : ERROR :", err)
+		log.Println(c.SessionID, ": services : Users : List : Completed : ERROR :", err)
 		return nil, err
 	}
 
-	log.Println(c.SessionID, ": services : UsersList : Completed")
+	log.Println(c.SessionID, ": services : Users : List : Completed")
 	return users, nil
 }
 
-// UsersRetrieve gets the specified user from the database.
-func UsersRetrieve(c *app.Context, id bson.ObjectId) (*models.User, error) {
-	log.Println(c.SessionID, ": services : UsersRetrieve : Started")
+// Retrieve gets the specified user from the database.
+func (us usersService) Retrieve(c *app.Context, id bson.ObjectId) (*models.User, error) {
+	log.Println(c.SessionID, ": services : Users : Retrieve : Started")
 
 	var u *models.User
 	f := func(collection *mgo.Collection) error {
 		q := bson.M{"_id": id}
-		log.Printf("%s : services : UsersRetrieve: MGO :\n\ndb.users.find(%s)\n\n", c.SessionID, app.Query(q))
+		log.Printf("%s : services : Users : Retrieve: MGO :\n\ndb.users.find(%s)\n\n", c.SessionID, app.Query(q))
 		return collection.Find(q).One(&u)
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
-		log.Println(c.SessionID, ": services : UsersRetrieve : Completed : ERROR :", err)
+		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", err)
 		return nil, err
 	}
 
-	log.Println(c.SessionID, ": services : UsersRetrieve : Completed")
+	log.Println(c.SessionID, ": services : Users : Retrieve : Completed")
 	return u, nil
 }
 
-// UsersCreate inserts a new user into the database.
-func UsersCreate(c *app.Context, u *models.User) error {
-	log.Println(c.SessionID, ": services : UsersCreate : Started")
+// Create inserts a new user into the database.
+func (us usersService) Create(c *app.Context, u *models.User) error {
+	log.Println(c.SessionID, ": services : Create : Started")
 
 	now := time.Now()
 	u.ID = bson.NewObjectId()
@@ -62,22 +68,22 @@ func UsersCreate(c *app.Context, u *models.User) error {
 	u.DateCreated = u.DateModified
 
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : services : UsersCreate : MGO :\n\ndb.users.insert(%s)\n\n", c.SessionID, app.Query(u))
+		log.Printf("%s : services : Create : MGO :\n\ndb.users.insert(%s)\n\n", c.SessionID, app.Query(u))
 		return collection.Insert(u)
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
-		log.Println(c.SessionID, ": services : UsersCreate : Completed : ERROR :", err)
+		log.Println(c.SessionID, ": services : Create : Completed : ERROR :", err)
 		return err
 	}
 
-	log.Println(c.SessionID, ": services : UsersCreate : Completed")
+	log.Println(c.SessionID, ": services : Create : Completed")
 	return nil
 }
 
-// UsersDelete inserts a new user into the database.
-func UsersDelete(c *app.Context, id bson.ObjectId) error {
-	log.Println(c.SessionID, ": services : UsersDelete : Started")
+// Delete inserts a new user into the database.
+func (us usersService) Delete(c *app.Context, id bson.ObjectId) error {
+	log.Println(c.SessionID, ": services : Delete : Started")
 
 	f := func(collection *mgo.Collection) error {
 		q := bson.M{"_id": id}
@@ -86,10 +92,10 @@ func UsersDelete(c *app.Context, id bson.ObjectId) error {
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
-		log.Println(c.SessionID, ": services : UsersDelete : Completed : ERROR :", err)
+		log.Println(c.SessionID, ": services : Delete : Completed : ERROR :", err)
 		return err
 	}
 
-	log.Println(c.SessionID, ": services : UsersDelete : Completed")
+	log.Println(c.SessionID, ": services : Delete : Completed")
 	return nil
 }

@@ -60,7 +60,7 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 	}
 	t.Log("\tShould be able to validate the user data.", succeed)
 
-	if err := services.UsersCreate(c, &u); err != nil {
+	if err := services.Users.Create(c, &u); err != nil {
 		t.Fatal("\tShould be able to create a user in the system.", failed)
 	}
 	t.Log("\tShould be able to create a user in the system.", succeed)
@@ -70,7 +70,7 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 	}
 	t.Log("\tShould have an ID for the user.", succeed)
 
-	ur, err := services.UsersRetrieve(c, u.ID)
+	ur, err := services.Users.Retrieve(c, u.ID)
 	if err != nil {
 		t.Fatal("\tShould be able to retrieve the user back from the system.", failed)
 	}
@@ -86,12 +86,12 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 	}
 	t.Log("\tShould have a match between the created user and the one retrieved.", succeed)
 
-	if err := services.UsersDelete(c, u.ID); err != nil {
+	if err := services.Users.Delete(c, u.ID); err != nil {
 		t.Fatal("\tShould be able to remove the user from the system.", failed)
 	}
 	t.Log("\tShould be able to remove the user from the system", succeed)
 
-	if _, err := services.UsersRetrieve(c, u.ID); err == nil {
+	if _, err := services.Users.Retrieve(c, u.ID); err == nil {
 		t.Fatal("\tShould NOT be able to retrieve the user back from the system.", failed)
 	}
 	t.Log("\tShould NOT be able to retrieve the user back from the system.", succeed)
