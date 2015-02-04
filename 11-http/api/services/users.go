@@ -60,7 +60,7 @@ func (us usersService) Retrieve(c *app.Context, id bson.ObjectId) (*models.User,
 
 // Create inserts a new user into the database.
 func (us usersService) Create(c *app.Context, u *models.User) error {
-	log.Println(c.SessionID, ": services : Create : Started")
+	log.Println(c.SessionID, ": services : Users : Create : Started")
 
 	now := time.Now()
 	u.ID = bson.NewObjectId()
@@ -68,34 +68,34 @@ func (us usersService) Create(c *app.Context, u *models.User) error {
 	u.DateCreated = u.DateModified
 
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : services : Create : MGO :\n\ndb.users.insert(%s)\n\n", c.SessionID, app.Query(u))
+		log.Printf("%s : services : Users : Create : MGO :\n\ndb.users.insert(%s)\n\n", c.SessionID, app.Query(u))
 		return collection.Insert(u)
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
-		log.Println(c.SessionID, ": services : Create : Completed : ERROR :", err)
+		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
 		return err
 	}
 
-	log.Println(c.SessionID, ": services : Create : Completed")
+	log.Println(c.SessionID, ": services : Users : Create : Completed")
 	return nil
 }
 
 // Delete inserts a new user into the database.
 func (us usersService) Delete(c *app.Context, id bson.ObjectId) error {
-	log.Println(c.SessionID, ": services : Delete : Started")
+	log.Println(c.SessionID, ": services : Users : Delete : Started")
 
 	f := func(collection *mgo.Collection) error {
 		q := bson.M{"_id": id}
-		log.Printf("%s : services : UsersRetrieve: MGO :\n\ndb.users.remove(%s)\n\n", c.SessionID, app.Query(q))
+		log.Printf("%s : services : Users : Delete : MGO :\n\ndb.users.remove(%s)\n\n", c.SessionID, app.Query(q))
 		return collection.Remove(q)
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
-		log.Println(c.SessionID, ": services : Delete : Completed : ERROR :", err)
+		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", err)
 		return err
 	}
 
-	log.Println(c.SessionID, ": services : Delete : Completed")
+	log.Println(c.SessionID, ": services : Users : Delete : Completed")
 	return nil
 }

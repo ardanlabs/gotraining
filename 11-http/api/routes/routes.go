@@ -13,11 +13,11 @@ import (
 
 // Users binds the routes to the handlers for the users service.
 func Users(r *httptreemux.TreeMux) {
-	addRoute(r, "GET", "/v1/users", ctrls.UsersList)
-	addRoute(r, "POST", "/v1/users", ctrls.UsersCreate)
-	addRoute(r, "GET", "/v1/users/:id", ctrls.UsersRetrieve)
-	addRoute(r, "PUT", "/v1/users/:id", ctrls.UsersUpdate)
-	addRoute(r, "DELETE", "/v1/users/:id", ctrls.UsersDelete)
+	addRoute(r, "GET", "/v1/users", ctrls.Users.List)
+	addRoute(r, "POST", "/v1/users", ctrls.Users.Create)
+	addRoute(r, "GET", "/v1/users/:id", ctrls.Users.Retrieve)
+	addRoute(r, "PUT", "/v1/users/:id", ctrls.Users.Update)
+	addRoute(r, "DELETE", "/v1/users/:id", ctrls.Users.Delete)
 }
 
 // addRoute allows routes to be injected into the middleware with the context.
