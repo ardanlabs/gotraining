@@ -3,6 +3,7 @@ package services
 
 import (
 	"log"
+	"time"
 
 	"github.com/ArdanStudios/gotraining/11-http/api/app"
 	"github.com/ArdanStudios/gotraining/11-http/api/models"
@@ -55,7 +56,10 @@ func UsersRetrieve(c *app.Context, id bson.ObjectId) (*models.User, error) {
 func UsersCreate(c *app.Context, u *models.User) error {
 	log.Println(c.SessionID, ": services : UsersCreate : Started")
 
+	now := time.Now()
 	u.ID = bson.NewObjectId()
+	u.DateModified = &now
+	u.DateCreated = u.DateModified
 
 	f := func(collection *mgo.Collection) error {
 		log.Printf("%s : services : UsersCreate : MGO :\n\ndb.users.insert(%s)\n\n", c.SessionID, app.Query(u))

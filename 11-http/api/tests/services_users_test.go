@@ -36,8 +36,8 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 		LastName:     "Kennedy",
 		Email:        "bill@ardanstugios.com",
 		Company:      "Ardan Labs",
-		DateModified: now,
-		DateCreated:  now,
+		DateModified: &now,
+		DateCreated:  &now,
 		Addresses: []models.UserAddress{
 			{
 				Type:         1,
@@ -47,8 +47,8 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 				State:        "FL",
 				Zipcode:      "33172",
 				Phone:        "305-527-3353",
-				DateModified: now,
-				DateCreated:  now,
+				DateModified: &now,
+				DateCreated:  &now,
 			},
 		},
 	}
@@ -63,7 +63,7 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 	if err := services.UsersCreate(c, &u); err != nil {
 		t.Fatal("\tShould be able to create a user in the system.", failed)
 	}
-	t.Log("\tShould be able to create a user in the system..", succeed)
+	t.Log("\tShould be able to create a user in the system.", succeed)
 
 	if u.ID.Hex() == "" {
 		t.Fatal("\tShould have an ID for the user.", failed)
@@ -75,6 +75,11 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 		t.Fatal("\tShould be able to retrieve the user back from the system.", failed)
 	}
 	t.Log("\tShould be able to retrieve the user back from the system.", succeed)
+
+	if _, err := u.Compare(ur); err != nil {
+		t.Fatal("\tShould find both the original and retrieved value are identical.", failed)
+	}
+	t.Log("\tShould find both the original and retrieved value are identical.", succeed)
 
 	if ur == nil || u.ID.Hex() != ur.ID.Hex() {
 		t.Fatal("\tShould have a match between the created user and the one retrieved.", failed)
