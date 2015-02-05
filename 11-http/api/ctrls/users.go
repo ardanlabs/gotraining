@@ -3,6 +3,7 @@ package ctrls
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 
 	"github.com/ArdanStudios/gotraining/11-http/api/app"
@@ -73,6 +74,15 @@ func (uc usersCtrl) Create(c *app.Context) {
 func (uc usersCtrl) Retrieve(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Started")
 
+	u, err := services.Users.Retrieve(c, c.Params["id"])
+	if err != nil {
+		c.RespondInternal500(err)
+		log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
+		return
+	}
+
+	c.RespondSuccess200(&u)
+
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 200")
 }
 
@@ -88,6 +98,20 @@ func (uc usersCtrl) Update(c *app.Context) {
 // 200 Success, 404 Not Found, 500 Internal
 func (uc usersCtrl) Delete(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Delete : Started")
+
+	if err := services.Users.Delete(c, c.Params["id"]); err != nil {
+		c.RespondInternal500(err)
+		log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 500 :", err)
+		return
+	}
+
+	r := struct {
+		message string
+	}{
+		fmt.Sprintf("User with ID %s has been removed", c.Params["id"]),
+	}
+
+	c.RespondSuccess200(&r)
 
 	log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 200")
 }

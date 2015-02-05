@@ -2,6 +2,7 @@
 package services
 
 import (
+	"errors"
 	"log"
 	"time"
 
@@ -39,12 +40,18 @@ func (us usersService) List(c *app.Context) ([]models.User, error) {
 }
 
 // Retrieve gets the specified user from the database.
-func (us usersService) Retrieve(c *app.Context, id bson.ObjectId) (*models.User, error) {
+func (us usersService) Retrieve(c *app.Context, id string) (*models.User, error) {
 	log.Println(c.SessionID, ": services : Users : Retrieve : Started")
+
+	if ok := bson.IsObjectIdHex(id); !ok {
+		err := errors.New("Invalid user id.")
+		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", err)
+		return nil, err
+	}
 
 	var u *models.User
 	f := func(collection *mgo.Collection) error {
-		q := bson.M{"_id": id}
+		q := bson.M{"_id": bson.ObjectIdHex(id)}
 		log.Printf("%s : services : Users : Retrieve: MGO :\n\ndb.users.find(%s)\n\n", c.SessionID, app.Query(q))
 		return collection.Find(q).One(&u)
 	}
@@ -82,11 +89,17 @@ func (us usersService) Create(c *app.Context, u *models.User) error {
 }
 
 // Delete inserts a new user into the database.
-func (us usersService) Delete(c *app.Context, id bson.ObjectId) error {
+func (us usersService) Delete(c *app.Context, id string) error {
 	log.Println(c.SessionID, ": services : Users : Delete : Started")
 
+	if ok := bson.IsObjectIdHex(id); !ok {
+		err := errors.New("Invalid user id.")
+		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", err)
+		return err
+	}
+
 	f := func(collection *mgo.Collection) error {
-		q := bson.M{"_id": id}
+		q := bson.M{"_id": bson.ObjectIdHex(id)}
 		log.Printf("%s : services : Users : Delete : MGO :\n\ndb.users.remove(%s)\n\n", c.SessionID, app.Query(q))
 		return collection.Remove(q)
 	}

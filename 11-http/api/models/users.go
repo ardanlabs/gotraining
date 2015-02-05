@@ -95,7 +95,7 @@ func (ua *UserAddress) Compare(uat *UserAddress) ([]app.Invalid, error) {
 
 // User contains information about a user.
 type User struct {
-	ID           bson.ObjectId `bson:"_id,omitempty" json:"-"`
+	ID           bson.ObjectId `bson:"_id,omitempty" json:"id,omitempty"`
 	UserType     int           `bson:"type" json:"type"`
 	FirstName    string        `bson:"first_name" json:"first_name"`
 	LastName     string        `bson:"last_name" json:"last_name"`

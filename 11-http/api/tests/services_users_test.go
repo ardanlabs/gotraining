@@ -5,25 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/11-http/api/app"
 	"github.com/ArdanStudios/gotraining/11-http/api/models"
 	"github.com/ArdanStudios/gotraining/11-http/api/services"
 )
-
-var c *app.Context
-
-// TestMain is the entry point for the test. Used to create a context
-// before the tests are run and can then perform cleanup.
-func TestMain(m *testing.M) {
-	c = &app.Context{
-		Session:   app.GetSession(),
-		SessionID: "TESTING",
-	}
-
-	m.Run()
-
-	c.Session.Close()
-}
 
 // Test_UsersCreateRetrieveRemove validates a user can be created, retrieved and
 // then removed from the system.
@@ -70,7 +54,7 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 	}
 	t.Log("\tShould have an ID for the user.", succeed)
 
-	ur, err := services.Users.Retrieve(c, u.ID)
+	ur, err := services.Users.Retrieve(c, u.ID.Hex())
 	if err != nil {
 		t.Fatal("\tShould be able to retrieve the user back from the system.", failed)
 	}
@@ -91,7 +75,7 @@ func Test_UsersCreateRetrieveRemove(t *testing.T) {
 	}
 	t.Log("\tShould be able to remove the user from the system", succeed)
 
-	if _, err := services.Users.Retrieve(c, u.ID); err == nil {
+	if _, err := services.Users.Retrieve(c, u.ID.Hex()); err == nil {
 		t.Fatal("\tShould NOT be able to retrieve the user back from the system.", failed)
 	}
 	t.Log("\tShould NOT be able to retrieve the user back from the system.", succeed)
