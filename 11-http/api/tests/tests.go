@@ -1,25 +1,22 @@
 package tests
 
 import (
-	"testing"
-
-	"github.com/ArdanStudios/gotraining/11-http/api/app"
+	"io"
+	"net/http"
+	"net/url"
 )
 
-const succeed = "\xE2\x9C\x93"
-const failed = "\xE2\x9C\x97"
+// Succeed is the UTF-8 byte squence for a check mark.
+const Succeed = "\xE2\x9C\x93"
 
-var c *app.Context
+// Succeed is the UTF-8 byte squence for an X mark.
+const Failed = "\xE2\x9C\x97"
 
-// TestMain is the entry point for the test. Used to create a context
-// before the tests are run and can then perform cleanup.
-func TestMain(m *testing.M) {
-	c = &app.Context{
-		Session:   app.GetSession(),
-		SessionID: "TESTING",
-	}
-
-	m.Run()
-
-	c.Session.Close()
+// NewRequest used to setup a request for mocking API calls with httptreemux.
+func NewRequest(method, path string, body io.Reader) *http.Request {
+	r, _ := http.NewRequest(method, path, body)
+	u, _ := url.Parse(path)
+	r.URL = u
+	r.RequestURI = path
+	return r
 }

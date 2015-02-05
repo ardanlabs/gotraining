@@ -18,7 +18,7 @@ type usersCtrl struct{}
 var Users usersCtrl
 
 // UsersList returns all the existing users in the system.
-// 200 Success, 500 Internal
+// 200 Success, 204 No Content, 500 Internal
 func (uc usersCtrl) List(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : List : Started")
 
@@ -26,6 +26,12 @@ func (uc usersCtrl) List(c *app.Context) {
 	if err != nil {
 		c.RespondInternal500(err)
 		log.Println(c.SessionID, ": ctrls : Users : List : Completed : 500 :", err)
+		return
+	}
+
+	if len(u) == 0 {
+		log.Println(c.SessionID, ": ctrls : Users : List : Completed : 204")
+		c.RespondBadRequest204()
 		return
 	}
 

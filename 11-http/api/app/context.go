@@ -59,6 +59,15 @@ func (c *Context) RespondSuccess200(v interface{}) {
 	log.Println(c.SessionID, ": api : RespondSuccess200 : Completed")
 }
 
+// RespondBadRequest204 means the call succeeded but no data.
+func (c *Context) RespondBadRequest204() {
+	log.Println(c.SessionID, ": api : RespondBadRequest204 : Started")
+
+	http.Error(c.Writer, "", http.StatusNoContent)
+
+	log.Println(c.SessionID, ": api : RespondBadRequest204 : Completed")
+}
+
 // RespondBadRequest400 means the call contained invalid post data.
 func (c *Context) RespondBadRequest400(err error) {
 	log.Println(c.SessionID, ": api : RespondBadRequest400 : Started")

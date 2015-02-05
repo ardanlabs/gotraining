@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/ArdanStudios/gotraining/11-http/api/routes"
-	"github.com/dimfeld/httptreemux"
 )
 
 // init is called before main. We are using init to
@@ -20,8 +19,5 @@ func init() {
 func main() {
 	log.Println("main : Started : Listing on: http://localhost:9000")
 
-	r := httptreemux.New()
-	routes.Users(r)
-
-	http.ListenAndServe(":9000", r)
+	http.ListenAndServe(":9000", routes.TM)
 }
