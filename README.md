@@ -58,7 +58,7 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 ## Partners
 
-[Venture Hive](http://venturehive.com/) | [SendGrid](https://sendgrid.com) | [Iron.io](https://iron.io) | [Galvanize](https://galvanize.com) | [Monogo DB](https://monogdb.com)
+[Venture Hive](http://venturehive.com/) | [SendGrid](http://sendgrid.com) | [Iron.io](http://iron.io) | [Galvanize](http://galvanize.com) | [Monogo DB](http://monogdb.com) | [InfluxDB](http://influxdb.com/)
 
 
 ## Getting the Material
