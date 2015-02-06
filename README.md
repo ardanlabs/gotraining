@@ -42,7 +42,7 @@ Kevin is an experienced software engineer that has been enthusiastically using G
 Cory LaNou ([@corylanou](https://twitter.com/corylanou))  
 Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time.
 
-Mark Bates ([@corylanou](https://twitter.com/markbates))  
+Mark Bates ([@markbates](https://twitter.com/markbates))  
 Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv.
 
 ## Testimonials
