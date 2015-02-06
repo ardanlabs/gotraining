@@ -72,59 +72,43 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 * Workshops  
 * Corporate  
 * Bootcamps  
+* After Hours  
 * Conferences
-
-Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.
 
 **_Meetups:_**   
+Have us speak at one of your Meetup events for free over Google hangout.  
 [GoDublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)
 
 **_Workshops:_**   
+Want to put on a workshop event for a couple of hours or event a full day?  
 Open
 
 **_Corporate:_**  
+Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.  
 Open
 
 **_Bootcamps_**  
-San Francisco, CA - March 2015  
-Denver, CO - April 2015  
-Washington D.C. - May 2015  
-NYC, NY - June 2015  
-Denver, CO - July 2015 (GopherCon)  
-Huston, TX - August 2015  
-Chicago, IL - September 2015  
+Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.  
+[Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-march-tickets-15635142131)  
+[San Francisco, CA - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
+[Denver, CO - April 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
+[Boston, MA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
+[McLean, VA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
+[NYC, NY - June 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
+[Denver, CO - GopherCon 2015 Mon](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-6th-tickets-15559629270)  
+[Denver, CO - GopherCon 2015 Tue](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-7th-tickets-15569243025)  
+[Houston, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-houston-august-exact-dates-tbd-tickets-15559615228)  
+[Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
+
+** After Hours **
+[Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-after-hours-denver-march-tickets-15643879264)
 
 **_Conferences_**  
 [Gophercon India - Feb 2015](http://www.gophercon.in/go-workshop/)  
 [FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
-Gophercon USA - July 2015  
-
-## Past Events
-
-**_Meetups:_**  
-Edmonton Go - Jan 2015  
-GoSF Meetup - Sep 2014  
-Goningen Meetup - Sep 2014  
-Go-Miami Meetup - 2014
-
-**_Workshops:_**  
-Edmonton Bootcamp - Jan 24th  
-ITPalooza Miami - Dec 4th  
-IronHack Dolphin Stadium - Oct 2014  
-Rackspace Workshop - Sep 2014
-
-**_Corporate:_**  
-Comcast - Reston, VA - Dec 2014  
-Wrecking Ball Media - Miami, FL - Sep 2014  
-Comcast - Sunnyvale, CA - Aug 2014
-
-**_Bootcamps:_**  
-Miami 2 Day Bootcamp - Nov 2014  
-
-**Conferences:_**  
-GothamGo - NYC, NY - Nov 2014  
+[Gophercon USA - July 2015](http://gophercon.com/)  
 
 ## Contact Information
 
