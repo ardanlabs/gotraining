@@ -102,8 +102,8 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 [Houston, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-houston-august-exact-dates-tbd-tickets-15559615228)  
 [Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
-** After Hours **  
-This is our bootcamp but available during the week after work. Our current Denver after hours class spans 5 nights for 4 hours each night.  
+**_After Hours_**  
+This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.  
 [Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-after-hours-denver-march-tickets-15643879264)
 
 **_Conferences_**  
