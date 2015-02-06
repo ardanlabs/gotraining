@@ -89,7 +89,7 @@ Open
 Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.  
 Open
 
-**_Bootcamps_**  
+**_Bootcamps:_**  
 Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.  
 [Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-march-tickets-15635142131)  
 [San Francisco, CA - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
@@ -102,11 +102,11 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 [Houston, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-houston-august-exact-dates-tbd-tickets-15559615228)  
 [Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
-**_After Hours_**  
+**_After Hours:_**  
 This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.  
 [Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-after-hours-denver-march-tickets-15643879264)
 
-**_Conferences_**  
+**_Conferences:_**  
 [Gophercon India - Feb 2015](http://www.gophercon.in/go-workshop/)  
 [FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
 [Gophercon USA - July 2015](http://gophercon.com/)  
