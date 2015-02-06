@@ -82,7 +82,7 @@ Have us speak at one of your Meetup events for free over Google hangout.
 [GoDublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)
 
 **_Workshops:_**   
-Want to put on a workshop event for a couple of hours or event a full day?  
+Want to put on a workshop event for a couple of hours or for a full day?  
 Open
 
 **_Corporate:_**  
@@ -102,7 +102,8 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 [Houston, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-houston-august-exact-dates-tbd-tickets-15559615228)  
 [Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
-** After Hours **
+** After Hours **  
+This is our bootcamp but available during the week after work. Our current Denver after hours class spans 5 nights for 4 hours each night.  
 [Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-after-hours-denver-march-tickets-15643879264)
 
 **_Conferences_**  
