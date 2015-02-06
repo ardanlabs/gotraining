@@ -28,8 +28,8 @@ type Context struct {
 
 // Invalid is the response for validation errors.
 type Invalid struct {
-	FieldName string `json:"field_name"`
-	Error     string `json:"error"`
+	Fld string `json:"field_name"`
+	Err string `json:"error"`
 }
 
 // Authenticate handles the authentication of each request.

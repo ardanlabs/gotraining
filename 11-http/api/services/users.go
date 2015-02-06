@@ -71,8 +71,12 @@ func (us usersService) Create(c *app.Context, u *models.User) error {
 
 	now := time.Now()
 	u.ID = bson.NewObjectId()
+	u.DateCreated = &now
 	u.DateModified = &now
-	u.DateCreated = u.DateModified
+	for _, ua := range u.Addresses {
+		ua.DateCreated = &now
+		ua.DateModified = &now
+	}
 
 	f := func(collection *mgo.Collection) error {
 		log.Printf("%s : services : Users : Create : MGO :\n\ndb.users.insert(%s)\n\n", c.SessionID, app.Query(u))
