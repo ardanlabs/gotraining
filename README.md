@@ -31,13 +31,19 @@ _Note: This material has been designed to be taught in a classroom environment. 
 * A feel for writing code in an idiomatic style and syntax.
 * Walk away with patterns and techniques for solving common problems. 
 
-## Class Options
+## Teachers
 
-* Meetups  
-* Workshops  
-* Corporate  
-* Bootcamps  
-* Conferences
+William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
+Bill is a manaing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami.
+
+Kevin Gillette ([@kevingillette](https://twitter.com/kevingillette))  
+Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history.
+
+Cory LaNou ([@corylanou](https://twitter.com/corylanou))  
+Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time.
+
+Mark Bates ([@corylanou](https://twitter.com/markbates))  
+Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv.
 
 ## Testimonials
 
@@ -50,12 +56,23 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/JackieHeitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
+## Partners
+
+[Venture Hive](http://venturehive.com/) | [SendGrid](https://sendgrid.com) | [Iron.io](https://iron.io) | [Galvanize](https://galvanize.com) | [Monogo DB](https://monogdb.com)
+
+
 ## Getting the Material
 
     -- Get all the material
     go get github.com/ArdanStudios/gotraining
 
 ## Classes and Pricing
+
+* Meetups  
+* Workshops  
+* Corporate  
+* Bootcamps  
+* Conferences
 
 Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
 
