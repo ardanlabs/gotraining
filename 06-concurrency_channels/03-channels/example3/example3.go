@@ -76,7 +76,7 @@ func insertDoc(id int) error {
 	log.Println("Insert document: ", id)
 
 	// Randomize if the insert fails or not.
-	if rand.Intn(2)%2 == 0 {
+	if rand.Intn(2) == 0 {
 		return fmt.Errorf("Document ID: %d", id)
 	}
 
@@ -86,7 +86,7 @@ func insertDoc(id int) error {
 // isNecessary determine if we need to perform the insert.
 func isNecessary() bool {
 	// Randomize if this insert is necessary or not.
-	if rand.Intn(2)%2 == 0 {
+	if rand.Intn(2) == 0 {
 		return true
 	}
 
