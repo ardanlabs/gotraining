@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/aHI23AlFD7
+// http://play.golang.org/p/GFVoQH0YOP
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
-	"sync"
 	"time"
 )
 
@@ -33,39 +32,40 @@ func main() {
 func performInserts() {
 	log.Println("Inserts Started")
 
-	// Waitgroup to know when all inserts are complete.
-	var wg sync.WaitGroup
-
 	// Buffered channel to receive information about any possible insert.
 	ch := make(chan error, numInserts)
+
+	// Number of responses we need to handle.
+	var waitResponses int
 
 	// Perform any possible number of inserts.
 	for i := 0; i < numInserts; i++ {
 		// Do we need to insert document A?
 		if isNecessary() {
-			wg.Add(1)
+			waitResponses++
 			go func(id int) {
 				ch <- insertDoc(id)
-				wg.Done()
 			}(i)
 		}
 	}
 
-	// Wait to be told all the inserts are done.
-	go func() {
-		wg.Wait()
-		close(ch)
-	}()
+	// Process the insert results as they complete.
+	for {
+		// Wait for a response from a goroutine.
+		err := <-ch
 
-	// Process the insert results as they complete. Wait for
-	// the channel to be closed.
-	for err := range ch {
+		// Display the result.
 		if err != nil {
 			log.Println("Received error:", err)
-			continue
+		} else {
+			log.Println("Received nil error")
 		}
 
-		log.Println("Received nil error")
+		// Decrement the wait count and determine if we are done.
+		waitResponses--
+		if waitResponses == 0 {
+			break
+		}
 	}
 
 	log.Println("Inserts Complete")
