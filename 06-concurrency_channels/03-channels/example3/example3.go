@@ -4,77 +4,91 @@
 // http://play.golang.org/p/o5wBWJ7fQP
 
 // This sample program demonstrates how to use a buffered
-// channel to work on multiple tasks with a predefined number
-// of goroutines.
+// channel to receive results from other goroutines in a guaranteed way.
 package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"sync"
 	"time"
 )
 
-const (
-	numberGoroutines = 4  // Number of goroutines to use.
-	taskLoad         = 10 // Amount of work to process.
-)
+// numInserts of inserts to perform.
+const numInserts = 10
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
-// init is called to initialize the package by the
-// Go runtime prior to any other code being executed.
+// init called before main.
 func init() {
 	// Seed the random number generator.
-	rand.Seed(time.Now().Unix())
+	rand.Seed(time.Now().UnixNano())
 }
 
 // main is the entry point for all Go programs.
 func main() {
-	// Create a buffered channel to manage the task load.
-	tasks := make(chan string, taskLoad)
-
-	// Launch goroutines to handle the work.
-	wg.Add(numberGoroutines)
-	for gr := 1; gr <= numberGoroutines; gr++ {
-		go worker(tasks, gr)
-	}
-
-	// Add a bunch of work to get done.
-	for post := 1; post <= taskLoad; post++ {
-		tasks <- fmt.Sprintf("Task : %d", post)
-	}
-
-	// Close the channel so the goroutines will quit
-	// when all the work is done.
-	close(tasks)
-
-	// Wait for all the work to get done.
-	wg.Wait()
+	performInserts()
 }
 
-// worker is launched as a goroutine to process work from
-// the buffered channel.
-func worker(tasks chan string, worker int) {
-	for {
-		// Wait for work to be assigned.
-		task, ok := <-tasks
-		if !ok {
-			// This means the channel is empty and closed.
-			fmt.Printf("Worker: %d : Shutting Down\n", worker)
-			wg.Done()
-			return
+// performInserts coordinates the possible inserts that need to take place.
+func performInserts() {
+	log.Println("Inserts Started")
+
+	// Waitgroup to know when all inserts are complete.
+	var wg sync.WaitGroup
+
+	// Buffered channel to receive information about any possible insert.
+	ch := make(chan error, numInserts)
+
+	// Perform any possible number of inserts.
+	for i := 0; i < numInserts; i++ {
+		// Do we need to insert document A?
+		if isNecessary() {
+			wg.Add(1)
+			go func(id int) {
+				ch <- insertDoc(id)
+				wg.Done()
+			}(i)
+		}
+	}
+
+	// Wait to be told all the inserts are done.
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
+
+	// Process the insert results as they complete. Wait for
+	// the channel to be closed.
+	for err := range ch {
+		if err != nil {
+			log.Println("Received error:", err)
+			continue
 		}
 
-		// Display we are starting the work.
-		fmt.Printf("Worker: %d : Started %s\n", worker, task)
-
-		// Randomly wait to simulate work time.
-		sleep := rand.Int63n(100)
-		time.Sleep(time.Duration(sleep) * time.Millisecond)
-
-		// Display we finished the work.
-		fmt.Printf("Worker: %d : Completed %s\n", worker, task)
+		log.Println("Received nil error")
 	}
+
+	log.Println("Inserts Complete")
+}
+
+// insertDoc simulates a database operation.
+func insertDoc(id int) error {
+	log.Println("Insert document: ", id)
+
+	// Randomize if the insert fails or not.
+	if rand.Intn(2)%2 == 0 {
+		return fmt.Errorf("Document ID: %d", id)
+	}
+
+	return nil
+}
+
+// isNecessary determine if we need to perform the insert.
+func isNecessary() bool {
+	// Randomize if this insert is necessary or not.
+	if rand.Intn(2)%2 == 0 {
+		return true
+	}
+
+	return false
 }
