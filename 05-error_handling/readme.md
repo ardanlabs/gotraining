@@ -17,6 +17,8 @@ http://www.goinggo.net/2014/10/error-handling-in-go-part-i.html
 
 http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html
 
+http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/
+
 ## Code Review
 
 [Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/8x6kDZxPWK))
