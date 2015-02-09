@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/GFVoQH0YOP
+// http://play.golang.org/p/jT4-vZBpMm
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
