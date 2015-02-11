@@ -80,6 +80,7 @@ If you are interested in holding an event in your area please let me know. I wil
 **_Meetups:_**   
 Have us speak at one of your Meetup events for free over Google hangout.  
 [GoDublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)
+[Goland DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
 
 **_Workshops:_**   
 Want to put on a workshop event for a couple of hours or for a full day?  
