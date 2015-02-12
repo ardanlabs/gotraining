@@ -14,6 +14,12 @@ import (
 
 const usersCollection = "users"
 
+// ErrNotFound is abstracting the mgo not found error.
+var ErrNotFound = mgo.ErrNotFound
+
+// ErrInvalidId is returned when a malformed id is provided.
+var ErrInvalidID = errors.New("Invalid user id.")
+
 // usersService maintains the set of services for the users api.
 type usersService struct{}
 
@@ -44,9 +50,8 @@ func (us usersService) Retrieve(c *app.Context, id string) (*models.User, error)
 	log.Println(c.SessionID, ": services : Users : Retrieve : Started")
 
 	if ok := bson.IsObjectIdHex(id); !ok {
-		err := errors.New("Invalid user id.")
-		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", err)
-		return nil, err
+		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", ErrInvalidID)
+		return nil, ErrInvalidID
 	}
 
 	var u *models.User
@@ -57,8 +62,13 @@ func (us usersService) Retrieve(c *app.Context, id string) (*models.User, error)
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
-		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", err)
-		return nil, err
+		if err != mgo.ErrNotFound {
+			log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", err)
+			return nil, err
+		}
+
+		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR : Not Found")
+		return nil, ErrNotFound
 	}
 
 	log.Println(c.SessionID, ": services : Users : Retrieve : Completed")

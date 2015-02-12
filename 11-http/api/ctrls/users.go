@@ -76,15 +76,26 @@ func (uc usersCtrl) Create(c *app.Context) {
 }
 
 // UsersRetrieve returns the specified user from the system.
-// 200 Success, 404 Not Found, 500 Internal
+// 200 Success, 404 Not Found, 409 Validation,, 500 Internal
 func (uc usersCtrl) Retrieve(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Started")
 
 	u, err := services.Users.Retrieve(c, c.Params["id"])
 	if err != nil {
-		c.RespondInternal500(err)
-		log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
-		return
+		switch err {
+		case services.ErrInvalidID:
+			c.RespondValidation409([]app.Invalid{{Fld: "id", Err: err.Error()}})
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 409 :", err)
+
+		case services.ErrNotFound:
+			c.RespondNotFound404()
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 404 : Not Found")
+
+		default:
+			c.RespondInternal500(err)
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
+			return
+		}
 	}
 
 	c.RespondSuccess200(&u)

@@ -4,6 +4,7 @@ package endpointtests
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http/httptest"
 	"testing"
 
@@ -11,7 +12,27 @@ import (
 	"github.com/ArdanStudios/gotraining/11-http/api/models"
 	"github.com/ArdanStudios/gotraining/11-http/api/routes"
 	"github.com/ArdanStudios/gotraining/11-http/api/tests"
+	"gopkg.in/mgo.v2/bson"
 )
+
+var u = models.User{
+	UserType:  1,
+	FirstName: "Bill",
+	LastName:  "Kennedy",
+	Email:     "bill@ardanstugios.com",
+	Company:   "Ardan Labs",
+	Addresses: []models.UserAddress{
+		{
+			Type:    1,
+			LineOne: "12973 SW 112th ST",
+			LineTwo: "Suite 153",
+			City:    "Miami",
+			State:   "FL",
+			Zipcode: "33172",
+			Phone:   "305-527-3353",
+		},
+	},
+}
 
 // Test_Users is the entry point for the users tests.
 func Test_Users(t *testing.T) {
@@ -21,32 +42,32 @@ func Test_Users(t *testing.T) {
 	}
 	defer c.Session.Close()
 
+	usersList204(t, c)
 	usersCreate200(t, c)
 	usersCreate409(t, c)
-	usersList200(t, c)
+	us := usersList200(t, c)
+	usersRetrieve200(t, c, us[0].ID.Hex())
+	usersRetrieve404(t, c, bson.NewObjectId().Hex())
+	usersRetrieve409(t, c, "123")
+}
+
+// usersList204 validates an empty users list can be retrieved with the endpoint.
+func usersList204(t *testing.T, c *app.Context) {
+	r := tests.NewRequest("GET", "/v1/users", nil)
+	w := httptest.NewRecorder()
+	routes.TM.ServeHTTP(w, r)
+
+	t.Log("Given the need to validate an empty list of users with the users endpoint.")
+	{
+		if w.Code != 204 {
+			t.Fatalf("\tShould received a status code of 204 for the response. Received[%d] %s", w.Code, tests.Failed)
+		}
+		t.Log("\tShould received a status code of 204 for the response.", tests.Succeed)
+	}
 }
 
 // usersCreate200 validates a user can be created with the endpoint.
 func usersCreate200(t *testing.T, c *app.Context) {
-	u := models.User{
-		UserType:  1,
-		FirstName: "Bill",
-		LastName:  "Kennedy",
-		Email:     "bill@ardanstugios.com",
-		Company:   "Ardan Labs",
-		Addresses: []models.UserAddress{
-			{
-				Type:    1,
-				LineOne: "12973 SW 112th ST",
-				LineTwo: "Suite 153",
-				City:    "Miami",
-				State:   "FL",
-				Zipcode: "33172",
-				Phone:   "305-527-3353",
-			},
-		},
-	}
-
 	var response struct {
 		ID string
 	}
@@ -122,7 +143,7 @@ func usersCreate409(t *testing.T, c *app.Context) {
 }
 
 // usersList200 validates a users list can be retrieved with the endpoint.
-func usersList200(t *testing.T, c *app.Context) {
+func usersList200(t *testing.T, c *app.Context) []models.User {
 	var us []models.User
 
 	r := tests.NewRequest("GET", "/v1/users", nil)
@@ -161,5 +182,65 @@ func usersList200(t *testing.T, c *app.Context) {
 			t.Fatalf("\tShould have dates in all the user documents. %+v", marks)
 		}
 		t.Logf("\tShould have dates in all the user documents. %+v", marks)
+	}
+
+	return us
+}
+
+// usersList200 validates a users list can be retrieved with the endpoint.
+func usersRetrieve200(t *testing.T, c *app.Context, id string) {
+	r := tests.NewRequest("GET", "/v1/users/"+id, nil)
+	w := httptest.NewRecorder()
+	routes.TM.ServeHTTP(w, r)
+
+	var ur models.User
+
+	t.Log("Given the need to retrieve an individual user with the users endpoint.")
+	{
+		if w.Code != 200 {
+			t.Fatalf("\tShould received a status code of 200 for the response. Received[%d] %s", w.Code, tests.Failed)
+		}
+		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
+
+		if err := json.NewDecoder(w.Body).Decode(&ur); err != nil {
+			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
+		}
+		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
+
+		if inv, err := ur.Compare(&u); err != nil {
+			fmt.Println(inv)
+			t.Fatal("\tShould have the document specified by id.", tests.Failed)
+		}
+		t.Log("\tShould have the document specified by id", tests.Succeed)
+	}
+}
+
+// usersRetrieve404 validates a user request for a user that does not exist with the endpoint.
+func usersRetrieve404(t *testing.T, c *app.Context, id string) {
+	r := tests.NewRequest("GET", "/v1/users/"+id, nil)
+	w := httptest.NewRecorder()
+	routes.TM.ServeHTTP(w, r)
+
+	t.Log("Given the situation of retrieving an individual user that does not exist with the users endpoint.")
+	{
+		if w.Code != 404 {
+			t.Fatalf("\tShould received a status code of 404 for the response. Received[%d] %s", w.Code, tests.Failed)
+		}
+		t.Log("\tShould received a status code of 404 for the response.", tests.Succeed)
+	}
+}
+
+// usersRetrieve409 validates a user request with an invalid id with the endpoint.
+func usersRetrieve409(t *testing.T, c *app.Context, id string) {
+	r := tests.NewRequest("GET", "/v1/users/"+id, nil)
+	w := httptest.NewRecorder()
+	routes.TM.ServeHTTP(w, r)
+
+	t.Log("Given the situation of retrieving an individual user with an invalid id with the users endpoint.")
+	{
+		if w.Code != 409 {
+			t.Fatalf("\tShould received a status code of 409 for the response. Received[%d] %s", w.Code, tests.Failed)
+		}
+		t.Log("\tShould received a status code of 409 for the response.", tests.Succeed)
 	}
 }
