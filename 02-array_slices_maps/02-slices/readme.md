@@ -35,7 +35,7 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 [Appending slices](example4/example4.go) ([Go Playground](http://play.golang.org/p/UzmwiMWDwd))
 
-[Iterating over slices](example5/example5.go) ([Go Playground](http://play.golang.org/p/HV5t0VrRie))
+[Strings and slices](example5/example5.go) ([Go Playground](http://play.golang.org/p/6CAkumo0HI))
 
 ## Advanced Code Review
 
