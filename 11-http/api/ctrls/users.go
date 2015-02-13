@@ -24,14 +24,16 @@ func (uc usersCtrl) List(c *app.Context) {
 
 	u, err := services.Users.List(c)
 	if err != nil {
-		c.RespondInternal500(err)
-		log.Println(c.SessionID, ": ctrls : Users : List : Completed : 500 :", err)
-		return
-	}
+		switch err {
+		case services.ErrNotFound:
+			c.RespondBadRequest204()
+			log.Println(c.SessionID, ": ctrls : Users : List : Completed : 204 :", err)
 
-	if len(u) == 0 {
-		log.Println(c.SessionID, ": ctrls : Users : List : Completed : 204")
-		c.RespondBadRequest204()
+		default:
+			c.RespondInternal500(err)
+			log.Println(c.SessionID, ": ctrls : Users : List : Completed : 500 :", err)
+		}
+
 		return
 	}
 
@@ -41,33 +43,35 @@ func (uc usersCtrl) List(c *app.Context) {
 }
 
 // UsersCreate inserts a new user into the system.
-// 200 Success, 409 Validation, 500 Internal
+// 200 Success, 404 Bad Request, 409 Validation, 500 Internal
 func (uc usersCtrl) Create(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Create : Started")
 
 	var u models.User
 	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
 		c.RespondBadRequest400(err)
-		log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 500 :", err)
+		log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 400 :", err)
 		return
 	}
 
-	if v, err := u.Validate(); err != nil {
-		c.RespondValidation409(v)
-		log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 409 :", err)
-		return
-	}
+	if v, err := services.Users.Create(c, &u); err != nil {
+		switch err {
+		case services.ErrValidation:
+			c.RespondValidation409(v)
+			log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 409 :", err)
 
-	if err := services.Users.Create(c, &u); err != nil {
-		c.RespondInternal500(err)
-		log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 500 :", err)
+		default:
+			c.RespondInternal500(err)
+			log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 500 :", err)
+		}
+
 		return
 	}
 
 	r := struct {
-		ID string
+		UserID string `json:"user_id"`
 	}{
-		u.ID.Hex(),
+		u.UserID,
 	}
 
 	c.RespondSuccess200(&r)
@@ -94,8 +98,9 @@ func (uc usersCtrl) Retrieve(c *app.Context) {
 		default:
 			c.RespondInternal500(err)
 			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
-			return
 		}
+
+		return
 	}
 
 	c.RespondSuccess200(&u)
@@ -108,24 +113,59 @@ func (uc usersCtrl) Retrieve(c *app.Context) {
 func (uc usersCtrl) Update(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Update : Started")
 
-	log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 200")
-}
+	var u models.User
+	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
+		c.RespondBadRequest400(err)
+		log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 400 :", err)
+		return
+	}
 
-// Delete removed the specified user from the system.
-// 200 Success, 404 Not Found, 500 Internal
-func (uc usersCtrl) Delete(c *app.Context) {
-	log.Println(c.SessionID, ": ctrls : Users : Delete : Started")
+	if v, err := services.Users.Update(c, &u); err != nil {
+		switch err {
+		case services.ErrValidation:
+			c.RespondValidation409(v)
+			log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 409 :", err)
 
-	if err := services.Users.Delete(c, c.Params["id"]); err != nil {
-		c.RespondInternal500(err)
-		log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 500 :", err)
+		default:
+			c.RespondInternal500(err)
+			log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 500 :", err)
+		}
+
 		return
 	}
 
 	r := struct {
-		message string
+		Message string `json:"message"`
 	}{
-		fmt.Sprintf("User with ID %s has been removed", c.Params["id"]),
+		fmt.Sprintf("User with ID %s has been updated.", u.UserID),
+	}
+
+	c.RespondSuccess200(&r)
+
+	log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 200")
+}
+
+// Delete removed the specified user from the system.
+// 200 Success, 409 Validation, 500 Internal
+func (uc usersCtrl) Delete(c *app.Context) {
+	log.Println(c.SessionID, ": ctrls : Users : Delete : Started")
+
+	if err := services.Users.Delete(c, c.Params["id"]); err != nil {
+		switch err {
+		case services.ErrInvalidID:
+			c.RespondValidation409([]app.Invalid{{Fld: "id", Err: err.Error()}})
+			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 409 :", err)
+
+		default:
+			c.RespondInternal500(err)
+			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 500 :", err)
+		}
+	}
+
+	r := struct {
+		Message string
+	}{
+		fmt.Sprintf("User with ID %s has been removed.", c.Params["id"]),
 	}
 
 	c.RespondSuccess200(&r)

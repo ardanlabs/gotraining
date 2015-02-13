@@ -52,7 +52,7 @@ func (ua *UserAddress) Validate() ([]app.Invalid, error) {
 	}
 
 	if len(inv) > 0 {
-		return inv, errors.New("Validation failures identified.")
+		return inv, errors.New("Validation failures identified")
 	}
 
 	return nil, nil
@@ -87,7 +87,7 @@ func (ua *UserAddress) Compare(uat *UserAddress) ([]app.Invalid, error) {
 	}
 
 	if len(inv) > 0 {
-		return inv, errors.New("Compare failures identified.")
+		return inv, errors.New("Compare failures identified")
 	}
 
 	return nil, nil
@@ -95,7 +95,7 @@ func (ua *UserAddress) Compare(uat *UserAddress) ([]app.Invalid, error) {
 
 // User contains information about a user.
 type User struct {
-	ID           bson.ObjectId `bson:"_id,omitempty" json:"id,omitempty"`
+	UserID       string        `bson:"user_id,omitempty" json:"user_id,omitempty"`
 	UserType     int           `bson:"type" json:"type"`
 	FirstName    string        `bson:"first_name" json:"first_name"`
 	LastName     string        `bson:"last_name" json:"last_name"`
@@ -109,6 +109,10 @@ type User struct {
 // Validate checks the fields to verify the value is in a proper state.
 func (u *User) Validate() ([]app.Invalid, error) {
 	var inv []app.Invalid
+
+	if !bson.IsObjectIdHex(u.UserID) {
+		inv = append(inv, app.Invalid{Fld: "UserID", Err: "The UserID is not in a valid form."})
+	}
 
 	if u.UserType == 0 {
 		inv = append(inv, app.Invalid{Fld: "UserType", Err: "The value of UserType cannot be 0."})
@@ -141,7 +145,7 @@ func (u *User) Validate() ([]app.Invalid, error) {
 	}
 
 	if len(inv) > 0 {
-		return inv, errors.New("Validation failures identified.")
+		return inv, errors.New("Validation failures identified")
 	}
 
 	return nil, nil
@@ -189,7 +193,7 @@ func (u *User) Compare(ut *User) ([]app.Invalid, error) {
 	}
 
 	if len(inv) > 0 {
-		return inv, errors.New("Compare failures identified.")
+		return inv, errors.New("Compare failures identified")
 	}
 
 	return nil, nil

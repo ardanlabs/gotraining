@@ -46,9 +46,10 @@ func Test_Users(t *testing.T) {
 	usersCreate200(t, c)
 	usersCreate409(t, c)
 	us := usersList200(t, c)
-	usersRetrieve200(t, c, us[0].ID.Hex())
+	usersRetrieve200(t, c, us[0].UserID)
 	usersRetrieve404(t, c, bson.NewObjectId().Hex())
 	usersRetrieve409(t, c, "123")
+	usersDelete200(t, c, us[0].UserID)
 }
 
 // usersList204 validates an empty users list can be retrieved with the endpoint.
@@ -69,7 +70,7 @@ func usersList204(t *testing.T, c *app.Context) {
 // usersCreate200 validates a user can be created with the endpoint.
 func usersCreate200(t *testing.T, c *app.Context) {
 	var response struct {
-		ID string
+		UserID string `json:"user_id"`
 	}
 
 	body, _ := json.Marshal(&u)
@@ -89,7 +90,7 @@ func usersCreate200(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
 
-		if response.ID == "" {
+		if response.UserID == "" {
 			t.Fatal("\tShould have a user id in the response.", tests.Failed)
 		}
 		t.Log("\tShould have a user id in the response.", tests.Succeed)
@@ -242,5 +243,34 @@ func usersRetrieve409(t *testing.T, c *app.Context, id string) {
 			t.Fatalf("\tShould received a status code of 409 for the response. Received[%d] %s", w.Code, tests.Failed)
 		}
 		t.Log("\tShould received a status code of 409 for the response.", tests.Succeed)
+	}
+}
+
+// usersDelete200 validates a user can be deleted with the endpoint.
+func usersDelete200(t *testing.T, c *app.Context, id string) {
+	var response struct {
+		Message string `json:"message"`
+	}
+
+	r := tests.NewRequest("DELETE", "/v1/users/"+id, nil)
+	w := httptest.NewRecorder()
+	routes.TM.ServeHTTP(w, r)
+
+	t.Log("Given the need to delete a new user with the users endpoint.")
+	{
+		if w.Code != 200 {
+			t.Fatalf("\tShould received a status code of 200 for the response. Received[%d] %s", w.Code, tests.Failed)
+		}
+		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
+
+		if err := json.NewDecoder(w.Body).Decode(&response); err != nil {
+			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
+		}
+		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
+
+		if response.Message != fmt.Sprintf("User with ID %s has been removed.", id) {
+			t.Fatal("\tShould have an expected message in the response.", tests.Failed)
+		}
+		t.Log("\tShould have an expected message in the response.", tests.Succeed)
 	}
 }

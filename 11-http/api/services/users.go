@@ -14,11 +14,16 @@ import (
 
 const usersCollection = "users"
 
-// ErrNotFound is abstracting the mgo not found error.
-var ErrNotFound = mgo.ErrNotFound
+var (
+	// ErrNotFound is abstracting the mgo not found error.
+	ErrNotFound = errors.New("No user(s) found")
 
-// ErrInvalidId is returned when a malformed id is provided.
-var ErrInvalidID = errors.New("Invalid user id.")
+	// ErrInvalidID occurs when an ID is not in a valid form.
+	ErrInvalidID = errors.New("ID is not in it's proper form")
+
+	// ErrValidation occurs when there are validation errors.
+	ErrValidation = errors.New("Validation errors occurred")
+)
 
 // usersService maintains the set of services for the users api.
 type usersService struct{}
@@ -30,10 +35,10 @@ var Users usersService
 func (us usersService) List(c *app.Context) ([]models.User, error) {
 	log.Println(c.SessionID, ": services : Users : List : Started")
 
-	var users []models.User
+	var u []models.User
 	f := func(collection *mgo.Collection) error {
 		log.Printf("%s : services : Users : List: MGO :\n\ndb.users.find()\n\n", c.SessionID)
-		return collection.Find(nil).All(&users)
+		return collection.Find(nil).All(&u)
 	}
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
@@ -41,22 +46,27 @@ func (us usersService) List(c *app.Context) ([]models.User, error) {
 		return nil, err
 	}
 
+	if len(u) == 0 {
+		log.Println(c.SessionID, ": services : Users : List : Completed : ERROR :", ErrNotFound)
+		return nil, ErrNotFound
+	}
+
 	log.Println(c.SessionID, ": services : Users : List : Completed")
-	return users, nil
+	return u, nil
 }
 
 // Retrieve gets the specified user from the database.
-func (us usersService) Retrieve(c *app.Context, id string) (*models.User, error) {
+func (us usersService) Retrieve(c *app.Context, userID string) (*models.User, error) {
 	log.Println(c.SessionID, ": services : Users : Retrieve : Started")
 
-	if ok := bson.IsObjectIdHex(id); !ok {
+	if !bson.IsObjectIdHex(userID) {
 		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", ErrInvalidID)
 		return nil, ErrInvalidID
 	}
 
 	var u *models.User
 	f := func(collection *mgo.Collection) error {
-		q := bson.M{"_id": bson.ObjectIdHex(id)}
+		q := bson.M{"user_id": userID}
 		log.Printf("%s : services : Users : Retrieve: MGO :\n\ndb.users.find(%s)\n\n", c.SessionID, app.Query(q))
 		return collection.Find(q).One(&u)
 	}
@@ -76,16 +86,22 @@ func (us usersService) Retrieve(c *app.Context, id string) (*models.User, error)
 }
 
 // Create inserts a new user into the database.
-func (us usersService) Create(c *app.Context, u *models.User) error {
+func (us usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, error) {
 	log.Println(c.SessionID, ": services : Users : Create : Started")
 
 	now := time.Now()
-	u.ID = bson.NewObjectId()
+
+	u.UserID = bson.NewObjectId().Hex()
 	u.DateCreated = &now
 	u.DateModified = &now
 	for _, ua := range u.Addresses {
 		ua.DateCreated = &now
 		ua.DateModified = &now
+	}
+
+	if v, err := u.Validate(); err != nil {
+		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
+		return v, ErrValidation
 	}
 
 	f := func(collection *mgo.Collection) error {
@@ -95,25 +111,48 @@ func (us usersService) Create(c *app.Context, u *models.User) error {
 
 	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
-		return err
+		return nil, err
 	}
 
 	log.Println(c.SessionID, ": services : Users : Create : Completed")
-	return nil
+	return nil, nil
 }
 
-// Delete inserts a new user into the database.
-func (us usersService) Delete(c *app.Context, id string) error {
-	log.Println(c.SessionID, ": services : Users : Delete : Started")
+// Update replaces a user document in the database.
+func (us usersService) Update(c *app.Context, u *models.User) ([]app.Invalid, error) {
+	log.Println(c.SessionID, ": services : Users : Update : Started")
 
-	if ok := bson.IsObjectIdHex(id); !ok {
-		err := errors.New("Invalid user id.")
-		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", err)
-		return err
+	if v, err := u.Validate(); err != nil {
+		log.Println(c.SessionID, ": services : Users : Update : Completed : ERROR :", err)
+		return v, ErrValidation
 	}
 
 	f := func(collection *mgo.Collection) error {
-		q := bson.M{"_id": bson.ObjectIdHex(id)}
+		q := bson.M{"user_id": u.UserID}
+		log.Printf("%s : services : Users : Update : MGO :\n\ndb.users.update(%s, %s)\n\n", c.SessionID, app.Query(q), app.Query(u))
+		return collection.Update(q, u)
+	}
+
+	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
+		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
+		return nil, err
+	}
+
+	log.Println(c.SessionID, ": services : Users : Update : Completed")
+	return nil, nil
+}
+
+// Delete inserts a new user into the database.
+func (us usersService) Delete(c *app.Context, userID string) error {
+	log.Println(c.SessionID, ": services : Users : Delete : Started")
+
+	if !bson.IsObjectIdHex(userID) {
+		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", ErrInvalidID)
+		return ErrInvalidID
+	}
+
+	f := func(collection *mgo.Collection) error {
+		q := bson.M{"user_id": userID}
 		log.Printf("%s : services : Users : Delete : MGO :\n\ndb.users.remove(%s)\n\n", c.SessionID, app.Query(q))
 		return collection.Remove(q)
 	}
