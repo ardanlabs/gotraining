@@ -10,6 +10,10 @@ import (
 )
 
 // MongoDB connection information.
+// This information is hardcoded into this app to allow you to run
+// this code without requiring configuration. Please don't do this
+// in production code. I recommend using environmental variables and
+// a package like envconfig [https://github.com/kelseyhightower/envconfig].
 const (
 	mongoDBHosts = "ds039441.mongolab.com:39441"
 	authDatabase = "gotraining"
