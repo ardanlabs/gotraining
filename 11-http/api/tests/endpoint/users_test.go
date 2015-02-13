@@ -49,6 +49,8 @@ func Test_Users(t *testing.T) {
 	usersRetrieve200(t, c, us[0].UserID)
 	usersRetrieve404(t, c, bson.NewObjectId().Hex())
 	usersRetrieve409(t, c, "123")
+	usersUpdate200(t, c)
+	usersRetrieve200(t, c, us[0].UserID)
 	usersDelete200(t, c, us[0].UserID)
 }
 
@@ -95,6 +97,9 @@ func usersCreate200(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould have a user id in the response.", tests.Succeed)
 	}
+
+	// Save for future calls.
+	u.UserID = response.UserID
 }
 
 // usersCreate409 validates a user can't be created with the endpoint
@@ -243,6 +248,38 @@ func usersRetrieve409(t *testing.T, c *app.Context, id string) {
 			t.Fatalf("\tShould received a status code of 409 for the response. Received[%d] %s", w.Code, tests.Failed)
 		}
 		t.Log("\tShould received a status code of 409 for the response.", tests.Succeed)
+	}
+}
+
+// usersUpdate200 validates a user can be updated with the endpoint.
+func usersUpdate200(t *testing.T, c *app.Context) {
+	u.FirstName = "Lisa"
+
+	var response struct {
+		Message string `json:"message"`
+	}
+
+	body, _ := json.Marshal(&u)
+	r := tests.NewRequest("PUT", "/v1/users/"+u.UserID, bytes.NewBuffer(body))
+	w := httptest.NewRecorder()
+	routes.TM.ServeHTTP(w, r)
+
+	t.Log("Given the need to validate a user can be updated with the users endpoint.")
+	{
+		if w.Code != 200 {
+			t.Fatalf("\tShould received a status code of 200 for the response. Received[%d] %s", w.Code, tests.Failed)
+		}
+		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
+
+		if err := json.NewDecoder(w.Body).Decode(&response); err != nil {
+			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
+		}
+		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
+
+		if response.Message != fmt.Sprintf("User with ID %s has been updated.", u.UserID) {
+			t.Fatal("\tShould have an expected message in the response.", tests.Failed)
+		}
+		t.Log("\tShould have an expected message in the response.", tests.Succeed)
 	}
 }
 

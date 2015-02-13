@@ -120,7 +120,7 @@ func (uc usersCtrl) Update(c *app.Context) {
 		return
 	}
 
-	if v, err := services.Users.Update(c, &u); err != nil {
+	if v, err := services.Users.Update(c, c.Params["id"], &u); err != nil {
 		switch err {
 		case services.ErrValidation:
 			c.RespondValidation409(v)
@@ -163,7 +163,7 @@ func (uc usersCtrl) Delete(c *app.Context) {
 	}
 
 	r := struct {
-		Message string
+		Message string `json:"message"`
 	}{
 		fmt.Sprintf("User with ID %s has been removed.", c.Params["id"]),
 	}

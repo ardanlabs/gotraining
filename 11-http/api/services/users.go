@@ -119,12 +119,21 @@ func (us usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, er
 }
 
 // Update replaces a user document in the database.
-func (us usersService) Update(c *app.Context, u *models.User) ([]app.Invalid, error) {
+func (us usersService) Update(c *app.Context, userID string, u *models.User) ([]app.Invalid, error) {
 	log.Println(c.SessionID, ": services : Users : Update : Started")
 
 	if v, err := u.Validate(); err != nil {
 		log.Println(c.SessionID, ": services : Users : Update : Completed : ERROR :", err)
 		return v, ErrValidation
+	}
+
+	if u.UserID == "" {
+		u.UserID = userID
+	}
+
+	if userID != u.UserID {
+		log.Println(c.SessionID, ": services : Users : Update : Completed : ERROR :", ErrValidation)
+		return []app.Invalid{{Fld: "UserID", Err: "Specified UserID does not match user value."}}, ErrValidation
 	}
 
 	f := func(collection *mgo.Collection) error {
