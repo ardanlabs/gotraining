@@ -17,7 +17,7 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
-// Context contains data in context with all requests.
+// Context contains data associated with a single request.
 type Context struct {
 	Session   *mgo.Session
 	Writer    http.ResponseWriter
