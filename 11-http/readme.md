@@ -25,7 +25,7 @@ http://www.restapitutorial.com/httpstatuscodes.html
 ## Advanced Code Review
 
 [Web API](api)  
-	Sample code that provides best practices for building a RESTful API in Go. It leverages the standard library except for the router where a package named [httptreemux](https://github.com/dimfeld/httptreemux) is used. This router provides some nice conveniences such as handling verbs and access to parameters.
+Sample code that provides best practices for building a RESTful API in Go. It leverages the standard library except for the router where a package named [httptreemux](https://github.com/dimfeld/httptreemux) is used. This router provides some nice conveniences such as handling verbs and access to parameters.
 
 ## Exercises
 
