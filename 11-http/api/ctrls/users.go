@@ -26,7 +26,7 @@ func (uc usersCtrl) List(c *app.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrNotFound:
-			c.RespondBadRequest204()
+			c.RespondNoContent204()
 			log.Println(c.SessionID, ": ctrls : Users : List : Completed : 204 :", err)
 
 		default:
@@ -43,7 +43,7 @@ func (uc usersCtrl) List(c *app.Context) {
 }
 
 // UsersCreate inserts a new user into the system.
-// 200 Success, 400 Bad Request, 500 Internal
+// 200 Success, 409 validation, 500 Internal
 func (uc usersCtrl) Create(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Create : Started")
 

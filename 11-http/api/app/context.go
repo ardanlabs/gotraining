@@ -1,4 +1,4 @@
-// Package api provides application support for context and MongoDB access.
+// Package app provides application support for context and MongoDB access.
 // Current Status Codes:
 // 		200 OK           : StatusOK                  : Call is success and returning data.
 // 		400 Bad Request  : StatusBadRequest          : Invalid post data (syntax or semantics).
@@ -58,22 +58,39 @@ func (c *Context) RespondSuccess200(v interface{}) {
 	log.Println(c.SessionID, ": api : RespondSuccess200 : Completed")
 }
 
-// RespondBadRequest204 means the call succeeded but no data.
-func (c *Context) RespondBadRequest204() {
-	log.Println(c.SessionID, ": api : RespondBadRequest204 : Started")
+// RespondNoContent204 means the call succeeded but no data.
+func (c *Context) RespondNoContent204() {
+	log.Println(c.SessionID, ": api : RespondNoContent204 : Started")
 
 	http.Error(c.Writer, "", http.StatusNoContent)
 
-	log.Println(c.SessionID, ": api : RespondBadRequest204 : Completed")
+	log.Println(c.SessionID, ": api : RespondNoContent204 : Completed")
 }
 
 // RespondBadRequest400 means the call contained invalid post data.
 func (c *Context) RespondBadRequest400(err error) {
 	log.Println(c.SessionID, ": api : RespondBadRequest400 : Started")
 
-	c.respondError(err, http.StatusBadRequest)
+	c.RespondValidation400([]Invalid{{Fld: "error", Err: err.Error()}})
 
 	log.Println(c.SessionID, ": api : RespondBadRequest400 : Completed")
+}
+
+// RespondValidation400 means the call failed validation.
+func (c *Context) RespondValidation400(v []Invalid) {
+	log.Println(c.SessionID, ": api : RespondValidation400 : Started")
+
+	data, err := json.MarshalIndent(v, "", "    ")
+	if err != nil {
+		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	s := string(data)
+	log.Printf("%s : api : RespondValidation400 : Response\n%s\n", c.SessionID, s)
+
+	http.Error(c.Writer, s, http.StatusBadRequest)
+	log.Println(c.SessionID, ": api : RespondValidation400 : Completed")
 }
 
 // RespondUnauthorized401 means the call failed authentication.
@@ -92,23 +109,6 @@ func (c *Context) RespondNotFound404() {
 	http.NotFound(c.Writer, c.Request)
 
 	log.Println(c.SessionID, ": api : RespondNotFound404 : Completed")
-}
-
-// RespondValidation400 means the call failed validation.
-func (c *Context) RespondValidation400(v []Invalid) {
-	log.Println(c.SessionID, ": api : RespondValidation400 : Started")
-
-	data, err := json.MarshalIndent(v, "", "    ")
-	if err != nil {
-		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	s := string(data)
-	log.Printf("%s : api : RespondValidation400 : Response\n%s\n", c.SessionID, s)
-
-	http.Error(c.Writer, s, http.StatusConflict)
-	log.Println(c.SessionID, ": api : RespondValidation400 : Completed")
 }
 
 // RespondInternal500 means the call resulted in an application error.
