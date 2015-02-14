@@ -19,7 +19,7 @@ var u = models.User{
 	UserType:  1,
 	FirstName: "Bill",
 	LastName:  "Kennedy",
-	Email:     "bill@ardanstugios.com",
+	Email:     "bill@ardanstudios.com",
 	Company:   "Ardan Labs",
 	Addresses: []models.UserAddress{
 		{

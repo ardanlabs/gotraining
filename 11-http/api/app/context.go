@@ -1,6 +1,7 @@
-// Package api provides application support for context and MongoDB access.
+// Package app provides application support for context and MongoDB access.
 // Current Status Codes:
 // 		200 Successful   : StatusOK                  : Call is success and returning data.
+// 		204 No Content   : StatusNoContent           : Call is success and no data being returned.
 // 		400 Bad Request  : StatusBadRequest          : Invalid post data.
 // 		401 Unauthorized : StatusUnauthorized        : Authentication failure.
 // 		404 Not Found    : StatusNotFound            : Invalid URL or identifier.
@@ -59,13 +60,13 @@ func (c *Context) RespondSuccess200(v interface{}) {
 	log.Println(c.SessionID, ": api : RespondSuccess200 : Completed")
 }
 
-// RespondBadRequest204 means the call succeeded but no data.
-func (c *Context) RespondBadRequest204() {
-	log.Println(c.SessionID, ": api : RespondBadRequest204 : Started")
+// RespondNoContent204 means the call succeeded but no data.
+func (c *Context) RespondNoContent204() {
+	log.Println(c.SessionID, ": api : RespondNoContent204 : Started")
 
 	http.Error(c.Writer, "", http.StatusNoContent)
 
-	log.Println(c.SessionID, ": api : RespondBadRequest204 : Completed")
+	log.Println(c.SessionID, ": api : RespondNoContent204 : Completed")
 }
 
 // RespondBadRequest400 means the call contained invalid post data.

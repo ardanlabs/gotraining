@@ -26,7 +26,7 @@ func (uc usersCtrl) List(c *app.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrNotFound:
-			c.RespondBadRequest204()
+			c.RespondNoContent204()
 			log.Println(c.SessionID, ": ctrls : Users : List : Completed : 204 :", err)
 
 		default:
@@ -160,6 +160,8 @@ func (uc usersCtrl) Delete(c *app.Context) {
 			c.RespondInternal500(err)
 			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 500 :", err)
 		}
+
+		return
 	}
 
 	r := struct {
