@@ -56,7 +56,7 @@ We need to add some changes to main to get the profiling data we need.
 ### Peek into the runtime scheduler:
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
-	GODEBUG=schedtrace=1000,scheddetail=1 ./example1.go
+	GODEBUG=schedtrace=1000,scheddetail=1 ./example3.go
 
 	*allocfreetrace*: setting allocfreetrace=1 causes every allocation to be
 	profiled and a stack trace printed on each object's allocation and free.
@@ -91,54 +91,119 @@ We need to add some changes to main to get the profiling data we need.
 	Example
 	http://golang.org/src/runtime/proc.c
 
-	SCHED 11951ms: gomaxprocs=2 idleprocs=0 threads=4 spinningthreads=0 idlethreads=1 runqueue=6 gcwaiting=0 nmidlelocked=0 stopwait=0 sysmonwait=0
+	GODEBUG=schedtrace=1000 ./example3.go
+
+	GOMAXPROCS = 1
+		SCHED 0ms: gomaxprocs=1 idleprocs=0 threads=2 spinningthreads=0 idlethreads=0 runqueue=0 [1]
+		SCHED 1009ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1 runqueue=0 [9]
+
+	GOMAXPROCS = 2
+		SCHED 1001ms: gomaxprocs=2 idleprocs=2 threads=4 spinningthreads=0 idlethreads=2 runqueue=0 [0 0]
+		SCHED 2002ms: gomaxprocs=2 idleprocs=0 threads=4 spinningthreads=0 idlethreads=1 runqueue=0 [4 4]
+	
 	Scheduler States:
-		gomaxprocs=2: Number of contexts being used.
-		threads=4:    Number of threads being used.
-		runqueue=6:   Number of goroutines in the global queue.
-		gcwaiting=0:  Is the scheduled blocking waiting for GC to finish.
+		gomaxprocs=1:  Number of contexts is use.
+		idleprocs=0:   Number of contexts not in use. Goroutine running.
+		threads=3:     Number of threads in use.
+		idlethreads=0: Number of threads not in use.
+		runqueue=0:    Number of goroutines in the global queue.
+		[9]:           Number of goroutines in a context's run queue.
 
+	GODEBUG=schedtrace=1000,scheddetail=1 ./example3.go
 
-  	P0: status=1 schedtick=11 syscalltick=0 m=3 runqsize=1 gfreecnt=0
-  	P1: status=1 schedtick=13 syscalltick=1 m=2 runqsize=1 gfreecnt=0
-  	Context Stats:
-  		m=3:        The thread being used.
-  		runqsize=1: Number of goroutines assigned to the context.
+	GOMAXPROCS = 1
+		SCHED 2016ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1 runqueue=0 gcwaiting=0 nmidlelocked=0 stopwait=0 sysmonwait=0
+		P0: status=1 schedtick=20 syscalltick=14 m=0 runqsize=9 gfreecnt=0
+		M2: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+		M1: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=1 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+		M0: p=0 curg=5 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+		G1: status=4(semacquire) m=-1 lockedm=-1
+		G2: status=4(force gc (idle)) m=-1 lockedm=-1
+		G3: status=4(GC sweep wait) m=-1 lockedm=-1
+		G4: status=4(finalizer wait) m=-1 lockedm=-1
+		G5: status=2(sleep) m=0 lockedm=-1
+		G6: status=1(sleep) m=-1 lockedm=-1
+		G7: status=1(sleep) m=-1 lockedm=-1
+		G8: status=1(sleep) m=-1 lockedm=-1
+		G9: status=1(sleep) m=-1 lockedm=-1
+		G10: status=1(sleep) m=-1 lockedm=-1
+		G11: status=1(sleep) m=-1 lockedm=-1
+		G12: status=1(sleep) m=-1 lockedm=-1
+		G13: status=1(sleep) m=-1 lockedm=-1
+		G14: status=1(sleep) m=-1 lockedm=-1
+		G15: status=4(timer goroutine (idle)) m=-1 lockedm=-1
 
-  	M3: p=0 curg=5 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-  	M2: p=1 curg=12 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-  	M1: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=1 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-  	M0: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-  	Thread Stats:
-  		p=0: The Context this thread is attached to.
+	GOMAXPROCS = 2
+		SCHED 2007ms: gomaxprocs=2 idleprocs=0 threads=4 spinningthreads=0 idlethreads=1 runqueue=0 gcwaiting=0 nmidlelocked=0 stopwait=0 sysmonwait=0
+		P0: status=1 schedtick=20 syscalltick=12 m=3 runqsize=4 gfreecnt=0
+	  	P1: status=1 schedtick=8 syscalltick=2 m=2 runqsize=4 gfreecnt=0
+	  	M3: p=0 curg=11 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+	  	M2: p=1 curg=6 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+	  	M1: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=1 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+	  	M0: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+	  	G1: status=4(semacquire) m=-1 lockedm=-1
+	  	G2: status=4(force gc (idle)) m=-1 lockedm=-1
+	  	G3: status=4(GC sweep wait) m=-1 lockedm=-1
+	  	G4: status=4(finalizer wait) m=-1 lockedm=-1
+	  	G5: status=1(sleep) m=-1 lockedm=-1
+	  	G6: status=2(sleep) m=2 lockedm=-1
+	  	G7: status=1(sleep) m=-1 lockedm=-1
+	  	G8: status=1(sleep) m=-1 lockedm=-1
+	  	G9: status=1(sleep) m=-1 lockedm=-1
+	  	G10: status=1(sleep) m=-1 lockedm=-1
+	  	G11: status=2(sleep) m=3 lockedm=-1
+	  	G12: status=1(sleep) m=-1 lockedm=-1
+	  	G13: status=1(sleep) m=-1 lockedm=-1
+	  	G14: status=1(sleep) m=-1 lockedm=-1
+	  	G17: status=4(timer goroutine (idle)) m=-1 lockedm=-1
 
-  	G1: status=4(semacquire) m=-1 lockedm=-1
-  	G2: status=4(force gc (idle)) m=-1 lockedm=-1
-  	G3: status=4(GC sweep wait) m=-1 lockedm=-1
-  	G4: status=1(stack growth) m=-1 lockedm=-1
-  	G5: status=2(sleep) m=3 lockedm=-1
-  	G6: status=1(sleep) m=-1 lockedm=-1
-  	G7: status=1(stack growth) m=-1 lockedm=-1
-  	G8: status=1(stack growth) m=-1 lockedm=-1
-  	G9: status=1(stack growth) m=-1 lockedm=-1
-  	G10: status=1(stack growth) m=-1 lockedm=-1
-  	G11: status=1(stack growth) m=-1 lockedm=-1
-  	G12: status=2(sleep) m=2 lockedm=-1
-  	G13: status=1(sleep) m=-1 lockedm=-1
-  	G17: status=4(timer goroutine (idle)) m=-1 lockedm=-1
-  	Goroutine Stats:
-  		m=3: The thread being used.
-  		status: http://golang.org/src/runtime/runtime.h
-  			Gidle,                                 // 0
-   			Grunnable,                             // 1 runnable and on a run queue
-   			Grunning,                              // 2
-   			Gsyscall,                              // 3
-   			Gwaiting,                              // 4
-   			Gmoribund_unused,                      // 5 currently unused, but hardcoded in gdb scripts
-   			Gdead,                                 // 6
-   			Genqueue,                              // 7 Only the Gscanenqueue is used.
-   			Gcopystack,                            // 8 in this state when newstack is moving the stack
-   			View runtime.h for more
+  	Scheduler States:  
+		gcwaiting=0: Is the scheduled blocking waiting for GC to finish.
+
+	P's represent contexts:  
+  		P0: status=1 schedtick=20 syscalltick=12 m=3 runqsize=4 gfreecnt=0
+  		P1: status=1 schedtick=8 syscalltick=2 m=2 runqsize=4 gfreecnt=0
+  		Context Stats:
+  			m=3:        The thread being used.
+  			runqsize=1: Number of goroutines in a context's run queue.
+
+  	M's represent a thread:
+	  	M3: p=0 curg=11 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+	  	M2: p=1 curg=6 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+	  	M1: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=1 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+	  	M0: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
+  		Thread Stats:  
+  			p=0: The Context this thread is attached to.
+
+  	G's represent a goroutine:  
+  		G1: status=4(semacquire) m=-1 lockedm=-1
+	  	G2: status=4(force gc (idle)) m=-1 lockedm=-1
+	  	G3: status=4(GC sweep wait) m=-1 lockedm=-1
+	  	G4: status=4(finalizer wait) m=-1 lockedm=-1
+	  	G5: status=1(sleep) m=-1 lockedm=-1
+	  	G6: status=2(sleep) m=2 lockedm=-1
+	  	G7: status=1(sleep) m=-1 lockedm=-1
+	  	G8: status=1(sleep) m=-1 lockedm=-1
+	  	G9: status=1(sleep) m=-1 lockedm=-1
+	  	G10: status=1(sleep) m=-1 lockedm=-1
+	  	G11: status=2(sleep) m=3 lockedm=-1
+	  	G12: status=1(sleep) m=-1 lockedm=-1
+	  	G13: status=1(sleep) m=-1 lockedm=-1
+	  	G14: status=1(sleep) m=-1 lockedm=-1
+	  	G17: status=4(timer goroutine (idle)) m=-1 lockedm=-1
+  		Goroutine Stats:  
+  			m=3: The thread being used.
+  			status: http://golang.org/src/runtime/runtime.h
+	  			Gidle,                                 // 0 
+	   			Grunnable,                             // 1 runnable and on a run queue
+	   			Grunning,                              // 2 running
+	   			Gsyscall,                              // 3 performing a syscall
+	   			Gwaiting,                              // 4 waiting for the runtime
+	   			Gmoribund_unused,                      // 5 currently unused, but hardcoded in gdb scripts
+	   			Gdead,                                 // 6 goroutine is dead
+	   			Genqueue,                              // 7 only the Gscanenqueue is used.
+	   			Gcopystack,                            // 8 in this state when newstack is moving the stack
+	   			View runtime.h for more
 
 ### Important Read
 [Go Debugging](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs)
