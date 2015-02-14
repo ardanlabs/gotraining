@@ -44,11 +44,11 @@ func TestUsers(t *testing.T) {
 
 	usersList204(t, c)
 	usersCreate200(t, c)
-	usersCreate409(t, c)
+	usersCreate400(t, c)
 	us := usersList200(t, c)
 	usersRetrieve200(t, c, us[0].UserID)
 	usersRetrieve404(t, c, bson.NewObjectId().Hex())
-	usersRetrieve409(t, c, "123")
+	usersRetrieve400(t, c, "123")
 	usersUpdate200(t, c)
 	usersRetrieve200(t, c, us[0].UserID)
 	usersDelete200(t, c, us[0].UserID)
@@ -102,9 +102,9 @@ func usersCreate200(t *testing.T, c *app.Context) {
 	u.UserID = response.UserID
 }
 
-// usersCreate409 validates a user can't be created with the endpoint
+// usersCreate400 validates a user can't be created with the endpoint
 // unless a valid user document is submitted.
-func usersCreate409(t *testing.T, c *app.Context) {
+func usersCreate400(t *testing.T, c *app.Context) {
 	u := models.User{
 		UserType: 1,
 		LastName: "Kennedy",
@@ -121,10 +121,10 @@ func usersCreate409(t *testing.T, c *app.Context) {
 
 	t.Log("Given the need to validate a new user can't be created with an invalid document.")
 	{
-		if w.Code != 409 {
-			t.Fatalf("\tShould received a status code of 409 for the response. Received[%d] %s", w.Code, tests.Failed)
+		if w.Code != 400 {
+			t.Fatalf("\tShould received a status code of 400 for the response. Received[%d] %s", w.Code, tests.Failed)
 		}
-		t.Log("\tShould received a status code of 409 for the response.", tests.Succeed)
+		t.Log("\tShould received a status code of 400 for the response.", tests.Succeed)
 
 		if err := json.NewDecoder(w.Body).Decode(&v); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
@@ -236,18 +236,18 @@ func usersRetrieve404(t *testing.T, c *app.Context, id string) {
 	}
 }
 
-// usersRetrieve409 validates a user request with an invalid id with the endpoint.
-func usersRetrieve409(t *testing.T, c *app.Context, id string) {
+// usersRetrieve400 validates a user request with an invalid id with the endpoint.
+func usersRetrieve400(t *testing.T, c *app.Context, id string) {
 	r := tests.NewRequest("GET", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
 	routes.TM.ServeHTTP(w, r)
 
 	t.Log("Given the situation of retrieving an individual user with an invalid id with the users endpoint.")
 	{
-		if w.Code != 409 {
-			t.Fatalf("\tShould received a status code of 409 for the response. Received[%d] %s", w.Code, tests.Failed)
+		if w.Code != 400 {
+			t.Fatalf("\tShould received a status code of 400 for the response. Received[%d] %s", w.Code, tests.Failed)
 		}
-		t.Log("\tShould received a status code of 409 for the response.", tests.Succeed)
+		t.Log("\tShould received a status code of 400 for the response.", tests.Succeed)
 	}
 }
 
