@@ -102,12 +102,13 @@ We need to add some changes to main to get the profiling data we need.
 		SCHED 2002ms: gomaxprocs=2 idleprocs=0 threads=4 spinningthreads=0 idlethreads=1 runqueue=0 [4 4]
 	
 	Scheduler States:
-		gomaxprocs=1:  Number of contexts is use.
-		idleprocs=0:   Number of contexts not in use. Goroutine running.
-		threads=3:     Number of threads in use.
-		idlethreads=0: Number of threads not in use.
-		runqueue=0:    Number of goroutines in the global queue.
-		[9]:           Number of goroutines in a context's run queue.
+		gomaxprocs=1:  Contexts configured.
+		idleprocs=0:   Contexts not in use. Goroutine running.
+		threads=3:     Threads in use.
+		idlethreads=0: Threads not in use.
+		runqueue=0:    Goroutines in the global queue.
+		[9]:           Goroutines in a context's run queue.
+		[4 4]:         Goroutines in each of the context's run queue.
 
 	GODEBUG=schedtrace=1000,scheddetail=1 ./example3.go
 
