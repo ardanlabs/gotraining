@@ -1,10 +1,9 @@
 // Package api provides application support for context and MongoDB access.
 // Current Status Codes:
-// 		200 Successful   : StatusOK                  : Call is success and returning data.
-// 		400 Bad Request  : StatusBadRequest          : Invalid post data.
+// 		200 OK           : StatusOK                  : Call is success and returning data.
+// 		400 Bad Request  : StatusBadRequest          : Invalid post data (syntax or semantics).
 // 		401 Unauthorized : StatusUnauthorized        : Authentication failure.
 // 		404 Not Found    : StatusNotFound            : Invalid URL or identifier.
-// 		409 Validation   : StatusConflict            : Validation error on parameters / post data.
 // 		500 Internal     : StatusInternalServerError : Application specific beyond scope of user.
 package app
 
@@ -95,9 +94,9 @@ func (c *Context) RespondNotFound404() {
 	log.Println(c.SessionID, ": api : RespondNotFound404 : Completed")
 }
 
-// RespondValidation409 means the call failed validation.
-func (c *Context) RespondValidation409(v []Invalid) {
-	log.Println(c.SessionID, ": api : RespondValidation409 : Started")
+// RespondValidation400 means the call failed validation.
+func (c *Context) RespondValidation400(v []Invalid) {
+	log.Println(c.SessionID, ": api : RespondValidation400 : Started")
 
 	data, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
@@ -106,10 +105,10 @@ func (c *Context) RespondValidation409(v []Invalid) {
 	}
 
 	s := string(data)
-	log.Printf("%s : api : RespondValidation409 : Response\n%s\n", c.SessionID, s)
+	log.Printf("%s : api : RespondValidation400 : Response\n%s\n", c.SessionID, s)
 
 	http.Error(c.Writer, s, http.StatusConflict)
-	log.Println(c.SessionID, ": api : RespondValidation409 : Completed")
+	log.Println(c.SessionID, ": api : RespondValidation400 : Completed")
 }
 
 // RespondInternal500 means the call resulted in an application error.
