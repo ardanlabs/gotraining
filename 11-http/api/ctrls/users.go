@@ -3,7 +3,6 @@ package ctrls
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 
 	"github.com/ArdanStudios/gotraining/11-http/api/app"
@@ -42,6 +41,35 @@ func (uc usersCtrl) List(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : List : Completed : 200")
 }
 
+// UsersRetrieve returns the specified user from the system.
+// 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
+func (uc usersCtrl) Retrieve(c *app.Context) {
+	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Started")
+
+	u, err := services.Users.Retrieve(c, c.Params["id"])
+	if err != nil {
+		switch err {
+		case services.ErrInvalidID:
+			c.RespondBadRequest400(err)
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 400 :", err)
+
+		case services.ErrNotFound:
+			c.RespondNotFound404()
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 404 : Not Found")
+
+		default:
+			c.RespondInternal500(err)
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
+		}
+
+		return
+	}
+
+	c.RespondSuccess200(&u)
+
+	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 200")
+}
+
 // UsersCreate inserts a new user into the system.
 // 200 Success, 409 validation, 500 Internal
 func (uc usersCtrl) Create(c *app.Context) {
@@ -68,44 +96,10 @@ func (uc usersCtrl) Create(c *app.Context) {
 		return
 	}
 
-	r := struct {
-		UserID string `json:"user_id"`
-	}{
-		u.UserID,
-	}
-
-	c.RespondSuccess200(&r)
+	c.Params = map[string]string{"id": u.UserID}
+	uc.Retrieve(c)
 
 	log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 200")
-}
-
-// UsersRetrieve returns the specified user from the system.
-// 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
-func (uc usersCtrl) Retrieve(c *app.Context) {
-	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Started")
-
-	u, err := services.Users.Retrieve(c, c.Params["id"])
-	if err != nil {
-		switch err {
-		case services.ErrInvalidID:
-			c.RespondValidation400([]app.Invalid{{Fld: "id", Err: err.Error()}})
-			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 400 :", err)
-
-		case services.ErrNotFound:
-			c.RespondNotFound404()
-			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 404 : Not Found")
-
-		default:
-			c.RespondInternal500(err)
-			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
-		}
-
-		return
-	}
-
-	c.RespondSuccess200(&u)
-
-	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 200")
 }
 
 // UsersUpdate updates the specified user in the system.
@@ -134,13 +128,7 @@ func (uc usersCtrl) Update(c *app.Context) {
 		return
 	}
 
-	r := struct {
-		Message string `json:"message"`
-	}{
-		fmt.Sprintf("User with ID %s has been updated.", u.UserID),
-	}
-
-	c.RespondSuccess200(&r)
+	uc.Retrieve(c)
 
 	log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 200")
 }
@@ -150,25 +138,40 @@ func (uc usersCtrl) Update(c *app.Context) {
 func (uc usersCtrl) Delete(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Delete : Started")
 
+	u, err := services.Users.Retrieve(c, c.Params["id"])
+	if err != nil {
+		switch err {
+		case services.ErrInvalidID:
+			c.RespondBadRequest400(err)
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 400 :", err)
+
+		case services.ErrNotFound:
+			c.RespondNotFound404()
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 404 : Not Found")
+
+		default:
+			c.RespondInternal500(err)
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
+		}
+
+		return
+	}
+
 	if err := services.Users.Delete(c, c.Params["id"]); err != nil {
 		switch err {
 		case services.ErrInvalidID:
-			c.RespondValidation400([]app.Invalid{{Fld: "id", Err: err.Error()}})
+			c.RespondBadRequest400(err)
 			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 400 :", err)
 
 		default:
 			c.RespondInternal500(err)
 			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 500 :", err)
 		}
+
+		return
 	}
 
-	r := struct {
-		Message string `json:"message"`
-	}{
-		fmt.Sprintf("User with ID %s has been removed.", c.Params["id"]),
-	}
-
-	c.RespondSuccess200(&r)
+	c.RespondSuccess200(&u)
 
 	log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 200")
 }

@@ -52,6 +52,7 @@ func TestUsers(t *testing.T) {
 	usersUpdate200(t, c)
 	usersRetrieve200(t, c, us[0].UserID)
 	usersDelete200(t, c, us[0].UserID)
+	usersDelete404(t, c, us[0].UserID)
 }
 
 // usersList204 validates an empty users list can be retrieved with the endpoint.
@@ -71,9 +72,7 @@ func usersList204(t *testing.T, c *app.Context) {
 
 // usersCreate200 validates a user can be created with the endpoint.
 func usersCreate200(t *testing.T, c *app.Context) {
-	var response struct {
-		UserID string `json:"user_id"`
-	}
+	var resp models.User
 
 	body, _ := json.Marshal(&u)
 	r := tests.NewRequest("POST", "/v1/users", bytes.NewBuffer(body))
@@ -87,19 +86,19 @@ func usersCreate200(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
-		if err := json.NewDecoder(w.Body).Decode(&response); err != nil {
+		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
 		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
 
-		if response.UserID == "" {
+		if resp.UserID == "" {
 			t.Fatal("\tShould have a user id in the response.", tests.Failed)
 		}
 		t.Log("\tShould have a user id in the response.", tests.Succeed)
 	}
 
 	// Save for future calls.
-	u.UserID = response.UserID
+	u.UserID = resp.UserID
 }
 
 // usersCreate400 validates a user can't be created with the endpoint
@@ -255,9 +254,7 @@ func usersRetrieve400(t *testing.T, c *app.Context, id string) {
 func usersUpdate200(t *testing.T, c *app.Context) {
 	u.FirstName = "Lisa"
 
-	var response struct {
-		Message string `json:"message"`
-	}
+	var resp models.User
 
 	body, _ := json.Marshal(&u)
 	r := tests.NewRequest("PUT", "/v1/users/"+u.UserID, bytes.NewBuffer(body))
@@ -271,23 +268,21 @@ func usersUpdate200(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
-		if err := json.NewDecoder(w.Body).Decode(&response); err != nil {
+		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
 		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
 
-		if response.Message != fmt.Sprintf("User with ID %s has been updated.", u.UserID) {
-			t.Fatal("\tShould have an expected message in the response.", tests.Failed)
+		if resp.UserID != u.UserID {
+			t.Fatal("\tShould have an a user value with the same id.", tests.Failed)
 		}
-		t.Log("\tShould have an expected message in the response.", tests.Succeed)
+		t.Log("\tShould have an a user value with the same id.", tests.Succeed)
 	}
 }
 
 // usersDelete200 validates a user can be deleted with the endpoint.
 func usersDelete200(t *testing.T, c *app.Context, id string) {
-	var response struct {
-		Message string `json:"message"`
-	}
+	var resp models.User
 
 	r := tests.NewRequest("DELETE", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
@@ -300,14 +295,29 @@ func usersDelete200(t *testing.T, c *app.Context, id string) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
-		if err := json.NewDecoder(w.Body).Decode(&response); err != nil {
+		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
 		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
 
-		if response.Message != fmt.Sprintf("User with ID %s has been removed.", id) {
-			t.Fatal("\tShould have an expected message in the response.", tests.Failed)
+		if resp.UserID != id {
+			t.Fatal("\tShould have an a user value with the same id.", tests.Failed)
 		}
-		t.Log("\tShould have an expected message in the response.", tests.Succeed)
+		t.Log("\tShould have an a user value with the same id.", tests.Succeed)
+	}
+}
+
+// usersDelete404 validates a user that has been deleted is deleted.
+func usersDelete404(t *testing.T, c *app.Context, id string) {
+	r := tests.NewRequest("DELETE", "/v1/users/"+id, nil)
+	w := httptest.NewRecorder()
+	routes.TM.ServeHTTP(w, r)
+
+	t.Log("Given the need to verify a deleted user is deleted.")
+	{
+		if w.Code != 404 {
+			t.Fatalf("\tShould received a status code of 404 for the response. Received[%d] %s", w.Code, tests.Failed)
+		}
+		t.Log("\tShould received a status code of 404 for the response.", tests.Succeed)
 	}
 }
