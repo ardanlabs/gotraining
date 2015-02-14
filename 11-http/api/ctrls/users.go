@@ -43,7 +43,7 @@ func (uc usersCtrl) List(c *app.Context) {
 }
 
 // UsersCreate inserts a new user into the system.
-// 200 Success, 404 Bad Request, 409 Validation, 500 Internal
+// 200 Success, 400 Bad Request, 500 Internal
 func (uc usersCtrl) Create(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Create : Started")
 
@@ -57,8 +57,8 @@ func (uc usersCtrl) Create(c *app.Context) {
 	if v, err := services.Users.Create(c, &u); err != nil {
 		switch err {
 		case services.ErrValidation:
-			c.RespondValidation409(v)
-			log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 409 :", err)
+			c.RespondValidation400(v)
+			log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 400 :", err)
 
 		default:
 			c.RespondInternal500(err)
@@ -80,7 +80,7 @@ func (uc usersCtrl) Create(c *app.Context) {
 }
 
 // UsersRetrieve returns the specified user from the system.
-// 200 Success, 404 Not Found, 409 Validation,, 500 Internal
+// 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
 func (uc usersCtrl) Retrieve(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Started")
 
@@ -88,8 +88,8 @@ func (uc usersCtrl) Retrieve(c *app.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrInvalidID:
-			c.RespondValidation409([]app.Invalid{{Fld: "id", Err: err.Error()}})
-			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 409 :", err)
+			c.RespondValidation400([]app.Invalid{{Fld: "id", Err: err.Error()}})
+			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 400 :", err)
 
 		case services.ErrNotFound:
 			c.RespondNotFound404()
@@ -109,7 +109,7 @@ func (uc usersCtrl) Retrieve(c *app.Context) {
 }
 
 // UsersUpdate updates the specified user in the system.
-// 200 Success, 409 Validation, 500 Internal
+// 200 Success, 400 Bad Request, 500 Internal
 func (uc usersCtrl) Update(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Update : Started")
 
@@ -123,8 +123,8 @@ func (uc usersCtrl) Update(c *app.Context) {
 	if v, err := services.Users.Update(c, c.Params["id"], &u); err != nil {
 		switch err {
 		case services.ErrValidation:
-			c.RespondValidation409(v)
-			log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 409 :", err)
+			c.RespondValidation400(v)
+			log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 400 :", err)
 
 		default:
 			c.RespondInternal500(err)
@@ -146,15 +146,15 @@ func (uc usersCtrl) Update(c *app.Context) {
 }
 
 // Delete removed the specified user from the system.
-// 200 Success, 409 Validation, 500 Internal
+// 200 Success, 400 Bad Request, 500 Internal
 func (uc usersCtrl) Delete(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Delete : Started")
 
 	if err := services.Users.Delete(c, c.Params["id"]); err != nil {
 		switch err {
 		case services.ErrInvalidID:
-			c.RespondValidation409([]app.Invalid{{Fld: "id", Err: err.Error()}})
-			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 409 :", err)
+			c.RespondValidation400([]app.Invalid{{Fld: "id", Err: err.Error()}})
+			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 400 :", err)
 
 		default:
 			c.RespondInternal500(err)

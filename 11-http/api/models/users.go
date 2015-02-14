@@ -1,4 +1,4 @@
-// Package models contains data structures and behavior for the data.
+// Package models contains data structures and associated behavior
 package models
 
 import (

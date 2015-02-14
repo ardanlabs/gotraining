@@ -1,4 +1,4 @@
-// Package routes declare paths and bind them to controller methods.
+// Package routes declares paths and bind them to controller methods.
 package routes
 
 import (

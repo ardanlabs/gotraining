@@ -34,8 +34,8 @@ var u = models.User{
 	},
 }
 
-// Test_Users is the entry point for the users tests.
-func Test_Users(t *testing.T) {
+// TestUsers is the entry point for the users tests.
+func TestUsers(t *testing.T) {
 	c := &app.Context{
 		Session:   app.GetSession(),
 		SessionID: "TESTING",

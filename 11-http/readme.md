@@ -1,16 +1,16 @@
 ## HTTP - API's
 
-HTTP support in the standard library gives you everything you need to build web api's and web sites.
+The Go standard library provides all the critical building blocks for producing web sites and APIs.
 
 ## Notes
 
-* The HTTP package is a fully compliant with version 1.1 of the protocol.
+* net/http provides an HTTP/1.1 compliant protocol implementation.
 * There is support for SSL/TLS.
-* Adding routing and middleware to your applications requires a few simple patterns.
+* Adding routing and middleware to your applications requires only a few simple patterns.
 
 ## Links
 
-http://golang.org/pkg/net/http/
+https://golang.org/pkg/net/http/
 
 https://golang.org/doc/articles/wiki/
 
@@ -25,7 +25,7 @@ http://www.restapitutorial.com/httpstatuscodes.html
 ## Advanced Code Review
 
 [Web API](api)  
-Sample code that provides best practices for building a RESTful API in Go. It leverages the standard library except for the router where a package named [httptreemux](https://github.com/dimfeld/httptreemux) is used. This router provides some nice conveniences such as handling verbs and access to parameters.
+	Sample code that provides best practices for building a RESTful API in Go. It leverages the standard library except for the router where a package named [httptreemux](https://github.com/dimfeld/httptreemux) is used. This router provides some nice conveniences such as handling verbs and access to parameters.
 
 ## Exercises
 
