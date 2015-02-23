@@ -1,13 +1,8 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// export GODEBUG=schedtrace=50
-// runqueue=1 [9]	1 in global queue and 9 in the context.
-
-// export GOMAXPROCS=2
-// runqueue=2 [2 2]	2 in global queue and 2 in each context.
-
-// export GODEBUG=schedtrace=50,scheddetail=1
+// export GODEBUG=schedtrace=1000
+// export GODEBUG=schedtrace=1000,scheddetail=1
 
 // Sample program to review scheduler stats.
 package main
@@ -20,8 +15,6 @@ import (
 // Create a waitgroup.
 var wg sync.WaitGroup
 
-var m sync.Mutex
-
 // main is the entry point for the application.
 func main() {
 	// We are going to create 10 goroutines.
@@ -29,7 +22,7 @@ func main() {
 
 	// Create those 10 goroutines.
 	for i := 0; i < 10; i++ {
-		go goroutine(i)
+		go goroutine()
 	}
 
 	// Wait for all the goroutines to complete.
@@ -39,12 +32,13 @@ func main() {
 	time.Sleep(3 * time.Second)
 }
 
-// goroutine does some CPU intensive work.
-func goroutine(i int) {
+// goroutine does some CPU bound work.
+func goroutine() {
 	time.Sleep(time.Second)
 
+	var count int
 	for i := 0; i < 1e10; i++ {
-		i++
+		count++
 	}
 
 	wg.Done()

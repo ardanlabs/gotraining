@@ -32,7 +32,7 @@ func main() {
 	go func() {
 		// Count down from 100 to 0.
 		for count := 100; count >= 0; count-- {
-			fmt.Printf("[A:%d]", count)
+			fmt.Printf("[A:%d]\n", count)
 		}
 
 		// Tell main we are done.
@@ -43,7 +43,7 @@ func main() {
 	go func() {
 		// Count up from 0 to 100.
 		for count := 0; count < 100; count++ {
-			fmt.Printf("[B:%d]", count)
+			fmt.Printf("[B:%d]\n", count)
 		}
 
 		// Tell main we are done.
