@@ -12,23 +12,29 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"gopkg.in/mgo.v2"
 )
 
 // Context contains data associated with a single request.
 type Context struct {
-	Session   *mgo.Session
-	Writer    http.ResponseWriter
+	Session *mgo.Session
+	http.ResponseWriter
 	Request   *http.Request
 	Params    map[string]string
 	SessionID string
 }
 
-// Invalid is the response for validation errors.
+// Invalid describes a validation error belonging to a specific field.
 type Invalid struct {
 	Fld string `json:"field_name"`
 	Err string `json:"error"`
+}
+
+type jsonError struct {
+	Error  string    `json:"error"`
+	Fields []Invalid `json:"fields,omitempty"`
 }
 
 // Authenticate handles the authentication of each request.
@@ -41,101 +47,43 @@ func (c *Context) Authenticate() error {
 	return nil
 }
 
-// RespondSuccess200 means the call is success and returning data.
-func (c *Context) RespondSuccess200(v interface{}) {
-	log.Println(c.SessionID, ": api : RespondSuccess200 : Started")
+// Respond sends JSON to the client.
+//
+// If code is StatusNoContent, v is expected to be nil.
+func (c *Context) Respond(v interface{}, code int) {
+	log.Printf("%v : api : Respond [%d] : Started", c.SessionID, code)
+
+	if code == http.StatusNoContent {
+		c.WriteHeader(http.StatusNoContent)
+		return
+	}
 
 	data, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
-		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)
-		return
+		// v failed to marshal (programmer error), so panic
+		log.Panicf("%v : api : Respond [%d] : Failed: %v", c.SessionID, code, err)
 	}
 
-	s := string(data)
-	log.Printf("%s : api : RespondSuccess200 : Response\n%s\n", c.SessionID, s)
+	datalen := len(data) + 1 // account for trailing LF
+	h := c.Header()
+	h.Set("Content-Type", "application/json")
+	h.Set("Content-Length", strconv.Itoa(datalen))
+	c.WriteHeader(code)
+	fmt.Fprintf(c, "%s\n", data)
 
-	fmt.Fprintf(c.Writer, s)
-	log.Println(c.SessionID, ": api : RespondSuccess200 : Completed")
+	log.Printf("%v : api : Respond [%d] : Completed", c.SessionID, code)
 }
 
-// RespondNoContent204 means the call succeeded but no data.
-func (c *Context) RespondNoContent204() {
-	log.Println(c.SessionID, ": api : RespondNoContent204 : Started")
-
-	http.Error(c.Writer, "", http.StatusNoContent)
-
-	log.Println(c.SessionID, ": api : RespondNoContent204 : Completed")
-}
-
-// RespondBadRequest400 means the call contained invalid post data.
-func (c *Context) RespondBadRequest400(err error) {
-	log.Println(c.SessionID, ": api : RespondBadRequest400 : Started")
-
-	c.RespondValidation400([]Invalid{{Fld: "error", Err: err.Error()}})
-
-	log.Println(c.SessionID, ": api : RespondBadRequest400 : Completed")
-}
-
-// RespondValidation400 means the call failed validation.
-func (c *Context) RespondValidation400(v []Invalid) {
-	log.Println(c.SessionID, ": api : RespondValidation400 : Started")
-
-	data, err := json.MarshalIndent(v, "", "    ")
-	if err != nil {
-		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)
-		return
+// RespondInvalid sends JSON describing field validation errors.
+func (c *Context) RespondInvalid(fields []Invalid) {
+	v := jsonError{
+		Error:  "field validation failure",
+		Fields: fields,
 	}
-
-	s := string(data)
-	log.Printf("%s : api : RespondValidation400 : Response\n%s\n", c.SessionID, s)
-
-	http.Error(c.Writer, s, http.StatusBadRequest)
-	log.Println(c.SessionID, ": api : RespondValidation400 : Completed")
+	c.Respond(v, http.StatusBadRequest)
 }
 
-// RespondUnauthorized401 means the call failed authentication.
-func (c *Context) RespondUnauthorized401(err error) {
-	log.Println(c.SessionID, ": api : RespondUnauthorized401 : Started")
-
-	c.respondError(err, http.StatusUnauthorized)
-
-	log.Println(c.SessionID, ": api : RespondUnauthorized401 : Completed")
-}
-
-// RespondNotFound404 means the call contained an URL or identifier.
-func (c *Context) RespondNotFound404() {
-	log.Println(c.SessionID, ": api : RespondNotFound404 : Started")
-
-	http.NotFound(c.Writer, c.Request)
-
-	log.Println(c.SessionID, ": api : RespondNotFound404 : Completed")
-}
-
-// RespondInternal500 means the call resulted in an application error.
-func (c *Context) RespondInternal500(err error) {
-	log.Println(c.SessionID, ": api : RespondInternal500 : Started")
-
-	c.respondError(err, http.StatusInternalServerError)
-
-	log.Println(c.SessionID, ": api : RespondInternal500 : Completed")
-}
-
-// respondError handles application errors
-func (c *Context) respondError(err error, status int) {
-	e := struct {
-		Err string
-	}{
-		Err: err.Error(),
-	}
-
-	data, err := json.MarshalIndent(&e, "", "    ")
-	if err != nil {
-		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	s := string(data)
-	log.Printf("%s : api : RespondError%d : Response\n%s\n", c.SessionID, status, s)
-
-	http.Error(c.Writer, s, status)
+// RespondError sends JSON describing the error
+func (c *Context) RespondError(error string, code int) {
+	c.Respond(jsonError{Error: error}, code)
 }

@@ -4,6 +4,7 @@ package ctrls
 import (
 	"encoding/json"
 	"log"
+	"net/http"
 
 	"github.com/ArdanStudios/gotraining/11-http/api/app"
 	"github.com/ArdanStudios/gotraining/11-http/api/models"
@@ -25,18 +26,19 @@ func (uc usersCtrl) List(c *app.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrNotFound:
-			c.RespondNoContent204()
+			// should this be http.StatusNotFound?
+			c.Respond(nil, http.StatusNoContent)
 			log.Println(c.SessionID, ": ctrls : Users : List : Completed : 204 :", err)
 
 		default:
-			c.RespondInternal500(err)
+			c.RespondError(err.Error(), http.StatusInternalServerError)
 			log.Println(c.SessionID, ": ctrls : Users : List : Completed : 500 :", err)
 		}
 
 		return
 	}
 
-	c.RespondSuccess200(u)
+	c.Respond(u, http.StatusOK)
 
 	log.Println(c.SessionID, ": ctrls : Users : List : Completed : 200")
 }
@@ -50,34 +52,34 @@ func (uc usersCtrl) Retrieve(c *app.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrInvalidID:
-			c.RespondBadRequest400(err)
+			c.RespondError(err.Error(), http.StatusBadRequest)
 			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 400 :", err)
 
 		case services.ErrNotFound:
-			c.RespondNotFound404()
+			c.RespondError(err.Error(), http.StatusNotFound)
 			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 404 : Not Found")
 
 		default:
-			c.RespondInternal500(err)
+			c.RespondError(err.Error(), http.StatusInternalServerError)
 			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
 		}
 
 		return
 	}
 
-	c.RespondSuccess200(&u)
+	c.Respond(u, http.StatusOK)
 
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 200")
 }
 
 // UsersCreate inserts a new user into the system.
-// 200 Success, 409 validation, 500 Internal
+// 200 OK, 400 Bad Request, 500 Internal
 func (uc usersCtrl) Create(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Create : Started")
 
 	var u models.User
 	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
-		c.RespondBadRequest400(err)
+		c.RespondError(err.Error(), http.StatusBadRequest)
 		log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 400 :", err)
 		return
 	}
@@ -85,11 +87,11 @@ func (uc usersCtrl) Create(c *app.Context) {
 	if v, err := services.Users.Create(c, &u); err != nil {
 		switch err {
 		case services.ErrValidation:
-			c.RespondValidation400(v)
+			c.RespondInvalid(v)
 			log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 400 :", err)
 
 		default:
-			c.RespondInternal500(err)
+			c.RespondError(err.Error(), http.StatusInternalServerError)
 			log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 500 :", err)
 		}
 
@@ -99,6 +101,7 @@ func (uc usersCtrl) Create(c *app.Context) {
 	c.Params = map[string]string{"id": u.UserID}
 	uc.Retrieve(c)
 
+	// this log message will be wrong if Retrieve fails
 	log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 200")
 }
 
@@ -109,7 +112,7 @@ func (uc usersCtrl) Update(c *app.Context) {
 
 	var u models.User
 	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
-		c.RespondBadRequest400(err)
+		c.RespondError(err.Error(), http.StatusBadRequest)
 		log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 400 :", err)
 		return
 	}
@@ -117,11 +120,11 @@ func (uc usersCtrl) Update(c *app.Context) {
 	if v, err := services.Users.Update(c, c.Params["id"], &u); err != nil {
 		switch err {
 		case services.ErrValidation:
-			c.RespondValidation400(v)
+			c.RespondInvalid(v)
 			log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 400 :", err)
 
 		default:
-			c.RespondInternal500(err)
+			c.RespondError(err.Error(), http.StatusInternalServerError)
 			log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 500 :", err)
 		}
 
@@ -130,6 +133,7 @@ func (uc usersCtrl) Update(c *app.Context) {
 
 	uc.Retrieve(c)
 
+	// this log message will be wrong if Retrieve fails
 	log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 200")
 }
 
@@ -142,15 +146,15 @@ func (uc usersCtrl) Delete(c *app.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrInvalidID:
-			c.RespondBadRequest400(err)
+			c.RespondError(err.Error(), http.StatusBadRequest)
 			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 400 :", err)
 
 		case services.ErrNotFound:
-			c.RespondNotFound404()
+			c.RespondError(err.Error(), http.StatusNotFound)
 			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 404 : Not Found")
 
 		default:
-			c.RespondInternal500(err)
+			c.RespondError(err.Error(), http.StatusInternalServerError)
 			log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 500 :", err)
 		}
 
@@ -160,18 +164,18 @@ func (uc usersCtrl) Delete(c *app.Context) {
 	if err := services.Users.Delete(c, c.Params["id"]); err != nil {
 		switch err {
 		case services.ErrInvalidID:
-			c.RespondBadRequest400(err)
+			c.RespondError(err.Error(), http.StatusBadRequest)
 			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 400 :", err)
 
 		default:
-			c.RespondInternal500(err)
+			c.RespondError(err.Error(), http.StatusInternalServerError)
 			log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 500 :", err)
 		}
 
 		return
 	}
 
-	c.RespondSuccess200(&u)
+	c.Respond(u, http.StatusOK)
 
 	log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 200")
 }

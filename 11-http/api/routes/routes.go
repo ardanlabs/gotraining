@@ -35,11 +35,11 @@ func addRoute(verb string, path string, userHandler func(c *app.Context)) {
 		log.Printf("%s : routes : handler : Started : Verb[%s] Path[%s] URL[%s]\n", uid, verb, path, r.URL.RequestURI())
 
 		c := app.Context{
-			Session:   app.GetSession(),
-			Writer:    w,
-			Request:   r,
-			Params:    p,
-			SessionID: uid,
+			Session:        app.GetSession(),
+			ResponseWriter: w,
+			Request:        r,
+			Params:         p,
+			SessionID:      uid,
 		}
 
 		defer func() {
