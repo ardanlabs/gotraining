@@ -80,10 +80,13 @@ If you are interested in holding an event in your area please let me know. I wil
 **_Meetups:_**   
 Have us speak at one of your Meetup events for free over Google hangout.
 
-Hangout [Go Dublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)  
-Hangout [Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)  
-Live    [Go Tampa DC Meetup - April 2015](http://www.meetup.com/Go-Tampa/events/220777645/)  
-Live    [Go DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
+Hangout:  
+[Go Dublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)  
+[Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)
+
+In Person:  
+[Go Tampa DC Meetup - April 2015](http://www.meetup.com/Go-Tampa/events/220777645/)  
+[Go DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
 
 **_Workshops:_**   
 Want to put on a workshop event for a couple of hours or for a full day?
