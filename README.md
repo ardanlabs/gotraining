@@ -78,22 +78,26 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.
 
 **_Meetups:_**   
-Have us speak at one of your Meetup events for free over Google hangout.  
-[Go Dublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)
-[Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)
-[Go Tampa DC Meetup - April 2015](http://www.meetup.com/Go-Tampa/events/220777645/)
+Have us speak at one of your Meetup events for free over Google hangout.
+
+[Go Dublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)  
+[Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)  
+[Go Tampa DC Meetup - April 2015](http://www.meetup.com/Go-Tampa/events/220777645/)  
 [Go DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
 
 **_Workshops:_**   
-Want to put on a workshop event for a couple of hours or for a full day?  
+Want to put on a workshop event for a couple of hours or for a full day?
+
 Open
 
 **_Corporate:_**  
-Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.  
+Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.
+
 Open
 
 **_Bootcamps:_**  
-Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.  
+Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
+
 [San Francisco, CA - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
 [Denver, CO - April 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
 [Boston, MA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
@@ -105,10 +109,13 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 [Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
 **_After Hours:_**  
-This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.  
+This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.
+
 Open
 
-**_Conferences:_**  
+**_Conferences:_**
+You can find us at conferences being held all around the country and the world.
+
 [FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
 [Gophercon USA - July 2015](http://gophercon.com/)  
 
