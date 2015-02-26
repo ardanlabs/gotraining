@@ -79,8 +79,10 @@ If you are interested in holding an event in your area please let me know. I wil
 
 **_Meetups:_**   
 Have us speak at one of your Meetup events for free over Google hangout.  
-[GoDublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)
-[Goland DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
+[Go Dublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)
+[Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)
+[Go Tampa DC Meetup - April 2015](http://www.meetup.com/Go-Tampa/events/220777645/)
+[Go DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
 
 **_Workshops:_**   
 Want to put on a workshop event for a couple of hours or for a full day?  
@@ -92,7 +94,6 @@ Open
 
 **_Bootcamps:_**  
 Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.  
-[Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-march-tickets-15635142131)  
 [San Francisco, CA - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
 [Denver, CO - April 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
 [Boston, MA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
@@ -105,10 +106,9 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 
 **_After Hours:_**  
 This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.  
-[Denver, CO - March 2015](https://www.eventbrite.com/e/go-programming-after-hours-denver-march-tickets-15643879264)
+Open
 
 **_Conferences:_**  
-[Gophercon India - Feb 2015](http://www.gophercon.in/go-workshop/)  
 [FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
 [Gophercon USA - July 2015](http://gophercon.com/)  
 
