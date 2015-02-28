@@ -104,6 +104,7 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 [San Francisco, CA - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
 [Denver, CO - April 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
 [Boston, MA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
+[Vancouver, BC. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-vancouver-may-tickets-15954625715)  
 [McLean, VA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
 [NYC, NY - June 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 [Denver, CO - GopherCon 2015 Mon](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-6th-tickets-15559629270)  
