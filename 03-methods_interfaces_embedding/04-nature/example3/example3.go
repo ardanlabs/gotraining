@@ -1,0 +1,61 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
+// https://play.golang.org/p/MkfZdLcvfD
+
+// Sample code to show how the standard library in general,
+// does not pass reference types via a pointer unless the function is
+// implementing an unmarshal functionality.
+
+// *******************************************************
+
+// http://golang.org/src/net/ip.go
+//
+// This is a named type from the net package called IP with a base type that
+// is a slice of bytes. There is value in using a named type when you need
+// to declare behavior around a built-in or reference type.
+type IP []byte
+
+// http://golang.org/src/net/ip.go
+//
+// MarshalText is using a value receiver. This is exactly what I would expect
+// to see because we don’t share reference types with a pointer.
+func (ip IP) MarshalText() ([]byte, error) {
+	if len(ip) == 0 {
+		return []byte(""), nil
+	}
+	if len(ip) != IPv4len && len(ip) != IPv6len {
+		return nil, errors.New("invalid IP address")
+	}
+	return []byte(ip.String()), nil
+}
+
+// http://golang.org/src/net/ip.go
+//
+// ipEmptyString accepts a value of named type IP. No pointer is used to share
+// this value since the base type for IP is a slice of bytes and therefore a
+// reference type.
+func ipEmptyString(ip IP) string {
+	if len(ip) == 0 {
+		return ""
+	}
+	return ip.String()
+}
+
+// http://golang.org/src/net/ip.go
+//
+// Anytime you are unmarshaling data into a reference type, you will need to
+// share that reference type value with a pointer.
+func (ip *IP) UnmarshalText(text []byte) error {
+	if len(text) == 0 {
+		*ip = nil
+		return nil
+	}
+	s := string(text)
+	x := ParseIP(s)
+	if x == nil {
+		return &ParseError{"IP address", s}
+	}
+	*ip = x
+	return nil
+}

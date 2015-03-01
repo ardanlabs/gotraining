@@ -3,6 +3,9 @@ On this day we take go deeper into Go. We learn about packaging, exporting, erro
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
+#### Nature of Types
+[Using Pointers](../03-methods_interfaces_embedding/04-nature/readme.md)
+
 #### Packaging and Exporting
 [Packaging and Exporting](../04-packaging_exporting/readme.md)
 
