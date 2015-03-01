@@ -4,19 +4,19 @@ On this day we continue go deeper into Go. We learn about concurrency patterns, 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 #### Concurrency Patterns
-[Concurrency Patterns](../07-concurrency_patterns/readme.md)
+[Concurrency Patterns](../08-concurrency_patterns/readme.md)
 
 #### Testing, Benchmarking and Profiling
-[Testing, Benchmarking and Profiling](../08-testing/readme.md)
+[Testing, Benchmarking and Profiling](../09-testing/readme.md)
 
 #### Logging, Encoding and IO
-[Standard Library](../09-standard_library/readme.md)
+[Standard Library](../10-standard_library/readme.md)
 
 #### Reflection
-[Reflection](../10-reflection/readme.md)
+[Reflection](../11-reflection/readme.md)
 
 #### HTTP
-[HTTP](../11-http/readme.md)
+[HTTP](../12-http/readme.md)
 
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)

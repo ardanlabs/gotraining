@@ -3,19 +3,19 @@ On this day we take go deeper into Go. We learn about packaging, exporting, erro
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-#### Nature of Types
-[Using Pointers](../03-methods_interfaces_embedding/04-nature/readme.md)
-
 #### Packaging and Exporting
 [Packaging and Exporting](../04-packaging_exporting/readme.md)
 
+#### Using Pointers
+[Nature Of Types](../05-using_pointers/readme.md)
+
 #### Error Handling
-[Error Handling](../05-error_handling/readme.md)
+[Error Handling](../06-error_handling/readme.md)
 
 #### Concurrency, Race Conditions and Channels
-[Goroutines](../06-concurrency_channels/01-goroutines/readme.md) | 
-[Race Conditions](../06-concurrency_channels/02-race_conditions/readme.md) | 
-[Channels](../06-concurrency_channels/03-channels/readme.md)
+[Goroutines](../07-concurrency_channels/01-goroutines/readme.md) | 
+[Race Conditions](../07-concurrency_channels/02-race_conditions/readme.md) | 
+[Channels](../07-concurrency_channels/03-channels/readme.md)
 
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
