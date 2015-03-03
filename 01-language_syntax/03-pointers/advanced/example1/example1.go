@@ -1,6 +1,8 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
+// https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
+
 // http://play.golang.org/p/931Cw6uzsn
 
 // go build -gcflags -m
