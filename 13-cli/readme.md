@@ -45,6 +45,43 @@ shell compatible semantics and syntax.
 
 ### Job Control
 
+Pipelines normally run in the *foreground*; there may only be one such pipeline
+running in the shell at any given time, and it will receive input and signals
+from the controlling terminal.
+
+Pipelines can be alternatively be started in or moved to the *background*.
+Background pipelines run normally, except that they do not receive terminal
+input, and can only be signalled explicitly by PID or job number. A pipeline
+may be suffixed with a single ampersand to run it in the background:
+
+	sleep 5 && echo "wakeup!" &
+
+A foreground pipeline can be suspended by typing `^Z` (Control-Z). Upon doing
+so, control will be returned to the shell, and the process can be resumed in
+the foreground or background using the `fg` or `bg` commands, respectively.
+The `fg` command may also be used to move a running background pipeline to the
+foreground.
+
+The `jobs` command lists suspended and background jobs; each of these will have
+a *job number*, beginning with 1. The first background job can therefore be
+killed with `kill %1`, the second can be moved to the foreground with `fg %2`,
+and so on. The percent syntax is known as a *jobspec*.
+
+Finally, the `wait` command can be used wait for one or more background
+pipelines, which may be specified using jobspecs. If called without arguments,
+wait will block until all active background pipelines have completed.
+
+When a shell (or shell script) exits, all background processes are disowned,
+and will continue to run.
+
+Correct use of job control can allow tasks to run concurrently, and make much
+more efficient use of computing resources. For example, to build several go
+binaries, a good technique would be:
+
+    go build cmd1 &
+    go build cmd2 &
+    wait
+
 ___
 [![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
