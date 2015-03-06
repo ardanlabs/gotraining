@@ -47,6 +47,9 @@ Mark Bates is the founder and chief architect of the Boston, MA based consulting
 
 ## Testimonials
 
+Neeru Dwivedi  
+_"I attended the one day workshop by Bill Kennedy from Ardan Labs. I was in for a surprise as before the workshop I was concerned whether I would understand concepts and whether I would be able to follow along. Bill has this wonderful way of explaining concepts and his knowledge on the concepts is so good that, I didn’t feel that I was learning something new & complicated. The Go Workshop got me started on the Go language. This workshop is perfect for beginners and anyone who wants to learn more about Go. I highly recommend this."_
+
 Todd Rafferty ([@webrat](https://twitter.com/webRat))  
 _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels."_
 
@@ -81,7 +84,6 @@ If you are interested in holding an event in your area please let me know. I wil
 Have us speak at one of your Meetup events for free over Google hangout.
 
 Hangout:  
-[Go Dublin Meetup - Mar 2015](http://www.meetup.com/Dublin-Go-Meetup/events/220046214/)  
 [Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)
 
 In Person:  
