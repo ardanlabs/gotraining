@@ -111,7 +111,7 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 [NYC, NY - June 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 [Denver, CO - GopherCon 2015 Mon](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-6th-tickets-15559629270)  
 [Denver, CO - GopherCon 2015 Tue](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-7th-tickets-15569243025)  
-[Houston, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-houston-august-exact-dates-tbd-tickets-15559615228)  
+[Austin, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
 [Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
 **_After Hours:_**  
