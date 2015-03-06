@@ -122,7 +122,8 @@ Open
 **_Conferences:_**
 You can find us at conferences being held all around the country and the world.
 
-[FluentConf - Apr 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
+[FluentConf - April 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
+[MagmaConf Mexico - June 2015](http://magmaconf.com/)  
 [Gophercon USA - July 2015](http://gophercon.com/)  
 
 ## Contact Information
