@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/mF2Z5ZPQFi
+// http://play.golang.org/p/Sw39qR_Mwd
 
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.
@@ -17,39 +17,37 @@ type user struct {
 	email string
 }
 
-// notify implements a method that can be called via
-// a value of type user.
+// notify implements a method with a value receiver.
 func (u user) notify() {
 	fmt.Printf("User: Sending User Email To %s<%s>\n",
 		u.name,
 		u.email)
 }
 
-// changeEmail implements a method that can be called via
-// a pointer of type user.
+// changeEmail implements a method with a pointer receiver.
 func (u *user) changeEmail(email string) {
 	u.email = email
 }
 
 // main is the entry point for the application.
 func main() {
-	// Value of type user can be used to call the method
-	// with a value receiver.
-	user1 := user{"Bill", "bill@email.com"}
-	user1.notify()
+	// Values of type user can be used to call methods
+	// declared with a value receiver.
+	bill := user{"Bill", "bill@email.com"}
+	bill.notify()
 
-	// Pointer of type user can also be used to call a method
-	// with a value receiver.
-	user2 := &user{"Jill", "jill@email.com"}
-	user2.notify()
+	// Pointers of type user can also be used to methods
+	// declared with a value receiver.
+	lisa := &user{"Lisa", "lisa@email.com"}
+	lisa.notify()
 
-	// Value of type User can be used to call the method
-	// with a pointer receiver.
-	user1.changeEmail("bill@gmail.com")
-	user1.notify()
+	// Values of type user can be used to call methods
+	// declared with a pointer receiver.
+	bill.changeEmail("bill@gmail.com")
+	bill.notify()
 
-	// Pointer of type User can be used to call the method
-	// with a pointer receiver.
-	user2.changeEmail("jill@gmail.com")
-	user2.notify()
+	// Pointers of type user can be used to call methods
+	// declared with a pointer receiver.
+	lisa.changeEmail("lisa@gmail.com")
+	lisa.notify()
 }
