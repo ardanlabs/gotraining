@@ -36,7 +36,7 @@ func main() {
 	bill := user{"Bill", "bill@email.com"}
 	bill.notify()
 
-	// Pointers of type user can also be used to methods
+	// Pointers of type user can also be used to call methods
 	// declared with a value receiver.
 	lisa := &user{"Lisa", "lisa@email.com"}
 	lisa.notify()
