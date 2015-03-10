@@ -43,10 +43,6 @@ func addRoute(verb string, path string, userHandler func(c *app.Context)) {
 		}
 
 		defer func() {
-			if r := recover(); r != nil {
-				log.Println(uid, ": routes : handler : PANIC :", r)
-			}
-
 			c.Session.Close()
 			log.Println(uid, ": routes : handler : Completed")
 		}()

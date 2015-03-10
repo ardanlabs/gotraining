@@ -60,10 +60,11 @@ func (c *Context) Respond(v interface{}, code int) {
 
 	data, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
-		c.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(c, "Application Error")
-		log.Printf("%v : api : Respond [500] : Completed : ERROR : %s", c.SessionID, err)
-		return
+		// We want this error condition to panic so we get a stack trace. This should
+		// never happen. The http package will catch the panic and provide logging
+		// and return a 500 back to the caller.
+		log.Panicf("%v : api : Respond [%d] : Failed: %v", c.SessionID, code, err)
+
 	}
 
 	datalen := len(data) + 1 // account for trailing LF
