@@ -17,7 +17,7 @@ type usersCtrl struct{}
 // Users fronts the access to the users controller functionality.
 var Users usersCtrl
 
-// UsersList returns all the existing users in the system.
+// List returns all the existing users in the system.
 // 200 Success, 204 No Content, 500 Internal
 func (uc usersCtrl) List(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : List : Started")
@@ -26,7 +26,6 @@ func (uc usersCtrl) List(c *app.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrNotFound:
-			// should this be http.StatusNotFound?
 			c.Respond(nil, http.StatusNoContent)
 			log.Println(c.SessionID, ": ctrls : Users : List : Completed : 204 :", err)
 
@@ -43,7 +42,7 @@ func (uc usersCtrl) List(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : List : Completed : 200")
 }
 
-// UsersRetrieve returns the specified user from the system.
+// Retrieve returns the specified user from the system.
 // 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
 func (uc usersCtrl) Retrieve(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Started")
@@ -72,7 +71,7 @@ func (uc usersCtrl) Retrieve(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Completed : 200")
 }
 
-// UsersCreate inserts a new user into the system.
+// Create inserts a new user into the system.
 // 200 OK, 400 Bad Request, 500 Internal
 func (uc usersCtrl) Create(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Create : Started")
@@ -101,11 +100,10 @@ func (uc usersCtrl) Create(c *app.Context) {
 	c.Params = map[string]string{"id": u.UserID}
 	uc.Retrieve(c)
 
-	// this log message will be wrong if Retrieve fails
-	log.Println(c.SessionID, ": ctrls : Users : Create : Completed : 200")
+	log.Println(c.SessionID, ": ctrls : Users : Create : Completed")
 }
 
-// UsersUpdate updates the specified user in the system.
+// Update updates the specified user in the system.
 // 200 Success, 400 Bad Request, 500 Internal
 func (uc usersCtrl) Update(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Update : Started")
@@ -133,8 +131,7 @@ func (uc usersCtrl) Update(c *app.Context) {
 
 	uc.Retrieve(c)
 
-	// this log message will be wrong if Retrieve fails
-	log.Println(c.SessionID, ": ctrls : Users : Update : Completed : 200")
+	log.Println(c.SessionID, ": ctrls : Users : Update : Completed")
 }
 
 // Delete removed the specified user from the system.
@@ -177,5 +174,5 @@ func (uc usersCtrl) Delete(c *app.Context) {
 
 	c.Respond(u, http.StatusOK)
 
-	log.Println(c.SessionID, ": ctrls : Users : Delete : Completed : 200")
+	log.Println(c.SessionID, ": ctrls : Users : Delete : Completed")
 }

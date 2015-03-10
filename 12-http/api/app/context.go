@@ -1,6 +1,7 @@
 // Package app provides application support for context and MongoDB access.
 // Current Status Codes:
 // 		200 OK           : StatusOK                  : Call is success and returning data.
+//      204 No Content   : StatusNoContent           : Call is success and returns no data.
 // 		400 Bad Request  : StatusBadRequest          : Invalid post data (syntax or semantics).
 // 		401 Unauthorized : StatusUnauthorized        : Authentication failure.
 // 		404 Not Found    : StatusNotFound            : Invalid URL or identifier.
@@ -48,7 +49,6 @@ func (c *Context) Authenticate() error {
 }
 
 // Respond sends JSON to the client.
-//
 // If code is StatusNoContent, v is expected to be nil.
 func (c *Context) Respond(v interface{}, code int) {
 	log.Printf("%v : api : Respond [%d] : Started", c.SessionID, code)
@@ -60,8 +60,10 @@ func (c *Context) Respond(v interface{}, code int) {
 
 	data, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
-		// v failed to marshal (programmer error), so panic
-		log.Panicf("%v : api : Respond [%d] : Failed: %v", c.SessionID, code, err)
+		c.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprintf(c, "Application Error")
+		log.Printf("%v : api : Respond [500] : Completed : ERROR : %s", c.SessionID, err)
+		return
 	}
 
 	datalen := len(data) + 1 // account for trailing LF
