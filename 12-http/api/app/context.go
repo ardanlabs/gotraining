@@ -64,7 +64,6 @@ func (c *Context) Respond(v interface{}, code int) {
 		// never happen. The http package will catch the panic and provide logging
 		// and return a 500 back to the caller.
 		log.Panicf("%v : api : Respond [%d] : Failed: %v", c.SessionID, code, err)
-
 	}
 
 	datalen := len(data) + 1 // account for trailing LF
