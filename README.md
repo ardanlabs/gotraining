@@ -84,12 +84,12 @@ If you are interested in holding an event in your area please let me know. I wil
 Have us speak at one of your Meetup events for free over Google hangout.
 
 Hangout:  
-[Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)
+[Go Edmonton Meetup : Mar 23rd](https://edmontongo.org/)
 
 In Person:  
-[Go VA Reston Meetup - March 2015](http://www.meetup.com/Golang-Reston/events/220920355/)  
-[Go Tampa DC Meetup - April 2015](http://www.meetup.com/Go-Tampa/events/220777645/)  
-[Go DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
+[Go VA Reston Meetup : March 18th](http://www.meetup.com/Golang-Reston/events/220920355/)  
+[Go Tampa DC Meetup : April 30th](http://www.meetup.com/Go-Tampa/events/220777645/)  
+[Go DC Meetup : May 13th](http://www.meetup.com/Golang-DC/events/220450459/)
 
 **_Workshops:_**   
 Want to put on a workshop event for a couple of hours or for a full day?
@@ -99,38 +99,38 @@ Open
 **_Corporate:_**  
 Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.
 
-[ACL Services - May 2015](http://www.acl.com/)
+[ACL Services - May 1st-3rd](http://www.acl.com/)
 
 **_Bootcamps:_**  
 Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
 
-[San Francisco, CA - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
+[San Francisco, CA : March 12th-14th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
 
-[Denver, CO - April 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
+[Denver, CO : April 9th-11th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
 
-[Boston, MA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
-[McLean, VA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
-[Denver, CO - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-denver-may-tickets-16131581996)  
+[Boston, MA : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
+[Denver, CO : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-denver-may-tickets-16131581996)  
+[McLean, VA : May 14th-16th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
 
-[NYC, NY - June 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
+[NYC, NY : June 10th-12th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 
-[Denver, CO - GopherCon 2015 Mon](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-6th-tickets-15559629270)  
-[Denver, CO - GopherCon 2015 Tue](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-7th-tickets-15569243025)  
+[Denver, CO : GopherCon 2015 Mon](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-6th-tickets-15559629270)  
+[Denver, CO : GopherCon 2015 Tue](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-7th-tickets-15569243025)  
 
-[Austin, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
-[Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
+[Austin, TX : August TBD](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
+[Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
 **_After Hours:_**  
 This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.
 
-[Denver, CO - April 13th - 22nd](https://www.eventbrite.com/e/go-programming-after-hours-denver-april-tickets-15643879264)
+[Denver, CO : April 13th - 22nd](https://www.eventbrite.com/e/go-programming-after-hours-denver-april-tickets-15643879264)
 
 **_Conferences:_**
 You can find us at conferences being held all around the country and the world.
 
-[FluentConf - April 2015](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
-[MagmaConf Mexico - June 2015](http://magmaconf.com/)  
-[Gophercon USA - July 2015](http://gophercon.com/)  
+[FluentConf, SF : April 20th-21st](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
+[MagmaConf Mexico : June 16th-19th](http://magmaconf.com/)  
+[Gophercon USA, CO - July 6th-10th](http://gophercon.com/)  
 
 ## Contact Information
 
