@@ -87,6 +87,7 @@ Hangout:
 [Go Edmonton Meetup - Mar 2015](https://edmontongo.org/)
 
 In Person:  
+[Go VA Reston Meetup - March 2015](http://www.meetup.com/Golang-Reston/events/220920355/)  
 [Go Tampa DC Meetup - April 2015](http://www.meetup.com/Go-Tampa/events/220777645/)  
 [Go DC Meetup - May 2015](http://www.meetup.com/Golang-DC/events/220450459/)
 
