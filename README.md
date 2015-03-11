@@ -123,7 +123,7 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 **_After Hours:_**  
 This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.
 
-Open
+[Denver, CO - April 13th - 22nd](https://www.eventbrite.com/e/go-programming-after-hours-denver-april-tickets-15643879264)
 
 **_Conferences:_**
 You can find us at conferences being held all around the country and the world.
