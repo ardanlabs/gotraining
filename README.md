@@ -105,12 +105,18 @@ Corporate full day classes are at $5,000 USD a day plus travel expenses. Corpora
 Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
 
 [San Francisco, CA - March 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
+
 [Denver, CO - April 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
+
 [Boston, MA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
 [McLean, VA. - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
+[Denver, CO - May 2015](https://www.eventbrite.com/e/go-programming-bootcamp-denver-may-tickets-16131581996)  
+
 [NYC, NY - June 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
+
 [Denver, CO - GopherCon 2015 Mon](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-6th-tickets-15559629270)  
 [Denver, CO - GopherCon 2015 Tue](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-7th-tickets-15569243025)  
+
 [Austin, TX - August 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
 [Chicago, IL - September 2015](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
