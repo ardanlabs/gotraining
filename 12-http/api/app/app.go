@@ -12,7 +12,7 @@ import (
 // framework. The fun part is that our context is fully controlled and
 // configured by us so we can extend the functionality of the Context whenever
 // we want.
-type Handler func(*Context)
+type Handler func(*Context) error
 
 // This is the entrypoint into our application and what configures our context
 // object for each of our http handlers. Feel free to add any configuration
@@ -41,14 +41,9 @@ func (a *App) Handle(verb, path string, handler Handler) {
 		}
 		defer c.Session.Close()
 
-		// todo: defer here
-
-		// authenticate our user
-		if c.Authenticate() != nil {
-			return
-		}
-
 		// call the handler
-		handler(&c)
+		if err := handler(&c); err != nil {
+			c.Error(err)
+		}
 	})
 }
