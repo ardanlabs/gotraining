@@ -1,5 +1,5 @@
-// Package ctrls contains the controller logic for processing requests.
-package ctrls
+// Package handlers contains the handler logic for processing requests.
+package handlers
 
 import (
 	"encoding/json"
@@ -11,15 +11,9 @@ import (
 	"github.com/ArdanStudios/gotraining/12-http/api/services"
 )
 
-// usersCtrl maintains the set of controllers for the users api.
-type usersCtrl struct{}
-
-// Users fronts the access to the users controller functionality.
-var Users usersCtrl
-
 // List returns all the existing users in the system.
 // 200 Success, 204 No Content, 500 Internal
-func (uc usersCtrl) List(c *app.Context) {
+func UsersList(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : List : Started")
 
 	u, err := services.Users.List(c)
@@ -44,7 +38,7 @@ func (uc usersCtrl) List(c *app.Context) {
 
 // Retrieve returns the specified user from the system.
 // 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
-func (uc usersCtrl) Retrieve(c *app.Context) {
+func UsersRetrieve(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Retrieve : Started")
 
 	u, err := services.Users.Retrieve(c, c.Params["id"])
@@ -73,7 +67,7 @@ func (uc usersCtrl) Retrieve(c *app.Context) {
 
 // Create inserts a new user into the system.
 // 200 OK, 400 Bad Request, 500 Internal
-func (uc usersCtrl) Create(c *app.Context) {
+func UsersCreate(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Create : Started")
 
 	var u models.User
@@ -98,14 +92,14 @@ func (uc usersCtrl) Create(c *app.Context) {
 	}
 
 	c.Params = map[string]string{"id": u.UserID}
-	uc.Retrieve(c)
+	UsersRetrieve(c)
 
 	log.Println(c.SessionID, ": ctrls : Users : Create : Completed")
 }
 
 // Update updates the specified user in the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func (uc usersCtrl) Update(c *app.Context) {
+func UsersUpdate(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Update : Started")
 
 	var u models.User
@@ -129,14 +123,14 @@ func (uc usersCtrl) Update(c *app.Context) {
 		return
 	}
 
-	uc.Retrieve(c)
+	UsersRetrieve(c)
 
 	log.Println(c.SessionID, ": ctrls : Users : Update : Completed")
 }
 
 // Delete removed the specified user from the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func (uc usersCtrl) Delete(c *app.Context) {
+func UsersDelete(c *app.Context) {
 	log.Println(c.SessionID, ": ctrls : Users : Delete : Started")
 
 	u, err := services.Users.Retrieve(c, c.Params["id"])

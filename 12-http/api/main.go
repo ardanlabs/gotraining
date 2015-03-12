@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/ArdanStudios/gotraining/12-http/api/app"
-	"github.com/ArdanStudios/gotraining/12-http/api/ctrls"
+	"github.com/ArdanStudios/gotraining/12-http/api/handlers"
 )
 
 // init is called before main. We are using init to customize logging output.
@@ -23,10 +23,10 @@ func main() {
 
 func Api() http.Handler {
 	a := app.New()
-	a.Handle("GET", "/v1/users", ctrls.Users.List)
-	a.Handle("POST", "/v1/users", ctrls.Users.Create)
-	a.Handle("GET", "/v1/users/:id", ctrls.Users.Retrieve)
-	a.Handle("PUT", "/v1/users/:id", ctrls.Users.Update)
-	a.Handle("DELETE", "/v1/users/:id", ctrls.Users.Delete)
+	a.Handle("GET", "/v1/users", handlers.UsersList)
+	a.Handle("POST", "/v1/users", handlers.UsersCreate)
+	a.Handle("GET", "/v1/users/:id", handlers.UsersRetrieve)
+	a.Handle("PUT", "/v1/users/:id", handlers.UsersUpdate)
+	a.Handle("DELETE", "/v1/users/:id", handlers.UsersDelete)
 	return a
 }
