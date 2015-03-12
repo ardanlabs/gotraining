@@ -1,11 +1,23 @@
 package app
 
 import (
+	"errors"
 	"net/http"
 
 	"code.google.com/p/go-uuid/uuid"
 
 	"github.com/dimfeld/httptreemux"
+)
+
+var (
+	// ErrNotFound is abstracting the mgo not found error.
+	ErrNotFound = errors.New("No user(s) found")
+
+	// ErrInvalidID occurs when an ID is not in a valid form.
+	ErrInvalidID = errors.New("ID is not in it's proper form")
+
+	// ErrValidation occurs when there are validation errors.
+	ErrValidation = errors.New("Validation errors occurred")
 )
 
 // A Handler is a type that handles an http request within our own little mini

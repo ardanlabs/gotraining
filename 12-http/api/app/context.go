@@ -39,6 +39,16 @@ type jsonError struct {
 }
 
 func (c *Context) Error(err error) {
+	switch err {
+	case ErrNotFound:
+		c.RespondError(err.Error(), http.StatusNotFound)
+	case ErrInvalidID:
+		c.RespondError(err.Error(), http.StatusBadRequest)
+	case ErrValidation:
+		c.RespondError(err.Error(), http.StatusBadRequest)
+	default:
+		c.RespondError(err.Error(), http.StatusInternalServerError)
+	}
 }
 
 // Respond sends JSON to the client.
