@@ -5,6 +5,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/ArdanStudios/gotraining/12-http/api/app"
 	"github.com/ArdanStudios/gotraining/12-http/api/handlers"
@@ -17,8 +18,13 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	log.Println("main : Started : Listening on: http://localhost:9000")
-	http.ListenAndServe(":9000", Api())
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
+	log.Println("main : Started : Listening on: http://localhost:" + port)
+	http.ListenAndServe(":"+port, Api())
 }
 
 func Api() http.Handler {
