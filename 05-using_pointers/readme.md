@@ -1,15 +1,19 @@
 ## Using Pointers
 
-Think of every struct as having a nature. If the nature of the struct is something that should not be changed, like a time, a color or a coordinate, then implement the struct as a primitive data value. If the nature of the struct is something that can be changed, even if it never is in your program, it is not a primitive data value and should be implemented to be shared with a pointer. Don’t create structs that have a duality of nature.
+I like to think of types as having one of two natures. One nature a type can exhibit represents data values that should not shared. Functions and methods perform operations on these data values by accepting copies and produce new data values as their result. Values based on the built-in types exhibit this nature. User defined types can also exhibit this nature, such as types that represent values like time or coordinates. I consider these types and their data values to be primitive in nature.
+
+The other nature a type can exhibit represents a data value that should be shared. This could be a data value that represents a document from a database. Once a data value of this type is created, passing copies to a function or method is not intuitive. Sometimes a data value of a given type is not safe to be copied and must be shared. This could be a data value that abstracts an operating system resource like a file. Passing copies of this type of data   value to a function or method can have serious consequences. I consider these types and their data values to be complex in nature.
+
+Understanding the nature of a type will help you determine not only how to implement your methods, but also how to implement functions that create and work with values of different types.
 
 ## Notes
 
-* The nature of the type should determine how it is shared.
+* The nature of the type should determine how it is passed.
 * Types can implement primitive and non-primitive data.
 * Don't create structs with a duality of nature.
-* In general, don’t share built-in type values with a pointer.
-* In general, share struct type values with a pointer unless the struct type has been implemented to behave like a primitive data value.
-* In general, don’t share reference type values with a pointer unless you are implementing an unmarshal type of functionality.
+* In general, don’t pass built-in type values with a pointer.
+* In general, pass struct type values with a pointer unless the struct type has been implemented to behave like a primitive data value.
+* In general, don’t pass reference type values with a pointer unless you are implementing an unmarshal type of functionality.
 
 ## Links
 
@@ -17,11 +21,11 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ## Code Review
 
-[Primitive Types](example1/example1.go) ([Go Playground](https://play.golang.org/p/MCfjtlG9LO))
+[Primitive Types](example1/example1.go) ([Go Playground](https://play.golang.org/p/H5HRoElN6q))
 
-[Struct Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/zy6oUCtoSX))
+[Struct Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/xD6PCx--GG))
 
-[Reference Types](example3/example3.go) ([Go Playground](https://play.golang.org/p/MkfZdLcvfD))
+[Reference Types](example3/example3.go) ([Go Playground](https://play.golang.org/p/E-Bb5cRuyz))
 
 ## Exercises
 

@@ -1,7 +1,9 @@
 // All material is licensed under the GNU Free Documentation License
+import "errors"
+
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/MkfZdLcvfD
+// https://play.golang.org/p/E-Bb5cRuyz
 
 // Sample code to show how the standard library in general,
 // does not pass reference types via a pointer unless the function is
@@ -19,7 +21,7 @@ type IP []byte
 // http://golang.org/src/net/ip.go
 //
 // MarshalText is using a value receiver. This is exactly what I would expect
-// to see because we don’t share reference types with a pointer.
+// to see because we don’t pass reference types with a pointer.
 func (ip IP) MarshalText() ([]byte, error) {
 	if len(ip) == 0 {
 		return []byte(""), nil
@@ -32,7 +34,7 @@ func (ip IP) MarshalText() ([]byte, error) {
 
 // http://golang.org/src/net/ip.go
 //
-// ipEmptyString accepts a value of named type IP. No pointer is used to share
+// ipEmptyString accepts a value of named type IP. No pointer is used to pass
 // this value since the base type for IP is a slice of bytes and therefore a
 // reference type.
 func ipEmptyString(ip IP) string {
@@ -45,7 +47,7 @@ func ipEmptyString(ip IP) string {
 // http://golang.org/src/net/ip.go
 //
 // Anytime you are unmarshaling data into a reference type, you will need to
-// share that reference type value with a pointer.
+// pass that reference type value with a pointer.
 func (ip *IP) UnmarshalText(text []byte) error {
 	if len(text) == 0 {
 		*ip = nil

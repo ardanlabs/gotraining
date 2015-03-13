@@ -1,10 +1,10 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/zy6oUCtoSX
+// https://play.golang.org/p/xD6PCx--GG
 
 // Sample code to show how the standard library in general,
-// does treats struct types based on the implement of the type.
+// treats struct types based on the implement of the type.
 
 // *******************************************************
 // Structs as primitive data type
@@ -61,7 +61,7 @@ func (t Time) Add(d Duration) Time {
 // http://golang.org/src/time/time.go
 //
 // Again, values of type Time are treated like a primitive data type and are
-// copied when shared.
+// copied when passed.
 func div(t Time, d Duration) (qmod2 int, r Duration) {
 
 // *******************************************************
@@ -80,7 +80,7 @@ func Open(name string) (file *File, err error) {
 //
 // Open is returning a pointer because it is not safe to make copies of the
 // referenced File value being returned. The value should always be used and
-// shared through the pointer.
+// passed through the pointer.
 
 // File represents an open file descriptor.
 type File struct {
@@ -101,7 +101,7 @@ type file struct {
 // http://golang.org/src/os/file_unix.go
 //
 // Even if a function or method is not changing the state of a File struct
-// type value, it still needs to be shared with a pointer.
+// type value, it still needs to be passed with a pointer.
 func epipecheck(file *File, e error) {
     if e == syscall.EPIPE {
         if atomic.AddInt32(&file.nepipe, 1) >= 10 {

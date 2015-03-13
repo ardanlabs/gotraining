@@ -1,10 +1,10 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/MCfjtlG9LO
+// https://play.golang.org/p/H5HRoElN6q
 
 // Sample code to show how the standard library in general,
-// does not share built-in type values with a pointer.
+// does not pass built-in type values with a pointer.
 
 // *******************************************************
 
