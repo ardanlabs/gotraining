@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -44,6 +45,7 @@ func main() {
 
 	}
 
+	fmt.Println("Listening on port", port)
 	http.ListenAndServe(":"+port, http.HandlerFunc(handler))
 }
 
