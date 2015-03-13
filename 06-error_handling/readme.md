@@ -4,7 +4,7 @@ Error handling is critical for making your programs reliable, trustworthy and re
 
 ## Notes
 
-* Use the defaul error value for static and simple formatted messages.
+* Use the default error value for static and simple formatted messages.
 * Create and return error variables to help the caller identify specific errors.
 * Create custom error types when the context of the error is more complex.
 * Error Values in Go aren't special, they are just values like any other, and so you have the entire language at your disposal.
@@ -30,7 +30,7 @@ http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/
 ## Exercises
 
 ### Exercise 1
-Create two error variables, one called InvalidValueError and the other called AmountToLargeError. Provide the static message for each variable. Then write a function called checkAmount that accepts a float64 type value and returns an error value. Check the value for zero and if it is, return the InvalidValueError. Check the value for greater than $1,000 and if it is, reutrn the AmountToLargeError. Write a main function to call the checkAmount function and check the return error value. Display a proper message to the screen.
+Create two error variables, one called InvalidValueError and the other called AmountToLargeError. Provide the static message for each variable. Then write a function called checkAmount that accepts a float64 type value and returns an error value. Check the value for zero and if it is, return the InvalidValueError. Check the value for greater than $1,000 and if it is, return the AmountToLargeError. Write a main function to call the checkAmount function and check the return error value. Display a proper message to the screen.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/Rt3O-7ndtJ)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/cIVJqLzm4d))
