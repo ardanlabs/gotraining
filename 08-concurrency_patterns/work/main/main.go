@@ -1,12 +1,11 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// This sample program demostrates how to use the work package
+// This sample program demonstrates how to use the work package
 // to use a pool of goroutines to get work done.
 package main
 
 import (
-	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -28,25 +27,16 @@ type namePrinter struct {
 	name string
 }
 
-// Work implements the Worker interface.
-func (m *namePrinter) Work(id int) {
-	fmt.Println(m.name)
+// Task implements the Worker interface.
+func (m *namePrinter) Task() {
+	log.Println(m.name)
 	time.Sleep(time.Second)
-}
-
-// logger is called by the work pool when
-// it has things to log.
-func logger(message string) {
-	log.Println(message)
 }
 
 // main is the entry point for all Go programs.
 func main() {
-	// Create a work value with 2 goroutines.
-	w, err := work.New(2, time.Second, logger)
-	if err != nil {
-		return
-	}
+	// Create a work pool with 2 goroutines.
+	p := work.New(2)
 
 	var wg sync.WaitGroup
 	wg.Add(100 * len(names))
@@ -55,7 +45,7 @@ func main() {
 		// Iterate over the slice of names.
 		for _, name := range names {
 			// Create a namePrinter and provide the
-			// specfic name.
+			// specific name.
 			np := namePrinter{
 				name: name,
 			}
@@ -63,27 +53,15 @@ func main() {
 			go func() {
 				// Submit the task to be worked on. When RunTask
 				// returns we know it is being handled.
-				w.Run(&np)
+				p.Run(&np)
 				wg.Done()
 			}()
 		}
 	}
 
-	for {
-		// Enter a number and hit enter to change the size
-		// of the work pool.
-		var c int
-		fmt.Scanf("%d", &c)
-		if c == 0 {
-			break
-		}
-
-		w.Add(c)
-	}
-
 	wg.Wait()
 
-	// Shutdown the work and wait for all existing work
+	// Shutdown the work pool and wait for all existing work
 	// to be completed.
-	w.Shutdown()
+	p.Shutdown()
 }
