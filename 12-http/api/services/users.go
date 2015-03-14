@@ -2,7 +2,6 @@
 package services
 
 import (
-	"errors"
 	"log"
 	"time"
 
@@ -13,17 +12,6 @@ import (
 )
 
 const usersCollection = "users"
-
-var (
-	// ErrNotFound is abstracting the mgo not found error.
-	ErrNotFound = errors.New("No user(s) found")
-
-	// ErrInvalidID occurs when an ID is not in a valid form.
-	ErrInvalidID = errors.New("ID is not in it's proper form")
-
-	// ErrValidation occurs when there are validation errors.
-	ErrValidation = errors.New("Validation errors occurred")
-)
 
 // usersService maintains the set of services for the users api.
 type usersService struct{}
@@ -47,8 +35,8 @@ func (us usersService) List(c *app.Context) ([]models.User, error) {
 	}
 
 	if len(u) == 0 {
-		log.Println(c.SessionID, ": services : Users : List : Completed : ERROR :", ErrNotFound)
-		return nil, ErrNotFound
+		log.Println(c.SessionID, ": services : Users : List : Completed : ERROR :", app.ErrNotFound)
+		return nil, app.ErrNotFound
 	}
 
 	log.Println(c.SessionID, ": services : Users : List : Completed")
@@ -60,8 +48,8 @@ func (us usersService) Retrieve(c *app.Context, userID string) (*models.User, er
 	log.Println(c.SessionID, ": services : Users : Retrieve : Started")
 
 	if !bson.IsObjectIdHex(userID) {
-		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", ErrInvalidID)
-		return nil, ErrInvalidID
+		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", app.ErrInvalidID)
+		return nil, app.ErrInvalidID
 	}
 
 	var u *models.User
@@ -78,7 +66,7 @@ func (us usersService) Retrieve(c *app.Context, userID string) (*models.User, er
 		}
 
 		log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR : Not Found")
-		return nil, ErrNotFound
+		return nil, app.ErrNotFound
 	}
 
 	log.Println(c.SessionID, ": services : Users : Retrieve : Completed")
@@ -101,7 +89,7 @@ func (us usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, er
 
 	if v, err := u.Validate(); err != nil {
 		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
-		return v, ErrValidation
+		return v, app.ErrValidation
 	}
 
 	f := func(collection *mgo.Collection) error {
@@ -124,7 +112,7 @@ func (us usersService) Update(c *app.Context, userID string, u *models.User) ([]
 
 	if v, err := u.Validate(); err != nil {
 		log.Println(c.SessionID, ": services : Users : Update : Completed : ERROR :", err)
-		return v, ErrValidation
+		return v, app.ErrValidation
 	}
 
 	if u.UserID == "" {
@@ -132,8 +120,8 @@ func (us usersService) Update(c *app.Context, userID string, u *models.User) ([]
 	}
 
 	if userID != u.UserID {
-		log.Println(c.SessionID, ": services : Users : Update : Completed : ERROR :", ErrValidation)
-		return []app.Invalid{{Fld: "UserID", Err: "Specified UserID does not match user value."}}, ErrValidation
+		log.Println(c.SessionID, ": services : Users : Update : Completed : ERROR :", app.ErrValidation)
+		return []app.Invalid{{Fld: "UserID", Err: "Specified UserID does not match user value."}}, app.ErrValidation
 	}
 
 	f := func(collection *mgo.Collection) error {
@@ -156,8 +144,8 @@ func (us usersService) Delete(c *app.Context, userID string) error {
 	log.Println(c.SessionID, ": services : Users : Delete : Started")
 
 	if !bson.IsObjectIdHex(userID) {
-		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", ErrInvalidID)
-		return ErrInvalidID
+		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", app.ErrInvalidID)
+		return app.ErrInvalidID
 	}
 
 	f := func(collection *mgo.Collection) error {
