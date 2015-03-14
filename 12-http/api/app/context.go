@@ -38,14 +38,17 @@ type jsonError struct {
 	Fields []Invalid `json:"fields,omitempty"`
 }
 
-// Authenticate handles the authentication of each request.
-func (c *Context) Authenticate() error {
-	log.Println(c.SessionID, ": api : Authenticate : Started")
-
-	// ServeError(w, errors.New("Auth Error"), http.StatusUnauthorized)
-
-	log.Println(c.SessionID, ": api : Authenticate : Completed")
-	return nil
+func (c *Context) Error(err error) {
+	switch err {
+	case ErrNotFound:
+		c.RespondError(err.Error(), http.StatusNotFound)
+	case ErrInvalidID:
+		c.RespondError(err.Error(), http.StatusBadRequest)
+	case ErrValidation:
+		c.RespondError(err.Error(), http.StatusBadRequest)
+	default:
+		c.RespondError(err.Error(), http.StatusInternalServerError)
+	}
 }
 
 // Respond sends JSON to the client.
