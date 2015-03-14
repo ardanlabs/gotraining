@@ -24,15 +24,16 @@ func main() {
 	}
 
 	log.Println("main : Started : Listening on: http://localhost:" + port)
-	http.ListenAndServe(":"+port, Api())
+	http.ListenAndServe(":"+port, API())
 }
 
-func Api() http.Handler {
+// API returns a handler for a set of routes.
+func API() http.Handler {
 	a := app.New()
-	a.Handle("GET", "/v1/users", handlers.UsersList)
-	a.Handle("POST", "/v1/users", handlers.UsersCreate)
-	a.Handle("GET", "/v1/users/:id", handlers.UsersRetrieve)
-	a.Handle("PUT", "/v1/users/:id", handlers.UsersUpdate)
-	a.Handle("DELETE", "/v1/users/:id", handlers.UsersDelete)
+	a.Handle("GET", "/v1/users", handlers.Users.List)
+	a.Handle("POST", "/v1/users", handlers.Users.Create)
+	a.Handle("GET", "/v1/users/:id", handlers.Users.Retrieve)
+	a.Handle("PUT", "/v1/users/:id", handlers.Users.Update)
+	a.Handle("DELETE", "/v1/users/:id", handlers.Users.Delete)
 	return a
 }

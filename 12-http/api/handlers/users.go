@@ -10,9 +10,15 @@ import (
 	"github.com/ArdanStudios/gotraining/12-http/api/services"
 )
 
+// usersHandle maintains the set of handlers for the users api.
+type usersHandle struct{}
+
+// Users fronts the access to the users service functionality.
+var Users usersHandle
+
 // List returns all the existing users in the system.
 // 200 Success, 204 No Content, 500 Internal
-func UsersList(c *app.Context) error {
+func (uh usersHandle) List(c *app.Context) error {
 	u, err := services.Users.List(c)
 	if err != nil {
 		return err
@@ -24,7 +30,7 @@ func UsersList(c *app.Context) error {
 
 // Retrieve returns the specified user from the system.
 // 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
-func UsersRetrieve(c *app.Context) error {
+func (uh usersHandle) Retrieve(c *app.Context) error {
 	u, err := services.Users.Retrieve(c, c.Params["id"])
 	if err != nil {
 		return err
@@ -36,7 +42,7 @@ func UsersRetrieve(c *app.Context) error {
 
 // Create inserts a new user into the system.
 // 200 OK, 400 Bad Request, 500 Internal
-func UsersCreate(c *app.Context) error {
+func (uh usersHandle) Create(c *app.Context) error {
 	var u models.User
 	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
 		return err
@@ -54,12 +60,12 @@ func UsersCreate(c *app.Context) error {
 	}
 
 	c.Params = map[string]string{"id": u.UserID}
-	return UsersRetrieve(c)
+	return Users.Retrieve(c)
 }
 
 // Update updates the specified user in the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func UsersUpdate(c *app.Context) error {
+func (uh usersHandle) Update(c *app.Context) error {
 	var u models.User
 	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
 		return err
@@ -76,12 +82,12 @@ func UsersUpdate(c *app.Context) error {
 		}
 	}
 
-	return UsersRetrieve(c)
+	return Users.Retrieve(c)
 }
 
 // Delete removed the specified user from the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func UsersDelete(c *app.Context) error {
+func (uh usersHandle) Delete(c *app.Context) error {
 	u, err := services.Users.Retrieve(c, c.Params["id"])
 	if err != nil {
 		return err

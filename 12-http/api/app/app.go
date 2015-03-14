@@ -26,13 +26,14 @@ var (
 // we want.
 type Handler func(*Context) error
 
-// This is the entrypoint into our application and what configures our context
+// App is the entrypoint into our application and what configures our context
 // object for each of our http handlers. Feel free to add any configuration
 // data/logic on this App struct
 type App struct {
 	*httptreemux.TreeMux
 }
 
+// New create an App value that handle a set of routes for the application.
 func New() *App {
 	return &App{
 		TreeMux: httptreemux.New(),
@@ -43,7 +44,7 @@ func New() *App {
 // pair, this makes for really easy, convenient routing.
 func (a *App) Handle(verb, path string, handler Handler) {
 	a.TreeMux.Handle(verb, path, func(w http.ResponseWriter, r *http.Request, p map[string]string) {
-		// create our context
+		// Create the context value for the call.
 		c := Context{
 			Session:        GetSession(),
 			ResponseWriter: w,
@@ -53,7 +54,7 @@ func (a *App) Handle(verb, path string, handler Handler) {
 		}
 		defer c.Session.Close()
 
-		// call the handler
+		// Call the handler and handle the any possible error.
 		if err := handler(&c); err != nil {
 			c.Error(err)
 		}

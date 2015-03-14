@@ -18,6 +18,18 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
+// Invalid describes a validation error belonging to a specific field.
+type Invalid struct {
+	Fld string `json:"field_name"`
+	Err string `json:"error"`
+}
+
+// jsonError is the response for errors that occur within the API.
+type jsonError struct {
+	Error  string    `json:"error"`
+	Fields []Invalid `json:"fields,omitempty"`
+}
+
 // Context contains data associated with a single request.
 type Context struct {
 	Session *mgo.Session
@@ -27,17 +39,7 @@ type Context struct {
 	SessionID string
 }
 
-// Invalid describes a validation error belonging to a specific field.
-type Invalid struct {
-	Fld string `json:"field_name"`
-	Err string `json:"error"`
-}
-
-type jsonError struct {
-	Error  string    `json:"error"`
-	Fields []Invalid `json:"fields,omitempty"`
-}
-
+// Error handles all error responses for the API.
 func (c *Context) Error(err error) {
 	switch err {
 	case ErrNotFound:
