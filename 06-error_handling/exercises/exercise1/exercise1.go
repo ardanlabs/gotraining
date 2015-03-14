@@ -21,7 +21,7 @@ import (
 var InvalidValueError = errors.New("Invalid Value")
 
 // AmountToLargeError indicates the value beyond the upper bound.
-var AmountToLargeError = errors.New("Amount To Large")
+var AmountTooLargeError = errors.New("Amount To Large")
 
 // main is the entry point for the application.
 func main() {
@@ -34,7 +34,8 @@ func main() {
 			return
 
 		// Check if the error is an InvalidValueError.
-		case AmountToLargeError:
+		case AmountTooLargeError:
+
 			fmt.Println("Value provided is too large.")
 			return
 
@@ -51,16 +52,17 @@ func main() {
 
 // checkAmount validates the value passed in.
 func checkAmount(f float64) error {
+
+	switch {
 	// Is the parameter equal to zero.
-	if f == 0 {
+	case f == 0:
 		return InvalidValueError
-	}
-
 	// Is the parameter greater than 1000.
-	if f > 1000 {
-		return AmountToLargeError
+	case f > 1000:
+		return AmountTooLargeError
+	// Return nil for the error value.
+	default:
+		return nil
 	}
 
-	// Return nil for the error value.
-	return nil
 }
