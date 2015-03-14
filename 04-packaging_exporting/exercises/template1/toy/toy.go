@@ -15,10 +15,10 @@ package toy
 // returns the current on hand count.
 
 // Declare a method named UpdateOnHand with a pointer receiver that
-// update and returns the current on hand count.
+// updates and returns the current on hand count.
 
 // Declare a method named Sold with a pointer receiver that
 // returns the current sold count.
 
 // Declare a method named UpdateSold with a pointer receiver that
-// update and returns the current sold count.
+// updates and returns the current sold count.
