@@ -1,16 +1,14 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// This example is provided with help by Gabriel Aszalos.
-
-// Package pool manages a user defined set of resources.
 // Example provided with help from Fatih Arslan and Gabriel Aszalos.
+// Package pool manages a user defined set of resources.
 package pool
 
 import (
 	"errors"
-	"fmt"
 	"io"
+	"log"
 	"sync"
 )
 
@@ -29,16 +27,16 @@ type Pool struct {
 var ErrPoolClosed = errors.New("Pool has been closed.")
 
 // New creates a pool that manages resources. A pool requires a
-// function that can allocate a new resource and the number of
-// resources that can be allocated.
-func New(fn func() (io.Closer, error), cap uint) (*Pool, error) {
-	if cap <= 0 {
-		return nil, errors.New("Capacity value too small.")
+// function that can allocate a new resource and the size of
+// the pool.
+func New(fn func() (io.Closer, error), size uint) (*Pool, error) {
+	if size <= 0 {
+		return nil, errors.New("Size value too small.")
 	}
 
 	return &Pool{
 		factory:   fn,
-		resources: make(chan io.Closer, cap),
+		resources: make(chan io.Closer, size),
 	}, nil
 }
 
@@ -47,7 +45,7 @@ func (p *Pool) Acquire() (io.Closer, error) {
 	select {
 	// Check for a free resource.
 	case r, ok := <-p.resources:
-		fmt.Println("Acquire:", "Shared Resource")
+		log.Println("Acquire:", "Shared Resource")
 		if !ok {
 			return nil, ErrPoolClosed
 		}
@@ -55,7 +53,7 @@ func (p *Pool) Acquire() (io.Closer, error) {
 
 	// Provide a new resource since there are none available.
 	default:
-		fmt.Println("Acquire:", "New Resource")
+		log.Println("Acquire:", "New Resource")
 		return p.factory()
 	}
 }
@@ -75,11 +73,11 @@ func (p *Pool) Release(r io.Closer) {
 	select {
 	// Attempt to place the new resource on the queue.
 	case p.resources <- r:
-		fmt.Println("Release:", "In Queue")
+		log.Println("Release:", "In Queue")
 
 	// If the queue is already at cap we close the resource.
 	default:
-		fmt.Println("Release:", "Closing")
+		log.Println("Release:", "Closing")
 		r.Close()
 	}
 }
@@ -95,7 +93,7 @@ func (p *Pool) Close() {
 		return
 	}
 
-	// Toggle the flag
+	// Set the pool as closed.
 	p.closed = true
 
 	// Close the channel before we drain the channel of its
