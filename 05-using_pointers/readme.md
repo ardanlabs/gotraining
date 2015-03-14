@@ -19,6 +19,8 @@ Understanding the nature of a type will help you determine not only how to imple
 
 http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
+http://play.golang.org/p/ki991PuHhk
+
 ## Code Review
 
 [Primitive Types](example1/example1.go) ([Go Playground](https://play.golang.org/p/H5HRoElN6q))

@@ -23,9 +23,12 @@ http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/
 
 [Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/8x6kDZxPWK))
 
-[Error Variables](example2/example2.go) ([Go Playground](http://play.golang.org/p/Zo1o0LFThp))
+[Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/iNrGaGYZ-o))
 
 [Custom Error Types](example3/example3.go) ([Go Playground](http://play.golang.org/p/Eu3X54PnWm))
+
+[Special B](example4/example4.go) ([Go Playground](http://play.golang.org/p/czXpjvWWTT))
+
 
 ## Exercises
 
@@ -33,7 +36,7 @@ http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/
 Create two error variables, one called InvalidValueError and the other called AmountToLargeError. Provide the static message for each variable. Then write a function called checkAmount that accepts a float64 type value and returns an error value. Check the value for zero and if it is, return the InvalidValueError. Check the value for greater than $1,000 and if it is, return the AmountToLargeError. Write a main function to call the checkAmount function and check the return error value. Display a proper message to the screen.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/Rt3O-7ndtJ)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/cIVJqLzm4d))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/8KETdvYk17))
 
 ### Exercise 2
 Create a custom error type called appError that contains three fields, Err error, Message string and Code int. Implement the error interface providing your own message using these three fields. Write a function called checkFlag that accepts a bool value. If the value is false, return a pointer of your custom error type initialized as you like. If the value is true, return a default error. Write a main function to call the checkFlag function and check the error for the concrete type.

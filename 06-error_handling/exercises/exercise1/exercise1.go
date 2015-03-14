@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/cIVJqLzm4d
+// https://play.golang.org/p/8KETdvYk17
 
 // Create two error variables, one called InvalidValueError and the other
 // called AmountToLargeError. Provide the static message for each variable.
@@ -17,25 +17,24 @@ import (
 	"fmt"
 )
 
-// InvalidValueError indicates the value is invalid.
-var InvalidValueError = errors.New("Invalid Value")
+// ErrInvalidValue indicates the value is invalid.
+var ErrInvalidValue = errors.New("Invalid Value")
 
-// AmountToLargeError indicates the value beyond the upper bound.
-var AmountTooLargeError = errors.New("Amount To Large")
+// ErrAmountTooLarge indicates the value beyond the upper bound.
+var ErrAmountTooLarge = errors.New("Amount To Large")
 
 // main is the entry point for the application.
 func main() {
 	// Call the function and get the error.
 	if err := checkAmount(0); err != nil {
 		switch err {
-		// Check if the error is an InvalidValueError.
-		case InvalidValueError:
+		// Check if the error is an ErrInvalidValue.
+		case ErrInvalidValue:
 			fmt.Println("Value provided is not valid.")
 			return
 
-		// Check if the error is an InvalidValueError.
-		case AmountTooLargeError:
-
+		// Check if the error is an ErrAmountTooLarge.
+		case ErrAmountTooLarge:
 			fmt.Println("Value provided is too large.")
 			return
 
@@ -52,17 +51,15 @@ func main() {
 
 // checkAmount validates the value passed in.
 func checkAmount(f float64) error {
-
 	switch {
 	// Is the parameter equal to zero.
 	case f == 0:
-		return InvalidValueError
+		return ErrInvalidValue
+
 	// Is the parameter greater than 1000.
 	case f > 1000:
-		return AmountTooLargeError
-	// Return nil for the error value.
-	default:
-		return nil
+		return ErrAmountTooLarge
 	}
 
+	return nil
 }
