@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/gJQH9uXKCf
+// http://play.golang.org/p/_DMKVXRwAu
 
 // go build -race
 
@@ -55,6 +55,10 @@ func main() {
 	// Wait for the write goroutine to finish.
 	wg.Wait()
 	fmt.Println("Program Complete")
+
+	// To keep the sample simple we are allowing the runtime to
+	// kill the reader goroutines. This is something we should
+	// control before allowing main to exit.
 }
 
 // writer adds 10 new strings to the slice in random intervals.
