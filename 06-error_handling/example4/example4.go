@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/Eu3X54PnWm
+// http://play.golang.org/p/czXpjvWWTT
 
 // Sample program to show see if the class can find the bug.
 package main
