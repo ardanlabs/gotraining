@@ -22,7 +22,9 @@ http://www.restapitutorial.com/httpstatuscodes.html
 
 ## Code Review
 [Hello World Server](example1/main.go)  
+
 [1 Line File Server](example2/main.go)  
+
 [Request and Response Basics](example3/main.go)  
 
 ## Advanced Code Review
