@@ -1,3 +1,8 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
+// Sample program to show how you can use the FileServer handle with
+// this service as a single call to ListenAndServe.
 package main
 
 import "net/http"

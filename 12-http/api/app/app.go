@@ -43,8 +43,8 @@ func New() *App {
 // Handle is our mechanism for mounting Handlers for a given HTTP verb and path
 // pair, this makes for really easy, convenient routing.
 func (a *App) Handle(verb, path string, handler Handler) {
-	a.TreeMux.Handle(verb, path, func(w http.ResponseWriter, r *http.Request, p map[string]string) {
-		// Create the context value for the call.
+	// The function to execute for each request.
+	h := func(w http.ResponseWriter, r *http.Request, p map[string]string) {
 		c := Context{
 			Session:        GetSession(),
 			ResponseWriter: w,
@@ -58,5 +58,8 @@ func (a *App) Handle(verb, path string, handler Handler) {
 		if err := handler(&c); err != nil {
 			c.Error(err)
 		}
-	})
+	}
+
+	// Add this handler for the specified verb and route.
+	a.TreeMux.Handle(verb, path, h)
 }

@@ -1,3 +1,8 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
+// Sample program to show how to implement a handler function
+// with the http package.
 package main
 
 import (
@@ -18,8 +23,9 @@ func main() {
 	http.ListenAndServe(":4000", nil)
 }
 
-// http Handlers are the universal interface for handling http stuff, you will
-// see that many Go developers rally around the http.Handler interface.
+// HelloHandler shows how the http Handlers are the universal interface for
+// handling http stuff, you will see that many Go developers rally around the
+// http.Handler interface.
 func HelloHandler(rw http.ResponseWriter, r *http.Request) {
 	// Fprintln is a nice way to write formatted text out to a io.Writer
 	fmt.Fprintln(rw, "Hello world")
