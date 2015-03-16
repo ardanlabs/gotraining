@@ -3,7 +3,7 @@
 
 // http://play.golang.org/p/3UVTkwprkM
 
-// Sample program to show how an embedded types works with interfaces.
+// Sample program to show how embedded types work with interfaces.
 package main
 
 import (
