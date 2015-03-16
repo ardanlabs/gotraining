@@ -53,6 +53,9 @@ We need to add some changes to main to get the profiling data we need.
     go tool pprof --pdf ./example1 cpu.pprof > callgraph.pdf
     go tool pprof --pdf ./example1 mem.pprof > callgraph.pdf
 
+    // See all the options
+    go tool pprof -h
+
 ### Peek into the runtime scheduler:
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 

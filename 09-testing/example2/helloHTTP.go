@@ -15,6 +15,9 @@
 // go tool pprof http://localhost:6060/debug/pprof/profile
 // go tool pprof http://localhost:6060/debug/pprof/block
 
+// For all the options
+// go tool pprof -h
+
 // Sample program to show off Go and check programming environment.
 package main
 

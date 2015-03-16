@@ -104,8 +104,6 @@ Corporate full day classes are at $5,000 USD a day plus travel expenses. Corpora
 **_Bootcamps:_**  
 Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
 
-[San Francisco, CA : March 12th-14th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-san-francisco-march-tickets-14944319863)  
-
 [Denver, CO : April 9th-11th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
 
 [Boston, MA : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
