@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/3UVTkwprkM
+// http://play.golang.org/p/Dpgqd-2rer
 
 // Sample program to show how embedded types work with interfaces.
 package main

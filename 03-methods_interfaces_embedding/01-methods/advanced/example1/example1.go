@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/RPyAn3y2OS
+// http://play.golang.org/p/MNI1jR8Ets
 
 // Sample program to show how to declare function variables.
 package main

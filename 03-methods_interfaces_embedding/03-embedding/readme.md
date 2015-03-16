@@ -18,9 +18,9 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Declaring Fields](example1/example1.go) ([Go Playground](http://play.golang.org/p/5LlI_KJ2ZT))
 
-[Embedding types](example2/example2.go) ([Go Playground](http://play.golang.org/p/gqsDjMd5bG))
+[Embedding types](example2/example2.go) ([Go Playground](http://play.golang.org/p/fD5Sa5Vldk))
 
-[Embedded types and interfaces](example3/example3.go) ([Go Playground](http://play.golang.org/p/3UVTkwprkM))
+[Embedded types and interfaces](example3/example3.go) ([Go Playground](http://play.golang.org/p/Dpgqd-2rer))
 
 [Outer and inner type interface implementations](example4/example4.go) ([Go Playground](http://play.golang.org/p/f5teopGU1J))
 

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/gqsDjMd5bG
+// https://play.golang.org/p/fD5Sa5Vldk
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
