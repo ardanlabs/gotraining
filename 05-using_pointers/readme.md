@@ -1,10 +1,8 @@
 ## Using Pointers
 
-I like to think of types as having one of two natures. One nature a type can exhibit represents data values that should not shared. Functions and methods perform operations on these data values by accepting copies and produce new data values as their result. Values based on the built-in types exhibit this nature. User defined types can also exhibit this nature, such as types that represent values like time or coordinates. I consider these types and their data values to be primitive in nature.
+I like to think of types as having one of two natures. One nature is a type that represents a data value that should not be shared. Data values that are created using a built-in or reference type exhibit this primitive nature. These data values should always be passed using copies of the original. The other nature is a type that should be shared. Data values that are created using struct types exhibit this nature in most cases. These data values should always be passed by sharing them with a pointer.
 
-The other nature a type can exhibit represents a data value that should be shared. This could be a data value that represents a document from a database. Once a data value of this type is created, passing copies to a function or method is not intuitive. Sometimes a data value of a given type is not safe to be copied and must be shared. This could be a data value that abstracts an operating system resource like a file. Passing copies of this type of data   value to a function or method can have serious consequences. I consider these types and their data values to be complex in nature.
-
-Understanding the nature of a type will help you determine not only how to implement your methods, but also how to implement functions that create and work with values of different types.
+However, struct types can also exhibit a primitive nature like the built-in and reference types do. Struct types that represent time or coordinate data values are a good example of this. Understanding the nature of a type will help you determine how best to pass your data values between methods and functions.
 
 ## Notes
 
