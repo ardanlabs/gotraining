@@ -15,15 +15,15 @@ import (
 // of time in Nanosecond.
 type duration int64
 
-// SetSeconds can change the value of duration type variables.
-func (d *duration) SetSeconds(seconds duration) {
+// setSeconds can change the value of duration type variables.
+func (d *duration) setSeconds(seconds duration) {
 	*d = 1e9 * seconds
 }
 
-// Seconds returns a formatted string of duration in seconds.
-func (d duration) Seconds() string {
-	seconds := d / 1e9
-	return fmt.Sprintf("%d Seconds", seconds)
+// seconds returns a formatted string of duration in seconds.
+func (d duration) seconds() string {
+	sec := d / 1e9
+	return fmt.Sprintf("%d Seconds", sec)
 }
 
 // main is the entry point for the application.
@@ -34,8 +34,8 @@ func main() {
 
 	// Change the value of dur to equal
 	// five seconds.
-	dur.SetSeconds(5)
+	dur.setSeconds(5)
 
 	// Display the new value of dur.
-	fmt.Println(dur.Seconds())
+	fmt.Println(dur.seconds())
 }

@@ -17,7 +17,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Declare and receiver behavior](example1/example1.go) ([Go Playground](http://play.golang.org/p/mF2Z5ZPQFi))
+[Declare and receiver behavior](example1/example1.go) ([Go Playground](http://play.golang.org/p/Sw39qR_Mwd))
 
 [Named typed methods](example2/example2.go) ([Go Playground](http://play.golang.org/p/EMY2xb1csT))
 
@@ -35,7 +35,7 @@ Declare a struct that represents a baseball player. Include name, atBats and hit
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/EZrIvPzfjh))
 
 ___
-[![GoingGo Training](../../00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___

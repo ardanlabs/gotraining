@@ -10,7 +10,7 @@ Let's make sure of local development environment is working.
 
 #### [Previous Slide](slide3.md) | [Start Training](../../readme.md)
 ___
-[![GoingGo Training](../../images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](../../images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](../../images/ggb_logo.png)](http://www.goinggo.net)
 ___

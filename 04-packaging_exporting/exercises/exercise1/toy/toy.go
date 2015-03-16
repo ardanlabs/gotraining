@@ -29,7 +29,8 @@ func (t *Toy) OnHand() int {
 // UpdateOnHand updates the on hand count and
 // returns the current value.
 func (t *Toy) UpdateOnHand(count int) int {
-	return t.onHand + count
+	t.onHand = t.onHand + count
+	return t.onHand
 }
 
 // Sold returns the current number of this
@@ -41,5 +42,6 @@ func (t *Toy) Sold() int {
 // UpdateSold updates the sold count and
 // returns the current value.
 func (t *Toy) UpdateSold(count int) int {
-	return t.sold + count
+	t.sold = t.sold + count
+	return t.sold
 }

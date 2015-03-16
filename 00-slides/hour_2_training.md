@@ -11,7 +11,7 @@ In this hour we take a deeper tour of the language. We learn about methods, inte
 [Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
 
 ___
-[![GoingGo Training](images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](images/ggb_logo.png)](http://www.goinggo.net)
 ___

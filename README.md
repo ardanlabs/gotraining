@@ -3,7 +3,7 @@
 
 ## Bootcamp Tour
 
-Ardan Labs is running a Go Bootcamp class in a different city every month this year. This 3 day class provides a comprehensive and idiomatic view of the Go programming language plus some best practices along the way. If you are interested in getting a jump start on learning Go, or want to understand more about the language sign up now.
+The Ardan Labs Go Bootcamp is a 3 day class providing a comprehensive and idiomatic view of the Go programming language. The class covers topics ranging from language syntax, OOP, concurrency, channels, testing, debugging and more. Great for anyone interested in getting a jump start on learning Go or wanting to understand more about the language and internals.
 
 [Bootcamp Tour](http://www.ardanlabs.com/go-bootcamp-tour)
 
@@ -31,13 +31,24 @@ _Note: This material has been designed to be taught in a classroom environment. 
 * A feel for writing code in an idiomatic style and syntax.
 * Walk away with patterns and techniques for solving common problems. 
 
-## Class Options
+## Teachers
 
-* Workshop Classes
-* One, Two and Three Day Language Classes
-* One and Two Day Advanced Classes
+William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
+Bill is a manaing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami.
+
+Kevin Gillette ([@kevingillette](https://twitter.com/kevingillette))  
+Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history.
+
+Cory LaNou ([@corylanou](https://twitter.com/corylanou))  
+Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time.
+
+Mark Bates ([@markbates](https://twitter.com/markbates))  
+Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv.
 
 ## Testimonials
+
+Neeru Dwivedi  
+_"I attended the one day workshop by Bill Kennedy from Ardan Labs. I was in for a surprise as before the workshop I was concerned whether I would understand concepts and whether I would be able to follow along. Bill has this wonderful way of explaining concepts and his knowledge on the concepts is so good that, I didn’t feel that I was learning something new & complicated. The Go Workshop got me started on the Go language. This workshop is perfect for beginners and anyone who wants to learn more about Go. I highly recommend this."_
 
 Todd Rafferty ([@webrat](https://twitter.com/webRat))  
 _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels."_
@@ -48,6 +59,11 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/JackieHeitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
+## Partners
+
+[Venture Hive](http://venturehive.com/) | [SendGrid](http://sendgrid.com) | [Iron.io](http://iron.io) | [Galvanize](http://galvanize.com) | [MonogoDB](http://monogdb.com) | [InfluxDB](http://influxdb.com/)
+
+
 ## Getting the Material
 
     -- Get all the material
@@ -55,55 +71,64 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 ## Classes and Pricing
 
-Corporate full day classes are at $3,500 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. I recommend limiting it to 25 students or less.
+* Meetups  
+* Workshops  
+* Corporate  
+* Bootcamps  
+* After Hours  
+* Conferences
 
-**_Currently Scheduled Corporate Classes:_**  
-None at this time
+If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.
 
-Individual enrollment classes are scheduled periodically and cost $250 per day/student plus fees.
+**_Meetups:_**   
+Have us speak at one of your Meetup events for free over Google hangout.
 
-**_Currently Scheduled Enrollment Classes:_**  
-**1 Day Classes**  
-[Edmonton Bootcamp - Jan 24th](http://edmontongo.org/workshop/) ** Discounted Pricing  
-[Gophercon India - Feb 19th](http://www.gophercon.in/go-workshop/)  
-Gophercon USA - July 2015  
+Hangout:  
+[Go Edmonton Meetup : Mar 23rd](https://edmontongo.org/)
 
-**3 Day Classes**  
-San Francisco, CA - March 2015  
-Denver, CO - April 2015  
-Washington D.C. - May 2015  
-NYC, NY - June 2015  
+In Person:  
+[Go VA Reston Meetup : March 18th](http://www.meetup.com/Golang-Reston/events/220920355/)  
+[Go Tampa DC Meetup : April 30th](http://www.meetup.com/Go-Tampa/events/220777645/)  
+[Go DC Meetup : May 13th](http://www.meetup.com/Golang-DC/events/220450459/)
 
-Hourly training classes are used for workshops or meetups and exclude time for working through the exercises. These events are free.
+**_Workshops:_**   
+Want to put on a workshop event for a couple of hours or for a full day?
 
-**_Currently Scheduled Workshops:_**   
-None at this time
+Open
 
-**_Currently Scheduled Meetups:_**   
-Go Dominican Republic - TBA
+**_Corporate:_**  
+Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.
 
-**If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.**
+[ACL Services - May 1st-3rd](http://www.acl.com/)
 
-## Past Events
+**_Bootcamps:_**  
+Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
 
-**_Corporate Classes:_**  
-Comcast - Reston, VA - Dec 2014  
-Wrecking Ball Media - Miami, FL - Sep 2014  
-Comcast - Sunnyvale, CA - Aug 2014
+[Denver, CO : April 9th-11th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-april-tickets-14944810330)  
 
-**_Enrollment Classes:_**  
-Miami 2 Day Bootcamp - Nov 2014  
-GothamGo - NYC, NY, - Nov 2014  
+[Boston, MA : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
+[Denver, CO : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-denver-may-tickets-16131581996)  
+[McLean, VA : May 14th-16th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
 
-**_Workshops:_**  
-ITPalooza Miami - Dec 4th  
-IronHack Dolphin Stadium - Oct 2014  
-Rackspace Workshop - Sep 2014
+[NYC, NY : June 10th-12th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 
-**_Meetups:_**  
-GoSF Meetup - Sep 2014  
-Goningen Meetup - Sep 2014  
-Go-Miami Meetup - 2014
+[Denver, CO : GopherCon 2015 Mon](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-6th-tickets-15559629270)  
+[Denver, CO : GopherCon 2015 Tue](https://www.eventbrite.com/e/go-programming-bootcamp-tour-denver-during-gophercon-july-7th-tickets-15569243025)  
+
+[Austin, TX : August TBD](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
+[Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
+
+**_After Hours:_**  
+This is our bootcamp but available during the week after work. Our current Denver After Hours class spans 5 nights over a couple of weeks for 4 hours each night.
+
+[Denver, CO : April 13th - 22nd](https://www.eventbrite.com/e/go-programming-after-hours-denver-april-tickets-15643879264)
+
+**_Conferences:_**
+You can find us at conferences being held all around the country and the world.
+
+[FluentConf, SF : April 20th-21st](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
+[MagmaConf Mexico : June 16th-19th](http://magmaconf.com/)  
+[Gophercon USA, CO - July 6th-10th](http://gophercon.com/)  
 
 ## Contact Information
 
@@ -114,7 +139,7 @@ Miami, FL 33186
 bill@ardanstudios.com
 
 ___
-[![GoingGo Training](00-slides/images/ggt_logo.png)](http://www.goinggotraining.net)
+[![Ardan Labs](00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
 [![GoingGo Blog](00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___
