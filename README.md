@@ -35,10 +35,10 @@ _Note: This material has been designed to be taught in a classroom environment. 
 
 ## Getting Started
 
-*Installation Help:*  
+**Installation Help:**  
 http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
-*Start Learning:*  
+**Start Learning:**  
 http://golang.org/  
 https://tour.golang.org/welcome/1  
 http://www.goinggo.net/
