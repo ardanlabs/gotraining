@@ -99,7 +99,7 @@ Hangout:
 [Go Edmonton Meetup : Mar 23rd](https://edmontongo.org/)
 
 In Person:  
-[Go VA Reston Meetup : March 18th](http://www.meetup.com/Golang-Reston/events/220920355/)  
+[Go VA Reston Meetup : March 25th](http://www.meetup.com/Golang-Reston/events/220920355/)  
 [Go Tampa DC Meetup : April 30th](http://www.meetup.com/Go-Tampa/events/220777645/)  
 [Go DC Meetup : May 13th](http://www.meetup.com/Golang-DC/events/220450459/)
 
