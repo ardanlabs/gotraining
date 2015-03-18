@@ -1,14 +1,14 @@
 ## Interfaces - Methods, Interfaces and Embedding
 
-Interfaces provide a way to declare types that define behavior. Then struct and named type can declare methods and implement this behavior. When a struct or named type implements the behavior declare by an interface, it satisfies the interface and can be assigned as values of the interface type. This leads to providing polymorphic behavior in our programs.
+Interfaces provide a way to declare types that define behavior. Then struct and named types can declare methods that implement this behavior. When a struct or named type implements the behavior declare by an interface, it satisfies the interface and values of the struct or named type can be assigned as values of the interface type. This leads to providing polymorphic behavior in our programs.
 
 ## Notes
 
 * The method set for a value, only includes methods implemented with a value reciever.
 * The method set for a pointer, includes methods implemented with both pointer and value recievers.
-* Interface values with an underlying value, can only call methods implemented with a value receiver.
-* Interface values with an underlying pointer, can call methods implemented with both pointer and value receivers.
-* The rules for method calls with concrete typed values do not apply.
+* Methods declared with a pointer receiver, only implement the interface with pointer values.
+* Methods declared with a value receiver, implement the interface with both a value and pointer receiver.
+* The rules of method sets apply to interface types.
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
