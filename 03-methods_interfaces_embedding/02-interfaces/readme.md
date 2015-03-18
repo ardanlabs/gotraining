@@ -1,6 +1,6 @@
 ## Interfaces - Methods, Interfaces and Embedding
 
-Interfaces provide a way to declare types that define behavior. Then struct and named types can declare methods that implement this behavior. When a struct or named type implements the behavior declare by an interface, it satisfies the interface and values of the struct or named type can be assigned as values of the interface type. This leads to providing polymorphic behavior in our programs.
+Interfaces provide a way to declare types that define only behavior. This behavior can be implemented by concrete types, such as struct or named types, via methods. When a concrete type implements the set of methods for an interface, values of the concrete type can be assigned to variables of the interface type. Then method calls against the interface value actually call into the equivalent method of the concrete value. Since any concrete type can implement any interface, method calls against an interface value are polymorphic in nature.
 
 ## Notes
 
