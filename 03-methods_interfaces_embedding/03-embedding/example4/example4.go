@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/f5teopGU1J
+// https://play.golang.org/p/-xQFBv9_82
 
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
@@ -11,25 +11,23 @@ import (
 	"fmt"
 )
 
-type (
-	// notifier is an interface that defined notification
-	// type behavior.
-	notifier interface {
-		notify()
-	}
+// notifier is an interface that defined notification
+// type behavior.
+type notifier interface {
+	notify()
+}
 
-	// user defines a user in the program.
-	user struct {
-		name  string
-		email string
-	}
+// user defines a user in the program.
+type user struct {
+	name  string
+	email string
+}
 
-	// admin represents an admin user with privileges.
-	admin struct {
-		user
-		level string
-	}
-)
+// admin represents an admin user with privileges.
+type admin struct {
+	user
+	level string
+}
 
 // notify implements a method that can be called via
 // a value of type user.

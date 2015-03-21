@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/cZTG1NdSqC
+// https://play.golang.org/p/dc1KFoO1sL
 
 // Sample program to show how to use an interface in Go.
 package main
@@ -10,19 +10,17 @@ import (
 	"fmt"
 )
 
-type (
-	// notifier is an interface that defined notification
-	// type behavior.
-	notifier interface {
-		notify()
-	}
+// notifier is an interface that defined notification
+// type behavior.
+type notifier interface {
+	notify()
+}
 
-	// user defines a user in the program.
-	user struct {
-		name  string
-		email string
-	}
-)
+// user defines a user in the program.
+type user struct {
+	name  string
+	email string
+}
 
 // notify implements a method that can be called via
 // a value of type user.

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/fD5Sa5Vldk
+// https://play.golang.org/p/zPJSZ_Jglf
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
@@ -11,19 +11,17 @@ import (
 	"fmt"
 )
 
-type (
-	// user defines a user in the program.
-	user struct {
-		name  string
-		email string
-	}
+// user defines a user in the program.
+type user struct {
+	name  string
+	email string
+}
 
-	// admin represents an admin user with privileges.
-	admin struct {
-		user  // Embedded Type
-		level string
-	}
-)
+// admin represents an admin user with privileges.
+type admin struct {
+	user  // Embedded Type
+	level string
+}
 
 // notify implements a method that can be called via
 // a value of type user.
