@@ -43,45 +43,6 @@ http://golang.org/
 https://tour.golang.org/welcome/1  
 http://www.goinggo.net/
 
-## Teachers
-
-William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
-Bill is a manaing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami.
-
-Kevin Gillette ([@kevingillette](https://twitter.com/kevingillette))  
-Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history.
-
-Cory LaNou ([@corylanou](https://twitter.com/corylanou))  
-Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time.
-
-Mark Bates ([@markbates](https://twitter.com/markbates))  
-Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv.
-
-Jeremy Saenz ([@codegansta](https://twitter.com/codegangsta))
-Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. You have probably heard about one of his open source projects like Martini, Negroni, Gin, CLI and others. Jeremy is also the voice behind GopherCasts.io and loves teaching people about technology through his programming screencasts.
-
-## Testimonials
-
-Joshua Shuster
-_"I would consider Ardan Studio’s 3 day course to be invaluable. Bill and his staff, being some of the foremost authorities in the Go language, were able to make many of the complex go topics understandable. Covering everything from memory management, all the way up to building concurrency programs and web API's. It has given me the knowledge to write idiomatic Go, and make the best use of it’s features. I would highly their courses to anyone new to Go, or to anyone wanting to widen their existing knowledge."_
-
-Neeru Dwivedi  
-_"I attended the one day workshop by Bill Kennedy from Ardan Labs. I was in for a surprise as before the workshop I was concerned whether I would understand concepts and whether I would be able to follow along. Bill has this wonderful way of explaining concepts and his knowledge on the concepts is so good that, I didn’t feel that I was learning something new & complicated. The Go Workshop got me started on the Go language. This workshop is perfect for beginners and anyone who wants to learn more about Go. I highly recommend this."_
-
-Todd Rafferty ([@webrat](https://twitter.com/webRat))  
-_"I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels."_
-
-Georgi Knox ([@GeorgiCodes](https://twitter.com/GeorgiCodes))  
-_"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
-
-Jackie Heitzer ([@JackieHeitzer](https://twitter.com/JackieHeitzer))  
-_"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
-
-## Partners
-
-[Venture Hive](http://venturehive.com/) | [SendGrid](http://sendgrid.com) | [Iron.io](http://iron.io) | [Galvanize](http://galvanize.com) | [MonogoDB](http://monogdb.com) | [InfluxDB](http://influxdb.com/)
-
-
 ## Getting the Material
 
     -- Get all the material
@@ -147,6 +108,44 @@ You can find us at conferences being held all around the country and the world.
 [FluentConf, SF : April 20th-21st](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
 [MagmaConf Mexico : June 16th-19th](http://magmaconf.com/)  
 [Gophercon USA, CO - July 6th-10th](http://gophercon.com/)  
+
+## Teachers
+
+William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
+Bill is a manaing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami.
+
+Kevin Gillette ([@kevingillette](https://twitter.com/kevingillette))  
+Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history.
+
+Cory LaNou ([@corylanou](https://twitter.com/corylanou))  
+Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time.
+
+Mark Bates ([@markbates](https://twitter.com/markbates))  
+Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv.
+
+Jeremy Saenz ([@codegansta](https://twitter.com/codegangsta))
+Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. You have probably heard about one of his open source projects like Martini, Negroni, Gin, CLI and others. Jeremy is also the voice behind GopherCasts.io and loves teaching people about technology through his programming screencasts.
+
+## Testimonials
+
+Joshua Shuster
+_"I would consider Ardan Studio’s 3 day course to be invaluable. Bill and his staff, being some of the foremost authorities in the Go language, were able to make many of the complex go topics understandable. Covering everything from memory management, all the way up to building concurrency programs and web API's. It has given me the knowledge to write idiomatic Go, and make the best use of it’s features. I would highly their courses to anyone new to Go, or to anyone wanting to widen their existing knowledge."_
+
+Neeru Dwivedi  
+_"I attended the one day workshop by Bill Kennedy from Ardan Labs. I was in for a surprise as before the workshop I was concerned whether I would understand concepts and whether I would be able to follow along. Bill has this wonderful way of explaining concepts and his knowledge on the concepts is so good that, I didn’t feel that I was learning something new & complicated. The Go Workshop got me started on the Go language. This workshop is perfect for beginners and anyone who wants to learn more about Go. I highly recommend this."_
+
+Todd Rafferty ([@webrat](https://twitter.com/webRat))  
+_"I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels."_
+
+Georgi Knox ([@GeorgiCodes](https://twitter.com/GeorgiCodes))  
+_"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
+
+Jackie Heitzer ([@JackieHeitzer](https://twitter.com/JackieHeitzer))  
+_"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
+
+## Partners
+
+[Venture Hive](http://venturehive.com/) | [SendGrid](http://sendgrid.com) | [Iron.io](http://iron.io) | [Galvanize](http://galvanize.com) | [MonogoDB](http://monogdb.com) | [InfluxDB](http://influxdb.com/)
 
 ## Contact Information
 
