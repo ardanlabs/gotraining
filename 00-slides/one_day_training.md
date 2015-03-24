@@ -16,7 +16,7 @@ On this day we take our initial tour of the language. We learn about variables, 
 #### Methods, Interfaces and Embedding (OOP)
 [Methods](../03-methods_interfaces_embedding/01-methods/readme.md) | 
 [Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md) | 
-[Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
+[Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md) | 
 [Packaging and Exporting](../04-packaging_exporting/readme.md)
 
 #### Concurrency, Race Conditions and Channels
