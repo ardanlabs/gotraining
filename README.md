@@ -128,19 +128,19 @@ Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. Yo
 
 ## Testimonials
 
-Joshua Shuster  
+Joshua Shuster ([@naysaier](https://twitter.com/naysaier))  
 _"I would consider Ardan Studio’s 3 day course to be invaluable. Bill and his staff, being some of the foremost authorities in the Go language, were able to make many of the complex go topics understandable. Covering everything from memory management, all the way up to building concurrency programs and web API's. It has given me the knowledge to write idiomatic Go, and make the best use of it’s features. I would highly their courses to anyone new to Go, or to anyone wanting to widen their existing knowledge."_
 
 Neeru Dwivedi  
 _"I attended the one day workshop by Bill Kennedy from Ardan Labs. I was in for a surprise as before the workshop I was concerned whether I would understand concepts and whether I would be able to follow along. Bill has this wonderful way of explaining concepts and his knowledge on the concepts is so good that, I didn’t feel that I was learning something new & complicated. The Go Workshop got me started on the Go language. This workshop is perfect for beginners and anyone who wants to learn more about Go. I highly recommend this."_
 
-Todd Rafferty ([@webrat](https://twitter.com/webRat))  
+Todd Rafferty ([@webrat](https://twitter.com/webrat))  
 _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels."_
 
-Georgi Knox ([@GeorgiCodes](https://twitter.com/GeorgiCodes))  
+Georgi Knox ([@GeorgiCodes](https://twitter.com/georgicodes))  
 _"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
 
-Jackie Heitzer ([@JackieHeitzer](https://twitter.com/JackieHeitzer))  
+Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
 ## Partners
