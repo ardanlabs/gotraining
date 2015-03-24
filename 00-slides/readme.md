@@ -16,6 +16,10 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 [Hour One Training](hour_1_training.md)  
 [Hour Two Training](hour_2_training.md)
 
+#### Language Class - One Day
+
+[One Day Training](one_day_training.md)  
+
 #### Language Classes - Daily
 
 [Day One Training](day_1_training.md)  
