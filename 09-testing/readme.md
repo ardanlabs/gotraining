@@ -8,9 +8,11 @@ Go has support for both testing and debugging. This includes profiling and bench
 
 [Prediction](../09-testing/02-prediction/readme.md)
 
-[Godebug](../09-testing/03-godebug/readme.md)
+[Caching](../09-testing/03-caching/readme.md)
 
-[Profiling](../09-testing/04-profiling/readme.md)
+[Godebug](../09-testing/04-godebug/readme.md)
+
+[Profiling](../09-testing/05-profiling/readme.md)
 
 ___
 [![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

@@ -70,3 +70,10 @@ https://golang.org/pkg/net/http/pprof/
 ## Code Review
 
 [HTTP Service](helloHTTP.go) ([Go Playground](http://play.golang.org/p/c44Q5OiX5z))
+
+___
+[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
+[![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
+___
+All material is licensed under the [GNU Free Documentation License](https://github.com/ArdanStudios/gotraining/blob/master/LICENSE).
