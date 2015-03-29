@@ -23,7 +23,7 @@ Consider how an instruction is executed – first it is fetched, then decoded, t
 
 Modern processors overlap these stages in a pipeline, like an assembly line. While one instruction is executing, the next instruction is being decoded, and the one after that is being fetched...
 
-![figure1](figure1.png)
+![figure2](figure2.png)
 
 Now the processor is completing 1 instruction every cycle (CPI = 1). This is a four-fold speedup without changing the clock speed at all. Not bad, huh?
 
