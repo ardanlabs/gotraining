@@ -5,7 +5,7 @@ Understanding how the hardware works is an critical component to understanding h
 ## Acknowledgment
 This content is provided by Lighterra, the software company of Jason Robert Carey Patterson. They work on a variety of software, including a cutting-edge code optimizer to make programs faster, a threading library for parallel programming, an iPhone user-interface library and a web video component.
 
-[Modern Micro Processors](http://www.lighterra.com/papers/modernmicroprocessors/)
+[Modern Microprocessors](http://www.lighterra.com/papers/modernmicroprocessors/)
 
 ## Notes
 
