@@ -50,3 +50,5 @@ http://www.lighterra.com/papers/modernmicroprocessors/
 
 [Prediction](prediction.go) ([Go Playground](http://play.golang.org/p/VxnL7AEZSl))
 
+[Tests](prediction_test.go) ([Go Playground](http://play.golang.org/p/M7KmittyJH))
+
