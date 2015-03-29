@@ -7,9 +7,9 @@ On this day we continue go deeper into Go. We learn about concurrency patterns, 
 [Concurrency Patterns](../08-concurrency_patterns/readme.md)
 
 #### Testing, Prediction, GODEBUG and Profiling
-[Testing](../09-testing/01-testing/readme.md)
-[Prediction](../09-testing/02-prediction/readme.md)
-[GODEBUG](../09-testing/03-godebug/readme.md)
+[Testing](../09-testing/01-testing/readme.md)  
+[Prediction](../09-testing/02-prediction/readme.md)  
+[GODEBUG](../09-testing/03-godebug/readme.md)  
 [Profiling](../09-testing/04-profiling/readme.md)
 
 #### Logging, Encoding and IO
