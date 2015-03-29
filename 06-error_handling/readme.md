@@ -29,7 +29,6 @@ http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/
 
 [Special B](example4/example4.go) ([Go Playground](http://play.golang.org/p/czXpjvWWTT))
 
-
 ## Exercises
 
 ### Exercise 1

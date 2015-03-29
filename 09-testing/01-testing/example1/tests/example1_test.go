@@ -9,7 +9,7 @@ package main
 import (
 	"testing"
 
-	"github.com/ArdanStudios/gotraining/09-testing/example1/buoy"
+	"github.com/ArdanStudios/gotraining/09-testing/01-testing/example1/buoy"
 )
 
 // TestStation checks the station service call is working

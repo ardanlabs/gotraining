@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ArdanStudios/gotraining/09-testing/example1/mongodb"
+	"github.com/ArdanStudios/gotraining/09-testing/01-testing/example1/mongodb"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

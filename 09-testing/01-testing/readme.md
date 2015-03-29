@@ -1,4 +1,4 @@
-## Testing, Benchmarking and Profiling
+## Testing and Benchmarking
 
 Testing is built right into the go tools and the standard library. Testing needs to be a vital part of the development process because it can save you a tremendous amount of time throughout the life cycle of the project. Benchmarking is also a very powerful tool tied to the testing functionality. Aspect of your code can be setup to be benchmarked for performance reviews. Profiling provides a view of the interations between functions and which functions are most heavlily used.
 
@@ -28,7 +28,7 @@ https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-i
 
 The sample program implements support for accessing a MongoDB database from MongoLab. The program implements two different find calls that return documents that are unmarshaled into user defined types.
 
-### Example 1
+### Sample App
 
 [example1.go](example1/example1.go)
 
@@ -36,25 +36,13 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 [mongodb/mongodb.go](example1/mongodb/mongodb.go)
 
-### Example 2
-
-[helloHTTP.go](example2/helloHTTP.go)
-
-### Example 3
-
-[GODEBUG Profiling](example3/example3.go)
-
-## Tests
+### Tests
 
 [Standard tests for testing calls to MongoDB](example1/tests/example1_test.go)
 
 [Table tests that perform multiple calls with different ids](example1/tests/example1_table_test.go)
 
 [Benchmarks that test the performance of the MongoDB find](advanced/tests/example1_bench_test.go)
-
-## Profiling
-
-[Go Tooling](pprof.md)
 
 ## Exercises
 

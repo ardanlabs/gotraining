@@ -9,7 +9,7 @@ package main
 import (
 	"testing"
 
-	"github.com/ArdanStudios/gotraining/09-testing/example1/buoy"
+	"github.com/ArdanStudios/gotraining/09-testing/01-testing/example1/buoy"
 )
 
 // stationIDs maintain a list of ids to check.

@@ -4,7 +4,6 @@ On this day we take our initial tour of the language. We learn about variables, 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 #### Language Syntax
-
 [Variables](../01-language_syntax/01-variables/readme.md) | 
 [Struct Types](../01-language_syntax/02-struct_types/readme.md) | 
 [Pointers](../01-language_syntax/03-pointers/readme.md) | 
