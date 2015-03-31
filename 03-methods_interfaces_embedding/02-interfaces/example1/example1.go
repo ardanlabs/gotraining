@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/oGN541doxg
+// https://play.golang.org/p/mZgbuA5fYE
 
 // Sample program to show how to use an interface in Go.
 package main
@@ -10,7 +10,7 @@ import (
 	"fmt"
 )
 
-// notifier is an interface that defined notification
+// notifier is an interface that defines notification
 // type behavior.
 type notifier interface {
 	notify()
@@ -22,7 +22,7 @@ type user struct {
 	email string
 }
 
-// notify implements a method with a pointer receiver.
+// notify implements the notifier interface with a pointer receiver.
 func (u *user) notify() {
 	fmt.Printf("User: Sending User Email To %s<%s>\n",
 		u.name,
@@ -32,14 +32,14 @@ func (u *user) notify() {
 // main is the entry point for the application.
 func main() {
 	// Create a value of type User and send a notification.
-	user1 := user{"Bill", "bill@email.com"}
+	u := user{"Bill", "bill@email.com"}
 
 	// Values of type user do not implement the interface because pointer
 	// receivers don't belong to the method set of a value.
 
-	sendNotification(user1)
+	sendNotification(u)
 
-	// ./example1.go:40: cannot use user1 (type user) as type notifier in argument to sendNotification:
+	// ./example1.go:40: cannot use u (type user) as type notifier in argument to sendNotification:
 	//   user does not implement notifier (notify method has pointer receiver)
 }
 
