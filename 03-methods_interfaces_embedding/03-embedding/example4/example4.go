@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/-xQFBv9_82
+// https://play.golang.org/p/ex9LfqHvee
 
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
@@ -32,7 +32,7 @@ type admin struct {
 // notify implements a method that can be called via
 // a value of type user.
 func (u *user) notify() {
-	fmt.Printf("user: Sending user email To %s<%s>\n",
+	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
 		u.email)
 }
@@ -40,7 +40,7 @@ func (u *user) notify() {
 // notify implements a method that can be called via
 // a value of type Admin.
 func (a *admin) notify() {
-	fmt.Printf("User: Sending Admin Email To %s<%s>\n",
+	fmt.Printf("Sending Admin Email To %s<%s>\n",
 		a.name,
 		a.email)
 }

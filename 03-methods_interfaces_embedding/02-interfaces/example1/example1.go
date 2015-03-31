@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/mZgbuA5fYE
+// https://play.golang.org/p/FkGu6GRs2F
 
 // Sample program to show how to use an interface in Go.
 package main
@@ -24,7 +24,7 @@ type user struct {
 
 // notify implements the notifier interface with a pointer receiver.
 func (u *user) notify() {
-	fmt.Printf("User: Sending User Email To %s<%s>\n",
+	fmt.Printf("Sending User Email To %s<%s>\n",
 		u.name,
 		u.email)
 }

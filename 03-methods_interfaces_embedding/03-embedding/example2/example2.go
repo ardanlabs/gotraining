@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/zPJSZ_Jglf
+// https://play.golang.org/p/21eV53l0uW
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
@@ -26,7 +26,7 @@ type admin struct {
 // notify implements a method that can be called via
 // a value of type user.
 func (u *user) notify() {
-	fmt.Printf("user: Sending user email To %s<%s>\n",
+	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
 		u.email)
 }

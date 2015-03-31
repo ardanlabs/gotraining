@@ -22,9 +22,9 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Pointer Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/mZgbuA5fYE))
+[Method Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/FkGu6GRs2F))
 
-[Value Receivers](example2/example2.go) ([Go Playground](https://play.golang.org/p/tqy4dr2yYh))
+[Polymorphism](example2/example2.go) ([Go Playground](https://play.golang.org/p/vZC9kpkQxH))
 
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/myZaTlp4Qd))
 

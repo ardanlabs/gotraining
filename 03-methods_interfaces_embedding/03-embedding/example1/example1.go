@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/uxPTAZ3ZiN
+// https://play.golang.org/p/ysJXEX-bN9
 
 // Sample program to show how what we are doing is NOT embedding
 // a type but just using a type as a field.
@@ -26,7 +26,7 @@ type admin struct {
 // notify implements a method that can be called via
 // a value of type user.
 func (u *user) notify() {
-	fmt.Printf("user: Sending user email To %s<%s>\n",
+	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
 		u.email)
 }

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/SnEnzuA4G1
+// https://play.golang.org/p/79SxNxyTFl
 
 // Sample program to show how embedded types work with interfaces.
 package main
@@ -31,7 +31,7 @@ type admin struct {
 // notify implements a method that can be called via
 // a value of type user.
 func (u *user) notify() {
-	fmt.Printf("user: Sending user email To %s<%s>\n",
+	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
 		u.email)
 }

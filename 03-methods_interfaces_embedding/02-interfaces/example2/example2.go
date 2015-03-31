@@ -1,9 +1,9 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/tqy4dr2yYh
+// https://play.golang.org/p/vZC9kpkQxH
 
-// Sample program to show how to use an interface in Go.
+// Sample program to show how polymorphic behavior with interfaces.
 package main
 
 import (
@@ -22,25 +22,35 @@ type user struct {
 	email string
 }
 
-// notify implements the notifier interface with a value receiver.
-func (u user) notify() {
-	fmt.Printf("user: Sending user Email To %s<%s>\n",
+// admin defines a admin in the program.
+type admin struct {
+	name  string
+	email string
+}
+
+// notify implements the notifier interface with a pointer receiver.
+func (u *user) notify() {
+	fmt.Printf("Sending user Email To %s<%s>\n",
 		u.name,
 		u.email)
 }
 
+// notify implements the notifier interface with a pointer receiver.
+func (a *admin) notify() {
+	fmt.Printf("Sending admin Email To %s<%s>\n",
+		a.name,
+		a.email)
+}
+
 // main is the entry point for the application.
 func main() {
-	// Create two values of type user.
+	// Create two values one of type user and one of type admin.
 	bill := user{"Bill", "bill@email.com"}
-	jill := &user{"Jill", "jill@email.com"}
-
-	// Values and pointers of type user implement the interface because value
-	// receivers belong to the method sets of both values and pointers.
+	jill := admin{"Jill", "jill@email.com"}
 
 	// Pass a pointer of the values to support the interface.
-	sendNotification(bill)
-	sendNotification(jill)
+	sendNotification(&bill)
+	sendNotification(&jill)
 }
 
 // sendNotification accepts values that implement the notifier

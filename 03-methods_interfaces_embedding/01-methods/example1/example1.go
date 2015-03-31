@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/Sw39qR_Mwd
+// https://play.golang.org/p/AYsB78Dlxb
 
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.
@@ -19,7 +19,7 @@ type user struct {
 
 // notify implements a method with a value receiver.
 func (u user) notify() {
-	fmt.Printf("User: Sending User Email To %s<%s>\n",
+	fmt.Printf("Sending User Email To %s<%s>\n",
 		u.name,
 		u.email)
 }
