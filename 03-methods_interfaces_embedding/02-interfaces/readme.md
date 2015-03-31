@@ -26,7 +26,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Value Receivers](example2/example2.go) ([Go Playground](https://play.golang.org/p/tqy4dr2yYh))
 
-[Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/m4YVUwryCn))
+[Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/myZaTlp4Qd))
 
 ## Exercises
 
