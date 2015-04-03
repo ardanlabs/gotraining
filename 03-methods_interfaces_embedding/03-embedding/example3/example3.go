@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/79SxNxyTFl
+// https://play.golang.org/p/BgEoThS7u9
 
 // Sample program to show how embedded types work with interfaces.
 package main
@@ -22,18 +22,18 @@ type user struct {
 	email string
 }
 
-// admin represents an admin user with privileges.
-type admin struct {
-	user
-	level string
-}
-
 // notify implements a method that can be called via
 // a value of type user.
 func (u *user) notify() {
 	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
 		u.email)
+}
+
+// admin represents an admin user with privileges.
+type admin struct {
+	user
+	level string
 }
 
 // main is the entry point for the application.
