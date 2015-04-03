@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/ex9LfqHvee
+// https://play.golang.org/p/jfOfrRMPZR
 
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
@@ -23,18 +23,18 @@ type user struct {
 	email string
 }
 
-// admin represents an admin user with privileges.
-type admin struct {
-	user
-	level string
-}
-
 // notify implements a method that can be called via
 // a value of type user.
 func (u *user) notify() {
 	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
 		u.email)
+}
+
+// admin represents an admin user with privileges.
+type admin struct {
+	user
+	level string
 }
 
 // notify implements a method that can be called via
