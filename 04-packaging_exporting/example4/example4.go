@@ -15,13 +15,13 @@ import (
 func main() {
 	// Create a value of type Dog from the animals package.
 	// This will NOT compile.
-
-	// ./example4.go:20: unknown animals.Dog field 'age' in struct literal
 	dog := animals.Dog{
 		Name:         "Chole",
 		BarkStrength: 10,
 		age:          5,
 	}
+
+	// ./example4.go:21: unknown animals.Dog field 'age' in struct literal
 
 	fmt.Printf("Dog: %#v\n", dog)
 }
