@@ -12,6 +12,6 @@ type animal struct {
 
 // Dog represents information about dogs.
 type Dog struct {
-	animal       // Make the embeeded type unexported.
+	animal       // The embedded type is unexported.
 	BarkStrength int
 }

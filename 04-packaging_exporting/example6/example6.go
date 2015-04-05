@@ -18,8 +18,7 @@ func main() {
 		BarkStrength: 10,
 	}
 
-	// Set the exported fields from the unexported
-	// animal inner type.
+	// Set the exported fields from the unexported animal inner type.
 	dog.Name = "Chole"
 	dog.Age = 1
 

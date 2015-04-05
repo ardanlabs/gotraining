@@ -1,65 +1,15 @@
-## Profiling Code
+## GODEBUG
 
-We can use the go tooling in conjunction with the Graph Visualization Tools and Ghostscript. These tools will allow us to graph the profiles we create.
+There is a special environmental variable named GODEBUG that will emit debugging information about the runtime as your program executes. You can request summary and detailed information for both the garbage collector and the scheduler. What’s great is you don't need to build your program with any special switches for it to work.
 
-Note: Profiling on the Mac is broken. This post talks about how to hack to OS X Kernel to make it work.  
-[http://research.swtch.com/macpprof](http://research.swtch.com/macpprof)
+## Notes
 
-## Installing Tools
+* View the internals of the runtime and scheduler.
+* Look and details about memory and goroutines.
+* Helps to determine how your concurrent program is running.
 
-[download files](https://drive.google.com/?pli=1&authuser=0#folders/0B8nQmHFH90Pkck13MVVLcko5OGc)
+### GODEBUG Documentation
 
-### Dave Cheney's Profile Package
-`go get` Dave Cheney's profiling package. He has done a nice job abstracting all the boilerplate code required. If you are interested in understanding how to do this without the profile package, read this (http://saml.rilspace.org/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof)
-
-	go get github.com/davecheney/profile
-
-### Graph Visualization Tools
-Download the package for your target OS/Arch:
-[http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
-
-### Ghostscript
-This is not an easy step for Mac users since there is no prebuilt distribution.
-
-Download and uncompress the source code:
-[http://ghostscript.com/download/gsdnld.html](http://ghostscript.com/download/gsdnld.html)
-
-	./configure
-	make
-	make install
-
-### Code Changes
-We need to add some changes to main to get the profiling data we need.
-
-    import "github.com/davecheney/profile"
-
-	// main is the entry point for the application.
-	func main() {
-		cfg := profile.Config{
-			MemProfile:     true,
-			CPUProfile:     true,
-			ProfilePath:    ".",  // store profiles in current directory
-			NoShutdownHook: true, // do not hook SIGINT
-		}
-
-		// p.Stop() must be called before the program exits to
-		// ensure profiling information is written to disk.
-		p := profile.Start(&cfg)
-		defer p.Stop()
-
-		. . .
-	}
-
-### Running and Creating Profile Graph
-	go build
-	./example1
-    go tool pprof --pdf ./example1 cpu.pprof > callgraph.pdf
-    go tool pprof --pdf ./example1 mem.pprof > callgraph.pdf
-
-    // See all the options
-    go tool pprof -h
-
-### Peek into the runtime scheduler:
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
 	GODEBUG=schedtrace=1000,scheddetail=1 ./example3.go
@@ -212,5 +162,19 @@ We need to add some changes to main to get the profiling data we need.
 	   			Gcopystack,                            // 8 in this state when newstack is moving the stack
 	   			View runtime.h for more
 
-### Important Read
-[Go Debugging](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs)
+## Links
+
+https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs
+
+http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html
+
+## Code Review
+
+[Scheduler Stats](godebug.go) ([Go Playground](http://play.golang.org/p/sKLLsUa5hH))
+
+___
+[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
+[![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
+___
+All material is licensed under the [GNU Free Documentation License](https://github.com/ArdanStudios/gotraining/blob/master/LICENSE).

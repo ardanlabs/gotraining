@@ -9,7 +9,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ArdanStudios/gotraining/09-testing/example1/buoy"
+	"github.com/ArdanStudios/gotraining/09-testing/01-testing/example1/buoy"
 )
 
 // init is called before main.

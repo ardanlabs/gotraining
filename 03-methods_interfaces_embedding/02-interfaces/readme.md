@@ -22,9 +22,11 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Declare, implement and method call restrictions I](example1/example1.go) ([Go Playground](https://play.golang.org/p/oGN541doxg))
+[Method Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/FkGu6GRs2F))
 
-[Declare, implement and method call restrictions II](example2/example2.go) ([Go Playground](https://play.golang.org/p/dc1KFoO1sL))
+[Polymorphism](example2/example2.go) ([Go Playground](https://play.golang.org/p/vZC9kpkQxH))
+
+[Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/myZaTlp4Qd))
 
 ## Exercises
 
