@@ -24,14 +24,14 @@ typically provide at least: command pipelining, stream redirection, conditional
 control flow, pattern matching, job control, and, for interactive shells,
 command history.
 
-The [Bourne Shell][sh], released by Bell Labs in 1977, was the first Unix shell
+The [Bourne Shell][1], released by Bell Labs in 1977, was the first Unix shell
 with excellent programming features; it set the standard in shell syntax and
 capabilities, and has left a strong legacy of similar shells that are referred
 to as "Bourne shell compatible" (or "sh compatible" for short, after the
 shell's command name). The following sections are described in terms of Bourne
 shell compatible semantics and syntax.
 
-  [sh]: http://en.wikipedia.org/wiki/Bourne_shell
+  [1]: http://en.wikipedia.org/wiki/Bourne_shell
 
 ### Command Invocation
 
@@ -43,6 +43,41 @@ arguments, for example:
 
 Manual pages, accessed via the `man` command, are a core feature of operating
 systems following the Unix tradition.
+
+Commands inherit an environment, which consists of key-value paired variables.
+A parent process may customize the environment each child receives, or may pass
+its own environment along without modification. In a shell, environment
+variables may be accessed using dollar-sign notation, such as:
+
+    echo "$SHELL"
+
+It's important to quote variables in order to avoid [shell injection][1]
+attacks and undefined behavior that can result from special characters and
+whitespace in the variable values (shells may re-interpret values after
+variable substitution has occurred).
+
+Commands can be invoked with a custom environment by passing key-value pairs
+before the command name, such as:
+
+    # add SOMEVAR to the existing environment and display that environment
+    SOMEVAR=someval env
+
+    # use the env command as a command runner; in this case it'll just run
+    # env again, but with an empty environment
+    env -i env
+
+If a variable needs to be in the environment of several commands, it can be
+more convenient to "export" it:
+
+    export SOMEVAR=someval
+    env
+
+After exporting a variable, all subsequent commands invoked by the shell
+process will contain that variable in their environment. Conventionally, all
+environment variable names are fully upper-case. As with file and command
+names, you should always treat variable names as being case-sensitive.
+
+  [1]: http://en.wikipedia.org/wiki/Code_injection#Shell_injection
 
 ### Text Streams, Redirection, and Pipelining
 
@@ -68,9 +103,12 @@ duplicates, and then write the result to outfile.
 Unless stdin is redirected from a file, the first process in a pipeline will
 receive input from the controlling terminal (the keyboard). Likewise, the
 stdout of the last process in a pipeline is sent to the controlling terminal,
-unless redirected. Stderr is used to communicate information not part of the
-normal program output, such as errors; since stderr is not normally redirected,
-the error output for all processes in a pipeline are displayed in the terminal.
+unless redirected. Even a lone command without explicit redirection is
+technically a pipeline, due to its implicit coupling to the terminal.
+
+Stderr is used to communicate information not part of the normal program
+output, such as errors; since stderr is not normally redirected, the error
+output for all processes in a pipeline are displayed in the terminal.
 
 However, it's often desirable to ignore stderr:
 
@@ -81,35 +119,87 @@ stderr is 2) to /dev/null, in effect discarding the error output.
 
 ### Conditional Control Flow
 
+Commands that complete successfully exit with status zero; all non-zero exit
+statuses indicate failure. Conventionally, a status of 1 is used as the generic
+program error status, and 2 indicates user error (such as invalid input or
+arguments), but any value in the range of 0-127 may be used. On many systems,
+statuses 128-255 have special meaning (such as signal reporting) and should not
+be set. The exit status of the last process in a pipeline is used as the status
+for the entire pipeline.
+
+The success or failure of a pipeline may be used to run additional pipelines:
+
+    rm some-file && echo success || echo failure
+
+Pipelines chained in this way are known as "lists" and have left-to-right
+precedence, such that the above will always either echo success or failure, but
+never both. Most commonly, AND sequences are chained together so that a series
+of tasks can proceed only if every task before it was successful:
+
+    task1 && task2 && task3
+
+If semicolons were used instead (or if each task were on its own line), then
+the tasks would run regardless of whether the previous tasks failed.
+
 ### Pattern Matching
+
+A fundamental convenience provided by shells is pattern matching of files.
+Let's initialize a directory with some files:
+
+    touch a b1 c1 01.txt 02.txt
+
+We can now match against these four files in various ways using patterns.
+
+    # display info for all files ending in '.txt': 01.txt 02.txt
+    # the "star" will match any number of characters (including zero)
+    ls -l *.txt
+
+    # list all files starting with a lowercase letter: a b1 c1
+    # character classes are case-sensitive and match exactly one character
+    echo [a-z]*
+
+    # list all files that do _not_ end with a number: a 01.txt 02.txt
+    echo *[!0-9]
+
+    # remove all files with names consisting of two characters: b1 c1
+    # question marks match exactly one character each
+    rm ??
+
+Pattern matching is the default behavior. To instead specify an argument or
+filename containing a wildcard character or whitespace, it can be wrapped in
+either single or double quotes, or the special character can be escaped with a
+backslash, for example:
+
+	# create two new files
+	touch filename\ with\ spaces "more spaces"
 
 ### Job Control
 
-Pipelines normally run in the *foreground*; there may only be one such pipeline
-running in the shell at any given time, and it will receive input and signals
-from the controlling terminal.
+Command, pipelines, and lists are all jobs, and jobs, by default, run in the
+*foreground*; there may only be foreground job running in a shell at any given
+time, and it will receive input and signals from the controlling terminal.
 
-Pipelines can be alternatively be started in or moved to the *background*.
-Background pipelines run normally, except that they do not receive terminal
-input, and can only be signalled explicitly by PID or job number. A pipeline
-may be suffixed with a single ampersand to run it in the background:
+Jobs can be alternatively be started in or moved to the *background*.
+Background jobs run normally, except that they do not receive terminal input,
+and in that state they can only be controlled explicitly by PID or job number.
+A job may be suffixed with a single ampersand to run it in the background:
 
-	sleep 5 && echo "wakeup!" &
+    sleep 5 && echo "wakeup!" &
 
-A foreground pipeline can be suspended by typing `^Z` (Control-Z). Upon doing
-so, control will be returned to the shell, and the process can be resumed in
-the foreground or background using the `fg` or `bg` commands, respectively.
-The `fg` command may also be used to move a running background pipeline to the
+A foreground job can be suspended by typing `^Z` (Control-Z). Upon doing so,
+control will be returned to the shell, and the job can be resumed in the
+foreground or background using the `fg` or `bg` commands, respectively.  The
+`fg` command may also be used to move a running background job to the
 foreground.
 
-The `jobs` command lists suspended and background jobs; each of these will have
-a *job number*, beginning with 1. The first background job can therefore be
-killed with `kill %1`, the second can be moved to the foreground with `fg %2`,
-and so on. The percent syntax is known as a *jobspec*.
+The `jobs` command displays suspended and background jobs; each of these will
+have a *job number*, beginning with 1. The first background job can therefore
+be killed with `kill %1`, the second can be moved to the foreground with `fg
+%2`, and so on. The percent syntax is known as a *jobspec*.
 
-Finally, the `wait` command can be used wait for one or more background
-pipelines, which may be specified using jobspecs. If called without arguments,
-wait will block until all active background pipelines have completed.
+Finally, the `wait` command can be used wait for one or more background jobs,
+which may be specified using jobspecs. If called without arguments, wait will
+block until all active background pipelines have completed.
 
 When a shell (or shell script) exits, all background processes are disowned,
 and will continue to run.
