@@ -51,7 +51,7 @@ variables may be accessed using dollar-sign notation, such as:
 
     echo "$SHELL"
 
-It's important to quote variables in order to avoid [shell injection][1]
+It's important to quote variables in order to avoid [shell injection][2]
 attacks and undefined behavior that can result from special characters and
 whitespace in the variable values (shells may re-interpret values after
 variable substitution has occurred).
@@ -77,7 +77,7 @@ process will contain that variable in their environment. Conventionally, all
 environment variable names are fully upper-case. As with file and command
 names, you should always treat variable names as being case-sensitive.
 
-  [1]: http://en.wikipedia.org/wiki/Code_injection#Shell_injection
+  [2]: http://en.wikipedia.org/wiki/Code_injection#Shell_injection
 
 ### Text Streams, Redirection, and Pipelining
 
