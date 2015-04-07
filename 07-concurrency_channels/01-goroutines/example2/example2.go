@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/Z8Z4pkU-g4
+// https://play.golang.org/p/AzDUqwkM58
 
 // Sample program to show how the goroutine scheduler
 // will time slice goroutines on a single thread.
@@ -35,7 +35,7 @@ func main() {
 // printPrime displays prime numbers for the first 5000 numbers.
 func printPrime(prefix string) {
 next:
-	for outer := 1; outer < 5000; outer++ {
+	for outer := 2; outer < 5000; outer++ {
 		for inner := 2; inner < outer; inner++ {
 			if outer%inner == 0 {
 				continue next
