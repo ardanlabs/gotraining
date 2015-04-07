@@ -24,7 +24,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Method Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/FkGu6GRs2F))
 
-[Polymorphism](example2/example2.go) ([Go Playground](https://play.golang.org/p/vZC9kpkQxH))
+[Polymorphism](example2/example2.go) ([Go Playground](https://play.golang.org/p/Lo1ucf1e9d))
 
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/myZaTlp4Qd))
 

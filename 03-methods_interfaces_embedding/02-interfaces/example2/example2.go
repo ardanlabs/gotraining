@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/vZC9kpkQxH
+// https://play.golang.org/p/Lo1ucf1e9d
 
 // Sample program to show how polymorphic behavior with interfaces.
 package main
@@ -22,17 +22,17 @@ type user struct {
 	email string
 }
 
-// admin defines a admin in the program.
-type admin struct {
-	name  string
-	email string
-}
-
 // notify implements the notifier interface with a pointer receiver.
 func (u *user) notify() {
 	fmt.Printf("Sending user Email To %s<%s>\n",
 		u.name,
 		u.email)
+}
+
+// admin defines a admin in the program.
+type admin struct {
+	name  string
+	email string
 }
 
 // notify implements the notifier interface with a pointer receiver.
@@ -55,6 +55,6 @@ func main() {
 
 // sendNotification accepts values that implement the notifier
 // interface and sends notifications.
-func sendNotification(notify notifier) {
-	notify.notify()
+func sendNotification(n notifier) {
+	n.notify()
 }
