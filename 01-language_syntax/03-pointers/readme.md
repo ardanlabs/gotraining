@@ -17,7 +17,7 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
-https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw
+[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
 
 ## Code Review
 
