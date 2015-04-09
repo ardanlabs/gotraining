@@ -34,7 +34,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part C** Add an interface named yelper with a single method called yelp. Declare a value of type yelper and assign the address of the value of type dog. Call the method yelp.
 
-**Part D** Implement the speaker interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type yelper.
+**Part D** Implement the yelper interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type yelper.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/a-Nzng_E6Z)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hvVA4zB9Bf))
