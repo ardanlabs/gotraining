@@ -1,27 +1,51 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/M7KmittyJH
+// http://play.golang.org/p/VxnL7AEZSl
 
-// go test -run=XXX -bench=. -benchtime=20s
+// go build -gcflags -m
 
-// Tests to show branch prediction benchmarks.
+// Package prediction provides code to show how branch prediction can affect performance.
 package prediction
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
-func BenchmarkIfOnly(b *testing.B) {
-	benchmark(b.N, ifOnly)
+func BenchmarkPredictable(b *testing.B) {
+	data := make([]byte, 1024)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		crunch(data)
+	}
 }
 
-func BenchmarkIfElse(b *testing.B) {
-	benchmark(b.N, ifElse)
+func BenchmarkUnpredictable(b *testing.B) {
+	data := make([]byte, 1024)
+	rand.Seed(0)
+
+	// fill data with (pseudo) random noise
+	for i := range data {
+		// comment to make crunch behave predictably again
+		data[i] = uint8(rand.Uint32())
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		crunch(data)
+	}
 }
 
-func BenchmarkIfOnlyReversed(b *testing.B) {
-	benchmark(b.N, ifOnlyReversed)
-}
-
-func BenchmarkIfElseReversed(b *testing.B) {
-	benchmark(b.N, ifElseReversed)
+func crunch(data []uint8) uint8 {
+	var sum uint8
+	for _, v := range data {
+		if v < 128 {
+			sum--
+		} else {
+			sum++
+		}
+	}
+	return sum
 }
