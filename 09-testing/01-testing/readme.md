@@ -42,8 +42,6 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 [Table tests that perform multiple calls with different ids](example1/tests/example1_table_test.go)
 
-[Benchmarks that test the performance of the MongoDB find](advanced/tests/example1_bench_test.go)
-
 ## Exercises
 
 ### Exercise 1
@@ -53,8 +51,8 @@ Write three benchmark tests for converting an integer into a string. First use t
 [Answer](exercises/exercise1/bench_test.go)
 
 ___
-[![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
-[![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
-[![GoingGo Blog](../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
+[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
+[![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___
 All material is licensed under the [GNU Free Documentation License](https://github.com/ArdanStudios/gotraining/blob/master/LICENSE).
