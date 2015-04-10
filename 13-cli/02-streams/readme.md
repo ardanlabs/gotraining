@@ -39,6 +39,7 @@ stderr is 2) to /dev/null, in effect discarding the error output.
 ## Example
 
 [Running a subprocess](example1/parent.go)
+
 [Replicating a shell pipeline](example2/parent.go)
 
 ___
