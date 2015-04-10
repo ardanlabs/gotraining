@@ -36,6 +36,11 @@ However, it's often desirable to ignore stderr:
 In this case, `2>` means redirect stream #2 (stdin is 0, stdout is 1, and
 stderr is 2) to /dev/null, in effect discarding the error output.
 
+## Example
+
+[Running a subprocess](example1/parent.go)
+[Replicating a shell pipeline](example2/parent.go)
+
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)

@@ -22,6 +22,10 @@ of tasks can proceed only if every task before it was successful:
 If semicolons were used instead (or if each task were on its own line), then
 the tasks would run regardless of whether the previous tasks failed.
 
+## Example
+
+[Setting exit status](example1/parent.go)
+
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
