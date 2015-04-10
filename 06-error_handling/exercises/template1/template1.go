@@ -3,21 +3,21 @@
 
 // http://play.golang.org/p/Rt3O-7ndtJ
 
-// Create two error variables, one called InvalidValueError and the other
-// called AmountToLargeError. Provide the static message for each variable.
+// Create two error variables, one called ErrInvalidValue and the other
+// called ErrAmountToLarge. Provide the static message for each variable.
 // Then write a function called checkAmount that accepts a float64 type value
 // and returns an error value. Check the value for zero and if it is, return
-// the InvalidValueError. Check the value for greater than $1,000 and if it is,
-// reutrn the AmountToLargeError. Write a main function to call the checkAmount
+// the ErrInvalidValue. Check the value for greater than $1,000 and if it is,
+// reutrn the ErrAmountToLarge. Write a main function to call the checkAmount
 // function and check the return error value. Display a proper message to the screen.
 package main
 
 // Add imports.
 
-// Declare an error variable named InvalidValueError using the New
+// Declare an error variable named ErrInvalidValue using the New
 // function from the errors package.
 
-// Declare an error variable named AmountToLargeError using the New
+// Declare an error variable named ErrAmountToLarge using the New
 // function from the errors package.
 
 // Declare a function named checkAmount that accepts a value of
