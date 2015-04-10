@@ -31,44 +31,20 @@ func benchmark(n int, f func(j int, d int) int) {
 	j++
 }
 
-// ifOnly is the most idiomatic way to write this code. Does not
-// use an else clause and the if tests for a condition that occurrs
-// 90% of the time.
-func ifOnly(j int, d int) int {
+// ifMostlyTrue is the most idiomatic way to write this code. If tests for a
+// condition that occurrs 90% of the time.
+func ifMostlyTrue(j int, d int) int {
 	if d != 3 {
 		return j + 1
 	}
 	return j + 2
 }
 
-// ifElse is not an idiomatic way to write this code. Does use
-// an else clause and the if tests for a condition that occurrs
-// 90% of the time.
-func ifElse(j int, d int) int {
-	if d != 3 {
-		return j + 1
-	} else {
-		return j + 2
-	}
-}
-
-// ifOnlyReversed is an idiomatic way to write this code. Does not
-// use an else clause but the if tests for a condition that occurrs
-// only 10% of the time.
-func ifOnlyReversed(j int, d int) int {
+// ifNotMostlyTrue is an idiomatic way to write this code. If tests for a
+// condition that occurrs only 10% of the time.
+func ifNotMostlyTrue(j int, d int) int {
 	if d == 3 {
 		return j + 2
 	}
 	return j + 1
-}
-
-// ifElseReversed is not an idiomatic way to write this code. Does
-// use an else clause and the if tests for a condition that occurrs
-// only 10% of the time.
-func ifElseReversed(j int, d int) int {
-	if d == 3 {
-		return j + 2
-	} else {
-		return j + 1
-	}
 }

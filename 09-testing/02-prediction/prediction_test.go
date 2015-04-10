@@ -10,18 +10,10 @@ package prediction
 
 import "testing"
 
-func BenchmarkIfOnly(b *testing.B) {
-	benchmark(b.N, ifOnly)
+func BenchmarkIfNotMostlyTrue(b *testing.B) {
+	benchmark(b.N, ifNotMostlyTrue)
 }
 
-func BenchmarkIfElse(b *testing.B) {
-	benchmark(b.N, ifElse)
-}
-
-func BenchmarkIfOnlyReversed(b *testing.B) {
-	benchmark(b.N, ifOnlyReversed)
-}
-
-func BenchmarkIfElseReversed(b *testing.B) {
-	benchmark(b.N, ifElseReversed)
+func BenchmarkIfMostlyTrue(b *testing.B) {
+	benchmark(b.N, ifMostlyTrue)
 }
