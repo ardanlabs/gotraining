@@ -40,7 +40,7 @@ stderr is 2) to /dev/null, in effect discarding the error output.
 
 [Running a subprocess](example1/parent.go)
 
-[Replicating a shell pipeline](example2/parent.go)
+[Replicating a shell pipeline](example2/pipeline.go)
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
