@@ -9,13 +9,13 @@
 * The implementation of the Write method should attempt to write the entire length
   of the byte slice that is passed in.
 
-* If that is not possible, then at least 1 byte must be written or the method must
-  return an error.
+* If the entire slice could not be written, the number of bytes successfully written
+  along with a non-nil error must be returned.
 
-* The number of bytes reported as written can be less then the length of the byte
-  slice but never more.
+* Otherwise, when completely successful, the returned `n` must equal `len(p)` and a
+  nil error should be returned.
 
-* The byte slice must never be modify in any way.
+* The Writer implementation must never modify the provided byte slice at any time.
 
 ### Reader
 
@@ -23,20 +23,24 @@
 	        Read(p []byte) (n int, err error)
 	}
 
-* The implementation should attempt to read the entire length of the byte slice that
-  is passed in. It is ok to read less than the entire length and it should not wait
-  to read the entire length if that much data is not available at the time of the call.
+* The implementation should fill the provided byte slice with all the data that is
+  immediately available, up to `len(p)` bytes.
 
-* When the last byte is read, two options are available. Either Read returns the final
-  bytes with the proper count and EOF for the error value or returns the final bytes
-  with the proper count and nil for the error value. In the latter case, the next read
-  must return no bytes with the count of 0 and EOF for the error value.
+* If no data is immediately available, Read should block.
+
+* `io.EOF` is a special `error` value used to signal an end-of-file condition: no more
+  data will follow.
+
+* When an error or EOF condition occurs, Reader implementations can choose either
+  to return the error value immediately from that same Read call, or may wait and return
+  `n == 0` along with the error on the next Read call. Code using Readers should be able
+  to handle both situations.
 
 * Anytime the Read method returns bytes, those bytes should be processed first before
   checking the error value for an EOF or other error value.
 
 * The implementation must never return a 0 byte read count with an error value of nil.
-  Reads that result in no byte read should always return an error.
+  Reads that result in no bytes read should always return an error.
 
 ___
 [![Ardan Labs](../../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
