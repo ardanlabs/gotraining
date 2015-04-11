@@ -48,9 +48,7 @@ http://www.lighterra.com/papers/modernmicroprocessors/
 
 ## Code Review
 
-[Prediction](prediction.go) ([Go Playground](http://play.golang.org/p/VxnL7AEZSl))
-
-[Tests](prediction_test.go) ([Go Playground](http://play.golang.org/p/M7KmittyJH))
+[Tests](prediction_test.go) ([Go Playground](https://play.golang.org/p/BRO5yW1J_l))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
