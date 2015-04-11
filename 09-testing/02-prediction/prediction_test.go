@@ -1,11 +1,12 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/BRO5yW1J_l
+// https://play.golang.org/p/hwZqjJNdbm
 
 // go build -gcflags -m
 
-// Package prediction provides code to show how branch prediction can affect performance.
+// Package prediction provides code to show how branch
+// prediction can affect performance.
 package prediction
 
 import (
@@ -26,9 +27,8 @@ func BenchmarkUnpredictable(b *testing.B) {
 	data := make([]byte, 1024)
 	rand.Seed(0)
 
-	// fill data with (pseudo) random noise
+	// Fill data with (pseudo) random noise
 	for i := range data {
-		// comment to make crunch behave predictably again
 		data[i] = uint8(rand.Uint32())
 	}
 
