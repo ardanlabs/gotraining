@@ -15,7 +15,7 @@
 * The number of bytes reported as written can be less then the length of the byte
   slice but never more.
 
-* The byte slice must never be modify in any way.
+* The byte slice must never be modified in any way.
 
 ### Reader
 
