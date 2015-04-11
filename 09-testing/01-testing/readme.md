@@ -30,7 +30,7 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 ### Sample App
 
-[example1.go](example1/example1.go)
+[example1.go](example1/testing.go)
 
 [buoy/buoy.go](example1/buoy/buoy.go)
 
