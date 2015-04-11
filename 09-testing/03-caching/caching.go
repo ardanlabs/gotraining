@@ -10,10 +10,10 @@ package caching
 const rows = 64
 
 // For the first test, set the cols to under 64k.
-//const cols = 64*1024 - 128
+// const cols = 64*1024 - 128
 
 // For the second test, set the cols to 64k.
-//const cols = 64 * 1024
+// const cols = 64 * 1024
 
 // matrix represents a set of columns that each exist on
 // their own cache line.
