@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/lABnNlP7jm
+// https://play.golang.org/p/prAjmbCrVe
 
 // Declare a nil slice of integers. Declare a nil slice of integers. Create a
 // loop that appends 10 values to the slice. Iterate over the slice and display
@@ -33,15 +33,15 @@ func main() {
 	names := []string{"Bill", "Lisa", "Jim", "Cathy"}
 
 	// Display each index position and name.
-	for index, name := range names {
-		fmt.Printf("Index: %d  Name: %s\n", index, name)
+	for i, name := range names {
+		fmt.Printf("Index: %d  Name: %s\n", i, name)
 	}
 
 	// Take a slice of the first and second index.
 	slice := names[1:3]
 
 	// Display the value of the new slice.
-	for index, name := range slice {
-		fmt.Printf("Index: %d  Name: %s\n", index, name)
+	for i, name := range slice {
+		fmt.Printf("Index: %d  Name: %s\n", i, name)
 	}
 }

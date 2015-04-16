@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/VqqCxINwyd
+// https://play.golang.org/p/s4BSgxz0Y3
 
 // Sample program to show how the behavior of the for range and
 // how memory for an array is contiguous.
@@ -18,7 +18,7 @@ func main() {
 
 	// Iterate over the array displaying the value and
 	// address of each element.
-	for index, value := range five {
-		fmt.Printf("Value[%s] Address[%p] IndexAddr[%p]\n", value, &value, &five[index])
+	for i, v := range five {
+		fmt.Printf("Value[%s] Address[%p] IndexAddr[%p]\n", v, &v, &five[i])
 	}
 }

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/BoNloVfW37
+// https://play.golang.org/p/aizhjTO-br
 
 // Sample program to show how to takes slices of slices to create different
 // views of and make changes to the underlying array.
@@ -50,10 +50,10 @@ func main() {
 // inspectSlice exposes the slice header for review.
 func inspectSlice(slice []string) {
 	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
-	for index, value := range slice {
+	for i, v := range slice {
 		fmt.Printf("[%d] %p %s\n",
-			index,
-			&slice[index],
-			value)
+			i,
+			&slice[i],
+			v)
 	}
 }

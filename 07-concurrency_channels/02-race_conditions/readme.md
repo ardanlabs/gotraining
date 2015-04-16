@@ -72,8 +72,8 @@ Given the following program, use the race detector to find and correct the race 
 		wg.Wait()
 
 		// Display the set of random numbers.
-		for index, number := range numbers {
-			fmt.Println(index, number)
+		for i, number := range numbers {
+			fmt.Println(i, number)
 		}
 	}
 
@@ -89,8 +89,8 @@ Given the following program, use the race detector to find and correct the race 
 	    wg.Done()
 	}
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/9-if--6ZBn) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/oBzhdwGeX6))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/yBFA-MDcMw) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/wFTNvVoBpz))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

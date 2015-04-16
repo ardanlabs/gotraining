@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/irrA08aCkm
+// https://play.golang.org/p/DGr8Zp9L_w
 
 // Sample program to show how to declare and iterate over
 // arrays of different types.
@@ -23,8 +23,8 @@ func main() {
 	strings[4] = "Plum"
 
 	// Iterate over the array of strings.
-	for index, fruit := range strings {
-		fmt.Println(index, fruit)
+	for i, fruit := range strings {
+		fmt.Println(i, fruit)
 	}
 
 	// Declare an array of 4 integers that is initalized
@@ -32,7 +32,7 @@ func main() {
 	numbers := [4]int{10, 20, 30, 40}
 
 	// Iterate over the array of numbers.
-	for index := 0; index < len(numbers); index++ {
-		fmt.Println(index, numbers[index])
+	for i := 0; i < len(numbers); i++ {
+		fmt.Println(i, numbers[i])
 	}
 }

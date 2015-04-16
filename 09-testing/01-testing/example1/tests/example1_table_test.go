@@ -18,7 +18,7 @@ var stationIDs = []string{"42002", "42001", "42012", "42019"}
 // TestTableStation checks the station service call is working
 func TestTableStation(t *testing.T) {
 	// Iterate through the slice of station ids.
-	for index := 0; index < len(stationIDs); index++ {
+	for i := 0; i < len(stationIDs); i++ {
 		// Station id to test.
 		stationID := stationIDs[index]
 

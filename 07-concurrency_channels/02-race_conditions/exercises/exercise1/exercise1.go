@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/oBzhdwGeX6
+// https://play.golang.org/p/wFTNvVoBpz
 
 // Answer for exercise 1 of Race Conditions.
 package main
@@ -41,8 +41,8 @@ func main() {
 	wg.Wait()
 
 	// Display the set of random numbers.
-	for index, number := range numbers {
-		fmt.Println(index, number)
+	for i, number := range numbers {
+		fmt.Println(i, number)
 	}
 }
 
