@@ -30,7 +30,7 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 ### Sample App
 
-[example1.go](example1/testing.go)
+[example1.go](example1/example1.go)
 
 [buoy/buoy.go](example1/buoy/buoy.go)
 
@@ -38,9 +38,11 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 ### Tests
 
-[Standard tests for testing calls to MongoDB](example1/tests/example1_test.go)
+[Standard Tests](example1/tests/example1_test.go)
 
-[Table tests that perform multiple calls with different ids](example1/tests/example1_table_test.go)
+[Table Tests](example1/tests/example1_table_test.go)
+
+[Example Tests](example1/tests/example1_test_example.go)
 
 ## Exercises
 

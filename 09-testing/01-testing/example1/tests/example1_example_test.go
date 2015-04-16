@@ -7,6 +7,7 @@
 package tests
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/ArdanStudios/gotraining/09-testing/01-testing/example1/buoy"
@@ -20,8 +21,31 @@ func ExampleFindStation() {
 		return
 	}
 
-	fmt.Println(*station)
+	d, err := json.MarshalIndent(station, "", "    ")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(string(d))
 
 	// Output:
-	// {ObjectIdHex("51e873dbb199b3cb9318d996") 42002 Station 42002 - West Gulf 207 NM East of Brownsville, TX {2.23694 150 4.47388} {Point [-93.666 25.79]}}
+	// {
+	//     "ID": "51e873dbb199b3cb9318d996",
+	//     "station_id": "42002",
+	//     "name": "Station 42002 - West Gulf",
+	//     "location_desc": "207 NM East of Brownsville, TX",
+	//     "condition": {
+	//         "wind_speed_milehour": 2.23694,
+	//         "wind_direction_degnorth": 150,
+	//         "gust_wind_speed_milehour": 4.47388
+	//     },
+	//     "location": {
+	//         "type": "Point",
+	//         "coordinates": [
+	//             -93.666,
+	//             25.79
+	//         ]
+	//     }
+	// }
 }
