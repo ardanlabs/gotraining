@@ -63,7 +63,7 @@ If you are interested in holding an event in your area please let me know. I wil
 Have us speak at one of your Meetup events for free over Google hangout.
 
 Hangout:  
-[Go Edmonton Meetup : April 27rd](https://edmontongo.org/)
+[Go Edmonton Meetup : April 27th](https://edmontongo.org/)
 
 In Person:  
 [Go VA Reston Meetup : April 23th](http://www.meetup.com/Golang-Reston/events/221861967/)  
@@ -74,7 +74,7 @@ In Person:
 **_Workshops:_**   
 Want to put on a workshop event for a couple of hours or for a full day?
 
-[FluentConf, CA : April 20th](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
+[San Francisco, CA : April 20th](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
 
 Open
 
@@ -95,11 +95,12 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 
 [Portland, OR : July 20th-21st](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
 [Denver, CO : July 7th](https://ti.to/gophercon/gophercon-2015)  
+[San Francisco, CA : July TBD]()
 
 [Austin, TX : August TBD](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
 [Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
-**_Conferences:_**
+**_Conferences:_**  
 You can find us at conferences being held all around the country and the world.
 
 [FluentConf : April 20th](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
