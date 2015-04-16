@@ -14,6 +14,8 @@ http://blog.golang.org/race-detector
 
 http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
+https://golang.org/doc/articles/race_detector.html
+
 ## Documentation
 
 [Race Condition Diagram](documentation/race_condition.md)
