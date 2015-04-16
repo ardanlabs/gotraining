@@ -3,6 +3,9 @@
 
 // http://play.golang.org/p/m4PJ0FpSwX
 
+// The playground is actually a 64-bit env with 32-bit pointers
+// The os/arch combo is named nacl/amd64p32
+
 // Sample program to show how to declare variables.
 package main
 
