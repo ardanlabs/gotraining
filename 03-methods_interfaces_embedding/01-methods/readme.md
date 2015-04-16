@@ -19,7 +19,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Declare and receiver behavior](example1/example1.go) ([Go Playground](https://play.golang.org/p/AYsB78Dlxb))
 
-[Named typed methods](example2/example2.go) ([Go Playground](http://play.golang.org/p/EMY2xb1csT))
+[Named typed methods](example2/example2.go) ([Go Playground](https://play.golang.org/p/zHePe-yTUw))
 
 ## Advanced Code Review
 

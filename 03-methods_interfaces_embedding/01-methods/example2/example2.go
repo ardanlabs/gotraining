@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/EMY2xb1csT
+// https://play.golang.org/p/zHePe-yTUw
 
 // Sample program to show how to declare methods against
 // a named type.
@@ -15,15 +15,25 @@ import (
 // of time in Nanosecond.
 type duration int64
 
-// setSeconds can change the value of duration type variables.
-func (d *duration) setSeconds(seconds duration) {
-	*d = 1e9 * seconds
+const (
+	nanosecond  duration = 1
+	microsecond          = 1000 * nanosecond
+	millisecond          = 1000 * microsecond
+	second               = 1000 * millisecond
+	minute               = 60 * second
+	hour                 = 60 * minute
+)
+
+// setHours sets the specified number of hours.
+func (d *duration) setHours(h float64) {
+	*d = duration(h) * hour
 }
 
-// seconds returns a formatted string of duration in seconds.
-func (d duration) seconds() string {
-	sec := d / 1e9
-	return fmt.Sprintf("%d Seconds", sec)
+// hours returns the duration as a floating point number of hours.
+func (d duration) hours() float64 {
+	hour := d / hour
+	nsec := d % hour
+	return float64(hour) + float64(nsec)*(1e-9/60/60)
 }
 
 // main is the entry point for the application.
@@ -34,8 +44,8 @@ func main() {
 
 	// Change the value of dur to equal
 	// five seconds.
-	dur.setSeconds(5)
+	dur.setHours(5)
 
 	// Display the new value of dur.
-	fmt.Println(dur.seconds())
+	fmt.Println("Hours:", dur.hours())
 }
