@@ -17,7 +17,7 @@ type usersHandle struct{}
 var Users usersHandle
 
 // List returns all the existing users in the system.
-// 200 Success, 204 No Content, 500 Internal
+// 200 Success, 404 Not Found, 500 Internal
 func (uh usersHandle) List(c *app.Context) error {
 	u, err := services.Users.List(c)
 	if err != nil {

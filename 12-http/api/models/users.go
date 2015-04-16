@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/ArdanStudios/gotraining/12-http/api/app"
-	"gopkg.in/mgo.v2/bson"
 )
 
 // UserAddress contains information about a user's address.
@@ -110,10 +109,6 @@ type User struct {
 func (u *User) Validate() ([]app.Invalid, error) {
 	var inv []app.Invalid
 
-	if !bson.IsObjectIdHex(u.UserID) {
-		inv = append(inv, app.Invalid{Fld: "UserID", Err: "The UserID is not in a valid form."})
-	}
-
 	if u.UserType == 0 {
 		inv = append(inv, app.Invalid{Fld: "UserType", Err: "The value of UserType cannot be 0."})
 	}
@@ -179,7 +174,7 @@ func (u *User) Compare(ut *User) ([]app.Invalid, error) {
 	utLen := len(ut.Addresses)
 
 	if uLen != utLen {
-		inv = append(inv, app.Invalid{Fld: "Addresses", Err: fmt.Sprintf("The set of Addresses is not the same. %s != %s", uLen, utLen)})
+		inv = append(inv, app.Invalid{Fld: "Addresses", Err: fmt.Sprintf("The set of Addresses is not the same. %d != %d", uLen, utLen)})
 	}
 
 	for idx, ua := range u.Addresses {

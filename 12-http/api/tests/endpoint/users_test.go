@@ -42,42 +42,42 @@ func TestUsers(t *testing.T) {
 	}
 	defer c.Session.Close()
 
-	usersList204(t, c)
-	usersCreate200(t, c)
-	usersCreate400(t, c)
-	us := usersList200(t, c)
-	usersRetrieve200(t, c, us[0].UserID)
-	usersRetrieve404(t, c, bson.NewObjectId().Hex())
-	usersRetrieve400(t, c, "123")
-	usersUpdate200(t, c)
-	usersRetrieve200(t, c, us[0].UserID)
-	usersDelete200(t, c, us[0].UserID)
-	usersDelete404(t, c, us[0].UserID)
+	a := routes.API().(*app.App)
+
+	usersList404(t, a, c)
+	usersCreate200(t, a, c)
+	usersCreate400(t, a, c)
+	us := usersList200(t, a, c)
+	usersRetrieve200(t, a, c, us[0].UserID)
+	usersRetrieve404(t, a, c, bson.NewObjectId().Hex())
+	usersRetrieve400(t, a, c, "123")
+	usersUpdate200(t, a, c)
+	usersRetrieve200(t, a, c, us[0].UserID)
+	usersDelete200(t, a, c, us[0].UserID)
+	usersDelete404(t, a, c, us[0].UserID)
 }
 
-// usersList204 validates an empty users list can be retrieved with the endpoint.
-func usersList204(t *testing.T, c *app.Context) {
+// usersList404 validates an empty users list can be retrieved with the endpoint.
+func usersList404(t *testing.T, a *app.App, c *app.Context) {
 	r := tests.NewRequest("GET", "/v1/users", nil)
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to validate an empty list of users with the users endpoint.")
 	{
-		if w.Code != 204 {
-			t.Fatalf("\tShould received a status code of 204 for the response. Received[%d] %s", w.Code, tests.Failed)
+		if w.Code != 404 {
+			t.Fatalf("\tShould received a status code of 404 for the response. Received[%d] %s", w.Code, tests.Failed)
 		}
-		t.Log("\tShould received a status code of 204 for the response.", tests.Succeed)
+		t.Log("\tShould received a status code of 404 for the response.", tests.Succeed)
 	}
 }
 
 // usersCreate200 validates a user can be created with the endpoint.
-func usersCreate200(t *testing.T, c *app.Context) {
-	var resp models.User
-
+func usersCreate200(t *testing.T, a *app.App, c *app.Context) {
 	body, _ := json.Marshal(&u)
 	r := tests.NewRequest("POST", "/v1/users", bytes.NewBuffer(body))
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to add a new user with the users endpoint.")
 	{
@@ -86,6 +86,7 @@ func usersCreate200(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
+		var resp models.User
 		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
@@ -95,15 +96,15 @@ func usersCreate200(t *testing.T, c *app.Context) {
 			t.Fatal("\tShould have a user id in the response.", tests.Failed)
 		}
 		t.Log("\tShould have a user id in the response.", tests.Succeed)
-	}
 
-	// Save for future calls.
-	u.UserID = resp.UserID
+		// Save for future calls.
+		u.UserID = resp.UserID
+	}
 }
 
 // usersCreate400 validates a user can't be created with the endpoint
 // unless a valid user document is submitted.
-func usersCreate400(t *testing.T, c *app.Context) {
+func usersCreate400(t *testing.T, a *app.App, c *app.Context) {
 	u := models.User{
 		UserType: 1,
 		LastName: "Kennedy",
@@ -111,12 +112,10 @@ func usersCreate400(t *testing.T, c *app.Context) {
 		Company:  "Ardan Labs",
 	}
 
-	var v []app.Invalid
-
 	body, _ := json.Marshal(&u)
 	r := tests.NewRequest("POST", "/v1/users", bytes.NewBuffer(body))
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to validate a new user can't be created with an invalid document.")
 	{
@@ -125,6 +124,7 @@ func usersCreate400(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould received a status code of 400 for the response.", tests.Succeed)
 
+		var v []app.Invalid
 		if err := json.NewDecoder(w.Body).Decode(&v); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
@@ -148,12 +148,10 @@ func usersCreate400(t *testing.T, c *app.Context) {
 }
 
 // usersList200 validates a users list can be retrieved with the endpoint.
-func usersList200(t *testing.T, c *app.Context) []models.User {
-	var us []models.User
-
+func usersList200(t *testing.T, a *app.App, c *app.Context) []models.User {
 	r := tests.NewRequest("GET", "/v1/users", nil)
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to retrieve a list of users with the users endpoint.")
 	{
@@ -162,6 +160,7 @@ func usersList200(t *testing.T, c *app.Context) []models.User {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
+		var us []models.User
 		if err := json.NewDecoder(w.Body).Decode(&us); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
@@ -187,18 +186,16 @@ func usersList200(t *testing.T, c *app.Context) []models.User {
 			t.Fatalf("\tShould have dates in all the user documents. %+v", marks)
 		}
 		t.Logf("\tShould have dates in all the user documents. %+v", marks)
-	}
 
-	return us
+		return us
+	}
 }
 
 // usersList200 validates a users list can be retrieved with the endpoint.
-func usersRetrieve200(t *testing.T, c *app.Context, id string) {
+func usersRetrieve200(t *testing.T, a *app.App, c *app.Context, id string) {
 	r := tests.NewRequest("GET", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
-
-	var ur models.User
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to retrieve an individual user with the users endpoint.")
 	{
@@ -207,6 +204,7 @@ func usersRetrieve200(t *testing.T, c *app.Context, id string) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
+		var ur models.User
 		if err := json.NewDecoder(w.Body).Decode(&ur); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
@@ -221,10 +219,10 @@ func usersRetrieve200(t *testing.T, c *app.Context, id string) {
 }
 
 // usersRetrieve404 validates a user request for a user that does not exist with the endpoint.
-func usersRetrieve404(t *testing.T, c *app.Context, id string) {
+func usersRetrieve404(t *testing.T, a *app.App, c *app.Context, id string) {
 	r := tests.NewRequest("GET", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the situation of retrieving an individual user that does not exist with the users endpoint.")
 	{
@@ -236,10 +234,10 @@ func usersRetrieve404(t *testing.T, c *app.Context, id string) {
 }
 
 // usersRetrieve400 validates a user request with an invalid id with the endpoint.
-func usersRetrieve400(t *testing.T, c *app.Context, id string) {
+func usersRetrieve400(t *testing.T, a *app.App, c *app.Context, id string) {
 	r := tests.NewRequest("GET", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the situation of retrieving an individual user with an invalid id with the users endpoint.")
 	{
@@ -251,15 +249,13 @@ func usersRetrieve400(t *testing.T, c *app.Context, id string) {
 }
 
 // usersUpdate200 validates a user can be updated with the endpoint.
-func usersUpdate200(t *testing.T, c *app.Context) {
+func usersUpdate200(t *testing.T, a *app.App, c *app.Context) {
 	u.FirstName = "Lisa"
-
-	var resp models.User
 
 	body, _ := json.Marshal(&u)
 	r := tests.NewRequest("PUT", "/v1/users/"+u.UserID, bytes.NewBuffer(body))
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to validate a user can be updated with the users endpoint.")
 	{
@@ -268,6 +264,7 @@ func usersUpdate200(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
+		var resp models.User
 		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
@@ -281,12 +278,10 @@ func usersUpdate200(t *testing.T, c *app.Context) {
 }
 
 // usersDelete200 validates a user can be deleted with the endpoint.
-func usersDelete200(t *testing.T, c *app.Context, id string) {
-	var resp models.User
-
+func usersDelete200(t *testing.T, a *app.App, c *app.Context, id string) {
 	r := tests.NewRequest("DELETE", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to delete a new user with the users endpoint.")
 	{
@@ -295,6 +290,7 @@ func usersDelete200(t *testing.T, c *app.Context, id string) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", tests.Succeed)
 
+		var resp models.User
 		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
@@ -308,10 +304,10 @@ func usersDelete200(t *testing.T, c *app.Context, id string) {
 }
 
 // usersDelete404 validates a user that has been deleted is deleted.
-func usersDelete404(t *testing.T, c *app.Context, id string) {
+func usersDelete404(t *testing.T, a *app.App, c *app.Context, id string) {
 	r := tests.NewRequest("DELETE", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
-	routes.TM.ServeHTTP(w, r)
+	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to verify a deleted user is deleted.")
 	{

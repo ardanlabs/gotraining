@@ -57,17 +57,17 @@ func usersCreateRetrieveRemove(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould be able to validate the user data.", tests.Succeed)
 
-		if err := services.Users.Create(c, &u); err != nil {
+		if _, err := services.Users.Create(c, &u); err != nil {
 			t.Fatal("\tShould be able to create a user in the system.", tests.Failed)
 		}
 		t.Log("\tShould be able to create a user in the system.", tests.Succeed)
 
-		if u.ID.Hex() == "" {
-			t.Fatal("\tShould have an ID for the user.", tests.Failed)
+		if u.UserID == "" {
+			t.Fatal("\tShould have an UserID for the user.", tests.Failed)
 		}
-		t.Log("\tShould have an ID for the user.", tests.Succeed)
+		t.Log("\tShould have an UserID for the user.", tests.Succeed)
 
-		ur, err := services.Users.Retrieve(c, u.ID.Hex())
+		ur, err := services.Users.Retrieve(c, u.UserID)
 		if err != nil {
 			t.Fatal("\tShould be able to retrieve the user back from the system.", tests.Failed)
 		}
@@ -78,17 +78,17 @@ func usersCreateRetrieveRemove(t *testing.T, c *app.Context) {
 		}
 		t.Log("\tShould find both the original and retrieved value are identical.", tests.Succeed)
 
-		if ur == nil || u.ID.Hex() != ur.ID.Hex() {
+		if ur == nil || u.UserID != ur.UserID {
 			t.Fatal("\tShould have a match between the created user and the one retrieved.", tests.Failed)
 		}
 		t.Log("\tShould have a match between the created user and the one retrieved.", tests.Succeed)
 
-		if err := services.Users.Delete(c, u.ID.Hex()); err != nil {
+		if err := services.Users.Delete(c, u.UserID); err != nil {
 			t.Fatal("\tShould be able to remove the user from the system.", tests.Failed)
 		}
 		t.Log("\tShould be able to remove the user from the system", tests.Succeed)
 
-		if _, err := services.Users.Retrieve(c, u.ID.Hex()); err == nil {
+		if _, err := services.Users.Retrieve(c, u.UserID); err == nil {
 			t.Fatal("\tShould NOT be able to retrieve the user back from the system.", tests.Failed)
 		}
 		t.Log("\tShould NOT be able to retrieve the user back from the system.", tests.Succeed)
