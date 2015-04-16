@@ -19,6 +19,8 @@ http://www.goinggo.net/2014/01/decode-json-documents-in-go.html
 
 [Marshal a user defined type](example3/example3.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
 
+[Custom Marshaler and Unmarshler](example3/example3.go) ([Go Playground](http://play.golang.org/p/TOYrZJoLei))
+
 ## Exercises
 
 ### Exercise 1
