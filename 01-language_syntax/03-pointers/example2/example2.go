@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/j4uDMFJqiF
+// https://play.golang.org/p/76GbxoS1QK
 
 // Sample program to show the basic concept of using a pointer
 // to share data.
@@ -25,10 +25,10 @@ func main() {
 
 // increment declares count as a pointer variable whose value is
 // always an address and points to values of type int.
-func increment(count *int) {
+func increment(inc *int) {
 	// Increment the value that the "pointer points to". (de-referencing)
-	*count++
-	println("Inc:", &count, count, *count)
+	*inc++
+	println("Inc:", &inc, inc, *inc)
 
 	// Do this to prevent inlining.
 	var x int
