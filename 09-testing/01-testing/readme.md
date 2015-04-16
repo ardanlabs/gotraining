@@ -42,7 +42,7 @@ The sample program implements support for accessing a MongoDB database from Mong
 
 [Table Tests](example1/tests/example1_table_test.go)
 
-[Example Tests](example1/tests/example1_test_example.go)
+[Example Tests](example1/tests/example1_example_test.go)
 
 ## Exercises
 
