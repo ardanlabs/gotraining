@@ -1,9 +1,15 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/cK3y_qYUgd
+// http://play.golang.org/p/XQS-twjrtl
 
-// Sample program to show how to declare and use variadic functions.
+// From Spec:
+// a short variable declaration may redeclare variables provided they
+// were originally declared earlier in the same block with the same
+// type, and at least one of the non-blank variables is new.
+
+// Sample program to show some of the mechanics behind the
+// short variable declaration operator redeclares.
 package main
 
 import "fmt"
@@ -16,25 +22,29 @@ type user struct {
 
 // main is the entry point for the application.
 func main() {
-	// Declare and initalize a value of type user.
-	u1 := user{
-		id:   1432,
-		name: "Betty",
+	// Declare the error variable.
+	var err1 error
+
+	// The short variable declaration operator will
+	// declare u and redeclare err1.
+	u, err1 := getUser()
+	if err1 != nil {
+		return
 	}
 
-	// Declare and initalize a value of type user.
-	u2 := user{
-		id:   4367,
-		name: "Janet",
+	fmt.Println(u)
+
+	// The short variable declaration operator will
+	// redeclare u and declare err2.
+	u, err2 := getUser()
+	if err2 != nil {
+		return
 	}
 
-	// Display both user values.
-	display(u1, u2)
+	fmt.Println(u)
 }
 
-// display can accept and display multiple values of user types.
-func display(users ...user) {
-	for i := 0; i < len(users); i++ {
-		fmt.Printf("%+v\n", users[i])
-	}
+// getUser returns a pointer of type user.
+func getUser() (*user, error) {
+	return &user{1432, "Betty"}, nil
 }
