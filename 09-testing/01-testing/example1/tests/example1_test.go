@@ -3,8 +3,8 @@
 
 // go test -v example1_test.go
 
-// Standard tests for example 1.
-package main
+// Package tests provides testing examples.
+package tests
 
 import (
 	"testing"

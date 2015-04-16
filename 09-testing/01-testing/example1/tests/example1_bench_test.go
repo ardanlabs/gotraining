@@ -12,8 +12,8 @@ The benchmark will call the function first with a value of b.N being 1. Then it 
 continue to call the function for a minimum of 1 second to complete the test.
 */
 
-// Benchmark tests for example 1.
-package main
+// Package tests provides testing examples.
+package tests
 
 import (
 	"testing"
