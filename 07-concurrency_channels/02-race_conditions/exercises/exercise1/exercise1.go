@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/1XDRILupRo
+// https://play.golang.org/p/oBzhdwGeX6
 
 // Answer for exercise 1 of Race Conditions.
 package main
@@ -13,16 +13,14 @@ import (
 	"time"
 )
 
-var (
-	// numbers maintains a set of random numbers.
-	numbers []int
+// numbers maintains a set of random numbers.
+var numbers []int
 
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
-	// mutex will help protect the slice.
-	mutex sync.Mutex
-)
+// mutex will help protect the slice.
+var mutex sync.Mutex
 
 // init is called prior to main.
 func init() {

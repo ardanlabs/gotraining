@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/lRNiGIUAwV
+// https://play.golang.org/p/LJETaLkVl0
 
 // go build -race
 
@@ -16,13 +16,11 @@ import (
 	"sync/atomic"
 )
 
-var (
-	// counter is a variable incremented by all goroutines.
-	counter int64
+// counter is a variable incremented by all goroutines.
+var counter int64
 
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
-)
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
 // main is the entry point for all Go programs.
 func main() {

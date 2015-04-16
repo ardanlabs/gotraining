@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/9-if--6ZBn
+// https://play.golang.org/p/lNXhQJ8gz4
 
 // Fix the race condition in this program.
 package main
@@ -13,13 +13,11 @@ import (
 	"time"
 )
 
-var (
-	// numbers maintains a set of random numbers.
-	numbers []int
+// numbers maintains a set of random numbers.
+var numbers []int
 
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
-)
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
 // init is called prior to main.
 func init() {

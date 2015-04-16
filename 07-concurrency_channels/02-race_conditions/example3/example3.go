@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/o8xu201CF-
+// https://play.golang.org/p/qifiyxrX1R
 
 // go build -race
 
@@ -16,13 +16,11 @@ import (
 	"time"
 )
 
-var (
-	// shutdown is a flag to alert running goroutines to shutdown.
-	shutdown int64
+// shutdown is a flag to alert running goroutines to shutdown.
+var shutdown int64
 
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
-)
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
 // main is the entry point for all Go programs.
 func main() {

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/_DMKVXRwAu
+// https://play.golang.org/p/p9V1R-_1T2
 
 // go build -race
 
@@ -18,19 +18,17 @@ import (
 	"time"
 )
 
-var (
-	// data is a slice that will be shared.
-	data []string
+// data is a slice that will be shared.
+var data []string
 
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
-	// rwMutex is used to define a critical section of code.
-	rwMutex sync.RWMutex
+// rwMutex is used to define a critical section of code.
+var rwMutex sync.RWMutex
 
-	// Number of reads occuring at ay given time.
-	readCount int64
-)
+// Number of reads occuring at ay given time.
+var readCount int64
 
 // init is called before main is executed.
 func init() {

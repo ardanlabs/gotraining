@@ -20,22 +20,22 @@ http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
 ## Code Review
 
-[Race Condition](example1/example1.go) ([Go Playground](http://play.golang.org/p/E_pi2bqD4P))
+[Race Condition](example1/example1.go) ([Go Playground](https://play.golang.org/p/dMHhzuM-TM))
 
-[Atomic Increments](example2/example2.go) ([Go Playground](http://play.golang.org/p/lRNiGIUAwV))
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/LJETaLkVl0))
 
-[Atomic Store/Load](example3/example3.go) ([Go Playground](http://play.golang.org/p/o8xu201CF-))
+[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/qifiyxrX1R))
 
-[Mutex](example4/example4.go) ([Go Playground](http://play.golang.org/p/UTPzriWXWq))
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/nr8BM7lvNA))
 
-[Read/Write Mutex](example5/example5.go) ([Go Playground](http://play.golang.org/p/_DMKVXRwAu))
+[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/p9V1R-_1T2))
 
 ## Exercises
 
 ### Exercise 1
 Given the following program, use the race detector to find and correct the race condition.
 
-	// http://play.golang.org/p/9-if--6ZBn
+	// https://play.golang.org/p/lNXhQJ8gz4
 
 	// Program for an exercise to fix a race condition.
 	package main
@@ -47,13 +47,11 @@ Given the following program, use the race detector to find and correct the race 
 		"time"
 	)
 
-	var (
-		// numbers maintains a set of random numbers.
-		numbers []int
+	// numbers maintains a set of random numbers.
+	var numbers []int
 
-		// wg is used to wait for the program to finish.
-		wg sync.WaitGroup
-	)
+	// wg is used to wait for the program to finish.
+	var wg sync.WaitGroup
 
 	// init is called prior to main.
 	func init() {
@@ -92,7 +90,7 @@ Given the following program, use the race detector to find and correct the race 
 	}
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/9-if--6ZBn) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/1XDRILupRo))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/oBzhdwGeX6))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/E_pi2bqD4P
+// https://play.golang.org/p/dMHhzuM-TM
 
 // go build -race
 
@@ -15,13 +15,11 @@ import (
 	"sync"
 )
 
-var (
-	// counter is a variable incremented by all goroutines.
-	counter int
+// counter is a variable incremented by all goroutines.
+var counter int
 
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
-)
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
 // main is the entry point for all Go programs.
 func main() {
