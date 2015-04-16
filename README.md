@@ -36,7 +36,7 @@ _Note: This material has been designed to be taught in a classroom environment. 
 ## Getting Started
 
 **Starter Material**  
-[Quick Tour](00-slides/getting_started)
+[Quick Tour](00-slides/quick_tour)
 
 **More Installation Help:**  
 http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
