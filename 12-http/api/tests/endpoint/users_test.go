@@ -124,24 +124,31 @@ func usersCreate400(t *testing.T, a *app.App, c *app.Context) {
 		}
 		t.Log("\tShould received a status code of 400 for the response.", tests.Succeed)
 
-		var v []app.Invalid
+		v := struct {
+			Error  string `json:"error"`
+			Fields []struct {
+				Fld string `json:"field_name"`
+				Err string `json:"error"`
+			} `json:"fields,omitempty"`
+		}{}
+
 		if err := json.NewDecoder(w.Body).Decode(&v); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", tests.Failed)
 		}
 		t.Log("\tShould be able to unmarshal the response.", tests.Succeed)
 
-		if len(v) == 0 {
+		if len(v.Fields) == 0 {
 			t.Fatal("\tShould have validation errors in the response.", tests.Failed)
 		}
 		t.Log("\tShould have validation errors in the response.", tests.Succeed)
 
-		if v[0].Fld != "FirstName" {
-			t.Fatalf("\tShould have a FirstName validation error in the response. Received[%s] %s", v[0].Fld, tests.Failed)
+		if v.Fields[0].Fld != "FirstName" {
+			t.Fatalf("\tShould have a FirstName validation error in the response. Received[%s] %s", v.Fields[0].Fld, tests.Failed)
 		}
 		t.Log("\tShould have a FirstName validation error in the response.", tests.Succeed)
 
-		if v[1].Fld != "Addresses" {
-			t.Fatalf("\tShould have an Addresses validation error in the response. Received[%s] %s", v[0].Fld, tests.Failed)
+		if v.Fields[1].Fld != "Addresses" {
+			t.Fatalf("\tShould have an Addresses validation error in the response. Received[%s] %s", v.Fields[0].Fld, tests.Failed)
 		}
 		t.Log("\tShould have an Addresses validation error in the response.", tests.Succeed)
 	}
