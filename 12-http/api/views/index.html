@@ -4,8 +4,8 @@
     <title>Users Example</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
     <script>
-      var countryApp = angular.module('usersApp', []);
-      countryApp.controller('UsersCtrl', function ($scope, $http){
+      var usersApp = angular.module('usersApp', []);
+      usersApp.controller('UsersCtrl', function ($scope, $http){
         $http.get('/v1/users').success(function(data) {
           $scope.users = data;
         });
