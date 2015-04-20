@@ -21,7 +21,7 @@ import (
 // User is a sample struct.
 type User struct {
 	Name  string `valid:"exists"`
-	Email string `valid:"regexp" exp:"(?i)[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\\.)+[A-Z]{2,6}"`
+	Email string `valid:"regexp" exp:"[\w.%+-]+@(?:[[:alnum:]-]+\\.)+[[:alpha:]]{2,6}"`
 }
 
 // Result provides a detail view of the validation results.
