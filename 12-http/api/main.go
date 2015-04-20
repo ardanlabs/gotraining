@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 
 	"github.com/ArdanStudios/gotraining/12-http/api/routes"
 )
@@ -17,11 +18,24 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
+	log.Println("main : Started")
+
+	// Check the environment for a configured port value.
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
 	}
 
-	log.Println("main : Started : Listening on: http://localhost:" + port)
-	http.ListenAndServe(":"+port, routes.API())
+	// Create this goroutine to run the web server.
+	go func() {
+		log.Println("listener : Started : Listening on: http://localhost:" + port)
+		http.ListenAndServe(":"+port, routes.API())
+	}()
+
+	// Listen for an interrupt signal from the OS.
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt)
+	<-sigChan
+
+	log.Println("main : Completed")
 }
