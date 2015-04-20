@@ -54,7 +54,7 @@ func (a *App) Handle(verb, path string, handler Handler) {
 		}
 		defer c.Session.Close()
 
-		// Call the handler and handle the any possible error.
+		// Call the handler and handle any possible error.
 		if err := handler(&c); err != nil {
 			c.Error(err)
 		}
