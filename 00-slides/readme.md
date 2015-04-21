@@ -5,7 +5,7 @@ Please choose the class and timeframe you are taking.
 
 #### Starter Material
 
-[Quick Tour](00-slides/quick_tour)
+[Quick Tour](quick_tour)
 
 #### Installation Mac
 
