@@ -3,6 +3,10 @@ Please choose the class and timeframe you are taking.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
+#### Starter Material
+
+[Quick Tour](00-slides/quick_tour)
+
 #### Installation Mac
 
 http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
