@@ -77,8 +77,6 @@ In Person:
 **_Workshops:_**   
 Want to put on a workshop event for a couple of hours or for a full day?
 
-[San Francisco, CA : April 20th](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
-
 Open
 
 **_Corporate:_**  
@@ -86,10 +84,11 @@ Corporate full day classes are at $5,000 USD a day plus travel expenses. Corpora
 
 [ACL Services - May 1st-3rd](http://www.acl.com/)
 
+[Rackspace - May 27th-29th](http://www.racespace.com/)
+
 **_Bootcamps:_**  
 Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
 
-[Boston, MA : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-tour-boston-may-tickets-15667846952)  
 [Denver, CO : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-denver-may-tickets-16131581996)  
 [McLean, VA : May 14th-16th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
 
@@ -106,7 +105,6 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 **_Conferences:_**  
 You can find us at conferences being held all around the country and the world.
 
-[FluentConf : April 20th](http://fluentconf.com/javascript-html-2015/public/schedule/speaker/196872)  
 [MagmaConf : June 16th](http://magmaconf.com/)  
 [Gophercon : July 7th](http://gophercon.com/)  
 [OSCON : July 20th](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
