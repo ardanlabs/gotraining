@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/Dh5vNdpuyq
+// https://play.golang.org/p/TyKXqvQbvc
 
 // Sample program to show the basic concept of pass by value.
 package main
@@ -19,7 +19,7 @@ func main() {
 	// Pass the "value of" the variable count.
 	increment(count)
 
-	println("After:", count, &count)
+	println("After: ", count, &count)
 }
 
 // increment declares count as a variable whose value is
@@ -27,7 +27,7 @@ func main() {
 func increment(inc int) {
 	// Increment the "value of" inc.
 	inc++
-	println("Inc:", inc, &inc)
+	println("Inc:   ", inc, &inc)
 
 	// Do this to prevent inlining.
 	var x int
