@@ -21,7 +21,7 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ## Code Review
 
-[Pass by value](example1/example1.go) ([Go Playground](https://play.golang.org/p/TyKXqvQbvc))
+[Pass by value](example1/example1.go) ([Go Playground](https://play.golang.org/p/nNnsK6hWdP))
 
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/FWmGnVUDoA))
 

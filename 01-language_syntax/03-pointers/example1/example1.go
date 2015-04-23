@@ -1,12 +1,10 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/TyKXqvQbvc
+// https://play.golang.org/p/nNnsK6hWdP
 
 // Sample program to show the basic concept of pass by value.
 package main
-
-import "fmt"
 
 // main is the entry point for the application.
 func main() {
@@ -28,8 +26,4 @@ func increment(inc int) {
 	// Increment the "value of" inc.
 	inc++
 	println("Inc:   ", inc, &inc)
-
-	// Do this to prevent inlining.
-	var x int
-	fmt.Sprintf("Prevent Inlining: %d", x)
 }
