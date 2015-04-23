@@ -7,6 +7,7 @@ package chat
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"log"
 	"net"
 	"sync"
@@ -21,7 +22,7 @@ type message struct {
 // client represents a single connection in the room.
 type client struct {
 	name   string
-	cr     *ChatRoom
+	room   *Room
 	reader *bufio.Reader
 	writer *bufio.Writer
 	wg     sync.WaitGroup
@@ -34,12 +35,25 @@ func (c *client) read() {
 		// Wait for a message to arrive.
 		line, err := c.reader.ReadString('\n')
 		if err != nil {
-			// Assume this happens right now only on shutdown.
-			c.wg.Done()
-			return
+			if e, ok := err.(*net.OpError); ok {
+				if !e.Temporary() {
+					log.Println("Temporary: Client leaving chat")
+					c.wg.Done()
+					return
+				}
+			}
+
+			if err == io.EOF {
+				log.Println("EOF: Client leaving chat")
+				c.wg.Done()
+				return
+			}
+
+			log.Println("read-routine", err)
+			continue
 		}
 
-		c.cr.outgoing <- message{
+		c.room.outgoing <- message{
 			data: line,
 			conn: c.conn,
 		}
@@ -49,7 +63,10 @@ func (c *client) read() {
 // write is a goroutine to handle processing outgoing
 // messages to this client.
 func (c *client) write(m message) {
-	c.writer.WriteString(fmt.Sprintf("%s %s", c.name, m.data))
+	msg := fmt.Sprintf("%s %s", c.name, m.data)
+	log.Printf(msg)
+
+	c.writer.WriteString(msg)
 	c.writer.Flush()
 }
 
@@ -61,10 +78,10 @@ func (c *client) drop() {
 }
 
 // newClient create a new client for an incoming connection.
-func newClient(cr *ChatRoom, conn net.Conn, name string) *client {
+func newClient(room *Room, conn net.Conn, name string) *client {
 	c := client{
 		name:   name,
-		cr:     cr,
+		room:   room,
 		reader: bufio.NewReader(conn),
 		writer: bufio.NewWriter(conn),
 		conn:   conn,
@@ -76,8 +93,8 @@ func newClient(cr *ChatRoom, conn net.Conn, name string) *client {
 	return &c
 }
 
-// ChatRoom contains a set of networked client connections.
-type ChatRoom struct {
+// Room contains a set of networked client connections.
+type Room struct {
 	listener net.Listener
 	clients  []*client
 	joining  chan net.Conn
@@ -87,8 +104,8 @@ type ChatRoom struct {
 }
 
 // sendGroupMessage sends a message to all clients in the room.
-func (cr *ChatRoom) sendGroupMessage(m message) {
-	for _, c := range cr.clients {
+func (r *Room) sendGroupMessage(m message) {
+	for _, c := range r.clients {
 		if c.conn != m.conn {
 			c.write(m)
 		}
@@ -96,29 +113,31 @@ func (cr *ChatRoom) sendGroupMessage(m message) {
 }
 
 // join takes a new connection and adds it to the room.
-func (cr *ChatRoom) join(conn net.Conn) {
-	name := fmt.Sprintf("Conn: %d", len(cr.clients))
-	c := newClient(cr, conn, name)
-	cr.clients = append(cr.clients, c)
+func (r *Room) join(conn net.Conn) {
+	name := fmt.Sprintf("Conn: %d", len(r.clients))
+	log.Println("New client joining chat:", name)
+
+	c := newClient(r, conn, name)
+	r.clients = append(r.clients, c)
 }
 
 // start turns the chatroom on.
-func (cr *ChatRoom) start() {
-	cr.wg.Add(2)
+func (r *Room) start() {
+	r.wg.Add(2)
 
 	// Chatroom processing goroutne.
 	go func() {
 		for {
 			select {
-			case message := <-cr.outgoing:
+			case message := <-r.outgoing:
 				// Sent message to the group.
-				cr.sendGroupMessage(message)
-			case conn := <-cr.joining:
+				r.sendGroupMessage(message)
+			case conn := <-r.joining:
 				// Join this connection to the room.
-				cr.join(conn)
-			case <-cr.shutdown:
+				r.join(conn)
+			case <-r.shutdown:
 				// Chatroom shutting down.
-				cr.wg.Done()
+				r.wg.Done()
 				return
 			}
 		}
@@ -127,44 +146,53 @@ func (cr *ChatRoom) start() {
 	// Chatroom connection accept goroutine.
 	go func() {
 		var err error
-		if cr.listener, err = net.Listen("tcp", ":6666"); err != nil {
+		if r.listener, err = net.Listen("tcp", ":6000"); err != nil {
 			log.Fatalln(err)
 		}
 
+		log.Println("Chat room started: 6000")
+
 		for {
-			conn, err := cr.listener.Accept()
+			conn, err := r.listener.Accept()
 			if err != nil {
-				// For now assume this error is caused because
-				// we are being asked to shutdown.
-				cr.wg.Done()
-				return
+				// Check if the error is temporary or not.
+				if e, ok := err.(*net.OpError); ok {
+					if !e.Temporary() {
+						log.Println("Temporary: Chat room shutting down")
+						r.wg.Done()
+						return
+					}
+				}
+
+				log.Println("accept-routine", err)
+				continue
 			}
 
 			// Add this new connection to the room.
-			cr.joining <- conn
+			r.joining <- conn
 		}
 	}()
 }
 
 // Close shutdown the chatroom and closes all connections.
-func (cr *ChatRoom) Close() {
+func (r *Room) Close() {
 	// Don't accept anymore client connections.
-	cr.listener.Close()
+	r.listener.Close()
 
 	// Signal the chatroom processing goroutine to stop.
-	close(cr.shutdown)
-	cr.wg.Wait()
+	close(r.shutdown)
+	r.wg.Wait()
 
 	// Drop all existing connections.
-	for _, c := range cr.clients {
+	for _, c := range r.clients {
 		c.drop()
 	}
 }
 
 // New creates a new chatroom.
-func New() *ChatRoom {
-	// Create a ChatRoom value.
-	chatRoom := ChatRoom{
+func New() *Room {
+	// Create a Room value.
+	chatRoom := Room{
 		joining:  make(chan net.Conn),
 		outgoing: make(chan message),
 		shutdown: make(chan struct{}),
