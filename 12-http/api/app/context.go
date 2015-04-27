@@ -10,10 +10,8 @@ package app
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 
 	"gopkg.in/mgo.v2"
 )
@@ -63,20 +61,14 @@ func (c *Context) Respond(v interface{}, code int) {
 		return
 	}
 
-	data, err := json.MarshalIndent(v, "", "    ")
-	if err != nil {
+	c.WriteHeader(code)
+
+	if err := json.NewEncoder(c).Encode(v); err != nil {
 		// We want this error condition to panic so we get a stack trace. This should
 		// never happen. The http package will catch the panic and provide logging
 		// and return a 500 back to the caller.
 		log.Panicf("%v : api : Respond [%d] : Failed: %v", c.SessionID, code, err)
 	}
-
-	datalen := len(data) + 1 // account for trailing LF
-	h := c.Header()
-	h.Set("Content-Type", "application/json")
-	h.Set("Content-Length", strconv.Itoa(datalen))
-	c.WriteHeader(code)
-	fmt.Fprintf(c, "%s\n", data)
 
 	log.Printf("%v : api : Respond [%d] : Completed", c.SessionID, code)
 }
