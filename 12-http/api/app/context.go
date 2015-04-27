@@ -61,6 +61,7 @@ func (c *Context) Respond(v interface{}, code int) {
 		return
 	}
 
+	c.Header().Set("Content-Type", "application/json")
 	c.WriteHeader(code)
 
 	if err := json.NewEncoder(c).Encode(v); err != nil {
