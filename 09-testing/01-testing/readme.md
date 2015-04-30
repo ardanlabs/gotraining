@@ -26,31 +26,11 @@ https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-i
 
 ## Code Review
 
-The sample program implements support for accessing a MongoDB database from MongoLab. The program implements two different find calls that return documents that are unmarshaled into user defined types.
+[Basic Unit Test](example1)
 
-### Sample App
+[Mocking Web Server Response](example2)
 
-[example1.go](example1/example1.go)
-
-[buoy/buoy.go](example1/buoy/buoy.go)
-
-[mongodb/mongodb.go](example1/mongodb/mongodb.go)
-
-### Tests
-
-[Standard Tests](example1/tests/example1_test.go)
-
-[Table Tests](example1/tests/example1_table_test.go)
-
-[Example Tests](example1/tests/example1_example_test.go)
-
-## Exercises
-
-### Exercise 1
-Write three benchmark tests for converting an integer into a string. First use the fmt.Sprintf function, then the strconv.FormatInt function and finally the strconv.Itoa. Identify which function performs the best.
-
-[Template](exercises/template1/bench_test.go) | 
-[Answer](exercises/exercise1/bench_test.go)
+[Testing Internal Endpoints](example3)
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

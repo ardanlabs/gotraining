@@ -1,54 +1,53 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Sample program to show how to write tests for a practical
-// program that makes database requests to MongoDB.
-package main
+// Package example1 provides a unit test to download an RSS
+// feed file and validate it worked.
+package example1
 
-import (
-	"log"
-	"os"
+import "encoding/xml"
 
-	"github.com/ArdanStudios/gotraining/09-testing/01-testing/example1/buoy"
-)
-
-// init is called before main.
-func init() {
-	// Change the output device from the default
-	// stderr to stdout.
-	log.SetOutput(os.Stdout)
-
-	// Set the prefix string for each log line.
-	log.SetPrefix("TRACE: ")
-
-	// Set the flag to show the code file and date/time
-	log.SetFlags(log.LstdFlags | log.Lshortfile)
+// Item defines the fields associated with the item tag in
+// the buoy RSS document.
+type Item struct {
+	XMLName     xml.Name `xml:"item"`
+	PubDate     string   `xml:"pubDate"`
+	Title       string   `xml:"title"`
+	Description string   `xml:"description"`
+	Link        string   `xml:"link"`
+	GUID        string   `xml:"guid"`
+	GeoRssPoint string   `xml:"georss:point"`
 }
 
-// main is the entry point for the application.
-func main() {
-	for i := 0; i < 20; i++ {
-		// Retrieve a document for station 42002.
-		stationID := "42002"
-		station, err := buoy.FindStation(stationID)
-		if err != nil {
-			log.Printf("main : ERROR : %s\n", err)
-			os.Exit(1)
-		}
+// Image defines the fields associated with the image tag in
+// the buoy RSS document.
+type Image struct {
+	XMLName xml.Name `xml:"image"`
+	URL     string   `xml:"url"`
+	Title   string   `xml:"title"`
+	Link    string   `xml:"link"`
+}
 
-		buoy.Print(station)
+// Channel defines the fields associated with the channel tag in
+// the buoy RSS document.
+type Channel struct {
+	XMLName        xml.Name `xml:"channel"`
+	Title          string   `xml:"title"`
+	Description    string   `xml:"description"`
+	Link           string   `xml:"link"`
+	PubDate        string   `xml:"pubDate"`
+	LastBuildDate  string   `xml:"lastBuildDate"`
+	TTL            string   `xml:"ttl"`
+	Language       string   `xml:"language"`
+	ManagingEditor string   `xml:"managingEditor"`
+	WebMaster      string   `xml:"webMaster"`
+	Image          Image    `xml:"image"`
+	Items          []Item   `xml:"item"`
+}
 
-		// Retrieve a slice of documents for the
-		// Gulf Of Mexico region.
-		region := "Gulf Of Mexico"
-		stations, err := buoy.FindRegion(region, 5)
-		if err != nil {
-			log.Printf("main : ERROR : %s\n", err)
-			os.Exit(1)
-		}
-
-		for _, station := range stations {
-			buoy.Print(&station)
-		}
-	}
+// Document defines the fields associated with the buoy RSS document.
+type Document struct {
+	XMLName xml.Name `xml:"rss"`
+	Channel Channel  `xml:"channel"`
+	URI     string
 }
