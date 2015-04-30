@@ -22,13 +22,12 @@ func TestDownload(t *testing.T) {
 		t.Logf("\tWhen checking \"%s\" for status code \"%d\"", url, statusCode)
 		{
 			resp, err := http.Get(url)
-			if err == nil {
-				t.Log("\t\tShould be able to make the Get call.",
-					succeed)
-			} else {
+			if err != nil {
 				t.Fatal("\t\tShould be able to make the Get call.",
 					failed, err)
 			}
+			t.Log("\t\tShould be able to make the Get call.",
+				succeed)
 
 			defer resp.Body.Close()
 
