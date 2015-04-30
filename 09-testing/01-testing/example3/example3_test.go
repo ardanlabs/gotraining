@@ -1,9 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Package example2_test provides a unit test to download an RSS
-// feed file and validate it worked. This time is mocks the server.
-package example2_test
+package example3
 
 import (
 	"encoding/xml"
@@ -72,12 +70,13 @@ func mockServer() *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(f))
 }
 
-// TestDownload tests if download web content is working.
+// TestDownload validates the http Get function can download content and
+// the content can be unmarshaled and clean.
 func TestDownload(t *testing.T) {
+	statusCode := 200
+
 	server := mockServer()
 	defer server.Close()
-
-	statusCode := 200
 
 	t.Log("Given the need to test downloading content.")
 	{

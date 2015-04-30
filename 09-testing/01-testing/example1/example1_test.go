@@ -1,8 +1,6 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Package example1_test provides a unit test to download an RSS
-// feed file and validate it worked.
 package example1
 
 import (
@@ -13,7 +11,7 @@ import (
 const succeed = "\u2713"
 const failed = "\u2717"
 
-// TestDownload tests if download web content is working.
+// TestDownload validates the http Get function can download content.
 func TestDownload(t *testing.T) {
 	url := "http://www.goinggo.net/feeds/posts/default?alt=rss"
 	statusCode := 200

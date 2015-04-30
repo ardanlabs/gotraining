@@ -1,9 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Package example1_test provides a unit test to download an RSS
-// feed file and validate it worked.
-package example1
+package example2
 
 import (
 	"net/http"
@@ -13,17 +11,17 @@ import (
 const succeed = "\u2713"
 const failed = "\u2717"
 
-// urls represents a table of URL's to test.
-var urls = []struct {
-	url        string
-	statusCode int
-}{
-	{"http://www.goinggo.net/feeds/posts/default?alt=rss", http.StatusOK},
-	{"http://rss.cnn.com/rss/cnn_topstorie.rss", http.StatusNotFound},
-}
-
-// TestDownload tests if download web content is working.
+// TestDownload validates the http Get function can download content and
+// handles different status conditions properly.
 func TestDownload(t *testing.T) {
+	var urls = []struct {
+		url        string
+		statusCode int
+	}{
+		{"http://www.goinggo.net/feeds/posts/default?alt=rss", http.StatusOK},
+		{"http://rss.cnn.com/rss/cnn_topstorie.rss", http.StatusNotFound},
+	}
+
 	t.Log("Given the need to test downloading different content.")
 	{
 		for _, u := range urls {
