@@ -81,7 +81,7 @@ func TestDownload(t *testing.T) {
 
 	t.Log("Given the need to test downloading content.")
 	{
-		t.Logf("\tWhen the URL is \"%s\" with status code \"%d\"", server.URL, statusCode)
+		t.Logf("\tWhen checking \"%s\" for status code \"%d\"", server.URL, statusCode)
 		{
 			resp, err := http.Get(server.URL)
 			if err == nil {

@@ -26,7 +26,7 @@ func TestDownload(t *testing.T) {
 	t.Log("Given the need to test downloading different content.")
 	{
 		for _, u := range urls {
-			t.Logf("\tWhen the URL is \"%s\" with status code \"%d\"", u.url, u.statusCode)
+			t.Logf("\tWhen checking \"%s\" for status code \"%d\"", u.url, u.statusCode)
 			{
 				resp, err := http.Get(u.url)
 				if err == nil {
