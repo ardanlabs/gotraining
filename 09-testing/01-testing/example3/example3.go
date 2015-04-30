@@ -39,4 +39,17 @@ func SendJSON(rw http.ResponseWriter, r *http.Request) {
 	if err := json.NewEncoder(rw).Encode(u); err != nil {
 		log.Panic(err)
 	}
+
+	LogResponse(&u)
+}
+
+// LogResponse is used to write the response to the log.
+func LogResponse(v interface{}) {
+	d, err := json.MarshalIndent(v, "", "    ")
+	if err != nil {
+		log.Println("Unable to Marshal Response", err)
+		return
+	}
+
+	log.Println(string(d))
 }
