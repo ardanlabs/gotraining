@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	ex3 "github.com/ArdanStudios/gotraining/09-testing/01-testing/example3"
+	ex "github.com/ArdanStudios/gotraining/09-testing/01-testing/example4"
 )
 
 // ExampleLogResponse provides a basic example test example.
@@ -24,7 +24,7 @@ func ExampleLogResponse() {
 		Email: "bill@ardanstudios.com",
 	}
 
-	ex3.LogResponse(&u)
+	ex.LogResponse(&u)
 	// Output:
 	// {
 	//     "Name": "Bill",
