@@ -9,10 +9,10 @@ package caching
 
 const rows = 64
 
-// For the first test, set the cols to under 64k.
-// const cols = 64*1024 - 128
+// Set the size of each row to be 4k.
+// const cols = 4*1024
 
-// For the second test, set the cols to 64k.
+// Set the size of each row to be 64k.
 // const cols = 64 * 1024
 
 // matrix represents a set of columns that each exist on
