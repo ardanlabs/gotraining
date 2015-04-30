@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Sample program to show how to test routes without running a server.
+// Sample test to show how to write a basic example test.
 package main_test
 
 import (

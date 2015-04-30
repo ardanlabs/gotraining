@@ -1,6 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
+// Sample test to show how to write a basic unit table test.
 package example2
 
 import (

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Sample program to show how to test routes without running a server.
+// Sample test to show how to test the execution of an internal endpoint.
 package main_test
 
 import (
@@ -20,7 +20,7 @@ func init() {
 	ex.Routes()
 }
 
-// TestDownload tests if download web content is working.
+// TestSendJSON testing the sendjson internal endpoint.
 func TestSendJSON(t *testing.T) {
 	t.Log("Given the need to test the SendJSON endpoint.")
 	{
