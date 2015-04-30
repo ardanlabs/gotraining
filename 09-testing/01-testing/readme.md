@@ -28,11 +28,13 @@ https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-i
 
 [Basic Unit Test](example1/example1_test.go)
 
-[Mocking Web Server Response](example2/example2_test.go)
+[Table Unit Test](example2/example2_test.go)
 
-[Testing Internal Endpoints](example3/example3_test.go)
+[Mocking Web Server Response](example3/example3_test.go)
 
-[Example Test](example3/example3_example_test.go)
+[Testing Internal Endpoints](example4/example4_test.go)
+
+[Example Test](example4/example4_example_test.go)
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
