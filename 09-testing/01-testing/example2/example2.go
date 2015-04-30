@@ -2,7 +2,7 @@
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
 // Package example2 provides a unit test to download an RSS
-// feed file and validate it worked. This time is mocks the server.
+// feed file and validate it worked. This time it mocks the server.
 package example2
 
 import "encoding/xml"
