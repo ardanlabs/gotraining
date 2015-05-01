@@ -10,10 +10,10 @@ package caching
 const rows = 64
 
 // Set the size of each row to be 4k.
-// const cols = 4*1024
+//const cols = 4 * 1024
 
 // Set the size of each row to be 64k.
-// const cols = 64 * 1024
+const cols = 64 * 1024
 
 // matrix represents a set of columns that each exist on
 // their own cache line.

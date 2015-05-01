@@ -6,8 +6,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 // main is the entry point for the application.
@@ -33,12 +35,20 @@ func SendJSON(rw http.ResponseWriter, r *http.Request) {
 		Email: "bill@ardanstudios.com",
 	}
 
-	rw.Header().Set("Content-Type", "application/json")
-	rw.WriteHeader(200)
-
-	if err := json.NewEncoder(rw).Encode(u); err != nil {
-		log.Panic(err)
+	data, err := json.Marshal(&u)
+	if err != nil {
+		// We want this error condition to panic so we get a stack trace. This should
+		// never happen. The http package will catch the panic and provide logging
+		// and return a 500 back to the caller.
+		log.Panic("Unable to unmatshal response", err)
 	}
+
+	datalen := len(data) + 1 // account for trailing LF
+	h := rw.Header()
+	h.Set("Content-Type", "application/json")
+	h.Set("Content-Length", strconv.Itoa(datalen))
+	rw.WriteHeader(200)
+	fmt.Fprintf(rw, "%s\n", data)
 
 	LogResponse(&u)
 }
@@ -47,7 +57,7 @@ func SendJSON(rw http.ResponseWriter, r *http.Request) {
 func LogResponse(v interface{}) {
 	d, err := json.MarshalIndent(v, "", "    ")
 	if err != nil {
-		log.Println("Unable to Marshal Response", err)
+		log.Println("Unable to marshal response", err)
 		return
 	}
 
