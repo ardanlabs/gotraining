@@ -38,7 +38,7 @@ func main() {
 	// Constant arithmetic supports different kinds.
 	// Kind Promotion is used to determine kind in these scenarios.
 	// Variable answer will be implicitly converted to type floating point.
-	var answer = 3 * 0.333 // KindInt(3) / KindFloat(3.0)
+	var answer = 3 * 0.333 // KindInt(3) * KindFloat(0.333)
 
 	fmt.Printf("var answer = 3 * 0.333 \t %T [%v]\n", answer, answer)
 
