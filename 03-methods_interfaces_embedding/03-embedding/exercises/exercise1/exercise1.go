@@ -1,72 +1,91 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/hvVA4zB9Bf
+// http://play.golang.org/p/TW2E6ApbTD
 
-// Declare a struct type named animal with two fields name and age. Declare a struct
-// type named dog with the field bark. Embed the animal type into the dog type. Declare
-// and initalize a value of type dog. Display the value of the variable.
+// Define a nail type with methods drive() and pull(). drive fastens the nail
+// into our imaginary board, while pull removes it from the board.
 //
-// Declare a method named yelp to the animal type using a pointer reciever which displays the
-// literal string "Not Implemented". Call the method from the value of type dog.
-//
-// Declare an interface named yelper with a single method called yelp. Declare a value of
-// type yelper and assign the address of the value of type dog. Call the method yelp.
-//
-// Implement the yelper interface for the dog type. Be creative with the
-// bark field. Call the method yelp again from the value of type yelper.
+// Define a toolbox type that embeds tools, of your choice, that implement
+// nailDriver and nailPuller.
 package main
 
-import (
-	"fmt"
+import "fmt"
+
+type (
+	// nailDriver fastens nails
+	nailDriver interface {
+		driveNail(*nail)
+	}
+
+	// nailPuller removes nails
+	nailPuller interface {
+		pullNail(*nail)
+	}
 )
 
-// yelper represents talking animals.
-type yelper interface {
-	yelp()
+type nail struct {
+	// fastened is true if pinned, false otherwise
+	fastened bool
 }
 
-// animal represents all animals.
-type animal struct {
-	name string
-	age  int
-}
+func (n *nail) drive() { n.fastened = true }
+func (n *nail) pull()  { n.fastened = false }
 
-// yelp represents how an animal can speak.
-func (a *animal) yelp() {
-	fmt.Println("Not Implemented")
-}
-
-// dog represents a dog.
-type dog struct {
-	animal
-	bark int
-}
-
-// yelp represents how an animal can speak.
-func (d *dog) yelp() {
-	for bark := 0; bark < d.bark; bark++ {
-		fmt.Print("BARK ")
+func (n *nail) String() string {
+	s := "-"
+	if n.fastened {
+		s = "+"
 	}
-	fmt.Println()
+	return fmt.Sprintf("%s%p", s, n)
 }
+
+type clawhammer struct{}
+
+func (h clawhammer) driveNail(n *nail) { n.drive() }
+func (h clawhammer) pullNail(n *nail)  { n.pull() }
+
+type toolbox struct{ clawhammer }
 
 // main is the entry point for the application.
 func main() {
-	// Create a value of type dog.
-	d := dog{
-		animal: animal{
-			name: "Chole",
-			age:  1,
-		},
-		bark: 10,
+	// This toolbox comes with a free hammer
+	var b toolbox
+
+	const n = 4
+
+	// Acquire some nails
+	nails := buyNails(n)
+
+	// Display the nails
+	fmt.Println(nails)
+
+	// Fasten the nails
+	driveNails(b, nails)
+
+	// Now pull half of those nails back out
+	pullNails(b, nails[n/2:])
+
+	// Display the nails again
+	fmt.Println(nails)
+}
+
+func buyNails(n int) []*nail {
+	nails := make([]*nail, n)
+	for i := range nails {
+		nails[i] = new(nail)
 	}
+	return nails
+}
 
-	// Display the value.
-	fmt.Println(d)
+func driveNails(d nailDriver, nails []*nail) {
+	for _, n := range nails {
+		d.driveNail(n)
+	}
+}
 
-	// Use the interface.
-	var y yelper
-	y = &d
-	y.yelp()
+func pullNails(p nailPuller, nails []*nail) {
+	for _, n := range nails {
+		p.pullNail(n)
+	}
 }
