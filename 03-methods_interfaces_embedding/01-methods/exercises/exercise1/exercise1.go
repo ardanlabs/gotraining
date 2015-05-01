@@ -29,7 +29,8 @@ func main() {
 
 	// Display the batting average for each player.
 	for _, player := range players {
-		fmt.Printf("%s: AVG[%.3f]\n", player.name, player.average())
+		average :=int( player.average()*1000)
+		fmt.Printf("%s: AVG[%s]\n", player.name, average)
 	}
 }
 
