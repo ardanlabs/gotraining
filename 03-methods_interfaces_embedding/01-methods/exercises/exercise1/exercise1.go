@@ -27,14 +27,14 @@ func (b *batter) average() float64 {
 func main() {
 	// Create a few players.
 	players := []batter{
-		batter{"bill", 10, 7},
-		batter{"jim", 12, 6},
-		batter{"ed", 6, 4},
+		{"bill", 10, 7},
+		{"jim", 12, 6},
+		{"ed", 6, 4},
 	}
 
 	// Display the batting average for each player.
 	for _, player := range players {
 		average := player.average() * 1000
-		fmt.Printf("%s: AVG[%.f]\n", player.name, average)
+		fmt.Printf("%s: AVG[.%.f]\n", player.name, average)
 	}
 }
