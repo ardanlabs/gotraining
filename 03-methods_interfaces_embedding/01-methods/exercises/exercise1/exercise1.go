@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/EZrIvPzfjh
+// http://play.golang.org/p/C8Z_MiYKbc
 
 // Declare a struct that represents a baseball player. Include name, atBats and hits.
 // Declare a method that calculates a players batting average. The formula is Hits / AtBats.
