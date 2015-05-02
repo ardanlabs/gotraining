@@ -34,7 +34,7 @@ type admin struct {
 // main is the entry point for the application.
 func main() {
 	// Create an admin user.
-	admin := admin{
+	a := admin{
 		person: user{
 			name:  "john smith",
 			email: "john@yahoo.com",
@@ -43,5 +43,5 @@ func main() {
 	}
 
 	// We can acces fields methods.
-	admin.person.notify()
+	a.person.notify()
 }
