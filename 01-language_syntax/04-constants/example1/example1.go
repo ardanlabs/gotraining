@@ -28,10 +28,10 @@ func main() {
 	// Constant arithmetic supports different kinds.
 	// Kind Promotion is used to determine kind in these scenarios.
 	// Variable answer will be implicitly converted to type floating point.
-	var answer = 3 * 0.333 // KindInt(3) * KindFloat(0.333)
+	var answer = 3 * 0.333 // KindFloat(3) * KindFloat(0.333)
 
 	// Variable third will be of kind floating point.
-	const third = 1 / 3.0 // KindInt(1) / KindFloat(3.0)
+	const third = 1 / 3.0 // KindFloat(1) / KindFloat(3.0)
 
 	// Variable zero will be of kind integer.
 	const zero = 1 / 3 // KindInt(1) / KindInt(3)
