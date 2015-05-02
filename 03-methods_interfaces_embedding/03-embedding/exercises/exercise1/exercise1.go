@@ -1,91 +1,75 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/TW2E6ApbTD
+// https://play.golang.org/p/4uJObo_ItN
 
-// Define a nail type with methods drive() and pull(). drive fastens the nail
-// into our imaginary board, while pull removes it from the board.
-//
-// Define a toolbox type that embeds tools, of your choice, that implement
-// nailDriver and nailPuller.
+// Copy the code from the template. Declare a new type called hockey
+// which embeds the sports type. Implement the matcher interface for hockey.
+// When implementing the Search method for hockey, call into the Search method
+// for the embedded sport type to check the embedded fields first. Then create
+// two hockey values inside the slice of matchers and perform the search.
 package main
 
-import "fmt"
-
-type (
-	// nailDriver fastens nails
-	nailDriver interface {
-		driveNail(*nail)
-	}
-
-	// nailPuller removes nails
-	nailPuller interface {
-		pullNail(*nail)
-	}
+import (
+	"fmt"
+	"strings"
 )
 
-type nail struct {
-	// fastened is true if pinned, false otherwise
-	fastened bool
+// matcher defines the behavior required for performing searches.
+type matcher interface {
+	Search(searchTerm string) bool
 }
 
-func (n *nail) drive() { n.fastened = true }
-func (n *nail) pull()  { n.fastened = false }
+// sport represents a sports team.
+type sport struct {
+	team string
+	city string
+}
 
-func (n *nail) String() string {
-	s := "-"
-	if n.fastened {
-		s = "+"
+// Search checks the value for the specified term.
+func (s sport) Search(searchTerm string) bool {
+	if strings.Contains(s.team, searchTerm) ||
+		strings.Contains(s.city, searchTerm) {
+		return true
 	}
-	return fmt.Sprintf("%s%p", s, n)
+
+	return false
 }
 
-type clawhammer struct{}
+// hockey represents specific hockey information.
+type hockey struct {
+	sport
+	country string
+}
 
-func (h clawhammer) driveNail(n *nail) { n.drive() }
-func (h clawhammer) pullNail(n *nail)  { n.pull() }
+// Search checks the value for the specified term.
+func (h hockey) Search(searchTerm string) bool {
+	if h.sport.Search(searchTerm) ||
+		strings.Contains(h.country, searchTerm) {
+		return true
+	}
 
-type toolbox struct{ clawhammer }
+	return false
+}
 
 // main is the entry point for the application.
 func main() {
-	// This toolbox comes with a free hammer
-	var b toolbox
+	// Define the term to search.
+	searchTerm := "Miami"
 
-	const n = 4
-
-	// Acquire some nails
-	nails := buyNails(n)
-
-	// Display the nails
-	fmt.Println(nails)
-
-	// Fasten the nails
-	driveNails(b, nails)
-
-	// Now pull half of those nails back out
-	pullNails(b, nails[n/2:])
-
-	// Display the nails again
-	fmt.Println(nails)
-}
-
-func buyNails(n int) []*nail {
-	nails := make([]*nail, n)
-	for i := range nails {
-		nails[i] = new(nail)
+	// Create a slice of matcher values to search.
+	matchers := []matcher{
+		hockey{sport{"Panthers", "Miami"}, "USA"},
+		hockey{sport{"Canadians", "Montreal"}, "Canada"},
 	}
-	return nails
-}
 
-func driveNails(d nailDriver, nails []*nail) {
-	for _, n := range nails {
-		d.driveNail(n)
-	}
-}
+	// Display what we are searching for.
+	fmt.Println("Searching For:", searchTerm)
 
-func pullNails(p nailPuller, nails []*nail) {
-	for _, n := range nails {
-		p.pullNail(n)
+	// Range of each matcher value and check the search term.
+	for _, m := range matchers {
+		if m.Search(searchTerm) {
+			fmt.Printf("FOUND: %+v", m)
+		}
 	}
 }

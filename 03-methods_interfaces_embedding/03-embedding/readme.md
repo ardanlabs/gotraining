@@ -28,16 +28,10 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ### Exercise 1
 
-**Part A** Declare a struct type named animal with two fields name and age. Declare a struct type named dog with the field bark. Embed the animal type into the dog type. Declare and initalize a value of type dog. Display the value of the variable.
+Copy the code from the template. Declare a new type called hockey which embeds the sports type. Implement the matcher interface for hockey. When implementing the Search method for hockey, call into the Search method for the embedded sport type to check the embedded fields first. Then create two hockey values inside the slice of matchers and perform the search.
 
-**Part B** Add a method to the animal type using a pointer reciever named yelp which displays the literal string "Not Implemented". Call the method from the value of type dog.
-
-**Part C** Add an interface named yelper with a single method called yelp. Declare a value of type yelper and assign the address of the value of type dog. Call the method yelp.
-
-**Part D** Implement the yelper interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type yelper.
-
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/N5bME5pkVJ)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/TW2E6ApbTD))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/oLrrwXSd25)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/5rBEX-bkIE))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
