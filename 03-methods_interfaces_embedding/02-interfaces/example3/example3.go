@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/myZaTlp4Qd
+// https://play.golang.org/p/yaUWLZjidB
 
 // Sample program to show how you can't always get the address of a value.
 package main
@@ -12,8 +12,8 @@ import "fmt"
 type duration int
 
 // format pretty-prints the duration value.
-func (d *duration) pretty() string {
-	return fmt.Sprintf("Duration: %d", *d)
+func (d *duration) pretty() {
+	fmt.Println("Duration:", *d)
 }
 
 // main is the entry point for the application.
