@@ -7,9 +7,9 @@ package work
 import "sync"
 
 // Worker must be implemented by types that want to use
-// the work pool.
+// the run pool.
 type Worker interface {
-	Task()
+	Work()
 }
 
 // Pool provides a pool of goroutines that can execute any Worker
@@ -29,7 +29,7 @@ func New(maxGoroutines int) *Pool {
 	for i := 0; i < maxGoroutines; i++ {
 		go func() {
 			for w := range p.work {
-				w.Task()
+				w.Work()
 			}
 			p.wg.Done()
 		}()

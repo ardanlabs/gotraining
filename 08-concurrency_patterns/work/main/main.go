@@ -27,8 +27,8 @@ type namePrinter struct {
 	name string
 }
 
-// Task implements the Worker interface.
-func (m *namePrinter) Task() {
+// Work implements the Worker interface.
+func (m *namePrinter) Work() {
 	log.Println(m.name)
 	time.Sleep(time.Second)
 }
