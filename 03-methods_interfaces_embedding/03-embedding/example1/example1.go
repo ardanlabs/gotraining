@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/z_6oLQpjAh
+// https://play.golang.org/p/e5O_Dx5VpM
 
 // Sample program to show how what we are doing is NOT embedding
 // a type but just using a type as a field.
@@ -34,7 +34,7 @@ type admin struct {
 // main is the entry point for the application.
 func main() {
 	// Create an admin user.
-	admin := admin{
+	ad := admin{
 		person: user{
 			name:  "john smith",
 			email: "john@yahoo.com",
@@ -43,5 +43,5 @@ func main() {
 	}
 
 	// We can acces fields methods.
-	admin.person.notify()
+	ad.person.notify()
 }
