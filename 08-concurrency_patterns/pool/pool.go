@@ -84,14 +84,14 @@ func (p *Pool) Release(r io.Closer) {
 }
 
 // Close will shutdown the pool and close all existing resources.
-func (p *Pool) Close() {
+func (p *Pool) Close() error {
 	// Secure this operation with the Release operation.
 	p.mu.Lock()
 	defer p.mu.Unlock()
 
 	// If the pool is already close, don't do anything.
 	if p.closed {
-		return
+		return ErrPoolClosed
 	}
 
 	// Set the pool as closed.
@@ -105,4 +105,5 @@ func (p *Pool) Close() {
 	for r := range p.resources {
 		r.Close()
 	}
+	return nil
 }
