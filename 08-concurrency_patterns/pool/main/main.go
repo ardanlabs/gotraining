@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	maxGoroutines   = 25 // the number of routines to use.
-	pooledResources = 2  // number of resources in the pool
+	maxGoroutines = 25 // the number of routines to use.
+	numPooled     = 2  // number of resources in the pool
 )
 
 // dbConnection simulates a resource to share.
@@ -52,7 +52,7 @@ func main() {
 	wg.Add(maxGoroutines)
 
 	// Create the pool to manage our connections.
-	p, err := pool.New(createConnection, pooledResources)
+	p, err := pool.New(numPooled, createConnection)
 	if err != nil {
 		log.Println(err)
 	}

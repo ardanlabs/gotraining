@@ -16,7 +16,7 @@ import (
 // multiple goroutines. The resource being managed must implement
 // the io.Closer interface.
 type Pool struct {
-	m         sync.Mutex
+	mu        sync.Mutex
 	resources chan io.Closer
 	factory   func() (io.Closer, error)
 	closed    bool
@@ -29,13 +29,13 @@ var ErrPoolClosed = errors.New("Pool has been closed.")
 // New creates a pool that manages resources. A pool requires a
 // function that can allocate a new resource and the size of
 // the pool.
-func New(fn func() (io.Closer, error), size uint) (*Pool, error) {
-	if size <= 0 {
+func New(size uint, f func() (io.Closer, error)) (*Pool, error) {
+	if size == 0 {
 		return nil, errors.New("Size value too small.")
 	}
 
 	return &Pool{
-		factory:   fn,
+		factory:   f,
 		resources: make(chan io.Closer, size),
 	}, nil
 }
@@ -61,8 +61,8 @@ func (p *Pool) Acquire() (io.Closer, error) {
 // Release places a new resource onto the pool.
 func (p *Pool) Release(r io.Closer) {
 	// Secure this operation with the Close operation.
-	p.m.Lock()
-	defer p.m.Unlock()
+	p.mu.Lock()
+	defer p.mu.Unlock()
 
 	// If the pool is closed, discard the resource.
 	if p.closed {
@@ -85,8 +85,8 @@ func (p *Pool) Release(r io.Closer) {
 // Close will shutdown the pool and close all existing resources.
 func (p *Pool) Close() {
 	// Secure this operation with the Release operation.
-	p.m.Lock()
-	defer p.m.Unlock()
+	p.mu.Lock()
+	defer p.mu.Unlock()
 
 	// If the pool is already close, don't do anything.
 	if p.closed {
