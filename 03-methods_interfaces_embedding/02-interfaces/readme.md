@@ -22,7 +22,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Method Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/FkGu6GRs2F))
+[Method Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/eY2Ms-UF-t))
 
 [Polymorphism](example2/example2.go) ([Go Playground](https://play.golang.org/p/Lo1ucf1e9d))
 

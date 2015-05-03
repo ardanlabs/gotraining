@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/FkGu6GRs2F
+// https://play.golang.org/p/eY2Ms-UF-t
 
 // Sample program to show how to use an interface in Go.
 package main
@@ -45,6 +45,6 @@ func main() {
 
 // sendNotification accepts values that implement the notifier
 // interface and sends notifications.
-func sendNotification(notify notifier) {
-	notify.notify()
+func sendNotification(n notifier) {
+	n.notify()
 }
