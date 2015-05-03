@@ -28,7 +28,7 @@ type namePrinter struct {
 }
 
 // Work implements the Worker interface.
-func (m *namePrinter) Work() {
+func (m namePrinter) Work() {
 	log.Println(m.name)
 	time.Sleep(3 * time.Second)
 }
@@ -53,7 +53,7 @@ func main() {
 			go func() {
 				// Submit the task to be worked on. When RunTask
 				// returns we know it is being handled.
-				p.Run(&np)
+				p.Run(np)
 				wg.Done()
 			}()
 		}
