@@ -34,29 +34,28 @@ func (c *client) read() {
 	for {
 		// Wait for a message to arrive.
 		line, err := c.reader.ReadString('\n')
-		if err != nil {
-			if e, ok := err.(*net.OpError); ok {
-				if !e.Temporary() {
-					log.Println("Temporary: Client leaving chat")
-					c.wg.Done()
-					return
-				}
-			}
 
-			if err == io.EOF {
-				log.Println("EOF: Client leaving chat")
-				c.wg.Done()
-				return
+		if err == nil {
+			c.room.outgoing <- message{
+				data: line,
+				conn: c.conn,
 			}
-
-			log.Println("read-routine", err)
 			continue
 		}
 
-		c.room.outgoing <- message{
-			data: line,
-			conn: c.conn,
+		if e, ok := err.(*net.OpError); ok && !e.Temporary() {
+			log.Println("Temporary: Client leaving chat")
+			c.wg.Done()
+			return
 		}
+
+		if err == io.EOF {
+			log.Println("EOF: Client leaving chat")
+			c.wg.Done()
+			return
+		}
+
+		log.Println("read-routine", err)
 	}
 }
 
