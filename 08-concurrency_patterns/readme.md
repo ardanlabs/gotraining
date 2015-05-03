@@ -17,6 +17,8 @@ https://blog.golang.org/context
 
 http://blog.golang.org/advanced-go-concurrency-patterns
 
+http://talks.golang.org/2012/chat.slide
+
 ## Code Review
 
 [Work](work)
