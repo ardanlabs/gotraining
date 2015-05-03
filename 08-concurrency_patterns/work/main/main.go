@@ -30,13 +30,13 @@ type namePrinter struct {
 // Work implements the Worker interface.
 func (m *namePrinter) Work() {
 	log.Println(m.name)
-	time.Sleep(time.Second)
+	time.Sleep(3 * time.Second)
 }
 
 // main is the entry point for all Go programs.
 func main() {
 	// Create a work pool with 2 goroutines.
-	p := work.New(2)
+	p := work.New(4)
 
 	var wg sync.WaitGroup
 	wg.Add(10 * len(names))
