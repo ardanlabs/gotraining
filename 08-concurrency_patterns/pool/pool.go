@@ -32,7 +32,7 @@ var ErrPoolClosed = errors.New("Pool has been closed")
 // the pool.
 func New(size uint, f func() (io.Closer, error)) (*Pool, error) {
 	if size == 0 {
-		return nil, errors.New("size value too small")
+		return nil, errors.New("Size value too small")
 	}
 
 	return &Pool{
