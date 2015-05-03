@@ -22,7 +22,7 @@ type Pool struct {
 // New creates a new work pool.
 func New(maxGoroutines int) *Pool {
 	p := Pool{
-		work: make(chan Worker),
+		work: make(chan Worker, maxGoroutines),
 	}
 
 	p.wg.Add(maxGoroutines)
