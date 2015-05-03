@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/xfhFFVRxvf
+// http://play.golang.org/p/I_6ETefhMp
 
 // Download any document from the web and display the content in
 // the terminal and write it to a file at the same time.
@@ -14,7 +14,7 @@ func main() {
 	// Download the RSS feed for "http://www.goinggo.net/feeds/posts/default".
 	// Check for errors.
 
-	// Decalre a slice of io.Writer interface values.
+	// Declare a slice of io.Writer interface values.
 
 	// Append stdout to the slice of writers.
 
