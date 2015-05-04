@@ -55,6 +55,7 @@ func main() {
 	p, err := pool.New(numPooled, createConnection)
 	if err != nil {
 		log.Println(err)
+		return
 	}
 
 	// Perform queries using connections from the pool.
