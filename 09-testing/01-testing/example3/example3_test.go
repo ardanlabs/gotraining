@@ -10,8 +10,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	ex2 "github.com/ArdanStudios/gotraining/09-testing/01-testing/example2"
 )
 
 const succeed = "\u2713"
@@ -101,7 +99,7 @@ func TestDownload(t *testing.T) {
 					statusCode, failed, resp.StatusCode)
 			}
 
-			var d ex2.Document
+			var d Document
 			if err := xml.NewDecoder(resp.Body).Decode(&d); err == nil {
 				t.Log("\t\tShould be able to unmarshal the response.",
 					succeed)
