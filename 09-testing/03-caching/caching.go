@@ -7,25 +7,25 @@
 // the hardware caches memory affects performance.
 package caching
 
-const rows = 64
+const cols = 64
 
 // Set the size of each row to be 4k.
-//const cols = 4 * 1024
+//const rows = 4 * 1024
 
 // Set the size of each row to be 64k.
-const cols = 64 * 1024
+//const rows = 64 * 1024
 
 // matrix represents a set of columns that each exist on
 // their own cache line.
-var matrix [rows][cols]byte
+var matrix [cols][rows]byte
 
 // init sets ~13% of the matrix to 0XFF.
 func init() {
 	var ctr int
-	for row := 0; row < rows; row++ {
-		for col := 0; col < cols; col++ {
-			if col%8 == 0 {
-				matrix[row][col] = 0xFF
+	for col := 0; col < cols; col++ {
+		for row := 0; row < rows; row++ {
+			if row%8 == 0 {
+				matrix[col][row] = 0xFF
 				ctr++
 			}
 		}
@@ -37,9 +37,9 @@ func init() {
 func rowTraverse() int {
 	var ctr int
 
-	for row := 0; row < rows; row++ {
-		for col := 0; col < cols; col++ {
-			if matrix[row][col] == 0xFF {
+	for col := 0; col < cols; col++ {
+		for row := 0; row < rows; row++ {
+			if matrix[col][row] == 0xFF {
 				ctr++
 			}
 		}
@@ -52,9 +52,9 @@ func rowTraverse() int {
 func colTraverse() int {
 	var ctr int
 
-	for col := 0; col < cols; col++ {
-		for row := 0; row < rows; row++ {
-			if matrix[row][col] == 0xFF {
+	for row := 0; row < rows; row++ {
+		for col := 0; col < cols; col++ {
+			if matrix[col][row] == 0xFF {
 				ctr++
 			}
 		}
