@@ -5,29 +5,33 @@
 package main_test
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
+	"net/http"
+	"net/http/httptest"
 	"os"
-
-	ex "github.com/ArdanStudios/gotraining/09-testing/01-testing/example4"
 )
 
-// ExampleLogResponse provides a basic example test example.
-func ExampleLogResponse() {
+// ExampleSendJSON provides a basic example test example.
+func ExampleSendJSON() {
 	log.SetFlags(0)
 	log.SetOutput(os.Stdout)
 
-	u := struct {
+	r, _ := http.NewRequest("GET", "/sendjson", nil)
+	w := httptest.NewRecorder()
+	http.DefaultServeMux.ServeHTTP(w, r)
+
+	var u struct {
 		Name  string
 		Email string
-	}{
-		Name:  "Bill",
-		Email: "bill@ardanstudios.com",
 	}
 
-	ex.LogResponse(&u)
+	if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
+		log.Println("ERROR:", err)
+	}
+
+	fmt.Println(u)
 	// Output:
-	// {
-	//     "Name": "Bill",
-	//     "Email": "bill@ardanstudios.com"
-	// }
+	// {Bill bill@ardanstudios.com}
 }

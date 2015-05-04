@@ -49,17 +49,4 @@ func SendJSON(rw http.ResponseWriter, r *http.Request) {
 	h.Set("Content-Length", strconv.Itoa(datalen))
 	rw.WriteHeader(200)
 	fmt.Fprintf(rw, "%s\n", data)
-
-	LogResponse(&u)
-}
-
-// LogResponse is used to write the response to the log.
-func LogResponse(v interface{}) {
-	d, err := json.MarshalIndent(v, "", "    ")
-	if err != nil {
-		log.Println("Unable to marshal response", err)
-		return
-	}
-
-	log.Println(string(d))
 }
