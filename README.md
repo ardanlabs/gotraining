@@ -66,12 +66,11 @@ If you are interested in holding an event in your area please let me know. I wil
 Have us speak at one of your Meetup events for free over Google hangout.
 
 Hangout:  
-[Go Edmonton Meetup : April 27th](https://edmontongo.org/)
+Ask me to join your Meetup of Hangout.
+
+Open
 
 In Person:  
-[Go VA Reston Meetup : April 23th](http://www.meetup.com/Golang-Reston/events/221861967/)  
-[Go Tampa Meetup : April 29th](http://www.meetup.com/Go-Tampa/events/220777645/)  
-[Go Vancouver Meetup : April 30th](http://www.meetup.com/golangvan/events/221155638/)  
 [Go DC Meetup : May 13th](http://www.meetup.com/Golang-DC/events/220450459/)
 
 **_Workshops:_**   
@@ -82,14 +81,11 @@ Open
 **_Corporate:_**  
 Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.
 
-[ACL Services - May 1st-3rd](http://www.acl.com/)
-
 [Rackspace - May 27th-29th](http://www.racespace.com/)
 
 **_Bootcamps:_**  
 Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
 
-[Denver, CO : May 1st-3rd](https://www.eventbrite.com/e/go-programming-bootcamp-denver-may-tickets-16131581996)  
 [McLean, VA : May 14th-16th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
 
 [NYC, NY : June 10th-12th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
