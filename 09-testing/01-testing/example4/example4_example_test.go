@@ -31,6 +31,7 @@ func ExampleSendJSON() {
 		log.Println("ERROR:", err)
 	}
 
+	// Use fmt to write to stdout to check the output.
 	fmt.Println(u)
 	// Output:
 	// {Bill bill@ardanstudios.com}

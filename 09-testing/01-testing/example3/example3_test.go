@@ -91,28 +91,26 @@ func TestDownload(t *testing.T) {
 
 			defer resp.Body.Close()
 
-			if resp.StatusCode == statusCode {
-				t.Logf("\t\tShould receive a \"%d\" status code. %v",
-					statusCode, succeed)
-			} else {
-				t.Errorf("\t\tShould receive a \"%d\" status code. %v %v",
+			if resp.StatusCode != statusCode {
+				t.Fatalf("\t\tShould receive a \"%d\" status code. %v %v",
 					statusCode, failed, resp.StatusCode)
 			}
+			t.Logf("\t\tShould receive a \"%d\" status code. %v",
+				statusCode, succeed)
 
 			var d Document
-			if err := xml.NewDecoder(resp.Body).Decode(&d); err == nil {
-				t.Log("\t\tShould be able to unmarshal the response.",
-					succeed)
-			} else {
+			if err := xml.NewDecoder(resp.Body).Decode(&d); err != nil {
 				t.Fatal("\t\tShould be able to unmarshal the response.",
 					failed, err)
 			}
+			t.Log("\t\tShould be able to unmarshal the response.",
+				succeed)
 
 			if len(d.Channel.Items) == 1 {
 				t.Log("\t\tShould have \"1\" item in the feed.",
 					succeed)
 			} else {
-				t.Fatal("\t\tShould have \"1\" item in the feed.",
+				t.Error("\t\tShould have \"1\" item in the feed.",
 					failed, len(d.Channel.Items))
 			}
 		}

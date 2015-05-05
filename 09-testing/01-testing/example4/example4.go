@@ -40,7 +40,7 @@ func SendJSON(rw http.ResponseWriter, r *http.Request) {
 		// We want this error condition to panic so we get a stack trace. This should
 		// never happen. The http package will catch the panic and provide logging
 		// and return a 500 back to the caller.
-		log.Panic("Unable to unmatshal response", err)
+		log.Panic("Unable to unmarshal response", err)
 	}
 
 	datalen := len(data) + 1 // account for trailing LF

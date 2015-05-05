@@ -29,18 +29,18 @@ func TestSendJSON(t *testing.T) {
 		http.DefaultServeMux.ServeHTTP(w, r)
 
 		if w.Code != 200 {
-			t.Fatalf("\tShould received a status code of \"200\" for the response. Received[%d] %s", w.Code, failed)
+			t.Fatalf("\tShould receive a status code of \"200\" for the response. Received[%d] %s", w.Code, failed)
 		}
-		t.Log("\tShould received a status code of \"200\" for the response.", succeed)
+		t.Log("\tShould receive a status code of \"200\" for the response.", succeed)
 
 		u := struct {
 			Name  string
 			Email string
 		}{}
 		if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
-			t.Fatal("\tShould be able to unmarshal the response.", failed)
+			t.Fatal("\tShould be able to decode the response.", failed)
 		}
-		t.Log("\tShould be able to unmarshal the response.", succeed)
+		t.Log("\tShould be able to decode the response.", succeed)
 
 		if u.Name == "Bill" {
 			t.Log("\tShould have \"Bill\" for Name in the response.", succeed)

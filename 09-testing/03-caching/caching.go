@@ -7,6 +7,8 @@
 // the hardware caches memory affects performance.
 package caching
 
+import "fmt"
+
 const cols = 64
 
 // Set the size of each row to be 4k.
@@ -30,7 +32,8 @@ func init() {
 			}
 		}
 	}
-	println(ctr, "Elements set out of", cols*rows)
+
+	fmt.Println(ctr, "Elements set out of", cols*rows)
 }
 
 // rowTraverse traverses the matrix linearly by each column for each row.
