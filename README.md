@@ -85,6 +85,7 @@ Open
 **_Corporate:_**  
 Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.
 
+[PowerChord Systems - May 13th-15th](http://www.powerchordsystem.com/)
 [Rackspace - May 27th-29th](http://www.racespace.com/)
 
 **_Bootcamps:_**  
@@ -97,9 +98,10 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 
 [Portland, OR : July 20th-21st](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
 [Denver, CO : July 7th](https://ti.to/gophercon/gophercon-2015)  
-[San Francisco, CA : July TBD]()
 
+[San Francisco, CA : August TBD]()  
 [Austin, TX : August TBD](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
+
 [Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
 **_Conferences:_**  
