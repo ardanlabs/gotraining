@@ -51,6 +51,10 @@ http://www.goinggo.net/
     -- Get all the material
     go get github.com/ArdanStudios/gotraining
 
+## Feedback Form
+
+https://ardanlabs.typeform.com/to/QzRgXk
+
 ## Classes and Pricing
 
 * Meetups  
