@@ -130,6 +130,9 @@ Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. Yo
 
 ## Testimonials
 
+ACL Services ([@ACLServices](https://twitter.com/ACLServices))  
+_"I'd just like to thank you again for just a phenomenal training session. The feedback from everyone was overwhelmingly positive. You probably could tell first hand that there were skeptics at first, but you’ve turned many into golang converts and we are really excited in growing golang adoption internally.”_
+
 Joshua Shuster ([@naysaier](https://twitter.com/naysaier))  
 _"I would consider Ardan Studio’s 3 day course to be invaluable. Bill and his staff, being some of the foremost authorities in the Go language, were able to make many of the complex go topics understandable. Covering everything from memory management, all the way up to building concurrency programs and web API's. It has given me the knowledge to write idiomatic Go, and make the best use of it’s features. I would highly their courses to anyone new to Go, or to anyone wanting to widen their existing knowledge."_
 
