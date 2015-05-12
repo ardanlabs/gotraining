@@ -72,7 +72,7 @@ func mockServer() *httptest.Server {
 // TestDownload validates the http Get function can download content and
 // the content can be unmarshaled and clean.
 func TestDownload(t *testing.T) {
-	statusCode := 200
+	statusCode := http.StatusOK
 
 	server := mockServer()
 	defer server.Close()
