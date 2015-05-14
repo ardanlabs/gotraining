@@ -10,7 +10,7 @@ package main
 // main is the entry point for the application.
 func main() {
 	// Constants live within the compiler.
-	// They have a paralell type system.
+	// They have a parallel type system.
 	// Compiler can perform implicit conversions of untyped constants.
 
 	// Untyped Constants.
