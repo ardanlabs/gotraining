@@ -23,7 +23,7 @@ func main() {
 func catchPanic(err *error) {
 	// Check if a panic occurred.
 	if r := recover(); r != nil {
-		fmt.Println("PANIC Defered")
+		fmt.Println("PANIC Deferred")
 
 		// Capture the stack trace
 		buf := make([]byte, 10000)
