@@ -35,7 +35,9 @@ func New(maxGoroutines int) *Pool {
 	for i := 0; i < maxGoroutines; i++ {
 		go func() {
 			for w := range p.work {
+				working++
 				w.Work()
+				working--
 			}
 			p.wg.Done()
 		}()
@@ -46,7 +48,9 @@ func New(maxGoroutines int) *Pool {
 
 // Run submits work to the pool.
 func (p *Pool) Run(w Worker) {
+	pushback++
 	p.work <- w
+	pushback--
 }
 
 // Shutdown waits for all the goroutines to shutdown.
