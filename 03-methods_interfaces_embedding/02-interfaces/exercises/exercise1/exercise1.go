@@ -1,12 +1,12 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/HQMkLBAjvR
+// http://play.golang.org/p/iHOEV4YEKr
 
 // Declare an interface named speaker with a method named sayHello. Declare a struct
 // named English that represents a person who speaks english and declare a struct named
 // Chinese for someone who speaks chinese. Implement the speaker interface for each
-// struct using a pointer receiver and these literal strings "Hello World" and "你好世界".
+// struct using a value receiver and these literal strings "Hello World" and "你好世界".
 // Declare a variable of type speaker and assign the _address of_ a value of type English
 // and call the method. Do it again for a value of type Chinese.
 //
