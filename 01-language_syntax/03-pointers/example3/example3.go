@@ -45,7 +45,7 @@ func increment(logins *int) {
 }
 
 // display declares u as user pointer variable whose value is always an address
-// and points to values of type dog.
+// and points to values of type user.
 func display(u *user) {
 	fmt.Printf("%p\t%+v\n", u, *u)
 }
