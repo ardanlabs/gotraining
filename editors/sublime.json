@@ -2,12 +2,6 @@
 	"env": {"GOPATH":"/Users/bill/Spaces/Go/Projects"},
 	"on_save":
 	[{
-	    "cmd": "gs9o_open", "args": {
-	        "run": ["goimports", "-w=true", "."],
-	        "focus_view": false
-		}
-	},
-	{
 		"cmd": "gs9o_open", "args": {
 	        "run": ["sh", "go build"],
 	        "focus_view": false
