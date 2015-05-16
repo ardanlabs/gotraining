@@ -1,10 +1,10 @@
 ## Functions - Language Syntax
 
-Functions are at the core of the language. They provide a mechanism to group and organize our code to separate and distinct pieces of functionality. They can be used to provide an API to the packages we write and are a core compontent to concurrency.
+Functions are at the core of the language. They provide a mechanism to group and organize our code to separate and distinct pieces of functionality. They can be used to provide an API to the packages we write and are a core component to concurrency.
 
 ## Notes
 
-* Functions can return mulitple values and most return an error value.
+* Functions can return multiple values and most return an error value.
 * The error value should always be checked as part of the programming logic.
 * The blank identifier can be used to ignore return values.
 

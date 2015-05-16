@@ -87,9 +87,8 @@ func checkShutdown() bool {
 	default:
 		// If the shutdown channel was not closed,
 		// presume with normal processing.
+		return false
 	}
-
-	return false
 }
 
 // processor provides the main program logic for the program.

@@ -105,5 +105,6 @@ func (p *Pool) Close() error {
 	for r := range p.resources {
 		r.Close()
 	}
+
 	return nil
 }

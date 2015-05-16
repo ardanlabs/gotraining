@@ -91,7 +91,7 @@ Given the following program, use the race detector to find and correct the race 
 	    wg.Done()
 	}
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/yBFA-MDcMw) | 
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/yBFA-MDcMw)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/wFTNvVoBpz))
 
 ___

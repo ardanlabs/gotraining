@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/kxcitARJZH
+// http://play.golang.org/p/vc6c1-M2EB
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -14,14 +14,17 @@ package main
 // Add Imports.
 
 // Declare a constant and set the value for the number of goroutines.
+
 // Declare a constant and set the value for the number of buffers.
 
 // Declare a wait group.
-// Declare a buffered channel of type string and initialize it.
+
+// Declare a buffered channel of type string and initialize it based on
+// the constant you declared above.
 
 // Declare a function for the goroutine that will process work
 // from the buffered channel.
-func worker( /* parameters */ ) {
+func worker(worker int) {
 	// Receive a string from the channel.
 
 	// Display the string.
@@ -33,12 +36,13 @@ func worker( /* parameters */ ) {
 
 // main is the entry point for all Go programs.
 func main() {
-	// Increment the wait group.
+	// Increment the wait group for the number of
+	// goroutines based on the value of the constant.
 
 	// Create the number if goroutines based on the
 	// value of the constant.
 
-	// Send resources into the buffered channel.
+	// Add strings in the buffered channel.
 
 	// Wait for all the work to get done.
 }

@@ -8,6 +8,7 @@ package toy
 type Toy struct {
 	Name   string
 	Weight int
+
 	onHand int
 	sold   int
 }

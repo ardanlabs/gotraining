@@ -35,7 +35,7 @@ func (m namePrinter) Work() {
 
 // main is the entry point for all Go programs.
 func main() {
-	// Create a work pool with 2 goroutines.
+	// Create a work pool with 4 goroutines.
 	p := work.New(4)
 
 	var wg sync.WaitGroup

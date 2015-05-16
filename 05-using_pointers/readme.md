@@ -1,17 +1,15 @@
 ## Using Pointers
 
-I like to think of types as having one of two natures. One nature is a type that represents a data value that should not be shared. Data values that are created using a built-in or reference type exhibit this primitive nature. These data values should always be passed using copies of the original. The other nature is a type that should be shared. Data values that are created using struct types exhibit this nature in most cases. These data values should always be passed by sharing them with a pointer.
-
-However, struct types can also exhibit a primitive nature like the built-in and reference types do. Struct types that represent time or coordinate data values are a good example of this. Understanding the nature of a type will help you determine how best to pass your data values between methods and functions.
+When creating a new type, try to answer this question before declaring methods. Does adding or removing something from a value of this type need to create a new value or mutate the existing one. If the answer is create a new value, then use value receivers, else use pointer receivers; and be consistent. This also applies to how values of this type should be passed to other parts of your program. Either, always use a value or a pointer, don’t mix it up. There are few exceptions to the rule.
 
 ## Notes
 
 * The nature of the type should determine how it is passed.
-* Types can implement primitive and non-primitive data.
-* Don't create structs with a duality of nature.
+* Types can implement primitive and non-primitive data qualities.
+* Don't declare structs with a duality of nature.
 * In general, don’t pass built-in type values with a pointer.
+* In general, don’t pass reference type values with a pointer unless you are implementing unmarshal type of functionality.
 * In general, pass struct type values with a pointer unless the struct type has been implemented to behave like a primitive data value.
-* In general, don’t pass reference type values with a pointer unless you are implementing an unmarshal type of functionality.
 
 ## Links
 

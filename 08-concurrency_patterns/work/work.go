@@ -22,8 +22,14 @@ type Pool struct {
 // New creates a new work pool.
 func New(maxGoroutines int) *Pool {
 	p := Pool{
-		work: make(chan Worker, maxGoroutines),
+		// Using an unbuffered channel because we want the
+		// guarentee of knowing the work being submitted is
+		// actually being worked on after the call to Run returns.
+		work: make(chan Worker),
 	}
+
+	// The goroutines are the pool. So we could add code
+	// to change the size of the pool later on.
 
 	p.wg.Add(maxGoroutines)
 	for i := 0; i < maxGoroutines; i++ {

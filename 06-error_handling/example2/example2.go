@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/iNrGaGYZ-o
+// https://play.golang.org/p/4YHAbpynl3
 
 // Sample program to show how to use error variables to help the
 // caller determine the exact error being returned.
@@ -29,7 +29,7 @@ func main() {
 			return
 
 		case ErrMovedPermanently:
-			fmt.Println("The URL moved, check it agaib")
+			fmt.Println("The URL moved, check it again")
 			return
 
 		default:

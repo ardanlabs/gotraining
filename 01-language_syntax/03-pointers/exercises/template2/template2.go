@@ -24,7 +24,7 @@ func main() {
 
 	// Display the value of the variable.
 
-	// Share the variable with the function you declared below.
+	// Share the variable with the function you declared above.
 
 	// Display the value of the variable.
 }
