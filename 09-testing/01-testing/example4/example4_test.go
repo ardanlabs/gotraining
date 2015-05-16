@@ -10,14 +10,14 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	ex "github.com/ArdanStudios/gotraining/09-testing/01-testing/example4"
+	"github.com/ardanstudios/gotraining/09-testing/01-testing/example4/handlers"
 )
 
 const succeed = "\u2713"
 const failed = "\u2717"
 
 func init() {
-	ex.Routes()
+	handlers.Routes()
 }
 
 // TestSendJSON testing the sendjson internal endpoint.

@@ -11,6 +11,11 @@ import (
 	"strconv"
 )
 
+// Routes sets the routes for the web service.
+func Routes() {
+	http.HandleFunc("/sendjson", SendJSON)
+}
+
 // SendJSON returns a simple JSON document.
 func SendJSON(rw http.ResponseWriter, r *http.Request) {
 	u := struct {
