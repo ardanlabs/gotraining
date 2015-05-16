@@ -24,13 +24,16 @@ The material has been designed to be taught in a classroom environment. The code
 	* A feel for writing code in an idiomatic style and syntax.
 	* Walk away with patterns and techniques for solving common problems. 
 
-## Before You Come Go Class
+## Before You Come To Class
 
 **Starter Material**  
 [Quick Tour](00-slides/quick_tour)
 
-**More Installation Help:**  
+**Mac Install**  
 http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
+
+**Windows Install** 
+http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
 
 **Start Learning:**  
 http://golang.org/  
