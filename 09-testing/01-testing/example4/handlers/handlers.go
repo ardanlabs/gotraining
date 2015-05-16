@@ -1,6 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
+// Package handlers provides the endpoints for the web service.
 package handlers
 
 import (
