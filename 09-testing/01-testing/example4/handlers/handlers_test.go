@@ -2,7 +2,7 @@
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
 // Sample test to show how to test the execution of an internal endpoint.
-package main_test
+package handlers_test
 
 import (
 	"encoding/json"

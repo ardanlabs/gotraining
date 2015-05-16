@@ -10,13 +10,7 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
-
-	"github.com/ardanstudios/gotraining/09-testing/01-testing/example4/handlers"
 )
-
-func init() {
-	handlers.Routes()
-}
 
 // ExampleSendJSON provides a basic example test example.
 func ExampleSendJSON() {
