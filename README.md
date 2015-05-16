@@ -26,23 +26,22 @@ The material has been designed to be taught in a classroom environment. The code
 
 ## Before You Come To Class
 
+**Install Go On Mac OS X**  
+http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
+
+**Install Go On Windows**  
+http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
+
 **Starter Material**  
 [Quick Tour](00-slides/quick_tour)
 
-**Mac Install**  
-http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
-
-**Windows Install** 
-http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
-
-**Start Learning:**  
+**Learn More:**  
 http://golang.org/  
 https://tour.golang.org/welcome/1  
 http://www.goinggo.net/
 
 ## Go Get The Material
 
-    -- Get all the material
     go get github.com/ArdanStudios/gotraining
 
 ## Feedback Form
@@ -54,11 +53,9 @@ https://ardanlabs.typeform.com/to/QzRgXk
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
 **_Corporate:_**  
-
 [Rackspace - May 27th-29th](http://www.racespace.com/)
 
 **_Enrollment:_**  
-
 [NYC, NY : June 10th-12th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 [Mexico : June 16th](http://magmaconf.com/)  
 
@@ -71,7 +68,6 @@ If you are interested in holding an event in your area please let me know. I wil
 [Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
 **_Conferences:_**  
-
 [MagmaConf : June 16th](http://magmaconf.com/)  
 [Gophercon : July 7th](http://gophercon.com/)  
 [OSCON : July 20th](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
