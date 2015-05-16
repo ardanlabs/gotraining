@@ -1,119 +1,72 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/aIES0zfHfg
+// http://play.golang.org/p/hvVA4zB9Bf
 
-// Declare a nail type using an empty struct. Then declare two interfaces, one
-// named nailDriver and the other named nailPuller. nailDriver has one method named
-// driveNail that accepts a slice of nails and returns a slice of nails. nailPuller
-// has one method named pullNail that also accepts and returns a slice of nails,
-// but also accepts the totalNails that exist.
+// Declare a struct type named animal with two fields name and age. Declare a struct
+// type named dog with the field bark. Embed the animal type into the dog type. Declare
+// and initalize a value of type dog. Display the value of the variable.
 //
-// Declare a tool type named clawhammer using an empty struct. Implement the
-// two interfaces using a value receiver. For the driveNail method, check that
-// the number of nails in the slice is not zero and then remove the first
-// element of the slice. For the pullNail method, check the number of nails in
-// the slice with the total nails and then append a new nail to the slice.
+// Declare a method named yelp to the animal type using a pointer reciever which displays the
+// literal string "Not Implemented". Call the method from the value of type dog.
 //
-// Declare a toolbox type with two fields named totalNails and nails. The
-// totalNails field will be of type int and the nails field will be a slice
-// of nails. Then embed the clawhammer tool inside the toolbox type. Declare a method
-// named addNails using a pointer reciever that accepts an integer for the number
-// of nails to add to the toolbox. Append that number of nail values to the slice
-// and set the totalNails field. Declare a method named nailCount using a pointer
-// receiver that returns the total number of nails in the slice and the value for
-// the totalNails field.
+// Declare an interface named yelper with a single method called yelp. Declare a value of
+// type yelper and assign the address of the value of type dog. Call the method yelp.
 //
-// Write a main function that creates a toolbox, adds nails to the toolbox,
-// displays the nail count, uses the clawhammer to fasten some nails, displays
-// the nail count again, unfastens the nails and displays the nail count one
-// more time.
+// Implement the yelper interface for the dog type. Be creative with the
+// bark field. Call the method yelp again from the value of type yelper.
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// nail represents a nail that is or is not fastened.
-type nail struct{}
-
-// nailDriver is implemented by tools to fasten nails.
-type nailDriver interface {
-	driveNail(nails []nail) []nail
+// yelper represents talking animals.
+type yelper interface {
+	yelp()
 }
 
-// nailPuller is implemented by tools to unfasten nails.
-type nailPuller interface {
-	pullNail(nails []nail, totalNails int) []nail
+// animal represents all animals.
+type animal struct {
+	name string
+	age  int
 }
 
-// clawhammer is a tool that operates on nails.
-type clawhammer struct{}
+// yelp represents how an animal can speak.
+func (a *animal) yelp() {
+	fmt.Println("Not Implemented")
+}
 
-// driveNail allows the clawhammer to fasten a nail.
-func (h clawhammer) driveNail(nails []nail) []nail {
-	if len(nails) == 0 {
-		return nails
+// dog represents a dog.
+type dog struct {
+	animal
+	bark int
+}
+
+// yelp represents how an animal can speak.
+func (d *dog) yelp() {
+	for bark := 0; bark < d.bark; bark++ {
+		fmt.Print("BARK ")
 	}
-
-	fmt.Println("Clawhammer: Fastened nail into the board.")
-	return nails[1:]
-}
-
-// pullNail allows the clawhammer to unfasten a nail.
-func (h clawhammer) pullNail(nails []nail, totalNails int) []nail {
-	if len(nails) == totalNails {
-		return nails
-	}
-
-	fmt.Println("Clawhammer: Unfastened nail from the board.")
-	return append(nails, nail{})
-}
-
-// toolbox can contains any number of tools.
-type toolbox struct {
-	totalNails int
-	nails      []nail
-	clawhammer
-}
-
-// addNails adds any number of nails to the toolbox.
-func (tb *toolbox) addNails(n int) {
-	for i := 0; i < n; i++ {
-		tb.nails = append(tb.nails, nail{})
-	}
-
-	tb.totalNails = len(tb.nails)
-}
-
-// nailCount returns the number of total nails and left in the box.
-func (tb *toolbox) nailCount() (total int, left int) {
-	return tb.totalNails, tb.totalNails - len(tb.nails)
+	fmt.Println()
 }
 
 // main is the entry point for the application.
 func main() {
-	// Create a toolbox.
-	var tb toolbox
+	// Create a value of type dog.
+	d := dog{
+		animal: animal{
+			name: "Chole",
+			age:  1,
+		},
+		bark: 10,
+	}
 
-	// Add 4 nails to the toolbox.
-	tb.addNails(4)
+	// Display the value.
+	fmt.Println(d)
 
-	// Display the nails we have in the toolbox.
-	total, left := tb.nailCount()
-	fmt.Println("Total:", total, "Left:", left)
-
-	// Fasten 2 of the nails using the clawhammer.
-	tb.nails = tb.clawhammer.driveNail(tb.nails)
-	tb.nails = tb.clawhammer.driveNail(tb.nails)
-
-	// Display the nails we have in the toolbox.
-	total, left = tb.nailCount()
-	fmt.Println("Total:", total, "Left:", left)
-
-	// Unfasten the 2 nails using the clawhammer.
-	tb.nails = tb.clawhammer.pullNail(tb.nails, tb.totalNails)
-	tb.nails = tb.clawhammer.pullNail(tb.nails, tb.totalNails)
-
-	// Display the nails we have in the toolbox.
-	total, left = tb.nailCount()
-	fmt.Println("Total:", total, "Left:", left)
+	// Use the interface.
+	var y yelper
+	y = &d
+	y.yelp()
 }
