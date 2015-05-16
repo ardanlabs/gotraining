@@ -1,21 +1,17 @@
-## Go Training Classes
+## Go Training
 [Click Here To Review The Course Material](00-slides/readme.md)
 
-## Bootcamp Tour
+## Hardcore Go
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has unusual properties that make effective Go programs different in character from programs written in its relatives. It balances the efficiency of a lower level systems language with the most important features of a high-level modern language. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go you can write less code and do so much more.
 
-The Ardan Labs Go Bootcamp is a 3 day class providing a comprehensive and idiomatic view of the Go programming language. The class covers topics ranging from language syntax, OOP, concurrency, channels, testing, debugging and more. Great for anyone interested in getting a jump start on learning Go or wanting to understand more about the language and internals.
+Hardcore Go is a 3 day class providing an intensive, comprehensive and idiomatic view of the Go programming language. The class explains at both a specification and implementation level, topics ranging from language syntax, OOP, concurrency, channels, testing, debugging and more. Great for anyone interested in getting a jump start on learning Go or wanting to understand more about the language and internals.
 
 [Bootcamp Tour](http://www.ardanlabs.com/go-bootcamp-tour)
 
-## Training
+## Minimal Qualified Student
 
-Training is broken into hourly and daily classes. The length of the class will determine which material is covered and whether exercises are used and to what extent.
-
-_Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class._
-
-**Minimal Qualified Student:**
+The material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class. Students with the following minimal background will get the most out of the class.
 
 * Programming
 	* Studied CS in school or has a minimum of two years of experience programming full time professionally.
@@ -27,13 +23,12 @@ _Note: This material has been designed to be taught in a classroom environment. 
     	* Knows how to maneuver around the file system.
     	* Understands what environment variables are.
 
-**What a student is expected to learn:**
+* What a student is expected to learn
+	* Thorough understanding of the language syntax and implementation.
+	* A feel for writing code in an idiomatic style and syntax.
+	* Walk away with patterns and techniques for solving common problems. 
 
-* Thorough understanding of the language syntax and implementation.
-* A feel for writing code in an idiomatic style and syntax.
-* Walk away with patterns and techniques for solving common problems. 
-
-## Getting Started
+## Before You Come Go Class
 
 **Starter Material**  
 [Quick Tour](00-slides/quick_tour)
@@ -46,7 +41,7 @@ http://golang.org/
 https://tour.golang.org/welcome/1  
 http://www.goinggo.net/
 
-## Getting the Material
+## Go Get The Material
 
     -- Get all the material
     go get github.com/ArdanStudios/gotraining
@@ -55,43 +50,15 @@ http://www.goinggo.net/
 
 https://ardanlabs.typeform.com/to/QzRgXk
 
-## Classes and Pricing
+## Current Classes
 
-* Meetups  
-* Workshops  
-* Corporate  
-* Bootcamps  
-* After Hours  
-* Conferences
-
-If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen.
-
-**_Meetups:_**   
-Have us speak at one of your Meetup events for free over Google hangout.
-
-Hangout:  
-Ask me to join your Meetup of Hangout.
-
-Open
-
-In Person:  
-[Go DC Meetup : May 13th](http://www.meetup.com/Golang-DC/events/220450459/)
-
-**_Workshops:_**   
-Want to put on a workshop event for a couple of hours or for a full day?
-
-Open
+If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
 **_Corporate:_**  
-Corporate full day classes are at $5,000 USD a day plus travel expenses. Corporate and group sponsors can have as many students in the class as they like. We recommend limiting it to 25 students or less.
 
-[PowerChord Systems - May 13th-15th](http://www.powerchordsystem.com/)
 [Rackspace - May 27th-29th](http://www.racespace.com/)
 
-**_Bootcamps:_**  
-Our bootcamp tour is in full swing. Check out all of the dates we haved scheduled.
-
-[McLean, VA : May 14th-16th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-virginia-may-tickets-14946167389)  
+**_Enrollment:_**  
 
 [NYC, NY : June 10th-12th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 [Mexico : June 16th](http://magmaconf.com/)  
@@ -105,7 +72,6 @@ Our bootcamp tour is in full swing. Check out all of the dates we haved schedule
 [Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
 **_Conferences:_**  
-You can find us at conferences being held all around the country and the world.
 
 [MagmaConf : June 16th](http://magmaconf.com/)  
 [Gophercon : July 7th](http://gophercon.com/)  
