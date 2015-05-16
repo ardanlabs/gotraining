@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/h0nMS_l1rO
+// http://play.golang.org/p/G7O-DnJrEA
 
 // Write a program where two goroutines pass an integer back and forth
 // ten times. Display when each goroutine receives the integer. Increment
@@ -14,22 +14,27 @@ package main
 // Declare a wait group variable.
 
 // Declare a function for the goroutine. Pass in a name for the
-// routine and a channel used to share the value back and forth.
+// routine and a channel of type int used to share the value back and forth.
 func goroutine( /* parameters */ ) {
 	for {
-		// Receive on the channel, waiting for the integer. Check
-		// if the channel is closed.
+		// Receive on the channel, waiting for the integer.
 
-		// Display the integer value received.
-
-		// Terminate the goroutine when the value is 10.
+		// Check if the channel is closed.
 		{
-			// Close the channel.
-			// Wait on the wait group to hit 0.
+			// Call done on the waitgroup.
 			// Display the goroutine is finished and return.
 		}
 
-		// Increment the value and send in back through
+		// Display the integer value received.
+
+		// Check is the value from the channel is 10.
+		{
+			// Close the channel.
+			// Call done on the waitgroup.
+			// Display the goroutine is finished and return.
+		}
+
+		// Increment the value by one and send in back through
 		// the channel.
 	}
 }

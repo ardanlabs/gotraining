@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/yApJg3-9e_
+// http://play.golang.org/p/K9gNyTRA0s
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -24,7 +24,7 @@ const (
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
-// resources is a buffered channel to manage resources.
+// resources is a buffered channel to manage strings.
 var resources = make(chan string, capacity)
 
 // main is the entry point for all Go programs.
@@ -35,7 +35,7 @@ func main() {
 		go worker(gr)
 	}
 
-	// Add the resources.
+	// Add the strings.
 	for rune := 'A'; rune < 'A'+capacity; rune++ {
 		resources <- string(rune)
 	}
@@ -47,13 +47,13 @@ func main() {
 // worker is launched as a goroutine to process work from
 // the buffered channel.
 func worker(worker int) {
-	// Receive a resource from the channel.
+	// Receive a string from the channel.
 	value := <-resources
 
 	// Display the value.
 	fmt.Printf("Worker: %d : %s\n", worker, value)
 
-	// Place the resource back.
+	// Place the string back.
 	resources <- value
 
 	// Tell main we are done.
