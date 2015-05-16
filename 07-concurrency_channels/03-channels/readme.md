@@ -41,8 +41,8 @@ Write a program where two goroutines pass an integer back and forth ten times. D
 ### Exercise 2
 Write a program that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/kxcitARJZH)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/x1HRyyAYhc))
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/tpd_yQzBlK)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/yApJg3-9e_))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

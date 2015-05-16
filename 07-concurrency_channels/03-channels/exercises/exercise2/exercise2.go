@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/x1HRyyAYhc
+// http://play.golang.org/p/yApJg3-9e_
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -21,13 +21,11 @@ const (
 	capacity   = 4
 )
 
-var (
-	// wg is used to wait for the program to finish.
-	wg sync.WaitGroup
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
 
-	// resources is a buffered channel to manage resources.
-	resources = make(chan string, capacity)
-)
+// resources is a buffered channel to manage resources.
+var resources = make(chan string, capacity)
 
 // main is the entry point for all Go programs.
 func main() {

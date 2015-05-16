@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/kxcitARJZH
+// http://play.golang.org/p/tpd_yQzBlK
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -14,9 +14,11 @@ package main
 // Add Imports.
 
 // Declare a constant and set the value for the number of goroutines.
+
 // Declare a constant and set the value for the number of buffers.
 
 // Declare a wait group.
+
 // Declare a buffered channel of type string and initialize it.
 
 // Declare a function for the goroutine that will process work
