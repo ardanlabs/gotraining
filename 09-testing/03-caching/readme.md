@@ -5,7 +5,7 @@ Understanding how the hardware works is an critical component to understanding h
 ## Acknowledgment
 This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
-[Cpu Caches and Why You Care](https://www.youtube.com/watch?v=WDIkqP4JbkE)
+[CPU Caches and Why You Care](https://www.youtube.com/watch?v=WDIkqP4JbkE)
 
 ## Notes
 
@@ -67,4 +67,3 @@ ___
 [![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___
 All material is licensed under the [GNU Free Documentation License](https://github.com/ArdanStudios/gotraining/blob/master/LICENSE).
-
