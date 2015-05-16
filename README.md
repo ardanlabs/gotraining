@@ -26,13 +26,13 @@ The material has been designed to be taught in a classroom environment. The code
 
 ## Before You Come To Class
 
-**Install Go On Mac OS X**  
+**Install Go On Mac OS X:**  
 http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
-**Install Go On Windows**  
+**Install Go On Windows:**  
 http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
 
-**Starter Material**  
+**Starter Material:**  
 [Quick Tour](00-slides/quick_tour)
 
 **Learn More:**  
@@ -52,10 +52,10 @@ https://ardanlabs.typeform.com/to/QzRgXk
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
-**_Corporate:_**  
+**Corporate:**  
 [Rackspace - May 27th-29th](http://www.racespace.com/)
 
-**_Enrollment:_**  
+**Enrollment:**  
 [NYC, NY : June 10th-12th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 [Mexico : June 16th](http://magmaconf.com/)  
 
@@ -67,7 +67,7 @@ If you are interested in holding an event in your area please let me know. I wil
 
 [Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
 
-**_Conferences:_**  
+**Conferences:**  
 [MagmaConf : June 16th](http://magmaconf.com/)  
 [Gophercon : July 7th](http://gophercon.com/)  
 [OSCON : July 20th](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
@@ -75,19 +75,19 @@ If you are interested in holding an event in your area please let me know. I wil
 ## Teachers
 
 William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
-Bill is a manaing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami.
+_Bill is a manaing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami._
 
 Kevin Gillette ([@kevingillette](https://twitter.com/kevingillette))  
-Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history.
+_Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history._
 
 Cory LaNou ([@corylanou](https://twitter.com/corylanou))  
-Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time.
+_Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time._
 
 Mark Bates ([@markbates](https://twitter.com/markbates))  
-Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv.
+_Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv._
 
 Jeremy Saenz ([@codegansta](https://twitter.com/codegangsta))
-Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. You have probably heard about one of his open source projects like Martini, Negroni, Gin, CLI and others. Jeremy is also the voice behind GopherCasts.io and loves teaching people about technology through his programming screencasts.
+_Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. You have probably heard about one of his open source projects like Martini, Negroni, Gin, CLI and others. Jeremy is also the voice behind GopherCasts.io and loves teaching people about technology through his programming screencasts._
 
 ## Testimonials
 
