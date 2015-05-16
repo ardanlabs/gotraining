@@ -1,13 +1,9 @@
-## Go Training
-[Click Here To Review The Course Material](00-slides/readme.md)
-
 ## Hardcore Go
+[Click Here To Review The Course Material](00-slides/readme.md)
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has unusual properties that make effective Go programs different in character from programs written in its relatives. It balances the efficiency of a lower level systems language with the most important features of a high-level modern language. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go you can write less code and do so much more.
 
 Hardcore Go is a 3 day class providing an intensive, comprehensive and idiomatic view of the Go programming language. The class explains at both a specification and implementation level, topics ranging from language syntax, OOP, concurrency, channels, testing, debugging and more. Great for anyone interested in getting a jump start on learning Go or wanting to understand more about the language and internals.
-
-[Bootcamp Tour](http://www.ardanlabs.com/go-bootcamp-tour)
 
 ## Minimal Qualified Student
 
