@@ -21,7 +21,7 @@ http://talks.golang.org/2012/chat.slide
 
 ## Code Review
 
-[Work](work)
+[Task](task)
 
 [Pooling](pool)
 

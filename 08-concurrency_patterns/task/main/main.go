@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/08-concurrency_patterns/work"
+	"github.com/ArdanStudios/gotraining/08-concurrency_patterns/task"
 )
 
 // names provides a set of names to display.
@@ -35,8 +35,8 @@ func (m namePrinter) Work() {
 
 // main is the entry point for all Go programs.
 func main() {
-	// Create a work pool with 4 goroutines.
-	p := work.New(4)
+	// Create a task pool with 4 goroutines.
+	t := task.New(4)
 
 	var wg sync.WaitGroup
 	wg.Add(10 * len(names))
@@ -51,9 +51,9 @@ func main() {
 			}
 
 			go func() {
-				// Submit the task to be worked on. When RunTask
-				// returns we know it is being handled.
-				p.Run(np)
+				// Submit the task to be worked on. When Do
+				// returns, we know it is being handled.
+				t.Do(np)
 				wg.Done()
 			}()
 		}
@@ -61,7 +61,7 @@ func main() {
 
 	wg.Wait()
 
-	// Shutdown the work pool and wait for all existing work
+	// Shutdown the task pool and wait for all existing work
 	// to be completed.
-	p.Shutdown()
+	t.Shutdown()
 }
