@@ -22,5 +22,5 @@ package main
 // BenchmarkFormat provides performance numbers for the strconv.FormatInt function.
 // strconv.FormatInt(number, 10)
 
-// BenchmarkAtoi provides performance numbers for the strconv.Atoi function.
+// BenchmarkItoa provides performance numbers for the strconv.Itoa function.
 // strconv.Itoa(number)

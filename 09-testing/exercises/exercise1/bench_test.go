@@ -38,8 +38,8 @@ func BenchmarkFormat(b *testing.B) {
 	}
 }
 
-// BenchmarkAtoi provides performance numbers for the strconv.Atoi function
-func BenchmarkAtoi(b *testing.B) {
+// BenchmarkItoa provides performance numbers for the strconv.Itoa function
+func BenchmarkItoa(b *testing.B) {
 	number := 10
 
 	for i := 0; i < b.N; i++ {
