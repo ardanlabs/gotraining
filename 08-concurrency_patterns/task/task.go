@@ -1,8 +1,8 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Package work manages a pool of goroutines to perform work.
-package work
+// Package task provides a pool of goroutines to perform tasks.
+package task
 
 import "sync"
 
@@ -12,16 +12,16 @@ type Worker interface {
 	Work()
 }
 
-// Pool provides a pool of goroutines that can execute any Worker
+// Task provides a pool of goroutines that can execute any Worker
 // tasks that are submitted.
-type Pool struct {
+type Task struct {
 	work chan Worker
 	wg   sync.WaitGroup
 }
 
 // New creates a new work pool.
-func New(maxGoroutines int) *Pool {
-	p := Pool{
+func New(maxGoroutines int) *Task {
+	t := Task{
 		// Using an unbuffered channel because we want the
 		// guarentee of knowing the work being submitted is
 		// actually being worked on after the call to Run returns.
@@ -31,26 +31,26 @@ func New(maxGoroutines int) *Pool {
 	// The goroutines are the pool. So we could add code
 	// to change the size of the pool later on.
 
-	p.wg.Add(maxGoroutines)
+	t.wg.Add(maxGoroutines)
 	for i := 0; i < maxGoroutines; i++ {
 		go func() {
-			for w := range p.work {
+			for w := range t.work {
 				w.Work()
 			}
-			p.wg.Done()
+			t.wg.Done()
 		}()
 	}
 
-	return &p
+	return &t
 }
 
-// Run submits work to the pool.
-func (p *Pool) Run(w Worker) {
-	p.work <- w
+// Do submits work to the pool.
+func (t *Task) Do(w Worker) {
+	t.work <- w
 }
 
 // Shutdown waits for all the goroutines to shutdown.
-func (p *Pool) Shutdown() {
-	close(p.work)
-	p.wg.Wait()
+func (t *Task) Shutdown() {
+	close(t.work)
+	t.wg.Wait()
 }
