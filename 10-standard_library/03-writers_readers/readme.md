@@ -20,15 +20,15 @@ http://golang.org/pkg/io/
 
 [Standard Library Working Together](example1/example1.go) ([Go Playground](http://play.golang.org/p/jlTo1IV1RQ))
 
-[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/W3YoitIiT-))
+[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/LY5P96Xrbl))
 
-[MultiWriters with curl example](example3/example3.go) ([Go Playground](http://play.golang.org/p/2PwJ2KDxDM))
+[MultiWriters with curl example](example3/example3.go) ([Go Playground](http://play.golang.org/p/OX6jTkWEF7))
 
 ## Advanced Code Review
 
 [TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/Tmt7v3fIQF))
 
-[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/4S7VHk7IJb))
+[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/JwuEob5GfV))
 
 ## Exercises
 
@@ -36,8 +36,8 @@ http://golang.org/pkg/io/
 
 Download any document from the web and display the content in the terminal and write it to a file at the same time.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/xfhFFVRxvf) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/_3-IOOYYFa))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/MxcJ581bt6) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/KtrDN1BStt))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

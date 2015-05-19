@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/I_6ETefhMp
+// http://play.golang.org/p/MxcJ581bt6
 
 // Download any document from the web and display the content in
 // the terminal and write it to a file at the same time.
@@ -13,6 +13,8 @@ package main
 func main() {
 	// Download the RSS feed for "http://www.goinggo.net/feeds/posts/default".
 	// Check for errors.
+
+	// Arrange for the response Body to be Closed using defer.
 
 	// Declare a slice of io.Writer interface values.
 
