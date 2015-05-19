@@ -20,7 +20,7 @@ type usersService struct{}
 var Users usersService
 
 // List retrieves a list of existing users from the database.
-func (us usersService) List(c *app.Context) ([]models.User, error) {
+func (usersService) List(c *app.Context) ([]models.User, error) {
 	log.Println(c.SessionID, ": services : Users : List : Started")
 
 	var u []models.User
@@ -44,7 +44,7 @@ func (us usersService) List(c *app.Context) ([]models.User, error) {
 }
 
 // Retrieve gets the specified user from the database.
-func (us usersService) Retrieve(c *app.Context, userID string) (*models.User, error) {
+func (usersService) Retrieve(c *app.Context, userID string) (*models.User, error) {
 	log.Println(c.SessionID, ": services : Users : Retrieve : Started")
 
 	if !bson.IsObjectIdHex(userID) {
@@ -74,7 +74,7 @@ func (us usersService) Retrieve(c *app.Context, userID string) (*models.User, er
 }
 
 // Create inserts a new user into the database.
-func (us usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, error) {
+func (usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, error) {
 	log.Println(c.SessionID, ": services : Users : Create : Started")
 
 	now := time.Now()
@@ -107,7 +107,7 @@ func (us usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, er
 }
 
 // Update replaces a user document in the database.
-func (us usersService) Update(c *app.Context, userID string, u *models.User) ([]app.Invalid, error) {
+func (usersService) Update(c *app.Context, userID string, u *models.User) ([]app.Invalid, error) {
 	log.Println(c.SessionID, ": services : Users : Update : Started")
 
 	if v, err := u.Validate(); err != nil {
@@ -150,7 +150,7 @@ func (us usersService) Update(c *app.Context, userID string, u *models.User) ([]
 }
 
 // Delete inserts a new user into the database.
-func (us usersService) Delete(c *app.Context, userID string) error {
+func (usersService) Delete(c *app.Context, userID string) error {
 	log.Println(c.SessionID, ": services : Users : Delete : Started")
 
 	if !bson.IsObjectIdHex(userID) {
