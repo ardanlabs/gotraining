@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/2PwJ2KDxDM
+// http://play.golang.org/p/OX6jTkWEF7
 
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-02-curl-go
 // Sample code provided by Jason Moiron
@@ -35,18 +35,19 @@ func init() {
 
 	if len(flag.Args()) != 1 {
 		fmt.Println("Usage: ./example3 [options] <url>")
-		os.Exit(-1)
+		os.Exit(2)
 	}
 }
 
 // main is the entry point for the application.
 func main() {
 	// r here is a response, and r.Body is an io.Reader
-	r, err := http.Get(flag.Args()[0])
+	resp, err := http.Get(flag.Args()[0])
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+	defer resp.Body.Close()
 
 	// A slice of io.Writers we will write the file to.
 	var writers []io.Writer
@@ -73,8 +74,8 @@ func main() {
 	dest := io.MultiWriter(writers...)
 
 	// Write to dest the same way as before, copying from the Body.
-	io.Copy(dest, r.Body)
-	if err := r.Body.Close(); err != nil {
+	_, err = io.Copy(dest, resp.Body)
+	if err != nil {
 		fmt.Println(err)
 	}
 }

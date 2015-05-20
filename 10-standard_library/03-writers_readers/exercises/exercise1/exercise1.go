@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/_3-IOOYYFa
+// http://play.golang.org/p/KtrDN1BStt
 
 // Download any document from the web and display the content in
 // the terminal and write it to a file at the same time.
@@ -17,11 +17,14 @@ import (
 // main is the entry point for the application.
 func main() {
 	// Retrieve the RSS feed for the blog.
-	r, err := http.Get("http://www.goinggo.net/feeds/posts/default")
+	resp, err := http.Get("http://www.goinggo.net/feeds/posts/default")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
+	// Arrange for the response Body to be Closed using defer.
+	defer resp.Body.Close()
 
 	// A slice of io.Writers we will write the file to.
 	var writers []io.Writer
@@ -45,8 +48,8 @@ func main() {
 	dest := io.MultiWriter(writers...)
 
 	// Write to dest the same way as before, copying from the Body.
-	io.Copy(dest, r.Body)
-	if err := r.Body.Close(); err != nil {
+	_, err = io.Copy(dest, resp.Body)
+	if err != nil {
 		fmt.Println(err)
 	}
 }

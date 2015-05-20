@@ -1,12 +1,12 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/4S7VHk7IJb
+// http://play.golang.org/p/JwuEob5GfV
 
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-03-curl-go
 // Sample code provided by Jason Moiron
 
-// ./example6 -o goinggo.gzip -s -z -md5 http://www.goinggo.net/feeds/posts/default
+// ./example2 -o goinggo.gzip -s -z -md5 http://www.goinggo.net/feeds/posts/default
 
 // Sample program that adds a few more features. If -z is passed, we want any
 // DestFile's to be gzipped. If -md5 is passed, we want print the md5sum of the
@@ -21,6 +21,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path/filepath"
 )
 
 // Config contains program configuration options.
@@ -40,8 +41,10 @@ func init() {
 	flag.Parse()
 
 	if len(flag.Args()) != 1 {
-		fmt.Println("Usage: ./example6 [options] <url>")
-		os.Exit(-1)
+		// determine the program name dynamically
+		prog := filepath.Base(os.Args[0])
+		fmt.Printf("Usage: %s [options] <url>\n", prog)
+		os.Exit(2)
 	}
 }
 
@@ -50,12 +53,13 @@ func main() {
 	// Capture the url from the arguments.
 	url := flag.Args()[0]
 
-	// r here is a response, and r.Body is an io.Reader.
-	r, err := http.Get(url)
+	// resp here is a response, and resp.Body is an io.Reader.
+	resp, err := http.Get(url)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+	defer resp.Body.Close()
 
 	// Our Md5 hash destination, which is an io.Writer that computes the
 	// hash of whatever is written to it.
@@ -98,8 +102,8 @@ func main() {
 	dest := io.MultiWriter(writers...)
 
 	// Write to dest the same way as before, copying from the Body.
-	io.Copy(dest, r.Body)
-	if err = r.Body.Close(); err != nil {
+	_, err = io.Copy(dest, resp.Body)
+	if err != nil {
 		fmt.Println(err)
 		return
 	}
