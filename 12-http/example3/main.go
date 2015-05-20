@@ -37,7 +37,7 @@ func main() {
 // usersHandler handles the /users api call.
 func usersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case "GET":
+	case "GET", "HEAD":
 		// List the users
 		respondJSON(w, http.StatusOK, users)
 
@@ -51,7 +51,9 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/users", http.StatusSeeOther)
 
 	default:
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		status := http.StatusMethodNotAllowed
+		w.Header().Set("Allow", "GET, HEAD, POST")
+		http.Error(w, http.StatusText(status), status)
 	}
 }
 
@@ -70,7 +72,7 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	http.Error(w, "Not Found", http.StatusNotFound)
+	http.NotFound(w, r)
 }
 
 // respondJSON writes the reponse for the api back to the caller
