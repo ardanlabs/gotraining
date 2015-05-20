@@ -35,11 +35,11 @@ func main() {
 }
 
 // usersHandler handles the /users api call.
-func usersHandler(rw http.ResponseWriter, r *http.Request) {
+func usersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		// List the users
-		respondJSON(rw, http.StatusOK, users)
+		respondJSON(w, http.StatusOK, users)
 
 	case "POST":
 		u := user{
@@ -48,29 +48,29 @@ func usersHandler(rw http.ResponseWriter, r *http.Request) {
 			Phone: r.PostFormValue("phone"),
 		}
 		users = append(users, u)
-		http.Redirect(rw, r, "/users", http.StatusSeeOther)
+		http.Redirect(w, r, "/users", http.StatusSeeOther)
 
 	default:
-		http.Error(rw, "Method Not Allowed", http.StatusMethodNotAllowed)
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 	}
 }
 
 // searchUsers handles the /search api call.
-func searchUsers(rw http.ResponseWriter, r *http.Request) {
+func searchUsers(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("q")
 	if query == "" {
-		http.Error(rw, "Query is required", http.StatusBadRequest)
+		http.Error(w, "Query is required", http.StatusBadRequest)
 		return
 	}
 
 	for _, u := range users {
 		if strings.Contains(u.Name, query) {
-			respondJSON(rw, http.StatusOK, u)
+			respondJSON(w, http.StatusOK, u)
 			return
 		}
 	}
 
-	http.Error(rw, "Not Found", http.StatusNotFound)
+	http.Error(w, "Not Found", http.StatusNotFound)
 }
 
 // respondJSON writes the reponse for the api back to the caller

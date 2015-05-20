@@ -26,7 +26,7 @@ func main() {
 // HelloHandler shows how the http Handlers are the universal interface for
 // handling http stuff, you will see that many Go developers rally around the
 // http.Handler interface.
-func HelloHandler(rw http.ResponseWriter, r *http.Request) {
+func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	// Fprintln is a nice way to write formatted text out to a io.Writer
-	fmt.Fprintln(rw, "Hello world")
+	fmt.Fprintln(w, "Hello world")
 }
