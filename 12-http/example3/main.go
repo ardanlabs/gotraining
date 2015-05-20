@@ -75,10 +75,9 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 	http.NotFound(w, r)
 }
 
-// respondJSON writes the reponse for the api back to the caller
-// in JSON.
-func respondJSON(w http.ResponseWriter, code int, val interface{}) error {
+// respondJSON sends status and writes JSON to the client.
+func respondJSON(w http.ResponseWriter, status int, val interface{}) error {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
+	w.WriteHeader(status)
 	return json.NewEncoder(w).Encode(val)
 }
