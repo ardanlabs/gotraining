@@ -78,7 +78,7 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 // respondJSON writes the reponse for the api back to the caller
 // in JSON.
 func respondJSON(w http.ResponseWriter, code int, val interface{}) error {
-	w.WriteHeader(code)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
 	return json.NewEncoder(w).Encode(val)
 }
