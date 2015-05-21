@@ -7,8 +7,11 @@ package main
 
 import (
 	"encoding/json"
+	"html/template"
+	"log"
 	"net/http"
 	"strings"
+	"sync"
 )
 
 // user represents a user in the system.
@@ -18,20 +21,46 @@ type user struct {
 	Phone string
 }
 
-// users is a slice of users.
-var users []user
+var (
+	// mu protects users.
+	mu sync.RWMutex
+	// initialize users, so that the output JSON won't be null
+	// prior to adding users.
+	users = make([]user, 0)
+)
+
+// index page template
+var IdxTpl = template.Must(template.ParseFiles("template/index.html"))
+
+// file server for any future assets and other static files
+var fs = http.FileServer(http.Dir("public"))
 
 func main() {
-	// Create a ServeMux and add some routes.
-	mux := http.NewServeMux()
-	mux.HandleFunc("/users", usersHandler)
-	mux.HandleFunc("/search", searchUsers)
+	// This will handle all paths without specific routes
+	http.HandleFunc("/", baseHandler)
 
-	// This will act as a catch all for the rest of the routes
-	mux.Handle("/", http.FileServer(http.Dir("public")))
+	// Create a ServeMux and add some routes.
+	api := http.NewServeMux()
+	api.HandleFunc("/users", usersHandler)
+	api.HandleFunc("/search", searchUsers)
+
+	http.Handle("/api/v1/", http.StripPrefix("/api/v1", api))
 
 	// Start the service.
-	http.ListenAndServe(":4000", mux)
+	bind := ":4000"
+	log.Println("Serving HTTP on", bind)
+	log.Fatalln(http.ListenAndServe(bind, nil))
+}
+
+func baseHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		fs.ServeHTTP(w, r)
+		return
+	}
+	mu.RLock()
+	data := struct{ Users []user }{users}
+	mu.RUnlock()
+	IdxTpl.Execute(w, data)
 }
 
 // usersHandler handles the /users api call.
@@ -39,7 +68,9 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET", "HEAD":
 		// List the users
+		mu.RLock()
 		respondJSON(w, http.StatusOK, users)
+		mu.RUnlock()
 
 	case "POST":
 		u := user{
@@ -47,8 +78,10 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 			Email: r.PostFormValue("email"),
 			Phone: r.PostFormValue("phone"),
 		}
+		mu.Lock()
 		users = append(users, u)
-		http.Redirect(w, r, "/users", http.StatusSeeOther)
+		mu.Unlock()
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 
 	default:
 		status := http.StatusMethodNotAllowed
