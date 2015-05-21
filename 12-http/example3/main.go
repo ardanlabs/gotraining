@@ -21,18 +21,16 @@ type user struct {
 	Phone string
 }
 
+// users is a simulated persistent data store
 var (
-	// mu protects users.
-	mu sync.RWMutex
-	// initialize users, so that the output JSON won't be null
-	// prior to adding users.
-	users = make([]user, 0)
+	mu    sync.RWMutex      // mu protects users
+	users = make([]user, 0) // initialized to avoid JSON null
 )
 
 // index page template
-var IdxTpl = template.Must(template.ParseFiles("template/index.html"))
+var idxTpl = template.Must(template.ParseFiles("template/index.html"))
 
-// file server for any future assets and other static files
+// fs is a file serving handler for static files
 var fs = http.FileServer(http.Dir("public"))
 
 func main() {
@@ -52,18 +50,21 @@ func main() {
 	log.Fatalln(http.ListenAndServe(bind, nil))
 }
 
+// baseHandler handles serving the index template and static assets.
 func baseHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		fs.ServeHTTP(w, r)
 		return
 	}
+
 	mu.RLock()
 	data := struct{ Users []user }{users}
 	mu.RUnlock()
-	IdxTpl.Execute(w, data)
+
+	idxTpl.Execute(w, data)
 }
 
-// usersHandler handles the /users api call.
+// usersHandler handles the /api/v1/users path.
 func usersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET", "HEAD":
@@ -78,9 +79,11 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 			Email: r.PostFormValue("email"),
 			Phone: r.PostFormValue("phone"),
 		}
+
 		mu.Lock()
 		users = append(users, u)
 		mu.Unlock()
+
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 
 	default:
@@ -90,7 +93,7 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// searchUsers handles the /search api call.
+// searchUsers handles the /api/v1/search path.
 func searchUsers(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("q")
 	if query == "" {
@@ -98,7 +101,11 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for _, u := range users {
+	mu.RLock()
+	list := users
+	mu.RUnlock()
+
+	for _, u := range list {
 		if strings.Contains(u.Name, query) {
 			respondJSON(w, http.StatusOK, u)
 			return
