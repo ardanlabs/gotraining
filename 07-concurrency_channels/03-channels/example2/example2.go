@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/5B1MxmDuZI
+// http://play.golang.org/p/0qJeU4GFnF
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a relay race between four goroutines.
@@ -12,6 +12,8 @@ import (
 	"sync"
 	"time"
 )
+
+const numRunners = 4
 
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
@@ -45,7 +47,7 @@ func Runner(baton chan int) {
 	fmt.Printf("Runner %d Running With Baton\n", runner)
 
 	// New runner to the line.
-	if runner != 4 {
+	if runner < numRunners {
 		newRunner = runner + 1
 		fmt.Printf("Runner %d To The Line\n", newRunner)
 		go Runner(baton)
@@ -55,7 +57,7 @@ func Runner(baton chan int) {
 	time.Sleep(100 * time.Millisecond)
 
 	// Is the race over.
-	if runner == 4 {
+	if runner >= numRunners {
 		fmt.Printf("Runner %d Finished, Race Over\n", runner)
 		wg.Done()
 		return
