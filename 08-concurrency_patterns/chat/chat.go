@@ -174,7 +174,7 @@ func (r *Room) start() {
 }
 
 // Close shutdown the chatroom and closes all connections.
-func (r *Room) Close() {
+func (r *Room) Close() error {
 	// Don't accept anymore client connections.
 	r.listener.Close()
 
@@ -186,6 +186,7 @@ func (r *Room) Close() {
 	for _, c := range r.clients {
 		c.drop()
 	}
+	return nil
 }
 
 // New creates a new chatroom.
