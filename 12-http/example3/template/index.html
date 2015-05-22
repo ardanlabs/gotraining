@@ -2,6 +2,16 @@
 <html>
   <head>
     <title>Sample Form</title>
+    <style>
+      th {
+        text-align: left;
+        padding-right: 10px;
+      }
+      td {
+        text-align: left;
+        padding-right: 10px;
+      }
+    </style>
   </head>
   <body>
     <h1>Add User</h1>
@@ -18,9 +28,11 @@
     <thead>
       <tr><th>Name</th><th>Email</th><th>Phone</th></tr>
     </thead>
+    <tbody>
     {{range .Users}}
       <tr><td>{{.Name}}</td><td>{{.Email}}</td><td>{{.Phone}}</td></tr>
     {{end}}
+    </tbody>
     </table>
   {{else}}
     <p>(no users)</p>
