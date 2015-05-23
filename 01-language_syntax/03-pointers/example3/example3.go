@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/cK1_GFyDOo
+// http://play.golang.org/p/VYqb11RiWr
 
 // Sample program to show the basic concept of using a pointer
 // to share data.
@@ -25,7 +25,7 @@ func main() {
 	}
 
 	//** We don't need to include all the fields when specifying field
-	// names with a composite literal.
+	// names with a struct literal.
 
 	// Pass the "address of" the bill value.
 	display(&bill)

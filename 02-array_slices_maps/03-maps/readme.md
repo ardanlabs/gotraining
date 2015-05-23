@@ -18,7 +18,7 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 [Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/voXAyiydFf))
 
-[Composite literal initialization](example2/example2.go) ([Go Playground](http://play.golang.org/p/htR56-yyqC))
+[Map literal initialization](example2/example2.go) ([Go Playground](http://play.golang.org/p/ekemu8ZfBu))
 
 [Map key restrictions](example3/example3.go) ([Go Playground](http://play.golang.org/p/0v_VHlYF7f))
 
