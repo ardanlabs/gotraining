@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/ZuB82kgz2K
+// http://play.golang.org/p/1CL1ACDipG
 
 // Alignment is about placing types on boundaries that make the
 // CPU access the fastest.
@@ -24,7 +24,7 @@ type example struct {
 // main is the entry point for the application.
 func main() {
 	// Declare variable of type example and init using
-	// a composite literal.
+	// a struct literal.
 	e := example{
 		flag:    true,
 		counter: 10,
@@ -32,7 +32,7 @@ func main() {
 	}
 
 	// Declare variable of type example and init using
-	// a composite literal.
+	// a struct literal.
 	eNext := example{
 		flag:    true,
 		counter: 10,

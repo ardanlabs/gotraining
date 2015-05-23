@@ -16,13 +16,13 @@ http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 ## Code Review
 
-[Declare, create and initalize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/Sl-vYp7pp_))
+[Declare, create and initalize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/-oeDmu2et8))
 
-[Anonymous struct types](example2/example2.go) ([Go Playground](http://play.golang.org/p/N2DjPVAWLJ))
+[Anonymous struct types](example2/example2.go) ([Go Playground](http://play.golang.org/p/_xxuE1Ep6U))
 
 ## Advanced Code Review
 
-[Struct type alignments](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/ZuB82kgz2K))
+[Struct type alignments](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/1CL1ACDipG))
 
 ## Exercises
 
