@@ -7,7 +7,7 @@ Testing is built right into the go tools and the standard library. Testing needs
 * The Go toolset has support for testing and benchmarking.
 * The tools are very flexible and give you many options.
 * Write tests in tandem with development.
-* "Example" tests serve as both a test and documentation.
+* Example code serve as both a test and documentation.
 * Benchmark throughout the dev, qa and release cycles.
 * If performance problems are observed, profile your code to see what functions to focus on.
 * The tools can interfere with each other. For example, precise memory profiling skews CPU profiles, goroutine blocking profiling affects scheduler trace, etc. Rerun tests for each needed profiling mode.
