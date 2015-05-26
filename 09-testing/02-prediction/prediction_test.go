@@ -15,7 +15,7 @@ import (
 )
 
 func BenchmarkPredictable(b *testing.B) {
-	data := make([]byte, 1024)
+	data := make([]uint8, 1024)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
@@ -24,7 +24,7 @@ func BenchmarkPredictable(b *testing.B) {
 }
 
 func BenchmarkUnpredictable(b *testing.B) {
-	data := make([]byte, 1024)
+	data := make([]uint8, 1024)
 	rand.Seed(0)
 
 	// Fill data with (pseudo) random noise
