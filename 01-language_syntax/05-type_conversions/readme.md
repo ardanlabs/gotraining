@@ -1,6 +1,6 @@
 ## Type Conversions - Language Syntax
 
-Go is a strict type safe lanaguage so typed values must be explicitly converted from one type to the other. Untyped constants on the other hand can be implicitly converted by the compiler. These values exist in a kind system and have more flexibility. In these examples we will learn about named types and how the time package uses them, in conjuction with constants, to provide both a flexible and type safe API.
+Go is a strict type safe language so typed values must be explicitly converted from one type to the other. Untyped constants on the other hand can be implicitly converted by the compiler. These values exist in a kind system and have more flexibility. In these examples we will learn about named types and how the time package uses them, in conjuction with constants, to provide both a flexible and type safe API.
 
 ## Notes
 
