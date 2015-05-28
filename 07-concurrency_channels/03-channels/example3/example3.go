@@ -50,7 +50,7 @@ func performInserts() {
 	}
 
 	// Process the insert results as they complete.
-	for {
+	for waitResponses > 0 {
 		// Wait for a response from a goroutine.
 		err := <-ch
 
@@ -63,9 +63,6 @@ func performInserts() {
 
 		// Decrement the wait count and determine if we are done.
 		waitResponses--
-		if waitResponses == 0 {
-			break
-		}
 	}
 
 	log.Println("Inserts Complete")
