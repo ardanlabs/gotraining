@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/0v_VHlYF7f
+// http://play.golang.org/p/qaUV475Zf0
 
 // Sample program to show how only types that can have
 // equality defined on them can be a map key.
@@ -22,8 +22,7 @@ type users []user
 
 // main is the entry point for the application.
 func main() {
-	// Declare and make a map uses a slice
-	// of users as the key.
+	// Declare and make a map uses a slice of users as the key.
 	u := make(map[users]int)
 
 	// ./example3.go:24: invalid map key type users

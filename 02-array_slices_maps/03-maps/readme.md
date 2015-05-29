@@ -16,11 +16,11 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 ## Code Review
 
-[Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/voXAyiydFf))
+[Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/ZgPw0LU_Nv))
 
-[Map literal initialization](example2/example2.go) ([Go Playground](http://play.golang.org/p/ekemu8ZfBu))
+[Map literal initialization](example2/example2.go) ([Go Playground](http://play.golang.org/p/hC1o26x7Q5))
 
-[Map key restrictions](example3/example3.go) ([Go Playground](http://play.golang.org/p/0v_VHlYF7f))
+[Map key restrictions](example3/example3.go) ([Go Playground](http://play.golang.org/p/qaUV475Zf0))
 
 ## Advanced Code Review
 
