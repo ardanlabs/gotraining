@@ -15,7 +15,7 @@ const cols = 64
 //const rows = 4 * 1024
 
 // Set the size of each row to be 64k.
-//const rows = 64 * 1024
+const rows = 64 * 1024
 
 // matrix represents a set of columns that each exist on
 // their own cache line.
