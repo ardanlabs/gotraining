@@ -2,32 +2,43 @@
 
 [Click Here To Review The Course Material](00-slides/readme.md)
 
-Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has unusual properties that make effective Go programs different in character from programs written in its relatives. It balances the efficiency of a lower level systems language with the most important features of a high-level modern language. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go you can write less code and do so much more.
+Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
-Hardcore Go is a 3 day class providing an intensive, comprehensive and idiomatic view of the Go programming language. The class explains at both a specification and implementation level, topics ranging from language syntax, OOP, concurrency, channels, testing, debugging and more. Great for anyone interested in getting a jump start on learning Go or wanting to understand more about the language and internals.
+## What You Will Learn
 
-## Other Languages
+Hardcore Go is a 3 day class for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. This class provides an intensive, comprehensive and idiomatic view of the language. We focus on both the specification and implementation of the language, including topics ranging from language syntax, Go’s type system, concurrency, channels, testing and more. We believe this class is perfect for anyone who wants a jump start in learning Go or who wants a more thorough understanding of the language and its internals.
 
-[Korean](https://github.com/subaklab/gotraining/)
+## Roadmap
+
+* Language Syntax
+* Arrays, Slices and Maps
+* Methods, Interfaces and Embedding
+* Packaging and Exporting
+* Using Pointers
+* Error Handling
+* Concurrency, Race Conditions and Channels
+* Concurrency Patterns
+* Testing and Debugging
+* Standard Library
+* Reflections
+* HTTP
 
 ## Minimal Qualified Student
 
 The material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class. Students with the following minimal background will get the most out of the class.
 
-* Programming
-	* Studied CS in school or has a minimum of two years of experience programming full time professionally.
-	* Familiar with structural and object oriented programming styles.
-	* Has worked with arrays, lists, queues and stacks.
-	* Understands processes, threads and synchronization at a high level.
-	* Operating Systems
-    	* Has worked with a command shell.
-    	* Knows how to maneuver around the file system.
-    	* Understands what environment variables are.
+* Studied CS in school or has a minimum of two years of experience programming full time professionally.
+* Familiar with structural and object oriented programming styles.
+* Has worked with arrays, lists, queues and stacks.
+* Understands processes, threads and synchronization at a high level.
+* Operating Systems
+	* Has worked with a command shell.
+	* Knows how to maneuver around the file system.
+	* Understands what environment variables are.
 
-* What a student is expected to learn
-	* Thorough understanding of the language syntax and implementation.
-	* A feel for writing code in an idiomatic style and syntax.
-	* Walk away with patterns and techniques for solving common problems. 
+## Other Languages
+
+[Korean](https://github.com/subaklab/gotraining/)
 
 ## Before You Come To Class
 
