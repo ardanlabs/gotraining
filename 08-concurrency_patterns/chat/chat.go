@@ -13,6 +13,12 @@ import (
 	"sync"
 )
 
+// temporary is declared to test for the existance of the method coming
+// from the net package.
+type temporary interface {
+	Temporary() bool
+}
+
 // message is the data received and sent to users in the chatroom.
 type message struct {
 	data string
@@ -43,7 +49,7 @@ func (c *client) read() {
 			continue
 		}
 
-		if e, ok := err.(*net.OpError); ok && !e.Temporary() {
+		if e, ok := err.(temporary); ok && !e.Temporary() {
 			log.Println("Temporary: Client leaving chat")
 			c.wg.Done()
 			return
@@ -155,7 +161,7 @@ func (r *Room) start() {
 			conn, err := r.listener.Accept()
 			if err != nil {
 				// Check if the error is temporary or not.
-				if e, ok := err.(*net.OpError); ok {
+				if e, ok := err.(temporary); ok {
 					if !e.Temporary() {
 						log.Println("Temporary: Chat room shutting down")
 						r.wg.Done()
