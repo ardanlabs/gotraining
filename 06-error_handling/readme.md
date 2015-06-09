@@ -27,9 +27,11 @@ http://dave.cheney.net/2014/12/24/inspecting-errors
 
 [Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/4YHAbpynl3))
 
-[Custom Error Types](example3/example3.go) ([Go Playground](http://play.golang.org/p/Eu3X54PnWm))
+[Type As Context](example3/example3.go) ([Go Playground](http://play.golang.org/p/Eu3X54PnWm))
 
-[Special B](example4/example4.go) ([Go Playground](http://play.golang.org/p/czXpjvWWTT))
+[Bahvior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/6GYqwSxHjI))
+
+[Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/czXpjvWWTT))
 
 ## Exercises
 
