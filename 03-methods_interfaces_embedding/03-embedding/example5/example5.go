@@ -69,6 +69,20 @@ type toolbox struct {
 // contractor carries out the task of securing boards.
 type contractor struct{}
 
+// fasten will drive nails into a board.
+func (contractor) fasten(d nailDriver, nailSupply *int, b *board) {
+	for b.nailsDriven < b.nailsNeeded {
+		d.driveNail(nailSupply, b)
+	}
+}
+
+// unfasten will remove nails from a board.
+func (contractor) unfasten(p nailPuller, nailSupply *int, b *board) {
+	for b.nailsDriven > b.nailsNeeded {
+		p.pullNail(nailSupply, b)
+	}
+}
+
 // processBoards works against boards.
 func (c contractor) processBoards(dp nailDrivePuller, nailSupply *int, boards []board) {
 	for i := range boards {
@@ -83,20 +97,6 @@ func (c contractor) processBoards(dp nailDrivePuller, nailSupply *int, boards []
 		case b.nailsDriven > b.nailsNeeded:
 			c.unfasten(dp, nailSupply, b)
 		}
-	}
-}
-
-// fasten will drive nails into a board.
-func (contractor) fasten(d nailDriver, nailSupply *int, b *board) {
-	for b.nailsDriven < b.nailsNeeded {
-		d.driveNail(nailSupply, b)
-	}
-}
-
-// unfasten will remove nails from a board.
-func (contractor) unfasten(p nailPuller, nailSupply *int, b *board) {
-	for b.nailsDriven > b.nailsNeeded {
-		p.pullNail(nailSupply, b)
 	}
 }
 
