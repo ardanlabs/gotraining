@@ -40,8 +40,8 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part E** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/a-Nzng_E6Z)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hvVA4zB9Bf))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/zyXy90YfeY)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hVFMZSUGI6))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
