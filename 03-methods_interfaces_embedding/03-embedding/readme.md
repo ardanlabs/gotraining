@@ -24,7 +24,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Outer and inner type interface implementations](example4/example4.go) ([Go Playground](https://play.golang.org/p/jfOfrRMPZR))
 
-[Composition](example5/example5.go) ([Go Playground](https://play.golang.org/p/BRedBxki6R))
+[Composition](example5/example5.go) ([Go Playground](http://play.golang.org/p/QKIjbBDW16))
 
 ## Exercises
 
