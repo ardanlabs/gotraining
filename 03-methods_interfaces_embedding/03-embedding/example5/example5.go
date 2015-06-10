@@ -127,25 +127,23 @@ func main() {
 	}
 
 	// Fill a toolbox.
-	tb := &toolbox{
+	tb := toolbox{
 		nailDriver: mallet{},
 		nailPuller: crowbar{},
 		nails:      10,
 	}
 
-	// Hire a contractor.
-	var c contractor
-
 	// Display the current state of our toolbox and boards.
-	displayState(tb, boards)
+	displayState(&tb, boards)
 
 	fmt.Println()
 
-	// Put our contractor to work.
-	c.processBoards(tb, &tb.nails, boards)
+	// Hire a contractor and put our contractor to work.
+	var c contractor
+	c.processBoards(&tb, &tb.nails, boards)
 
 	fmt.Println()
 
 	// Display the new state of our toolbox and boards.
-	displayState(tb, boards)
+	displayState(&tb, boards)
 }
