@@ -30,13 +30,15 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ### Exercise 1
 
-**Part A** Declare a struct type named animal with two fields name and age. Declare a struct type named dog with the field bark. Embed the animal type into the dog type. Declare and initalize a value of type dog. Display the value of the variable.
+**Part A** Follow the guided comments to:
 
-**Part B** Add a method to the animal type using a pointer reciever named yelp which displays the literal string "Not Implemented". Call the method from the value of type dog.
+**Part B** Declare a sysadmin type that implements the administrator interface.
 
-**Part C** Add an interface named yelper with a single method called yelp. Declare a value of type yelper and assign the address of the value of type dog. Call the method yelp.
+**Part C** Declare a programmer type that implements the developer interface.
 
-**Part D** Implement the yelper interface for the dog type. Be creative with the bark field. Call the method yelp again from the value of type yelper.
+**Part D** Declare a company type that embeds both an administrator and a developer.
+
+**Part E** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/a-Nzng_E6Z)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hvVA4zB9Bf))
