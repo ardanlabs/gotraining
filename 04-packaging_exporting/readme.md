@@ -5,7 +5,7 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 ## Notes
 
 * Code in go is complied into packages and then linked together.
-* Identifiers are either be exported or unexported from a package.
+* Identifiers are exported (or remain unexported) based on letter-case.
 * We import packages to access exported identifiers.
 * Any package can use a value of an unexported type.
 
