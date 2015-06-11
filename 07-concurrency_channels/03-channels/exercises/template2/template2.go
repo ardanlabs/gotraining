@@ -39,7 +39,7 @@ func main() {
 	// Increment the wait group for the number of
 	// goroutines based on the value of the constant.
 
-	// Create the number if goroutines based on the
+	// Create the number of goroutines based on the
 	// value of the constant.
 
 	// Add strings in the buffered channel.
