@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/jT4-vZBpMm
+// http://play.golang.org/p/T3QupG_7_X
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
@@ -13,9 +13,6 @@ import (
 	"math/rand"
 	"time"
 )
-
-// numInserts of inserts to perform.
-const numInserts = 10
 
 // init called before main.
 func init() {
@@ -32,25 +29,26 @@ func main() {
 func performInserts() {
 	log.Println("Inserts Started")
 
+	// Set the number of routines and inserts.
+	const routines = 10
+	const inserts = routines * 2
+
 	// Buffered channel to receive information about any possible insert.
-	ch := make(chan error, numInserts)
+	ch := make(chan error, inserts)
 
 	// Number of responses we need to handle.
-	var waitResponses int
+	waitInserts := inserts
 
-	// Perform any possible number of inserts.
-	for i := 0; i < numInserts; i++ {
-		// Do we need to insert document A?
-		if isNecessary() {
-			waitResponses++
-			go func(id int) {
-				ch <- insertDoc(id)
-			}(i)
-		}
+	// Perform all the inserts.
+	for i := 0; i < routines; i++ {
+		go func(id int) {
+			ch <- insertDoc1(id)
+			ch <- insertDoc2(id)
+		}(i)
 	}
 
 	// Process the insert results as they complete.
-	for waitResponses > 0 {
+	for waitInserts > 0 {
 		// Wait for a response from a goroutine.
 		err := <-ch
 
@@ -62,30 +60,32 @@ func performInserts() {
 		}
 
 		// Decrement the wait count and determine if we are done.
-		waitResponses--
+		waitInserts--
 	}
 
 	log.Println("Inserts Complete")
 }
 
-// insertDoc simulates a database operation.
-func insertDoc(id int) error {
-	log.Println("Insert document: ", id)
+// insertDoc1 simulates a database operation.
+func insertDoc1(id int) error {
+	log.Println("Insert document 1: ", id)
 
 	// Randomize if the insert fails or not.
-	if rand.Intn(2) == 0 {
+	if rand.Intn(10) == 0 {
 		return fmt.Errorf("Document ID: %d", id)
 	}
 
 	return nil
 }
 
-// isNecessary determine if we need to perform the insert.
-func isNecessary() bool {
-	// Randomize if this insert is necessary or not.
-	if rand.Intn(2) == 0 {
-		return true
+// insertDoc2 simulates a database operation.
+func insertDoc2(id int) error {
+	log.Println("Insert document 2: ", id)
+
+	// Randomize if the insert fails or not.
+	if rand.Intn(10) == 0 {
+		return fmt.Errorf("Document ID: %d", id)
 	}
 
-	return false
+	return nil
 }
