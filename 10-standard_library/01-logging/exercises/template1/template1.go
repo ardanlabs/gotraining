@@ -39,5 +39,5 @@ func main() {
 	// Create a slice of strings and initialize with names.
 	// Log the values of the slice.
 
-	// Use the Fataln function.
+	// Use the Fatalln function.
 }
