@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/aizhjTO-br
+// http://play.golang.org/p/nZnkHsGj_P
 
 // Sample program to show how to takes slices of slices to create different
 // views of and make changes to the underlying array.
@@ -33,7 +33,7 @@ func main() {
 	// Length:   4 - 2
 	// Capacity: 8 - 2
 
-	// Parameters are starting index : ending index + 1
+	// Parameters are [starting_index : (starting_index + length)
 	slice2 := slice1[2:4]
 	inspectSlice(slice2)
 
