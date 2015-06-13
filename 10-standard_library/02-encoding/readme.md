@@ -29,7 +29,7 @@ http://www.goinggo.net/2014/01/decode-json-documents-in-go.html
 
 **Part B** Marshal the slice into pretty print strings and display each element.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/OkIHsVwMQ7) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/OkIHsVwMQ7)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/Huf8jEDUJO))
 
 ___
