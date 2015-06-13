@@ -1,6 +1,6 @@
 ## Standard Library
 
-The Go standard library is a set of core packages that enhance and extend the language. These packages add to the number of different types of programs you an write without the need to build your own packages or download packages others have published. Since these packages are tied to the language, they come with some special guarantees that make the standard library special and something you want to leverage as much as possible.
+The Go standard library is a set of core packages that enhance and extend the language. These packages add to the number of different types of programs you can write without the need to build your own packages or download packages others have published. Since these packages are tied to the language, they come with some special guarantees that make the standard library special and something you want to leverage as much as possible.
 
 ## Guarantees
 
