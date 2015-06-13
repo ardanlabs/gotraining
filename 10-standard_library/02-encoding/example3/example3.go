@@ -63,7 +63,7 @@ func main() {
 	}
 
 	// Convert the byte slice to a string and display.
-	fmt.Printf("%s\n\n", string(r1))
+	fmt.Printf("%s\n\n", r1)
 
 	// Marshal the buoyStation value into a pretty-print
 	// JSON string representation.
