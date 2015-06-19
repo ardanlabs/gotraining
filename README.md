@@ -69,16 +69,15 @@ https://ardanlabs.typeform.com/to/QzRgXk
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
 **Corporate:**  
-[Rackspace - May 27th-29th](http://www.racespace.com/)
+TBA
 
 **Enrollment:**  
-[NYC, NY : June 10th-12th](https://www.eventbrite.com/e/go-programming-bootcamp-tour-nyc-june-tickets-14946227569)  
 [Mexico : June 16th](http://magmaconf.com/)  
 
 [Portland, OR : July 20th-21st](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
 [Denver, CO : July 7th](https://ti.to/gophercon/gophercon-2015)  
 
-[San Francisco, CA : August TBD]()  
+[San Francisco, CA : August TBA]()  
 [Austin, TX : August TBD](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
 
 [Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
