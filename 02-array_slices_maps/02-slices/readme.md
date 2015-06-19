@@ -31,9 +31,9 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 [Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/d1kRkbZ-iV))
 
-[Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/nZnkHsGj_P))
-
 [Appending slices](example4/example4.go) ([Go Playground](http://play.golang.org/p/UzmwiMWDwd))
+
+[Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/nZnkHsGj_P))
 
 [Strings and slices](example5/example5.go) ([Go Playground](http://play.golang.org/p/6CAkumo0HI))
 
