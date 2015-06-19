@@ -17,13 +17,13 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
 #### Hardcore Go
 
-[Day One](day_1_training.md)  |  
-[Day Two](day_2_training.md)  |  
+[Day One](day_1_training.md) | 
+[Day Two](day_2_training.md) | 
 [Day Three](day_3_training.md)
 
 #### Hardcore Go - Advanced
 
-[Day Four](day_4_training.md)  |   
+[Day Four](day_4_training.md) | 
 [Day Five](day_5_training.md)
 
 ___
