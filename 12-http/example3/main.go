@@ -1,6 +1,8 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
+// https://play.golang.org/p/-dhowrDOO4
+
 // Sample program to show how to use a ServeMux from the standard
 // library. How to handle verbs and more complex routing.
 package main
@@ -23,14 +25,21 @@ type user struct {
 
 // app contains package level state for the web service.
 var app = struct {
-	mu     sync.RWMutex
-	users  []user
+	// Mutex for safe access.
+	mu sync.RWMutex
+
+	// In-Memory data store. Initialized to avoid JSON null.
+	users []user
+
+	// idxTpl maintains access to the page template.
 	idxTpl *template.Template
-	fs     http.Handler
+
+	// fs is a file serving handler for static files.
+	fs http.Handler
 }{
-	users:  make([]user, 0),                                           // Initialized to avoid JSON null.
-	idxTpl: template.Must(template.ParseFiles("template/index.html")), // idxTpl maintains access to the page template.
-	fs:     http.FileServer(http.Dir("public")),                       // fs is a file serving handler for static files.
+	users:  make([]user, 0),
+	idxTpl: template.Must(template.ParseFiles("template/index.html")),
+	fs:     http.FileServer(http.Dir("public")),
 }
 
 func main() {
@@ -42,7 +51,9 @@ func main() {
 	api.HandleFunc("/users", usersHandler)
 	api.HandleFunc("/search", searchUsers)
 
-	// TODO: Describe what this is doing.
+	// We are stripping out the prefix (/api/v1/) before the
+	// route will be handled. This allows the routes above
+	// to be compliant with this prefix.
 	http.Handle("/api/v1/", http.StripPrefix("/api/v1", api))
 
 	// Start the service.
@@ -59,45 +70,62 @@ func baseHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Execute the template and respond with the results.
+	// Capture a safe copy of the slice header.
+	var data []user
 	app.mu.RLock()
 	{
-		data := struct{ Users []user }{app.users}
-		app.idxTpl.Execute(w, data)
+		data = app.users
 	}
 	app.mu.RUnlock()
+
+	// Create a value for the template with this
+	// slice header.
+	users := struct {
+		Users []user
+	}{
+		data,
+	}
+
+	// Execute the template for the users and send the
+	// result to the client.
+	app.idxTpl.Execute(w, users)
 }
 
 // usersHandler handles the /api/v1/users path.
 func usersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET", "HEAD":
-		// Respond the current slice of users.
+		// Capture a safe copy of the slice header.
+		var users []user
 		app.mu.RLock()
 		{
-			respondJSON(w, http.StatusOK, app.users)
+			users = app.users
 		}
 		app.mu.RUnlock()
 
+		// Response to the client with these users.
+		respondJSON(w, http.StatusOK, users)
+
 	case "POST":
-		// Add a new user to the slice.
+		// Create a new user value.
 		u := user{
 			Name:  r.PostFormValue("name"),
 			Email: r.PostFormValue("email"),
 			Phone: r.PostFormValue("phone"),
 		}
 
+		// Add the new user to the in-memory datastore.
 		app.mu.Lock()
 		{
 			app.users = append(app.users, u)
 		}
 		app.mu.Unlock()
 
-		// TODO: Please explain this redirect and status?
+		// Redirect the client to the home page.
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 
 	default:
-		// TODO: Please explain this code.
+		// We don't support these verbs. Let the user know.
 		status := http.StatusMethodNotAllowed
 		w.Header().Set("Allow", "GET, HEAD, POST")
 		http.Error(w, http.StatusText(status), status)
@@ -138,6 +166,7 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 
 // respondJSON sends status and writes JSON to the client.
 func respondJSON(w http.ResponseWriter, status int, val interface{}) error {
+	// Standard way to respond back to the client.
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	return json.NewEncoder(w).Encode(val)

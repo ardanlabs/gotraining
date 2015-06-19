@@ -1,6 +1,8 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
+// https://play.golang.org/p/leTrm6v1yG
+
 // Sample program to show how to implement a handler function
 // with the http package.
 package main

@@ -10,10 +10,8 @@ package app
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 
 	"gopkg.in/mgo.v2"
 )
@@ -71,12 +69,9 @@ func (c *Context) Respond(v interface{}, code int) {
 		log.Panicf("%v : api : Respond [%d] : Failed: %v", c.SessionID, code, err)
 	}
 
-	datalen := len(data) + 1 // account for trailing LF
-	h := c.Header()
-	h.Set("Content-Type", "application/json")
-	h.Set("Content-Length", strconv.Itoa(datalen))
+	c.Header().Set("Content-Type", "application/json")
 	c.WriteHeader(code)
-	fmt.Fprintf(c, "%s\n", data)
+	json.NewEncoder(c).Encode(data)
 
 	log.Printf("%v : api : Respond [%d] : Completed", c.SessionID, code)
 }

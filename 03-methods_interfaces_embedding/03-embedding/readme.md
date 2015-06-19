@@ -24,11 +24,20 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Outer and inner type interface implementations](example4/example4.go) ([Go Playground](https://play.golang.org/p/jfOfrRMPZR))
 
-[Composition](example5/example5.go) ([Go Playground](http://play.golang.org/p/QKIjbBDW16))
+## Advanced Code Review
+
+[Composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/QKIjbBDW16))
 
 ## Exercises
 
 ### Exercise 1
+
+Copy the code from the template. Declare a new type called hockey which embeds the sports type. Implement the matcher interface for hockey. When implementing the Search method for hockey, call into the Search method for the embedded sport type to check the embedded fields first. Then create two hockey values inside the slice of matchers and perform the search.
+
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/c9Qrsq8QFe) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/4uJObo_ItN))
+
+### Exercise 2
 
 **Part A** Follow the guided comments to:
 
@@ -40,8 +49,8 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part E** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/zyXy90YfeY)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hVFMZSUGI6))
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/zyXy90YfeY)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/hVFMZSUGI6))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

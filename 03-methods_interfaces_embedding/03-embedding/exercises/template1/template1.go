@@ -1,114 +1,57 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/zyXy90YfeY
+// http://play.golang.org/p/c9Qrsq8QFe
 
-// Follow the guided comments to:
-//
-// Declare a sysadmin type that implements the administrator interface.
-//
-// Declare a programmer type that implements the developer interface.
-//
-// Declare a company type that embeds both an administrator and a developer.
-//
-// Create a sysadmin, programmers, and a company which are available for hire,
-// and use them to complete some predefined tasks.
+// Copy the code from the template. Declare a new type called hockey
+// which embeds the sports type. Implement the matcher interface for hockey.
+// When implementing the Search method for hockey, call into the Search method
+// for the embedded sport type to check the embedded fields first. Then create
+// two hockey values inside the slice of matchers and perform the search.
 package main
 
-// Add import(s).
+import "strings"
 
-// administrator represents a person or other entity capable of administering
-// hardware and software infrastructure.
-type administrator interface {
-	administrate(system string)
+// matcher defines the behavior required for performing searches.
+type matcher interface {
+	Search(searchTerm string) bool
 }
 
-// developer represents a person or other entity capable of writing software.
-type developer interface {
-	develop(system string)
+// sport represents a sports team.
+type sport struct {
+	team string
+	city string
 }
 
-// tasks contains a set of systems we must administer or develop.
-var tasks = []struct {
-	system     string
-	needsDev   bool
-	needsAdmin bool
-}{
-	{system: "exercise1", needsDev: true},
-	{system: "server5", needsAdmin: true},
-	{system: "project-omega", needsDev: true},
-}
-
-// Declare a struct type named sysadmin: it should have a name field.
-
-// Define an administrate method on the sysadmin type, implementing the
-// administrator interface.  administrate should print out the name of the
-// sysadmin, as well as the system they are administering.
-
-// Declare a struct type named programmer: it should have a name field.
-
-// Define a develop method on the programmer type, implementing the developer
-// interface.  develop should print out the name of the programmer, as well as
-// the system they are developing.
-
-// Declare a struct type named company: it should embed administrator and developer.
-
-func main() {
-	// Create a variable named admins of type adminlist.
-
-	// Create a variable named devs of type devlist.
-
-	// Push a new sysadmin onto admins.
-
-	// Push two new programmers onto devs.
-
-	// Create a variable named techfirm of type company, and initialize it by
-	// hiring (popping) an administrator from admins and a developer from devs.
-
-	// Push techfirm onto both devs and admins (we can now transparently
-	// outsource to techfirm for development and administrative needs).
-
-	// Iterate over tasks.
-	for _, task := range tasks {
-		// Check if the task needs a developer. If so, pop a developer from devs,
-		// print its type information, and have it develop the system.
-
-		// Check if the task needs an administrator. If so, pop an administrator from
-		// admins, print its type information, and have it administrate the system.
-
+// Search checks the value for the specified term.
+func (s sport) Search(searchTerm string) bool {
+	if strings.Contains(s.team, searchTerm) ||
+		strings.Contains(s.city, searchTerm) {
+		return true
 	}
+
+	return false
 }
 
-// adminlist represents a group of administrators.
-type adminlist struct {
-	list []administrator
+// Declare a struct type named hockey that represents specific
+// hockey information. Have it embed the sport type first.
+
+// Implement the matcher interface for hockey.
+func ( /* receiver type */ ) Search(searchTerm string) bool {
+	// Make sure you call into Search method for the embedded
+	// sport type.
+
+	// Implement the search for the new fields.
+	return false
 }
 
-// pushAdmin adds an administrator to the adminlist.
-func (l *adminlist) pushAdmin(a administrator) {
-	l.list = append(l.list, a)
-}
+// main is the entry point for the application.
+func main() {
+	// Define the term to search.
 
-// popAdmin removes an administrator from the adminlist.
-func (l *adminlist) popAdmin() administrator {
-	a := l.list[0]
-	l.list = l.list[1:]
-	return a
-}
+	// Create a slice of matcher values to search.
 
-// devlist represents a group of developers.
-type devlist struct {
-	list []developer
-}
+	// Display what we are searching for.
 
-// pushDev adds a developer to the devlist.
-func (l *devlist) pushDev(d developer) {
-	l.list = append(l.list, d)
-}
-
-// popDev removes a developer from the devlist.
-func (l *devlist) popDev() developer {
-	d := l.list[0]
-	l.list = l.list[1:]
-	return d
+	// Range of each matcher value and check the search term.
 }

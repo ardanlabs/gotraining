@@ -22,11 +22,11 @@ http://www.restapitutorial.com/httpstatuscodes.html
 
 ## Code Review
 
-[Hello World Server](example1/main.go)  
+[Hello World Server](example1/main.go) ([Go Playground](https://play.golang.org/p/leTrm6v1yG))
 
-[1 Line File Server](example2/main.go)  
+[1 Line File Server](example2/main.go) ([Go Playground](https://play.golang.org/p/Qmj_C5PEs1))
 
-[Request and Response Basics](example3/main.go)  
+[Request and Response Basics](example3/main.go) ([Go Playground](https://play.golang.org/p/-dhowrDOO4))
 
 ## Advanced Code Review
 
