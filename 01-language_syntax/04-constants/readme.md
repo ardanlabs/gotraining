@@ -19,7 +19,7 @@ http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 ## Code Review
 
-[Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/OLuzwK1oHT))
+[Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/fkQx0inUJ3))
 
 [Parallel type system (Kind)](example2/example2.go) ([Go Playground](http://play.golang.org/p/ExxRWe6jUz))
 
