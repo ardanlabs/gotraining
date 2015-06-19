@@ -21,9 +21,9 @@ http://play.golang.org/p/ki991PuHhk
 
 [Primitive Types](example1/example1.go) ([Go Playground](https://play.golang.org/p/H5HRoElN6q))
 
-[Struct Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/xD6PCx--GG))
-
 [Reference Types](example3/example3.go) ([Go Playground](https://play.golang.org/p/E-Bb5cRuyz))
+
+[Struct Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/xD6PCx--GG))
 
 ## Exercises
 
