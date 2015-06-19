@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/T3QupG_7_X
+// http://play.golang.org/p/yOn3nZU5rf
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
@@ -13,6 +13,13 @@ import (
 	"math/rand"
 	"time"
 )
+
+// result is what is sent back from each operation.
+type result struct {
+	id  int
+	op  string
+	err error
+}
 
 // init called before main.
 func init() {
@@ -34,7 +41,7 @@ func performInserts() {
 	const inserts = routines * 2
 
 	// Buffered channel to receive information about any possible insert.
-	ch := make(chan error, inserts)
+	ch := make(chan result, inserts)
 
 	// Number of responses we need to handle.
 	waitInserts := inserts
@@ -42,22 +49,22 @@ func performInserts() {
 	// Perform all the inserts.
 	for i := 0; i < routines; i++ {
 		go func(id int) {
-			ch <- insertDoc1(id)
-			ch <- insertDoc2(id)
+			ch <- insertUser(id)
+
+			// We don't need to wait to start the second insert
+			// thanks to the buffered channel. The first send
+			// will happen immediately.
+			ch <- insertTrans(id)
 		}(i)
 	}
 
 	// Process the insert results as they complete.
 	for waitInserts > 0 {
 		// Wait for a response from a goroutine.
-		err := <-ch
+		r := <-ch
 
 		// Display the result.
-		if err != nil {
-			log.Println("Received error:", err)
-		} else {
-			log.Println("Received nil error")
-		}
+		log.Printf("ID: %d OP: %s ERR: %v", r.id, r.op, r.err)
 
 		// Decrement the wait count and determine if we are done.
 		waitInserts--
@@ -66,26 +73,32 @@ func performInserts() {
 	log.Println("Inserts Complete")
 }
 
-// insertDoc1 simulates a database operation.
-func insertDoc1(id int) error {
-	log.Println("Insert document 1: ", id)
+// insertUser simulates a database operation.
+func insertUser(id int) result {
+	r := result{
+		id: id,
+		op: fmt.Sprintf("insert USERS value (%d)", id),
+	}
 
 	// Randomize if the insert fails or not.
 	if rand.Intn(10) == 0 {
-		return fmt.Errorf("Document ID: %d", id)
+		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
 	}
 
-	return nil
+	return r
 }
 
-// insertDoc2 simulates a database operation.
-func insertDoc2(id int) error {
-	log.Println("Insert document 2: ", id)
+// insertTrans simulates a database operation.
+func insertTrans(id int) result {
+	r := result{
+		id: id,
+		op: fmt.Sprintf("insert TRANS value (%d)", id),
+	}
 
 	// Randomize if the insert fails or not.
 	if rand.Intn(10) == 0 {
-		return fmt.Errorf("Document ID: %d", id)
+		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
 	}
 
-	return nil
+	return r
 }
