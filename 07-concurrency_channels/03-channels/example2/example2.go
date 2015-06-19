@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/q_0Q4SgUVZ
+// http://play.golang.org/p/AzJuQsPG3a
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a relay race between four goroutines.
@@ -12,10 +12,6 @@ import (
 	"sync"
 	"time"
 )
-
-// maxExchanges represents the number of exchanges
-// the baton will make.
-const maxExchanges = 4
 
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
@@ -40,6 +36,9 @@ func main() {
 
 // Runner simulates a person running in the relay race.
 func Runner(track chan int) {
+	// The number of exchanges of the baton.
+	const maxExchanges = 4
+
 	var exchange int
 
 	// Wait to receive the baton.
