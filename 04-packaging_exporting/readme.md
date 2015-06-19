@@ -27,9 +27,7 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 
 [Unexported struct type fields](example4/example4.go)
 
-[Exported embedded types](example5/example5.go)
-
-[Unexported embedded types](example6/example6.go)
+[Unexported embedded types](example5/example5.go)
 
 ## Exercises
 

@@ -4,14 +4,14 @@
 // Package animals provides support for animals.
 package animals
 
-// Animal represents information about all animals.
-type Animal struct {
+// animal represents information about all animals.
+type animal struct {
 	Name string
 	Age  int
 }
 
 // Dog represents information about dogs.
 type Dog struct {
-	Animal
+	animal       // The embedded type is unexported.
 	BarkStrength int
 }
