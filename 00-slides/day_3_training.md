@@ -1,5 +1,5 @@
 ## Go Training - Day 3
-On this day we continue go deeper into Go. We learn about concurrency patterns, testing, benchmarking, profilng, logging, encoding, io, and reflection.
+On this day we continue go deeper into Go. We learn about concurrency patterns, testing, benchmarking, debugging, logging, encoding, io, and reflection.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
