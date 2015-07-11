@@ -9,13 +9,16 @@ On this day we dive deeper into Go. We learn about packaging, exporting, error h
 #### Using Pointers
 [Nature Of Types](../05-using_pointers/readme.md)
 
+#### Composition
+[Composition](../06-composition/readme.md)
+
 #### Error Handling
-[Error Handling](../06-error_handling/readme.md)
+[Error Handling](../07-error_handling/readme.md)
 
 #### Concurrency, Race Conditions and Channels
-[Goroutines](../07-concurrency_channels/01-goroutines/readme.md) | 
-[Race Conditions](../07-concurrency_channels/02-race_conditions/readme.md) | 
-[Channels](../07-concurrency_channels/03-channels/readme.md)
+[Goroutines](../08-concurrency_channels/01-goroutines/readme.md) | 
+[Race Conditions](../08-concurrency_channels/02-race_conditions/readme.md) | 
+[Channels](../08-concurrency_channels/03-channels/readme.md)
 
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)

@@ -15,12 +15,13 @@ Hardcore Go is a 3 day class for any intermediate-level developer who has some e
 * Methods, Interfaces and Embedding
 * Packaging and Exporting
 * Using Pointers
+* Composition
 * Error Handling
 * Concurrency, Race Conditions and Channels
 * Concurrency Patterns
 * Testing and Debugging
 * Standard Library
-* Reflections
+* Reflection
 * HTTP
 
 ## Minimal Qualified Student
