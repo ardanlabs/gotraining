@@ -1,3 +1,7 @@
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
+// Sample program demonstrating composition through embedding.
 package main
 
 import (
@@ -6,34 +10,40 @@ import (
 	"github.com/ArdanStudios/gotraining/06-composition/example1/game"
 )
 
+// Building declares a building in the game.
 type Building struct {
 	name string
 	game.Object
 	game.Location
 }
 
+// Draw is how a building is drawn.
 func (b *Building) Draw() {
 	fmt.Printf("[B] %+v\n", *b)
 }
 
 // *****************************************************************************
 
+// Cloud declares a cloud in the game.
 type Cloud struct {
 	kind string
 	game.Object
 	game.Location
 }
 
+// Draw is how a cloud is drawn.
 func (c *Cloud) Draw() {
 	fmt.Printf("[C] %+v\n", *c)
 }
 
+// Change is how a cloud can change shape.
 func (c *Cloud) Change(length float64, volume float64, mass float64) {
 	c.Length = length
 	c.Volume = volume
 	c.Mass = mass
 }
 
+// Move is how a cloud can move.
 func (c *Cloud) Move(x int, y int) {
 	c.X += x
 	c.Y += y
@@ -41,28 +51,34 @@ func (c *Cloud) Move(x int, y int) {
 
 // *****************************************************************************
 
-type Player struct {
+// Person declares a person in the game.
+type Person struct {
 	name string
 	game.Object
 	game.Location
 }
 
-func (p *Player) Draw() {
+// Draw is how a person is drawn.
+func (p *Person) Draw() {
 	fmt.Printf("[P] %+v\n", *p)
 }
 
-func (p *Player) Move(x int, y int) {
+// Move is how a person moves.
+func (p *Person) Move(x int, y int) {
 	p.X = x
 	p.Y = y
 }
 
-func (p *Player) Hide(b bool) {
+// Hide is how a person can become invisible.
+func (p *Person) Hide(b bool) {
 	p.Visible = !b
 }
 
 // *****************************************************************************
 
+// main is the entry point for the application.
 func main() {
+	// Create a building.
 	b := Building{
 		name: "NY Times",
 		Object: game.Object{
@@ -78,6 +94,7 @@ func main() {
 		},
 	}
 
+	// Create a cloud.
 	c := Cloud{
 		kind: "cirrus",
 		Object: game.Object{
@@ -93,7 +110,8 @@ func main() {
 		},
 	}
 
-	p := Player{
+	// Create a person.
+	p := Person{
 		name: "Bill",
 		Object: game.Object{
 			Length:  72,
@@ -107,6 +125,10 @@ func main() {
 			Y: 33464,
 		},
 	}
+
+	// Using the game display functions, pass the
+	// correct object type through. The compiler will
+	// provide checks based on interface implementation.
 
 	game.DisplaySolidFixed(&b)
 	game.DisplayLiquid(&c)

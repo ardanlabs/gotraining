@@ -12,12 +12,11 @@ Composition goes beyond the mechanics of type embedding. It's a design pattern w
 
 http://golang.org/doc/effective_go.html#embedding
 
-
 ## Code Review
 
-[Struct Composition](example1/example1.go)
+[Composition I](example1) ([Go Playground](https://play.golang.org/p/fXcd5vS6hX | https://play.golang.org/p/i0FXxWTS1p))
 
-[Interface Composition](example2/example2.go)
+[Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/QKIjbBDW16))
 
 ## Exercises
 
