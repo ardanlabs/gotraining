@@ -91,6 +91,7 @@ func main() {
 
 	game.Draw(&c)
 	game.Move(&c, 30, 12)
+	game.Change(&c, 6000, 5e10, 9091232)
 
 	p := Player{
 		name: "Bill",

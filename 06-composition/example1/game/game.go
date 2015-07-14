@@ -43,6 +43,10 @@ func Draw(d Drawer) {
 	d.Draw()
 }
 
+func Change(c Changer, length float64, volume float64, mass float64) {
+	c.Change(length, volume, mass)
+}
+
 func Move(m Mover, x int, y int) {
 	m.Move(x, y)
 }
