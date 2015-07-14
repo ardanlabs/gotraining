@@ -7,10 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ArdanStudios/gotraining/12-http/api/app"
-	"github.com/ArdanStudios/gotraining/12-http/api/models"
-	"github.com/ArdanStudios/gotraining/12-http/api/routes"
-	"github.com/ArdanStudios/gotraining/12-http/api/tests"
+	"github.com/ArdanStudios/gotraining/13-http/api/app"
+	"github.com/ArdanStudios/gotraining/13-http/api/models"
+	"github.com/ArdanStudios/gotraining/13-http/api/routes"
+	"github.com/ArdanStudios/gotraining/13-http/api/tests"
 	"gopkg.in/mgo.v2/bson"
 )
 

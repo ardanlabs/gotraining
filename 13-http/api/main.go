@@ -8,7 +8,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/ArdanStudios/gotraining/12-http/api/routes"
+	"github.com/ArdanStudios/gotraining/13-http/api/routes"
 )
 
 // init is called before main. We are using init to customize logging output.
