@@ -3,6 +3,8 @@
 
 package game
 
+import "fmt"
+
 type Object struct {
 	Length float64
 	Volume float64
@@ -13,6 +15,13 @@ type Object struct {
 
 	Visible bool
 }
+
+type Location struct {
+	X int
+	Y int
+}
+
+// *****************************************************************************
 
 type Drawer interface {
 	Draw()
@@ -26,31 +35,38 @@ type Hider interface {
 	Hide(b bool)
 }
 
-// *****************************************************************************
-
-type Location struct {
-	X int
-	Y int
-}
-
 type Mover interface {
 	Move(x int, y int)
 }
 
 // *****************************************************************************
 
-func Draw(d Drawer) {
-	d.Draw()
+type Solid interface {
+	Drawer
+	Hider
+	Mover
 }
 
-func Change(c Changer, length float64, volume float64, mass float64) {
-	c.Change(length, volume, mass)
+type SolidFixed interface {
+	Drawer
 }
 
-func Move(m Mover, x int, y int) {
-	m.Move(x, y)
+type Liquid interface {
+	Drawer
+	Changer
+	Mover
 }
 
-func Hide(h Hider, b bool) {
-	h.Hide(b)
+// *****************************************************************************
+
+func DisplaySolid(s Solid) {
+	fmt.Println("Solid:", s)
+}
+
+func DisplaySolidFixed(sf SolidFixed) {
+	fmt.Println("SolidFixed:", sf)
+}
+
+func DisplayLiquid(l Liquid) {
+	fmt.Println("Liquid:", l)
 }

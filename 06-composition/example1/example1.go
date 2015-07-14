@@ -16,6 +16,8 @@ func (b *Building) Draw() {
 	fmt.Printf("[B] %+v\n", *b)
 }
 
+// *****************************************************************************
+
 type Cloud struct {
 	kind string
 	game.Object
@@ -37,6 +39,8 @@ func (c *Cloud) Move(x int, y int) {
 	c.Y += y
 }
 
+// *****************************************************************************
+
 type Player struct {
 	name string
 	game.Object
@@ -56,6 +60,8 @@ func (p *Player) Hide(b bool) {
 	p.Visible = !b
 }
 
+// *****************************************************************************
+
 func main() {
 	b := Building{
 		name: "NY Times",
@@ -72,8 +78,6 @@ func main() {
 		},
 	}
 
-	game.Draw(&b)
-
 	c := Cloud{
 		kind: "cirrus",
 		Object: game.Object{
@@ -88,10 +92,6 @@ func main() {
 			Y: 33464,
 		},
 	}
-
-	game.Draw(&c)
-	game.Move(&c, 30, 12)
-	game.Change(&c, 6000, 5e10, 9091232)
 
 	p := Player{
 		name: "Bill",
@@ -108,7 +108,7 @@ func main() {
 		},
 	}
 
-	game.Draw(&p)
-	game.Move(&p, 300, 123)
-	game.Hide(&p, false)
+	game.DisplaySolidFixed(&b)
+	game.DisplayLiquid(&c)
+	game.DisplaySolid(&p)
 }
