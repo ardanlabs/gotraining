@@ -20,4 +20,18 @@ http://golang.org/doc/effective_go.html#embedding
 
 ## Exercises
 
-### Exercise 1
+### Exercise 2
+
+**Part A** Follow the guided comments to:
+
+**Part B** Declare a sysadmin type that implements the administrator interface.
+
+**Part C** Declare a programmer type that implements the developer interface.
+
+**Part D** Declare a company type that embeds both an administrator and a developer.
+
+**Part E** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
+
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/zyXy90YfeY)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/hVFMZSUGI6))
+

@@ -33,21 +33,6 @@ Copy the code from the template. Declare a new type called hockey which embeds t
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/c9Qrsq8QFe)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/4uJObo_ItN))
 
-### Exercise 2
-
-**Part A** Follow the guided comments to:
-
-**Part B** Declare a sysadmin type that implements the administrator interface.
-
-**Part C** Declare a programmer type that implements the developer interface.
-
-**Part D** Declare a company type that embeds both an administrator and a developer.
-
-**Part E** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
-
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/zyXy90YfeY)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/hVFMZSUGI6))
-
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)

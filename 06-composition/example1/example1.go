@@ -1,136 +1,132 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// Sample program demonstrating composition through embedding.
 package main
 
-import (
-	"fmt"
+import "fmt"
 
-	"github.com/ArdanStudios/gotraining/06-composition/example1/game"
-)
+// *****************************************************************************
+// Set of behaviors.
 
-// Building declares a building in the game.
-type Building struct {
-	name string
-	game.Object
-	game.Location
+// drawer is behvior for drawing an object.
+type drawer interface {
+	draw()
 }
 
-// Draw is how a building is drawn.
-func (b *Building) Draw() {
-	fmt.Printf("[B] %+v\n", *b)
+// changer is behvior for an object to change shape.
+type changer interface {
+	change(length float64, volume float64, mass float64)
+}
+
+// hider is behavior for an object to hide itself.
+type hider interface {
+	hide(b bool)
+}
+
+// mover is behavior for an object to move.
+type mover interface {
+	move(x int, y int)
 }
 
 // *****************************************************************************
+// Set of objects that exhibit different behaviors.
 
-// Cloud declares a cloud in the game.
-type Cloud struct {
-	kind string
-	game.Object
-	game.Location
+// building contain this behavior.
+type building interface {
+	drawer
 }
 
-// Draw is how a cloud is drawn.
-func (c *Cloud) Draw() {
+// cloud contain this behavior.
+type cloud interface {
+	drawer
+	changer
+	mover
+}
+
+// person contain this behavior.
+type person interface {
+	drawer
+	hider
+	mover
+}
+
+// *****************************************************************************
+// Set of concrete objects.
+
+// location provides support placing objects.
+type location struct {
+	x, y, z int
+}
+
+// move is how a cumulus cloud can move.
+func (l *location) move(x, y, z int) {
+	l.x = x
+	l.y = y
+	l.z = z
+}
+
+// house represents a place people live in.
+type house struct {
+	location
+	address string
+	color   string
+}
+
+// draw is how a house is drawn.
+func (h *house) draw() {
+	fmt.Printf("[H] %+v\n", *h)
+}
+
+// move is implemented to prevent a house from moving.
+func (*house) move(x, y, z int) {}
+
+// cumulus declares a cumulus cloud in the game.
+type cumulus struct {
+	location
+	altitude float64
+	area     float64
+}
+
+// draw is how a cumulus cloud is drawn.
+func (c *cumulus) draw() {
 	fmt.Printf("[C] %+v\n", *c)
 }
 
-// Change is how a cloud can change shape.
-func (c *Cloud) Change(length float64, volume float64, mass float64) {
-	c.Length = length
-	c.Volume = volume
-	c.Mass = mass
+// change is how a cumulus cloud can change shape.
+func (c *cumulus) change(altitude float64, area float64) {
+	c.altitude = altitude
+	c.area = area
 }
 
-// Move is how a cloud can move.
-func (c *Cloud) Move(x int, y int) {
-	c.X += x
-	c.Y += y
+// policeman declares a cop in the game.
+type policeman struct {
+	location
+	name    string
+	visible bool
 }
 
-// *****************************************************************************
-
-// Person declares a person in the game.
-type Person struct {
-	name string
-	game.Object
-	game.Location
-}
-
-// Draw is how a person is drawn.
-func (p *Person) Draw() {
+// draw is how a cop is drawn.
+func (p *policeman) draw() {
 	fmt.Printf("[P] %+v\n", *p)
 }
 
-// Move is how a person moves.
-func (p *Person) Move(x int, y int) {
-	p.X = x
-	p.Y = y
-}
-
-// Hide is how a person can become invisible.
-func (p *Person) Hide(b bool) {
-	p.Visible = !b
+// hide is how a cop can become hidden.
+func (p *policeman) hide(b bool) {
+	p.visible = !b
 }
 
 // *****************************************************************************
+// Set of worlds.
 
-// main is the entry point for the application.
+// world represents a set of objects.
+type world struct {
+	buildings []building
+	clouds    []cloud
+	people    []person
+}
+
+// *****************************************************************************
+// Now we can build our world.
+
 func main() {
-	// Create a building.
-	b := Building{
-		name: "NY Times",
-		Object: game.Object{
-			Length:  100000,
-			Volume:  37e6,
-			Mass:    85e9,
-			Texture: "stone",
-			Color:   "silver",
-		},
-		Location: game.Location{
-			X: 80,
-			Y: 64,
-		},
-	}
-
-	// Create a cloud.
-	c := Cloud{
-		kind: "cirrus",
-		Object: game.Object{
-			Length:  5000,
-			Volume:  4e10,
-			Mass:    8818490,
-			Texture: "puffy",
-			Color:   "white",
-		},
-		Location: game.Location{
-			X: 13280,
-			Y: 33464,
-		},
-	}
-
-	// Create a person.
-	p := Person{
-		name: "Bill",
-		Object: game.Object{
-			Length:  72,
-			Volume:  66.4,
-			Mass:    68.0,
-			Texture: "skin",
-			Color:   "white",
-		},
-		Location: game.Location{
-			X: 13280,
-			Y: 33464,
-		},
-	}
-
-	// Using the game display functions, pass the
-	// correct object type through. The compiler will
-	// provide checks based on interface implementation.
-
-	game.DisplaySolidFixed(&b)
-	game.DisplayLiquid(&c)
-	game.DisplaySolid(&p)
 }
