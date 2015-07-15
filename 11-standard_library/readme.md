@@ -12,11 +12,11 @@ The Go standard library is a set of core packages that enhance and extend the la
 
 ## Package Review
 
-[Logging](../10-standard_library/01-logging/readme.md)
+[Logging](../11-standard_library/01-logging/readme.md)
 
-[Encoding](../10-standard_library/02-encoding/readme.md)
+[Encoding](../11-standard_library/02-encoding/readme.md)
 
-[Writers/Readers](../10-standard_library/03-writers_readers/readme.md)
+[Writers/Readers](../11-standard_library/03-writers_readers/readme.md)
 
 ___
 [![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
