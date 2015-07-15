@@ -4,15 +4,15 @@ Go has support for both testing and debugging. This includes profiling and bench
 
 ## Package Review
 
-[Testing](../09-testing/01-testing/readme.md)
+[Testing](../10-testing/01-testing/readme.md)
 
-[Prediction](../09-testing/02-prediction/readme.md)
+[Prediction](../10-testing/02-prediction/readme.md)
 
-[Caching](../09-testing/03-caching/readme.md)
+[Caching](../10-testing/03-caching/readme.md)
 
-[Godebug](../09-testing/04-godebug/readme.md)
+[Godebug](../10-testing/04-godebug/readme.md)
 
-[Profiling](../09-testing/05-profiling/readme.md)
+[Profiling](../10-testing/05-profiling/readme.md)
 
 ## Exercises
 
