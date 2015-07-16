@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/eDXJfOzczM
+// http://play.golang.org/p/W5ya6_LAU6
 
 // Sample program demonstrating composition through embedding.
 package main
