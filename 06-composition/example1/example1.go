@@ -145,17 +145,25 @@ func main() {
 		},
 	}
 
+	// Build a slice of all the values that can be drawn.
+	var d []drawer
+	for _, v := range w.buildings {
+		d = append(d, v)
+	}
+	for _, v := range w.clouds {
+		d = append(d, v)
+	}
+	for _, v := range w.people {
+		d = append(d, v)
+	}
+
 	// Draw the world.
+	draw(d)
+}
 
-	for _, b := range w.buildings {
-		b.draw()
-	}
-
-	for _, c := range w.clouds {
-		c.draw()
-	}
-
-	for _, p := range w.people {
-		p.draw()
+// draw takes a set of values that can be drawn.
+func draw(d []drawer) {
+	for _, v := range d {
+		v.draw()
 	}
 }
