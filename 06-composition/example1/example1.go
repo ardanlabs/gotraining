@@ -1,6 +1,9 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
+// http://play.golang.org/p/eDXJfOzczM
+
+// Sample program demonstrating composition through embedding.
 package main
 
 import "fmt"
@@ -15,7 +18,7 @@ type drawer interface {
 
 // changer is behvior for an object to change shape.
 type changer interface {
-	change(length float64, volume float64, mass float64)
+	change(area float64)
 }
 
 // hider is behavior for an object to hide itself.
@@ -25,7 +28,7 @@ type hider interface {
 
 // mover is behavior for an object to move.
 type mover interface {
-	move(x int, y int)
+	move(x, y, z int)
 }
 
 // *****************************************************************************
@@ -67,7 +70,7 @@ func (l *location) move(x, y, z int) {
 
 // house represents a place people live in.
 type house struct {
-	location
+	*location
 	address string
 	color   string
 }
@@ -82,9 +85,8 @@ func (*house) move(x, y, z int) {}
 
 // cumulus declares a cumulus cloud in the game.
 type cumulus struct {
-	location
-	altitude float64
-	area     float64
+	*location
+	area float64
 }
 
 // draw is how a cumulus cloud is drawn.
@@ -93,14 +95,13 @@ func (c *cumulus) draw() {
 }
 
 // change is how a cumulus cloud can change shape.
-func (c *cumulus) change(altitude float64, area float64) {
-	c.altitude = altitude
+func (c *cumulus) change(area float64) {
 	c.area = area
 }
 
 // policeman declares a cop in the game.
 type policeman struct {
-	location
+	*location
 	name    string
 	visible bool
 }
@@ -116,7 +117,7 @@ func (p *policeman) hide(b bool) {
 }
 
 // *****************************************************************************
-// Set of worlds.
+// Declare a world that contains all these behaviors.
 
 // world represents a set of objects.
 type world struct {
@@ -128,5 +129,33 @@ type world struct {
 // *****************************************************************************
 // Now we can build our world.
 
+// main is the entry point for the application.
 func main() {
+	// Create a world.
+	w := world{
+		buildings: []building{
+			&house{&location{10, 10, 10}, "123 mocking bird", "white"},
+			&house{&location{10, 20, 10}, "127 mocking bird", "red"},
+		},
+		clouds: []cloud{
+			&cumulus{&location{10, 15, 1000}, 123456.4332},
+		},
+		people: []person{
+			&policeman{&location{15, 40, 10}, "Harry", true},
+		},
+	}
+
+	// Draw the world.
+
+	for _, b := range w.buildings {
+		b.draw()
+	}
+
+	for _, c := range w.clouds {
+		c.draw()
+	}
+
+	for _, p := range w.people {
+		p.draw()
+	}
 }

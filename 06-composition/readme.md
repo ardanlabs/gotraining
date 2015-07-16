@@ -14,7 +14,7 @@ http://golang.org/doc/effective_go.html#embedding
 
 ## Code Review
 
-[Composition I](example1) ([Game](https://play.golang.org/p/fXcd5vS6hX)) | ([Example](https://play.golang.org/p/i0FXxWTS1p))
+[Composition I](example1) ([Go Playground](http://play.golang.org/p/eDXJfOzczM))
 
 [Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/QKIjbBDW16))
 
