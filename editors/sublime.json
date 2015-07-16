@@ -3,6 +3,12 @@
 	"on_save":
 	[{
 		"cmd": "gs9o_open", "args": {
+	        "run": ["clear"],
+	        "focus_view": false
+		}
+	},
+	{
+		"cmd": "gs9o_open", "args": {
 	        "run": ["sh", "go build"],
 	        "focus_view": false
 		}
