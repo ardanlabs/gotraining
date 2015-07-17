@@ -11,7 +11,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/ArdanStudios/gotraining/08-concurrency_patterns/chat"
+	"github.com/ArdanStudios/gotraining/09-concurrency_patterns/chat"
 )
 
 func main() {
