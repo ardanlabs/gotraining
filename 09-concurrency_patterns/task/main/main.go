@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/08-concurrency_patterns/task"
+	"github.com/ArdanStudios/gotraining/09-concurrency_patterns/task"
 )
 
 // names provides a set of names to display.
@@ -36,7 +36,7 @@ func (m namePrinter) Work() {
 // main is the entry point for all Go programs.
 func main() {
 	// Create a task pool with 4 goroutines.
-	t := task.New(4)
+	t := task.New(10)
 
 	var wg sync.WaitGroup
 	wg.Add(10 * len(names))
