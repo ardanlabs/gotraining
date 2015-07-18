@@ -41,9 +41,7 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 ## Advanced Code Review
 
-[Practical use of slices](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/-qQgO7NbLm))
-
-[Three index slicing](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/dJk2eycWhH))
+[Three index slicing](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/dJk2eycWhH))
 
 ## Exercies
 

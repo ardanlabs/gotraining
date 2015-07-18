@@ -1,58 +1,52 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/-qQgO7NbLm
+// http://play.golang.org/p/dJk2eycWhH
 
-// Sample program to show the practical use of slices.
+// Sample program to show how to use a third index slice.
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
-//  bson is a named type that declares a map of key/value pairs.
-type bson map[string]interface{}
-
-// user is a struct type that declares user information.
-type user struct {
-	ID   int
-	Name string
-}
-
 // main is the entry point for the application.
 func main() {
-	// Retrieve profiles for all users in the system.
-	users, err := retrieveUsers()
-	if err != nil {
-		fmt.Println(err)
-	}
+	// Create a slice of strings with different types of fruit.
+	slice := []string{"Apple", "Orange", "Banana", "Grape", "Plum"}
+	inspectSlice(slice)
 
-	// Display each user from the slice.
-	for _, user := range users {
-		fmt.Printf("%+v\n", user)
-	}
+	// Take a slice of slice. We want just index 2
+	// takeOne[0] = "Banana"
+	// Length:   3 - 2
+	// Capacity: 5 - 2
+	takeOne := slice[2:3]
+	inspectSlice(takeOne)
+
+	// For slice[ i : j : k ] the
+	// Length:   j - i
+	// Capacity: k - i
+
+	// Take a slice of just index 2 with a length and capacity of 1
+	// takeOneCapOne[0] = "Banana"
+	// Length:   3 - 2
+	// Capacity: 3 - 2
+	takeOneCapOne := slice[2:3:3] // Use the third index position to
+	inspectSlice(takeOneCapOne)   // set the capacity to 1.
+
+	// Append a new element which will create a new
+	// underlying array to increase capacity.
+	takeOneCapOne = append(takeOneCapOne, "Kiwi")
+	inspectSlice(takeOneCapOne)
 }
 
-// retrieveUsers retrieves user documents for the specified
-// user and returns a pointer to a user type value.
-func retrieveUsers() ([]user, error) {
-	// Make a call to get the json response.
-	r, err := getUsers()
-	if err != nil {
-		return nil, err
+// inspectSlice exposes the slice header for review.
+func inspectSlice(slice []string) {
+	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
+	for index, value := range slice {
+		fmt.Printf("[%d] %p %s\n",
+			index,
+			&slice[index],
+			value)
 	}
-
-	// Unmarshal the json document into a value of
-	// the user struct type.
-	var users []user
-	err = json.Unmarshal([]byte(r), &users)
-	return users, err
-}
-
-// getUsers simulates a web call that returns an array
-// of json documents with users.
-func getUsers() (string, error) {
-	response := `[{"id":1432, "name":"sally"},{"id":4312, "name":"bill"},{"id":6721, "name":"jane"}]`
-	return response, nil
 }
