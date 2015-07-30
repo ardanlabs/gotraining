@@ -20,7 +20,7 @@ http://golang.org/doc/effective_go.html#embedding
 
 ## Exercises
 
-### Exercise 2
+### Exercise 1
 
 **Part A** Follow the guided comments to:
 
