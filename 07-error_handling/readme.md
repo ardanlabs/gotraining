@@ -29,7 +29,7 @@ http://dave.cheney.net/2014/12/24/inspecting-errors
 
 [Type As Context](example3/example3.go) ([Go Playground](http://play.golang.org/p/Eu3X54PnWm))
 
-[Bahvior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/6GYqwSxHjI))
+[Behavior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/6GYqwSxHjI))
 
 [Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/czXpjvWWTT))
 
