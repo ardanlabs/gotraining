@@ -3,7 +3,7 @@
 
 // http://play.golang.org/p/pUtHSTN0Ef
 
-// Declare and initalize a variable of type int with the value of 20. Display
+// Declare and initialize a variable of type int with the value of 20. Display
 // the _address of_ and _value of_ the variable.
 //
 // Declare and initialize a pointer variable of type int that points to the last

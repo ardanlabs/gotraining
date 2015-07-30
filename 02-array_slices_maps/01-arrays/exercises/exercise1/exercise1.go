@@ -19,7 +19,7 @@ func main() {
 	// Declare an array pre-populated with friend's names.
 	friends := [5]string{"Joe", "Ed", "Jim", "Erick", "Bill"}
 
-	// Asssign the array of friends to the names array.
+	// Assign the array of friends to the names array.
 	names = friends
 
 	// Display each name in names.

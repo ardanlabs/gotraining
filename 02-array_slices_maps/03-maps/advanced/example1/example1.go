@@ -18,7 +18,7 @@ func main() {
 	// Declare and make a map of Data type values.
 	users := make(map[string]Data)
 
-	// Intialize some data into our map of maps.
+	// Initialize some data into our map of maps.
 	users["clients"] = Data{"123": "Henry", "654": "Joan"}
 	users["admins"] = Data{"398": "Bill", "076": "Steve"}
 

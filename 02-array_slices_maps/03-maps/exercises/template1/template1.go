@@ -13,7 +13,7 @@ package main
 func main() {
 	// Declare and make a map of integer type values.
 
-	// Intialize some data into the map.
+	// Initialize some data into the map.
 
 	// Display each key/value pair.
 }

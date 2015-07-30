@@ -50,7 +50,7 @@ func main() {
 
 // validate performs data validation on any struct type value.
 func validate(value interface{}) []Result {
-	// Declare a nil slce of Result values.
+	// Declare a nil slice of Result values.
 	var results []Result
 
 	// Retrieve the value that the interface contains or points to.
@@ -61,7 +61,7 @@ func validate(value interface{}) []Result {
 		// Retrieve the field information.
 		typeField := val.Type().Field(i)
 
-		// Declare a variable of type Result and initalize
+		// Declare a variable of type Result and initialize
 		// it with all the meta-data.
 		result := Result{
 			Field: typeField.Name,

@@ -4,7 +4,7 @@ Struct types are a way of creating complex types that group fields of data toget
 
 ## Notes
 
-* We can use the struct literal form to intialize a value from a struct type.
+* We can use the struct literal form to initialize a value from a struct type.
 * The dot (.) operator allows us to access individual field values.
 * We can create anonymous structs.
 
@@ -16,7 +16,7 @@ http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 ## Code Review
 
-[Declare, create and initalize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/-oeDmu2et8))
+[Declare, create and initialize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/-oeDmu2et8))
 
 [Anonymous struct types](example2/example2.go) ([Go Playground](http://play.golang.org/p/_xxuE1Ep6U))
 
@@ -28,7 +28,7 @@ http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 ### Exercise 1
 
-**Part A:** Declare a struct type to maintain information about a user (name, email and age). Create a value of this type, initalize with values and display each field.
+**Part A:** Declare a struct type to maintain information about a user (name, email and age). Create a value of this type, initialize with values and display each field.
 
 **Part B:** Declare and initialize an anonymous struct type with the same three fields. Display the value.
 

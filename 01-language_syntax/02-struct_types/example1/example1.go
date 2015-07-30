@@ -3,7 +3,7 @@
 
 // http://play.golang.org/p/-oeDmu2et8
 
-// Sample program to show how to declare and initalize struct types.
+// Sample program to show how to declare and initialize struct types.
 package main
 
 import (

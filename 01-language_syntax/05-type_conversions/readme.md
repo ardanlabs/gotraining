@@ -11,7 +11,7 @@ Go is a strict type safe language so typed values must be explicitly converted f
 
 ## Code Review
 
-[Declare, create and initalize named types](example1/example1.go) ([Go Playground](http://play.golang.org/p/mhKlxSyuxr))
+[Declare, create and initialize named types](example1/example1.go) ([Go Playground](http://play.golang.org/p/mhKlxSyuxr))
 
 [Named types in the standard library](example2/example2.go) ([Go Playground](http://play.golang.org/p/XJ4Ia1lMWl))
 
@@ -23,7 +23,7 @@ Go is a strict type safe language so typed values must be explicitly converted f
 
 ### Exercise 1
 
-**Part A** Declare a named type called counter with a base type of int. Declare and initalize a variable of this named type to its zero value. Display the value of this variable and the variables type.
+**Part A** Declare a named type called counter with a base type of int. Declare and initialize a variable of this named type to its zero value. Display the value of this variable and the variables type.
 
 **Part B** Declare a new variable of the named type assign it the value of 10. Display the value.
 

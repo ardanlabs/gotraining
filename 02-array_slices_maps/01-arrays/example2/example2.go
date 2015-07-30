@@ -13,11 +13,11 @@ import (
 
 // main is the entry point for the application.
 func main() {
-	// Declare an array of 5 integers that is initalized
+	// Declare an array of 5 integers that is initialized
 	// to its zero value.
 	var five [5]int
 
-	// Declare an array of 4 integers that is initalized
+	// Declare an array of 4 integers that is initialized
 	// with some values.
 	four := [4]int{10, 20, 30, 40}
 

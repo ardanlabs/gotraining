@@ -24,7 +24,7 @@ func main() {
 	fmt.Printf("var c float64 \t %T [%v]\n", c, c)
 	fmt.Printf("var d bool \t %T [%v]\n\n", d, d)
 
-	// Declare variables and initalize.
+	// Declare variables and initialize.
 	// Using the short variable declaration operator.
 	aa := 10
 	bb := "hello"

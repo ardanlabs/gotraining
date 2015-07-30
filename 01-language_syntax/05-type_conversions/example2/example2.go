@@ -46,7 +46,7 @@ func main() {
 	// Subtract 5 nanoseconds from now time using a literal constant.
 	lessFiveNanoseconds := now.Add(-5)
 
-	// Substract 5 seconds from now using a declared constant.
+	// Subtract 5 seconds from now using a declared constant.
 	lessFiveSeconds := now.Add(-fiveSeconds)
 
 	// Display the values.

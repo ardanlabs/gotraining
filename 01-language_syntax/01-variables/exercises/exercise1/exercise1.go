@@ -3,11 +3,11 @@
 
 // https://play.golang.org/p/d2M0Q3mRnd
 
-// Declare three variables that are initalized to their zero value and three
+// Declare three variables that are initialized to their zero value and three
 // declared with a literal value. Declare variables of type string, int and
 // bool. Display the values of those variables.
 //
-// Declare a new variable of type float32 and initalize the variable by
+// Declare a new variable of type float32 and initialize the variable by
 // converting the literal value of Pi (3.14).
 package main
 
@@ -25,7 +25,7 @@ func main() {
 	fmt.Println(name)
 	fmt.Println(legal)
 
-	// Declare variables and initalize.
+	// Declare variables and initialize.
 	// Using the short variable declaration operator.
 	month := 10
 	dayOfWeek := "Tuesday"

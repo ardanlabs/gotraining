@@ -141,7 +141,7 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Interate over the slice looking for the user.
+	// Iterate over the slice looking for the user.
 	var foundUser *user
 	app.mu.RLock()
 	{

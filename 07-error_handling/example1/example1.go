@@ -3,7 +3,7 @@
 
 // http://play.golang.org/p/8x6kDZxPWK
 
-// Sample program to show how the defaul error type is implemented.
+// Sample program to show how the default error type is implemented.
 package main
 
 import "fmt"

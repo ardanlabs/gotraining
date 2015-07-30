@@ -30,7 +30,7 @@ type (
 
 // main is the entry point for the application.
 func main() {
-	// Declare and initalize a value of type user.
+	// Declare and initialize a value of type user.
 	u := user{
 		ID:   1432,
 		Name: "Betty",

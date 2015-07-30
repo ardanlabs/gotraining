@@ -19,7 +19,7 @@ func main() {
 	// Use the New function from the toy package to create a value of
 	// type toy.
 
-	// Use the methods from the toy value to set some intialize
+	// Use the methods from the toy value to set some initialize
 	// values.
 
 	// Display each field separately from the toy value.

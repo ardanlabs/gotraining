@@ -3,7 +3,7 @@
 
 // http://play.golang.org/p/ZgPw0LU_Nv
 
-// Sample program to show how to declare, initalize and iterate
+// Sample program to show how to declare, initialize and iterate
 // over a map. Shows how iterating over a map is random.
 package main
 

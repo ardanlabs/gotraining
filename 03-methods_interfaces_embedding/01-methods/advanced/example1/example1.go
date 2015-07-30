@@ -43,7 +43,7 @@ func main() {
 	// bound to the package.
 	f2 := data.displayName
 
-	// Call the function passing the reciever.
+	// Call the function passing the receiver.
 	f2(d)
 
 	// Declare a function variable for the method
@@ -57,6 +57,6 @@ func main() {
 	// bound to the package. The receiver is a pointer.
 	f4 := (*data).setAge
 
-	// Call the function passing the reciever and the parameter.
+	// Call the function passing the receiver and the parameter.
 	f4(&d, 55)
 }

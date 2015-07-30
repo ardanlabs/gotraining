@@ -42,7 +42,7 @@ func main() {
 		level: "super",
 	}
 
-	// We can acces the inner type's method directly.
+	// We can access the inner type's method directly.
 	ad.user.notify()
 
 	// The inner type's method is promoted.

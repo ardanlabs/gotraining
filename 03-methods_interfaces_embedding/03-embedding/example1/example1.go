@@ -42,6 +42,6 @@ func main() {
 		level: "super",
 	}
 
-	// We can acces fields methods.
+	// We can access fields methods.
 	ad.person.notify()
 }

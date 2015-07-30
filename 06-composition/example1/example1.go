@@ -11,12 +11,12 @@ import "fmt"
 // *****************************************************************************
 // Set of behaviors.
 
-// drawer is behvior for drawing an object.
+// drawer is behavior for drawing an object.
 type drawer interface {
 	draw()
 }
 
-// changer is behvior for an object to change shape.
+// changer is behavior for an object to change shape.
 type changer interface {
 	change(area float64)
 }

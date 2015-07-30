@@ -4,7 +4,7 @@
 // http://play.golang.org/p/ItPe2EEy9X
 
 // Declare a struct type to maintain information about a user (name, email and age).
-// Create a value of this type, initalize with values and display each field.
+// Create a value of this type, initialize with values and display each field.
 //
 // Declare and initialize an anonymous struct type with the same three fields. Display the value.
 package main
