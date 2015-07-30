@@ -28,12 +28,7 @@ type sport struct {
 
 // Search checks the value for the specified term.
 func (s sport) Search(searchTerm string) bool {
-	if strings.Contains(s.team, searchTerm) ||
-		strings.Contains(s.city, searchTerm) {
-		return true
-	}
-
-	return false
+	return strings.Contains(s.team, searchTerm) || strings.Contains(s.city, searchTerm)
 }
 
 // hockey represents specific hockey information.
@@ -44,12 +39,7 @@ type hockey struct {
 
 // Search checks the value for the specified term.
 func (h hockey) Search(searchTerm string) bool {
-	if h.sport.Search(searchTerm) ||
-		strings.Contains(h.country, searchTerm) {
-		return true
-	}
-
-	return false
+	return h.sport.Search(searchTerm) || strings.Contains(h.country, searchTerm)
 }
 
 // main is the entry point for the application.
