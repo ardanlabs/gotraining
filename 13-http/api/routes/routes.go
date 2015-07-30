@@ -3,8 +3,8 @@ package routes
 import (
 	"net/http"
 
-	"github.com/ArdanStudios/gotraining/12-http/api/app"
-	"github.com/ArdanStudios/gotraining/12-http/api/handlers"
+	"github.com/ArdanStudios/gotraining/13-http/api/app"
+	"github.com/ArdanStudios/gotraining/13-http/api/handlers"
 )
 
 // API returns a handler for a set of routes.

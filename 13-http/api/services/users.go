@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/12-http/api/app"
-	"github.com/ArdanStudios/gotraining/12-http/api/models"
+	"github.com/ArdanStudios/gotraining/13-http/api/app"
+	"github.com/ArdanStudios/gotraining/13-http/api/models"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

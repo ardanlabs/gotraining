@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/12-http/api/app"
-	"github.com/ArdanStudios/gotraining/12-http/api/models"
-	"github.com/ArdanStudios/gotraining/12-http/api/services"
-	"github.com/ArdanStudios/gotraining/12-http/api/tests"
+	"github.com/ArdanStudios/gotraining/13-http/api/app"
+	"github.com/ArdanStudios/gotraining/13-http/api/models"
+	"github.com/ArdanStudios/gotraining/13-http/api/services"
+	"github.com/ArdanStudios/gotraining/13-http/api/tests"
 )
 
 // TestUsers is the entry point for the users tests.
