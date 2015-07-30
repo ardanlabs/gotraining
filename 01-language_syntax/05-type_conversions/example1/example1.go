@@ -20,7 +20,7 @@ func main() {
 	// Declare a variable of type int64 and assign a value.
 	nanosecond := int64(10)
 
-	// Attemped to assign a variable of type int64 (base type of Duration) to
+	// Attempted to assign a variable of type int64 (base type of Duration) to
 	// a variable of type Duration.
 	// duration = nanosecond
 

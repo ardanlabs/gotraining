@@ -13,7 +13,7 @@ import (
 
 // main is the entry point for the application.
 func main() {
-	// Declare a string with both chinese and english charaters.
+	// Declare a string with both chinese and english characters.
 	s := "世界 means world"
 
 	// UTFMax is 4 -- up to 4 bytes per encoded rune.

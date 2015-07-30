@@ -8,7 +8,7 @@
 // Then write a function called checkAmount that accepts a float64 type value
 // and returns an error value. Check the value for zero and if it is, return
 // the ErrInvalidValue. Check the value for greater than $1,000 and if it is,
-// reutrn the ErrAmountTooLarge. Write a main function to call the checkAmount
+// return the ErrAmountTooLarge. Write a main function to call the checkAmount
 // function and check the return error value. Display a proper message to the screen.
 package main
 

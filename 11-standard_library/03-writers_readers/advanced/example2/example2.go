@@ -10,7 +10,7 @@
 
 // Sample program that adds a few more features. If -z is passed, we want any
 // DestFile's to be gzipped. If -md5 is passed, we want print the md5sum of the
-// data that's been transfered instead of the data itself.
+// data that's been transferred instead of the data itself.
 package main
 
 import (

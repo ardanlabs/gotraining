@@ -15,7 +15,7 @@ import (
 func main() {
 	// Like many packages in the standard library, the http package has
 	// convenience methods that are declared on the package level. These methods
-	// actually delegate to an underlying structure that you can initilize
+	// actually delegate to an underlying structure that you can initialize
 	// yourself. In this example, we are adding a handler to the http.DefaultServeMux
 	http.HandleFunc("/", HelloHandler)
 

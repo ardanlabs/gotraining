@@ -27,7 +27,7 @@ func main() {
 		fmt.Println(i, fruit)
 	}
 
-	// Declare an array of 4 integers that is initalized
+	// Declare an array of 4 integers that is initialized
 	// with some values.
 	numbers := [4]int{10, 20, 30, 40}
 

@@ -38,7 +38,7 @@ type (
 
 // main is the entry point for the application.
 func main() {
-	// Declare and initalize a value of type buoyStation.
+	// Declare and initialize a value of type buoyStation.
 	station := buoyStation{
 		StationID: "42036",
 		Name:      "Station 42036 - West Tampa",

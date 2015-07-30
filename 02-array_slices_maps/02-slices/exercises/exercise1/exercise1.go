@@ -19,7 +19,7 @@ func main() {
 	// Declare a nil slice of integers.
 	var numbers []int
 
-	// Appens numbers to the slice.
+	// Append numbers to the slice.
 	for i := 0; i < 5; i++ {
 		numbers = append(numbers, i*10)
 	}

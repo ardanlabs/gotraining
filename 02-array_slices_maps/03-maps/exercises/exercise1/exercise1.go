@@ -16,7 +16,7 @@ func main() {
 	// Declare and make a map of integer type values.
 	departments := make(map[string]int)
 
-	// Intialize some data into the map.
+	// Initialize some data into the map.
 	departments["IT"] = 20
 	departments["Marketing"] = 15
 	departments["Executives"] = 5

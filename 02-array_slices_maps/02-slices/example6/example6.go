@@ -16,13 +16,13 @@ type user struct {
 
 // main is the entry point for the application.
 func main() {
-	// Declare and initalize a value of type user.
+	// Declare and initialize a value of type user.
 	u1 := user{
 		id:   1432,
 		name: "Betty",
 	}
 
-	// Declare and initalize a value of type user.
+	// Declare and initialize a value of type user.
 	u2 := user{
 		id:   4367,
 		name: "Janet",

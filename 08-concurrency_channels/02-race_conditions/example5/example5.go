@@ -27,7 +27,7 @@ var wg sync.WaitGroup
 // rwMutex is used to define a critical section of code.
 var rwMutex sync.RWMutex
 
-// Number of reads occuring at ay given time.
+// Number of reads occurring at ay given time.
 var readCount int64
 
 // init is called before main is executed.

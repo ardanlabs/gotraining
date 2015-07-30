@@ -52,7 +52,7 @@ func main() {
 	// ./example2.go:48: cannot use minusFive (type int64) as type
 	// time.Duration in argument to now.Add
 
-	// Substract 5 seconds from now using a declared constant.
+	// Subtract 5 seconds from now using a declared constant.
 	lessFiveSeconds := now.Add(-fiveSeconds)
 
 	// Display the values.

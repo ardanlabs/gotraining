@@ -13,7 +13,7 @@ import (
 
 // main is the entry point for the application.
 func main() {
-	// Declare an array of 5 strings initalized with values.
+	// Declare an array of 5 strings initialized with values.
 	five := [5]string{"Annie", "Betty", "Charley", "Doug", "Edward"}
 
 	// Iterate over the array displaying the value and

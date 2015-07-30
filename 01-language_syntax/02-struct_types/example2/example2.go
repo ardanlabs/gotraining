@@ -3,7 +3,7 @@
 
 // http://play.golang.org/p/_xxuE1Ep6U
 
-// Sample program to show how to declare and initalize anonymous
+// Sample program to show how to declare and initialize anonymous
 // struct types.
 package main
 

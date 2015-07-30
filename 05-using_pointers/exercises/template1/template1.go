@@ -18,7 +18,7 @@ package main
 
 // Declare a method named Distance that finds the length of the hypotenuse
 // between two points. Pass one point in and return the answer.
-// Forumula is the square root of (x2 - x1)^2 + (y2 - y1)^2
+// Formula is the square root of (x2 - x1)^2 + (y2 - y1)^2
 // Use the math.Pow and math.Sqrt functions.
 
 // main is the entry point for the application.
