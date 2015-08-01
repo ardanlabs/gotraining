@@ -9,6 +9,8 @@ There are lots of different patterns we can create with goroutines and channels.
 
 ## Links
 
+https://github.com/gobridge/concurrency-patterns
+
 http://blog.golang.org/pipelines
 
 https://talks.golang.org/2012/concurrency.slide#1
