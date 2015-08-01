@@ -1,7 +1,7 @@
 // Package app provides application support for context and MongoDB access.
 // Current Status Codes:
 // 		200 OK           : StatusOK                  : Call is success and returning data.
-//      204 No Content   : StatusNoContent           : Call is success and returns no data.
+//      	204 No Content   : StatusNoContent           : Call is success and returns no data.
 // 		400 Bad Request  : StatusBadRequest          : Invalid post data (syntax or semantics).
 // 		401 Unauthorized : StatusUnauthorized        : Authentication failure.
 // 		404 Not Found    : StatusNotFound            : Invalid URL or identifier.
@@ -53,20 +53,12 @@ func (c *Context) Error(err error) {
 
 // Respond sends JSON to the client.
 // If code is StatusNoContent, v is expected to be nil.
-func (c *Context) Respond(v interface{}, code int) {
+func (c *Context) Respond(data interface{}, code int) {
 	log.Printf("%v : api : Respond [%d] : Started", c.SessionID, code)
 
 	if code == http.StatusNoContent {
 		c.WriteHeader(http.StatusNoContent)
 		return
-	}
-
-	data, err := json.Marshal(v)
-	if err != nil {
-		// We want this error condition to panic so we get a stack trace. This should
-		// never happen. The http package will catch the panic and provide logging
-		// and return a 500 back to the caller.
-		log.Panicf("%v : api : Respond [%d] : Failed: %v", c.SessionID, code, err)
 	}
 
 	c.Header().Set("Content-Type", "application/json")
