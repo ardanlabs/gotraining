@@ -26,11 +26,16 @@ var (
 // we want.
 type Handler func(*Context) error
 
+// A Middleware is a type that wraps a handler to remove boilerplate or other
+// concerns not direct to any given Handler.
+type Middleware func(Handler) Handler
+
 // App is the entrypoint into our application and what configures our context
 // object for each of our http handlers. Feel free to add any configuration
 // data/logic on this App struct
 type App struct {
 	*httptreemux.TreeMux
+	mw []Middleware
 }
 
 // New create an App value that handle a set of routes for the application.
@@ -38,6 +43,21 @@ func New() *App {
 	return &App{
 		TreeMux: httptreemux.New(),
 	}
+}
+
+// Use gives us a way to assign middleware for the application to use.
+func (a *App) Use(mw ...Middleware) *App {
+	a.mw = append(a.mw, mw...)
+	return a
+}
+
+// wrap nests the given handler in all available middleware.
+func (a *App) wrap(h Handler) Handler {
+	for i := len(a.mw) - 1; i >= 0; i-- {
+		h = a.mw[i](h)
+	}
+
+	return h
 }
 
 // Handle is our mechanism for mounting Handlers for a given HTTP verb and path
@@ -55,7 +75,7 @@ func (a *App) Handle(verb, path string, handler Handler) {
 		defer c.Session.Close()
 
 		// Call the handler and handle any possible error.
-		if err := handler(&c); err != nil {
+		if err := a.wrap(handler)(&c); err != nil {
 			c.Error(err)
 		}
 	}
