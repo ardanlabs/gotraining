@@ -39,30 +39,18 @@ type App struct {
 }
 
 // New create an App value that handle a set of routes for the application.
-func New() *App {
+// You can provide any number of middleware and they'll be used to wrap every
+// request handler.
+func New(mw ...Middleware) *App {
 	return &App{
 		TreeMux: httptreemux.New(),
+		mw:      mw,
 	}
-}
-
-// Use gives us a way to assign middleware for the application to use.
-func (a *App) Use(mw ...Middleware) *App {
-	a.mw = append(a.mw, mw...)
-	return a
-}
-
-// wrap nests the given handler in all available middleware.
-func (a *App) wrap(h Handler) Handler {
-	for i := len(a.mw) - 1; i >= 0; i-- {
-		h = a.mw[i](h)
-	}
-
-	return h
 }
 
 // Handle is our mechanism for mounting Handlers for a given HTTP verb and path
 // pair, this makes for really easy, convenient routing.
-func (a *App) Handle(verb, path string, handler Handler) {
+func (a *App) Handle(verb, path string, handler Handler, mw ...Middleware) {
 	// The function to execute for each request.
 	h := func(w http.ResponseWriter, r *http.Request, p map[string]string) {
 		c := Context{
@@ -74,8 +62,23 @@ func (a *App) Handle(verb, path string, handler Handler) {
 		}
 		defer c.Session.Close()
 
-		// Call the handler and handle any possible error.
-		if err := a.wrap(handler)(&c); err != nil {
+		// Wrap the handler in all associated middleware.
+		wrap := func(h Handler) Handler {
+			// Wrap up the application-wide first...
+			for i := len(a.mw) - 1; i >= 0; i-- {
+				h = a.mw[i](h)
+			}
+
+			// and then wrap with our route specific ones.
+			for i := len(mw) - 1; i >= 0; i-- {
+				h = mw[i](h)
+			}
+
+			return h
+		}
+
+		// Call the wrapped handler and handle any possible error.
+		if err := wrap(handler)(&c); err != nil {
 			c.Error(err)
 		}
 	}

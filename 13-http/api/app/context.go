@@ -35,6 +35,7 @@ type Context struct {
 	Request   *http.Request
 	Params    map[string]string
 	SessionID string
+	Status    int
 }
 
 // Error handles all error responses for the API.
@@ -55,6 +56,8 @@ func (c *Context) Error(err error) {
 // If code is StatusNoContent, v is expected to be nil.
 func (c *Context) Respond(data interface{}, code int) {
 	log.Printf("%v : api : Respond [%d] : Started", c.SessionID, code)
+
+	c.Status = code
 
 	if code == http.StatusNoContent {
 		c.WriteHeader(http.StatusNoContent)
