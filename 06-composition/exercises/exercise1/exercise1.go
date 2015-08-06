@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/hVFMZSUGI6
+// http://play.golang.org/p/8t5ns3cqNp
 
 // Follow the guided comments to:
 //
@@ -29,6 +29,78 @@ type developer interface {
 	develop(system string)
 }
 
+// =============================================================================
+
+// Declare a struct type named sysadmin: it should have a name field.
+type sysadmin struct {
+	name string
+}
+
+// Define an administrate method on the sysadmin type, implementing the
+// administrator interface.  administrate should print out the name of the
+// sysadmin, as well as the system they are administering.
+func (s *sysadmin) administrate(system string) {
+	fmt.Println(s.name, "is administering", system)
+}
+
+// Declare a struct type named programmer: it should have a name field.
+type programmer struct {
+	name string
+}
+
+// Define a develop method on the programmer type, implementing the developer
+// interface.  develop should print out the name of the programmer, as well as
+// the system they are developing.
+func (p *programmer) develop(system string) {
+	fmt.Println(p.name, "is developing", system)
+}
+
+// Declare a struct type named company: it should embed administrator and developer.
+type company struct {
+	administrator
+	developer
+}
+
+// =============================================================================
+
+// adminlist represents a group of administrators.
+type adminlist struct {
+	list []administrator
+}
+
+// pushAdmin adds an administrator to the adminlist.
+func (l *adminlist) pushAdmin(a administrator) {
+	l.list = append(l.list, a)
+}
+
+// popAdmin removes an administrator from the adminlist.
+func (l *adminlist) popAdmin() administrator {
+	a := l.list[0]
+	l.list = l.list[1:]
+	return a
+}
+
+// =============================================================================
+
+// devlist represents a group of developers.
+type devlist struct {
+	list []developer
+}
+
+// pushDev adds a developer to the devlist.
+func (l *devlist) pushDev(d developer) {
+	l.list = append(l.list, d)
+}
+
+// popDev removes a developer from the devlist.
+func (l *devlist) popDev() developer {
+	d := l.list[0]
+	l.list = l.list[1:]
+	return d
+}
+
+// =============================================================================
+
 // tasks contains a set of systems we must administer or develop.
 var tasks = []struct {
 	system     string
@@ -40,31 +112,7 @@ var tasks = []struct {
 	{system: "project-omega", needsDev: true},
 }
 
-// Declare a struct type named sysadmin: it should have a name field.
-type sysadmin struct{ name string }
-
-// Define an administrate method on the sysadmin type, implementing the
-// administrator interface.  administrate should print out the name of the
-// sysadmin, as well as the system they are administering.
-func (s sysadmin) administrate(system string) {
-	fmt.Println(s.name, "is administering", system)
-}
-
-// Declare a struct type named programmer: it should have a name field.
-type programmer struct{ name string }
-
-// Define a develop method on the programmer type, implementing the developer
-// interface.  develop should print out the name of the programmer, as well as
-// the system they are developing.
-func (p programmer) develop(system string) {
-	fmt.Println(p.name, "is developing", system)
-}
-
-// Declare a struct type named company: it should embed administrator and developer.
-type company struct {
-	administrator
-	developer
-}
+// =============================================================================
 
 func main() {
 	// Create a variable named admins of type adminlist.
@@ -82,7 +130,7 @@ func main() {
 
 	// Create a variable named techfirm of type company, and initialize it by
 	// hiring (popping) an administrator from admins and a developer from devs.
-	techfirm := &company{
+	techfirm := company{
 		admins.popAdmin(),
 		devs.popDev(),
 	}
@@ -110,38 +158,4 @@ func main() {
 			admin.administrate(task.system)
 		}
 	}
-}
-
-// adminlist represents a group of administrators.
-type adminlist struct {
-	list []administrator
-}
-
-// pushAdmin adds an administrator to the adminlist.
-func (l *adminlist) pushAdmin(a administrator) {
-	l.list = append(l.list, a)
-}
-
-// popAdmin removes an administrator from the adminlist.
-func (l *adminlist) popAdmin() administrator {
-	a := l.list[0]
-	l.list = l.list[1:]
-	return a
-}
-
-// devlist represents a group of developers.
-type devlist struct {
-	list []developer
-}
-
-// pushDev adds a developer to the devlist.
-func (l *devlist) pushDev(d developer) {
-	l.list = append(l.list, d)
-}
-
-// popDev removes a developer from the devlist.
-func (l *devlist) popDev() developer {
-	d := l.list[0]
-	l.list = l.list[1:]
-	return d
 }

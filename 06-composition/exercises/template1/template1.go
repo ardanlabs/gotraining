@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/zyXy90YfeY
+// http://play.golang.org/p/b8ww3jd2Xs
 
 // Follow the guided comments to:
 //
@@ -28,16 +28,7 @@ type developer interface {
 	develop(system string)
 }
 
-// tasks contains a set of systems we must administer or develop.
-var tasks = []struct {
-	system     string
-	needsDev   bool
-	needsAdmin bool
-}{
-	{system: "exercise1", needsDev: true},
-	{system: "server5", needsAdmin: true},
-	{system: "project-omega", needsDev: true},
-}
+// =============================================================================
 
 // Declare a struct type named sysadmin: it should have a name field.
 
@@ -52,6 +43,59 @@ var tasks = []struct {
 // the system they are developing.
 
 // Declare a struct type named company: it should embed administrator and developer.
+
+// =============================================================================
+
+// adminlist represents a group of administrators.
+type adminlist struct {
+	list []administrator
+}
+
+// pushAdmin adds an administrator to the adminlist.
+func (l *adminlist) pushAdmin(a administrator) {
+	l.list = append(l.list, a)
+}
+
+// popAdmin removes an administrator from the adminlist.
+func (l *adminlist) popAdmin() administrator {
+	a := l.list[0]
+	l.list = l.list[1:]
+	return a
+}
+
+// =============================================================================
+
+// devlist represents a group of developers.
+type devlist struct {
+	list []developer
+}
+
+// pushDev adds a developer to the devlist.
+func (l *devlist) pushDev(d developer) {
+	l.list = append(l.list, d)
+}
+
+// popDev removes a developer from the devlist.
+func (l *devlist) popDev() developer {
+	d := l.list[0]
+	l.list = l.list[1:]
+	return d
+}
+
+// =============================================================================
+
+// tasks contains a set of systems we must administer or develop.
+var tasks = []struct {
+	system     string
+	needsDev   bool
+	needsAdmin bool
+}{
+	{system: "exercise1", needsDev: true},
+	{system: "server5", needsAdmin: true},
+	{system: "project-omega", needsDev: true},
+}
+
+// =============================================================================
 
 func main() {
 	// Create a variable named admins of type adminlist.
@@ -75,40 +119,5 @@ func main() {
 
 		// Check if the task needs an administrator. If so, pop an administrator from
 		// admins, print its type information, and have it administrate the system.
-
 	}
-}
-
-// adminlist represents a group of administrators.
-type adminlist struct {
-	list []administrator
-}
-
-// pushAdmin adds an administrator to the adminlist.
-func (l *adminlist) pushAdmin(a administrator) {
-	l.list = append(l.list, a)
-}
-
-// popAdmin removes an administrator from the adminlist.
-func (l *adminlist) popAdmin() administrator {
-	a := l.list[0]
-	l.list = l.list[1:]
-	return a
-}
-
-// devlist represents a group of developers.
-type devlist struct {
-	list []developer
-}
-
-// pushDev adds a developer to the devlist.
-func (l *devlist) pushDev(d developer) {
-	l.list = append(l.list, d)
-}
-
-// popDev removes a developer from the devlist.
-func (l *devlist) popDev() developer {
-	d := l.list[0]
-	l.list = l.list[1:]
-	return d
 }

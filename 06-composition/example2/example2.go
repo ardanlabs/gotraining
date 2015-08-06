@@ -1,18 +1,14 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/QKIjbBDW16
+// http://play.golang.org/p/xsDJhCYOBA
 
 // Sample program demonstrating composition through embedding.
 package main
 
 import "fmt"
 
-// board represents a surface we can work on.
-type board struct {
-	nailsNeeded int
-	nailsDriven int
-}
+// =============================================================================
 
 // A set of interfaces for driving and pulling nails.
 type (
@@ -29,6 +25,8 @@ type (
 		nailPuller
 	}
 )
+
+// =============================================================================
 
 // mallet is a tool that pounds in nails.
 type mallet struct{}
@@ -58,13 +56,7 @@ func (crowbar) pullNail(nailSupply *int, b *board) {
 	fmt.Println("crowbar: yanked nail out of the board.")
 }
 
-// toolbox can contains any number of tools.
-type toolbox struct {
-	nailDriver
-	nailPuller
-
-	nails int
-}
+// =============================================================================
 
 // contractor carries out the task of securing boards.
 type contractor struct{}
@@ -100,6 +92,24 @@ func (c contractor) processBoards(dp nailDrivePuller, nailSupply *int, boards []
 	}
 }
 
+// =============================================================================
+
+// toolbox can contains any number of tools.
+type toolbox struct {
+	nailDriver
+	nailPuller
+
+	nails int
+}
+
+// board represents a surface we can work on.
+type board struct {
+	nailsNeeded int
+	nailsDriven int
+}
+
+// =============================================================================
+
 // displayState provide information about all the boards.
 func displayState(tb *toolbox, boards []board) {
 	fmt.Printf("Box: %#v\n", tb)
@@ -109,6 +119,8 @@ func displayState(tb *toolbox, boards []board) {
 		fmt.Printf("\t%+v\n", b)
 	}
 }
+
+// =============================================================================
 
 // main is the entry point for the application.
 func main() {
