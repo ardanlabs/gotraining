@@ -31,7 +31,7 @@ http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 **Part B:** Multiply two literal constants into a typed variable and display the value.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/kzZZ24O23g)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/qG3-9yn5_6)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/d2gkKxEftw))
 
 ___
