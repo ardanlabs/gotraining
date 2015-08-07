@@ -69,25 +69,6 @@ https://ardanlabs.typeform.com/to/QzRgXk
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
-**Corporate:**  
-TBA
-
-**Enrollment:**  
-[Mexico : June 16th](http://magmaconf.com/)  
-
-[Portland, OR : July 20th-21st](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
-[Denver, CO : July 7th](https://ti.to/gophercon/gophercon-2015)  
-
-[San Francisco, CA : August TBA]()  
-[Austin, TX : August TBD](https://www.eventbrite.com/e/go-programming-bootcamp-tour-austin-august-exact-dates-tbd-tickets-15559615228)  
-
-[Chicago, IL : September TDB](https://www.eventbrite.com/e/go-programming-bootcamp-tour-chicago-september-exact-dates-tbd-tickets-15559453745)
-
-**Conferences:**  
-[MagmaConf : June 16th](http://magmaconf.com/)  
-[Gophercon : July 7th](http://gophercon.com/)  
-[OSCON : July 20th](http://www.oscon.com/open-source-2015/public/schedule/detail/42635)  
-
 ## Teachers
 
 **William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
@@ -107,8 +88,11 @@ _Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. Y
 
 ## Testimonials
 
+Geoff Clitheroe ([@gclitheroe](https://twitter.com/gclitheroe))  
+_"Your training is awesome! Myself and three colleagues recently caught variations of the training at GopherCon and OSCON. We all thought the Bootcamp was the best thing at any of these conferences (and I went to both). Awesome work to Bill for presenting and anyone involved in developing the training. I really liked the structure, emphasis on deeper understanding, _me_ doing a small number of examples to emphasize this, and general content. Night and day to other training which is to often just watching someone else live code. Great work."_
+
 ACL Services ([@ACLServices](https://twitter.com/ACLServices))  
-_"I'd just like to thank you again for just a phenomenal training session. The feedback from everyone was overwhelmingly positive. You probably could tell first hand that there were skeptics at first, but you’ve turned many into golang converts and we are really excited in growing golang adoption internally.”_
+_"I'd just like to thank you again for just a phenomenal training session. The feedback from everyone was overwhelmingly positive. You probably could tell first hand that there were skeptics at first, but you’ve turned many into golang converts and we are really excited in growing golang adoption internally."_
 
 Joshua Shuster ([@naysaier](https://twitter.com/naysaier))  
 _"I would consider Ardan Studio’s 3 day course to be invaluable. Bill and his staff, being some of the foremost authorities in the Go language, were able to make many of the complex go topics understandable. Covering everything from memory management, all the way up to building concurrency programs and web API's. It has given me the knowledge to write idiomatic Go, and make the best use of it’s features. I would highly their courses to anyone new to Go, or to anyone wanting to widen their existing knowledge."_
@@ -124,10 +108,6 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
-
-## Partners
-
-[Venture Hive](http://venturehive.com/) | [SendGrid](http://sendgrid.com) | [Iron.io](http://iron.io) | [Galvanize](http://galvanize.com) | [MongoDB](http://mongodb.com) | [InfluxDB](http://influxdb.com/)
 
 ## Contact Information
 
