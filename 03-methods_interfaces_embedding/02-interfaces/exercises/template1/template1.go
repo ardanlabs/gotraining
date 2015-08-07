@@ -29,22 +29,22 @@ package main
 // Declare a method named sayHello for the chinese type
 // using a value receiver. "你好世界"
 
-// sayHello accepts values of the interface type.
+// sayHello accepts values of the speaker type.
 func sayHello( /* Declare parameter */ ) {
-	// Call the sayHello() method from the interface parameter.
+	// Call the sayHello() method from the speaker parameter.
 }
 
 // main is the entry point for the application.
 func main() {
-	// Declare a variable of the interface type set to its zero value.
+	// Declare a variable of the speaker type set to its zero value.
 
 	// Declare a variable of type english and assign it to
-	// the interface variable.
-	// Call the sayHello() method from the interface variable.
+	// the speaker variable.
+	// Call the sayHello() method from the speaker variable.
 
 	// Declare a variable of type chinese and assign it to
-	// the interface variable.
-	// Call the sayHello() method from the interface variable.
+	// the speaker variable.
+	// Call the sayHello() method from the speaker variable.
 
 	// Call the sayHello function passing each concrete type.
 }
