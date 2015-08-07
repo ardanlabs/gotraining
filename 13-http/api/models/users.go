@@ -1,4 +1,3 @@
-// Package models contains data structures and associated behavior
 package models
 
 import (
@@ -11,13 +10,13 @@ import (
 
 // UserAddress contains information about a user's address.
 type UserAddress struct {
-	Type         int        `bson:"type" json:"type"`
-	LineOne      string     `bson:"line_one" json:"line_one"`
+	Type         int        `bson:"type" json:"type" validate:"required"`
+	LineOne      string     `bson:"line_one" json:"line_one" validate:"required"`
 	LineTwo      string     `bson:"line_two" json:"line_two,omitempty"`
-	City         string     `bson:"city" json:"city"`
-	State        string     `bson:"state" json:"state"`
-	Zipcode      string     `bson:"zipcode" json:"zipcode"`
-	Phone        string     `bson:"phone" json:"phone"`
+	City         string     `bson:"city" json:"city" validate:"required"`
+	State        string     `bson:"state" json:"state" validate:"required"`
+	Zipcode      string     `bson:"zipcode" json:"zipcode" validate:"required"`
+	Phone        string     `bson:"phone" json:"phone" validate:"required"`
 	DateModified *time.Time `bson:"date_modified" json:"date_modified"`
 	DateCreated  *time.Time `bson:"date_created,omitempty" json:"date_created"`
 }
@@ -26,31 +25,12 @@ type UserAddress struct {
 func (ua *UserAddress) Validate() ([]app.Invalid, error) {
 	var inv []app.Invalid
 
-	if ua.Type == 0 {
-		inv = append(inv, app.Invalid{Fld: "Type", Err: "The value of Type cannot be 0."})
-	}
+	errs := validate.Struct(ua)
+	if errs != nil {
+		for _, err := range errs {
+			inv = append(inv, app.Invalid{Fld: err.Field, Err: err.Tag})
+		}
 
-	if ua.LineOne == "" {
-		inv = append(inv, app.Invalid{Fld: "LineOne", Err: "A value of LineOne cannot be empty."})
-	}
-
-	if ua.City == "" {
-		inv = append(inv, app.Invalid{Fld: "City", Err: "A value of City cannot be empty."})
-	}
-
-	if ua.State == "" {
-		inv = append(inv, app.Invalid{Fld: "State", Err: "A value of State cannot be empty."})
-	}
-
-	if ua.Zipcode == "" {
-		inv = append(inv, app.Invalid{Fld: "Zipcode", Err: "A value of Zipcode cannot be empty."})
-	}
-
-	if ua.Phone == "" {
-		inv = append(inv, app.Invalid{Fld: "Phone", Err: "A value of Phone cannot be empty."})
-	}
-
-	if len(inv) > 0 {
 		return inv, errors.New("Validation failures identified")
 	}
 
@@ -95,12 +75,12 @@ func (ua *UserAddress) Compare(uat *UserAddress) ([]app.Invalid, error) {
 // User contains information about a user.
 type User struct {
 	UserID       string        `bson:"user_id,omitempty" json:"user_id,omitempty"`
-	UserType     int           `bson:"type" json:"type"`
-	FirstName    string        `bson:"first_name" json:"first_name"`
-	LastName     string        `bson:"last_name" json:"last_name"`
-	Email        string        `bson:"email" json:"email"`
-	Company      string        `bson:"company" json:"company"`
-	Addresses    []UserAddress `bson:"addresses" json:"addresses"`
+	UserType     int           `bson:"type" json:"type" validate:"required"`
+	FirstName    string        `bson:"first_name" json:"first_name" validate:"required"`
+	LastName     string        `bson:"last_name" json:"last_name" validate:"required"`
+	Email        string        `bson:"email" json:"email" validate:"required"`
+	Company      string        `bson:"company" json:"company" validate:"required"`
+	Addresses    []UserAddress `bson:"addresses" json:"addresses" validate:"required"`
 	DateModified *time.Time    `bson:"date_modified" json:"date_modified"`
 	DateCreated  *time.Time    `bson:"date_created,omitempty" json:"date_created"`
 }
@@ -109,33 +89,18 @@ type User struct {
 func (u *User) Validate() ([]app.Invalid, error) {
 	var inv []app.Invalid
 
-	if u.UserType == 0 {
-		inv = append(inv, app.Invalid{Fld: "UserType", Err: "The value of UserType cannot be 0."})
+	errs := validate.Struct(u)
+	if errs != nil {
+		for _, err := range errs {
+			inv = append(inv, app.Invalid{Fld: err.Field, Err: err.Tag})
+		}
+
+		return inv, errors.New("Validation failures identified")
 	}
 
-	if u.FirstName == "" {
-		inv = append(inv, app.Invalid{Fld: "FirstName", Err: "A value of FirstName cannot be empty."})
-	}
-
-	if u.LastName == "" {
-		inv = append(inv, app.Invalid{Fld: "LastName", Err: "A value of LastName cannot be empty."})
-	}
-
-	if u.Email == "" {
-		inv = append(inv, app.Invalid{Fld: "Email", Err: "A value of Email cannot be empty."})
-	}
-
-	if u.Company == "" {
-		inv = append(inv, app.Invalid{Fld: "Company", Err: "A value of Company cannot be empty."})
-	}
-
-	if len(u.Addresses) == 0 {
-		inv = append(inv, app.Invalid{Fld: "Addresses", Err: "There must be at least one address."})
-	} else {
-		for _, ua := range u.Addresses {
-			if va, err := ua.Validate(); err != nil {
-				inv = append(inv, va...)
-			}
+	for _, ua := range u.Addresses {
+		if va, err := ua.Validate(); err != nil {
+			inv = append(inv, va...)
 		}
 	}
 
