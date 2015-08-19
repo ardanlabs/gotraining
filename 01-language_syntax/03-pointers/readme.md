@@ -29,7 +29,7 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ## Advanced Code Review
 
-[Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/931Cw6uzsn))
+[Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/_uK8EYlsd0))
 
 ## Exercises
 

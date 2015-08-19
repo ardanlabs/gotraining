@@ -3,7 +3,7 @@
 
 // https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
 
-// http://play.golang.org/p/931Cw6uzsn
+// http://play.golang.org/p/_uK8EYlsd0
 
 // go build -gcflags -m
 
@@ -37,11 +37,13 @@ func escapeToHeap() {
 }
 
 /*
-./example1.go:20: can inline stayOnStack
-./example1.go:15: inlining call to stayOnStack
-./example1.go:31: moved to heap: x
-./example1.go:34: &x escapes to heap
-./example1.go:34: escapeToHeap ... argument does not escape
-./example1.go:15: stayOnStack &x does not escape
-./example1.go:25: stayOnStack &x does not escape
+./example1.go:22: can inline stayOnStack
+./example1.go:17: inlining call to stayOnStack
+./example1.go:36: "Heap Addr:" escapes to heap
+./example1.go:36: &x escapes to heap
+./example1.go:33: moved to heap: x
+./example1.go:36: &x escapes to heap
+./example1.go:36: escapeToHeap ... argument does not escape
+./example1.go:17: main &x does not escape
+./example1.go:27: stayOnStack &x does not escape
 */
