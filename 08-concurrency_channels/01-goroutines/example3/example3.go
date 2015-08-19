@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/cqsHoPD30n
+// http://play.golang.org/p/vT23eEJxJ1
 
 // Sample program to show how to create goroutines and
 // how the goroutine scheduler behaves with two contexts.
@@ -15,13 +15,13 @@ import (
 
 // main is the entry point for all Go programs.
 func main() {
+	// Allocate two contexts for the scheduler to use.
+	runtime.GOMAXPROCS(2)
+
 	// wg is used to wait for the program to finish.
 	// Add a count of two, one for each goroutine.
 	var wg sync.WaitGroup
 	wg.Add(2)
-
-	// Allocate two contexts for the scheduler to use.
-	runtime.GOMAXPROCS(2)
 
 	fmt.Println("Start Goroutines")
 

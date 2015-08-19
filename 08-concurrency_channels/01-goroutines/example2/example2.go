@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/AzDUqwkM58
+// http://play.golang.org/p/mEcWhL14ha
 
 // Sample program to show how the goroutine scheduler
 // will time slice goroutines on a single thread.
@@ -9,6 +9,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 )
 
@@ -17,6 +18,9 @@ var wg sync.WaitGroup
 
 // main is the entry point for all Go programs.
 func main() {
+	// Allocate one contexts for the scheduler to use.
+	runtime.GOMAXPROCS(1)
+
 	// Add a count of two, one for each goroutine.
 	wg.Add(2)
 
