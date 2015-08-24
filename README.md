@@ -89,7 +89,7 @@ _Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. Y
 ## Testimonials
 
 Geoff Clitheroe ([@gclitheroe](https://twitter.com/gclitheroe))  
-_"Your training is awesome! Myself and three colleagues recently caught variations of the training at GopherCon and OSCON. We all thought the Bootcamp was the best thing at any of these conferences (and I went to both). Awesome work to Bill for presenting and anyone involved in developing the training. I really liked the structure, emphasis on deeper understanding, _me_ doing a small number of examples to emphasize this, and general content. Night and day to other training which is to often just watching someone else live code. Great work."_
+_"Your training is awesome! Myself and three colleagues recently caught variations of the training at GopherCon and OSCON. We all thought the Bootcamp was the best thing at any of these conferences (and I went to both). Awesome work to Bill for presenting and anyone involved in developing the training. I really liked the structure, emphasis on deeper understanding, me doing a small number of examples to emphasize this, and general content. Night and day to other training which is to often just watching someone else live code. Great work."_
 
 ACL Services ([@ACLServices](https://twitter.com/ACLServices))  
 _"I'd just like to thank you again for just a phenomenal training session. The feedback from everyone was overwhelmingly positive. You probably could tell first hand that there were skeptics at first, but you’ve turned many into golang converts and we are really excited in growing golang adoption internally."_
