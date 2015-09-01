@@ -19,6 +19,8 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
 
+[Go 1.5 GC](https://blog.golang.org/go15gc)
+
 ## Code Review
 
 [Pass by value](example1/example1.go) ([Go Playground](https://play.golang.org/p/nNnsK6hWdP))
