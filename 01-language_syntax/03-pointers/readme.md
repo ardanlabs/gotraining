@@ -17,13 +17,15 @@ http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
+[Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)
+
 [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
 
 [Rick Hudson GC Talk](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
 
-[Go 1.5 GC](https://blog.golang.org/go15gc)
+https://blog.golang.org/go15gc
 
-[Tri-Color Marking](https://en.wikipedia.org/wiki/Tracing_garbage_collection#Tri-color_marking)
+https://en.wikipedia.org/wiki/Tracing_garbage_collection
 
 ## Code Review
 
