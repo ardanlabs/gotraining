@@ -9,6 +9,10 @@ Pointers provide a way to share data across function boundaries. Having the abil
 * "Value of", what's in the box. "Address of" ( **&** ), where is the box.
 * The (*) operator declares a pointer variable and the "Value that the pointer points to".
 
+## 1.5 Garbage Collection
+
+![figure1](GC_Algorithm.png)
+
 ## Links
 
 https://golang.org/doc/effective_go.html#pointers_vs_values
