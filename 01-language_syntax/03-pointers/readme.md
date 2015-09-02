@@ -19,13 +19,15 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
 
+[Rick Hudson GC Talk](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
+
 [Go 1.5 GC](https://blog.golang.org/go15gc)
 
 [Tri-Color Marking](https://en.wikipedia.org/wiki/Tracing_garbage_collection#Tri-color_marking)
 
 ## Code Review
 
-[Pass by value](example1/example1.go) ([Go Playground](https://play.golang.org/p/nNnsK6hWdP))
+[Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/nNnsK6hWdP))
 
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/FWmGnVUDoA))
 
@@ -34,6 +36,8 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 ## Advanced Code Review
 
 [Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/_uK8EYlsd0))
+
+[Contiguous Backing Array](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/IIubKW34GA))
 
 ## Exercises
 
