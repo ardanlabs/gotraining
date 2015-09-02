@@ -21,6 +21,8 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 [Go 1.5 GC](https://blog.golang.org/go15gc)
 
+[Tri-Color Marking](https://en.wikipedia.org/wiki/Tracing_garbage_collection#Tri-color_marking)
+
 ## Code Review
 
 [Pass by value](example1/example1.go) ([Go Playground](https://play.golang.org/p/nNnsK6hWdP))
