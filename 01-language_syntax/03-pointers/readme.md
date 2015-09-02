@@ -39,11 +39,11 @@ https://en.wikipedia.org/wiki/Tracing_garbage_collection
 
 [Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/VYqb11RiWr))
 
+[Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/_uK8EYlsd0))
+
 ## Advanced Code Review
 
-[Stack vs Heap](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/_uK8EYlsd0))
-
-[Contiguous Backing Array](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/IIubKW34GA))
+[Contiguous Backing Array](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/IIubKW34GA))
 
 ## Exercises
 
