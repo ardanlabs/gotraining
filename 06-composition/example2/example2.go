@@ -10,6 +10,14 @@ import "fmt"
 
 // =============================================================================
 
+// board represents a surface we can work on.
+type board struct {
+	nailsNeeded int
+	nailsDriven int
+}
+
+// =============================================================================
+
 // A set of interfaces for driving and pulling nails.
 type (
 	nailDriver interface {
@@ -100,12 +108,6 @@ type toolbox struct {
 	nailPuller
 
 	nails int
-}
-
-// board represents a surface we can work on.
-type board struct {
-	nailsNeeded int
-	nailsDriven int
 }
 
 // =============================================================================
