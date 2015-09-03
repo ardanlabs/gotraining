@@ -25,7 +25,7 @@ http://dave.cheney.net/2014/12/24/inspecting-errors
 
 [Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/8x6kDZxPWK))
 
-[Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/4YHAbpynl3))
+[Error Variables](example2/example2.go) ([Go Playground](http://play.golang.org/p/VCNIEKEmnA))
 
 [Type As Context](example3/example3.go) ([Go Playground](http://play.golang.org/p/Eu3X54PnWm))
 

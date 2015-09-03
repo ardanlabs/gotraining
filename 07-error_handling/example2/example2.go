@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/4YHAbpynl3
+// http://play.golang.org/p/VCNIEKEmnA
 
 // Sample program to show how to use error variables to help the
 // caller determine the exact error being returned.
@@ -22,7 +22,7 @@ var (
 
 // main is the entry point for the application.
 func main() {
-	if err := webCall(); err != nil {
+	if err := webCall(true); err != nil {
 		switch err {
 		case ErrBadRequest:
 			fmt.Println("Bad Request Occurred")
@@ -42,6 +42,10 @@ func main() {
 }
 
 // webCall performs a web operation.
-func webCall() error {
-	return ErrBadRequest
+func webCall(b bool) error {
+	if b {
+		return ErrBadRequest
+	}
+
+	return ErrMovedPermanently
 }
