@@ -72,7 +72,7 @@ If you are interested in holding an event in your area please let me know. I wil
 ## Teachers
 
 **William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
-_Bill is a manaing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami._
+_Bill is a managing partner at Ardan Studios in Miami, FL, a mobile, web and systems development company. He is also the co-author of the book Go In Action, the author of the blog GoingGo.Net and the organizer for the Go and MongoDB meetups in Miami._
 
 **Kevin Gillette** ([@kevingillette](https://twitter.com/kevingillette))  
 _Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history._
