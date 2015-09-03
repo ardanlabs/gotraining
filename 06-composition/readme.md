@@ -16,7 +16,7 @@ http://golang.org/doc/effective_go.html#embedding
 
 [Composition I](example1/example1.go) ([Go Playground](http://play.golang.org/p/W5ya6_LAU6))
 
-[Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/xsDJhCYOBA))
+[Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/BOzKkZQ4AF))
 
 ## Exercises
 
