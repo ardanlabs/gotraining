@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/8t5ns3cqNp
+// http://play.golang.org/p/UvFEZQHDu0
 
 // Follow the guided comments to:
 //
@@ -131,8 +131,8 @@ func main() {
 	// Create a variable named techfirm of type company, and initialize it by
 	// hiring (popping) an administrator from admins and a developer from devs.
 	techfirm := company{
-		admins.popAdmin(),
-		devs.popDev(),
+		administrator: admins.popAdmin(),
+		developer:     devs.popDev(),
 	}
 
 	// Push techfirm onto both devs and admins (we can now transparently

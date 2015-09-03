@@ -33,6 +33,6 @@ http://golang.org/doc/effective_go.html#embedding
 **Part E** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/b8ww3jd2Xs)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/8t5ns3cqNp))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/UvFEZQHDu0))
 ___
 All material is licensed under the [GNU Free Documentation License](https://github.com/gobridge/gotraining/blob/master/LICENSE).
