@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/AYsB78Dlxb
+// https://play.golang.org/p/olva991YF4
 
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // user defines a user in the program.
 type user struct {

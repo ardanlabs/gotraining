@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/jfOfrRMPZR
+// https://play.golang.org/p/KU2tRviRcl
 
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // notifier is an interface that defined notification
 // type behavior.
@@ -45,6 +43,12 @@ func (a *admin) notify() {
 		a.email)
 }
 
+// sendNotification accepts values that implement the notifier
+// interface and sends notifications.
+func sendNotification(n notifier) {
+	n.notify()
+}
+
 // main is the entry point for the application.
 func main() {
 	// Create an admin user.
@@ -66,10 +70,4 @@ func main() {
 
 	// The inner type's method is NOT promoted.
 	ad.notify()
-}
-
-// sendNotification accepts values that implement the notifier
-// interface and sends notifications.
-func sendNotification(n notifier) {
-	n.notify()
 }

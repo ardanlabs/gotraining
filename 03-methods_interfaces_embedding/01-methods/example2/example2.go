@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/zHePe-yTUw
+// https://play.golang.org/p/3RfP7rBt28
 
 // Sample program to show how to declare methods against
 // a named type.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // duration is a named type that represents a duration
 // of time in Nanosecond.

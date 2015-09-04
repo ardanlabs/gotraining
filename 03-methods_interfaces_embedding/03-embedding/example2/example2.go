@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/UkrDXkk-Ch
+// https://play.golang.org/p/3bTo41YmK9
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // user defines a user in the program.
 type user struct {

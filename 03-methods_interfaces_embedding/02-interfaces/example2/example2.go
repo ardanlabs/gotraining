@@ -1,14 +1,12 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/Lo1ucf1e9d
+// https://play.golang.org/p/ETbtWCpWAr
 
 // Sample program to show how polymorphic behavior with interfaces.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // notifier is an interface that defines notification
 // type behavior.
@@ -42,6 +40,12 @@ func (a *admin) notify() {
 		a.email)
 }
 
+// sendNotification accepts values that implement the notifier
+// interface and sends notifications.
+func sendNotification(n notifier) {
+	n.notify()
+}
+
 // main is the entry point for the application.
 func main() {
 	// Create two values one of type user and one of type admin.
@@ -51,10 +55,4 @@ func main() {
 	// Pass a pointer of the values to support the interface.
 	sendNotification(&bill)
 	sendNotification(&jill)
-}
-
-// sendNotification accepts values that implement the notifier
-// interface and sends notifications.
-func sendNotification(n notifier) {
-	n.notify()
 }

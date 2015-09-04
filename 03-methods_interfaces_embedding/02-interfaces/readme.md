@@ -24,9 +24,9 @@ https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
 
 ## Code Review
 
-[Method Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/eY2Ms-UF-t))
+[Method Receivers](example1/example1.go) ([Go Playground](https://play.golang.org/p/kvfri0xTxo))
 
-[Polymorphism](example2/example2.go) ([Go Playground](https://play.golang.org/p/Lo1ucf1e9d))
+[Polymorphism](example2/example2.go) ([Go Playground](https://play.golang.org/p/ETbtWCpWAr))
 
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/yaUWLZjidB))
 

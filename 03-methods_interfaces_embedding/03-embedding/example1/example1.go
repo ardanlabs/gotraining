@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/e5O_Dx5VpM
+// https://play.golang.org/p/Bweb5f-xdM
 
 // Sample program to show how what we are doing is NOT embedding
 // a type but just using a type as a field.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // user defines a user in the program.
 type user struct {
