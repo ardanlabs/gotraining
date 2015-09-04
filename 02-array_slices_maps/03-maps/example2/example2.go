@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/hC1o26x7Q5
+// https://play.golang.org/p/9zQuoGSuTe
 
 // Sample program to show how to declare and initialize a map
 // using a map literal.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // user defines a user in the program.
 type user struct {

@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/1JmxvWLAET
+// https://play.golang.org/p/fU18qrexKb
 
 // Sample program to show how only types that can have
 // equality defined on them can be a map key.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // user defines a user in the program.
 type user struct {

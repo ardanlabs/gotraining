@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/ZgPw0LU_Nv
+// https://play.golang.org/p/wVgTXEVimA
 
 // Sample program to show how to declare, initialize and iterate
 // over a map. Shows how iterating over a map is random.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // user defines a user in the program.
 type user struct {

@@ -16,15 +16,15 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 ## Code Review
 
-[Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/ZgPw0LU_Nv))
+[Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/wVgTXEVimA))
 
-[Map literal initialization](example2/example2.go) ([Go Playground](http://play.golang.org/p/hC1o26x7Q5))
+[Map literal initialization](example2/example2.go) ([Go Playground](https://play.golang.org/p/9zQuoGSuTe))
 
-[Map key restrictions](example3/example3.go) ([Go Playground](http://play.golang.org/p/1JmxvWLAET))
+[Map key restrictions](example3/example3.go) ([Go Playground](https://play.golang.org/p/fU18qrexKb))
 
 ## Advanced Code Review
 
-[Composing maps of maps](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/pQsoB02pDl))
+[Composing maps of maps](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/mycosI0zpN))
 
 ## Exercises
 
@@ -33,7 +33,7 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 Declare and make a map of integer values with a string as the key. Populate the map with five values and iterate over the map to display the key/value pairs.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/-JBSUoux-v)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/8K-IZgJFSg))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/9DDe_wFFYi))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
