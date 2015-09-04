@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/AzJuQsPG3a
+// https://play.golang.org/p/0vwvXoZi6q
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a relay race between four goroutines.
@@ -15,24 +15,6 @@ import (
 
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
-
-// main is the entry point for all Go programs.
-func main() {
-	// Create an unbuffered channel.
-	track := make(chan int)
-
-	// Add a count of one for the last runner.
-	wg.Add(1)
-
-	// First runner to his mark.
-	go Runner(track)
-
-	// Start the race.
-	track <- 1
-
-	// Wait for the race to finish.
-	wg.Wait()
-}
 
 // Runner simulates a person running in the relay race.
 func Runner(track chan int) {
@@ -70,4 +52,22 @@ func Runner(track chan int) {
 		exchange)
 
 	track <- exchange
+}
+
+// main is the entry point for all Go programs.
+func main() {
+	// Create an unbuffered channel.
+	track := make(chan int)
+
+	// Add a count of one for the last runner.
+	wg.Add(1)
+
+	// First runner to his mark.
+	go Runner(track)
+
+	// Start the race.
+	track <- 1
+
+	// Wait for the race to finish.
+	wg.Wait()
 }

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/KuMG3o_7-C
+// https://play.golang.org/p/Hzv6scEn7T
 
 // This sample program demonstrates how to use a channel to
 // monitor the amount of time the program is running and terminate
@@ -32,6 +32,70 @@ var (
 	// shutdown provides system wide notification.
 	shutdown = make(chan struct{})
 )
+
+// checkShutdown checks the shutdown flag to determine
+// if we have been asked to interrupt processing.
+func checkShutdown() bool {
+	select {
+	case <-shutdown:
+		// We have been asked to shutdown cleanly.
+		log.Println("checkShutdown - Shutdown Early")
+		return true
+
+	default:
+		// If the shutdown channel was not closed,
+		// presume with normal processing.
+		return false
+	}
+}
+
+// doWork simulates task work.
+func doWork() error {
+	log.Println("Processor - Task 1")
+	time.Sleep(2 * time.Second)
+
+	if checkShutdown() {
+		return errors.New("Early Shutdown")
+	}
+
+	log.Println("Processor - Task 2")
+	time.Sleep(1 * time.Second)
+
+	if checkShutdown() {
+		return errors.New("Early Shutdown")
+	}
+
+	log.Println("Processor - Task 3")
+	time.Sleep(1 * time.Second)
+
+	return nil
+}
+
+// processor provides the main program logic for the program.
+func processor(complete chan<- error) {
+	log.Println("Processor - Starting")
+
+	// Variable to store any error that occurs.
+	// Passed into the defer function via closures.
+	var err error
+
+	// Defer the send on the channel so it happens
+	// regardless of how this function terminates.
+	defer func() {
+		// Capture any potential panic.
+		if r := recover(); r != nil {
+			log.Println("Processor - Panic", r)
+		}
+
+		// Signal the goroutine we have shutdown.
+		complete <- err
+	}()
+
+	// Perform the work.
+	err = doWork()
+
+	log.Println("Processor - Completed")
+}
 
 // main is the entry point for all Go programs.
 func main() {
@@ -73,68 +137,4 @@ ControlLoop:
 
 	// Program finished.
 	log.Println("Process Ended")
-}
-
-// checkShutdown checks the shutdown flag to determine
-// if we have been asked to interrupt processing.
-func checkShutdown() bool {
-	select {
-	case <-shutdown:
-		// We have been asked to shutdown cleanly.
-		log.Println("checkShutdown - Shutdown Early")
-		return true
-
-	default:
-		// If the shutdown channel was not closed,
-		// presume with normal processing.
-		return false
-	}
-}
-
-// processor provides the main program logic for the program.
-func processor(complete chan<- error) {
-	log.Println("Processor - Starting")
-
-	// Variable to store any error that occurs.
-	// Passed into the defer function via closures.
-	var err error
-
-	// Defer the send on the channel so it happens
-	// regardless of how this function terminates.
-	defer func() {
-		// Capture any potential panic.
-		if r := recover(); r != nil {
-			log.Println("Processor - Panic", r)
-		}
-
-		// Signal the goroutine we have shutdown.
-		complete <- err
-	}()
-
-	// Perform the work.
-	err = doWork()
-
-	log.Println("Processor - Completed")
-}
-
-// doWork simulates task work.
-func doWork() error {
-	log.Println("Processor - Task 1")
-	time.Sleep(2 * time.Second)
-
-	if checkShutdown() {
-		return errors.New("Early Shutdown")
-	}
-
-	log.Println("Processor - Task 2")
-	time.Sleep(1 * time.Second)
-
-	if checkShutdown() {
-		return errors.New("Early Shutdown")
-	}
-
-	log.Println("Processor - Task 3")
-	time.Sleep(1 * time.Second)
-
-	return nil
 }

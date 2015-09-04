@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/7WO_eOJx_G
+// https://play.golang.org/p/6hi8VaijOK
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a game of tennis between two goroutines.
@@ -19,25 +19,6 @@ var wg sync.WaitGroup
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
-}
-
-// main is the entry point for all Go programs.
-func main() {
-	// Create an unbuffered channel.
-	court := make(chan int)
-
-	// Add a count of two, one for each goroutine.
-	wg.Add(2)
-
-	// Launch two players.
-	go player("Serena", court)
-	go player("Venus", court)
-
-	// Start the set.
-	court <- 1
-
-	// Wait for the game to finish.
-	wg.Wait()
 }
 
 // player simulates a person playing the game of tennis.
@@ -71,4 +52,23 @@ func player(name string, court chan int) {
 		// Hit the ball back to the opposing player.
 		court <- ball
 	}
+}
+
+// main is the entry point for all Go programs.
+func main() {
+	// Create an unbuffered channel.
+	court := make(chan int)
+
+	// Add a count of two, one for each goroutine.
+	wg.Add(2)
+
+	// Launch two players.
+	go player("Serena", court)
+	go player("Venus", court)
+
+	// Start the set.
+	court <- 1
+
+	// Wait for the game to finish.
+	wg.Wait()
 }
