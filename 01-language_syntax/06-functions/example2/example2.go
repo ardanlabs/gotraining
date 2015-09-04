@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/lTw1_MPo6v
+// http://play.golang.org/p/jJl5GV_LdI
 
 // Sample program to show how we can use the blank IDentifier to ignore return values.
 package main
@@ -26,6 +26,24 @@ type updateStats struct {
 	Message  string
 }
 
+// main is the entry point for the application.
+func main() {
+	// Declare and initialize a value of type user.
+	u := user{
+		ID:   1432,
+		Name: "Betty",
+	}
+
+	// Update the user Name. Don't care about the update stats.
+	if _, err := updateUser(&u); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// Display the update was Successful.
+	fmt.Println("Updated user record for ID", u.ID)
+}
+
 // updateUser updates the specified user document.
 func updateUser(u *user) (*updateStats, error) {
 	// response simulates a JSON response.
@@ -45,22 +63,4 @@ func updateUser(u *user) (*updateStats, error) {
 	}
 
 	return &us, nil
-}
-
-// main is the entry point for the application.
-func main() {
-	// Declare and initialize a value of type user.
-	u := user{
-		ID:   1432,
-		Name: "Betty",
-	}
-
-	// Update the user Name. Don't care about the update stats.
-	if _, err := updateUser(&u); err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// Display the update was Successful.
-	fmt.Println("Updated user record for ID", u.ID)
 }

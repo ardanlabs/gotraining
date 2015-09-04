@@ -18,15 +18,15 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 ## Code Review
 
-[Return multiple values](example1/example1.go) ([Go Playground](https://play.golang.org/p/Dvz30aqkj4))
+[Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/bYY-TRjfH0))
 
-[Blank identifier](example2/example2.go) ([Go Playground](https://play.golang.org/p/lTw1_MPo6v))
+[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/jJl5GV_LdI))
 
-[Redeclarations](example3/example3.go) ([Go Playground](https://play.golang.org/p/LlQCl0XcrL))
+[Redeclarations](example3/example3.go) ([Go Playground](http://play.golang.org/p/bw3PrialU0))
 
 ## Advanced Code Review
 
-[Trapping panics](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/2NnHPYhwsA))
+[Trapping panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/QiGOu7b32S))
 
 ## Exercises
 
