@@ -14,13 +14,13 @@ http://blog.golang.org/laws-of-reflection
 
 ## Code Review
 
-[Empty Interface](example1/example1.go) ([Go Playground](http://play.golang.org/p/OSeD9F_P46))
+[Empty Interface](example1/example1.go) ([Go Playground](https://play.golang.org/p/Bn-7NAh9di))
 
-[Reflect struct types with tags](example2/example2.go) ([Go Playground](http://play.golang.org/p/y0WyYezH05))
+[Reflect struct types with tags](example2/example2.go) ([Go Playground](https://play.golang.org/p/VM0sFi7G1v))
 
 ## Advanced Code Review
 
-[Decoding function for integers](example3/example3.go) ([Go Playground](http://play.golang.org/p/bWQ6hiVECQ))
+[Decoding function for integers](example3/example3.go) ([Go Playground](https://play.golang.org/p/JjDPaH9elb))
 
 ## Exercises
 

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/y0WyYezH05
+// https://play.golang.org/p/VM0sFi7G1v
 
 /*
 ValueOf returns a new Value initialized to the concrete value stored in the interface i.
@@ -31,21 +31,6 @@ type Result struct {
 	Value  string
 	Test   string
 	Result bool
-}
-
-// main is the entry point for the application.
-func main() {
-	// Declare a variable of type user.
-	user := User{
-		Name:  "Henry Ford",
-		Email: "henry@ford.com",
-	}
-
-	// Validate the value and display the results.
-	results := validate(&user)
-	for _, result := range results {
-		fmt.Printf("%+v\n", result)
-	}
 }
 
 // validate performs data validation on any struct type value.
@@ -89,4 +74,19 @@ func validate(value interface{}) []Result {
 	}
 
 	return results
+}
+
+// main is the entry point for the application.
+func main() {
+	// Declare a variable of type user.
+	user := User{
+		Name:  "Henry Ford",
+		Email: "henry@ford.com",
+	}
+
+	// Validate the value and display the results.
+	results := validate(&user)
+	for _, result := range results {
+		fmt.Printf("%+v\n", result)
+	}
 }
