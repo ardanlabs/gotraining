@@ -1,26 +1,26 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/A8yp-bzj1H
+// https://play.golang.org/p/ur6IPVCo9l
 
 // Sample program to show how to read a stack trace.
 package main
 
-func main() {
-	slice := make([]string, 2, 4)
-	Example(slice, "hello", 10)
+func example(slice []string, str string, i int) {
+	panic("Want stack trace")
 }
 
-func Example(slice []string, str string, i int) {
-	panic("Want stack trace")
+func main() {
+	slice := make([]string, 2, 4)
+	example(slice, "hello", 10)
 }
 
 /*
 panic: Want stack trace
 
 goroutine 1 [running]:
-main.Example(0x820123f08, 0x2, 0x4, 0x6d4f8, 0x5, 0xa)
-	/Users/bill/code/go/src/github.com/ardanstudios/gotraining/10-testing/06-stack_trace/example1/example1.go:15 +0x65
+main.example(0x820123f08, 0x2, 0x4, 0x6d4f8, 0x5, 0xa)
+	/Users/bill/.../example1/example1.go:10 +0x65
 main.main()
-	/Users/bill/code/go/src/github.com/ardanstudios/gotraining/10-testing/06-stack_trace/example1/example1.go:11 +0xa5
+	/Users/bill/.../example1/example1.go:15 +0xa5
 */

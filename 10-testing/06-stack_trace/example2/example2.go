@@ -1,27 +1,27 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/SLOEngNewm
+// https://play.golang.org/p/S5ukG0_hXt
 
 // Sample program to show how to read a stack trace when it packs values.
 package main
 
-func main() {
-	Example(true, false, true, 25)
+func example(b1, b2, b3 bool, i uint8) {
+	panic("Want stack trace")
 }
 
-func Example(b1, b2, b3 bool, i uint8) {
-	panic("Want stack trace")
+func main() {
+	example(true, false, true, 25)
 }
 
 /*
 panic: Want stack trace
 
 goroutine 1 [running]:
-main.Example(0x819010001)
-	/Users/bill/code/go/src/github.com/ardanstudios/gotraining/10-testing/06-stack_trace/example2/example2.go:14 +0x65
+main.example(0x819010001)
+	/Users/bill/.../example2/example2.go:10 +0x65
 main.main()
-	/Users/bill/code/go/src/github.com/ardanstudios/gotraining/10-testing/06-stack_trace/example2/example2.go:10 +0x2b
+	/Users/bill/.../example2/example2.go:14 +0x2b
 
 --------------------------------------------------------------------------------
 
