@@ -1,4 +1,7 @@
-// http://play.golang.org/p/008KxiH7Yj
+// All material is licensed under the GNU Free Documentation License
+// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+
+// https://play.golang.org/p/HlCQ3tKRsm
 
 /*
 func New(out io.Writer, prefix string, flag int) *Logger
@@ -33,6 +36,25 @@ var (
 	Error *log.Logger
 )
 
+// initLog sets the devices for each log type.
+func initLog(traceHandle io.Writer, infoHandle io.Writer, warningHandle io.Writer, errorHandle io.Writer) {
+	Trace = log.New(traceHandle,
+		"TRACE: ",
+		log.Ldate|log.Ltime|log.Lshortfile)
+
+	Info = log.New(infoHandle,
+		"INFO: ",
+		log.Ldate|log.Ltime|log.Lshortfile)
+
+	Warning = log.New(warningHandle,
+		"WARNING: ",
+		log.Ldate|log.Ltime|log.Lshortfile)
+
+	Error = log.New(errorHandle,
+		"ERROR: ",
+		log.Ldate|log.Ltime|log.Lshortfile)
+}
+
 // main is the entry point for the application.
 func main() {
 	// Open a file for warnings.
@@ -60,23 +82,4 @@ func main() {
 	Info.Println("Important Information.")
 	Warning.Println("There is something you need to know about.")
 	Error.Println("Something has failed.")
-}
-
-// initLog sets the devices for each log type.
-func initLog(traceHandle io.Writer, infoHandle io.Writer, warningHandle io.Writer, errorHandle io.Writer) {
-	Trace = log.New(traceHandle,
-		"TRACE: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
-
-	Info = log.New(infoHandle,
-		"INFO: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
-
-	Warning = log.New(warningHandle,
-		"WARNING: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
-
-	Error = log.New(errorHandle,
-		"ERROR: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
 }
