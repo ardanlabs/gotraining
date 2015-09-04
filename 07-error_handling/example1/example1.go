@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/8x6kDZxPWK
+// https://play.golang.org/p/MsJ2Y-R6k7
 
 // Sample program to show how the default error type is implemented.
 package main
@@ -29,6 +29,11 @@ func New(text string) error {
 	return &errorString{text}
 }
 
+// webCall performs a web operation.
+func webCall() error {
+	return New("Bad Request")
+}
+
 // main is the entry point for the application.
 func main() {
 	if err := webCall(); err != nil {
@@ -37,9 +42,4 @@ func main() {
 	}
 
 	fmt.Println("Life is good")
-}
-
-// webCall performs a web operation.
-func webCall() error {
-	return New("Bad Request")
 }

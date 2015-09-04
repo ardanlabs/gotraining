@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/Eu3X54PnWm
+// https://play.golang.org/p/pAFz7cYe5u
 
 // http://golang.org/src/pkg/encoding/json/decode.go
 // Sample program to show how to implement a custom error type
@@ -48,6 +48,16 @@ type user struct {
 	Name int
 }
 
+// Unmarshal simulates an unmarshal call that always fails.
+func Unmarshal(data []byte, v interface{}) error {
+	rv := reflect.ValueOf(v)
+	if rv.Kind() != reflect.Ptr || rv.IsNil() {
+		return &InvalidUnmarshalError{reflect.TypeOf(v)}
+	}
+
+	return &UnmarshalTypeError{"string", reflect.TypeOf(v)}
+}
+
 // main is the entry point for the application.
 func main() {
 	var u user
@@ -65,14 +75,4 @@ func main() {
 	}
 
 	fmt.Println("Name:", u.Name)
-}
-
-// Unmarshal simulates an unmarshal call that always fails.
-func Unmarshal(data []byte, v interface{}) error {
-	rv := reflect.ValueOf(v)
-	if rv.Kind() != reflect.Ptr || rv.IsNil() {
-		return &InvalidUnmarshalError{reflect.TypeOf(v)}
-	}
-
-	return &UnmarshalTypeError{"string", reflect.TypeOf(v)}
 }

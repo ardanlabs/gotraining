@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/8KETdvYk17
+// https://play.golang.org/p/M45JCXGpdj
 
 // Create two error variables, one called ErrInvalidValue and the other
 // called ErrAmountTooLarge. Provide the static message for each variable.
@@ -22,6 +22,21 @@ var ErrInvalidValue = errors.New("Invalid Value")
 
 // ErrAmountTooLarge indicates the value beyond the upper bound.
 var ErrAmountTooLarge = errors.New("Amount To Large")
+
+// checkAmount validates the value passed in.
+func checkAmount(f float64) error {
+	switch {
+	// Is the parameter equal to zero.
+	case f == 0:
+		return ErrInvalidValue
+
+	// Is the parameter greater than 1000.
+	case f > 1000:
+		return ErrAmountTooLarge
+	}
+
+	return nil
+}
 
 // main is the entry point for the application.
 func main() {
@@ -47,19 +62,4 @@ func main() {
 
 	// Display everything is good.
 	fmt.Println("Everything checks out.")
-}
-
-// checkAmount validates the value passed in.
-func checkAmount(f float64) error {
-	switch {
-	// Is the parameter equal to zero.
-	case f == 0:
-		return ErrInvalidValue
-
-	// Is the parameter greater than 1000.
-	case f > 1000:
-		return ErrAmountTooLarge
-	}
-
-	return nil
 }

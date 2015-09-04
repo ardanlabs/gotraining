@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/-v-sxBl_ER
+// https://play.golang.org/p/yfppDtF0Pj
 
 // Create a custom error type called appError that contains three fields, Err error,
 // Message string and Code int. Implement the error interface providing your own message
@@ -28,6 +28,17 @@ func (a *appError) Error() string {
 	return fmt.Sprintf("App Error[%s] Message[%s] Code[%d]", a.Err, a.Message, a.Code)
 }
 
+// checkFlag returns one of two errors based on the value of the parameter.
+func checkFlag(t bool) error {
+	// If the parameter is false return an appError.
+	if !t {
+		return &appError{errors.New("Flag False"), "The Flag was false", 9}
+	}
+
+	// Return a default error.
+	return errors.New("Flag True")
+}
+
 // main is the entry point for the application.
 func main() {
 	// Call the function to simulate an error of the
@@ -43,15 +54,4 @@ func main() {
 		fmt.Println(e)
 		return
 	}
-}
-
-// checkFlag returns one of two errors based on the value of the parameter.
-func checkFlag(t bool) error {
-	// If the parameter is false return an appError.
-	if !t {
-		return &appError{errors.New("Flag False"), "The Flag was false", 9}
-	}
-
-	// Return a default error.
-	return errors.New("Flag True")
 }
