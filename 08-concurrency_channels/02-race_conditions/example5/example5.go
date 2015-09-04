@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/p9V1R-_1T2
+// https://play.golang.org/p/dq4jkYGnVS
 
 // go build -race
 
@@ -33,30 +33,6 @@ var readCount int64
 // init is called before main is executed.
 func init() {
 	rand.Seed(time.Now().UnixNano())
-}
-
-// main is the entry point for all Go programs.
-func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
-
-	// Add the one goroutines for the writer.
-	wg.Add(1)
-
-	// Create the writer goroutine.
-	go writer()
-
-	// Create seven reader goroutines.
-	for i := 1; i <= 7; i++ {
-		go reader(i)
-	}
-
-	// Wait for the write goroutine to finish.
-	wg.Wait()
-	fmt.Println("Program Complete")
-
-	// To keep the sample simple we are allowing the runtime to
-	// kill the reader goroutines. This is something we should
-	// control before allowing main to exit.
 }
 
 // writer adds 10 new strings to the slice in random intervals.
@@ -106,4 +82,28 @@ func reader(id int) {
 		rwMutex.RUnlock()
 		// Release the read lock.
 	}
+}
+
+// main is the entry point for all Go programs.
+func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	// Add the one goroutines for the writer.
+	wg.Add(1)
+
+	// Create the writer goroutine.
+	go writer()
+
+	// Create seven reader goroutines.
+	for i := 1; i <= 7; i++ {
+		go reader(i)
+	}
+
+	// Wait for the write goroutine to finish.
+	wg.Wait()
+	fmt.Println("Program Complete")
+
+	// To keep the sample simple we are allowing the runtime to
+	// kill the reader goroutines. This is something we should
+	// control before allowing main to exit.
 }

@@ -22,22 +22,22 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Race Condition](example1/example1.go) ([Go Playground](https://play.golang.org/p/dMHhzuM-TM))
+[Race Condition](example1/example1.go) ([Go Playground](https://play.golang.org/p/tQtb_72jOh))
 
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/LJETaLkVl0))
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/5xRKLl9A9r))
 
-[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/qifiyxrX1R))
+[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/dJnQk00G0F))
 
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/nr8BM7lvNA))
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/ggZm3t4rLB)
 
-[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/p9V1R-_1T2))
+[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/dq4jkYGnVS))
 
 ## Exercises
 
 ### Exercise 1
 Given the following program, use the race detector to find and correct the race condition.
 
-	// https://play.golang.org/p/lNXhQJ8gz4
+	// https://play.golang.org/p/0C-mUZGUhE
 
 	// Program for an exercise to fix a race condition.
 	package main
@@ -60,6 +60,18 @@ Given the following program, use the race detector to find and correct the race 
 		rand.Seed(time.Now().UnixNano())
 	}
 
+	// random generates random numbers and stores them into a slice.
+	func random(amount int) {
+		// Generate as many random numbers as specified.
+		for i := 0; i < amount; i++ {
+			n := rand.Intn(100)
+			numbers = append(numbers, n)
+		}
+
+		// Tell main we are done.
+	    wg.Done()
+	}
+
 	// main is the entry point for all Go programs.
 	func main() {
 		// Add a count for each goroutine we will create.
@@ -79,20 +91,8 @@ Given the following program, use the race detector to find and correct the race 
 		}
 	}
 
-	// random generates random numbers and stores them into a slice.
-	func random(amount int) {
-		// Generate as many random numbers as specified.
-		for i := 0; i < amount; i++ {
-			n := rand.Intn(100)
-			numbers = append(numbers, n)
-		}
-
-		// Tell main we are done.
-	    wg.Done()
-	}
-
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/yBFA-MDcMw)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/wFTNvVoBpz))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/0C-mUZGUhE)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/88i9oxgq7l))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
