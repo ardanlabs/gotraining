@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/wPVvgwPlHw
+// https://play.golang.org/p/lTw1_MPo6v
 
 // Sample program to show how we can use the blank IDentifier to ignore return values.
 package main
@@ -12,38 +12,18 @@ import (
 	"fmt"
 )
 
-type (
-	// user is a struct type that declares user information.
-	user struct {
-		ID   int
-		Name string
-	}
+// user is a struct type that declares user information.
+type user struct {
+	ID   int
+	Name string
+}
 
-	// updateStats provIDes update stats.
-	updateStats struct {
-		Modified int
-		Duration float64
-		Success  bool
-		Message  string
-	}
-)
-
-// main is the entry point for the application.
-func main() {
-	// Declare and initialize a value of type user.
-	u := user{
-		ID:   1432,
-		Name: "Betty",
-	}
-
-	// Update the user Name. Don't care about the update stats.
-	if _, err := updateUser(&u); err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// Display the update was Successful.
-	fmt.Println("Updated user record for ID", u.ID)
+// updateStats provIDes update stats.
+type updateStats struct {
+	Modified int
+	Duration float64
+	Success  bool
+	Message  string
 }
 
 // updateUser updates the specified user document.
@@ -65,4 +45,22 @@ func updateUser(u *user) (*updateStats, error) {
 	}
 
 	return &us, nil
+}
+
+// main is the entry point for the application.
+func main() {
+	// Declare and initialize a value of type user.
+	u := user{
+		ID:   1432,
+		Name: "Betty",
+	}
+
+	// Update the user Name. Don't care about the update stats.
+	if _, err := updateUser(&u); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// Display the update was Successful.
+	fmt.Println("Updated user record for ID", u.ID)
 }

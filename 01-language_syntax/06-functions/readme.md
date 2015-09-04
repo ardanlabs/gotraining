@@ -18,15 +18,15 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 ## Code Review
 
-[Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/bYY-TRjfH0))
+[Return multiple values](example1/example1.go) ([Go Playground](https://play.golang.org/p/Dvz30aqkj4))
 
-[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/wPVvgwPlHw))
+[Blank identifier](example2/example2.go) ([Go Playground](https://play.golang.org/p/lTw1_MPo6v))
 
-[Redeclarations](example3/example3.go) ([Go Playground](http://play.golang.org/p/XQS-twjrtl))
+[Redeclarations](example3/example3.go) ([Go Playground](https://play.golang.org/p/LlQCl0XcrL))
 
 ## Advanced Code Review
 
-[Trapping panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/eg14ClW4_y))
+[Trapping panics](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/2NnHPYhwsA))
 
 ## Exercises
 
@@ -37,7 +37,7 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 **Part B** Make a second call to your function but this time ignore the value and just test the error value.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/p0vlsW5sVL)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/fSjQ3caTy1))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/KrrJT0563m))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/eg14ClW4_y
+// https://play.golang.org/p/2NnHPYhwsA
 
 // Sample program to show how to trap panics that can occur from the Go runtime.
 package main
@@ -10,14 +10,6 @@ import (
 	"fmt"
 	"runtime"
 )
-
-// main is the entry point for the application.
-func main() {
-	// Call the testPanic function to run the test.
-	if err := testPanic(); err != nil {
-		fmt.Println("Error:", err)
-	}
-}
 
 // catchPanic catches panics and processes the error.
 func catchPanic(err *error) {
@@ -62,4 +54,12 @@ func testPanic() (err error) {
 
 	fmt.Println("End Test")
 	return err
+}
+
+// main is the entry point for the application.
+func main() {
+	// Call the testPanic function to run the test.
+	if err := testPanic(); err != nil {
+		fmt.Println("Error:", err)
+	}
 }

@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/bYY-TRjfH0
+// https://play.golang.org/p/Dvz30aqkj4
 
 // Sample program to show how functions can return multiple values while using
 // named and struct types.
@@ -18,17 +18,11 @@ type user struct {
 	Name string
 }
 
-// main is the entry point for the application.
-func main() {
-	// Retrieve the user profile.
-	u, err := retrieveUser("sally")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// Display the user profile.
-	fmt.Printf("%+v\n", *u)
+// GetUser simulates a web call that returns a json
+// document for the specified user.
+func getUser(name string) (string, error) {
+	response := `{"id":1432, "name":"sally"}`
+	return response, nil
 }
 
 // retrieveUser retrieves the user document for the specified
@@ -47,9 +41,15 @@ func retrieveUser(name string) (*user, error) {
 	return &u, err
 }
 
-// GetUser simulates a web call that returns a json
-// document for the specified user.
-func getUser(name string) (string, error) {
-	response := `{"id":1432, "name":"sally"}`
-	return response, nil
+// main is the entry point for the application.
+func main() {
+	// Retrieve the user profile.
+	u, err := retrieveUser("sally")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// Display the user profile.
+	fmt.Printf("%+v\n", *u)
 }

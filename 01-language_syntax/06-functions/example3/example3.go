@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/XQS-twjrtl
+// https://play.golang.org/p/LlQCl0XcrL
 
 // From Spec:
 // a short variable declaration may redeclare variables provided they
@@ -18,6 +18,11 @@ import "fmt"
 type user struct {
 	id   int
 	name string
+}
+
+// getUser returns a pointer of type user.
+func getUser() (*user, error) {
+	return &user{1432, "Betty"}, nil
 }
 
 // main is the entry point for the application.
@@ -42,9 +47,4 @@ func main() {
 	}
 
 	fmt.Println(u)
-}
-
-// getUser returns a pointer of type user.
-func getUser() (*user, error) {
-	return &user{1432, "Betty"}, nil
 }

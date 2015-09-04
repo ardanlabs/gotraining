@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/fSjQ3caTy1
+// https://play.golang.org/p/KrrJT0563m
 
 // Declare a struct type to maintain information about a user. Declare a function
 // that creates value of and returns pointers of this type and an error value. Call
@@ -17,6 +17,11 @@ import "fmt"
 type user struct {
 	name  string
 	email string
+}
+
+// newUser creates and returns pointers of user type values.
+func newUser() (*user, error) {
+	return &user{"Bill", "bill@ardanstudios.com"}, nil
 }
 
 // main is the entry point for the application.
@@ -37,9 +42,4 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-}
-
-// newUser creates and returns pointers of user type values.
-func newUser() (*user, error) {
-	return &user{"Bill", "bill@ardanstudios.com"}, nil
 }
