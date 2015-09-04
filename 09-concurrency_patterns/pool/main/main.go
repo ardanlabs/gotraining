@@ -46,6 +46,23 @@ func createConnection() (io.Closer, error) {
 	return &dbConnection{id}, nil
 }
 
+// performQueries tests the resource pool of connections.
+func performQueries(query int, p *pool.Pool) {
+	// Acquire a connection from the pool.
+	conn, err := p.Acquire()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	// Release the connection back to the pool.
+	defer p.Release(conn)
+
+	// Wait to simulate a query response.
+	time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
+	log.Printf("Query: QID[%d] CID[%d]\n", query, conn.(*dbConnection).ID)
+}
+
 // main is the entry point for all Go programs.
 func main() {
 	var wg sync.WaitGroup
@@ -75,21 +92,4 @@ func main() {
 	// Close the pool.
 	log.Println("Shutdown Program.")
 	p.Close()
-}
-
-// performQueries tests the resource pool of connections.
-func performQueries(query int, p *pool.Pool) {
-	// Acquire a connection from the pool.
-	conn, err := p.Acquire()
-	if err != nil {
-		log.Println(err)
-		return
-	}
-
-	// Release the connection back to the pool.
-	defer p.Release(conn)
-
-	// Wait to simulate a query response.
-	time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
-	log.Printf("Query: QID[%d] CID[%d]\n", query, conn.(*dbConnection).ID)
 }
