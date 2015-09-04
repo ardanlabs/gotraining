@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/LVD43cYBNS
+// http://play.golang.org/p/nYgwqqOctt
 
 // Sample program to show how arrays of different sizes are
 // not of the same type.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // main is the entry point for the application.
 func main() {
@@ -24,7 +22,7 @@ func main() {
 	// Assign one array to the other
 	five = four
 
-	// ./example2.go:20: cannot use four (type [4]int) as type [5]int in assignment
+	// ./example2.go:23: cannot use four (type [4]int) as type [5]int in assignment
 
 	fmt.Println(four)
 	fmt.Println(five)

@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/DGr8Zp9L_w
+// http://play.golang.org/p/2D24t6fbW_
 
 // Sample program to show how to declare and iterate over
 // arrays of different types.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // main is the entry point for the application.
 func main() {

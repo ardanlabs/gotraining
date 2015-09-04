@@ -10,11 +10,11 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 
 ## Code Review
 
-[Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/DGr8Zp9L_w))
+[Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/2D24t6fbW_))
 
-[Different type arrays](example2/example2.go) ([Go Playground](http://play.golang.org/p/LVD43cYBNS))
+[Different type arrays](example2/example2.go) ([Go Playground](http://play.golang.org/p/nYgwqqOctt))
 
-[Contiguous memory allocations](example3/example3.go) ([Go Playground](https://play.golang.org/p/s4BSgxz0Y3))
+[Contiguous memory allocations](example3/example3.go) ([Go Playground](http://play.golang.org/p/L-SmdGfUcP))
 
 ## Exercises
 
