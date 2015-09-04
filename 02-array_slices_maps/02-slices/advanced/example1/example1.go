@@ -1,23 +1,12 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/PdB-x5lwHb
+// http://play.golang.org/p/TepZptJati
 
 // Sample program to show how to use a third index slice.
 package main
 
 import "fmt"
-
-// inspectSlice exposes the slice header for review.
-func inspectSlice(slice []string) {
-	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
-	for index, value := range slice {
-		fmt.Printf("[%d] %p %s\n",
-			index,
-			&slice[index],
-			value)
-	}
-}
 
 // main is the entry point for the application.
 func main() {
@@ -37,4 +26,15 @@ func main() {
 	// underlying array to increase capacity.
 	takeOneCapOne = append(takeOneCapOne, "Kiwi")
 	inspectSlice(takeOneCapOne)
+}
+
+// inspectSlice exposes the slice header for review.
+func inspectSlice(slice []string) {
+	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
+	for index, value := range slice {
+		fmt.Printf("[%d] %p %s\n",
+			index,
+			&slice[index],
+			value)
+	}
 }
