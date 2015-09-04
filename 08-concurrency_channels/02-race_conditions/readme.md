@@ -28,7 +28,7 @@ https://golang.org/doc/articles/race_detector.html
 
 [Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/dJnQk00G0F))
 
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/ggZm3t4rLB)
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/ggZm3t4rLB))
 
 [Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/dq4jkYGnVS))
 
