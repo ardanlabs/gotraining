@@ -1,14 +1,12 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/-oeDmu2et8
+// https://play.golang.org/p/TAX6NpPaEu
 
 // Sample program to show how to declare and initialize struct types.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // example represents a type with different fields.
 type example struct {

@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/_xxuE1Ep6U
+// https://play.golang.org/p/NtPpvGEN4W
 
 // Sample program to show how to declare and initialize anonymous
 // struct types.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // main is the entry point for the application.
 func main() {
