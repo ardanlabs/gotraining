@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/-dhowrDOO4
+// https://play.golang.org/p/SIk8XWmwWa
 
 // Sample program to show how to use a ServeMux from the standard
 // library. How to handle verbs and more complex routing.
@@ -42,26 +42,6 @@ var app = struct {
 	fs:     http.FileServer(http.Dir("public")),
 }
 
-func main() {
-	// This will handle all paths without specific routes.
-	http.HandleFunc("/", baseHandler)
-
-	// Create a ServeMux and add some routes.
-	api := http.NewServeMux()
-	api.HandleFunc("/users", usersHandler)
-	api.HandleFunc("/search", searchUsers)
-
-	// We are stripping out the prefix (/api/v1/) before the
-	// route will be handled. This allows the routes above
-	// to be compliant with this prefix.
-	http.Handle("/api/v1/", http.StripPrefix("/api/v1", api))
-
-	// Start the service.
-	bind := ":4000"
-	log.Println("Serving HTTP on", bind)
-	log.Fatalln(http.ListenAndServe(bind, nil))
-}
-
 // baseHandler handles serving the index template and static assets.
 func baseHandler(w http.ResponseWriter, r *http.Request) {
 	// If an static asset is being requested, use the file server.
@@ -89,6 +69,14 @@ func baseHandler(w http.ResponseWriter, r *http.Request) {
 	// Execute the template for the users and send the
 	// result to the client.
 	app.idxTpl.Execute(w, users)
+}
+
+// respondJSON sends status and writes JSON to the client.
+func respondJSON(w http.ResponseWriter, status int, val interface{}) error {
+	// Standard way to respond back to the client.
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	return json.NewEncoder(w).Encode(val)
 }
 
 // usersHandler handles the /api/v1/users path.
@@ -164,10 +152,22 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 	http.NotFound(w, r)
 }
 
-// respondJSON sends status and writes JSON to the client.
-func respondJSON(w http.ResponseWriter, status int, val interface{}) error {
-	// Standard way to respond back to the client.
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
-	return json.NewEncoder(w).Encode(val)
+func main() {
+	// This will handle all paths without specific routes.
+	http.HandleFunc("/", baseHandler)
+
+	// Create a ServeMux and add some routes.
+	api := http.NewServeMux()
+	api.HandleFunc("/users", usersHandler)
+	api.HandleFunc("/search", searchUsers)
+
+	// We are stripping out the prefix (/api/v1/) before the
+	// route will be handled. This allows the routes above
+	// to be compliant with this prefix.
+	http.Handle("/api/v1/", http.StripPrefix("/api/v1", api))
+
+	// Start the service.
+	bind := ":4000"
+	log.Println("Serving HTTP on", bind)
+	log.Fatalln(http.ListenAndServe(bind, nil))
 }
