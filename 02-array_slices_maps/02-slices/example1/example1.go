@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/fWJR3Kln4Y
+// https://play.golang.org/p/sq3zBRbuJU
 
 // Sample program to show how the capacity of the slice
 // is not available for use.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // main is the entry point for the application.
 func main() {

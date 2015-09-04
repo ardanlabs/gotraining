@@ -1,15 +1,24 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/d1kRkbZ-iV
+// https://play.golang.org/p/vlbVjgqWf5
 
 // Sample program to show the components of a slice. It has a
 // length, capacity and the underlying array.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+
+// inspectSlice exposes the slice header for review.
+func inspectSlice(slice []string) {
+	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
+	for i, v := range slice {
+		fmt.Printf("[%d] %p %s\n",
+			i,
+			&slice[i],
+			v)
+	}
+}
 
 // main is the entry point for the application.
 func main() {
@@ -22,15 +31,4 @@ func main() {
 	slice[4] = "Plum"
 
 	inspectSlice(slice)
-}
-
-// inspectSlice exposes the slice header for review.
-func inspectSlice(slice []string) {
-	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
-	for i, v := range slice {
-		fmt.Printf("[%d] %p %s\n",
-			i,
-			&slice[i],
-			v)
-	}
 }

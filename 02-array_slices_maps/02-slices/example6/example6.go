@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/cK3y_qYUgd
+// https://play.golang.org/p/K7SZTuazr-
 
 // Sample program to show how to declare and use variadic functions.
 package main
@@ -12,6 +12,13 @@ import "fmt"
 type user struct {
 	id   int
 	name string
+}
+
+// display can accept and display multiple values of user types.
+func display(users ...user) {
+	for i := 0; i < len(users); i++ {
+		fmt.Printf("%+v\n", users[i])
+	}
 }
 
 // main is the entry point for the application.
@@ -30,11 +37,4 @@ func main() {
 
 	// Display both user values.
 	display(u1, u2)
-}
-
-// display can accept and display multiple values of user types.
-func display(users ...user) {
-	for i := 0; i < len(users); i++ {
-		fmt.Printf("%+v\n", users[i])
-	}
 }

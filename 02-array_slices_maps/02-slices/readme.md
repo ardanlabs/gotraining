@@ -27,21 +27,21 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 ## Code Review
 
-[Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/fWJR3Kln4Y))
+[Declare and Length](example1/example1.go) ([Go Playground](https://play.golang.org/p/sq3zBRbuJU))
 
-[Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/d1kRkbZ-iV))
+[Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/vlbVjgqWf5))
 
-[Appending slices](example4/example4.go) ([Go Playground](http://play.golang.org/p/UzmwiMWDwd))
+[Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/IHKg8PuSj4))
 
-[Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/nZnkHsGj_P))
+[Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/A6Sm1MNDCk))
 
-[Strings and slices](example5/example5.go) ([Go Playground](http://play.golang.org/p/6CAkumo0HI))
+[Strings and slices](example5/example5.go) ([Go Playground](https://play.golang.org/p/W3c_iWsvqj))
 
-[Variadic functions](example6/example6.go) ([Go Playground](http://play.golang.org/p/cK3y_qYUgd))
+[Variadic functions](example6/example6.go) ([Go Playground](https://play.golang.org/p/K7SZTuazr-))
 
 ## Advanced Code Review
 
-[Three index slicing](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/dJk2eycWhH))
+[Three index slicing](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/PdB-x5lwHb))
 
 ## Exercies
 

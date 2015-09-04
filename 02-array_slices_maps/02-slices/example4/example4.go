@@ -1,15 +1,13 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/UzmwiMWDwd
+// https://play.golang.org/p/IHKg8PuSj4
 
 // Sample program to show how to grow a slice using the built-in function append
 // and how append grows the capacity of the underlying array.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // main is the entry point for the application.
 func main() {
