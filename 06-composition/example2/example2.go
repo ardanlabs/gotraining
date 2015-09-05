@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// http://play.golang.org/p/BOzKkZQ4AF
+// https://play.golang.org/p/nbfJ7CRpxJ
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -112,18 +112,6 @@ type toolbox struct {
 
 // =============================================================================
 
-// displayState provide information about all the boards.
-func displayState(tb *toolbox, boards []board) {
-	fmt.Printf("Box: %#v\n", tb)
-	fmt.Println("Boards:")
-
-	for _, b := range boards {
-		fmt.Printf("\t%+v\n", b)
-	}
-}
-
-// =============================================================================
-
 // main is the entry point for the application.
 func main() {
 	// Inventory of old boards to remove, and the new boards
@@ -160,4 +148,14 @@ func main() {
 
 	// Display the new state of our toolbox and boards.
 	displayState(&tb, boards)
+}
+
+// displayState provide information about all the boards.
+func displayState(tb *toolbox, boards []board) {
+	fmt.Printf("Box: %#v\n", tb)
+	fmt.Println("Boards:")
+
+	for _, b := range boards {
+		fmt.Printf("\t%+v\n", b)
+	}
 }
