@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/hzfy_3XUJB
+// https://play.golang.org/p/_MiwwXZbVI
 
 // Sample program to show how embedded types work with interfaces.
 package main
@@ -34,12 +34,6 @@ type admin struct {
 	level string
 }
 
-// sendNotification accepts values that implement the notifier
-// interface and sends notifications.
-func sendNotification(n notifier) {
-	n.notify()
-}
-
 // main is the entry point for the application.
 func main() {
 	// Create an admin user.
@@ -55,4 +49,10 @@ func main() {
 	// The embedded inner type's implementation of the
 	// interface is "promoted" to the outer type.
 	sendNotification(&ad)
+}
+
+// sendNotification accepts values that implement the notifier
+// interface and sends notifications.
+func sendNotification(n notifier) {
+	n.notify()
 }
