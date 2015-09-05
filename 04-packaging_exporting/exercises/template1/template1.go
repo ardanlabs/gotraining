@@ -1,5 +1,5 @@
-// All material is licensed under the GNU Free Documentation License
-// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
 
 // Create a package named toy with a single exported struct type named Toy. Add
 // the exported fields Name and Weight. Then add two unexported fields named

@@ -1,7 +1,7 @@
-// All material is licensed under the GNU Free Documentation License
+// All material is licensed under the Apache License Version 2.0, January 2004
 import "errors"
 
-// https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
+// http://www.apache.org/licenses/LICENSE-2.0
 
 // https://play.golang.org/p/E-Bb5cRuyz
 
