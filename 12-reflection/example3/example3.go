@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/JjDPaH9elb
+// https://play.golang.org/p/bWQ6hiVECQ
 
 // https://github.com/goinggo/mapstructure
 // Sample code provided by Mitchell Hashimoto
@@ -15,21 +15,15 @@ import (
 	"strconv"
 )
 
-// getKind provides support for identifying predeclared numeric
-// types with implementation-specific sizes.
-func getKind(val reflect.Value) reflect.Kind {
-	kind := val.Kind()
+// main is the entry point for the application.
+func main() {
+	var number int
+	decodeInt("10", &number)
+	fmt.Println("number:", number)
 
-	switch {
-	case kind >= reflect.Int && kind <= reflect.Int64:
-		return reflect.Int
-	case kind >= reflect.Uint && kind <= reflect.Uint64:
-		return reflect.Uint
-	case kind >= reflect.Float32 && kind <= reflect.Float64:
-		return reflect.Float32
-	default:
-		return kind
-	}
+	var age int
+	decodeInt(45, &age)
+	fmt.Println("age:", age)
 }
 
 // decodeInt accepts a value of any type and will decode
@@ -71,13 +65,19 @@ func decodeInt(data interface{}, number *int) error {
 	return nil
 }
 
-// main is the entry point for the application.
-func main() {
-	var number int
-	decodeInt("10", &number)
-	fmt.Println("number:", number)
+// getKind provides support for identifying predeclared numeric
+// types with implementation-specific sizes.
+func getKind(val reflect.Value) reflect.Kind {
+	kind := val.Kind()
 
-	var age int
-	decodeInt(45, &age)
-	fmt.Println("age:", age)
+	switch {
+	case kind >= reflect.Int && kind <= reflect.Int64:
+		return reflect.Int
+	case kind >= reflect.Uint && kind <= reflect.Uint64:
+		return reflect.Uint
+	case kind >= reflect.Float32 && kind <= reflect.Float64:
+		return reflect.Float32
+	default:
+		return kind
+	}
 }

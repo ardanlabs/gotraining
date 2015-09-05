@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/Bn-7NAh9di
+// https://play.golang.org/p/OSeD9F_P46
 
 /*
 An interface is a reference type who's header is a two word value. The
@@ -32,16 +32,6 @@ type User struct {
 	Email string
 }
 
-// JSONString converts any value into a JSON string.
-func JSONString(value interface{}) string {
-	data, err := json.MarshalIndent(value, "", "    ")
-	if err != nil {
-		return ""
-	}
-
-	return string(data)
-}
-
 // main is the entry point for the application.
 func main() {
 	// Declare a variable of type User.
@@ -51,4 +41,14 @@ func main() {
 	}
 
 	fmt.Println(JSONString(&user))
+}
+
+// JSONString converts any value into a JSON string.
+func JSONString(value interface{}) string {
+	data, err := json.MarshalIndent(value, "", "    ")
+	if err != nil {
+		return ""
+	}
+
+	return string(data)
 }
