@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/yaUWLZjidB
+// https://play.golang.org/p/lTMxc-oExx
 
 // Sample program to show how you can't always get the address of a value.
 package main
