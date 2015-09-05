@@ -22,13 +22,13 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/6hi8VaijOK))
+[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/Un5qxhsaqu))
 
-[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](https://play.golang.org/p/0vwvXoZi6q))
+[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](https://play.golang.org/p/pJAe9SvoGb))
 
-[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/_ufwuyEBAG))
+[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/yOn3nZU5rf))
 
-[Timer channels and Select](example4/example4.go) ([Go Playground](https://play.golang.org/p/Hzv6scEn7T))
+[Timer channels and Select](example4/example4.go) ([Go Playground](https://play.golang.org/p/Sv_eWCWqiJ))
 
 ## Exercises
 
@@ -36,13 +36,13 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the integer equals ten, terminate the program cleanly.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/G7O-DnJrEA)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/Q1T9IyAOXw))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/v7fEyd86i3))
 
 ### Exercise 2
 Write a program that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate.
 
 [Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/vc6c1-M2EB)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/Sd1Am1D5ru))
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/SL-z0COxsy))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

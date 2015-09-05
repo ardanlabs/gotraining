@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/_ufwuyEBAG
+// https://play.golang.org/p/yOn3nZU5rf
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
@@ -27,34 +27,9 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-// insertUser simulates a database operation.
-func insertUser(id int) result {
-	r := result{
-		id: id,
-		op: fmt.Sprintf("insert USERS value (%d)", id),
-	}
-
-	// Randomize if the insert fails or not.
-	if rand.Intn(10) == 0 {
-		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
-	}
-
-	return r
-}
-
-// insertTrans simulates a database operation.
-func insertTrans(id int) result {
-	r := result{
-		id: id,
-		op: fmt.Sprintf("insert TRANS value (%d)", id),
-	}
-
-	// Randomize if the insert fails or not.
-	if rand.Intn(10) == 0 {
-		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
-	}
-
-	return r
+// main is the entry point for all Go programs.
+func main() {
+	performInserts()
 }
 
 // performInserts coordinates the possible inserts that need to take place.
@@ -98,7 +73,32 @@ func performInserts() {
 	log.Println("Inserts Complete")
 }
 
-// main is the entry point for all Go programs.
-func main() {
-	performInserts()
+// insertUser simulates a database operation.
+func insertUser(id int) result {
+	r := result{
+		id: id,
+		op: fmt.Sprintf("insert USERS value (%d)", id),
+	}
+
+	// Randomize if the insert fails or not.
+	if rand.Intn(10) == 0 {
+		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
+	}
+
+	return r
+}
+
+// insertTrans simulates a database operation.
+func insertTrans(id int) result {
+	r := result{
+		id: id,
+		op: fmt.Sprintf("insert TRANS value (%d)", id),
+	}
+
+	// Randomize if the insert fails or not.
+	if rand.Intn(10) == 0 {
+		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
+	}
+
+	return r
 }

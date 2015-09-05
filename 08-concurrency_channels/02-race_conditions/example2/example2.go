@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/5xRKLl9A9r
+// https://play.golang.org/p/OoYbpJToZ8
 
 // go build -race
 
@@ -22,20 +22,6 @@ var counter int64
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
-// incCounter increments the package level counter variable.
-func incCounter(id int) {
-	for count := 0; count < 2; count++ {
-		// Safely Add One To Counter.
-		atomic.AddInt64(&counter, 1)
-
-		// Yield the thread and be placed back in queue.
-		runtime.Gosched()
-	}
-
-	// Tell main we are done.
-	wg.Done()
-}
-
 // main is the entry point for all Go programs.
 func main() {
 	// Add a count of two, one for each goroutine.
@@ -50,4 +36,18 @@ func main() {
 
 	// Display the final value.
 	fmt.Println("Final Counter:", counter)
+}
+
+// incCounter increments the package level counter variable.
+func incCounter(id int) {
+	for count := 0; count < 2; count++ {
+		// Safely Add One To Counter.
+		atomic.AddInt64(&counter, 1)
+
+		// Yield the thread and be placed back in queue.
+		runtime.Gosched()
+	}
+
+	// Tell main we are done.
+	wg.Done()
 }

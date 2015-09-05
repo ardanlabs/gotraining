@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/KpJP7WyqVn
+// https://play.golang.org/p/mEcWhL14ha
 
 // Sample program to show how the goroutine scheduler
 // will time slice goroutines on a single thread.
@@ -15,24 +15,6 @@ import (
 
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
-
-// printPrime displays prime numbers for the first 5000 numbers.
-func printPrime(prefix string) {
-next:
-	for outer := 2; outer < 5000; outer++ {
-		for inner := 2; inner < outer; inner++ {
-			if outer%inner == 0 {
-				continue next
-			}
-		}
-		fmt.Printf("%s:%d\n", prefix, outer)
-	}
-
-	fmt.Println("Completed", prefix)
-
-	// Tell main we are done.
-	wg.Done()
-}
 
 // main is the entry point for all Go programs.
 func main() {
@@ -52,4 +34,22 @@ func main() {
 	wg.Wait()
 
 	fmt.Println("Terminating Program")
+}
+
+// printPrime displays prime numbers for the first 5000 numbers.
+func printPrime(prefix string) {
+next:
+	for outer := 2; outer < 5000; outer++ {
+		for inner := 2; inner < outer; inner++ {
+			if outer%inner == 0 {
+				continue next
+			}
+		}
+		fmt.Printf("%s:%d\n", prefix, outer)
+	}
+
+	fmt.Println("Completed", prefix)
+
+	// Tell main we are done.
+	wg.Done()
 }
