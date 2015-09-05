@@ -20,7 +20,7 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 [Map literal initialization](example2/example2.go) ([Go Playground](https://play.golang.org/p/9zQuoGSuTe))
 
-[Map key restrictions](example3/example3.go) ([Go Playground](https://play.golang.org/p/fU18qrexKb))
+[Map key restrictions](example3/example3.go) ([Go Playground](http://play.golang.org/p/FcY_0ckwOZ))
 
 ## Advanced Code Review
 
