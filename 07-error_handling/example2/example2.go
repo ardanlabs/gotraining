@@ -1,7 +1,7 @@
 // All material is licensed under the GNU Free Documentation License
 // https://github.com/ArdanStudios/gotraining/blob/master/LICENSE
 
-// https://play.golang.org/p/4-SbLB5hg1
+// https://play.golang.org/p/FRnwmQx_ZI
 
 // Sample program to show how to use error variables to help the
 // caller determine the exact error being returned.
@@ -17,15 +17,6 @@ var ErrBadRequest = errors.New("Bad Request")
 
 // ErrMovedPermanently is returned when a 301/302 is returned.
 var ErrMovedPermanently = errors.New("Moved Permanently")
-
-// webCall performs a web operation.
-func webCall(b bool) error {
-	if b {
-		return ErrBadRequest
-	}
-
-	return ErrMovedPermanently
-}
 
 // main is the entry point for the application.
 func main() {
@@ -46,4 +37,13 @@ func main() {
 	}
 
 	fmt.Println("Life is good")
+}
+
+// webCall performs a web operation.
+func webCall(b bool) error {
+	if b {
+		return ErrBadRequest
+	}
+
+	return ErrMovedPermanently
 }
