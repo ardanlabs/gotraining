@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/3bTo41YmK9
+// http://play.golang.org/p/wAV3xnKj60
 
 // Sample program to show how to embed a type into another type and
 // the relationship between the inner and outer type.
@@ -16,7 +16,7 @@ type user struct {
 }
 
 // notify implements a method that can be called via
-// a value of type user.
+// a pointer of type user.
 func (u *user) notify() {
 	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
