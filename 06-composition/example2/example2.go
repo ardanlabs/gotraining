@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/nbfJ7CRpxJ
+// http://play.golang.org/p/yAq9ZK4Te4
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -138,13 +138,9 @@ func main() {
 	// Display the current state of our toolbox and boards.
 	displayState(&tb, boards)
 
-	fmt.Println()
-
 	// Hire a contractor and put our contractor to work.
 	var c contractor
 	c.processBoards(&tb, &tb.nails, boards)
-
-	fmt.Println()
 
 	// Display the new state of our toolbox and boards.
 	displayState(&tb, boards)
@@ -158,4 +154,6 @@ func displayState(tb *toolbox, boards []board) {
 	for _, b := range boards {
 		fmt.Printf("\t%+v\n", b)
 	}
+
+	fmt.Println()
 }
