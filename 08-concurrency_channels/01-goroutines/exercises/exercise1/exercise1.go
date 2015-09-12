@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/mB4QslSNoA
+// http://play.golang.org/p/y0WHqI69Zl
 
 // Create a program that declares two anonymous functions. Once that counts up to
 // 100 from 0 and one that counts down to 0 from 100. Display each number with an
@@ -13,6 +13,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 )
 
@@ -23,8 +24,8 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(2)
 
-	// Allocate two contexts for the scheduler to use.
-	// runtime.GOMAXPROCS(2)
+	// Allocate one logical processor.
+	runtime.GOMAXPROCS(1)
 
 	fmt.Println("Start Goroutines")
 
