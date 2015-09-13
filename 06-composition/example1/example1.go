@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/W5ya6_LAU6
+// http://play.golang.org/p/kThUi96DoW
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -11,109 +11,109 @@ import "fmt"
 // *****************************************************************************
 // Set of behaviors.
 
-// drawer is behavior for drawing an object.
-type drawer interface {
-	draw()
+// Drawer is behavior for drawing an object.
+type Drawer interface {
+	Draw()
 }
 
-// changer is behavior for an object to change shape.
-type changer interface {
-	change(area float64)
+// Changer is behavior for an object to change shape.
+type Changer interface {
+	Change(area float64)
 }
 
-// hider is behavior for an object to hide itself.
-type hider interface {
-	hide(b bool)
+// Hider is behavior for an object to hide itself.
+type Hider interface {
+	Hide(b bool)
 }
 
-// mover is behavior for an object to move.
-type mover interface {
-	move(x, y, z int)
+// Mover is behavior for an object to move.
+type Mover interface {
+	Move(x, y, z int)
 }
 
 // *****************************************************************************
 // Set of objects that exhibit different behaviors.
 
-// building contain this behavior.
-type building interface {
-	drawer
+// Building contain this behavior.
+type Building interface {
+	Drawer
 }
 
-// cloud contain this behavior.
-type cloud interface {
-	drawer
-	changer
-	mover
+// Cloud contain this behavior.
+type Cloud interface {
+	Drawer
+	Changer
+	Mover
 }
 
-// person contain this behavior.
-type person interface {
-	drawer
-	hider
-	mover
+// Person contain this behavior.
+type Person interface {
+	Drawer
+	Hider
+	Mover
 }
 
 // *****************************************************************************
 // Set of concrete objects.
 
-// location provides support placing objects.
-type location struct {
-	x, y, z int
+// Location provides support placing objects.
+type Location struct {
+	X, Y, Z int
 }
 
-// move is how a cumulus cloud can move.
-func (l *location) move(x, y, z int) {
-	l.x = x
-	l.y = y
-	l.z = z
+// Move is how a cumulus cloud can move.
+func (l *Location) Move(x, y, z int) {
+	l.X = x
+	l.Y = y
+	l.Z = z
 }
 
-// house represents a place people live in.
-type house struct {
-	*location
-	address string
-	color   string
+// House represents a place people live in.
+type House struct {
+	*Location
+	Address string
+	Color   string
 }
 
-// draw is how a house is drawn.
-func (h *house) draw() {
+// Draw is how a House is drawn.
+func (h *House) Draw() {
 	fmt.Printf("[H] %+v\n", *h)
 }
 
-// move is implemented to prevent a house from moving.
-func (*house) move(x, y, z int) {}
+// Move is implemented to prevent a House from moving.
+func (*House) Move(x, y, z int) {}
 
-// cumulus declares a cumulus cloud in the game.
-type cumulus struct {
-	*location
-	area float64
+// Cumulus declares a cumulus cloud in the game.
+type Cumulus struct {
+	*Location
+	Area float64
 }
 
-// draw is how a cumulus cloud is drawn.
-func (c *cumulus) draw() {
+// Draw is how a cumulus cloud is drawn.
+func (c *Cumulus) Draw() {
 	fmt.Printf("[C] %+v\n", *c)
 }
 
-// change is how a cumulus cloud can change shape.
-func (c *cumulus) change(area float64) {
-	c.area = area
+// Change is how a cumulus cloud can change shape.
+func (c *Cumulus) Change(area float64) {
+	c.Area = area
 }
 
-// policeman declares a cop in the game.
-type policeman struct {
-	*location
-	name    string
-	visible bool
+// Policeman declares a cop in the game.
+type Policeman struct {
+	*Location
+	Name    string
+	Visible bool
 }
 
-// draw is how a cop is drawn.
-func (p *policeman) draw() {
+// Draw is how a cop is drawn.
+func (p *Policeman) Draw() {
 	fmt.Printf("[P] %+v\n", *p)
 }
 
-// hide is how a cop can become hidden.
-func (p *policeman) hide(b bool) {
-	p.visible = !b
+// Hide is how a cop can become hidden.
+func (p *Policeman) Hide(b bool) {
+	p.Visible = !b
 }
 
 // *****************************************************************************
@@ -121,9 +121,9 @@ func (p *policeman) hide(b bool) {
 
 // world represents a set of objects.
 type world struct {
-	buildings []building
-	clouds    []cloud
-	people    []person
+	buildings []Building
+	clouds    []Cloud
+	people    []Person
 }
 
 // *****************************************************************************
@@ -133,20 +133,20 @@ type world struct {
 func main() {
 	// Create a world.
 	w := world{
-		buildings: []building{
-			&house{&location{10, 10, 10}, "123 mocking bird", "white"},
-			&house{&location{10, 20, 10}, "127 mocking bird", "red"},
+		buildings: []Building{
+			&House{&Location{10, 10, 10}, "123 mocking bird", "white"},
+			&House{&Location{10, 20, 10}, "127 mocking bird", "red"},
 		},
-		clouds: []cloud{
-			&cumulus{&location{10, 15, 1000}, 123456.4332},
+		clouds: []Cloud{
+			&Cumulus{&Location{10, 15, 1000}, 123456.4332},
 		},
-		people: []person{
-			&policeman{&location{15, 40, 10}, "Harry", true},
+		people: []Person{
+			&Policeman{&Location{15, 40, 10}, "Harry", true},
 		},
 	}
 
 	// Build a slice of all the values that can be drawn.
-	var d []drawer
+	var d []Drawer
 	for _, v := range w.buildings {
 		d = append(d, v)
 	}
@@ -162,8 +162,8 @@ func main() {
 }
 
 // draw takes a set of values that can be drawn.
-func draw(d []drawer) {
+func draw(d []Drawer) {
 	for _, v := range d {
-		v.draw()
+		v.Draw()
 	}
 }
