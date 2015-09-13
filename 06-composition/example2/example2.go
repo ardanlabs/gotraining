@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/we7a-Nk08J
+// http://play.golang.org/p/lDCxRHnBwD
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -12,8 +12,8 @@ import "fmt"
 
 // Board represents a surface we can work on.
 type Board struct {
-	nailsNeeded int
-	nailsDriven int
+	NailsNeeded int
+	NailsDriven int
 }
 
 // =============================================================================
@@ -45,7 +45,7 @@ func (Mallet) DriveNail(nailSupply *int, b *Board) {
 	*nailSupply--
 
 	// Pound a nail into the board.
-	b.nailsDriven++
+	b.NailsDriven++
 
 	fmt.Println("Mallet: pounded nail into the board.")
 }
@@ -56,7 +56,7 @@ type Crowbar struct{}
 // pullNail yanks a nail out of the specified board.
 func (Crowbar) pullNail(nailSupply *int, b *Board) {
 	// Yank a nail out of the board.
-	b.nailsDriven--
+	b.NailsDriven--
 
 	// Put that nail back into the supply.
 	*nailSupply++
@@ -71,14 +71,14 @@ type Contractor struct{}
 
 // fasten will drive nails into a board.
 func (Contractor) fasten(d NailDriver, nailSupply *int, b *Board) {
-	for b.nailsDriven < b.nailsNeeded {
+	for b.NailsDriven < b.NailsNeeded {
 		d.DriveNail(nailSupply, b)
 	}
 }
 
 // unfasten will remove nails from a board.
 func (Contractor) unfasten(p NailPuller, nailSupply *int, b *Board) {
-	for b.nailsDriven > b.nailsNeeded {
+	for b.NailsDriven > b.NailsNeeded {
 		p.pullNail(nailSupply, b)
 	}
 }
@@ -91,10 +91,10 @@ func (c Contractor) processBoards(dp NailDrivePuller, nailSupply *int, boards []
 		fmt.Printf("Contractor: examining board #%d: %+v\n", i+1, b)
 
 		switch {
-		case b.nailsDriven < b.nailsNeeded:
+		case b.NailsDriven < b.NailsNeeded:
 			c.fasten(dp, nailSupply, b)
 
-		case b.nailsDriven > b.nailsNeeded:
+		case b.NailsDriven > b.NailsNeeded:
 			c.unfasten(dp, nailSupply, b)
 		}
 	}
@@ -118,14 +118,14 @@ func main() {
 	// that will replace them.
 	boards := []Board{
 		// Rotted boards to be removed.
-		{nailsDriven: 3},
-		{nailsDriven: 1},
-		{nailsDriven: 6},
+		{NailsDriven: 3},
+		{NailsDriven: 1},
+		{NailsDriven: 6},
 
 		// Fresh boards to be fastened.
-		{nailsNeeded: 6},
-		{nailsNeeded: 9},
-		{nailsNeeded: 4},
+		{NailsNeeded: 6},
+		{NailsNeeded: 9},
+		{NailsNeeded: 4},
 	}
 
 	// Fill a toolbox.
