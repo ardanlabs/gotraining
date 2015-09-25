@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/kThUi96DoW
+// http://play.golang.org/p/DqZvyTbTle
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -70,7 +70,7 @@ func (l *Location) Move(x, y, z int) {
 
 // House represents a place people live in.
 type House struct {
-	*Location
+	Location
 	Address string
 	Color   string
 }
@@ -85,7 +85,7 @@ func (*House) Move(x, y, z int) {}
 
 // Cumulus declares a cumulus cloud in the game.
 type Cumulus struct {
-	*Location
+	Location
 	Area float64
 }
 
@@ -101,7 +101,7 @@ func (c *Cumulus) Change(area float64) {
 
 // Policeman declares a cop in the game.
 type Policeman struct {
-	*Location
+	Location
 	Name    string
 	Visible bool
 }
@@ -134,14 +134,14 @@ func main() {
 	// Create a world.
 	w := world{
 		buildings: []Building{
-			&House{&Location{10, 10, 10}, "123 mocking bird", "white"},
-			&House{&Location{10, 20, 10}, "127 mocking bird", "red"},
+			&House{Location{10, 10, 10}, "123 mocking bird", "white"},
+			&House{Location{10, 20, 10}, "127 mocking bird", "red"},
 		},
 		clouds: []Cloud{
-			&Cumulus{&Location{10, 15, 1000}, 123456.4332},
+			&Cumulus{Location{10, 15, 1000}, 123456.4332},
 		},
 		people: []Person{
-			&Policeman{&Location{15, 40, 10}, "Harry", true},
+			&Policeman{Location{15, 40, 10}, "Harry", true},
 		},
 	}
 
