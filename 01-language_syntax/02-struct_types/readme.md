@@ -20,6 +20,8 @@ http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 [Anonymous struct types](example2/example2.go) ([Go Playground](https://play.golang.org/p/NtPpvGEN4W))
 
+[Named vs Unnamed types](example3/example3.go)([Go Playground](http://play.golang.org/p/QoBVXdmVAc))
+
 ## Advanced Code Review
 
 [Struct type alignments](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/1CL1ACDipG))
