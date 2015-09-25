@@ -8,6 +8,10 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 * Arrays of different sizes are considered to be of different types.
 * Memory is allocated as a contiguous block.
 
+## Links
+
+[CPU Caches and Why You Care (18:50)](https://youtu.be/WDIkqP4JbkE?t=1129)
+
 ## Code Review
 
 [Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/2D24t6fbW_))
