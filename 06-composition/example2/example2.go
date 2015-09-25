@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/EskD0UR3Pc
+// http://play.golang.org/p/QnkL-UIVJN
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -69,22 +69,22 @@ func (Crowbar) PullNail(nailSupply *int, b *Board) {
 // Contractor carries out the task of securing boards.
 type Contractor struct{}
 
-// fasten will drive nails into a board.
-func (Contractor) fasten(d NailDriver, nailSupply *int, b *Board) {
+// Fasten will drive nails into a board.
+func (Contractor) Fasten(d NailDriver, nailSupply *int, b *Board) {
 	for b.NailsDriven < b.NailsNeeded {
 		d.DriveNail(nailSupply, b)
 	}
 }
 
-// unfasten will remove nails from a board.
-func (Contractor) unfasten(p NailPuller, nailSupply *int, b *Board) {
+// Unfasten will remove nails from a board.
+func (Contractor) Unfasten(p NailPuller, nailSupply *int, b *Board) {
 	for b.NailsDriven > b.NailsNeeded {
 		p.PullNail(nailSupply, b)
 	}
 }
 
-// processBoards works against boards.
-func (c Contractor) processBoards(dp NailDrivePuller, nailSupply *int, boards []Board) {
+// ProcessBoards works against boards.
+func (c Contractor) ProcessBoards(dp NailDrivePuller, nailSupply *int, boards []Board) {
 	for i := range boards {
 		b := &boards[i]
 
@@ -92,10 +92,10 @@ func (c Contractor) processBoards(dp NailDrivePuller, nailSupply *int, boards []
 
 		switch {
 		case b.NailsDriven < b.NailsNeeded:
-			c.fasten(dp, nailSupply, b)
+			c.Fasten(dp, nailSupply, b)
 
 		case b.NailsDriven > b.NailsNeeded:
-			c.unfasten(dp, nailSupply, b)
+			c.Unfasten(dp, nailSupply, b)
 		}
 	}
 }
@@ -140,7 +140,7 @@ func main() {
 
 	// Hire a Contractor and put our Contractor to work.
 	var c Contractor
-	c.processBoards(&tb, &tb.nails, boards)
+	c.ProcessBoards(&tb, &tb.nails, boards)
 
 	// Display the new state of our toolbox and boards.
 	displayState(&tb, boards)

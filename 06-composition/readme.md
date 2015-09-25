@@ -18,7 +18,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 [Composition I](example1/example1.go) ([Go Playground](http://play.golang.org/p/kThUi96DoW))
 
-[Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/EskD0UR3Pc))
+[Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/QnkL-UIVJN))
 
 ## Exercises
 
