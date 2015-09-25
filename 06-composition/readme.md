@@ -12,6 +12,8 @@ Composition goes beyond the mechanics of type embedding. It's a design pattern w
 
 http://golang.org/doc/effective_go.html#embedding
 
+http://www.goinggo.net/2015/09/composition-with-go.html
+
 ## Code Review
 
 [Composition I](example1/example1.go) ([Go Playground](http://play.golang.org/p/kThUi96DoW))
