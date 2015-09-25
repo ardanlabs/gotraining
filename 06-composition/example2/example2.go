@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/lDCxRHnBwD
+// http://play.golang.org/p/EskD0UR3Pc
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -25,7 +25,7 @@ type NailDriver interface {
 
 // NailPuller represents behavior to remove nails into a board.
 type NailPuller interface {
-	pullNail(nailSupply *int, b *Board)
+	PullNail(nailSupply *int, b *Board)
 }
 
 // NailDrivePuller represents behavior to drive and remove nails into a board.
@@ -53,8 +53,8 @@ func (Mallet) DriveNail(nailSupply *int, b *Board) {
 // Crowbar is a tool that removes nails.
 type Crowbar struct{}
 
-// pullNail yanks a nail out of the specified board.
-func (Crowbar) pullNail(nailSupply *int, b *Board) {
+// PullNail yanks a nail out of the specified board.
+func (Crowbar) PullNail(nailSupply *int, b *Board) {
 	// Yank a nail out of the board.
 	b.NailsDriven--
 
@@ -79,7 +79,7 @@ func (Contractor) fasten(d NailDriver, nailSupply *int, b *Board) {
 // unfasten will remove nails from a board.
 func (Contractor) unfasten(p NailPuller, nailSupply *int, b *Board) {
 	for b.NailsDriven > b.NailsNeeded {
-		p.pullNail(nailSupply, b)
+		p.PullNail(nailSupply, b)
 	}
 }
 
