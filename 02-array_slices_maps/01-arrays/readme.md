@@ -20,6 +20,10 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 
 [Contiguous memory allocations](example3/example3.go) ([Go Playground](http://play.golang.org/p/L-SmdGfUcP))
 
+## Advanced Code Review
+
+[Contiguous Backing Array](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/IIubKW34GA))
+
 ## Exercises
 
 ### Exercise 1

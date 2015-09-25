@@ -41,10 +41,6 @@ https://en.wikipedia.org/wiki/Tracing_garbage_collection
 
 [Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/_uK8EYlsd0))
 
-## Advanced Code Review
-
-[Contiguous Backing Array](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/IIubKW34GA))
-
 ## Exercises
 
 ### Exercise 1
