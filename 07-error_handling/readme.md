@@ -23,7 +23,7 @@ http://dave.cheney.net/2014/12/24/inspecting-errors
 
 ## Code Review
 
-[Default Error Values](example1/example1.go) ([Go Playground](https://play.golang.org/p/MsJ2Y-R6k7))
+[Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/PiSDQj1UCB))
 
 [Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/FRnwmQx_ZI))
 
