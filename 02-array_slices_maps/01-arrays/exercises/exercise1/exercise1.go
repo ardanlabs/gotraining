@@ -1,12 +1,13 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/Pa3mrTCcpB
+// http://play.golang.org/p/px3X_qw_SX
 
 // Declare an array of 5 strings with each element initialized to its zero value.
 //
 // Declare a second array of 5 strings and initialize this array with literal string
 // values. Assign the second array to the first and display the results of the first array.
+// Display the string value and address of each element.
 package main
 
 import "fmt"
@@ -22,8 +23,8 @@ func main() {
 	// Assign the array of friends to the names array.
 	names = friends
 
-	// Display each name in names.
-	for _, name := range names {
-		fmt.Println(name)
+	// Display each string value and address index in names.
+	for i, name := range names {
+		fmt.Println(name, &names[i])
 	}
 }
