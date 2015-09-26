@@ -45,7 +45,7 @@ Create two error variables, one called ErrInvalidValue and the other called ErrA
 Create a custom error type called appError that contains three fields, Err error, Message string and Code int. Implement the error interface providing your own message using these three fields. Write a function called checkFlag that accepts a bool value. If the value is false, return a pointer of your custom error type initialized as you like. If the value is true, return a default error. Write a main function to call the checkFlag function and check the error for the concrete type.
 
 [Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/x6UimVQMMQ)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/rLCuGVzwy4))
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/IN0XHfDNZJ))
 
 ___
 [![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

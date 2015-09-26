@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/rLCuGVzwy4
+// http://play.golang.org/p/IN0XHfDNZJ
 
 // Create a custom error type called appError that contains three fields, Err error,
 // Message string and Code int. Implement the error interface providing your own message
@@ -18,14 +18,14 @@ import (
 
 // appError is a custom error type for the program.
 type appError struct {
-	Err     error
-	Message string
-	Code    int
+	err     error
+	message string
+	code    int
 }
 
 // Error implements the error interface for appError.
 func (a *appError) Error() string {
-	return fmt.Sprintf("App Error[%s] Message[%s] Code[%d]", a.Err, a.Message, a.Code)
+	return fmt.Sprintf("App Error[%s] Message[%s] Code[%d]", a.err, a.message, a.code)
 }
 
 // main is the entry point for the application.
@@ -37,7 +37,7 @@ func main() {
 	// Check the concrete type and handle appropriately.
 	switch e := err.(type) {
 	case *appError:
-		fmt.Printf("App Error: Code[%d] Message[%s] Err[%s]", e.Code, e.Message, e.Err)
+		fmt.Printf("App Error: Code[%d] Message[%s] Err[%s]", e.code, e.message, e.err)
 		return
 	default:
 		fmt.Println(e)
