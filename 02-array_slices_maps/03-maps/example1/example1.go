@@ -22,7 +22,7 @@ func main() {
 	users := make(map[string]user)
 
 	// Add key/value pairs to the map.
-	users["Rob"] = user{"Roy", "Rob"}
+	users["Roy"] = user{"Rob", "Roy"}
 	users["Ford"] = user{"Henry", "Ford"}
 	users["Mouse"] = user{"Mickey", "Mouse"}
 	users["Jackson"] = user{"Michael", "Jackson"}
