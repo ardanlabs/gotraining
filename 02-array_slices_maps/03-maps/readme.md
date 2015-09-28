@@ -26,6 +26,8 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 [Composing maps of maps](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/mycosI0zpN))
 
+[Properties of nil maps](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/P_8b-42YwD))
+
 ## Exercises
 
 ### Exercise 1
