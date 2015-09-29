@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/Rt3O-7ndtJ
+// http://play.golang.org/p/4IGNSTCAE6
 
 // Create two error variables, one called ErrInvalidValue and the other
 // called ErrAmountTooLarge. Provide the static message for each variable.
