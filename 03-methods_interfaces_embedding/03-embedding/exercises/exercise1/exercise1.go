@@ -50,7 +50,7 @@ func main() {
 	// Create a slice of matcher values to search.
 	matchers := []matcher{
 		hockey{sport{"Panthers", "Miami"}, "USA"},
-		hockey{sport{"Canadians", "Montreal"}, "Canada"},
+		hockey{sport{"Canadiens", "Montreal"}, "Canada"},
 	}
 
 	// Display what we are searching for.
