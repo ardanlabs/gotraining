@@ -1,21 +1,23 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/P_8b-42YwD
+// http://play.golang.org/p/GF0gbY4SvN
 
+// Sample program to show the properties of nil maps.
 package main
 
 import "fmt"
 
+// main is the entry point for the application.
 func main() {
-	test(map[int]string{1: "one", 2: "two", 3: "three"})
+	show(map[int]string{1: "one", 2: "two", 3: "three"})
 
 	fmt.Println()
 
-	test(nil)
+	show(nil)
 }
 
-func test(m map[int]string) {
+func show(m map[int]string) {
 	defer func() {
 		v := recover()
 		if v != nil {
