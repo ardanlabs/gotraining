@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/gbd8OOO3cM
+// https://play.golang.org/p/B7VVYyaA21
 
 // Copy the code from the template. Declare a new type called hockey
 // which embeds the sports type. Implement the matcher interface for hockey.
@@ -50,7 +50,7 @@ func main() {
 	// Create a slice of matcher values to search.
 	matchers := []matcher{
 		hockey{sport{"Panthers", "Miami"}, "USA"},
-		hockey{sport{"Canadians", "Montreal"}, "Canada"},
+		hockey{sport{"Canadiens", "Montreal"}, "Canada"},
 	}
 
 	// Display what we are searching for.
