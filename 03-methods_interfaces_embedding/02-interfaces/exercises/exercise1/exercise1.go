@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/iHOEV4YEKr
+// http://play.golang.org/p/0dlL76l8X2
 
 // Declare an interface named speaker with a method named sayHello. Declare a struct
 // named English that represents a person who speaks english and declare a struct named
@@ -28,7 +28,7 @@ type speaker interface {
 type english struct{}
 
 // sayHello implements the speaker interface.
-func (e english) sayHello() {
+func (english) sayHello() {
 	fmt.Println("Hello World")
 }
 
@@ -36,7 +36,7 @@ func (e english) sayHello() {
 type chinese struct{}
 
 // sayHello implements the speaker interface.
-func (c chinese) sayHello() {
+func (chinese) sayHello() {
 	fmt.Println("你好世界")
 }
 
