@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/fkQx0inUJ3
+// http://play.golang.org/p/0Z2qjifGld
 
 // Sample program to show how to declare constants and their
 // implementation in Go.
@@ -27,17 +27,18 @@ func main() {
 
 	// Constant arithmetic supports different kinds.
 	// Kind Promotion is used to determine kind in these scenarios.
-	// Variable answer will be implicitly converted to type floating point.
-	var answer = 3 * 0.333 // KindInt(3) * KindFloat(0.333)
 
-	// Variable third will be of kind floating point.
-	const third = 1 / 3.0 // KindInt(1) / KindFloat(3.0)
+	// Variable answer will of type float64.
+	var answer = 3 * 0.333 // KindFloat(3) * KindFloat(0.333)
 
-	// Variable zero will be of kind integer.
+	// Constant third will be of kind floating point.
+	const third = 1 / 3.0 // KindFloat(1) / KindFloat(3.0)
+
+	// Constant zero will be of kind integer.
 	const zero = 1 / 3 // KindInt(1) / KindInt(3)
 
 	// This is an example of constant arithmetic between typed and
 	// untyped constants. Must have like types to perform math.
 	const one int8 = 1
-	const two = 2 * one // KindInt(2) * int8(1)
+	const two = 2 * one // int8(2) * int8(1)
 }

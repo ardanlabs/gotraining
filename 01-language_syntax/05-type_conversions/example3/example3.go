@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/Rgoqvg8dNv
+// http://play.golang.org/p/KvbjDP2uOV
 
 /*
 // A Duration represents the elapsed time between two instants as
@@ -36,7 +36,7 @@ import (
 )
 
 // fiveSeconds is an typed constant of type Duration.
-const fiveSeconds = 5 * time.Second // Duration(5) * Duration(1000000000)
+const fiveSeconds = 5 * time.Second // time.Duration(5) * time.Duration(1000000000)
 
 // main is the entry point for the application.
 func main() {

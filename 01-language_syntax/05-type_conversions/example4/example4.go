@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/B75FURdQ7t
+// http://play.golang.org/p/WqWhHtix4U
 
 /*
 // A Duration represents the elapsed time between two instants as
@@ -36,7 +36,7 @@ import (
 )
 
 // fiveSeconds is a typed constant of type int64.
-const fiveSeconds int64 = 5 * time.Second // Duration(5) * Duration(1000000000)
+const fiveSeconds int64 = 5 * time.Second // time.Duration(5) * time.Duration(1000000000)
 
 // ./example2.go:36: cannot use time.Duration(5) * time.Second
 // (type time.Duration) as type int64 in const initializer
