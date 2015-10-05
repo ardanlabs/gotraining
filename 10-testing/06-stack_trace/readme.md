@@ -17,7 +17,7 @@ http://www.goinggo.net/2015/01/stack-traces-in-go.html
 
 [Review Stack Trace](example1/example1.go) ([Go Playground](http://play.golang.org/p/vP5cZsU6uU))
 
-[Packing](example2/example2.go) ([Go Playground](http://play.golang.org/p/aJfAJ5bqNt))
+[Packing](example2/example2.go) ([Go Playground](https://play.golang.org/p/NdhLzZJf_X))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
