@@ -7,6 +7,8 @@ This content is provided by Lighterra, the software company of Jason Robert Care
 
 [Modern Microprocessors](http://www.lighterra.com/papers/modernmicroprocessors/)
 
+[New CPU Features](http://danluu.com/new-cpu-features/)
+
 ## Notes
 
 * Each instruction takes 4 cycles over 4 stages (Fetch, Decode, Execute, Writeback)
