@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/0dlL76l8X2
+// https://play.golang.org/p/MFPF58SkRs
 
 // Declare an interface named speaker with a method named sayHello. Declare a struct
 // named English that represents a person who speaks english and declare a struct named
@@ -15,9 +15,7 @@
 // new values of each type and use the function.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // speaker implements the voice of anyone.
 type speaker interface {
