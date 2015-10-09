@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/1CL1ACDipG
+// http://play.golang.org/p/IiElaanvbY
 
 // Alignment is about placing types on boundaries that make the
 // CPU access the fastest.
@@ -18,31 +18,16 @@ import (
 type example struct {
 	flag    bool
 	counter int16
+	flag2   bool
 	pi      float32
 }
 
 // main is the entry point for the application.
 func main() {
-	// Declare variable of type example and init using
-	// a struct literal.
-	e := example{
-		flag:    true,
-		counter: 10,
-		pi:      3.141592,
-	}
-
-	// Declare variable of type example and init using
-	// a struct literal.
-	eNext := example{
-		flag:    true,
-		counter: 10,
-		pi:      3.141592,
-	}
-
-	// By placing both value one after the other on the stack
-	// we can see the actual padding and where it is located.
+	var e example
 
 	alignmentBoundary := unsafe.Alignof(e)
+	sizeE := unsafe.Sizeof(e)
 
 	sizeBool := unsafe.Sizeof(e.flag)
 	offsetBool := unsafe.Offsetof(e.flag)
@@ -50,31 +35,31 @@ func main() {
 	sizeInt := unsafe.Sizeof(e.counter)
 	offsetInt := unsafe.Offsetof(e.counter)
 
+	sizeBool2 := unsafe.Sizeof(e.flag2)
+	offsetBool2 := unsafe.Offsetof(e.flag2)
+
 	sizeFloat := unsafe.Sizeof(e.pi)
 	offsetFloat := unsafe.Offsetof(e.pi)
 
-	sizeBoolNext := unsafe.Sizeof(eNext.flag)
-	offsetBoolNext := unsafe.Offsetof(eNext.flag)
+	fmt.Printf("Alignment(%d):\tSize: %d\n", alignmentBoundary, sizeE)
 
-	fmt.Printf("Alignment Boundary: %d\n", alignmentBoundary)
-
-	fmt.Printf("flag = Size: %d Offset: %d Addr: %v\n",
+	fmt.Printf("flag:\t\tSize: %d\t\tOffset: %d\tAddr: %v\n",
 		sizeBool, offsetBool, &e.flag)
 
-	fmt.Printf("counter = Size: %d Offset: %d Addr: %v\n",
+	fmt.Printf("counter:\tSize: %d\t\tOffset: %d\tAddr: %v\n",
 		sizeInt, offsetInt, &e.counter)
 
-	fmt.Printf("pi = Size: %d Offset: %d Addr: %v\n",
-		sizeFloat, offsetFloat, &e.pi)
+	fmt.Printf("flag1:\t\tSize: %d\t\tOffset: %d\tAddr: %v\n",
+		sizeBool2, offsetBool2, &e.flag2)
 
-	fmt.Printf("Next = Size: %d Offset: %d Addr: %v\n",
-		sizeBoolNext, offsetBoolNext, &eNext.flag)
+	fmt.Printf("pi\t\tSize: %d\t\tOffset: %d\tAddr: %v\n",
+		sizeFloat, offsetFloat, &e.pi)
 }
 
 /*
-Alignment Boundary: 4
-flag = Size: 1 Offset: 0 Addr: 0x20817a170
-counter = Size: 2 Offset: 2 Addr: 0x20817a172
-pi = Size: 4 Offset: 4 Addr: 0x20817a174
-Next = Size: 1 Offset: 0 Addr: 0x20817a178
+Alignment(4):	Size: 12
+flag:		Size: 1		Offset: 0	Addr: 0x104382e0
+counter:	Size: 2		Offset: 2	Addr: 0x104382e2
+flag1:		Size: 1		Offset: 4	Addr: 0x104382e4
+pi		Size: 4		Offset: 8	Addr: 0x104382e8
 */
