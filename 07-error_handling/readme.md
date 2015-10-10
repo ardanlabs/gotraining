@@ -31,7 +31,7 @@ http://dave.cheney.net/2014/12/24/inspecting-errors
 
 [Behavior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/6GYqwSxHjI))
 
-[Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/czXpjvWWTT))
+[Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/9Pqn5P5l0C))
 
 ## Exercises
 

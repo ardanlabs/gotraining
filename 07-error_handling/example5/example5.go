@@ -1,14 +1,12 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/czXpjvWWTT
+// http://play.golang.org/p/9Pqn5P5l0C
 
 // Sample program to show see if the class can find the bug.
 package main
 
-import (
-	"log"
-)
+import "log"
 
 // customError is just an empty struct.
 type customError struct{}
