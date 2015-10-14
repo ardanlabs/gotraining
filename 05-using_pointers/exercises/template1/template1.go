@@ -1,11 +1,11 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/9_MSdcdlNQ
+// https://play.golang.org/p/Qe3dhDTwzX
 
 // Declare a struct type named Point with two fields, X and Y of type int.
-// Implement a factory function for this type and a method that accept a value
-// of this type and calculates the distance between the two points. What is
+// Implement a factory function for this type and a method that accepts
+// this type and calculates the distance between the two points. What is
 // the nature of this type?
 package main
 

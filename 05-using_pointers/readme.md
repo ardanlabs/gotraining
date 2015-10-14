@@ -30,10 +30,10 @@ http://play.golang.org/p/ki991PuHhk
 ### Exercise 1
 
 Declare a struct type named Point with two fields, X and Y of type float64. Implement a factory function for this type and a method
-that accept a value of this type and calculates the distance between the two points. What is the nature of this type?
+that accepts this type and calculates the distance between the two points. What is the nature of this type?
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/9_MSdcdlNQ)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/5KL4HipSJ-))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/Qe3dhDTwzX)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/1tcEsqNG6a))
 
 ___
 [![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
