@@ -1,14 +1,15 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/IN0XHfDNZJ
+// https://play.golang.org/p/8UyOIVjFtY
 
-// Create a custom error type called appError that contains three fields, Err error,
-// Message string and Code int. Implement the error interface providing your own message
-// using these three fields. Write a function called checkFlag that accepts a bool value.
-// If the value is false, return a pointer of your custom error type initialized as you like.
-// If the value is true, return a default error. Write a main function to call the
-// checkFlag function and check the error for the concrete type.
+// Create a custom error type called appError that contains three fields, err error,
+// message string and code int. Implement the error interface providing your own message
+// using these three fields. Implement a second method named Temporary that returns false
+// when the value of the code field is 9. Write a function called checkFlag that accepts
+// a bool value. If the value is false, return a pointer of your custom error type
+// initialized as you like. If the value is true, return a default error. Write a main
+// function to call the checkFlag function and check the error.
 package main
 
 import (
@@ -28,20 +29,28 @@ func (a *appError) Error() string {
 	return fmt.Sprintf("App Error[%s] Message[%s] Code[%d]", a.err, a.message, a.code)
 }
 
+// Temporary implements behavior about the error.
+func (a *appError) Temporary() bool {
+	return (a.code != 9)
+}
+
+// temporary is used to test the error we receive.
+type temporary interface {
+	Temporary() bool
+}
+
 // main is the entry point for the application.
 func main() {
-	// Call the function to simulate an error of the
-	// concrete type.
-	err := checkFlag(false)
-
-	// Check the concrete type and handle appropriately.
-	switch e := err.(type) {
-	case *appError:
-		fmt.Printf("App Error: Code[%d] Message[%s] Err[%s]", e.code, e.message, e.err)
-		return
-	default:
-		fmt.Println(e)
-		return
+	if err := checkFlag(false); err != nil {
+		switch e := err.(type) {
+		case temporary:
+			fmt.Println(err)
+			if !e.Temporary() {
+				fmt.Println("Critical Error!")
+			}
+		default:
+			fmt.Println(err)
+		}
 	}
 }
 
