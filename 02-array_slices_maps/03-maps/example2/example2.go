@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/9zQuoGSuTe
+// https://play.golang.org/p/C0RJU7WUca
 
 // Sample program to show how to declare and initialize a map
 // using a map literal.
@@ -19,10 +19,10 @@ type user struct {
 func main() {
 	// Declare and initialize the map with values.
 	users := map[string]user{
-		"Rob":     user{"Roy", "Rob"},
-		"Ford":    user{"Henry", "Ford"},
-		"Mouse":   user{"Mickey", "Mouse"},
-		"Jackson": user{"Michael", "Jackson"},
+		"Rob":     {"Roy", "Rob"},
+		"Ford":    {"Henry", "Ford"},
+		"Mouse":   {"Mickey", "Mouse"},
+		"Jackson": {"Michael", "Jackson"},
 	}
 
 	// Iterate over the map.
