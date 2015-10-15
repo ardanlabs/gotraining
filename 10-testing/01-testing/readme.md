@@ -24,6 +24,12 @@ http://golang.org/pkg/net/http/pprof/
 
 https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs
 
+https://github.com/dvyukov/go-fuzz
+
+https://talks.golang.org/2015/dynamic-tools.slide#1
+
+https://vimeo.com/141698770
+
 ## Code Review
 
 [Basic Unit Test](example1/example1_test.go)
