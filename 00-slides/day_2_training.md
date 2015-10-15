@@ -20,7 +20,7 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 
 #### Concurrency and Race Conditions
 [Goroutines](../08-concurrency_channels/01-goroutines/readme.md) | 
-[Race Conditions](../08-concurrency_channels/02-race_conditions/readme.md) | 
+[Race Conditions](../08-concurrency_channels/02-race_conditions/readme.md)
 
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
