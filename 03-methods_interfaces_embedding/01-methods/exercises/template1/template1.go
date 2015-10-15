@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/Rj0QfwVPhX
+// https://play.golang.org/p/jf-1k_ddCE
 
 // Declare a struct that represents a baseball player. Include name, atBats and hits.
 // Declare a method that calculates a players batting average. The formula is Hits / AtBats.
@@ -14,7 +14,7 @@ package main
 // Declare a struct that represents a ball player.
 // Include field called name, atBats and hits.
 
-// Declare a method that calculates the batting average for a batter.
+// Declare a method that calculates the batting average for a player.
 func ( /* receiver */ ) average() /* return type */ {
 }
 
