@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/TZFvBbg3OJ
+// https://play.golang.org/p/KlKIYq9s_3
 
 // Create a program that declares two anonymous functions. Once that counts up to
 // 100 from 0 and one that counts down to 0 from 100. Display each number with an
@@ -15,12 +15,15 @@ import "runtime"
 
 // Add imports.
 
+// init is called prior to main.
+func init() {
+	// Allocate one logical processor for the scheduler to use.
+	runtime.GOMAXPROCS(1)
+}
+
 // main is the entry point for all Go programs.
 func main() {
 	// Declare a wait group and set the count to two.
-
-	// Allocate one logical processor.
-	runtime.GOMAXPROCS(1)
 
 	// Declare an anonymous function and create a goroutine.
 	{

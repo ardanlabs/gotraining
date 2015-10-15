@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/mEcWhL14ha
+// https://play.golang.org/p/SvJj6T4Jhi
 
 // Sample program to show how the goroutine scheduler
 // will time slice goroutines on a single thread.
@@ -16,11 +16,14 @@ import (
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
+// init is called prior to main.
+func init() {
+	// Allocate one logical processor for the scheduler to use.
+	runtime.GOMAXPROCS(1)
+}
+
 // main is the entry point for all Go programs.
 func main() {
-	// Allocate one contexts for the scheduler to use.
-	runtime.GOMAXPROCS(1)
-
 	// Add a count of two, one for each goroutine.
 	wg.Add(2)
 

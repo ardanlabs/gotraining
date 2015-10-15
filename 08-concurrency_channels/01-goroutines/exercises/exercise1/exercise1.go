@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/y0WHqI69Zl
+// https://play.golang.org/p/pzIjQhIJ5J
 
 // Create a program that declares two anonymous functions. Once that counts up to
 // 100 from 0 and one that counts down to 0 from 100. Display each number with an
@@ -17,15 +17,18 @@ import (
 	"sync"
 )
 
+// init is called prior to main.
+func init() {
+	// Allocate one logical processor for the scheduler to use.
+	runtime.GOMAXPROCS(1)
+}
+
 // main is the entry point for all Go programs.
 func main() {
 	// wg is used to wait for the program to finish.
 	// Add a count of two, one for each goroutine.
 	var wg sync.WaitGroup
 	wg.Add(2)
-
-	// Allocate one logical processor.
-	runtime.GOMAXPROCS(1)
 
 	fmt.Println("Start Goroutines")
 
