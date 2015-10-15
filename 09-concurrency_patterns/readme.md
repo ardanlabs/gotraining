@@ -21,6 +21,9 @@ http://blog.golang.org/advanced-go-concurrency-patterns
 
 http://talks.golang.org/2012/chat.slide
 
+Functional Options : type DialOption func(*dialOptions)  
+https://github.com/grpc/grpc-go/blob/master/clientconn.go
+
 ## Code Review
 
 [Task](task)
