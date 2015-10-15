@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/OoYbpJToZ8
+// https://play.golang.org/p/1Wlq7FDgHd
 
 // go build -race
 
@@ -28,8 +28,8 @@ func main() {
 	wg.Add(2)
 
 	// Create two goroutines.
-	go incCounter(1)
-	go incCounter(2)
+	go incCounter()
+	go incCounter()
 
 	// Wait for the goroutines to finish.
 	wg.Wait()
@@ -39,7 +39,7 @@ func main() {
 }
 
 // incCounter increments the package level counter variable.
-func incCounter(id int) {
+func incCounter() {
 	for count := 0; count < 2; count++ {
 		// Safely Add One To Counter.
 		atomic.AddInt64(&counter, 1)

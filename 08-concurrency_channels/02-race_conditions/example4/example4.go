@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/vLjXglnDbZ
+// https://play.golang.org/p/E7Gj_pSpqf
 
 // go build -race
 
@@ -30,8 +30,8 @@ func main() {
 	wg.Add(2)
 
 	// Create two goroutines.
-	go incCounter(1)
-	go incCounter(2)
+	go incCounter()
+	go incCounter()
 
 	// Wait for the goroutines to finish.
 	wg.Wait()
@@ -40,7 +40,7 @@ func main() {
 
 // incCounter increments the package level Counter variable
 // using the Mutex to synchronize and provide safe access.
-func incCounter(id int) {
+func incCounter() {
 	for count := 0; count < 2; count++ {
 		// Only allow one goroutine through this
 		// critical section at a time.

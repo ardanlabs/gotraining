@@ -22,13 +22,13 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Race Condition](example1/example1.go) ([Go Playground](https://play.golang.org/p/tGPRhCN4h1))
+[Race Condition](example1/example1.go) ([Go Playground](https://play.golang.org/p/IwFKbnb1JO))
 
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/OoYbpJToZ8))
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/1Wlq7FDgHd))
 
 [Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/blXRQXlH8Z))
 
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/vLjXglnDbZ))
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/E7Gj_pSpqf))
 
 [Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/jVPu5BFuPT))
 
