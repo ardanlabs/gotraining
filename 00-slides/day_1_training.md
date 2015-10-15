@@ -16,10 +16,9 @@ On this day we take our initial tour of the language. We learn about variables, 
 [Slices](../02-array_slices_maps/02-slices/readme.md) | 
 [Maps](../02-array_slices_maps/03-maps/readme.md)
 
-#### Methods, Interfaces and Embedding (OOP)
+#### Methods and Interfaces (OOP)
 [Methods](../03-methods_interfaces_embedding/01-methods/readme.md) | 
-[Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md) | 
-[Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
+[Interfaces](../03-methods_interfaces_embedding/02-interfaces/readme.md)
 
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)

@@ -3,6 +3,9 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
+#### Embedding (OOP)
+[Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
+
 #### Packaging and Exporting
 [Packaging and Exporting](../04-packaging_exporting/readme.md)
 
@@ -15,10 +18,9 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 #### Error Handling
 [Error Handling](../07-error_handling/readme.md)
 
-#### Concurrency, Race Conditions and Channels
+#### Concurrency and Race Conditions
 [Goroutines](../08-concurrency_channels/01-goroutines/readme.md) | 
 [Race Conditions](../08-concurrency_channels/02-race_conditions/readme.md) | 
-[Channels](../08-concurrency_channels/03-channels/readme.md)
 
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
