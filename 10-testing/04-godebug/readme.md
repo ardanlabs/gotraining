@@ -170,7 +170,7 @@ http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html
 
 ## Code Review
 
-[Scheduler Stats](godebug.go) ([Go Playground](https://play.golang.org/p/j5fkd7UgGu))
+[Scheduler Stats](godebug.go) ([Go Playground](https://play.golang.org/p/M6_9Ir79EB))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
