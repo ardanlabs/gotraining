@@ -42,6 +42,15 @@ https://vimeo.com/141698770
 
 [Example Test](example4/handlers/handlers_example_test.go)
 
+## Coverage
+
+Making sure your test cover as much of your code as possible is critical. Go's testing tool allows you to create a profile for the code that is touched during all the tests and see a visual of what is and is not covered.
+
+	go test -coverprofile cover.out
+	go tool cover -html=cover.out
+
+![figure1](testing_coverage.png)
+
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
