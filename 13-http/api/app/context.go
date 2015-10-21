@@ -1,11 +1,11 @@
 // Package app provides application support for context and MongoDB access.
 // Current Status Codes:
-// 		200 OK           : StatusOK                  : Call is success and returning data.
-//      	204 No Content   : StatusNoContent           : Call is success and returns no data.
-// 		400 Bad Request  : StatusBadRequest          : Invalid post data (syntax or semantics).
-// 		401 Unauthorized : StatusUnauthorized        : Authentication failure.
-// 		404 Not Found    : StatusNotFound            : Invalid URL or identifier.
-// 		500 Internal     : StatusInternalServerError : Application specific beyond scope of user.
+//		200 OK           : StatusOK                  : Call is success and returning data.
+//		204 No Content   : StatusNoContent           : Call is success and returns no data.
+//		400 Bad Request  : StatusBadRequest          : Invalid post data (syntax or semantics).
+//		401 Unauthorized : StatusUnauthorized        : Authentication failure.
+//		404 Not Found    : StatusNotFound            : Invalid URL or identifier.
+//		500 Internal     : StatusInternalServerError : Application specific beyond scope of user.
 package app
 
 import (
