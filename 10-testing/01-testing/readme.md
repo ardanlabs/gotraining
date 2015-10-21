@@ -44,7 +44,7 @@ https://vimeo.com/141698770
 
 ## Coverage
 
-Making sure your test cover as much of your code as possible is critical. Go's testing tool allows you to create a profile for the code that is touched during all the tests and see a visual of what is and is not covered.
+Making sure your tests cover as much of your code as possible is critical. Go's testing tool allows you to create a profile for the code that is executed during all the tests and see a visual of what is and is not covered.
 
 	go test -coverprofile cover.out
 	go tool cover -html=cover.out
