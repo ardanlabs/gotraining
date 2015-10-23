@@ -21,7 +21,7 @@ func SendJSON(rw http.ResponseWriter, r *http.Request) {
 		Email string
 	}{
 		Name:  "Bill",
-		Email: "bill@ardanstudios.com",
+		Email: "bill@ardanlabs.com",
 	}
 
 	rw.Header().Set("Content-Type", "application/json")

@@ -21,7 +21,7 @@ func main() {
 	// Declare and initialize a variable named bill of type user.
 	bill := user{
 		name:  "Bill",
-		email: "bill@ardanstudios.com",
+		email: "bill@ardanlabs.com",
 	}
 
 	//** We don't need to include all the fields when specifying field

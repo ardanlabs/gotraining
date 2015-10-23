@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ArdanStudios/gotraining/04-packaging_exporting/example1/counters"
+	"github.com/ardanlabs/gotraining/04-packaging_exporting/example1/counters"
 )
 
 // main is the entry point for the application.

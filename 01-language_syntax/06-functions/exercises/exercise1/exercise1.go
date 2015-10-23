@@ -21,7 +21,7 @@ type user struct {
 
 // newUser creates and returns pointers of user type values.
 func newUser() (*user, error) {
-	return &user{"Bill", "bill@ardanstudios.com"}, nil
+	return &user{"Bill", "bill@ardanlabs.com"}, nil
 }
 
 // main is the entry point for the application.

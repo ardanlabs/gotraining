@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/13-http/api/app"
+	"github.com/ardanlabs/gotraining/13-http/api/app"
 )
 
 // UserAddress contains information about a user's address.

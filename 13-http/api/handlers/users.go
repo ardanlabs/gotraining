@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/ArdanStudios/gotraining/13-http/api/app"
-	"github.com/ArdanStudios/gotraining/13-http/api/models"
-	"github.com/ArdanStudios/gotraining/13-http/api/services"
+	"github.com/ardanlabs/gotraining/13-http/api/app"
+	"github.com/ardanlabs/gotraining/13-http/api/models"
+	"github.com/ardanlabs/gotraining/13-http/api/services"
 )
 
 // usersHandle maintains the set of handlers for the users api.

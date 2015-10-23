@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ArdanStudios/gotraining/09-concurrency_patterns/task"
+	"github.com/ardanlabs/gotraining/09-concurrency_patterns/task"
 )
 
 // names provides a set of names to display.

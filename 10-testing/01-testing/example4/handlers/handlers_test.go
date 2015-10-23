@@ -10,7 +10,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ardanstudios/gotraining/10-testing/01-testing/example4/handlers"
+	"github.com/ardanlabs/gotraining/10-testing/01-testing/example4/handlers"
 )
 
 const succeed = "\u2713"
@@ -48,10 +48,10 @@ func TestSendJSON(t *testing.T) {
 			t.Error("\tShould have \"Bill\" for Name in the response.", failed, u.Name)
 		}
 
-		if u.Email == "bill@ardanstudios.com" {
-			t.Log("\tShould have \"bill@ardanstudios.com\" for Email in the response.", succeed)
+		if u.Email == "bill@ardanlabs.com" {
+			t.Log("\tShould have \"bill@ardanlabs.com\" for Email in the response.", succeed)
 		} else {
-			t.Error("\tShould have \"bill@ardanstudios.com\" for Email in the response.", failed, u.Email)
+			t.Error("\tShould have \"bill@ardanlabs.com\" for Email in the response.", failed, u.Email)
 		}
 	}
 }

@@ -23,7 +23,7 @@ func main() {
 	// Declare variable of type user and init using a struct literal.
 	bill := user{
 		name:  "Bill",
-		email: "bill@ardanstudios.com",
+		email: "bill@ardanlabs.com",
 		age:   45,
 	}
 
@@ -39,7 +39,7 @@ func main() {
 		age   int
 	}{
 		name:  "Ed",
-		email: "ed@ardanstudios.com",
+		email: "ed@ardanlabs.com",
 		age:   46,
 	}
 

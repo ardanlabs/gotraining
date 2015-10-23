@@ -22,7 +22,7 @@ func main() {
 	// Create a variable of type user and initialize each field.
 	bill := user{
 		name:        "Bill",
-		email:       "bill@ardanstudios.com",
+		email:       "bill@ardanlabs.com",
 		accessLevel: 1,
 	}
 

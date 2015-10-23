@@ -23,7 +23,7 @@ On this day we continue go deeper into Go. We learn about concurrency patterns, 
 
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
-[![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
+[![Ardan Studios](images/ardan_logo.png)](http://www.ardanlabs.com)
 [![GoingGo Blog](images/ggb_logo.png)](http://www.goinggo.net)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

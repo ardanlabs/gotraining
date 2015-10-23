@@ -7,10 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ArdanStudios/gotraining/13-http/api/app"
-	"github.com/ArdanStudios/gotraining/13-http/api/models"
-	"github.com/ArdanStudios/gotraining/13-http/api/routes"
-	"github.com/ArdanStudios/gotraining/13-http/api/tests"
+	"github.com/ardanlabs/gotraining/13-http/api/app"
+	"github.com/ardanlabs/gotraining/13-http/api/models"
+	"github.com/ardanlabs/gotraining/13-http/api/routes"
+	"github.com/ardanlabs/gotraining/13-http/api/tests"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -18,7 +18,7 @@ var u = models.User{
 	UserType:  1,
 	FirstName: "Bill",
 	LastName:  "Kennedy",
-	Email:     "bill@ardanstudios.com",
+	Email:     "bill@ardanlabs.com",
 	Company:   "Ardan Labs",
 	Addresses: []models.UserAddress{
 		{

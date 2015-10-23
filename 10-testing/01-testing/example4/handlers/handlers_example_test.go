@@ -29,5 +29,5 @@ func ExampleSendJSON() {
 
 	fmt.Println(u)
 	// Output:
-	// {Bill bill@ardanstudios.com}
+	// {Bill bill@ardanlabs.com}
 }
