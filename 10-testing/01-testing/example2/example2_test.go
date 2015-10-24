@@ -15,7 +15,7 @@ const failed = "\u2717"
 // TestDownload validates the http Get function can download content and
 // handles different status conditions properly.
 func TestDownload(t *testing.T) {
-	var urls = []struct {
+	urls := []struct {
 		url        string
 		statusCode int
 	}{
