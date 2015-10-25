@@ -2,7 +2,7 @@
 
 We can use the go tooling in conjunction with the Graph Visualization Tools and Ghostscript. These tools will allow us to graph the profiles we create.
 
-Note: Profiling on the Mac is broken. This post talks about how to hack to OS X Kernel to make it work.  
+Note: Unless you are running OS X El Capitan, profiling on the Mac is broken. This post talks about how to hack to OS X Kernel to make it work.  
 [http://research.swtch.com/macpprof](http://research.swtch.com/macpprof)  
 [https://godoc.org/rsc.io/pprof_mac_fix](https://godoc.org/rsc.io/pprof_mac_fix)
 
