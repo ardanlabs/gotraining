@@ -64,8 +64,8 @@ We need to make some changes to main to get the profiling data we need.
     	go tool pprof --pdf ./05-profiling cpu.pprof > cpugraph.pdf
 		go tool pprof --pdf ./05-profiling mem.pprof > memgraph.pdf
 
-    // See all the options
-    go tool pprof -h
+    See all the options:
+    	go tool pprof -h
 
 ### HTTP Runtime Profile Graphs
 	Build and run the service:
@@ -95,7 +95,7 @@ https://godoc.org/rsc.io/pprof_mac_fix
 
 ## Code Review
 
-[HTTP Service](helloHTTP.go) ([Go Playground](https://play.golang.org/p/fcU9jQX2Qz)
+[HTTP Service](helloHTTP.go) ([Go Playground](https://play.golang.org/p/fcU9jQX2Qz))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
