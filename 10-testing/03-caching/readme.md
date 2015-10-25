@@ -9,7 +9,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 ## Notes
 
-* CPU Caches works by caching memory on cache lines.
+* CPU Caches works by caching memory on 64 byte cache lines.
 * On our 64 bit processors, the cache line will be 64k.
 * Cache lines are moved and stored in L1, L2 and L3 caches.
 * Memory in L1 and L2 caches is also in L3 cache.
@@ -57,7 +57,7 @@ http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-
 
 ## Code Review
 
-[Caching](caching.go) ([Go Playground](http://play.golang.org/p/GQQXh3cf15))
+[Caching](caching.go) ([Go Playground](https://play.golang.org/p/QilJqGkQgb))
 
 [Tests](caching_test.go) ([Go Playground](http://play.golang.org/p/opI__KHj9a))
 

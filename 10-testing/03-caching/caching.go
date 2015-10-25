@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/GQQXh3cf15
+// https://play.golang.org/p/QilJqGkQgb
 
 // package caching provides code to show why CPU caches matter and the way
 // the hardware caches memory affects performance.
@@ -9,16 +9,14 @@ package caching
 
 import "fmt"
 
-const cols = 64
-
-// Set the size of each row to be 4k.
-//const rows = 4 * 1024
-
 // Set the size of each row to be 64k.
-const rows = 64 * 1024
+const (
+	cols = 64
+	rows = 64 * 1024
+)
 
-// matrix represents a set of columns that each exist on
-// their own cache line.
+// matrix represents a matrix with a large number
+// of cache lines per row.
 var matrix [cols][rows]byte
 
 // init sets ~13% of the matrix to 0XFF.
