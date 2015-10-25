@@ -76,13 +76,10 @@ _Kevin is an experienced software engineer that has been enthusiastically using 
 **Cory LaNou** ([@corylanou](https://twitter.com/corylanou))  
 _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time._
 
-**Mark Bates** ([@markbates](https://twitter.com/markbates))  
-_Mark Bates is the founder and chief architect of the Boston, MA based consulting company, Meta42 Labs. Mark spends his days focusing on new application development and consulting for his clients. At night he writes books, raises kids, and occasionally he forms a band and "tries to make it". Mark is the author of three books, "Distributed Programming with Ruby" (2009), "Programming in CoffeeScript" (2012), and "Conquering the Command Line" (2014). He also runs the weekly Golang screencast site, www.metacasts.tv._
-
-**Jeremy Saenz** ([@codegansta](https://twitter.com/codegangsta))
-_Jeremy AKA @codegangsta is a fellow Gopher, author, speaker and screencaster. You have probably heard about one of his open source projects like Martini, Negroni, Gin, CLI and others. Jeremy is also the voice behind GopherCasts.io and loves teaching people about technology through his programming screencasts._
-
 ## Testimonials
+
+Shalab Goel, Ph.D.
+_"It was a pleasure taking this course — learning lot of “dry" stuff in such animated and enthusiastic environment. The exercises were spot on for building what you called as "memory muscle. I have good amount of background in conventional multithreaded and distributed environments, but I have not put that knowledge to use more recently; so it was good refresher from that point of view as well. From Yuck to completely Wow-ed is how I will like to describe my respect for Go within three days. I knew nothing about GO before the course. "
 
 Geoff Clitheroe ([@gclitheroe](https://twitter.com/gclitheroe))  
 _"Your training is awesome! Myself and three colleagues recently caught variations of the training at GopherCon and OSCON. We all thought the Bootcamp was the best thing at any of these conferences (and I went to both). Awesome work to Bill for presenting and anyone involved in developing the training. I really liked the structure, emphasis on deeper understanding, me doing a small number of examples to emphasize this, and general content. Night and day to other training which is to often just watching someone else live code. Great work."_
