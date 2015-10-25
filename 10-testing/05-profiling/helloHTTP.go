@@ -1,24 +1,10 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/c44Q5OiX5z
+// https://play.golang.org/p/fcU9jQX2Qz
 
-// Use Dave's profile package:
-// go tool pprof http://localhost:6060/debug/pprof/heap
-// go tool pprof http://localhost:6060/debug/pprof/profile
-// while true; do curl http://localhost:6060/english; done
-
-// Use http pprof
-// http://golang.org/pkg/net/http/pprof/
-// import _ "net/http/pprof"
-// go tool pprof http://localhost:6060/debug/pprof/heap
-// go tool pprof http://localhost:6060/debug/pprof/profile
-// go tool pprof http://localhost:6060/debug/pprof/block
-
-// For all the options
-// go tool pprof -h
-
-// Sample program to show off Go and check programming environment.
+// Sample program to show how profiling works. This is the base
+// code. Use the readme for changes needed to be made to the code.
 package main
 
 import (
@@ -52,20 +38,16 @@ func main() {
 
 // helloEnglish sends a greeting in English.
 func helloEnglish(w http.ResponseWriter, r *http.Request) {
-	err := json.NewEncoder(w).Encode(hello{"Hello World"})
-	if err != nil {
+	if err := json.NewEncoder(w).Encode(hello{"Hello World"}); err != nil {
 		log.Println("Error encoding JSON", err)
 		return
 	}
-	log.Println("Sent English")
 }
 
 // helloChinese sends a greeting in Chinese.
 func helloChinese(w http.ResponseWriter, r *http.Request) {
-	err := json.NewEncoder(w).Encode(hello{"你好世界"})
-	if err != nil {
+	if err := json.NewEncoder(w).Encode(hello{"你好世界"}); err != nil {
 		log.Println("Error encoding JSON", err)
 		return
 	}
-	log.Println("Sent Chinese")
 }

@@ -27,10 +27,10 @@ Download and uncompress the source code:
 
 	./configure
 	make
-	make install
+	sudo make install
 
 ### Code Changes
-We need to add some changes to main to get the profiling data we need.
+We need to make some changes to main to get the profiling data we need.
 
     import "github.com/davecheney/profile"
 
@@ -51,14 +51,37 @@ We need to add some changes to main to get the profiling data we need.
 		. . .
 	}
 
-### Running and Creating Profile Graph
-	go build
-	./example1
-    go tool pprof --pdf ./example1 cpu.pprof > callgraph.pdf
-    go tool pprof --pdf ./example1 mem.pprof > callgraph.pdf
+### Running and Creating Profile Graphs
+	Build and run the service:
+		go build
+		./05-profiling
+	
+	In a separate terminal generate requests:
+		while true && do curl http://localhost:6060/english && done
+		<control> C
+    
+    Generate the call graphs:
+    	go tool pprof --pdf ./05-profiling cpu.pprof > cpugraph.pdf
+		go tool pprof --pdf ./05-profiling mem.pprof > memgraph.pdf
 
     // See all the options
     go tool pprof -h
+
+### HTTP Runtime Profile Graphs
+	Build and run the service:
+		go build
+		./05-profiling
+	
+	In a separate terminal generate requests:
+		while true && do curl http://localhost:6060/english && done
+
+	In a separate terminal run a pprof tool:
+		go tool pprof http://localhost:6060/debug/pprof/heap
+		go tool pprof http://localhost:6060/debug/pprof/profile
+		go tool pprof http://localhost:6060/debug/pprof/block
+
+	Play with the different commands:
+		go tool pprof -help
 
 ## Links
 
@@ -72,7 +95,7 @@ https://godoc.org/rsc.io/pprof_mac_fix
 
 ## Code Review
 
-[HTTP Service](helloHTTP.go) ([Go Playground](http://play.golang.org/p/c44Q5OiX5z))
+[HTTP Service](helloHTTP.go) ([Go Playground](https://play.golang.org/p/fcU9jQX2Qz)
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
