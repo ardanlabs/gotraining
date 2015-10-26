@@ -18,7 +18,7 @@ Goroutines are functions that are created and scheduled to be run independently.
 ## Multi Processor and Thread Memory Access Issues
 This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
-[CPU Caches and Why You Care](https://www.youtube.com/watch?v=WDIkqP4JbkE)
+[CPU Caches and Why You Care (32:46-35:40)](https://youtu.be/WDIkqP4JbkE?t=1966)
 
 ## Notes
 
@@ -29,6 +29,8 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 * When a thread is migrated from one processor to another, all the cache lines have to be moved.
 * Swapping threads between processors can mean the swapping of cache.
 * Leveraging one thread against a consistent data set can provide better performance.
+* Hyper-Threading lets the processor work more than one thread at a time.
+* Even with HT, only one thread is executing at a time.
 
 ## Links
 
