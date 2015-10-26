@@ -15,6 +15,21 @@ Goroutines are functions that are created and scheduled to be run independently.
 
 [Scheduler Diagrams](documentation/scheduler.md)
 
+## Multi Processor and Thread Memory Access Issues
+This content is provided by Scott Meyers from his talk in 2014 at Dive:
+
+[CPU Caches and Why You Care](https://www.youtube.com/watch?v=WDIkqP4JbkE)
+
+## Notes
+
+* Cache lines (64 bytes) are moved in and out of the caches.
+* Two or more processors or cores may cache the same memory, cores need to know about activity.
+* Cache lines can be flagged as dirty and reloaded between the caches for a processor or core.
+* Leveraging the stack can give us exclusivity.
+* When a thread is migrated from one processor to another, all the cache lines have to be moved.
+* Swapping threads between processors can mean the swapping of cache.
+* Leveraging one thread against a consistent data set can provide better performance.
+
 ## Links
 
 http://blog.golang.org/advanced-go-concurrency-patterns
@@ -26,6 +41,10 @@ http://blog.golang.org/concurrency-is-not-parallelism
 http://talks.golang.org/2013/distsys.slide
 
 http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
+
+http://www.akkadia.org/drepper/cpumemory.pdf
+
+http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips
 
 ## Code Review
 
