@@ -29,7 +29,7 @@ http://play.golang.org/p/ki991PuHhk
 
 ### Exercise 1
 
-Declare a struct type named Point with two fields, X and Y of type float64. Implement a factory function for this type and a method
+Declare a struct type named Point with two fields, X and Y of type int. Implement a factory function for this type and a method
 that accepts this type and calculates the distance between the two points. What is the nature of this type?
 
 [Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/Qe3dhDTwzX)) | 
