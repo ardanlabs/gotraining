@@ -16,7 +16,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 ## Code Review
 
-[Composition I](example1/example1.go) ([Go Playground](http://play.golang.org/p/DqZvyTbTle))
+[Composition I](example1/example1.go) ([Go Playground](https://play.golang.org/p/2BVYbX8Hyz))
 
 [Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/QnkL-UIVJN))
 

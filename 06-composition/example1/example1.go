@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/DqZvyTbTle
+// https://play.golang.org/p/2BVYbX8Hyz
 
 // Sample program demonstrating composition through embedding.
 package main
@@ -61,7 +61,7 @@ type Location struct {
 	X, Y, Z int
 }
 
-// Move is how a cumulus cloud can move.
+// Move is how objects can be moved.
 func (l *Location) Move(x, y, z int) {
 	l.X = x
 	l.Y = y
