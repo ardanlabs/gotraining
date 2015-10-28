@@ -8,19 +8,20 @@ package main
 import (
 	"fmt"
 
-	"github.com/ardanlabs/gotraining/04-packaging_exporting/example4/animals"
+	"github.com/ardanlabs/gotraining/04-packaging_exporting/example4/users"
 )
 
 // main is the entry point for the application.
 func main() {
-	// Create a value of type Dog from the animals package.
-	dog := animals.Dog{
-		Name:         "Chole",
-		BarkStrength: 10,
-		age:          5,
+	// Create a value of type User from the users package.
+	u := users.User{
+		Name: "Chole",
+		ID:   10,
+
+		password: "xxxx",
 	}
 
-	// ./example4.go:20: unknown animals.Dog field 'age' in struct literal
+	// ./example4.go:21: unknown users.User field 'password' in struct literal
 
-	fmt.Printf("Dog: %#v\n", dog)
+	fmt.Printf("User: %#v\n", u)
 }
