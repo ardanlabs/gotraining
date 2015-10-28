@@ -21,15 +21,15 @@ import (
 // main is the entry point for the application.
 func main() {
 	// Create a value of type toy.
-	toy := toy.New("Bat", 28)
+	t := toy.New("Bat", 28)
 
 	// Update the counts.
-	toy.UpdateOnHand(100)
-	toy.UpdateSold(2)
+	t.UpdateOnHand(100)
+	t.UpdateSold(2)
 
 	// Display each field separately.
-	fmt.Println("Name", toy.Name)
-	fmt.Println("Weight", toy.Weight)
-	fmt.Println("OnHand", toy.OnHand())
-	fmt.Println("Sold", toy.Sold())
+	fmt.Println("Name", t.Name)
+	fmt.Println("Weight", t.Weight)
+	fmt.Println("OnHand", t.OnHand())
+	fmt.Println("Sold", t.Sold())
 }
