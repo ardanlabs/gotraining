@@ -9,7 +9,7 @@
 	},
 	{
 		"cmd": "gs9o_open", "args": {
-	        "run": ["sh", "go build"],
+	        "run": ["sh", "go build -i"],
 	        "focus_view": false
 		}
 	},
