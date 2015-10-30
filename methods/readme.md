@@ -1,4 +1,4 @@
-## Methods - Methods, Interfaces and Embedding
+## Methods
 
 Methods are functions that are declared with a receiver which binds the method to a type. Then the method and can be used to operate on values or pointers of that type.
 

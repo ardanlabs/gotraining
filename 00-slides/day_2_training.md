@@ -6,7 +6,7 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 #### Object Oriented Programming
 [Interfaces](../interfaces/readme.md) | 
 [Embedding](../embedding/readme.md) | 
-[Packaging and Exporting](../packaging_exporting/readme.md) | 
+[Exporting](../exporting/readme.md) | 
 [Composition](../composition/readme.md)
 
 #### Error Handling

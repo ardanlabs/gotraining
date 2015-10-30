@@ -1,4 +1,4 @@
-## Package and Exporting
+## Exporting
 
 Packages contain the basic unit of compiled code. They define a scope for the indentifiers that are declared within them. Learning how to package our code is vital because exported identifiers become part of the packages API. Stable and useable API's are incredibily important.
 
