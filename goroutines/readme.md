@@ -1,4 +1,4 @@
-## Goroutines - Concurrency and Channels
+## Goroutines
 
 Goroutines are functions that are created and scheduled to be run independently. Goroutines are multiplexed against a shared thread that is own by context. The scheduler is responsible for the management and execution of goroutines.
 

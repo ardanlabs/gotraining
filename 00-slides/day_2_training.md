@@ -12,7 +12,7 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 #### Error Handling
 [Error Handling](../error_handling/readme.md)
 
-#### Concurrency
+#### Concurrency Part I
 [Goroutines](../goroutines/readme.md) | 
 [Race Conditions](../race_conditions/readme.md)
 ___

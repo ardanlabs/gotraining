@@ -1,4 +1,4 @@
-## Race Conditions - Concurrency and Channels
+## Race Conditions
 
 A race condition is when two or more goroutines attempt to read and write to the same resource at the same time. Race conditions can create bugs that totally appear random or can be never surface as they corrupt data. Atomic functions and mutexes are a way to synchronize the access of shared resources between goroutines.
 
