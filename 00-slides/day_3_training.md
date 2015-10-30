@@ -3,7 +3,7 @@ On this day we continue go deeper into Go. We learn about concurrency patterns, 
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-#### Concurrency
+#### Concurrency Part II
 [Channels](../channels/readme.md) | 
 [Patterns](../concurrency_patterns/readme.md)
 
