@@ -18,7 +18,7 @@ On this day we take our initial tour of the language. We learn about variables, 
 
 #### Methods
 [Methods](../methods/readme.md) | 
-[Nature Of Types](../using_pointers/readme.md)
+[Receiver Choices](../receiver_choices/readme.md)
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)

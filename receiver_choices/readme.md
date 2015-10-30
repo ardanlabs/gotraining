@@ -1,4 +1,4 @@
-## Using Pointers
+## Receiver Choices
 
 When creating a new type, try to answer this question before declaring methods. Does adding or removing something from a value of this type need to create a new value or mutate the existing one. If the answer is create a new value, then use value receivers, else use pointer receivers; and be consistent. This also applies to how values of this type should be passed to other parts of your program. Either, always use a value or a pointer, don’t mix it up. There are few exceptions to the rule.
 
