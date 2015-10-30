@@ -37,4 +37,8 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/b8ww3jd2Xs)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/UvFEZQHDu0))
 ___
-All material is licensed under the [Apache License Version 2.0, January 2004](https://github.com/gobridge/gotraining/blob/master/LICENSE).
+[![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
+[![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
+___
+All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
