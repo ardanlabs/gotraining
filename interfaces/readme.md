@@ -42,8 +42,8 @@ https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/MFPF58SkRs))
 
 ___
-[![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
-[![Ardan Studios](../../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
-[![GoingGo Blog](../../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
+[![Ardan Labs](../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
+[![Ardan Studios](../00-slides/images/ardan_logo.png)](http://www.ardanstudios.com)
+[![GoingGo Blog](../00-slides/images/ggb_logo.png)](http://www.goinggo.net)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
