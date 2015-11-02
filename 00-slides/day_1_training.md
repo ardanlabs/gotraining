@@ -16,9 +16,9 @@ On this day we take our initial tour of the language. We learn about variables, 
 [Slices](../slices/readme.md) | 
 [Maps](../maps/readme.md)
 
-#### Methods
+#### Methods and Interfaces
 [Methods](../methods/readme.md) | 
-[Receiver Choices](../receiver_choices/readme.md)
+[Interfaces](../interfaces/readme.md)
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
