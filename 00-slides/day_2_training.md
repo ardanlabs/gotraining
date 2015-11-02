@@ -10,10 +10,8 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 #### Nature of Types
 [Receiver Choices](../receiver_choices/readme.md)
 
-#### Composition
+#### API Design
 [Composition](../composition/readme.md)
-
-#### Error Handling
 [Error Handling](../error_handling/readme.md)
 
 #### Concurrency Part I
