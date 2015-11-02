@@ -3,25 +3,18 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-#### Embedding (OOP)
-[Embedding](../03-methods_interfaces_embedding/03-embedding/readme.md)
-
-#### Packaging and Exporting
-[Packaging and Exporting](../04-packaging_exporting/readme.md)
-
-#### Using Pointers
-[Nature Of Types](../05-using_pointers/readme.md)
-
-#### Composition
-[Composition](../06-composition/readme.md)
+#### Object Oriented Programming
+[Interfaces](../interfaces/readme.md) | 
+[Embedding](../embedding/readme.md) | 
+[Exporting](../exporting/readme.md) | 
+[Composition](../composition/readme.md)
 
 #### Error Handling
-[Error Handling](../07-error_handling/readme.md)
+[Error Handling](../error_handling/readme.md)
 
-#### Concurrency and Race Conditions
-[Goroutines](../08-concurrency_channels/01-goroutines/readme.md) | 
-[Race Conditions](../08-concurrency_channels/02-race_conditions/readme.md)
-
+#### Concurrency Part I
+[Goroutines](../goroutines/readme.md) | 
+[Race Conditions](../race_conditions/readme.md)
 ___
 [![Ardan Labs](images/ggt_logo.png)](http://www.ardanlabs.com)
 [![Ardan Studios](images/ardan_logo.png)](http://www.ardanstudios.com)
