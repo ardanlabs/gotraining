@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/10-testing/01-testing/example4/handlers"
+	"github.com/ardanlabs/gotraining/topics/testing/example4/handlers"
 )
 
 // main is the entry point for the application.
