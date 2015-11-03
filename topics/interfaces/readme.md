@@ -4,8 +4,8 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 
 ## Notes
 
-* The method set for a value, only includes methods implemented with a value reciever.
-* The method set for a pointer, includes methods implemented with both pointer and value recievers.
+* The method set for a value, only includes methods implemented with a value receiver.
+* The method set for a pointer, includes methods implemented with both pointer and value receivers.
 * Methods declared with a pointer receiver, only implement the interface with pointer values.
 * Methods declared with a value receiver, implement the interface with both a value and pointer receiver.
 * The rules of method sets apply to interface types.
