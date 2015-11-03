@@ -22,6 +22,7 @@ On this day we take our initial tour of the language. We learn about variables, 
 #### Methods and Interfaces
 [Methods](../../topics/methods/readme.md) | 
 [Interfaces](../../topics/interfaces/readme.md)
+___
 
 ### Day 2
 On this day we dive deeper into Go. We learn about packaging, exporting, using pointers, composition, error handling, concurrency and race conditions.
@@ -40,6 +41,7 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 #### Concurrency Part I
 [Goroutines](../../topics/goroutines/readme.md) | 
 [Race Conditions](../../topics/race_conditions/readme.md)
+___
 
 ### Day 3
 On this day we continue go deeper into Go. We learn about channels, concurrency patterns, testing, benchmarking, debugging.
@@ -54,6 +56,7 @@ On this day we continue go deeper into Go. We learn about channels, concurrency 
 [Profiling](../../topics/profiling/readme.md) | 
 [Debugging](../../topics/godebug/readme.md) | 
 [Stack Traces](../../topics/stack_trace/readme.md)
+___
 
 ### Day 4
 On this day we continue to go deeper into Go and learn about the standard library. We focus on logging, reflection and the io package.
@@ -62,6 +65,7 @@ On this day we continue to go deeper into Go and learn about the standard librar
 [Logging](../../logging/readme.md) | 
 [Reflection](../../reflection/readme.md) | 
 [IO](../../writers_readers/readme.md)
+___
 
 ### Day 5
 On this day we learn about the encoding and http packages that are part of the standard library.
