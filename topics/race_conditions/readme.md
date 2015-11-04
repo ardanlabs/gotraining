@@ -21,9 +21,11 @@ http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
 
 https://golang.org/doc/articles/race_detector.html
 
-## Documentation
+## Diagram
 
-[Race Condition Diagram](documentation/race_condition.md)
+### View of Race Condition in Example1.
+
+![Ardan Labs](race_condition.png)
 
 ## Code Review
 
