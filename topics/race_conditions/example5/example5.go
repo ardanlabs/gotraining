@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/jVPu5BFuPT
+// https://play.golang.org/p/0_T7S2w2qp
 
 // go build -race
 
@@ -32,13 +32,12 @@ var readCount int64
 
 // init is called before main is executed.
 func init() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	rand.Seed(time.Now().UnixNano())
 }
 
 // main is the entry point for all Go programs.
 func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
-
 	// Add the one goroutines for the writer.
 	wg.Add(1)
 

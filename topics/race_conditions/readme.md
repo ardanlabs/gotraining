@@ -8,10 +8,10 @@ A race condition is when two or more goroutines attempt to read and write to the
 * When two or more goroutines attempt to access the same resource, we have a race condition.
 * Atomic functions and mutexes can provide the support we need.
 
-## Cache Coherency
+## False Sharing and Cache Coherency
 This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
-[CPU Caches and Why You Care (30:09-32:10)](https://youtu.be/WDIkqP4JbkE?t=1809)
+[CPU Caches and Why You Care (30:09-35:40)](https://youtu.be/WDIkqP4JbkE?t=1809)
 
 ## Links
 
@@ -35,7 +35,7 @@ https://golang.org/doc/articles/race_detector.html
 
 [Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/E7Gj_pSpqf))
 
-[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/jVPu5BFuPT))
+[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/0_T7S2w2qp))
 
 ## Exercises
 
