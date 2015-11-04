@@ -1,5 +1,4 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
-import "errors"
 
 // http://www.apache.org/licenses/LICENSE-2.0
 
@@ -20,16 +19,16 @@ type IP []byte
 
 // http://golang.org/src/net/ip.go
 //
-// MarshalText is using a value receiver. This is exactly what I would expect
-// to see because we don’t pass reference types with a pointer.
-func (ip IP) MarshalText() ([]byte, error) {
-	if len(ip) == 0 {
-		return []byte(""), nil
+// To16 converts the IP address ip to a 16-byte representation.
+// If ip is not an IP address (it is the wrong length), To16 returns nil.
+func (ip IP) To16() IP {
+	if len(ip) == IPv4len {
+		return IPv4(ip[0], ip[1], ip[2], ip[3])
 	}
-	if len(ip) != IPv4len && len(ip) != IPv6len {
-		return nil, errors.New("invalid IP address")
+	if len(ip) == IPv6len {
+		return ip
 	}
-	return []byte(ip.String()), nil
+	return nil
 }
 
 // http://golang.org/src/net/ip.go
