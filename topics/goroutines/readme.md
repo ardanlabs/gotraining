@@ -13,7 +13,13 @@ Goroutines are functions that are created and scheduled to be run independently.
 
 ## Documentation
 
-[Scheduler Diagrams](documentation/scheduler.md)
+### Diagram of how the scheduler works.
+
+![Ardan Labs](scheduler.png)
+
+### Difference between concurrency and parallelism.
+
+![Ardan Labs](parallel.png)
 
 ## Links
 
