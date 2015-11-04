@@ -1,13 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-/*
-http://golang.org/cmd/go/#hdr-Description_of_testing_flags
-go test -run=XXX -bench=.
-go test -run=XXX -bench=BenchmarkSprintf
-go test -run=XXX -bench=BenchmarkFormat
-go test -run=XXX -bench=BenchmarkAtoi
-*/
+// go test -run none -bench . -benchtime 3s -benchmem
 
 // Write three benchmark tests for converting an integer into a string. First using the
 // fmt.Sprintf function, then the strconv.FormatInt function and then strconv.Itoa.

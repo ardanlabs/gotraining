@@ -3,7 +3,7 @@
 
 // https://play.golang.org/p/hwZqjJNdbm
 
-// go build -gcflags -m
+// go test -run none -bench . -benchtime 3s -benchmem
 
 // Package prediction provides code to show how branch
 // prediction can affect performance.

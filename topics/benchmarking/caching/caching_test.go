@@ -3,7 +3,7 @@
 
 // http://play.golang.org/p/opI__KHj9a
 
-// go test -run=XXX -bench=.
+// go test -run none -bench . -benchtime 3s -benchmem
 
 // Tests to show how why CPU caches matter.
 package caching

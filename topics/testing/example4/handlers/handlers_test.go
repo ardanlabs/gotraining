@@ -1,6 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
+// go test -run TestSendJSON -race -cpu 16
+
 // Sample test to show how to test the execution of an internal endpoint.
 package handlers_test
 
@@ -10,7 +12,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/10-testing/01-testing/example4/handlers"
+	"github.com/ardanlabs/gotraining/topics/testing/example4/handlers"
 )
 
 const succeed = "\u2713"
@@ -33,10 +35,11 @@ func TestSendJSON(t *testing.T) {
 		}
 		t.Log("\tShould receive a status code of \"200\" for the response.", succeed)
 
-		u := struct {
+		var u struct {
 			Name  string
 			Email string
-		}{}
+		}
+
 		if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
 			t.Fatal("\tShould be able to decode the response.", failed)
 		}
