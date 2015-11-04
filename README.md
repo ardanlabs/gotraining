@@ -26,7 +26,7 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
 
 **Starter Material:**  
-[Quick Tour](00-slides/quick_tour)
+[Quick Tour](courses/quick_tour)
 
 **Learn More:**  
 http://golang.org/  
