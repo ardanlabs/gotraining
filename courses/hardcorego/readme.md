@@ -3,7 +3,7 @@ Hardcore Go is a 5 day class for any intermediate-level developer who has some e
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-### Day 1
+## Day 1
 
 #### Language Syntax
 [Variables](../../topics/variables/readme.md) | 
@@ -23,7 +23,7 @@ Hardcore Go is a 5 day class for any intermediate-level developer who has some e
 [Interfaces](../../topics/interfaces/readme.md)
 ___
 
-### Day 2
+## Day 2
 
 #### Embedding and Exporting
 [Embedding](../../topics/embedding/readme.md) | 
@@ -41,7 +41,7 @@ ___
 [Race Conditions](../../topics/race_conditions/readme.md)
 ___
 
-### Day 3
+## Day 3
 
 #### Concurrency Part II
 [Channels](../../topics/channels/readme.md) | 
@@ -58,7 +58,7 @@ ___
 [Stack Traces](../../topics/stack_trace/readme.md)
 ___
 
-### Day 4
+## Day 4
 
 #### Standard Library
 [Logging](../../logging/readme.md) | 
@@ -66,7 +66,7 @@ ___
 [IO](../../writers_readers/readme.md)
 ___
 
-### Day 5
+## Day 5
 
 #### Standard Library
 [Encoding](../../encoding/readme.md) | 
