@@ -15,7 +15,7 @@ We can get specific information about the scheduler using the GODEBUG environmen
 	*schedtrace*: setting schedtrace=X causes the scheduler to emit a single line to standard
 	error every X milliseconds, summarizing the scheduler state.
 
-## Summary Trace
+## Running Summary Trace
 
 	go build
 	GODEBUG=schedtrace=1000 ./sched_trace
@@ -37,7 +37,7 @@ We can get specific information about the scheduler using the GODEBUG environmen
 		[9]:           Goroutines in a context's run queue.
 		[4 4]:         Goroutines in each of the context's run queue.
 
-## Detailed Trace
+## Running Detailed Trace
 
 	go build
 	GODEBUG=schedtrace=1000,scheddetail=1 ./sched_trace
