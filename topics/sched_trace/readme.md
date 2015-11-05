@@ -2,7 +2,7 @@
 
 We can get specific information about the scheduler using the GODEBUG environmental variable. The variable will cause the schedule to emit information about the health of the logical processors.
 
-## Scheduler GODEBUG
+## GODEBUG
 
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 

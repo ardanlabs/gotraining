@@ -2,7 +2,7 @@
 
 There is no way to identify specifically in the code where a leak is occuring. We can validate if a memory leak is present and which functions or methods are producing the most allocations.
 
-## GC GODEBUG
+## GODEBUG
 
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
