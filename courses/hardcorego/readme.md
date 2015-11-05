@@ -50,11 +50,11 @@ On this day we continue go deeper into Go. We learn about channels, concurrency 
 [Channels](../../topics/channels/readme.md) | 
 [Patterns](../../topics/concurrency_patterns/readme.md)
 
-#### Testing and Debugging
+#### Testing
 [Testing](../../topics/testing/readme.md) | 
 [Benchmarking](../../topics/benchmarking/readme.md)
 
-## Profiling and Tracing
+#### Profiling and Tracing
 [Profiling](../../topics/profiling/readme.md) | 
 [Memory Trace](../../topics/memory_trace/readme.md) | 
 [Scheduler Trace](../../topics/sched_trace/readme.md) | 
