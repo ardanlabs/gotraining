@@ -2,7 +2,7 @@
 
 There is no way to identify specifically in the code where a leak is occuring. We can validate if a memory leak is present and which functions or methods are producing the most allocations.
 
-### GODEBUG=gctrace=1
+## GODEBUG=gctrace=1
 
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
@@ -31,7 +31,7 @@ In Go, a memory leak is memory you retain a reference to.
     gc 3 @0.032s 1%: 0.020+0.16+0.007+0.25+0.090 ms clock, 0.14+0.16+0+0/0.20/0.27+0.63 ms cpu, 17->17->14 MB, 14 MB goal, 8 P
     gc 4 @0.066s 0%: 0.029+0.17+0.074+0.48+0.10 ms clock, 0.20+0.17+0+0/0.42/0.26+0.76 ms cpu, 35->35->29 MB, 29 MB goal, 8 P
 
-### pprof
+## pprof
 
 We can use the pprof tooling but all it will show are places where lots of allocations are taking place.
 
