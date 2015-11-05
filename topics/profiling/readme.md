@@ -10,11 +10,6 @@ Note: Unless you are running OS X El Capitan, profiling on the Mac is broken. Th
 
 [download files](https://drive.google.com/?pli=1&authuser=0#folders/0B8nQmHFH90Pkck13MVVLcko5OGc)
 
-### Dave Cheney's Profile Package
-`go get` Dave Cheney's profiling package. He has done a nice job abstracting all the boilerplate code required. If you are interested in understanding how to do this without the profile package, read this (http://saml.rilspace.org/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof)
-
-	go get github.com/davecheney/profile
-
 ### Graph Visualization Tools
 Download the package for your target OS/Arch:
 [http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
@@ -29,7 +24,16 @@ Download and uncompress the source code:
 	make
 	sudo make install
 
-### Code Changes
+### Static Profiling
+
+We can have our program produce profiling data and once the program quits, write the profiling data to disk so it can be visualized.
+
+## Code Changes
+
+`go get` Dave Cheney's profiling package. He has done a nice job abstracting all the boilerplate code required.
+
+	go get github.com/davecheney/profile
+
 We need to make some changes to main to get the profiling data we need.
 
     import "github.com/davecheney/profile"
@@ -51,37 +55,67 @@ We need to make some changes to main to get the profiling data we need.
 		. . .
 	}
 
-### Running and Creating Profile Graphs
+## Running and Creating Profile Graphs
+
 	Build and run the service:
 		go build
-		./05-profiling
+		./profiling
 	
 	In a separate terminal generate requests:
 		while true && do curl http://localhost:6060/english && done
 		<control> C
     
     Generate the call graphs:
-    	go tool pprof --pdf ./05-profiling cpu.pprof > cpugraph.pdf
-		go tool pprof --pdf ./05-profiling mem.pprof > memgraph.pdf
+    	go tool pprof --pdf ./profiling cpu.pprof > cpugraph.pdf
+		go tool pprof --pdf ./profiling mem.pprof > memgraph.pdf
 
-    See all the options:
-    	go tool pprof -h
+## Dynamic Profiling
 
-### HTTP Runtime Profile Graphs
+We can have our program produce profiling data and during runtime, write the profiling data to disk so it can be visualized.
+
+### Code Changes
+
+Reset the example back to the original code. Then add this import and this will add a route to the existing service we can leverage to get the profile data.
+
+	_ "net/http/pprof"
+
+### Running and Creating Profile Graphs
+
 	Build and run the service:
 		go build
-		./05-profiling
+		./profiling
 	
 	In a separate terminal generate requests:
 		while true && do curl http://localhost:6060/english && done
 
 	In a separate terminal run a pprof tool:
-		go tool pprof http://localhost:6060/debug/pprof/heap
-		go tool pprof http://localhost:6060/debug/pprof/profile
-		go tool pprof http://localhost:6060/debug/pprof/block
+		go tool pprof http://localhost:6060/debug/pprof/heap		(Memory Profile)
+		go tool pprof http://localhost:6060/debug/pprof/profile   	(CPU Profile)
 
-	Play with the different commands:
-		go tool pprof -help
+### pprof Commands
+
+We will use the CPU profile data:
+
+	go tool pprof http://localhost:6060/debug/pprof/profile
+
+The `top` command will show top functions and methods based on CPU Profile
+
+	(pprof) top
+	810ms of 810ms total (  100%)
+	Showing top 10 nodes out of 98 (cum >= 10ms)
+	      flat  flat%   sum%        cum   cum%
+	     320ms 39.51% 39.51%      330ms 40.74%  syscall.Syscall
+	     140ms 17.28% 56.79%      140ms 17.28%  runtime.kevent
+	     120ms 14.81% 71.60%      120ms 14.81%  runtime.mach_semaphore_signal
+	      70ms  8.64% 80.25%       70ms  8.64%  runtime.usleep
+	      60ms  7.41% 87.65%       60ms  7.41%  runtime.mach_semaphore_wait
+	      30ms  3.70% 91.36%       30ms  3.70%  runtime.mach_semaphore_timedwait
+	      30ms  3.70% 95.06%       30ms  3.70%  runtime.memmove
+	      20ms  2.47% 97.53%       20ms  2.47%  syscall.Syscall6
+	      10ms  1.23% 98.77%       10ms  1.23%  runtime.cas64
+	      10ms  1.23%   100%       10ms  1.23%  syscall.RawSyscall
+
+The `web` command will generate a call graph.
 
 ## Links
 

@@ -11,16 +11,15 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 )
 
-type (
-	// hello holds a message.
-	hello struct {
-		Message string
-	}
-)
+// hello holds a message.
+type hello struct {
+	Message string
+}
 
 // main is the entry point for the application.
 func main() {
