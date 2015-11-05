@@ -2,11 +2,14 @@
 
 There is no way to identify specifically in the code where a leak is occuring. We can validate if a memory leak is present and which functions or methods are producing the most allocations.
 
-## GODEBUG=gctrace=1
+## GC GODEBUG
 
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
 To validate if a memory leak is truly occuring use the GODEBUG environmental variable. Setting gctrace=1 causes the garbage collector to emit a single line to standard error at each collection, summarizing the amount of memory collected and the length of the pause. Setting gctrace=2 emits the same summary but also repeats each collection. The format of this line is subject to change:
+
+    go build
+    GODEBUG=gctrace=1 ./memory_trace
 
     gc # @#s #%: #+...+# ms clock, #+...+# ms cpu, #->#-># MB, # MB goal, # P
 
@@ -23,33 +26,39 @@ Where the fields are as follows:
 In C++, a memory leak is memory you have lost a reference to.
 In Go, a memory leak is memory you retain a reference to.
 
-    export GODEBUG=gctrace=1
-    ./finding_leak
+### Running a GODEBUG Trace
+
+    go build
+    GODEBUG=gctrace=1 ./finding_leak
 
     gc 1 @0.009s 1%: 0.059+0.17+0.005+0.24+0.12 ms clock, 0.17+0.17+0+0/0.36/0.067+0.38 ms cpu, 5->5->3 MB, 4 MB goal, 8 P
     gc 2 @0.017s 1%: 0.037+0.096+0.098+0.21+0.086 ms clock, 0.22+0.096+0+0.10/0.31/0.091+0.51 ms cpu, 8->8->7 MB, 7 MB goal, 8 P
     gc 3 @0.032s 1%: 0.020+0.16+0.007+0.25+0.090 ms clock, 0.14+0.16+0+0/0.20/0.27+0.63 ms cpu, 17->17->14 MB, 14 MB goal, 8 P
     gc 4 @0.066s 0%: 0.029+0.17+0.074+0.48+0.10 ms clock, 0.20+0.17+0+0/0.42/0.26+0.76 ms cpu, 35->35->29 MB, 29 MB goal, 8 P
 
-## pprof
+## pprof heap
 
-We can use the pprof tooling but all it will show are places where lots of allocations are taking place.
+We can get detailed information about the heap using the pprof support. We can actually produce and compare different profiles to see difference in memory over time.
 
-		go tool pprof http://localhost:6060/debug/pprof/heap
+### Comparing Profiles
 
-Take a snapshot of the current heap profile:
+    Build and run the service:
+        go build
+        ./finding_leak
+
+    Take a snapshot of the current heap profile:
 
 		curl -s http://localhost:6060/debug/pprof/heap > base.heap
 
-After some time, take another snapshot:
+    After some time, take another snapshot:
 
 		curl -s http://localhost:6060/debug/pprof/heap > current.heap
 
-Now compare both snapshots against the binary and get into the pprof tool:
+    Now compare both snapshots against the binary and get into the pprof tool:
 
-		go tool pprof -inuse_objects -base base.heap \
-                             /PATH_TO_BINARY/finding_leaks \
-                             current.heap
+		go tool pprof -inuse_objects -base base.heap /PATH_TO_BINARY/finding_leaks current.heap
+
+### Running pprof Commands
 
 Run the `top` command to see the functions allocating the most objects:
 

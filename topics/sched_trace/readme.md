@@ -2,11 +2,12 @@
 
 We can get specific information about the scheduler using the GODEBUG environmental variable. The variable will cause the schedule to emit information about the health of the logical processors.
 
-## Scheduler GODEBUG Documentation
+## Scheduler GODEBUG
 
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
-	GODEBUG=schedtrace=1000,scheddetail=1 ./sched_trace.go
+	go build
+	GODEBUG=schedtrace=1000,scheddetail=1 ./sched_trace
 
 	*scheddetail*: setting schedtrace=X and scheddetail=1 causes the scheduler to emit
 	detailed multiline info every X milliseconds, describing state of the scheduler,
@@ -17,6 +18,7 @@ We can get specific information about the scheduler using the GODEBUG environmen
 
 ## Summary Trace
 
+	go build
 	GODEBUG=schedtrace=1000 ./sched_trace
 
 	export GOMAXPROCS=1
@@ -38,6 +40,7 @@ We can get specific information about the scheduler using the GODEBUG environmen
 
 ## Detailed Trace
 
+	go build
 	GODEBUG=schedtrace=1000,scheddetail=1 ./sched_trace
 
 		SCHED 2016ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1 runqueue=0 gcwaiting=0 nmidlelocked=0 stopwait=0 sysmonwait=0
