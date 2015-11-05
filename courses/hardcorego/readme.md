@@ -54,8 +54,8 @@ On this day we continue go deeper into Go. We learn about channels, concurrency 
 [Testing](../../topics/testing/readme.md) | 
 [Benchmarking](../../topics/benchmarking/readme.md) | 
 [Profiling](../../topics/profiling/readme.md) | 
-[Memory Leaks](../../topics/memory_leaks/readme.md) | 
-[Debugging](../../topics/godebug/readme.md) | 
+[Memory Trace](../../topics/memory_trace/readme.md) | 
+[Scheduler Trace](../../topics/sched_trace/readme.md) | 
 [Stack Traces](../../topics/stack_trace/readme.md)
 ___
 

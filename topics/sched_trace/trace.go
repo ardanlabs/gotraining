@@ -3,9 +3,6 @@
 
 // https://play.golang.org/p/M6_9Ir79EB
 
-// export GODEBUG=schedtrace=1000
-// export GODEBUG=schedtrace=1000,scheddetail=1
-
 // Sample program to review scheduler stats.
 package main
 

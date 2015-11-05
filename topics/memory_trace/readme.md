@@ -1,8 +1,10 @@
-## Memory Leaks
+## Memory Tracing
 
 There is no way to identify specifically in the code where a leak is occuring. We can validate if a memory leak is present and which functions or methods are producing the most allocations.
 
 ### GODEBUG=gctrace=1
+
+[http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
 To validate if a memory leak is truly occuring use the GODEBUG environmental variable. Setting gctrace=1 causes the garbage collector to emit a single line to standard error at each collection, summarizing the amount of memory collected and the length of the pause. Setting gctrace=2 emits the same summary but also repeats each collection. The format of this line is subject to change:
 
@@ -84,6 +86,6 @@ https://www.hakkalabs.co/articles/finding-memory-leaks-go-programs
 
 ## Code Review
 
-[Finding Leak](leak.go) ([Go Playground](https://play.golang.org/p/_CbgE89cyO))
+[Finding Leak](trace.go) ([Go Playground](https://play.golang.org/p/aLDVeFFbxd))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

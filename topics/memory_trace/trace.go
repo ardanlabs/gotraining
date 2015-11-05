@@ -1,10 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/_CbgE89cyO
+// https://play.golang.org/p/aLDVeFFbxd
 
-// Sample program to learn how to identify memory leaks. This code is
-// experimental. It is a treasure hunt at the end of the day.
+// Sample program to learn how to identify memory problems.
 package main
 
 import (
@@ -14,6 +13,7 @@ import (
 	"os/signal"
 )
 
+// main is the entry point for the application.
 func main() {
 	// Create a goroutine that leaks memory. Since the map needs
 	// to be constantly shuffled around, this becomes very expensive.
