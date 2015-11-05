@@ -28,7 +28,7 @@ In Go, a memory leak is memory you retain a reference to.
 ### Running a GODEBUG Trace
 
     go build
-    GODEBUG=gctrace=1 ./finding_leak
+    GODEBUG=gctrace=1 ./trace
 
     gc 1 @0.009s 1%: 0.059+0.17+0.005+0.24+0.12 ms clock, 0.17+0.17+0+0/0.36/0.067+0.38 ms cpu, 5->5->3 MB, 4 MB goal, 8 P
     gc 2 @0.017s 1%: 0.037+0.096+0.098+0.21+0.086 ms clock, 0.22+0.096+0+0.10/0.31/0.091+0.51 ms cpu, 8->8->7 MB, 7 MB goal, 8 P
@@ -43,7 +43,7 @@ We can get detailed information about the heap using the pprof support. We can a
 
     Build and run the service:
         go build
-        ./finding_leak
+        ./trace
 
     Take a snapshot of the current heap profile:
 
