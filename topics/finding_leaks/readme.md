@@ -26,30 +26,30 @@ Now compare both snapshots against the binary and get into the pprof tool:
 
 Run the top command to see the functions allocating the most objects:
 
-  (pprof) top
-  3182575 of 3182575 total (  100%)
-  Dropped 5 nodes (cum <= 15912)
-        flat  flat%   sum%        cum   cum%
-     3182575   100%   100%    3182575   100%  main.main.func1
-           0     0%   100%    3182575   100%  runtime.goexit
+    (pprof) top
+    3182575 of 3182575 total (  100%)
+    Dropped 5 nodes (cum <= 15912)
+          flat  flat%   sum%        cum   cum%
+       3182575   100%   100%    3182575   100%  main.main.func1
+             0     0%   100%    3182575   100%  runtime.goexit
 
 Run the list command against the goroutine declared in main:
 
-  (pprof) list main.main.func1
-  Total: 3182575
-  ROUTINE ======================== main.main.func1 in /PATH_TO_BINARY/finding_leaks/leak.go
-     3182575    3182575 (flat, cum)   100% of Total
-           .          .     10:func main() {
-           .          .     11:	go func() {
-           .          .     12:		m := make(map[int]int)
-           .          .     13:
-           .          .     14:		for i := 0; ; i++ {
-     3182575    3182575     15:			m[i] = i
-           .          .     16:		}
-           .          .     17:	}()
-           .          .     18:
-           .          .     19:	go func() {
-           .          .     20:		http.ListenAndServe(":6060", nil)
+    (pprof) list main.main.func1
+    Total: 3182575
+    ROUTINE ======================== main.main.func1 in /PATH_TO_BINARY/finding_leaks/leak.go
+       3182575    3182575 (flat, cum)   100% of Total
+             .          .     10:func main() {
+             .          .     11:	go func() {
+             .          .     12:		m := make(map[int]int)
+             .          .     13:
+             .          .     14:		for i := 0; ; i++ {
+       3182575    3182575     15:			m[i] = i
+             .          .     16:		}
+             .          .     17:	}()
+             .          .     18:
+             .          .     19:	go func() {
+             .          .     20:		http.ListenAndServe(":6060", nil)
 
 ### GODEBUG=gctrace=1
 -----------------------------------------------------------------------------
@@ -74,13 +74,13 @@ where the fields are as follows:
 In C++, a memory leak is memory you have lost a reference to.
 In Go, a memory leak is memory you retain a reference to.
 
-  export GODEBUG=gctrace=1
-  ./finding_leak
+    export GODEBUG=gctrace=1
+    ./finding_leak
 
-  gc 1 @0.009s 1%: 0.059+0.17+0.005+0.24+0.12 ms clock, 0.17+0.17+0+0/0.36/0.067+0.38 ms cpu, 5->5->3 MB, 4 MB goal, 8 P
-  gc 2 @0.017s 1%: 0.037+0.096+0.098+0.21+0.086 ms clock, 0.22+0.096+0+0.10/0.31/0.091+0.51 ms cpu, 8->8->7 MB, 7 MB goal, 8 P
-  gc 3 @0.032s 1%: 0.020+0.16+0.007+0.25+0.090 ms clock, 0.14+0.16+0+0/0.20/0.27+0.63 ms cpu, 17->17->14 MB, 14 MB goal, 8 P
-  gc 4 @0.066s 0%: 0.029+0.17+0.074+0.48+0.10 ms clock, 0.20+0.17+0+0/0.42/0.26+0.76 ms cpu, 35->35->29 MB, 29 MB goal, 8 P
+    gc 1 @0.009s 1%: 0.059+0.17+0.005+0.24+0.12 ms clock, 0.17+0.17+0+0/0.36/0.067+0.38 ms cpu, 5->5->3 MB, 4 MB goal, 8 P
+    gc 2 @0.017s 1%: 0.037+0.096+0.098+0.21+0.086 ms clock, 0.22+0.096+0+0.10/0.31/0.091+0.51 ms cpu, 8->8->7 MB, 7 MB goal, 8 P
+    gc 3 @0.032s 1%: 0.020+0.16+0.007+0.25+0.090 ms clock, 0.14+0.16+0+0/0.20/0.27+0.63 ms cpu, 17->17->14 MB, 14 MB goal, 8 P
+    gc 4 @0.066s 0%: 0.029+0.17+0.074+0.48+0.10 ms clock, 0.20+0.17+0+0/0.42/0.26+0.76 ms cpu, 35->35->29 MB, 29 MB goal, 8 P
 
 ## Links
 
