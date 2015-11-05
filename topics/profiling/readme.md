@@ -24,11 +24,11 @@ Download and uncompress the source code:
 	make
 	sudo make install
 
-### Static Profiling
+## Static Profiling
 
 We can have our program produce profiling data and once the program quits, write the profiling data to disk so it can be visualized.
 
-## Code Changes
+### Code Changes
 
 `go get` Dave Cheney's profiling package. He has done a nice job abstracting all the boilerplate code required.
 
@@ -55,7 +55,7 @@ We need to make some changes to main to get the profiling data we need.
 		. . .
 	}
 
-## Running and Creating Profile Graphs
+### Running and Creating Profile Graphs
 
 	Build and run the service:
 		go build
