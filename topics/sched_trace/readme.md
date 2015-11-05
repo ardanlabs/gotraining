@@ -6,8 +6,7 @@ We can get specific information about the scheduler using the GODEBUG environmen
 
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
-	go build
-	GODEBUG=schedtrace=1000,scheddetail=1 ./sched_trace
+	export GODEBUG=schedtrace=1000,scheddetail=1
 
 	*scheddetail*: setting schedtrace=X and scheddetail=1 causes the scheduler to emit
 	detailed multiline info every X milliseconds, describing state of the scheduler,
