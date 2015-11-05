@@ -4,7 +4,6 @@ Hardcore Go is a 5 day class for any intermediate-level developer who has some e
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 ### Day 1
-On this day we take our initial tour of the language. We learn about variables, types, data structures and OOP. We also explore what is idiomatic and how the language is very orthogonal. This includes following the community standards for coding and style.
 
 #### Language Syntax
 [Variables](../../topics/variables/readme.md) | 
@@ -25,7 +24,6 @@ On this day we take our initial tour of the language. We learn about variables, 
 ___
 
 ### Day 2
-On this day we dive deeper into Go. We learn about packaging, exporting, using pointers, composition, error handling, concurrency and race conditions.
 
 #### Embedding and Exporting
 [Embedding](../../topics/embedding/readme.md) | 
@@ -44,7 +42,6 @@ On this day we dive deeper into Go. We learn about packaging, exporting, using p
 ___
 
 ### Day 3
-On this day we continue go deeper into Go. We learn about channels, concurrency patterns, testing, benchmarking, debugging.
 
 #### Concurrency Part II
 [Channels](../../topics/channels/readme.md) | 
@@ -62,7 +59,6 @@ On this day we continue go deeper into Go. We learn about channels, concurrency 
 ___
 
 ### Day 4
-On this day we continue to go deeper into Go and learn about the standard library. We focus on logging, reflection and the io package.
 
 #### Standard Library
 [Logging](../../logging/readme.md) | 
@@ -71,7 +67,6 @@ On this day we continue to go deeper into Go and learn about the standard librar
 ___
 
 ### Day 5
-On this day we learn about the encoding and http packages that are part of the standard library.
 
 #### Standard Library
 [Encoding](../../encoding/readme.md) | 
