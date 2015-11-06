@@ -16,6 +16,9 @@ http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html
 
 http://dave.cheney.net/2015/10/09/padding-is-hard
 
+http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing
+
+
 ## Code Review
 
 [Declare, create and initialize struct types](example1/example1.go) ([Go Playground](https://play.golang.org/p/TAX6NpPaEu))
