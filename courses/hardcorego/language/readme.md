@@ -20,8 +20,8 @@ This is a 2 day class for any intermediate-level developer who has some experien
 
 #### Methods, Interfaces and Embedding
 [Methods](../../../topics/methods/readme.md) | 
-[Interfaces](../../../topics/interfaces/readme.md)
-[Embedding](../../../topics/embedding/readme.md) | 
+[Interfaces](../../../topics/interfaces/readme.md) | 
+[Embedding](../../../topics/embedding/readme.md)
 ___
 
 ## Day 2
@@ -36,7 +36,7 @@ ___
 [Composition](../../../topics/composition/readme.md) | 
 [Error Handling](../../../topics/error_handling/readme.md)
 
-#### Concurrency Part I
+#### Concurrency
 [Goroutines](../../../topics/goroutines/readme.md) | 
 [Race Conditions](../../../topics/race_conditions/readme.md)
 [Channels](../../../topics/channels/readme.md) | 
