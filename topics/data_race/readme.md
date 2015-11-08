@@ -1,6 +1,6 @@
-## Race Conditions
+## Data Races
 
-A race condition is when two or more goroutines attempt to read and write to the same resource at the same time. Race conditions can create bugs that totally appear random or can be never surface as they corrupt data. Atomic functions and mutexes are a way to synchronize the access of shared resources between goroutines.
+A data race is when two or more goroutines attempt to read and write to the same resource at the same time. Race conditions can create bugs that totally appear random or can be never surface as they corrupt data. Atomic functions and mutexes are a way to synchronize the access of shared resources between goroutines.
 
 ## Notes
 
@@ -23,13 +23,13 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Diagram
 
-### View of Race Condition in Example1.
+### View of Data Race in Example1.
 
-![Ardan Labs](race_condition.png)
+![Ardan Labs](data_race.png)
 
 ## Code Review
 
-[Race Condition](example1/example1.go) ([Go Playground](https://play.golang.org/p/IwFKbnb1JO))
+[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/IwFKbnb1JO))
 
 [Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/1Wlq7FDgHd))
 
@@ -42,7 +42,7 @@ https://golang.org/doc/articles/race_detector.html
 ## Exercises
 
 ### Exercise 1
-Given the following program, use the race detector to find and correct the race condition.
+Given the following program, use the race detector to find and correct the data race.
 
 	// https://play.golang.org/p/0C-mUZGUhE
 
