@@ -5,7 +5,7 @@ A data race is when two or more goroutines attempt to read and write to the same
 ## Notes
 
 * Goroutines need to be coordinated and synchronized.
-* When two or more goroutines attempt to access the same resource, we have a race condition.
+* When two or more goroutines attempt to access the same resource, we have a data race.
 * Atomic functions and mutexes can provide the support we need.
 
 ## False Sharing and Cache Coherency
