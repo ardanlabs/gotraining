@@ -38,7 +38,7 @@ ___
 
 #### Concurrency
 [Goroutines](../../../topics/goroutines/readme.md) | 
-[Race Conditions](../../../topics/race_conditions/readme.md)
+[Data Races](../../../topics/data_race/readme.md) | 
 [Channels](../../../topics/channels/readme.md) | 
 [Patterns](../../../topics/concurrency_patterns/readme.md)
 ___
