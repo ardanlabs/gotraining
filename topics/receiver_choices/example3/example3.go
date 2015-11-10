@@ -2,7 +2,7 @@
 
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/E-Bb5cRuyz
+// https://play.golang.org/p/4npFGglwQW
 
 // Sample code to show how the standard library in general,
 // does not pass reference types via a pointer unless the function is
