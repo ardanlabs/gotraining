@@ -6,13 +6,13 @@ This class is a 1 day class for any intermediate-level developer who has taken t
 ## Day 1
 
 #### Testing
-[Testing](../../../topics/testing/readme.md) | 
-[Benchmarking](../../../topics/benchmarking/readme.md)
+[Testing](../../../topics/testing/README.md) | 
+[Benchmarking](../../../topics/benchmarking/README.md)
 
 #### Profiling and Tracing
-[Profiling](../../../topics/profiling/readme.md) | 
-[Memory Trace](../../../topics/memory_trace/readme.md) | 
-[Scheduler Trace](../../../topics/sched_trace/readme.md) | 
-[Stack Traces](../../../topics/stack_trace/readme.md)
+[Profiling](../../../topics/profiling/README.md) | 
+[Memory Trace](../../../topics/memory_trace/README.md) | 
+[Scheduler Trace](../../../topics/sched_trace/README.md) | 
+[Stack Traces](../../../topics/stack_trace/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

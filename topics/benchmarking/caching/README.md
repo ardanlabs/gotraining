@@ -5,7 +5,7 @@ Understanding how the hardware works is an critical component to understanding h
 ## Arrays
 Please review the section on arrays for more details behind these benchmark tests.
 
-[Review Documentation on Arrays](../../arrays/readme.md)
+[Review Documentation on Arrays](../../arrays/README.md)
 
 ## Code Review
 

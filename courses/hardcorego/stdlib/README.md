@@ -6,15 +6,15 @@ This class is a 2 day class for any intermediate-level developer who has taken t
 ## Day 1
 
 #### IO
-[Logging](../../../logging/readme.md) | 
-[Reflection](../../../reflection/readme.md) | 
-[IO](../../../writers_readers/readme.md)
+[Logging](../../../logging/README.md) | 
+[Reflection](../../../reflection/README.md) | 
+[IO](../../../writers_readers/README.md)
 ___
 
 ## Day 2
 
 #### HTTP
-[Encoding](../../../encoding/readme.md) | 
-[HTTP](../../../http/readme.md)
+[Encoding](../../../encoding/README.md) | 
+[HTTP](../../../http/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
