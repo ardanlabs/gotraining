@@ -1,14 +1,14 @@
 ## Receiver Choices
 
-When creating a new type, try to answer this question before declaring methods. Does adding or removing something from a value of this type need to create a new value or mutate the existing one. If the answer is create a new value, then use value receivers, else use pointer receivers; and be consistent. This also applies to how values of this type should be passed to other parts of your program. Either, always use a value or a pointer, don’t mix it up. There are few exceptions to the rule.
+When creating a new type, try to answer this question before declaring methods. Does adding or removing something from a value of this type need to create a new value or mutate the existing one. If the answer is create a new value, then use value receivers, else use pointer receivers; and be consistent. This also applies to how values of this type should be passed to other parts of your program. Either, always use a value or a pointer, don't mix it up. There are few exceptions to the rule.
 
 ## Notes
 
 * The nature of the type should determine how it is passed.
 * Types can implement primitive and non-primitive data qualities.
 * Don't declare structs with a duality of nature.
-* In general, don’t pass built-in type values with a pointer.
-* In general, don’t pass reference type values with a pointer unless you are implementing unmarshal type of functionality.
+* In general, don't pass built-in type values with a pointer.
+* In general, don't pass reference type values with a pointer unless you are implementing unmarshal type of functionality.
 * In general, pass struct type values with a pointer unless the struct type has been implemented to behave like a primitive data value.
 
 ## Links
