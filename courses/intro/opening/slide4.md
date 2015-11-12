@@ -8,6 +8,6 @@ Let's make sure of local development environment is working.
 
 [Hello World Web](../quick/helloHTTP/helloHTTP.go) ([Go Playground](http://play.golang.org/p/c44Q5OiX5z))
 
-#### [Previous Slide](slide3.md) | [Start Training](../../readme.md)
+#### [Previous Slide](slide3.md) | [Start Training](../../README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
