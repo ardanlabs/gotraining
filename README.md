@@ -1,6 +1,6 @@
 ## Go Training
 
-[Click Here To Review The Course Material](courses/readme.md)
+[Click Here To Review The Course Material](courses/README.md)
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
@@ -55,19 +55,19 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 ## Testimonials
 
 Shalab Goel, Ph.D.
-_"It was a pleasure taking this course — learning lot of “dry" stuff in such animated and enthusiastic environment. The exercises were spot on for building what you called as "memory muscle. I have good amount of background in conventional multithreaded and distributed environments, but I have not put that knowledge to use more recently; so it was good refresher from that point of view as well. From Yuck to completely Wow-ed is how I will like to describe my respect for Go within three days. I knew nothing about GO before the course."_
+_"It was a pleasure taking this course — learning lot of "dry" stuff in such animated and enthusiastic environment. The exercises were spot on for building what you called as "memory muscle. I have good amount of background in conventional multithreaded and distributed environments, but I have not put that knowledge to use more recently; so it was good refresher from that point of view as well. From Yuck to completely Wow-ed is how I will like to describe my respect for Go within three days. I knew nothing about GO before the course."_
 
 Geoff Clitheroe ([@gclitheroe](https://twitter.com/gclitheroe))  
 _"Your training is awesome! Myself and three colleagues recently caught variations of the training at GopherCon and OSCON. We all thought the Bootcamp was the best thing at any of these conferences (and I went to both). Awesome work to Bill for presenting and anyone involved in developing the training. I really liked the structure, emphasis on deeper understanding, me doing a small number of examples to emphasize this, and general content. Night and day to other training which is to often just watching someone else live code. Great work."_
 
 ACL Services ([@ACLServices](https://twitter.com/ACLServices))  
-_"I'd just like to thank you again for just a phenomenal training session. The feedback from everyone was overwhelmingly positive. You probably could tell first hand that there were skeptics at first, but you’ve turned many into golang converts and we are really excited in growing golang adoption internally."_
+_"I'd just like to thank you again for just a phenomenal training session. The feedback from everyone was overwhelmingly positive. You probably could tell first hand that there were skeptics at first, but you've turned many into golang converts and we are really excited in growing golang adoption internally."_
 
 Joshua Shuster ([@naysaier](https://twitter.com/naysaier))  
-_"I would consider Ardan Studio’s 3 day course to be invaluable. Bill and his staff, being some of the foremost authorities in the Go language, were able to make many of the complex go topics understandable. Covering everything from memory management, all the way up to building concurrency programs and web API's. It has given me the knowledge to write idiomatic Go, and make the best use of it’s features. I would highly their courses to anyone new to Go, or to anyone wanting to widen their existing knowledge."_
+_"I would consider Ardan Studio's 3 day course to be invaluable. Bill and his staff, being some of the foremost authorities in the Go language, were able to make many of the complex go topics understandable. Covering everything from memory management, all the way up to building concurrency programs and web API's. It has given me the knowledge to write idiomatic Go, and make the best use of its features. I would highly their courses to anyone new to Go, or to anyone wanting to widen their existing knowledge."_
 
 Neeru Dwivedi  
-_"I attended the one day workshop by Bill Kennedy from Ardan Labs. I was in for a surprise as before the workshop I was concerned whether I would understand concepts and whether I would be able to follow along. Bill has this wonderful way of explaining concepts and his knowledge on the concepts is so good that, I didn’t feel that I was learning something new & complicated. The Go Workshop got me started on the Go language. This workshop is perfect for beginners and anyone who wants to learn more about Go. I highly recommend this."_
+_"I attended the one day workshop by Bill Kennedy from Ardan Labs. I was in for a surprise as before the workshop I was concerned whether I would understand concepts and whether I would be able to follow along. Bill has this wonderful way of explaining concepts and his knowledge on the concepts is so good that, I didn't feel that I was learning something new & complicated. The Go Workshop got me started on the Go language. This workshop is perfect for beginners and anyone who wants to learn more about Go. I highly recommend this."_
 
 Todd Rafferty ([@webrat](https://twitter.com/webrat))  
 _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is extremely passionate about the Go language and his energy feeds into his training. Very professional, very informative. My favorite section of his training, if I had to pick, was the segment on MultiWriters. I highly recommend a 3 day course, over a 2 day course. Even after the classes were over, William was always responsive with additional questions via various social media channels."_
