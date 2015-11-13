@@ -4,9 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"code.google.com/p/go-uuid/uuid"
-
 	"github.com/dimfeld/httptreemux"
+	"github.com/pborman/uuid"
 )
 
 var (

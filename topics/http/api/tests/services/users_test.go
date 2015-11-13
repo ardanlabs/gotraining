@@ -11,7 +11,8 @@ import (
 	"github.com/ardanlabs/gotraining/topics/http/api/tests"
 )
 
-// TestUsers is the entry point for the users tests.
+// TestUsers validates a user can be created, retrieved and
+// then removed from the system.
 func TestUsers(t *testing.T) {
 	c := &app.Context{
 		Session:   app.GetSession(),
@@ -19,12 +20,6 @@ func TestUsers(t *testing.T) {
 	}
 	defer c.Session.Close()
 
-	usersCreateRetrieveRemove(t, c)
-}
-
-// usersCreateRetrieveRemove validates a user can be created, retrieved and
-// then removed from the system.
-func usersCreateRetrieveRemove(t *testing.T, c *app.Context) {
 	now := time.Now()
 
 	u := models.User{

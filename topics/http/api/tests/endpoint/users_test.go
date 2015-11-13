@@ -43,7 +43,7 @@ func TestUsers(t *testing.T) {
 
 	a := routes.API().(*app.App)
 
-	//usersList404(t, a, c)
+	usersList404(t, a, c)
 	usersCreate200(t, a, c)
 	usersCreate400(t, a, c)
 	us := usersList200(t, a, c)
