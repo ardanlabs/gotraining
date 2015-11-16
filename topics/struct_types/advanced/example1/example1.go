@@ -1,10 +1,10 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/IiElaanvbY
+// https://play.golang.org/p/hEmKF_Mbsf
 
-// Alignment is about placing types on boundaries that make the
-// CPU access the fastest.
+// Alignment is about placing fields on address alignment boundaries
+// for more efficient reads and writes to memory.
 
 // Sample program to show how struct types align on boundaries.
 package main
@@ -14,52 +14,48 @@ import (
 	"unsafe"
 )
 
-// example represents a type with different fields.
-type example struct {
-	flag    bool
-	counter int16
-	flag2   bool
-	pi      float32
-}
-
 // main is the entry point for the application.
 func main() {
-	var e example
+	// Since all the fields are based on a single byte,
+	// the all align perfectly within a single word.
+	var np struct {
+		a bool
+		b bool
+		c bool
+	}
+	size := unsafe.Sizeof(np)
+	fmt.Printf("0 bytes of Padding - SizeOf[%d][%p %p %p]\n", size, &np.a, &np.b, &np.c)
 
-	alignmentBoundary := unsafe.Alignof(e)
-	sizeE := unsafe.Sizeof(e)
+	// Since the second field is a 2 byte int, that must
+	// be aligned properly start at an address ending in
+	// 0, 2, 4, 6, 8, A, C, E.
+	// 1 byte of padding is included to align the int16 properly.
+	var sbp struct {
+		a bool
+		b int16
+	}
+	size = unsafe.Sizeof(sbp)
+	fmt.Printf("1 byte of Padding - SizeOf[%d][%p %p]\n", size, &sbp.a, &sbp.b)
 
-	sizeBool := unsafe.Sizeof(e.flag)
-	offsetBool := unsafe.Offsetof(e.flag)
+	// Since the second field is a 4 byte int, that must
+	// be aligned properly start at an address ending in
+	// 0, 4, 8, C.
+	// 3 byte of padding is included to align the int32 properly.
+	var tbp struct {
+		a bool
+		b int32
+	}
+	size = unsafe.Sizeof(tbp)
+	fmt.Printf("3 byte of Padding - SizeOf[%d][%p %p]\n", size, &tbp.a, &tbp.b)
 
-	sizeInt := unsafe.Sizeof(e.counter)
-	offsetInt := unsafe.Offsetof(e.counter)
-
-	sizeBool2 := unsafe.Sizeof(e.flag2)
-	offsetBool2 := unsafe.Offsetof(e.flag2)
-
-	sizeFloat := unsafe.Sizeof(e.pi)
-	offsetFloat := unsafe.Offsetof(e.pi)
-
-	fmt.Printf("Alignment(%d):\tSize: %d\n", alignmentBoundary, sizeE)
-
-	fmt.Printf("flag:\t\tSize: %d\t\tOffset: %d\tAddr: %v\n",
-		sizeBool, offsetBool, &e.flag)
-
-	fmt.Printf("counter:\tSize: %d\t\tOffset: %d\tAddr: %v\n",
-		sizeInt, offsetInt, &e.counter)
-
-	fmt.Printf("flag1:\t\tSize: %d\t\tOffset: %d\tAddr: %v\n",
-		sizeBool2, offsetBool2, &e.flag2)
-
-	fmt.Printf("pi\t\tSize: %d\t\tOffset: %d\tAddr: %v\n",
-		sizeFloat, offsetFloat, &e.pi)
+	// Since the second field is a 8 byte int, that must
+	// be aligned properly start at an address ending in
+	// 0, 8.
+	// 4 byte of padding is included to align the int64 properly.
+	var fbp struct {
+		a bool
+		b int64
+	}
+	size = unsafe.Sizeof(fbp)
+	fmt.Printf("7 byte of Padding - SizeOf[%d][%p %p]\n", size, &fbp.a, &fbp.b)
 }
-
-/*
-Alignment(4):	Size: 12
-flag:		Size: 1		Offset: 0	Addr: 0x104382e0
-counter:	Size: 2		Offset: 2	Addr: 0x104382e2
-flag1:		Size: 1		Offset: 4	Addr: 0x104382e4
-pi		Size: 4		Offset: 8	Addr: 0x104382e8
-*/
