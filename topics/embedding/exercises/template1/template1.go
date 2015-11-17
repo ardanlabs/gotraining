@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/c9Qrsq8QFe
+// https://play.golang.org/p/rfTJFcUn9m
 
 // Copy the code from the template. Declare a new type called hockey
 // which embeds the sports type. Implement the matcher interface for hockey.
@@ -14,7 +14,7 @@ import "strings"
 
 // matcher defines the behavior required for performing searches.
 type matcher interface {
-	Search(searchTerm string) bool
+	search(searchTerm string) bool
 }
 
 // sport represents a sports team.
@@ -23,8 +23,8 @@ type sport struct {
 	city string
 }
 
-// Search checks the value for the specified term.
-func (s sport) Search(searchTerm string) bool {
+// search checks the value for the specified term.
+func (s sport) search(searchTerm string) bool {
 	if strings.Contains(s.team, searchTerm) ||
 		strings.Contains(s.city, searchTerm) {
 		return true
@@ -37,7 +37,7 @@ func (s sport) Search(searchTerm string) bool {
 // hockey information. Have it embed the sport type first.
 
 // Implement the matcher interface for hockey.
-func ( /* receiver type */ ) Search(searchTerm string) bool {
+func ( /* receiver type */ ) search(searchTerm string) bool {
 	// Make sure you call into Search method for the embedded
 	// sport type.
 
