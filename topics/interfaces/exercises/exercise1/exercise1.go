@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/zD-40tdSdm
+// https://play.golang.org/p/CaBE4Z8-VR
 
 // Declare an interface named speaker with a method named sayHello. Declare a struct
 // named English that represents a person who speaks english and declare a struct named
@@ -43,14 +43,14 @@ func main() {
 	// Declare a variable of the interface type.
 	var sp speaker
 
-	// Assign a value to the interface type and
+	// Assign a value to the interface type variable and
 	// call the interface method.
 	var e english
 	sp = e
 	sp.sayHello()
 
-	// Assign a different value to the interface type and
-	// call the interface method.
+	// Assign a different value to the interface type
+	// variable and call the interface method.
 	var c chinese
 	sp = c
 	sp.sayHello()

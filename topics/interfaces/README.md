@@ -39,6 +39,6 @@ https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
 **Part B** Add a new function named SayHello that accepts a value of type Speaker. Implement that function to call the SayHello method on the interface value. Then create new values of each type and use the function.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/oijJdRW3cD)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/zD-40tdSdm))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/CaBE4Z8-VR))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
