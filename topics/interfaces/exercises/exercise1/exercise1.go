@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/MFPF58SkRs
+// https://play.golang.org/p/zD-40tdSdm
 
 // Declare an interface named speaker with a method named sayHello. Declare a struct
 // named English that represents a person who speaks english and declare a struct named
@@ -57,7 +57,10 @@ func main() {
 
 	// Create new values and call the function.
 	sayHello(new(english))
-	sayHello(new(chinese))
+	sayHello(&chinese{})
+
+	// The use of new() and the empty literal is there
+	// as a talking point about these options.
 }
 
 // SatHello abstracts speaking functionality.
