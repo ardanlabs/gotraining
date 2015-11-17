@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/olva991YF4
+// https://play.golang.org/p/ovMH0wrl4B
 
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.
@@ -48,4 +48,16 @@ func main() {
 	// declared with a pointer receiver.
 	lisa.changeEmail("lisa@gmail.com")
 	lisa.notify()
+
+	// Create a slice of users with two users.
+	users := []user{
+		{"bill", "bill@email.com"},
+		{"lisa", "lisa@email.com"},
+	}
+
+	// Iterate over the slice of users
+	// calling notify.
+	for _, u := range users {
+		u.notify()
+	}
 }
