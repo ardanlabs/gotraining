@@ -63,7 +63,7 @@ func main() {
 	// as a talking point about these options.
 }
 
-// SatHello abstracts speaking functionality.
+// sayHello abstracts speaking functionality.
 func sayHello(sp speaker) {
 	sp.sayHello()
 }
