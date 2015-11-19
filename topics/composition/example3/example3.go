@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/0wWsHq-nib
+// https://play.golang.org/p/7n8fcCdkNf
 
 // Sample program demonstrating when implicit interface conversions
 // are provided by the compiler.
@@ -11,10 +11,11 @@ import "fmt"
 
 // =============================================================================
 
-// MoveHider provides support for moving and hiding.
-type MoveHider interface {
+// MoveHider provides support for moving and locking things.
+type MoveLocker interface {
 	Move()
-	Hide()
+	Lock()
+	Unlock()
 }
 
 // Mover provides support for moving things.
@@ -22,70 +23,56 @@ type Mover interface {
 	Move()
 }
 
-// Locker provides support for locking things.
-type Locker interface {
-	Lock()
-	Unlock()
-}
-
 // =============================================================================
 
-// house represents a concrete type for the example.
-type house struct{}
+// bike represents a concrete type for the example.
+type bike struct{}
 
-// Move implements the Mover interface.
-func (house) Move() {
-	fmt.Println("Moving the house")
+// Move can change the position of a bike.
+func (bike) Move() {
+	fmt.Println("Moving the bike")
 }
 
-// Hide helps to implement the MoveHider interface.
-func (house) Hide() {
-	fmt.Println("Hiding the house")
+// Lock prevents a bike from moving.
+func (bike) Lock() {
+	fmt.Println("Locking the bike")
 }
 
-// Lock implements the Locker interface.
-func (house) Lock() {
-	fmt.Println("Locking the house")
-}
-
-// Unlock implements the Locker interface.
-func (house) Unlock() {
-	fmt.Println("Unlocking the house")
+// Unlock allows a bike to be moved.
+func (bike) Unlock() {
+	fmt.Println("Unlocking the bike")
 }
 
 // =============================================================================
 
 func main() {
-	// Declare variables of the MoveHider and Mover interfaces set to their
+	// Declare variables of the MoveLocker and Mover interfaces set to their
 	// zero value.
-	var mh MoveHider
+	var ml MoveLocker
 	var m Mover
 
-	// Create a value of type house and assign the value to the MoveHider
+	// Create a value of type bike and assign the value to the MoveLocker
 	// interface value.
-	mh = house{}
+	ml = bike{}
 
-	// An interface value of type MoveHider can be implicitly convered into
+	// An interface value of type MoveLocker can be implicitly convered into
 	// a value of type Mover. They both declare a method named move.
-	m = mh
+	m = ml
 
-	// Declare a variable of the interface type Locker set to its zero value.
-	var l Locker
+	// prog.go:64: cannot use m (type Mover) as type MoveLocker in assignment:
+	//	   Mover does not implement MoveLocker (missing Lock method)
+	ml = m
 
-	// Interface type MoveHider does not declare methods named lock and unlock.
-	// Therefore, the compiler can't perform an implicit conversion between
-	// interface values of type MoveHider and Locker. It is irrelevant that the
-	// concrete type value of type house that was assigned to the MoveHider
-	// interface value implements the Locker interface.
-
-	// prog.go:83: cannot use mh (type MoveHider) as type Locker in assignment:
-	//	   MoveHider does not implement Locker (missing Lock method)
-	l = mh
+	// Interface type Mover does not declare methods named lock and unlock.
+	// Therefore, the compiler can't perform an implicit conversion to assign
+	// a value of interface type Mover to an interface value of type MoveLocker.
+	// It is irrelevant that the concrete type value of type bike that is stored
+	// inside of the Mover interfae value implements the MoveLocker interface.
 
 	// We can perform a type assertion at runtime to support the assignment.
 
-	// Perform a type assertion against the MoveHider interface value to access
-	// the concrete type value of type house that was stored inside of it. Then
-	// assign the concrete type to the Locker interface.
-	l = mh.(house)
+	// Perform a type assertion against the Mover interface value to access
+	// the concrete type value of type bike that was stored inside of it. Then
+	// assign the concrete type to the MoveLocker interface.
+	ml = m.(bike)
 }
