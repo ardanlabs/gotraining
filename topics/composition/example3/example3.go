@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/48bYQqiV9L
+// https://play.golang.org/p/0wWsHq-nib
 
 // Sample program demonstrating when implicit interface conversions
 // are provided by the compiler.
@@ -11,20 +11,21 @@ import "fmt"
 
 // =============================================================================
 
-// moveHider provides support for moving and hiding.
-type moveHider interface {
-	move()
-	hide()
+// MoveHider provides support for moving and hiding.
+type MoveHider interface {
+	Move()
+	Hide()
 }
 
-// mover provides support for moving things.
-type mover interface {
-	move()
+// Mover provides support for moving things.
+type Mover interface {
+	Move()
 }
 
-// locker provides support for locking things.
-type locker interface {
-	lock()
+// Locker provides support for locking things.
+type Locker interface {
+	Lock()
+	Unlock()
 }
 
 // =============================================================================
@@ -32,54 +33,59 @@ type locker interface {
 // house represents a concrete type for the example.
 type house struct{}
 
-// move implements the mover interface.
-func (house) move() {
+// Move implements the Mover interface.
+func (house) Move() {
 	fmt.Println("Moving the house")
 }
 
-// hide helps to implement the moveHider interface.
-func (house) hide() {
+// Hide helps to implement the MoveHider interface.
+func (house) Hide() {
 	fmt.Println("Hiding the house")
 }
 
-// lock implements the locker interface.
-func (house) lock() {
+// Lock implements the Locker interface.
+func (house) Lock() {
 	fmt.Println("Locking the house")
+}
+
+// Unlock implements the Locker interface.
+func (house) Unlock() {
+	fmt.Println("Unlocking the house")
 }
 
 // =============================================================================
 
 func main() {
-	// Declare variables of the moveHider and mover interfaces set to their
+	// Declare variables of the MoveHider and Mover interfaces set to their
 	// zero value.
-	var mh moveHider
-	var m mover
+	var mh MoveHider
+	var m Mover
 
-	// Create a value of type house and assign the value to the moveHider
+	// Create a value of type house and assign the value to the MoveHider
 	// interface value.
 	mh = house{}
 
-	// An interface value of type moveHider can be implicitly convered into
-	// a value of type mover. They both declare a method named move.
+	// An interface value of type MoveHider can be implicitly convered into
+	// a value of type Mover. They both declare a method named move.
 	m = mh
 
-	// Declare a variable of the interface type locker set to its zero value.
-	var l locker
+	// Declare a variable of the interface type Locker set to its zero value.
+	var l Locker
 
-	// Interface type moveHider does not declare a method named lock. Therefore,
-	// the compiler can't perform an implicit conversion between interface values
-	// of type moveHider and locker. It is irrelevant that the concrete type
-	// value of type house that was assigned to the moveHider interface value
-	// implements the lock method and does satisfy the locker interface.
+	// Interface type MoveHider does not declare methods named lock and unlock.
+	// Therefore, the compiler can't perform an implicit conversion between
+	// interface values of type MoveHider and Locker. It is irrelevant that the
+	// concrete type value of type house that was assigned to the MoveHider
+	// interface value implements the Locker interface.
 
-	// prog.go:77: cannot use mh (type moveHider) as type locker in assignment:
-	//	   moveHider does not implement locker (missing lock method)
+	// prog.go:83: cannot use mh (type MoveHider) as type Locker in assignment:
+	//	   MoveHider does not implement Locker (missing Lock method)
 	l = mh
 
 	// We can perform a type assertion at runtime to support the assignment.
 
-	// Perform a type assertion against the moveHider interface value to access
+	// Perform a type assertion against the MoveHider interface value to access
 	// the concrete type value of type house that was stored inside of it. Then
-	// assign the concrete type to the locker interface.
+	// assign the concrete type to the Locker interface.
 	l = mh.(house)
 }
