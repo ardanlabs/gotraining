@@ -4,16 +4,21 @@ This is 5 days of material for any intermediate-level developer who has some exp
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 ## Language
-This is a 2 day class for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. This class provides an intensive, comprehensive and idiomatic view of the language. We focus on both the specification and implementation of the language, including topics ranging from language syntax, Go's type system, concurrency and channels.
+This material covers all the langauge syntax, idioms, implementation and specification of the language. Once you are done with this material you will understand the mechanics of the language and mechanical sympathies the language has for both the hardware and operating system. 
 
 [Language](language/README.md)
 
+## Concurrency
+This material covers all the concurrency aspects of the language. Once you are done with this material you will understand the understand the concurrent mechanics of the language and mechanical sympathies the language has for both the hardware and operating system as it related to concurrency.
+
+[Concurrency](concurrency/README.md)
+
 ## Tooling
-This class is a 1 day class for any intermediate-level developer who has taken the Hardcore Go language class. The class provides an intensive, comprehensive and idiomatic view of the Go tooling. We focus on testing, benchmarking and debugging.
+This material covers a good portion of the tooling that comes with go. Specifically we cover testing and benchmarking. We also cover profiling memory and the scheduler. Finally we learn how to read stack traces.
 
 [Tooling](tooling/README.md)
 
 ## Standard Library
-This class is a 2 day class for any intermediate-level developer who has taken the Hardcore Go language class. The class provides an intensive, comprehensive and idiomatic view of the standard library. We focus on the http and io packages but this requires looking at other packages that work together.
+This material covers the essential things you need to know about the io and http packages. Along the way you also learn about the log, reflect and encoding packages.
 
 [Standard Library](stdlib/README.md)
