@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/7n8fcCdkNf
+// https://play.golang.org/p/wSC0U_qXWa
 
 // Sample program demonstrating when implicit interface conversions
 // are provided by the compiler.
@@ -11,16 +11,21 @@ import "fmt"
 
 // =============================================================================
 
-// MoveHider provides support for moving and locking things.
-type MoveLocker interface {
+// Mover provides support for moving things.
+type Mover interface {
 	Move()
+}
+
+// Locker provides support for locking and unlocking things.
+type Locker interface {
 	Lock()
 	Unlock()
 }
 
-// Mover provides support for moving things.
-type Mover interface {
-	Move()
+// MoveLocker provides support for moving and locking things.
+type MoveLocker interface {
+	Mover
+	Locker
 }
 
 // =============================================================================
@@ -59,7 +64,7 @@ func main() {
 	// a value of type Mover. They both declare a method named move.
 	m = ml
 
-	// prog.go:64: cannot use m (type Mover) as type MoveLocker in assignment:
+	// prog.go:69: cannot use m (type Mover) as type MoveLocker in assignment:
 	//	   Mover does not implement MoveLocker (missing Lock method)
 	ml = m
 
