@@ -6,6 +6,8 @@ Full lesson material, taught over multiple two-day courses, can be found in the 
 
 Examples marked with an asterisk are from [golang.org](http://golang.org/), provided under a [BSD license](https://golang.org/LICENSE).
 
+For a great talk/video that reinforces many of these ideas, see Andrew Gerrand's [Code that Grows with Grace](https://talks.golang.org/2012/chat.slide).
+
 ## Syntax and Type Semantics
 
 Easy to learn and reason about, trivial to machine-process.
