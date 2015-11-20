@@ -12,6 +12,8 @@ Easy to learn and reason about, trivial to machine-process.
 
 [Variables, Builtins, and Type Safety](http://play.golang.org/p/6w6hBNE75a) ([Source](../../../topics/variables/example1/example1.go))
 
+[Constants](http://play.golang.org/p/ZHfzj2_Rse) ([Source](misc/consts/main.go))
+
 [Structs](http://play.golang.org/p/TAX6NpPaEu) ([Source](../../../topics/struct_types/example1/example1.go))
 
 ## Pointers and Reference Types
