@@ -4,6 +4,8 @@ We can get specific information about the scheduler using the GODEBUG environmen
 
 ## GODEBUG
 
+[http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)
+
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
 	export GODEBUG=schedtrace=1000,scheddetail=1

@@ -8,6 +8,8 @@ There is no way to identify specifically in the code where a leak is occuring. W
 
 [http://dave.cheney.net/2014/07/11/visualising-the-go-garbage-collector](Visualising the Go garbage collector)
 
+[http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)
+
 To validate if a memory leak is truly occuring use the GODEBUG environmental variable. Setting gctrace=1 causes the garbage collector to emit a single line to standard error at each collection, summarizing the amount of memory collected and the length of the pause. Setting gctrace=2 emits the same summary but also repeats each collection. The format of this line is subject to change:
 
     export GODEBUG=gctrace=1
