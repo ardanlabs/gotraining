@@ -12,5 +12,8 @@ This is a class for any intermediate-level developer who has some experience wit
 [Memory Trace](../../../topics/memory_trace/README.md) | 
 [Scheduler Trace](../../../topics/sched_trace/README.md) | 
 [Stack Traces](../../../topics/stack_trace/README.md)
+
+#### Command Line Interfaces
+[Cobra](../../../topics/cli/cobra/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
