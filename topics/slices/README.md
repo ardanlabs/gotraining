@@ -43,7 +43,7 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 [Three index slicing](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/TepZptJati))
 
-## Exercies
+## Exercises
 
 ### Exercise 1
 
