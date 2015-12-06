@@ -33,14 +33,18 @@ shell compatible semantics and syntax.
 
 ## Links
 
-[1]: http://en.wikipedia.org/wiki/Bourne_shell
+[1] http://en.wikipedia.org/wiki/Bourne_shell
 
 ## Background
 
-[Command Invocation](invocation/README.md) | 
-[Conditional Control Flow](flow/README.md) | 
-[Job Control](jobs/README.md) | 
-[Pattern Matching](patterns/README.md) | 
+[Command Invocation](invocation/README.md)
+
+[Conditional Control Flow](flow/README.md)
+
+[Job Control](jobs/README.md)
+
+[Pattern Matching](patterns/README.md)
+
 [Text Streams, Redirection, and Pipelining](streams/README.md)
 
 ## Code Review
