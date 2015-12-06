@@ -3,9 +3,8 @@
 
 // http://play.golang.org/p/mPKmyGNR2L
 
-// Declare a nil slice of integers. Declare a nil slice of integers. Create a
-// loop that appends 10 values to the slice. Iterate over the slice and display
-// each value. Iterate over the slice and display each value.
+// Declare a nil slice of integers. Create a loop that appends 10 values to the
+// slice. Iterate over the slice and display each value.
 //
 // Declare a slice of five strings and initialize the slice with string literal
 // values. Display all the elements. Take a slice of index one and two
