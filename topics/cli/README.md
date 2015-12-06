@@ -24,7 +24,7 @@ typically provide at least: command pipelining, stream redirection, conditional
 control flow, pattern matching, job control, and, for interactive shells,
 command history.
 
-The [Bourne Shell][1], released by Bell Labs in 1977, was the first Unix shell
+The Bourne Shell[1], released by Bell Labs in 1977, was the first Unix shell
 with excellent programming features; it set the standard in shell syntax and
 capabilities, and has left a strong legacy of similar shells that are referred
 to as "Bourne shell compatible" (or "sh compatible" for short, after the
