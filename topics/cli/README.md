@@ -31,6 +31,20 @@ to as "Bourne shell compatible" (or "sh compatible" for short, after the
 shell's command name). The following sections are described in terms of Bourne
 shell compatible semantics and syntax.
 
-  [1]: http://en.wikipedia.org/wiki/Bourne_shell
+## Links
+
+[1]: http://en.wikipedia.org/wiki/Bourne_shell
+
+## Background
+
+[Command Invocation](invocation/README.md) | 
+[Conditional Control Flow](flow/README.md) | 
+[Job Control](jobs/README.md) | 
+[Pattern Matching](patterns/README.md) | 
+[Text Streams, Redirection, and Pipelining](streams/README.md)
+
+## Code Review
+
+[Cobra](cobra/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
