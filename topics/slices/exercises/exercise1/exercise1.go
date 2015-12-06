@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/BSNAUj2pd-
+// https://play.golang.org/p/uJrY2JZApJ
 
 // Declare a nil slice of integers. Create a loop that appends 10 values to the
 // slice. Iterate over the slice and display each value.
