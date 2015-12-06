@@ -1,9 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/cjZ-iIHIsK
+// https://play.golang.org/p/5mEz3VjEMv
 
-// Sample program to show how polymorphic behavior with interfaces.
+// Sample program to show how to understand the important of method sets.
 package main
 
 import "fmt"
@@ -22,33 +22,23 @@ type user struct {
 
 // notify implements the notifier interface with a pointer receiver.
 func (u *user) notify() {
-	fmt.Printf("Sending user Email To %s<%s>\n",
+	fmt.Printf("Sending User Email To %s<%s>\n",
 		u.name,
 		u.email)
 }
 
-// admin defines a admin in the program.
-type admin struct {
-	name  string
-	email string
-}
-
-// notify implements the notifier interface with a pointer receiver.
-func (a *admin) notify() {
-	fmt.Printf("Sending admin Email To %s<%s>\n",
-		a.name,
-		a.email)
-}
-
 // main is the entry point for the application.
 func main() {
-	// Create two values one of type user and one of type admin.
-	bill := user{"Bill", "bill@email.com"}
-	jill := admin{"Jill", "jill@email.com"}
+	// Create a value of type User and send a notification.
+	u := user{"Bill", "bill@email.com"}
 
-	// Pass a pointer of the values to support the interface.
-	sendNotification(&bill)
-	sendNotification(&jill)
+	// Values of type user do not implement the interface because pointer
+	// receivers don't belong to the method set of a value.
+
+	sendNotification(u)
+
+	// ./example1.go:38: cannot use u (type user) as type notifier in argument to sendNotification:
+	//   user does not implement notifier (notify method has pointer receiver)
 }
 
 // sendNotification accepts values that implement the notifier

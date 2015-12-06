@@ -1,48 +1,56 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/xvOEbidmSQ
+// https://play.golang.org/p/nMJIHaNXxm
 
-// Sample program to show how to use an interface in Go.
+// Sample program to show how polymorphic behavior with interfaces.
 package main
 
 import "fmt"
 
-// notifier is an interface that defines notification
-// type behavior.
-type notifier interface {
-	notify()
+// reader is an interface that defines the act of reading data.
+type reader interface {
+	read() ([]byte, error)
 }
 
-// user defines a user in the program.
-type user struct {
-	name  string
-	email string
+// file defines a system file.
+type file struct {
+	name string
 }
 
-// notify implements the notifier interface with a pointer receiver.
-func (u *user) notify() {
-	fmt.Printf("Sending User Email To %s<%s>\n",
-		u.name,
-		u.email)
+// read implements the reader interface for a file.
+func (f file) read() ([]byte, error) {
+	return []byte(`<rss><channel><title>Going Go Programming</title></channel></rss>`), nil
+}
+
+// pipe defines a named pipe network connection.
+type pipe struct {
+	name string
+}
+
+// read implements the reader interface for a network connection.
+func (p pipe) read() ([]byte, error) {
+	return []byte(`{name: "bill", title: "developer"}`), nil
 }
 
 // main is the entry point for the application.
 func main() {
-	// Create a value of type User and send a notification.
-	u := user{"Bill", "bill@email.com"}
+	// Create two values one of type file and one of type pipe.
+	f := file{"data.json"}
+	p := pipe{"cfg_service"}
 
-	// Values of type user do not implement the interface because pointer
-	// receivers don't belong to the method set of a value.
-
-	sendNotification(u)
-
-	// ./example1.go:38: cannot use u (type user) as type notifier in argument to sendNotification:
-	//   user does not implement notifier (notify method has pointer receiver)
+	// Call the retrieve funcion for each concrete type.
+	retrieve(f)
+	retrieve(p)
 }
 
-// sendNotification accepts values that implement the notifier
-// interface and sends notifications.
-func sendNotification(n notifier) {
-	n.notify()
+// retrieve can read any device and process the data.
+func retrieve(r reader) error {
+	d, err := r.read()
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(string(d))
+	return nil
 }

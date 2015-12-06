@@ -24,9 +24,9 @@ https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
 
 ## Code Review
 
-[Method Receivers](example1/example1.go) ([Go Playground](http://play.golang.org/p/xvOEbidmSQ))
+[Polymorphism](example2/example1.go) ([Go Playground](https://play.golang.org/p/nMJIHaNXxm))
 
-[Polymorphism](example2/example2.go) ([Go Playground](http://play.golang.org/p/cjZ-iIHIsK))
+[Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/5mEz3VjEMv))
 
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/lTMxc-oExx))
 
@@ -34,11 +34,11 @@ https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
 
 ### Exercise 1
 
-**Part A** Declare an interface named Speaker with a method named SayHello. Declare a struct named English that represents a person who speaks english and declare a struct named Chinese for someone who speaks chinese. Implement the Speaker interface for each struct using a value receiver and these literal strings "Hello World" and "你好世界". Declare a variable of type Speaker and assign the _address of_ a value of type English and call the method. Do it again for a value of type Chinese.
+**Part A** Declare an interface named speaker with a method named speak. Declare a struct named english that represents a person who speaks english and declare a struct named chinese for someone who speaks chinese. Implement the speaker interface for each struct using a value receiver and these literal strings "Hello World" and "你好世界". Declare a variable of type speaker and assign the address of a value of type english and call the method. Do it again for a value of type chinese.
 
-**Part B** Add a new function named SayHello that accepts a value of type Speaker. Implement that function to call the SayHello method on the interface value. Then create new values of each type and use the function.
+**Part B** Add a new function named sayHello that accepts a value of type speaker. Implement that function to call the speak method on the interface value. Then create new values of each type and use the function.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/oijJdRW3cD)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/CaBE4Z8-VR))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/b2MN-16K_8)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/PS9sqY6kSp))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
