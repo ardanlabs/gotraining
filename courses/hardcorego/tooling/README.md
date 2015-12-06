@@ -14,6 +14,6 @@ This is a class for any intermediate-level developer who has some experience wit
 [Stack Traces](../../../topics/stack_trace/README.md)
 
 #### Command Line Interfaces
-[Command-Line Interface (CLI)](../../../topics/cli/cobra/README.md)
+[Command-Line Interface (CLI)](../../../topics/cli/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
