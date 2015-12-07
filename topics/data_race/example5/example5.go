@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/XO1PgDSi9w
+// https://play.golang.org/p/k6nGJWXo7e
 
 // go build -race
 
@@ -21,9 +21,6 @@ import (
 // data is a slice that will be shared.
 var data []string
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
 // rwMutex is used to define a critical section of code.
 var rwMutex sync.RWMutex
 
@@ -38,7 +35,8 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	// Add the one goroutines for the writer.
+	// wg is used to manage concurrency.
+	var wg sync.WaitGroup
 	wg.Add(1)
 
 	// Create the writer goroutine.

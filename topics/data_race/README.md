@@ -29,22 +29,22 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/wj47Qz9MRa))
+[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/78I4DNrqRe))
 
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/rWL6rs-X3M))
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/EOxtXFiab7))
 
-[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/dA7TBdoL5S))
+[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/jLepfkGV5E))
 
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/pAcJIjMyjd))
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/xF8YEhiNoY))
 
-[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/XO1PgDSi9w))
+[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/k6nGJWXo7e))
 
 ## Exercises
 
 ### Exercise 1
 Given the following program, use the race detector to find and correct the data race.
 
-	// https://play.golang.org/p/0C-mUZGUhE
+	// https://play.golang.org/p/r-lOOe5PbI
 
 	// Program for an exercise to fix a race condition.
 	package main
@@ -59,9 +59,6 @@ Given the following program, use the race detector to find and correct the data 
 	// numbers maintains a set of random numbers.
 	var numbers []int
 
-	// wg is used to wait for the program to finish.
-	var wg sync.WaitGroup
-
 	// init is called prior to main.
 	func init() {
 		rand.Seed(time.Now().UnixNano())
@@ -69,13 +66,17 @@ Given the following program, use the race detector to find and correct the data 
 
 	// main is the entry point for all Go programs.
 	func main() {
-		// Add a count for each goroutine we will create.
+		// wg is used to manage concurrency.
+		var wg sync.WaitGroup
 		wg.Add(3)
 
 		// Create three goroutines to generate random numbers.
-		go random(10)
-		go random(10)
-		go random(10)
+		for i := 0; i < 3; i++ {
+			go func() {
+				random(10)
+				wg.Done()
+			}()
+		}
 
 		// Wait for all the goroutines to finish.
 		wg.Wait()
@@ -93,12 +94,9 @@ Given the following program, use the race detector to find and correct the data 
 			n := rand.Intn(100)
 			numbers = append(numbers, n)
 		}
-
-		// Tell main we are done.
-	    wg.Done()
 	}
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/U2K9NuynH9)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/Eh70D5XZ44))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/r-lOOe5PbI)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/XO8QnKmsq7))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

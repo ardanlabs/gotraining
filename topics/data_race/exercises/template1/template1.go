@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/U2K9NuynH9
+// https://play.golang.org/p/r-lOOe5PbI
 
 // Fix the race condition in this program.
 package main
@@ -16,9 +16,6 @@ import (
 // numbers maintains a set of random numbers.
 var numbers []int
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
 // init is called prior to main.
 func init() {
 	rand.Seed(time.Now().UnixNano())
@@ -26,7 +23,8 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	// Add a count for each goroutine we will create.
+	// wg is used to manage concurrency.
+	var wg sync.WaitGroup
 	wg.Add(3)
 
 	// Create three goroutines to generate random numbers.

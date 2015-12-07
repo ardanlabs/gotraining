@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/rWL6rs-X3M
+// https://play.golang.org/p/EOxtXFiab7
 
 // go build -race
 
@@ -19,12 +19,10 @@ import (
 // counter is a variable incremented by all goroutines.
 var counter int64
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
 // main is the entry point for the application.
 func main() {
-	// Add a count of two, one for each goroutine.
+	// wg is used to manage concurrency.
+	var wg sync.WaitGroup
 	wg.Add(2)
 
 	// Create two goroutines.

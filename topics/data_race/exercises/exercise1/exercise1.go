@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/Eh70D5XZ44
+// https://play.golang.org/p/XO8QnKmsq7
 
 // Answer for exercise 1 of Race Conditions.
 package main
@@ -16,9 +16,6 @@ import (
 // numbers maintains a set of random numbers.
 var numbers []int
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
 // mutex will help protect the slice.
 var mutex sync.Mutex
 
@@ -29,7 +26,8 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	// Add a count for each goroutine we will create.
+	// wg is used to manage concurrency.
+	var wg sync.WaitGroup
 	wg.Add(3)
 
 	// Create three goroutines to generate random numbers.
