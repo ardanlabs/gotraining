@@ -22,7 +22,7 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 Sandi Metz : Less - The Path to Better Design:  
 https://vimeo.com/26330100
 
-Think of a package as a component that accepts a set of inputs and provides a set of stable outputs. It provides a semantic set of functionality. Focus more on the behavior and less on the concrete.
+Think of a package as a component that accepts a set of inputs and provides a set of predictable outputs. It provides a semantic set of functionality. Focus more on the behavior and less on the concrete.
 
 Package dependency is a choice and must be thought about during the design of the application. Design the source tree and import choices as part of the design of the architecture.
 
