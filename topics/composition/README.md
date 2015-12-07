@@ -20,7 +20,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 [Composition II](example2/example2.go) ([Go Playground](http://play.golang.org/p/QnkL-UIVJN))
 
-[Interface Conversions](example3/example3.go) ([Go Playground](https://play.golang.org/p/wSC0U_qXWa))
+[Interface Conversions](example3/example3.go) ([Go Playground](https://play.golang.org/p/eWGMuXlzs5))
 
 ## Exercises
 
