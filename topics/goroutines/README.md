@@ -54,6 +54,6 @@ http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-
 **Part B** Run the program in parallel.
 
 [Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/rhf8k-7OT8)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/YWwOeybeTd))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/zt-HraI_TY))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

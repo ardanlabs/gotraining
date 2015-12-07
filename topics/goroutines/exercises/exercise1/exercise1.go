@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/YWwOeybeTd
+// https://play.golang.org/p/zt-HraI_TY
 
 // Create a program that declares two anonymous functions. Once that counts up to
 // 100 from 0 and one that counts down to 0 from 100. Display each number with an
@@ -25,8 +25,7 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	// wg is used to wait for the program to finish.
-	// Add a count of two, one for each goroutine.
+	// Declare a wait group and set the count to two.
 	var wg sync.WaitGroup
 	wg.Add(2)
 
