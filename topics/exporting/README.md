@@ -40,6 +40,8 @@ Don’t guess what changes could come, guess what could change.
 
 Knowledge creates dependencies, unstable dependencies increase risk, uncertainty is your guide, loosen coupling so you can reduce cost.
 
+Interfaces provide the highest form of decoupling when the code working with the interfaces don't have any knowledge of the concrete type values stored within them. The concrete types should be opaque to the code using the interfaces. 
+
 ## Code Review
 
 [Declare and access exported identifiers](example1/example1.go)
