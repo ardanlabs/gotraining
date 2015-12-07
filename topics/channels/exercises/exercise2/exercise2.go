@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/SL-z0COxsy
+// http://play.golang.org/p/AUViIO0quk
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -27,7 +27,7 @@ var wg sync.WaitGroup
 // resources is a buffered channel to manage strings.
 var resources = make(chan string, capacity)
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Launch goroutines to handle the work.
 	wg.Add(goroutines)

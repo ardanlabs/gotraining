@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/pJAe9SvoGb
+// http://play.golang.org/p/r1-v3Pf0wz
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a relay race between four goroutines.
@@ -16,7 +16,7 @@ import (
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Create an unbuffered channel.
 	track := make(chan int)

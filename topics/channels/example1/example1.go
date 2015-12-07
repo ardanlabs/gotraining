@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/Un5qxhsaqu
+// http://play.golang.org/p/k6VyXLi7Jj
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a game of tennis between two goroutines.
@@ -17,6 +17,7 @@ import (
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
+// init is called prior to main.
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }

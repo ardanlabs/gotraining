@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/vc6c1-M2EB
+// http://play.golang.org/p/JRDwcCdBDi
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -34,7 +34,7 @@ func worker(worker int) {
 	// Tell main this goroutine is done.
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Increment the wait group for the number of
 	// goroutines based on the value of the constant.

@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/yOn3nZU5rf
+// http://play.golang.org/p/_nAP4DKQpL
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
@@ -27,7 +27,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	performInserts()
 }

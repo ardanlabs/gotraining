@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/Sv_eWCWqiJ
+// http://play.golang.org/p/OwIUceuKrM
 
 // This sample program demonstrates how to use a channel to
 // monitor the amount of time the program is running and terminate
@@ -33,7 +33,7 @@ var (
 	shutdown = make(chan struct{})
 )
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	log.Println("Starting Process")
 

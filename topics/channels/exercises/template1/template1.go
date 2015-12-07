@@ -39,7 +39,7 @@ func goroutine( /* parameters */ ) {
 	}
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Declare and initialize an unbuffered channel
 	// of type int.

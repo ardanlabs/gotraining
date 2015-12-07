@@ -28,26 +28,26 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/Un5qxhsaqu))
+[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](http://play.golang.org/p/k6VyXLi7Jj))
 
-[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](https://play.golang.org/p/pJAe9SvoGb))
+[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/r1-v3Pf0wz))
 
-[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/yOn3nZU5rf))
+[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](http://play.golang.org/p/_nAP4DKQpL))
 
-[Timer channels and Select](example4/example4.go) ([Go Playground](https://play.golang.org/p/Sv_eWCWqiJ))
+[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/OwIUceuKrM))
 
 ## Exercises
 
 ### Exercise 1
 Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the integer equals ten, terminate the program cleanly.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/G7O-DnJrEA)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/v7fEyd86i3))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/pkWv2bBYRf)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/IUnk_NNF5N))
 
 ### Exercise 2
 Write a program that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/vc6c1-M2EB)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/SL-z0COxsy))
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/JRDwcCdBDi)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/AUViIO0quk))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
