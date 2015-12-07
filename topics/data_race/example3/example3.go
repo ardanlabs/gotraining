@@ -22,7 +22,7 @@ var shutdown int64
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Add a count of two, one for each goroutine.
 	wg.Add(2)

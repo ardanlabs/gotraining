@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/IwFKbnb1JO
+// https://play.golang.org/p/-aLUdVtJt6
 
 // go build -race
 
@@ -21,7 +21,7 @@ var counter int
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Add a count of two, one for each goroutine.
 	wg.Add(2)

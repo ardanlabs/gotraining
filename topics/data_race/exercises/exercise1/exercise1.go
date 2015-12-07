@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/wFTNvVoBpz
+// https://play.golang.org/p/UUPh5nkXP2
 
 // Answer for exercise 1 of Race Conditions.
 package main
@@ -27,7 +27,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Add a count for each goroutine we will create.
 	wg.Add(3)

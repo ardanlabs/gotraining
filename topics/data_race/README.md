@@ -29,15 +29,15 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/IwFKbnb1JO))
+[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/-aLUdVtJt6))
 
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/1Wlq7FDgHd))
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/xA40V1WG-P))
 
-[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/blXRQXlH8Z))
+[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/83ZtP3B9JM))
 
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/E7Gj_pSpqf))
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/ueG2YIBA-X))
 
-[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/0_T7S2w2qp))
+[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/GNeG7KUHUH))
 
 ## Exercises
 
@@ -98,7 +98,7 @@ Given the following program, use the race detector to find and correct the data 
 	    wg.Done()
 	}
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/yBFA-MDcMw)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/wFTNvVoBpz))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/gcQIlMrKnV)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/UUPh5nkXP2))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
