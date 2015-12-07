@@ -1,11 +1,11 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/B7VVYyaA21
+// https://play.golang.org/p/U_f7Ko8eOK
 
 // Copy the code from the template. Declare a new type called hockey
 // which embeds the sports type. Implement the matcher interface for hockey.
-// When implementing the Search method for hockey, call into the Search method
+// When implementing the match method for hockey, call into the match method
 // for the embedded sport type to check the embedded fields first. Then create
 // two hockey values inside the slice of matchers and perform the search.
 package main
@@ -15,9 +15,9 @@ import (
 	"strings"
 )
 
-// matcher defines the behavior required for performing searches.
+// matcher defines the behavior required for performing matching.
 type matcher interface {
-	search(searchTerm string) bool
+	match(searchTerm string) bool
 }
 
 // sport represents a sports team.
@@ -26,8 +26,8 @@ type sport struct {
 	city string
 }
 
-// Search checks the value for the specified term.
-func (s sport) search(searchTerm string) bool {
+// match checks the value for the specified term.
+func (s sport) match(searchTerm string) bool {
 	return strings.Contains(s.team, searchTerm) || strings.Contains(s.city, searchTerm)
 }
 
@@ -37,28 +37,28 @@ type hockey struct {
 	country string
 }
 
-// Search checks the value for the specified term.
-func (h hockey) search(searchTerm string) bool {
-	return h.sport.search(searchTerm) || strings.Contains(h.country, searchTerm)
+// match checks the value for the specified term.
+func (h hockey) match(searchTerm string) bool {
+	return h.sport.match(searchTerm) || strings.Contains(h.country, searchTerm)
 }
 
 // main is the entry point for the application.
 func main() {
-	// Define the term to search.
-	searchTerm := "Miami"
+	// Define the term to match.
+	term := "Miami"
 
-	// Create a slice of matcher values to search.
+	// Create a slice of matcher values to match.
 	matchers := []matcher{
 		hockey{sport{"Panthers", "Miami"}, "USA"},
 		hockey{sport{"Canadiens", "Montreal"}, "Canada"},
 	}
 
-	// Display what we are searching for.
-	fmt.Println("Searching For:", searchTerm)
+	// Display what we are trying to match.
+	fmt.Println("Matching For:", term)
 
-	// Range of each matcher value and check the search term.
+	// Range of each matcher value and check the term.
 	for _, m := range matchers {
-		if m.search(searchTerm) {
+		if m.match(term) {
 			fmt.Printf("FOUND: %+v", m)
 		}
 	}
