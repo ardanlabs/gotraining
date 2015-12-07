@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/SvJj6T4Jhi
+// https://play.golang.org/p/Xh0mvm60Xp
 
 // Sample program to show how the goroutine scheduler
 // will time slice goroutines on a single thread.
@@ -22,7 +22,7 @@ func init() {
 	runtime.GOMAXPROCS(1)
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Add a count of two, one for each goroutine.
 	wg.Add(2)

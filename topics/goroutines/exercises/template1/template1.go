@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/KlKIYq9s_3
+// https://play.golang.org/p/rhf8k-7OT8
 
 // Create a program that declares two anonymous functions. Once that counts up to
 // 100 from 0 and one that counts down to 0 from 100. Display each number with an
@@ -21,7 +21,7 @@ func init() {
 	runtime.GOMAXPROCS(1)
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Declare a wait group and set the count to two.
 

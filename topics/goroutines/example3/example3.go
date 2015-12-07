@@ -19,7 +19,7 @@ func init() {
 	runtime.GOMAXPROCS(2)
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// wg is used to wait for the program to finish.
 	// Add a count of two, one for each goroutine.

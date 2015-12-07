@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/ki1woWvmzW
+// https://play.golang.org/p/B7i0BC8s9L
 
 // Sample program to show how to create goroutines and
 // how the scheduler behaves.
@@ -22,7 +22,7 @@ func init() {
 	runtime.GOMAXPROCS(1)
 }
 
-// main is the entry point for all Go programs.
+// main is the entry point for the application.
 func main() {
 	// Add a count of two, one for each goroutine.
 	wg.Add(2)
