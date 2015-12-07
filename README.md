@@ -27,7 +27,7 @@ http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 **Windows**  
 http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
 
-**Linux**
+**Linux**  
 I do not recommend using `apt-get`. Go is easy to install. Just download the
 archive and extract it into /usr/local, creating a Go tree in /usr/local/go.
 
@@ -35,27 +35,27 @@ https://golang.org/doc/install
 
 ### Editors
 
-**Visual Studio Code**
-https://code.visualstudio.com/Updates
+**Visual Studio Code**  
+https://code.visualstudio.com/Updates  
 https://github.com/microsoft/vscode-go
 
-**Sublime**
-http://www.sublimetext.com/
-https://github.com/DisposaBoy/GoSublime
+**Sublime**  
+http://www.sublimetext.com/  
+https://github.com/DisposaBoy/GoSublime  
 http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
 
-**VIM**
-http://www.vim.org/download.php
+**VIM**  
+http://www.vim.org/download.php  
 http://farazdagi.com/blog/2015/vim-as-golang-ide/
 
-**Atom**
-https://atom.io/
+**Atom**  
+https://atom.io/  
 https://github.com/joefitzgerald/go-plus
 
-**LiteIDE**
+**LiteIDE**  
 http://sourceforge.net/projects/liteide/files/
 
-**Emacs**
+**Emacs**  
 https://github.com/creack/dotfiles
 
 ## Starter Material
