@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/M6_9Ir79EB
+// https://play.golang.org/p/yUz3VkxLdo
 
 // Sample program to review scheduler stats.
 package main
@@ -11,17 +11,18 @@ import (
 	"time"
 )
 
-// Create a waitgroup.
-var wg sync.WaitGroup
-
 // main is the entry point for the application.
 func main() {
 	// We are going to create 10 goroutines.
+	var wg sync.WaitGroup
 	wg.Add(10)
 
 	// Create those 10 goroutines.
 	for i := 0; i < 10; i++ {
-		go goroutine()
+		go func() {
+			goroutine()
+			wg.Done()
+		}()
 	}
 
 	// Wait for all the goroutines to complete.
@@ -39,6 +40,4 @@ func goroutine() {
 	for i := 0; i < 1e10; i++ {
 		count++
 	}
-
-	wg.Done()
 }
