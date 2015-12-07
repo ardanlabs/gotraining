@@ -39,9 +39,9 @@ http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-
 
 ## Code Review
 
-[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/B7i0BC8s9L))
+[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/LC1VgZZzO9))
 
-[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/Xh0mvm60Xp))
+[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/WU1p9-_RMN))
 
 [Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/1LJPV8HZrG))
 

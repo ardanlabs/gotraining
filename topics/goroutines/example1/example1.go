@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/B7i0BC8s9L
+// https://play.golang.org/p/LC1VgZZzO9
 
 // Sample program to show how to create goroutines and
 // how the scheduler behaves.
@@ -13,9 +13,6 @@ import (
 	"sync"
 )
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
 // init is called prior to main.
 func init() {
 	// Allocate one logical processor for the scheduler to use.
@@ -24,16 +21,23 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	// Add a count of two, one for each goroutine.
+	// wg is used to manage concurrency.
+	var wg sync.WaitGroup
 	wg.Add(2)
 
 	fmt.Println("Start Goroutines")
 
 	// Create a goroutine from the lowercase function.
-	go lowercase()
+	go func() {
+		lowercase()
+		wg.Done()
+	}()
 
 	// Create a goroutine from the uppercase function.
-	go uppercase()
+	go func() {
+		uppercase()
+		wg.Done()
+	}()
 
 	// Wait for the goroutines to finish.
 	fmt.Println("Waiting To Finish")
@@ -50,9 +54,6 @@ func lowercase() {
 			fmt.Printf("%c ", rune)
 		}
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }
 
 // uppercase displays the set of uppercase letters three times.
@@ -63,7 +64,4 @@ func uppercase() {
 			fmt.Printf("%c ", rune)
 		}
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }
