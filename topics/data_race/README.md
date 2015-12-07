@@ -29,13 +29,13 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/78I4DNrqRe))
+[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/_BpVuJ2jga))
 
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/EOxtXFiab7))
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/2Zeq3INrv4))
 
-[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/jLepfkGV5E))
+[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/BjzenGHmuN))
 
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/xF8YEhiNoY))
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/FLTlW0aqWT))
 
 [Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/k6nGJWXo7e))
 
@@ -96,7 +96,7 @@ Given the following program, use the race detector to find and correct the data 
 		}
 	}
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/r-lOOe5PbI)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/XO8QnKmsq7))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/HULjGWClKQ)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/VCFI9VpNNw))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

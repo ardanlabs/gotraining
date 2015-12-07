@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/xF8YEhiNoY
+// https://play.golang.org/p/FLTlW0aqWT
 
 // go build -race
 
@@ -23,21 +23,20 @@ var mutex sync.Mutex
 
 // main is the entry point for the application.
 func main() {
+	// Number of goroutines to use.
+	const grs = 2
+
 	// wg is used to manage concurrency.
 	var wg sync.WaitGroup
-	wg.Add(2)
+	wg.Add(grs)
 
 	// Create two goroutines.
-
-	go func() {
-		incCounter()
-		wg.Done()
-	}()
-
-	go func() {
-		incCounter()
-		wg.Done()
-	}()
+	for i := 0; i < grs; i++ {
+		go func() {
+			incCounter()
+			wg.Done()
+		}()
+	}
 
 	// Wait for the goroutines to finish.
 	wg.Wait()
