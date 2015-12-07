@@ -19,21 +19,54 @@ The material has been designed to be taught in a classroom environment. The code
 
 ## Before You Come To Class
 
-**Install Go On Mac OS X:**  
+### Installing Go
+
+**Mac OS X**  
 http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
-**Install Go On Windows:**  
+**Windows**  
 http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
 
-**Starter Material:**  
-[Quick Tour](courses/quick_tour)
+**Linux**
+I do not recommend using `apt-get`. Go is easy to install. Just download the
+archive and extract it into /usr/local, creating a Go tree in /usr/local/go.
 
-**Learn More:**  
+https://golang.org/doc/install
+
+### Editors
+
+**Visual Studio Code**
+https://code.visualstudio.com/Updates
+https://github.com/microsoft/vscode-go
+
+**Sublime**
+http://www.sublimetext.com/
+https://github.com/DisposaBoy/GoSublime
+http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
+
+**VIM**
+http://www.vim.org/download.php
+http://farazdagi.com/blog/2015/vim-as-golang-ide/
+
+**Atom**
+https://atom.io/
+https://github.com/joefitzgerald/go-plus
+
+**LiteIDE**
+http://sourceforge.net/projects/liteide/files/
+
+**Emacs**
+https://github.com/creack/dotfiles
+
+## Starter Material
+  
+[Quick Tour](courses/quick_tour)
+  
 http://golang.org/  
 https://tour.golang.org/welcome/1  
 http://www.goinggo.net/
 
-## Go Get The Material
+## Go Get The Training Material
 
     go get github.com/ardanlabs/gotraining
 
