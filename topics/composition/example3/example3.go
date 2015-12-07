@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/eWGMuXlzs5
+// http://play.golang.org/p/W8_QflbEFz
 
 // Sample program demonstrating when implicit interface conversions
 // are provided by the compiler.
@@ -50,6 +50,7 @@ func (bike) Unlock() {
 
 // =============================================================================
 
+// main is the entry point for the application.
 func main() {
 	// Declare variables of the MoveLocker and Mover interfaces set to their
 	// zero value.
