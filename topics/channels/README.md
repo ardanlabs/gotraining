@@ -28,7 +28,7 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](http://play.golang.org/p/k6VyXLi7Jj))
+[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/kuxUFMqy-9))
 
 [Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/r1-v3Pf0wz))
 
