@@ -27,10 +27,19 @@ func main() {
 	// Add a count of two, one for each goroutine.
 	wg.Add(2)
 
-	// Create two goroutines.
 	fmt.Println("Create Goroutines")
-	go printPrime("A")
-	go printPrime("B")
+
+	// Create the first goroutine and manage its lifecycle here.
+	go func() {
+		printPrime("A")
+		wg.Done()
+	}()
+
+	// Create the second goroutine and manage its lifecycle here.
+	go func() {
+		printPrime("B")
+		wg.Done()
+	}()
 
 	// Wait for the goroutines to finish.
 	fmt.Println("Waiting To Finish")
@@ -48,11 +57,9 @@ next:
 				continue next
 			}
 		}
+
 		fmt.Printf("%s:%d\n", prefix, outer)
 	}
 
 	fmt.Println("Completed", prefix)
-
-	// Tell main we are done.
-	wg.Done()
 }

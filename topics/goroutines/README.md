@@ -41,7 +41,7 @@ http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-
 
 [Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/ki1woWvmzW))
 
-[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/SvJj6T4Jhi))
+[Goroutine time slicing](example2/example2.go) ([Go Playground](http://play.golang.org/p/f0jfw-2BQT))
 
 [Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/kz65m4PHmC))
 
