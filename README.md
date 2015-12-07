@@ -16,6 +16,20 @@ The material has been designed to be taught in a classroom environment. The code
 	* Has worked with a command shell.
 	* Knows how to maneuver around the file system.
 	* Understands what environment variables are.
+	
+## Course Outline
+
+* Language Syntax
+* Arrays, Slices and Maps
+* Methods, Interfaces and Embedding
+* Packaging and Exporting
+* Using Pointers
+* Error Handling
+* Concurrency, Race Conditions and Channels
+* Concurrency Patterns
+* Testing and Debugging
+* Project Structure and Vendoring
+* Standard Library
 
 ## Before You Come To Class
 
