@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/1Wlq7FDgHd
+// https://play.golang.org/p/rWL6rs-X3M
 
 // go build -race
 
@@ -28,8 +28,16 @@ func main() {
 	wg.Add(2)
 
 	// Create two goroutines.
-	go incCounter()
-	go incCounter()
+
+	go func() {
+		incCounter()
+		wg.Done()
+	}()
+
+	go func() {
+		incCounter()
+		wg.Done()
+	}()
 
 	// Wait for the goroutines to finish.
 	wg.Wait()
@@ -47,7 +55,4 @@ func incCounter() {
 		// Yield the thread and be placed back in queue.
 		runtime.Gosched()
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }

@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/GNeG7KUHUH
+// https://play.golang.org/p/XO1PgDSi9w
 
 // go build -race
 
@@ -42,7 +42,14 @@ func main() {
 	wg.Add(1)
 
 	// Create the writer goroutine.
-	go writer()
+	go func() {
+		writer()
+		wg.Done()
+	}()
+
+	// To keep the sample simple we are allowing the runtime to
+	// kill the reader goroutines. This is something we should
+	// control before allowing main to exit.
 
 	// Create seven reader goroutines.
 	for i := 1; i <= 7; i++ {
@@ -52,10 +59,6 @@ func main() {
 	// Wait for the write goroutine to finish.
 	wg.Wait()
 	fmt.Println("Program Complete")
-
-	// To keep the sample simple we are allowing the runtime to
-	// kill the reader goroutines. This is something we should
-	// control before allowing main to exit.
 }
 
 // writer adds 10 new strings to the slice in random intervals.
@@ -80,9 +83,6 @@ func writer() {
 		// Sleep a random amount of time.
 		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }
 
 // reader wakes up and iterates over the data slice.

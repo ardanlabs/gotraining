@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/-aLUdVtJt6
+// https://play.golang.org/p/wj47Qz9MRa
 
 // go build -race
 
@@ -27,8 +27,16 @@ func main() {
 	wg.Add(2)
 
 	// Create two goroutines.
-	go incCounter()
-	go incCounter()
+
+	go func() {
+		incCounter()
+		wg.Done()
+	}()
+
+	go func() {
+		incCounter()
+		wg.Done()
+	}()
 
 	// Wait for the goroutines to finish.
 	wg.Wait()
@@ -51,30 +59,31 @@ func incCounter() {
 		// Store the value back into Counter.
 		counter = value
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }
 
 /*
 ==================
 WARNING: DATA RACE
-Write by goroutine 6:
+Read by goroutine 7:
   main.incCounter()
-      /Users/bill/.../example1/example1.go:52 +0x6f
+      /Users/bill/.../example1/example1.go:50 +0x41
+  main.main.func2()
+      /Users/bill/.../example1/example1.go:37 +0x25
 
-Previous read by goroutine 7:
+Previous write by goroutine 6:
   main.incCounter()
-      /Users/bill/.../example1/example1.go:42 +0x41
-
-Goroutine 6 (running) created at:
-  main.main()
-      /Users/bill/.../example1/example1.go:30 +0x69
+      /Users/bill/.../example1/example1.go:60 +0x6f
+  main.main.func1()
+      /Users/bill/.../example1/example1.go:32 +0x25
 
 Goroutine 7 (running) created at:
   main.main()
-      /Users/bill/.../example1/example1.go:31 +0x8a
+      /Users/bill/.../example1/example1.go:39 +0x78
+
+Goroutine 6 (finished) created at:
+  main.main()
+      /Users/bill/.../example1/example1.go:34 +0x60
 ==================
-Final Counter: 2
+Final Counter: 4
 Found 1 data race(s)
 */

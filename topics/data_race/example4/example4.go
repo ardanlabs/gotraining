@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/E7Gj_pSpqf
+// https://play.golang.org/p/pAcJIjMyjd
 
 // go build -race
 
@@ -30,8 +30,16 @@ func main() {
 	wg.Add(2)
 
 	// Create two goroutines.
-	go incCounter()
-	go incCounter()
+
+	go func() {
+		incCounter()
+		wg.Done()
+	}()
+
+	go func() {
+		incCounter()
+		wg.Done()
+	}()
 
 	// Wait for the goroutines to finish.
 	wg.Wait()
@@ -62,7 +70,4 @@ func incCounter() {
 		// Release the lock and allow any
 		// waiting goroutine through.
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }

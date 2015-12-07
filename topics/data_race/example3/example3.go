@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/blXRQXlH8Z
+// https://play.golang.org/p/dA7TBdoL5S
 
 // go build -race
 
@@ -28,8 +28,16 @@ func main() {
 	wg.Add(2)
 
 	// Create two goroutines.
-	go doWork("A")
-	go doWork("B")
+
+	go func() {
+		doWork("A")
+		wg.Done()
+	}()
+
+	go func() {
+		doWork("B")
+		wg.Done()
+	}()
 
 	// Give the goroutines time to run so we can see
 	// the shutdown flag work.
@@ -56,7 +64,4 @@ func doWork(name string) {
 			break
 		}
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }

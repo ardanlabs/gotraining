@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/UUPh5nkXP2
+// https://play.golang.org/p/Eh70D5XZ44
 
 // Answer for exercise 1 of Race Conditions.
 package main
@@ -33,9 +33,12 @@ func main() {
 	wg.Add(3)
 
 	// Create three goroutines to generate random numbers.
-	go random(10)
-	go random(10)
-	go random(10)
+	for i := 0; i < 3; i++ {
+		go func() {
+			random(10)
+			wg.Done()
+		}()
+	}
 
 	// Wait for all the goroutines to finish.
 	wg.Wait()
@@ -59,7 +62,4 @@ func random(amount int) {
 		}
 		mutex.Unlock()
 	}
-
-	// Tell main we are done.
-	wg.Done()
 }
