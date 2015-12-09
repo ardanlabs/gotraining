@@ -5,7 +5,8 @@
 ### Slide Decks
 
 [Opening Slide Deck](intro/opening/slide1.md) | 
-[Quick Tour](quick_tour)
+[Quick Tour](quick_tour) | 
+[Go 102 by Tim Blair](https://speakerdeck.com/timblair/go-102-a-workshop)
 
 ### Hardcore Go
 
