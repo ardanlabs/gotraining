@@ -52,7 +52,7 @@ http://archive.arstechnica.com/cpu/1q00/crusoe/m-crusoe-1.html
 
 ## Code Review
 
-[Tests](prediction_test.go) ([Go Playground](https://play.golang.org/p/hwZqjJNdbm))
+[Tests](prediction_test.go) ([Go Playground](https://play.golang.org/p/cHTjwWp5FV))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)

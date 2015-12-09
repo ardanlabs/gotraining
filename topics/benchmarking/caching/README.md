@@ -11,7 +11,7 @@ Please review the section on arrays for more details behind these benchmark test
 
 [Caching](caching.go) ([Go Playground](https://play.golang.org/p/QilJqGkQgb))
 
-[Tests](caching_test.go) ([Go Playground](http://play.golang.org/p/opI__KHj9a))
+[Tests](caching_test.go) ([Go Playground](https://play.golang.org/p/F9KjBB84o4))
 
 ___
 [![Ardan Labs](../../00-slides/images/ggt_logo.png)](http://www.ardanlabs.com)
