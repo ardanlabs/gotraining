@@ -15,21 +15,39 @@ Pointers provide a way to share data across function boundaries. Having the abil
 
 ## Links
 
+### Pointer Mechanics
+
 https://golang.org/doc/effective_go.html#pointers_vs_values
 
 http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 
 http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
+### Stacks
+
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)
+
+### Escpae Analysis and Inlining
 
 [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
 
-[Rick Hudson GC Talk](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
+https://github.com/golang/go/wiki/CompilerOptimizations
+
+### Garbage Collection
+
+https://en.wikipedia.org/wiki/Tracing_garbage_collection
 
 https://blog.golang.org/go15gc
 
-https://en.wikipedia.org/wiki/Tracing_garbage_collection
+[Rick Hudson GC Talk](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
+
+### Single Static Assignment Optimizations
+
+[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)
+
+https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83
+
+https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Code Review
 
@@ -39,7 +57,7 @@ https://en.wikipedia.org/wiki/Tracing_garbage_collection
 
 [Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/VYqb11RiWr))
 
-[Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/_uK8EYlsd0))
+[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/Jw7VNbxGpm))
 
 ## Exercises
 

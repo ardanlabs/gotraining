@@ -1,11 +1,10 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
+// Escape Analysis Flaws:
 // https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
 
-// http://play.golang.org/p/_uK8EYlsd0
-
-// go build -gcflags -m
+// https://play.golang.org/p/Jw7VNbxGpm
 
 // Sample program to show varaibles stay on or escape from the stack.
 package main
@@ -37,13 +36,25 @@ func escapeToHeap() {
 }
 
 /*
-./example1.go:22: can inline stayOnStack
-./example1.go:17: inlining call to stayOnStack
-./example1.go:36: "Heap Addr:" escapes to heap
-./example1.go:36: &x escapes to heap
-./example1.go:33: moved to heap: x
-./example1.go:36: &x escapes to heap
-./example1.go:36: escapeToHeap ... argument does not escape
-./example1.go:17: main &x does not escape
-./example1.go:27: stayOnStack &x does not escape
+// go build -gcflags -m
+
+./example4.go:20: can inline stayOnStack
+./example4.go:15: inlining call to stayOnStack
+./example4.go:34: "Heap Addr:" escapes to heap
+./example4.go:34: &x escapes to heap
+./example4.go:31: moved to heap: x
+./example4.go:34: &x escapes to heap
+./example4.go:34: escapeToHeap ... argument does not escape
+./example4.go:15: main &x does not escape
+./example4.go:25: stayOnStack &x does not escape
+
+
+go build -gcflags -S
+
+"".main t=1 size=128 value=0 args=0x0 locals=0x20
+	0x0000 00000 (/Users/bill/code/.../example4.go:14)	TEXT	"".main(SB), $32-0
+	0x0000 00000 (/Users/bill/code/.../example4.go:14)	MOVQ	(TLS), CX
+	0x0009 00009 (/Users/bill/code/.../example4.go:14)	CMPQ	SP, 16(CX)
+	0x000d 00013 (/Users/bill/code/.../example4.go:14)	JLS	107
+	0x000f 00015 (/Users/bill/code/.../example4.go:14)	SUBQ	$32, SP
 */
