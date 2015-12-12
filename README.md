@@ -99,6 +99,17 @@ _Kevin is an experienced software engineer that has been enthusiastically using 
 **Cory LaNou** ([@corylanou](https://twitter.com/corylanou))  
 _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time._
 
+## Twitter
+
+Kelsey Hightower ([‏@kelseyhightower](https://twitter.com/kelseyhightower/status/673359937909592064))
+_"Day 1 of the Hardcore Go workshop was outstanding! Big shoutout to @intel, @golangbridge, and @goinggodotnet for bringing this to Portland._"
+
+Katrina Owen ([@kytrinyx](https://twitter.com/kytrinyx/status/673360428278222848))
+_"OH: "You thought you knew Go..." (You do Go? You want to do Go?) You should take this workshop. Seriously.) "_
+
+Matt Oswalt ([@Mierdin](https://twitter.com/mierdin/status/673570058392616961))  
+_"Should be mentioned that though I am no expert, I have been using Go for about a year - and this meetup is kicking my ass."_
+
 ## Testimonials
 
 Shalab Goel, Ph.D.

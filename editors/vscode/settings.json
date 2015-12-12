@@ -1,14 +1,15 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.fontSize": 15,
-    "editor.wrappingColumn": 0,
+    "editor.fontSize": 14,
+    "editor.wrappingColumn": 300,
     "editor.tabSize": 4,
     "editor.insertSpaces": false,
-	"editor.autoClosingBrackets": false,
+	"editor.quickSuggestions": false,
     
 	"go.buildOnSave": true,
     "go.lintOnSave": true,
     "go.vetOnSave": true,
+	"go.formatTool": "gofmt",
     "go.formatOnSave": true,
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/bill/code/go"
