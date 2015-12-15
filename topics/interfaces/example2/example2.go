@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/5mEz3VjEMv
+// https://play.golang.org/p/jWMR2oudEN
 
 // Sample program to show how to understand the important of method sets.
 package main

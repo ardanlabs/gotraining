@@ -57,7 +57,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/VYqb11RiWr))
 
-[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/Jw7VNbxGpm))
+[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/3qE0uUOnTv))
 
 ## Exercises
 
