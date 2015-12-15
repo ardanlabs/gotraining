@@ -24,7 +24,7 @@ https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
 
 ## Code Review
 
-[Polymorphism](example2/example1.go) ([Go Playground](https://play.golang.org/p/nMJIHaNXxm))
+[Polymorphism](example1/example1.go) ([Go Playground](https://play.golang.org/p/nMJIHaNXxm))
 
 [Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/jWMR2oudEN))
 
