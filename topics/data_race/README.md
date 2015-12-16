@@ -44,7 +44,7 @@ https://golang.org/doc/articles/race_detector.html
 ### Exercise 1
 Given the following program, use the race detector to find and correct the data race.
 
-	// https://play.golang.org/p/HULjGWClKQ
+	// https://play.golang.org/p/F5DCJTZ6Lm
 
 	// Fix the race condition in this program.
 	package main
@@ -99,7 +99,7 @@ Given the following program, use the race detector to find and correct the data 
 		}
 	}
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/HULjGWClKQ)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/F5DCJTZ6Lm)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/VCFI9VpNNw))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

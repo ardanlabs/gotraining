@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/HULjGWClKQ
+// https://play.golang.org/p/F5DCJTZ6Lm
 
 // Fix the race condition in this program.
 package main
