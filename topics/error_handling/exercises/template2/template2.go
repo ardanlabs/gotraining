@@ -21,7 +21,7 @@ package main
 // error interface.
 
 // Declare a method for the appError struct type named Temporary that returns
-// true when the value of the code field is 9.
+// false when the value of the code field is 9.
 
 // Declare the temporary interface type with a method named Temporary that
 // takes no parameters and returns a bool.
