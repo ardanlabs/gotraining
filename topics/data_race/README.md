@@ -44,9 +44,9 @@ https://golang.org/doc/articles/race_detector.html
 ### Exercise 1
 Given the following program, use the race detector to find and correct the data race.
 
-	// https://play.golang.org/p/r-lOOe5PbI
+	// https://play.golang.org/p/HULjGWClKQ
 
-	// Program for an exercise to fix a race condition.
+	// Fix the race condition in this program.
 	package main
 
 	import (
@@ -64,14 +64,17 @@ Given the following program, use the race detector to find and correct the data 
 		rand.Seed(time.Now().UnixNano())
 	}
 
-	// main is the entry point for all Go programs.
+	// main is the entry point for the application.
 	func main() {
+		// Number of goroutines to use.
+		const grs = 3
+
 		// wg is used to manage concurrency.
 		var wg sync.WaitGroup
-		wg.Add(3)
+		wg.Add(grs)
 
 		// Create three goroutines to generate random numbers.
-		for i := 0; i < 3; i++ {
+		for i := 0; i < grs; i++ {
 			go func() {
 				random(10)
 				wg.Done()
