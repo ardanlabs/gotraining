@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/6MCHII_ILe
+// https://play.golang.org/p/MLzU9Gy_zA
 
 // Create a custom error type called appError that contains three fields, err error,
 // message string and code int. Implement the error interface providing your own message
@@ -21,7 +21,7 @@ package main
 // error interface.
 
 // Declare a method for the appError struct type named Temporary that returns
-// false when the value of the code field is 9.
+// true when the value of the code field is not 9.
 
 // Declare the temporary interface type with a method named Temporary that
 // takes no parameters and returns a bool.
