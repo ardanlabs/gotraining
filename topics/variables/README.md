@@ -16,6 +16,8 @@ https://golang.org/doc/effective_go.html#variables
 
 http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 
+[What's in a name](https://www.youtube.com/watch?v=sFUSP8Au_PE)
+
 ## Code Review
 
 [Declare and initialize variables](example1/example1.go) ([Go Playground](http://play.golang.org/p/6w6hBNE75a))

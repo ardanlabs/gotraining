@@ -39,6 +39,10 @@ https://golang.org/doc/articles/race_detector.html
 
 [Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/k6nGJWXo7e))
 
+## Advanced Code Review
+
+[Interface Based Race Condition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/V7bTCB3Pge))
+
 ## Exercises
 
 ### Exercise 1
