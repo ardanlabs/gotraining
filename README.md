@@ -31,6 +31,18 @@ The material has been designed to be taught in a classroom environment. The code
 * Project Structure and Vendoring
 * Standard Library
 
+## Our Experience
+
+We have taught this class over 40 times to over 1000 students.
+
+We have trained companies such as:
+
+Comcast, Rackspace, The New York Times, Yik Yak, Fidelity, GE, The Economist, Teradata and more.
+
+We have taught all around the world:
+
+US, Canada, Mexico, England and India
+
 ## Before You Come To Class
 
 ### Installing Go
