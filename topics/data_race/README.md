@@ -41,7 +41,7 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Advanced Code Review
 
-[Interface Based Race Condition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/brWaJsfSqn))
+[Interface Based Race Condition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/GcRMWsjeO0))
 
 ## Exercises
 

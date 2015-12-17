@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/brWaJsfSqn
+// https://play.golang.org/p/GcRMWsjeO0
 
 // Sample program to show a more complicated race condition using
 // an interface value. This produces a read to an inteface value after
@@ -33,17 +33,14 @@ func (b *Ben) Speak() bool {
 
 // Jerry is a person who can speak.
 type Jerry struct {
-	field1 *[5]byte
-	field2 int
+	name string
 }
 
 // Speak allows Jerry to say hello. It returns false if the method is
 // called through the interface value after a partial write.
 func (j *Jerry) Speak() bool {
-	name := string((*j.field1)[:])
-
-	if name != "Jerry" {
-		fmt.Printf("Jerry says, \"Hello my name is %s\"\n", name)
+	if j.name != "Jerry" {
+		fmt.Printf("Jerry says, \"Hello my name is %s\"\n", j.name)
 		return false
 	}
 
@@ -54,7 +51,7 @@ func (j *Jerry) Speak() bool {
 func main() {
 	// Create value of Ben and Jerry.
 	ben := &Ben{"Ben"}
-	jerry := &Jerry{&[5]byte{'J', 'e', 'r', 'r', 'y'}, 5}
+	jerry := &Jerry{"Jerry"}
 
 	// Assign the value of type Ben to the interface value.
 	var person Speaker = ben
