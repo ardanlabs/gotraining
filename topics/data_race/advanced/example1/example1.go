@@ -1,16 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/V7bTCB3Pge
+// https://play.golang.org/p/brWaJsfSqn
 
 // Sample program to show a more complicated race condition using
 // an interface value. This produces a read to an inteface value after
 // a partial write.
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // Speaker allows for speaking behavior.
 type Speaker interface {
