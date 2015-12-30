@@ -20,6 +20,8 @@ https://github.com/interagent/http-api-design/blob/master/README.md
 
 http://www.restapitutorial.com/httpstatuscodes.html
 
+http://racksburg.com/choosing-an-http-status-code/
+
 ## Code Review
 
 [Hello World Server](example1/main.go) ([Go Playground](https://play.golang.org/p/vB_ZytmqC1))
