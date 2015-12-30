@@ -41,7 +41,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 	* Waiting on the OS to tell us where the memory is.
 
 ### Cache Hierarchies
-This is a diagram showing the relationship of the cache hierarchy for two processors that each have two cores and each core having two threads. Each core has its own L1 cache that is shared between the threads. The cores share the L2 and L3 caches in this diagram but some architectures, like the one described above from Scott Meyers talk, give each core an individual L2 cache as well.
+This is a diagram showing the relationship of the cache hierarchy for two processors that each have two cores and each core having two threads. The threads share the Level 1 caches. The cores (shaded in the darker gray) have individual Level 1 caches. All cores of the CPU share the higher-level caches. The two processors (the two big boxes shaded in the lighter gray) of course do not share any caches. Some architectures, like the one described above from Scott Meyers talk, give each core an individual L2 cache as well.
 
 ![figure1](figure1.png)
 
