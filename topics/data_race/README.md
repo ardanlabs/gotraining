@@ -13,6 +13,8 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 [CPU Caches and Why You Care (30:09-35:40)](https://youtu.be/WDIkqP4JbkE?t=1809)
 
+![figure1](figure1.png)
+
 ## Links
 
 http://blog.golang.org/race-detector
