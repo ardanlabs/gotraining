@@ -74,7 +74,7 @@ This is subject to be different in different processors. For this content, the f
 
 [How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)
 
-[Memory part 2: CPU caches](http://lwn.net/Articles/252125)
+[Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)
 
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)
 
