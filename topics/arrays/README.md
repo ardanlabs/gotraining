@@ -80,6 +80,8 @@ http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-
 
 [Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)
 
+[Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)
+
 ## Code Review
 
 [Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/2D24t6fbW_))
