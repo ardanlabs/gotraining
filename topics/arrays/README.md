@@ -17,25 +17,27 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 ## CPU Cache Notes
 
-* CPU Caches works by caching memory on cache lines.
-* On our 64 bit processors, the cache line will be 64 bytes.
-* Cache lines are moved and stored in L1, L2 and L3 caches.
-* Memory in L1 and L2 caches is also in L3 cache.
-* Both data and instructions are stored in these caches.
-* By default all data read or written by the CPU cores is stored in the cache.
-* When memory content is needed by the processor the entire cache line is loaded into the L1d.
-* CPU access L1 cache, cached data is pushed down to L2 and then L3.
+* CPU caches works by caching main memory on cache lines.
+* Cache lines today are either 32 or 64 bytes wide depending on the hardware.
+* Cores do not access main memory directly. They tend to only have access their local caches.
+* Both data and instructions are stored in the caches.
+* Cache lines are shuffled down L1->L2->L3 as new cache lines need to be stored in the caches.
 * Hardware likes to traverse data and instructions linearly along cache lines.
+
+* Main memory is built on relatively fast cheap memory. Caches are built on very fast expensive memory.
 * Access to main memory is incredibly slow, we need the cache.
-	* Accessing one byte from main memory will cause an entire cache line to be read.
+	* Accessing one byte from main memory will cause an entire cache line to be read and cached.
 	* Writes to one byte in a cache line requires the entire cache line to be written.
+
 * Small = Fast
 	* Compact, well localized code that fits in cache is fastest.
 	* Compact data structures that fit in cache are fastest.
 	* Traversals touching only cached data is the fastest.
+
 * Predictable access patterns matter.
 	* Provide regular patterns of memory access.
 	* Hardware can make better predictions about required memory.
+
 * Cache misses can result in TLB cache misses as well.
 	* Cache of translations of a virtual address to a physical address.
 	* Waiting on the OS to tell us where the memory is.
