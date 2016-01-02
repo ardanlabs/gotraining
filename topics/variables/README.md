@@ -8,6 +8,7 @@ Variables are at the heart of the language and provide the ability to read from 
 * Code primarily allocates, reads and writes to memory.
 * Understanding type is crutial to writing good code and understanding code.
 * If you don't understand the data, you don't understand the problem.
+* You understand the problem better by understanding the data.
 * When variables are being declared to their zero value, use the keyword var.
 * When variables are being declared and initialized, use the short variable declaration operator.
 

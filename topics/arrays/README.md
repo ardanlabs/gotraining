@@ -17,6 +17,9 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 ## CPU Cache Notes
 
+* If you don't understand the data, you don't understand the problem.
+* If you don't understand the hardware, you can't reason about the cost of solving the problem.
+
 * CPU caches works by caching main memory on cache lines.
 * Cache lines today are either 32 or 64 bytes wide depending on the hardware.
 * Cores do not access main memory directly. They tend to only have access their local caches.
