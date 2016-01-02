@@ -23,8 +23,8 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 * Both data and instructions are stored in the caches.
 * Cache lines are shuffled down L1->L2->L3 as new cache lines need to be stored in the caches.
 * Hardware likes to traverse data and instructions linearly along cache lines.
-
 * Main memory is built on relatively fast cheap memory. Caches are built on very fast expensive memory.
+
 * Access to main memory is incredibly slow, we need the cache.
 	* Accessing one byte from main memory will cause an entire cache line to be read and cached.
 	* Writes to one byte in a cache line requires the entire cache line to be written.
@@ -35,6 +35,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 	* Traversals touching only cached data is the fastest.
 
 * Predictable access patterns matter.
+	* Whenever it is practical, you want to employ a linear array traversal.
 	* Provide regular patterns of memory access.
 	* Hardware can make better predictions about required memory.
 
@@ -69,11 +70,15 @@ This is subject to be different in different processors. For this content, the f
 
 [Scott Meyers: Cpu Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)
 
-http://www.akkadia.org/drepper/cpumemory.pdf
+[What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)
 
 http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips
 
 [Memory part 2: CPU caches](http://lwn.net/Articles/252125)
+
+[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)
+
+[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)
 
 ## Code Review
 
