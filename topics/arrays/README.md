@@ -57,15 +57,21 @@ This is subject to be different in different processors. For this content, the f
 		32KB I-Cache
 		32KB D-Cache
 		2 HW Threads
+		4 cycles of latency
 
 	L2 - 256KB Cache (Per Core)
 		Holds both Instructions and Data
 		2 HW Threads
+		11 cycles of latency
 
 	L3 - 8MB Cache
 		Holds both Instructions and Data
 		Shared across all 4 cores
 		8 HW Threads
+		39 cycles of latency
+
+	Main Memory
+		107 cycle of latency
 
 ## Links
 
