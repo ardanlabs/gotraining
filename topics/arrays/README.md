@@ -66,13 +66,13 @@ This is subject to be different in different processors. For this content, the f
 
 ## Links
 
-[Scott Meyers: Cpu Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)
+[Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)
 
-[Scott Meyers: Cpu Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)
+[Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)
 
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)
 
-http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips
+[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)
 
 [Memory part 2: CPU caches](http://lwn.net/Articles/252125)
 
