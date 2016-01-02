@@ -22,25 +22,27 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 Sandi Metz : Less - The Path to Better Design:  
 https://vimeo.com/26330100
 
-Think of a package as a component that accepts a set of inputs and provides a set of predictable outputs. It provides a semantic set of functionality. Focus more on the behavior and less on the concrete.
+* If you don't understand the data, you don't understand the problem.
 
-Package dependency is a choice and must be thought about during the design of the application. Design the source tree and import choices as part of the design of the architecture.
+* Think of a package as a component that accepts a set of data inputs and provides a set of predictable data outputs. It provides a semantic set of functionality. Focus more on the behavior and less on the concrete.
 
-Packages must only depend on other packages that are more stable than itself.
+* Package dependency is a choice and must be thought about during the design of the application. Design the source tree and import choices as part of the design of the architecture.
 
-If a package will be a dependency for other packages, it needs to have an API that reveals as little as possible about the package.
+* Packages must only depend on other packages that are more stable than itself.
 
-Uncertainty is not a license to guess but a directive to decouple.
+* If a package will be a dependency for other packages, it needs to have an API that reveals as little as possible about the package.
 
-A package API must consider how changes to itself will affect changes to those packages that depend on it. We must recognize and minimize cascading changes.
+* Uncertainty is not a license to guess but a directive to decouple.
 
-When dependencies are weakened and the coupling is loosened, stability is improved and cascading changes are minimized. Allowing for architectures that can better adapt to change over time.
+* A package API must consider how changes to itself will affect changes to those packages that depend on it. We must recognize and minimize cascading changes.
 
-Don’t guess what changes could come, guess what could change.
+* When dependencies are weakened and the coupling is loosened, stability is improved and cascading changes are minimized. Allowing for architectures that can better adapt to change over time.
 
-Knowledge creates dependencies, unstable dependencies increase risk, uncertainty is your guide, loosen coupling so you can reduce cost.
+* Don’t guess what changes could come, guess what could change.
 
-Interfaces provide the highest form of decoupling when the code working with the interfaces does not have any knowledge of the concrete type values stored within them. The concrete types should be opaque to the code using the interfaces. 
+* Knowledge creates dependencies, unstable dependencies increase risk, uncertainty is your guide, loosen coupling so you can reduce cost.
+
+* Interfaces provide the highest form of decoupling when the code working with the interfaces does not have any knowledge of the concrete type values stored within them. The concrete types should be opaque to the code using the interfaces. 
 
 ## Code Review
 
