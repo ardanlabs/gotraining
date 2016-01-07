@@ -19,7 +19,7 @@ func main() {
 	var numbers []int
 
 	// Append numbers to the slice.
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		numbers = append(numbers, i*10)
 	}
 
