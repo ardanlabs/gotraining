@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/b2MN-16K_8
+// https://play.golang.org/p/8XNVqdVYV2
 
 // Declare an interface named speaker with a method named speak. Declare a struct
 // named english that represents a person who speaks english and declare a struct named
