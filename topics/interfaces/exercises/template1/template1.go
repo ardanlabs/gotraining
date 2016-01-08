@@ -46,5 +46,5 @@ func main() {
 	// the speaker variable.
 	// Call the speak method from the speaker variable.
 
-	// Call the sayHello function passing each concrete type.
+	// Call the sayHello function with new values of each concrete type.
 }
