@@ -1,17 +1,29 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/i4rne0QM2F
+// https://play.golang.org/p/0WWW4Lwok4
 
 /*
+	https://blog.golang.org/strings
+
 	Go source code is always UTF-8.
 	A string holds arbitrary bytes.
 	A string literal, absent byte-level escapes, always holds valid UTF-8 sequences.
 	Those sequences represent Unicode code points, called runes.
 	No guarantee is made in Go that characters in strings are normalized.
-	Multiple runes can become different characters.
 
-	https://blog.golang.org/strings
+	----------------------------------------------------------------------------
+
+	Multiple runes can represent different characters:
+
+	The lower case grave-accented letter à is a character, and it's also a code
+	point (U+00E0), but it has other representations.
+
+	We can use the "combining" grave accent code point, U+0300, and attach it to
+	the lower case letter a, U+0061, to create the same character à.
+
+	In general, a character may be represented by a number of different sequences
+	of code points (runes), and therefore different sequences of UTF-8 bytes.
 */
 
 // Sample program to show how strings have a UTF-8 encoded byte array.
