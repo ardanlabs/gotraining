@@ -1,7 +1,18 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/W3c_iWsvqj
+// https://play.golang.org/p/i4rne0QM2F
+
+/*
+	Go source code is always UTF-8.
+	A string holds arbitrary bytes.
+	A string literal, absent byte-level escapes, always holds valid UTF-8 sequences.
+	Those sequences represent Unicode code points, called runes.
+	No guarantee is made in Go that characters in strings are normalized.
+	Multiple runes can become different characters.
+
+	https://blog.golang.org/strings
+*/
 
 // Sample program to show how strings have a UTF-8 encoded byte array.
 package main
