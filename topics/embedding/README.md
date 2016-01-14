@@ -22,7 +22,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Embedded types and interfaces](example3/example3.go) ([Go Playground](https://play.golang.org/p/_MiwwXZbVI))
 
-[Outer and inner type interface implementations](example4/example4.go) ([Go Playground](https://play.golang.org/p/QSjaJocj5S))
+[Outer and inner type interface implementations](example4/example4.go) ([Go Playground](https://play.golang.org/p/7FJeSczdyf))
 
 ## Exercises
 
