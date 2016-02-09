@@ -13,6 +13,8 @@ Slices are an incredibly important data structure in Go. They form the basis for
 
 http://blog.golang.org/go-slices-usage-and-internals
 
+https://blog.golang.org/strings
+
 http://blog.golang.org/slices
 
 http://www.goinggo.net/2013/08/understanding-slices-in-go-programming.html
