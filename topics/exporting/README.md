@@ -13,6 +13,8 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 
 http://blog.golang.org/organizing-go-code
 
+http://blog.golang.org/package-names
+
 http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html
 
 http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
