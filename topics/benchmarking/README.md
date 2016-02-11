@@ -10,9 +10,13 @@ Go has support for both testing and debugging. This includes profiling and bench
 
 [Caching](caching/README.md)
 
+[Profiling](profiling/README.md)
+
 ## Links
 
 http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go
+
+[Profiling & Optimizing in Go / Brad Fitzpatrick](https://www.youtube.com/watch?v=xxDZuPEgbBU)
 
 ## Exercises
 
