@@ -1,9 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/rhf8k-7OT8
+// https://play.golang.org/p/V2IfRAWfu7
 
-// Create a program that declares two anonymous functions. Once that counts up to
+// Create a program that declares two anonymous functions. One that counts up to
 // 100 from 0 and one that counts down to 0 from 100. Display each number with an
 // unique identifier for each goroutine. Then create goroutines from these functions
 // and don't let main return until the goroutines complete.
