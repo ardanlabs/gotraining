@@ -18,6 +18,8 @@ http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go
 
 [Profiling & Optimizing in Go / Brad Fitzpatrick](https://www.youtube.com/watch?v=xxDZuPEgbBU)
 
+[Benchstat computes and compares statistics about benchmarks](https://github.com/rsc/benchstat)
+
 ## Exercises
 
 ### Exercise 1
