@@ -1,12 +1,14 @@
 ## Composition
 
-Composition goes beyond the mechanics of type embedding. It's a design pattern we can leverage in Go to build larger programs from smaller parts. These smaller parts come from the declaration and implementation of types that have a single focus. Programs that are architected with composition in mind have a better chance to grow and adapt to changes.
+Composition goes beyond the mechanics of type embedding and is more than just a paradigm. It is the key for maintaining stability in your software by having the ability to adapt to the data and transformation changes that are coming.
 
 ## Notes
 
-* Declare types and behavior with composition in mind.
-* Composition is like building software with lego blocks.
 * This is much more than the mechanics of type embedding.
+* Declare types and implement workflows with composition in mind.
+* Understand the problem you are trying to solve first. This means understanding the data.
+* The goal is to reduce and minimize cascading changes across your software.
+* Interfaces provide the highest form composition.
 
 ## Links
 

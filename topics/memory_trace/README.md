@@ -10,6 +10,8 @@ There is no way to identify specifically in the code where a leak is occuring. W
 
 [http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)
 
+[https://deferpanic.com/blog/understanding-golang-memory-usage](Understanding Go memory usage)
+
 To validate if a memory leak is truly occuring use the GODEBUG environmental variable. Setting gctrace=1 causes the garbage collector to emit a single line to standard error at each collection, summarizing the amount of memory collected and the length of the pause. Setting gctrace=2 emits the same summary but also repeats each collection. The format of this line is subject to change:
 
     export GODEBUG=gctrace=1
@@ -59,12 +61,25 @@ We can get detailed information about the heap using the pprof support. We can a
 
     Now compare both snapshots against the binary and get into the pprof tool:
 
-		go tool pprof -inuse_objects -base base.heap /PATH_TO_BINARY/finding_leaks current.heap
+		go tool pprof -alloc_space -base base.heap /PATH_TO_BINARY/finding_leaks current.heap
+
+        -inuse_space  : Display in-use memory size
+        -inuse_objects: Display in-use object counts
+        -alloc_space  : Display allocated memory size
+        -alloc_objects: Display allocated object counts
 
 ### Running pprof Commands
 
 Run the `top` command to see the functions allocating the most objects:
 
+    Using -alloc_space
+    (pprof) top
+    1.88GB of 1.88GB total (  100%)
+          flat  flat%   sum%        cum   cum%
+        1.88GB   100%   100%     1.88GB   100%  main.main.func1
+             0     0%   100%     1.88GB   100%  runtime.goexit
+
+    Using -inuse_space
     (pprof) top
     3182575 of 3182575 total (  100%)
     Dropped 5 nodes (cum <= 15912)
@@ -74,6 +89,24 @@ Run the `top` command to see the functions allocating the most objects:
 
 Run the `list` command against the goroutine declared in main:
 
+    Using -alloc_space
+    (pprof) list main.main.func1
+    Total: 1.88GB
+    ROUTINE ======================== main.main.func1 in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/memory_trace/trace.go
+        1.88GB     1.88GB (flat, cum)   100% of Total
+             .          .     19:   // to be constantly shuffled around, this becomes very expensive.
+             .          .     20:   go func() {
+             .          .     21:       m := make(map[int]int)
+             .          .     22:
+             .          .     23:       for i := 0; ; i++ {
+        1.88GB     1.88GB     24:           m[i] = i
+             .          .     25:       }
+             .          .     26:   }()
+             .          .     27:
+             .          .     28:   // Start a listener for the pprof support.
+             .          .     29:   go func() {
+
+    Using -inuse_space
     (pprof) list main.main.func1
     Total: 3182575
     ROUTINE ======================== main.main.func1 in /PATH_TO_BINARY/finding_leaks/leak.go

@@ -24,27 +24,31 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 Sandi Metz : Less - The Path to Better Design:  
 https://vimeo.com/26330100
 
-* If you don't understand the data, you don't understand the problem.
+* If you don't understand the data you are working with, you don't understand the problem you are trying to solve.
 
-* Think of a package as a component that accepts a set of data inputs and provides a set of predictable data outputs. It provides a semantic set of functionality. Focus more on the behavior and less on the concrete.
+* Every problem is a data transformation problem at heart and each function, method and workflow must focus on implementing their specific data transformation.
 
-* Package dependency is a choice and must be thought about during the design of the application. Design the source tree and import choices as part of the design of the architecture.
+* If your data is changing, your problem is changing.
 
-* Packages must only depend on other packages that are more stable than itself.
+* When your problem is changing, the data transformations you have implemented need to change.
 
-* If a package will be a dependency for other packages, it needs to have an API that reveals as little as possible about the package.
+* Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
 
-* Uncertainty is not a license to guess but a directive to decouple.
+* Packages in Go provide API boundaries that should focus on solving one specific problem or a highly focused group of problems.
 
-* A package API must consider how changes to itself will affect changes to those packages that depend on it. We must recognize and minimize cascading changes.
+* In many languages folders are used to organize code, in Go folders are used to organize API's.
 
-* When dependencies are weakened and the coupling is loosened, stability is improved and cascading changes are minimized. Allowing for architectures that can better adapt to change over time.
+* You must do your best to guess what data could change over time and consider how these changes will affect the software.
 
-* Don’t guess what changes could come, guess what could change.
+* You must understand how changes to the data for a particular package affects the other packages that depend on it.
 
-* Knowledge creates dependencies, unstable dependencies increase risk, uncertainty is your guide, loosen coupling so you can reduce cost.
+* When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
 
-* Interfaces provide the highest form of decoupling when the code working with the interfaces does not have any knowledge of the concrete type values stored within them. The concrete types should be opaque to the code using the interfaces. 
+* Uncertainty about the data is not a license to guess but a directive to decouple.
+
+* Decoupling means reducing the amount of intimate knowledge packages must have about each other to be used together.
+
+* Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
 
 ## Code Review
 
