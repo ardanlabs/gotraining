@@ -27,7 +27,7 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)
 
-### Escpae Analysis and Inlining
+### Escape Analysis and Inlining
 
 [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
 
