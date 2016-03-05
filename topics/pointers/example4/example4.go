@@ -6,7 +6,7 @@
 
 // https://play.golang.org/p/3qE0uUOnTv
 
-// Sample program to show varaibles stay on or escape from the stack.
+// Sample program to show variables stay on or escape from the stack.
 package main
 
 import "fmt"
