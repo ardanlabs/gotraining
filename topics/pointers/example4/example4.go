@@ -4,7 +4,7 @@
 // Escape Analysis Flaws:
 // https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
 
-// https://play.golang.org/p/3qE0uUOnTv
+// https://play.golang.org/p/KGQS9dhSmT
 
 // Sample program to show variables stay on or escape from the stack.
 package main
