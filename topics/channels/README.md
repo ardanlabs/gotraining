@@ -3,7 +3,7 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 
 ## Notes
 
-* Unbuffered channels provide a guarentee that data has been exchanged at some instant.
+* Unbuffered channels provide a guarantee that data has been exchanged at some instant.
 * Buffered channels provide great support for managing goroutines and resources.
 * Closed channels can provide a system wide mechanism for notifications.
 * A send on an unbuffered channel happens before the corresponding receive from that channel completes.
