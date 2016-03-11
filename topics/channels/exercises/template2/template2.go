@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/JRDwcCdBDi
+// https://play.golang.org/p/Ki3X_YIny6
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -13,36 +13,30 @@ package main
 
 // Add Imports.
 
-// Declare a constant and set the value for the number of goroutines.
+// Declare constants for number of goroutines and capacity.
 
-// Declare a constant and set the value for the number of buffers.
+// Declare a wait group variable.
 
-// Declare a wait group.
-
-// Declare a buffered channel of type string and initialize it based on
-// the constant you declared above.
-
-// Declare a function for the goroutine that will process work
-// from the buffered channel.
-func worker(worker int) {
-	// Receive a string from the channel.
-
-	// Display the string.
-
-	// Send the string back into the channel.
-
-	// Tell main this goroutine is done.
-}
+// Declare a buffered channel to manage strings
+// with a capacity.
+var resources = make(chan string, capacity)
 
 // main is the entry point for the application.
 func main() {
-	// Increment the wait group for the number of
-	// goroutines based on the value of the constant.
+	// Launch the goroutines to handle the work.
+	// Handle the Done when they are finished.
 
-	// Create the number of goroutines based on the
-	// value of the constant.
-
-	// Add strings in the buffered channel.
+	// Add the strings to the buffered channel.
 
 	// Wait for all the work to get done.
+}
+
+// worker is launched as a goroutine to process work from
+// the buffered channel.
+func worker( /* parameters */ ) {
+	// Receive a string from the channel.
+
+	// Display the value.
+
+	// Place the string back.
 }
