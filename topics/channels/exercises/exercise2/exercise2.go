@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/AUViIO0quk
+// https://play.golang.org/p/YPAwHnkNcJ
 
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
@@ -32,7 +32,10 @@ func main() {
 	// Launch goroutines to handle the work.
 	wg.Add(goroutines)
 	for gr := 1; gr <= goroutines; gr++ {
-		go worker(gr)
+		go func() {
+			worker(gr)
+			wg.Done()
+		}()
 	}
 
 	// Add the strings.
@@ -55,7 +58,4 @@ func worker(worker int) {
 
 	// Place the string back.
 	resources <- value
-
-	// Tell main we are done.
-	wg.Done()
 }

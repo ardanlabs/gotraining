@@ -42,12 +42,12 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the integer equals ten, terminate the program cleanly.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/pkWv2bBYRf)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/IUnk_NNF5N))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/G9eY00v4aP))
 
 ### Exercise 2
 Write a program that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate.
 
 [Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/JRDwcCdBDi)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/AUViIO0quk))
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/YPAwHnkNcJ))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
