@@ -7,10 +7,6 @@
 [Opening Slide Deck](intro/opening/slide1.md)  
 [Quick Tour](quick_tour)
 
-### Go 102 by Tim Blair
-[Repo](https://github.com/timblair/go-102-workshop)  
-[Slide Deck](https://speakerdeck.com/timblair/go-102-a-workshop)
-
 ### Hardcore Go
 
 This is 5 days of material for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. We believe these classes are perfect for anyone who wants a jump start in learning Go or who wants a more thorough understanding of the language and its internals.
@@ -22,5 +18,16 @@ This is 5 days of material for any intermediate-level developer who has some exp
 This class covers the key architectural and design aspects that distinguish Go from other imperative languages, and how these characteristics make Go a strong choice for applications that demand fast development, reliability, and scalability.
 
 [One-Day Overview](one-day-overview/README.md)
+
+### Go 102 by Tim Blair
+[Repo](https://github.com/timblair/go-102-workshop)  
+[Slide Deck](https://speakerdeck.com/timblair/go-102-a-workshop)
+
+### Todd McLeod Go Training
+
+[Repo](https://github.com/GoesToEleven/GolangTraining)  
+[You Tube](https://www.youtube.com/user/toddmcleod)  
+[Udemy - Fee](https://www.udemy.com/learn-how-to-code)  
+[Lynda.com](http://www.lynda.com/Todd-McLeod/5465427-1.html)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
