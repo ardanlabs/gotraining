@@ -23,6 +23,8 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 ## Links
 
+[The Go Memory Model](https://golang.org/ref/mem)
+
 http://blog.golang.org/race-detector
 
 http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html

@@ -1,10 +1,11 @@
 ## Channels
-Channels are a reference type that provide a safe mechanism to share data between goroutines. Unbuffered channel give a guarantee of delivery that data has passed from one goroutine to the other. Buffered channels allow for data to pass through the channel without such guarantees. Unbuffered channels require both a sending and receiving goroutine to be ready at the same instant before any send or receive operation can complete. Buffered channels don't force goroutines to be ready at the same instant to perform sends and receives.
+Channels are a reference type that provide a safe mechanism to share data between goroutines. Unbuffered channel provide a 100% guarantee of delivery that data has passed from one goroutine to the other. Buffered channels allow for data to pass through the channel without such guarantees. Unbuffered channels require both a sending and receiving goroutine to be ready at the same instant before any send or receive operation can complete. Buffered channels don't force goroutines to be ready at the same instant to perform sends and receives.
 
 ## Notes
 
-* Unbuffered channels provide a guarantee that data has been exchanged at some instant.
-* Buffered channels provide great support for managing goroutines and resources.
+* Use channels to orchestrate goroutines, not to synchronize access to shared state.
+* Unbuffered channels provide a 100% guarantee that data has been exchanged at some point in space and time.
+* Buffered channels provide a way of maintaining continuity. Don't use them just for performance.
 * Closed channels can provide a system wide mechanism for notifications.
 * A send on an unbuffered channel happens before the corresponding receive from that channel completes.
 * A receive from an unbuffered channel happens before the send on that channel completes.
@@ -22,6 +23,8 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 
 ## Links
 
+[Channel Communication](https://golang.org/ref/mem#tmp_7)
+
 http://blog.golang.org/share-memory-by-communicating
 
 http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
@@ -35,6 +38,10 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 [Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](http://play.golang.org/p/_nAP4DKQpL))
 
 [Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/OwIUceuKrM))
+
+## Advanced Code Review
+
+[Channel communication ordering](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/xLCzalG2rS))
 
 ## Exercises
 
