@@ -2,6 +2,20 @@
 
 Using benchmarks you can profile your programs and see exactly where your performance or memory is being taken.
 
+## Profiling Commands
+
+   CPU Profiling
+   go test -run none -bench . -cpuprofile cpu.out
+   go tool pprof profiling.test cpu.out
+
+   Memory Profiling
+   go test -run none -bench . -memprofile mem.out
+   go tool pprof --alloc_space profiling.test mem.out
+
+   Profile Commands
+   top --cum
+   list profiling.getValue
+
 ## Profile Information
 
 Look at how much time lines of code are taking:
