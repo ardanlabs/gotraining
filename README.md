@@ -35,6 +35,8 @@ The material has been designed to be taught in a classroom environment. The code
 
 ## Important Reading
 
+[Go Documentation References](https://golang.org/doc/#references)
+
 [An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)
 
 [Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)
