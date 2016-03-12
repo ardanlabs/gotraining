@@ -3,7 +3,7 @@
 Using benchmarks you can profile your programs and see exactly where your performance or memory is being taken.
 
 ## Profiling Commands
-
+```
    CPU Profiling
    go test -run none -bench . -cpuprofile cpu.out
    go tool pprof profiling.test cpu.out
@@ -15,6 +15,7 @@ Using benchmarks you can profile your programs and see exactly where your perfor
    Profile Commands
    top --cum
    list profiling.getValue
+```
 
 ## Profile Information
 
