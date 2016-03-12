@@ -9,12 +9,6 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 * We import packages to access exported identifiers.
 * Any package can use a value of an unexported type.
 
-## An Interview with Brian Kernighan
-
-http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html
-
-_I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help._ - July 2000
-
 ## Links
 
 http://blog.golang.org/organizing-go-code
@@ -24,6 +18,12 @@ http://blog.golang.org/package-names
 http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html
 
 http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
+
+## An Interview with Brian Kernighan
+
+http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html
+
+_I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help._ - July 2000
 
 ##  Package Design
 
