@@ -7,11 +7,18 @@ Using benchmarks you can profile your programs and see exactly where your perfor
    CPU Profiling
    go test -run none -bench . -cpuprofile cpu.out
    go tool pprof profiling.test cpu.out
-
+```
+```
    Memory Profiling
    go test -run none -bench . -memprofile mem.out
    go tool pprof --alloc_space profiling.test mem.out
 
+   -inuse_space  : Display in-use memory size
+   -inuse_objects: Display in-use object counts
+   -alloc_space  : Display allocated memory size
+   -alloc_objects: Display allocated object counts
+```
+```
    Profile Commands
    top --cum
    list profiling.getValue
