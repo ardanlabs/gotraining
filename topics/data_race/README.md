@@ -11,7 +11,7 @@ A data race is when two or more goroutines attempt to read and write to the same
 ## Cache Coherency and False Sharing
 This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
-[CPU Caches and Why You Care (30:09-35:40)](https://youtu.be/WDIkqP4JbkE?t=1809)
+[CPU Caches and Why You Care (30:09-38:30)](https://youtu.be/WDIkqP4JbkE?t=1809)
 
 ![figure1](figure1.png)
 
