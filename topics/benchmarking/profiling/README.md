@@ -3,13 +3,15 @@
 Using benchmarks you can profile your programs and see exactly where your performance or memory is being taken.
 
 ## Profiling Commands
+
+#### CPU Profiling
 ```
-   CPU Profiling
    go test -run none -bench . -cpuprofile cpu.out
    go tool pprof profiling.test cpu.out
 ```
+
+#### Memory Profiling
 ```
-   Memory Profiling
    go test -run none -bench . -memprofile mem.out
    go tool pprof --alloc_space profiling.test mem.out
 
@@ -18,8 +20,9 @@ Using benchmarks you can profile your programs and see exactly where your perfor
    -alloc_space  : Display allocated memory size
    -alloc_objects: Display allocated object counts
 ```
+
+#### Profile Commands
 ```
-   Profile Commands
    top --cum
    list profiling.getValue
 ```
