@@ -33,17 +33,27 @@ The material has been designed to be taught in a classroom environment. The code
 * Project Structure and Vendoring
 * Standard Library
 
+## Important Reading
+
+[An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)
+
+[Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)
+
+[Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)
+
+[A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)
+
 ## Our Experience
 
-We have taught this class over 40 times to over 1000 students.
+We have taught this class to thousands of students for almost two years.
 
 We have trained companies such as:
 
-Comcast, Rackspace, The New York Times, Yik Yak, Fidelity, GE, The Economist, Teradata and more.
+Comcast, Rackspace, The New York Times, Yik Yak, Fidelity, GE, CISCO, The Economist, Teradata and more.
 
 We have taught all around the world:
 
-US, Canada, Mexico, England and India
+US, Canada, Mexico, England, Amsterdam and India
 
 ## Before You Come To Class
 

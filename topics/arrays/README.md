@@ -85,6 +85,12 @@ This is subject to be different in different processors. For this content, the f
 
 [Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)
 
+[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)
+
+[Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)
+
+[Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law)
+
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)
 
 [Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)
