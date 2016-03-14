@@ -23,11 +23,11 @@ This class covers the key architectural and design aspects that distinguish Go f
 [Repo](https://github.com/timblair/go-102-workshop)  
 [Slide Deck](https://speakerdeck.com/timblair/go-102-a-workshop)
 
-### Todd McLeod Go Training
+### Todd McLeod's Go Training
 
-[Repo](https://github.com/GoesToEleven/GolangTraining)  
+[Go Fundamentals](https://github.com/GoesToEleven/GolangTraining)  
+[Go Web Development](https://github.com/GoesToEleven/golang-web)  
 [You Tube](https://www.youtube.com/user/toddmcleod)  
-[Udemy - Fee](https://www.udemy.com/learn-how-to-code)  
-[Lynda.com](http://www.lynda.com/Todd-McLeod/5465427-1.html)
+[Udemy - Fee](https://www.udemy.com/learn-how-to-code/?couponCode=learngo)  
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
