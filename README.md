@@ -128,7 +128,7 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 ## Twitter
 
 Kelsey Hightower ([‏@kelseyhightower](https://twitter.com/kelseyhightower/status/673359937909592064))  
-_"Day 1 of the Hardcore Go workshop was outstanding! Big shoutout to @intel, @golangbridge, and @goinggodotnet for bringing this to Portland._"
+_"Day 1 of the [Ultimate] Go workshop was outstanding! Big shoutout to @intel, @golangbridge, and @goinggodotnet for bringing this to Portland._"
 
 Katrina Owen ([@kytrinyx](https://twitter.com/kytrinyx/status/673360428278222848))  
 _"OH: "You thought you knew Go..." (You do Go? You want to do Go?) You should take this workshop. Seriously.) "_
@@ -138,7 +138,10 @@ _"Should be mentioned that though I am no expert, I have been using Go for about
 
 ## Testimonials
 
-Shalab Goel, Ph.D.
+Paul Garvey, General Electric  
+_"Looking back I am grateful I took the GoLang training course. I had planned to just buy a few books and learned it on my own. In retrospect that would have been a bad decision as I would missed out on all the pitfalls, best practices, practical exercises and discussions the instructor imparted from his years of experience in the field, writing a book and blogging with other gophers. In the end I felt I learn more in 3 days then I could reading books and learning GoLang on my own and all my colleagues who took the course all share this view. We also share the view that Bill the instructor brought an enthusiasm and energy to the course that made a really technical course easy to learn. I would recommend anyone who want to learn Go to sign up with Mr Kennedy. At the end of the course you will feel like you are ready to rewrite all your old apps in Go :-)_"
+
+Shalab Goel, Ph.D.  
 _"It was a pleasure taking this course — learning lot of "dry" stuff in such animated and enthusiastic environment. The exercises were spot on for building what you called as "memory muscle. I have good amount of background in conventional multithreaded and distributed environments, but I have not put that knowledge to use more recently; so it was good refresher from that point of view as well. From Yuck to completely Wow-ed is how I will like to describe my respect for Go within three days. I knew nothing about GO before the course."_
 
 Geoff Clitheroe ([@gclitheroe](https://twitter.com/gclitheroe))  

@@ -2,7 +2,7 @@
 
 In this class, we will cover the key architectural and design aspects that distinguish Go from other imperative languages, including Go's approach to object oriented programming and concurrency. We will also learn how these characteristics make Go a strong choice for applications that demand fast development, reliability, and scalability.
 
-Full lesson material, taught over multiple two-day courses, can be found in the [Hardcore Go section](../hardcorego/README.md). Please see the [gotraining README](../../README.md) for contact information.
+Full lesson material, taught over multiple two-day courses, can be found in the [Ultimate Go section](../ultimate/README.md). Please see the [gotraining README](../../README.md) for contact information.
 
 Examples marked with an asterisk are from [golang.org](http://golang.org/), provided under a [BSD license](https://golang.org/LICENSE).
 
