@@ -14,8 +14,7 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 ## CPU Caches
 This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
-[CPU Caches and Why You Care (18:50-20:30)](https://youtu.be/WDIkqP4JbkE?t=1129)
-
+[CPU Caches and Why You Care (18:50-20:30)](https://youtu.be/WDIkqP4JbkE?t=1129)  
 [CPU Caches and Why You Care (44:36-45:40)](https://youtu.be/WDIkqP4JbkE?t=2676)
 
 ## CPU Cache Notes
