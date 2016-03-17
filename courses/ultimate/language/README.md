@@ -21,8 +21,8 @@ This is a class for any intermediate-level developer who has some experience wit
 [Interfaces](../../../topics/interfaces/README.md) | 
 [Embedding](../../../topics/embedding/README.md)
 
-#### Exporting
-[Exporting](../../../topics/exporting/README.md)
+#### Packaging / Exporting
+[Packaging/Exporting](../../../topics/exporting/README.md)
 
 #### Nature of Types
 [Receiver Choices](../../../topics/receiver_choices/README.md)

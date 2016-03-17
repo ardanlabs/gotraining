@@ -1,4 +1,4 @@
-## Exporting
+## Packaging / Exporting
 
 Packages contain the basic unit of compiled code. They define a scope for the indentifiers that are declared within them. Learning how to package our code is vital because exported identifiers become part of the packages API. Stable and useable API's are incredibily important.
 
@@ -27,10 +27,16 @@ _I think that the real problem with C is that it doesn't give you enough mechani
 
 ##  Package Design
 
-**Sandi Metz : Less - The Path to Better Design:**  
-https://vimeo.com/26330100
+#### Mike Action : Data-Oriented Design and C++
+https://www.youtube.com/watch?v=rX0ItVEVjHc
 
 * If you don't understand the data you are working with, you don't understand the problem you are trying to solve.
+
+* If you don't understand the cost of solving the problem, you can't reason about the problem.
+
+* If you don't understand the hardware, you can't reason about the cost of solving the problem.
+
+* Solving problems you don't have, creates more problems you now do.
 
 * Every problem is a data transformation problem at heart and each function, method and workflow must focus on implementing their specific data transformation.
 
@@ -38,13 +44,39 @@ https://vimeo.com/26330100
 
 * When your problem is changing, the data transformations you have implemented need to change.
 
-* You must do your best to guess what data could change over time and consider how these changes will affect the software.
+#### Scott Myers : The Most Important Design Guideline
+https://www.youtube.com/watch?v=5tg1ONG18H8
 
-* Uncertainty about the data is not a license to guess but a directive to decouple.
+* Make Interfaces easy to use correctly and hard to use incorrectly.
+
+* Principle of least astonishment.
+	* Keep the expectation clear, allows users to guess correctly.
+	* Take advantage of what people already know.
+	* Behavior should maintain a level of expectation.
+
+* Choose good names.
+	* Names are the interface.
+	* Give a lot of thought to the names you use.
+
+* Be consistent.
+
+* Document before using.
+	* Test driven design.
+	* This is identify problems early on.
+
+* Try to minimize user mistakes with the API.
+	* Trying to constrain values can create readability issues.
+	* Minimize choices.
+
+#### Decoupling Guidelines For Go
 
 * In many languages folders are used to organize code, in Go folders are used to organize API's (packages).
 
 * Packages in Go provide API boundaries that should focus on solving one specific problem or a highly focused group of problems.
+
+* You must do your best to guess what data could change over time and consider how these changes will affect the software.
+
+* Uncertainty about the data is not a license to guess but a directive to decouple.
 
 * You must understand how changes to the data for a particular package affects the other packages that depend on it.
 
@@ -55,39 +87,6 @@ https://vimeo.com/26330100
 * Decoupling means reducing the amount of intimate knowledge packages must have about each other to be used together.
 
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
-
-**Scott Myers : The Most Important Design Guideline:**  
-https://www.youtube.com/watch?v=5tg1ONG18H8
-
-* Make Interfaces easy to use correctly and hard to use incorrectly.
-
-* Principle of least astonishment.
-	
-	* Keep the expectation clear, allows users to guess correctly.
-
-	* Take advantage of what people already know.
-
-	* Behavior should maintain a level of expectation.
-
-* Choose good names.
-
-	* Names are the interface.
-
-	* Give a lot of thought to the names you use.
-
-* Be consistent.
-
-* Document before using.
-
-	* Test driven design.
-
-	* This is identify problems early on.
-
-* Try to minimize user mistakes with the API.
-
-	* Trying to constrain values can create readability issues.
-
-	* Minimize choices.
 
 ## Code Review
 
