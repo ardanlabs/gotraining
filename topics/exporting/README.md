@@ -8,6 +8,7 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 * Identifiers are exported (or remain unexported) based on letter-case.
 * We import packages to access exported identifiers.
 * Any package can use a value of an unexported type.
+* Package design and understanding the components you need is critical.
 
 ## Links
 
