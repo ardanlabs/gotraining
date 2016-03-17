@@ -7,7 +7,6 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 * If you don't understand the data, you don't understand the problem.
 * If you don't understand the cost of solving the problem, you can't reason about the problem.
 * If you don't understand the hardware, you can't reason about the cost of solving the problem.
-
 * Arrays are fixed length data structures that can't change.
 * Arrays of different sizes are considered to be of different types.
 * Memory is allocated as a contiguous block.
