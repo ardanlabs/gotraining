@@ -1,169 +1,127 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/2BVYbX8Hyz
+// https://play.golang.org/p/wipPTC9se1
 
-// Sample program demonstrating composition through embedding.
+// Sample program demonstrating struct composition.
 package main
 
 import "fmt"
 
-// *****************************************************************************
-// Set of behaviors.
+// =============================================================================
 
-// Drawer is behavior for drawing an object.
-type Drawer interface {
-	Draw()
+// Board represents a surface we can work on.
+type Board struct {
+	NailsNeeded int
+	NailsDriven int
 }
 
-// Changer is behavior for an object to change shape.
-type Changer interface {
-	Change(area float64)
+// =============================================================================
+
+// Mallet is a tool that pounds in nails.
+type Mallet struct{}
+
+// DriveNail pounds a nail into the specified board.
+func (Mallet) DriveNail(nailSupply *int, b *Board) {
+
+	// Take a nail out of the supply.
+	*nailSupply--
+
+	// Pound a nail into the board.
+	b.NailsDriven++
+
+	fmt.Println("Mallet: pounded nail into the board.")
 }
 
-// Hider is behavior for an object to hide itself.
-type Hider interface {
-	Hide(b bool)
+// Crowbar is a tool that removes nails.
+type Crowbar struct{}
+
+// PullNail yanks a nail out of the specified board.
+func (Crowbar) PullNail(nailSupply *int, b *Board) {
+
+	// Yank a nail out of the board.
+	b.NailsDriven--
+
+	// Put that nail back into the supply.
+	*nailSupply++
+
+	fmt.Println("Crowbar: yanked nail out of the board.")
 }
 
-// Mover is behavior for an object to move.
-type Mover interface {
-	Move(x, y, z int)
+// =============================================================================
+
+// Toolbox can contains a Mallet and a Crowbar.
+type Toolbox struct {
+	Mallet
+	Crowbar
+
+	nails int
 }
 
-// *****************************************************************************
-// Set of objects that exhibit different behaviors.
+// =============================================================================
 
-// Building contain this behavior.
-type Building interface {
-	Drawer
+// Contractor carries out the task of securing boards.
+type Contractor struct{}
+
+// Fasten will drive nails into a board.
+func (Contractor) Fasten(m Mallet, nailSupply *int, b *Board) {
+	for b.NailsDriven < b.NailsNeeded {
+		m.DriveNail(nailSupply, b)
+	}
 }
 
-// Cloud contain this behavior.
-type Cloud interface {
-	Drawer
-	Changer
-	Mover
+// Unfasten will remove nails from a board.
+func (Contractor) Unfasten(cb Crowbar, nailSupply *int, b *Board) {
+	for b.NailsDriven > b.NailsNeeded {
+		cb.PullNail(nailSupply, b)
+	}
 }
 
-// Person contain this behavior.
-type Person interface {
-	Drawer
-	Hider
-	Mover
+// ProcessBoards works against boards.
+func (c Contractor) ProcessBoards(tb *Toolbox, nailSupply *int, boards []Board) {
+	for i := range boards {
+		b := &boards[i]
+
+		fmt.Printf("Contractor: examining board #%d: %+v\n", i+1, b)
+
+		switch {
+		case b.NailsDriven < b.NailsNeeded:
+			c.Fasten(tb.Mallet, nailSupply, b)
+
+		case b.NailsDriven > b.NailsNeeded:
+			c.Unfasten(tb.Crowbar, nailSupply, b)
+		}
+	}
 }
 
-// *****************************************************************************
-// Set of concrete objects.
-
-// Location provides support placing objects.
-type Location struct {
-	X, Y, Z int
-}
-
-// Move is how objects can be moved.
-func (l *Location) Move(x, y, z int) {
-	l.X = x
-	l.Y = y
-	l.Z = z
-}
-
-// House represents a place people live in.
-type House struct {
-	Location
-	Address string
-	Color   string
-}
-
-// Draw is how a House is drawn.
-func (h *House) Draw() {
-	fmt.Printf("[H] %+v\n", *h)
-}
-
-// Move is implemented to prevent a House from moving.
-func (*House) Move(x, y, z int) {}
-
-// Cumulus declares a cumulus cloud in the game.
-type Cumulus struct {
-	Location
-	Area float64
-}
-
-// Draw is how a cumulus cloud is drawn.
-func (c *Cumulus) Draw() {
-	fmt.Printf("[C] %+v\n", *c)
-}
-
-// Change is how a cumulus cloud can change shape.
-func (c *Cumulus) Change(area float64) {
-	c.Area = area
-}
-
-// Policeman declares a cop in the game.
-type Policeman struct {
-	Location
-	Name    string
-	Visible bool
-}
-
-// Draw is how a cop is drawn.
-func (p *Policeman) Draw() {
-	fmt.Printf("[P] %+v\n", *p)
-}
-
-// Hide is how a cop can become hidden.
-func (p *Policeman) Hide(b bool) {
-	p.Visible = !b
-}
-
-// *****************************************************************************
-// Declare a world that contains all these behaviors.
-
-// world represents a set of objects.
-type world struct {
-	buildings []Building
-	clouds    []Cloud
-	people    []Person
-}
-
-// *****************************************************************************
-// Now we can build our world.
+// =============================================================================
 
 // main is the entry point for the application.
 func main() {
-	// Create a world.
-	w := world{
-		buildings: []Building{
-			&House{Location{10, 10, 10}, "123 mocking bird", "white"},
-			&House{Location{10, 20, 10}, "127 mocking bird", "red"},
-		},
-		clouds: []Cloud{
-			&Cumulus{Location{10, 15, 1000}, 123456.4332},
-		},
-		people: []Person{
-			&Policeman{Location{15, 40, 10}, "Harry", true},
-		},
+
+	// Inventory of old boards to remove, and the new boards
+	// that will replace them.
+	boards := []Board{
+
+		// Rotted boards to be removed.
+		{NailsDriven: 3},
+		{NailsDriven: 1},
+		{NailsDriven: 6},
+
+		// Fresh boards to be fastened.
+		{NailsNeeded: 6},
+		{NailsNeeded: 9},
+		{NailsNeeded: 4},
 	}
 
-	// Build a slice of all the values that can be drawn.
-	var d []Drawer
-	for _, v := range w.buildings {
-		d = append(d, v)
-	}
-	for _, v := range w.clouds {
-		d = append(d, v)
-	}
-	for _, v := range w.people {
-		d = append(d, v)
+	// Fill a toolbox.
+	tb := Toolbox{
+		Mallet:  Mallet{},
+		Crowbar: Crowbar{},
+		nails:   10,
 	}
 
-	// Draw the world.
-	draw(d)
-}
-
-// draw takes a set of values that can be drawn.
-func draw(d []Drawer) {
-	for _, v := range d {
-		v.Draw()
-	}
+	// Hire a Contractor and put our Contractor to work.
+	var c Contractor
+	c.ProcessBoards(&tb, &tb.nails, boards)
 }

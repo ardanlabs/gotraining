@@ -1,9 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/QnkL-UIVJN
+// https://play.golang.org/p/Kh8JCDxdjY
 
-// Sample program demonstrating composition through embedding.
+// Sample program demonstrating decoupling with interfaces.
 package main
 
 import "fmt"
@@ -28,12 +28,6 @@ type NailPuller interface {
 	PullNail(nailSupply *int, b *Board)
 }
 
-// NailDrivePuller represents behavior to drive and remove nails into a board.
-type NailDrivePuller interface {
-	NailDriver
-	NailPuller
-}
-
 // =============================================================================
 
 // Mallet is a tool that pounds in nails.
@@ -41,6 +35,7 @@ type Mallet struct{}
 
 // DriveNail pounds a nail into the specified board.
 func (Mallet) DriveNail(nailSupply *int, b *Board) {
+
 	// Take a nail out of the supply.
 	*nailSupply--
 
@@ -55,6 +50,7 @@ type Crowbar struct{}
 
 // PullNail yanks a nail out of the specified board.
 func (Crowbar) PullNail(nailSupply *int, b *Board) {
+
 	// Yank a nail out of the board.
 	b.NailsDriven--
 
@@ -62,6 +58,16 @@ func (Crowbar) PullNail(nailSupply *int, b *Board) {
 	*nailSupply++
 
 	fmt.Println("Crowbar: yanked nail out of the board.")
+}
+
+// =============================================================================
+
+// Toolbox can contains a Mallet and a Crowbar.
+type Toolbox struct {
+	Mallet
+	Crowbar
+
+	nails int
 }
 
 // =============================================================================
@@ -84,7 +90,7 @@ func (Contractor) Unfasten(p NailPuller, nailSupply *int, b *Board) {
 }
 
 // ProcessBoards works against boards.
-func (c Contractor) ProcessBoards(dp NailDrivePuller, nailSupply *int, boards []Board) {
+func (c Contractor) ProcessBoards(tb *Toolbox, nailSupply *int, boards []Board) {
 	for i := range boards {
 		b := &boards[i]
 
@@ -92,31 +98,23 @@ func (c Contractor) ProcessBoards(dp NailDrivePuller, nailSupply *int, boards []
 
 		switch {
 		case b.NailsDriven < b.NailsNeeded:
-			c.Fasten(dp, nailSupply, b)
+			c.Fasten(tb.Mallet, nailSupply, b)
 
 		case b.NailsDriven > b.NailsNeeded:
-			c.Unfasten(dp, nailSupply, b)
+			c.Unfasten(tb.Crowbar, nailSupply, b)
 		}
 	}
 }
 
 // =============================================================================
 
-// Toolbox can contains any number of tools.
-type Toolbox struct {
-	NailDriver
-	NailPuller
-
-	nails int
-}
-
-// =============================================================================
-
 // main is the entry point for the application.
 func main() {
+
 	// Inventory of old boards to remove, and the new boards
 	// that will replace them.
 	boards := []Board{
+
 		// Rotted boards to be removed.
 		{NailsDriven: 3},
 		{NailsDriven: 1},
@@ -130,30 +128,12 @@ func main() {
 
 	// Fill a toolbox.
 	tb := Toolbox{
-		NailDriver: Mallet{},
-		NailPuller: Crowbar{},
-		nails:      10,
+		Mallet:  Mallet{},
+		Crowbar: Crowbar{},
+		nails:   10,
 	}
-
-	// Display the current state of our toolbox and boards.
-	displayState(&tb, boards)
 
 	// Hire a Contractor and put our Contractor to work.
 	var c Contractor
 	c.ProcessBoards(&tb, &tb.nails, boards)
-
-	// Display the new state of our toolbox and boards.
-	displayState(&tb, boards)
-}
-
-// displayState provide information about all the boards.
-func displayState(tb *Toolbox, boards []Board) {
-	fmt.Printf("Box: %#v\n", tb)
-	fmt.Println("Boards:")
-
-	for _, b := range boards {
-		fmt.Printf("\t%+v\n", b)
-	}
-
-	fmt.Println()
 }
