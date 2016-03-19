@@ -22,7 +22,7 @@ func main() {
 	inspectSlice(slice1)
 
 	// Take a slice of slice1. We want just indexes 2 and 3.
-	// Parameters are [starting_index : (starting_index + length)
+	// Parameters are [starting_index : (starting_index + length)]
 	slice2 := slice1[2:4]
 	inspectSlice(slice2)
 
