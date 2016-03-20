@@ -12,7 +12,7 @@ import "fmt"
 // user defines a user in the program.
 type user struct {
 	name  string
-	email string
+	surname string
 }
 
 // main is the entry point for the application.
