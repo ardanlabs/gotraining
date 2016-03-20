@@ -41,7 +41,7 @@ func main() {
 	var dur duration
 
 	// Change the value of dur to equal
-	// five seconds.
+	// five hours.
 	dur.setHours(5)
 
 	// Display the new value of dur.
