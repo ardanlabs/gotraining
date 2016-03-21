@@ -12,14 +12,14 @@ import "fmt"
 // user defines a user in the program.
 type user struct {
 	name  string
-	email string
+	surname string
 }
 
 // main is the entry point for the application.
 func main() {
 	// Declare and initialize the map with values.
 	users := map[string]user{
-		"Rob":     {"Roy", "Rob"},
+		"Roy":     {"Rob", "Roy"},
 		"Ford":    {"Henry", "Ford"},
 		"Mouse":   {"Mickey", "Mouse"},
 		"Jackson": {"Michael", "Jackson"},
