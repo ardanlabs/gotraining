@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/AFb1SZ_1WZ
+// http://play.golang.org/p/etCPO64mWh
 
 // Sample program to show how to takes slices of slices to create different
 // views of and make changes to the underlying array.
