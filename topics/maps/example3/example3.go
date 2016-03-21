@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/FcY_0ckwOZ
+// http://play.golang.org/p/bnnKVUeyhP
 
 // Sample program to show how only types that can have
 // equality defined on them can be a map key.
@@ -11,8 +11,8 @@ import "fmt"
 
 // user defines a user in the program.
 type user struct {
-	name  string
-	email string
+	name    string
+	surname string
 }
 
 // users define a set of users.

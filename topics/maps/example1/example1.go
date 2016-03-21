@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/WZ7qt_I8GY
+// http://play.golang.org/p/xRdyu6M-Vq
 
 // Sample program to show how to declare, initialize and iterate
 // over a map. Shows how iterating over a map is random.
@@ -11,7 +11,7 @@ import "fmt"
 
 // user defines a user in the program.
 type user struct {
-	name  string
+	name    string
 	surname string
 }
 

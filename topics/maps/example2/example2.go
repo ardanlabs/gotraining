@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/C0RJU7WUca
+// http://play.golang.org/p/EtPZoqHgaL
 
 // Sample program to show how to declare and initialize a map
 // using a map literal.
@@ -11,7 +11,7 @@ import "fmt"
 
 // user defines a user in the program.
 type user struct {
-	name  string
+	name    string
 	surname string
 }
 
