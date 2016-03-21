@@ -127,8 +127,11 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 
 ## Twitter
 
+Jessie Frazelle ([@frazelledazzell](https://twitter.com/frazelledazzell/status/711355859066990592))
+_"@goinggodotnet you were amazing!!! So enthusiastic!!! Thanks for doing this for everyone!"_
+
 Kelsey Hightower ([‏@kelseyhightower](https://twitter.com/kelseyhightower/status/673359937909592064))  
-_"Day 1 of the [Ultimate] Go workshop was outstanding! Big shoutout to @intel, @golangbridge, and @goinggodotnet for bringing this to Portland._"
+_"Day 1 of the [Ultimate] Go workshop was outstanding! Big shoutout to @intel, @golangbridge, and @goinggodotnet for bringing this to Portland."_
 
 Katrina Owen ([@kytrinyx](https://twitter.com/kytrinyx/status/673360428278222848))  
 _"OH: "You thought you knew Go..." (You do Go? You want to do Go?) You should take this workshop. Seriously.) "_
@@ -137,6 +140,9 @@ Matt Oswalt ([@Mierdin](https://twitter.com/mierdin/status/673570058392616961))
 _"Should be mentioned that though I am no expert, I have been using Go for about a year - and this meetup is kicking my ass."_
 
 ## Testimonials
+
+Susan Dady, Software Engineer - GE Digital
+_"Rarely will you come across a course as worthwhile as this one. I learned many things relevant and useful in my daily work and William's energy kept me engaged. I came back to work excited to get coding in Go."_
 
 Paul Garvey, Software Engineer - GE Digital
 _"Looking back I am grateful I took the GoLang training course. I had planned to just buy a few books and learned it on my own. In retrospect that would have been a bad decision as I would missed out on all the pitfalls, best practices, practical exercises and discussions the instructor imparted from his years of experience in the field, writing a book and blogging with other gophers. In the end I felt I learn more in 3 days then I could reading books and learning GoLang on my own and all my colleagues who took the course all share this view. We also share the view that Bill the instructor brought an enthusiasm and energy to the course that made a really technical course easy to learn. I would recommend anyone who want to learn Go to sign up with Mr Kennedy. At the end of the course you will feel like you are ready to rewrite all your old apps in Go :-)"_
