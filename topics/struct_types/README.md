@@ -29,7 +29,7 @@ http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing
 
 ## Advanced Code Review
 
-[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/hEmKF_Mbsf))
+[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/70dMqePtk2))
 
 ## Exercises
 
