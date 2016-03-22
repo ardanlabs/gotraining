@@ -85,8 +85,8 @@ func main() {
 	// 1 byte of padding is included to align the int16 properly.
 	//
 	// structlayout -json github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 sbp | structlayout-pretty
-	// 	sbp.a bool: 0-1 (size 1, align 1)
-	// 	padding: 1-2 (size 1, align 0)
+	// 	sbp.a bool:  0-1 (size 1, align 1)
+	// 	padding:     1-2 (size 1, align 0)
 	// 	sbp.b int16: 2-4 (size 2, align 2)
 	//
 	// 	  +--------+
