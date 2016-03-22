@@ -97,7 +97,7 @@ func main() {
 	// 	2 |        | <- sbp.b int16
 	// 	  +--------+
 	// 	3 |        |
-	//    +--------+
+	// 	  +--------+
 	//
 	var sbp sbp
 	size = unsafe.Sizeof(sbp)
