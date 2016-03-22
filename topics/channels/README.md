@@ -29,6 +29,10 @@ http://blog.golang.org/share-memory-by-communicating
 
 http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
+[Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g)
+
+[Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
+
 ## Code Review
 
 [Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/kuxUFMqy-9))
