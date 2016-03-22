@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/70dMqePtk2
+// https://play.golang.org/p/Hk5u2odiNY
 
 // go get honnef.co/go/structlayout/cmd/...
 
@@ -54,10 +54,10 @@ func main() {
 	// Since all the fields are based on a single byte,
 	// the all align perfectly within a single word.
 	//
-	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 sbp
-	// 	sbp.a bool:  0-1 (size 1, align 1)
-	// 	padding:     1-2 (size 1, align 0)
-	// 	sbp.b int16: 2-4 (size 2, align 2)
+	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 np
+	// 		np.a bool: 0-1 (size 1, align 1)
+	// 		np.b bool: 1-2 (size 1, align 1)
+	// 		np.c bool: 2-3 (size 1, align 1)
 	var np np
 	size := unsafe.Sizeof(np)
 	fmt.Printf("0 bytes of Padding - SizeOf[%d][%p %p %p]\n", size, &np.a, &np.b, &np.c)
@@ -75,10 +75,10 @@ func main() {
 	// 0, 2, 4, 6, 8, A, C, E.
 	// 1 byte of padding is included to align the int16 properly.
 	//
-	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 np
-	// 	np.a bool: 0-1 (size 1, align 1)
-	// 	np.b bool: 1-2 (size 1, align 1)
-	// 	np.c bool: 2-3 (size 1, align 1)
+	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 sbp
+	// 		sbp.a bool: 0-1 (size 1, align 1)
+	// 		padding: 1-2 (size 1, align 0)
+	// 		sbp.b int16: 2-4 (size 2, align 2)
 	var sbp sbp
 	size = unsafe.Sizeof(sbp)
 	fmt.Printf("1 byte of Padding - SizeOf[%d][%p %p]\n", size, &sbp.a, &sbp.b)
@@ -97,9 +97,9 @@ func main() {
 	// 3 byte of padding is included to align the int32 properly.
 	//
 	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 tbp
-	// 	tbp.a bool:  0-1 (size 1, align 1)
-	// 	padding:     1-4 (size 3, align 0)
-	// 	tbp.b int32: 4-8 (size 4, align 4)
+	// 		tbp.a bool:  0-1 (size 1, align 1)
+	// 		padding:     1-4 (size 3, align 0)
+	// 		tbp.b int32: 4-8 (size 4, align 4)
 	var tbp tbp
 	size = unsafe.Sizeof(tbp)
 	fmt.Printf("3 byte of Padding - SizeOf[%d][%p %p]\n", size, &tbp.a, &tbp.b)
@@ -118,9 +118,9 @@ func main() {
 	// 4 byte of padding is included to align the int64 properly.
 	//
 	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 fbp
-	// 	fbp.a bool:  0-1  (size 1, align 1)
-	// 	padding:     1-8  (size 7, align 0)
-	// 	fbp.b int64: 8-16 (size 8, align 8)
+	// 		fbp.a bool:  0-1  (size 1, align 1)
+	// 		padding:     1-8  (size 7, align 0)
+	// 		fbp.b int64: 8-16 (size 8, align 8)
 	var fbp fbp
 	size = unsafe.Sizeof(fbp)
 	fmt.Printf("7 byte of Padding - SizeOf[%d][%p %p]\n", size, &fbp.a, &fbp.b)
