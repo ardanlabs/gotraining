@@ -30,6 +30,16 @@ http://blog.golang.org/share-memory-by-communicating
 
 http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
+## Buffer Bloat - 2011
+
+* Large buffers prevent timely notification of back pressure.
+* They defeat your ability to reduce back pressure in a timely matter.
+* They can increase latency not reduce it.
+* Use buffered channels to provide a way of maintaining continuity.
+	* Don't use them just for performance.
+	* Use them to handle well defined bursts of data.
+	* Use them to deal with speed of light issues between handoffs.
+
 [Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g)
 
 [Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
