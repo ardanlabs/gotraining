@@ -46,18 +46,19 @@ func main() {
 
 	// No padding.
 	// type np struct {
-	// 		a bool
-	// 		b bool
-	// 		c bool
+	// 	a bool
+	// 	b bool
+	// 	c bool
 	// }
 	//
 	// Since all the fields are based on a single byte,
 	// the all align perfectly within a single word.
 	//
 	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 np
-	// 		np.a bool: 0-1 (size 1, align 1)
-	// 		np.b bool: 1-2 (size 1, align 1)
-	// 		np.c bool: 2-3 (size 1, align 1)
+	// 	np.a bool: 0-1 (size 1, align 1)
+	// 	np.b bool: 1-2 (size 1, align 1)
+	// 	np.c bool: 2-3 (size 1, align 1)
+	//
 	var np np
 	size := unsafe.Sizeof(np)
 	fmt.Printf("0 bytes of Padding - SizeOf[%d][%p %p %p]\n", size, &np.a, &np.b, &np.c)
@@ -66,8 +67,8 @@ func main() {
 
 	// Single byte padding.
 	// type sbp struct {
-	// 		a bool
-	// 		b int16
+	// 	a bool
+	// 	b int16
 	// }
 	//
 	// Since the second field is a 2 byte int, that must
@@ -76,9 +77,10 @@ func main() {
 	// 1 byte of padding is included to align the int16 properly.
 	//
 	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 sbp
-	// 		sbp.a bool: 0-1 (size 1, align 1)
-	// 		padding: 1-2 (size 1, align 0)
-	// 		sbp.b int16: 2-4 (size 2, align 2)
+	// 	sbp.a bool: 0-1 (size 1, align 1)
+	// 	padding: 1-2 (size 1, align 0)
+	// 	sbp.b int16: 2-4 (size 2, align 2)
+	//
 	var sbp sbp
 	size = unsafe.Sizeof(sbp)
 	fmt.Printf("1 byte of Padding - SizeOf[%d][%p %p]\n", size, &sbp.a, &sbp.b)
@@ -87,8 +89,8 @@ func main() {
 
 	// Two byte padding.
 	// type tbp struct {
-	// 		a bool
-	// 		b int32
+	// 	a bool
+	// 	b int32
 	// }
 	//
 	// Since the second field is a 4 byte int, that must
@@ -97,9 +99,10 @@ func main() {
 	// 3 byte of padding is included to align the int32 properly.
 	//
 	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 tbp
-	// 		tbp.a bool:  0-1 (size 1, align 1)
-	// 		padding:     1-4 (size 3, align 0)
-	// 		tbp.b int32: 4-8 (size 4, align 4)
+	// 	tbp.a bool:  0-1 (size 1, align 1)
+	// 	padding:     1-4 (size 3, align 0)
+	// 	tbp.b int32: 4-8 (size 4, align 4)
+	//
 	var tbp tbp
 	size = unsafe.Sizeof(tbp)
 	fmt.Printf("3 byte of Padding - SizeOf[%d][%p %p]\n", size, &tbp.a, &tbp.b)
@@ -108,8 +111,8 @@ func main() {
 
 	// Four byte padding.
 	// type fbp struct {
-	// 		a bool
-	// 		b int64
+	// 	a bool
+	// 	b int64
 	// }
 	//
 	// Since the second field is a 8 byte int, that must
@@ -118,9 +121,10 @@ func main() {
 	// 4 byte of padding is included to align the int64 properly.
 	//
 	// structlayout github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 fbp
-	// 		fbp.a bool:  0-1  (size 1, align 1)
-	// 		padding:     1-8  (size 7, align 0)
-	// 		fbp.b int64: 8-16 (size 8, align 8)
+	// 	fbp.a bool:  0-1  (size 1, align 1)
+	// 	padding:     1-8  (size 7, align 0)
+	// 	fbp.b int64: 8-16 (size 8, align 8)
+	//
 	var fbp fbp
 	size = unsafe.Sizeof(fbp)
 	fmt.Printf("7 byte of Padding - SizeOf[%d][%p %p]\n", size, &fbp.a, &fbp.b)
