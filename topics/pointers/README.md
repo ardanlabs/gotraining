@@ -49,6 +49,8 @@ https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.g
 
 https://godoc.org/golang.org/x/tools/go/ssa
 
+[Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
+
 ## Code Review
 
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/nNnsK6hWdP))

@@ -35,15 +35,7 @@ The material has been designed to be taught in a classroom environment. The code
 
 ## Important Reading
 
-[Go Documentation References](https://golang.org/doc/#references)
-
-[An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)
-
-[Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)
-
-[Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)
-
-[A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)
+Please check out this page of [important reading](reading/README.md). You will find articles and videos around mechnical sympathy, data-oriented design, Go runtime and optimizations and articles about the history of computing.
 
 ## Our Experience
 
