@@ -26,7 +26,7 @@ http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html
 
 _I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help._ - July 2000
 
-##  Package Design
+##  Package-Oriented Design
 
 #### Mike Action : Data-Oriented Design and C++
 https://www.youtube.com/watch?v=rX0ItVEVjHc
