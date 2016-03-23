@@ -67,7 +67,7 @@ https://www.youtube.com/watch?v=5tg1ONG18H8
 
 * Packages in Go provide API boundaries that should focus on solving one specific problem or a highly focused group of problems.
 
-* You must understand how changes to the data for a particular package affects the other packages that depend on it.
+* You must understand how changes to the API for a particular package affects the other packages that depend on it.
 
 * Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
 
