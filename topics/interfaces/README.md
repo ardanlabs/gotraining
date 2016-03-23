@@ -14,7 +14,7 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 
 ## Interface Design Guidelines
 
-* Learn about the [design guidelines](../../reading/design_guidelines.md) for intefaces.
+* Learn about the [design guidelines](../../reading/design_guidelines.md) for interfaces.
 
 ## Links
 
