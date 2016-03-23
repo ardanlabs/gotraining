@@ -16,21 +16,9 @@ http://golang.org/doc/effective_go.html#embedding
 
 http://www.goinggo.net/2015/09/composition-with-go.html
 
-## Decoupling Guidelines For Go
+## Design Guidelines
 
-* You must do your best to guess what data could change over time and consider how these changes will affect the software.
-
-* Uncertainty about the data is not a license to guess but a directive to decouple.
-
-* You must understand how changes to the data for a particular package affects the other packages that depend on it.
-
-* Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
-
-* When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
-
-* Decoupling means reducing the amount of intimate knowledge packages must have about each other to be used together.
-
-* Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
+* Learn about the [design guidelines](../../reading/design_guidelines.md) for composition.
 
 ## Code Review
 

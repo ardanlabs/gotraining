@@ -12,6 +12,10 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
+## Interface Design Guidelines
+
+* Learn about the [design guidelines](../../reading/design_guidelines.md) for intefaces.
+
 ## Links
 
 https://golang.org/doc/effective_go.html#interfaces
