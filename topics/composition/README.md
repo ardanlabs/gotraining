@@ -1,4 +1,4 @@
-## Composition
+## Interface and Composition Design
 
 Composition goes beyond the mechanics of type embedding and is more than just a paradigm. It is the key for maintaining stability in your software by having the ability to adapt to the data and transformation changes that are coming.
 
