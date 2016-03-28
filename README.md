@@ -101,6 +101,8 @@ http://sourceforge.net/projects/liteide/files/
 **Emacs**  
 https://github.com/creack/dotfiles
 
+For a full list of editors, see the wiki: https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins
+
 ### Installing the Training Material
 
 While many of the examples can be done using the online playground (http://play.golang.org), some may find it easier to complete them with their local editor.  To do so, you will want to load the training material locally to your machine.  From a command prompt, issue the following commands:
