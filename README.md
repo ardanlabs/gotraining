@@ -51,6 +51,17 @@ US, Canada, Mexico, England, Amsterdam and India
 
 ## Before You Come To Class
 
+The following is a set of tasks that can be done prior to showing up for class.  We will also do this in class if anyone has not completed it.  However, the more attendees that complete this ahead of time the more time we have to cover additional training material.
+
+### Joining the Go Slack Community
+
+We use a slack channel to share links, code, and examples during the training.  This is free.  This is also the same slack community you will use after training to ask for help and interact with may Go experts around the world in the community.
+
+1. Using the following link, fill out your name and email address: https://gophersinvite.herokuapp.com/
+1. Check your email, and follow the link to the slack application.
+1. Join the training channel by clicking on this link: https://gophers.slack.com/messages/training/
+1. Click the “Join Channel” button at the bottom of the screen.
+
 ### Installing Go
 
 **Mac OS X**  
@@ -89,6 +100,18 @@ http://sourceforge.net/projects/liteide/files/
 
 **Emacs**  
 https://github.com/creack/dotfiles
+
+### Installing the Training Material
+
+While many of the examples can be done using the online playground (http://play.golang.org), some may find it easier to complete them with their local editor.  To do so, you will want to load the training material locally to your machine.  From a command prompt, issue the following commands:
+
+```sh
+mkdir -p $GOPATH/src/github.com/ardanlabs
+cd $GOPATH/src/github.com/ardanlabs
+git clone https://github.com/ardanlabs/gotraining.git
+```
+
+*NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
 
 ## Starter Material
   
