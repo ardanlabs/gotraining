@@ -121,6 +121,6 @@ http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html
 
 ## Code Review
 
-[Scheduler Stats](trace.go) ([Go Playground](https://play.golang.org/p/yUz3VkxLdo))
+[Scheduler Stats](trace.go) ([Go Playground](https://play.golang.org/p/9--g7HC0J5))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
