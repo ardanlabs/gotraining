@@ -2,6 +2,9 @@
 
 We can get specific information about the scheduler using the GODEBUG environmental variable. The variable will cause the schedule to emit information about the health of the logical processors.
 
+We will need this program to place load on the example web api's. Download and build this tool.
+	https://github.com/wg/wrk
+
 ## GODEBUG
 
 [http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)
@@ -17,101 +20,14 @@ We can get specific information about the scheduler using the GODEBUG environmen
 	*schedtrace*: setting schedtrace=X causes the scheduler to emit a single line to standard
 	error every X milliseconds, summarizing the scheduler state.
 
-## Running Summary Trace
+	SCHED 1009ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1 runqueue=0 [4 4]
 
-	go build
-	GODEBUG=schedtrace=1000 ./sched_trace
-
-	export GOMAXPROCS=1
-		SCHED 0ms: gomaxprocs=1 idleprocs=0 threads=2 spinningthreads=0 idlethreads=0 runqueue=0 [1]
-		SCHED 1009ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1 runqueue=0 [9]
-
-	export GOMAXPROCS=2
-		SCHED 1001ms: gomaxprocs=2 idleprocs=2 threads=4 spinningthreads=0 idlethreads=2 runqueue=0 [0 0]
-		SCHED 2002ms: gomaxprocs=2 idleprocs=0 threads=4 spinningthreads=0 idlethreads=1 runqueue=0 [4 4]
-	
-	Scheduler States:
 		gomaxprocs=1:  Contexts configured.
 		idleprocs=0:   Contexts not in use. Goroutine running.
 		threads=3:     Threads in use.
 		idlethreads=0: Threads not in use.
 		runqueue=0:    Goroutines in the global queue.
-		[9]:           Goroutines in a context's run queue.
-		[4 4]:         Goroutines in each of the context's run queue.
-
-## Running Detailed Trace
-
-	go build
-	GODEBUG=schedtrace=1000,scheddetail=1 ./sched_trace
-
-		SCHED 2016ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1 runqueue=0 gcwaiting=0 nmidlelocked=0 stopwait=0 sysmonwait=0
-		P0: status=1 schedtick=20 syscalltick=14 m=0 runqsize=9 gfreecnt=0
-		M2: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-		M1: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=1 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-		M0: p=0 curg=5 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-		G1: status=4(semacquire) m=-1 lockedm=-1
-		G2: status=4(force gc (idle)) m=-1 lockedm=-1
-		G3: status=4(GC sweep wait) m=-1 lockedm=-1
-		G4: status=4(finalizer wait) m=-1 lockedm=-1
-		G5: status=2(sleep) m=0 lockedm=-1
-		G6: status=1(sleep) m=-1 lockedm=-1
-		G7: status=1(sleep) m=-1 lockedm=-1
-		G8: status=1(sleep) m=-1 lockedm=-1
-		G9: status=1(sleep) m=-1 lockedm=-1
-		G10: status=1(sleep) m=-1 lockedm=-1
-		G11: status=1(sleep) m=-1 lockedm=-1
-		G12: status=1(sleep) m=-1 lockedm=-1
-		G13: status=1(sleep) m=-1 lockedm=-1
-		G14: status=1(sleep) m=-1 lockedm=-1
-		G15: status=4(timer goroutine (idle)) m=-1 lockedm=-1
-
-  	Scheduler States:  
-		gcwaiting=0: Is the scheduled blocking waiting for GC to finish.
-
-	P's represent contexts:  
-  		P0: status=1 schedtick=20 syscalltick=12 m=3 runqsize=4 gfreecnt=0
-  		P1: status=1 schedtick=8 syscalltick=2 m=2 runqsize=4 gfreecnt=0
-  		Context Stats:
-  			m=3:        The thread being used.
-  			runqsize=1: Number of goroutines in a context's run queue.
-
-  	M's represent a thread:
-	  	M3: p=0 curg=11 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-	  	M2: p=1 curg=6 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-	  	M1: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=1 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-	  	M0: p=-1 curg=-1 mallocing=0 throwing=0 gcing=0 locks=0 dying=0 helpgc=0 spinning=0 blocked=0 lockedg=-1
-  		Thread Stats:  
-  			p=0: The Context this thread is attached to.
-
-  	G's represent a goroutine:  
-  		G1: status=4(semacquire) m=-1 lockedm=-1
-	  	G2: status=4(force gc (idle)) m=-1 lockedm=-1
-	  	G3: status=4(GC sweep wait) m=-1 lockedm=-1
-	  	G4: status=4(finalizer wait) m=-1 lockedm=-1
-	  	G5: status=1(sleep) m=-1 lockedm=-1
-	  	G6: status=2(sleep) m=2 lockedm=-1
-	  	G7: status=1(sleep) m=-1 lockedm=-1
-	  	G8: status=1(sleep) m=-1 lockedm=-1
-	  	G9: status=1(sleep) m=-1 lockedm=-1
-	  	G10: status=1(sleep) m=-1 lockedm=-1
-	  	G11: status=2(sleep) m=3 lockedm=-1
-	  	G12: status=1(sleep) m=-1 lockedm=-1
-	  	G13: status=1(sleep) m=-1 lockedm=-1
-	  	G14: status=1(sleep) m=-1 lockedm=-1
-	  	G17: status=4(timer goroutine (idle)) m=-1 lockedm=-1
-  		Goroutine Stats:  
-  			m=3: The thread being used.
-  			status: http://golang.org/src/runtime/runtime.h
-	  			Gidle,                                 // 0 
-	   			Grunnable,                             // 1 runnable and on a run queue
-	   			Grunning,                              // 2 running
-	   			Gsyscall,                              // 3 performing a syscall
-	   			Gwaiting,                              // 4 waiting for the runtime
-	   			Gmoribund_unused,                      // 5 currently unused, but hardcoded in gdb scripts
-	   			Gdead,                                 // 6 goroutine is dead
-	   			Genqueue,                              // 7 only the Gscanenqueue is used.
-	   			Gcopystack,                            // 8 in this state when newstack is moving the stack
-	   			View runtime.h for more
+		[4 4]:         Goroutines in each of the logical processors.
 
 ## Links
 
@@ -119,8 +35,98 @@ https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-i
 
 http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html
 
+## Running Summary Trace: Example1
+
+This example shows a simple web api running with some basic load.
+
+	Build and run the example program using a single logical processor.
+
+		go build
+		export GOMAXPROCS=1
+		export GODEBUG=schedtrace=1000
+		./example1
+
+	Start to apply load to the web api:
+	
+		wrk -t8 -c500 -d5s http://localhost:4000/sendjson
+
+	Look at the load on the logical processor. We can only see runnable goroutines:
+
+		SCHED 1009ms: gomaxprocs=1 idleprocs=1 threads=4 spinningthreads=0 idlethreads=1 runqueue=0 [0]
+		SCHED 4026ms: gomaxprocs=1 idleprocs=0 threads=4 spinningthreads=0 idlethreads=1 runqueue=32 [25]
+
+	Look at the general stats from the profile:
+
+		http://localhost:4000/debug/pprof
+		/debug/pprof/
+			profiles:
+				0	block
+				499	goroutine
+				19	heap
+				4	threadcreate
+
+	Let's run with two logical processors now:
+
+		export GOMAXPROCS=2
+		./example1
+
+	Look at the load on the logical processor. We can only see runnable goroutines:
+
+		SCHED 9056ms: gomaxprocs=2 idleprocs=0 threads=6 spinningthreads=0 idlethreads=2 runqueue=79 [13 0]
+		SCHED 10062ms: gomaxprocs=2 idleprocs=0 threads=6 spinningthreads=0 idlethreads=2 runqueue=4 [9 4]
+
+	Look at the general stats from the profile:
+	
+		http://localhost:4000/debug/pprof
+		/debug/pprof/
+			profiles:
+				0	block
+				499	goroutine
+				22	heap
+				5	threadcreate
+
+## Running Summary Trace: Example2
+
+This example shows a simple web api running that is leaking goroutines.
+
+	Build and run the example program using a single logical processor.
+
+		go build
+		export GOMAXPROCS=1
+		export GODEBUG=schedtrace=1000
+		./example2
+
+	Start to apply load to the web api:
+	
+		wrk -t8 -c500 -d5s http://localhost:4000/sendjson
+
+	Look at the load on the logical processor. We can only see runnable goroutines:
+
+		SCHED 1009ms: gomaxprocs=1 idleprocs=1 threads=4 spinningthreads=0 idlethreads=1 runqueue=0 [0]
+		SCHED 4026ms: gomaxprocs=1 idleprocs=0 threads=4 spinningthreads=0 idlethreads=1 runqueue=32 [25]
+
+	Look at the general stats from the profile:
+
+		http://localhost:4000/debug/pprof
+		/debug/pprof/
+			profiles:
+				0	block
+				499	goroutine
+				19	heap
+				4	threadcreate
+
+		http://localhost:4000/debug/pprof
+		/debug/pprof/
+			profiles:
+				0	block
+				694	goroutine
+				23	heap
+				7	threadcreate
+
 ## Code Review
 
-[Scheduler Stats](trace.go) ([Go Playground](https://play.golang.org/p/9--g7HC0J5))
+[Web API](example1/example1.go) ([Go Playground](https://play.golang.org/p/70aRkw59zH))
+
+[Web API Leaking Goroutines](example2/example2.go) ([Go Playground](https://play.golang.org/p/jWMR2oudEN))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
