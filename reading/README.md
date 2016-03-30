@@ -4,10 +4,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Books
 
-[Go In Action - Kennedy, Ketelsen, St. Martin](https://www.manning.com/books/go-in-action)  
+[Go In Action](https://www.manning.com/books/go-in-action) - Kennedy, Ketelsen, St. Martin  
 Coupon Code: goiaucf
 
-[Learn Go - Nathan Youngman](https://www.manning.com/books/learn-go)
+[Learn Go](https://www.manning.com/books/learn-go) - Nathan Youngman
 
 ### Blogs
 
