@@ -45,7 +45,7 @@ https://www.youtube.com/watch?v=5tg1ONG18H8
 
 #### Interface and Composition Design
 
-_With help from Sarah Mei and Sandi Metz._
+_With help from [Sarah Mei](https://twitter.com/sarahmei) and [Sandi Metz](https://twitter.com/sandimetz)._
 
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
 
