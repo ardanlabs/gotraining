@@ -2,6 +2,12 @@
 
 There is a ton of links to extra reading and videos through out the material. Occasionally we run into material that we feel is important and don't have an exact place to put it. This is a section place for that material.
 
+### Books
+
+[Go In Action - Kennedy, Ketelsen, St. Martin](https://www.manning.com/books/go-in-action)  Coupon Code: goiaucf
+
+[Learn Go - Nathan Youngman](https://www.manning.com/books/learn-go)
+
 ### General
 
 [Go Documentation References](https://golang.org/doc/#references)
