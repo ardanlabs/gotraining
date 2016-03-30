@@ -34,6 +34,12 @@ https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
 
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/lTMxc-oExx))
 
+#### Mocking
+
+[Package To Mock](example4/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/GfjXEKv4qf))
+
+[Client](example4/example4.go) ([Go Playground](https://play.golang.org/p/Z-Wdj9Mfmg))
+
 ## Exercises
 
 ### Exercise 1
