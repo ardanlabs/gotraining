@@ -45,7 +45,7 @@ https://www.youtube.com/watch?v=5tg1ONG18H8
 
 #### Interface and Composition Design
 
-_With help from [Sarah Mei](https://twitter.com/sarahmei) and [Sandi Metz](https://twitter.com/sandimetz)._
+_With help from [Sandi Metz](https://twitter.com/sandimetz)._
 
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
 
@@ -63,7 +63,23 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Sandi Metz](https
 
 * When dependencies are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
 
+* The standardization of interfaces can set clear and consistent expectations.
+
+#### Interface Polution
+
+_With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)_
+
+* Don't use an interface for the sake of using an interface.
+
+* Unless the user needs to provide an implementation or you have multiple implementations, question.
+
+* Don't add an interface just for the sake of testing. API's are for users not tests.
+
 * If it's not clear how an abstraction makes the code better, it probably doesn't.
+
+* Don’t export any interfaces until you have to.
+
+* Introduce concrete types and don’t export any interfaces unless you have to encourage external packages to implement one.
 
 #### Package-Oriented Design
 
