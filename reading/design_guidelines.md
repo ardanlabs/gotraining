@@ -67,6 +67,14 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Sandi Metz](https
 
 #### Package-Oriented Design
 
+* Start with a Project that contains all the source code you need to build the products and services the Project owns.
+
+* Maintain each Project in a single repo.
+
+* Only break a Project up when developer productivity is a cost.
+
+* Breaking a Project into multiple projects comes with dependency costs.
+
 * In many languages folders are used to organize code, in Go folders are used to organize API's (packages).
 
 * Packages in Go provide API boundaries that should focus on solving one specific problem or a highly focused group of problems.
