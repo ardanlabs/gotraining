@@ -41,11 +41,15 @@ Coupon Code: goiaucf
 
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)
 
-## Mechanical Sympathy
+### Profiling and Debugging
+
+[Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick
+
+### Mechanical Sympathy
 
 This content can be found under [arrays](../topics/arrays) and [data races](../topics/data_race). We feel this content is so important it has been moved out to this general materials page.
 
-### CPU Caches
+#### CPU Caches
 
 [Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)
 
@@ -63,7 +67,7 @@ This content can be found under [arrays](../topics/arrays) and [data races](../t
 
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law)
 
-### Data-Oriented Design
+#### Data-Oriented Design
 
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)
 
@@ -71,21 +75,21 @@ This content can be found under [arrays](../topics/arrays) and [data races](../t
 
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)
 
-## Runtime
+### Runtime
 
 This content can be found under [pointers](../topics/pointers). We feel this content is so important it has been moved out to this general materials page.
 
-### Stacks
+#### Stacks
 
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)
 
-### Escape Analysis and Inlining
+#### Escape Analysis and Inlining
 
 [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
 
 https://github.com/golang/go/wiki/CompilerOptimizations
 
-### Garbage Collection
+#### Garbage Collection
 
 https://en.wikipedia.org/wiki/Tracing_garbage_collection
 
@@ -93,7 +97,7 @@ https://blog.golang.org/go15gc
 
 [Rick Hudson GC Talk](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
 
-### Single Static Assignment Optimizations
+#### Single Static Assignment Optimizations
 
 [GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)
 
@@ -102,4 +106,3 @@ https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.g
 https://godoc.org/golang.org/x/tools/go/ssa
 
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
-
