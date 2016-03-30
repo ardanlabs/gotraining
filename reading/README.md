@@ -21,13 +21,15 @@ Coupon Code: goiaucf
 
 [Martin Thompson - Mechanical Sympathy](http://mechanical-sympathy.blogspot.com)
 
-### General
+### Interviews
 
 [Go Documentation References](https://golang.org/doc/#references)
 
 [An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)
 
 [Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)
+
+### History
 
 [Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)
 
