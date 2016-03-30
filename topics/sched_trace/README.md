@@ -127,6 +127,6 @@ This example shows a simple web api running that is leaking goroutines.
 
 [Web API](example1/example1.go) ([Go Playground](https://play.golang.org/p/70aRkw59zH))
 
-[Web API Leaking Goroutines](example2/example2.go) ([Go Playground](https://play.golang.org/p/jWMR2oudEN))
+[Web API Leaking Goroutines](example2/example2.go) ([Go Playground](https://play.golang.org/p/6MnCQ3ABDU))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
