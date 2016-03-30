@@ -11,15 +11,15 @@ Coupon Code: goiaucf
 
 ### Blogs
 
-[Going Go - William Kennedy](http://www.goinggo.net)
+[Going Go](http://www.goinggo.net) - William Kennedy
 
-[The acme of foolishness - Dave Cheney](http://dave.cheney.net)
+[The acme of foolishness](http://dave.cheney.net) - Dave Cheney
 
-[The Go Blog](https://blog.golang.org)
+[The Go Blog](https://blog.golang.org) - Language Team
 
-[Ukiah Smith](https://ukiahsmith.com)
+[Ukiah Smith](https://ukiahsmith.com) - Ukiah Smith
 
-[Martin Thompson - Mechanical Sympathy](http://mechanical-sympathy.blogspot.com)
+[Mechanical Sympathy](http://mechanical-sympathy.blogspot.com) - Martin Thompson
 
 ### Interviews
 
