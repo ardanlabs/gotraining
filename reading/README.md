@@ -9,6 +9,18 @@ Coupon Code: goiaucf
 
 [Learn Go - Nathan Youngman](https://www.manning.com/books/learn-go)
 
+### Blogs
+
+[Going Go - William Kennedy](http://www.goinggo.net)
+
+[The acme of foolishness - Dave Cheney](http://dave.cheney.net)
+
+[The Go Blog](https://blog.golang.org)
+
+[Ukiah Smith](https://ukiahsmith.com)
+
+[Martin Thompson - Mechanical Sympathy](http://mechanical-sympathy.blogspot.com)
+
 ### General
 
 [Go Documentation References](https://golang.org/doc/#references)
