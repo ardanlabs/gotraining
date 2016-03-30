@@ -24,7 +24,7 @@ http://blog.golang.org/laws-of-reflection
 
 http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
-https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275
+[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)
 
 ## Code Review
 

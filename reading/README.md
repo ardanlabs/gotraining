@@ -21,7 +21,7 @@ Coupon Code: goiaucf
 
 [Mechanical Sympathy](http://mechanical-sympathy.blogspot.com) - Martin Thompson
 
-[Go Documentation References](https://golang.org/doc/#references)
+[Go Documentation References](https://golang.org/doc/#references) - Language Team
 
 ### Interviews
 
@@ -44,6 +44,14 @@ Coupon Code: goiaucf
 ### Profiling and Debugging
 
 [Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick
+
+### Interfaces and Composition
+
+[Design Guidelines](design_guidelines.md)
+
+[Composition](http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy
+
+[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan
 
 ## Mechanical Sympathy
 
