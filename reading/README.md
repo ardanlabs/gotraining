@@ -21,9 +21,9 @@ Coupon Code: goiaucf
 
 [Mechanical Sympathy](http://mechanical-sympathy.blogspot.com) - Martin Thompson
 
-### Interviews
-
 [Go Documentation References](https://golang.org/doc/#references)
+
+### Interviews
 
 [An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)
 
