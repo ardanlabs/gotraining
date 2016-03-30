@@ -45,6 +45,8 @@ https://www.youtube.com/watch?v=5tg1ONG18H8
 
 #### Interface and Composition Design
 
+_With help from Sarah Mei and Sandi Metz._
+
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
 
 * Decoupling means reducing the amount of intimate knowledge code must have about concrete types.
@@ -60,6 +62,8 @@ https://www.youtube.com/watch?v=5tg1ONG18H8
 * Recognizing and minimizing cascading changes across the code is a way to architect adaptability and stability in your software.
 
 * When dependencies are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
+
+* If it's not clear how an abstraction makes the code better, it probably doesn't.
 
 #### Package-Oriented Design
 
