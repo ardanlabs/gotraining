@@ -45,7 +45,7 @@ Coupon Code: goiaucf
 
 [Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick
 
-### Mechanical Sympathy
+## Mechanical Sympathy
 
 This content can be found under [arrays](../topics/arrays) and [data races](../topics/data_race). We feel this content is so important it has been moved out to this general materials page.
 
@@ -75,7 +75,7 @@ This content can be found under [arrays](../topics/arrays) and [data races](../t
 
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)
 
-### Runtime
+## Runtime
 
 This content can be found under [pointers](../topics/pointers). We feel this content is so important it has been moved out to this general materials page.
 
