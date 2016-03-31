@@ -11,6 +11,14 @@ Pointers provide a way to share data across function boundaries. Having the abil
 
 ## 1.5 Garbage Collection
 
+The design of the Go GC has changed over the years:
+* Go 1.0, Stop the world mark sweep collector based heavily on tcmalloc.
+* Go 1.2, Precise collector, wouldn't mistake big numbers (or big strings of text) for pointers.
+* Go 1.3, Fully precise tracking of all stack values.
+* Go 1.4, Mark and sweep now parallel, but still stop the world.
+* Go 1.5, New GC design, focusing on latency over throughput.
+* Go 1.6, GC improvements, handling larger heaps with lower latency.
+
 ![figure1](GC_Algorithm.png)
 
 ## Links
