@@ -5,36 +5,26 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### Books
 
 [Go In Action](https://www.manning.com/books/go-in-action) - Kennedy, Ketelsen, St. Martin  
-Coupon Code: goiaucf
-
 [Learn Go](https://www.manning.com/books/learn-go) - Nathan Youngman
 
 ### Blogs
 
-[Going Go](http://www.goinggo.net) - William Kennedy
-
-[The acme of foolishness](http://dave.cheney.net) - Dave Cheney
-
-[The Go Blog](https://blog.golang.org) - Language Team
-
-[Ukiah Smith](https://ukiahsmith.com) - Ukiah Smith
-
-[Mechanical Sympathy](http://mechanical-sympathy.blogspot.com) - Martin Thompson
-
+[Going Go](http://www.goinggo.net) - William Kennedy  
+[The acme of foolishness](http://dave.cheney.net) - Dave Cheney  
+[The Go Blog](https://blog.golang.org) - Language Team  
+[Ukiah Smith](https://ukiahsmith.com) - Ukiah Smith  
+[Mechanical Sympathy](http://mechanical-sympathy.blogspot.com) - Martin Thompson  
 [Go Documentation References](https://golang.org/doc/#references) - Language Team
 
 ### Interviews
 
-[An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)
-
+[An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)  
 [Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)
 
 ### History
 
-[Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)
-
-[A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)
-
+[Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)  
+[A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)  
 [The Rise and Fall of Minicomputers](http://ethw.org/Rise_and_Fall_of_Minicomputers)
 
 ### Why Vendoring Is Important
@@ -47,10 +37,8 @@ Coupon Code: goiaucf
 
 ### Interfaces and Composition
 
-[Design Guidelines](design_guidelines.md)
-
-[Composition](http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy
-
+[Design Guidelines](design_guidelines.md)  
+[Composition](http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
 [Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan
 
 ## Mechanical Sympathy
@@ -59,28 +47,19 @@ This content can be found under [arrays](../topics/arrays) and [data races](../t
 
 #### CPU Caches
 
-[Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)
-
-[Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)
-
-[What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)
-
-[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)
-
-[Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)
-
-[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)
-
-[Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)
-
+[Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)  
+[Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
+[What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
+[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
+[Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)  
+[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)  
+[Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)  
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law)
 
 #### Data-Oriented Design
 
-[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)
-
-[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)
-
+[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)  
+[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)  
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)
 
 ## Runtime
@@ -93,41 +72,28 @@ This content can be found under [pointers](../topics/pointers). We feel this con
 
 #### Escape Analysis and Inlining
 
-[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
-
-https://github.com/golang/go/wiki/CompilerOptimizations
+[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)  
+[Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)
 
 #### Garbage Collection
 
-https://en.wikipedia.org/wiki/Tracing_garbage_collection
-
-https://blog.golang.org/go15gc
-
+[Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
+[Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
 [Rick Hudson GC Talk](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
 
 #### Single Static Assignment Optimizations
 
-[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)
-
-https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83
-
-https://godoc.org/golang.org/x/tools/go/ssa
-
+[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)  
+https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83  
+https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
 
 ## Release Notes
 
+[Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
+[Go 1.5 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19  
+[Go 1.4 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10  
+[Go 1.3 Release Notes](https://golang.org/doc/go1.3) - 2014/06/18  
+[Go 1.2 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01  
+[Go 1.1 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13  
 [Go 1.0 Release Notes](https://golang.org/doc/go1.0) - 2012/03/28
-
-[Go 1.1 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13
-
-[Go 1.2 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01
-
-[Go 1.3 Release Notes](https://golang.org/doc/go1.3) - 2014/06/18
-
-[Go 1.4 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10
-
-[Go 1.5 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19
-
-[Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17
-
