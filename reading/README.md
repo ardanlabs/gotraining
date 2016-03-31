@@ -117,17 +117,17 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Release Notes
 
-[Go 1.0 Release Notes](https://golang.org/doc/go1.0) - released 2012/03/28
+[Go 1.0 Release Notes](https://golang.org/doc/go1.0) - 2012/03/28
 
-[Go 1.1 Release Notes](https://golang.org/doc/go1.1) - released 2013/05/13
+[Go 1.1 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13
 
-[Go 1.2 Release Notes](https://golang.org/doc/go1.2) - released 2013/12/01
+[Go 1.2 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01
 
-[Go 1.3 Release Notes](https://golang.org/doc/go1.3) - released 2014/06/18
+[Go 1.3 Release Notes](https://golang.org/doc/go1.3) - 2014/06/18
 
-[Go 1.4 Release Notes](https://golang.org/doc/go1.4) - released 2014/12/10
+[Go 1.4 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10
 
-[Go 1.5 Release Notes](https://golang.org/doc/go1.5) - released 2015/08/19
+[Go 1.5 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19
 
-[Go 1.6 Release Notes](https://golang.org/doc/go1.6) - released 2016/02/17
+[Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17
 
