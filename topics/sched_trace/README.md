@@ -48,7 +48,7 @@ This example shows a simple web api running with some basic load.
 
 	Start to apply load to the web api:
 	
-		wrk -t8 -c500 -d5s http://localhost:4000/sendjson
+		wrk -t8 -c500 -d5m http://localhost:4000/sendjson
 
 	Look at the load on the logical processor. We can only see runnable goroutines:
 
@@ -98,7 +98,7 @@ This example shows a simple web api running that is leaking goroutines.
 
 	Start to apply load to the web api:
 	
-		wrk -t8 -c500 -d5s http://localhost:4000/sendjson
+		wrk -t8 -c500 -d5m http://localhost:4000/sendjson
 
 	Look at the load on the logical processor. We can only see runnable goroutines:
 
