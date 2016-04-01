@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/kuxUFMqy-9
+// https://play.golang.org/p/zM31ksYjY9
 
 // Sample program to show how to use an unbuffered channel to
 // simulate a game of tennis between two goroutines.
@@ -21,13 +21,11 @@ func init() {
 
 // main is the entry point for all Go programs.
 func main() {
-	// wg is used to manage concurrency.
-	var wg sync.WaitGroup
-
 	// Create an unbuffered channel.
 	court := make(chan int)
 
-	// Add a count of two, one for each goroutine.
+	// wg is used to manage concurrency.
+	var wg sync.WaitGroup
 	wg.Add(2)
 
 	// Launch two players.

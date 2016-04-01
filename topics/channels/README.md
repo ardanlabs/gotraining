@@ -46,11 +46,11 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/kuxUFMqy-9))
+[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/zM31ksYjY9))
 
 [Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/r1-v3Pf0wz))
 
-[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](http://play.golang.org/p/_nAP4DKQpL))
+[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/mWFXe3hQ8P))
 
 [Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/OwIUceuKrM))
 

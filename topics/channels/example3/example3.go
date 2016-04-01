@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/_nAP4DKQpL
+// https://play.golang.org/p/mWFXe3hQ8P
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
@@ -29,22 +29,15 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-	performInserts()
-}
 
-// performInserts coordinates the possible inserts that need to take place.
-func performInserts() {
-	log.Println("Inserts Started")
-
-	// Set the number of routines and inserts.
+	// Set the number of routines.
 	const routines = 10
-	const inserts = routines * 2
 
 	// Buffered channel to receive information about any possible insert.
-	ch := make(chan result, inserts)
+	ch := make(chan result, routines)
 
 	// Number of responses we need to handle.
-	waitInserts := inserts
+	waitInserts := routines
 
 	// Perform all the inserts.
 	for i := 0; i < routines; i++ {
