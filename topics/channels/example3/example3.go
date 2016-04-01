@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/mWFXe3hQ8P
+// https://play.golang.org/p/9qREBUf9jj
 
 // This sample program demonstrates how to use a buffered
 // channel to receive results from other goroutines in a guaranteed way.
@@ -29,7 +29,6 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
-
 	// Set the number of routines.
 	const routines = 10
 

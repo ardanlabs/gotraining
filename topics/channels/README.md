@@ -50,7 +50,7 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 [Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/r1-v3Pf0wz))
 
-[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/mWFXe3hQ8P))
+[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/9qREBUf9jj))
 
 [Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/OwIUceuKrM))
 
