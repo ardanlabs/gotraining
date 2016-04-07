@@ -79,39 +79,31 @@ func TestDownload(t *testing.T) {
 
 	t.Log("Given the need to test downloading content.")
 	{
-		t.Logf("\tWhen checking \"%s\" for status code \"%d\"", server.URL, statusCode)
+		t.Logf("\tTest 0:\tWhen checking %q for status code %d", server.URL, statusCode)
 		{
 			resp, err := http.Get(server.URL)
 			if err != nil {
-				t.Fatal("\t\tShould be able to make the Get call.",
-					failed, err)
+				t.Fatalf("\t%s\tShould be able to make the Get call : %v", failed, err)
 			}
-			t.Log("\t\tShould be able to make the Get call.",
-				succeed)
+			t.Logf("\t%s\tShould be able to make the Get call.", succeed)
 
 			defer resp.Body.Close()
 
 			if resp.StatusCode != statusCode {
-				t.Fatalf("\t\tShould receive a \"%d\" status code. %v %v",
-					statusCode, failed, resp.StatusCode)
+				t.Fatalf("\t%s\tShould receive a %d status code : %v", failed, statusCode, resp.StatusCode)
 			}
-			t.Logf("\t\tShould receive a \"%d\" status code. %v",
-				statusCode, succeed)
+			t.Logf("\t%s\tShould receive a %d status code.", succeed, statusCode)
 
 			var d Document
 			if err := xml.NewDecoder(resp.Body).Decode(&d); err != nil {
-				t.Fatal("\t\tShould be able to unmarshal the response.",
-					failed, err)
+				t.Fatalf("\t%s\tShould be able to unmarshal the response : %v", failed, err)
 			}
-			t.Log("\t\tShould be able to unmarshal the response.",
-				succeed)
+			t.Logf("\t%s\tShould be able to unmarshal the response.", succeed)
 
 			if len(d.Channel.Items) == 1 {
-				t.Log("\t\tShould have \"1\" item in the feed.",
-					succeed)
+				t.Logf("\t%s\tShould have 1 item in the feed.", succeed)
 			} else {
-				t.Error("\t\tShould have \"1\" item in the feed.",
-					failed, len(d.Channel.Items))
+				t.Errorf("\t%s\tShould have 1 item in the feed : %d", failed, len(d.Channel.Items))
 			}
 		}
 	}

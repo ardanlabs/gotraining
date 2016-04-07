@@ -24,37 +24,43 @@ func init() {
 
 // TestSendJSON testing the sendjson internal endpoint.
 func TestSendJSON(t *testing.T) {
+	url := "/sendjson"
+	statusCode := 200
+
 	t.Log("Given the need to test the SendJSON endpoint.")
 	{
-		r, _ := http.NewRequest("GET", "/sendjson", nil)
+		r, _ := http.NewRequest("GET", url, nil)
 		w := httptest.NewRecorder()
 		http.DefaultServeMux.ServeHTTP(w, r)
 
-		if w.Code != 200 {
-			t.Fatalf("\tShould receive a status code of \"200\" for the response. Received[%d] %s", w.Code, failed)
-		}
-		t.Log("\tShould receive a status code of \"200\" for the response.", succeed)
+		t.Logf("\tTest 0:\tWhen checking %q for status code %d", url, statusCode)
+		{
+			if w.Code != 200 {
+				t.Fatalf("\t%s\tShould receive a status code of %d for the response. Received[%d].", failed, statusCode)
+			}
+			t.Logf("\t%s\tShould receive a status code of %d for the response.", succeed, statusCode)
 
-		var u struct {
-			Name  string
-			Email string
-		}
+			var u struct {
+				Name  string
+				Email string
+			}
 
-		if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
-			t.Fatal("\tShould be able to decode the response.", failed)
-		}
-		t.Log("\tShould be able to decode the response.", succeed)
+			if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
+				t.Fatalf("\t%s\tShould be able to decode the response.", failed)
+			}
+			t.Logf("\t%s\tShould be able to decode the response.", succeed)
 
-		if u.Name == "Bill" {
-			t.Log("\tShould have \"Bill\" for Name in the response.", succeed)
-		} else {
-			t.Error("\tShould have \"Bill\" for Name in the response.", failed, u.Name)
-		}
+			if u.Name == "Bill" {
+				t.Logf("\t%s\tShould have \"Bill\" for Name in the response.", succeed)
+			} else {
+				t.Errorf("\t%s\tShould have \"Bill\" for Name in the response : %q", failed, u.Name)
+			}
 
-		if u.Email == "bill@ardanlabs.com" {
-			t.Log("\tShould have \"bill@ardanlabs.com\" for Email in the response.", succeed)
-		} else {
-			t.Error("\tShould have \"bill@ardanlabs.com\" for Email in the response.", failed, u.Email)
+			if u.Email == "bill@ardanlabs.com" {
+				t.Logf("\t%s\tShould have \"bill@ardanlabs.com\" for Email in the response.", succeed)
+			} else {
+				t.Errorf("\t%s\tShould have \"bill@ardanlabs.com\" for Email in the response : %q", failed, u.Email)
+			}
 		}
 	}
 }
