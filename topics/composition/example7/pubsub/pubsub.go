@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/GfjXEKv4qf
+// https://play.golang.org/p/cn0Uww6qmc
 
 // Package pubsub simulates a package that provides publication/subscription
 // type services.
@@ -16,13 +16,13 @@ type PubSub struct {
 
 // New creates a pubsub value for use.
 func New(host string) *PubSub {
-	p := PubSub{
+	ps := PubSub{
 		host: host,
 	}
 
 	// PRETEND THERE IS A SPECIFIC IMPLEMENTATION.
 
-	return &p
+	return &ps
 }
 
 // Publish sends the data for the specified key.

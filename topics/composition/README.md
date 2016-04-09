@@ -40,9 +40,9 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 #### Mocking
 
-[Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/GfjXEKv4qf))
+[Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/cn0Uww6qmc))
 
-[Client](example7/example7.go) ([Go Playground](https://play.golang.org/p/Z-Wdj9Mfmg))
+[Client](example7/example7.go) ([Go Playground](https://play.golang.org/p/0NS3SbImQ3))
 
 ## Exercises
 
