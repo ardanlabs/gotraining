@@ -20,7 +20,9 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 * Learn about the [design guidelines](../../reading/design_guidelines.md) for composition.
 
-## Code Review
+## Composition
+
+#### Decoupling
 
 [Struct Composition](example1/example1.go) ([Go Playground](https://play.golang.org/p/wipPTC9se1))
 
@@ -30,9 +32,17 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 [Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/uB4c33sbfj))
 
+#### Conversion and Assertions
+
 [Interface Conversions](example5/example5.go) ([Go Playground](http://play.golang.org/p/W8_QflbEFz))
 
 [Runtime Type Assertions](example6/example6.go) ([Go Playground](http://play.golang.org/p/2kfVP_SGA4))
+
+#### Mocking
+
+[Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/GfjXEKv4qf))
+
+[Client](example7/example7.go) ([Go Playground](https://play.golang.org/p/Z-Wdj9Mfmg))
 
 ## Exercises
 

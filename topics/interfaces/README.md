@@ -34,12 +34,6 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/lTMxc-oExx))
 
-#### Mocking
-
-[Package To Mock](example4/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/GfjXEKv4qf))
-
-[Client](example4/example4.go) ([Go Playground](https://play.golang.org/p/Z-Wdj9Mfmg))
-
 ## Exercises
 
 ### Exercise 1
