@@ -20,9 +20,9 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 * Learn about the [design guidelines](../../reading/design_guidelines.md) for composition.
 
-## Composition
+## Code Review
 
-#### Decoupling
+#### Composition and Decoupling
 
 [Struct Composition](example1/example1.go) ([Go Playground](https://play.golang.org/p/wipPTC9se1))
 
