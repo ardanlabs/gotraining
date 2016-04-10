@@ -26,7 +26,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)  
 [A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)  
 [The Rise and Fall of Minicomputers](http://ethw.org/Rise_and_Fall_of_Minicomputers)  
-[After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law)
+[After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law)  
+[A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter)
 
 ### Why Vendoring Is Important
 
@@ -47,9 +48,14 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g)  
 [Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
 
+### Linux
+
+[The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
+[Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html)
+
 ## Mechanical Sympathy
 
-This content can be found under [arrays](../topics/arrays) and [data races](../topics/data_race). We feel this content is so important it has been moved out to this general materials page.
+Much of this content can be found under [arrays](../topics/arrays) and [data races](../topics/data_race). We feel this content is so important it has been moved out to this general materials page.
 
 #### CPU Caches
 
