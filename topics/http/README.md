@@ -10,24 +10,17 @@ The Go standard library provides all the critical building blocks for producing 
 
 ## Links
 
-https://golang.org/pkg/net/http/
-
-https://golang.org/doc/articles/wiki/
-
-https://github.com/bradfitz/http2
-
-https://github.com/interagent/http-api-design/blob/master/README.md
-
-http://www.restapitutorial.com/httpstatuscodes.html
-
+https://golang.org/pkg/net/http/  
+https://golang.org/doc/articles/wiki/  
+https://github.com/bradfitz/http2  
+https://github.com/interagent/http-api-design/blob/master/README.md  
+http://www.restapitutorial.com/httpstatuscodes.html  
 http://racksburg.com/choosing-an-http-status-code/
 
 ## Code Review
 
-[Hello World Server](example1/main.go) ([Go Playground](https://play.golang.org/p/vB_ZytmqC1))
-
-[1 Line File Server](example2/main.go) ([Go Playground](https://play.golang.org/p/Qmj_C5PEs1))
-
+[Hello World Server](example1/main.go) ([Go Playground](https://play.golang.org/p/vB_ZytmqC1))  
+[1 Line File Server](example2/main.go) ([Go Playground](https://play.golang.org/p/Qmj_C5PEs1))  
 [Request and Response Basics](example3/main.go) ([Go Playground](https://play.golang.org/p/SIk8XWmwWa))
 
 ## Advanced Code Review

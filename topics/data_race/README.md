@@ -23,12 +23,9 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 ## Links
 
-[The Go Memory Model](https://golang.org/ref/mem)
-
-http://blog.golang.org/race-detector
-
-http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html
-
+[The Go Memory Model](https://golang.org/ref/mem)  
+http://blog.golang.org/race-detector  
+http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html  
 https://golang.org/doc/articles/race_detector.html
 
 ## Diagram
@@ -39,14 +36,10 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/_BpVuJ2jga))
-
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/2Zeq3INrv4))
-
-[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/BjzenGHmuN))
-
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/FLTlW0aqWT))
-
+[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/_BpVuJ2jga))  
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/2Zeq3INrv4))  
+[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/BjzenGHmuN))  
+[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/FLTlW0aqWT))  
 [Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/k6nGJWXo7e))
 
 ## Advanced Code Review

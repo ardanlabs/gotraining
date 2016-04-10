@@ -18,16 +18,13 @@ http://golang.org/pkg/io/
 
 ## Code Review
 
-[Standard Library Working Together](example1/example1.go) ([Go Playground](http://play.golang.org/p/jlTo1IV1RQ))
-
-[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/LY5P96Xrbl))
-
+[Standard Library Working Together](example1/example1.go) ([Go Playground](http://play.golang.org/p/jlTo1IV1RQ))  
+[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/LY5P96Xrbl))  
 [MultiWriters with curl example](example3/example3.go) ([Go Playground](http://play.golang.org/p/OX6jTkWEF7))
 
 ## Advanced Code Review
 
-[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/Tmt7v3fIQF))
-
+[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/Tmt7v3fIQF))  
 [Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/JwuEob5GfV))
 
 ## Exercises

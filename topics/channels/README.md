@@ -24,11 +24,9 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 
 ## Links
 
-[Channel Communication](https://golang.org/ref/mem#tmp_7)
-
-http://blog.golang.org/share-memory-by-communicating
-
-http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
+[Channel Communication](https://golang.org/ref/mem#tmp_7)  
+http://blog.golang.org/share-memory-by-communicating  
+http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html  
 
 ## Buffer Bloat - 2011
 
@@ -40,19 +38,15 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 	* Use them to handle well defined bursts of data.
 	* Use them to deal with speed of light issues between handoffs.
 
-[Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g)
-
-[Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
+[Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g)  
+[Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)  
 
 ## Code Review
 
-[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/zM31ksYjY9))
-
-[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/r1-v3Pf0wz))
-
-[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/9qREBUf9jj))
-
-[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/OwIUceuKrM))
+[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/zM31ksYjY9))  
+[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/r1-v3Pf0wz))  
+[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/9qREBUf9jj))  
+[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/OwIUceuKrM))  
 
 ## Advanced Code Review
 

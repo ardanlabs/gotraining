@@ -14,12 +14,9 @@ Variables are at the heart of the language and provide the ability to read from 
 
 ## Links
 
-[Built-In Types](http://golang.org/ref/spec#Boolean_types)
-
-https://golang.org/doc/effective_go.html#variables
-
-http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
-
+[Built-In Types](http://golang.org/ref/spec#Boolean_types)  
+https://golang.org/doc/effective_go.html#variables  
+http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html  
 [What's in a name](https://www.youtube.com/watch?v=sFUSP8Au_PE)
 
 ## Code Review

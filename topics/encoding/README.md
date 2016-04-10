@@ -13,12 +13,9 @@ http://www.goinggo.net/2014/01/decode-json-documents-in-go.html
 
 ## Code Review
 
-[Unmarshal JSON documents](example1/example1.go) ([Go Playground](http://play.golang.org/p/ocxFH62yaw))
-
-[Unmarshal JSON files](example2/example2.go) ([Go Playground](http://play.golang.org/p/IWfOJbmMdL))
-
-[Marshal a user defined type](example3/example3.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))
-
+[Unmarshal JSON documents](example1/example1.go) ([Go Playground](http://play.golang.org/p/ocxFH62yaw))  
+[Unmarshal JSON files](example2/example2.go) ([Go Playground](http://play.golang.org/p/IWfOJbmMdL))  
+[Marshal a user defined type](example3/example3.go) ([Go Playground](http://play.golang.org/p/rLDpqYbnGR))  
 [Custom Marshaler and Unmarshler](example4/example4.go) ([Go Playground](http://play.golang.org/p/TOYrZJoLei))
 
 ## Exercises

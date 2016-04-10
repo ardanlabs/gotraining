@@ -74,35 +74,30 @@ This is subject to be different in different processors. For this content, the f
 
 ## Links
 
-[Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)
+#### CPU Caches
 
-[Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)
+[Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)  
+[Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
+[What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
+[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
+[Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors)  
+[Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)  
+[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)  
+[Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)  
 
-[What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)
+[Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law)  
 
-[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)
+#### Data-Oriented Design
 
-[Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)
-
-[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)
-
-[Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)
-
-[Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law)
-
-[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)
-
-[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)
-
-[Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)
+[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)  
+[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)  
+[Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)  
 
 ## Code Review
 
-[Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/2D24t6fbW_))
-
-[Different type arrays](example2/example2.go) ([Go Playground](http://play.golang.org/p/nYgwqqOctt))
-
-[Contiguous memory allocations](example3/example3.go) ([Go Playground](http://play.golang.org/p/L-SmdGfUcP))
+[Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/2D24t6fbW_))  
+[Different type arrays](example2/example2.go) ([Go Playground](http://play.golang.org/p/nYgwqqOctt))  
+[Contiguous memory allocations](example3/example3.go) ([Go Playground](http://play.golang.org/p/L-SmdGfUcP))  
 
 ## Advanced Code Review
 

@@ -11,16 +11,13 @@ Constants are a way to create a named identifier whose value can never change. T
 
 ## Links
 
-https://golang.org/ref/spec#Constants
-
-http://blog.golang.org/constants
-
+https://golang.org/ref/spec#Constants  
+http://blog.golang.org/constants  
 http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 ## Code Review
 
-[Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/Remt-HvD2D))
-
+[Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/Remt-HvD2D))  
 [Parallel type system (Kind)](example2/example2.go) ([Go Playground](http://play.golang.org/p/ExxRWe6jUz))
 
 ## Exercises

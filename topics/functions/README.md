@@ -10,18 +10,14 @@ Functions are at the core of the language. They provide a mechanism to group and
 
 ## Links
 
-https://golang.org/doc/effective_go.html#functions
-
-http://www.goinggo.net/2013/10/functions-and-naked-returns-in-go.html
-
+https://golang.org/doc/effective_go.html#functions  
+http://www.goinggo.net/2013/10/functions-and-naked-returns-in-go.html  
 http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 ## Code Review
 
-[Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/bYY-TRjfH0))
-
-[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/jJl5GV_LdI))
-
+[Return multiple values](example1/example1.go) ([Go Playground](http://play.golang.org/p/bYY-TRjfH0))  
+[Blank identifier](example2/example2.go) ([Go Playground](http://play.golang.org/p/jJl5GV_LdI))  
 [Redeclarations](example3/example3.go) ([Go Playground](http://play.golang.org/p/bw3PrialU0))
 
 ## Advanced Code Review

@@ -18,20 +18,15 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 
 ## Links
 
-https://golang.org/doc/effective_go.html#interfaces
-
-http://blog.golang.org/laws-of-reflection
-
-http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
-
+https://golang.org/doc/effective_go.html#interfaces  
+http://blog.golang.org/laws-of-reflection  
+http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html  
 [Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)
 
 ## Code Review
 
-[Polymorphism](example1/example1.go) ([Go Playground](https://play.golang.org/p/nMJIHaNXxm))
-
-[Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/jWMR2oudEN))
-
+[Polymorphism](example1/example1.go) ([Go Playground](https://play.golang.org/p/nMJIHaNXxm))  
+[Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/jWMR2oudEN))  
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/lTMxc-oExx))
 
 ## Exercises

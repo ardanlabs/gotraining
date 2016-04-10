@@ -63,6 +63,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 [Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
 [How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
+[Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors)  
 [Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)  
 [The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)  
 [Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)  

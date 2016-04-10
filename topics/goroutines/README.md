@@ -23,28 +23,19 @@ Goroutines are functions that are created and scheduled to be run independently.
 
 ## Links
 
-http://blog.golang.org/advanced-go-concurrency-patterns
-
-http://blog.golang.org/context
-
-http://blog.golang.org/concurrency-is-not-parallelism
-
-http://talks.golang.org/2013/distsys.slide
-
-[Go 1.5 GOMAXPROCS Default](https://docs.google.com/document/d/1At2Ls5_fhJQ59kDK2DFVhFu3g5mATSXqqV5QrxinasI/edit)
-
-http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
-
-http://www.akkadia.org/drepper/cpumemory.pdf
-
+http://blog.golang.org/advanced-go-concurrency-patterns  
+http://blog.golang.org/context  
+http://blog.golang.org/concurrency-is-not-parallelism  
+http://talks.golang.org/2013/distsys.slide  
+[Go 1.5 GOMAXPROCS Default](https://docs.google.com/document/d/1At2Ls5_fhJQ59kDK2DFVhFu3g5mATSXqqV5QrxinasI/edit)  
+http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html  
+http://www.akkadia.org/drepper/cpumemory.pdf  
 http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips
 
 ## Code Review
 
-[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/LC1VgZZzO9))
-
-[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/WU1p9-_RMN))
-
+[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/LC1VgZZzO9))  
+[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/WU1p9-_RMN))  
 [Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/1LJPV8HZrG))
 
 ## Exercises

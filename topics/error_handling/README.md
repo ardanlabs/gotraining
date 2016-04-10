@@ -11,26 +11,18 @@ Error handling is critical for making your programs reliable, trustworthy and re
 
 ## Links
 
-http://blog.golang.org/error-handling-and-go
-
-http://www.goinggo.net/2014/10/error-handling-in-go-part-i.html
-
-http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html
-
-http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/
-
+http://blog.golang.org/error-handling-and-go  
+http://www.goinggo.net/2014/10/error-handling-in-go-part-i.html  
+http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html  
+http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/  
 http://dave.cheney.net/2014/12/24/inspecting-errors
 
 ## Code Review
 
-[Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/PiSDQj1UCB))
-
-[Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/FRnwmQx_ZI))
-
-[Type As Context](example3/example3.go) ([Go Playground](https://play.golang.org/p/N7AXFU5JYv))
-
-[Behavior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/6GYqwSxHjI))
-
+[Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/PiSDQj1UCB))  
+[Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/FRnwmQx_ZI))  
+[Type As Context](example3/example3.go) ([Go Playground](https://play.golang.org/p/N7AXFU5JYv))  
+[Behavior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/6GYqwSxHjI))  
 [Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/9Pqn5P5l0C))
 
 ## Exercises

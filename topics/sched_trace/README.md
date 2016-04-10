@@ -7,8 +7,7 @@ We will need this program to place load on the example web api's. Download and b
 
 ## GODEBUG
 
-[http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)
-
+[http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)  
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)
 
 	export GODEBUG=schedtrace=1000,scheddetail=1
@@ -31,8 +30,7 @@ We will need this program to place load on the example web api's. Download and b
 
 ## Links
 
-https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs
-
+https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs  
 http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html
 
 ## Running Summary Trace: Example1
@@ -125,8 +123,7 @@ This example shows a simple web api running that is leaking goroutines.
 
 ## Code Review
 
-[Web API](example1/example1.go) ([Go Playground](https://play.golang.org/p/70aRkw59zH))
-
+[Web API](example1/example1.go) ([Go Playground](https://play.golang.org/p/70aRkw59zH))  
 [Web API Leaking Goroutines](example2/example2.go) ([Go Playground](https://play.golang.org/p/6MnCQ3ABDU))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

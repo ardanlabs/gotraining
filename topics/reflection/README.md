@@ -14,10 +14,8 @@ http://blog.golang.org/laws-of-reflection
 
 ## Code Review
 
-[Empty Interface](example1/example1.go) ([Go Playground](https://play.golang.org/p/OSeD9F_P46))
-
-[Reflect struct types with tags](example2/example2.go) ([Go Playground](https://play.golang.org/p/fSMITKsv3p))
-
+[Empty Interface](example1/example1.go) ([Go Playground](https://play.golang.org/p/OSeD9F_P46))  
+[Reflect struct types with tags](example2/example2.go) ([Go Playground](https://play.golang.org/p/fSMITKsv3p))  
 [Decoding function for integers](example3/example3.go) ([Go Playground](https://play.golang.org/p/bWQ6hiVECQ))
 
 ## Exercises

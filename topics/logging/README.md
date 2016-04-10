@@ -13,8 +13,7 @@ http://www.goinggo.net/2013/11/using-log-package-in-go.html
 
 ## Code Review
 
-[Use of log package](example1/example1.go) ([Go Playground](http://play.golang.org/p/xO5OuPOJef))
-
+[Use of log package](example1/example1.go) ([Go Playground](http://play.golang.org/p/xO5OuPOJef))  
 [Customizing your own log](example2/example2.go) ([Go Playground](https://play.golang.org/p/HlCQ3tKRsm))
 
 ## Exercises

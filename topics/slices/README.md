@@ -11,34 +11,22 @@ Slices are an incredibly important data structure in Go. They form the basis for
 
 ## Links
 
-http://blog.golang.org/go-slices-usage-and-internals
-
-https://blog.golang.org/strings
-
-http://blog.golang.org/slices
-
-http://www.goinggo.net/2013/08/understanding-slices-in-go-programming.html
-
-http://www.goinggo.net/2013/08/collections-of-unknown-length-in-go.html
-
-http://www.goinggo.net/2013/09/iterating-over-slices-in-go.html
-
-http://www.goinggo.net/2013/09/slices-of-slices-of-slices-in-go.html
-
+http://blog.golang.org/go-slices-usage-and-internals  
+https://blog.golang.org/strings  
+http://blog.golang.org/slices  
+http://www.goinggo.net/2013/08/understanding-slices-in-go-programming.html  
+http://www.goinggo.net/2013/08/collections-of-unknown-length-in-go.html  
+http://www.goinggo.net/2013/09/iterating-over-slices-in-go.html  
+http://www.goinggo.net/2013/09/slices-of-slices-of-slices-in-go.html  
 http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 ## Code Review
 
-[Declare and Length](example1/example1.go) ([Go Playground](https://play.golang.org/p/sq3zBRbuJU))
-
-[Reference Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/e-U8HPnmIL))
-
-[Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/IHKg8PuSj4))
-
-[Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/etCPO64mWh))
-
-[Strings and slices](example5/example5.go) ([Go Playground](https://play.golang.org/p/0WWW4Lwok4))
-
+[Declare and Length](example1/example1.go) ([Go Playground](https://play.golang.org/p/sq3zBRbuJU))  
+[Reference Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/e-U8HPnmIL))  
+[Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/IHKg8PuSj4))  
+[Taking slices of slices](example3/example3.go) ([Go Playground](http://play.golang.org/p/etCPO64mWh))  
+[Strings and slices](example5/example5.go) ([Go Playground](https://play.golang.org/p/0WWW4Lwok4))  
 [Variadic functions](example6/example6.go) ([Go Playground](http://play.golang.org/p/5uDVuormwB))
 
 ## Advanced Code Review

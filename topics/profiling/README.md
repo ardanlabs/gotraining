@@ -119,12 +119,9 @@ The `web` command will generate a call graph.
 
 ## Links
 
-http://golang.org/blog/profiling-go-programs
-
-http://golang.org/pkg/runtime/pprof/
-
-https://golang.org/pkg/net/http/pprof/
-
+http://golang.org/blog/profiling-go-programs  
+http://golang.org/pkg/runtime/pprof/  
+https://golang.org/pkg/net/http/pprof/  
 https://godoc.org/rsc.io/pprof_mac_fix
 
 ## Code Review

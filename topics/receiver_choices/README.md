@@ -13,16 +13,13 @@ When creating a new type, try to answer this question before declaring methods. 
 
 ## Links
 
-http://www.goinggo.net/2014/12/using-pointers-in-go.html
-
+http://www.goinggo.net/2014/12/using-pointers-in-go.html  
 http://play.golang.org/p/ki991PuHhk
 
 ## Code Review
 
-[Primitive Types](example1/example1.go) ([Go Playground](https://play.golang.org/p/H5HRoElN6q))
-
-[Reference Types](example3/example3.go) ([Go Playground](https://play.golang.org/p/4npFGglwQW))
-
+[Built-In Tpes](example1/example1.go) ([Go Playground](https://play.golang.org/p/H5HRoElN6q))  
+[Reference Types](example3/example3.go) ([Go Playground](https://play.golang.org/p/4npFGglwQW))  
 [Struct Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/xD6PCx--GG))
 
 ## Exercises

@@ -14,32 +14,21 @@ Testing is built right into the go tools and the standard library. Testing needs
 
 ## Links
 
-http://golang.org/pkg/testing/
-
-http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go
-
-http://saml.rilspace.org/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof
-
-http://golang.org/pkg/net/http/pprof/
-
-https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs
-
-https://github.com/dvyukov/go-fuzz
-
-https://talks.golang.org/2015/dynamic-tools.slide#1
-
+http://golang.org/pkg/testing/  
+http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go  
+http://saml.rilspace.org/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof  
+http://golang.org/pkg/net/http/pprof/  
+https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs  
+https://github.com/dvyukov/go-fuzz  
+https://talks.golang.org/2015/dynamic-tools.slide#1  
 https://vimeo.com/141698770
 
 ## Code Review
 
-[Basic Unit Test](example1/example1_test.go)
-
-[Table Unit Test](example2/example2_test.go)
-
-[Mocking Web Server Response](example3/example3_test.go)
-
-[Testing Internal Endpoints](example4)
-
+[Basic Unit Test](example1/example1_test.go)  
+[Table Unit Test](example2/example2_test.go)  
+[Mocking Web Server Response](example3/example3_test.go)  
+[Testing Internal Endpoints](example4)  
 [Example Test](example4/handlers/handlers_example_test.go)
 
 ## Coverage

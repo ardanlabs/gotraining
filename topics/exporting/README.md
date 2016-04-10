@@ -12,12 +12,9 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 
 ## Links
 
-http://blog.golang.org/organizing-go-code
-
-http://blog.golang.org/package-names
-
-http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html
-
+http://blog.golang.org/organizing-go-code  
+http://blog.golang.org/package-names  
+http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html  
 http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 
 ## An Interview with Brian Kernighan
@@ -32,14 +29,10 @@ _I think that the real problem with C is that it doesn't give you enough mechani
 
 ## Code Review
 
-[Declare and access exported identifiers](example1/example1.go)
-
-[Declare unexported identifiers and restrictions](example2/example2.go)
-
-[Access values of unexported identifiers](example3/example3.go)
-
-[Unexported struct type fields](example4/example4.go)
-
+[Declare and access exported identifiers](example1/example1.go)  
+[Declare unexported identifiers and restrictions](example2/example2.go)  
+[Access values of unexported identifiers](example3/example3.go)  
+[Unexported struct type fields](example4/example4.go)  
 [Unexported embedded types](example5/example5.go)
 
 ## Exercises

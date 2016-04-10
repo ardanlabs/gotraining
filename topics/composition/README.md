@@ -12,8 +12,7 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 
 ## Links
 
-http://golang.org/doc/effective_go.html#embedding
-
+http://golang.org/doc/effective_go.html#embedding  
 http://www.goinggo.net/2015/09/composition-with-go.html
 
 ## Design Guidelines
@@ -24,24 +23,19 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 #### Composition and Decoupling
 
-[Struct Composition](example1/example1.go) ([Go Playground](https://play.golang.org/p/wipPTC9se1))
-
-[Decoupling With Interface](example2/example2.go) ([Go Playground](https://play.golang.org/p/Kh8JCDxdjY))
-
-[Interface Composition](example3/example3.go) ([Go Playground](https://play.golang.org/p/wUtZ7gxLIL))
-
-[Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/uB4c33sbfj))
+[Struct Composition](example1/example1.go) ([Go Playground](https://play.golang.org/p/wipPTC9se1))  
+[Decoupling With Interface](example2/example2.go) ([Go Playground](https://play.golang.org/p/Kh8JCDxdjY))  
+[Interface Composition](example3/example3.go) ([Go Playground](https://play.golang.org/p/wUtZ7gxLIL))  
+[Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/uB4c33sbfj))  
 
 #### Conversion and Assertions
 
-[Interface Conversions](example5/example5.go) ([Go Playground](http://play.golang.org/p/W8_QflbEFz))
-
+[Interface Conversions](example5/example5.go) ([Go Playground](http://play.golang.org/p/W8_QflbEFz))  
 [Runtime Type Assertions](example6/example6.go) ([Go Playground](http://play.golang.org/p/2kfVP_SGA4))
 
 #### Mocking
 
-[Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/cn0Uww6qmc))
-
+[Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/cn0Uww6qmc))  
 [Client](example7/example7.go) ([Go Playground](https://play.golang.org/p/0NS3SbImQ3))
 
 ## Exercises
