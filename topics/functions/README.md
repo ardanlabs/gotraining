@@ -23,7 +23,7 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 ## Advanced Code Review
 
-[Trapping panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/QiGOu7b32S))
+[Recover panics](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/xOprJ4yms0))
 
 ## Exercises
 

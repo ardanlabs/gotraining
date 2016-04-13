@@ -1,9 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/QiGOu7b32S
+// http://play.golang.org/p/xOprJ4yms0
 
-// Sample program to show how to trap panics that can occur from the Go runtime.
+// Sample program to show how to recover from panics.
 package main
 
 import (
@@ -13,6 +13,7 @@ import (
 
 // main is the entry point for the application.
 func main() {
+
 	// Call the testPanic function to run the test.
 	if err := testPanic(); err != nil {
 		fmt.Println("Error:", err)
@@ -22,6 +23,7 @@ func main() {
 // testPanic simulates a function that encounters a panic to
 // test our catchPanic function.
 func testPanic() (err error) {
+
 	// Schedule the catchPanic function to be called when
 	// the testPanic function returns.
 	defer catchPanic(&err)
@@ -42,11 +44,12 @@ func testPanic() (err error) {
 
 // catchPanic catches panics and processes the error.
 func catchPanic(err *error) {
+
 	// Check if a panic occurred.
 	if r := recover(); r != nil {
 		fmt.Println("PANIC Deferred")
 
-		// Capture the stack trace
+		// Capture the stack trace.
 		buf := make([]byte, 10000)
 		runtime.Stack(buf, false)
 		fmt.Println("Stack Trace:", string(buf))
