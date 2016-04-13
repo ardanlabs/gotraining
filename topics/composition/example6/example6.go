@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/2kfVP_SGA4
+// https://play.golang.org/p/ahRbbv1CA0
 
 // Sample program demonstrating that type assertions are a runtime and
 // not compile time construct.
@@ -10,6 +10,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"time"
 )
 
 // car represents something that can move.
@@ -32,6 +33,11 @@ func (cloud) String() string {
 
 // main is the entry point for the application.
 func main() {
+
+	// Seed the number random generator.
+	rand.Seed(time.Now().UnixNano())
+
+	// Create a slice of the Stringer interface values.
 	mvs := []fmt.Stringer{
 		car{},
 		cloud{},

@@ -56,7 +56,8 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/nNnsK6hWdP))  
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/FWmGnVUDoA))  
 [Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/VYqb11RiWr))  
-[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/KGQS9dhSmT))
+[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/KGQS9dhSmT))  
+[Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/NO6mwHV3YO))
 
 ## Exercises
 

@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/W8_QflbEFz
+// https://play.golang.org/p/5JeYtz7iGF
 
 // Sample program demonstrating when implicit interface conversions
 // are provided by the compiler.
@@ -78,8 +78,9 @@ func main() {
 	// We can perform a type assertion at runtime to support the assignment.
 
 	// Perform a type assertion against the Mover interface value to access
-	// the concrete type value of type bike that was stored inside of it. Then
-	// assign the concrete type to the MoveLocker interface.
+	// a COPY of the concrete type value of type bike that was stored inside
+	// of it. Then assign the COPY of the concrete type to the MoveLocker
+	// interface.
 	b := m.(bike)
 	ml = b
 }
