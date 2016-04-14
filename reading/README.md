@@ -23,11 +23,13 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### History
 
+[The Evolution of Go - Robert Griesmer](https://www.youtube.com/watch?v=0ReKdcpNyQg)  
 [Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)  
+
 [A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)  
 [The Rise and Fall of Minicomputers](http://ethw.org/Rise_and_Fall_of_Minicomputers)  
 [After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law)  
-[A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter)
+[A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter)  
 
 ### Why Vendoring Is Important
 
