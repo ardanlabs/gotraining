@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/tGFZkhZ01i
+// https://play.golang.org/p/Xi-Qavgibz
 
 // Sample program demonstrating struct composition.
 package main
