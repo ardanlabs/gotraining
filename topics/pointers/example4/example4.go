@@ -4,7 +4,7 @@
 // Escape Analysis Flaws:
 // https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
 
-// https://play.golang.org/p/l4oKBekBPD
+// https://play.golang.org/p/Wfv2K70DcQ
 
 // Sample program to show variables stay on or escape from the stack.
 package main
@@ -33,12 +33,12 @@ func stayOnStack() user {
 
 // escapeToHeap shows how the variable does escape.
 func escapeToHeap() *user {
-	u := &user{
+	u := user{
 		name:  "Bill",
 		email: "bill@ardanlabs.com",
 	}
 
-	return u
+	return &u
 }
 
 /*
@@ -49,8 +49,9 @@ func escapeToHeap() *user {
 ./example4.go:19: can inline main
 ./example4.go:20: inlining call to stayOnStack
 ./example4.go:21: inlining call to escapeToHeap
-./example4.go:21: main &user literal does not escape
-./example4.go:38: &user literal escapes to heap
+./example4.go:21: main &u does not escape
+./example4.go:39: moved to heap: u
+./example4.go:41: &u escapes to heap
 
 
 go build -gcflags -S
