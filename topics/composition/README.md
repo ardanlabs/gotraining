@@ -23,10 +23,10 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 #### Composition and Decoupling
 
-[Struct Composition](example1/example1.go) ([Go Playground](https://play.golang.org/p/wipPTC9se1))  
-[Decoupling With Interface](example2/example2.go) ([Go Playground](https://play.golang.org/p/Kh8JCDxdjY))  
+[Struct Composition](example1/example1.go) ([Go Playground](https://play.golang.org/p/5M0cu4ui2k))  
+[Decoupling With Interface](example2/example2.go) ([Go Playground](https://play.golang.org/p/cLAnmOBMzB))  
 [Interface Composition](example3/example3.go) ([Go Playground](https://play.golang.org/p/wUtZ7gxLIL))  
-[Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/uB4c33sbfj))  
+[Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/8Yo0yUfGMc))  
 
 #### Conversion and Assertions
 
