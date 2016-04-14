@@ -1,14 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/8Yo0yUfGMc
+// https://play.golang.org/p/tGFZkhZ01i
 
 // Sample program demonstrating decoupling with interface composition.
 package main
 
 import (
+	"errors"
 	"fmt"
-	"io"
 	"math/rand"
 	"time"
 )
@@ -18,6 +18,9 @@ func init() {
 }
 
 // =============================================================================
+
+// EOD represents the end of the data stream.
+var EOD = errors.New("EOD")
 
 // Data is the structure of the data we are copying.
 type Data struct {
@@ -49,8 +52,11 @@ type Xenia struct{}
 
 // Pull knows how to pull data out of Xenia.
 func (Xenia) Pull(d *Data) error {
-	if rand.Intn(10) == 5 {
-		return io.EOF
+	switch rand.Intn(10) {
+	case 1, 9:
+		return EOD
+	case 5:
+		return errors.New("Error reading data from Xenia")
 	}
 
 	d.Line = "Data"
@@ -99,11 +105,11 @@ func (IO) store(s Storer, data []Data) {
 }
 
 // Copy knows how to pull and store data from any System.
-func (io IO) Copy(ps PullStorer, batch int) {
+func (io IO) Copy(ps PullStorer, batch int) error {
 	for {
 		data := make([]Data, batch)
 		if err := io.pull(ps, data); err != nil {
-			return
+			return err
 		}
 
 		io.store(ps, data)
@@ -122,5 +128,7 @@ func main() {
 	}
 
 	var io IO
-	io.Copy(&sys, 3)
+	if err := io.Copy(&sys, 3); err != nil && err != EOD {
+		fmt.Println(err)
+	}
 }
