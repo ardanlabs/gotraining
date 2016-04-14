@@ -23,7 +23,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### History
 
-[The Evolution of Go - Robert Griesmer](https://www.youtube.com/watch?v=0ReKdcpNyQg)  
+[The Evolution of Go](https://www.youtube.com/watch?v=0ReKdcpNyQg) - Robert Griesmer  
 [Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)  
 
 [A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)  
@@ -37,7 +37,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Profiling and Debugging
 
-[Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick
+[Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
+[Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov
 
 ### Interfaces and Composition
 
