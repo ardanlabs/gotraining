@@ -4,12 +4,16 @@
 // Escape Analysis Flaws:
 // https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
 
-// https://play.golang.org/p/KGQS9dhSmT
+// https://play.golang.org/p/l4oKBekBPD
 
 // Sample program to show variables stay on or escape from the stack.
 package main
 
-import "fmt"
+// user represents a user in the system.
+type user struct {
+	name  string
+	email string
+}
 
 // main is the entry point for the application.
 func main() {
@@ -18,43 +22,42 @@ func main() {
 }
 
 // stayOnStack shows how the variable does not escape.
-func stayOnStack() {
-	// Declare a variable of type integer.
-	var x int
+func stayOnStack() user {
+	u := user{
+		name:  "Bill",
+		email: "bill@ardanlabs.com",
+	}
 
-	// Display the address of the variable.
-	println("Stack Addr:", &x)
+	return u
 }
 
 // escapeToHeap shows how the variable does escape.
-func escapeToHeap() {
-	// Declare a variable of type integer.
-	var x int
+func escapeToHeap() *user {
+	u := &user{
+		name:  "Bill",
+		email: "bill@ardanlabs.com",
+	}
 
-	// Display the address of the variable.
-	fmt.Println("Heap Addr:", &x)
+	return u
 }
 
 /*
 // go build -gcflags -m
 
-./example4.go:21: can inline stayOnStack
-./example4.go:16: inlining call to stayOnStack
-./example4.go:35: "Heap Addr:" escapes to heap
-./example4.go:35: &x escapes to heap
-./example4.go:32: moved to heap: x
-./example4.go:35: &x escapes to heap
-./example4.go:35: escapeToHeap ... argument does not escape
-./example4.go:16: main &x does not escape
-./example4.go:26: stayOnStack &x does not escape
+./example4.go:25: can inline stayOnStack
+./example4.go:35: can inline escapeToHeap
+./example4.go:19: can inline main
+./example4.go:20: inlining call to stayOnStack
+./example4.go:21: inlining call to escapeToHeap
+./example4.go:21: main &user literal does not escape
+./example4.go:38: &user literal escapes to heap
 
 
 go build -gcflags -S
 
-"".main t=1 size=128 value=0 args=0x0 locals=0x20
-	0x0000 00000 (/Users/bill/code/.../example4.go:15)	TEXT	"".main(SB), $32-0
-	0x0000 00000 (/Users/bill/code/.../example4.go:15)	MOVQ	(TLS), CX
-	0x0009 00009 (/Users/bill/code/.../example4.go:15)	CMPQ	SP, 16(CX)
-	0x000d 00013 (/Users/bill/code/.../example4.go:15)	JLS	107
-	0x000f 00015 (/Users/bill/code/.../example4.go:15)	SUBQ	$32, SP
+0x000f 00015 (pointers/example4/example4.go:20)	MOVQ	$4, DX
+0x0016 00022 (pointers/example4/example4.go:20)	LEAQ	go.string."bill@ardanlabs.com"(SB), CX
+0x001d 00029 (pointers/example4/example4.go:20)	MOVQ	$18, AX
+0x0024 00036 (pointers/example4/example4.go:20)	NOP
+0x0024 00036 (pointers/example4/example4.go:21)	MOVQ	$0, AX
 */

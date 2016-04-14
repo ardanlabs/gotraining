@@ -14,7 +14,7 @@ const failed = "\u2717"
 
 // TestDownload validates the http Get function can download content.
 func TestDownload(t *testing.T) {
-	url := "http://www.goinggo.net/feeds/posts/default?alt=rss"
+	url := "http://feeds.reuters.com/reuters/businessNews"
 	statusCode := 200
 
 	t.Log("Given the need to test downloading content.")
