@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/nMJIHaNXxm
+// https://play.golang.org/p/OTaD58WLde
 
 // Sample program to show how polymorphic behavior with interfaces.
 package main
@@ -10,7 +10,7 @@ import "fmt"
 
 // reader is an interface that defines the act of reading data.
 type reader interface {
-	read() ([]byte, error)
+	read(b []byte) (int, error)
 }
 
 // file defines a system file.
@@ -19,8 +19,10 @@ type file struct {
 }
 
 // read implements the reader interface for a file.
-func (f file) read() ([]byte, error) {
-	return []byte(`<rss><channel><title>Going Go Programming</title></channel></rss>`), nil
+func (f file) read(b []byte) (int, error) {
+	s := "<rss><channel><title>Going Go Programming</title></channel></rss>"
+	copy(b, []byte(s))
+	return len(s), nil
 }
 
 // pipe defines a named pipe network connection.
@@ -29,12 +31,15 @@ type pipe struct {
 }
 
 // read implements the reader interface for a network connection.
-func (p pipe) read() ([]byte, error) {
-	return []byte(`{name: "bill", title: "developer"}`), nil
+func (p pipe) read(b []byte) (int, error) {
+	s := `{name: "bill", title: "developer"}`
+	copy(b, []byte(s))
+	return len(s), nil
 }
 
 // main is the entry point for the application.
 func main() {
+
 	// Create two values one of type file and one of type pipe.
 	f := file{"data.json"}
 	p := pipe{"cfg_service"}
@@ -46,11 +51,13 @@ func main() {
 
 // retrieve can read any device and process the data.
 func retrieve(r reader) error {
-	d, err := r.read()
+	data := make([]byte, 100)
+
+	len, err := r.read(data)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(string(d))
+	fmt.Println(string(data[:len]))
 	return nil
 }
