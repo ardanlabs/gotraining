@@ -18,13 +18,13 @@ with the right link.
 
 ## Usage
 
-Simply run `markdown-playground-links` with a list of files you want to process.
+Simply run `mpl` with a list of files you want to process.
 
 ```
 # Update the links of the constants README.md
-markdown-playground-links topics/constants/README.md
+mpl topics/constants/README.md
 
-# Using zsh wildcards, update all markdown files unther the current directory
-markdown-playground-links **/*.md
+# Using zsh wildcards, update all markdown files under the current directory
+mpl **/*.md
 ```
 
