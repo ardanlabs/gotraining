@@ -39,8 +39,8 @@ const fiveSeconds int64 = 5 * time.Second // time.Duration(5) * time.Duration(10
 // ./example2.go:37: cannot use time.Duration(5) * time.Second
 // (type time.Duration) as type int64 in const initializer
 
-// main is the entry point for the application.
 func main() {
+
 	// Use the time package to get the current date/time.
 	now := time.Now()
 
@@ -50,7 +50,8 @@ func main() {
 	// Attempt to use the constant of type int64.
 	lessFiveSeconds := now.Add(-fiveSeconds)
 
-	// ./example2.go:51: cannot use -fiveSeconds (type int64) as
+	// ./example4.go:51: illegal constant expression - int64
+	// ./example4.go:51: cannot use -fiveSeconds (type int64) as
 	// type time.Duration in argument to now.Add
 
 	// Display the values.

@@ -14,7 +14,7 @@ Go is a strict type safe language so typed values must be explicitly converted f
 [Declare, create and initialize named types](example1/example1.go) ([Go Playground](http://play.golang.org/p/jcNHcgFz6N))  
 [Named types in the standard library](example2/example2.go) ([Go Playground](http://play.golang.org/p/bUtxOEgcOn))  
 [Conversions I](example3/example3.go) ([Go Playground](http://play.golang.org/p/NXJ8i2Gkhc))  
-[Conversions II](example4/example4.go) ([Go Playground](http://play.golang.org/p/MvSUzH-ry6))
+[Conversions II](example4/example4.go) ([Go Playground](http://play.golang.org/p/cc3XhBsKVW))
 
 ## Exercises
 
