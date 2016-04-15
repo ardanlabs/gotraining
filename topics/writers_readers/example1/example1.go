@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/jlTo1IV1RQ
-
 // The io.Reader and io.Writer interfaces allow you to compose all of these different bits together.
 
 // Sample program to show how different functions from the
@@ -15,8 +13,8 @@ import (
 	"os"
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a Buffer value and write a string to the buffer.
 	// Using the Write method that implements io.Writer.
 	var b bytes.Buffer

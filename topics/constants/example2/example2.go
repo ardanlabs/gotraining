@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/ExxRWe6jUz
-
 // Sample program to show how constants do have a parallel type system.
 package main
 
@@ -19,7 +17,6 @@ const (
 	// biggerInt int64 = 9223372036854775808543522345
 )
 
-// main is the entry point for the application.
 func main() {
 	fmt.Println("Will Compile")
 }

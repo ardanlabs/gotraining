@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/AgUvQt171n
-
 // Sample program to show how to understand the important of method sets.
 package main
 
@@ -27,7 +25,6 @@ func (u *user) notify() {
 		u.email)
 }
 
-// main is the entry point for the application.
 func main() {
 
 	// Create a value of type User and send a notification.
@@ -38,7 +35,7 @@ func main() {
 
 	sendNotification(u)
 
-	// ./example1.go:39: cannot use u (type user) as type notifier in argument to sendNotification:
+	// ./example1.go:36: cannot use u (type user) as type notifier in argument to sendNotification:
 	//   user does not implement notifier (notify method has pointer receiver)
 }
 

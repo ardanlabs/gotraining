@@ -18,14 +18,14 @@ http://golang.org/pkg/io/
 
 ## Code Review
 
-[Standard Library Working Together](example1/example1.go) ([Go Playground](http://play.golang.org/p/jlTo1IV1RQ))  
-[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/LY5P96Xrbl))  
-[MultiWriters with curl example](example3/example3.go) ([Go Playground](http://play.golang.org/p/OX6jTkWEF7))
+[Standard Library Working Together](example1/example1.go) ([Go Playground](http://play.golang.org/p/Ikm0s6vjoi))  
+[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/b_BxHFATti))  
+[MultiWriters with curl example](example3/example3.go) ([Go Playground](http://play.golang.org/p/3UeN6iAE-k))
 
 ## Advanced Code Review
 
-[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/Tmt7v3fIQF))  
-[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/JwuEob5GfV))
+[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/9QSXbjtPxe))  
+[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/kN97kdqRGy))
 
 ## Exercises
 
@@ -33,7 +33,7 @@ http://golang.org/pkg/io/
 
 Download any document from the web and display the content in the terminal and write it to a file at the same time.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/MxcJ581bt6)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/KtrDN1BStt))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZCqK8ek58U)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/bogTavYBEx))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

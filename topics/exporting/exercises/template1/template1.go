@@ -14,8 +14,8 @@ package main
 
 // Add imports.
 
-// main is the entry point for the application.
 func main() {
+
 	// Use the New function from the toy package to create a value of
 	// type toy.
 

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/JwuEob5GfV
-
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-03-curl-go
 // Sample code provided by Jason Moiron
 
@@ -41,15 +39,16 @@ func init() {
 	flag.Parse()
 
 	if len(flag.Args()) != 1 {
-		// determine the program name dynamically
+
+		// Determine the program name dynamically.
 		prog := filepath.Base(os.Args[0])
 		fmt.Printf("Usage: %s [options] <url>\n", prog)
 		os.Exit(2)
 	}
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Capture the url from the arguments.
 	url := flag.Args()[0]
 
@@ -68,6 +67,7 @@ func main() {
 
 	// If we aren't in Silent mode, lets add Stdout to our writers.
 	if !Config.Silent {
+
 		// If -md5 was passed, write to the hash instead of os.Stdout.
 		if Config.Md5 {
 			writers = append(writers, hash)
@@ -78,6 +78,7 @@ func main() {
 
 	// If DestFile was provided, lets try to create it and add to the writers.
 	if len(Config.DestFile) > 0 {
+
 		// By declaring a Writer here as a WriteCloser, we're saying that we don't care
 		// what the underlying implementation is at all, all we require is something that
 		// can Write and Close;  both os.File and the gzip.Writer are WriteClosers.

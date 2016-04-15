@@ -18,8 +18,8 @@ import (
 	"github.com/ardanlabs/gotraining/topics/exporting/exercises/exercise1/toy"
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a value of type toy.
 	t := toy.New("Bat", 28)
 

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/0NS3SbImQ3
-
 // Sample program to show how you can personally mock concrete types when
 // you need to for your own packages or tests.
 package main
@@ -27,7 +25,6 @@ func (m *mock) Publish(key string, v interface{}) error {
 	return nil
 }
 
-// main is the entry point for the application.
 func main() {
 	var p publisher
 

@@ -11,8 +11,8 @@ import (
 	"github.com/ardanlabs/gotraining/topics/exporting/example2/counters"
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a variable of the unexported type and initialize the value to 10.
 	counter := counters.alertCounter(10)
 

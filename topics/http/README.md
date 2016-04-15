@@ -19,9 +19,9 @@ http://racksburg.com/choosing-an-http-status-code/
 
 ## Code Review
 
-[Hello World Server](example1/main.go) ([Go Playground](https://play.golang.org/p/vB_ZytmqC1))  
-[1 Line File Server](example2/main.go) ([Go Playground](https://play.golang.org/p/Qmj_C5PEs1))  
-[Request and Response Basics](example3/main.go) ([Go Playground](https://play.golang.org/p/SIk8XWmwWa))
+[Hello World Server](example1/main.go) ([Go Playground](http://play.golang.org/p/S0yUXdOa-i))  
+[1 Line File Server](example2/main.go) ([Go Playground](http://play.golang.org/p/AT6Zq-Sv7h))  
+[Request and Response Basics](example3/main.go) ([Go Playground](http://play.golang.org/p/QFzRJmryzq))
 
 ## Advanced Code Review
 

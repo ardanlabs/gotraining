@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/5VSYQPm0Ov
-
 // Sample program to show a more complicated race condition using
 // an interface value. This produces a read to an inteface value after
 // a partial write.
@@ -47,8 +45,8 @@ func (j *Jerry) Speak() bool {
 	return true
 }
 
-// main is the entry point for all Go programs.
 func main() {
+
 	// Create values of type Ben and Jerry.
 	ben := Ben{"Ben"}
 	jerry := Jerry{"Jerry"}

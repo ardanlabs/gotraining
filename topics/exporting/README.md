@@ -29,11 +29,20 @@ _I think that the real problem with C is that it doesn't give you enough mechani
 
 ## Code Review
 
-[Declare and access exported identifiers](example1/example1.go)  
-[Declare unexported identifiers and restrictions](example2/example2.go)  
-[Access values of unexported identifiers](example3/example3.go)  
-[Unexported struct type fields](example4/example4.go)  
-[Unexported embedded types](example5/example5.go)
+[Declare and access exported identifiers - Pkg](example1/counters/counters.go) ([Go Playground](http://play.golang.org/p/Sb_G1kcn_7))  
+[Declare and access exported identifiers - Main](example1/example1.go) ([Go Playground](http://play.golang.org/p/ZgH4PpoPX2))  
+
+[Declare unexported identifiers and restrictions - Pkg](example2/counters/counters.go) ([Go Playground](http://play.golang.org/p/bb4TcZNXwl))  
+[Declare unexported identifiers and restrictions - Main](example2/example2.go) ([Go Playground](http://play.golang.org/p/GFV71cumqa))  
+
+[Access values of unexported identifiers - Pkg](example3/counters/counters.go) ([Go Playground](http://play.golang.org/p/9cjS2FESNH))  
+[Access values of unexported identifiers - Main](example3/example3.go) ([Go Playground](http://play.golang.org/p/d_E0bOYRBV))  
+
+[Unexported struct type fields - Pkg](example4/users/users.go) ([Go Playground](http://play.golang.org/p/O9hleQ18dT))  
+[Unexported struct type fields - Main](example4/example4.go) ([Go Playground](http://play.golang.org/p/LpjLP_bIKS))  
+
+[Unexported embedded types - Pkg](example4/users/users.go) ([Go Playground](http://play.golang.org/p/O9hleQ18dT))  
+[Unexported embedded types - Main](example5/example5.go) ([Go Playground](http://play.golang.org/p/_1QiymFuw5))  
 
 ## Exercises
 
@@ -42,7 +51,7 @@ _I think that the real problem with C is that it doesn't give you enough mechani
 
 **Part B** Create a program that imports the toy package. Use the New function to create a value of type toy. Then use the methods to set the counts and display the field values of that toy value.
 
-[Template](exercises/template1) | 
-[Answer](exercises/exercise1)
+[Template](exercises/template1) ([Go Playground](http://play.golang.org/p/PiSDQj1UCB)) | 
+[Answer](exercises/exercise1) ([Go Playground](http://play.golang.org/p/PiSDQj1UCB))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

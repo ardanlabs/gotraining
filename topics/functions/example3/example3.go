@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/bw3PrialU0
-
 // From Spec:
 // a short variable declaration may redeclare variables provided they
 // were originally declared earlier in the same block with the same
@@ -20,8 +18,8 @@ type user struct {
 	name string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare the error variable.
 	var err1 error
 

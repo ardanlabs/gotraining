@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/fSMITKsv3p
-
 /*
 ValueOf returns a new Value initialized to the concrete value stored in the interface i.
 ValueOf(nil) returns the zero Value.
@@ -33,8 +31,8 @@ type Result struct {
 	Result bool
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of type user.
 	user := User{
 		Name:  "Henry Ford",
@@ -50,6 +48,7 @@ func main() {
 
 // validate performs data validation on any struct type value.
 func validate(value interface{}) []Result {
+
 	// Declare a nil slice of Result values.
 	var results []Result
 
@@ -58,6 +57,7 @@ func validate(value interface{}) []Result {
 
 	// Iterate over the fields of the struct value.
 	for i := 0; i < val.NumField(); i++ {
+
 		// Retrieve the field information.
 		typeField := val.Type().Field(i)
 

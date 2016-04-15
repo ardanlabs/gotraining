@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/xy-wyPrsjz
-
 // Declare a struct type that represents a request for a customer invoice. Include a CustomerID and InvoiceID field. Define
 // tags that can be used to validate the request. Define tags that specify both the length and range for the ID to be valid.
 // Declare a function named validate that accepts values of any type and processes the tags. Display the resutls of the validation.
@@ -22,8 +20,8 @@ type Customer struct {
 	InvoiceID  int `length:"5" range:"60000-99999"`
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of type Customer.
 	customer := Customer{
 		CustomerID: 202,
@@ -36,11 +34,13 @@ func main() {
 
 // validate performs data validation on any struct type value.
 func validate(value interface{}) {
+
 	// Retrieve the value that the interface contains or points to.
 	val := reflect.ValueOf(value).Elem()
 
 	// Iterate over the fields of the struct value.
 	for i := 0; i < val.NumField(); i++ {
+
 		// Retrieve the field information.
 		typeField := val.Type().Field(i)
 

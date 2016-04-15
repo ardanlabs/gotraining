@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/5uDVuormwB
-
 // Sample program to show how to declare and use variadic functions.
 package main
 
@@ -14,8 +12,8 @@ type user struct {
 	name string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare and initialize a value of type user.
 	u1 := user{
 		id:   1432,

@@ -1,15 +1,13 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/TepZptJati
-
 // Sample program to show how to use a third index slice.
 package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a slice of strings with different types of fruit.
 	slice := []string{"Apple", "Orange", "Banana", "Grape", "Plum"}
 	inspectSlice(slice)

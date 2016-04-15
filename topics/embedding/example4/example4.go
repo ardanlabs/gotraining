@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/7FJeSczdyf
-
 // Sample program to show what happens when the outer and inner
 // type implement the same interface.
 package main
@@ -43,8 +41,8 @@ func (a *admin) notify() {
 		a.email)
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Create an admin user.
 	ad := admin{
 		user: user{

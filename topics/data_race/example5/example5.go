@@ -1,10 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/k6nGJWXo7e
-
-// go build -race
-
 // Sample program to show how to use a read/write mutex to define critical
 // sections of code that needs synchronous access.
 package main
@@ -12,29 +8,29 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"runtime"
 	"sync"
 	"sync/atomic"
 	"time"
 )
 
-// data is a slice that will be shared.
-var data []string
+var (
+	// data is a slice that will be shared.
+	data []string
 
-// rwMutex is used to define a critical section of code.
-var rwMutex sync.RWMutex
+	// rwMutex is used to define a critical section of code.
+	rwMutex sync.RWMutex
 
-// Number of reads occurring at ay given time.
-var readCount int64
+	// Number of reads occurring at ay given time.
+	readCount int64
+)
 
 // init is called prior to main.
 func init() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
 	rand.Seed(time.Now().UnixNano())
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// wg is used to manage concurrency.
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -62,6 +58,7 @@ func main() {
 // writer adds 10 new strings to the slice in random intervals.
 func writer() {
 	for i := 1; i <= 10; i++ {
+
 		// Only allow one goroutine to read/write to the
 		// slice at a time.
 		rwMutex.Lock()
@@ -86,6 +83,7 @@ func writer() {
 // reader wakes up and iterates over the data slice.
 func reader(id int) {
 	for {
+
 		// Any goroutine can read when no write
 		// operation is taking place.
 		rwMutex.RLock()

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/tGFZkhZ01i
-
 // Sample program demonstrating decoupling with interface composition.
 package main
 
@@ -118,7 +116,6 @@ func (io IO) Copy(ps PullStorer, batch int) error {
 
 // =============================================================================
 
-// main is the entry point for the application.
 func main() {
 
 	// Initialize the system for use.

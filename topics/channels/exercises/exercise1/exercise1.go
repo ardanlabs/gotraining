@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/G9eY00v4aP
-
 // Write a program where two goroutines pass an integer back and forth
 // ten times. Display when each goroutine receives the integer. Increment
 // the integer with each pass. Once the integer equals ten, terminate
@@ -17,8 +15,8 @@ import (
 // wg is used to wait for the program to finish.
 var wg sync.WaitGroup
 
-// main is the entry point for the application.
 func main() {
+
 	// Create an unbuffered channel.
 	share := make(chan int)
 
@@ -46,9 +44,11 @@ func main() {
 // goroutine simulates sharing a value.
 func goroutine(name string, share chan int) {
 	for {
+
 		// Wait for the ball to be hit back to us.
 		value, ok := <-share
 		if !ok {
+
 			// If the channel was closed, shutdown.
 			fmt.Printf("Goroutine %s Down\n", name)
 			return

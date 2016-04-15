@@ -20,13 +20,13 @@ http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing
 
 ## Code Review
 
-[Declare, create and initialize struct types](example1/example1.go) ([Go Playground](https://play.golang.org/p/TAX6NpPaEu))  
-[Anonymous struct types](example2/example2.go) ([Go Playground](https://play.golang.org/p/NtPpvGEN4W))  
-[Named vs Unnamed types](example3/example3.go) ([Go Playground](http://play.golang.org/p/QoBVXdmVAc))
+[Declare, create and initialize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/TEmOrIxl_P))  
+[Anonymous struct types](example2/example2.go) ([Go Playground](http://play.golang.org/p/x-Dpp9Ts_U))  
+[Named vs Unnamed types](example3/example3.go) ([Go Playground](http://play.golang.org/p/QREkSIDAuW))
 
 ## Advanced Code Review
 
-[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/tJcCewOf4V))
+[Struct type alignments](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/MQqKUYXoUK))
 
 ## Exercises
 
@@ -36,7 +36,7 @@ http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing
 
 **Part B:** Declare and initialize an anonymous struct type with the same three fields. Display the value.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ItPe2EEy9X)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/rZH_5xLAaK))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/PvQKHgf9jZ)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/8CtSrnTp-1))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

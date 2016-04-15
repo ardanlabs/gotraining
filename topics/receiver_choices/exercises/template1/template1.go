@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/Qe3dhDTwzX
-
 // Declare a struct type named Point with two fields, X and Y of type int.
 // Implement a factory function for this type and a method that accepts
 // this type and calculates the distance between the two points. What is
@@ -21,8 +19,8 @@ package main
 // Formula is the square root of (x2 - x1)^2 + (y2 - y1)^2
 // Use the math.Pow and math.Sqrt functions.
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare the first point.
 
 	// Declare the second point.

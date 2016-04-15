@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/ocxFH62yaw
-
 // Sample program to show how to unmarshal a JSON document into
 // a user defined struct type.
 package main
@@ -58,8 +56,8 @@ type (
 	}
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of type UserContext.
 	var uc userContext
 

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/px3X_qw_SX
-
 // Declare an array of 5 strings with each element initialized to its zero value.
 //
 // Declare a second array of 5 strings and initialize this array with literal string
@@ -12,8 +10,8 @@ package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare string arrays to hold names.
 	var names [5]string
 

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/NdhLzZJf_X
-
 // Sample program to show how to read a stack trace when it packs values.
 package main
 
@@ -18,10 +16,12 @@ func example(b1, b2, b3 bool, i uint8) {
 panic: Want stack trace
 
 goroutine 1 [running]:
-main.example(0x819010001)
-	/Users/bill/.../example2/example2.go:14 +0x65
+panic(0x569e0, 0xc82000a110)
+	/usr/local/go/src/runtime/panic.go:464 +0x3e6
+main.example(0xc819010001)
+	/Users/bill/.../stack_trace/example2/example2.go:12 +0x65
 main.main()
-	/Users/bill/.../example2/example2.go:10 +0x2b
+	/Users/bill/.../stack_trace/example2/example2.go:8 +0x2b
 
 --------------------------------------------------------------------------------
 

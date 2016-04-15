@@ -1,14 +1,12 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/Remt-HvD2D
-
 // Sample program to show how to declare constants and their
 // implementation in Go.
 package main
 
-// main is the entry point for the application.
 func main() {
+
 	// Constants live within the compiler.
 	// They have a parallel type system.
 	// Compiler can perform implicit conversions of untyped constants.
@@ -22,7 +20,7 @@ func main() {
 	const ti int = 12345        // type: int64
 	const tf float64 = 3.141592 // type: float64
 
-	// ./constants.go:26: constant 1000 overflows uint8
+	// ./constants.go:XX: constant 1000 overflows uint8
 	// const myUint8 uint8 = 1000
 
 	// Constant arithmetic supports different kinds.

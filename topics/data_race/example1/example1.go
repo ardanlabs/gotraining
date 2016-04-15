@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/_BpVuJ2jga
-
 // go build -race
 
 // Sample program to show how to create race conditions in
@@ -18,8 +16,8 @@ import (
 // counter is a variable incremented by all goroutines.
 var counter int
 
-// main is the entry point for the application.
 func main() {
+
 	// Number of goroutines to use.
 	const grs = 2
 
@@ -43,6 +41,7 @@ func main() {
 // incCounter increments the package level counter variable.
 func incCounter() {
 	for count := 0; count < 2; count++ {
+
 		// Capture the value of Counter.
 		value := counter
 
@@ -61,26 +60,26 @@ func incCounter() {
 /*
 ==================
 WARNING: DATA RACE
-Write by goroutine 7:
+Read by goroutine 7:
   main.incCounter()
-      /Users/bill/.../data_race/example1/example1.go:57 +0x6f
+      /Users/bill/.../data_race/example1/example1.go:46 +0x41
   main.main.func1()
-      /Users/bill/.../data_race/example1/example1.go:33 +0x25
+      /Users/bill/.../data_race/example1/example1.go:31 +0x25
 
-Previous read by goroutine 6:
+Previous write by goroutine 6:
   main.incCounter()
-      /Users/bill/.../data_race/example1/example1.go:47 +0x41
+      /Users/bill/.../data_race/example1/example1.go:56 +0x6f
   main.main.func1()
-      /Users/bill/.../data_race/example1/example1.go:33 +0x25
+      /Users/bill/.../data_race/example1/example1.go:31 +0x25
 
 Goroutine 7 (running) created at:
   main.main()
-      /Users/bill/.../data_race/example1/example1.go:35 +0xa1
+      /Users/bill/.../data_race/example1/example1.go:33 +0xa1
 
-Goroutine 6 (running) created at:
+Goroutine 6 (finished) created at:
   main.main()
-      /Users/bill/.../data_race/example1/example1.go:35 +0xa1
+      /Users/bill/.../data_race/example1/example1.go:33 +0xa1
 ==================
-Final Counter: 2
+Final Counter: 4
 Found 1 data race(s)
 */

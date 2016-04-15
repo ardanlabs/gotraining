@@ -43,27 +43,27 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](https://play.golang.org/p/zM31ksYjY9))  
-[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/r1-v3Pf0wz))  
-[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](https://play.golang.org/p/9qREBUf9jj))  
-[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/OwIUceuKrM))  
+[Unbuffered channels - Tennis game](example1/example1.go) ([Go Playground](http://play.golang.org/p/VlxW_v07PQ))  
+[Unbuffered channels - Relay race](example2/example2.go) ([Go Playground](http://play.golang.org/p/OsyUwckOie))  
+[Buffered channels - Retrieving results](example3/example3.go) ([Go Playground](http://play.golang.org/p/zhr3oxpj-o))  
+[Timer channels and Select](example4/example4.go) ([Go Playground](http://play.golang.org/p/TsJSagQawy))  
 
 ## Advanced Code Review
 
-[Channel communication ordering](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/xLCzalG2rS))
+[Channel communication ordering](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/b3pPHMYZbX))
 
 ## Exercises
 
 ### Exercise 1
 Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the integer equals ten, terminate the program cleanly.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/0ip9DM7rgx)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/G9eY00v4aP))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/FN-EE97gDS)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/M0PVuIshVY))
 
 ### Exercise 2
 Write a program that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate.
 
-[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/0R4Ue3cqdC)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/zcRkuuGYmk))
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/hk8pu8eSB9)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/3l4Gxtgp_O))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

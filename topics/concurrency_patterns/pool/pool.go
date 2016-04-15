@@ -44,6 +44,7 @@ func New(size uint, f func() (io.Closer, error)) (*Pool, error) {
 // Acquire retrieves a resource	from the pool.
 func (p *Pool) Acquire() (io.Closer, error) {
 	select {
+
 	// Check for a free resource.
 	case r, ok := <-p.resources:
 		log.Println("Acquire:", "Shared Resource")
@@ -61,6 +62,7 @@ func (p *Pool) Acquire() (io.Closer, error) {
 
 // Release places a new resource onto the pool.
 func (p *Pool) Release(r io.Closer) {
+
 	// Secure this operation with the Close operation.
 	p.mu.Lock()
 	defer p.mu.Unlock()
@@ -85,6 +87,7 @@ func (p *Pool) Release(r io.Closer) {
 
 // Close will shutdown the pool and close all existing resources.
 func (p *Pool) Close() error {
+
 	// Secure this operation with the Release operation.
 	p.mu.Lock()
 	defer p.mu.Unlock()

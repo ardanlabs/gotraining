@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/oEtveMoO1s
-
 // Declare a struct type and create a value of this type. Declare a function
 // that can change the value of some field in this struct type. Display the
 // value before and after the call to your function.
@@ -17,8 +15,8 @@ type user struct {
 	accessLevel int
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a variable of type user and initialize each field.
 	bill := user{
 		name:        "Bill",
@@ -39,6 +37,7 @@ func main() {
 
 // accessLevel changes the value of the users access level.
 func accessLevel(u *user, accessLevel int) {
+
 	// Set of value of the accessLevel field to the value
 	// that is passed in.
 	u.accessLevel = accessLevel

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/xRdyu6M-Vq
-
 // Sample program to show how to declare, initialize and iterate
 // over a map. Shows how iterating over a map is random.
 package main
@@ -15,8 +13,8 @@ type user struct {
 	surname string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare and make a map that stores values
 	// of type user with a key of type string.
 	users := make(map[string]user)

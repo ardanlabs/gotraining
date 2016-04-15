@@ -1,14 +1,11 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/GF0gbY4SvN
-
 // Sample program to show the properties of nil maps.
 package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
 	show(map[int]string{1: "one", 2: "two", 3: "three"})
 

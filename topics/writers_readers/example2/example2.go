@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/LY5P96Xrbl
-
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-01-curl-go
 // Sample code provided by Jason Moiron
 //
@@ -19,7 +17,6 @@ import (
 	"os"
 )
 
-// init is called before main.
 func init() {
 	if len(os.Args) != 2 {
 		fmt.Println("Usage: ./example2 <url>")
@@ -27,14 +24,15 @@ func init() {
 	}
 }
 
-// main is the entry point for the application.
 func main() {
-	// resp here is a response, and resp.Body is an io.Reader
+
+	// resp here is a response, and resp.Body is an io.Reader.
 	resp, err := http.Get(os.Args[1])
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
 	// Close the ReadCloser when we're done with it.
 	// We don't need to check the error, since
 	// Close errors on Readers are meaningless.

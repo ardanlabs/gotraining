@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/Huf8jEDUJO
-
 // Create a file with an array of JSON documents that contain a user name and email address. Declare a struct
 // type that maps to the JSON document. Using the json package, read the file and create a slice of this struct
 // type. Display the slice.
@@ -22,8 +20,8 @@ type user struct {
 	Email string `json:"email"`
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Open the file.
 	file, err := os.Open("data.json")
 	if err != nil {

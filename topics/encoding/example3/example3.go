@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/rLDpqYbnGR
-
 // Sample program to show how to marshal a user defined
 // struct type into a string.
 package main
@@ -36,8 +34,8 @@ type (
 	}
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare and initialize a value of type buoyStation.
 	station := buoyStation{
 		StationID: "42036",

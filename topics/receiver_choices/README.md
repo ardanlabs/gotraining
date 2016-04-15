@@ -18,9 +18,9 @@ http://play.golang.org/p/ki991PuHhk
 
 ## Code Review
 
-[Built-In Types](example1/example1.go) ([Go Playground](https://play.golang.org/p/H5HRoElN6q))  
-[Reference Types](example3/example3.go) ([Go Playground](https://play.golang.org/p/4npFGglwQW))  
-[Struct Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/xD6PCx--GG))
+[Built-In Types](example1/example1.go) ([Go Playground](http://play.golang.org/p/UZ0x9ka8xk))  
+[Reference Types](example3/example3.go) ([Go Playground](http://play.golang.org/p/UCJc1l6QM0))  
+[Struct Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/GYULdyhmW7))
 
 ## Exercises
 
@@ -29,7 +29,7 @@ http://play.golang.org/p/ki991PuHhk
 Declare a struct type named Point with two fields, X and Y of type int. Implement a factory function for this type and a method
 that accepts this type and calculates the distance between the two points. What is the nature of this type?
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/Qe3dhDTwzX)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/1tcEsqNG6a))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/0nRumpShDA)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/Lym51VJR5E))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

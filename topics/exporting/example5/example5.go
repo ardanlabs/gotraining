@@ -11,9 +11,9 @@ import (
 	"github.com/ardanlabs/gotraining/topics/exporting/example5/users"
 )
 
-// main is the entry point for the application.
 func main() {
-	/// Create a value of type Manager from the users package.
+
+	// Create a value of type Manager from the users package.
 	u := users.Manager{
 		Title: "Dev Manager",
 	}

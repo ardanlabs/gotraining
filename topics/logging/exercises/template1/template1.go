@@ -1,16 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/9eVWni05Ma
-
 // Setup a new program to use the log package. Set the Prefix to your first name and on each log line show
 // the date and long path for the code file.
 package main
 
 // Add imports.
 
-// init is called before main.
 func init() {
+
 	// Change the output device from the default stderr to stdout.
 
 	// Set the prefix string for each log line.
@@ -32,8 +30,8 @@ func setFlags() {
 	// Set the flags.
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Use the Println function.
 
 	// Create a slice of strings and initialize with names.

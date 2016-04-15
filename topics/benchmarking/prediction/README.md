@@ -5,8 +5,7 @@ Understanding how the hardware works is an critical component to understanding h
 ## Acknowledgment
 This content is provided by Lighterra, the software company of Jason Robert Carey Patterson. They work on a variety of software, including a cutting-edge code optimizer to make programs faster, a threading library for parallel programming, an iPhone user-interface library and a web video component.
 
-[Modern Microprocessors](http://www.lighterra.com/papers/modernmicroprocessors/)
-
+[Modern Microprocessors](http://www.lighterra.com/papers/modernmicroprocessors/)  
 [New CPU Features](http://danluu.com/new-cpu-features/)
 
 ## Notes
@@ -46,12 +45,11 @@ Nonetheless, even the very best modern processors with the best, smartest branch
 
 ## Links
 
-http://www.lighterra.com/papers/modernmicroprocessors/
-
+http://www.lighterra.com/papers/modernmicroprocessors/  
 http://archive.arstechnica.com/cpu/1q00/crusoe/m-crusoe-1.html
 
 ## Code Review
 
-[Tests](prediction_test.go) ([Go Playground](https://play.golang.org/p/cHTjwWp5FV))
+[Tests](prediction_test.go) ([Go Playground](http://play.golang.org/p/_VcWtAKH4Z))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

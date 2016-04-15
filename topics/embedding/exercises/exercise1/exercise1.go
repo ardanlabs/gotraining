@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/U_f7Ko8eOK
-
 // Copy the code from the template. Declare a new type called hockey
 // which embeds the sports type. Implement the matcher interface for hockey.
 // When implementing the match method for hockey, call into the match method
@@ -42,8 +40,8 @@ func (h hockey) match(searchTerm string) bool {
 	return h.sport.match(searchTerm) || strings.Contains(h.country, searchTerm)
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Define the term to match.
 	term := "Miami"
 

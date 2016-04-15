@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/4IGNSTCAE6
-
 // Create two error variables, one called ErrInvalidValue and the other
 // called ErrAmountTooLarge. Provide the static message for each variable.
 // Then write a function called checkAmount that accepts a float64 type value
@@ -14,6 +12,7 @@ package main
 
 // Add imports.
 
+var (
 // Declare an error variable named ErrInvalidValue using the New
 // function from the errors package.
 
@@ -22,7 +21,10 @@ package main
 
 // Declare a function named checkAmount that accepts a value of
 // type float64 and returns an error interface value.
+)
+
 func checkAmount( /* parameter */ ) /* return arg */ {
+
 	// Is the parameter equal to zero. If so then return
 	// the error variable.
 
@@ -32,8 +34,8 @@ func checkAmount( /* parameter */ ) /* return arg */ {
 	// Return nil for the error value.
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Call the checkAmount function and check the error. Then
 	// use a switch/case to compare the error with each variable.
 	// Add a default case. Return if there is an error.

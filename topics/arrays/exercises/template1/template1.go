@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/qKUNW0FSgC
-
 // Declare an array of 5 strings with each element initialized to its zero value.
 //
 // Declare a second array of 5 strings and initialize this array with literal string
@@ -12,8 +10,8 @@ package main
 
 // Add imports.
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare an array of 5 strings set to its zero value.
 
 	// Declare an array of 5 strings and pre-populate it with names.

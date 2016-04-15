@@ -1,14 +1,11 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/xLCzalG2rS
-
 // Sample program to show the order of channel communication for unbuffered,
 // buffered and closing channels based on the specification.
 // https://golang.org/ref/mem#tmp_7
 package main
 
-// main is the entry point for all Go programs.
 func main() {
 	unBuffered()
 	buffered()

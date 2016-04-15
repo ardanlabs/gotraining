@@ -19,24 +19,24 @@ http://dave.cheney.net/2014/12/24/inspecting-errors
 
 ## Code Review
 
-[Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/PiSDQj1UCB))  
-[Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/FRnwmQx_ZI))  
-[Type As Context](example3/example3.go) ([Go Playground](https://play.golang.org/p/N7AXFU5JYv))  
-[Behavior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/6GYqwSxHjI))  
-[Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/9Pqn5P5l0C))
+[Default Error Values](example1/example1.go) ([Go Playground](http://play.golang.org/p/aSjTxzNfP2))  
+[Error Variables](example2/example2.go) ([Go Playground](http://play.golang.org/p/-vBG0m1Scs))  
+[Type As Context](example3/example3.go) ([Go Playground](http://play.golang.org/p/FeR2nE3eAH))  
+[Behavior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/Aylgou6Gq0))  
+[Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/0AUU_sJsec))
 
 ## Exercises
 
 ### Exercise 1
 Create two error variables, one called ErrInvalidValue and the other called ErrAmountTooLarge. Provide the static message for each variable. Then write a function called checkAmount that accepts a float64 type value and returns an error value. Check the value for zero and if it is, return the ErrInvalidValue. Check the value for greater than $1,000 and if it is, return the ErrAmountTooLarge. Write a main function to call the checkAmount function and check the return error value. Display a proper message to the screen.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/4IGNSTCAE6)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/QdLjCjMM40))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/jwUWet5q1Y)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/WHmYkHwYjf))
 
 ### Exercise 2
 Create a custom error type called appError that contains three fields, err error, message string and code int. Implement the error interface providing your own message using these three fields. Implement a second method named Temporary that returns false when the value of the code field is 9. Write a function called checkFlag that accepts a bool value. If the value is false, return a pointer of your custom error type initialized as you like. If the value is true, return a default error. Write a main function to call the checkFlag function and check the error.
 
-[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/MLzU9Gy_zA)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/8UyOIVjFtY))
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/Y3HbZbx8eN)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/D9b3ndWlUT))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

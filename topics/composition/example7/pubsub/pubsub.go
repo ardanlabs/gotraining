@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/cn0Uww6qmc
-
 // Package pubsub simulates a package that provides publication/subscription
 // type services.
 package pubsub

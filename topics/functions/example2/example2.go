@@ -1,9 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/jJl5GV_LdI
-
-// Sample program to show how we can use the blank IDentifier to ignore return values.
+// Sample program to show how we can use the blank identifier to
+// ignore return values.
 package main
 
 import (
@@ -26,8 +25,8 @@ type updateStats struct {
 	Message  string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare and initialize a value of type user.
 	u := user{
 		ID:   1432,
@@ -46,6 +45,7 @@ func main() {
 
 // updateUser updates the specified user document.
 func updateUser(u *user) (*updateStats, error) {
+
 	// response simulates a JSON response.
 	response := `{"Modified":1, "Duration":0.005, "Success" : true, "Message": "updated"}`
 

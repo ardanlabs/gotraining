@@ -1,16 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/2D24t6fbW_
-
 // Sample program to show how to declare and iterate over
 // arrays of different types.
 package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare an array of five strings that is initialized
 	// to its zero value.
 	var strings [5]string

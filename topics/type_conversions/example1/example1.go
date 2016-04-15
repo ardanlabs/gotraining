@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/gSib_YkR2D
-
 // Sample program to show how to declare and use a named type.
 package main
 
@@ -13,6 +11,7 @@ import "fmt"
 type duration int64
 
 func main() {
+
 	// Declare a variable of type Duration.
 	var d duration
 	fmt.Println(d)
@@ -22,9 +21,9 @@ func main() {
 
 	// Attempted to assign a variable of type int64 (base type of duration) to
 	// a variable of type duration.
-	// d = nanosecond
+	d = nanosecond
 
-	// ./example1.go:25: cannot use nanosecond (type int64) as type duration in assignment
+	// ./example1.go:24: cannot use nanosecond (type int64) as type duration in assignment
 
 	// Convert a value of type int64 to type Duration.
 	d = duration(nanosecond)

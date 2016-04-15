@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/lgMQHWpZul
-
 // Declare a struct type that represents a request for a customer invoice. Include a CustomerID and InvoiceID field. Define
 // tags that can be used to validate the request. Define tags that specify both the length and range for the ID to be valid.
 // Declare a function named validate that accepts values of any type and processes the tags. Display the resutls of the validation.
@@ -16,6 +14,7 @@ package main
 
 // validate performs data validation on any struct type value.
 func validate( /* parameter */ ) {
+
 	// Retrieve the value that the interface contains or points to.
 
 	// Iterate over the fields of the struct value.
@@ -30,8 +29,8 @@ func validate( /* parameter */ ) {
 	}
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of type Customer and initialize it.
 
 	// Validate the value and display the results.

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/oIVChmV7pP
-
 // Sample program demonstrating decoupling with interfaces.
 package main
 
@@ -112,7 +110,6 @@ func (io IO) Copy(sys *System, batch int) error {
 
 // =============================================================================
 
-// main is the entry point for the application.
 func main() {
 
 	// Initialize the system for use.

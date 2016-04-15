@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/bYY-TRjfH0
-
 // Sample program to show how functions can return multiple values while using
 // named and struct types.
 package main
@@ -18,8 +16,8 @@ type user struct {
 	Name string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Retrieve the user profile.
 	u, err := retrieveUser("sally")
 	if err != nil {
@@ -34,6 +32,7 @@ func main() {
 // retrieveUser retrieves the user document for the specified
 // user and returns a pointer to a user type value.
 func retrieveUser(name string) (*user, error) {
+
 	// Make a call to get the user in a json response.
 	r, err := getUser(name)
 	if err != nil {

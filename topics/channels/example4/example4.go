@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/OwIUceuKrM
-
 // This sample program demonstrates how to use a channel to
 // monitor the amount of time the program is running and terminate
 // the program if it runs too long.
@@ -33,7 +31,6 @@ var (
 	shutdown = make(chan struct{})
 )
 
-// main is the entry point for the application.
 func main() {
 	log.Println("Starting Process")
 
@@ -48,6 +45,7 @@ ControlLoop:
 	for {
 		select {
 		case <-sigChan:
+
 			// Interrupt event signaled by the operation system.
 			log.Println("OS INTERRUPT")
 
@@ -60,11 +58,13 @@ ControlLoop:
 			sigChan = nil
 
 		case <-timeout:
+
 			// We have taken too much time. Kill the app hard.
 			log.Println("Timeout - Killing Program")
 			os.Exit(1)
 
 		case err := <-complete:
+
 			// Everything completed within the time given.
 			log.Printf("Task Completed: Error[%s]", err)
 			break ControlLoop
@@ -86,6 +86,7 @@ func processor(complete chan<- error) {
 	// Defer the send on the channel so it happens
 	// regardless of how this function terminates.
 	defer func() {
+
 		// Capture any potential panic.
 		if r := recover(); r != nil {
 			log.Println("Processor - Panic", r)
@@ -128,11 +129,13 @@ func doWork() error {
 func checkShutdown() bool {
 	select {
 	case <-shutdown:
+
 		// We have been asked to shutdown cleanly.
 		log.Println("checkShutdown - Shutdown Early")
 		return true
 
 	default:
+
 		// If the shutdown channel was not closed,
 		// presume with normal processing.
 		return false

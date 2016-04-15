@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/-WjYGqauiY
-
 // Declare a named type called counter with a base type of int. Declare a variable
 // named c of type counter set to its zero value. Display the value of c.
 //
@@ -18,8 +16,8 @@ package main
 // Declare the named type called counter with a base
 // type of int.
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable named c of type counter
 	// set to its zero value.
 

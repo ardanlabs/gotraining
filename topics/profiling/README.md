@@ -126,6 +126,6 @@ https://godoc.org/rsc.io/pprof_mac_fix
 
 ## Code Review
 
-[HTTP Service](helloHTTP.go) ([Go Playground](https://play.golang.org/p/fcU9jQX2Qz))
+[HTTP Service](helloHTTP.go) ([Go Playground](http://play.golang.org/p/XcpEreJ9zg))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

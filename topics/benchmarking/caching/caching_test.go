@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/F9KjBB84o4
-
 // go test -run none -bench . -benchtime 3s -benchmem
 
 // Tests to show how why CPU caches matter.

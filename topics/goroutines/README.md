@@ -34,9 +34,9 @@ http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-
 
 ## Code Review
 
-[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/LC1VgZZzO9))  
-[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/WU1p9-_RMN))  
-[Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/1LJPV8HZrG))
+[Goroutines and concurrency](example1/example1.go) ([Go Playground](http://play.golang.org/p/eV4l2JqLZL))  
+[Goroutine time slicing](example2/example2.go) ([Go Playground](http://play.golang.org/p/8NwVeZG6IB))  
+[Goroutines and parallelism](example3/example3.go) ([Go Playground](http://play.golang.org/p/Bvk_ZwxJVh))
 
 ## Exercises
 
@@ -46,7 +46,7 @@ http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-
 
 **Part B** Run the program in parallel.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/V2IfRAWfu7)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/Ci3j0V_lLV))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/xv15yVM2yE)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/87OanzQcg4))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

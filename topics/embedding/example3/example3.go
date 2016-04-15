@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/_MiwwXZbVI
-
 // Sample program to show how embedded types work with interfaces.
 package main
 
@@ -34,8 +32,8 @@ type admin struct {
 	level string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Create an admin user.
 	ad := admin{
 		user: user{

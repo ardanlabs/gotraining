@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/OX6jTkWEF7
-
 // https://gist.github.com/jmoiron/e9f72720cef51862b967#file-02-curl-go
 // Sample code provided by Jason Moiron
 
@@ -26,7 +24,6 @@ var Config struct {
 	DestFile string
 }
 
-// init is called before main.
 func init() {
 	// Let the flag package handle the options;  -o for output and -s for silent.
 	flag.StringVar(&Config.DestFile, "o", "", "output file")
@@ -39,14 +36,15 @@ func init() {
 	}
 }
 
-// main is the entry point for the application.
 func main() {
-	// r here is a response, and r.Body is an io.Reader
+
+	// r here is a response, and r.Body is an io.Reader.
 	resp, err := http.Get(flag.Args()[0])
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
 	defer resp.Body.Close()
 
 	// A slice of io.Writers we will write the file to.

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/PS9sqY6kSp
-
 // Declare an interface named speaker with a method named speak. Declare a struct
 // named english that represents a person who speaks english and declare a struct named
 // chinese for someone who speaks chinese. Implement the speaker interface for each
@@ -38,8 +36,8 @@ func (chinese) speak() {
 	fmt.Println("你好世界")
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of the interface type.
 	var sp speaker
 

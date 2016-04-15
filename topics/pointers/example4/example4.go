@@ -4,8 +4,6 @@
 // Escape Analysis Flaws:
 // https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
 
-// https://play.golang.org/p/Wfv2K70DcQ
-
 // Sample program to show variables stay on or escape from the stack.
 package main
 
@@ -44,21 +42,21 @@ func escapeToHeap() *user {
 /*
 // go build -gcflags -m
 
-./example4.go:25: can inline stayOnStack
-./example4.go:35: can inline escapeToHeap
-./example4.go:19: can inline main
-./example4.go:20: inlining call to stayOnStack
-./example4.go:21: inlining call to escapeToHeap
-./example4.go:21: main &u does not escape
-./example4.go:39: moved to heap: u
-./example4.go:41: &u escapes to heap
+./example4.go:23: can inline stayOnStack
+./example4.go:33: can inline escapeToHeap
+./example4.go:17: can inline main
+./example4.go:18: inlining call to stayOnStack
+./example4.go:19: inlining call to escapeToHeap
+./example4.go:19: main &u does not escape
+./example4.go:37: moved to heap: u
+./example4.go:39: &u escapes to heap
 
 
 go build -gcflags -S
 
-0x000f 00015 (pointers/example4/example4.go:20)	MOVQ	$4, DX
-0x0016 00022 (pointers/example4/example4.go:20)	LEAQ	go.string."bill@ardanlabs.com"(SB), CX
-0x001d 00029 (pointers/example4/example4.go:20)	MOVQ	$18, AX
-0x0024 00036 (pointers/example4/example4.go:20)	NOP
-0x0024 00036 (pointers/example4/example4.go:21)	MOVQ	$0, AX
+0x000f 00015 (pointers/example4/example4.go:18)	MOVQ	$4, DX
+0x0016 00022 (pointers/example4/example4.go:18)	LEAQ	go.string."bill@ardanlabs.com"(SB), CX
+0x001d 00029 (pointers/example4/example4.go:18)	MOVQ	$18, AX
+0x0024 00036 (pointers/example4/example4.go:18)	NOP
+0x0024 00036 (pointers/example4/example4.go:19)	MOVQ	$0, AX
 */
