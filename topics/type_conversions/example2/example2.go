@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/4b2RYpHv_F
-
 /*
 // A Duration represents the elapsed time between two instants as
 // an int64 nanosecond count. The representation limits the largest
@@ -38,8 +36,8 @@ import (
 // fiveSeconds is an typed constant of type Duration.
 const fiveSeconds = 5 * time.Second // time.Duration(5) * time.Duration(1000000000)
 
-// main is the entry point for the application.
 func main() {
+
 	// Use the time package to get the current date/time.
 	now := time.Now()
 

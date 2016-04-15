@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/aLDVeFFbxd
-
 // Sample program to learn how to identify memory problems.
 package main
 
@@ -13,8 +11,8 @@ import (
 	"os/signal"
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a goroutine that leaks memory. Since the map needs
 	// to be constantly shuffled around, this becomes very expensive.
 	go func() {

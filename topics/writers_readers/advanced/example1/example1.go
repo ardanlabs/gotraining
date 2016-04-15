@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/Tmt7v3fIQF
-
 // https://github.com/extemporalgenome/watchpost/blob/master/main.go
 // Sample code provided by Kevin Gillette
 
@@ -20,8 +18,8 @@ import (
 	"os"
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Open the file for reading.
 	file, err := os.Open("data.json")
 	if err != nil {

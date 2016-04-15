@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/bWQ6hiVECQ
-
 // https://github.com/goinggo/mapstructure
 // Sample code provided by Mitchell Hashimoto
 
@@ -15,7 +13,6 @@ import (
 	"strconv"
 )
 
-// main is the entry point for the application.
 func main() {
 	var number int
 	decodeInt("10", &number)
@@ -29,6 +26,7 @@ func main() {
 // decodeInt accepts a value of any type and will decode
 // that value to an integer.
 func decodeInt(data interface{}, number *int) error {
+
 	// Retrieve the value that the interface contains or points to.
 	val := reflect.ValueOf(number).Elem()
 

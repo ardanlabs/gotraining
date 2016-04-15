@@ -1,16 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/MxcJ581bt6
-
 // Download any document from the web and display the content in
 // the terminal and write it to a file at the same time.
 package main
 
 // Add imports.
 
-// main is the entry point for the application.
 func main() {
+
 	// Download the RSS feed for "http://www.goinggo.net/feeds/posts/default".
 	// Check for errors.
 

@@ -1,10 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/BjzenGHmuN
-
-// go build -race
-
 // Sample program to show how to use the atomic package functions
 // Store and Load to provide safe access to numeric types.
 package main
@@ -19,8 +15,8 @@ import (
 // shutdown is a flag to alert running goroutines to shutdown.
 var shutdown int64
 
-// main is the entry point for the application.
 func main() {
+
 	// Number of goroutines to use.
 	const grs = 2
 

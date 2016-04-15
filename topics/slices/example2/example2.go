@@ -1,16 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/e-U8HPnmIL
-
 // Sample program to show the components of a slice. It has a
 // length, capacity and the underlying array.
 package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a slice with a length of 5 elements and a capacity of 8.
 	slice := make([]string, 5, 8)
 	slice[0] = "Apple"

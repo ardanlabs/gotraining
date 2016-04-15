@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/MNI1jR8Ets
-
 // Sample program to show how to declare function variables.
 package main
 
@@ -25,8 +23,8 @@ func (d *data) setAge(age int) {
 	fmt.Println("Set Age: ", d.age)
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of type data.
 	d := data{
 		name: "Bill",

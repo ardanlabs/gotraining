@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/IWfOJbmMdL
-
 // Sample program to show how to unmarshal a JSON document into
 // a user defined struct type from a file.
 package main
@@ -37,8 +35,8 @@ type (
 	}
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Open the file.
 	file, err := os.Open("data.json")
 	if err != nil {

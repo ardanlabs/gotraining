@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/HlCQ3tKRsm
-
 /*
 func New(out io.Writer, prefix string, flag int) *Logger
 
@@ -55,8 +53,8 @@ func initLog(traceHandle io.Writer, infoHandle io.Writer, warningHandle io.Write
 		log.Ldate|log.Ltime|log.Lshortfile)
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Open a file for warnings.
 	warnings, err := os.OpenFile("warnings.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {

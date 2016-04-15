@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/0R4Ue3cqdC
-
 // Write a problem that uses a buffered channel to maintain a buffer
 // of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
 // into the channel. Then create 20 goroutines that receive a string
@@ -21,8 +19,8 @@ package main
 // with a capacity.
 var resources = make(chan string, capacity)
 
-// main is the entry point for the application.
 func main() {
+
 	// Add the number of goroutines to the waitgroup.
 
 	// Launch goroutines to handle the work. Make sure
@@ -36,6 +34,7 @@ func main() {
 // worker is launched as a goroutine to process work from
 // the buffered channel.
 func worker( /* parameters */ ) {
+
 	// Receive a string from the channel.
 
 	// Display the value.

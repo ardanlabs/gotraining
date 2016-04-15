@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/OTaD58WLde
-
 // Sample program to show how polymorphic behavior with interfaces.
 package main
 
@@ -37,7 +35,6 @@ func (p pipe) read(b []byte) (int, error) {
 	return len(s), nil
 }
 
-// main is the entry point for the application.
 func main() {
 
 	// Create two values one of type file and one of type pipe.

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/xD6PCx--GG
-
 // Sample code to show how the standard library in general,
 // treats struct types based on the implement of the type.
 

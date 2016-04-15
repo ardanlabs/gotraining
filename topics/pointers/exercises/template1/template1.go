@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/asM7GXfJNk
-
 // Declare and initialize a variable of type int with the value of 20. Display
 // the _address of_ and _value of_ the variable.
 //
@@ -13,8 +11,8 @@ package main
 
 // Add imports.
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare an integer variable with the value of 20.
 
 	// Display the address of and value of the variable.

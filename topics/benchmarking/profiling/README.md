@@ -61,6 +61,6 @@ Look at how much memory lines of code are taking:
 
 ## Code Review
 
-[Profiling](profiling.go)
+[Profiling](profiling.go) ([Go Playground](http://play.golang.org/p/45RqOFR0Ms))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

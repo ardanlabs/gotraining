@@ -1,3 +1,7 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Test program for the benchmark example.
 package main
 
 import (
@@ -11,8 +15,6 @@ var vars = map[string]string{
 	"variable_name": "bill",
 }
 
-// main used the function that will be testing and showing how to review
-// cpu and memory profiling information.
 func main() {
 	variable := "#string:variable_name"
 	v := getValue(variable, vars)

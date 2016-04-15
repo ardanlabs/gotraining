@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/b8ww3jd2Xs
-
 // Follow the guided comments to:
 //
 // Declare a sysadmin type that implements the administrator interface.
@@ -98,6 +96,7 @@ var tasks = []struct {
 // =============================================================================
 
 func main() {
+
 	// Create a variable named admins of type adminlist.
 
 	// Create a variable named devs of type devlist.
@@ -114,6 +113,7 @@ func main() {
 
 	// Iterate over tasks.
 	for _, task := range tasks {
+
 		// Check if the task needs a developer. If so, pop a developer from devs,
 		// print its type information, and have it develop the system.
 

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/TAX6NpPaEu
-
 // Sample program to show how to declare and initialize struct types.
 package main
 
@@ -15,8 +13,8 @@ type example struct {
 	pi      float32
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of type example set to its
 	// zero value.
 	var e1 example

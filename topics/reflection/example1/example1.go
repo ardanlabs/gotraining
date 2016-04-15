@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/OSeD9F_P46
-
 /*
 An interface is a reference type who's header is a two word value. The
 first word represents the type of the value and the second is the data
@@ -32,8 +30,8 @@ type User struct {
 	Email string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a variable of type User.
 	user := User{
 		Name:  "Henry Ford",

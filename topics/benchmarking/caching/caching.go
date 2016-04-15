@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/QilJqGkQgb
-
 // package caching provides code to show why CPU caches matter and the way
 // the hardware caches memory affects performance.
 package caching

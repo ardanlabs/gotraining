@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/0WWW4Lwok4
-
 /*
 	https://blog.golang.org/strings
 
@@ -34,8 +32,8 @@ import (
 	"unicode/utf8"
 )
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a string with both chinese and english characters.
 	s := "世界 means world"
 
@@ -44,6 +42,7 @@ func main() {
 
 	// Iterate over each character in the string.
 	for i, r := range s {
+
 		// Capture the number of bytes for this character.
 		rl := utf8.RuneLen(r)
 

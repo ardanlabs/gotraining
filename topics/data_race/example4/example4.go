@@ -1,10 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/FLTlW0aqWT
-
-// go build -race
-
 // Sample program to show how to use a mutex to define critical
 // sections of code that need synchronous access.
 package main
@@ -15,14 +11,16 @@ import (
 	"sync"
 )
 
-// counter is a variable incremented by all goroutines.
-var counter int
+var (
+	// counter is a variable incremented by all goroutines.
+	counter int
 
-// mutex is used to define a critical section of code.
-var mutex sync.Mutex
+	// mutex is used to define a critical section of code.
+	mutex sync.Mutex
+)
 
-// main is the entry point for the application.
 func main() {
+
 	// Number of goroutines to use.
 	const grs = 2
 
@@ -47,6 +45,7 @@ func main() {
 // using the Mutex to synchronize and provide safe access.
 func incCounter() {
 	for count := 0; count < 2; count++ {
+
 		// Only allow one goroutine through this
 		// critical section at a time.
 		mutex.Lock()

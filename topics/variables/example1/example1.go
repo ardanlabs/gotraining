@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/m4PJ0FpSwX
-
 // The playground is actually a 64-bit env with 32-bit pointers
 // The os/arch combo is named nacl/amd64p32
 
@@ -11,8 +9,8 @@ package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare variables that are set to their zero value.
 	var a int
 	var b string

@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/SIk8XWmwWa
-
 // Sample program to show how to use a ServeMux from the standard
 // library. How to handle verbs and more complex routing.
 package main
@@ -25,6 +23,7 @@ type user struct {
 
 // app contains package level state for the web service.
 var app = struct {
+
 	// Mutex for safe access.
 	mu sync.RWMutex
 
@@ -44,6 +43,7 @@ var app = struct {
 
 // baseHandler handles serving the index template and static assets.
 func baseHandler(w http.ResponseWriter, r *http.Request) {
+
 	// If an static asset is being requested, use the file server.
 	if r.URL.Path != "/" {
 		app.fs.ServeHTTP(w, r)
@@ -73,6 +73,7 @@ func baseHandler(w http.ResponseWriter, r *http.Request) {
 
 // respondJSON sends status and writes JSON to the client.
 func respondJSON(w http.ResponseWriter, status int, val interface{}) error {
+
 	// Standard way to respond back to the client.
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
@@ -83,6 +84,7 @@ func respondJSON(w http.ResponseWriter, status int, val interface{}) error {
 func usersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET", "HEAD":
+
 		// Capture a safe copy of the slice header.
 		var users []user
 		app.mu.RLock()
@@ -95,6 +97,7 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 		respondJSON(w, http.StatusOK, users)
 
 	case "POST":
+
 		// Create a new user value.
 		u := user{
 			Name:  r.PostFormValue("name"),
@@ -122,6 +125,7 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 
 // searchUsers handles the /api/v1/search path.
 func searchUsers(w http.ResponseWriter, r *http.Request) {
+
 	// Extract the search term from the query string.
 	query := r.URL.Query().Get("q")
 	if query == "" {
@@ -153,6 +157,7 @@ func searchUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
 	// This will handle all paths without specific routes.
 	http.HandleFunc("/", baseHandler)
 

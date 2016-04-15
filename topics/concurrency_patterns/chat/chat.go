@@ -38,6 +38,7 @@ type client struct {
 // read waits for message and sends it to the chatroom for procesing.
 func (c *client) read() {
 	for {
+
 		// Wait for a message to arrive.
 		line, err := c.reader.ReadString('\n')
 
@@ -77,6 +78,7 @@ func (c *client) write(m message) {
 
 // drop closes the client connection and read goroutine.
 func (c *client) drop() {
+
 	// Close the connection.
 	c.conn.Close()
 	c.wg.Wait()
@@ -181,6 +183,7 @@ func (r *Room) start() {
 
 // Close shutdown the chatroom and closes all connections.
 func (r *Room) Close() error {
+
 	// Don't accept anymore client connections.
 	r.listener.Close()
 
@@ -197,6 +200,7 @@ func (r *Room) Close() error {
 
 // New creates a new chatroom.
 func New() *Room {
+
 	// Create a Room value.
 	chatRoom := Room{
 		joining:  make(chan net.Conn),

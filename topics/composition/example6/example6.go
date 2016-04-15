@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/ahRbbv1CA0
-
 // Sample program demonstrating that type assertions are a runtime and
 // not compile time construct.
 package main
@@ -31,7 +29,6 @@ func (cloud) String() string {
 
 // =============================================================================
 
-// main is the entry point for the application.
 func main() {
 
 	// Seed the number random generator.
@@ -45,6 +42,7 @@ func main() {
 
 	// Let's run this experiment ten times.
 	for i := 0; i < 10; i++ {
+
 		// Choose a random number from 0 to 1.
 		rn := rand.Intn(2)
 

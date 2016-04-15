@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/QdLjCjMM40
-
 // Create two error variables, one called ErrInvalidValue and the other
 // called ErrAmountTooLarge. Provide the static message for each variable.
 // Then write a function called checkAmount that accepts a float64 type value
@@ -17,17 +15,20 @@ import (
 	"fmt"
 )
 
-// ErrInvalidValue indicates the value is invalid.
-var ErrInvalidValue = errors.New("Invalid Value")
+var (
+	// ErrInvalidValue indicates the value is invalid.
+	ErrInvalidValue = errors.New("Invalid Value")
 
-// ErrAmountTooLarge indicates the value beyond the upper bound.
-var ErrAmountTooLarge = errors.New("Amount To Large")
+	// ErrAmountTooLarge indicates the value beyond the upper bound.
+	ErrAmountTooLarge = errors.New("Amount To Large")
+)
 
-// main is the entry point for the application.
 func main() {
+
 	// Call the function and get the error.
 	if err := checkAmount(0); err != nil {
 		switch err {
+
 		// Check if the error is an ErrInvalidValue.
 		case ErrInvalidValue:
 			fmt.Println("Value provided is not valid.")
@@ -52,6 +53,7 @@ func main() {
 // checkAmount validates the value passed in.
 func checkAmount(f float64) error {
 	switch {
+
 	// Is the parameter equal to zero.
 	case f == 0:
 		return ErrInvalidValue

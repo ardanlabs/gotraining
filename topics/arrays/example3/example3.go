@@ -1,16 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/L-SmdGfUcP
-
 // Sample program to show how the behavior of the for range and
 // how memory for an array is contiguous.
 package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare an array of 5 strings initialized with values.
 	five := [5]string{"Annie", "Betty", "Charley", "Doug", "Edward"}
 

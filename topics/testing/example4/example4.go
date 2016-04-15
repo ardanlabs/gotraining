@@ -11,7 +11,6 @@ import (
 	"github.com/ardanlabs/gotraining/topics/testing/example4/handlers"
 )
 
-// main is the entry point for the application.
 func main() {
 	handlers.Routes()
 

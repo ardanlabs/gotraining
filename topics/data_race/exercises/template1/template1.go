@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/F5DCJTZ6Lm
-
 // Fix the race condition in this program.
 package main
 
@@ -21,8 +19,8 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Number of goroutines to use.
 	const grs = 3
 
@@ -49,6 +47,7 @@ func main() {
 
 // random generates random numbers and stores them into a slice.
 func random(amount int) {
+
 	// Generate as many random numbers as specified.
 	for i := 0; i < amount; i++ {
 		n := rand.Intn(100)

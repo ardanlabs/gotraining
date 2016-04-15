@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/g5O3xKc0GI
-
 // Declare a struct that represents a baseball player. Include name, atBats and hits.
 // Declare a method that calculates a players batting average. The formula is Hits / AtBats.
 // Declare a slice of this type and initialize the slice with several players. Iterate over
@@ -23,8 +21,8 @@ func (p *player) average() float64 {
 	return float64(p.hits) / float64(p.atBats)
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Create a few players.
 	players := []player{
 		{"bill", 10, 7},

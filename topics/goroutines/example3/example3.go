@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/kz65m4PHmC
-
 // Sample program to show how to create goroutines and
 // how the goroutine scheduler behaves with two contexts.
 package main
@@ -13,14 +11,14 @@ import (
 	"sync"
 )
 
-// init is called prior to main.
 func init() {
+
 	// Allocate two logical processors for the scheduler to use.
 	runtime.GOMAXPROCS(2)
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// wg is used to wait for the program to finish.
 	// Add a count of two, one for each goroutine.
 	var wg sync.WaitGroup

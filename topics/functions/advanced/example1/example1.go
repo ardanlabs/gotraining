@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/xOprJ4yms0
-
 // Sample program to show how to recover from panics.
 package main
 
@@ -11,7 +9,6 @@ import (
 	"runtime"
 )
 
-// main is the entry point for the application.
 func main() {
 
 	// Call the testPanic function to run the test.

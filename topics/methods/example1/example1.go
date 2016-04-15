@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/ovMH0wrl4B
-
 // Sample program to show how to declare methods and how the Go
 // compiler supports them.
 package main
@@ -27,8 +25,8 @@ func (u *user) changeEmail(email string) {
 	u.email = email
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Values of type user can be used to call methods
 	// declared with a value receiver.
 	bill := user{"Bill", "bill@email.com"}

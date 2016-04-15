@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// http://play.golang.org/p/IIubKW34GA
-
 // Sample program to show how the backing array for a referene type can
 // be placed contiguous in memory with the header value. Must be run locally
 // and not in the playground.

@@ -1,16 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/IHKg8PuSj4
-
 // Sample program to show how to grow a slice using the built-in function append
 // and how append grows the capacity of the underlying array.
 package main
 
 import "fmt"
 
-// main is the entry point for the application.
 func main() {
+
 	// Declare a nil slice of strings.
 	var data []string
 
@@ -20,11 +18,13 @@ func main() {
 
 	// Append ~10k strings to the slice.
 	for record := 1; record <= 10240; record++ {
+
 		// Use the built-in function append to add to the slice.
 		data = append(data, fmt.Sprintf("Rec: %d", record))
 
-		// when the capacity of the slice changes, display the changes.
+		// When the capacity of the slice changes, display the changes.
 		if lastCap != cap(data) {
+
 			// Calculate the percent of change.
 			lenChg := float64(len(data)-lastLen) / float64(lastLen) * 100
 			capChg := float64(cap(data)-lastCap) / float64(lastCap) * 100

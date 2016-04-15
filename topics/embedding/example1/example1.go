@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/Bweb5f-xdM
-
 // Sample program to show how what we are doing is NOT embedding
 // a type but just using a type as a field.
 package main
@@ -29,8 +27,8 @@ type admin struct {
 	level  string
 }
 
-// main is the entry point for the application.
 func main() {
+
 	// Create an admin user.
 	ad := admin{
 		person: user{

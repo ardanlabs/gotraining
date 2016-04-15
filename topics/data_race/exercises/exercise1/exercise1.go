@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/VCFI9VpNNw
-
 // Answer for exercise 1 of Race Conditions.
 package main
 

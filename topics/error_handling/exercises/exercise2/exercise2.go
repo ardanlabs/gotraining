@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/8UyOIVjFtY
-
 // Create a custom error type called appError that contains three fields, err error,
 // message string and code int. Implement the error interface providing your own message
 // using these three fields. Implement a second method named Temporary that returns false
@@ -39,7 +37,6 @@ type temporary interface {
 	Temporary() bool
 }
 
-// main is the entry point for the application.
 func main() {
 	if err := checkFlag(false); err != nil {
 		switch e := err.(type) {
@@ -56,6 +53,7 @@ func main() {
 
 // checkFlag returns one of two errors based on the value of the parameter.
 func checkFlag(t bool) error {
+
 	// If the parameter is false return an appError.
 	if !t {
 		return &appError{errors.New("Flag False"), "The Flag was false", 9}

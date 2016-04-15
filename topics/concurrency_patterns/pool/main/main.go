@@ -48,6 +48,7 @@ func createConnection() (io.Closer, error) {
 
 // performQueries tests the resource pool of connections.
 func performQueries(query int, p *pool.Pool) {
+
 	// Acquire a connection from the pool.
 	conn, err := p.Acquire()
 	if err != nil {
@@ -63,7 +64,6 @@ func performQueries(query int, p *pool.Pool) {
 	log.Printf("Query: QID[%d] CID[%d]\n", query, conn.(*dbConnection).ID)
 }
 
-// main is the entry point for all Go programs.
 func main() {
 	var wg sync.WaitGroup
 	wg.Add(maxGoroutines)
@@ -77,6 +77,7 @@ func main() {
 
 	// Perform queries using connections from the pool.
 	for query := 0; query < maxGoroutines; query++ {
+
 		// Each goroutine needs its own copy of the query
 		// value else they will all be sharing the same query
 		// variable.

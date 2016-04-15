@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/70aRkw59zH
-
 // Sample program that implements a simple web service that will allow us to
 // explore how to use the schedtrace.
 package main
@@ -14,7 +12,6 @@ import (
 	_ "net/http/pprof"
 )
 
-// main is the entry point for the application.
 func main() {
 	http.HandleFunc("/sendjson", sendJSON)
 

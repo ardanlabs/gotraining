@@ -14,16 +14,16 @@ http://blog.golang.org/laws-of-reflection
 
 ## Code Review
 
-[Empty Interface](example1/example1.go) ([Go Playground](https://play.golang.org/p/OSeD9F_P46))  
-[Reflect struct types with tags](example2/example2.go) ([Go Playground](https://play.golang.org/p/fSMITKsv3p))  
-[Decoding function for integers](example3/example3.go) ([Go Playground](https://play.golang.org/p/bWQ6hiVECQ))
+[Empty Interface](example1/example1.go) ([Go Playground](http://play.golang.org/p/peXhv7-dYi))  
+[Reflect struct types with tags](example2/example2.go) ([Go Playground](http://play.golang.org/p/r-riAX2m6l))  
+[Decoding function for integers](example3/example3.go) ([Go Playground](http://play.golang.org/p/oQS__TEal_))
 
 ## Exercises
 
 ### Exercise 1
 Declare a struct type that represents a request for a customer invoice. Include a CustomerID and InvoiceID field. Define tags that can be used to validate the request. Define tags that specify both the length and range for the ID to be valid. Declare a function named validate that accepts values of any type and processes the tags. Display the results of the validation.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/lgMQHWpZul)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/xy-wyPrsjz))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/LKWPS9cN_n)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/pDTvc6jEjt))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

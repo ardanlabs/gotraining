@@ -1,10 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/2Zeq3INrv4
-
-// go build -race
-
 // Sample program to show how to use the atomic package to
 // provide safe access to numeric types.
 package main
@@ -19,8 +15,8 @@ import (
 // counter is a variable incremented by all goroutines.
 var counter int64
 
-// main is the entry point for the application.
 func main() {
+
 	// Number of goroutines to use.
 	const grs = 2
 
@@ -46,6 +42,7 @@ func main() {
 // incCounter increments the package level counter variable.
 func incCounter() {
 	for count := 0; count < 2; count++ {
+
 		// Safely Add One To Counter.
 		atomic.AddInt64(&counter, 1)
 

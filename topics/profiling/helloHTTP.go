@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// https://play.golang.org/p/fcU9jQX2Qz
-
 // Sample program to show how profiling works. This is the base
 // code. Use the readme for changes needed to be made to the code.
 package main
@@ -21,7 +19,6 @@ type hello struct {
 	Message string
 }
 
-// main is the entry point for the application.
 func main() {
 	http.HandleFunc("/english", helloEnglish)
 	http.HandleFunc("/chinese", helloChinese)
