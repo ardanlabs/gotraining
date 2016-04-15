@@ -98,10 +98,6 @@ This is subject to be different in different processors. For this content, the f
 [Different type arrays](example2/example2.go) ([Go Playground](http://play.golang.org/p/tyOZ5_zBUN))  
 [Contiguous memory allocations](example3/example3.go) ([Go Playground](http://play.golang.org/p/DyZ7spMgZ3))  
 
-## Advanced Code Review
-
-[Contiguous Backing Array](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/BKMPXKYW6t))
-
 ## Exercises
 
 ### Exercise 1
