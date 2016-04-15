@@ -17,9 +17,10 @@ const (
 // of cache lines per row.
 var matrix [cols][rows]byte
 
-// init sets ~13% of the matrix to 0XFF.
 func init() {
 	var ctr int
+
+	// Set ~13% of the matrix to 0XFF.
 	for col := 0; col < cols; col++ {
 		for row := 0; row < rows; row++ {
 			if row%8 == 0 {
