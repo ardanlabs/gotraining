@@ -1,4 +1,5 @@
-// Package main provides a CLI tool to automatically update Go Playground links within a training markdown file
+// Package main provides a CLI tool to automatically update Go Playground
+// links within a training markdown file
 package main
 
 import (
@@ -12,45 +13,16 @@ import (
 	"regexp"
 )
 
-func main() {
-	flag.Parse()
-
-	for _, file := range flag.Args() {
-		if err := process(file); err != nil {
-			log.Fatal(err)
-		}
-	}
-}
-
 var (
-	// linkRegexp matches markdown links
+	// linkRegexp matches markdown links.
 	linkRegexp = regexp.MustCompile("\\[([^\\]]+)\\]\\(([^\\)]+)\\)")
-	// srcLinkRegexp matches linked source file that has to be uploaded to the Go Playground
+
+	// srcLinkRegexp matches linked source file that has to be uploaded to the
+	// Go Playground.
 	srcLinkRegexp = regexp.MustCompile("\\[[^\\]]+\\]\\([^\\)]+\\.go\\) +\\(\\[Go Playground\\]\\([^\\)]*\\)\\)")
 )
 
-// process looks for playground links in a given markdown files and generates new links
-func process(f string) error {
-	log.Println("Processing", f)
-	src, err := ioutil.ReadFile(f)
-	if err != nil {
-		return err
-	}
-	res := srcLinkRegexp.ReplaceAllFunc(src, func(b []byte) []byte {
-		m := linkRegexp.FindAllSubmatch(b, 1)
-		title := string(m[0][1])
-		srcFile := string(m[0][2])
-		log.Println("Updating", title, srcFile)
-		l, err := newLink(f, title, srcFile)
-		if err != nil {
-			log.Fatal(err)
-		}
-		log.Println(l)
-		return []byte(l.String())
-	})
-	return ioutil.WriteFile(f, res, 077)
-}
-
+// link represents data required to create a link.
 type link struct {
 	title    string
 	srcFile  string
@@ -58,18 +30,22 @@ type link struct {
 	src      []byte
 }
 
+// newLink returns a new link based on a source file.
 func newLink(mdFile, title, srcFile string) (link, error) {
 	l := link{
 		title:   title,
 		srcFile: srcFile,
 	}
+
 	var err error
 	if l.src, err = ioutil.ReadFile(path.Join(path.Dir(mdFile), l.srcFile)); err != nil {
 		return link{}, err
 	}
+
 	if l.playLink, err = l.generatePlayLink(); err != nil {
 		return link{}, err
 	}
+
 	return l, nil
 }
 
@@ -84,13 +60,59 @@ func (l link) generatePlayLink() (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	defer res.Body.Close()
+
 	if res.StatusCode != 200 {
 		return "", fmt.Errorf("unexpected playground status code: %d", res.StatusCode)
 	}
+
 	b, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return "", err
 	}
+
 	return fmt.Sprintf("http://play.golang.org/p/%s", string(b)), nil
+}
+
+func main() {
+	flag.Parse()
+
+	for _, file := range flag.Args() {
+		if err := process(file); err != nil {
+			log.Fatal(err)
+		}
+	}
+}
+
+// process looks for playground links in a given markdown files and
+// generates new links.
+func process(file string) error {
+	log.Println("Processing", file)
+
+	src, err := ioutil.ReadFile(file)
+	if err != nil {
+		return err
+	}
+
+	f := func(b []byte) []byte {
+		m := linkRegexp.FindAllSubmatch(b, 1)
+
+		title := string(m[0][1])
+		srcFile := string(m[0][2])
+
+		log.Println("Updating", title, srcFile)
+
+		l, err := newLink(file, title, srcFile)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		log.Println(l)
+		return []byte(l.String())
+	}
+
+	res := srcLinkRegexp.ReplaceAllFunc(src, f)
+
+	return ioutil.WriteFile(file, res, 077)
 }
