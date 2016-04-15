@@ -53,14 +53,15 @@ func (Xenia) Pull(d *Data) error {
 	switch rand.Intn(10) {
 	case 1, 9:
 		return EOD
+
 	case 5:
 		return errors.New("Error reading data from Xenia")
+
+	default:
+		d.Line = "Data"
+		fmt.Println("In:", d.Line)
+		return nil
 	}
-
-	d.Line = "Data"
-	fmt.Println("In:", d.Line)
-
-	return nil
 }
 
 // Pillar is a system we need to store data into.
@@ -85,14 +86,14 @@ type System struct {
 type IO struct{}
 
 // pull knows how to pull bulks of data from any Puller.
-func (IO) pull(p Puller, data []Data) error {
+func (IO) pull(p Puller, data []Data) (int, error) {
 	for i := range data {
 		if err := p.Pull(&data[i]); err != nil {
-			return err
+			return i, err
 		}
 	}
 
-	return nil
+	return len(data), nil
 }
 
 // store knows how to store bulks of data from any Storer.
@@ -106,11 +107,15 @@ func (IO) store(s Storer, data []Data) {
 func (io IO) Copy(ps PullStorer, batch int) error {
 	for {
 		data := make([]Data, batch)
-		if err := io.pull(ps, data); err != nil {
-			return err
+
+		i, err := io.pull(ps, data)
+		if i > 0 {
+			io.store(ps, data[:i])
 		}
 
-		io.store(ps, data)
+		if err != nil {
+			return err
+		}
 	}
 }
 
