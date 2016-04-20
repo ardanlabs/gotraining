@@ -191,6 +191,72 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
+## Schedule
+
+**2016**  
+	Capital One 	Richmond, VA 		- January  
+	BOT 			Miami, FL 			- January  
+	CISCO 			Lawrenceville, GA 	- February  
+	Ultimate Go 	Utrecht, Amsterdam	- March  
+	GE 				San Ramon, CA 		- March  
+	WWG 			SF, CA 				- March  
+	Ultimate Go 	SLC, UT 			- March  
+	SAS 			Cary, NC 			- March  
+	Ultimate Go 	SF, CA 				- April  
+	Salesforce 		Dublin, Ireland 	- April  
+	CapitalOne 		Richmond, VA 		- April  
+
+	--- Pending ---  
+	CISCO 			Lawrenceville, GA 	- May  
+	Rackspace 		San Antonio, TX 	- May  
+	OSCON 			Portland, OR  		- May  
+	Intel 			Hillsboro, OR 		- May  
+	Staples 		Framingham, MA  	- May  
+	HP Enterprise 	Seattle, WA 		- May  
+	Ultimate Go 	London, England 	- June  
+	Ultimate Go 	Phoenix, AZ  		- June  
+	GolangUK 		London, England 	- August  
+	CodeChix 		SF, CA 				- August  
+	Ultimate Go 	Toronto, Canada 	- September  
+
+**2015**    
+	Edmonton Go 	Edmonton, Canada 	- January  
+	GopherCon 		Bangalore, India 	- February  
+	Ultimate Go 	Denver, CO 			- March  
+	Ultimate Go 	SF, CA 				- March  
+	Ultimate Go 	Denver, CO 			- April  
+	FluentConf 		SF, CA 				- April  
+	ACL 			Vancouver, Canada 	- May  
+	PowerChord 		Tampa, FL 			- May  
+	Rackspace 		San Antonio, TX 	- May  
+	Ultimate Go 	NYC, NY 			- June  
+	MagmaConf  		Manzanillo, Mexico 	- June  
+	Ultimate Go		Denver, CO 			- July  
+	NY Times   		NYC, NY 			- July  
+	OSCON      		Portland, OR 		- July  
+	WWG 			SF, CA 				- August  
+	GolangUK 		London, England 	- August  
+	YikYak 			Atlanta, GA 		- August  
+	Bridgevine 		Miami, FL 			- September  
+	Ultimate Go 	Seattle, WA 		- September  
+	Fidelity 		Dublin, Ireland 	- September  
+	Ultimate Go 	SF, CA 				- September  
+	GothamGo 		NYC, NY 			- October  
+	Economist 		NYC, NY 			- October  
+	GE 				San Ramon, CA 		- October  
+	Teradata 		San Diego, CA 		- October  
+	SAS 			Cary, NC 			- October  
+	NY Times 		NYC, NY 			- November  
+	Meetme 			New Paltz, NY 		- November  
+	NY Times 		NYC, NY 			- November 
+	Ultimate Go 	Portland, OR 		- November  
+	Nordstrom 		Seattle, WA 		- December  
+
+**2014**  
+	Comcast 		SF, CA 				- August  
+	GothamGo 		NYC, NY 			- October  
+	Comcast 		Reston, VA 			- December
+  
 ## Contact Information
 
 William Kennedy  
