@@ -127,10 +127,6 @@ http://www.goinggo.net/
 
     go get github.com/ardanlabs/gotraining
 
-## Current Classes
-
-If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
-
 ## Teachers
 
 **William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
@@ -202,7 +198,9 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
-## Schedule
+## Classes
+
+If you are interested in holding an event in your area please let us know. We will work with you and your organization to help make it happen.
 
 #### 2016
 
