@@ -30,29 +30,38 @@ func main() {
 		name: "Bill",
 	}
 
-	// Declare a function variable for the method
-	// bound to the d variable.
+	// How we actually call methods in Go.
+	d.displayName()
+	d.setAge(45)
+
+	// =========================================================================
+
+	// Declare a function variable for the method bound to the d variable.
 	f1 := d.displayName
 
 	// Call the method via the variable.
 	f1()
 
-	// Declare a function variable for the function
-	// bound to the package.
+	// =========================================================================
+
+	// Declare a function variable for the function bound to the package.
 	f2 := data.displayName
 
 	// Call the function passing the receiver.
 	f2(d)
 
-	// Declare a function variable for the method
-	// bound to the d variable.
+	// =========================================================================
+
+	// Declare a function variable for the method bound to the d variable.
 	f3 := d.setAge
 
 	// Call the method via the variable passing the parameter.
 	f3(45)
 
-	// Declare a function variable for the function
-	// bound to the package. The receiver is a pointer.
+	// =========================================================================
+
+	// Declare a function variable for the function bound to the package.
+	// The receiver is a pointer.
 	f4 := (*data).setAge
 
 	// Call the function passing the receiver and the parameter.

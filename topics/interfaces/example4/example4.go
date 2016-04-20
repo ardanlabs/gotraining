@@ -13,7 +13,7 @@ type user struct {
 }
 
 // String implements the fmt.Stringer interface.
-func (u user) String() string {
+func (u *user) String() string {
 	return fmt.Sprintf("My name is %q and my email is %q", u.name, u.email)
 }
 
