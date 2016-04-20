@@ -1,30 +1,22 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how method sets can affect behavior.
+// Sample program to show how you can't always get the address of a value.
 package main
 
 import "fmt"
 
-// user defines a user in the system.
-type user struct {
-	name  string
-	email string
-}
+// duration is a named type with a base type of int.
+type duration int
 
-// String implements the fmt.Stringer interface.
-func (u user) String() string {
-	return fmt.Sprintf("My name is %q and name email is %q", u.name, u.email)
+// format pretty-prints the duration value.
+func (d *duration) pretty() {
+	fmt.Println("Duration:", *d)
 }
 
 func main() {
+	duration(42).pretty()
 
-	// Create a value of type user.
-	u := user{
-		name:  "Bill",
-		email: "bill@ardanlabs.com",
-	}
-
-	// Display the value.
-	fmt.Println(u)
+	// ./example3.go:18: cannot call pointer method on duration(42)
+	// ./example3.go:18: cannot take the address of duration(42)
 }
