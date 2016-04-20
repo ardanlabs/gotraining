@@ -134,7 +134,17 @@ If you are interested in holding an event in your area please let me know. I wil
 ## Teachers
 
 **William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
-_William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity. Bill is focused on Go education through his training company Ardan Labs. He can often be found talking at conferences and giving workshops both locally and over hangouts. He always finds time to work with individuals and groups who want to take their Go knowledge, blogging, and coding skills to the next level._
+_William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
+
+[Going Go](https://www.goinggo.net/) - Blog  
+[Go In Action](https://www.manning.com/books/go-in-action) - Book  
+[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk) - Video  
+[GoSF - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ) - Video  
+[GothamGo - Error Handling in Go](https://vimeo.com/115782573) - Video  
+[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM) - Video  
+[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo) - Video  
+[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek) - Video  
+[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8) - Video  
 
 **Kevin Gillette** ([@kevingillette](https://twitter.com/kevingillette))  
 _Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history._
