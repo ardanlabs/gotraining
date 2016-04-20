@@ -193,7 +193,8 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 ## Schedule
 
-**2016**  
+**2016**
+
 		Capital One 	Richmond, VA 		- January  
 		BOT 			Miami, FL 			- January  
 		CISCO 			Lawrenceville, GA 	- February  
@@ -219,7 +220,8 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 		CodeChix 		SF, CA 				- August  
 		Ultimate Go 	Toronto, Canada 	- September  
 
-**2015**    
+**2015**
+
 		Edmonton Go 	Edmonton, Canada 	- January  
 		GopherCon 		Bangalore, India 	- February  
 		Ultimate Go 	Denver, CO 			- March  
@@ -252,7 +254,8 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 		Ultimate Go 	Portland, OR 		- November  
 		Nordstrom 		Seattle, WA 		- December  
 
-**2014**  
+**2014**
+
 		Comcast 		SF, CA 				- August  
 		GothamGo 		NYC, NY 			- October  
 		Comcast 		Reston, VA 			- December
