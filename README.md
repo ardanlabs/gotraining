@@ -137,6 +137,7 @@ If you are interested in holding an event in your area please let me know. I wil
 _William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
 [Going Go](https://www.goinggo.net/) - Blog  
+[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go) - Blog  
 [Go In Action](https://www.manning.com/books/go-in-action) - Book  
 [GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk) - Video  
 [GoSF - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ) - Video  
