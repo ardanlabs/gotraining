@@ -35,7 +35,7 @@ The material has been designed to be taught in a classroom environment. The code
 
 ## Important Reading
 
-Please check out this page of [important reading](reading/README.md). You will find articles and videos around mechnical sympathy, data-oriented design, Go runtime and optimizations and articles about the history of computing.
+Please check out this page of [important reading](reading/README.md). You will find articles and videos around mechanical sympathy, data-oriented design, Go runtime and optimizations and articles about the history of computing.
 
 ## Our Experience
 
