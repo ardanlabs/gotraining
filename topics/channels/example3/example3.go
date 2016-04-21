@@ -25,14 +25,15 @@ func init() {
 
 func main() {
 
-	// Set the number of routines.
+	// Set the number of routines and inserts.
 	const routines = 10
+	const inserts = routines * 2
 
 	// Buffered channel to receive information about any possible insert.
 	ch := make(chan result, routines)
 
 	// Number of responses we need to handle.
-	waitInserts := routines
+	waitInserts := inserts
 
 	// Perform all the inserts.
 	for i := 0; i < routines; i++ {
@@ -52,7 +53,7 @@ func main() {
 		r := <-ch
 
 		// Display the result.
-		log.Printf("ID: %d OP: %s ERR: %v", r.id, r.op, r.err)
+		log.Printf("N: %d ID: %d OP: %s ERR: %v", waitInserts, r.id, r.op, r.err)
 
 		// Decrement the wait count and determine if we are done.
 		waitInserts--
