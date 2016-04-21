@@ -15,7 +15,7 @@ import (
 const succeed = "\u2713"
 const failed = "\u2717"
 
-// feed is mocking the XML document we except to receive.
+// feed is mocking the XML document we expect to receive.
 var feed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss>
 <channel>
