@@ -30,7 +30,7 @@ func main() {
 	const inserts = routines * 2
 
 	// Buffered channel to receive information about any possible insert.
-	ch := make(chan result, routines)
+	ch := make(chan result, inserts)
 
 	// Number of responses we need to handle.
 	waitInserts := inserts
