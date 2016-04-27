@@ -39,15 +39,9 @@ Please check out this page of [important reading](reading/README.md). You will f
 
 ## Our Experience
 
-We have taught this class to thousands of students for almost two years.
+We have taught classes to thousands of students for over the past two years and all around the world.
 
-We have trained companies such as:
-
-Comcast, Rackspace, The New York Times, Yik Yak, Fidelity, GE, CISCO, The Economist, Teradata and more.
-
-We have taught all around the world:
-
-US, Canada, Mexico, England, Amsterdam and India
+Look at our schedule: https://github.com/ardanlabs/gotraining#schedule
 
 ## Before You Come To Class
 
