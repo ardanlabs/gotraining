@@ -31,7 +31,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law)  
 [A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter)  
 
-### Why Vendoring Is Important
+### Vendoring
 
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)
 
@@ -56,6 +56,15 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html)  
 [The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)
+
+### Docker
+
+[How To Deploy a Go Web Application with Docker](https://semaphoreci.com/community/tutorials/how-to-deploy-a-go-web-application-with-docker) - Kulshekhar Kabra  
+
+### Misc
+
+[Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
+[Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
 
 ## Mechanical Sympathy
 
