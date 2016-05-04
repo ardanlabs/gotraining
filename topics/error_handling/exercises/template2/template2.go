@@ -7,7 +7,8 @@
 // when the value of the code field is 9. Write a function called checkFlag that accepts
 // a bool value. If the value is false, return a pointer of your custom error type
 // initialized as you like. If the value is true, return a default error. Write a main
-// function to call the checkFlag function and check the error.
+// function to call the checkFlag function and check the error using the temporary
+// interface.
 package main
 
 // Add imports.
