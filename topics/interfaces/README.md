@@ -31,6 +31,10 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 [Behavior Changes](example4/example4.go) ([Go Playground](http://play.golang.org/p/OrFNjhTrxv))  
 [Storage By Value](example5/example5.go) ([Go Playground](https://play.golang.org/p/LZZkir37h1))  
 
+## Advanced Code Review
+
+[Storing Values](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/ejtie-K9eQ))
+
 ## Exercises
 
 ### Exercise 1
