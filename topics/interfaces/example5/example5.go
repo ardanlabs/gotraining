@@ -2,7 +2,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Sample program to show how the concrete value assigned to
-// the interface value is what is stored.
+// the interface is what is stored inside the interface.
 package main
 
 import "fmt"
@@ -41,13 +41,14 @@ func main() {
 	// Add the values and pointers to the slice of
 	// printer interface values.
 	entites := []printer{
+
 		// Store copies of the user and admin
 		// values in the interface value.
 		u,
 		a,
 
-		// Store the address of each user and
-		// admin value in the interface value.
+		// Store copies of the address of user and
+		// admin values in the interface value.
 		&u,
 		&a,
 	}
@@ -56,9 +57,17 @@ func main() {
 	u.name = "Bill_CHG"
 	a.name = "Lisa_CHG"
 
-	// Iterate over the slice of entities and see
-	// when the change is seen.
+	// Iterate over the slice of entities and call
+	// print against the copied interface value.
 	for _, e := range entites {
 		e.print()
 	}
+
+	// When we store a value, the interface value has its own
+	// copy of the value. Changes to the original value will
+	// not be seen.
+
+	// When we store a pointer, the interface value has its own
+	// copy of the address. Changes to the original value will
+	// be seen.
 }
