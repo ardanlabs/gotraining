@@ -29,6 +29,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 [Method Sets](example2/example2.go) ([Go Playground](http://play.golang.org/p/tiyisLc01p))  
 [Address Of Value](example3/example3.go) ([Go Playground](http://play.golang.org/p/Dl71x_B6cU))  
 [Behavior Changes](example4/example4.go) ([Go Playground](http://play.golang.org/p/OrFNjhTrxv))  
+[Storage By Value](example5/example5.go) ([Go Playground](https://play.golang.org/p/LZZkir37h1))  
 
 ## Exercises
 
