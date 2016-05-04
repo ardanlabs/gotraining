@@ -25,6 +25,9 @@ func (v value) bill() {
 
 func main() {
 
+	// Capture the size of a word in this arch.
+	size := unsafe.Sizeof(10)
+
 	// Create a biller interface and concrete type value.
 	var b biller
 	v := value(10)
@@ -35,7 +38,7 @@ func main() {
 
 	// Get a pointer to the second word of the interface value.
 	// We want to inspect the value that the interface is pointing to.
-	second := uintptr(unsafe.Pointer(&b)) + uintptr(4)
+	second := uintptr(unsafe.Pointer(&b)) + uintptr(size)
 	valPtr := (**value)(unsafe.Pointer(second))
 	fmt.Println("Addr V:", &v, "Int Addr:", *valPtr, "Value:", **valPtr)
 
@@ -46,7 +49,7 @@ func main() {
 
 	// Get a pointer to the second word of the interface value.
 	// We want to inspect the value that the interface is pointing to.
-	second = uintptr(unsafe.Pointer(&b1)) + uintptr(4)
+	second = uintptr(unsafe.Pointer(&b1)) + uintptr(size)
 	valPtr = (**value)(unsafe.Pointer(second))
 	fmt.Println("Addr V:", &v, "Int Addr:", *valPtr, "Value:", **valPtr)
 
