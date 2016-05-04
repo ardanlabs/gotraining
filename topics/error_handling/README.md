@@ -15,7 +15,8 @@ http://blog.golang.org/error-handling-and-go
 http://www.goinggo.net/2014/10/error-handling-in-go-part-i.html  
 http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html  
 http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/  
-http://dave.cheney.net/2014/12/24/inspecting-errors
+http://dave.cheney.net/2014/12/24/inspecting-errors  
+http://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully  
 
 ## Code Review
 
