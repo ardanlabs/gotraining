@@ -24,7 +24,7 @@ func New(maxGoroutines int) *Task {
 	t := Task{
 
 		// Using an unbuffered channel because we want the
-		// guarentee of knowing the work being submitted is
+		// guarantee of knowing the work being submitted is
 		// actually being worked on after the call to Run returns.
 		work: make(chan Worker),
 	}
