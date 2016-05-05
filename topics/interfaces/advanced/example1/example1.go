@@ -25,46 +25,40 @@ func (u user) notify() {
 	fmt.Println("Alert", u.name)
 }
 
-func main() {
+func inspect(n *notifier, u *user) {
+	word := uintptr(unsafe.Pointer(n)) + uintptr(unsafe.Sizeof(&u))
+	value := (**user)(unsafe.Pointer(word))
+	fmt.Printf("Addr User: %p  Word Value: %p  Ptr Value: %v\n", u, *value, **value)
+}
 
-	// Capture the size of a word in this arch.
-	size := unsafe.Sizeof(10)
+func main() {
 
 	// Create a notifier interface and concrete type value.
 	var n1 notifier
 	u := user{"bill"}
 
-	// The assignment stores a copy of the user value inside
-	// the notifier interface value.
+	// Store a copy of the user value inside the notifier
+	// interface value.
 	n1 = u
 
-	// Get a pointer to the second word of the interface value.
-	// We want to inspect the value that the interface is pointing to.
-	word := uintptr(unsafe.Pointer(&n1)) + uintptr(size)
-	value := (**user)(unsafe.Pointer(word))
-	fmt.Printf("N1: Addr User: %p  Word Value: %p  Ptr Value: %v\n", &u, *value, **value)
+	// We see the interface has its own copy.
+	// Addr User: 0x1040a120  Word Value: 0x10427f70  Ptr Value: {bill}
+	inspect(&n1, &u)
 
-	// Create a second interface value and assign the orginal interface
-	// value to the new interface value.
-	var n2 notifier
-	n2 = n1
+	// Make a copy of the interface value.
+	n2 := n1
 
-	// Get a pointer to the second word of the interface value.
-	// We want to inspect the value that the interface is pointing to.
-	word = uintptr(unsafe.Pointer(&n2)) + uintptr(size)
-	value = (**user)(unsafe.Pointer(word))
-	fmt.Printf("N2: Addr User: %p  Word Value: %p  Ptr Value: %v\n", &u, *value, **value)
+	// We see the interface is sharing the same value stored in
+	// the n1 interface value.
+	// Addr User: 0x1040a120  Word Value: 0x10427f70  Ptr Value: {bill}
+	inspect(&n2, &u)
 
-	// Mutate the value that the interface is pointing to.
-	(**value).name = "lisa"
+	// Store a copy of the user address value inside the
+	// notifier interface value.
+	n1 = &u
 
-	// We see the change in both interface values. What this means is
-	// that when we make an assignment between different interface values,
-	// like on line 42, we are copying just the interface value. We are not making
-	// a second copy of the value that was stored. Both b and b1 are pointing to
-	// the same value we originally stored on line 26.
-	fmt.Println("N1:", n1.(user), "N2:", n2.(user))
-
-	// The type assertion is returning a copy of the value stored. This is
-	// whether the value was an address or not.
+	// We see the interface is sharing the u variables value
+	// directly. There is no copy.
+	// Addr User: 0x1040a120  Word Value: 0x1040a120  Ptr Value: {bill}
+	inspect(&n1, &u)
 }

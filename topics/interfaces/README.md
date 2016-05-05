@@ -33,7 +33,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Advanced Code Review
 
-[Storing Values](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/r9HYjCUzUx))
+[Storing Values](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/KXvtpd9_29))
 
 ## Exercises
 
