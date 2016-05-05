@@ -58,6 +58,18 @@ We use a slack channel to share links, code, and examples during the training.  
 
 ### Installing Go
 
+**Using Docker container**   
+Installing Go may not be needed if you choose using [Docker container](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
+
+```
+git clone https://github.com/ardanlabs/gotraining.git
+cd gotraining
+```
+
+*NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
+
+To build and run docker container to start your training right away, see [here](#docker).
+
 **Mac OS X**  
 http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
 
@@ -108,6 +120,34 @@ git clone https://github.com/ardanlabs/gotraining.git
 ```
 
 *NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
+
+
+###<a name="docker" />Starting gotraining in Docker container
+
+**Install Docker Toolbox**  
+https://www.docker.com/products/docker-toolbox
+
+**Build Docker container**
+
+```
+# current path is the source root where Dockerfile exists
+docker build -t ardanlabs-gotraining .
+```
+
+**Start Docker container**
+
+```
+docker run -it -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs-gotraining
+# or start container with downloaded gotraining in the image
+docker run -it ardanlabs-gotraining
+```
+
+**Remove gotraining container and image**
+
+```
+docker rm -f $(docker ps -a | grep ardanlabs-gotraining | awk '{print $1}')
+docker rmi -f $(docker images -a | grep ardanlabs-gotraining | awk '{print $1}')
+```
 
 ## Starter Material
   
