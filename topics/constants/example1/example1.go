@@ -17,7 +17,7 @@ func main() {
 
 	// Typed Constants still use the constant type system but their precision
 	// is restricted.
-	const ti int = 12345        // type: int64
+	const ti int = 12345        // type: int
 	const tf float64 = 3.141592 // type: float64
 
 	// ./constants.go:XX: constant 1000 overflows uint8
