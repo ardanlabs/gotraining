@@ -11,7 +11,7 @@ import (
 	"math/rand"
 	"net/http"
 	_ "net/http/pprof"
-	"time"
+	"runtime"
 )
 
 func main() {
@@ -26,12 +26,15 @@ func sendJSON(rw http.ResponseWriter, r *http.Request) {
 
 	// Leak a goroutine on every so often.
 	//
-	// Note: everything seems ok from the sched stats since these goroutines
-	// never wake up. The sched stats can only show us runnable goroutines.
+	// Note: The use of Gosched keeps the leaked goroutines in a
+	// runnable state so we see the leak.
+	// The sched stats can only show us runnable goroutines.
 
-	if rand.Intn(10000) == 5 {
+	if rand.Intn(100) == 5 {
 		go func() {
-			time.Sleep(time.Hour)
+			for {
+				runtime.Gosched()
+			}
 		}()
 	}
 
