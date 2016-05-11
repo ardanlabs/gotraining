@@ -1,43 +1,36 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Write a problem that uses a buffered channel to maintain a buffer
-// of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
-// into the channel. Then create 20 goroutines that receive a string
-// from the channel, display the value and then send the string back
-// into the channel. Once each goroutine is done performing that task,
-// allow the goroutine to terminate.
+// Write a program that uses a fan out pattern to generate 100 random numbers
+// concurrently. Have each goroutine generate a single random number and return
+// that number to the main goroutine over a buffered channel. Set the size of
+// the buffer channel so no send every blocks. Don't allocate more buffers than
+// you need. Have the main goroutine display each random number is receives and
+// then terminate the program.
 package main
 
-// Add Imports.
+// Add imports.
 
-// Declare constants for number of goroutines and capacity.
+// Declare constant for number of goroutines .
 
-// Declare a wait group variable.
-
-// Declare a buffered channel to manage strings
-// with a capacity.
-var resources = make(chan string, capacity)
+func init() {
+	// Seed the random number generator.
+}
 
 func main() {
 
-	// Add the number of goroutines to the waitgroup.
+	// Create the buffer channel with a buffer for
+	// each goroutine to be created.
 
-	// Launch goroutines to handle the work. Make sure
-	// you handle the Done call in the goroutine.
+	// Iterate and launch each goroutine.
+	{
 
-	// Add the strings to the buffered channel.
+		// Create an anonymous function for each goroutine that
+		// generates a random number and sends it on the channel.
+	}
 
-	// Wait for all the work to get done.
-}
+	// Create a variable to be used as a waitgroup.
+	// Set the value to the number of goroutines created.
 
-// worker is launched as a goroutine to process work from
-// the buffered channel.
-func worker( /* parameters */ ) {
-
-	// Receive a string from the channel.
-
-	// Display the value.
-
-	// Place the string back.
+	// Iterate receiving each value until they are all received.
 }

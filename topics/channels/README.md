@@ -61,9 +61,9 @@ Write a program where two goroutines pass an integer back and forth ten times. D
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/M0PVuIshVY))
 
 ### Exercise 2
-Write a program that uses a buffered channel to maintain a buffer of four strings. In main, send the strings 'A', 'B', 'C' and 'D' into the channel. Then create 20 goroutines that receive a string from the channel, display the value and then send the string back into the channel. Once each goroutine is done performing that task, allow the goroutine to terminate.
+Write a program that uses a fan out pattern to generate 100 random numbers concurrently. Have each goroutine generate a single random number and return that number to the main goroutine over a buffered channel. Set the size of the buffer channel so no send every blocks. Don't allocate more buffers than you need. Have the main goroutine display each random number is receives and then terminate the program.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/hk8pu8eSB9)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/3l4Gxtgp_O))
+[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/rzAIGTTmiz)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/OoewXPiQwE))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

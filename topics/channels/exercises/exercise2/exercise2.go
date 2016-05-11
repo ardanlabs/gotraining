@@ -1,63 +1,51 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Write a problem that uses a buffered channel to maintain a buffer
-// of four strings. In main, send the strings 'A', 'B', 'C' and 'D'
-// into the channel. Then create 20 goroutines that receive a string
-// from the channel, display the value and then send the string back
-// into the channel. Once each goroutine is done performing that task,
-// allow the goroutine to terminate.
+// Write a program that uses a fan out pattern to generate 100 random numbers
+// concurrently. Have each goroutine generate a single random number and return
+// that number to the main goroutine over a buffered channel. Set the size of
+// the buffer channel so no send every blocks. Don't allocate more buffers than
+// you need. Have the main goroutine display each random number is receives and
+// then terminate the program.
 package main
 
 import (
 	"fmt"
-	"sync"
+	"math/rand"
+	"time"
 )
 
 const (
-	goroutines = 20
-	capacity   = 4
+	goroutines = 100
 )
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
-// resources is a buffered channel to manage strings.
-var resources = make(chan string, capacity)
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
 
-	// Add the number of goroutines to the waitgroup.
-	wg.Add(goroutines)
+	// Create the buffer channel with a buffer for
+	// each goroutine to be created.
+	values := make(chan int, goroutines)
 
-	// Launch goroutines to handle the work. Make sure
-	// you handle the Done call in the goroutine.
-	for gr := 1; gr <= goroutines; gr++ {
-		go func(gr int) {
-			worker(gr)
-			wg.Done()
-		}(gr)
+	// Iterate and launch each goroutine.
+	for gr := 0; gr < goroutines; gr++ {
+
+		// Create an anonymous function for each goroutine that
+		// generates a random number and sends it on the channel.
+		go func() {
+			values <- rand.Intn(1000)
+		}()
 	}
 
-	// Add the strings.
-	for rune := 'A'; rune < 'A'+capacity; rune++ {
-		resources <- string(rune)
+	// Create a variable to be used as a waitgroup.
+	// Set the value to the number of goroutines created.
+	wait := goroutines
+
+	// Iterate receiving each value until they are all received.
+	for wait > 0 {
+		fmt.Println(wait, <-values)
+		wait--
 	}
-
-	// Wait for all the work to get done.
-	wg.Wait()
-}
-
-// worker is launched as a goroutine to process work from
-// the buffered channel.
-func worker(worker int) {
-
-	// Receive a string from the channel.
-	value := <-resources
-
-	// Display the value.
-	fmt.Printf("Worker: %d : %s\n", worker, value)
-
-	// Place the string back.
-	resources <- value
 }
