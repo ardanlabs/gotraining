@@ -131,7 +131,7 @@ func main() {
 	}
 
 	var io IO
-	if err := io.Copy(&sys, 3); err != nil && err != EOD {
+	if err := io.Copy(&sys, 3); err != EOD {
 		fmt.Println(err)
 	}
 }
