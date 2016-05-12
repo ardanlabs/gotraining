@@ -29,5 +29,9 @@ This class covers the key architectural and design aspects that distinguish Go f
 [Go Web Development](https://github.com/GoesToEleven/golang-web)  
 [You Tube](https://www.youtube.com/user/toddmcleod)  
 [Udemy - Fee](https://www.udemy.com/learn-how-to-code/?couponCode=learngo)  
+
+#### Go Challenges
+
+[Learn Go by solving problems and getting feedback from Go experts!](http://golang-challenge.org/)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
