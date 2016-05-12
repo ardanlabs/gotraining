@@ -21,9 +21,10 @@ https://github.com/grpc/grpc-go/blob/master/clientconn.go
 
 ## Code Review
 
+[Chat](chat)  
+[Logger](logger)  
 [Task](task)  
 [Pooling](pool)  
-[Chat](chat)  
 [Kit](https://github.com/ardanlabs/kit)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
