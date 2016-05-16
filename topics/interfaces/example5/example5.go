@@ -40,7 +40,7 @@ func main() {
 
 	// Add the values and pointers to the slice of
 	// printer interface values.
-	entites := []printer{
+	entities := []printer{
 
 		// Store copies of the user and admin
 		// values in the interface value.
@@ -59,7 +59,7 @@ func main() {
 
 	// Iterate over the slice of entities and call
 	// print against the copied interface value.
-	for _, e := range entites {
+	for _, e := range entities {
 		e.print()
 	}
 
