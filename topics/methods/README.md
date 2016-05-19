@@ -7,7 +7,7 @@ Methods are functions that are declared with a receiver which binds the method t
 * Methods are functions that contain a receiver value.
 * Receivers bind a method to a type and can be value or pointers.
 * Methods are called against values and pointers, not packages.
-* Go support function and method variables.
+* Go supports function and method variables.
 
 ## Links
 
@@ -16,7 +16,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Declare and receiver behavior](example1/example1.go) ([Go Playground](http://play.golang.org/p/haHeUTsJQR))  
+[Declare and receiver behavior](example1/example1.go) ([Go Playground](https://play.golang.org/p/nxAwTRWk4N))  
 [Named typed methods](example2/example2.go) ([Go Playground](http://play.golang.org/p/9WeR1rShIa))
 
 ## Advanced Code Review

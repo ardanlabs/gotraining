@@ -39,12 +39,12 @@ func main() {
 
 	// Values of type user can be used to call methods
 	// declared with a pointer receiver.
-	bill.changeEmail("bill@gmail.com")
+	bill.changeEmail("bill@hotmail.com")
 	bill.notify()
 
 	// Pointers of type user can be used to call methods
 	// declared with a pointer receiver.
-	lisa.changeEmail("lisa@gmail.com")
+	lisa.changeEmail("lisa@hotmail.com")
 	lisa.notify()
 
 	// Create a slice of users with two users.

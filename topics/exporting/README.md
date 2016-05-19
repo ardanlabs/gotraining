@@ -41,7 +41,7 @@ _I think that the real problem with C is that it doesn't give you enough mechani
 [Unexported struct type fields - Pkg](example4/users/users.go) ([Go Playground](http://play.golang.org/p/O9hleQ18dT))  
 [Unexported struct type fields - Main](example4/example4.go) ([Go Playground](http://play.golang.org/p/LpjLP_bIKS))  
 
-[Unexported embedded types - Pkg](example4/users/users.go) ([Go Playground](http://play.golang.org/p/O9hleQ18dT))  
+[Unexported embedded types - Pkg](example5/users/users.go) ([Go Playground](https://play.golang.org/p/RWpldbVNJe))  
 [Unexported embedded types - Main](example5/example5.go) ([Go Playground](http://play.golang.org/p/_1QiymFuw5))  
 
 ## Exercises
