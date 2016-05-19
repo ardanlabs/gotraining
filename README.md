@@ -249,19 +249,21 @@ If you are interested in holding an event in your area please let me know. I wil
 		Ultimate Go 	SF, CA 				- April  
 		Salesforce 		Dublin, Ireland 	- April  
 		CapitalOne 		Richmond, VA 		- April  
-
-					--- Pending ---
-
+		HP Enterprise 	Seattle, WA 		- May  
 		CISCO 			Lawrenceville, GA 	- May  
 		Rackspace 		San Antonio, TX 	- May  
 		OSCON 			Portland, OR  		- May  
+
+					--- Pending ---
+
 		Intel 			Hillsboro, OR 		- May  
 		Staples 		Framingham, MA  	- May  
-		HP Enterprise 	Seattle, WA 		- May  
 		Ultimate Go 	London, England 	- June  
 		Ultimate Go 	Phoenix, AZ  		- June  
+		GopherCon		Denver, CO  		- July  
+		Red Ventures 	South Carolina	 	- August  
 		GolangUK 		London, England 	- August  
-		CodeChix 		SF, CA 				- August  
+		Tune 			Seattle, WA	 		- August  
 		Ultimate Go 	Toronto, Canada 	- September  
 
 #### 2015
