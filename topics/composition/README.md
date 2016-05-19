@@ -31,7 +31,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 #### Conversion and Assertions
 
 [Interface Conversions](example5/example5.go) ([Go Playground](http://play.golang.org/p/wI0TmVBM-e))  
-[Runtime Type Assertions](example6/example6.go) ([Go Playground](http://play.golang.org/p/cCL0iGjTpN))
+[Runtime Type Assertions](example6/example6.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
 
 #### Mocking
 

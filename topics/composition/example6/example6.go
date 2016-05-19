@@ -11,20 +11,20 @@ import (
 	"time"
 )
 
-// car represents something that can move.
+// car represents something you drive.
 type car struct{}
 
-// Move implements the Mover interface.
+// String implements the fmt.Stringer interface.
 func (car) String() string {
-	return "Moving Car"
+	return "Vroom!"
 }
 
-// cloud represents something that can move.
+// cloud represents somewhere you store information.
 type cloud struct{}
 
-// Move implements the Mover interface.
+// String implements the fmt.Stringer interface.
 func (cloud) String() string {
-	return "Moving Cloud"
+	return "Big Data!"
 }
 
 // =============================================================================
