@@ -8,7 +8,7 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 * Declare types and implement workflows with composition in mind.
 * Understand the problem you are trying to solve first. This means understanding the data.
 * The goal is to reduce and minimize cascading changes across your software.
-* Interfaces provide the highest form composition.
+* Interfaces provide the highest form of composition.
 
 ## Links
 

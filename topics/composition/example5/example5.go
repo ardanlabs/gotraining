@@ -59,7 +59,7 @@ func main() {
 	// interface value.
 	ml = bike{}
 
-	// An interface value of type MoveLocker can be implicitly convered into
+	// An interface value of type MoveLocker can be implicitly converted into
 	// a value of type Mover. They both declare a method named move.
 	m = ml
 
@@ -71,7 +71,7 @@ func main() {
 	// Therefore, the compiler can't perform an implicit conversion to assign
 	// a value of interface type Mover to an interface value of type MoveLocker.
 	// It is irrelevant that the concrete type value of type bike that is stored
-	// inside of the Mover interfae value implements the MoveLocker interface.
+	// inside of the Mover interface value implements the MoveLocker interface.
 
 	// We can perform a type assertion at runtime to support the assignment.
 

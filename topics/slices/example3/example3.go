@@ -26,7 +26,7 @@ func main() {
 
 	fmt.Println("*************************")
 
-	// Change the value of the index 0 of slice3.
+	// Change the value of the index 0 of slice2.
 	slice2[0] = "CHANGED"
 
 	// Display the change across all existing slices.
