@@ -36,6 +36,12 @@ func main() {
 	d.displayName()
 	d.setAge(45)
 
+	fmt.Println("\nWhat the Complier is Doing:")
+
+	// This is what Go is doing underneath.
+	data.displayName(d)
+	(*data).setAge(&d, 45)
+
 	// =========================================================================
 
 	fmt.Println("\nCall Value Receiver Methods with Variable:")
