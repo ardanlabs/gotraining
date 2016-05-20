@@ -74,6 +74,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 
 [Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)  
 [Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
+[Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' • Martin Thompson](https://www.youtube.com/watch?v=MC1EKLQ2Wmg)  
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
 [How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
 [Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors)  

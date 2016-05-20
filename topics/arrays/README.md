@@ -15,7 +15,8 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 [CPU Caches and Why You Care (18:50-20:30)](https://youtu.be/WDIkqP4JbkE?t=1129)  
-[CPU Caches and Why You Care (44:36-45:40)](https://youtu.be/WDIkqP4JbkE?t=2676)
+[CPU Caches and Why You Care (44:36-45:40)](https://youtu.be/WDIkqP4JbkE?t=2676)  
+[Modern Hardware to Gain 'Mechanical Sympathy' (17:20-20:08)](https://youtu.be/MC1EKLQ2Wmg?t=1040)
 
 ## CPU Cache Notes
 
@@ -78,6 +79,7 @@ This is subject to be different in different processors. For this content, the f
 
 [Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)  
 [Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
+[Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' • Martin Thompson](https://www.youtube.com/watch?v=MC1EKLQ2Wmg)  
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
 [How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
 [Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors)  

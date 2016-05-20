@@ -2,7 +2,7 @@
 
 These are a set of design guidelines for interfaces, composition and packages. Please consider these thoughts when designing your own software.
 
-#### Mike Action : Data-Oriented Design and C++
+#### Mike Acton : Data-Oriented Design and C++
 https://www.youtube.com/watch?v=rX0ItVEVjHc
 
 * If you don't understand the data you are working with, you don't understand the problem you are trying to solve.
