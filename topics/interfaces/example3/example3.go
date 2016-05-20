@@ -9,13 +9,13 @@ import "fmt"
 // duration is a named type with a base type of int.
 type duration int
 
-// format pretty-prints the duration value.
-func (d *duration) pretty() {
-	fmt.Println("Duration:", *d)
+// notify implements the notifier interface.
+func (d *duration) notify() {
+	fmt.Println("Sending Notification in", *d)
 }
 
 func main() {
-	duration(42).pretty()
+	duration(42).notify()
 
 	// ./example3.go:18: cannot call pointer method on duration(42)
 	// ./example3.go:18: cannot take the address of duration(42)

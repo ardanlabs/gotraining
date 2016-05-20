@@ -26,8 +26,8 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 ## Code Review
 
 [Polymorphism](example1/example1.go) ([Go Playground](http://play.golang.org/p/hbz_OvJD_p))  
-[Method Sets](example2/example2.go) ([Go Playground](http://play.golang.org/p/tiyisLc01p))  
-[Address Of Value](example3/example3.go) ([Go Playground](http://play.golang.org/p/Dl71x_B6cU))  
+[Method Sets](example2/example2.go) ([Go Playground](http://play.golang.org/p/4R3_QVKNli))  
+[Address Of Value](example3/example3.go) ([Go Playground](http://play.golang.org/p/hJtuUbNICG))  
 [Behavior Changes](example4/example4.go) ([Go Playground](http://play.golang.org/p/OrFNjhTrxv))  
 [Storage By Value](example5/example5.go) ([Go Playground](http://play.golang.org/p/u5PT1fMvnk))  
 
