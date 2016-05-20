@@ -38,7 +38,7 @@ func main() {
 		&u,
 	}
 
-	// Change the name field on both values.
+	// Change the name field on the user value.
 	u.name = "Bill_CHG"
 
 	// Iterate over the slice of entities and call
