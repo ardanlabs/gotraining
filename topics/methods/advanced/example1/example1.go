@@ -14,13 +14,13 @@ type data struct {
 
 // displayName provides a pretty print view of the name.
 func (d data) displayName() {
-	fmt.Println("My Name Is: ", d.name)
+	fmt.Println("My Name Is", d.name)
 }
 
 // setAge sets the age and displays the value.
 func (d *data) setAge(age int) {
 	d.age = age
-	fmt.Println("Set Age: ", d.age)
+	fmt.Println(d.name, "Is Age", d.age)
 }
 
 func main() {
@@ -30,40 +30,66 @@ func main() {
 		name: "Bill",
 	}
 
+	fmt.Println("Proper Calls to Methods:")
+
 	// How we actually call methods in Go.
 	d.displayName()
 	d.setAge(45)
 
 	// =========================================================================
 
+	fmt.Println("\nCall Value Receiver Methods with Variable:")
+
 	// Declare a function variable for the method bound to the d variable.
+	// The function variable will get its own copy of d because the method
+	// is using a value receiver.
 	f1 := d.displayName
 
 	// Call the method via the variable.
 	f1()
 
+	// Change the value of d.
+	d.name = "Lisa"
+
+	// Call the method via the variable. We don't see the change.
+	f1()
+
 	// =========================================================================
 
-	// Declare a function variable for the function bound to the package.
+	fmt.Println("\nCall Value Receiver Method Passing Receiver as Parameter:")
+
+	// Declare a function variable for the method bound to the receiver type.
 	f2 := data.displayName
 
-	// Call the function passing the receiver.
+	// Call the function passing the receiver as the first parameter.
 	f2(d)
 
 	// =========================================================================
 
+	fmt.Println("\nCall Pointer Receiver Method with Variable:")
+
 	// Declare a function variable for the method bound to the d variable.
+	// The function variable will get the address of d because the method
+	// is using a pointer receiver.
 	f3 := d.setAge
 
-	// Call the method via the variable passing the parameter.
+	// Call the method via the variable.
+	f3(45)
+
+	// Change the value of d.
+	d.name = "Joan"
+
+	// Call the method via the variable. We see the change.
 	f3(45)
 
 	// =========================================================================
 
-	// Declare a function variable for the function bound to the package.
-	// The receiver is a pointer.
+	fmt.Println("\nCall Pointer Receiver Method Passing Receiver as Parameter:")
+
+	// Declare a function variable for the method bound to the receiver type.
 	f4 := (*data).setAge
 
 	// Call the function passing the receiver and the parameter.
+	// Adjust the value of d to make the call.
 	f4(&d, 55)
 }

@@ -21,7 +21,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Advanced Code Review
 
-[Function/Method variables](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/hzB9s1JIWI))
+[Function/Method variables](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/Wzw1DT-Bc_))
 
 ## Exercises
 
