@@ -22,40 +22,24 @@ func (u user) print() {
 	fmt.Printf("User Name: %s\n", u.name)
 }
 
-// admin defines an admin in the program.
-type admin struct {
-	name string
-}
-
-// print displays the admin's name.
-func (a admin) print() {
-	fmt.Printf("Admin Name: %s\n", a.name)
-}
-
 func main() {
 
 	// Create values of type user and admin.
 	u := user{"Bill"}
-	a := admin{"Lisa"}
 
 	// Add the values and pointers to the slice of
 	// printer interface values.
 	entities := []printer{
 
-		// Store copies of the user and admin
-		// values in the interface value.
+		// Store a copy of the user value in the interface value.
 		u,
-		a,
 
-		// Store copies of the address of user and
-		// admin values in the interface value.
+		// Store a copy of the address of the user value in the interface value.
 		&u,
-		&a,
 	}
 
 	// Change the name field on both values.
 	u.name = "Bill_CHG"
-	a.name = "Lisa_CHG"
 
 	// Iterate over the slice of entities and call
 	// print against the copied interface value.
