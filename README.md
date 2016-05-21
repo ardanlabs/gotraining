@@ -58,7 +58,7 @@ We use a slack channel to share links, code, and examples during the training.  
 
 ### Installing Go
 
-**Using Docker container**   
+#### Using Docker container
 Installing Go may not be needed if you choose using [Docker container](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
 
 ```
@@ -70,17 +70,10 @@ cd gotraining
 
 To build and run docker container to start your training right away, see [here](#docker).
 
-**Mac OS X**  
-http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
+#### Local Installation
+I do not recommend using `homebrew` or `apt-get`.
 
-**Windows**  
-http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
-
-**Linux**  
-I do not recommend using `apt-get`. Go is easy to install. Just download the
-archive and extract it into /usr/local, creating a Go tree in /usr/local/go.
-
-https://golang.org/doc/install
+https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
 
 ### Editors
 
