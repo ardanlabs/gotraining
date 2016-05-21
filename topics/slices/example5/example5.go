@@ -1,58 +1,27 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-/*
-	https://blog.golang.org/strings
-
-	Go source code is always UTF-8.
-	A string holds arbitrary bytes.
-	A string literal, absent byte-level escapes, always holds valid UTF-8 sequences.
-	Those sequences represent Unicode code points, called runes.
-	No guarantee is made in Go that characters in strings are normalized.
-
-	----------------------------------------------------------------------------
-
-	Multiple runes can represent different characters:
-
-	The lower case grave-accented letter à is a character, and it's also a code
-	point (U+00E0), but it has other representations.
-
-	We can use the "combining" grave accent code point, U+0300, and attach it to
-	the lower case letter a, U+0061, to create the same character à.
-
-	In general, a character may be represented by a number of different sequences
-	of code points (runes), and therefore different sequences of UTF-8 bytes.
-*/
-
-// Sample program to show how strings have a UTF-8 encoded byte array.
+// Sample program to show how one needs to be careful when appending
+// to a slice when you have a reference to an element.
 package main
 
-import (
-	"fmt"
-	"unicode/utf8"
-)
+import "fmt"
 
 func main() {
 
-	// Declare a string with both chinese and english characters.
-	s := "世界 means world"
+	// Declare a slice of integers with 7 values.
+	x := []int{100, 200, 300, 400, 500, 600, 700}
 
-	// UTFMax is 4 -- up to 4 bytes per encoded rune.
-	var buf [utf8.UTFMax]byte
+	// Set a pointer to the second element of the slice.
+	twohundred := &x[1]
 
-	// Iterate over each character in the string.
-	for i, r := range s {
+	// Append a new value to the slice.
+	x = append(x, 800)
 
-		// Capture the number of bytes for this character.
-		rl := utf8.RuneLen(r)
+	// Change the value of the second element of the slice.
+	x[1] = 250
 
-		// Calculate the slice offset to slice the character out.
-		si := i + rl
-
-		// Copy of character from the string to our buffer.
-		copy(buf[:], s[i:si])
-
-		// Display the details.
-		fmt.Printf("%2d: %q; codepoint: %#6x; encoded bytes: %#v\n", i, r, r, buf[:rl])
-	}
+	// Display the value that the pointer points to and the
+	// second element of the slice.
+	fmt.Println("Pointer:", *twohundred, "Element", x[1])
 }
