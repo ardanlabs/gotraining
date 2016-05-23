@@ -63,7 +63,7 @@ func main() {
 	// a value of type Mover. They both declare a method named move.
 	m = ml
 
-	// prog.go:69: cannot use m (type Mover) as type MoveLocker in assignment:
+	// prog.go:68: cannot use m (type Mover) as type MoveLocker in assignment:
 	//	   Mover does not implement MoveLocker (missing Lock method)
 	ml = m
 
