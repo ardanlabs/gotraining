@@ -1,23 +1,27 @@
 ## Design Guidelines
 
-These are a set of design guidelines for interfaces, composition and packages. Please consider these thoughts when designing your own software.
+These are a set of design guidelines for data, interfaces, composition and packages. Please consider these thoughts when designing your own software.
 
-#### Mike Acton : Data-Oriented Design and C++
+#### Mike Acton : Data-Oriented Design
 https://www.youtube.com/watch?v=rX0ItVEVjHc
 
-* If you don't understand the data you are working with, you don't understand the problem you are trying to solve.
+* If you don't understand the data, you don't understand the problem.
 
-* If you don't understand the cost of solving the problem, you can't reason about the problem.
+* All problems are unqiue and specific to the data you are working with.
 
-* If you don't understand the hardware, you can't reason about the cost of solving the problem.
+* Data transformations are at the heart of solving problems. Each function, method and workflow must focus on implementing the specific data transformations required to solve the problems.
+
+* If your data is changing, your problems are changing. When your problems are changing, the data transformations needs to change with it.
+
+* Uncertainty about the data is not a license to guess but a directive to STOP and learn more.
 
 * Solving problems you don't have, creates more problems you now do.
 
-* Every problem is a data transformation problem at heart and each function, method and workflow must focus on implementing their specific data transformation.
+* Minimize, simplfy and reduce the amount of code required to solve each problem. Code that can be reasoned about and does not hide execution costs can be better understood, debugged and performance tuned.
 
-* If your data is changing, your problem is changing.
+* If performance matters, you must have mechanical sympathy for how the hardware and operating system work.
 
-* When your problem is changing, the data transformations you have implemented need to change.
+* Coupling data together and writing code that produces predictable access patterns to the data will be the most performant.
 
 #### Scott Myers : The Most Important Design Guideline
 https://www.youtube.com/watch?v=5tg1ONG18H8
@@ -53,11 +57,9 @@ _With help from [Sandi Metz](https://twitter.com/sandimetz)._
 
 * Interfaces with more than one method has more than one reason to change.
 
-* You must do your best to guess what data could change over time and consider how these changes will affect the software.
+* You must do your best to understand what could change and decouple those aspects of your code.
 
-* Uncertainty about the data is not a license to guess but a directive to decouple.
-
-* You must understand how changes to the data affects the other parts of your code that depend on it.
+* Uncertainty about change is not a license to guess but a directive to STOP and learn more.
 
 * Recognizing and minimizing cascading changes across the code is a way to architect adaptability and stability in your software.
 
@@ -73,13 +75,11 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 
 * Unless the user needs to provide an implementation or you have multiple implementations, question.
 
+* Don’t export any interfaces until your user needs it. Users can declare their own interfaces.
+
 * Don't add an interface just for the sake of testing. API's are for users not tests.
 
 * If it's not clear how an abstraction makes the code better, it probably doesn't.
-
-* Don’t export any interfaces until you have to.
-
-* Introduce concrete types and don’t export any interfaces unless you have to encourage external packages to implement one.
 
 #### Package-Oriented Design
 
