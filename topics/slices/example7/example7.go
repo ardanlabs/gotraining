@@ -28,11 +28,20 @@ func main() {
 
 	// Display both user values.
 	display(u1, u2)
+
+	// Create a slice of user values.
+	u3 := []user{
+		{24, "Bill"},
+		{32, "Lisa"},
+	}
+
+	// Display all the user values from the slice.
+	display(u3...)
 }
 
 // display can accept and display multiple values of user types.
 func display(users ...user) {
-	for i := 0; i < len(users); i++ {
-		fmt.Printf("%+v\n", users[i])
+	for _, u := range users {
+		fmt.Printf("%+v\n", u)
 	}
 }
