@@ -114,34 +114,6 @@ git clone https://github.com/ardanlabs/gotraining.git
 
 *NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
 
-
-###<a name="docker" />Starting gotraining in Docker
-
-**Install Docker Toolbox**  
-https://www.docker.com/products/docker-toolbox
-
-**Build Docker container**
-
-```
-# current path is the source root where Dockerfile exists
-docker build -t ardanlabs-gotraining .
-```
-
-**Start Docker container**
-
-```
-docker run -it -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs-gotraining
-# or start container with downloaded gotraining in the image
-docker run -it ardanlabs-gotraining
-```
-
-**Remove gotraining container and image**
-
-```
-docker rm -f $(docker ps -a | grep ardanlabs-gotraining | awk '{print $1}')
-docker rmi -f $(docker images -a | grep ardanlabs-gotraining | awk '{print $1}')
-```
-
 ## Starter Material
   
 [Quick Tour](courses/quick_tour)
@@ -246,10 +218,10 @@ If you are interested in holding an event in your area please let me know. I wil
 		CISCO 			Lawrenceville, GA 	- May  
 		Rackspace 		San Antonio, TX 	- May  
 		OSCON 			Portland, OR  		- May  
+		Intel 			Hillsboro, OR 		- May  
 
 					--- Pending ---
 
-		Intel 			Hillsboro, OR 		- May  
 		Staples 		Framingham, MA  	- May  
 		Ultimate Go 	London, England 	- June  
 		Ultimate Go 	Phoenix, AZ  		- June  
@@ -308,3 +280,30 @@ Miami, FL 33186
 bill@ardanlabs.com
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
+
+###<a name="docker" />Starting gotraining in Docker
+
+**Install Docker Toolbox**  
+https://www.docker.com/products/docker-toolbox
+
+**Build Docker container**
+
+```
+# current path is the source root where Dockerfile exists
+docker build -t ardanlabs-gotraining .
+```
+
+**Start Docker container**
+
+```
+docker run -it -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs-gotraining
+# or start container with downloaded gotraining in the image
+docker run -it ardanlabs-gotraining
+```
+
+**Remove gotraining container and image**
+
+```
+docker rm -f $(docker ps -a | grep ardanlabs-gotraining | awk '{print $1}')
+docker rmi -f $(docker images -a | grep ardanlabs-gotraining | awk '{print $1}')
+```
