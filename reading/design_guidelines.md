@@ -7,9 +7,9 @@ https://www.youtube.com/watch?v=rX0ItVEVjHc
 
 * If you don't understand the data, you don't understand the problem.
 
-* All problems are unqiue and specific to the data you are working with.
+* All problems are unique and specific to the data you are working with.
 
-* Data transformations are at the heart of solving problems. Each function, method and workflow must focus on implementing the specific data transformations required to solve the problems.
+* Data transformations are at the heart of solving problems. Each function, method and work-flow must focus on implementing the specific data transformations required to solve the problems.
 
 * If your data is changing, your problems are changing. When your problems are changing, the data transformations needs to change with it.
 
@@ -17,7 +17,7 @@ https://www.youtube.com/watch?v=rX0ItVEVjHc
 
 * Solving problems you don't have, creates more problems you now do.
 
-* Minimize, simplfy and reduce the amount of code required to solve each problem. Code that can be reasoned about and does not hide execution costs can be better understood, debugged and performance tuned.
+* Minimize, simplify and reduce the amount of code required to solve each problem. Code that can be reasoned about and does not hide execution costs can be better understood, debugged and performance tuned.
 
 * If performance matters, you must have mechanical sympathy for how the hardware and operating system work.
 
