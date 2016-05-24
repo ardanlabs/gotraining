@@ -58,7 +58,12 @@ We use a slack channel to share links, code, and examples during the training.  
 
 ### Installing Go
 
-#### Using Docker container
+#### Local Installation
+I do not recommend using `homebrew` or `apt-get`.
+
+https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
+
+#### Using Docker
 Installing Go may not be needed if you choose using [Docker container](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
 
 ```
@@ -69,11 +74,6 @@ cd gotraining
 *NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
 
 To build and run docker container to start your training right away, see [here](#docker).
-
-#### Local Installation
-I do not recommend using `homebrew` or `apt-get`.
-
-https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
 
 ### Editors
 
