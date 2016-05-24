@@ -64,7 +64,7 @@ I do not recommend using `homebrew` or `apt-get`.
 https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
 
 #### Using Docker
-Installing Go may not be needed if you choose using [Docker container](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
+Installing Go may not be needed if you choose using [Docker](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
 
 ```
 git clone https://github.com/ardanlabs/gotraining.git
@@ -115,7 +115,7 @@ git clone https://github.com/ardanlabs/gotraining.git
 *NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
 
 
-###<a name="docker" />Starting gotraining in Docker container
+###<a name="docker" />Starting gotraining in Docker
 
 **Install Docker Toolbox**  
 https://www.docker.com/products/docker-toolbox
