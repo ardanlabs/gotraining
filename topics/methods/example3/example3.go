@@ -62,40 +62,19 @@ func main() {
 
 	// =========================================================================
 
-	fmt.Println("\nCall Value Receiver Method Passing Receiver as Parameter:")
-
-	// Declare a function variable for the method bound to the receiver type.
-	f2 := data.displayName
-
-	// Call the function passing the receiver as the first parameter.
-	f2(d)
-
-	// =========================================================================
-
 	fmt.Println("\nCall Pointer Receiver Method with Variable:")
 
 	// Declare a function variable for the method bound to the d variable.
 	// The function variable will get the address of d because the method
 	// is using a pointer receiver.
-	f3 := d.setAge
+	f2 := d.setAge
 
 	// Call the method via the variable.
-	f3(45)
+	f2(45)
 
 	// Change the value of d.
 	d.name = "Joan"
 
 	// Call the method via the variable. We see the change.
-	f3(45)
-
-	// =========================================================================
-
-	fmt.Println("\nCall Pointer Receiver Method Passing Receiver as Parameter:")
-
-	// Declare a function variable for the method bound to the receiver type.
-	f4 := (*data).setAge
-
-	// Call the function passing the receiver and the parameter.
-	// Adjust the value of d to make the call.
-	f4(&d, 55)
+	f2(45)
 }
