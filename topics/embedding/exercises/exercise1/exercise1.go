@@ -45,7 +45,8 @@ func main() {
 	// Define the term to match.
 	term := "Miami"
 
-	// Create a slice of matcher values to match.
+	// Create a slice of matcher values and assign values
+	// of the concrete hockey type.
 	matchers := []matcher{
 		hockey{sport{"Panthers", "Miami"}, "USA"},
 		hockey{sport{"Canadiens", "Montreal"}, "Canada"},

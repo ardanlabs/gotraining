@@ -42,7 +42,8 @@ func main() {
 
 	// Define the term to match.
 
-	// Create a slice of matcher values to match.
+	// Create a slice of matcher values and assign values
+	// of the concrete hockey type.
 
 	// Display what we are trying to match.
 
