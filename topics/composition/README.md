@@ -36,7 +36,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 #### Mocking
 
 [Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](http://play.golang.org/p/3a_zYeR8M7))  
-[Client](example7/example7.go) ([Go Playground](http://play.golang.org/p/KnWJ6z4B0s))
+[Client](example7/example7.go) ([Go Playground](http://play.golang.org/p/9clCt16AtN))
 
 ## Exercises
 

@@ -9,10 +9,11 @@ import (
 	"github.com/ardanlabs/gotraining/topics/composition/example7/pubsub"
 )
 
-// publisher is an interface to allow this package to mock the Publish
-// behavior from the pubsub package.
+// publisher is an interface to allow this package to mock the pubsub
+// package support.
 type publisher interface {
 	Publish(key string, v interface{}) error
+	Subscribe(key string) error
 }
 
 // mock is a concrete type to help support the mocking of the pubsub package.
@@ -25,14 +26,23 @@ func (m *mock) Publish(key string, v interface{}) error {
 	return nil
 }
 
+// Subscribe implements the publisher interface for the mock.
+func (m *mock) Subscribe(key string) error {
+
+	// ADD YOUR MOCK FOR THE SUBSCRIBE CALL.
+	return nil
+}
+
 func main() {
 	var p publisher
 
 	// Use the pubsub package.
 	p = pubsub.New("localhost")
 	p.Publish("key", "value")
+	p.Subscribe("key")
 
 	// Use the mock type value.
 	p = &mock{}
 	p.Publish("key", "value")
+	p.Subscribe("key")
 }
