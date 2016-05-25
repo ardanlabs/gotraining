@@ -55,7 +55,6 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html)  
-[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)
 
 ### Docker
 
@@ -74,7 +73,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 
 [Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)  
 [Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
-[Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' • Martin Thompson](https://www.youtube.com/watch?v=MC1EKLQ2Wmg)  
+[Martin Thompson: Mythbusting Modern Hardware to Gain 'Mechanical Sympathy`](https://www.youtube.com/watch?v=MC1EKLQ2Wmg)  
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
 [How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
 [Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors)  
@@ -88,6 +87,11 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)  
 [Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)  
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)
+
+#### Operating Systems and Virtualization
+
+[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
+[The Cost of Virtualization](http://queue.acm.org/detail.cfm?id=1348591)
 
 ## Runtime
 
