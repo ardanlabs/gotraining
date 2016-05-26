@@ -164,6 +164,9 @@ _"Should be mentioned that though I am no expert, I have been using Go for about
 
 ## Testimonials
 
+Greg Hammond, Founder & CEO at Best Option Trading
+_"Bill helped me learn enough Go to work with him and his team to take a program with a lot of complexity, accumulated over years, and make it into an enterprise product. As architect, he made it more extensible, tested, and created an external API. Bill has a gift for writing readable code that is easy to reason about. He demonstrates coding restraint by favoring code that is maintainable, rather than relying upon overly clever solutions. At the same time, he is a performance hawk, always thinking about how to cut milliseconds from runtime. When I began the project with Bill, I was under pressure from both schedule and cost perspectives. He put in extra effort at the end of the project to deliver what I needed. I highly recommend Bill for his well-written book, his 'Ultimate Go' course, and development work through Ardan Labs."_
+
 Susan Dady, Software Engineer - GE Digital
 _"Rarely will you come across a course as worthwhile as this one. I learned many things relevant and useful in my daily work and William's energy kept me engaged. I came back to work excited to get coding in Go."_
 
