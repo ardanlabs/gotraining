@@ -17,7 +17,7 @@ This is 5 days of material for any intermediate-level developer who has some exp
 
 This is a 1 day class for anyone looking to learn more about or use NATS to building highly scalable and distributed systems. NATS acts as a central nervous system for distributed systems such as mobile devices, IoT networks, enterprise microservices and cloud native infrastructure. Unlike traditional enterprise messaging systems, NATS provides an always on ‘dial-tone’.
 
-[NATS](topics/nats)
+[NATS](../topics/nats)
 
 ### One-Day Overview
 
