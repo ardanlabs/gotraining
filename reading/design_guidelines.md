@@ -2,8 +2,9 @@
 
 These are a set of design guidelines for data, interfaces, composition and packages. Please consider these thoughts when designing your own software.
 
-#### Mike Acton : Data-Oriented Design
-https://www.youtube.com/watch?v=rX0ItVEVjHc
+#### Data-Oriented Design
+[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
+[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
 
 * If you don't understand the data, you don't understand the problem.
 
@@ -27,8 +28,8 @@ https://www.youtube.com/watch?v=rX0ItVEVjHc
 
 * Coupling data together and writing code that produces predictable access patterns to the data will be the most performant.
 
-#### Scott Myers : The Most Important Design Guideline
-https://www.youtube.com/watch?v=5tg1ONG18H8
+#### Important Design Guidelines
+[The Most Important Design Guideline](https://www.youtube.com/watch?v=5tg1ONG18H8) - Scott Meyers
 
 * Make Interfaces easy to use correctly and hard to use incorrectly.
 
