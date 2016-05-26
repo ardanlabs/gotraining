@@ -25,7 +25,7 @@ http://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully
 [Type As Context](example3/example3.go) ([Go Playground](http://play.golang.org/p/FeR2nE3eAH))  
 [Behavior As Context](example4/example4.go) ([Go Playground](http://play.golang.org/p/Aylgou6Gq0))  
 [Find The Bug](example5/example5.go) ([Go Playground](http://play.golang.org/p/0AUU_sJsec)) | 
-[Answer](example5/example5answer.go) ([Go Playground](https://play.golang.org/p/Yy9-h-9Qct))
+[The Reason](example5/reason/reason.go) ([Go Playground](http://play.golang.org/p/TCANdwroOi))
 
 ## Exercises
 
