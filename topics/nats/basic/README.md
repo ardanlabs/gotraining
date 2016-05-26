@@ -1,4 +1,4 @@
-## Basic Examples
+## NATS : Basic Examples
 
 These examples show the basics of using the NATS client.
 
