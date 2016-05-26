@@ -42,15 +42,15 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 ### Exercise 1
 
-**Part A** Follow the guided comments to:
+Follow the guided comments to:
 
-**Part B** Declare a sysadmin type that implements the administrator interface.
+**Part A** Declare a sysadmin type that implements the administrator interface.
 
-**Part C** Declare a programmer type that implements the developer interface.
+**Part B** Declare a programmer type that implements the developer interface.
 
-**Part D** Declare a company type that embeds both an administrator and a developer.
+**Part C** Declare a company type that embeds both an administrator and a developer.
 
-**Part E** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
+**Part D** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/fMHqL8ZNHO)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/KpKx-w6LWJ))
