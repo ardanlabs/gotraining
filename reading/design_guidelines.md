@@ -37,9 +37,11 @@ Writing idiomatic code in Go gets you a long way. But you can do so much more wh
 
 * Code that can be reasoned about and does not hide execution costs can be better understood, debugged and performance tuned.
 
+* Coupling data together and writing code that produces predictable access patterns to the data will be the most performant.
+
 * Changing data layouts can yield more signifcant performance improvements than changing just the algorithms.
 
-* Coupling data together and writing code that produces predictable access patterns to the data will be the most performant.
+* Efficiency is obtained through algorithms but performance is obtained through data structures and layouts.
 
 #### Important Design Guidelines
 [The Most Important Design Guideline](https://www.youtube.com/watch?v=5tg1ONG18H8) - Scott Meyers
