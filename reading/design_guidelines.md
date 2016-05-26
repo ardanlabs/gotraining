@@ -17,9 +17,13 @@ https://www.youtube.com/watch?v=rX0ItVEVjHc
 
 * Solving problems you don't have, creates more problems you now do.
 
-* Minimize, simplify and reduce the amount of code required to solve each problem. Code that can be reasoned about and does not hide execution costs can be better understood, debugged and performance tuned.
-
 * If performance matters, you must have mechanical sympathy for how the hardware and operating system work.
+
+* Minimize, simplify and REDUCE the amount of code required to solve each problem. Do less work by not wasting effort.
+
+* Code that can be reasoned about and does not hide execution costs can be better understood, debugged and performance tuned.
+
+* Changing data layouts can yield more signifcant performance improvements than changing just the algorithms.
 
 * Coupling data together and writing code that produces predictable access patterns to the data will be the most performant.
 
