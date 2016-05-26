@@ -64,7 +64,7 @@ I do not recommend using `homebrew` or `apt-get`.
 https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
 
 #### Using Docker
-Installing Go may not be needed if you choose using [Docker](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
+Installing Go may not be needed if you choose to use [Docker](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
 
 ```
 git clone https://github.com/ardanlabs/gotraining.git
@@ -164,16 +164,16 @@ _"Should be mentioned that though I am no expert, I have been using Go for about
 
 ## Testimonials
 
-Greg Hammond, Founder & CEO at Best Option Trading
+Greg Hammond, Founder & CEO at Best Option Trading  
 _"Bill helped me learn enough Go to work with him and his team to take a program with a lot of complexity, accumulated over years, and make it into an enterprise product. As architect, he made it more extensible, tested, and created an external API. Bill has a gift for writing readable code that is easy to reason about. He demonstrates coding restraint by favoring code that is maintainable, rather than relying upon overly clever solutions. At the same time, he is a performance hawk, always thinking about how to cut milliseconds from runtime. When I began the project with Bill, I was under pressure from both schedule and cost perspectives. He put in extra effort at the end of the project to deliver what I needed. I highly recommend Bill for his well-written book, his 'Ultimate Go' course, and development work through Ardan Labs."_
 
-Susan Dady, Software Engineer - GE Digital
+Susan Dady, Software Engineer - GE Digital  
 _"Rarely will you come across a course as worthwhile as this one. I learned many things relevant and useful in my daily work and William's energy kept me engaged. I came back to work excited to get coding in Go."_
 
-Paul Garvey, Software Engineer - GE Digital
+Paul Garvey, Software Engineer - GE Digital  
 _"Looking back I am grateful I took the GoLang training course. I had planned to just buy a few books and learned it on my own. In retrospect that would have been a bad decision as I would missed out on all the pitfalls, best practices, practical exercises and discussions the instructor imparted from his years of experience in the field, writing a book and blogging with other gophers. In the end I felt I learn more in 3 days then I could reading books and learning GoLang on my own and all my colleagues who took the course all share this view. We also share the view that Bill the instructor brought an enthusiasm and energy to the course that made a really technical course easy to learn. I would recommend anyone who want to learn Go to sign up with Mr Kennedy. At the end of the course you will feel like you are ready to rewrite all your old apps in Go :-)"_
 
-Richard Stanley, Software Engineer - GE Digital
+Richard Stanley, Software Engineer - GE Digital  
 _"Not only does Bill deeply understands the technical details of Go, he also can explain them in an effective, enthusiastic manner that helped me retain somewhat dry material.  His passion for the language and its capabilities are obvious through out his training."_
 
 Shalab Goel, Ph.D.  
@@ -283,7 +283,8 @@ Miami, FL 33186
 bill@ardanlabs.com
 ___
 
-###<a name="docker" />Starting gotraining in Docker
+#### Running Docker
+<a name="docker" />
 
 **Install Docker Toolbox**  
 https://www.docker.com/products/docker-toolbox
