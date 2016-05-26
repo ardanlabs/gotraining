@@ -18,11 +18,10 @@ var (
 
 // Declare an error variable named ErrAmountTooLarge using the New
 // function from the errors package.
+)
 
 // Declare a function named checkAmount that accepts a value of
 // type float64 and returns an error interface value.
-)
-
 func checkAmount( /* parameter */ ) /* return arg */ {
 
 	// Is the parameter equal to zero. If so then return
