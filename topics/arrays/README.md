@@ -16,7 +16,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 [CPU Caches and Why You Care (18:50-20:30)](https://youtu.be/WDIkqP4JbkE?t=1129)  
 [CPU Caches and Why You Care (44:36-45:40)](https://youtu.be/WDIkqP4JbkE?t=2676)  
-[Modern Hardware to Gain 'Mechanical Sympathy' (17:20-20:08)](https://youtu.be/MC1EKLQ2Wmg?t=1040)
+[Modern Hardware to Gain 'Mechanical Sympathy' (17:20-20:08)](https://youtu.be/MC1EKLQ2Wmg?t=1040)  
 
 ## CPU Cache Notes
 

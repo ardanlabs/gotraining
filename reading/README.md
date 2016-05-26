@@ -24,12 +24,12 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### History
 
 [The Evolution of Go](https://www.youtube.com/watch?v=0ReKdcpNyQg) - Robert Griesmer  
-[Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article)  
+[Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article) - Rob Pike  
 
-[A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015)  
-[The Rise and Fall of Minicomputers](http://ethw.org/Rise_and_Fall_of_Minicomputers)  
-[After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law)  
-[A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter)  
+[A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015) - Martyn Thomas  
+[The Rise and Fall of Minicomputers](http://ethw.org/Rise_and_Fall_of_Minicomputers) - Gordon Bell  
+[After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law) - Tim Cross  
+[A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter) -  Cliff Click  
 
 ### Vendoring
 
@@ -39,7 +39,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
 [Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
-[How NOT to Measure Latency](https://www.youtube.com/watch?v=lJ8ydIuPFeU&feature=youtu.be) - Gil Tene
+[How NOT to Measure Latency](https://www.youtube.com/watch?v=lJ8ydIuPFeU&feature=youtu.be) - Gil Tene  
+[Go Performance Tales](http://jmoiron.net/blog/go-performance-tales) - Jason Moiron  
+[Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
+[Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes
 
 ### Interfaces and Composition
 
@@ -49,13 +52,13 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Buffer Bloat - 2011
 
-[Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g)  
+[Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g) - Jim Gettys  
 [Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
 
 ### Linux
 
 [The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
-[Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html)  
+[Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
 
 ### Docker
 
@@ -72,27 +75,29 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 
 #### CPU Caches
 
-[Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)  
-[Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
-[Martin Thompson: Mythbusting Modern Hardware to Gain 'Mechanical Sympathy`](https://www.youtube.com/watch?v=MC1EKLQ2Wmg)  
+[CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE) - Scott Meyers  
+[CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf) - Scott Meyers  
+[Mythbusting Modern Hardware to Gain 'Mechanical Sympathy`](https://www.youtube.com/watch?v=MC1EKLQ2Wmg) - Martin Thompson  
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
-[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
-[Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors)  
-[Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)  
-[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)  
-[Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)  
-[Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law)
+[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips) - Joel Hruska  
+[Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors) - Jason Robert Carey Patterson  
+[Memory part 2: CPU caches](http://lwn.net/Articles/252125) - Ulrich Drepper  
+[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm) - Herb Sutter  
+[Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
+[Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
+[Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
 
 #### Data-Oriented Design
 
-[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)  
-[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)  
-[Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)
+[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
+[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf) - Tony Albrecht  
+[Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo) - Bjarne Stroustrup  
+[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
 
 #### Operating Systems and Virtualization
 
 [The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
-[The Cost of Virtualization](http://queue.acm.org/detail.cfm?id=1348591)
+[The Cost of Virtualization](http://queue.acm.org/detail.cfm?id=1348591) - Ulrich Drepper  
 
 ## Runtime
 
@@ -104,21 +109,21 @@ This content can be found under [pointers](../topics/pointers). We feel this con
 
 #### Escape Analysis and Inlining
 
-[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)  
+[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw) - Dmitry Vyukov  
 [Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)
 
 #### Garbage Collection
 
-[Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
+[Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection) - Wikipedia  
 [Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
-[Rick Hudson GC Talk](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
+[Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm) - Rick Hudson  
 
 #### Single Static Assignment Optimizations
 
-[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)  
+[GopherCon 2015: Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY) - Ben Johnson  
 https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83  
 https://godoc.org/golang.org/x/tools/go/ssa  
-[Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
+[Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU) - Chandler Carruth  
 
 ## Release Notes
 

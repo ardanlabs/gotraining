@@ -23,6 +23,9 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 ## Links
 
+[Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206)
+
+
 [The Go Memory Model](https://golang.org/ref/mem)  
 http://blog.golang.org/race-detector  
 http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html  
