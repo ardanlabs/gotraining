@@ -44,7 +44,7 @@ Run the `go-fuzz-build` tool against the package to generate the fuzz zip file. 
 
 Perform the actual fuzzing by running the `go-fuzz` tool and find data inputs that cause panics. Run this for a few seconds.
 
-		go-fuzz -bin=./api-fuzz.zip -workdir=workdir/corpus
+		go-fuzz -bin=./api-fuzz.zip -dup -workdir=workdir/corpus -v 9
 
 Review the `crashers` folder under the `workdir/corpus` folders. This contains panic information.
 

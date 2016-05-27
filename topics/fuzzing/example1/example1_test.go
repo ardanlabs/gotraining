@@ -28,7 +28,7 @@ func TestProcess(t *testing.T) {
 		val    []byte
 		resp   string
 	}{
-		{"/process", http.StatusOK, []byte("Bill:46,Lisa:42,John:35,Eduardo:46"), `[{"Name":"Bill","Age":46},{"Name":"Lisa","Age":42},{"Name":"John","Age":35},{"Name":"Eduardo","Age":46}]`},
+		{"/process", http.StatusOK, []byte("ADM46Bill,ADM42Lisa,DEV35John,USR46Eduardo"), `[{"Type":"ADM","Name":"Bill","Age":46},{"Type":"ADM","Name":"Lisa","Age":42},{"Type":"DEV","Name":"John","Age":35},{"Type":"USR","Name":"Eduardo","Age":46}]`},
 	}
 
 	t.Log("Given the need to test the Process endpoint.")

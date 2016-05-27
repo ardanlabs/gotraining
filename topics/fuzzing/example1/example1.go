@@ -6,6 +6,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -34,11 +35,18 @@ func Process(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Split the data by comma
+	// If we received no data return an error.
+	if len(data) == 0 {
+		SendError(w, errors.New("Empty data value"))
+		return
+	}
+
+	// Split the data by comma.
 	parts := strings.Split(string(data), ",")
 
 	// Need a named type for our user.
 	type user struct {
+		Type string
 		Name string
 		Age  int
 	}
@@ -49,18 +57,21 @@ func Process(w http.ResponseWriter, r *http.Request) {
 	// Iterate over the set of users we received.
 	for _, part := range parts {
 
-		// Split each part by the colon separator.
-		split := strings.Split(part, ":")
+		// Capture the type of user.
+		typ := part[:3]
 
-		// Convert the second part to an integer.
-		age, err := strconv.Atoi(split[1])
+		// Capture the age and convert to integer.
+		age, err := strconv.Atoi(part[3:5])
 		if err != nil {
 			SendError(w, err)
 			return
 		}
 
+		// Capture the users name.
+		name := part[5:]
+
 		// Add a user to the slice.
-		users = append(users, user{split[0], age})
+		users = append(users, user{typ, name, age})
 	}
 
 	// Respond with the processed data.

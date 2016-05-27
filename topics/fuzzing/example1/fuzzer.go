@@ -1,8 +1,5 @@
 // +build gofuzz
 
-// go-fuzz-build github.com/ardanlabs/gotraining/topics/fuzzing/example1
-// go-fuzz -bin=./api-fuzz.zip -workdir=workdir/corpus
-
 package api
 
 import (
@@ -22,8 +19,11 @@ func Fuzz(data []byte) int {
 	http.DefaultServeMux.ServeHTTP(w, r)
 
 	if w.Code != 200 {
-		return 0
+
+		// This was not successful. It we panic it will be recorded.
+		panic(w.Body.String())
 	}
 
+	// The data caused no issues and is not interesting.
 	return 1
 }

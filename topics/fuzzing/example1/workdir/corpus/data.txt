@@ -1,1 +1,0 @@
-Bill:46,Lisa:42,John:35,Eduardo:46
