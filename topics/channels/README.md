@@ -58,12 +58,12 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the integer equals ten, terminate the program cleanly.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/FN-EE97gDS)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/M0PVuIshVY))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/_vkFWVgWnA))
 
 ### Exercise 2
 Write a program that uses a fan out pattern to generate 100 random numbers concurrently. Have each goroutine generate a single random number and return that number to the main goroutine over a buffered channel. Set the size of the buffer channel so no send every blocks. Don't allocate more buffers than you need. Have the main goroutine display each random number is receives and then terminate the program.
 
-[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/rzAIGTTmiz)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/OoewXPiQwE))
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/xAi8hhJMq1)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/OoewXPiQwE))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

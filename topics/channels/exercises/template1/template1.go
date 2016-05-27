@@ -37,6 +37,7 @@ func goroutine( /* parameters */ ) {
 
 		// Terminate when the value is 10.
 
-		// Share the value.
+		// Increment the value and send it
+		// over the channel.
 	}
 }

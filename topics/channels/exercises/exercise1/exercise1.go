@@ -64,7 +64,8 @@ func goroutine(name string, share chan int) {
 			return
 		}
 
-		// Share the value.
+		// Increment the value and send it
+		// over the channel.
 		share <- (value + 1)
 	}
 }
