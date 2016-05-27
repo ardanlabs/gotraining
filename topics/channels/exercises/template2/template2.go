@@ -29,7 +29,7 @@ func main() {
 		// generates a random number and sends it on the channel.
 	}
 
-	// Create a variable to be used as a waitgroup.
+	// Create a variable to be used to track received messages.
 	// Set the value to the number of goroutines created.
 
 	// Iterate receiving each value until they are all received.

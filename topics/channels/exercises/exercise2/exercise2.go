@@ -39,7 +39,7 @@ func main() {
 		}()
 	}
 
-	// Create a variable to be used as a waitgroup.
+	// Create a variable to be used to track received messages.
 	// Set the value to the number of goroutines created.
 	wait := goroutines
 
