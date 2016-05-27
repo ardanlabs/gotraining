@@ -15,7 +15,7 @@ const failed = "\u2717"
 // TestDownload validates the http Get function can download content and
 // handles different status conditions properly.
 func TestDownload(t *testing.T) {
-	urls := []struct {
+	tests := []struct {
 		url        string
 		statusCode int
 	}{
@@ -25,10 +25,10 @@ func TestDownload(t *testing.T) {
 
 	t.Log("Given the need to test downloading different content.")
 	{
-		for i, u := range urls {
-			t.Logf("\tTest: %d\tWhen checking %q for status code %d", i, u.url, u.statusCode)
+		for i, tt := range tests {
+			t.Logf("\tTest: %d\tWhen checking %q for status code %d", i, tt.url, tt.statusCode)
 			{
-				resp, err := http.Get(u.url)
+				resp, err := http.Get(tt.url)
 				if err != nil {
 					t.Fatalf("\t%s\tShould be able to make the Get call : %v", failed, err)
 				}
@@ -36,10 +36,10 @@ func TestDownload(t *testing.T) {
 
 				defer resp.Body.Close()
 
-				if resp.StatusCode == u.statusCode {
-					t.Logf("\t%s\tShould receive a %d status code.", succeed, u.statusCode)
+				if resp.StatusCode == tt.statusCode {
+					t.Logf("\t%s\tShould receive a %d status code.", succeed, tt.statusCode)
 				} else {
-					t.Errorf("\t%s\tShould receive a %d status code : %v", failed, u.statusCode, resp.StatusCode)
+					t.Errorf("\t%s\tShould receive a %d status code : %v", failed, tt.statusCode, resp.StatusCode)
 				}
 			}
 		}
