@@ -31,6 +31,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law) - Tim Cross  
 [A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter) -  Cliff Click  
 
+[The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob
+
 ### Vendoring
 
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)
