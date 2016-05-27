@@ -6,11 +6,15 @@
 package main
 
 import (
-	"crypto/rand"
 	"fmt"
-	"math/big"
+	"math/rand"
 	"sync"
+	"time"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
 
@@ -53,7 +57,8 @@ func player(name string, court chan int) {
 		}
 
 		// Pick a random number and see if we miss the ball.
-		if n, _ := rand.Int(rand.Reader, big.NewInt(100)); n.Uint64()%13 == 0 {
+		n := rand.Intn(100)
+		if n%13 == 0 {
 			fmt.Printf("Player %s Missed\n", name)
 
 			// Close the channel to signal we lost.
