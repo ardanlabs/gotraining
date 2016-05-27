@@ -36,7 +36,7 @@ func TestSendJSON(t *testing.T) {
 		t.Logf("\tTest 0:\tWhen checking %q for status code %d", url, statusCode)
 		{
 			if w.Code != 200 {
-				t.Fatalf("\t%s\tShould receive a status code of %d for the response. Received[%d].", failed, statusCode)
+				t.Fatalf("\t%s\tShould receive a status code of %d for the response. Received[%d].", failed, statusCode, w.Code)
 			}
 			t.Logf("\t%s\tShould receive a status code of %d for the response.", succeed, statusCode)
 
