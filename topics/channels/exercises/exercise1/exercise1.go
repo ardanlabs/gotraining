@@ -49,7 +49,7 @@ func goroutine(name string, share chan int) {
 		value, ok := <-share
 		if !ok {
 
-			// If the channel was closed, shutdown.
+			// If the channel was closed, return.
 			fmt.Printf("Goroutine %s Down\n", name)
 			return
 		}

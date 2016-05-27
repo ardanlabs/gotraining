@@ -31,7 +31,7 @@ func goroutine( /* parameters */ ) {
 	for {
 
 		// Wait for the value to be sent.
-		// If the channel was closed, shutdown.
+		// If the channel was closed, return.
 
 		// Display the value.
 
