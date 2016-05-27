@@ -7,6 +7,9 @@ This is a class for any intermediate-level developer who has some experience wit
 [Testing](../../../topics/testing/README.md) | 
 [Benchmarking](../../../topics/benchmarking/README.md)
 
+#### Go Fuzzing
+[Fuzzing](../../../topics/fuzzing/README.md)
+
 #### Profiling and Tracing
 [Profiling](../../../topics/profiling/README.md) | 
 [Memory Trace](../../../topics/memory_trace/README.md) | 
