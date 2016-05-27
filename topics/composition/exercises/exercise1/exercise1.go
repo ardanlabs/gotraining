@@ -1,16 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Follow the guided comments to:
-//
-// Declare a sysadmin type that implements the administrator interface.
-//
-// Declare a programmer type that implements the developer interface.
-//
-// Declare a company type that embeds both an administrator and a developer.
-//
-// Create a sysadmin, programmers, and a company which are available for hire,
-// and use them to complete some predefined tasks.
+// Using the template, declare a set of concrete types that implement the set
+// of predefined interface types. Then create values of these types and use
+// them to complete a set of predefined tasks.
 package main
 
 // Add import(s).
@@ -25,38 +18,6 @@ type administrator interface {
 // developer represents a person or other entity capable of writing software.
 type developer interface {
 	develop(system string)
-}
-
-// =============================================================================
-
-// Declare a struct type named sysadmin: it should have a name field.
-type sysadmin struct {
-	name string
-}
-
-// Define an administrate method on the sysadmin type, implementing the
-// administrator interface.  administrate should print out the name of the
-// sysadmin, as well as the system they are administering.
-func (s *sysadmin) administrate(system string) {
-	fmt.Println(s.name, "is administering", system)
-}
-
-// Declare a struct type named programmer: it should have a name field.
-type programmer struct {
-	name string
-}
-
-// Define a develop method on the programmer type, implementing the developer
-// interface.  develop should print out the name of the programmer, as well as
-// the system they are developing.
-func (p *programmer) develop(system string) {
-	fmt.Println(p.name, "is developing", system)
-}
-
-// Declare a struct type named company: it should embed administrator and developer.
-type company struct {
-	administrator
-	developer
 }
 
 // =============================================================================
@@ -99,15 +60,35 @@ func (l *devlist) popDev() developer {
 
 // =============================================================================
 
-// tasks contains a set of systems we must administer or develop.
-var tasks = []struct {
-	system     string
-	needsDev   bool
-	needsAdmin bool
-}{
-	{system: "exercise1", needsDev: true},
-	{system: "server5", needsAdmin: true},
-	{system: "project-omega", needsDev: true},
+// Declare a concrete type named sysadmin with a name field of type string.
+type sysadmin struct {
+	name string
+}
+
+// Declare a method named administrate for the sysadmin type, implementing the
+// administrator interface. administrate should print out the name of the
+// sysadmin, as well as the system they are administering.
+func (s *sysadmin) administrate(system string) {
+	fmt.Println(s.name, "is administering", system)
+}
+
+// Declare a concrete type named programmer with a name field of type string.
+type programmer struct {
+	name string
+}
+
+// Declare a method named develop for the programmer type, implementing the
+// developer interface. develop should print out the name of the
+// programmer, as well as the system they are coding.
+func (p *programmer) develop(system string) {
+	fmt.Println(p.name, "is developing", system)
+}
+
+// Declare a concrete type named company. Declare it as the composition of
+// the administrator and developer interface types.
+type company struct {
+	administrator
+	developer
 }
 
 // =============================================================================
@@ -127,35 +108,44 @@ func main() {
 	devs.pushDev(&programmer{"Mary"})
 	devs.pushDev(&programmer{"Steve"})
 
-	// Create a variable named techfirm of type company, and initialize it by
+	// Create a variable named cmp of type company, and initialize it by
 	// hiring (popping) an administrator from admins and a developer from devs.
-	techfirm := company{
+	cmp := company{
 		administrator: admins.popAdmin(),
 		developer:     devs.popDev(),
 	}
 
-	// Push techfirm onto both devs and admins (we can now transparently
-	// outsource to techfirm for development and administrative needs).
-	admins.pushAdmin(techfirm)
-	devs.pushDev(techfirm)
+	// Push the company value on both lists since the company implements
+	// each interface.
+	admins.pushAdmin(&cmp)
+	devs.pushDev(&cmp)
+
+	// A set of tasks for administrators and developers to perform.
+	tasks := []struct {
+		needsAdmin bool
+		system     string
+	}{
+		{needsAdmin: false, system: "xenia"},
+		{needsAdmin: true, system: "pillar"},
+		{needsAdmin: false, system: "omega"},
+	}
 
 	// Iterate over tasks.
 	for _, task := range tasks {
 
-		// Check if the task needs a developer. If so, pop a developer from devs,
-		// print its type information, and have it develop the system.
-		if task.needsDev {
-			dev := devs.popDev()
-			fmt.Printf("Developer Type: %T\n", dev)
-			dev.develop(task.system)
-		}
-
-		// Check if the task needs an administrator. If so, pop an administrator from
-		// admins, print its type information, and have it administrate the system.
+		// Check if the task needs an administrator else use a developer.
 		if task.needsAdmin {
+
+			// Pop an administrator value from the admins list and
+			// call the administrate method.
 			admin := admins.popAdmin()
-			fmt.Printf("Administrator Type: %T\n", admin)
 			admin.administrate(task.system)
+		} else {
+
+			// Pop a developer value from the devs list and
+			// call the develop method.
+			dev := devs.popDev()
+			dev.develop(task.system)
 		}
 	}
 }

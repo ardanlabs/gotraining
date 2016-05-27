@@ -42,17 +42,9 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 ### Exercise 1
 
-Follow the guided comments to:
+Using the template, declare a set of concrete types that implement the set of predefined interface types. Then create values of these types and use them to complete a set of predefined tasks.
 
-**Part A** Declare a sysadmin type that implements the administrator interface.
-
-**Part B** Declare a programmer type that implements the developer interface.
-
-**Part C** Declare a company type that embeds both an administrator and a developer.
-
-**Part D** Create a sysadmin, programmers, and a company which are available for hire, and use them to complete some predefined tasks.
-
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/fMHqL8ZNHO)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/KpKx-w6LWJ))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/MXFPUsqoxI)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/uXVupN6o4K))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
