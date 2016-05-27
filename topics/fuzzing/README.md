@@ -32,11 +32,11 @@ Review the code we want to find problems with and the existing test:
 
 Create a corpus file with the initial input data to use and that will be mutated.
 
-[Fuzzing Data](workdir/corpus/data.api) ([Go Playground](http://play.golang.org/p/RkYDgyQsF8))
+[Fuzzing Data](workdir/corpus/input.txt) ([Go Playground](http://play.golang.org/p/RkYDgyQsF8))
 
 Create a fuzzing function that takes mutated input and executes the code we care about using it.
 
-[Fuzzing Function](example1/fuzzer.go) ([Go Playground](http://play.golang.org/p/eq8Xnba6as)
+[Fuzzing Function](example1/fuzzer.go) ([Go Playground](http://play.golang.org/p/ditM8pfOLm)
 
 Run the `go-fuzz-build` tool against the package to generate the fuzz zip file. The zip file contains all the instrumented binaries go-fuzz is going to use while fuzzing. Any time the source code changes this needs to be re-run.
 
@@ -46,13 +46,14 @@ Perform the actual fuzzing by running the `go-fuzz` tool and find data inputs th
 
 		go-fuzz -bin=./api-fuzz.zip -dup -workdir=workdir/corpus
 
-Run the build and start fuzzing.
-
 Review the `crashers` folder under the `workdir/corpus` folders. This contains panic information. You will see an issue when the data passed into the web call is empty. Fix the `Process` function and add the table data to the test.
 
-	{"/process", http.StatusBadRequest, []byte(""), `{"Error":"The Message"}`},
+		{"/process", http.StatusBadRequest, []byte(""), `{"Error":"The Message"}`},
 
 Run the build and start fuzzing.
+
+		rm -rf workdir/crashers and workdir/supressions
+		go-fuzz -bin=./api-fuzz.zip -dup -workdir=workdir/corpus
 
 Review the `crashers` folder under the `workdir/corpus` folders. This contains panic information. You will see an issue when value of "0" is used. Fix the `Process` function and add the table data to the test.
 		
@@ -62,5 +63,8 @@ Review the `crashers` folder under the `workdir/corpus` folders. This contains p
 
 ### Exercise 1
 
+A function named `UnpackUsers` exists and requires fuzzing. A `Fuzz` function and corpus have also been provided. Use the Go Fuzz tooling to find as many problems as you can. In each case fix the bug and add a test table record to validate the test is fixed.
+
+[Exercise](exercises/exercise1)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

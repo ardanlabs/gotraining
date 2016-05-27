@@ -12,7 +12,8 @@ func init() {
 	Routes()
 }
 
-// Fuzz is morphing the input from the corpus.
+// Fuzz is executed by the go-fuzz tool. Input data modifications
+// are provided and used to validate API call.
 func Fuzz(data []byte) int {
 	r, _ := http.NewRequest("POST", "/process", bytes.NewBuffer(data))
 	w := httptest.NewRecorder()

@@ -22,7 +22,7 @@ func init() {
 
 // TestProcess tests the Process endpoint with proper data.
 func TestProcess(t *testing.T) {
-	data := []struct {
+	tests := []struct {
 		url    string
 		status int
 		val    []byte
@@ -33,23 +33,23 @@ func TestProcess(t *testing.T) {
 
 	t.Log("Given the need to test the Process endpoint.")
 	{
-		for i, d := range data {
-			t.Logf("\tTest %d:\tWhen checking %q for status code %d with data %s", i, d.url, d.status, d.val)
+		for i, tt := range tests {
+			t.Logf("\tTest %d:\tWhen checking %q for status code %d with data %s", i, tt.url, tt.status, tt.val)
 			{
-				r, _ := http.NewRequest("POST", d.url, bytes.NewBuffer(d.val))
+				r, _ := http.NewRequest("POST", tt.url, bytes.NewBuffer(tt.val))
 				w := httptest.NewRecorder()
 				http.DefaultServeMux.ServeHTTP(w, r)
 
-				if w.Code != d.status {
-					t.Fatalf("\t%s\tShould receive a status code of %d for the response. Received[%d].", failed, d.status, w.Code)
+				if w.Code != tt.status {
+					t.Fatalf("\t%s\tShould receive a status code of %d for the response. Received[%d].", failed, tt.status, w.Code)
 				}
-				t.Logf("\t%s\tShould receive a status code of %d for the response.", succeed, d.status)
+				t.Logf("\t%s\tShould receive a status code of %d for the response.", succeed, tt.status)
 
 				recv := w.Body.String()
 
-				if d.resp != recv[:len(recv)-1] {
+				if tt.resp != recv[:len(recv)-1] {
 					t.Log("GOT:", recv)
-					t.Log("EXP:", d.resp)
+					t.Log("EXP:", tt.resp)
 					t.Fatalf("\t%s\tShould get the expected result.", failed)
 				}
 				t.Logf("\t%s\tShould get the expected result.", succeed)
