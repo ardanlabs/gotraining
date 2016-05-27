@@ -5,15 +5,11 @@
 package main
 
 import (
+	"crypto/rand"
 	"errors"
 	"fmt"
-	"math/rand"
-	"time"
+	"math/big"
 )
-
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
 
 // =============================================================================
 
@@ -50,7 +46,7 @@ type Xenia struct{}
 
 // Pull knows how to pull data out of Xenia.
 func (Xenia) Pull(d *Data) error {
-	switch rand.Intn(10) {
+	switch n, _ := rand.Int(rand.Reader, big.NewInt(10)); n.Uint64() {
 	case 1, 9:
 		return EOD
 
