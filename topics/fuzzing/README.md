@@ -27,12 +27,12 @@ First thing is to install the Go fuzz tooling:
 
 Review the code we want to find problems with and the existing test:
 
-[Basic Fuzzing](example1/example1.go) ([Go Playground](http://play.golang.org/p/rDoJiaLOV7))  
-[Basic Fuzzing Test](example1/example1_test.go) ([Go Playground](http://play.golang.org/p/ToGFE_qvJw)) 
+[Code To Fuzz](example1/example1.go) ([Go Playground](http://play.golang.org/p/rDoJiaLOV7))  
+[Test For The Code](example1/example1_test.go) ([Go Playground](http://play.golang.org/p/ToGFE_qvJw)) 
 
 Create a corpus file with the initial input data to use and that will be mutated.
 
-[Fuzzing Data](workdir/corpus/input.txt) ([Go Playground](http://play.golang.org/p/RkYDgyQsF8))
+[Fuzzing Input Data](workdir/corpus/input.txt) ([Go Playground](http://play.golang.org/p/RkYDgyQsF8))
 
 Create a fuzzing function that takes mutated input and executes the code we care about using it.
 
