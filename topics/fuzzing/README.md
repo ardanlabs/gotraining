@@ -32,33 +32,35 @@ Review the code we want to find problems with and the existing test:
 
 Create a corpus file with the initial input data to use and that will be mutated.
 
-[Fuzzing Data](workdir/corpus/data.txt) ([Go Playground](http://play.golang.org/p/_bfeKC1A4z))
+[Fuzzing Data](workdir/corpus/data.api) ([Go Playground](http://play.golang.org/p/RkYDgyQsF8))
 
 Create a fuzzing function that takes mutated input and executes the code we care about using it.
 
-[Fuzzing Function](example1/fuzzer.go) ([Go Playground](http://play.golang.org/p/CaGCilf6Yr))
+[Fuzzing Function](example1/fuzzer.go) ([Go Playground](http://play.golang.org/p/eq8Xnba6as)
 
-Run the `go-fuzz-build` tool against the package to generate the fuzz zip file. The zip file contains all the instrumented binaries go-fuzz is going to use while fuzzing.
+Run the `go-fuzz-build` tool against the package to generate the fuzz zip file. The zip file contains all the instrumented binaries go-fuzz is going to use while fuzzing. Any time the source code changes this needs to be re-run.
 
 		go-fuzz-build github.com/ardanlabs/gotraining/topics/fuzzing/example1
 
-Perform the actual fuzzing by running the `go-fuzz` tool and find data inputs that cause panics. Run this for a few seconds.
+Perform the actual fuzzing by running the `go-fuzz` tool and find data inputs that cause panics. Run this until you see an initial crash.
 
-		go-fuzz -bin=./api-fuzz.zip -dup -workdir=workdir/corpus -v 9
+		go-fuzz -bin=./api-fuzz.zip -dup -workdir=workdir/corpus
 
-Review the `crashers` folder under the `workdir/corpus` folders. This contains panic information.
+Run the build and start fuzzing.
 
-[Output Stack Trace](example1/workdir/corpus/crashers/da39a3ee5e6b4b0d3255bfef95601890afd80709.output) ([Go Playground](http://play.golang.org/p/YajfpYyttx)
+Review the `crashers` folder under the `workdir/corpus` folders. This contains panic information. You will see an issue when the data passed into the web call is empty. Fix the `Process` function and add the table data to the test.
 
-_**NOTE: These files are empty because an empty string is causing our problems.**_
+	{"/process", http.StatusBadRequest, []byte(""), `{"Error":"The Message"}`},
 
-[Crash Data Raw](example1/workdir/corpus/crashers/da39a3ee5e6b4b0d3255bfef95601890afd80709)  
-[Crash Data Quoted](example1/workdir/corpus/crashers/da39a3ee5e6b4b0d3255bfef95601890afd80709.quoted)
+Run the build and start fuzzing.
 
-Add new table data to our test for this input case and run the test. It will panic.
+Review the `crashers` folder under the `workdir/corpus` folders. This contains panic information. You will see an issue when value of "0" is used. Fix the `Process` function and add the table data to the test.
+		
+		{"/process", http.StatusBadRequest, []byte("0"), `{"Error":"The Message"}`},
 
-		{"/process", http.StatusBadRequest, []byte(""), `{"Error":"Invalid user format"}`},
+## Exercises
 
-Fix the `Process` function so this test no longer crashes. Run the tests again.
+### Exercise 1
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

@@ -6,12 +6,18 @@ package api
 
 import (
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
 )
+
+// Need a named type for our user.
+type user struct {
+	Type string
+	Name string
+	Age  int
+}
 
 // Routes initializes the routes.
 func Routes() {
@@ -35,21 +41,8 @@ func Process(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// If we received no data return an error.
-	if len(data) == 0 {
-		SendError(w, errors.New("Empty data value"))
-		return
-	}
-
 	// Split the data by comma.
 	parts := strings.Split(string(data), ",")
-
-	// Need a named type for our user.
-	type user struct {
-		Type string
-		Name string
-		Age  int
-	}
 
 	// Create a slice of users.
 	var users []user
@@ -57,25 +50,38 @@ func Process(w http.ResponseWriter, r *http.Request) {
 	// Iterate over the set of users we received.
 	for _, part := range parts {
 
-		// Capture the type of user.
-		typ := part[:3]
-
-		// Capture the age and convert to integer.
-		age, err := strconv.Atoi(part[3:5])
+		// Extract the user.
+		u, err := extractUser(part)
 		if err != nil {
 			SendError(w, err)
 			return
 		}
 
-		// Capture the users name.
-		name := part[5:]
-
 		// Add a user to the slice.
-		users = append(users, user{typ, name, age})
+		users = append(users, u)
 	}
 
 	// Respond with the processed data.
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(users)
+}
+
+// extractUser knows how to extract a user from the string.
+func extractUser(data string) (user, error) {
+
+	// Capture the age and convert to integer.
+	age, err := strconv.Atoi(data[3:5])
+	if err != nil {
+		return user{}, err
+	}
+
+	// Create the user value.
+	u := user{
+		Type: data[:3],
+		Name: data[5:],
+		Age:  age,
+	}
+
+	return u, nil
 }

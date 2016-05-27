@@ -18,12 +18,16 @@ func Fuzz(data []byte) int {
 	w := httptest.NewRecorder()
 	http.DefaultServeMux.ServeHTTP(w, r)
 
+	// Data which has been corrupted but "looks valid" is more likely to be
+	// able to get into other valid parts of your program without being
+	// discarded as junk.
+
 	if w.Code != 200 {
 
-		// This was not successful. It we panic it will be recorded.
-		panic(w.Body.String())
+		// Report the data that produced this error as not interesting.
+		return 0
 	}
 
-	// The data caused no issues and is not interesting.
+	// Report the data that did not cause an error as interesting.
 	return 1
 }
