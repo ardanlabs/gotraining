@@ -6,10 +6,10 @@
 package main
 
 import (
+	"crypto/rand"
 	"fmt"
 	"log"
-	"math/rand"
-	"time"
+	"math/big"
 )
 
 // result is what is sent back from each operation.
@@ -17,10 +17,6 @@ type result struct {
 	id  int
 	op  string
 	err error
-}
-
-func init() {
-	rand.Seed(time.Now().UnixNano())
 }
 
 func main() {
@@ -70,7 +66,7 @@ func insertUser(id int) result {
 	}
 
 	// Randomize if the insert fails or not.
-	if rand.Intn(10) == 0 {
+	if n, _ := rand.Int(rand.Reader, big.NewInt(10)); n.Uint64() == 0 {
 		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
 	}
 
@@ -85,7 +81,7 @@ func insertTrans(id int) result {
 	}
 
 	// Randomize if the insert fails or not.
-	if rand.Intn(10) == 0 {
+	if n, _ := rand.Int(rand.Reader, big.NewInt(10)); n.Uint64() == 0 {
 		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
 	}
 
