@@ -30,7 +30,7 @@ func main() {
 
 	// Subscribe to receive messages for the specified key.
 	// Passing nil for the handler so everything is a manual pull.
-	sub, err := conn.Subscribe(key, nil)
+	sub, err := conn.SubscribeSync(key)
 	if err != nil {
 		log.Println("Subscribing for specified key:", err)
 		return
