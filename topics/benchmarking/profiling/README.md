@@ -9,7 +9,7 @@ Using benchmarks you can profile your programs and see exactly where your perfor
    go test -run none -bench . -cpuprofile cpu.out
    go tool pprof profiling.test cpu.out
    
-      list getValue
+      (pprof) list getValue
 
       10ms       10ms     36:func getValue(variable string, vars map[string]string) interface{} {
          .          .     37:
@@ -27,7 +27,7 @@ Using benchmarks you can profile your programs and see exactly where your perfor
    go test -run none -bench . -memprofile mem.out -memprofilerate 1
    go tool pprof -alloc_space profiling.test mem.out
 
-      list getValue
+      (pprof) list getValue
 
       .          .     36:func getValue(variable string, vars map[string]string) interface{} {
       .          .     37:

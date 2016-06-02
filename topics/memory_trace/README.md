@@ -44,81 +44,69 @@ We can get detailed information about the heap using the pprof support. We can a
 
 ### Comparing Profiles
 
-    Build and run the service:
-        go build
-        ./memory_trace
+Build and run the service:
+```
+    go build
+    ./memory_trace
+```
 
-    Take a snapshot of the current heap profile:
+Take a snapshot of the current heap profile:
+```
+    curl -s http://localhost:6060/debug/pprof/heap > base.heap
+```
 
-		curl -s http://localhost:6060/debug/pprof/heap > base.heap
+After some time, take another snapshot:
+```
+    curl -s http://localhost:6060/debug/pprof/heap > current.heap
+```
 
-    After some time, take another snapshot:
+Now compare both snapshots against the binary and get into the pprof tool:
+```
+    go tool pprof -alloc_space -base base.heap memory_trace current.heap
 
-		curl -s http://localhost:6060/debug/pprof/heap > current.heap
-
-    Now compare both snapshots against the binary and get into the pprof tool:
-
-		go tool pprof -inuse_space -base base.heap /PATH_TO_BINARY/finding_leaks current.heap
-
-        -inuse_space  : Display in-use memory size
-        -inuse_objects: Display in-use object counts
-        -alloc_space  : Display allocated memory size
-        -alloc_objects: Display allocated object counts
+    -inuse_space  : Display in-use memory size
+    -inuse_objects: Display in-use object counts
+    -alloc_space  : Display allocated memory size
+    -alloc_objects: Display allocated object counts
+```
 
 ### Running pprof Commands
 
 Run the `top` command to see the functions allocating the most objects:
-
-    Using -alloc_space
+```
     (pprof) top
-    1.88GB of 1.88GB total (  100%)
-          flat  flat%   sum%        cum   cum%
-        1.88GB   100%   100%     1.88GB   100%  main.main.func1
-             0     0%   100%     1.88GB   100%  runtime.goexit
-
-    Using -inuse_space
-    (pprof) top
-    3182575 of 3182575 total (  100%)
-    Dropped 5 nodes (cum <= 15912)
-          flat  flat%   sum%        cum   cum%
-       3182575   100%   100%    3182575   100%  main.main.func1
-             0     0%   100%    3182575   100%  runtime.goexit
+        2.24GB of 2.24GB total (  100%)
+              flat  flat%   sum%        cum   cum%
+            2.24GB   100%   100%     2.24GB   100%  main.main.func1
+                 0     0%   100%     2.24GB   100%  runtime.goexit
+```
 
 Run the `list` command against the goroutine declared in main:
+```
+    (pprof) list main
+        Total: 2.24GB
+        ROUTINE ======================== main.main.func1 in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/memory_trace/trace.go
+            2.24GB     2.24GB (flat, cum)   100% of Total
+                 .          .     17:   // to be constantly shuffled around, this becomes very expensive.
+                 .          .     18:   go func() {
+                 .          .     19:       m := make(map[int]int)
+                 .          .     20:
+                 .          .     21:       for i := 0; ; i++ {
+            2.24GB     2.24GB     22:           m[i] = i
+                 .          .     23:       }
+                 .          .     24:   }()
+                 .          .     25:
+                 .          .     26:   // Start a listener for the pprof support.
+                 .          .     27:   go func() {
+```
 
-    Using -alloc_space
-    (pprof) list main.main.func1
-    Total: 1.88GB
-    ROUTINE ======================== main.main.func1 in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/memory_trace/trace.go
-        1.88GB     1.88GB (flat, cum)   100% of Total
-             .          .     19:   // to be constantly shuffled around, this becomes very expensive.
-             .          .     20:   go func() {
-             .          .     21:       m := make(map[int]int)
-             .          .     22:
-             .          .     23:       for i := 0; ; i++ {
-        1.88GB     1.88GB     24:           m[i] = i
-             .          .     25:       }
-             .          .     26:   }()
-             .          .     27:
-             .          .     28:   // Start a listener for the pprof support.
-             .          .     29:   go func() {
+### Generate PDF Call Graph
 
-    Using -inuse_space
-    (pprof) list main.main.func1
-    Total: 3182575
-    ROUTINE ======================== main.main.func1 in /PATH_TO_BINARY/finding_leaks/leak.go
-       3182575    3182575 (flat, cum)   100% of Total
-             .          .     10:func main() {
-             .          .     11:	go func() {
-             .          .     12:		m := make(map[int]int)
-             .          .     13:
-             .          .     14:		for i := 0; ; i++ {
-       3182575    3182575     15:			m[i] = i
-             .          .     16:		}
-             .          .     17:	}()
-             .          .     18:
-             .          .     19:	go func() {
-             .          .     20:		http.ListenAndServe(":6060", nil)
+You can generate a call graph but you need Graphviz and Ghostscript to generate a PDF. Look at [Profiling](../profiling).
+```
+    go tool pprof -pdf -alloc_space -base base.heap memory_trace current.heap > mem.pdf
+    open -a "Adobe Acrobat" mem.pdf
+```
 
 ## Links
 
