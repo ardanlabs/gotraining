@@ -9,8 +9,6 @@ import "testing"
 var fv interface{}
 
 func BenchmarkGetValue(b *testing.B) {
-	b.ReportAllocs()
-
 	var v interface{}
 
 	for i := 0; i < b.N; i++ {

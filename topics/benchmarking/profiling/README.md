@@ -24,7 +24,7 @@ Using benchmarks you can profile your programs and see exactly where your perfor
 
 #### Memory Profiling
 ```
-   go test -run none -bench . -memprofile mem.out -memprofilerate 1
+   go test -run none -bench . -memprofile mem.out -memprofilerate 1 -benchmem
    go tool pprof -alloc_space profiling.test mem.out
 
       (pprof) list getValue
@@ -48,6 +48,6 @@ Using benchmarks you can profile your programs and see exactly where your perfor
 ## Code Review
 
 [Profiling](profiling.go) ([Go Playground](http://play.golang.org/p/45RqOFR0Ms)) | 
-[Profiling Test](profiling_test.go) ([Go Playground](http://play.golang.org/p/zY3Elhibcy))
+[Profiling Test](profiling_test.go) ([Go Playground](http://play.golang.org/p/QdofVman_Z))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
