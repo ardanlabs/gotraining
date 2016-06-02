@@ -58,7 +58,7 @@ We can get detailed information about the heap using the pprof support. We can a
 
     Now compare both snapshots against the binary and get into the pprof tool:
 
-		go tool pprof -alloc_space -base base.heap /PATH_TO_BINARY/finding_leaks current.heap
+		go tool pprof -inuse_space -base base.heap /PATH_TO_BINARY/finding_leaks current.heap
 
         -inuse_space  : Display in-use memory size
         -inuse_objects: Display in-use object counts

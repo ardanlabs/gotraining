@@ -1,5 +1,5 @@
 /*
-	go test -run none -bench BenchmarkNextMsg -benchmem -memprofile mem.out -memprofilerate 1
+	go test -run none -bench BenchmarkNextMsg -memprofile mem.out -memprofilerate 1
 
 	BenchmarkNextMsg-8	    1000	   1390932 ns/op	     192 B/op	       3 allocs/op
 
@@ -110,6 +110,8 @@ func init() {
 var msg *nats.Msg
 
 func BenchmarkNextMsg(b *testing.B) {
+	b.ReportAllocs()
+
 	var m *nats.Msg
 
 	for i := 0; i < b.N; i++ {

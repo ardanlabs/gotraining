@@ -15,11 +15,11 @@ const (
 
 // matrix represents a matrix with a large number of
 // columns per row.
-var matrix [rows][cols][56]byte
+var matrix [rows][cols]byte
 
 // data represents a data node for our linked list.
 type data struct {
-	v [56]byte
+	v byte
 	p *data
 }
 
@@ -45,8 +45,8 @@ func init() {
 
 			// Apply a value on this interval.
 			if row%8 == 0 {
-				matrix[row][col][0] = 0xFF
-				d.v[0] = 0xFF
+				matrix[row][col] = 0xFF
+				d.v = 0xFF
 			}
 		}
 	}
@@ -69,7 +69,7 @@ func LinkedListTraverse() int {
 
 	d := list
 	for d != nil {
-		if d.v[0] == 0xFF {
+		if d.v == 0xFF {
 			ctr++
 		}
 
@@ -85,7 +85,7 @@ func ColumnTraverse() int {
 
 	for col := 0; col < cols; col++ {
 		for row := 0; row < rows; row++ {
-			if matrix[row][col][0] == 0xFF {
+			if matrix[row][col] == 0xFF {
 				ctr++
 			}
 		}
@@ -100,7 +100,7 @@ func RowTraverse() int {
 
 	for row := 0; row < rows; row++ {
 		for col := 0; col < cols; col++ {
-			if matrix[row][col][0] == 0xFF {
+			if matrix[row][col] == 0xFF {
 				ctr++
 			}
 		}
