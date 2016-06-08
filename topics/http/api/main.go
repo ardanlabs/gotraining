@@ -4,11 +4,11 @@ package main
 
 import (
 	"log"
-	"net/http"
 	"os"
 	"os/signal"
 
 	"github.com/ardanlabs/gotraining/topics/http/api/routes"
+	"github.com/braintree/manners"
 )
 
 // init is called before main. We are using init to customize logging output.
@@ -29,13 +29,16 @@ func main() {
 	// Create this goroutine to run the web server.
 	go func() {
 		log.Println("listener : Started : Listening on: http://localhost:" + port)
-		http.ListenAndServe(":"+port, routes.API())
+		manners.ListenAndServe(":"+port, routes.API())
 	}()
 
 	// Listen for an interrupt signal from the OS.
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt)
 	<-sigChan
+
+	log.Println("main : Shutting down...")
+	manners.Close()
 
 	log.Println("main : Completed")
 }
