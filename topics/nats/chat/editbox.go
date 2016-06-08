@@ -1,3 +1,6 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
 package main
 
 import (
@@ -8,18 +11,33 @@ import (
 	"github.com/nsf/termbox-go"
 )
 
-const edit_box_width = 80
-const edit_box_height = 15
+const editBoxWidth = 80
+const editBoxHeight = 15
 
 var (
-	edit_box EditBox
-	out      []string
-	mu       sync.Mutex
+	eb  editBox
+	out []string
+	mu  sync.Mutex
 )
 
-// draw will draw the client UI and hold the application
+// =============================================================================
+
+// WriteMessage adds a message to the current view of messages.
+func WriteMessage(who, s string) {
+	mu.Lock()
+	{
+		out = append(out, who+": "+s)
+		if len(out) > editBoxHeight-2 {
+			out = out[1:]
+		}
+	}
+	mu.Unlock()
+	redrawAll()
+}
+
+// Draw will draw the client UI and hold the application
 // from terminating.
-func draw(event func(string)) {
+func Draw(event func(string)) {
 	err := termbox.Init()
 	if err != nil {
 		panic(err)
@@ -27,7 +45,7 @@ func draw(event func(string)) {
 	defer termbox.Close()
 
 	termbox.SetInputMode(termbox.InputEsc)
-	redraw_all()
+	redrawAll()
 
 mainloop:
 	for {
@@ -37,33 +55,31 @@ mainloop:
 			case termbox.KeyEsc:
 				break mainloop
 			case termbox.KeyArrowLeft, termbox.KeyCtrlB:
-				edit_box.MoveCursorOneRuneBackward()
+				eb.MoveCursorOneRuneBackward()
 			case termbox.KeyArrowRight, termbox.KeyCtrlF:
-				edit_box.MoveCursorOneRuneForward()
+				eb.MoveCursorOneRuneForward()
 			case termbox.KeyBackspace, termbox.KeyBackspace2:
-				edit_box.DeleteRuneBackward()
+				eb.DeleteRuneBackward()
 			case termbox.KeyDelete, termbox.KeyCtrlD:
-				edit_box.DeleteRuneForward()
+				eb.DeleteRuneForward()
 			case termbox.KeyTab:
-				edit_box.InsertRune('\t')
+				eb.InsertRune('\t')
 			case termbox.KeySpace:
-				edit_box.InsertRune(' ')
+				eb.InsertRune(' ')
 			case termbox.KeyCtrlK:
-				edit_box.DeleteTheRestOfTheLine()
+				eb.DeleteTheRestOfTheLine()
 			case termbox.KeyHome, termbox.KeyCtrlA:
-				edit_box.MoveCursorToBeginningOfTheLine()
+				eb.MoveCursorToBeginningOfTheLine()
 			case termbox.KeyEnd, termbox.KeyCtrlE:
-				edit_box.MoveCursorToEndOfTheLine()
+				eb.MoveCursorToEndOfTheLine()
 			case termbox.KeyEnter:
-				appendMsg(string(edit_box.text))
+				event(string(eb.text))
 
-				event(string(edit_box.text))
-
-				edit_box.MoveCursorToBeginningOfTheLine()
-				edit_box.DeleteTheRestOfTheLine()
+				eb.MoveCursorToBeginningOfTheLine()
+				eb.DeleteTheRestOfTheLine()
 			default:
 				if ev.Ch != 0 {
-					edit_box.InsertRune(ev.Ch)
+					eb.InsertRune(ev.Ch)
 				}
 			}
 
@@ -71,57 +87,46 @@ mainloop:
 			panic(ev.Err)
 		}
 
-		redraw_all()
+		redrawAll()
 	}
 }
 
-// redraw_all will draw the edit box with all the contents.
-func redraw_all() {
+// =============================================================================
+
+func redrawAll() {
 	const coldef = termbox.ColorDefault
 	termbox.Clear(coldef, coldef)
 	w, h := termbox.Size()
 
 	midy := (h / 2) + (h / 3)
-	midx := (w - edit_box_width) / 2
+	midx := (w - editBoxWidth) / 2
 
 	termbox.SetCell(midx-1, midy, '│', coldef, coldef)
-	termbox.SetCell(midx+edit_box_width, midy, '│', coldef, coldef)
+	termbox.SetCell(midx+editBoxWidth, midy, '│', coldef, coldef)
 	termbox.SetCell(midx-1, midy-1, '┌', coldef, coldef)
 	termbox.SetCell(midx-1, midy+1, '└', coldef, coldef)
-	termbox.SetCell(midx+edit_box_width, midy-1, '┐', coldef, coldef)
-	termbox.SetCell(midx+edit_box_width, midy+1, '┘', coldef, coldef)
-	fill(midx, midy-1, edit_box_width, 1, termbox.Cell{Ch: '─'})
-	fill(midx, midy+1, edit_box_width, 1, termbox.Cell{Ch: '─'})
+	termbox.SetCell(midx+editBoxWidth, midy-1, '┐', coldef, coldef)
+	termbox.SetCell(midx+editBoxWidth, midy+1, '┘', coldef, coldef)
+	fill(midx, midy-1, editBoxWidth, 1, termbox.Cell{Ch: '─'})
+	fill(midx, midy+1, editBoxWidth, 1, termbox.Cell{Ch: '─'})
 
-	edit_box.Draw(midx, midy, edit_box_width, 1)
-	termbox.SetCursor(midx+edit_box.CursorX(), midy)
+	eb.Draw(midx, midy, editBoxWidth, 1)
+	termbox.SetCursor(midx+eb.CursorX(), midy)
 
 	var i int
 	var o int
-	for i = 2; i < edit_box_height; i++ {
+	for i = 2; i < editBoxHeight; i++ {
 		o++
 		termbox.SetCell(midx-1, midy-i, '│', coldef, coldef)
 		if len(out) >= o {
-			tbprint(midx+1, midy-i, coldef, coldef, "Me: "+out[len(out)-o])
+			tbprint(midx+1, midy-i, coldef, coldef, out[len(out)-o])
 		}
-		termbox.SetCell(midx+edit_box_width, midy-i, '│', coldef, coldef)
+		termbox.SetCell(midx+editBoxWidth, midy-i, '│', coldef, coldef)
 	}
-	fill(midx, midy-i, edit_box_width, 1, termbox.Cell{Ch: '─'})
+	fill(midx, midy-i, editBoxWidth, 1, termbox.Cell{Ch: '─'})
 
 	tbprint(midx+32, midy+3, coldef, coldef, "Press ESC to quit")
 	termbox.Flush()
-}
-
-// appendMsg adds a message to the current view of messages.
-func appendMsg(s string) {
-	mu.Lock()
-	{
-		out = append(out, s)
-		if len(out) > edit_box_height-2 {
-			out = out[1:]
-		}
-	}
-	mu.Unlock()
 }
 
 func tbprint(x, y int, fg, bg termbox.Attribute, msg string) {
@@ -139,62 +144,63 @@ func fill(x, y, w, h int, cell termbox.Cell) {
 	}
 }
 
-func rune_advance_len(r rune, pos int) int {
+func runeAdvanceLen(r rune, pos int) int {
 	if r == '\t' {
-		return tabstop_length - pos%tabstop_length
+		return tabstopLength - pos%tabstopLength
 	}
 	return runewidth.RuneWidth(r)
 }
 
-func voffset_coffset(text []byte, boffset int) (voffset, coffset int) {
+func voffsetCoffset(text []byte, boffset int) (voffset, coffset int) {
 	text = text[:boffset]
 	for len(text) > 0 {
 		r, size := utf8.DecodeRune(text)
 		text = text[size:]
-		coffset += 1
-		voffset += rune_advance_len(r, voffset)
+		coffset++
+		voffset += runeAdvanceLen(r, voffset)
 	}
 	return
 }
 
-func byte_slice_grow(s []byte, desired_cap int) []byte {
-	if cap(s) < desired_cap {
-		ns := make([]byte, len(s), desired_cap)
+func byteSliceGrow(s []byte, desiredCap int) []byte {
+	if cap(s) < desiredCap {
+		ns := make([]byte, len(s), desiredCap)
 		copy(ns, s)
 		return ns
 	}
 	return s
 }
 
-func byte_slice_remove(text []byte, from, to int) []byte {
+func byteSliceRemove(text []byte, from, to int) []byte {
 	size := to - from
 	copy(text[from:], text[to:])
 	text = text[:len(text)-size]
 	return text
 }
 
-func byte_slice_insert(text []byte, offset int, what []byte) []byte {
+func byteSliceInsert(text []byte, offset int, what []byte) []byte {
 	n := len(text) + len(what)
-	text = byte_slice_grow(text, n)
+	text = byteSliceGrow(text, n)
 	text = text[:n]
 	copy(text[offset+len(what):], text[offset:])
 	copy(text[offset:], what)
 	return text
 }
 
-const preferred_horizontal_threshold = 5
-const tabstop_length = 8
+// =============================================================================
 
-type EditBox struct {
-	text           []byte
-	line_voffset   int
-	cursor_boffset int // cursor offset in bytes
-	cursor_voffset int // visual cursor offset in termbox cells
-	cursor_coffset int // cursor offset in unicode code points
+const preferredHorizontalThreshold = 5
+const tabstopLength = 8
+
+type editBox struct {
+	text          []byte
+	lineVoffset   int
+	cursorBoffset int // cursor offset in bytes
+	cursorVoffset int // visual cursor offset in termbox cells
+	cursorCoffset int // cursor offset in unicode code points
 }
 
-// Draws the EditBox in the given location, 'h' is not used at the moment
-func (eb *EditBox) Draw(x, y, w, h int) {
+func (eb *editBox) Draw(x, y, w, h int) {
 	eb.AdjustVOffset(w)
 
 	const coldef = termbox.ColorDefault
@@ -204,13 +210,13 @@ func (eb *EditBox) Draw(x, y, w, h int) {
 	lx := 0
 	tabstop := 0
 	for {
-		rx := lx - eb.line_voffset
+		rx := lx - eb.lineVoffset
 		if len(t) == 0 {
 			break
 		}
 
 		if lx == tabstop {
-			tabstop += tabstop_length
+			tabstop += tabstopLength
 		}
 
 		if rx >= w {
@@ -222,7 +228,7 @@ func (eb *EditBox) Draw(x, y, w, h int) {
 		r, size := utf8.DecodeRune(t)
 		if r == '\t' {
 			for ; lx < tabstop; lx++ {
-				rx = lx - eb.line_voffset
+				rx = lx - eb.lineVoffset
 				if rx >= w {
 					goto next
 				}
@@ -241,103 +247,100 @@ func (eb *EditBox) Draw(x, y, w, h int) {
 		t = t[size:]
 	}
 
-	if eb.line_voffset != 0 {
+	if eb.lineVoffset != 0 {
 		termbox.SetCell(x, y, '←', coldef, coldef)
 	}
 }
 
-// Adjusts line visual offset to a proper value depending on width
-func (eb *EditBox) AdjustVOffset(width int) {
-	ht := preferred_horizontal_threshold
-	max_h_threshold := (width - 1) / 2
-	if ht > max_h_threshold {
-		ht = max_h_threshold
+func (eb *editBox) AdjustVOffset(width int) {
+	ht := preferredHorizontalThreshold
+	maxHThreshold := (width - 1) / 2
+	if ht > maxHThreshold {
+		ht = maxHThreshold
 	}
 
 	threshold := width - 1
-	if eb.line_voffset != 0 {
+	if eb.lineVoffset != 0 {
 		threshold = width - ht
 	}
-	if eb.cursor_voffset-eb.line_voffset >= threshold {
-		eb.line_voffset = eb.cursor_voffset + (ht - width + 1)
+	if eb.cursorVoffset-eb.lineVoffset >= threshold {
+		eb.lineVoffset = eb.cursorVoffset + (ht - width + 1)
 	}
 
-	if eb.line_voffset != 0 && eb.cursor_voffset-eb.line_voffset < ht {
-		eb.line_voffset = eb.cursor_voffset - ht
-		if eb.line_voffset < 0 {
-			eb.line_voffset = 0
+	if eb.lineVoffset != 0 && eb.cursorVoffset-eb.lineVoffset < ht {
+		eb.lineVoffset = eb.cursorVoffset - ht
+		if eb.lineVoffset < 0 {
+			eb.lineVoffset = 0
 		}
 	}
 }
 
-func (eb *EditBox) MoveCursorTo(boffset int) {
-	eb.cursor_boffset = boffset
-	eb.cursor_voffset, eb.cursor_coffset = voffset_coffset(eb.text, boffset)
+func (eb *editBox) MoveCursorTo(boffset int) {
+	eb.cursorBoffset = boffset
+	eb.cursorVoffset, eb.cursorCoffset = voffsetCoffset(eb.text, boffset)
 }
 
-func (eb *EditBox) RuneUnderCursor() (rune, int) {
-	return utf8.DecodeRune(eb.text[eb.cursor_boffset:])
+func (eb *editBox) RuneUnderCursor() (rune, int) {
+	return utf8.DecodeRune(eb.text[eb.cursorBoffset:])
 }
 
-func (eb *EditBox) RuneBeforeCursor() (rune, int) {
-	return utf8.DecodeLastRune(eb.text[:eb.cursor_boffset])
+func (eb *editBox) RuneBeforeCursor() (rune, int) {
+	return utf8.DecodeLastRune(eb.text[:eb.cursorBoffset])
 }
 
-func (eb *EditBox) MoveCursorOneRuneBackward() {
-	if eb.cursor_boffset == 0 {
+func (eb *editBox) MoveCursorOneRuneBackward() {
+	if eb.cursorBoffset == 0 {
 		return
 	}
 	_, size := eb.RuneBeforeCursor()
-	eb.MoveCursorTo(eb.cursor_boffset - size)
+	eb.MoveCursorTo(eb.cursorBoffset - size)
 }
 
-func (eb *EditBox) MoveCursorOneRuneForward() {
-	if eb.cursor_boffset == len(eb.text) {
+func (eb *editBox) MoveCursorOneRuneForward() {
+	if eb.cursorBoffset == len(eb.text) {
 		return
 	}
 	_, size := eb.RuneUnderCursor()
-	eb.MoveCursorTo(eb.cursor_boffset + size)
+	eb.MoveCursorTo(eb.cursorBoffset + size)
 }
 
-func (eb *EditBox) MoveCursorToBeginningOfTheLine() {
+func (eb *editBox) MoveCursorToBeginningOfTheLine() {
 	eb.MoveCursorTo(0)
 }
 
-func (eb *EditBox) MoveCursorToEndOfTheLine() {
+func (eb *editBox) MoveCursorToEndOfTheLine() {
 	eb.MoveCursorTo(len(eb.text))
 }
 
-func (eb *EditBox) DeleteRuneBackward() {
-	if eb.cursor_boffset == 0 {
+func (eb *editBox) DeleteRuneBackward() {
+	if eb.cursorBoffset == 0 {
 		return
 	}
 
 	eb.MoveCursorOneRuneBackward()
 	_, size := eb.RuneUnderCursor()
-	eb.text = byte_slice_remove(eb.text, eb.cursor_boffset, eb.cursor_boffset+size)
+	eb.text = byteSliceRemove(eb.text, eb.cursorBoffset, eb.cursorBoffset+size)
 }
 
-func (eb *EditBox) DeleteRuneForward() {
-	if eb.cursor_boffset == len(eb.text) {
+func (eb *editBox) DeleteRuneForward() {
+	if eb.cursorBoffset == len(eb.text) {
 		return
 	}
 	_, size := eb.RuneUnderCursor()
-	eb.text = byte_slice_remove(eb.text, eb.cursor_boffset, eb.cursor_boffset+size)
+	eb.text = byteSliceRemove(eb.text, eb.cursorBoffset, eb.cursorBoffset+size)
 }
 
-func (eb *EditBox) DeleteTheRestOfTheLine() {
-	eb.text = eb.text[:eb.cursor_boffset]
+func (eb *editBox) DeleteTheRestOfTheLine() {
+	eb.text = eb.text[:eb.cursorBoffset]
 }
 
-func (eb *EditBox) InsertRune(r rune) {
+func (eb *editBox) InsertRune(r rune) {
 	var buf [utf8.UTFMax]byte
 	n := utf8.EncodeRune(buf[:], r)
-	eb.text = byte_slice_insert(eb.text, eb.cursor_boffset, buf[:n])
+	eb.text = byteSliceInsert(eb.text, eb.cursorBoffset, buf[:n])
 	eb.MoveCursorOneRuneForward()
 }
 
-// Please, keep in mind that cursor depends on the value of line_voffset, which
-// is being set on Draw() call, so.. call this method after Draw() one.
-func (eb *EditBox) CursorX() int {
-	return eb.cursor_voffset - eb.line_voffset
+func (eb *editBox) CursorX() int {
+	return eb.cursorVoffset - eb.lineVoffset
 }

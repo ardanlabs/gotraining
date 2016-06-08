@@ -1,67 +1,97 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Sample program to show how to build a very basic chat client using NATS.
 package main
 
 import (
-	"fmt"
+	"log"
+	"math/rand"
+	"strconv"
+	"strings"
+	"time"
 
 	"github.com/nats-io/nats"
 )
 
-const key = "chat"
+// channel represents the channel to use.
+const channel = "general"
+
+// user represents the internal user name.
+var user string
+
+// =============================================================================
+
+func init() {
+
+	// Generate a random user name.
+	rand.Seed(time.Now().UnixNano())
+	user = strconv.Itoa(rand.Intn(1000))
+}
 
 func main() {
 
-	f := func(s string) {
-
+	// Connect to the local nats server.
+	conn, err := nats.Connect(nats.DefaultURL)
+	if err != nil {
+		log.Println("Unable to connect to NATS")
+		return
 	}
 
-	// // Connect to the local nats server.
-	// conn, err := nats.Connect(nats.DefaultURL)
-	// if err != nil {
-	// 	log.Println("Unable to connect to NATS")
-	// 	return
-	// }
+	// This function gets called when a message is received.
+	recv := func(m *nats.Msg) {
 
-	// // Subscribe to receive messages for the specified key.
-	// sub, err := conn.Subscribe(key, receive)
-	// if err != nil {
-	// 	log.Println("Subscribing for specified key:", err)
-	// 	return
-	// }
+		// We are using a simple userid:message format.
+		s := strings.Split(string(m.Data), ":")
 
-	// go send(conn)
+		// If this was not our message, ignore it.
+		if s[0] != user {
+			WriteMessage(s[0], s[1])
+		}
+	}
 
-	// // Unsubscribe from receiving these messages.
-	// if err := sub.Unsubscribe(); err != nil {
-	// 	log.Println("Error unsubscribing from the bus:", err)
-	// 	return
-	// }
+	// Subscribe to receive messages for the specified key.
+	sub, err := conn.Subscribe(channel, recv)
+	if err != nil {
+		log.Println("Subscribing for specified channel:", err)
+		return
+	}
 
-	// // Close the connection to the NATS server.
-	// conn.Close()
+	// This function gets called when the enter key is hit.
+	event := func(s string) {
 
-	draw(f)
-}
+		// Not performing perfect length checking.
+		if len(s) > 2 && s[:3] == "bot" {
+			switch s[4:] {
+			case "name":
+				user = s[9:]
+				WriteMessage(user, "name set")
+			}
 
-// receive shows a message that is received.
-func receive(m *nats.Msg) {
-	fmt.Println(string(m.Data))
-}
-
-func send(conn *nats.Conn) {
-	for {
-		fmt.Print("\n\n> ")
-
-		var s string
-		i, err := fmt.Scanln(&s)
-		if err != nil {
-			fmt.Println(err)
+			return
 		}
 
-		fmt.Println(i, s)
+		// Write the message to the screen.
+		WriteMessage(user, s)
 
-		// if err := conn.Publish(key, []byte(s)); err != nil {
-		// 	log.Println("Publishing a message for specified key:", err)
-		// 	return
-		// }
+		// Add the user id to the message for delivery.
+		send := user + ":" + s
+
+		// Publish the message to NATS.
+		if err := conn.Publish(channel, []byte(send)); err != nil {
+			WriteMessage("Err", err.Error())
+		}
 	}
+
+	// Draw the box and set the handler.
+	Draw(event)
+
+	// Unsubscribe from receiving these messages.
+	if err := sub.Unsubscribe(); err != nil {
+		log.Println("Error unsubscribing from NATS:", err)
+		return
+	}
+
+	// Close the connection to the NATS server.
+	conn.Close()
 }

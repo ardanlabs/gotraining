@@ -19,9 +19,6 @@ These examples show the basics of using the NATS client.
 
 ### Exercise 1
 
-TBD
-
-[Template]() ([Go Playground]()) | 
-[Answer]() ([Go Playground]())
+Write a program that has two goroutines playing a game of tennis. Pass the ball between the two goroutines using the NATS service. Pick a random number to determine if a goroutine missed the ball. Shut the program down cleanly once a goroutine loses.
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
