@@ -62,7 +62,7 @@ func main() {
 
 		// Not performing perfect length checking.
 		if len(s) > 2 && s[:3] == "bot" {
-			switch s[4:] {
+			switch s[4:8] {
 			case "name":
 				user = s[9:]
 				WriteMessage(user, "name set")
