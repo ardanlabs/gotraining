@@ -10,8 +10,8 @@ This example shows how to create a basic chat client using NATS.
 
 ## Code Review
 
-[Chat Editbox](editbox.go) ([Go Playground](http://play.golang.org/p/ZWTXLFuLRH))  
-[Chat App](main.go) ([Go Playground](http://play.golang.org/p/EW34xIuS9P))  
+[Chat Editbox](editbox.go) ([Go Playground](http://play.golang.org/p/NVxbmW1sRq))  
+[Chat App](main.go) ([Go Playground](http://play.golang.org/p/0znZPKTZZF))  
 
 ## Exercises
 
