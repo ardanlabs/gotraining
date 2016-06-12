@@ -95,9 +95,7 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 
 * Unless the user needs to provide an implementation or you have multiple implementations, question.
 
-* Don’t export any interfaces until your user needs it. Users can declare their own interfaces.
-
-* Don't add an interface just for the sake of testing. API's are for users not tests.
+* Don’t export any interface unless your user needs it. This includes interfaces for internal testing. Users can declare their own interfaces.
 
 * If it's not clear how an abstraction makes the code better, it probably doesn't.
 
