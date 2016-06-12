@@ -23,8 +23,8 @@ func init() {
 
 func main() {
 
-	// Declare the key to use for publishing/subscribing.
-	const key = "test"
+	// Declare the subject to use for publishing/subscribing.
+	const subject = "test"
 
 	// Connect to the local nats server.
 	rawConn, err := nats.Connect(nats.DefaultURL)
@@ -42,7 +42,7 @@ func main() {
 
 	// Make and bind a channel to receiving user values.
 	recv := make(chan user)
-	subRecv, err := conn.BindRecvChan(key, recv)
+	subRecv, err := conn.BindRecvChan(subject, recv)
 	if err != nil {
 		log.Println("Unable to bind the receive channel")
 		return
@@ -50,7 +50,7 @@ func main() {
 
 	// Make and bind a channel to send user values.
 	send := make(chan user)
-	if err := conn.BindSendChan(key, send); err != nil {
+	if err := conn.BindSendChan(subject, send); err != nil {
 		log.Println("Unable to bind the send channel")
 		return
 	}

@@ -18,8 +18,8 @@ func init() {
 
 func main() {
 
-	// Declare the key to use for publishing/subscribing.
-	const key = "test"
+	// Declare the subject to use for publishing/subscribing.
+	const subject = "test"
 
 	// Connect to the local nats server.
 	conn, err := nats.Connect(nats.DefaultURL)
@@ -33,23 +33,21 @@ func main() {
 	wg.Add(1)
 
 	// Function is called when new messages are received.
-	// NOTE: This is bad. Not receiving a value of type Msg.
 	f := func(m *nats.Msg) {
 		log.Println("Received a message:", string(m.Data))
 		wg.Done()
 	}
 
-	// Subscribe to receive messages for the specified key.
-	sub, err := conn.Subscribe(key, f)
+	// Subscribe to receive messages for the specified subject.
+	sub, err := conn.Subscribe(subject, f)
 	if err != nil {
-		log.Println("Subscribing for specified key:", err)
+		log.Println("Subscribing for specified subject:", err)
 		return
 	}
 
-	// Publish the string into the message bus under the
-	// specified key.
-	if err := conn.Publish(key, []byte("Hello World")); err != nil {
-		log.Println("Publishing a message for specified key:", err)
+	// Publish the message for the specified subject.
+	if err := conn.Publish(subject, []byte("Hello World")); err != nil {
+		log.Println("Publishing a message for specified subject:", err)
 		return
 	}
 

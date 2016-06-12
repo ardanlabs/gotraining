@@ -18,8 +18,8 @@ func init() {
 
 func main() {
 
-	// Declare the key to use for publishing/subscribing.
-	const key = "test"
+	// Declare the subject to use for publishing/subscribing.
+	const subject = "test"
 
 	// Connect to the local nats server.
 	conn, err := nats.Connect(nats.DefaultURL)
@@ -28,23 +28,20 @@ func main() {
 		return
 	}
 
-	// Subscribe to receive messages for the specified key.
-	// Passing nil for the handler so everything is a manual pull.
-	sub, err := conn.SubscribeSync(key)
+	// Subscribe to receive messages for the specified subject.
+	sub, err := conn.SubscribeSync(subject)
 	if err != nil {
-		log.Println("Subscribing for specified key:", err)
+		log.Println("Subscribing for specified subject:", err)
 		return
 	}
 
-	// Publish the string into the message bus under the
-	// specified key.
-	if err := conn.Publish(key, []byte("Hello World")); err != nil {
-		log.Println("Publishing a message for specified key:", err)
+	// Publish the message for the specified subject.
+	if err := conn.Publish(subject, []byte("Hello World")); err != nil {
+		log.Println("Publishing a message for specified subject:", err)
 		return
 	}
 
-	// Pull the message we published from the message bus.
-	// NOTE: This is a bad call. It creates a timer on each call :(
+	// Pull the message we just published.
 	m, err := sub.NextMsg(time.Second)
 	if err != nil {
 		log.Println("Error pulling a message from the bus:", err)
