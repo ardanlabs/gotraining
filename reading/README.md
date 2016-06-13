@@ -37,20 +37,22 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)
 
-### Profiling and Debugging
+### Profiling, Debugging and Optimization
 
 [Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
 [Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
 [How NOT to Measure Latency](https://www.youtube.com/watch?v=lJ8ydIuPFeU&feature=youtu.be) - Gil Tene  
 [Go Performance Tales](http://jmoiron.net/blog/go-performance-tales) - Jason Moiron  
 [Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
-[Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes
+[Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
+[Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
 
 ### Interfaces and Composition
 
 [Design Guidelines](design_guidelines.md)  
 [Composition](http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
-[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan
+[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
+[Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful) - Brave New Geek  
 
 ### Buffer Bloat - 2011
 
@@ -61,15 +63,21 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
+[Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz  
 
-### Docker
+### Container and Orchestration
 
 [How To Deploy a Go Web Application with Docker](https://semaphoreci.com/community/tutorials/how-to-deploy-a-go-web-application-with-docker) - Kulshekhar Kabra  
+[An introduction to Clear Containers](https://lwn.net/Articles/644675) - LWN.net  
+
+### Distributed Systems
+
+[Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods) - Jeff Hodges  
 
 ### Misc
 
 [Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
-[Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
+[USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)
 
 ## Mechanical Sympathy
 
@@ -94,7 +102,8 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
 [Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf) - Tony Albrecht  
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo) - Bjarne Stroustrup  
-[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
+[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth  
+[Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)](http://gamesfromwithin.com/data-oriented-design) - Noel  
 
 #### Operating Systems and Virtualization
 
@@ -129,6 +138,9 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Release Notes
 
+[Open issues for the upcoming release](https://dev.golang.org/release)
+
+[Go 1.7 Release Notes](https://golang.org/doc/go1.7) - DRAFT  
 [Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
 [Go 1.5 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19  
 [Go 1.4 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10  
@@ -136,3 +148,12 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Go 1.2 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01  
 [Go 1.1 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13  
 [Go 1.0 Release Notes](https://golang.org/doc/go1.0) - 2012/03/28
+
+## Research Papers
+
+[DINAMITE: A modern approach to memory performance profiling](http://arxiv.org/pdf/1606.00396v1.pdf)  
+[GoHotDraw: evaluating the Go programming language with design patterns](http://dl.acm.org/citation.cfm?id=1937127) - ACM  
+[Blade : A Datacenter Garbage Collector](http://www.scs.stanford.edu/14au-cs244b/labs/projects/terei.pdf) - David Terei  
+[Text Understanding from Scratch](https://arxiv.org/pdf/1502.01710.pdf) - Xiang Zhang, Yann LeCun  
+[What You Always Wanted to Know about Model Checking of Fault-Tolerant Distributed Algorithms?](http://forsyte.at/download/kvw-psi15.pdf) - Vienna University of Technology  
+[The Modelling and Analysis of Security Protocols: the CSP Approach](http://www.computing.surrey.ac.uk/personal/st/S.Schneider/books/MASP.pdf)

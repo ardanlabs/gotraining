@@ -93,6 +93,8 @@ This is subject to be different in different processors. For this content, the f
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)  
 [Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)  
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)  
+[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs)  
+[Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)](http://gamesfromwithin.com/data-oriented-design)
 
 ## Code Review
 

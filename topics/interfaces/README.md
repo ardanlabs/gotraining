@@ -21,7 +21,8 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 https://golang.org/doc/effective_go.html#interfaces  
 http://blog.golang.org/laws-of-reflection  
 http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html  
-[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)
+[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)  
+[Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful)
 
 ## Code Review
 
