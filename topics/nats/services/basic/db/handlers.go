@@ -32,6 +32,11 @@ func GetUsers(conn *nats.EncodedConn, reply string, req Request) {
 func ResponseHandler(conn *nats.EncodedConn, m *nats.Msg) {
 	log.Printf("Message received: [%s] %s\n", m.Subject, string(m.Data))
 
+	if m.Reply == "" {
+		log.Println("********************> INVALID MESSAGE - NO REPLY")
+		return
+	}
+
 	// Unmarshal the reuqest.
 	var req Request
 	if err := json.Unmarshal(m.Data, &req); err != nil {
