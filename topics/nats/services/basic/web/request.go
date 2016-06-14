@@ -24,12 +24,7 @@ type Response struct {
 func SendRequest(subject string, req Request) (Response, error) {
 	log.Printf("SendRequest: Subject[%s] Req[%+v]\n", subject, req)
 
-	// Send the request for processing.
-	if err := conn.Publish(subject, req); err != nil {
-		return Response{}, err
-	}
-
-	// Wait for the response.
+	// Send the request and wait for the response.
 	var resp Response
 	err := conn.Request(subject, req, &resp, time.Second)
 
