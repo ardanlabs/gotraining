@@ -105,9 +105,9 @@ func store(s Storer, data []Data) error {
 
 // Copy knows how to pull and store data from any System.
 func Copy(ps PullStorer, batch int) error {
-	for {
-		data := make([]Data, batch)
+	data := make([]Data, batch)
 
+	for {
 		i, err := pull(ps, data)
 		if i > 0 {
 			if err := store(ps, data[:i]); err != nil {

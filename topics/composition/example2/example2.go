@@ -99,9 +99,9 @@ func store(s Storer, data []Data) error {
 
 // Copy knows how to pull and store data from the System.
 func Copy(sys *System, batch int) error {
-	for {
-		data := make([]Data, batch)
+	data := make([]Data, batch)
 
+	for {
 		i, err := pull(&sys.Xenia, data)
 		if i > 0 {
 			if err := store(&sys.Pillar, data[:i]); err != nil {
