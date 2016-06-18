@@ -107,7 +107,7 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 
 * Only break a Project up when developer productivity is a cost.
 
-* Breaking a Project into multiple projects comes with dependency costs.
+* Breaking a Project into multiple projects comes with extra dependency costs.
 
 * In many languages folders are used to organize code, in Go folders are used to organize API's (packages).
 
