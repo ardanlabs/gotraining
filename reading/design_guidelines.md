@@ -93,6 +93,8 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 
 * Don't use an interface for the sake of using an interface.
 
+* Don't use an interface to generalize an algorithm.
+
 * Unless the user needs to provide an implementation or you have multiple implementations, question.
 
 * Don’t export any interface unless your user needs it. This includes interfaces for internal testing. Users can declare their own interfaces.
