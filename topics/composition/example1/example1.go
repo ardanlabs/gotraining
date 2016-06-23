@@ -74,7 +74,7 @@ func pull(x *Xenia, data []Data) (int, error) {
 	return len(data), nil
 }
 
-// store knows how to store bulks of data from Pillar.
+// store knows how to store bulks of data into Pillar.
 func store(p *Pillar, data []Data) error {
 	for _, d := range data {
 		if err := p.Store(d); err != nil {
