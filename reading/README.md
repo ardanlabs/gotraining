@@ -74,6 +74,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods) - Jeff Hodges  
 
+### HTTP and Timeouts
+
+[Complete Guide To Go Net HTTP Timeouts](https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts) - Filippo Valsorda  
+
 ### Misc
 
 [Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  

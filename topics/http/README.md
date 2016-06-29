@@ -10,12 +10,13 @@ The Go standard library provides all the critical building blocks for producing 
 
 ## Links
 
-https://golang.org/pkg/net/http/  
-https://golang.org/doc/articles/wiki/  
+https://golang.org/pkg/net/http  
+https://golang.org/doc/articles/wiki  
 https://github.com/bradfitz/http2  
 https://github.com/interagent/http-api-design/blob/master/README.md  
 http://www.restapitutorial.com/httpstatuscodes.html  
-http://racksburg.com/choosing-an-http-status-code/
+http://racksburg.com/choosing-an-http-status-code  
+https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts
 
 ## Code Review
 
