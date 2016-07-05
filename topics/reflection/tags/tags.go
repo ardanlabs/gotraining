@@ -1,13 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-/*
-ValueOf returns a new Value initialized to the concrete value stored in the interface i.
-ValueOf(nil) returns the zero Value.
-func ValueOf(i interface{}) Value {
-*/
-
-// Sample program to show how to reflect on a struct type with tags.
+// Example shows how to reflect on a struct type with tags.
 package main
 
 import (
