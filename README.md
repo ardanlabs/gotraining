@@ -222,17 +222,21 @@ If you are interested in holding an event in your area please let me know. I wil
 		Rackspace 		San Antonio, TX 	- May  
 		OSCON 			Portland, OR  		- May  
 		Intel 			Hillsboro, OR 		- May  
-
-					--- Pending ---
-
 		Staples 		Framingham, MA  	- May  
 		Ultimate Go 	London, England 	- June  
 		Ultimate Go 	Phoenix, AZ  		- June  
+
+					--- Pending ---
+
 		GopherCon		Denver, CO  		- July  
 		Red Ventures 	South Carolina	 	- August  
 		GolangUK 		London, England 	- August  
 		Tune 			Seattle, WA	 		- August  
+		Traderev		Toronto, Canada 	- September  
 		Ultimate Go 	Toronto, Canada 	- September  
+		dotGo			Paris, France		- October  
+		Centralway		Zürich, Switzerland	- October  
+		DevconTLV		Tel Aviv, Israel	- November    
 
 #### 2015
 
