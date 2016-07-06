@@ -56,12 +56,12 @@ This example shows a simple web api running with some basic load.
 	Look at the general stats from the profile:
 
 		http://localhost:4000/debug/pprof
-		/debug/pprof/
-			profiles:
-				0	block
-				499	goroutine
-				19	heap
-				4	threadcreate
+			/debug/pprof/
+				profiles:
+					0	block
+					499	goroutine
+					19	heap
+					4	threadcreate
 
 	Let's run with two logical processors now:
 
@@ -76,12 +76,12 @@ This example shows a simple web api running with some basic load.
 	Look at the general stats from the profile:
 	
 		http://localhost:4000/debug/pprof
-		/debug/pprof/
-			profiles:
-				0	block
-				499	goroutine
-				22	heap
-				5	threadcreate
+			/debug/pprof/
+				profiles:
+					0	block
+					499	goroutine
+					22	heap
+					5	threadcreate
 
 ## Running Summary Trace: Example2
 
@@ -106,24 +106,24 @@ This example shows a simple web api running that is leaking goroutines.
 	Look at the general stats from the profile:
 
 		http://localhost:4000/debug/pprof
-		/debug/pprof/
-			profiles:
-				0	block
-				499	goroutine
-				19	heap
-				4	threadcreate
+			/debug/pprof/
+				profiles:
+					0	block
+					499	goroutine
+					19	heap
+					4	threadcreate
 
 		http://localhost:4000/debug/pprof
-		/debug/pprof/
-			profiles:
-				0	block
-				694	goroutine
-				23	heap
-				7	threadcreate
+			/debug/pprof/
+				profiles:
+					0	block
+					694	goroutine
+					23	heap
+					7	threadcreate
 
 ## Code Review
 
 [Web API](example1/example1.go) ([Go Playground](http://play.golang.org/p/iQ1r6yGjGx))  
-[Web API Leaking Goroutines](example2/example2.go) ([Go Playground](http://play.golang.org/p/rqMy80L4te))
+[Web API Leaking Goroutines](example2/example2.go) ([Go Playground](http://play.golang.org/p/ovd6vgE5RL))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

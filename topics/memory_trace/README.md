@@ -115,6 +115,6 @@ https://www.hakkalabs.co/articles/finding-memory-leaks-go-programs
 
 ## Code Review
 
-[Finding Leak](trace.go) ([Go Playground](http://play.golang.org/p/W2zH_cR5Ir))
+[Finding Leak](trace.go) ([Go Playground](http://play.golang.org/p/1xNLqzqf0g))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
