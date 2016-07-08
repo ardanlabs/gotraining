@@ -1,4 +1,3 @@
-// Package search : bing performs searches against the bing search engine.
 package search
 
 import "log"
@@ -19,13 +18,13 @@ func NewCNN() Searcher {
 }
 
 // Search performs a search against the CNN RSS feeds.
-func (CNN) Search(term string, found chan<- []Result) {
-	log.Printf("CNN : Search : Started : searchTerm[%s]\n", term)
+func (CNN) Search(uid string, term string, found chan<- []Result) {
+	log.Printf("%s : CNN : Search : Started : searchTerm[%s]\n", uid, term)
 
 	results := []Result{}
 
 	for _, feed := range cnnFeeds {
-		res, err := rssSearch(term, "CNN", feed)
+		res, err := rssSearch(uid, term, "CNN", feed)
 		if err != nil {
 			continue
 		}
@@ -35,5 +34,5 @@ func (CNN) Search(term string, found chan<- []Result) {
 
 	found <- results
 
-	log.Println("CNN : Search : Completed")
+	log.Printf("%s : CNN : Search : Completed\n", uid)
 }

@@ -11,10 +11,12 @@ Note: Unless you are running OS X El Capitan, profiling on the Mac is broken. Th
 [download files](https://drive.google.com/?pli=1&authuser=0#folders/0B8nQmHFH90Pkck13MVVLcko5OGc)
 
 ### Graph Visualization Tools
+
 Download the package for your target OS/Arch:
 [http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
 
 ### Ghostscript
+
 This is not an easy step for Mac users since there is no prebuilt distribution.
 
 Download and uncompress the source code:
@@ -23,6 +25,34 @@ Download and uncompress the source code:
 	./configure
 	make
 	sudo make install
+
+
+### go-wrk
+
+go-wrk is a modern HTTP benchmarking tool capable of generating significant load when run on a single multi-core CPU. It builds on go language go routines and scheduler for behind the scenes async IO and concurrency.
+
+	go get -u github.com/tsliwowicz/go-wrk
+
+## Adding Load
+
+To add load to the service while running profiling we can run this command. This is use 10 connections for 2 full minutes.
+
+	go-wrk -M POST -c 10 -d 120 "http://localhost:4000/search?term=dallas&cnn=on&bbc=on&nyt=on"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Static Profiling
 

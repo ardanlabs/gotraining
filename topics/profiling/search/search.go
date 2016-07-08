@@ -1,4 +1,5 @@
-// Package search manages the searching of results against Google, Yahoo and Bing.
+// Package search manages the searching of results against different
+// news feeds.
 package search
 
 import (
@@ -11,6 +12,7 @@ type Options struct {
 	Term  string
 	CNN   bool
 	NYT   bool
+	BBC   bool
 	First bool
 }
 
@@ -37,28 +39,34 @@ func (r *Result) ContentHTML() template.HTML {
 // Searcher declares an interface used to leverage different
 // search engines to find results.
 type Searcher interface {
-	Search(term string, found chan<- []Result)
+	Search(uid string, term string, found chan<- []Result)
 }
 
 // =============================================================================
 
 // Submit uses goroutines and channels to perform a search against the
 // feeds concurrently.
-func Submit(options Options) []Result {
-	log.Printf("search : Submit : Started : %#v\n", options)
+func Submit(uid string, options Options) []Result {
+	log.Printf("%s : Submit : Started : %#v\n", uid, options)
 
 	searchers := make(map[string]Searcher)
 
 	// Create a CNN Searcher if checked.
 	if options.CNN {
-		log.Println("search : Submit : Info : Adding CNN")
+		log.Printf("%s : Submit : Info : Adding CNN\n", uid)
 		searchers["cnn"] = NewCNN()
 	}
 
 	// Create a NYT Searcher if checked.
 	if options.NYT {
-		log.Println("search : Submit : Info : Adding NYTimes")
-		searchers["nyt"] = NewNYTimes()
+		log.Printf("%s : Submit : Info : Adding NYT\n", uid)
+		searchers["nyt"] = NewNYT()
+	}
+
+	// Create a BBC Searcher if checked.
+	if options.BBC {
+		log.Printf("%s : Submit : Info : Adding BBC\n", uid)
+		searchers["bbc"] = NewBBC()
 	}
 
 	results := make(chan []Result)
@@ -66,7 +74,7 @@ func Submit(options Options) []Result {
 	// Perform the searches concurrently. Using a map because
 	// it returns the searchers in a random order every time.
 	for _, searcher := range searchers {
-		go searcher.Search(options.Term, results)
+		go searcher.Search(uid, options.Term, results)
 	}
 
 	var final []Result
@@ -80,20 +88,20 @@ func Submit(options Options) []Result {
 		if options.First && (search > 0 && len(final) > 0) {
 			go func() {
 				found := <-results
-				log.Printf("search : Submit : Info : Results Discarded : Results[%d]\n", len(found))
+				log.Printf("%s : Submit : Info : Results Discarded : Results[%d]\n", uid, len(found))
 			}()
 			continue
 		}
 
 		// Wait to recieve results.
-		log.Println("search : Submit : Info : Waiting For Results...")
+		log.Printf("%s : Submit : Info : Waiting For Results...\n", uid)
 		found := <-results
 
 		// Save the results to the final slice.
-		log.Printf("search : Submit : Info : Results Used : Results[%d]\n", len(found))
+		log.Printf("%s : Submit : Info : Results Used : Results[%d]\n", uid, len(found))
 		final = append(final, found...)
 	}
 
-	log.Printf("search : Submit : Completed : Found [%d] Results\n", len(final))
+	log.Printf("%s : Submit : Completed : Found [%d] Results\n", uid, len(final))
 	return final
 }

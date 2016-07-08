@@ -1,4 +1,3 @@
-// Package search : rss provides RSS feed support.
 package search
 
 import (
@@ -59,24 +58,24 @@ type (
 // =============================================================================
 
 // rssSearch is used against any RSS feeds.
-func rssSearch(term, engine, uri string) ([]Result, error) {
-	log.Printf("%s-%s : rssSearch : Started\n", engine, uri)
+func rssSearch(uid, term, engine, uri string) ([]Result, error) {
+	log.Printf("%s : %s-%s : rssSearch : Started\n", uid, engine, uri)
 
 	var d Document
 
 	// Capture a document of rss chanel items.
 	key := term + engine + uri
 	if v, found := cache.Get(key); found {
-		log.Printf("%s-%s : rssSearch : CACHE : Found\n", engine, uri)
+		log.Printf("%s : %s-%s : rssSearch : CACHE : Found\n", uid, engine, uri)
 
 		d = v.(Document)
 	} else {
-		log.Printf("%s-%s : rssSearch : GET\n", engine, uri)
+		log.Printf("%s : %s-%s : rssSearch : GET\n", uid, engine, uri)
 
 		// Pull down the rss feed.
 		resp, err := http.Get(uri)
 		if err != nil {
-			log.Printf("%s-%s : rssSearch : ERROR : %s\n", engine, uri, err)
+			log.Printf("%s : %s-%s : rssSearch : ERROR : %s\n", uid, engine, uri, err)
 			return []Result{}, err
 		}
 
@@ -86,7 +85,7 @@ func rssSearch(term, engine, uri string) ([]Result, error) {
 		// Decode the results into a document.
 		err = xml.NewDecoder(resp.Body).Decode(&d)
 		if err != nil {
-			log.Printf("%s-%s : rssSearch : ERROR : Decode : %s\n", engine, uri, err)
+			log.Printf("%s : %s-%s : rssSearch : ERROR : Decode : %s\n", uid, engine, uri, err)
 			return []Result{}, err
 		}
 
@@ -109,6 +108,6 @@ func rssSearch(term, engine, uri string) ([]Result, error) {
 		}
 	}
 
-	log.Printf("%s-%s : rssSearch : Completed : Found[%d]\n", engine, uri, len(results))
+	log.Printf("%s : %s-%s : rssSearch : Completed : Found[%d]\n", uid, engine, uri, len(results))
 	return results, nil
 }

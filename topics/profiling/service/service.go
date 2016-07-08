@@ -4,10 +4,16 @@ package service
 import (
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"time"
+
+	"github.com/braintree/manners"
 )
 
 // init binds the routes and handlers for the web service.
 func init() {
+
 	// Setup a route for our static files.
 	//
 	// Because our static directory is set as the root of the FileSystem,
@@ -17,14 +23,37 @@ func init() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Setup a route for the home page.
-	http.HandleFunc("/", index)
+	http.HandleFunc("/search", handler)
 }
 
-// Run binds the service to a port and starts listening
-// for requests.
+// Run binds the service to a port and starts listening for requests.
 func Run() {
-	log.Println("Listing on: http://localhost:4000")
+	host := "localhost:5000"
+	readTimeout := 10 * time.Second
+	writeTimeout := 30 * time.Second
 
-	// Listen for our HTTP requests.
-	http.ListenAndServe("localhost:4000", nil)
+	// Create a new server and set timeout values.
+	s := manners.NewWithServer(&http.Server{
+		Addr:           host,
+		Handler:        http.DefaultServeMux,
+		ReadTimeout:    readTimeout,
+		WriteTimeout:   writeTimeout,
+		MaxHeaderBytes: 1 << 20,
+	})
+
+	// Support for shutting down cleanly.
+	go func() {
+
+		// Listen for an interrupt signal from the OS.
+		sigChan := make(chan os.Signal, 1)
+		signal.Notify(sigChan, os.Interrupt)
+		<-sigChan
+
+		// We have been asked to shutdown the server.
+		log.Println("Starting shutdown...")
+		s.Close()
+	}()
+
+	log.Println("Listening on:", host)
+	s.ListenAndServe()
 }

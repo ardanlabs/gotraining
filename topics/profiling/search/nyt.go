@@ -1,4 +1,3 @@
-// Package search : bing performs searches against the bing search engine.
 package search
 
 import "log"
@@ -10,22 +9,22 @@ var nytFeeds = []string{
 	"http://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
 }
 
-// NYTimes provides support for CNN searches.
-type NYTimes struct{}
+// NYT provides support for NYT searches.
+type NYT struct{}
 
-// NewNYTimes returns a NYTimes Searcher value.
-func NewNYTimes() Searcher {
-	return NYTimes{}
+// NewNYT returns a NYT Searcher value.
+func NewNYT() Searcher {
+	return NYT{}
 }
 
-// Search performs a search against the CNN RSS feeds.
-func (NYTimes) Search(term string, found chan<- []Result) {
-	log.Printf("NYTimes : Search : Started : searchTerm[%s]\n", term)
+// Search performs a search against the NYT RSS feeds.
+func (NYT) Search(uid string, term string, found chan<- []Result) {
+	log.Printf("%s : NYT : Search : Started : searchTerm[%s]\n", uid, term)
 
 	results := []Result{}
 
 	for _, feed := range nytFeeds {
-		res, err := rssSearch(term, "NYTimes", feed)
+		res, err := rssSearch(uid, term, "NYT", feed)
 		if err != nil {
 			continue
 		}
@@ -35,5 +34,5 @@ func (NYTimes) Search(term string, found chan<- []Result) {
 
 	found <- results
 
-	log.Println("NYTimes : Search : Completed")
+	log.Printf("%s : NYT : Search : Completed\n", uid)
 }

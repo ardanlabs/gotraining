@@ -17,10 +17,10 @@ var views = make(map[string]*template.Template)
 func init() {
 	// In order for the endpoint tests to run this needs to be
 	// physically located. Trying to avoid configuration for now.
-	tmplPath := os.Getenv("GOPATH") + "/src/github.com/ardanlabs/gotraining/topics/profiling"
-	loadTemplate("layout", tmplPath+"/views/basic-layout.html")
-	loadTemplate("index", tmplPath+"/views/index.html")
-	loadTemplate("results", tmplPath+"/views/results.html")
+	pwd, _ := os.Getwd()
+	loadTemplate("layout", pwd+"/views/basic-layout.html")
+	loadTemplate("search", pwd+"/views/search.html")
+	loadTemplate("results", pwd+"/views/results.html")
 }
 
 // loadTemplate reads the specified template file for use.
