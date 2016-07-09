@@ -2,23 +2,13 @@
 
 We can use the go tooling in conjunction with the Graph Visualization Tools and Ghostscript. These tools will allow us to graph the profiles we create.
 
-Note: Unless you are running OS X El Capitan, profiling on the Mac is broken. This post talks about how to hack to OS X Kernel to make it work.  
-[http://research.swtch.com/macpprof](http://research.swtch.com/macpprof)  
-[https://godoc.org/rsc.io/pprof_mac_fix](https://godoc.org/rsc.io/pprof_mac_fix)
-
 ## Installing Tools
 
-[download files](https://drive.google.com/?pli=1&authuser=0#folders/0B8nQmHFH90Pkck13MVVLcko5OGc)
-
-### Graph Visualization Tools
-
+**Graph Visualization Tools**    
 Download the package for your target OS/Arch:
 [http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
 
-### Ghostscript
-
-This is not an easy step for Mac users since there is no prebuilt distribution.
-
+**Ghostscript**    
 Download and uncompress the source code:
 [http://ghostscript.com/download/gsdnld.html](http://ghostscript.com/download/gsdnld.html)
 
@@ -26,126 +16,136 @@ Download and uncompress the source code:
 	make
 	sudo make install
 
-
-### go-wrk
-
+**go-wrk**  
 go-wrk is a modern HTTP benchmarking tool capable of generating significant load when run on a single multi-core CPU. It builds on go language go routines and scheduler for behind the scenes async IO and concurrency.
 
 	go get -u github.com/tsliwowicz/go-wrk
 
+## Building and Running the Project
+
+We have a website that we will use to learn and explore more about profiling. This project is a search engine for RSS feeds. Run the website and validate it is working.
+
+	go build
+	./project
+
+	http://localhost:5000/search
+
 ## Adding Load
 
-To add load to the service while running profiling we can run this command. This is use 10 connections for 2 full minutes.
+To add load to the service while running profiling we can run these command.
 
-	go-wrk -M POST -c 10 -d 120 "http://localhost:4000/search?term=dallas&cnn=on&bbc=on&nyt=on"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Static Profiling
-
-We can have our program produce profiling data and once the program quits, write the profiling data to disk so it can be visualized.
-
-### Code Changes
-
-`go get` Dave Cheney's profiling package. He has done a nice job abstracting all the boilerplate code required.
-
-	go get github.com/davecheney/profile
-
-We need to make some changes to main to get the profiling data we need.
-
-    import "github.com/davecheney/profile"
-
-	// main is the entry point for the application.
-	func main() {
-		cfg := profile.Config{
-			MemProfile:     true,
-			CPUProfile:     true,
-			ProfilePath:    ".",  // store profiles in current directory
-			NoShutdownHook: true, // do not hook SIGINT
-		}
-
-		// p.Stop() must be called before the program exits to
-		// ensure profiling information is written to disk.
-		p := profile.Start(&cfg)
-		defer p.Stop()
-
-		. . .
-	}
-
-### Running and Creating Profile Graphs
-
-	Build and run the service:
-		go build
-		./profiling
+	Use 1 connections for 5 seconds on CNN about house:
+	go-wrk -M POST -c 1 -d 5 -no-ka "http://localhost:5000/search?term=house&cnn=on"
 	
-	In a separate terminal generate requests:
-		while true && do curl http://localhost:6060/english && done
-		<control> C
-    
-    Generate the call graphs:
-    	go tool pprof --pdf ./profiling cpu.pprof > cpugraph.pdf
-		go tool pprof --pdf ./profiling mem.pprof > memgraph.pdf
+	Use 500 connections for 2 minutes on CNN, BBC and NYT about house:
+	go-wrk -M POST -c 500 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-## Dynamic Profiling
+## GODEBUG
 
-We can have our program produce profiling data and during runtime, write the profiling data to disk so it can be visualized.
+GODBUG is an environment variable that allows us to get information from the runtime about the scheduler and the garabage collector.
 
-### Code Changes
+### The Basics
 
-Reset the example back to the original code. Then add this import and this will add a route to the existing service we can leverage to get the profile data.
+Learn the basics of using GODEBUG for tracing.  
+[Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
 
-	_ "net/http/pprof"
+### Memory Trace for Project
 
-### Running and Creating Profile Graphs
-
-	Build and run the service:
-		go build
-		./profiling
+Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
-	In a separate terminal generate requests:
-		while true && do curl http://localhost:6060/english && done
+	GODEBUG=gctrace=1 ./project > /dev/null
 
-	In a separate terminal run a pprof tool:
-		go tool pprof http://localhost:6060/debug/pprof/heap		(Memory Profile)
-		go tool pprof http://localhost:6060/debug/pprof/profile   	(CPU Profile)
+Put some load of the web application for 20 seconds.
 
-### pprof Commands
+ 	go-wrk -M POST -c 500 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-We will use the CPU profile data:
+### Scheduler Trace for Project
 
-	go tool pprof http://localhost:6060/debug/pprof/profile
+Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
+	
+	GODEBUG=schedtrace=1000 GOMAXPROCS=2 ./project > /dev/null
 
-The `top` command will show top functions and methods based on CPU Profile
+Put some load of the web application for 20 seconds.
 
-	(pprof) top
-	810ms of 810ms total (  100%)
-	Showing top 10 nodes out of 98 (cum >= 10ms)
-	      flat  flat%   sum%        cum   cum%
-	     320ms 39.51% 39.51%      330ms 40.74%  syscall.Syscall
-	     140ms 17.28% 56.79%      140ms 17.28%  runtime.kevent
-	     120ms 14.81% 71.60%      120ms 14.81%  runtime.mach_semaphore_signal
-	      70ms  8.64% 80.25%       70ms  8.64%  runtime.usleep
-	      60ms  7.41% 87.65%       60ms  7.41%  runtime.mach_semaphore_wait
-	      30ms  3.70% 91.36%       30ms  3.70%  runtime.mach_semaphore_timedwait
-	      30ms  3.70% 95.06%       30ms  3.70%  runtime.memmove
-	      20ms  2.47% 97.53%       20ms  2.47%  syscall.Syscall6
-	      10ms  1.23% 98.77%       10ms  1.23%  runtime.cas64
-	      10ms  1.23%   100%       10ms  1.23%  syscall.RawSyscall
+ 	go-wrk -M POST -c 500 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-The `web` command will generate a call graph.
+## PPROF
+
+Go provides built in support for retrieving profiling data from your running Go applications.
+
+### Raw http/pprof
+
+Add the following import so we can include the profiling route to our web service.
+
+	import _ "net/http/pprof"
+
+Build the project again and start it.
+
+	go build
+	./project
+
+Look at the basic profiling stats from the new endpoint.
+
+	http://localhost:5000/debug/pprof
+
+Run a single search from the Browser and then refresh the profile information.
+
+	http://localhost:5000/search?term=house&cnn=on
+
+Put some load of the web application for 10 seconds. Review the raw profiling information once again.
+
+ 	go-wrk -M POST -c 10 -d 10 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+
+### Interactive Profiling
+
+Using the Go pprof tool we can interact with the profiling data.
+
+Put some load of the web application for 2 minutes using a single connection.
+
+ 	go-wrk -M POST -c 1 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+
+Run the Go pprof tool in another window or tab to review heap information.
+
+	go tool pprof ./project http://localhost:5000/debug/pprof/heap
+
+Run the Go pprof tool in another window or tab to review cpu information.
+
+	go tool pprof ./project http://localhost:5000/debug/pprof/profile
+
+Explore using the **top** and **list** commands.
+
+### Generate PDF Call Graph
+
+	go tool pprof -pdf ./project http://localhost:5000/debug/pprof/heap > mem.pdf
+    open -a "Adobe Acrobat" mem.pdf
+
+	go tool pprof -pdf ./project http://localhost:5000/debug/pprof/profile > cpu.pdf
+    open -a "Adobe Acrobat" cpu.pdf
+
+### Go Torch
+
+https://github.com/uber/go-torch
+
+go-torch -u http://localhost:5000/
+
+### Comparing Profiles
+
+Take a snapshot of the current heap profile. Then do the same for the cpu profile.
+
+    curl -s http://localhost:5000/debug/pprof/heap > base.heap
+
+After some time, take another snapshot:
+
+    curl -s http://localhost:5000/debug/pprof/heap > current.heap
+
+Now compare both snapshots against the binary and get into the pprof tool:
+
+    go tool pprof -alloc_space -base base.heap memory_trace current.heap
+
+    -inuse_space  : Display in-use memory size
+    -inuse_objects: Display in-use object counts
+    -alloc_space  : Display allocated memory size
+    -alloc_objects: Display allocated object counts
 
 ## Links
 
