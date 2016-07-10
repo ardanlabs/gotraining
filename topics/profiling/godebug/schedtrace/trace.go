@@ -10,30 +10,36 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
-	_ "net/http/pprof"
+	"os"
 	"time"
 )
+
+var leak bool
 
 func main() {
 	http.HandleFunc("/sendjson", sendJSON)
 
-	log.Println("listener : Started : Listening on: http://localhost:4000")
+	// Leak goroutines if we have any argument.
+	if len(os.Args) == 2 {
+		leak = true
+	}
+
+	log.Printf("listener : Started : Listening on: http://localhost:4000 : Leak[%v]\n", leak)
 	http.ListenAndServe(":4000", nil)
 }
 
 // sendJSON returns a simple JSON document.
 func sendJSON(rw http.ResponseWriter, r *http.Request) {
 
-	// Leak a goroutine on every so often.
-	//
-	// The sched stats can only show us runnable goroutines.
-
-	if rand.Intn(100) == 5 {
-		go func() {
-			for {
-				time.Sleep(time.Minute)
-			}
-		}()
+	// Leak a goroutine every so often.
+	if leak {
+		if rand.Intn(100) == 5 {
+			go func() {
+				for {
+					time.Sleep(time.Millisecond * 10)
+				}
+			}()
+		}
 	}
 
 	u := struct {
