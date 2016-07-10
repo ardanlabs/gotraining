@@ -6,6 +6,7 @@ import (
 	"log"
 	_ "net/http/pprof"
 	"os"
+	"runtime/trace"
 
 	"github.com/ardanlabs/gotraining/topics/profiling/project/service"
 )
@@ -19,5 +20,18 @@ func init() {
 
 // main is the entry point for the application.
 func main() {
+
+	// Quick way to turn on tracing when needed.
+	if len(os.Args) == 2 {
+		f, err := os.Create("trace.out")
+		if err != nil {
+			log.Fatalln(err)
+		}
+		defer f.Close()
+
+		trace.Start(f)
+		defer trace.Stop()
+	}
+
 	service.Run()
 }

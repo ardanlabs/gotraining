@@ -55,7 +55,7 @@ func Run() {
 
 		// For now until I deal with manners handling static files.
 		go func() {
-			time.Sleep(time.Second * 5)
+			time.Sleep(time.Second * 60)
 			log.Println("Killed Service")
 			os.Exit(1)
 		}()
