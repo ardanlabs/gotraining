@@ -39,7 +39,7 @@ To add load to the service while running profiling we can run these command.
 
 ## GODEBUG
 
-GODBUG is an environment variable that allows us to get information from the runtime about the scheduler and the garabage collector.
+GODEBUG is an environment variable that allows us to get information from the runtime about the scheduler and the garabage collector.
 
 ### The Basics
 
