@@ -12,8 +12,6 @@ This is a class for any intermediate-level developer who has some experience wit
 
 #### Profiling and Tracing
 [Profiling](../../../topics/profiling/README.md) | 
-[Memory Trace](../../../topics/memory_trace/README.md) | 
-[Scheduler Trace](../../../topics/sched_trace/README.md) | 
 [Stack Traces](../../../topics/stack_trace/README.md)
 
 #### Command Line Interfaces
