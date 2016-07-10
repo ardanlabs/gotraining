@@ -65,7 +65,7 @@ This example shows a simple web api running with some basic load.
 
 ## Links
 
-[http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)   
+[Tour of Go's env variables](http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables)   
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)  
 https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs    
 http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html  
