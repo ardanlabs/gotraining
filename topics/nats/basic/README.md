@@ -11,8 +11,8 @@ These examples show the basics of using the NATS client.
 ## Code Review
 
 [Synchronous Messaging](sync/main.go) ([Go Playground](http://play.golang.org/p/ZWTXLFuLRH))  
-[Asynchronous Messaging](async/main.go) ([Go Playground](http://play.golang.org/p/EW34xIuS9P))  
-[Channel Messaging](channels/main.go) ([Go Playground](http://play.golang.org/p/eZofyzr96R))
+[Asynchronous Messaging](async/main.go) ([Go Playground](http://play.golang.org/p/EW34xIuS9P))    
+[Channel Messaging](channels/main.go) ([Go Playground](http://play.golang.org/p/eZofyzr96R))  
 [Requests](request/main.go) ([Go Playground](http://play.golang.org/p/CjqFQrxYel))  
 [Queuing](queue/main.go) ([Go Playground](http://play.golang.org/p/2c8pbezdtX))  
 
