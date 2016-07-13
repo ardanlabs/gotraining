@@ -21,12 +21,42 @@ The design of the Go GC has changed over the years:
 
 ![figure1](GC_Algorithm.png)
 
+**Mark / Sweep**
+
+* All objects on the heap are turned white and the write barrier is turned on.
+* Scan Stack phase is about finding all the root objects and placing them in the queue.
+    * All these root objects are turned GREY.
+* Mark phase I is about popping a GREY object from the queue and scanning it.
+    * If this GREY object points to a WHITE object, the WHITE object is added to the queue and marked GREY.
+    * The popped GREY object is then turned BLACK to show it has been scanned.
+    * The GC and the application is running concurrently.
+* Mark phase II is about finding objects that were missed due to updates.
+    * Rescan all the root objects again.
+    * This scan should be quick but required for consistency.
+* Sweep phase reclaims memory.
+    * Left with either WHITE or BLACK objects. No more GREY objects.
+    * WHITE objects are reclaimed while BLACK objects stay.
+
+**Write Barrier**
+
+The write barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running.
+
+The write barrier is a little function that inspects the write of pointers when the GC is running. If it identifies such a write, the WHITE object is turned GREY and added to the queue.
+
+**Pacing**
+
+The GC starts a scan based on a feedback loop of information about the running program and the stress on the heap. It is the pacers job to make this decision. Once the decision is made to run, the amount of time the GC has to finish the scan is pre-determined. This time is based on the current size of the heap, the current live heap, and timing calculations about future heap usage while the GC is running.
+
+The GC has a set of goroutines to perform the task of Mark and Sweep. The scheduler will provide these goroutines 25% of the available logical processor time. If your program is using 4 logical processors, that 1 entire logical processor will be given to the GC goroutines for exclusive use.
+
+If the GC begins to believe that it can’t finish the collection within the decided amount of time, it will begin to recruit program goroutines to help. Those goroutines that are causing the slow down will be recruited to help.
+
 ## Links
 
 ### Pointer Mechanics
 
-https://golang.org/doc/effective_go.html#pointers_vs_values  
-http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html  
+https://golang.org/doc/effective_go.html#pointers_vs_values
+http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
 http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ### Stacks
@@ -35,28 +65,28 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ### Escape Analysis and Inlining
 
-[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)  
-[Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)  
+[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
+[Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)
 
 ### Garbage Collection
 
-[Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
-[Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
-[Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm) 
+[Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)
+[Go Blog - 1.5 GC](https://blog.golang.org/go15gc)
+[Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
 
 ### Single Static Assignment Optimizations
 
-[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)  
-https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83  
-https://godoc.org/golang.org/x/tools/go/ssa  
-[Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)  
+[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)
+https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83
+https://godoc.org/golang.org/x/tools/go/ssa
+[Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
 
 ## Code Review
 
-[Pass by Value](example1/example1.go) ([Go Playground](http://play.golang.org/p/qnCX0kVwRH))  
-[Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/6GUcA7-x3j))  
-[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/KRKrUCcTYe))  
-[Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/88QkRhKk53))  
+[Pass by Value](example1/example1.go) ([Go Playground](http://play.golang.org/p/qnCX0kVwRH))
+[Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/6GUcA7-x3j))
+[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/KRKrUCcTYe))
+[Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/88QkRhKk53))
 [Stack grow](example5/example5.go) ([Go Playground](http://play.golang.org/p/tpDOwBCvqW))
 
 ## Exercises
@@ -67,14 +97,14 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 **Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of_ and the _value that the pointer points to_.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZiVZzVkMqk)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZiVZzVkMqk)) |
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/ARXt9Ddawc))
 
 ### Exercise 2
 
 Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/qT4JMQDzpD)) | 
+[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/qT4JMQDzpD)) |
 [Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/DS8DZnEg6i))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
