@@ -9,7 +9,7 @@ Pointers provide a way to share data across function boundaries. Having the abil
 * "Value of", what's in the box. "Address of" ( **&** ), where is the box.
 * The (*) operator declares a pointer variable and the "Value that the pointer points to".
 
-## 1.5 Garbage Collection
+## Garbage Collection
 
 The design of the Go GC has changed over the years:
 * Go 1.0, Stop the world mark sweep collector based heavily on tcmalloc.
@@ -23,7 +23,7 @@ The design of the Go GC has changed over the years:
 
 **Mark / Sweep**
 
-* All objects on the heap are turned white and the write barrier is turned on.
+* All objects on the heap are turned WHITE and the write barrier is turned on.
 * Scan Stack phase is about finding all the root objects and placing them in the queue.
     * All these root objects are turned GREY.
 * Mark phase I is about popping a GREY object from the queue and scanning it.
