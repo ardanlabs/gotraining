@@ -29,7 +29,7 @@ The design of the Go GC has changed over the years:
 * Mark phase I is about popping a GREY object from the queue and scanning it.
     * If this GREY object points to a WHITE object, the WHITE object is added to the queue and marked GREY.
     * The popped GREY object is then turned BLACK to show it has been scanned.
-    * The GC and the application is running concurrently.
+    * The GC and the application are running concurrently.
 * Mark phase II is about finding objects that were missed due to updates.
     * Rescan all the root objects again.
     * This scan should be quick but required for consistency.
