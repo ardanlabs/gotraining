@@ -19,7 +19,7 @@ The design of the Go GC has changed over the years:
 * Go 1.5, New GC design, focusing on latency over throughput.
 * Go 1.6, GC improvements, handling larger heaps with lower latency.
 
-![figure1](GC_Algorithm.png)
+![figure1](GC_Algorithm.png?v=2)
 
 **Mark / Sweep**
 
