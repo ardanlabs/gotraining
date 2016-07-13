@@ -55,8 +55,8 @@ If the GC begins to believe that it can’t finish the collection within the dec
 
 ### Pointer Mechanics
 
-https://golang.org/doc/effective_go.html#pointers_vs_values
-http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html
+https://golang.org/doc/effective_go.html#pointers_vs_values  
+http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html  
 http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ### Stacks
@@ -65,29 +65,30 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ### Escape Analysis and Inlining
 
-[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)
+[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw)  
 [Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)
 
 ### Garbage Collection
 
-[Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)
-[Go Blog - 1.5 GC](https://blog.golang.org/go15gc)
-[Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)
+[Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
+[Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
+[Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)  
+[Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)
 
 ### Single Static Assignment Optimizations
 
-[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)
+[GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)  
 https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83
-https://godoc.org/golang.org/x/tools/go/ssa
+https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
 
 ## Code Review
 
-[Pass by Value](example1/example1.go) ([Go Playground](http://play.golang.org/p/qnCX0kVwRH))
-[Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/6GUcA7-x3j))
-[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/KRKrUCcTYe))
-[Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/88QkRhKk53))
-[Stack grow](example5/example5.go) ([Go Playground](http://play.golang.org/p/tpDOwBCvqW))
+[Pass by Value](example1/example1.go) ([Go Playground](http://play.golang.org/p/qnCX0kVwRH))  
+[Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/6GUcA7-x3j))  
+[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/KRKrUCcTYe))  
+[Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/88QkRhKk53))  
+[Stack grow](example5/example5.go) ([Go Playground](http://play.golang.org/p/tpDOwBCvqW))  
 
 ## Exercises
 
