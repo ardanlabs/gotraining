@@ -33,7 +33,7 @@ This example shows a simple web api running with some basic load.
 
 	Start to apply load to the web api for 5 seconds.
 
-		go-wrk -M POST -c 500 -d 5 "http://localhost:4000/sendjson"
+		go-wrk -m POST -c 500 -d 5 "http://localhost:4000/sendjson"
 	
 	Look at the load on the logical processor. We can only see runnable goroutines. After 5 seconds
 	we don't see any more goroutines in the trace.
@@ -49,7 +49,7 @@ This example shows a simple web api running with some basic load.
 
 	Start to apply load to the web api for 5 seconds.
 
-		go-wrk -M POST -c 500 -d 5 "http://localhost:4000/sendjson"
+		go-wrk -m POST -c 500 -d 5 "http://localhost:4000/sendjson"
 	
 	Look at the load on the logical processor. We can only see runnable goroutines. After 5 seconds
 	we still see goroutines in the trace.
@@ -65,7 +65,7 @@ This example shows a simple web api running with some basic load.
 
 ## Links
 
-[http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)   
+[Tour of Go's env variables](http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables)   
 [http://golang.org/pkg/runtime/](http://golang.org/pkg/runtime/)  
 https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs    
 http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html  
