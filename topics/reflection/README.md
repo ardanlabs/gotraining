@@ -14,20 +14,6 @@ http://blog.golang.org/laws-of-reflection
 
 ## Code Review
 
-### Basics
-
-Example shows how to reflect over a struct type value.  
-[Struct Types](basics/struct/struct.go) ([Go Playground](https://play.golang.org/p/V9Lf75Ajaa))    
-
-Example shows how to reflect over a slice of struct type values.  
-[Slices](basics/slice/slice.go) ([Go Playground](https://play.golang.org/p/ISWgNKWIxM))  
-
-Example shows how to reflect over a map of struct type values.  
-[Maps](basics/map/map.go) ([Go Playground](https://play.golang.org/p/BNWVXx4QTo))  
-
-Example shows how to reflect over a struct type pointer.  
-[Pointers](basics/pointer/pointer.go) ([Go Playground](https://play.golang.org/p/0bSbKUJk19))  
-
 ### Interfaces
 
 Example shows how to reflect over a struct type value that is stored inside an interface value.  
@@ -45,7 +31,7 @@ Example shows how to reflect over a struct type pointer that is stored inside an
 ### Tags
 
 Example shows how to reflect on a struct type with tags.  
-[Tags](tags/tags.go) ([Go Playground](https://play.golang.org/p/s6FE6J58Es))  
+[Tags](tag/tag.go) ([Go Playground](https://play.golang.org/p/s6FE6J58Es))  
 
 ### Inspection / Decoding
 
