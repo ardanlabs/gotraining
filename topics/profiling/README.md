@@ -181,10 +181,16 @@ Run the Go trace tool.
 
 ## Links
 
-http://golang.org/blog/profiling-go-programs  
 http://golang.org/pkg/runtime/pprof/  
 https://golang.org/pkg/net/http/pprof/  
-https://godoc.org/rsc.io/pprof_mac_fix
+[Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
+[Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
+[How NOT to Measure Latency](https://www.youtube.com/watch?v=lJ8ydIuPFeU&feature=youtu.be) - Gil Tene  
+[Go Performance Tales](http://jmoiron.net/blog/go-performance-tales) - Jason Moiron  
+[Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
+[Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
+[Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
+[Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
 
 ## Code Review
 
