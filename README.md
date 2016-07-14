@@ -1,6 +1,6 @@
 ## Go Training
 
-[Click Here To Review The Course Material](courses/README.md)
+[Click Here To See The Different Courses And Material](courses/README.md)
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
@@ -18,20 +18,6 @@ The material has been designed to be taught in a classroom environment. The code
 	* Has worked with a command shell.
 	* Knows how to maneuver around the file system.
 	* Understands what environment variables are.
-	
-## Course Outline
-
-* Language Syntax
-* Arrays, Slices and Maps
-* Methods, Interfaces and Embedding
-* Packaging and Exporting
-* Using Pointers
-* Error Handling
-* Concurrency, Race Conditions and Channels
-* Concurrency Patterns
-* Testing and Debugging
-* Project Structure and Vendoring
-* Standard Library
 
 ## Important Reading
 
@@ -150,6 +136,14 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 
 ## Twitter
 
+https://twitter.com/ianfoo/status/752246569554964480
+
+Ian Molee ([@ianfoo](https://twitter.com/c4milo/status/752317652563996672))  
+_"If you're at @GopherCon, get yourself to a session with @goinggodotnet. Superb! Pretty sure his pic appears with the definition of "dynamo.""_
+
+Camilo Aguilar ([@c4milo](https://twitter.com/c4milo/status/752317652563996672))  
+_"Holy cow, the best lighting talk I have ever seen about mechanical sympathy by @goinggodotnet. Here at #gophercon"_
+
 Jessie Frazelle ([@frazelledazzell](https://twitter.com/frazelledazzell/status/711355859066990592))  
 _"@goinggodotnet you were amazing!!! So enthusiastic!!! Thanks for doing this for everyone!"_
 
@@ -224,11 +218,11 @@ If you are interested in holding an event in your area please let me know. I wil
 		Intel 			Hillsboro, OR 		- May  
 		Staples 		Framingham, MA  	- May  
 		Ultimate Go 	London, England 	- June  
-		Ultimate Go 	Phoenix, AZ  		- June  
+		Ultimate Go 	Phoenix, AZ  		- June
+		GopherCon		Denver, CO  		- July  
 
 					--- Pending ---
 
-		GopherCon		Denver, CO  		- July  
 		Red Ventures 	South Carolina	 	- August  
 		GolangUK 		London, England 	- August  
 		Tune 			Seattle, WA	 		- August  

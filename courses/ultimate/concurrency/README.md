@@ -1,5 +1,5 @@
 ## Ultimate Go - Concurrency
-This is a class for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. This class provides an intensive, comprehensive and idiomatic view of the language. We focus on both the specification and implementation of the language, including topics ranging from language syntax, Go's type system, concurrency, channels, standard library and tooling.
+This material covers all the concurrency aspects of the language. Once you are done with this material you will understand the understand the concurrent mechanics of the language and mechanical sympathies the language has for both the hardware and operating system as it related to concurrency.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 

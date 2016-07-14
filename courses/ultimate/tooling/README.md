@@ -1,5 +1,5 @@
 ## Ultimate Go - Tooling
-This is a class for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. This class provides an intensive, comprehensive and idiomatic view of the language. We focus on both the specification and implementation of the language, including topics ranging from language syntax, Go's type system, concurrency, channels, standard library and tooling.
+This material covers a good portion of the tooling that comes with go. Specifically we cover testing and benchmarking. We also cover profiling memory and the scheduler. Finally we learn how to read stack traces.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
@@ -13,8 +13,5 @@ This is a class for any intermediate-level developer who has some experience wit
 #### Profiling and Tracing
 [Profiling](../../../topics/profiling/README.md) | 
 [Stack Traces](../../../topics/stack_trace/README.md)
-
-#### Command Line Interfaces
-[Command-Line Interface (CLI)](../../../topics/cli/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
