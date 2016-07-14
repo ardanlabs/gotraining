@@ -163,15 +163,17 @@ Now compare both snapshots against the binary and get into the pprof tool:
 
 ## Tracing
 
-Run the web application with tracing on. Show the code that produces the trace.
+Run the web application.
 
-	./project trace
+	./project
 
 Put some load of the web application for 2 minutes.
 
 	go-wrk -M POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-Kill the web application to produce the trace.out file.
+Capture a trace file for a brief duration.
+
+	curl -s http://localhost:5000/debug/pprof/trace?seconds=2 > trace.out
 
 Run the Go trace tool.
 
