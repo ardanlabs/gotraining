@@ -35,7 +35,7 @@ We have a website that we will use to learn and explore more about profiling. Th
 To add load to the service while running profiling we can run these command.
 
 	Use 10 connections for 2 minute on CNN, BBC and NYT about house:
-	go-wrk -M POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	go-wrk -m POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ## GODEBUG
 
@@ -54,7 +54,7 @@ Run the website redirecting the stdout (logs) to the null device. This will allo
 
 Put some load of the web application for 20 seconds.
 
-	go-wrk -M POST -c 10 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	go-wrk -m POST -c 10 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ### Scheduler Trace for Project
 
@@ -64,7 +64,7 @@ Run the website redirecting the stdout (logs) to the null device. This will allo
 
 Put some load of the web application for 20 seconds.
 
-	go-wrk -M POST -c 10 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	go-wrk -m POST -c 10 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ## PPROF
 
@@ -91,7 +91,7 @@ Run a single search from the Browser and then refresh the profile information.
 
 Put some load of the web application for 10 seconds. Review the raw profiling information once again.
 
-	go-wrk -M POST -c 10 -d 10 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	go-wrk -m POST -c 10 -d 10 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ### Interactive Profiling
 
@@ -99,7 +99,7 @@ Using the Go pprof tool we can interact with the profiling data.
 
 Put some load of the web application for 2 minutes using a single connection.
 
- 	go-wrk -M POST -c 1 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+ 	go-wrk -m POST -c 1 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Run the Go pprof tool in another window or tab to review heap information.
 
@@ -136,7 +136,7 @@ Tool for stochastically profiling Go programs. Collects stack traces and synthes
 
 Put some load of the web application for 2 minutes.
 
-	go-wrk -M POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	go-wrk -m POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Run the torch tool and visualize the profile.
 
@@ -169,7 +169,7 @@ Run the web application.
 
 Put some load of the web application for 2 minutes.
 
-	go-wrk -M POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	go-wrk -m POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Capture a trace file for a brief duration.
 
