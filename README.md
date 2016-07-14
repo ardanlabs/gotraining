@@ -136,8 +136,6 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 
 ## Twitter
 
-https://twitter.com/ianfoo/status/752246569554964480
-
 Ian Molee ([@ianfoo](https://twitter.com/c4milo/status/752317652563996672))  
 _"If you're at @GopherCon, get yourself to a session with @goinggodotnet. Superb! Pretty sure his pic appears with the definition of "dynamo.""_
 
