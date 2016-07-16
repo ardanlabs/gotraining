@@ -1,6 +1,6 @@
 ## Profiling Code
 
-We can use the go tooling in conjunction with the Graph Visualization Tools and Ghostscript. These tools will allow us to graph the profiles we create.
+We can use the go tooling to inspect and profile our programs. Profiling is more of a journey and detective work. It requires some understanding about the application and expectations. The profiling data in and of itself is just raw numbers. We have to give it meaning and understanding.
 
 ## Installing Tools
 
@@ -16,10 +16,10 @@ Download and uncompress the source code:
 	make
 	sudo make install
 
-**go-wrk**  
-go-wrk is a modern HTTP benchmarking tool capable of generating significant load when run on a single multi-core CPU. It builds on go language go routines and scheduler for behind the scenes async IO and concurrency.
+**boom**  
+boom is a modern HTTP benchmarking tool capable of generating the load you need to run tests. It's built using the Go language and leverages goroutines for behind the scenes async IO and concurrency.
 
-	go get -u github.com/tsliwowicz/go-wrk
+	go get -u github.com/raykll/book
 
 ## Building and Running the Project
 
@@ -34,8 +34,8 @@ We have a website that we will use to learn and explore more about profiling. Th
 
 To add load to the service while running profiling we can run these command.
 
-	Use 10 connections for 2 minute on CNN, BBC and NYT about house:
-	go-wrk -m POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	// Send 100k request using 8 connections.
+	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ## GODEBUG
 
@@ -52,9 +52,9 @@ Run the website redirecting the stdout (logs) to the null device. This will allo
 	
 	GODEBUG=gctrace=1 ./project > /dev/null
 
-Put some load of the web application for 20 seconds.
+Put some load of the web application.
 
-	go-wrk -m POST -c 10 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ### Scheduler Trace for Project
 
@@ -62,9 +62,9 @@ Run the website redirecting the stdout (logs) to the null device. This will allo
 	
 	GODEBUG=schedtrace=1000 GOMAXPROCS=2 ./project > /dev/null
 
-Put some load of the web application for 20 seconds.
+Put some load of the web application.
 
-	go-wrk -m POST -c 10 -d 20 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ## PPROF
 
@@ -72,14 +72,9 @@ Go provides built in support for retrieving profiling data from your running Go 
 
 ### Raw http/pprof
 
-Add the following import so we can include the profiling route to our web service.
+We already added the following import so we can include the profiling route to our web service.
 
 	import _ "net/http/pprof"
-
-Build the project again and start it.
-
-	go build
-	./project
 
 Look at the basic profiling stats from the new endpoint.
 
@@ -89,17 +84,17 @@ Run a single search from the Browser and then refresh the profile information.
 
 	http://localhost:5000/search?term=house&cnn=on
 
-Put some load of the web application for 10 seconds. Review the raw profiling information once again.
+Put some load of the web application. Review the raw profiling information once again.
 
-	go-wrk -m POST -c 10 -d 10 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ### Interactive Profiling
 
 Using the Go pprof tool we can interact with the profiling data.
 
-Put some load of the web application for 2 minutes using a single connection.
+Put some load of the web application using a single connection.
 
- 	go-wrk -m POST -c 1 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+ 	boom -m POST -c 1 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Run the Go pprof tool in another window or tab to review heap information.
 
@@ -109,7 +104,7 @@ Run the Go pprof tool in another window or tab to review cpu information.
 
 	go tool pprof ./project http://localhost:5000/debug/pprof/profile
 
-Explore using the **top** and **list** commands.
+Explore using the **top**, **list** and **web list** commands.
 
 ### Generate PDF Call Graph
 
@@ -134,9 +129,9 @@ Tool for stochastically profiling Go programs. Collects stack traces and synthes
 
 	https://github.com/uber/go-torch
 
-Put some load of the web application for 2 minutes.
+Put some load of the web application.
 
-	go-wrk -m POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Run the torch tool and visualize the profile.
 
@@ -161,15 +156,36 @@ Now compare both snapshots against the binary and get into the pprof tool:
     -alloc_space  : Display allocated memory size
     -alloc_objects: Display allocated object counts
 
+## Profiling With Benchmarks
+
+Most of the time these large profiles are not going to help refine potential problems. There is too much noise in the data. This is when isolating a profile with a banchmark becomes important.
+
+Run the test and produce a cpu and memory profile.
+
+	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
+	
+	go test -run none -bench . -benchtime 3s -cpuprofile cpu.out
+	go tool pprof ./search.test cpu.out
+	(pprof) web list rssSearch
+
+	go test -run none -bench . -benchtime 3s -memprofile mem.out
+	go tool pprof -alloc_space ./search.test mem.out
+	(pprof) web list rssSearch
+
 ## Tracing
 
-Run the web application.
+Tracing provides the ability to get to even more information. This includes blocking and latency information.
 
-	./project
+### The Basics
 
-Put some load of the web application for 2 minutes.
+Learn the basics of using the tracing tool.  
+[Tracing Examples](trace)
 
-	go-wrk -m POST -c 10 -d 120 -no-ka "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+### Tracing Web Application
+
+Put some load of the web application.
+
+	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Capture a trace file for a brief duration.
 
@@ -178,6 +194,14 @@ Capture a trace file for a brief duration.
 Run the Go trace tool.
 
 	go tool trace trace.out
+
+Use the RSS Search test instead.
+
+	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
+	go test -run none -bench . -benchtime 3s -trace trace.out
+	go tool trace trace.out
+
+Explore the trace.
 
 ## Links
 
