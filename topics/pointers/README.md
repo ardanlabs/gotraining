@@ -78,7 +78,6 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 ### Single Static Assignment Optimizations
 
 [GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)  
-https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83
 https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
 
