@@ -75,14 +75,14 @@ func pull(x *Xenia, data []Data) (int, error) {
 }
 
 // store knows how to store bulks of data into Pillar.
-func store(p *Pillar, data []Data) error {
-	for _, d := range data {
+func store(p *Pillar, data []Data) (int, error) {
+	for i, d := range data {
 		if err := p.Store(d); err != nil {
-			return err
+			return i, err
 		}
 	}
 
-	return nil
+	return len(data), nil
 }
 
 // Copy knows how to pull and store data from the System.
@@ -92,7 +92,7 @@ func Copy(sys *System, batch int) error {
 	for {
 		i, err := pull(&sys.Xenia, data)
 		if i > 0 {
-			if err := store(&sys.Pillar, data[:i]); err != nil {
+			if _, err := store(&sys.Pillar, data[:i]); err != nil {
 				return err
 			}
 		}

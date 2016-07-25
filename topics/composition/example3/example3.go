@@ -93,14 +93,14 @@ func pull(p Puller, data []Data) (int, error) {
 }
 
 // store knows how to store bulks of data from any Storer.
-func store(s Storer, data []Data) error {
-	for _, d := range data {
+func store(s Storer, data []Data) (int, error) {
+	for i, d := range data {
 		if err := s.Store(d); err != nil {
-			return err
+			return i, err
 		}
 	}
 
-	return nil
+	return len(data), nil
 }
 
 // Copy knows how to pull and store data from any System.
@@ -110,7 +110,7 @@ func Copy(ps PullStorer, batch int) error {
 	for {
 		i, err := pull(ps, data)
 		if i > 0 {
-			if err := store(ps, data[:i]); err != nil {
+			if _, err := store(ps, data[:i]); err != nil {
 				return err
 			}
 		}
