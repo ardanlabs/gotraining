@@ -79,6 +79,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Complete Guide To Go Net HTTP Timeouts](https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts) - Filippo Valsorda  
 
+### Queuing Theory
+
+[Basic Queuing Theory](http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main_Angol.pdf) - Dr. János Sztrik  
+
 ### Misc
 
 [Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
