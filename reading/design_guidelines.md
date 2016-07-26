@@ -87,7 +87,7 @@ _With help from [Sandi Metz](https://twitter.com/sandimetz)._
 
 * The standardization of interfaces can set clear and consistent expectations.
 
-#### Interface Polution
+#### Interface Pollution
 
 _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)_
 
