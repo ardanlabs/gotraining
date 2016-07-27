@@ -19,7 +19,7 @@ Download and uncompress the source code:
 **boom**  
 boom is a modern HTTP benchmarking tool capable of generating the load you need to run tests. It's built using the Go language and leverages goroutines for behind the scenes async IO and concurrency.
 
-	go get -u github.com/raykll/book
+	go get -u github.com/rakyll/boom
 
 ## Building and Running the Project
 
