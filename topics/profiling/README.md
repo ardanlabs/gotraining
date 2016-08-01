@@ -203,6 +203,12 @@ Use the RSS Search test instead.
 
 Explore the trace.
 
+## Godoc Analysis
+
+The `godoc` tool can help you perform analysis on your code.
+
+[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
+
 ## Links
 
 http://golang.org/pkg/runtime/pprof/  
@@ -215,6 +221,7 @@ https://golang.org/pkg/net/http/pprof/
 [Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
 [Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
 [Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
+[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
 
 ## Code Review
 

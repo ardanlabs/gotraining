@@ -31,11 +31,13 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law) - Tim Cross  
 [A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter) -  Cliff Click  
 
-[The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob
+[The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob  
+[The Best Programming Advice I Ever Got](http://www.informit.com/articles/article.aspx?p=1941206) - Rob Pike  
 
-### Vendoring
+### Vendoring / Versioning
 
-[How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)
+[How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)  
+[The End of Software Versions](http://hintjens.com/blog:85) - Pieter Hintjens  
 
 ### Profiling, Debugging and Optimization
 
@@ -47,6 +49,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
 [Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
 [Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
+[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team    
 
 ### Interfaces and Composition
 
@@ -64,7 +67,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
-[Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz  
+[Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz    
+[Monitoring and Tuning the Linux Networking Stack: Receiving Data](http://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/) - packagecloud  
 
 ### Container and Orchestration
 
