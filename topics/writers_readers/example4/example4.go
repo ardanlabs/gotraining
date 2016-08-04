@@ -43,61 +43,125 @@ var repl = []byte("Elvis")
 var size = len(find)
 
 func main() {
+	var output bytes.Buffer
 
-	// Range over the table testing the algorithm against each input/output.
+	fmt.Println("=======================================\nRunning Algorithm One")
 	for _, d := range data {
+		output.Reset()
+		algorithmOne(d.input, &output)
+		matched := bytes.Compare(d.output, output.Bytes())
+		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
+	}
 
-		// Use the bytes package to provide a stream to process.
-		input := bytes.NewBuffer(d.input)
-		var output bytes.Buffer
+	fmt.Println("=======================================\nRunning Algorithm Two")
+	for _, d := range data {
+		output.Reset()
+		algorithmTwo(d.input, &output)
+		matched := bytes.Compare(d.output, output.Bytes())
+		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
+	}
+}
 
-		// Declare the buffers we need to process the stream.
-		buf := make([]byte, size)
-		tmp := make([]byte, 1)
-		end := size - 1
+// algorithmOne is one way to solve the problem.
+func algorithmOne(data []byte, output *bytes.Buffer) {
 
-		// Read in an initial number of bytes we need to get started.
-		if n, err := io.ReadFull(input, buf[:end]); err != nil {
-			fmt.Printf("Match: 0 Inp: [%s] Exp: [%s] Got: [%s]\n", d.input, d.output, buf[:n])
+	// Use a bytes Buffer to provide a stream to process.
+	input := bytes.NewBuffer(data)
+
+	// Declare the buffers we need to process the stream.
+	buf := make([]byte, size)
+	tmp := make([]byte, 1)
+	end := size - 1
+
+	// Read in an initial number of bytes we need to get started.
+	if n, err := io.ReadFull(input, buf[:end]); err != nil {
+		output.Write(buf[:n])
+		return
+	}
+
+	for {
+
+		// Read in one byte from the input stream.
+		n, err := io.ReadFull(input, tmp)
+
+		// If we have a byte then process it.
+		if n == 1 {
+
+			// Add this byte to the end of the buffer.
+			buf[end] = tmp[0]
+
+			// If we have a match, replace the bytes.
+			if bytes.Compare(buf, find) == 0 {
+				copy(buf, repl)
+			}
+
+			// Write the front byte since it has been compared.
+			output.WriteByte(buf[0])
+
+			// Slice that front byte out.
+			copy(buf, buf[1:])
+		}
+
+		// Did we hit the end of the stream, then we are done.
+		if err != nil {
+
+			// Flush the reset of the bytes we have.
+			output.Write(buf[:end])
+			break
+		}
+	}
+}
+
+// algorithmTwo is a second way to solve the problem.
+func algorithmTwo(data []byte, output *bytes.Buffer) {
+
+	// Use the bytes Reader to provide a stream to process.
+	input := bytes.NewReader(data)
+
+	// Create an index variable to match bytes.
+	idx := 0
+
+	for {
+
+		// Read a single byte from our input.
+		b, err := input.ReadByte()
+		if err != nil {
+			break
+		}
+
+		// Does this byte match the byte at this offset?
+		if b == find[idx] {
+
+			// It matches so increment the index position.
+			idx++
+
+			// If every byte has been matched, write
+			// out the replacement.
+			if idx == size {
+				output.Write(repl)
+				idx = 0
+			}
+
 			continue
 		}
 
-		for {
+		// Did we have any sort of match on any given byte?
+		if idx != 0 {
 
-			// Read in one byte from the input stream.
-			n, err := io.ReadFull(input, tmp)
+			// Write what we've matched up to this point.
+			output.Write(find[:idx])
 
-			// If we have a byte then process it.
-			if n == 1 {
+			// Unread the unmatched byte so it can be processed again.
+			input.UnreadByte()
 
-				// Add this byte to the end of the buffer.
-				buf[end] = tmp[0]
+			// Reset the offset to start matching from the beginning.
+			idx = 0
 
-				// If we have a match, replace the bytes.
-				if bytes.Compare(buf, find) == 0 {
-					copy(buf, repl)
-				}
-
-				// Write the front byte since it has been compared.
-				output.WriteByte(buf[0])
-
-				// Slice that front byte out.
-				copy(buf, buf[1:])
-			}
-
-			// Did we hit the end of the stream, then we are done.
-			if err != nil {
-
-				// Flush the reset of the bytes we have.
-				output.Write(buf[:end])
-				break
-			}
+			continue
 		}
 
-		// Create strings from the bytes.
-		matched := bytes.Compare(d.output, output.Bytes())
-
-		// Display the results.
-		fmt.Printf("Match: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched, d.input, d.output, output.Bytes())
+		// There was no previous match. Write byte and reset.
+		output.WriteByte(b)
+		idx = 0
 	}
 }
