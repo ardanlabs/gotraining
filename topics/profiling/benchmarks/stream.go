@@ -10,6 +10,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
 	"io"
@@ -57,6 +58,22 @@ func main() {
 	for _, d := range data {
 		output.Reset()
 		algorithmTwo(d.input, &output)
+		matched := bytes.Compare(d.output, output.Bytes())
+		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
+	}
+
+	fmt.Println("=======================================\nRunning Algorithm Three")
+	for _, d := range data {
+		output.Reset()
+		algorithmThree(bytes.NewReader(d.input), &output)
+		matched := bytes.Compare(d.output, output.Bytes())
+		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
+	}
+
+	fmt.Println("=======================================\nRunning Algorithm Four")
+	for _, d := range data {
+		output.Reset()
+		algorithmFour(bytes.NewReader(d.input), &output)
 		matched := bytes.Compare(d.output, output.Bytes())
 		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
 	}
@@ -164,5 +181,136 @@ func algorithmTwo(data []byte, output *bytes.Buffer) {
 		// There was no previous match. Write byte and reset.
 		output.WriteByte(b)
 		idx = 0
+	}
+}
+
+// algorithmThree is a second way to solve the problem. This approach takes an
+// io.Reader to represent an infinite stream. This allows for the algorithm to
+// accept input from just about anywhere, thanks to the beauty of Go
+// interfaces.
+//
+// Provided by Tyler Bunnell https://twitter.com/TylerJBunnell
+func algorithmThree(data io.Reader, output *bytes.Buffer) {
+
+	// Use bufio.NewReaderSize to provide a stream from which we can read and
+	// unread single bytes.
+	input := bufio.NewReaderSize(data, 1)
+
+	// Create an index variable to match bytes.
+	idx := 0
+
+	for {
+
+		// Read a single byte from our input.
+		b, err := input.ReadByte()
+		if err != nil {
+			break
+		}
+
+		// Does this byte match the byte at this offset?
+		if b == find[idx] {
+
+			// It matches so increment the index position.
+			idx++
+
+			// If every byte has been matched, write
+			// out the replacement.
+			if idx == size {
+				output.Write(repl)
+				idx = 0
+			}
+
+			continue
+		}
+
+		// Did we have any sort of match on any given byte?
+		if idx != 0 {
+
+			// Write what we've matched up to this point.
+			output.Write(find[:idx])
+
+			// Unread the unmatched byte so it can be processed again.
+			input.UnreadByte()
+
+			// Reset the offset to start matching from the beginning.
+			idx = 0
+
+			continue
+		}
+
+		// There was no previous match. Write byte and reset.
+		output.WriteByte(b)
+		idx = 0
+	}
+}
+
+// algorithmFour is a fourth way to solve the problem. This approach takes an
+// io.Reader to represent an infinite stream. This allows for the algorithm to
+// accept input from just about anywhere, thanks to the beauty of Go
+// interfaces.
+//
+// Additionally, it has been optimized for minimal allocations by reading
+// directly from the stream into a minimal buffer, instead of using
+// bufio.NewReader. This results in 1 allocation of 1 byte at the time of
+// writing.
+//
+// Provided by Tyler Bunnell https://twitter.com/TylerJBunnell
+func algorithmFour(data io.Reader, output *bytes.Buffer) {
+
+	// Create a byte slice of length 1 into which our byte will be read.
+	b := make([]byte, 1)
+
+	// Create an index variable to match bytes.
+	idx := 0
+
+	for {
+
+		// Are we re-using the byte from a previous call?
+		if b[0] == 0 {
+			// Read a single byte from our input.
+			n, err := data.Read(b)
+			if n == 0 || err != nil {
+				break
+			}
+		}
+
+		// Does this byte match the byte at this offset?
+		if b[0] == find[idx] {
+
+			// It matches so increment the index position.
+			idx++
+
+			// If every byte has been matched, write
+			// out the replacement.
+			if idx == size {
+				output.Write(repl)
+				idx = 0
+			}
+
+			// Reset the reader byte to 0 so another byte will be read.
+			b[0] = 0
+			continue
+		}
+
+		// Did we have any sort of match on any given byte?
+		if idx != 0 {
+
+			// Write what we've matched up to this point.
+			output.Write(find[:idx])
+
+			// NOTE: we are NOT resetting the reader byte to 0 here because we need
+			// to re-use it on the next call. This is equivalent to the UnreadByte()
+			// call in the other functions.
+
+			// Reset the offset to start matching from the beginning.
+			idx = 0
+
+			continue
+		}
+
+		// There was no previous match. Write byte and reset.
+		output.WriteByte(b[0])
+		// Reset the reader byte to 0 so another byte will be read.
+		b[0] = 0
 	}
 }
