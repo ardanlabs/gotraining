@@ -1,5 +1,8 @@
-// use guru referrers and channel-peers analysis on `ch`
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
 
+// Sample code to show how to use the Go Guru to perform referrers and
+// channel-peers analysis on channels.
 package main
 
 import "log"
