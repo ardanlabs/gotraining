@@ -156,19 +156,26 @@ Now compare both snapshots against the binary and get into the pprof tool:
     -alloc_space  : Display allocated memory size
     -alloc_objects: Display allocated object counts
 
-## Profiling With Benchmarks
+## Benchmarks
 
-Most of the time these large profiles are not going to help refine potential problems. There is too much noise in the data. This is when isolating a profile with a banchmark becomes important.
+Most of the time these large profiles are not going to help refine potential problems. There is too much noise in the data. This is when isolating a profile with a benchmark becomes important. Using benchmarks you can profile your programs and see exactly where your performance or memory is being taken.
+
+### The Basics
+
+Learn the basics of using benchmarks for profiling.  
+[Benchmark Profiling](benchmarks)
+
+### Using Benchmarks
 
 Run the test and produce a cpu and memory profile.
 
 	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
 	
-	go test -run none -bench . -benchtime 3s -cpuprofile cpu.out
+	go test -run none -bench . -benchtime 3s -benchmem -cpuprofile cpu.out
 	go tool pprof ./search.test cpu.out
 	(pprof) web list rssSearch
 
-	go test -run none -bench . -benchtime 3s -memprofile mem.out
+	go test -run none -bench . -benchtime 3s -benchmem -memprofile mem.out
 	go tool pprof -alloc_space ./search.test mem.out
 	(pprof) web list rssSearch
 
