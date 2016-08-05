@@ -65,12 +65,11 @@ func main() {
 // algorithmOne is one way to solve the problem.
 func algorithmOne(data []byte, output *bytes.Buffer) {
 
-	// Use a bytes Buffer to provide a stream to process.
-	input := bytes.NewBuffer(data)
+	// Use a bytes Reader to provide a stream to process.
+	input := bytes.NewReader(data)
 
-	// Declare the buffers we need to process the stream.
+	// Declare the buffer we need to process the stream.
 	buf := make([]byte, size)
-	tmp := make([]byte, 1)
 	end := size - 1
 
 	// Read in an initial number of bytes we need to get started.
@@ -82,33 +81,27 @@ func algorithmOne(data []byte, output *bytes.Buffer) {
 	for {
 
 		// Read in one byte from the input stream.
-		n, err := io.ReadFull(input, tmp)
-
-		// If we have a byte then process it.
-		if n == 1 {
-
-			// Add this byte to the end of the buffer.
-			buf[end] = tmp[0]
-
-			// If we have a match, replace the bytes.
-			if bytes.Compare(buf, find) == 0 {
-				copy(buf, repl)
-			}
-
-			// Write the front byte since it has been compared.
-			output.WriteByte(buf[0])
-
-			// Slice that front byte out.
-			copy(buf, buf[1:])
-		}
-
-		// Did we hit the end of the stream, then we are done.
+		b, err := input.ReadByte()
 		if err != nil {
 
 			// Flush the reset of the bytes we have.
 			output.Write(buf[:end])
 			break
 		}
+
+		// Add this byte to the end of the buffer.
+		buf[end] = b
+
+		// If we have a match, replace the bytes.
+		if bytes.Compare(buf, find) == 0 {
+			copy(buf, repl)
+		}
+
+		// Write the front byte since it has been compared.
+		output.WriteByte(buf[0])
+
+		// Slice that front byte out.
+		copy(buf, buf[1:])
 	}
 }
 
