@@ -1,6 +1,6 @@
 ## Design Guidelines
 
-These are a set of design guidelines for data, interfaces, composition and packages. Please consider these thoughts when designing your own software.
+These are a set of design guidelines for data, interfaces, composition and packages. Please consider these principles when designing your own software.
 
 #### Bottom Line
 
