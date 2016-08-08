@@ -24,22 +24,28 @@ func assembleInputStream() []byte {
 // Capture the time it takes to execute algorithm one.
 func BenchmarkAlgorithmOne(b *testing.B) {
 	var output bytes.Buffer
-	in := assembleInputStream()
+	in := bytes.NewReader(assembleInputStream())
+
+	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
 		output.Reset()
-		algorithmOne(in, &output)
+		in.Seek(0, 0)
+		algOne(in, &output)
 	}
 }
 
 // Capture the time it takes to execute algorithm two.
 func BenchmarkAlgorithmTwo(b *testing.B) {
 	var output bytes.Buffer
-	in := assembleInputStream()
+	in := bytes.NewReader(assembleInputStream())
+
+	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
 		output.Reset()
-		algorithmTwo(in, &output)
+		in.Seek(0, 0)
+		algTwo(in, &output)
 	}
 }
 
@@ -48,12 +54,12 @@ func BenchmarkAlgorithmThree(b *testing.B) {
 	var output bytes.Buffer
 	in := bytes.NewReader(assembleInputStream())
 
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		output.Reset()
-
-		// Seek our reader to the beginning of the byte array.
 		in.Seek(0, 0)
-		algorithmThree(in, &output)
+		algThree(in, &output)
 	}
 }
 
@@ -62,11 +68,11 @@ func BenchmarkAlgorithmFour(b *testing.B) {
 	var output bytes.Buffer
 	in := bytes.NewReader(assembleInputStream())
 
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		output.Reset()
-
-		// Seek our reader to the beginning of the byte array.
 		in.Seek(0, 0)
-		algorithmFour(in, &output)
+		algFour(in, &output)
 	}
 }

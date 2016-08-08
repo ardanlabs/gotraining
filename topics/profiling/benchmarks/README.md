@@ -9,8 +9,8 @@ Using benchmarks you can profile your programs and see exactly where your perfor
    go test -run none -bench . -benchtime 3s -benchmem -cpuprofile cpu.out
    go tool pprof benchmarks.test cpu.out
    
-   (pprof) list algorithmOne
-   (pprof) web list algorithmOne
+   (pprof) list algOne
+   (pprof) web list algOne
 ```
 
 #### Memory Profiling
@@ -18,8 +18,8 @@ Using benchmarks you can profile your programs and see exactly where your perfor
     go test -run none -bench . -benchtime 3s -benchmem -memprofile mem.out
     go tool pprof -alloc_space benchmarks.test mem.out
 
-    (pprof) list algorithmOne
-    (pprof) web list algorithmOne
+    (pprof) list algOne
+    (pprof) web list algOne
 
     -inuse_space  : Display in-use memory size
     -inuse_objects: Display in-use object counts
