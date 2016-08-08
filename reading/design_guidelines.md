@@ -19,16 +19,16 @@ Writing idiomatic code in Go gets you a long way. But you can do so much more wh
 
 You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. These trade-offs falls into these four areas. Before you allow a higher numbered trade-off trump a lower numbered trade-off, you must consciously and with great reason be able to explain yourself.
 
-**1) Integrity**:  
+**1) Integrity**  
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
 
-**2) Readability**:  
+**2) Readability**  
 This is the ability to easily read code and understand what it is doing. It is also the ability to understand the cost of the code and its impact on your software and the overall ecosystem it exists in.
 
-**3) Simplicity**:  
+**3) Simplicity**  
 This is algorithm efficiency and not wasting effort. Solving the data transformation problem with the least number of steps. NASA identified that every 10 lines of code produces a bug whether you like it or not. Reduce bugs and simplify code by writing less of it.
 
-**4) Performance**:  
+**4) Performance**  
 This is about micro-optimizing something when it is absolutely necessary. When code is written with this as the priority, it is very difficult to write code that is readable and simple. When readable and simple code is not performing well enough based on real empirical data, then this can be discussed.
 
 #### Data-Oriented Design
