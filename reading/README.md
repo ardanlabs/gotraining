@@ -90,7 +90,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### Misc
 
 [Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
-[USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)
+[USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)  
+[You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
 
 ## Mechanical Sympathy
 

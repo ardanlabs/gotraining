@@ -15,6 +15,22 @@ You need to work with it and help it.
 
 Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
 
+#### Integrity, Readability, Simplicity and Performance
+
+You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. These trade-offs falls into these four areas. Before you allow a higher numbered trade-off trump a lower numbered trade-off, you must consciously and with great reason be able to explain yourself.
+
+**1) Integrity**:  
+This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
+
+**2) Readability**:  
+This is the ability to easily read code and understand what it is doing. It is also the ability to understand the cost of the code and its impact on your software and the overall ecosystem it exists in.
+
+**3) Simplicity**:  
+This is algorithm efficiency and not wasting effort. Solving the data transformation problem with the least number of steps. NASA identified that every 10 lines of code produces a bug whether you like it or not. Reduce bugs and simplify code by writing less of it.
+
+**4) Performance**:  
+This is about micro-optimizing something when it is absolutely necessary. When code is written with this as the priority, it is very difficult to write code that is readable and simple. When readable and simple code is not performing well enough based on real empirical data, then this can be discussed.
+
 #### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
 [Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
@@ -42,30 +58,6 @@ Writing idiomatic code in Go gets you a long way. But you can do so much more wh
 * Changing data layouts can yield more significant performance improvements than changing just the algorithms.
 
 * Efficiency is obtained through algorithms but performance is obtained through data structures and layouts.
-
-#### Important Design Guidelines
-[The Most Important Design Guideline](https://www.youtube.com/watch?v=5tg1ONG18H8) - Scott Meyers
-
-* Make Interfaces easy to use correctly and hard to use incorrectly.
-
-* Principle of least astonishment.
-	* Keep the expectation clear, allows users to guess correctly.
-	* Take advantage of what people already know.
-	* Behavior should maintain a level of expectation.
-
-* Choose good names.
-	* Names are the interface.
-	* Give a lot of thought to the names you use.
-
-* Be consistent.
-
-* Document before using.
-	* Test driven design.
-	* This is identify problems early on.
-
-* Try to minimize user mistakes with the API.
-	* Trying to constrain values can create readability issues.
-	* Minimize choices.
 
 #### Interface and Composition Design
 
@@ -120,4 +112,17 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 * Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
 
 * When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
+
+#### Code Reviews
+
+I teach a lot about the things I look for in code reviews. I am slowly attempting to document this.
+
+* Try to use functions over methods when it is practical. Functions allow for better readability and reusability because all the input is passed in and the output is returned out. No information is lost or abstracted.
+
+* Eliminate the use of the else statements when it is practical. Do not attempt to push code paths to the end of a function. Keep your positive path code in the first tabbed position and use the if statement to process negative path. Return from the function as part of error handling.
+
+* Don't start off with pointer variables if it can be avoided. It is easier to work with variables that represent a value, even if that value is going to escape to the heap. The use of the & operator can go a long way to maintaining readability in your code.
+
+* Use the keyword var to represent the declaration of a variable that is being set to its zero value. This helps with readability and can provide the basis for developing a consistent set of rules around variable declarations. One of Go's biggest warts if there are too many ways to declare and create variables.
+
 
