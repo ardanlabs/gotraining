@@ -34,6 +34,16 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob  
 [The Best Programming Advice I Ever Got](http://www.informit.com/articles/article.aspx?p=1941206) - Rob Pike  
 
+### Standard Library
+
+[io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#.d2ebstv0q) - Ben Johnson  
+[bytes + strings packages](https://medium.com/@benbjohnson/go-walkthrough-bytes-strings-packages-499be9f4b5bd#.u3z89vqc1) - Ben Johnson  
+
+### Testing and Structure
+
+[Structuring Tests in Go](https://medium.com/@benbjohnson/structuring-tests-in-go-46ddee7a25c#.b2m3nziyb) - Ben Johnson  
+[Structuring Applications in Go](https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091#.xc85lg2kf) - Ben Johnson  
+
 ### Vendoring / Versioning
 
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)  
