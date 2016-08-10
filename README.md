@@ -217,18 +217,23 @@ If you are interested in holding an event in your area please let me know. I wil
 		Staples 		Framingham, MA  	- May  
 		Ultimate Go 	London, England 	- June  
 		Ultimate Go 	Phoenix, AZ  		- June
-		GopherCon		Denver, CO  		- July  
+		GopherCon		Denver, CO  		- July
+		Red Ventures 	South Carolina	 	- August  
 
 					--- Pending ---
-
-		Red Ventures 	South Carolina	 	- August  
+		  
 		GolangUK 		London, England 	- August  
 		Tune 			Seattle, WA	 		- August  
+		CapitalOne		McLean, VA	 		- September  
+		Nordstroms		Seattle, WA	 		- September  
+		Skillsmatter	London, England		- September
+		Ultimate Go		SF, CA				- September
+		WWG - FS		SF, CA				- September  
 		Traderev		Toronto, Canada 	- September  
-		Ultimate Go 	Toronto, Canada 	- September  
-		dotGo			Paris, France		- October  
 		Centralway		Zürich, Switzerland	- October  
-		DevconTLV		Tel Aviv, Israel	- November    
+		dotGo			Paris, France		- October  
+		DevconTLV		Tel Aviv, Israel	- November 
+		GNS Science		New Zealand			- December   
 
 #### 2015
 
