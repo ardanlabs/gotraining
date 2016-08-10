@@ -230,7 +230,7 @@ If you are interested in holding an event in your area please let me know. I wil
 		Ultimate Go		SF, CA				- September
 		WWG - FS		SF, CA				- September  
 		Traderev		Toronto, Canada 	- September  
-		Centralway		Zürich, Switzerland	- October  
+		Centralway		Zürich, Switzerland - October  
 		dotGo			Paris, France		- October  
 		DevconTLV		Tel Aviv, Israel	- November 
 		GNS Science		New Zealand			- December   
