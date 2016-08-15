@@ -38,6 +38,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#.d2ebstv0q) - Ben Johnson  
 [bytes + strings packages](https://medium.com/@benbjohnson/go-walkthrough-bytes-strings-packages-499be9f4b5bd#.u3z89vqc1) - Ben Johnson  
+[encoding package](https://medium.com/@benbjohnson/go-walkthrough-encoding-package-bc5e912232d#.ydtphayvi)  - Ben Johnson  
 
 ### Testing and Structure
 
