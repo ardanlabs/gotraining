@@ -185,7 +185,7 @@ Use the RSS Search test instead.
 
 Package expvar provides a standardized interface to public variables, such as operation counters in servers. It exposes these variables via HTTP at /debug/vars in JSON format.
 
-### Adding New Variable
+### Adding New Variables
 
 	import "expvar"
 
@@ -215,7 +215,7 @@ TermUI based Go apps monitor using expvars variables (/debug/vars). Quickest way
 
 Running expvarmon
 
-	expvarmon -ports=":5000" -vars="Goroutines,mem:memstats.Alloc"
+	expvarmon -ports=":5000" -vars="requests,goroutines,mem:memstats.Alloc"
 
 ## Godoc Analysis
 

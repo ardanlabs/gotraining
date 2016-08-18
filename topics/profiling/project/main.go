@@ -24,7 +24,7 @@ func init() {
 func expvars() {
 
 	// Add goroutine counts to the variable set.
-	gr := expvar.NewInt("Goroutines")
+	gr := expvar.NewInt("goroutines")
 	go func() {
 		for _ = range time.Tick(time.Millisecond * 250) {
 			gr.Set(int64(runtime.NumGoroutine()))
