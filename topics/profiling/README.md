@@ -237,8 +237,5 @@ https://golang.org/pkg/net/http/pprof/
 [Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
 
-## Code Review
-
-[HTTP Service](helloHTTP.go) ([Go Playground](http://play.golang.org/p/XcpEreJ9zg))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
