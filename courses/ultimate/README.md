@@ -9,7 +9,7 @@ This material covers all the language syntax, idioms, implementation and specifi
 [Language](language/README.md)
 
 ## Concurrency
-This material covers all the concurrency aspects of the language. Once you are done with this material you will understand the understand the concurrent mechanics of the language and mechanical sympathies the language has for both the hardware and operating system as it related to concurrency.
+This material covers all the concurrency aspects of the language. Once you are done with this material you will understand the concurrent mechanics of the language and mechanical sympathies the language has for both the hardware and operating system as it related to concurrency.
 
 [Concurrency](concurrency/README.md)
 
