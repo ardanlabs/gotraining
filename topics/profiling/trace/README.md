@@ -1,12 +1,26 @@
-## Tracing Code
+## Tracing / Blocking Profiling
 
-Tracing allows us to see blocking and latency profiles.
+Testing and Tracing allows us to see blocking and latency profiles.
+
+## Running A Test
+
+	We can get blocking profiles by running a test.
+
+	cd delay
+	go test -blockprofile block.out
+	go tool pprof delay.test block.out
+	list TestDelay
+
+	cd latency
+	go test -blockprofile block.out
+	go tool pprof latency.test block.out
+	list TestLatency
 
 ## Running A Trace
 
 Once you have a test established you can use the **-trace file.out** option with the go test tool.
 
-	go test -v -trace trace.out
+	go test -trace trace.out
 	go tool trace trace.out
 
 Run these command and let's explore each trace.

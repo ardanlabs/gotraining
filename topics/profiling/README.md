@@ -21,7 +21,24 @@ boom is a modern HTTP benchmarking tool capable of generating the load you need 
 
 	go get -u github.com/rakyll/boom
 
-## Building and Running the Project
+## The Basics
+
+Let's learn the basics of viewing and working with profiling data.
+
+Learn the basics of using GODEBUG.  
+[Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
+
+Learn the basics of using benchmarking.  
+[Benchmark Profiling](benchmarks)
+
+Learn the basics of using tests/tracing.  
+[Tracing Examples](trace)
+
+## Profiling a Web Service
+
+We have a web application that extends a web service. Let's profile this application and attempt to understand how it is working.
+
+### Building and Running the Project
 
 We have a website that we will use to learn and explore more about profiling. This project is a search engine for RSS feeds. Run the website and validate it is working.
 
@@ -30,23 +47,16 @@ We have a website that we will use to learn and explore more about profiling. Th
 
 	http://localhost:5000/search
 
-## Adding Load
+### Adding Load
 
 To add load to the service while running profiling we can run these command.
 
 	// Send 100k request using 8 connections.
 	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-## GODEBUG
+### GODEBUG
 
-GODEBUG is an environment variable that allows us to get information from the runtime about the scheduler and the garabage collector.
-
-### The Basics
-
-Learn the basics of using GODEBUG for tracing.  
-[Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
-
-### Memory Trace for Project
+#### Memory Trace for Project
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
@@ -56,7 +66,7 @@ Put some load of the web application.
 
 	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-### Scheduler Trace for Project
+#### Scheduler Trace for Project
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
@@ -66,11 +76,9 @@ Put some load of the web application.
 
 	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-## PPROF
+### PPROF
 
-Go provides built in support for retrieving profiling data from your running Go applications.
-
-### Raw http/pprof
+#### Raw http/pprof
 
 We already added the following import so we can include the profiling route to our web service.
 
@@ -88,9 +96,7 @@ Put some load of the web application. Review the raw profiling information once 
 
 	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-### Interactive Profiling
-
-Using the Go pprof tool we can interact with the profiling data.
+#### Interactive Profiling
 
 Put some load of the web application using a single connection.
 
@@ -104,40 +110,9 @@ Run the Go pprof tool in another window or tab to review cpu information.
 
 	go tool pprof ./project http://localhost:5000/debug/pprof/profile
 
-Explore using the **top**, **list** and **web list** commands.
+Explore using the **top**, **list**, **web** and **web list** commands.
 
-### Generate PDF Call Graph
-
-Generate call graphs for both the cpu and memory profiles.
-
-	// Create output files.
-	curl -s http://localhost:5000/debug/pprof/profile > cpu.out
-	go tool pprof ./project cpu.out
-	(pprof) web
-
-	curl -s http://localhost:5000/debug/pprof/heap > mem.out
-	go tool pprof ./project mem.out
-	(pprof) web
-
-	// Call into the endpoints directly and generate graphs.
-	go tool pprof -web ./project http://localhost:5000/debug/pprof/heap
-	go tool pprof -web ./project http://localhost:5000/debug/pprof/profile
-
-## Go Torch
-
-Tool for stochastically profiling Go programs. Collects stack traces and synthesizes them into a flame graph.
-
-	https://github.com/uber/go-torch
-
-Put some load of the web application.
-
-	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-Run the torch tool and visualize the profile.
-
-	go-torch -u http://localhost:5000/
-
-## Comparing Profiles
+#### Comparing Profiles
 
 Take a snapshot of the current heap profile. Then do the same for the cpu profile.
 
@@ -156,16 +131,21 @@ Now compare both snapshots against the binary and get into the pprof tool:
     -alloc_space  : Display allocated memory size
     -alloc_objects: Display allocated object counts
 
-## Benchmarks
+#### Go Torch
 
-Most of the time these large profiles are not going to help refine potential problems. There is too much noise in the data. This is when isolating a profile with a benchmark becomes important. Using benchmarks you can profile your programs and see exactly where your performance or memory is being taken.
+Tool for stochastically profiling Go programs. Collects stack traces and synthesizes them into a flame graph.
 
-### The Basics
+	https://github.com/uber/go-torch
 
-Learn the basics of using benchmarks for profiling.  
-[Benchmark Profiling](benchmarks)
+Put some load of the web application.
 
-### Using Benchmarks
+	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+
+Run the torch tool and visualize the profile.
+
+	go-torch -u http://localhost:5000/
+
+### Benchmarks
 
 Run the test and produce a cpu and memory profile.
 
@@ -179,16 +159,9 @@ Run the test and produce a cpu and memory profile.
 	go tool pprof -alloc_space ./search.test mem.out
 	(pprof) web list rssSearch
 
-## Tracing
+### Tracing / Blocking Profiles
 
-Tracing provides the ability to get to even more information. This includes blocking and latency information.
-
-### The Basics
-
-Learn the basics of using the tracing tool.  
-[Tracing Examples](trace)
-
-### Tracing Web Application
+#### Tracing Web Application
 
 Put some load of the web application.
 
@@ -208,7 +181,41 @@ Use the RSS Search test instead.
 	go test -run none -bench . -benchtime 3s -trace trace.out
 	go tool trace trace.out
 
-Explore the trace.
+## Expvar
+
+Package expvar provides a standardized interface to public variables, such as operation counters in servers. It exposes these variables via HTTP at /debug/vars in JSON format.
+
+### Adding New Variable
+
+	import "expvar"
+
+	// expvars is adding the goroutine counts to the variable set.
+	func expvars() {
+
+		// Add goroutine counts to the variable set.
+		gr := expvar.NewInt("Goroutines")
+		go func() {
+			for _ = range time.Tick(time.Millisecond * 250) {
+				gr.Set(int64(runtime.NumGoroutine()))
+			}
+		}()
+	}
+
+	// main is the entry point for the application.
+	func main() {
+		expvars()
+		service.Run()
+	}
+
+### Expvarmon
+
+TermUI based Go apps monitor using expvars variables (/debug/vars). Quickest way to monitor your Go app.
+
+	go get github.com/divan/expvarmon
+
+Running expvarmon
+
+	expvarmon -ports=":5000" -vars="Goroutines,mem:memstats.Alloc"
 
 ## Godoc Analysis
 
