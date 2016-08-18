@@ -29,10 +29,10 @@ Learn the basics of using GODEBUG.
 [Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
 
 Learn the basics of using benchmarking.  
-[Benchmark Profiling](benchmarks)
+[Benchmarking](benchmarks)
 
 Learn the basics of using tests/tracing.  
-[Tracing Examples](trace)
+[Tracing](trace)
 
 ## Profiling a Web Service
 
@@ -56,7 +56,7 @@ To add load to the service while running profiling we can run these command.
 
 ### GODEBUG
 
-#### Memory Trace for Project
+#### Memory Tracing
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
@@ -66,7 +66,7 @@ Put some load of the web application.
 
 	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-#### Scheduler Trace for Project
+#### Scheduler Tracing
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
