@@ -8,8 +8,8 @@ Although the CSV data you will work with is not likely to be "big" (whatever tha
 
 ## Code Review
 
-[Read in CSV records](example1/example1.go)
-[Handle unexpected fields](example2/example2.go)
+[Read in CSV records](example1/example1.go)  
+[Handle unexpected fields](example2/example2.go)  
 
 ## Exercises
 
