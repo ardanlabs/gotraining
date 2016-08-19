@@ -8,10 +8,10 @@ Integity in data science applications is crucial, because data science applicati
 
 ## Code Review
 
-[Parse a clean CSV with python](example1/example1.py)
-[Parse a clean CSV with Go](example2/example2.go)
-[Integrity breakdown with python CSV parsing](example3/example3.py)
-[Maintain integrity in Go CSV parsing](example4/example4.go)
+[Parse a clean CSV with python](example1/example1.py)  
+[Parse a clean CSV with Go](example2/example2.go)  
+[Integrity breakdown with python CSV parsing](example3/example3.py)  
+[Maintain integrity in Go CSV parsing](example4/example4.go)  
 
 ## Exercises
 
