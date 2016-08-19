@@ -4,13 +4,22 @@ Integity in data science applications is crucial, because data science applicati
 
 ## Notes
 
+* Data science applications should consider integrity before performance or sophistication.
+* A lack of reproducibility destroys the credibility of a data science application.
+* Integrity cannot be maintained with a complicated deploy.
+* If errors and edge cases are handled gracefully in Go, you can have confidence in how your application will behave.
+* There are ways of deploying Go that maintain integrity, even if you utilize various dependencies for your statistics, ML, etc.
+
 ## Links
+
+[Example python data science Dockerfile](https://github.com/wiseio/datascience-docker/blob/master/datascience-base/Dockerfile)  
+[Example Go Dockerfile](https://www.iron.io/an-easier-way-to-create-tiny-golang-docker-images/)  
 
 ## Code Review
 
 [Parse a clean CSV with python](example1/example1.py)  
 [Parse a clean CSV with Go](example2/example2.go)  
-[Integrity breakdown with python CSV parsing](example3/example3.py)  
+[Force Integrity breakdown with python CSV parsing](example3/example3.py)  
 [Maintain integrity in Go CSV parsing](example4/example4.go)  
 
 ## Exercises

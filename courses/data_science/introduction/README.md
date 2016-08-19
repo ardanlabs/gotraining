@@ -7,6 +7,6 @@ This is material for scientists, analysts, and developers who have some experien
 [Data Science](../../../topics/data_science/data_science/README.md)
 
 #### Maintaining Integrity in Data Science Applications
-[Integrity](../../../topics/data_science/integrity/README.md) | 
+[Integrity](../../../topics/data_science/integrity/README.md)   
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
