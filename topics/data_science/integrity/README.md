@@ -24,5 +24,11 @@ Integity in data science applications is crucial, because data science applicati
 
 ## Exercises
 
+### Exercise 1
+
+Implement another way of handling the CSV parsing error we encountered above.  That is, handle the missing value in a way other than throwing an error.
+
+[Template](exercises/template1/template1.go) |
+[Answer](exercises/exercise1/exercise1.go)  
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
