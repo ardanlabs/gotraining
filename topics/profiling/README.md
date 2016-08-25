@@ -21,9 +21,92 @@ boom is a modern HTTP benchmarking tool capable of generating the load you need 
 
 	go get -u github.com/rakyll/boom
 
-## The Basics
+## Dave Cheney's profiling presentation:  
 
-Let's learn the basics of viewing and working with profiling data.
+Much of what I have learned comes from Dave and working on solving problems. This slide deck is a great place to start. Much of this material can be found in the material below.
+
+http://go-talks.appspot.com/github.com/davecheney/presentations/seven.slide#1
+
+## Profiling, Debugging and Optimization Reading
+
+Here is more reading and videos to also help get you started.
+
+[Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
+[Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
+[Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
+[How NOT to Measure Latency](https://www.youtube.com/watch?v=lJ8ydIuPFeU&feature=youtu.be) - Gil Tene  
+[Go Performance Tales](http://jmoiron.net/blog/go-performance-tales) - Jason Moiron  
+[Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
+[Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
+[Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
+[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team    
+
+## Go and OS Tooling
+
+### time
+
+The **time** command provide information that can help you get a sense how your program is performing.
+
+Use the **time** command to see data about building the program.
+	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project
+	/usr/bin/time -lp go build		-- Mac OS X
+	/usr/bin/time -v go build		-- Linux
+
+### go build -x Option
+
+The **-x** option will provide detailed information about the build of your software.
+
+	go build -x
+
+### -toolexec Option
+
+This options lets you add a prefix command to every command the Go tooling runs.
+
+	go build -toolexec="/usr/bin/time -lp" .	-- Mac OS X
+	go build -toolexec="/usr/bin/time -v" .		-- Linux
+
+### perf
+
+If you're a linux user, then perf(1) is a great tool for profiling applications. Now we have frame pointers, perf can profile Go applications.
+
+	% go build -toolexec="perf stat" cmd/compile/internal/gc
+	# cmd/compile/internal/gc
+
+ 	Performance counter stats for '/home/dfc/go/pkg/tool/linux_amd64/compile -o $WORK/cmd/compile/internal/gc.a -trimpath $WORK -p cmd/compile/internal/gc -complete -buildid 87cd803267511b4d9e753d68b5b66a70e2f878c4 -D _/home/dfc/go/src/cmd/compile/internal/gc -I $WORK -pack ./alg.go ./align.go ./bexport.go ./bimport.go ./builtin.go ./bv.go ./cgen.go ./closure.go ./const.go ./cplx.go ./dcl.go ./esc.go ./export.go ./fmt.go ./gen.go ./go.go ./gsubr.go ./init.go ./inl.go ./lex.go ./magic.go ./main.go ./mpfloat.go ./mpint.go ./obj.go ./opnames.go ./order.go ./parser.go ./pgen.go ./plive.go ./popt.go ./racewalk.go ./range.go ./reflect.go ./reg.go ./select.go ./sinit.go ./sparselocatephifunctions.go ./ssa.go ./subr.go ./swt.go ./syntax.go ./type.go ./typecheck.go ./universe.go ./unsafe.go ./util.go ./walk.go':
+
+       7026.140760 task-clock (msec)         #    1.283 CPUs utilized          
+             1,665 context-switches          #    0.237 K/sec                  
+                39 cpu-migrations            #    0.006 K/sec                  
+            77,362 page-faults               #    0.011 M/sec                  
+    21,769,537,949 cycles                    #    3.098 GHz                     [83.41%]
+    11,671,235,864 stalled-cycles-frontend   #   53.61% frontend cycles idle    [83.31%]
+     6,839,727,058 stalled-cycles-backend    #   31.42% backend  cycles idle    [66.65%]
+    27,157,950,447 instructions              #    1.25  insns per cycle        
+                                             #    0.43  stalled cycles per insn [83.25%]
+     5,351,057,260 branches                  #  761.593 M/sec                   [83.49%]
+       118,150,150 branch-misses             #    2.21% of all branches         [83.15%]
+
+       5.476816754 seconds time elapsed
+
+## The Basics of Profiling
+
+### How does a profiler work?
+
+A profiler runs your program and configures the operating system to interrupt it at regular intervals. This is done by sending SIGPROF to the program being profiled, which suspends and transfers execution to the profiler. The profiler then grabs the program counter for each executing thread and restarts the program.
+
+### Profiling do's and don't's
+Before you profile, you must have a stable environment to get repeatable results.
+
+* The machine must be idle—don't profile on shared hardware, don't browse the web while waiting for a long benchmark to run.
+* Watch out for power saving and thermal scaling.
+* Avoid virtual machines and shared cloud hosting; they are too noisy for consistent measurements.
+* There is a kernel bug on OS X versions less than El Capitan; upgrade or avoid profiling on OS X.
+
+If you can afford it, buy dedicated performance test hardware. Rack them, disable all the power management and thermal scaling and never update the software on those machines.
+
+For everyone else, have a before and after sample and run them multiple times to get consistent results.
+
+### Basic Profiling
 
 Learn the basics of using GODEBUG.  
 [Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
@@ -78,6 +161,32 @@ Put some load of the web application.
 
 ### PPROF
 
+pprof descends from the Google Performance Tools suite. pprof profiling is built into the Go runtime and comes in two parts:
+
+* runtime/pprof package built into every Go program
+* go tool pprof for investigating profiles.
+
+**CPU profiling**  
+CPU profiling is the most common type of profile. When CPU profiling is enabled, the runtime will interrupt itself every 10ms and record the stack trace of the currently running goroutines. Once the profile is saved to disk, we can analyse it to determine the hottest code paths. The more times a function appears in the profile, the more time that code path is taking as a percentage of the total runtime.
+
+**Memory profiling**  
+Memory profiling records the stack trace when a heap allocation is made. Memory profiling, like CPU profiling is sample based. By default memory profiling samples 1 in every 1000 allocations. This rate can be changed. Stack allocations are assumed to be free and are not tracked in the memory profile. Because of memory profiling is sample based and because it tracks allocations not use, using memory profiling to determine your application's overall memory usage is difficult.
+
+**Block profiling**  
+Block profiling is quite unique. A block profile is similar to a CPU profile, but it records the amount of time a goroutine spent waiting for a shared resource. This can be useful for determining concurrency bottlenecks in your application. Block profiling can show you when a large number of goroutines could make progress, but were blocked. 
+
+Blocking includes:
+
+* Sending or receiving on a unbuffered channel.
+* Sending to a full channel, receiving from an empty one.
+* Trying to Lock a sync.Mutex that is locked by another goroutine.
+* Block profiling is a very specialised tool, it should not be used until you believe you have eliminated all your CPU and memory usage bottlenecks.
+
+**One profile at at time**  
+Profiling is not free. Profiling has a moderate, but measurable impact on program performance—especially if you increase the memory profile sample rate. Most tools will not stop you from enabling multiple profiles at once. If you enable multiple profiles at the same time, they will observe their own interactions and skew your results.
+
+**Do not enable more than one kind of profile at a time.**
+
 #### Raw http/pprof
 
 We already added the following import so we can include the profiling route to our web service.
@@ -131,9 +240,9 @@ Now compare both snapshots against the binary and get into the pprof tool:
     -alloc_space  : Display allocated memory size
     -alloc_objects: Display allocated object counts
 
-#### Go Torch
+#### Flame Graphs
 
-Tool for stochastically profiling Go programs. Collects stack traces and synthesizes them into a flame graph.
+Go-Torch is a tool for stochastically profiling Go programs. Collects stack traces and synthesizes them into a flame graph.
 
 	https://github.com/uber/go-torch
 

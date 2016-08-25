@@ -198,43 +198,43 @@ If you are interested in holding an event in your area please let me know. I wil
 
 #### 2016
 
-		Capital One 	Richmond, VA 		- January  
-		BOT 			Miami, FL 			- January  
-		CISCO 			Lawrenceville, GA 	- February  
-		Ultimate Go 	Utrecht, Amsterdam	- March  
-		GE 				San Ramon, CA 		- March  
-		WWG 			SF, CA 				- March  
-		Ultimate Go 	SLC, UT 			- March  
-		SAS 			Cary, NC 			- March  
-		Ultimate Go 	SF, CA 				- April  
-		Salesforce 		Dublin, Ireland 	- April  
-		CapitalOne 		Richmond, VA 		- April  
-		HP Enterprise 	Seattle, WA 		- May  
-		CISCO 			Lawrenceville, GA 	- May  
-		Rackspace 		San Antonio, TX 	- May  
-		OSCON 			Portland, OR  		- May  
-		Intel 			Hillsboro, OR 		- May  
-		Staples 		Framingham, MA  	- May  
-		Ultimate Go 	London, England 	- June  
-		Ultimate Go 	Phoenix, AZ  		- June
-		GopherCon		Denver, CO  		- July
-		Red Ventures 	South Carolina	 	- August  
-		GolangUK 		London, England 	- August
+		Capital One 	Richmond, VA 			- January  
+		BOT 			Miami, FL 				- January  
+		CISCO 			Lawrenceville, GA 		- February  
+		Ultimate Go 	Utrecht, Amsterdam		- March  
+		GE 				San Ramon, CA 			- March  
+		WWG 			SF, CA 					- March  
+		Ultimate Go 	SLC, UT 				- March  
+		SAS 			Cary, NC 				- March  
+		Ultimate Go 	SF, CA 					- April  
+		Salesforce 		Dublin, Ireland 		- April  
+		CapitalOne 		Richmond, VA 			- April  
+		HP Enterprise 	Seattle, WA 			- May  
+		CISCO 			Lawrenceville, GA 		- May  
+		Rackspace 		San Antonio, TX 		- May  
+		OSCON 			Portland, OR  			- May  
+		Intel 			Hillsboro, OR 			- May  
+		Staples 		Framingham, MA  		- May  
+		Ultimate Go 	London, England 		- June  
+		Ultimate Go 	Phoenix, AZ  			- June
+		GopherCon		Denver, CO  			- July
+		Red Ventures 	South Carolina	 		- August  
+		GolangUK 		London, England 		- August
 
 					--- Pending ---  
 		  
-		Tune 			Seattle, WA	 		- August  
-		CapitalOne		McLean, VA	 		- September  
-		Viacom			NYC, NY				- September
-		Nordstroms		Seattle, WA	 		- September  
-		Skillsmatter	London, England		- September
-		Ultimate Go		SF, CA				- September
-		WWG				SF, CA				- September  
-		Traderev		Toronto, Canada 	- September  
-		Centralway		Zürich, Switzerland - October  
-		dotGo			Paris, France		- October  
-		DevconTLV		Tel Aviv, Israel	- November 
-		GNS Science		New Zealand			- December   
+		Tune 			Seattle, WA	 			- August  
+		CapitalOne		McLean, VA	 			- September  
+		Viacom			NYC, NY					- September
+		Nordstroms		Seattle, WA	 			- September  
+		Skillsmatter	London, England			- September
+		Ultimate Go		SF, CA					- September
+		WWG				SF, CA					- September  
+		Traderev		Toronto, Canada 		- September  
+		Centralway		Zürich, Switzerland 	- October  
+		dotGo			Paris, France			- October  
+		GopherCon		Florianópolis, Brazil	- November 
+		GNS Science		New Zealand				- December   
 
 #### 2015
 
