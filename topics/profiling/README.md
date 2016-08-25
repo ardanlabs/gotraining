@@ -21,7 +21,7 @@ boom is a modern HTTP benchmarking tool capable of generating the load you need 
 
 	go get -u github.com/rakyll/boom
 
-## Dave Cheney's profiling presentation:  
+## Dave Cheney's Profiling Presentation:  
 
 Much of what I have learned comes from Dave and working on solving problems. This slide deck is a great place to start. Much of this material can be found in the material below.
 
@@ -52,13 +52,13 @@ Use the **time** command to see data about building the program.
 	/usr/bin/time -lp go build		-- Mac OS X
 	/usr/bin/time -v go build		-- Linux
 
-### go build -x Option
+### go build -x
 
 The **-x** option will provide detailed information about the build of your software.
 
 	go build -x
 
-### -toolexec Option
+### go build -toolexec
 
 This options lets you add a prefix command to every command the Go tooling runs.
 
@@ -330,20 +330,6 @@ Running expvarmon
 
 The `godoc` tool can help you perform analysis on your code.
 
-[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
-
-## Links
-
-http://golang.org/pkg/runtime/pprof/  
-https://golang.org/pkg/net/http/pprof/  
-[Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
-[Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
-[How NOT to Measure Latency](https://www.youtube.com/watch?v=lJ8ydIuPFeU&feature=youtu.be) - Gil Tene  
-[Go Performance Tales](http://jmoiron.net/blog/go-performance-tales) - Jason Moiron  
-[Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
-[Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
-[Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
-[Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
 
 ___
