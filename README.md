@@ -219,16 +219,17 @@ If you are interested in holding an event in your area please let me know. I wil
 		Ultimate Go 	Phoenix, AZ  		- June
 		GopherCon		Denver, CO  		- July
 		Red Ventures 	South Carolina	 	- August  
+		GolangUK 		London, England 	- August
 
-					--- Pending ---
+					--- Pending ---  
 		  
-		GolangUK 		London, England 	- August  
 		Tune 			Seattle, WA	 		- August  
 		CapitalOne		McLean, VA	 		- September  
+		Viacom			NYC, NY				- September
 		Nordstroms		Seattle, WA	 		- September  
 		Skillsmatter	London, England		- September
 		Ultimate Go		SF, CA				- September
-		WWG - FS		SF, CA				- September  
+		WWG				SF, CA				- September  
 		Traderev		Toronto, Canada 	- September  
 		Centralway		Zürich, Switzerland - October  
 		dotGo			Paris, France		- October  
