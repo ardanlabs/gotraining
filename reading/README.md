@@ -165,7 +165,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
-[Go 1.7 Release Notes](https://golang.org/doc/go1.7) - DRAFT  
+[Go 1.7 Release Notes](https://golang.org/doc/go1.7) - 2016/08/15  
 [Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
 [Go 1.5 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19  
 [Go 1.4 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10  
