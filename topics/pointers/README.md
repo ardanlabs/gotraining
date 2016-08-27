@@ -18,6 +18,7 @@ The design of the Go GC has changed over the years:
 * Go 1.4, Mark and sweep now parallel, but still stop the world.
 * Go 1.5, New GC design, focusing on latency over throughput.
 * Go 1.6, GC improvements, handling larger heaps with lower latency.
+* Go 1.7, GC improvements, handling larger number of idle goroutines, substantial stack size fluctuation, or large package-level variables.
 
 ![figure1](GC_Algorithm.png?v=2)
 
