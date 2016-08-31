@@ -206,7 +206,7 @@ If you are interested in holding an event in your area please let me know. I wil
 		Corporate	Ultimate Go			Centralway		Zürich, Switzerland		- October  
 		Public		Ultimate Go			dotGo			Paris, France			- October
 		Public		Ultimate K8s		OSCON 			London, England			- October
-		Public		Ultimate Go			GopherCon		Florianópolis, Brazil	- November
+		Public		Ultimate Go			GopherCon		Florianópolis, Brazil	 - November
 		Free		Ultimate Web		WWG				SF, CA					- November
 		Public		Ultimate DS			Ardan			SF, CA					- November
 		Public		Ultimate Go			Dev Fest		NYC, NY					- November
