@@ -196,6 +196,8 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
+### 2016
+
 		Corporate	Ultimate Go			CapitalOne		McLean, VA	 			- September  
 		Corporate	Ultimate Go			Viacom			NYC, NY					- September
 		Corporate	Ultimate Go			Nordstroms		Seattle, WA	 			- September
@@ -203,7 +205,7 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Ultimate Adv Go		Rackspace		SF, CA					- October
 		Free		Ultimate Go			WWG				SF, CA					- October  
 		Corporate	Ultimate Go			Traderev		Toronto, Canada 		- October  
-		Corporate	Ultimate Go			Centralway		Zürich, Switzerland	    - October  
+		Corporate	Ultimate Go			Centralway		Zürich, Switzerland	  - October  
 		Public		Ultimate Go			dotGo			Paris, France			- October
 		Public		Ultimate K8s		OSCON 			London, England			- October
 		Public		Ultimate Go			GopherCon		Florianópolis, Brazil	 - November
@@ -240,6 +242,8 @@ If you are interested in holding an event in your area please let me know. I wil
 		Corporate	Ultimate Go			Red Ventures 	South Carolina	 		- August  
 		Public		Ultimate Adv/Go		GolangUK 		London, England 		- August
 		Corporate	Ultimate Go			Tune 			Seattle, WA	 			- August
+
+### Past Years
 
 		2015 : 31 Events
 		2014 :  3 Events
