@@ -123,13 +123,15 @@ _**Writing**_
 [Go In Action](https://www.manning.com/books/go-in-action)  
 
 _**Video**_  
-[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)    
-[GoSF - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)   
+[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
+[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
+[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
 [GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
-[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)    
+
+[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
+[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
 [Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
 [Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)    
-[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
 
 _**Podcasts**_  
 [Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
@@ -144,7 +146,7 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 
 ## Twitter
 
-Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))
+Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
 _"The unflappable @goinggodotnet demystifying Go stacktraces at #ultimatego day 3 at @tune. Thanks for leveling us up."_
 
 Camilo Aguilar ([@c4milo](https://twitter.com/c4milo/status/752317652563996672))  
