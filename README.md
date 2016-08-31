@@ -210,56 +210,61 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
 ### 2016
-		Type		Ultimate		Venue			City, ST				Month
-		=================================================================================
-		Corporate	Go				CapitalOne		McLean, VA	 			September  
-		Corporate	Go				Viacom			NYC, NY					September
-		Corporate	Go				Nordstroms		Seattle, WA	 			September
-		Free		Go				WWG				London, England			October
-		Public		Advanced Go		Rackspace		SF, CA					October
-		Free		Go				WWG				SF, CA					October  
-		Corporate	Go				Traderev		Toronto, Canada 		October  
-		Corporate	Go				Centralway		Zürich, Switzerland	 October  
-		Public		Go				dotGo			Paris, France			October
-		Public		Kubernetes		OSCON 			London, England			October
-		Public		Go				GopherCon		Florianópolis, Brazil	 November
-		Free		Web				WWG				SF, CA					November
-		Public		Data Science	Ardan			SF, CA					November
-		Public		Go				GothamGo		NYC, NY					November
-		Public		Go				Dev Fest		NYC, NY					November
-		Public		Data Science	GDG DevFest		Siberia, Russia			November
-		Free		Web				WWG				NYC, NY					November
-		Corporate	Go				Skillsmatter	London, England			November
-		Public		Web				Ardan			SF, CA					December
-		Corporate	Go				GNS Science		New Zealand				December
+		Type		Ultimate		Venue			City, ST				Month		Trainer
+		=========================================================================================
+		Corporate	Go				CapitalOne		McLean, VA	 			September	Bill Kennedy
+		Corporate	Go				Viacom			NYC, NY					September	Bill Kennedy
+		Corporate	Go				Nordstroms		Seattle, WA	 			September	Bill Kennedy
+		Free		Go				WWG				London, England			October		Bill Kennedy
+		Public		Advanced Go		Rackspace		SF, CA					October		Bill Kennedy
+		Free		Go				WWG				SF, CA					October		Bill Kennedy
+		Corporate	Go				Traderev		Toronto, Canada 		October		Bill Kennedy
+		Corporate	Go				Centralway		Zürich, Switzerland	 October		Bill Kennedy  
+		Public		Go				dotGo			Paris, France			October		Ernesto Jimenez
+		Public		Kubernetes		OSCON 			London, England			October		Brian Ketelsen
+		Public		Go				GopherCon		Florianópolis, Brazil	 November	Bill Kennedy
+		Free		Web				WWG				SF, CA					November	Mark Bates
+		Public		Data Science	Ardan			SF, CA					November	Daniel Whitenack
+		Public		Go				GothamGo		NYC, NY					November	Bill Kennedy
+		Public		Go				Dev Fest		NYC, NY					November	Bill Kennedy
+		Public		Data Science	GDG DevFest		Siberia, Russia			November	Daniel Whitenack
+		Free		Web				WWG				NYC, NY					November	Mark Bates
+		Corporate	Go				Skillsmatter	London, England			November	Bill Kennedy
+		Public		Web				Ardan			SF, CA					December	Mark Bates
+		Corporate	Go				GNS Science		New Zealand				December	Bill Kennedy
 
-		Corporate	Go				Capital One 	Richmond, VA 			January  
-		Corporate	Go				BOT 			Miami, FL 				January  
-		Corporate	Go				CISCO 			Lawrenceville, GA 		February  
-		Public		Go				Bol 			Utrecht, Amsterdam		March  
-		Corporate	Go				GE 				San Ramon, CA 			March  
-		Free		Go				WWG				SF, CA 					March  
-		Public		Go 				Fidelity		SLC, UT 				March  
-		Corporate	Go				SAS 			Cary, NC 				March  
-		Public		Go				Minio			SF, CA 					April  
-		Corporate	Go				Salesforce 		Dublin, Ireland 		April  
-		Corporate	Go				CapitalOne 		Richmond, VA 			April  
-		Corporate	Go				HP Enterprise 	Seattle, WA 			May  
-		Corporate	Go				CISCO 			Lawrenceville, GA 		May  
-		Corporate	Go				Rackspace 		San Antonio, TX 		May  
-		Public		Go				OSCON 			Portland, OR  			May  
-		Corporate	Go				Intel 			Hillsboro, OR 			May  
-		Corporate	Go				Staples 		Framingham, MA  		May  
-		Public		Go 				Halio			London, England 		June  
-		Public		Go 				Shutterfly		Phoenix, AZ  			June
-		Public		Advanced Go		GopherCon		Denver, CO  			July
-		Corporate	Go				Red Ventures 	South Carolina	 		August  
-		Public		Advanced Go		GolangUK 		London, England 		August
-		Corporate	Go				Tune 			Seattle, WA	 			August
+											Completed
+
+		Corporate	Go				Capital One 	Richmond, VA 			January		Bill Kennedy
+		Corporate	Go				BOT 			Miami, FL 				January		Bill Kennedy
+		Corporate	Go				CISCO 			Lawrenceville, GA 		February	Bill Kennedy
+		Public		Go				Bol 			Utrecht, Amsterdam		March		Bill Kennedy
+		Corporate	Go				GE 				San Ramon, CA 			March		Bill Kennedy
+		Free		Go				WWG				SF, CA 					March		Bill Kennedy
+		Public		Go 				Fidelity		SLC, UT 				March		Bill Kennedy
+		Corporate	Go				SAS 			Cary, NC 				March		Bill Kennedy
+		Public		Go				Ardan			Minneapolis, MN			March		Cory LaNou
+		Public		Go				Minio			SF, CA 					April		Bill Kennedy
+		Corporate	Go				Salesforce 		Dublin, Ireland 		April		Kevin Gillette
+		Corporate	Go				CapitalOne 		Richmond, VA 			April		Bill Kennedy
+		Corporate	Go				HP Enterprise 	Seattle, WA 			May			Cory LaNou
+		Corporate	Go				CISCO 			Lawrenceville, GA 		May			Bill Kennedy
+		Corporate	Go				Rackspace 		San Antonio, TX 		May			Bill Kennedy
+		Public		Go				OSCON 			Portland, OR  			May			Bill Kennedy
+		Corporate	Go				Intel 			Hillsboro, OR 			May			Bill Kennedy
+		Corporate	Go				Staples 		Framingham, MA  		May			Bill Kennedy
+		Public		Go 				Halio			London, England 		June		Bill Kennedy
+		Public		Go 				Shutterfly		Phoenix, AZ  			June		Bill Kennedy
+		Public		Go				GopherCon		Denver, CO  			July		Cory LaNou
+		Public		Advanced Go		GopherCon		Denver, CO  			July		Bill Kennedy
+		Corporate	Go				Red Ventures 	South Carolina	 		August		Bill Kennedy
+		Public		Go				GolangUK 		London, England 		August		Cory LaNou
+		Public		Advanced Go		GolangUK 		London, England 		August		Bill Kennedy
+		Corporate	Go				Tune 			Seattle, WA	 			August		Bill Kennedy
 
 ### Past Years
 
-		2015 : 31 Events
+		2015 : 33 Events
 		2014 :  3 Events
   
 ## Contact Information
