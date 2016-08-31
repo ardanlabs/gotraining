@@ -117,24 +117,24 @@ http://www.goinggo.net/
 **William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
 _William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
-**Writing**
-[Going Go](https://www.goinggo.net/)  
-[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)  
-[Go In Action](https://www.manning.com/books/go-in-action)
+_**Writing**_  
+[Going Go](https://www.goinggo.net/)    
+[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
+[Go In Action](https://www.manning.com/books/go-in-action)  
 
-**Video**
-[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
-[GoSF - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ) 
-[GothamGo - Error Handling in Go](https://vimeo.com/115782573)
-[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
-[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)
-[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)  
-[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)
+_**Video**_  
+[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)    
+[GoSF - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)   
+[GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
+[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)    
+[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
+[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)    
+[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
 
-**Podcasts**
-[Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)
-[The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)
-[Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime-6/)
+_**Podcasts**_  
+[Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
+[The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
+[Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime-6/)  
 
 **Kevin Gillette** ([@kevingillette](https://twitter.com/kevingillette))  
 _Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history._
@@ -144,8 +144,8 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 
 ## Twitter
 
-Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/752246569554964480))
-_"If you're at @GopherCon, get yourself to a session with @goinggodotnet. Superb! Pretty sure his pic appears with the definition of "dynamo.""_
+Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))
+_"The unflappable @goinggodotnet demystifying Go stacktraces at #ultimatego day 3 at @tune. Thanks for leveling us up."_
 
 Camilo Aguilar ([@c4milo](https://twitter.com/c4milo/status/752317652563996672))  
 _"Holy cow, the best lighting talk I have ever seen about mechanical sympathy by @goinggodotnet. Here at #gophercon"_
@@ -158,6 +158,9 @@ _"Day 1 of the [Ultimate] Go workshop was outstanding! Big shoutout to @intel, @
 
 Katrina Owen ([@kytrinyx](https://twitter.com/kytrinyx/status/673360428278222848))  
 _"OH: "You thought you knew Go..." (You do Go? You want to do Go?) You should take this workshop. Seriously.) "_
+
+Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/752246569554964480))
+_"If you're at @GopherCon, get yourself to a session with @goinggodotnet. Superb! Pretty sure his pic appears with the definition of "dynamo.""_
 
 Matt Oswalt ([@Mierdin](https://twitter.com/mierdin/status/673570058392616961))  
 _"Should be mentioned that though I am no expert, I have been using Go for about a year - and this meetup is kicking my ass."_
