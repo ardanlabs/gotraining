@@ -211,7 +211,7 @@ If you are interested in holding an event in your area please let me know. I wil
 
 ### 2016
 		Type		Ultimate		Venue			City, ST				Month		Trainer
-		=========================================================================================
+		================================================================================================
 		Corporate	Go				CapitalOne		McLean, VA	 			September	Bill Kennedy
 		Corporate	Go				Viacom			NYC, NY					September	Bill Kennedy
 		Corporate	Go				Nordstroms		Seattle, WA	 			September	Bill Kennedy
