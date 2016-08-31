@@ -220,20 +220,20 @@ If you are interested in holding an event in your area please let me know. I wil
 		GopherCon		Denver, CO  			- July
 		Red Ventures 	South Carolina	 		- August  
 		GolangUK 		London, England 		- August
+		Tune 			Seattle, WA	 			- August
 
 					--- Pending ---  
-		  
-		Tune 			Seattle, WA	 			- August  
+		    
 		CapitalOne		McLean, VA	 			- September  
 		Viacom			NYC, NY					- September
 		Nordstroms		Seattle, WA	 			- September  
-		Skillsmatter	London, England			- September
 		Ultimate Go		SF, CA					- September
 		WWG				SF, CA					- September  
 		Traderev		Toronto, Canada 		- September  
-		Centralway		Zürich, Switzerland 	- October  
+		Centralway		Zürich, Switzerland		- October  
 		dotGo			Paris, France			- October  
 		GopherCon		Florianópolis, Brazil	- November 
+		Skillsmatter	London, England			- November
 		GNS Science		New Zealand				- December   
 
 #### 2015
