@@ -196,85 +196,52 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
-#### 2016
+		Corporate	Ultimate Go			CapitalOne		McLean, VA	 			- September  
+		Corporate	Ultimate Go			Viacom			NYC, NY					- September
+		Corporate	Ultimate Go			Nordstroms		Seattle, WA	 			- September
+		Free		Ultimate Go			WWG				London, England			- October
+		Public		Ultimate Adv Go		Rackspace		SF, CA					- October
+		Free		Ultimate Go			WWG				SF, CA					- October  
+		Corporate	Ultimate Go			Traderev		Toronto, Canada 		- October  
+		Corporate	Ultimate Go			Centralway		Zürich, Switzerland		- October  
+		Public		Ultimate Go			dotGo			Paris, France			- October
+		Public		Ultimate K8s		OSCON 			London, England			- October
+		Public		Ultimate Go			GopherCon		Florianópolis, Brazil	- November
+		Free		Ultimate Web		WWG				SF, CA					- November
+		Public		Ultimate DS			Ardan			SF, CA					- November
+		Public		Ultimate Go			Dev Fest		NYC, NY					- November
+		Free		Ultimate Web		WWG				NYC, NY					- November
+		Corporate	Ultimate Go			Skillsmatter	London, England			- November
+		Public		Ultimate Web		Ardan			SF, CA					- December
+		Corporate	Ultimate Go			GNS Science		New Zealand				- December
 
-		Capital One 	Richmond, VA 			- January  
-		BOT 			Miami, FL 				- January  
-		CISCO 			Lawrenceville, GA 		- February  
-		Ultimate Go 	Utrecht, Amsterdam		- March  
-		GE 				San Ramon, CA 			- March  
-		WWG 			SF, CA 					- March  
-		Ultimate Go 	SLC, UT 				- March  
-		SAS 			Cary, NC 				- March  
-		Ultimate Go 	SF, CA 					- April  
-		Salesforce 		Dublin, Ireland 		- April  
-		CapitalOne 		Richmond, VA 			- April  
-		HP Enterprise 	Seattle, WA 			- May  
-		CISCO 			Lawrenceville, GA 		- May  
-		Rackspace 		San Antonio, TX 		- May  
-		OSCON 			Portland, OR  			- May  
-		Intel 			Hillsboro, OR 			- May  
-		Staples 		Framingham, MA  		- May  
-		Ultimate Go 	London, England 		- June  
-		Ultimate Go 	Phoenix, AZ  			- June
-		GopherCon		Denver, CO  			- July
-		Red Ventures 	South Carolina	 		- August  
-		GolangUK 		London, England 		- August
-		Tune 			Seattle, WA	 			- August
 
-					--- Pending ---  
-		    
-		CapitalOne		McLean, VA	 			- September  
-		Viacom			NYC, NY					- September
-		Nordstroms		Seattle, WA	 			- September  
-		Ultimate Go		SF, CA					- September
-		WWG				SF, CA					- September  
-		Traderev		Toronto, Canada 		- September  
-		Centralway		Zürich, Switzerland		- October  
-		dotGo			Paris, France			- October  
-		GopherCon		Florianópolis, Brazil	- November 
-		Skillsmatter	London, England			- November
-		GNS Science		New Zealand				- December   
+		Corporate	Ultimate Go			Capital One 	Richmond, VA 			- January  
+		Corporate	Ultimate Go			BOT 			Miami, FL 				- January  
+		Corporate	Ultimate Go			CISCO 			Lawrenceville, GA 		- February  
+		Public		Ultimate Go			Bol 			Utrecht, Amsterdam		- March  
+		Corporate	Ultimate Go			GE 				San Ramon, CA 			- March  
+		Free		Ultimate Go			WWG				SF, CA 					- March  
+		Public		Ultimate Go 		Fidelity		SLC, UT 				- March  
+		Corporate	Ultimate Go			SAS 			Cary, NC 				- March  
+		Public		Ultimate Go			Minio			SF, CA 					- April  
+		Corporate	Ultimate Go			Salesforce 		Dublin, Ireland 		- April  
+		Corporate	Ultimate Go			CapitalOne 		Richmond, VA 			- April  
+		Corporate	Ultimate Go			HP Enterprise 	Seattle, WA 			- May  
+		Corporate	Ultimate Go			CISCO 			Lawrenceville, GA 		- May  
+		Corporate	Ultimate Go			Rackspace 		San Antonio, TX 		- May  
+		Public		Ultimate Go			OSCON 			Portland, OR  			- May  
+		Corporate	Ultimate Go			Intel 			Hillsboro, OR 			- May  
+		Corporate	Ultimate Go			Staples 		Framingham, MA  		- May  
+		Public		Ultimate Go 		Halio			London, England 		- June  
+		Public		Ultimate Go 		Shutterfly		Phoenix, AZ  			- June
+		Public		Ultimate Adv Go		GopherCon		Denver, CO  			- July
+		Corporate	Ultimate Go			Red Ventures 	South Carolina	 		- August  
+		Public		Ultimate Adv/Go		GolangUK 		London, England 		- August
+		Corporate	Ultimate Go			Tune 			Seattle, WA	 			- August
 
-#### 2015
-
-		Edmonton Go 	Edmonton, Canada 	- January  
-		GopherCon 		Bangalore, India 	- February  
-		Ultimate Go 	Denver, CO 			- March  
-		Ultimate Go 	SF, CA 				- March  
-		Ultimate Go 	Denver, CO 			- April  
-		FluentConf 		SF, CA 				- April  
-		ACL 			Vancouver, Canada 	- May  
-		PowerChord 		Tampa, FL 			- May  
-		Rackspace 		San Antonio, TX 	- May  
-		Ultimate Go 	NYC, NY 			- June  
-		MagmaConf  		Manzanillo, Mexico 	- June  
-		Ultimate Go		Denver, CO 			- July  
-		NY Times   		NYC, NY 			- July  
-		OSCON      		Portland, OR 		- July  
-		WWG 			SF, CA 				- August  
-		GolangUK 		London, England 	- August  
-		YikYak 			Atlanta, GA 		- August  
-		Bridgevine 		Miami, FL 			- September  
-		Ultimate Go 	Seattle, WA 		- September  
-		Fidelity 		Dublin, Ireland 	- September  
-		Ultimate Go 	SF, CA 				- September  
-		GothamGo 		NYC, NY 			- October  
-		Economist 		NYC, NY 			- October  
-		GE 				San Ramon, CA 		- October  
-		Teradata 		San Diego, CA 		- October  
-		SAS 			Cary, NC 			- October  
-		NY Times 		NYC, NY 			- November  
-		Meetme 			New Paltz, NY 		- November  
-		NY Times 		NYC, NY 			- November 
-		Ultimate Go 	Portland, OR 		- November  
-		Nordstrom 		Seattle, WA 		- December  
-
-#### 2014
-
-		Comcast 		SF, CA 				- August  
-		GothamGo 		NYC, NY 			- October  
-		Comcast 		Reston, VA 			- December
+		2015 : 31 Events
+		2014 :  3 Events
   
 ## Contact Information
 
