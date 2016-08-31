@@ -227,11 +227,11 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Data Science	Ardan			SF, CA					November
 		Public		Go				GothamGo		NYC, NY					November
 		Public		Go				Dev Fest		NYC, NY					November
+		Public		Data Science	GDG DevFest		Siberia, Russia			November
 		Free		Web				WWG				NYC, NY					November
 		Corporate	Go				Skillsmatter	London, England			November
 		Public		Web				Ardan			SF, CA					December
 		Corporate	Go				GNS Science		New Zealand				December
-
 
 		Corporate	Go				Capital One 	Richmond, VA 			January  
 		Corporate	Go				BOT 			Miami, FL 				January  
