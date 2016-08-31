@@ -203,12 +203,13 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Ultimate Adv Go		Rackspace		SF, CA					- October
 		Free		Ultimate Go			WWG				SF, CA					- October  
 		Corporate	Ultimate Go			Traderev		Toronto, Canada 		- October  
-		Corporate	Ultimate Go			Centralway		Zürich, Switzerland		- October  
+		Corporate	Ultimate Go			Centralway		Zürich, Switzerland	    - October  
 		Public		Ultimate Go			dotGo			Paris, France			- October
 		Public		Ultimate K8s		OSCON 			London, England			- October
 		Public		Ultimate Go			GopherCon		Florianópolis, Brazil	 - November
 		Free		Ultimate Web		WWG				SF, CA					- November
 		Public		Ultimate DS			Ardan			SF, CA					- November
+		Public		Ultimate Go			GothamGo		NYC, NY					- November
 		Public		Ultimate Go			Dev Fest		NYC, NY					- November
 		Free		Ultimate Web		WWG				NYC, NY					- November
 		Corporate	Ultimate Go			Skillsmatter	London, England			- November
