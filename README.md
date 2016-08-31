@@ -219,7 +219,7 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Advanced Go		Rackspace		SF, CA					October
 		Free		Go				WWG				SF, CA					October  
 		Corporate	Go				Traderev		Toronto, Canada 		October  
-		Corporate	Go				Centralway		Zürich, Switzerland	    October  
+		Corporate	Go				Centralway		Zürich, Switzerland	 October  
 		Public		Go				dotGo			Paris, France			October
 		Public		Kubernetes		OSCON 			London, England			October
 		Public		Go				GopherCon		Florianópolis, Brazil	 November
