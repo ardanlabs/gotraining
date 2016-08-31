@@ -219,7 +219,7 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Advanced Go		Rackspace		SF, CA					October		Bill Kennedy
 		Free		Go				WWG				SF, CA					October		Bill Kennedy
 		Corporate	Go				Traderev		Toronto, Canada 		October		Bill Kennedy
-		Corporate	Go				Centralway		Zürich, Switzerland	 October	Bill Kennedy  
+		Corporate	Go				Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
 		Public		Go				dotGo			Paris, France			October		Ernesto Jimenez
 		Public		Kubernetes		OSCON 			London, England			October		Brian Ketelsen
 		Public		Go				GopherCon		Florianópolis, Brazil	 November	 Bill Kennedy
