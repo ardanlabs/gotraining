@@ -144,6 +144,8 @@ _Kevin is an experienced software engineer that has been enthusiastically using 
 **Cory LaNou** ([@corylanou](https://twitter.com/corylanou))  
 _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time._
 
+https://corylanou.github.io/
+
 ## Twitter
 
 Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
@@ -216,21 +218,21 @@ If you are interested in holding an event in your area please let me know. I wil
 		Corporate	Go				Viacom			NYC, NY					September	Bill Kennedy
 		Corporate	Go				Nordstroms		Seattle, WA	 			September	Bill Kennedy
 		Free		Go				WWG				London, England			October		Bill Kennedy
-		Public		Advanced Go		Rackspace		SF, CA					October		Bill Kennedy
-		Free		Go				WWG				SF, CA					October		Bill Kennedy
+		Public		[Advanced Go](https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143)	Rackspace		SF, CA					October		Bill Kennedy
+		Free		[Go](http://www.meetup.com/Women-Who-Go/events/232670825/)				WWG				SF, CA					October		Bill Kennedy
 		Corporate	Go				Traderev		Toronto, Canada 		October		Bill Kennedy
 		Corporate	Go				Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
 		Public		Go				dotGo			Paris, France			October		Ernesto Jimenez
-		Public		Kubernetes		OSCON 			London, England			October		Brian Ketelsen
+		Public		[Kubernetes](http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454)	OSCON 			London, England			October		Brian Ketelsen
 		Public		Go				GopherCon		Florianópolis, Brazil	 November	 Bill Kennedy
 		Free		Web				WWG				SF, CA					November	Mark Bates
 		Public		Data Science	Ardan			SF, CA					November	Daniel Whitenack
 		Public		Go				GothamGo		NYC, NY					November	Bill Kennedy
 		Public		Go				Dev Fest		NYC, NY					November	Bill Kennedy
-		Public		Data Science	GDG DevFest		Siberia, Russia			November	Daniel Whitenack
+		Public		[Data Science](https://devfest.gdg.org.ru/en/)	GDG DevFest		Siberia, Russia			November	Daniel Whitenack
 		Free		Web				WWG				NYC, NY					November	Mark Bates
 		Corporate	Go				Skillsmatter	London, England			November	Bill Kennedy
-		Public		Web				Ardan			SF, CA					December	Mark Bates
+		Public		[Web](https://www.eventbrite.com/e/ultimate-go-web-san-francisco-nov-2016-tickets-27326208425)				Ardan			SF, CA					December	Mark Bates
 		Corporate	Go				GNS Science		New Zealand				December	Bill Kennedy
 
 											Completed
