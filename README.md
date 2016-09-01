@@ -146,6 +146,16 @@ _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of
 
 https://corylanou.github.io/
 
+**Mark Bates** ([@markbates](https://twitter.com/markbates))  
+_Mark Bates is a full stack web developer with over 17 years of experience. He has written three books, “Distributed Programming with Ruby”, “Programming in CoffeeScript”, and “Conquering the Command Line”. Mark has spoken at conferences around the world, has led user groups such as Boston Ruby and Boston Golang, and has helped to organize conferences such as GothamGo and GopherCon (lightning talks)._
+
+https://www.papercall.io/speakers/markbates
+
+**Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
+Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
+
+https://github.com/dwhitena/slides
+
 ## Twitter
 
 Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
