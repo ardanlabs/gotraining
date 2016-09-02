@@ -6,8 +6,8 @@ When dealing with CSV data or other forms of tabular data, you will likely want 
 
 ## Links
 
-[github.com/kniren/gota](https://github.com/kniren/gota) - Dataframes package
-[github.com/go-hep/csvutil](https://github.com/go-hep/csvutil) - CSV library for databases/sql
+[github.com/kniren/gota](https://github.com/kniren/gota) - Dataframes package  
+[github.com/go-hep/csvutil](https://github.com/go-hep/csvutil) - CSV library and utility for databases/sql
 
 ## Code Review
 
