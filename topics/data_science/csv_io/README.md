@@ -16,8 +16,9 @@ Although the CSV data you will work with is not likely to be "big" (whatever tha
 ## Code Review
 
 [Read in CSV records](example1/example1.go)  
-[Handle unexpected fields](example2/example2.go) 
-[Handle unexpected types](example3/example3.go) 
+[Handle unexpected fields](example2/example2.go)   
+[Handle unexpected types](example3/example3.go)   
+[Save a CSV file](example4/example4.go)  
 
 ## Exercises
 
@@ -27,5 +28,13 @@ Parse [iris_multiple_mixed_types.csv](data/iris_multiple_mixed_types.csv). Defin
 
 [Template](exercises/template1/template1.go) |
 [Answer](exercises/exercise1/exercise1.go)  
+
+### Exercise 2
+
+Save the parsed and cleaned [iris_multiple_mixed_types.csv](data/iris_multiple_mixed_types.csv) to a file called `processed.csv`.  
+
+[Template](exercises/template2/template2.go) |
+[Answer](exercises/exercise2/exercise2.go)  
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
