@@ -1,4 +1,4 @@
-## CSV Data Input/Output
+## CSV Data Input/Output/Parsing
 
 Although the CSV data you will work with is not likely to be "big" (whatever that means), it is important.  As a data scientist, you will most definitely have to work with CSV data, because it is such a common format for data sets downloaded from the government, survey sites, marketers, etc.  Also, it is common to provide results, aggregations, etc. to colleagues in CSV format.
 
