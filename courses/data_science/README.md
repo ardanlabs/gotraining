@@ -1,4 +1,4 @@
-# Go for Data Science
+# Ultimate Data Science
 This is material for scientists, analysts, and developers who have some experience with Go and statistics and want to learn how to do data science with Go. We believe these classes are perfect for data scientist interested in working in Go or Go programmers interested in doing data science.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
