@@ -85,6 +85,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [How To Deploy a Go Web Application with Docker](https://semaphoreci.com/community/tutorials/how-to-deploy-a-go-web-application-with-docker) - Kulshekhar Kabra  
 [An introduction to Clear Containers](https://lwn.net/Articles/644675) - LWN.net  
+[Getting Started with Docker](https://docs.docker.com/engine/getstarted/) - Docker  
+[Kubernetes Bootcamp](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/) - Google  
 
 ### Distributed Systems
 
@@ -108,7 +110,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 Much of this content can be found under [arrays](../topics/arrays) and [data races](../topics/data_race). We feel this content is so important it has been moved out to this general materials page.
 
-#### CPU Caches
+#### CPU Caches / Memory
 
 [CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE) - Scott Meyers  
 [CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf) - Scott Meyers  
@@ -121,6 +123,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 [Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
+[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
 
 #### Data-Oriented Design
 
