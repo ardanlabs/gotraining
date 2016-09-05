@@ -5,27 +5,64 @@
 // channel latencies.
 package main
 
-import "testing"
+import (
+	"bytes"
+	"fmt"
+	"io"
+	"sync"
+	"testing"
+	"time"
+)
+
+func send(r io.Reader, ch chan int) {
+	buf := make([]byte, 1)
+
+	for {
+		n, err := r.Read(buf)
+		if n == 0 || err != nil {
+			break
+		}
+
+		ch <- int(buf[0])
+	}
+}
+
+func recv(ch chan int) {
+	var total int
+
+	for v := range ch {
+		total = total + v
+	}
+}
+
+func input() io.Reader {
+	base := []byte{0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}
+	var data []byte
+	for i := 0; i < 1000000; i++ {
+		data = append(data, base...)
+	}
+
+	return bytes.NewBuffer(data)
+}
 
 // TestLatency provides a test to profile and trace channel latencies.
 func TestLatency(t *testing.T) {
-	ch := make(chan int)
+	for i := 0; i < 40; i++ {
+		var wg sync.WaitGroup
+		ch := make(chan int, i)
 
-	// Lanuch a goroutine that passes integers into the channel.
-	go func() {
+		wg.Add(1)
+		go func() {
+			recv(ch)
+			wg.Done()
+		}()
 
-		// Close the channel when done.
-		defer close(ch)
+		st := time.Now()
 
-		// Pass 10k integers into the channel.
-		for i := 0; i < 10000; i++ {
-			ch <- i
-		}
-	}()
+		send(input(), ch)
+		close(ch)
+		wg.Wait()
 
-	// Receive each integer that is sent into the channel.
-	for range ch {
-
-		// do nothing (we're looking at overhead)
+		fmt.Println(i, time.Since(st))
 	}
 }
