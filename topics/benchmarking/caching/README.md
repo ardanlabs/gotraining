@@ -9,7 +9,7 @@ Please review the section on arrays for more details behind these benchmark test
 
 ## Code Review
 
-[Caching](caching.go) ([Go Playground](http://play.golang.org/p/h-2_3N7DhE))  
-[Tests](caching_test.go) ([Go Playground](http://play.golang.org/p/OyvLqxZAt2))
+[Caching](caching.go) ([Go Playground](https://play.golang.org/p/Z22j8uiBKv))  
+[Tests](caching_test.go) ([Go Playground](https://play.golang.org/p/OyvLqxZAt2))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
