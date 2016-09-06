@@ -40,16 +40,17 @@ func main() {
 	// UTFMax is 4 -- up to 4 bytes per encoded rune.
 	var buf [utf8.UTFMax]byte
 
-	// Iterate over each character in the string.
+	// Iterate over the string.
 	for i, r := range s {
 
-		// Capture the number of bytes for this character.
+		// Capture the number of bytes for this rune.
 		rl := utf8.RuneLen(r)
 
-		// Calculate the slice offset to slice the character out.
+		// Calculate the slice offset for the bytes associated
+		// with this rune.
 		si := i + rl
 
-		// Copy of character from the string to our buffer.
+		// Copy of rune from the string to our buffer.
 		copy(buf[:], s[i:si])
 
 		// Display the details.
