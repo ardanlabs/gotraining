@@ -18,7 +18,7 @@ Although there is a good bit of hype around interesting NoSQL databases and key/
 
 [Open a database, ping the connection](example1/example1.go)  
 [Load data into a database](example2/example2.go)  
-[Retrieve data from a database](example3/example3.go)
+[Retrieve data from a database](example3/example3.go)  
 [Modify data in a database](example4/example4.go)
 
 ## Exercises
