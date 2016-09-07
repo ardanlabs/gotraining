@@ -5,6 +5,7 @@ Go has support for both testing and debugging. This includes profiling and bench
 ## Package Review
 
 [Basic Benchmarking](basic/basic_test.go) ([Go Playground](https://play.golang.org/p/Kwqe4zYpMi))  
+[Sub Benchmarks](sub/sub_test.go) ([Go Playground](https://play.golang.org/p/q4qV9BdH4R))  
 [Prediction](prediction/README.md)  
 [Caching](caching/README.md)  
 [Profiling](../profiling/benchmarks/README.md)
