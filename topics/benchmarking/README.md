@@ -13,7 +13,8 @@ Go has support for both testing and debugging. This includes profiling and bench
 
 http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go  
 [Profiling & Optimizing in Go / Brad Fitzpatrick](https://www.youtube.com/watch?v=xxDZuPEgbBU)  
-[Benchstat computes and compares statistics about benchmarks](https://github.com/rsc/benchstat)
+[Benchstat computes and compares statistics about benchmarks](https://github.com/rsc/benchstat)  
+[Advanced Testing Concepts for Go 1.7](https://speakerdeck.com/mpvl/advanced-testing-concepts-for-go-1-dot-7) - Marcel van Lohuizen  
 
 ## Exercises
 

@@ -23,6 +23,7 @@ https://github.com/dvyukov/go-fuzz
 https://talks.golang.org/2015/dynamic-tools.slide#1  
 https://vimeo.com/141698770  
 [Structuring Tests in Go](https://medium.com/@benbjohnson/structuring-tests-in-go-46ddee7a25c#.b2m3nziyb) - Ben Johnson  
+[Advanced Testing Concepts for Go 1.7](https://speakerdeck.com/mpvl/advanced-testing-concepts-for-go-1-dot-7) - Marcel van Lohuizen  
 
 ## Code Review
 
@@ -31,6 +32,7 @@ https://vimeo.com/141698770
 [Mocking Web Server Response](example3/example3_test.go) ([Go Playground](https://play.golang.org/p/JJ_2VIL_R6))  
 [Testing Internal Endpoints](example4/handlers/handlers_test.go) ([Go Playground](https://play.golang.org/p/bGM-oA6KT-))  
 [Example Test](example4/handlers/handlers_example_test.go) ([Go Playground](http://play.golang.org/p/BTSUkNQn3r))  
+[Sub Tests](example5/example5_test.go) ([Go Playground](http://play.golang.org/p/_ksJdlKox7))  
 
 ## Coverage
 
