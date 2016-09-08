@@ -34,6 +34,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob  
 [The Best Programming Advice I Ever Got](http://www.informit.com/articles/article.aspx?p=1941206) - Rob Pike  
 
+[A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh
+
 ### Standard Library
 
 [io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#.d2ebstv0q) - Ben Johnson  
