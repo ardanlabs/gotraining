@@ -1,22 +1,16 @@
-## Tracing / Blocking Profiling
+## Blocking Profiling
 
-Testing and Tracing allows us to see blocking and latency profiles.
+Testing and Tracing allows us to see blocking profiles.
 
-## Running A Test
+## Running a Test Based Blocking Profile
 
 	We can get blocking profiles by running a test.
 
-	cd delay
 	go test -blockprofile block.out
-	go tool pprof delay.test block.out
-	list TestDelay
-
-	cd latency
-	go test -blockprofile block.out
-	go tool pprof latency.test block.out
+	go tool pprof blocking.test block.out
 	list TestLatency
 
-## Running A Trace
+## Running a Trace
 
 Once you have a test established you can use the **-trace file.out** option with the go test tool.
 
@@ -31,6 +25,6 @@ No Extra links at this time.
 
 ## Code Review
 
-[Delay Trace](delay/delay_test.go) ([Go Playground](http://play.golang.org/p/_i4hBx2Pzu)) | [Latency Trace](latency/latency_test.go) ([Go Playground](http://play.golang.org/p/b50cFOkrMd)) 
+[Blocking Trace](blocking_test.go) ([Go Playground](http://play.golang.org/p/b50cFOkrMd)) 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

@@ -95,6 +95,7 @@ If you're a linux user, then perf(1) is a great tool for profiling applications.
 A profiler runs your program and configures the operating system to interrupt it at regular intervals. This is done by sending SIGPROF to the program being profiled, which suspends and transfers execution to the profiler. The profiler then grabs the program counter for each executing thread and restarts the program.
 
 ### Profiling do's and don't's
+
 Before you profile, you must have a stable environment to get repeatable results.
 
 * The machine must be idle—don't profile on shared hardware, don't browse the web while waiting for a long benchmark to run.
@@ -106,16 +107,39 @@ If you can afford it, buy dedicated performance test hardware. Rack them, disabl
 
 For everyone else, have a before and after sample and run them multiple times to get consistent results.
 
-### Basic Profiling
+### Types of Profiling
+
+**CPU profiling**  
+CPU profiling is the most common type of profile. When CPU profiling is enabled, the runtime will interrupt itself every 10ms and record the stack trace of the currently running goroutines. Once the profile is saved to disk, we can analyse it to determine the hottest code paths. The more times a function appears in the profile, the more time that code path is taking as a percentage of the total runtime.
+
+**Memory profiling**  
+Memory profiling records the stack trace when a heap allocation is made. Memory profiling, like CPU profiling is sample based. By default memory profiling samples 1 in every 1000 allocations. This rate can be changed. Stack allocations are assumed to be free and are not tracked in the memory profile. Because of memory profiling is sample based and because it tracks allocations not use, using memory profiling to determine your application's overall memory usage is difficult.
+
+**Block profiling**  
+Block profiling is quite unique. A block profile is similar to a CPU profile, but it records the amount of time a goroutine spent waiting for a shared resource. This can be useful for determining concurrency bottlenecks in your application. Block profiling can show you when a large number of goroutines could make progress, but were blocked. 
+
+Blocking includes:
+
+* Sending or receiving on a unbuffered channel.
+* Sending to a full channel, receiving from an empty one.
+* Trying to Lock a sync.Mutex that is locked by another goroutine.
+* Block profiling is a very specialised tool, it should not be used until you believe you have eliminated all your CPU and memory usage bottlenecks.
+
+**One profile at at time**  
+Profiling is not free. Profiling has a moderate, but measurable impact on program performance—especially if you increase the memory profile sample rate. Most tools will not stop you from enabling multiple profiles at once. If you enable multiple profiles at the same time, they will observe their own interactions and skew your results.
+
+**Do not enable more than one kind of profile at a time.**
+
+## Basic Profiling
 
 Learn the basics of using GODEBUG.  
 [Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
 
-Learn the basics of using benchmarking.  
-[Benchmarking](benchmarks)
+Learn the basics of using memory and cpu profiling.  
+[Memory and CPU Profiling](memcpu)
 
-Learn the basics of using tests/tracing.  
-[Tracing](trace)
+Learn the basics of blocking profiling.  
+[Blocking Profiling](blocking)
 
 ## Profiling a Web Service
 
@@ -147,7 +171,7 @@ Run the website redirecting the stdout (logs) to the null device. This will allo
 
 Put some load of the web application.
 
-	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 #### Scheduler Tracing
 
@@ -157,7 +181,7 @@ Run the website redirecting the stdout (logs) to the null device. This will allo
 
 Put some load of the web application.
 
-	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ### PPROF
 
@@ -165,27 +189,6 @@ pprof descends from the Google Performance Tools suite. pprof profiling is built
 
 * runtime/pprof package built into every Go program
 * go tool pprof for investigating profiles.
-
-**CPU profiling**  
-CPU profiling is the most common type of profile. When CPU profiling is enabled, the runtime will interrupt itself every 10ms and record the stack trace of the currently running goroutines. Once the profile is saved to disk, we can analyse it to determine the hottest code paths. The more times a function appears in the profile, the more time that code path is taking as a percentage of the total runtime.
-
-**Memory profiling**  
-Memory profiling records the stack trace when a heap allocation is made. Memory profiling, like CPU profiling is sample based. By default memory profiling samples 1 in every 1000 allocations. This rate can be changed. Stack allocations are assumed to be free and are not tracked in the memory profile. Because of memory profiling is sample based and because it tracks allocations not use, using memory profiling to determine your application's overall memory usage is difficult.
-
-**Block profiling**  
-Block profiling is quite unique. A block profile is similar to a CPU profile, but it records the amount of time a goroutine spent waiting for a shared resource. This can be useful for determining concurrency bottlenecks in your application. Block profiling can show you when a large number of goroutines could make progress, but were blocked. 
-
-Blocking includes:
-
-* Sending or receiving on a unbuffered channel.
-* Sending to a full channel, receiving from an empty one.
-* Trying to Lock a sync.Mutex that is locked by another goroutine.
-* Block profiling is a very specialised tool, it should not be used until you believe you have eliminated all your CPU and memory usage bottlenecks.
-
-**One profile at at time**  
-Profiling is not free. Profiling has a moderate, but measurable impact on program performance—especially if you increase the memory profile sample rate. Most tools will not stop you from enabling multiple profiles at once. If you enable multiple profiles at the same time, they will observe their own interactions and skew your results.
-
-**Do not enable more than one kind of profile at a time.**
 
 #### Raw http/pprof
 
@@ -213,7 +216,12 @@ Put some load of the web application using a single connection.
 
 Run the Go pprof tool in another window or tab to review heap information.
 
-	go tool pprof ./project http://localhost:5000/debug/pprof/heap
+	go tool pprof -alloc_space ./project http://localhost:5000/debug/pprof/heap
+
+	-inuse_space  : Display in-use memory size
+    -inuse_objects: Display in-use object counts
+    -alloc_space  : Display allocated memory size
+    -alloc_objects: Display allocated object counts
 
 Run the Go pprof tool in another window or tab to review cpu information.
 
@@ -235,11 +243,6 @@ Now compare both snapshots against the binary and get into the pprof tool:
 
     go tool pprof -alloc_space -base base.heap memory_trace current.heap
 
-    -inuse_space  : Display in-use memory size
-    -inuse_objects: Display in-use object counts
-    -alloc_space  : Display allocated memory size
-    -alloc_objects: Display allocated object counts
-
 #### Flame Graphs
 
 Go-Torch is a tool for stochastically profiling Go programs. Collects stack traces and synthesizes them into a flame graph.
@@ -254,9 +257,9 @@ Run the torch tool and visualize the profile.
 
 	go-torch -u http://localhost:5000/
 
-### Benchmarks
+### Benchmark Profiling
 
-Run the test and produce a cpu and memory profile.
+Run the benchmarks and produce a cpu and memory profile.
 
 	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
 	

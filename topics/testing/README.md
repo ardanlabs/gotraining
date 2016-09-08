@@ -35,6 +35,8 @@ https://vimeo.com/141698770
 [Example Test](example4/handlers/handlers_example_test.go) ([Go Playground](http://play.golang.org/p/BTSUkNQn3r))  
 [Sub Tests](example5/example5_test.go) ([Go Playground](http://play.golang.org/p/d4ZVYkZUGr))  
 
+_Look at the profiling topic to learn more about using test to [profile](../profiling) code._
+
 ## Coverage
 
 Making sure your tests cover as much of your code as possible is critical. Go's testing tool allows you to create a profile for the code that is executed during all the tests and see a visual of what is and is not covered.
