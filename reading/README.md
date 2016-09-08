@@ -82,6 +82,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
 [Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz    
 [Monitoring and Tuning the Linux Networking Stack: Receiving Data](http://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/) - packagecloud  
+[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
 
 ### Container and Orchestration
 
@@ -124,8 +125,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 [The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm) - Herb Sutter  
 [Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
-[Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
-[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
+[Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter      
 
 #### Data-Oriented Design
 
@@ -139,6 +139,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 
 [The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
 [The Cost of Virtualization](http://queue.acm.org/detail.cfm?id=1348591) - Ulrich Drepper  
+[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman  
 
 ## Runtime
 
