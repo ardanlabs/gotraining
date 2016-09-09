@@ -28,7 +28,7 @@ This is the accuracy and consistency of your code performing every read, write a
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
 **3) Performance**  
-This is about not wasting effort and achieving algorithm efficiency. Writing algorithms with mechanical sympathy in mind. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
+This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
 
 **4) Micro-Optimization**  
 This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
