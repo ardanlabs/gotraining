@@ -4,6 +4,8 @@ We can use the go tooling to inspect and profile our programs. Profiling is more
 
 ## Installing Tools
 
+You don't need `graphviz` or `ghostscript` unless you want to produce PDF's for your call graphs.
+
 **Graph Visualization Tools**    
 Download the package for your target OS/Arch:
 [http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
