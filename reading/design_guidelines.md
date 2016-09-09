@@ -17,7 +17,7 @@ You need to work with it and help it.
 
 Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
 
-#### Integrity, Readability, Efficiency and Performance
+#### Integrity, Readability, Performance and Micro-Optimization
 
 You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. These trade-offs falls into these four areas. Before you allow a higher numbered trade-off trump a lower numbered trade-off, you must consciously and with great reason be able to explain yourself.
 
@@ -27,11 +27,11 @@ This is the accuracy and consistency of your code performing every read, write a
 **2) Readability**  
 This is the ability to easily read code and understand what it is doing. It is also the ability to understand the cost of the code and its impact on your software and the overall ecosystem it exists in.
 
-**3) Efficiency**  
+**3) Performance**  
 This is about not wasting effort, algorithm efficiency. Solving the data transformation problem with the least number of steps. NASA identified that every 10 lines of code produces a bug whether you like it or not. Reduce bugs and simplify code by writing less of it.
 
-**4) Performance**  
-This is about micro-optimizing something when it is absolutely necessary. When code is written with this as the priority, it is very difficult to write code that is readable and simple. When readable and simple code is not performing well enough based on real empirical data, then this can be discussed.
+**4) Micro-Optimization**  
+This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable and idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
 #### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
