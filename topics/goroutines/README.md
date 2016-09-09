@@ -29,7 +29,8 @@ http://blog.golang.org/concurrency-is-not-parallelism
 http://talks.golang.org/2013/distsys.slide  
 [Go 1.5 GOMAXPROCS Default](https://docs.google.com/document/d/1At2Ls5_fhJQ59kDK2DFVhFu3g5mATSXqqV5QrxinasI/edit)  
 http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html  
-[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)
+[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
+[Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
 
 ## Code Review
 
