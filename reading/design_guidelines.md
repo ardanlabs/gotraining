@@ -17,7 +17,7 @@ You need to work with it and help it.
 
 Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
 
-#### Trade-Offs
+#### Decision Making and Trade-Offs
 
 You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. Evaluate the trade-offs of a decision in this order: Integrity, Readability, and then Performance. Before you allow a lower priority trade-off to trump you must consciously and with great reason be able to explain yourself.
 
