@@ -2,17 +2,17 @@
 
 These are a set of design guidelines for data, interfaces, composition and packages. Please consider these principles when designing your own software.
 
-***"The most amazing achievement of the computer software industry is its __continuing cancellation__ of the steady and staggering gains made by the computer hardware industry." - Henry Petroski***
+***"The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski***
 
 #### Bottom Line
 
-The compiler is a tool and it's not all knowing or perfect.  
+The **compiler** is a tool and it's not all knowing or perfect.  
 You need to work with it and help it.
 
-The operating system is doing its best to keep cores busy and leverage the right core at the right time.  
+The **operating system** is doing its best to keep cores busy and leverage the right core at the right time.  
 You need to work with it and help it.
 
-The hardware is doing its best to execute as many instructions per clock cycle as possible.  
+The **hardware** is doing its best to execute as many instructions per clock cycle as possible.  
 You need to work with it and help it.
 
 Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
