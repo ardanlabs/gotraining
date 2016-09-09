@@ -25,7 +25,7 @@ You can't make the best decisions without understanding the impact of your decis
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
 
 **2) Readability**  
-This is the ability to easily read code and understand what it is doing. It is also about not hiding the cost of the code and its impact on the software and the overall ecosystem it exists in.
+This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per function, package and the overall ecosystem it runs in.
 
 **3) Performance**  
 This is about not wasting effort, algorithm efficiency. Solving the data transformation problem with the least number of steps. Achieving performance by writing less code but staying within the idioms and framework of the language.
