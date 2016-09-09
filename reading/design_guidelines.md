@@ -17,9 +17,9 @@ You need to work with it and help it.
 
 Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
 
-#### Integrity, Readability, Performance and Micro-Optimization
+#### Trade-Offs
 
-You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. These trade-offs falls into these four areas. Before you allow a higher numbered trade-off trump a lower numbered trade-off, you must consciously and with great reason be able to explain yourself.
+You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. Evaluate the trade-offs of a decision in this order: Integrity, Readability, and then Performance. Before you allow a lower priority trade-off to trump you must consciously and with great reason be able to explain yourself.
 
 **1) Integrity**  
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
