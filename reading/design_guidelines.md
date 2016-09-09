@@ -4,6 +4,8 @@ These are a set of design guidelines for data, interfaces, composition and packa
 
 #### Bottom Line
 
+*_"The most amazing achievement of the computer software industry is its __continuing cancellation__ of the steady and staggering gains made by the computer hardware industry."_ - Henry Petroski*
+
 The compiler is a tool and it's not all knowing or perfect.  
 You need to work with it and help it.
 
