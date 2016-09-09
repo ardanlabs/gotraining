@@ -2,9 +2,9 @@
 
 These are a set of design guidelines for data, interfaces, composition and packages. Please consider these principles when designing your own software.
 
-#### Bottom Line
+***"The most amazing achievement of the computer software industry is its __continuing cancellation__ of the steady and staggering gains made by the computer hardware industry." - Henry Petroski***
 
-*_"The most amazing achievement of the computer software industry is its __continuing cancellation__ of the steady and staggering gains made by the computer hardware industry."_ - Henry Petroski*
+#### Bottom Line
 
 The compiler is a tool and it's not all knowing or perfect.  
 You need to work with it and help it.
