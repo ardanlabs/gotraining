@@ -28,10 +28,10 @@ This is the accuracy and consistency of your code performing every read, write a
 This is the ability to easily read code and understand what it is doing. It is also the ability to understand the cost of the code and its impact on your software and the overall ecosystem it exists in.
 
 **3) Performance**  
-This is about not wasting effort, algorithm efficiency. Solving the data transformation problem with the least number of steps. NASA identified that every 10 lines of code produces a bug whether you like it or not. Reduce bugs and simplify code by writing less of it.
+This is about not wasting effort, algorithm efficiency. Solving the data transformation problem with the least number of steps. Simplifying code by writing less of it.
 
 **4) Micro-Optimization**  
-This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable and idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
+This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
 #### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
