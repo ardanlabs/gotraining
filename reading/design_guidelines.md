@@ -25,10 +25,10 @@ You can't make the best decisions without understanding the impact of your decis
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
 
 **2) Readability**  
-This is the ability to easily read code and understand what it is doing. It is also the ability to understand the cost of the code and its impact on your software and the overall ecosystem it exists in.
+This is the ability to easily read code and understand what it is doing. It is also about not hiding the cost of the code and its impact on the software and the overall ecosystem it exists in.
 
 **3) Performance**  
-This is about not wasting effort, algorithm efficiency. Solving the data transformation problem with the least number of steps. Simplifying code by writing less of it.
+This is about not wasting effort, algorithm efficiency. Solving the data transformation problem with the least number of steps. Achieving performance by writing less code but staying within the idioms and framework of the language.
 
 **4) Micro-Optimization**  
 This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
