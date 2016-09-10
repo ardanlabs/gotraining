@@ -26,7 +26,7 @@ When dealing with CSV data or other forms of tabular data, you will likely want 
 
 Use Gota dataframes to read [iris.csv](data/iris.csv) and output three files corresponding to each Iris species (`setosa.csv`, `versicolor`, and `virginica.csv`), each of the three files containing only the rows corresponding to the respective species.
 
-[Template](exercises/template1/template2.go) |
+[Template](exercises/template1/template1.go) |
 [Answer](exercises/exercise1/exercise1.go)
 
 ### Exercise 2
