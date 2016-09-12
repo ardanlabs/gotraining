@@ -1,19 +1,22 @@
 ## Benchmarking
 
-Go has support for both testing and debugging. This includes profiling and benchmarking Go programs.
+Go has support for testing the performance of your code.
 
 ## Package Review
 
-[Basic Benchmarking](basic/basic_test.go) ([Go Playground](http://play.golang.org/p/afMdjJLluX))  
+[Basic Benchmarking](basic/basic_test.go) ([Go Playground](https://play.golang.org/p/Kwqe4zYpMi))  
+[Sub Benchmarks](sub/sub_test.go) ([Go Playground](https://play.golang.org/p/q4qV9BdH4R))  
 [Prediction](prediction/README.md)  
 [Caching](caching/README.md)  
-[Profiling](../profiling/benchmarks/README.md)
+
+_Look at the profiling topic to learn more about using benchmarks to [profile](../profiling) code._
 
 ## Links
 
 http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go  
 [Profiling & Optimizing in Go / Brad Fitzpatrick](https://www.youtube.com/watch?v=xxDZuPEgbBU)  
-[Benchstat computes and compares statistics about benchmarks](https://github.com/rsc/benchstat)
+[Benchstat computes and compares statistics about benchmarks](https://github.com/rsc/benchstat)  
+[Advanced Testing Concepts for Go 1.7](https://speakerdeck.com/mpvl/advanced-testing-concepts-for-go-1-dot-7) - Marcel van Lohuizen  
 
 ## Exercises
 

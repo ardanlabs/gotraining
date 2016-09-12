@@ -1,11 +1,11 @@
 ## Goroutines
 
-Goroutines are functions that are created and scheduled to be run independently. Goroutines are multiplexed against a shared thread that is owned by context. The scheduler is responsible for the management and execution of goroutines.
+Goroutines are functions that are created and scheduled to be run independently. Goroutines are multiplexed against a shared thread that is owned by logical processor. The scheduler is responsible for the management and execution of goroutines.
 
 ## Notes
 
 * Goroutines are functions that are scheduled to run independently.
-* The scheduler uses a context that owns an OS thread and goroutine run queue.
+* The scheduler uses a logical processor that owns an OS thread and goroutine run queue.
 * We must always maintain an account of running goroutines and shutdown cleanly.
 * Concurrency is not parallelism.
 	* Concurrency is about dealing with lots of things at once.
@@ -29,7 +29,8 @@ http://blog.golang.org/concurrency-is-not-parallelism
 http://talks.golang.org/2013/distsys.slide  
 [Go 1.5 GOMAXPROCS Default](https://docs.google.com/document/d/1At2Ls5_fhJQ59kDK2DFVhFu3g5mATSXqqV5QrxinasI/edit)  
 http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html  
-[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)
+[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
+[Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
 
 ## Code Review
 
@@ -45,7 +46,7 @@ http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 **Part B** Run the program in parallel.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/xv15yVM2yE)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/87OanzQcg4))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/c4bS7fR4f1)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/BRZbwwGyES))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

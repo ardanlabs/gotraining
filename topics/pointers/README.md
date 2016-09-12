@@ -18,6 +18,7 @@ The design of the Go GC has changed over the years:
 * Go 1.4, Mark and sweep now parallel, but still stop the world.
 * Go 1.5, New GC design, focusing on latency over throughput.
 * Go 1.6, GC improvements, handling larger heaps with lower latency.
+* Go 1.7, GC improvements, handling larger number of idle goroutines, substantial stack size fluctuation, or large package-level variables.
 
 ![figure1](GC_Algorithm.png?v=2)
 
@@ -75,7 +76,7 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)  
 [Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)
 
-### Single Static Assignment Optimizations
+### Static Single Assignment Optimizations
 
 [GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)  
 https://godoc.org/golang.org/x/tools/go/ssa  

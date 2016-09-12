@@ -2,34 +2,36 @@
 
 These are a set of design guidelines for data, interfaces, composition and packages. Please consider these principles when designing your own software.
 
+***"The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski***
+
 #### Bottom Line
 
-The compiler is a tool and it's not all knowing or perfect.  
+The **compiler** is a tool and it's not all knowing or perfect.  
 You need to work with it and help it.
 
-The operating system is doing its best to keep cores busy and leverage the right core at the right time.  
+The **operating system** is doing its best to keep cores busy and leverage the right core at the right time.  
 You need to work with it and help it.
 
-The hardware is doing its best to execute as many instructions per clock cycle as possible.  
+The **hardware** is doing its best to execute as many instructions per clock cycle as possible.  
 You need to work with it and help it.
 
 Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
 
-#### Integrity, Readability, Simplicity and Performance
+#### Decision Making and Trade-Offs
 
-You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. These trade-offs falls into these four areas. Before you allow a higher numbered trade-off trump a lower numbered trade-off, you must consciously and with great reason be able to explain yourself.
+You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. Evaluate the trade-offs of a decision in this order: Integrity, Readability, and then Performance. Before you allow a lower priority trade-off to trump you must consciously and with great reason be able to explain yourself.
 
 **1) Integrity**  
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
 
 **2) Readability**  
-This is the ability to easily read code and understand what it is doing. It is also the ability to understand the cost of the code and its impact on your software and the overall ecosystem it exists in.
+This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
-**3) Simplicity**  
-This is algorithm efficiency and not wasting effort. Solving the data transformation problem with the least number of steps. NASA identified that every 10 lines of code produces a bug whether you like it or not. Reduce bugs and simplify code by writing less of it.
+**3) Performance**  
+This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
 
-**4) Performance**  
-This is about micro-optimizing something when it is absolutely necessary. When code is written with this as the priority, it is very difficult to write code that is readable and simple. When readable and simple code is not performing well enough based on real empirical data, then this can be discussed.
+**4) Micro-Optimization**  
+This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
 #### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  

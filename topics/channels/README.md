@@ -27,6 +27,7 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 [Channel Communication](https://golang.org/ref/mem#tmp_7)  
 http://blog.golang.org/share-memory-by-communicating  
 http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html  
+[A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh  
 
 ## Buffer Bloat - 2011
 

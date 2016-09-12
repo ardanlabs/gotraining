@@ -1,6 +1,6 @@
 ## Memory Tracing
 
-There is no way to identify specifically in the code where a leak is occuring. We can validate if a memory leak is present and which functions or methods are producing the most allocations.
+There is no way to identify specifically in the code where a leak is occurring. We can validate if a memory leak is present and which functions or methods are producing the most allocations.
 
 ## GODEBUG
 

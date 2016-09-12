@@ -23,7 +23,8 @@ type speaker interface {
 // english represents an english speaking person.
 type english struct{}
 
-// speak implements the speaker interface.
+// speak implements the speaker interface using a
+// value receiver.
 func (english) speak() {
 	fmt.Println("Hello World")
 }
@@ -31,34 +32,44 @@ func (english) speak() {
 // chinese represents a chinese speaking person.
 type chinese struct{}
 
-// speak implements the speaker interface.
-func (chinese) speak() {
+// speak implements the speaker interface using a
+// pointer receiver.
+func (*chinese) speak() {
 	fmt.Println("你好世界")
 }
 
 func main() {
 
-	// Declare a variable of the interface type.
+	// Declare a variable of the interface speaker type
+	// set to its zero value.
 	var sp speaker
 
-	// Assign a value to the interface type variable and
-	// call the interface method.
+	// Declare a variable of type english.
 	var e english
+
+	// Assign the english value to the speaker variable.
 	sp = e
+
+	// Call the speak method against the speaker variable.
 	sp.speak()
 
-	// Assign a different value to the interface type
-	// variable and call the interface method.
+	// Declare a variable of type chinese.
 	var c chinese
-	sp = c
+
+	// Assign the chinese pointer to the speaker variable.
+	sp = &c
+
+	// Call the speak method against the speaker variable.
 	sp.speak()
 
-	// Create new values and call the function.
-	sayHello(new(english))
+	// Call the sayHello function with new values and pointers
+	// of english and chinese.
+	sayHello(english{})
+	sayHello(&english{})
 	sayHello(&chinese{})
 
-	// The use of new() and the empty literal is there
-	// as a talking point about these options.
+	// Why does this not work?
+	// sayHello(chinese{})
 }
 
 // sayHello abstracts speaking functionality.

@@ -34,6 +34,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob  
 [The Best Programming Advice I Ever Got](http://www.informit.com/articles/article.aspx?p=1941206) - Rob Pike  
 
+[A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh
+
 ### Standard Library
 
 [io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#.d2ebstv0q) - Ben Johnson  
@@ -80,11 +82,14 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
 [Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz    
 [Monitoring and Tuning the Linux Networking Stack: Receiving Data](http://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/) - packagecloud  
+[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
 
 ### Container and Orchestration
 
 [How To Deploy a Go Web Application with Docker](https://semaphoreci.com/community/tutorials/how-to-deploy-a-go-web-application-with-docker) - Kulshekhar Kabra  
 [An introduction to Clear Containers](https://lwn.net/Articles/644675) - LWN.net  
+[Getting Started with Docker](https://docs.docker.com/engine/getstarted/) - Docker  
+[Kubernetes Bootcamp](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/) - Google  
 
 ### Distributed Systems
 
@@ -108,7 +113,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 Much of this content can be found under [arrays](../topics/arrays) and [data races](../topics/data_race). We feel this content is so important it has been moved out to this general materials page.
 
-#### CPU Caches
+#### CPU Caches / Memory
 
 [CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE) - Scott Meyers  
 [CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf) - Scott Meyers  
@@ -120,7 +125,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 [The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm) - Herb Sutter  
 [Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
-[Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
+[Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter      
 
 #### Data-Oriented Design
 
@@ -134,6 +139,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 
 [The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
 [The Cost of Virtualization](http://queue.acm.org/detail.cfm?id=1348591) - Ulrich Drepper  
+[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman  
 
 ## Runtime
 
@@ -165,7 +171,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
-[Go 1.7 Release Notes](https://golang.org/doc/go1.7) - DRAFT  
+[Go 1.7 Release Notes](https://golang.org/doc/go1.7) - 2016/08/15  
 [Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
 [Go 1.5 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19  
 [Go 1.4 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10  

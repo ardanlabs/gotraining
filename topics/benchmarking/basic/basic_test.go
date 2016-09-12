@@ -6,30 +6,31 @@
 // Basic benchmark test.
 package basic
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-// fib finds the nth fibonacci number.
-func fib(n int) int {
-	a := 0
-	b := 1
+var gs string
 
-	for i := 0; i < n; i++ {
-		temp := a
-		a = b
-		b = temp + a
-	}
-	return a
-}
-
-var fa int
-
-// BenchmarkFib provides performance numbers for the fibonacci function.
-func BenchmarkFib(b *testing.B) {
-	var a int
+// BenchmarkSprint tests the performance of using Sprint.
+func BenchmarkSprint(b *testing.B) {
+	var s string
 
 	for i := 0; i < b.N; i++ {
-		a = fib(1e5)
+		s = fmt.Sprint("hello")
 	}
 
-	fa = a
+	gs = s
+}
+
+// BenchmarkSprint tests the performance of using Sprintf.
+func BenchmarkSprintf(b *testing.B) {
+	var s string
+
+	for i := 0; i < b.N; i++ {
+		s = fmt.Sprintf("hello")
+	}
+
+	gs = s
 }

@@ -55,5 +55,6 @@ func main() {
 	fmt.Println("Waiting To Finish")
 	wg.Wait()
 
+	// Display "Terminating Program".
 	fmt.Println("\nTerminating Program")
 }

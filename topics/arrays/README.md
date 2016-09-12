@@ -75,26 +75,28 @@ This is subject to be different in different processors. For this content, the f
 
 ## Links
 
-#### CPU Caches
+#### CPU Caches / Memory
 
-[Scott Meyers: CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE)  
-[Scott Meyers: CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf)  
-[Mythbusting Modern Hardware to Gain 'Mechanical Sympathy' • Martin Thompson](https://www.youtube.com/watch?v=MC1EKLQ2Wmg)  
-[What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf)  
-[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips)  
-[Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors)  
-[Ulrich Drepper - Memory part 2: CPU caches](http://lwn.net/Articles/252125)  
-[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm)  
-[Dick Sites - "Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM)  
-[Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law)  
+[CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE) - Scott Meyers  
+[CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf) - Scott Meyers  
+[Mythbusting Modern Hardware to Gain 'Mechanical Sympathy`](https://www.youtube.com/watch?v=MC1EKLQ2Wmg) - Martin Thompson  
+[What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf) - Ulrich Drepper  
+[How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips) - Joel Hruska  
+[Modern Microprocessors A 90 Minute Guide](http://www.lighterra.com/papers/modernmicroprocessors) - Jason Robert Carey Patterson  
+[Memory part 2: CPU caches](http://lwn.net/Articles/252125) - Ulrich Drepper  
+[The Free Lunch Is Over](http://www.gotw.ca/publications/concurrency-ddj.htm) - Herb Sutter  
+[Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
+[Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
+[Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
+[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
 
 #### Data-Oriented Design
 
-[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc)  
-[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf)  
-[Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo)  
-[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs)  
-[Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)](http://gamesfromwithin.com/data-oriented-design)
+[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
+[Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf) - Tony Albrecht  
+[Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo) - Bjarne Stroustrup  
+[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth  
+[Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)](http://gamesfromwithin.com/data-oriented-design) - Noel  
 
 ## Code Review
 

@@ -4,7 +4,8 @@
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
-[Learn More](https://talks.golang.org/2012/splash.article)
+[Learn More](https://talks.golang.org/2012/splash.article) - Go Team  
+[Getting Started In Go](http://aarti.github.io/2016/08/13/getting-started-in-go) - Aarti Parikh  
 
 ## Minimal Qualified Student
 
@@ -117,16 +118,26 @@ http://www.goinggo.net/
 **William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
 _William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
-[Going Go](https://www.goinggo.net/) - Blog  
-[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go) - Blog  
-[Go In Action](https://www.manning.com/books/go-in-action) - Book  
-[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk) - Video  
-[GoSF - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ) - Video  
-[GothamGo - Error Handling in Go](https://vimeo.com/115782573) - Video  
-[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM) - Video  
-[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo) - Video  
-[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek) - Video  
-[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8) - Video  
+_**Writing**_  
+[Going Go](https://www.goinggo.net/)    
+[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
+[Go In Action](https://www.manning.com/books/go-in-action)  
+
+_**Video**_  
+[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
+[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
+[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
+[GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
+
+[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
+[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
+[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
+[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)    
+
+_**Podcasts**_  
+[Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
+[The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
+[Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime-6/)  
 
 **Kevin Gillette** ([@kevingillette](https://twitter.com/kevingillette))  
 _Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history._
@@ -134,10 +145,22 @@ _Kevin is an experienced software engineer that has been enthusiastically using 
 **Cory LaNou** ([@corylanou](https://twitter.com/corylanou))  
 _Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time._
 
+https://corylanou.github.io/
+
+**Mark Bates** ([@markbates](https://twitter.com/markbates))  
+_Mark Bates is a full stack web developer with over 17 years of experience. He has written three books, “Distributed Programming with Ruby”, “Programming in CoffeeScript”, and “Conquering the Command Line”. Mark has spoken at conferences around the world, has led user groups such as Boston Ruby and Boston Golang, and has helped to organize conferences such as GothamGo and GopherCon (lightning talks)._
+
+https://www.papercall.io/speakers/markbates
+
+**Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
+Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
+
+https://github.com/dwhitena/slides
+
 ## Twitter
 
-Ian Molee ([@ianfoo](https://twitter.com/c4milo/status/752317652563996672))  
-_"If you're at @GopherCon, get yourself to a session with @goinggodotnet. Superb! Pretty sure his pic appears with the definition of "dynamo.""_
+Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
+_"The unflappable @goinggodotnet demystifying Go stacktraces at #ultimatego day 3 at @tune. Thanks for leveling us up."_
 
 Camilo Aguilar ([@c4milo](https://twitter.com/c4milo/status/752317652563996672))  
 _"Holy cow, the best lighting talk I have ever seen about mechanical sympathy by @goinggodotnet. Here at #gophercon"_
@@ -150,6 +173,9 @@ _"Day 1 of the [Ultimate] Go workshop was outstanding! Big shoutout to @intel, @
 
 Katrina Owen ([@kytrinyx](https://twitter.com/kytrinyx/status/673360428278222848))  
 _"OH: "You thought you knew Go..." (You do Go? You want to do Go?) You should take this workshop. Seriously.) "_
+
+Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/752246569554964480))
+_"If you're at @GopherCon, get yourself to a session with @goinggodotnet. Superb! Pretty sure his pic appears with the definition of "dynamo.""_
 
 Matt Oswalt ([@Mierdin](https://twitter.com/mierdin/status/673570058392616961))  
 _"Should be mentioned that though I am no expert, I have been using Go for about a year - and this meetup is kicking my ass."_
@@ -196,84 +222,63 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
-#### 2016
+### 2016
+		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
+		===========================================================================================================
+		Corporate	Go			Viacom			NYC, NY					September	Bill Kennedy
+		Corporate	Go			Nordstroms		Seattle, WA	 			September	Bill Kennedy
+		Free		Go			WWG				London, England			October		Bill Kennedy
+		Public		Adv Go		Rackspace		SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
+		Free		Go			WWG				SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
+		Corporate	Go			Traderev		Toronto, Canada 		October		Bill Kennedy
+		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
+		Public		Go			dotGo			Paris, France			October		Ernesto Jimenez
+		Public		Kubernetes	OSCON 			London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
+		Public		Go			GopherCon		Florianópolis, Brazil	 November	 Bill Kennedy
+		Free		Web			WWG				SF, CA					November	Mark Bates
+		Public		Data		Ardan			SF, CA					November	Daniel Whitenack
+		Public		Go			GothamGo		NYC, NY					November	Bill Kennedy
+		Public		Go			Dev Fest		NYC, NY					November	Bill Kennedy
+		Public		Data		GDG DevFest		Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
+		Free		Web			WWG				NYC, NY					November	Mark Bates
+		Corporate	Go			Skillsmatter	London, England			November	Bill Kennedy
+		Public		Web			Ardan			SF, CA					December	Mark Bates			https://www.eventbrite.com/e/ultimate-go-web-san-francisco-nov-2016-tickets-27326208425
+		Corporate	Go			GNS Science		New Zealand				December	Bill Kennedy
 
-		Capital One 	Richmond, VA 		- January  
-		BOT 			Miami, FL 			- January  
-		CISCO 			Lawrenceville, GA 	- February  
-		Ultimate Go 	Utrecht, Amsterdam	- March  
-		GE 				San Ramon, CA 		- March  
-		WWG 			SF, CA 				- March  
-		Ultimate Go 	SLC, UT 			- March  
-		SAS 			Cary, NC 			- March  
-		Ultimate Go 	SF, CA 				- April  
-		Salesforce 		Dublin, Ireland 	- April  
-		CapitalOne 		Richmond, VA 		- April  
-		HP Enterprise 	Seattle, WA 		- May  
-		CISCO 			Lawrenceville, GA 	- May  
-		Rackspace 		San Antonio, TX 	- May  
-		OSCON 			Portland, OR  		- May  
-		Intel 			Hillsboro, OR 		- May  
-		Staples 		Framingham, MA  	- May  
-		Ultimate Go 	London, England 	- June  
-		Ultimate Go 	Phoenix, AZ  		- June
-		GopherCon		Denver, CO  		- July
-		Red Ventures 	South Carolina	 	- August  
+											Completed
 
-					--- Pending ---
-		  
-		GolangUK 		London, England 	- August  
-		Tune 			Seattle, WA	 		- August  
-		CapitalOne		McLean, VA	 		- September  
-		Nordstroms		Seattle, WA	 		- September  
-		Skillsmatter	London, England		- September
-		Ultimate Go		SF, CA				- September
-		WWG - FS		SF, CA				- September  
-		Traderev		Toronto, Canada 	- September  
-		Centralway		Zürich, Switzerland - October  
-		dotGo			Paris, France		- October  
-		DevconTLV		Tel Aviv, Israel	- November 
-		GNS Science		New Zealand			- December   
+		Corporate	Go			CapitalOne		McLean, VA	 			September	Bill Kennedy
+		Corporate	Go			Capital One 	Richmond, VA 			January		Bill Kennedy
+		Corporate	Go			BOT 			Miami, FL 				January		Bill Kennedy
+		Corporate	Go			CISCO 			Lawrenceville, GA 		February	Bill Kennedy
+		Public		Go			Bol 			Utrecht, Amsterdam		March		Bill Kennedy
+		Corporate	Go			GE 				San Ramon, CA 			March		Bill Kennedy
+		Free		Go			WWG				SF, CA 					March		Bill Kennedy
+		Public		Go 			Fidelity		SLC, UT 				March		Bill Kennedy
+		Corporate	Go			SAS 			Cary, NC 				March		Bill Kennedy
+		Public		Go			Ardan			Minneapolis, MN			March		Cory LaNou
+		Public		Go			Minio			SF, CA 					April		Bill Kennedy
+		Corporate	Go			Salesforce 		Dublin, Ireland 		April		Kevin Gillette
+		Corporate	Go			CapitalOne 		Richmond, VA 			April		Bill Kennedy
+		Corporate	Go			HP Enterprise 	Seattle, WA 			May			Cory LaNou
+		Corporate	Go			CISCO 			Lawrenceville, GA 		May			Bill Kennedy
+		Corporate	Go			Rackspace 		San Antonio, TX 		May			Bill Kennedy
+		Public		Go			OSCON 			Portland, OR  			May			Bill Kennedy
+		Corporate	Go			Intel 			Hillsboro, OR 			May			Bill Kennedy
+		Corporate	Go			Staples 		Framingham, MA  		May			Bill Kennedy
+		Public		Go 			Halio			London, England 		June		Bill Kennedy
+		Public		Go 			Shutterfly		Phoenix, AZ  			June		Bill Kennedy
+		Public		Go			GopherCon		Denver, CO  			July		Cory LaNou
+		Public		Adv Go		GopherCon		Denver, CO  			July		Bill Kennedy
+		Corporate	Go			Red Ventures 	South Carolina	 		August		Bill Kennedy
+		Public		Go			GolangUK 		London, England 		August		Cory LaNou
+		Public		Adv Go		GolangUK 		London, England 		August		Bill Kennedy
+		Corporate	Go			Tune 			Seattle, WA	 			August		Bill Kennedy
 
-#### 2015
+### Past Years
 
-		Edmonton Go 	Edmonton, Canada 	- January  
-		GopherCon 		Bangalore, India 	- February  
-		Ultimate Go 	Denver, CO 			- March  
-		Ultimate Go 	SF, CA 				- March  
-		Ultimate Go 	Denver, CO 			- April  
-		FluentConf 		SF, CA 				- April  
-		ACL 			Vancouver, Canada 	- May  
-		PowerChord 		Tampa, FL 			- May  
-		Rackspace 		San Antonio, TX 	- May  
-		Ultimate Go 	NYC, NY 			- June  
-		MagmaConf  		Manzanillo, Mexico 	- June  
-		Ultimate Go		Denver, CO 			- July  
-		NY Times   		NYC, NY 			- July  
-		OSCON      		Portland, OR 		- July  
-		WWG 			SF, CA 				- August  
-		GolangUK 		London, England 	- August  
-		YikYak 			Atlanta, GA 		- August  
-		Bridgevine 		Miami, FL 			- September  
-		Ultimate Go 	Seattle, WA 		- September  
-		Fidelity 		Dublin, Ireland 	- September  
-		Ultimate Go 	SF, CA 				- September  
-		GothamGo 		NYC, NY 			- October  
-		Economist 		NYC, NY 			- October  
-		GE 				San Ramon, CA 		- October  
-		Teradata 		San Diego, CA 		- October  
-		SAS 			Cary, NC 			- October  
-		NY Times 		NYC, NY 			- November  
-		Meetme 			New Paltz, NY 		- November  
-		NY Times 		NYC, NY 			- November 
-		Ultimate Go 	Portland, OR 		- November  
-		Nordstrom 		Seattle, WA 		- December  
-
-#### 2014
-
-		Comcast 		SF, CA 				- August  
-		GothamGo 		NYC, NY 			- October  
-		Comcast 		Reston, VA 			- December
+		2015 : 33 Events
+		2014 :  3 Events
   
 ## Contact Information
 

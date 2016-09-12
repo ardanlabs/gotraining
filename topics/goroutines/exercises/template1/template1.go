@@ -27,7 +27,7 @@ func main() {
 		// Declare a loop that counts down from 100 to 0 and
 		// display each value.
 
-		// Decrements the count of the wait group.
+		// Tell main we are done.
 	}
 
 	// Declare an anonymous function and create a goroutine.
@@ -35,8 +35,10 @@ func main() {
 		// Declare a loop that counts up from 0 to 100 and
 		// display each value.
 
-		// Decrements the count of the wait group.
+		// Tell main we are done.
 	}
 
 	// Wait for the goroutines to finish.
+
+	// Display "Terminating Program".
 }
