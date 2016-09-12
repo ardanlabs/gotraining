@@ -5,6 +5,7 @@
     "go.formatOnSave": true,
     "go.buildOnSave": true,
     "go.lintOnSave": true,
+    "go.lintTool": "golint",
     "go.vetOnSave": true,
     "go.buildFlags": ["-i"],
     "go.lintFlags": [],
@@ -16,6 +17,7 @@
     "go.formatTool": "goreturns",
     "go.gocodeAutoBuild": true,
 
+    "editor.fontSize": 14,
     "editor.formatOnType": true,
     "editor.mouseWheelZoom": true,
 
