@@ -4,7 +4,13 @@ As already discussed, the day-to-day activities of a data scientists usually inv
 
 ## Notes
 
+* A cache isn’t meant to be used as a persistent datastore.
+* A cache created with `go-cache` can be safely used by multiple goroutines.
+
 ## Links
+
+[go-cache Docs](https://patrickmn.com/projects/go-cache/)
+[Intro to BoltDB](https://npf.io/2014/07/intro-to-boltdb-painless-performant-persistence/)
 
 ## Code Review
 

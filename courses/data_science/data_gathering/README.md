@@ -17,6 +17,8 @@ This is material for scientists, analysts, and developers who have some experien
 
 #### Caching
 
+[Embedded/In-Memory Caching](../../../topics/data_science/caching/README.md)
+
 #### Interactive Data Exploration
 
 ___
