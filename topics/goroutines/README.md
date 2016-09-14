@@ -42,11 +42,11 @@ http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 ### Exercise 1
 
-**Part A** Create a program that declares two anonymous functions. One that counts up to 100 from 0 and one that counts down to 0 from 100. Display each number with an unique identifier for each goroutine. Then create goroutines from these functions and don't let main return until the goroutines complete.
+**Part A** Create a program that declares two anonymous functions. One that counts down from 100 to 0 and one that counts up from 0 to 100. Display each number with an unique identifier for each goroutine. Then create goroutines from these functions and don't let main return until the goroutines complete.
 
 **Part B** Run the program in parallel.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/c4bS7fR4f1)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/BRZbwwGyES))
+[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/kjtlMXkAAv)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/6iGzF8rMTN))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
