@@ -89,6 +89,7 @@ This is subject to be different in different processors. For this content, the f
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
 [NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
+[The Myth Of Ram](http://www.ilikebigbits.com/blog/2014/4/21/the-myth-of-ram-part-i) - Emil Ernerfeldt    
 
 #### Data-Oriented Design
 
