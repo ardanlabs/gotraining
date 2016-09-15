@@ -22,27 +22,39 @@ The design of the Go GC has changed over the years:
 
 ![figure1](GC_Algorithm.png?v=2)
 
-**Mark / Sweep**
+**Initial Stop The World (STW) Phase**
 
-* All objects on the heap are turned WHITE and the write barrier is turned on.
+Turn the Write Barrier on. The Write Barrier is a little function that inspects the write of pointers when the GC is running. Each goroutine must know this flag is set. This STW pause should be sub-millisecond.
+
+**Mark Phase**
+
+Find all the object that can be reclaimed.
+
+* All objects on the heap are turned WHITE and the Write Barrier is turned on.
 * Scan Stack phase is about finding all the root objects and placing them in the queue.
     * All these root objects are turned GREY.
 * Mark phase I is about popping a GREY object from the queue and scanning it.
-    * If this GREY object points to a WHITE object, the WHITE object is added to the queue and marked GREY.
-    * The popped GREY object is then turned BLACK to show it has been scanned.
+    * Turn the object BLACK.
+    * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
     * The GC and the application are running concurrently.
 * Mark phase II is about finding objects that were missed due to updates.
     * Rescan all the root objects again.
     * This scan should be quick but required for consistency.
-* Sweep phase reclaims memory.
-    * Left with either WHITE or BLACK objects. No more GREY objects.
-    * WHITE objects are reclaimed while BLACK objects stay.
+    * Looking for any GREY objects that exist because of the Write Barrier.
+    * Handle calling finalizers.
+
+**Sweep Phase**
+
+Sweep phase reclaims memory.
+
+* Left with either WHITE or BLACK objects. No more GREY objects.
+* WHITE objects are reclaimed while BLACK objects stay.
 
 **Write Barrier**
 
-The write barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running.
+The Write Barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object after GC is complete. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running after that BLACK object has been processed.
 
-The write barrier is a little function that inspects the write of pointers when the GC is running. If it identifies such a write, the WHITE object is turned GREY and added to the queue.
+The Write Barrier is a little function that inspects the write of pointers when the GC is running. If it identifies such a write as described above, the WHITE object is turned GREY.
 
 **Pacing**
 

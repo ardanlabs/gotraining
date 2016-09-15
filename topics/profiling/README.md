@@ -252,7 +252,11 @@ Run the Go pprof tool in another window or tab to review cpu information.
 
 	go tool pprof ./project http://localhost:5000/debug/pprof/profile
 
-	_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile). Note that goroutines in "IO wait" state also do not consume threads, they are parked on non-blocking network poller (which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
+	_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not
+	(except for goroutines that called runtime.LockOSThread, which is, unfortunately, not
+	visible in the profile). Note that goroutines in "IO wait" state also do not consume
+	threads, they are parked on non-blocking network poller
+	(which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
 
 Explore using the **top**, **list**, **web** and **web list** commands.
 
