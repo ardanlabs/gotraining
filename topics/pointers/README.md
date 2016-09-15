@@ -31,13 +31,13 @@ Turn the Write Barrier on. The Write Barrier is a little function that inspects 
 Find all the objects that can be reclaimed.
 
 * All objects on the heap are turned WHITE.
-* Scan Stacks phase is about finding all the root objects and placing them in the queue.
+* **Scan Stacks** is about finding all the root objects and placing them in the queue.
     * All these root objects are turned GREY.
-* Mark phase I is about popping a GREY object from the queue and scanning it.
+* **Mark Phase I** is about popping a GREY object from the queue and scanning it.
     * Turn the object BLACK.
     * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
     * The GC and the application are running concurrently.
-* Mark phase II is about rescanning for Write Barrier changes.
+* **Mark phase II** is about rescanning for Write Barrier changes.
     * Rescan all the root objects again.
     * This scan should be quick but required for consistency.
     * Looking for any GREY objects that exist because of the Write Barrier.
