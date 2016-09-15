@@ -54,19 +54,6 @@ Use the **time** command to see data about building the program.
 	/usr/bin/time -lp go build		-- Mac OS X
 	/usr/bin/time -v go build		-- Linux
 
-### go build -x
-
-The **-x** option will provide detailed information about the build of your software.
-
-	go build -x
-
-### go build -toolexec
-
-This options lets you add a prefix command to every command the Go tooling runs.
-
-	go build -toolexec="/usr/bin/time -lp" .	-- Mac OS X
-	go build -toolexec="/usr/bin/time -v" .		-- Linux
-
 ### perf
 
 If you're a linux user, then perf(1) is a great tool for profiling applications. Now we have frame pointers, perf can profile Go applications.
