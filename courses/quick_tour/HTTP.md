@@ -38,7 +38,7 @@ func main() {
 To run this issue the following command:
 
 ```sh
-go run website.go
+go run webserver.go
 ```
 
 Then open web browser on [http://localhost:8080](http://localhost:8080)
@@ -92,7 +92,7 @@ go get github.com/gorilla/mux
 Now, we can fire up the server again:
 
 ```sh
-go run website.go
+go run webserver.go
 ```
 
 Now open web browser on [http://localhost:8080](http://localhost:8080).  As you can see nothing new is really going on.
