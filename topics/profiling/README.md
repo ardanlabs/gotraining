@@ -127,7 +127,7 @@ If lots of time is spent in channel operations, `sync.Mutex` code and other sync
 
 If lots of time is spent in `syscall.Read/Write`, the program potentially makes excessive amount of small reads and writes. Bufio wrappers around os.File or net.Conn can help in this case.
 
-If lots of time is spent in GC component, the program either allocates too many transient objects or heap size is very small so garbage collections happen too frequently. See Garbage Collector Tracer and Memory Profiler sections for optimization suggestions.
+If lots of time is spent in GC component, the program either allocates too many transient objects or heap size is very small so garbage collections happen too frequently.
 
 * Large objects affect memory consumption and GC time, while large number of tiny allocations affects execution speed.
 
@@ -242,9 +242,11 @@ Run the Go pprof tool in another window or tab to review heap information.
 	-alloc_space  : All allocations happened since program start
 	-alloc_objects: Number of object allocated at the time of profile
 
-	If you want to reduce memory consumption, look at the `-inuse_space` profile collected during normal program operation.
+	If you want to reduce memory consumption, look at the `-inuse_space` profile collected during
+	normal program operation.
 	
-	If you want to improve execution speed, look at the `-alloc_objects` profile collected after significant running time or at program end.
+	If you want to improve execution speed, look at the `-alloc_objects` profile collected after
+	significant running time or at program end.
 
 Run the Go pprof tool in another window or tab to review cpu information.
 

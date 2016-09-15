@@ -31,9 +31,11 @@ Using benchmarks you can profile your programs and see exactly where your perfor
 	-alloc_space  : All allocations happened since program start
 	-alloc_objects: Number of object allocated at the time of profile
 
-	If you want to reduce memory consumption, look at the `-inuse_space` profile collected during normal program operation.
+	If you want to reduce memory consumption, look at the `-inuse_space` profile collected during
+    normal program operation.
 	
-	If you want to improve execution speed, look at the `-alloc_objects` profile collected after significant running time or at program end.
+	If you want to improve execution speed, look at the `-alloc_objects` profile collected after
+    significant running time or at program end.
 ```
 
 ## Code Review
