@@ -22,26 +22,26 @@ The design of the Go GC has changed over the years:
 
 ![figure1](GC_Algorithm.png?v=2)
 
-**Initial Stop The World (STW) Phase**
+**STW : Stop The World Phase**
 
 Turn the Write Barrier on. The Write Barrier is a little function that inspects the write of pointers when the GC is running. Each goroutine must know this flag is set. This STW pause should be sub-millisecond.
 
 **Mark Phase**
 
-Find all the object that can be reclaimed.
+Find all the objects that can be reclaimed.
 
-* All objects on the heap are turned WHITE and the Write Barrier is turned on.
-* Scan Stack phase is about finding all the root objects and placing them in the queue.
+* All objects on the heap are turned WHITE.
+* Scan Stacks phase is about finding all the root objects and placing them in the queue.
     * All these root objects are turned GREY.
 * Mark phase I is about popping a GREY object from the queue and scanning it.
     * Turn the object BLACK.
     * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
     * The GC and the application are running concurrently.
-* Mark phase II is about finding objects that were missed due to updates.
+* Mark phase II is about rescanning for Write Barrier changes.
     * Rescan all the root objects again.
     * This scan should be quick but required for consistency.
     * Looking for any GREY objects that exist because of the Write Barrier.
-    * Handle calling finalizers.
+    * Call any finalizers on BLACK objects.
 
 **Sweep Phase**
 
