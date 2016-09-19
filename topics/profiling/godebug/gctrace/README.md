@@ -35,7 +35,7 @@ In Go, a memory leak is memory you retain a reference to.
     gc 3 @0.032s 1%: 0.020+0.16+0.007+0.25+0.090 ms clock, 0.14+0.16+0+0/0.20/0.27+0.63 ms cpu, 17->17->14 MB, 14 MB goal, 8 P
     gc 4 @0.066s 0%: 0.029+0.17+0.074+0.48+0.10 ms clock, 0.20+0.17+0+0/0.42/0.26+0.76 ms cpu, 35->35->29 MB, 29 MB goal, 8 P
 
-    gc 4        : Forth GC run since program started.
+    gc 1        : First GC run since program started.
     @0.009s     : Nine milliseconds since the program started.
     1%          : One percent of the programs time has been spent in GC.
     
@@ -54,7 +54,7 @@ In Go, a memory leak is memory you retain a reference to.
     5MB         : Heap size at GC start.
     5MB         : Heap size at GC end.
     3MB         : Live Heap.
-    14MB        : Goal heap size.
+    4MB         : Goal heap size.
     8P          : Number of logical processors. 
 
 ## Links
