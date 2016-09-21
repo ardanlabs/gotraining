@@ -38,9 +38,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Standard Library
 
-[io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#.d2ebstv0q) - Ben Johnson  
-[bytes + strings packages](https://medium.com/@benbjohnson/go-walkthrough-bytes-strings-packages-499be9f4b5bd#.u3z89vqc1) - Ben Johnson  
-[encoding package](https://medium.com/@benbjohnson/go-walkthrough-encoding-package-bc5e912232d#.ydtphayvi)  - Ben Johnson  
+[io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#) - Ben Johnson  
+[bytes + strings packages](https://medium.com/@benbjohnson/go-walkthrough-bytes-strings-packages-499be9f4b5bd#) - Ben Johnson  
+[encoding package](https://medium.com/@benbjohnson/go-walkthrough-encoding-package-bc5e912232d#)  - Ben Johnson  
+[strconv package](https://medium.com/@benbjohnson/go-walkthrough-strconv-7a24632a9e73#) - Ben Johnson  
 
 ### Testing and Structure
 
