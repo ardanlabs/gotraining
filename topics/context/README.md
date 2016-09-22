@@ -26,12 +26,15 @@ The package context defines the Context type, which carries deadlines, cancelati
 [WithCancel API](example2/example2.go) ([Go Playground](https://play.golang.org/p/1p12kPZVKp))  
 [WithDeadline API](example3/example3.go) ([Go Playground](https://play.golang.org/p/KLuuhopJpS))  
 [WithTimeout API](example4/example4.go) ([Go Playground](https://play.golang.org/p/K4iMUT8cLc))  
-[Web Service](example5/example5.go) ([Go Playground](https://play.golang.org/p/2L_DF8-pH7))  
+[Request/Response](example5/example5.go) ([Go Playground](https://play.golang.org/p/urtOUiAyCF))  
 
 ## Exercises
 
 ### Exercise 1
 
-TBD
+Use the template and follow the directions. You will be writing a web handler that performs a mock database call but will timeout based on a context if the call takes to long. You will also save state into the context.
+
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/JBgzV7JI8S)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/2L_DF8-pH7))  
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
