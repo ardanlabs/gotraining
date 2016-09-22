@@ -1,5 +1,5 @@
 ## Ultimate Go - Language
-This material covers the specification and implementation of the language, including topics ranging from language syntax, Go's type system, internals, data oriented design and mechanical sympathy.
+This material covers all the language syntax, idioms, implementation and specification of the language. Once you are done with this material you will understand the mechanics of the language and mechanical sympathies the language has for both the hardware and operating system. 
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 

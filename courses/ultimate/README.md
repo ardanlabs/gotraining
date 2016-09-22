@@ -9,7 +9,7 @@ This material covers all the language syntax, idioms, implementation and specifi
 [Language](language/README.md)
 
 ## API Design
-This material covers aspects of Package and API design. Once you are done with this material you will understand better how composition and error handling work in Go plus other related API design principles. 
+This material covers the essential things you need to know about API design principles. Along the way you also learn about composition and error handling.
 
 [API](api/README.md)
 
@@ -24,6 +24,6 @@ This material covers a good portion of the tooling that comes with go. Specifica
 [Tooling](tooling/README.md)
 
 ## Standard Library
-This material covers the essential things you need to know about the io and http packages. Along the way you also learn about the log, reflect and encoding packages.
+This material covers the essential things you need to know about the standard library. Along the way you also learn about the most commonly used packages.
 
 [Standard Library](stdlib/README.md)
