@@ -8,12 +8,17 @@ This material covers all the language syntax, idioms, implementation and specifi
 
 [Language](language/README.md)
 
+## API Design
+This material covers aspects of Package and API design. Once you are done with this material you will understand better how composition and error handling work in Go plus other related API design principles. 
+
+[API](api/README.md)
+
 ## Concurrency
 This material covers all the concurrency aspects of the language. Once you are done with this material you will understand the concurrent mechanics of the language and mechanical sympathies the language has for both the hardware and operating system as it related to concurrency.
 
 [Concurrency](concurrency/README.md)
 
-## Tooling
+## Testing and Profiling
 This material covers a good portion of the tooling that comes with go. Specifically we cover testing and benchmarking. We also cover profiling memory and the scheduler. Finally we learn how to read stack traces.
 
 [Tooling](tooling/README.md)
