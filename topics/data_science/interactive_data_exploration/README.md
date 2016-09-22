@@ -1,6 +1,6 @@
 ## Interactive Data Exploration
 
-In the first stages of a data science project, you may not understand what the data looks like or the implications of certain analyses.  Thus, it can be extremely valuable to be able explore data interactively and develop analyses through some trial and error (implementing those later in a robust application).  The most common tool utilized for this type of exploratory data analysis is [Jupyter](http://jupyter.org/) notebooks.  These notebooks allow you to create and share documents that contain live code, equations, visualizations and explanatory text.  Here we will use Go in Jupyter notebooks recreating some of our previous data parsing interactively.
+In the first stages of a data science project, you may not understand what your data looks like or the implications of certain analyses.  Thus, it can be extremely valuable to be able explore data interactively and develop analyses through trial and error (implementing those later in a robust application).  The most common tool utilized for this type of exploratory data analysis is [Jupyter](http://jupyter.org/) notebooks.  These notebooks allow you to create and share documents that contain live code, equations, visualizations and explanatory text.  Here we will use Go in Jupyter notebooks recreating some of our previous data parsing interactively.
 
 ## Notes
 
@@ -16,7 +16,8 @@ In the first stages of a data science project, you may not understand what the d
 
 ## Code Review
 
-[Load and filter data](example1/example1.ipynb)  
+[Load and filter data in a notebook](example1/example1.ipynb) 
+[Examine the response from an API in a notebook](example2/example2.ipynb)
 
 ## Exercises
 
