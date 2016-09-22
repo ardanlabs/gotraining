@@ -35,6 +35,28 @@ In Go, a memory leak is memory you retain a reference to.
     gc 3 @0.032s 1%: 0.020+0.16+0.007+0.25+0.090 ms clock, 0.14+0.16+0+0/0.20/0.27+0.63 ms cpu, 17->17->14 MB, 14 MB goal, 8 P
     gc 4 @0.066s 0%: 0.029+0.17+0.074+0.48+0.10 ms clock, 0.20+0.17+0+0/0.42/0.26+0.76 ms cpu, 35->35->29 MB, 29 MB goal, 8 P
 
+    gc 1        : First GC run since program started.
+    @0.009s     : Nine milliseconds since the program started.
+    1%          : One percent of the programs time has been spent in GC.
+    
+    0.059ms     : **STW** Sweep termination.
+    0.17ms      : Mark/Scan - Assist Time (GC performed in line with allocation).
+    0.005ms     : Mark/Scan - Background GC time.
+    0.24ms      : Mark/Scan - Idle GC time.
+    0.12ms      : **STW** Mark termination.
+
+    0.17ms      : **STW** Sweep termination.
+    0.17+0+0ms  : Mark/Scan - Assist Time (GC performed in line with allocation).
+    0.36ms      : Mark/Scan - Background GC time.
+    0.067ms     : Mark/Scan - Idle GC time.
+    0.38ms      : **STW** Mark termination.
+
+    5MB         : Heap size at GC start.
+    5MB         : Heap size at GC end.
+    3MB         : Live Heap.
+    4MB         : Goal heap size.
+    8P          : Number of logical processors. 
+
 ## Links
 
 https://golang.org/pkg/runtime  
@@ -43,6 +65,7 @@ https://www.hakkalabs.co/articles/finding-memory-leaks-go-programs
 [http://dave.cheney.net/2014/07/11/visualising-the-go-garbage-collector](Visualising the Go garbage collector)    
 [http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables](Tour of Go's env variables)    
 [https://deferpanic.com/blog/understanding-golang-memory-usage](Understanding Go memory usage)  
+[GC Runtime Source Code](https://golang.org/src/runtime/mgc.go)  
 
 ## Code Review
 

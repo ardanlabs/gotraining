@@ -9,7 +9,7 @@
 
 ### Ultimate Go
 
-This is 5 days of material for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. We believe these classes are perfect for anyone who wants a jump start in learning Go or who wants a more thorough understanding of the language and its internals.
+This is 4 days of material for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. We believe these classes are perfect for anyone who wants a jump start in learning Go or who wants a more thorough understanding of the language and its internals.
 
 [Ultimate Go](ultimate/README.md)
 

@@ -48,7 +48,7 @@ func (Xenia) Pull(d *Data) error {
 type Pillar struct{}
 
 // Store knows how to store data into Pillar.
-func (Pillar) Store(d Data) error {
+func (Pillar) Store(d *Data) error {
 	fmt.Println("Out:", d.Line)
 	return nil
 }
@@ -76,8 +76,8 @@ func pull(x *Xenia, data []Data) (int, error) {
 
 // store knows how to store bulks of data into Pillar.
 func store(p *Pillar, data []Data) (int, error) {
-	for i, d := range data {
-		if err := p.Store(d); err != nil {
+	for i := range data {
+		if err := p.Store(&data[i]); err != nil {
 			return i, err
 		}
 	}

@@ -15,6 +15,11 @@ import (
 	"sync"
 	"testing"
 	"time"
+
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/plotter"
+	"github.com/gonum/plot/plotutil"
+	"github.com/gonum/plot/vg"
 )
 
 // data represents a set of bytes to process.
@@ -68,7 +73,9 @@ func input() io.Reader {
 // TestLatency provides a test to profile and trace channel latencies.
 func TestLatency(t *testing.T) {
 	var i int
+	var count int
 	var first time.Duration
+	pts := make(plotter.XYs, 40)
 
 	for {
 		var wg sync.WaitGroup
@@ -106,6 +113,11 @@ func TestLatency(t *testing.T) {
 		// Display the results.
 		fmt.Printf("%d\t%v\t%.2f\n", i, since, dec)
 
+		// Prepare the results for plotting.
+		pts[count].X = float64(i)
+		pts[count].Y = dec
+		count++
+
 		// Want to look at a single buffer increment.
 		if i < 10 {
 			i++
@@ -118,4 +130,37 @@ func TestLatency(t *testing.T) {
 			break
 		}
 	}
+
+	// Make the plot of latencies.
+	if err := makePlot(pts); err != nil {
+		log.Fatal(err)
+	}
+}
+
+// makePlot creates and saves a plot of the overall latencies
+// differenced from the unbuffered channel.
+func makePlot(xys plotter.XYs) error {
+
+	// Create a new plot.
+	p, err := plot.New()
+	if err != nil {
+		return err
+	}
+
+	// Label the new plot.
+	p.Title.Text = "Latencies (differenced from the unbuffered channel)"
+	p.X.Label.Text = "Buffer Length"
+	p.Y.Label.Text = "Latency"
+
+	// Add the prepared points to the plot.
+	if err = plotutil.AddLinePoints(p, "Latencies", xys); err != nil {
+		return err
+	}
+
+	// Save the plot to a PNG file.
+	if err := p.Save(10*vg.Inch, 5*vg.Inch, "latencies.png"); err != nil {
+		return err
+	}
+
+	return nil
 }

@@ -10,6 +10,7 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 * Arrays are fixed length data structures that can't change.
 * Arrays of different sizes are considered to be of different types.
 * Memory is allocated as a contiguous block.
+* Go gives you control over spacial locality.
 
 ## CPU Caches
 This content is provided by Scott Meyers from his talk in 2014 at Dive:
@@ -89,6 +90,8 @@ This is subject to be different in different processors. For this content, the f
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
 [NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
+[The Myth Of Ram](http://www.ilikebigbits.com/blog/2014/4/21/the-myth-of-ram-part-i) - Emil Ernerfeldt  
+[Understanding Transaction Hardware Memory](https://www.infoq.com/presentations/hardware-transactional-memory) - Gil Gene  
 
 #### Data-Oriented Design
 

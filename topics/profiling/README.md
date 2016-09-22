@@ -54,19 +54,6 @@ Use the **time** command to see data about building the program.
 	/usr/bin/time -lp go build		-- Mac OS X
 	/usr/bin/time -v go build		-- Linux
 
-### go build -x
-
-The **-x** option will provide detailed information about the build of your software.
-
-	go build -x
-
-### go build -toolexec
-
-This options lets you add a prefix command to every command the Go tooling runs.
-
-	go build -toolexec="/usr/bin/time -lp" .	-- Mac OS X
-	go build -toolexec="/usr/bin/time -v" .		-- Linux
-
 ### perf
 
 If you're a linux user, then perf(1) is a great tool for profiling applications. Now we have frame pointers, perf can profile Go applications.
@@ -131,6 +118,22 @@ Blocking includes:
 Profiling is not free. Profiling has a moderate, but measurable impact on program performance—especially if you increase the memory profile sample rate. Most tools will not stop you from enabling multiple profiles at once. If you enable multiple profiles at the same time, they will observe their own interactions and skew your results.
 
 **Do not enable more than one kind of profile at a time.**
+
+### Hints to interpret what you see in the profile
+
+If you see lots of time spent in `runtime.mallocgc` function, the program potentially makes excessive amount of small memory allocations. The profile will tell you where the allocations are coming from. See the memory profiler section for suggestions on how to optimize this case.
+
+If lots of time is spent in channel operations, `sync.Mutex` code and other synchronization primitives or System component, the program probably suffers from contention. Consider to restructure program to eliminate frequently accessed shared resources. Common techniques for this include sharding/partitioning, local buffering/batching and copy-on-write technique.
+
+If lots of time is spent in `syscall.Read/Write`, the program potentially makes excessive amount of small reads and writes. Bufio wrappers around os.File or net.Conn can help in this case.
+
+If lots of time is spent in GC component, the program either allocates too many transient objects or heap size is very small so garbage collections happen too frequently.
+
+* Large objects affect memory consumption and GC time, while large number of tiny allocations affects execution speed.
+
+* Combine values into larger values. This will reduce number of memory allocations (faster) and also reduce pressure on garbage collector (faster garbage collections).
+
+* Values that do not contain any pointers are not scanned by garbage collector. Removing pointers from actively used value can positively impact garbage collection time.
 
 ## Basic Profiling
 
@@ -210,6 +213,17 @@ Put some load of the web application. Review the raw profiling information once 
 
 	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
+Look at the heap profile
+
+	http://localhost:5000/debug/pprof/heap?debug=1
+
+	heap profile: 4: 3280 [1645: 13352240] @ heap/1048576
+
+	[4:] 		Currently live objects,
+	[3280] 		Amount of memory occupied by live objects
+	[1645:] 	Total number of allocations
+	[13352240] 	Amount of memory occupied by all allocations
+
 #### Interactive Profiling
 
 Put some load of the web application using a single connection.
@@ -218,16 +232,31 @@ Put some load of the web application using a single connection.
 
 Run the Go pprof tool in another window or tab to review heap information.
 
-	go tool pprof -alloc_space ./project http://localhost:5000/debug/pprof/heap
+	go tool pprof -<PICK_MEM_PROFILE> ./project http://localhost:5000/debug/pprof/heap
 
-	-inuse_space  : Display in-use memory size
-    -inuse_objects: Display in-use object counts
-    -alloc_space  : Display allocated memory size
-    -alloc_objects: Display allocated object counts
+	// Useful to see current status of heap.
+	-inuse_space  : Allocations live at the time of profile  	** default
+	-inuse_objects: Number of bytes allocated at the time of profile
+
+	// Useful to see pressure on heap over time.
+	-alloc_space  : All allocations happened since program start
+	-alloc_objects: Number of object allocated at the time of profile
+
+	If you want to reduce memory consumption, look at the `-inuse_space` profile collected during
+	normal program operation.
+	
+	If you want to improve execution speed, look at the `-alloc_objects` profile collected after
+	significant running time or at program end.
 
 Run the Go pprof tool in another window or tab to review cpu information.
 
 	go tool pprof ./project http://localhost:5000/debug/pprof/profile
+
+	_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not
+	(except for goroutines that called runtime.LockOSThread, which is, unfortunately, not
+	visible in the profile). Note that goroutines in "IO wait" state also do not consume
+	threads, they are parked on non-blocking network poller
+	(which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
 
 Explore using the **top**, **list**, **web** and **web list** commands.
 
@@ -243,7 +272,7 @@ After some time, take another snapshot:
 
 Now compare both snapshots against the binary and get into the pprof tool:
 
-    go tool pprof -alloc_space -base base.heap memory_trace current.heap
+    go tool pprof -inuse_space -base base.heap memory_trace current.heap
 
 #### Flame Graphs
 
@@ -270,7 +299,7 @@ Run the benchmarks and produce a cpu and memory profile.
 	(pprof) web list rssSearch
 
 	go test -run none -bench . -benchtime 3s -benchmem -memprofile mem.out
-	go tool pprof -alloc_space ./search.test mem.out
+	go tool pprof -inuse_space ./search.test mem.out
 	(pprof) web list rssSearch
 
 ### Tracing / Blocking Profiles

@@ -32,7 +32,7 @@ type Puller interface {
 
 // Storer declares behavior for storing data.
 type Storer interface {
-	Store(d Data) error
+	Store(d *Data) error
 }
 
 // PullStorer declares behavior for both pulling and storing.
@@ -66,7 +66,7 @@ func (Xenia) Pull(d *Data) error {
 type Pillar struct{}
 
 // Store knows how to store data into Pillar.
-func (Pillar) Store(d Data) error {
+func (Pillar) Store(d *Data) error {
 	fmt.Println("Out:", d.Line)
 	return nil
 }
@@ -94,8 +94,8 @@ func pull(p Puller, data []Data) (int, error) {
 
 // store knows how to store bulks of data from any Storer.
 func store(s Storer, data []Data) (int, error) {
-	for i, d := range data {
-		if err := s.Store(d); err != nil {
+	for i := range data {
+		if err := s.Store(&data[i]); err != nil {
 			return i, err
 		}
 	}

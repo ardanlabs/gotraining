@@ -12,18 +12,13 @@ Maps provide a data structure that allow for the storage and management of key/v
 
 http://blog.golang.org/go-maps-in-action  
 http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html  
-https://www.youtube.com/watch?v=Tl7mi9QmLns
+[Keith Randall - Inside the Map Implementation](https://www.youtube.com/watch?v=Tl7mi9QmLns)
 
 ## Code Review
 
 [Declare, initialize and iterate](example1/example1.go) ([Go Playground](http://play.golang.org/p/EHfkoipKYF))  
-[Map literal initialization](example2/example2.go) ([Go Playground](http://play.golang.org/p/FgZ3hxVwdA))  
-[Map key restrictions](example3/example3.go) ([Go Playground](http://play.golang.org/p/LZRHA7FG6s))
-
-## Advanced Code Review
-
-[Composing maps of maps](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/zOyE-qoKqD))  
-[Properties of nil maps](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/DZpW5pmdBu))
+[Map literals and delete](example2/example2.go) ([Go Playground](http://play.golang.org/p/H2txq6dw14))  
+[Map key restrictions](example3/example3.go) ([Go Playground](http://play.golang.org/p/LZRHA7FG6s))  
 
 ## Exercises
 

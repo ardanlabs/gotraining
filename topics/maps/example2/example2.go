@@ -2,7 +2,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Sample program to show how to declare and initialize a map
-// using a map literal.
+// using a map literal and delete a key.
 package main
 
 import "fmt"
@@ -22,6 +22,16 @@ func main() {
 		"Mouse":   {"Mickey", "Mouse"},
 		"Jackson": {"Michael", "Jackson"},
 	}
+
+	// Iterate over the map.
+	for key, value := range users {
+		fmt.Println(key, value)
+	}
+
+	// Delete the Roy key.
+	delete(users, "Roy")
+
+	fmt.Println("=================")
 
 	// Iterate over the map.
 	for key, value := range users {
