@@ -3,13 +3,20 @@ With a basic understand of how the web and HTTP work, let’s write a simple “
 
 * Hello World
 * http.ServeMux
-* http.ListenAndServe
 * http.Handler
-* http.HandlerFunc
 
 ### Hello World
 
 [example](../../../topics/web/basics/example1/main.go)
+
+### http.ServeMux
+
+[example](../../../topics/web/basics/example2/main.go)
+
+### http.Handler
+
+[example](../../../topics/web/basics/example3/main.go)
+[example](../../../topics/web/basics/example4/main.go)
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
