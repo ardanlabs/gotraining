@@ -3,7 +3,7 @@
 
 // Use the template and follow the directions. You will be writing a web handler
 // that performs a mock database call but will timeout based on a context if the call
-// takes to long. You will also save state into the context.
+// takes too long. You will also save state into the context.
 package main
 
 // Add imports.

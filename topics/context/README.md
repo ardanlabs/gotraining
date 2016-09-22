@@ -32,9 +32,9 @@ The package context defines the Context type, which carries deadlines, cancelati
 
 ### Exercise 1
 
-Use the template and follow the directions. You will be writing a web handler that performs a mock database call but will timeout based on a context if the call takes to long. You will also save state into the context.
+Use the template and follow the directions. You will be writing a web handler that performs a mock database call but will timeout based on a context if the call takes too long. You will also save state into the context.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/JBgzV7JI8S)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/S8P9XgJJwM)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/2L_DF8-pH7))  
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
