@@ -43,12 +43,12 @@ func main() {
 }
 
 // cleanFile parses and cleans the file similar to what we did in exercise1.
-func cleanFile(filename string) ([]csvRecord, error) {
+func cleanFile(filename string) ([]CSVRecord, error) {
 
 	// Open the iris dataset file.
 	csvFile, err := os.Open(filename)
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
 	defer csvFile.Close()
 
@@ -58,13 +58,6 @@ func cleanFile(filename string) ([]csvRecord, error) {
 	// Create a slice value that will hold all of the successfully parsed
 	// records from the CSV.
 	var csvData []CSVRecord
-
-	// Create a map of the types we will use for parsing.
-	typeMap := make(map[int]string)
-	for i := 0; i < 4; i++ {
-		typeMap[i] = "float"
-	}
-	typeMap[4] = "string"
 
 	// Read in the records looking for unexpected types.
 	line := 1
@@ -82,22 +75,22 @@ func cleanFile(filename string) ([]csvRecord, error) {
 		for idx, value := range record {
 
 			// Parse the value according to the execected type.
-			t := typeMap[idx]
 			var floatValue float64
-			switch t {
-			case "string":
+			switch idx {
+			case 0, 1, 2, 3:
+				if floatValue, err = strconv.ParseFloat(value, 64); err != nil {
+					log.Printf("Parsing line %d failed, unexpected type in column %d\n", line, idx)
+					parseErr = err
+					continue
+				}
+			case 4:
 				if value == "" {
 					log.Printf("Parsing line %d failed, unexpected type in column %d\n", line, idx)
 					parseErr = fmt.Errorf("Could not parse string value")
 					continue
 				}
 				csvRecord.Species = value
-			case "float":
-				if floatValue, err = strconv.ParseFloat(value, 64); err != nil {
-					log.Printf("Parsing line %d failed, unexpected type in column %d\n", line, idx)
-					parseErr = err
-					continue
-				}
+
 			}
 
 			// Add the float value to the respective field in the CSVRecord.

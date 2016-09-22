@@ -19,7 +19,5 @@ This is material for scientists, analysts, and developers who have some experien
 
 [Embedded/In-Memory Caching](../../../topics/data_science/caching/README.md)
 
-#### Interactive Data Exploration
-
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

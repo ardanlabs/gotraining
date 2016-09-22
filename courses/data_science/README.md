@@ -13,5 +13,10 @@ This material covers the gathering, organization, and parsing of data to/from a 
 
 [Data Gathering, Organization, and Parsing](data_gathering/README.md)
 
+## Matrices and Linear Algebra
+This material covers the organization of data into matrices and matrix operations.  Once you are done with this material you will understand how to form matrices within Go programs and how to utilize those matrices to perform various types of matrix operations.
+
+[Matrices and Linear Algebra](matrices/README.md)
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
