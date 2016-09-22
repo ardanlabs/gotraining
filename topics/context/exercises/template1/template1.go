@@ -34,52 +34,52 @@ func findUser(rw http.ResponseWriter, r *http.Request) {
 
 	// Create a context that timesout in fifty milliseconds.
 
-    // Defer the call to cancel.
+	// Defer the call to cancel.
 
 	// Save the `r.RemoteAddr` value in the context using `userIPKey`
-    // as the key. This call returns a new context so replace the
-    // current `ctx` value with this new one. The original context is
+	// as the key. This call returns a new context so replace the
+	// current `ctx` value with this new one. The original context is
 	// the parent context for this new child context.
 
-    // Create a channel with a buffer size of 1 that works with
-    // pointers of type `User` 
+	// Create a channel with a buffer size of 1 that works with
+	// pointers of type `User` 
 
-    // Use this goroutine to make the database call. Use the channel
+	// Use this goroutine to make the database call. Use the channel
 	// to get the user back.
 	go func() {
 
 		// Get the `r.RemoteAddr` value from the context and log
-        // the value you get back.
+		// the value you get back.
 
 		// Call the `readDatabase` function provided below and
-        // send the returned `User` pointer on the channel.
+		// send the returned `User` pointer on the channel.
 
-        // Log that the goroutine is terminating.
+		// Log that the goroutine is terminating.
 	}()
 
 	// Wait for the database call to finish or the timeout.
 	select {
 
-    // Add a case to wait on the channel for the `User` pointer.
+	// Add a case to wait on the channel for the `User` pointer.
 
 		// Call the `sendResponse` function provided below to
-        // send the `User` to the caller. Use `http.StatusOK`
-        // as the status code.
+		// send the `User` to the caller. Use `http.StatusOK`
+		// as the status code.
 
-        // Log we sent the response with a StatusOk
+		// Log we sent the response with a StatusOk
 		
 		return
 
-    // Add a case to wait on the `ctx.Done()` channel.
+	// Add a case to wait on the `ctx.Done()` channel.
 
 		// Use this struct value for the error response.
 		e := struct{ Error string }{ctx.Err().Error()}
 
-        // Call the `sendResponse` function provided below to
-        // send the error to the caller. Use `http.StatusRequestTimeout`
-        // as the status code.
+		// Call the `sendResponse` function provided below to
+		// send the error to the caller. Use `http.StatusRequestTimeout`
+		// as the status code.
 
-        // Log we sent the response with a StatusRequestTimeout
+		// Log we sent the response with a StatusRequestTimeout
 
 		return
 	}
