@@ -9,35 +9,53 @@
 package main
 
 import (
-	"encoding/csv"
 	"fmt"
+	"io/ioutil"
 	"log"
-	"os"
+
+	"github.com/gonum/matrix/mat64"
+	"github.com/kniren/gota/data-frame"
 )
 
 func main() {
 
-	// Open the iris dataset file.
-	csvFile, err := os.Open("../data/iris.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer csvFile.Close()
-
-	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
-
-	// Set the number of fields per record.
-	reader.FieldsPerRecord = 5
-
-	// Read in all of the CSV records
-	rawCSVData, err := reader.ReadAll()
+	// Pull in the CSV data.
+	irisData, err := ioutil.ReadFile("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// As a sanity check, display the records to stdout.
-	for _, each := range rawCSVData {
-		fmt.Println(each)
+	// Create a dataframe from the CSV string.
+	// The types of the columns will be inferred.
+	irisDF := df.ReadCSV(string(irisData))
+
+	// Sequentially move the columns into a slice of floats.
+	floatData := make([]float64, 4*irisDF.Nrow())
+	var dataIndex int
+	for colIndex, colName := range irisDF.Names() {
+
+		// If the column is one of the float columns, move it
+		// into the slice of floats.
+		if colIndex < 4 {
+
+			// Extract the columns as a slice of floats.
+			floatCol, ok := irisDF.Col(colName).Elements.(df.FloatElements)
+			if !ok {
+				log.Fatal(fmt.Errorf("Could not parse float column."))
+			}
+
+			// Append the float values to floatData.
+			for _, floatVal := range floatCol {
+				floatData[dataIndex] = *floatVal.Float()
+				dataIndex++
+			}
+		}
 	}
+
+	// Form the matrix.
+	mat := mat64.NewDense(irisDF.Nrow(), 4, floatData)
+
+	// As a sanity check, output the matrix to standard out.
+	fMat := mat64.Formatted(mat, mat64.Prefix("      "))
+	fmt.Printf("mat = %v\n\n", fMat)
 }
