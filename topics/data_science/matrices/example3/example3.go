@@ -23,11 +23,11 @@ func main() {
 	fmt.Printf("The value of a at (0,1) is: %.2f\n\n", val)
 
 	// Get the values in a specific column.
-	col := a.ColView(2).RawVector().Data
+	col := mat64.Col(nil, 2, a)
 	fmt.Printf("The values in the 3rd column are: %v\n\n", col)
 
 	// Get the values in a specific row.
-	row := a.RowView(2).RawVector().Data
+	row := mat64.Row(nil, 2, a)
 	fmt.Printf("The values in the 3rd row are: %v\n\n", row)
 
 	// Get a "view" of a portion of the matrix extending from a starting
@@ -36,6 +36,6 @@ func main() {
 	b := a.View(0, 0, 2, 2)
 
 	// Print it again without zero value elements.
-	fa := mat64.Formatted(b, mat64.Prefix("    "))
-	fmt.Printf("The \"view\" of a looks like:\nb = % v\n\n", fa)
+	fb := mat64.Formatted(b, mat64.Prefix("    "))
+	fmt.Printf("The \"view\" of a looks like:\nb = % v\n\n", fb)
 }

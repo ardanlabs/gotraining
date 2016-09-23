@@ -1,4 +1,4 @@
-## Forming Matrices
+## Matrix Creation, Modification, and Access
 
 Many modeling, machine learning, and optimization algorithms rely on linear algebra concepts.  These concepts include eigenvalues/vectors, matrix multiplication, matrix inversion, and more.  Thus, data utilized by data scientists often has to be represented in matrix form.  
 
