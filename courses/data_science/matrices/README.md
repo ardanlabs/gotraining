@@ -6,8 +6,8 @@ This is material for scientists, analysts, and developers who have some experien
 #### Matrix Creation/Modification/Access
 [Matrix Creation/Modification/Access](../../../topics/data_science/matrices/README.md) 
 
-#### Matrix Operations
-[Matrix Operations](../../../topics/data_science/matrix_operations/README.md) 
+#### Matrix Operations, Linear Algebra
+[Matrix Operations, Linear Algebra](../../../topics/data_science/matrix_operations/README.md) 
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
