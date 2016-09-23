@@ -14,6 +14,9 @@ Many modeling, machine learning, and optimization algorithms rely on linear alge
 ## Code Review
 
 [Form a float64 matrix](example1/example1.go)  
+[Modifying a matrix](example2/example2.go)  
+[Accessing values in a matrix](example3/example3.go)  
+[Formatting matrix output](example4/example4.go)  
 
 ## Exercises
 
