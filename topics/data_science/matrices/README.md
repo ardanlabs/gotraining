@@ -6,9 +6,9 @@ Many modeling, machine learning, and optimization algorithms rely on linear alge
 
 ## Links
 
-[github/gonum/matrix/mat64 docs](https://godoc.org/github.com/gonum/matrix/mat64)
+[github/gonum/matrix/mat64 docs](https://godoc.org/github.com/gonum/matrix/mat64)  
 [The Matrix Cookbook](http://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)  
-[Khan Academy - Matrices](https://www.khanacademy.org/math/algebra-home/precalculus/precalc-matrices)
+[Khan Academy - Matrices](https://www.khanacademy.org/math/algebra-home/precalculus/precalc-matrices)  
 [Khan Academy - Linear Algebra](https://www.khanacademy.org/math/linear-algebra)
 
 ## Code Review
