@@ -22,6 +22,12 @@ Where the fields are as follows:
     # MB goal   goal heap size
     # P         number of processors used
 
+    **wall-clock** time is a measure of the real time that elapses from start to end, including time that passes due to programmed (artificial) delays or waiting for resources to become available.
+    https://en.wikipedia.org/wiki/Wall-clock_time
+
+    **CPU time** (or process time) is the amount of time for which a central processing unit (CPU) was used for processing instructions of a computer program or operating system, as opposed to, for example, waiting for input/output (I/O) operations or entering low-power (idle) mode.
+    https://en.wikipedia.org/wiki/CPU_time
+
 In C++, a memory leak is memory you have lost a reference to.
 In Go, a memory leak is memory you retain a reference to.
 
@@ -39,12 +45,14 @@ In Go, a memory leak is memory you retain a reference to.
     @0.009s     : Nine milliseconds since the program started.
     1%          : One percent of the programs time has been spent in GC.
     
+    // wall-clock
     0.059ms     : **STW** Sweep termination.
     0.17ms      : Mark/Scan - Assist Time (GC performed in line with allocation).
     0.005ms     : Mark/Scan - Background GC time.
     0.24ms      : Mark/Scan - Idle GC time.
     0.12ms      : **STW** Mark termination.
 
+    // CPU time
     0.17ms      : **STW** Sweep termination.
     0.17+0+0ms  : Mark/Scan - Assist Time (GC performed in line with allocation).
     0.36ms      : Mark/Scan - Background GC time.
