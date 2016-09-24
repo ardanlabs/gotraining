@@ -1,6 +1,6 @@
-## Tracing Tool
+## Trace Profiling
 
-The tracing tool can help identify the health of your programs. We will use a simple program to learn how to navigate and read some of the tracing information you can find in the tool.
+The trace profiling can help identify the health of your programs. We will use a simple program to learn how to navigate and read some of the tracing information you can find in the trace tool.
 
 ## Trace Command
 
