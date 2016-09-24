@@ -146,6 +146,9 @@ Learn the basics of using memory and cpu profiling.
 Learn the basics of blocking profiling.  
 [Blocking Profiling](blocking)
 
+Learn the basics of trace profiling.  
+[Trace Profiling](trace)
+
 ## Profiling a Web Service
 
 We have a web application that extends a web service. Let's profile this application and attempt to understand how it is working.
@@ -168,7 +171,7 @@ To add load to the service while running profiling we can run these command.
 
 ### GODEBUG
 
-#### Memory Tracing
+#### GC Trace
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
@@ -178,7 +181,7 @@ Put some load of the web application.
 
 	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-#### Scheduler Tracing
+#### Scheduler Trace
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
@@ -302,9 +305,9 @@ Run the benchmarks and produce a cpu and memory profile.
 	go tool pprof -inuse_space ./search.test mem.out
 	(pprof) web list rssSearch
 
-### Tracing / Blocking Profiles
+### Trace Profiles
 
-#### Tracing Web Application
+#### Trace Web Application
 
 Put some load of the web application.
 

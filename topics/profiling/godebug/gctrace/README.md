@@ -69,6 +69,6 @@ https://www.hakkalabs.co/articles/finding-memory-leaks-go-programs
 
 ## Code Review
 
-[Memory Trace](trace.go) ([Go Playground](http://play.golang.org/p/ty-4EwbuH_))
+[Memory Trace](trace.go) ([Go Playground](https://play.golang.org/p/ty-4EwbuH_))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

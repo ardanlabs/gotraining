@@ -72,6 +72,6 @@ http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html
 
 ## Code Review
 
-[Scheduler Trace](trace.go) ([Go Playground](http://play.golang.org/p/iyRaSsjQSS))
+[Scheduler Trace](trace.go) ([Go Playground](https://play.golang.org/p/iyRaSsjQSS))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

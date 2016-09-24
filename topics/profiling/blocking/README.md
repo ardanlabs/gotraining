@@ -12,7 +12,7 @@ Testing and Tracing allows us to see blocking profiles.
 
 ## Running a Trace
 
-Once you have a test established you can use the **-trace file.out** option with the go test tool.
+Once you have a test established you can use the **-trace trace.out** option with the go test tool.
 
 	go test -trace trace.out
 	go tool trace trace.out
