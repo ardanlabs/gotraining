@@ -43,6 +43,7 @@ Here is more reading and videos to also help get you started.
 [Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team   
 [Seven ways to profile a Go program](https://www.bigmarker.com/remote-meetup-go/Seven-ways-to-profile-a-Go-program) - Dave Cheney   
+[runtime: goroutine execution stalled during GC](https://github.com/golang/go/issues/16293) - Caleb Spare  
 
 ## Go and OS Tooling
 
