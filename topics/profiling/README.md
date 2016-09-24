@@ -366,7 +366,15 @@ Running expvarmon
 
 ## Godoc Analysis
 
-The `godoc` tool can help you perform analysis on your code.
+The `godoc` tool can help you perform static analysis on your code.
+
+	Move into the directory of the code you want to perform an analysis on.
+
+	// Perform a general analysis.
+	GOPATH=/dev/null godoc -analysis -http=:8080
+
+	// Perform just a pointer analysis.
+	GOPATH=/dev/null godoc -analysis pointer -http=:8080
 
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
 
