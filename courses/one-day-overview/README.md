@@ -14,7 +14,7 @@ Easy to learn and reason about, trivial to machine-process.
 
 [Variables, Builtins, and Type Safety](https://play.golang.org/p/B5mjJKPYLh) ([Source](../../topics/language/variables/example1/example1.go))
 
-[Constants](http://play.golang.org/p/ZHfzj2_Rse) ([Source](misc/consts/main.go))
+[Constants](https://play.golang.org/p/OqJLBLhO7_) ([Source](../../topics/language/constants/example3/example3.go))
 
 [Structs](https://play.golang.org/p/TEmOrIxl_P) ([Source](../../topics/language/struct_types/example1/example1.go))
 
@@ -82,11 +82,11 @@ Excellent value for its volume. I/O is especially powerful.
 
 [Behavior As Error Context](https://play.golang.org/p/Aylgou6Gq0) ([Source](../../topics/api/error_handling/example4/example4.go))
 
-[Basic cURL](misc/curl1/gocurl.go)
+[Basic cURL](http://play.golang.org/p/b_BxHFATti))  ([Source](../../topics/standard_library/io/example2/example2.go))
 
-[Enhanced cURL](misc/curl2/gocurl.go)
+[Enhanced cURL](http://play.golang.org/p/3UeN6iAE-k))  ([Source](../../topics/standard_library/io/example3/example3.go))  
 
-[HTTP Server](misc/serv/serv.go)
+[HTTP Server](https://play.golang.org/p/S0yUXdOa-i)  ([Source](../../topics/standard_library/http/example1/example1.go))
 
 ## Tooling
 

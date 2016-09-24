@@ -19,15 +19,15 @@ http://golang.org/pkg/io/
 
 ## Code Review
 
-[Standard Library Working Together](example1/example1.go) ([Go Playground](http://play.golang.org/p/Ikm0s6vjoi))  
-[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](http://play.golang.org/p/b_BxHFATti))  
-[MultiWriters with curl example](example3/example3.go) ([Go Playground](http://play.golang.org/p/3UeN6iAE-k))  
-[Stream processing](example4/example4.go) ([Go Playground](http://play.golang.org/p/9h53-8jZUW))  
+[Standard Library Working Together](example1/example1.go) ([Go Playground](https://play.golang.org/p/Ikm0s6vjoi))  
+[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](https://play.golang.org/p/b_BxHFATti))  
+[MultiWriters with curl example](example3/example3.go) ([Go Playground](https://play.golang.org/p/3UeN6iAE-k))  
+[Stream processing](example4/example4.go) ([Go Playground](https://play.golang.org/p/9h53-8jZUW))  
 
 ## Advanced Code Review
 
-[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/9QSXbjtPxe))  
-[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](http://play.golang.org/p/kN97kdqRGy))
+[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/9QSXbjtPxe))  
+[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](https://play.golang.org/p/kN97kdqRGy))
 
 ## Exercises
 
