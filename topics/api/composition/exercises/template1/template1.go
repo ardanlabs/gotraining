@@ -111,10 +111,10 @@ func main() {
 			// Pop an administrator value from the admins list and
 			// call the administrate method.
 
-		} else {
-
-			// Pop a developer value from the devs list and
-			// call the develop method.
+			continue
 		}
+
+		// Pop a developer value from the devs list and
+		// call the develop method.
 	}
 }

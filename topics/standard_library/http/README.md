@@ -20,9 +20,9 @@ https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts
 
 ## Code Review
 
-[Hello World Server](example1/main.go) ([Go Playground](http://play.golang.org/p/S0yUXdOa-i))  
-[1 Line File Server](example2/main.go) ([Go Playground](http://play.golang.org/p/AT6Zq-Sv7h))  
-[Request and Response Basics](example3/main.go) ([Go Playground](http://play.golang.org/p/QFzRJmryzq))
+[Hello World Server](example1/main.go) ([Go Playground](https://play.golang.org/p/S0yUXdOa-i))  
+[1 Line File Server](example2/main.go) ([Go Playground](https://play.golang.org/p/AT6Zq-Sv7h))  
+[Request and Response Basics](example3/main.go) ([Go Playground](https://play.golang.org/p/QFzRJmryzq))
 
 ## Advanced Code Review
 

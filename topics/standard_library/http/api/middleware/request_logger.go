@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/ardanlabs/gotraining/topics/http/api/app"
+	"github.com/ardanlabs/gotraining/topics/standard_library/http/api/app"
 )
 
 // RequestLogger writes some information about the request to the logs in

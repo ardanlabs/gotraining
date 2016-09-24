@@ -22,17 +22,17 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 ## Code Review
 
-[Declare and Length](example1/example1.go) ([Go Playground](http://play.golang.org/p/lDKravTEqF))  
-[Reference Types](example2/example2.go) ([Go Playground](http://play.golang.org/p/gVWb35XjwM))  
-[Appending slices](example4/example4.go) ([Go Playground](http://play.golang.org/p/x4hGDV1phU))  
+[Declare and Length](example1/example1.go) ([Go Playground](https://play.golang.org/p/lDKravTEqF))  
+[Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/gVWb35XjwM))  
+[Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/x4hGDV1phU))  
 [Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/Okc2EZG5_M))  
-[Slices and References](example5/example5.go) ([Go Playground](http://play.golang.org/p/XGrtsrxmNb))  
-[Strings and slices](example6/example6.go) ([Go Playground](http://play.golang.org/p/x0Q5ByzxGS))  
-[Variadic functions](example7/example7.go) ([Go Playground](http://play.golang.org/p/aTGRT1rhoO))
+[Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/XGrtsrxmNb))  
+[Strings and slices](example6/example6.go) ([Go Playground](https://play.golang.org/p/x0Q5ByzxGS))  
+[Variadic functions](example7/example7.go) ([Go Playground](https://play.golang.org/p/aTGRT1rhoO))
 
 ## Advanced Code Review
 
-[Three index slicing](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/QZQIdaTgtG))
+[Three index slicing](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/QZQIdaTgtG))
 
 ## Exercises
 
@@ -42,7 +42,7 @@ http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
 
 **Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of index one and two and display the index position and value of each element in the new slice.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/sE06PRtw7h)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/3WKISOXA-L))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/sE06PRtw7h)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/3WKISOXA-L))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

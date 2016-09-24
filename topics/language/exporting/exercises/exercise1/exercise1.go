@@ -15,7 +15,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ardanlabs/gotraining/topics/exporting/exercises/exercise1/toy"
+	"github.com/ardanlabs/gotraining/topics/language/exporting/exercises/exercise1/toy"
 )
 
 func main() {

@@ -28,12 +28,12 @@ https://vimeo.com/141698770
 
 ## Code Review
 
-[Basic Unit Test](example1/example1_test.go) ([Go Playground](http://play.golang.org/p/bYkkr3uQcp))  
-[Table Unit Test](example2/example2_test.go) ([Go Playground](http://play.golang.org/p/hhavdseEPj))  
+[Basic Unit Test](example1/example1_test.go) ([Go Playground](https://play.golang.org/p/bYkkr3uQcp))  
+[Table Unit Test](example2/example2_test.go) ([Go Playground](https://play.golang.org/p/hhavdseEPj))  
 [Mocking Web Server Response](example3/example3_test.go) ([Go Playground](https://play.golang.org/p/JJ_2VIL_R6))  
 [Testing Internal Endpoints](example4/handlers/handlers_test.go) ([Go Playground](https://play.golang.org/p/bGM-oA6KT-))  
-[Example Test](example4/handlers/handlers_example_test.go) ([Go Playground](http://play.golang.org/p/BTSUkNQn3r))  
-[Sub Tests](example5/example5_test.go) ([Go Playground](http://play.golang.org/p/d4ZVYkZUGr))  
+[Example Test](example4/handlers/handlers_example_test.go) ([Go Playground](https://play.golang.org/p/BTSUkNQn3r))  
+[Sub Tests](example5/example5_test.go) ([Go Playground](https://play.golang.org/p/d4ZVYkZUGr))  
 
 _Look at the profiling topic to learn more about using test to [profile](../profiling) code._
 
