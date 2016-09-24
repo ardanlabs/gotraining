@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ardanlabs/gotraining/topics/http/api/app"
-	"github.com/ardanlabs/gotraining/topics/http/api/models"
-	"github.com/ardanlabs/gotraining/topics/http/api/services"
-	"github.com/ardanlabs/gotraining/topics/http/api/tests"
+	"github.com/ardanlabs/gotraining/topics/standard_library/http/api/app"
+	"github.com/ardanlabs/gotraining/topics/standard_library/http/api/models"
+	"github.com/ardanlabs/gotraining/topics/standard_library/http/api/services"
+	"github.com/ardanlabs/gotraining/topics/standard_library/http/api/tests"
 )
 
 // TestUsers validates a user can be created, retrieved and

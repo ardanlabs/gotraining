@@ -96,11 +96,11 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Code Review
 
-[Pass by Value](example1/example1.go) ([Go Playground](http://play.golang.org/p/qnCX0kVwRH))  
-[Sharing data I](example2/example2.go) ([Go Playground](http://play.golang.org/p/6GUcA7-x3j))  
-[Sharing data II](example3/example3.go) ([Go Playground](http://play.golang.org/p/KRKrUCcTYe))  
-[Stack vs Heap](example4/example4.go) ([Go Playground](http://play.golang.org/p/88QkRhKk53))  
-[Stack grow](example5/example5.go) ([Go Playground](http://play.golang.org/p/tpDOwBCvqW))  
+[Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/qnCX0kVwRH))  
+[Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/6GUcA7-x3j))  
+[Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/KRKrUCcTYe))  
+[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/88QkRhKk53))  
+[Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/tpDOwBCvqW))  
 
 ## Exercises
 
@@ -110,8 +110,8 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 **Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of_ and the _value that the pointer points to_.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZiVZzVkMqk)) |
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/ARXt9Ddawc))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/ZiVZzVkMqk)) |
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/ARXt9Ddawc))
 
 ### Exercise 2
 
