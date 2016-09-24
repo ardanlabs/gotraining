@@ -41,7 +41,8 @@ Here is more reading and videos to also help get you started.
 [Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
 [Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
 [Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
-[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team    
+[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team   
+[Seven ways to profile a Go program](https://www.bigmarker.com/remote-meetup-go/Seven-ways-to-profile-a-Go-program) - Dave Cheney   
 
 ## Go and OS Tooling
 
