@@ -28,6 +28,19 @@ https://en.wikipedia.org/wiki/Wall-clock_time
 **CPU time** (or process time) is the amount of time for which a central processing unit (CPU) was used for processing instructions of a computer program or operating system, as opposed to, for example, waiting for input/output (I/O) operations or entering low-power (idle) mode.
 https://en.wikipedia.org/wiki/CPU_time
 
+You can get more details by adding the **gcpacertrace=1** flag. This causes the garbage collector to print information about the internal state of the concurrent pacer.
+
+    export GODEBUG=gctrace=1,gcpacertrace=1
+
+Sample output:
+
+    gc 5 @0.071s 0%: 0.018+0.46+0.071 ms clock, 0.14+0/0.38/0.14+0.56 ms cpu, 29->29->29 MB, 30 MB goal, 8 P
+    pacer: sweep done at heap size 29MB; allocated 0MB of spans; swept 3752 pages at +6.183550e-004 pages/byte
+    pacer: assist ratio=+1.232155e+000 (scan 1 MB in 70->71 MB) workers=2+0
+    pacer: H_m_prev=30488736 h_t=+2.334071e-001 H_T=37605024 h_a=+1.409842e+000 H_a=73473040 h_g=+1.000000e+000 H_g=60977472 u_a=+2.500000e-001 u_g=+2.500000e-001 W_a=308200 goalΔ=+7.665929e-001 actualΔ=+1.176435e+000 u_a/u_g=+1.000000e+000
+
+Notes:
+
 In C++, a memory leak is memory you have lost a reference to.  
 In Go, a memory leak is memory you retain a reference to.
 
