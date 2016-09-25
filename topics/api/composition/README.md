@@ -17,7 +17,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../reading/design_guidelines.md) for composition.
+* Learn about the [design guidelines](../../../reading/design_guidelines.md) for composition.
 
 ## Code Review
 
