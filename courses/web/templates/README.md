@@ -13,7 +13,7 @@ We can now write primitive web apps, as well as test them. Now we need to start 
 
 [Serving Static Files](../../../topics/web/templates/example6/main.go)
 
-### Bundling Assets in Binaries (go.rice)
+### Bundling Assets in Binaries ([go.rice](https://github.com/GeertJohan/go.rice))
 
 [Using go.rice](../../../topics/web/templates/example7/main.go)
 [rice embed-go](../../../topics/web/templates/example8/rice-box.go)
