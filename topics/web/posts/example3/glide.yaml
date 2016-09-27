@@ -1,0 +1,5 @@
+package: github.com/ardanlabs/gotraining/topics/web/posts/example3
+import:
+- package: github.com/gorilla/schema
+  subpackages:
+  - '...'
