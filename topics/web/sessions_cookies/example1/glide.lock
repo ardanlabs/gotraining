@@ -1,0 +1,8 @@
+hash: 6d1f54e02991f4f5a006fe3698fb834f19e9ec09d9af22326846fd273e37b02c
+updated: 2016-09-28T15:26:21.31602543-04:00
+imports:
+- name: github.com/gorilla/sessions
+  version: ca9ada44574153444b00d3fd9c8559e4cc95f896
+  subpackages:
+  - '...'
+testImports: []

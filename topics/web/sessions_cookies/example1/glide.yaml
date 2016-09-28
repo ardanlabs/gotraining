@@ -1,0 +1,6 @@
+package: github.com/ardanlabs/gotraining/topics/web/sessions_cookies/example1
+import:
+- package: github.com/gorilla/sessions
+  version: ^1.1.0
+  subpackages:
+  - '...'
