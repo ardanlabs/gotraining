@@ -1,10 +1,6 @@
 ## Ultimate Web - HTTP Basics in Go
 With a basic understand of how the web and HTTP work, let’s write a simple “Hello World” app in Go. We’ll cover how to start a web server in Go, take in requests, and return responses.
 
-* Hello World
-* http.ServeMux
-* http.Handler
-
 ### Hello World
 
 [example](../../../topics/web/basics/example1/main.go)
@@ -16,6 +12,7 @@ With a basic understand of how the web and HTTP work, let’s write a simple “
 ### http.Handler
 
 [example](../../../topics/web/basics/example3/main.go)
+
 [Wrapping a HandlerFunc](../../../topics/web/basics/example4/main.go)
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*

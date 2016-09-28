@@ -8,11 +8,13 @@ HTTP applications don’t just serve content, they also take in content. We’ll
 ### Form Handling
 
 [Simple Form](../../../topics/web/posts/example2/main.go)
+
 [Bind to Struct](../../../topics/web/posts/example3/main.go) - [github.com/gorilla/schema](github.com/gorilla/schema)
 
 ### File Uploads
 
 [File Upload](../../../topics/web/posts/example4/main.go)
+
 [File Upload - Test](../../../topics/web/posts/example4/main_test.go)
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
