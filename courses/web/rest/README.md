@@ -11,9 +11,7 @@ In many ways, the World Wide Web itself, based on HTTP, can be viewed as a REST-
 
 RESTful applications use HTTP requests to post data (create and/or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all four CRUD (Create/Read/Update/Delete) operations.
 
-### URL Design
-
-### More HTTP Verbs
+### HTTP Verbs
 
 |HTTP Verb|CRUD           |URL Format     |Common Codes             |
 |---      |---            |---            |---                      |
@@ -23,7 +21,11 @@ RESTful applications use HTTP requests to post data (create and/or update), read
 |PATCH    |Update/Modify  |/customers/:id |200, 204, 404, 422       |
 |DELETE   |Delete         |/customers/:id |200, 404                 |
 
-### Error Handling
+[RESTful Server](../../../topics/web/rest/example1/main.go)
+
+#### Exercise
+
+Implement the `PUT`, `PATCH`, and `DELETE` responses in the [RESTful Server](../../../topics/web/rest/example1/main.go).
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
