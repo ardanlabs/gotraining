@@ -225,7 +225,6 @@ If you are interested in holding an event in your area please let me know. I wil
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Corporate	Go			Nordstroms		Seattle, WA	 			September	Bill Kennedy
 		Free		Go			WWG				London, England			October		Bill Kennedy 		https://skillsmatter.com/conferences/8373-women-who-go-workshop-with-bill-kennedy
 		Public		Adv Go		Rackspace		SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
 		Free		Go			WWG				SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
@@ -247,6 +246,7 @@ If you are interested in holding an event in your area please let me know. I wil
 
 											Completed
 
+		Corporate	Go			Nordstroms		Seattle, WA	 			September	Bill Kennedy
 		Corporate	Go			Viacom			NYC, NY					September	Bill Kennedy
 		Corporate	Go			CapitalOne		McLean, VA	 			September	Bill Kennedy
 		Corporate	Go			Capital One 	Richmond, VA 			January		Bill Kennedy
