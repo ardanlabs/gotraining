@@ -7,7 +7,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/ardanlabs/gotraining/topics/standard_library/http/api/routes"
+	"github.com/ardanlabs/gotraining/topics/packages/http/api/routes"
 	"github.com/braintree/manners"
 )
 
