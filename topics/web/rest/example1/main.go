@@ -7,7 +7,9 @@ import (
 	"regexp"
 )
 
-func router(res http.ResponseWriter, req *http.Request) {
+type router struct{}
+
+func (r router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	// Log the request
 	log.Printf("[%s] %s\n", req.Method, req.URL.Path)
 
@@ -69,6 +71,10 @@ func router(res http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func App() http.Handler {
+	return router{}
+}
+
 func indexHandler(res http.ResponseWriter, req *http.Request) {
 	err := templates.ExecuteTemplate(res, "index.html", Customers)
 	if err != nil {
@@ -89,6 +95,5 @@ func createHandler(res http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", router)
-	log.Fatal(http.ListenAndServe(":3000", nil))
+	log.Fatal(http.ListenAndServe(":3000", App()))
 }
