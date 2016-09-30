@@ -15,8 +15,6 @@ import (
 	"log"
 	"os"
 	"strconv"
-
-	"github.com/pkg/errors"
 )
 
 func main() {
@@ -24,15 +22,13 @@ func main() {
 	// Open the CSV.
 	f, err := os.Open("../data/example_messy.csv")
 	if err != nil {
-		err = errors.Wrap(err, "Could not open CSV")
 		log.Fatal(err)
 	}
 
-	// Read in the CSV records
+	// Read in the CSV records.
 	r := csv.NewReader(bufio.NewReader(f))
 	records, err := r.ReadAll()
 	if err != nil {
-		err = errors.Wrap(err, "Could not parse CSV")
 		log.Fatal(err)
 	}
 
@@ -41,7 +37,6 @@ func main() {
 	for _, record := range records {
 		intVal, err := strconv.Atoi(record[0])
 		if err != nil {
-			err = errors.Wrap(err, "Parse failed")
 			log.Fatal(err)
 		}
 		if intVal > intMax {
@@ -49,6 +44,6 @@ func main() {
 		}
 	}
 
-	// Print the maxium value
+	// Print the maxium value.
 	fmt.Println(intMax)
 }
