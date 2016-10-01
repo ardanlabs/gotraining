@@ -35,7 +35,7 @@ func createHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	c := NewCustomer(req.FormValue("name"))
+	c := &Customer{Name: req.FormValue("name")}
 	Customers.Save(c)
 	http.Redirect(res, req, fmt.Sprintf("/customers/%s", c.ID), http.StatusSeeOther)
 }

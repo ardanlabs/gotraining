@@ -25,8 +25,8 @@ func showHandler(ctx echo.Context) error {
 }
 
 func createHandler(ctx echo.Context) error {
-	c := NewCustomer("")
-	err := ctx.Bind(&c)
+	c := &Customer{}
+	err := ctx.Bind(c)
 	if err != nil {
 		ctx.Error(err)
 		return err

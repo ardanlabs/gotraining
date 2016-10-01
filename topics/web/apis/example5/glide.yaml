@@ -1,0 +1,7 @@
+package: github.com/ardanlabs/gotraining/topics/web/muxers/example3
+import:
+- package: github.com/labstack/echo
+  version: ^2.1.0
+  subpackages:
+  - engine/standard
+  - middleware
