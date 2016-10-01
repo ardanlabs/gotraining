@@ -38,15 +38,15 @@ The basic muxer in Go has gotten us a long way by this point, but it has it’s 
 
 [Alternative Muxers](muxers/README.md)
 
+## Data Serialization
+Before we start building APIs we need to understand how to serialize data. We’ll look at 3 common data formats, as well as ways to customize those formats to match the needs of your API.
+
+[Data Serialization](serializers/README.md)
+
 ## APIs
 By this point we should be able to build fully featured HTML applications in Go, but the fun doesn’t stop there. Let’s turn an eye to building APIs for other applications to consume. We’ll look at two different ways of building APIs (RESTful & HyperMedia), we’ll also look at different ways to handle that age old question of versioning and API.
 
 [APIs](apis/README.md)
-
-## Data Serialization
-An API is nothing if we don’t have a way of serializing the data we want to send. We’ll look at 3 common data formats, as well as ways to customize those formats to match the needs of your API.
-
-[Data Serialization](serializers/README.md)
 
 ## Consuming HTTP APIs
 What good is having an API if we can’t consume it? We’ll learn how to use Go to speak with APIs, marshal & unmarshal data, set request headers, and more.
