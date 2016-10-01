@@ -16,13 +16,13 @@ var lock = &sync.Mutex{}
 func init() {
 	rand.Seed(time.Now().UnixNano())
 
-	Customers.Save(&Customer{Name: "Mary Jane"})
-	Customers.Save(&Customer{Name: "Bob Smith"})
+	Customers.Save(&Customer{ID: "1", Name: "Mary Jane"})
+	Customers.Save(&Customer{ID: "2", Name: "Bob Smith"})
 }
 
 type Customer struct {
 	ID   string
-	Name string
+	Name string `form:"name"`
 }
 
 func (db customers) Save(c *Customer) {
