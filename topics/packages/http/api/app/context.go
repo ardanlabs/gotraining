@@ -1,4 +1,6 @@
-// Package app provides application support for context and MongoDB access.
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
 // Current Status Codes:
 //		200 OK           : StatusOK                  : Call is success and returning data.
 //		204 No Content   : StatusNoContent           : Call is success and returns no data.

@@ -1,3 +1,6 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
 // Package app provides a thin layer of support for writing web services. It
 // integrates with the ardanlabs kit repo to provide support for logging,
 // configuration, database, routing and application context. The base things
