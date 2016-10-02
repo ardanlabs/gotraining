@@ -27,6 +27,11 @@ Sample code that provides best practices for building a RESTful API in Go. It le
 
 ### Exercise 1
 
-TBD
+**Step 1**  
+Add a new set of routes to CRUD User Roles.
+
+**Step 2**  
+Add a new piece of middleware to mock authentication. Then apply this middleware to the Group of routes that create, update for delete data.
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
