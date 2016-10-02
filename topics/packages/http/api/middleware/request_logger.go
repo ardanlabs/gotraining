@@ -11,18 +11,14 @@ import (
 // the format: SESSIONID : (200) GET /foo -> IP ADDR (latency)
 func RequestLogger(h app.Handler) app.Handler {
 	return func(c *app.Context) error {
-		log.Printf("%v : middleware : RequestLogger : Started", c.SessionID)
-
 		start := time.Now()
 		err := h(c)
 
-		log.Printf("%v : (%d) %s %s -> %s (%s)",
+		log.Printf("%s : RL : *****> (%d) %s %s -> %s (%s)",
 			c.SessionID,
 			c.Status, c.Request.Method, c.Request.URL.Path,
 			c.Request.RemoteAddr, time.Since(start),
 		)
-
-		log.Printf("%v : middleware : RequestLogger : Completed", c.SessionID)
 
 		return err
 	}

@@ -8,17 +8,25 @@ import (
 	"github.com/ardanlabs/gotraining/topics/packages/http/api/app"
 	"github.com/ardanlabs/gotraining/topics/packages/http/api/models"
 	"github.com/ardanlabs/gotraining/topics/packages/http/api/services"
-	"github.com/ardanlabs/gotraining/topics/packages/http/api/tests"
 )
+
+// Succeed is the Unicode codepoint for a check mark.
+const Succeed = "\u2713"
+
+// Failed is the Unicode codepoint for an X mark.
+const Failed = "\u2717"
 
 // TestUsers validates a user can be created, retrieved and
 // then removed from the system.
 func TestUsers(t *testing.T) {
 	c := &app.Context{
-		Session:   app.GetSession(),
+		Ctx:       make(map[string]interface{}),
 		SessionID: "TESTING",
 	}
-	defer c.Session.Close()
+
+	ses := app.GetSession()
+	c.Ctx["DB"] = ses
+	defer ses.Close()
 
 	now := time.Now()
 
@@ -48,44 +56,44 @@ func TestUsers(t *testing.T) {
 	t.Log("Given the need to add a new user, retrieve and remove that user from the system.")
 	{
 		if _, err := u.Validate(); err != nil {
-			t.Fatal("\tShould be able to validate the user data.", tests.Failed)
+			t.Fatal("\tShould be able to validate the user data.", Failed)
 		}
-		t.Log("\tShould be able to validate the user data.", tests.Succeed)
+		t.Log("\tShould be able to validate the user data.", Succeed)
 
 		if _, err := services.Users.Create(c, &u); err != nil {
-			t.Fatal("\tShould be able to create a user in the system.", tests.Failed)
+			t.Fatal("\tShould be able to create a user in the system.", Failed)
 		}
-		t.Log("\tShould be able to create a user in the system.", tests.Succeed)
+		t.Log("\tShould be able to create a user in the system.", Succeed)
 
 		if u.UserID == "" {
-			t.Fatal("\tShould have an UserID for the user.", tests.Failed)
+			t.Fatal("\tShould have an UserID for the user.", Failed)
 		}
-		t.Log("\tShould have an UserID for the user.", tests.Succeed)
+		t.Log("\tShould have an UserID for the user.", Succeed)
 
 		ur, err := services.Users.Retrieve(c, u.UserID)
 		if err != nil {
-			t.Fatal("\tShould be able to retrieve the user back from the system.", tests.Failed)
+			t.Fatal("\tShould be able to retrieve the user back from the system.", Failed)
 		}
-		t.Log("\tShould be able to retrieve the user back from the system.", tests.Succeed)
+		t.Log("\tShould be able to retrieve the user back from the system.", Succeed)
 
 		if _, err := u.Compare(ur); err != nil {
-			t.Fatal("\tShould find both the original and retrieved value are identical.", tests.Failed)
+			t.Fatal("\tShould find both the original and retrieved value are identical.", Failed)
 		}
-		t.Log("\tShould find both the original and retrieved value are identical.", tests.Succeed)
+		t.Log("\tShould find both the original and retrieved value are identical.", Succeed)
 
 		if ur == nil || u.UserID != ur.UserID {
-			t.Fatal("\tShould have a match between the created user and the one retrieved.", tests.Failed)
+			t.Fatal("\tShould have a match between the created user and the one retrieved.", Failed)
 		}
-		t.Log("\tShould have a match between the created user and the one retrieved.", tests.Succeed)
+		t.Log("\tShould have a match between the created user and the one retrieved.", Succeed)
 
 		if err := services.Users.Delete(c, u.UserID); err != nil {
-			t.Fatal("\tShould be able to remove the user from the system.", tests.Failed)
+			t.Fatal("\tShould be able to remove the user from the system.", Failed)
 		}
-		t.Log("\tShould be able to remove the user from the system", tests.Succeed)
+		t.Log("\tShould be able to remove the user from the system", Succeed)
 
 		if _, err := services.Users.Retrieve(c, u.UserID); err == nil {
-			t.Fatal("\tShould NOT be able to retrieve the user back from the system.", tests.Failed)
+			t.Fatal("\tShould NOT be able to retrieve the user back from the system.", Failed)
 		}
-		t.Log("\tShould NOT be able to retrieve the user back from the system.", tests.Succeed)
+		t.Log("\tShould NOT be able to retrieve the user back from the system.", Succeed)
 	}
 }

@@ -29,7 +29,7 @@ func (usersService) List(c *app.Context) ([]models.User, error) {
 		return collection.Find(nil).All(&u)
 	}
 
-	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : List : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (usersService) Retrieve(c *app.Context, userID string) (*models.User, error
 		return collection.Find(q).One(&u)
 	}
 
-	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
 			log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", err)
 			return nil, err
@@ -97,7 +97,7 @@ func (usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, error
 		return collection.Insert(u)
 	}
 
-	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -140,7 +140,7 @@ func (usersService) Update(c *app.Context, userID string, u *models.User) ([]app
 		return collection.Update(q, u)
 	}
 
-	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -164,7 +164,7 @@ func (usersService) Delete(c *app.Context, userID string) error {
 		return collection.Remove(q)
 	}
 
-	if err := app.ExecuteDB(c.Session, usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", err)
 		return err
 	}

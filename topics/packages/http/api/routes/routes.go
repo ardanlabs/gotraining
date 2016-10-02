@@ -5,11 +5,12 @@ import (
 
 	"github.com/ardanlabs/gotraining/topics/packages/http/api/app"
 	"github.com/ardanlabs/gotraining/topics/packages/http/api/handlers"
+	"github.com/ardanlabs/gotraining/topics/packages/http/api/middleware"
 )
 
 // API returns a handler for a set of routes.
 func API() http.Handler {
-	a := app.New()
+	a := app.New(middleware.RequestLogger, middleware.Mongo)
 
 	// Setup the file server to serve up static content such as
 	// the index.html page.
