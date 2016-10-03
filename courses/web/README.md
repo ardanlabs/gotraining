@@ -53,11 +53,6 @@ What good is having an API if we can’t consume it? We’ll learn how to use Go
 
 [Consuming HTTP APIs](consuming/README.md)
 
-## Securing APIs
-Secure APIs are a must have these days. From configuring our server to use SSL to learning how to read/write JSON Web Tokens we’ll learn how to trust communication between web servers.
-
-[Securing APIs](security/README.md)
-
 ## Context
 In Go 1.7 there is now a Context value that can passed along with requests that make working with multiple services, and go routines, that much more pleasant. Let’s looking into this mystery new addition and see how we can use it to set/get values through a request, as well as control requests to 3rd parties as well.
 
