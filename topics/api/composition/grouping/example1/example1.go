@@ -19,10 +19,10 @@
 // not their state.
 
 // These facts help to flush out the problems with this code.
-// 1) Animals can't talk since this type is generic. This type
+// 1) Animals can't speak since this type is generic. This type
 //    is providing a generalization where behavior is not specific.
 // 2) We will never create an Animal value in our code. This type
-//    is providing a abstraction layer of reuable state.
+//    is providing an abstraction layer of reusable state.
 
 package main
 

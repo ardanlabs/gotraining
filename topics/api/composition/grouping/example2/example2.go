@@ -14,12 +14,15 @@
 // provides that common type we need. The contract.
 
 // A little copy/paste can go a long way. Treat each type as
-// its own resuable type. Don't create these dependency trees.
-// Each type can declare Name and IsMammal and should because
-// they are their own type.
+// its own reusable independent type. Avoid creating dependency
+// trees when it is reasonable and practical to do so. Each type
+// can declare Name and IsMammal and should because they are
+// their own type.
 
-// Use embedding to compose behavior not state. If you are using
-// composition with state in mind STOP.
+// Use embedding to compose for behavior not state. If you are using
+// composition with state in mind question it and validate it makes
+// sense for the given situation. Embed the behavior you need to
+// satisfy existing interfaces.
 
 // Go is pushing us to think about common behavior and contracts.
 // We can group and work with a set of types through the common
@@ -27,12 +30,12 @@
 // not their state.
 
 // These facts help to flush out the code is good.
-// 1) We can now create a list of Animals and work with the
-//    list through the common behvior.
+// 1) We can now create a list of different animal and work with
+//    the list through the common behavior.
 // 2) We have no type pollution by declaring types that are
 //    never created or used directly by our code.
-// 3) We have no types just providing an state based abstraction
-//    layer that adds no real value to the algorithms we are writing.
+// 3) We have no types just providing a state based abstraction
+//    layer that adds no real value to the program we are writing.
 
 package main
 
