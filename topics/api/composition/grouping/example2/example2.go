@@ -5,38 +5,6 @@
 // something we want to do in Go. We will group common types by
 // their behavior and not by their state. This pattern does
 // provide a good design principle in a Go program.
-
-// =============================================================================
-// NOTES:
-
-// Now I can create a list of different Animals because they
-// share a common behavior that is Speak(). The interface
-// provides that common type we need. The contract.
-
-// A little copy/paste can go a long way. Treat each type as
-// its own reusable independent type. Avoid creating dependency
-// trees when it is reasonable and practical to do so. Each type
-// can declare Name and IsMammal and should because they are
-// their own type.
-
-// Use embedding to compose for behavior not state. If you are using
-// composition with state in mind question it and validate it makes
-// sense for the given situation. Embed the behavior you need to
-// satisfy existing interfaces.
-
-// Go is pushing us to think about common behavior and contracts.
-// We can group and work with a set of types through the common
-// behavior they exhibit. Group concrete types by their behavior
-// not their state.
-
-// These facts help to flush out the code is good.
-// 1) We can now create a list of different animal and work with
-//    the list through the common behavior.
-// 2) We have no type pollution by declaring types that are
-//    never created or used directly by our code.
-// 3) We have no types just providing a state based abstraction
-//    layer that adds no real value to the program we are writing.
-
 package main
 
 import "fmt"
@@ -48,8 +16,7 @@ type Speaker interface {
 	Speak()
 }
 
-// Dog contains everything an Animal is but specific
-// attributes that only a Dog has.
+// Dog contains everything a Dog needs.
 type Dog struct {
 	Name     string
 	IsMammal bool
@@ -63,8 +30,7 @@ func (d Dog) Speak() {
 	fmt.Println("Woof!", d.Name, d.Bark, d.IsMammal)
 }
 
-// Cat contains everything an Animal is but specific
-// attributes that only a Cat has.
+// Cat contains everything a Cat needs.
 type Cat struct {
 	Name     string
 	IsMammal bool
@@ -105,3 +71,15 @@ func main() {
 		spkr.Speak()
 	}
 }
+
+// =============================================================================
+
+// NOTES:
+
+// Some final thoughts about the changes we made:
+//  * We didn’t need a base type or type hierarchies to group concrete type
+//    values together.
+//  * The Interface allowed us to create a slice of different concrete type
+//    values and work with these values through their common behavior.
+//  * We removed any type pollution by not declaring a type that was never
+//    solely used by the program.

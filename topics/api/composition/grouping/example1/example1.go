@@ -6,24 +6,6 @@
 // concept of sub-typing. All types are their own and the concepts of
 // base and derived types do not exist in Go. This pattern does not
 // provide a good design principle in a Go program.
-
-// =============================================================================
-// NOTES:
-
-// What if I need a list of different Animals. I can't
-// create a slice of Animals and place Cats and Dogs in it.
-
-// Go wants us to walk away from these type hierarchies that
-// promote the idea of common state and think about the
-// common behavior. Group concrete types by their behavior
-// not their state.
-
-// These facts help to flush out the problems with this code.
-// 1) Animals can't speak since this type is generic. This type
-//    is providing a generalization where behavior is not specific.
-// 2) We will never create an Animal value in our code. This type
-//    is providing an abstraction layer of reusable state.
-
 package main
 
 import "fmt"
@@ -95,3 +77,20 @@ func main() {
 	d.Speak()
 	c.Speak()
 }
+
+// =============================================================================
+
+// NOTES:
+
+// Smells:
+// 	* The Animal type is providing an abstraction layer of reusable state.
+// 	* The program never needs to create or solely use a value of type Animal.
+// 	* The implementation of the Speak method for the Animal type is a generalization.
+// 	* The Speak method for the Animal type is never going to be called.
+
+// Here are some guidelines around declaring types:
+// 	* Declare types that represent something new or unique.
+// 	* Validate that a value of any type is created or used on its own.
+// 	* Embed types to reuse existing behaviors you need to satisfy.
+// 	* Question types that are an alias or abstraction for an existing type.
+// 	* Question types whose sole purpose is to share common state.
