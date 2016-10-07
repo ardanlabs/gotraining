@@ -23,7 +23,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 #### Grouping Types
 
-[Grouping Hierarchies](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/SG_EG1JIDo))  
+[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/SG_EG1JIDo))  
 [Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/fDAgqKgSMv))  
 
 #### Decoupling
