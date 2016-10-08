@@ -193,6 +193,33 @@ func TestJSONSerialization(t *testing.T) {
 	}
 }
 
+func TestNopSerialization(t *testing.T) {
+	cookieData := "fooobar123"
+	sz := NopEncoder{}
+
+	if _, err := sz.Serialize(cookieData); err != errValueNotByte {
+		t.Fatal("Expected error passing string")
+	}
+	dat, err := sz.Serialize([]byte(cookieData))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if (string(dat)) != cookieData {
+		t.Fatal("Expected serialized data to be same as source")
+	}
+
+	var dst []byte
+	if err = sz.Deserialize(dat, dst); err != errValueNotBytePtr {
+		t.Fatal("Expect error unless you pass a *[]byte")
+	}
+	if err = sz.Deserialize(dat, &dst); err != nil {
+		t.Fatal(err)
+	}
+	if (string(dst)) != cookieData {
+		t.Fatal("Expected deserialized data to be same as source")
+	}
+}
+
 func TestEncoding(t *testing.T) {
 	for _, value := range testStrings {
 		encoded := encode([]byte(value))

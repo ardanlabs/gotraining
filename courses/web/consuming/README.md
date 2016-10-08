@@ -13,7 +13,11 @@ What good is having an API if we can’t consume it? We’ll learn how to use Go
 
 [Timeouts](../../../topics/web/consuming/example4/main_test.go)
 
+[Custom Transport](../../../topics/web/consuming/example5/main_test.go)
+
 ### JSON Web Tokens (JWT)
+
+[JWT](../../../topics/web/consuming/example6/main_test.go)
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 

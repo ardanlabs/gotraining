@@ -626,11 +626,11 @@ func checkConnHeaders(req *http.Request) error {
 	if v := req.Header.Get("Upgrade"); v != "" {
 		return fmt.Errorf("http2: invalid Upgrade request header: %q", req.Header["Upgrade"])
 	}
-	if v := req.Header.Get("Transfer-Encoding"); (v != "" && v != "chunked") || len(req.Header["Transfer-Encoding"]) > 1 {
-		return fmt.Errorf("http2: invalid Transfer-Encoding request header: %q", req.Header["Transfer-Encoding"])
+	if vv := req.Header["Transfer-Encoding"]; len(vv) > 0 && (len(vv) > 1 || vv[0] != "" && vv[0] != "chunked") {
+		return fmt.Errorf("http2: invalid Transfer-Encoding request header: %q", vv)
 	}
-	if v := req.Header.Get("Connection"); (v != "" && v != "close" && v != "keep-alive") || len(req.Header["Connection"]) > 1 {
-		return fmt.Errorf("http2: invalid Connection request header: %q", req.Header["Connection"])
+	if vv := req.Header["Connection"]; len(vv) > 0 && (len(vv) > 1 || vv[0] != "" && vv[0] != "close" && vv[0] != "keep-alive") {
+		return fmt.Errorf("http2: invalid Connection request header: %q", vv)
 	}
 	return nil
 }

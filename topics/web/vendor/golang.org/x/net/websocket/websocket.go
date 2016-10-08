@@ -86,6 +86,9 @@ type Config struct {
 	// Additional header fields to be sent in WebSocket opening handshake.
 	Header http.Header
 
+	// Dialer used when opening websocket connections.
+	Dialer *net.Dialer
+
 	handshakeData map[string]string
 }
 

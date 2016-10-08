@@ -52,13 +52,3 @@ By this point we should be able to build fully featured HTML applications in Go,
 What good is having an API if we can’t consume it? We’ll learn how to use Go to speak with APIs, marshal & unmarshal data, set request headers, and more.
 
 [Consuming HTTP APIs](consuming/README.md)
-
-## Context
-In Go 1.7 there is now a Context value that can passed along with requests that make working with multiple services, and go routines, that much more pleasant. Let’s looking into this mystery new addition and see how we can use it to set/get values through a request, as well as control requests to 3rd parties as well.
-
-[Context](context/README.md)
-
-## Deployment
-We’ve built our application and we’re ready to release it to the world! But how? We’ll cover a simple deployment strategy using Heroku. We’ll also look at the Caddy Web Server (written in Go) that has been taking the world by storm, and see just how easy it is to get started with Caddy and Go web applications.
-
-[Deployment](deployment/README.md)

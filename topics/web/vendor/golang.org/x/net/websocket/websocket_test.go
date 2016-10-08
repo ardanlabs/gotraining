@@ -357,6 +357,26 @@ func TestDialConfigBadVersion(t *testing.T) {
 	}
 }
 
+func TestDialConfigWithDialer(t *testing.T) {
+	once.Do(startServer)
+	config := newConfig(t, "/echo")
+	config.Dialer = &net.Dialer{
+		Deadline: time.Now().Add(-time.Minute),
+	}
+	_, err := DialConfig(config)
+	dialerr, ok := err.(*DialError)
+	if !ok {
+		t.Fatalf("DialError expected, got %#v", err)
+	}
+	neterr, ok := dialerr.Err.(*net.OpError)
+	if !ok {
+		t.Fatalf("net.OpError error expected, got %#v", dialerr.Err)
+	}
+	if !neterr.Timeout() {
+		t.Fatalf("expected timeout error, got %#v", neterr)
+	}
+}
+
 func TestSmallBuffer(t *testing.T) {
 	// http://code.google.com/p/go/issues/detail?id=1145
 	// Read should be able to handle reading a fragment of a frame.
