@@ -15,6 +15,10 @@ Now that we have some code written, let’s start understanding how to test HTTP
 
 [Using a Handler](../../../topics/web/testing/example5/integration_test.go)
 
+### Third Party Tools
+
+[github.com/markbates/willie](../../../topics/web/testing/example6/willie_test.go)
+
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 ___

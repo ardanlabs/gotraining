@@ -1,5 +1,0 @@
-package: github.com/ardanlabs/gotraining/topics/web/muxers/example1
-import:
-- package: github.com/gorilla/pat
-  subpackages:
-  - '...'

@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 type App struct{}
@@ -16,13 +14,15 @@ func (a App) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 }
 
 func Test_App(t *testing.T) {
-	r := require.New(t)
-
 	req := httptest.NewRequest("GET", "http://example.com/foo", nil)
 	res := httptest.NewRecorder()
 
 	a := App{}
 	a.ServeHTTP(res, req)
 
-	r.Equal("Hello World!", res.Body.String())
+	exp := "Hello World!"
+	act := res.Body.String()
+	if act != exp {
+		t.Fatalf("expected %s got %s", exp, act)
+	}
 }

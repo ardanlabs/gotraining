@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func MyHandler(res http.ResponseWriter, req *http.Request) {
@@ -14,11 +12,13 @@ func MyHandler(res http.ResponseWriter, req *http.Request) {
 }
 
 func Test_MyHandler(t *testing.T) {
-	r := require.New(t)
-
 	req := httptest.NewRequest("GET", "http://example.com/foo", nil)
 	res := httptest.NewRecorder()
 	MyHandler(res, req)
 
-	r.Equal("Hello World!", res.Body.String())
+	exp := "Hello World!"
+	act := res.Body.String()
+	if act != exp {
+		t.Fatalf("expected %s got %s", exp, act)
+	}
 }

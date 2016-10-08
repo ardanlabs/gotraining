@@ -1,6 +1,0 @@
-package: github.com/ardanlabs/gotraining/topics/web/templates/example7
-import:
-- package: github.com/GeertJohan/go.rice
-  subpackages:
-  - rice
-  - '...'

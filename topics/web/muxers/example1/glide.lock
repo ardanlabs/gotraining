@@ -1,8 +1,0 @@
-hash: bb59ca387555998cfda92f3de0e25b81040952a8aec3ae496ca966cfac6b065c
-updated: 2016-09-30T16:03:45.901849164-04:00
-imports:
-- name: github.com/gorilla/pat
-  version: cf955c3d1f2c27ee96f93e9738085c762ff5f49d
-  subpackages:
-  - '...'
-testImports: []
