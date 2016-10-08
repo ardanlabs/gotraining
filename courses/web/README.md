@@ -38,6 +38,11 @@ The basic muxer in Go has gotten us a long way by this point, but it has it’s 
 
 [Alternative Muxers](muxers/README.md)
 
+## Middleware
+Through the use of middleware we can wrap requests to applications with commonly run code, such as logging, authentication/authorization, and other such tasks.
+
+[Middleware](middleware/README.md)
+
 ## Data Serialization
 Before we start building APIs we need to understand how to serialize data. We’ll look at 3 common data formats, as well as ways to customize those formats to match the needs of your API.
 
