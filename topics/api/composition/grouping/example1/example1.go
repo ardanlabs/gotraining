@@ -20,31 +20,40 @@ type Animal struct {
 // how they speak.
 // SMELL - This can't apply to all animals.
 func (a Animal) Speak() {
-	fmt.Println("UGH!", a.Name, a.IsMammal)
+	fmt.Println("UGH!",
+		"My name is", a.Name,
+		", it is", a.IsMammal,
+		"I am a mammal")
 }
 
 // Dog contains everything an Animal is but specific
 // attributes that only a Dog has.
 type Dog struct {
 	Animal
-	Bark int
+	PackFactor int
 }
 
 // Speak knows how to speak like a dog.
 func (d Dog) Speak() {
-	fmt.Println("Woof!", d.Name, d.Bark, d.IsMammal)
+	fmt.Println("Woof!",
+		"My name is", d.Name,
+		", it is", d.IsMammal,
+		"I am a mammal with a pack factor of", d.PackFactor)
 }
 
 // Cat contains everything an Animal is but specific
 // attributes that only a Cat has.
 type Cat struct {
 	Animal
-	Meow int
+	ClimbFactor int
 }
 
 // Speak knows how to speak like a cat.
 func (c Cat) Speak() {
-	fmt.Println("Meow!", c.Name, c.Meow, c.IsMammal)
+	fmt.Println("Meow!",
+		"My name is", c.Name,
+		", it is", c.IsMammal,
+		"I am a mammal with a climb factor of", c.ClimbFactor)
 }
 
 func main() {
@@ -60,7 +69,7 @@ func main() {
 			Name:     "Fido",
 			IsMammal: true,
 		},
-		Bark: 5,
+		PackFactor: 5,
 	}
 
 	// Create a Cat by initializing its Animal parts
@@ -70,7 +79,7 @@ func main() {
 			Name:     "Milo",
 			IsMammal: true,
 		},
-		Meow: 4,
+		ClimbFactor: 4,
 	}
 
 	// Have the Dog and Cat speak.
