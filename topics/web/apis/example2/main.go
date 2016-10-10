@@ -11,8 +11,8 @@ const defaultAPIVersion = "2"
 
 func init() {
 	apis = map[string]http.Handler{
-		"1": V1(),
-		"2": V2(),
+		"v1": V1(),
+		"v2": V2(),
 	}
 }
 
