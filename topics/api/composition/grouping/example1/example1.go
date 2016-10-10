@@ -62,29 +62,36 @@ func main() {
 	// the Animal type. Can't create a list based on a
 	// common set of state.
 
-	// Create a Dog by initializing its Animal parts
-	// and then its specific Dog attributes.
-	d := Dog{
-		Animal: Animal{
-			Name:     "Fido",
-			IsMammal: true,
+	// DOES NOT COMPILE
+
+	// Create a list of Animals that know how to speak.
+	animals := []Animal{
+
+		// Create a Dog by initializing its Animal parts
+		// and then its specific Dog attributes.
+		Dog{
+			Animal: Animal{
+				Name:     "Fido",
+				IsMammal: true,
+			},
+			PackFactor: 5,
 		},
-		PackFactor: 5,
+
+		// Create a Cat by initializing its Animal parts
+		// and then its specific Cat attributes.
+		Cat{
+			Animal: Animal{
+				Name:     "Milo",
+				IsMammal: true,
+			},
+			ClimbFactor: 4,
+		},
 	}
 
-	// Create a Cat by initializing its Animal parts
-	// and then its specific Cat attributes.
-	c := Cat{
-		Animal: Animal{
-			Name:     "Milo",
-			IsMammal: true,
-		},
-		ClimbFactor: 4,
+	// Have the Animals speak.
+	for _, animal := range animals {
+		animal.Speak()
 	}
-
-	// Have the Dog and Cat speak.
-	d.Speak()
-	c.Speak()
 }
 
 // =============================================================================
