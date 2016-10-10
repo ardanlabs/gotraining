@@ -7,7 +7,7 @@ import (
 	rice "github.com/GeertJohan/go.rice"
 )
 
-func main() {
+func App() http.Handler {
 	m := http.NewServeMux()
 
 	box := rice.MustFindBox("./static")
@@ -18,5 +18,9 @@ func main() {
 		b, _ := box.Bytes("index.html")
 		res.Write(b)
 	})
-	log.Fatal(http.ListenAndServe(":3000", m))
+	return m
+}
+
+func main() {
+	log.Fatal(http.ListenAndServe(":3000", App()))
 }

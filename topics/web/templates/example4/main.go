@@ -2,6 +2,7 @@ package main
 
 import (
 	"html/template"
+	"io"
 	"log"
 	"os"
 )
@@ -18,10 +19,14 @@ type User struct {
 	Email string `json:"email"`
 }
 
-func main() {
+func Exec(w io.Writer) {
 	t, err := template.New("foo").Parse(html)
 	if err != nil {
 		log.Fatal(err)
 	}
-	t.Execute(os.Stdout, User{Name: "Mark", Email: "mark@example.com"})
+	t.Execute(w, User{Name: "Mark", Email: "mark@example.com"})
+}
+
+func main() {
+	Exec(os.Stdout)
 }

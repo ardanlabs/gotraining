@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"os"
 	"strings"
@@ -30,7 +31,7 @@ func (u User) FullName() string {
 	return fmt.Sprintf("%s %s", u.First, u.Last)
 }
 
-func main() {
+func Exec(w io.Writer) {
 	funcs := template.FuncMap{
 		"upper": func(s string) string {
 			return strings.ToUpper(s)
@@ -40,9 +41,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	t.Execute(os.Stdout, User{
+
+	t.Execute(w, User{
 		First:   "Mary",
 		Last:    "Smith",
 		Aliases: []string{"Scarface", "MC Skat Kat"},
 	})
+}
+
+func main() {
+	Exec(os.Stdout)
 }
