@@ -8,18 +8,20 @@ import (
 	"github.com/gorilla/schema"
 )
 
-func router(res http.ResponseWriter, req *http.Request) {
-	switch req.Method {
-	case "GET":
-		getHandler(res, req)
-	case "POST":
-		postHandler(res, req)
-	default:
-		res.WriteHeader(http.StatusMethodNotAllowed)
-	}
+func App() http.Handler {
+	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+		switch req.Method {
+		case "GET":
+			GetHandler(res, req)
+		case "POST":
+			PostHandler(res, req)
+		default:
+			res.WriteHeader(http.StatusMethodNotAllowed)
+		}
+	})
 }
 
-func getHandler(res http.ResponseWriter, req *http.Request) {
+func GetHandler(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Content-Type", "text/html")
 	res.Write([]byte(`
 <form action="/" method="POST">
@@ -41,7 +43,7 @@ type User struct {
 	LastName  string
 }
 
-func postHandler(res http.ResponseWriter, req *http.Request) {
+func PostHandler(res http.ResponseWriter, req *http.Request) {
 	err := req.ParseForm()
 	if err != nil {
 		res.WriteHeader(http.StatusInternalServerError)
@@ -59,10 +61,9 @@ func postHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(res, "First Name: %s\nLast Name %s", u.FirstName, u.LastName)
+	fmt.Fprintf(res, "First Name: %s\nLast Name: %s", u.FirstName, u.LastName)
 }
 
 func main() {
-	http.HandleFunc("/", router)
-	log.Fatal(http.ListenAndServe(":3000", nil))
+	log.Fatal(http.ListenAndServe(":3000", App()))
 }

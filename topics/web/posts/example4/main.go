@@ -9,12 +9,17 @@ import (
 	"runtime"
 )
 
-func main() {
-	http.HandleFunc("/upload", Upload)
-	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
+func App() http.Handler {
+	m := http.NewServeMux()
+	m.HandleFunc("/upload", Upload)
+	m.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(html))
 	})
-	http.ListenAndServe(":3000", nil)
+	return m
+}
+
+func main() {
+	http.ListenAndServe(":3000", App())
 }
 
 func Upload(res http.ResponseWriter, req *http.Request) {
@@ -57,7 +62,7 @@ var html = `<html>
 <body>
 <form action="/upload" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
   <p><input type="file" name="myFile"></p>
-  <p><input type="submit" value="Continue →"></p>
+  <p><input type="submit" value="Continue ->"></p>
 </form>
 </body>
 </html>

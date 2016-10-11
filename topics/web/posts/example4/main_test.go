@@ -3,62 +3,98 @@ package main
 import (
 	"bytes"
 	"io"
+	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path"
+	"strings"
 	"testing"
 )
 
-func TestUpload(t *testing.T) {
-	img := path.Join(currentDir(), "gopher.png")
-	file, err := os.Open(img)
-	if err != nil {
-		t.Fatal(err)
-	}
+var uploadDir string
 
-	defer file.Close()
-
-	body := &bytes.Buffer{}
-	writer := multipart.NewWriter(body)
-	part, _ := writer.CreateFormFile("myFile", path.Base(img))
-	io.Copy(part, file)
-
-	writer.Close()
-
-	res := httptest.NewRecorder()
-	req, _ := http.NewRequest("POST", "/", body)
-	req.Header.Set("Content-Type", writer.FormDataContentType())
-
-	dirname := path.Join(currentDir(), "test_uploads")
-	defer os.RemoveAll(dirname)
-	os.RemoveAll(dirname)
+func init() {
+	uploadDir = path.Join(currentDir(), "test_uploads")
+	os.RemoveAll(uploadDir)
 	uploadDirectoryName = func() string {
-		return dirname
+		return uploadDir
 	}
+}
 
-	Upload(res, req)
+func Test_App(t *testing.T) {
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+	t.Run("GET", test_Get(ts))
+	t.Run("POST", test_Post(ts))
+}
 
-	if res.Code != 200 {
-		t.Errorf("Expected %d to equal 200", res.Code)
-		t.FailNow()
+func test_Get(ts *httptest.Server) func(*testing.T) {
+	return func(t *testing.T) {
+		res, err := http.Get(ts.URL)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		b, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		act := string(b)
+		exp := "Continue ->"
+
+		if !strings.Contains(act, exp) {
+			t.Fatalf("expected %s to contain %s", act, exp)
+		}
 	}
-	upFile := path.Join(dirname, path.Base(img))
-	os.Stat(upFile)
+}
 
-	orig, _ := os.Open(img)
-	defer orig.Close()
-	origBytes := []byte{}
-	orig.Read(origBytes)
+func test_Post(ts *httptest.Server) func(*testing.T) {
+	return func(t *testing.T) {
+		img := path.Join(currentDir(), "gopher.png")
+		file, err := os.Open(img)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-	uploaded, _ := os.Open(upFile)
-	defer uploaded.Close()
-	upBytes := []byte{}
-	uploaded.Read(upBytes)
+		body := &bytes.Buffer{}
+		writer := multipart.NewWriter(body)
+		part, _ := writer.CreateFormFile("myFile", path.Base(img))
+		io.Copy(part, file)
 
-	if string(origBytes) != string(upBytes) {
-		t.Error("Original file bytes and uploaded file bytes aren't equal")
-		t.FailNow()
+		req, err := http.NewRequest("POST", ts.URL, body)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		req.Header.Set("Content-Type", writer.FormDataContentType())
+
+		c := http.Client{}
+		res, err := c.Do(req)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if res.StatusCode != 200 {
+			t.Fatalf("Expected %d to equal 200", res.StatusCode)
+		}
+
+		orig, _ := os.Open(img)
+		origBytes := []byte{}
+		orig.Read(origBytes)
+
+		upFile := path.Join(uploadDir, path.Base(img))
+		uploaded, _ := os.Open(upFile)
+		upBytes := []byte{}
+		uploaded.Read(upBytes)
+
+		act := string(upBytes)
+		exp := string(origBytes)
+
+		if act != exp {
+			t.Fatal("Original file bytes and uploaded file bytes aren't equal")
+		}
 	}
 }
