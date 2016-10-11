@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"io"
 	"os"
 	"time"
 )
@@ -16,10 +16,13 @@ type User struct {
 	Bio       *string
 }
 
-func main() {
-	e := json.NewEncoder(os.Stdout)
-	e.Encode(User{})
+func EncodeUser(w io.Writer, u User) {
+	e := json.NewEncoder(w)
+	e.Encode(u)
+}
 
-	fmt.Println("\n")
-	e.Encode(User{FirstName: "Mary", LastName: "Jane"})
+func main() {
+	w := os.Stdout
+	EncodeUser(w, User{})
+	EncodeUser(w, User{FirstName: "Mary", LastName: "Jane"})
 }
