@@ -184,6 +184,9 @@ _"Should be mentioned that though I am no expert, I have been using Go for about
 
 ## Testimonials
 
+Ana-Maria Lazar, Software Engineer at Sainsbury's  
+_"Intensive crash course in Go that literally takes you to a whole new level. Not only Bill provides lots of examples and exercises to familiarize yourself faster with the language but there is also a lot of  information that can be applied to other languages as well. Perfect combination!"_
+
 Greg Hammond, Founder & CEO at Best Option Trading  
 _"Bill helped me learn enough Go to work with him and his team to take a program with a lot of complexity, accumulated over years, and make it into an enterprise product. As architect, he made it more extensible, tested, and created an external API. Bill has a gift for writing readable code that is easy to reason about. He demonstrates coding restraint by favoring code that is maintainable, rather than relying upon overly clever solutions. At the same time, he is a performance hawk, always thinking about how to cut milliseconds from runtime. When I began the project with Bill, I was under pressure from both schedule and cost perspectives. He put in extra effort at the end of the project to deliver what I needed. I highly recommend Bill for his well-written book, his 'Ultimate Go' course, and development work through Ardan Labs."_
 
