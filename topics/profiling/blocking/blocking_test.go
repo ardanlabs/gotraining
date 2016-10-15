@@ -41,18 +41,100 @@ func init() {
 	fmt.Println("Bytes", len(data))
 }
 
-// send reads the bytes and sends them through the channel.
-func send(r io.Reader, ch chan int) {
-	buf := make([]byte, 1)
+// TestLatency runs a single stream so we can look at
+// blocking profiles for different buffer sizes.
+func TestLatency(t *testing.T) {
+	bufSize := 0
+
+	fmt.Println("BufSize:", bufSize)
+	stream(bufSize)
+}
+
+// TestLatencies provides a test to profile and trace channel latencies
+// with a little data science sprinkled in.
+func TestLatencies(t *testing.T) {
+	var bufSize int
+	var count int
+	var first time.Duration
+
+	pts := make(plotter.XYs, 20)
 
 	for {
-		n, err := r.Read(buf)
-		if n == 0 || err != nil {
-			break
+
+		// Perform a stream with specified buffer size.
+		since := stream(bufSize)
+
+		// Calculate how long this took and the percent
+		// of different from the unbuffered channel.
+		if bufSize == 0 {
+			first = since
+		}
+		dec := ((float64(first) - float64(since)) / float64(first)) * 100
+
+		// Display the results.
+		fmt.Printf("BufSize: %d\t%v\t%.2f%%\n", bufSize, since, dec)
+
+		// Prepare the results for plotting.
+		pts[count].X = float64(bufSize)
+		pts[count].Y = dec
+		count++
+
+		// Want to look at a single buffer increment.
+		if bufSize < 10 {
+			bufSize++
+			continue
 		}
 
-		ch <- int(buf[0])
+		// Increment by 10 moving forward.
+		if bufSize == 100 {
+			break
+		}
+		bufSize = bufSize + 10
 	}
+
+	// Make the plot of latencies.
+	if err := makePlot(pts); err != nil {
+		log.Fatal(err)
+	}
+}
+
+// stream performs the moving of the data stream from
+// one goroutine to the other.
+func stream(bufSize int) time.Duration {
+
+	// Create WaitGroup and channels.
+	var wg sync.WaitGroup
+	ch := make(chan int, bufSize)
+
+	// Capture the reader for the input data.
+	data := input()
+
+	// Create the receiver goroutine.
+	wg.Add(1)
+	go func() {
+		recv(ch)
+		wg.Done()
+	}()
+
+	// Start the clock.
+	st := time.Now()
+
+	// Send all the data to the receiving goroutine.
+	send(data, ch)
+
+	// Close the channel and wait for the receiving
+	// goroutine to terminate.
+	close(ch)
+	wg.Wait()
+
+	// Calculate how long the send took.
+	return time.Since(st)
+}
+
+// input returns a reader that can be used to read a stream
+// of bytes.
+func input() io.Reader {
+	return bytes.NewBuffer(data)
 }
 
 // recv waits for bytes and adds them up.
@@ -64,76 +146,17 @@ func recv(ch chan int) {
 	}
 }
 
-// input returns a reader that can be used to read a stream
-// of bytes.
-func input() io.Reader {
-	return bytes.NewBuffer(data)
-}
-
-// TestLatency provides a test to profile and trace channel latencies.
-func TestLatency(t *testing.T) {
-	var i int
-	var count int
-	var first time.Duration
-	pts := make(plotter.XYs, 40)
+// send reads the bytes and sends them through the channel.
+func send(r io.Reader, ch chan int) {
+	buf := make([]byte, 1)
 
 	for {
-		var wg sync.WaitGroup
-		ch := make(chan int, i)
-
-		// Capture the reader for the input data.
-		data := input()
-
-		// Create the receiver goroutine.
-		wg.Add(1)
-		go func() {
-			recv(ch)
-			wg.Done()
-		}()
-
-		// Start the clock.
-		st := time.Now()
-
-		// Send all the data to the receiving goroutine.
-		send(data, ch)
-
-		// Close the channel and wait for the receiving
-		// goroutine to terminate.
-		close(ch)
-		wg.Wait()
-
-		// Calculate how long this took and the percent
-		// of different from the unbuffered channel.
-		since := time.Since(st)
-		if i == 0 {
-			first = since
-		}
-		dec := ((float64(first) - float64(since)) / float64(first)) * 100
-
-		// Display the results.
-		fmt.Printf("%d\t%v\t%.2f\n", i, since, dec)
-
-		// Prepare the results for plotting.
-		pts[count].X = float64(i)
-		pts[count].Y = dec
-		count++
-
-		// Want to look at a single buffer increment.
-		if i < 10 {
-			i++
-			continue
-		}
-
-		// Increment by 10 moving forward.
-		i = i + 10
-		if i == 310 {
+		n, err := r.Read(buf)
+		if n == 0 || err != nil {
 			break
 		}
-	}
 
-	// Make the plot of latencies.
-	if err := makePlot(pts); err != nil {
-		log.Fatal(err)
+		ch <- int(buf[0])
 	}
 }
 

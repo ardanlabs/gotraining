@@ -22,7 +22,26 @@ Where the fields are as follows:
     # MB goal   goal heap size
     # P         number of processors used
 
-In C++, a memory leak is memory you have lost a reference to.
+**wall-clock** time is a measure of the real time that elapses from start to end, including time that passes due to programmed (artificial) delays or waiting for resources to become available.
+https://en.wikipedia.org/wiki/Wall-clock_time
+
+**CPU time** (or process time) is the amount of time for which a central processing unit (CPU) was used for processing instructions of a computer program or operating system, as opposed to, for example, waiting for input/output (I/O) operations or entering low-power (idle) mode.
+https://en.wikipedia.org/wiki/CPU_time
+
+You can get more details by adding the **gcpacertrace=1** flag. This causes the garbage collector to print information about the internal state of the concurrent pacer.
+
+    export GODEBUG=gctrace=1,gcpacertrace=1
+
+Sample output:
+
+    gc 5 @0.071s 0%: 0.018+0.46+0.071 ms clock, 0.14+0/0.38/0.14+0.56 ms cpu, 29->29->29 MB, 30 MB goal, 8 P
+    pacer: sweep done at heap size 29MB; allocated 0MB of spans; swept 3752 pages at +6.183550e-004 pages/byte
+    pacer: assist ratio=+1.232155e+000 (scan 1 MB in 70->71 MB) workers=2+0
+    pacer: H_m_prev=30488736 h_t=+2.334071e-001 H_T=37605024 h_a=+1.409842e+000 H_a=73473040 h_g=+1.000000e+000 H_g=60977472 u_a=+2.500000e-001 u_g=+2.500000e-001 W_a=308200 goalΔ=+7.665929e-001 actualΔ=+1.176435e+000 u_a/u_g=+1.000000e+000
+
+Notes:
+
+In C++, a memory leak is memory you have lost a reference to.  
 In Go, a memory leak is memory you retain a reference to.
 
 ## Running a GODEBUG GC Trace
@@ -39,12 +58,14 @@ In Go, a memory leak is memory you retain a reference to.
     @0.009s     : Nine milliseconds since the program started.
     1%          : One percent of the programs time has been spent in GC.
     
+    // wall-clock
     0.059ms     : **STW** Sweep termination.
     0.17ms      : Mark/Scan - Assist Time (GC performed in line with allocation).
     0.005ms     : Mark/Scan - Background GC time.
     0.24ms      : Mark/Scan - Idle GC time.
     0.12ms      : **STW** Mark termination.
 
+    // CPU time
     0.17ms      : **STW** Sweep termination.
     0.17+0+0ms  : Mark/Scan - Assist Time (GC performed in line with allocation).
     0.36ms      : Mark/Scan - Background GC time.
@@ -69,6 +90,6 @@ https://www.hakkalabs.co/articles/finding-memory-leaks-go-programs
 
 ## Code Review
 
-[Memory Trace](trace.go) ([Go Playground](http://play.golang.org/p/ty-4EwbuH_))
+[Memory Trace](trace.go) ([Go Playground](https://play.golang.org/p/ty-4EwbuH_))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

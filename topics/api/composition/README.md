@@ -17,26 +17,31 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../reading/design_guidelines.md) for composition.
+* Learn about the [design guidelines](../../../reading/design_guidelines.md) for composition.
 
 ## Code Review
 
-#### Composition and Decoupling
+#### Grouping Types
 
-[Struct Composition](example1/example1.go) ([Go Playground](http://play.golang.org/p/nrgO8CSnNK))  
-[Decoupling With Interface](example2/example2.go) ([Go Playground](http://play.golang.org/p/MpiSpACEib))  
-[Interface Composition](example3/example3.go) ([Go Playground](http://play.golang.org/p/Rec1liNLFH))  
-[Decoupling With Interface Composition](example4/example4.go) ([Go Playground](http://play.golang.org/p/1jOt6VOzky))  
+[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/hKEhvhetlu))  
+[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/8ZsLe4nrAj))  
+
+#### Decoupling
+
+[Struct Composition](decoupling/example1/example1.go) ([Go Playground](https://play.golang.org/p/axLYwteYkK))  
+[Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/EnzMrT7Fdo))  
+[Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/ES4BOnDX6O))  
+[Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/ufFSFxCdEs))  
 
 #### Conversion and Assertions
 
-[Interface Conversions](example5/example5.go) ([Go Playground](http://play.golang.org/p/2K2svo0MR0))  
-[Runtime Type Assertions](example6/example6.go) ([Go Playground](http://play.golang.org/p/tr-RGBxES-))
+[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/2K2svo0MR0))  
+[Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
 
 #### Mocking
 
-[Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](http://play.golang.org/p/3a_zYeR8M7))  
-[Client](example7/example7.go) ([Go Playground](http://play.golang.org/p/guvjysMjgb))
+[Package To Mock](mocking/example1/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/3a_zYeR8M7))  
+[Client](mocking/example1/example1.go) ([Go Playground](https://play.golang.org/p/guvjysMjgb))
 
 ## Exercises
 
@@ -44,7 +49,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 Using the template, declare a set of concrete types that implement the set of predefined interface types. Then create values of these types and use them to complete a set of predefined tasks.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/MXFPUsqoxI)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/uXVupN6o4K))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/x6sO5GKkrs)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/XJeRRunNE2))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

@@ -33,8 +33,9 @@ func main() {
 
 	fmt.Println("=================")
 
-	// Iterate over the map.
-	for key, value := range users {
-		fmt.Println(key, value)
-	}
+	// Find the Roy key.
+	u, found := users["Roy"]
+
+	// Display the value and found flag.
+	fmt.Println("Roy", found, u)
 }

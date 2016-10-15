@@ -17,8 +17,9 @@ http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 ## Code Review
 
-[Declare and inialize constants](example1/example1.go) ([Go Playground](http://play.golang.org/p/dIJb3S6CIb))  
-[Parallel type system (Kind)](example2/example2.go) ([Go Playground](http://play.golang.org/p/-DUJAVsTMp))
+[Declare and inialize constants](example1/example1.go) ([Go Playground](https://play.golang.org/p/dIJb3S6CIb))  
+[Parallel type system (Kind)](example2/example2.go) ([Go Playground](https://play.golang.org/p/-DUJAVsTMp))  
+[iota](example3/example3.go) ([Go Playground](https://play.golang.org/p/OqJLBLhO7_))  
 
 ## Exercises
 
@@ -28,7 +29,7 @@ http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 **Part B:** Multiply two literal constants into a typed variable and display the value.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/QMrOCsHjcC)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/aUZ-7VPb9H))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/QMrOCsHjcC)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/aUZ-7VPb9H))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

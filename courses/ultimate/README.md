@@ -23,7 +23,7 @@ This material covers a good portion of the tooling that comes with go. Specifica
 
 [Tooling](tooling/README.md)
 
-## Standard Library
-This material covers the essential things you need to know about the standard library. Along the way you also learn about the most commonly used packages.
+## Packages
+This material covers the essential things you need to know about the standard library and some important third party packages. Along the way you also learn about the most commonly used packages.
 
-[Standard Library](stdlib/README.md)
+[Packages](packages/README.md)

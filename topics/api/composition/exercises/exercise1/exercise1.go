@@ -138,14 +138,15 @@ func main() {
 
 			// Pop an administrator value from the admins list and
 			// call the administrate method.
-			admin := admins.popAdmin()
-			admin.administrate(task.system)
-		} else {
+			adm := admins.popAdmin()
+			adm.administrate(task.system)
 
-			// Pop a developer value from the devs list and
-			// call the develop method.
-			dev := devs.popDev()
-			dev.develop(task.system)
+			continue
 		}
+
+		// Pop a developer value from the devs list and
+		// call the develop method.
+		dev := devs.popDev()
+		dev.develop(task.system)
 	}
 }

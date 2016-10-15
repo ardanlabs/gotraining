@@ -24,9 +24,17 @@ func main() {
 
 	// Defer the call to the anonymous function till after main returns.
 	defer func() {
-		fmt.Println("Defer:", n)
+		fmt.Println("Defer 1:", n)
 	}()
 
 	// Set the value of n to 3 before the return.
 	n = 3
+
+	// Call the anonymous function through the variable.
+	f()
+
+	// Defer the call to the anonymous function till after main returns.
+	defer func() {
+		fmt.Println("Defer 2:", n)
+	}()
 }

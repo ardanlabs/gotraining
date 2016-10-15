@@ -1,10 +1,32 @@
 ## Design Guidelines
 
-These are a set of design guidelines for data, interfaces, composition and packages. Please consider these principles when designing your own software.
+Performance and productivity both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is out pacing the hardware’s ability to make them faster.
 
-***"The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski***
+By following Go’s idioms and a few guidelines, we can write code that can be reasoned about by anyone who looks at it. We can write software that simplifies, minimizes and reduces the amount of code we need to solve the problems we are working on. We don’t have to choose productivity over performance or performance over productivity anymore. We can have both.
 
-#### Bottom Line
+#### Quotes
+
+*"The hope is that the progress in hardware will cure all software ills. However, a critical observer may observe that software manages to outgrow hardware in size and sluggishness. Other observers had noted this for some time before, indeed the trend was becoming obvious as early as 1987." - Niklaus Wirth*
+
+*"The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski*
+
+*"The hardware folks will not put more cores into their hardware if the software isn’t going to use them, so, it is this balancing act of each other staring at each other, and we are hoping that Go is going to break through on the software side.” - Rick Hudson*
+
+*"C is the best balance I've ever seen between power and expressiveness. You can do almost anything you want to do by programming fairly straightforwardly and you will have a very good mental model of what's going to happen on the machine; you can predict reasonably well how quickly it's going to run, you understand what's going on .... - Brian Kernighan*
+
+#### Somewhere Along The Line
+
+* We became impressed with programs that contain large amounts of code.
+* We strived to create large abstractions in our code base.
+* We forgot that the hardware is the platform.
+* We lost the understanding that every decision comes with a cost.
+
+#### These Days Are Gone
+
+* We can throw more hardware at the problem.
+* We can throw more developers at the problem.
+
+#### Remember
 
 The **compiler** is a tool and it's not all knowing or perfect.  
 You need to work with it and help it.

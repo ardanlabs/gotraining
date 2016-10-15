@@ -20,13 +20,13 @@ http://www.catb.org/esr/structure-packing
 
 ## Code Review
 
-[Declare, create and initialize struct types](example1/example1.go) ([Go Playground](http://play.golang.org/p/TEmOrIxl_P))  
-[Anonymous struct types](example2/example2.go) ([Go Playground](http://play.golang.org/p/x-Dpp9Ts_U))  
-[Named vs Unnamed types](example3/example3.go) ([Go Playground](http://play.golang.org/p/QREkSIDAuW))
+[Declare, create and initialize struct types](example1/example1.go) ([Go Playground](https://play.golang.org/p/TEmOrIxl_P))  
+[Anonymous struct types](example2/example2.go) ([Go Playground](https://play.golang.org/p/x-Dpp9Ts_U))  
+[Named vs Unnamed types](example3/example3.go) ([Go Playground](https://play.golang.org/p/QREkSIDAuW))
 
 ## Advanced Code Review
 
-[Struct type alignments](advanced/example1/example1.go) ([Go Playground](http://play.golang.org/p/MQqKUYXoUK))
+[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/MQqKUYXoUK))
 
 ## Exercises
 

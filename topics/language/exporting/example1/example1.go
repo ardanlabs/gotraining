@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ardanlabs/gotraining/topics/exporting/example1/counters"
+	"github.com/ardanlabs/gotraining/topics/language/exporting/example1/counters"
 )
 
 func main() {

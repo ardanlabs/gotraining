@@ -41,7 +41,9 @@ Here is more reading and videos to also help get you started.
 [Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov  
 [Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
 [Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
-[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team    
+[Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team   
+[Seven ways to profile a Go program](https://www.bigmarker.com/remote-meetup-go/Seven-ways-to-profile-a-Go-program) - Dave Cheney   
+[runtime: goroutine execution stalled during GC](https://github.com/golang/go/issues/16293) - Caleb Spare  
 
 ## Go and OS Tooling
 
@@ -146,6 +148,9 @@ Learn the basics of using memory and cpu profiling.
 Learn the basics of blocking profiling.  
 [Blocking Profiling](blocking)
 
+Learn the basics of trace profiling.  
+[Trace Profiling](trace)
+
 ## Profiling a Web Service
 
 We have a web application that extends a web service. Let's profile this application and attempt to understand how it is working.
@@ -168,7 +173,7 @@ To add load to the service while running profiling we can run these command.
 
 ### GODEBUG
 
-#### Memory Tracing
+#### GC Trace
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
@@ -178,7 +183,7 @@ Put some load of the web application.
 
 	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
-#### Scheduler Tracing
+#### Scheduler Trace
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
@@ -302,9 +307,9 @@ Run the benchmarks and produce a cpu and memory profile.
 	go tool pprof -inuse_space ./search.test mem.out
 	(pprof) web list rssSearch
 
-### Tracing / Blocking Profiles
+### Trace Profiles
 
-#### Tracing Web Application
+#### Trace Web Application
 
 Put some load of the web application.
 
@@ -362,7 +367,10 @@ Running expvarmon
 
 ## Godoc Analysis
 
-The `godoc` tool can help you perform analysis on your code.
+The `godoc` tool can help you perform static analysis on your code.
+
+	// Perform a pointer analysis and then run the godoc website.
+	godoc -analysis pointer -http=:8080
 
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
 
