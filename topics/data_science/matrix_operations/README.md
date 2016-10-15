@@ -16,7 +16,7 @@ As mentioned, matrix operations are ubiquitous in the data science world.  Most 
 [Matrix arithmetic](example1/example1.go)  
 [Transpose, Det, Dot Product, Inverse](example2/example2.go)  
 [Solve for eigenvalues/vectors](example3/example3.go)  
-[Normalize a matrix](example4/example4.go) 
+[Vector/Matrix Norms](example4/example4.go) 
 
 ## Exercises
 
