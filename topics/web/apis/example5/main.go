@@ -9,32 +9,6 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-func indexHandler(ctx echo.Context) error {
-	return ctx.JSON(http.StatusOK, Customers.All())
-}
-
-func showHandler(ctx echo.Context) error {
-	id := ctx.Param("id")
-	c, err := Customers.Find(id)
-	if err != nil {
-		ctx.Error(err)
-		return err
-	}
-	return ctx.JSON(http.StatusOK, c)
-}
-
-func createHandler(ctx echo.Context) error {
-	c := &Customer{}
-	err := ctx.Bind(&c)
-	if err != nil {
-		ctx.Error(err)
-		return err
-	}
-
-	Customers.Save(c)
-	return ctx.JSON(http.StatusCreated, c)
-}
-
 func App() http.Handler {
 	r := echo.New()
 	r.Use(middleware.Logger())
@@ -64,6 +38,32 @@ func App() http.Handler {
 	st := standard.New("")
 	st.SetHandler(r)
 	return st
+}
+
+func indexHandler(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, Customers.All())
+}
+
+func showHandler(ctx echo.Context) error {
+	id := ctx.Param("id")
+	c, err := Customers.Find(id)
+	if err != nil {
+		ctx.Error(err)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, c)
+}
+
+func createHandler(ctx echo.Context) error {
+	c := &Customer{}
+	err := ctx.Bind(&c)
+	if err != nil {
+		ctx.Error(err)
+		return err
+	}
+
+	Customers.Save(c)
+	return ctx.JSON(http.StatusCreated, c)
 }
 
 func main() {

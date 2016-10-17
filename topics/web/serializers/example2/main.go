@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"os"
 	"time"
 )
@@ -30,14 +31,20 @@ func (u User) MarshalJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-func EncodeUser(w io.Writer, u User) {
+func EncodeUser(w io.Writer, u User) error {
 	e := json.NewEncoder(w)
-	e.Encode(u)
+	return e.Encode(u)
 }
 
 func main() {
 	w := os.Stdout
-	EncodeUser(w, User{})
+	err := EncodeUser(w, User{})
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	EncodeUser(w, User{FirstName: "Mary", LastName: "Jane"})
+	err = EncodeUser(w, User{FirstName: "Mary", LastName: "Jane"})
+	if err != nil {
+		log.Fatal(err)
+	}
 }

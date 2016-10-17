@@ -12,41 +12,6 @@ const sessionName = "ultimate-web-session"
 
 var store = sessions.NewCookieStore([]byte("something-very-secret"))
 
-func homeHandler(res http.ResponseWriter, req *http.Request) {
-	session, err := store.Get(req, sessionName)
-	if err != nil {
-		fmt.Fprint(res, err)
-		return
-	}
-
-	name := session.Values["name"]
-	if name != nil {
-		fmt.Fprintf(res, htmlWithSession, name)
-	} else {
-		fmt.Fprint(res, htmlNoSession)
-	}
-}
-
-func saveHandler(res http.ResponseWriter, req *http.Request) {
-	session, err := store.Get(req, sessionName)
-	if err != nil {
-		fmt.Fprint(res, err)
-		return
-	}
-
-	req.ParseForm()
-	name := req.FormValue("myName")
-	session.Values["name"] = name
-	session.Save(req, res)
-	fmt.Fprintf(res, htmlWithSession, name)
-}
-
-func main() {
-	http.HandleFunc("/", homeHandler)
-	http.HandleFunc("/save", saveHandler)
-	log.Fatal(http.ListenAndServe(":3000", nil))
-}
-
 var htmlNoSession = `
 <html>
   <form action="/save" method="POST">
@@ -62,3 +27,43 @@ var htmlWithSession = `
   <h1>Hello %s!</h1>
 </html>
 `
+
+func App() http.Handler {
+	m := http.NewServeMux()
+	m.HandleFunc("/", homeHandler)
+	m.HandleFunc("/save", saveHandler)
+	return m
+}
+
+func homeHandler(res http.ResponseWriter, req *http.Request) {
+	session, err := store.Get(req, sessionName)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	name := session.Values["name"]
+	if name != nil {
+		fmt.Fprintf(res, htmlWithSession, name)
+	} else {
+		fmt.Fprint(res, htmlNoSession)
+	}
+}
+
+func saveHandler(res http.ResponseWriter, req *http.Request) {
+	session, err := store.Get(req, sessionName)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	req.ParseForm()
+	name := req.FormValue("myName")
+	session.Values["name"] = name
+	session.Save(req, res)
+	fmt.Fprintf(res, htmlWithSession, name)
+}
+
+func main() {
+	log.Fatal(http.ListenAndServe(":3000", App()))
+}

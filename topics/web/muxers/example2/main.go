@@ -8,6 +8,27 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+func App() http.Handler {
+	r := httprouter.New()
+
+	// Order matters
+	r.GET("/customers/:id", showHandler)
+	r.GET("/customers", indexHandler)
+	r.POST("/customers", createHandler)
+
+	// TODO: EXERCISE: Implement the PUT and PATCH response by accepting a
+	// "name" form value, assigning it to the customer, saving it back
+	// to the database, and then redirecting to the customer show page.
+	// r.POST("/customers/:id", updateHandler)
+
+	// TODO: EXERCISE: Implement the DELETE response by removing the
+	// customer from the database and then redirecting back to the index page.
+	// r.DELETE("/customers/:id", deleteHandler)
+
+	r.GET("/", indexHandler)
+	return r
+}
+
 func indexHandler(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	err := templates.ExecuteTemplate(res, "index.html", Customers)
 	if err != nil {
@@ -38,27 +59,6 @@ func createHandler(res http.ResponseWriter, req *http.Request, _ httprouter.Para
 	c := &Customer{Name: req.FormValue("name")}
 	Customers.Save(c)
 	http.Redirect(res, req, fmt.Sprintf("/customers/%s", c.ID), http.StatusSeeOther)
-}
-
-func App() http.Handler {
-	r := httprouter.New()
-
-	// Order matters
-	r.GET("/customers/:id", showHandler)
-	r.GET("/customers", indexHandler)
-	r.POST("/customers", createHandler)
-
-	// TODO: EXERCISE: Implement the PUT and PATCH response by accepting a
-	// "name" form value, assigning it to the customer, saving it back
-	// to the database, and then redirecting to the customer show page.
-	// r.POST("/customers/:id", updateHandler)
-
-	// TODO: EXERCISE: Implement the DELETE response by removing the
-	// customer from the database and then redirecting back to the index page.
-	// r.DELETE("/customers/:id", deleteHandler)
-
-	r.GET("/", indexHandler)
-	return r
 }
 
 func main() {

@@ -11,14 +11,14 @@ var html = `
 Hello, {{.}}!
 `
 
-func Exec(w io.Writer) {
+func Exec(w io.Writer) error {
 	t, err := template.New("foo").Parse(html)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
-	t.Execute(w, "World")
+	return t.Execute(w, "World")
 }
 
 func main() {
-	Exec(os.Stdout)
+	log.Fatal(Exec(os.Stdout))
 }

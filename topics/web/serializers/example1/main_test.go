@@ -8,7 +8,10 @@ import (
 
 func Test_EncodeUser_Blank(t *testing.T) {
 	bb := &bytes.Buffer{}
-	EncodeUser(bb, User{})
+	err := EncodeUser(bb, User{})
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	act := strings.TrimSpace(bb.String())
 	exp := `{"first_name":"","CreatedAt":"0001-01-01T00:00:00Z","Admin":false,"Bio":null}`
@@ -20,7 +23,10 @@ func Test_EncodeUser_Blank(t *testing.T) {
 
 func Test_EncodeUser_WithData(t *testing.T) {
 	bb := &bytes.Buffer{}
-	EncodeUser(bb, User{FirstName: "Mary", LastName: "Jane"})
+	err := EncodeUser(bb, User{FirstName: "Mary", LastName: "Jane"})
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	act := strings.TrimSpace(bb.String())
 	exp := `{"first_name":"Mary","LastName":"Jane","CreatedAt":"0001-01-01T00:00:00Z","Admin":false,"Bio":null}`

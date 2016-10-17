@@ -2,7 +2,8 @@ package main
 
 import (
 	"encoding/xml"
-	"fmt"
+	"io"
+	"log"
 	"os"
 	"time"
 )
@@ -16,9 +17,19 @@ type User struct {
 	Bio       *string
 }
 
+func EncodeUser(w io.Writer, u User) error {
+	e := xml.NewEncoder(w)
+	return e.Encode(User{})
+}
+
 func main() {
-	e := xml.NewEncoder(os.Stdout)
-	e.Encode(User{})
-	fmt.Println("\n")
-	e.Encode(User{FirstName: "Mary", LastName: "Jane"})
+	err := EncodeUser(os.Stdout, User{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = EncodeUser(os.Stdout, User{FirstName: "Mary", LastName: "Jane"})
+	if err != nil {
+		log.Fatal(err)
+	}
 }

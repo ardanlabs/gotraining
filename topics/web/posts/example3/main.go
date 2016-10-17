@@ -46,8 +46,7 @@ type User struct {
 func PostHandler(res http.ResponseWriter, req *http.Request) {
 	err := req.ParseForm()
 	if err != nil {
-		res.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprint(res, err)
+		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -56,8 +55,7 @@ func PostHandler(res http.ResponseWriter, req *http.Request) {
 	decoder := schema.NewDecoder()
 	err = decoder.Decode(&u, req.PostForm)
 	if err != nil {
-		res.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprint(res, err)
+		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
 

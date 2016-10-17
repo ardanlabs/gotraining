@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"os"
 	"time"
 )
@@ -16,13 +17,19 @@ type User struct {
 	Bio       *string
 }
 
-func EncodeUser(w io.Writer, u User) {
+func EncodeUser(w io.Writer, u User) error {
 	e := json.NewEncoder(w)
-	e.Encode(u)
+	return e.Encode(u)
 }
 
 func main() {
 	w := os.Stdout
-	EncodeUser(w, User{})
-	EncodeUser(w, User{FirstName: "Mary", LastName: "Jane"})
+	err := EncodeUser(w, User{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = EncodeUser(w, User{FirstName: "Mary", LastName: "Jane"})
+	if err != nil {
+		log.Fatal(err)
+	}
 }

@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"sync"
 	"time"
+
+	"github.com/markbates/going/wait"
 )
 
 func main() {
@@ -18,20 +19,14 @@ func main() {
 	go http.ListenAndServe(":3000", m)
 
 	start := time.Now()
-	wg := &sync.WaitGroup{}
-	for i := 0; i < 100; i++ {
-		wg.Add(1)
-		go func(n int) {
-			defer wg.Done()
-			res, err := http.Get(fmt.Sprintf("http://localhost:3000/%d", n))
-			if err != nil {
-				log.Fatal(err)
-			}
-			if res.StatusCode != http.StatusTeapot {
-				log.Fatal("Oops!")
-			}
-		}(i)
-	}
-	wg.Wait()
+	wait.Wait(100, func(i int) {
+		res, err := http.Get(fmt.Sprintf("http://localhost:3000/%d", i))
+		if err != nil {
+			log.Fatal(err)
+		}
+		if res.StatusCode != http.StatusTeapot {
+			log.Fatal("Oops!")
+		}
+	})
 	fmt.Printf("\nduration: %s\n", time.Now().Sub(start))
 }

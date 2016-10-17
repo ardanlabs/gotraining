@@ -8,7 +8,10 @@ import (
 
 func Test_Exec(t *testing.T) {
 	bb := &bytes.Buffer{}
-	Exec(bb)
+	err := Exec(bb)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	act := bb.String()
 

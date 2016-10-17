@@ -31,7 +31,7 @@ func (u User) FullName() string {
 	return fmt.Sprintf("%s %s", u.First, u.Last)
 }
 
-func Exec(w io.Writer) {
+func Exec(w io.Writer) error {
 	funcs := template.FuncMap{
 		"upper": func(s string) string {
 			return strings.ToUpper(s)
@@ -39,10 +39,10 @@ func Exec(w io.Writer) {
 	}
 	t, err := template.New("foo").Funcs(funcs).Parse(html)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
-	t.Execute(w, User{
+	return t.Execute(w, User{
 		First:   "Mary",
 		Last:    "Smith",
 		Aliases: []string{"Scarface", "MC Skat Kat"},
@@ -50,5 +50,5 @@ func Exec(w io.Writer) {
 }
 
 func main() {
-	Exec(os.Stdout)
+	log.Fatal(Exec(os.Stdout))
 }
