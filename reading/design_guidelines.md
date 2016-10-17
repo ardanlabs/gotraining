@@ -80,7 +80,7 @@ _With help from [Sandi Metz](https://twitter.com/sandimetz). and Rob Pike_
 * Interfaces encourage design by composition.
 * Interfaces enable and enforce clean divisions between components.
     * The standardization of interfaces can set clear and consistent expectations.
-* Interfaces allow you to group concrete type by what they do.
+* Interfaces allow you to group concrete types by what they do.
     * Don't group types by a common DNA but by a common behavior.
     * Everyone can work together when we focus when we do and not what we are.
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
