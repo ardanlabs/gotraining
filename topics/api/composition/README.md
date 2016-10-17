@@ -9,10 +9,13 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 * Understand the problem you are trying to solve first. This means understanding the data.
 * The goal is to reduce and minimize cascading changes across your software.
 * Interfaces provide the highest form of composition.
+* Don't group types by a common DNA but by a common behavior.
+* Everyone can work together when we focus when we do and not what we are.
 
 ## Links
 
 http://golang.org/doc/effective_go.html#embedding  
+https://www.goinggo.net/2016/10/reducing-type-hierarchies.html  
 http://www.goinggo.net/2015/09/composition-with-go.html
 
 ## Design Guidelines
