@@ -94,6 +94,10 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
 
+### Debugging code generation
+
+[Debugging code generation in Go](http://golang.rakyll.org/codegen/)
+
 ## Code Review
 
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/qnCX0kVwRH))  
