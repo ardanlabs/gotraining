@@ -34,9 +34,9 @@ http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 ## Code Review
 
-[Goroutines and concurrency](example1/example1.go) ([Go Playground](http://play.golang.org/p/eV4l2JqLZL))  
-[Goroutine time slicing](example2/example2.go) ([Go Playground](http://play.golang.org/p/8NwVeZG6IB))  
-[Goroutines and parallelism](example3/example3.go) ([Go Playground](http://play.golang.org/p/Bvk_ZwxJVh))
+[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/eV4l2JqLZL))  
+[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/8NwVeZG6IB))  
+[Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/5A0VFp03vb))
 
 ## Exercises
 
@@ -46,7 +46,7 @@ http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 **Part B** Run the program in parallel.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/kjtlMXkAAv)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/6iGzF8rMTN))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/kjtlMXkAAv)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/6iGzF8rMTN))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
