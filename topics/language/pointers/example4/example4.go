@@ -71,9 +71,9 @@ go build -gcflags -S
 
 go tool objdump -s main.main example4
 
-example4.go:17	0x2040	4883ec28			SUBQ $0x28, SP
-example4.go:17	0x2044	48896c2420			MOVQ BP, 0x20(SP)
-example4.go:17	0x2049	488d6c2420			LEAQ 0x20(SP), BP
+example4.go:17	0x2040	4883ec28		SUBQ $0x28, SP
+example4.go:17	0x2044	48896c2420		MOVQ BP, 0x20(SP)
+example4.go:17	0x2049	488d6c2420		LEAQ 0x20(SP), BP
 example4.go:19	0x204e	48c7042400000000	MOVQ $0x0, 0(SP)
 example4.go:19	0x2056	48c744240800000000	MOVQ $0x0, 0x8(SP)
 
