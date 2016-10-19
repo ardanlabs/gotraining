@@ -31,16 +31,17 @@ Turn the Write Barrier on. The Write Barrier is a little function that inspects 
 Find all the objects that can be reclaimed.
 
 * All objects on the heap are turned WHITE.
-* **Scan Stacks :** is about finding all the root objects and placing them in the queue.
-    * All these root objects are turned GREY.
+* **Scan Stacks :** Find all the root objects and place them in the queue.
+    * Pause the goroutine while scanning its stack.
+    * All root objects found on the stack are turned GREY.
     * The stack is marked BLACK.
-* **Mark Phase I :** is about popping a GREY object from the queue and scanning it.
+* **Mark Phase I :** Pop a GREY object from the queue and scan it.
     * Turn the object BLACK.
     * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
     * The GC and the application are running concurrently.
     * Goroutines executing at this time will find their stack reverted back to GREY.
-* **Mark Phase II - STW :** is about rescanning GREY stacks.
-    * Rescan all GREY stacks and root objects again.
+* **Mark Phase II - STW :** Re-scan GREY stacks.
+    * Re-scan all GREY stacks and root objects again.
     * Should be quick but large numbers of active goroutines can cause milliseconds of latency. 
     * Call any finalizers on BLACK objects.
 
