@@ -33,12 +33,13 @@ Find all the objects that can be reclaimed.
 * All objects on the heap are turned WHITE.
 * **Scan Stacks** is about finding all the root objects and placing them in the queue.
     * All these root objects are turned GREY.
+    * The stack is marked BLACK.
 * **Mark Phase I** is about popping a GREY object from the queue and scanning it.
     * Turn the object BLACK.
     * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
     * The GC and the application are running concurrently.
-* **Mark phase II** is about rescanning for Write Barrier changes.
-    * Rescan all the root objects again.
+* **Mark Phase II** is about rescanning because of Write Barrier changes.
+    * Rescan all GREY stacks and root objects again.
     * This scan should be quick but required for consistency.
     * Looking for any GREY objects that exist because of the Write Barrier.
     * Call any finalizers on BLACK objects.
@@ -52,9 +53,11 @@ Sweep phase reclaims memory.
 
 **Write Barrier**
 
-The Write Barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object after GC is complete. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running after that BLACK object has been processed.
+The Write Barrier is a little function that inspects the write of pointers when the GC is running.
 
-The Write Barrier is a little function that inspects the write of pointers when the GC is running. If it identifies such a write as described above, the WHITE object is turned GREY.
+The Write Barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object after the Mark Phases are complete. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running after that BLACK object has been processed. So the Write Barrier will make sure this writes change the object to GREY so they can be rescanned properly.
+
+Pointers that exist on a stack can also be changed by goroutines when the GC is running. So stacks are also marked as BLACK once they are scanned and can revert back to GREY during the Mark phase. A BLACK stack reverts back to GREY when its goroutine executes again. During Mark Phase II, the GC must re-scan GREY stacks to BLACKen them and finish marking any remaining heap pointers. Since it must ensure the stacks don't continue to change during this scan, the whole re-scan process happens *with the world stopped*.
 
 **Pacing**
 
@@ -86,7 +89,8 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 [Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
 [Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)  
-[Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)
+[Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)  
+[Eliminating Stack Re-Scanning](https://groups.google.com/forum/m/#!topic/golang-codereviews/O8OoHFzBQc4)
 
 ### Static Single Assignment Optimizations
 
