@@ -31,15 +31,15 @@ Turn the Write Barrier on. The Write Barrier is a little function that inspects 
 Find all the objects that can be reclaimed.
 
 * All objects on the heap are turned WHITE.
-* **Scan Stacks** is about finding all the root objects and placing them in the queue.
+* **Scan Stacks :** is about finding all the root objects and placing them in the queue.
     * All these root objects are turned GREY.
     * The stack is marked BLACK.
-* **Mark Phase I** is about popping a GREY object from the queue and scanning it.
+* **Mark Phase I :** is about popping a GREY object from the queue and scanning it.
     * Turn the object BLACK.
     * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
     * The GC and the application are running concurrently.
     * Goroutines executing at this time will find their stack reverted back to GREY.
-* **Mark Phase II - STW** is about rescanning because of Write Barrier changes.
+* **Mark Phase II - STW :** is about rescanning GREY stacks.
     * Rescan all GREY stacks and root objects again.
     * Should be quick but large numbers of active goroutines can cause milliseconds of latency. 
     * Call any finalizers on BLACK objects.
@@ -57,7 +57,7 @@ The Write Barrier is a little function that inspects the write of pointers when 
 
 The Write Barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object after the Mark Phases are complete. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running after that BLACK object has been processed. So the Write Barrier will make sure this write changes the object to BLACK so it's not swept away.
 
-Pointers that exist on a stack can also be changed by goroutines when the GC is running. So stacks are also marked as BLACK once they are scanned and can revert back to GREY during Mark Phase I. A BLACK stack reverts back to GREY when its goroutine executes again. During Mark Phase II, the GC must re-scan GREY stacks to BLACKen them and finish marking any remaining heap pointers. Since it must ensure the stacks don't continue to change during this scan, the whole re-scan process happens *with the world stopped*.
+Pointers to the heap that exist on a stack can also be changed by goroutines when the GC is running. So stacks are also marked as BLACK once they are scanned and can revert back to GREY during Mark Phase I. A BLACK stack reverts back to GREY when its goroutine executes again. During Mark Phase II, the GC must re-scan GREY stacks to BLACKen them and finish marking any remaining heap pointers. Since it must ensure the stacks don't continue to change during this scan, the whole re-scan process happens *with the world stopped*.
 
 **Pacing**
 
