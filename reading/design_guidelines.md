@@ -82,7 +82,7 @@ _With help from [Sandi Metz](https://twitter.com/sandimetz). and Rob Pike_
     * The standardization of interfaces can set clear and consistent expectations.
 * Interfaces allow you to group concrete types by what they do.
     * Don't group types by a common DNA but by a common behavior.
-    * Everyone can work together when we focus when we do and not what we are.
+    * Everyone can work together when we focus on what we do and not what we are.
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
     * Decoupling means reducing the amount of intimate knowledge code must have about concrete types.
     * When dependencies are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
@@ -121,5 +121,3 @@ I teach a lot about the things I look for in code reviews. I am slowly attemptin
 * Eliminate the use of the else statements when it is practical. Do not attempt to push code paths to the end of a function. Keep your positive path code in the first tabbed position and use the if statement to process negative path. Return from the function as part of error handling.
 * Don't start off with pointer variables if it can be avoided. It is easier to work with variables that represent a value, even if that value is going to escape to the heap. The use of the & operator can go a long way to maintaining readability in your code.
 * Use the keyword var to represent the declaration of a variable that is being set to its zero value. This helps with readability and can provide the basis for developing a consistent set of rules around variable declarations. One of Go's biggest warts is there are too many ways to declare and create variables.
-
-
