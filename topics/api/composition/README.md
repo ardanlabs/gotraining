@@ -26,8 +26,8 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 #### Grouping Types
 
-[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/hKEhvhetlu))  
-[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/8ZsLe4nrAj))  
+[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/iwci4dKqLW))  
+[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/mnJMHPew08))  
 
 #### Decoupling
 
@@ -40,6 +40,11 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 [Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/2K2svo0MR0))  
 [Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
+
+#### Interface Pollution
+
+[Create Interface Pollution](pollution/example1/example1.go) ([Go Playground](https://play.golang.org/p/wHDLvxe8hC))
+[Remove Interface Pollution](pollution/example2/example2.go) ([Go Playground](https://play.golang.org/p/s6HAmeT6oT))
 
 #### Mocking
 

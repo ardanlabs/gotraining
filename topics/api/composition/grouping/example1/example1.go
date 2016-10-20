@@ -103,10 +103,3 @@ func main() {
 // 	* The program never needs to create or solely use a value of type Animal.
 // 	* The implementation of the Speak method for the Animal type is a generalization.
 // 	* The Speak method for the Animal type is never going to be called.
-
-// Here are some guidelines around declaring types:
-// 	* Declare types that represent something new or unique.
-// 	* Validate that a value of any type is created or used on its own.
-// 	* Embed types to reuse existing behaviors you need to satisfy.
-// 	* Question types that are an alias or abstraction for an existing type.
-// 	* Question types whose sole purpose is to share common state.

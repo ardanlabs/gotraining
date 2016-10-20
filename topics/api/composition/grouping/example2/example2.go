@@ -82,10 +82,9 @@ func main() {
 
 // NOTES:
 
-// Some final thoughts about the changes we made:
-//  * We didn’t need a base type or type hierarchies to group concrete type
-//    values together.
-//  * The Interface allowed us to create a slice of different concrete type
-//    values and work with these values through their common behavior.
-//  * We removed any type pollution by not declaring a type that was never
-//    solely used by the program.
+// Here are some guidelines around declaring types:
+// 	* Declare types that represent something new or unique.
+// 	* Validate that a value of any type is created or used on its own.
+// 	* Embed types to reuse existing behaviors you need to satisfy.
+// 	* Question types that are an alias or abstraction for an existing type.
+// 	* Question types whose sole purpose is to share common state.
