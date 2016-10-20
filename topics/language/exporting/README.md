@@ -26,7 +26,7 @@ _I think that the real problem with C is that it doesn't give you enough mechani
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../reading/design_guidelines.md) for packaging.
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#package-oriented-design) for packaging.
 
 ## Code Review
 
@@ -52,7 +52,7 @@ _I think that the real problem with C is that it doesn't give you enough mechani
 
 **Part B** Create a program that imports the toy package. Use the New function to create a value of type toy. Then use the methods to set the counts and display the field values of that toy value.
 
-[Template](exercises/template1) | 
+[Template](exercises/template1) |
 [Answer](exercises/exercise1)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
