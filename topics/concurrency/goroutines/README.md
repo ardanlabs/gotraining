@@ -1,15 +1,15 @@
 ## Goroutines
 
-Goroutines are functions that are created and scheduled to be run independently. Goroutines are multiplexed against a shared thread that is owned by logical processor. The scheduler is responsible for the management and execution of goroutines.
+Goroutines are functions that are created and scheduled to be run independently. Goroutines are multiplexed against a system threads that are managed by the Go scheduler. The Go scheduler is responsible for the management and execution of goroutines.
 
 ## Notes
 
 * Goroutines are functions that are scheduled to run independently.
-* The scheduler uses a logical processor that owns an OS thread and goroutine run queue.
-* We must always maintain an account of running goroutines and shutdown cleanly.
-* Concurrency is not parallelism.
-	* Concurrency is about dealing with lots of things at once.
-	* Parallelism is about doing lots of things at once.
+* The Go scheduler's job is to manage the running and execution of goroutines.
+
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#Concurrency) for Concurrency.
 
 ## Diagrams
 

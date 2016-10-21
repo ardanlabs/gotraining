@@ -113,11 +113,46 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 * Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
 * When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
 
-#### Code Reviews
+#### Concurrency
 
-I teach a lot about the things I look for in code reviews. I am slowly attempting to document this.
+Concurrency is about managing a lot of things at once. Parallelism is about doing a lot of things at once. These are completly two different ideas. Managing concurrency is a two way street between the runtime and you. You are responsible for managing three things in your concurrent software:
 
-* Try to use functions over methods when it is practical. Functions allow for better readability and reusability because all the input is passed in and the output is returned out. No information is lost or abstracted.
-* Eliminate the use of the else statements when it is practical. Do not attempt to push code paths to the end of a function. Keep your positive path code in the first tabbed position and use the if statement to process negative path. Return from the function as part of error handling.
-* Don't start off with pointer variables if it can be avoided. It is easier to work with variables that represent a value, even if that value is going to escape to the heap. The use of the & operator can go a long way to maintaining readability in your code.
-* Use the keyword var to represent the declaration of a variable that is being set to its zero value. This helps with readability and can provide the basis for developing a consistent set of rules around variable declarations. One of Go's biggest warts is there are too many ways to declare and create variables.
+* Your software must start up and shutdown with integrity.
+    * You are now allowed to create a goroutine unless you know when and how they terminate.
+    * All goroutines must terminate before the application shuts down.
+    * Anything less is an integrity issue that must be resolved.
+    * This will help to identify race conditions.
+* You must monitor all the points of potential back pressure in your application.
+    * Back pressure exists when goroutines are blocked waiting on other goroutines.
+    * A little bit of back pressure is good, a large amount of back pressure is bad.
+    * A large amount of back pressure can cause your application to implode or stall.
+    * Know what will happen when any goroutine can block on a channel operation, mutes or atomic instruction.
+* Timeouts, Timeout, Timeouts!
+    * Timeouts are how you reduce back pressure in your application. 
+    * No request or task is allowed to take forever.
+    * There is no infinity in processing work.
+    * The `net` package provides the ability to set timeouts.
+    * The `select` statement provides the ability to apply timeouts.
+    * The `context` package has good support for timeout logic.    
+
+#### Channels
+
+It about keeping the data moving between goroutines with the least amount of risk and with greatest amount of integrity and predictability. This is a game of trade-offs that can't be isolated to one data flow but all the data flows in the system. You must focus on what happens when things are going bad, not when things are going well.
+
+* Use channels to orchestrate goroutines, not to synchronize access to shared state.
+* Don't use a channel as a queue, they are not queues, they provide guarantees for data delivery. 
+* An unbuffered channel provides a 100% guarantee that a piece of data has passed between two goroutines.
+	* We take the benefit of the 100% guarantee for the cost of higher latency.
+	* The 100% guarantee provides the highest level of integrity and predictability we can achieve.
+* A buffered channel provides no guarantee that a piece of data has passed between two goroutines.
+	* We take the benefit of reducing latency for the cost of losing the 100% guarantee.
+	* The larger the buffer, the larger the risk, because the guarantee becomes less and less.
+	* The risks are:
+		* Parts of the application can keep running when problems occur because it takes longer to detect problems.
+		* More data is accepted into the system and back pressure is greater when problems occur.
+		* The larger the back pressure, the longer it takes (latency) to clear when problems are corrected.
+* Reducing latency towards zero does not mean better throughput.
+	* Find the smallest buffer size to minimize the risk and keep the data moving.
+	* Use a buffer of one when the throughput is good enough. Question anything larger and measure.
+	* A buffer of 10 can provide the same or close throughput as a buffer of 100.
+		* This can be true even if the smaller buffer creates larger latencies. 

@@ -12,15 +12,15 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 * Don't group types by a common DNA but by a common behavior.
 * Everyone can work together when we focus when we do and not what we are.
 
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#Interface_and_Composition_Design) for composition.
+
 ## Links
 
 http://golang.org/doc/effective_go.html#embedding  
 https://www.goinggo.net/2016/10/reducing-type-hierarchies.html  
 http://www.goinggo.net/2015/09/composition-with-go.html
-
-## Design Guidelines
-
-* Learn about the [design guidelines](../../../reading/design_guidelines.md) for composition.
 
 ## Code Review
 
