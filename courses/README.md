@@ -45,5 +45,12 @@ This class covers the key architectural and design aspects that distinguish Go f
 ### Go Challenges
 
 [Learn Go by solving problems and getting feedback from Go experts!](http://golang-challenge.org/)
+
+### exercism.io
+
+Level up your programming skills by solving small practice problems. Then submit the solution to the site for feedback. This site is perfect for both newbies and experienced programmers.
+
+[exercism.io](http://exercism.io/)
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

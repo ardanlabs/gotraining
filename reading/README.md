@@ -36,6 +36,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh
 
+### Contribute to Go
+
+[Contribution Guidelines](https://golang.org/doc/contribute.html) - Go Documentation  
+[CONTRIBUTING: The Talk!](https://github.com/matloob/contributing/blob/master/contributing.md) - Michael Matloob  
+
 ### Standard Library
 
 [io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#) - Ben Johnson  

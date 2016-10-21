@@ -12,10 +12,6 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
-## Interface Design Guidelines
-
-* Learn about the [design guidelines](../../reading/design_guidelines.md) for interfaces.
-
 ## Links
 
 https://golang.org/doc/effective_go.html#interfaces  
@@ -44,7 +40,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part B** Add a new function named sayHello that accepts a value of type speaker. Implement that function to call the speak method on the interface value. Then create new values of each type and use the function.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/adkJ3OvYpr)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/adkJ3OvYpr)) |
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/06fecJbfE4))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

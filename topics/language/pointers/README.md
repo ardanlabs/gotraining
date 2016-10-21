@@ -31,16 +31,18 @@ Turn the Write Barrier on. The Write Barrier is a little function that inspects 
 Find all the objects that can be reclaimed.
 
 * All objects on the heap are turned WHITE.
-* **Scan Stacks** is about finding all the root objects and placing them in the queue.
-    * All these root objects are turned GREY.
-* **Mark Phase I** is about popping a GREY object from the queue and scanning it.
+* **Scan Stacks :** Find all the root objects and place them in the queue.
+    * Pause the goroutine while scanning its stack.
+    * All root objects found on the stack are turned GREY.
+    * The stack is marked BLACK.
+* **Mark Phase I :** Pop a GREY object from the queue and scan it.
     * Turn the object BLACK.
     * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
     * The GC and the application are running concurrently.
-* **Mark phase II** is about rescanning for Write Barrier changes.
-    * Rescan all the root objects again.
-    * This scan should be quick but required for consistency.
-    * Looking for any GREY objects that exist because of the Write Barrier.
+    * Goroutines executing at this time will find their stack reverted back to GREY.
+* **Mark Phase II - STW :** Re-scan GREY stacks.
+    * Re-scan all GREY stacks and root objects again.
+    * Should be quick but large numbers of active goroutines can cause milliseconds of latency. 
     * Call any finalizers on BLACK objects.
 
 **Sweep Phase**
@@ -52,9 +54,11 @@ Sweep phase reclaims memory.
 
 **Write Barrier**
 
-The Write Barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object after GC is complete. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running after that BLACK object has been processed.
+The Write Barrier is a little function that inspects the write of pointers when the GC is running.
 
-The Write Barrier is a little function that inspects the write of pointers when the GC is running. If it identifies such a write as described above, the WHITE object is turned GREY.
+The Write Barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object after the Mark Phases are complete. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running after that BLACK object has been processed. So the Write Barrier will make sure this write changes the object to BLACK so it's not swept away.
+
+Pointers to the heap that exist on a stack can also be changed by goroutines when the GC is running. So stacks are also marked as BLACK once they are scanned and can revert back to GREY during Mark Phase I. A BLACK stack reverts back to GREY when its goroutine executes again. During Mark Phase II, the GC must re-scan GREY stacks to BLACKen them and finish marking any remaining heap pointers. Since it must ensure the stacks don't continue to change during this scan, the whole re-scan process happens *with the world stopped*.
 
 **Pacing**
 
@@ -86,7 +90,8 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 [Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
 [Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)  
-[Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)
+[Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)  
+[Eliminating Stack Re-Scanning](https://groups.google.com/forum/m/#!topic/golang-codereviews/O8OoHFzBQc4)
 
 ### Static Single Assignment Optimizations
 
@@ -94,12 +99,16 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
 
+### Debugging code generation
+
+[Debugging code generation in Go](http://golang.rakyll.org/codegen/)
+
 ## Code Review
 
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/qnCX0kVwRH))  
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/6GUcA7-x3j))  
 [Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/KRKrUCcTYe))  
-[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/88QkRhKk53))  
+[Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/qBUjYozz6q))  
 [Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/tpDOwBCvqW))  
 
 ## Exercises

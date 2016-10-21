@@ -4,6 +4,8 @@
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
+Go is the fusion of performance and productivity wrapped in a language that software developers can learn, use and understand. Go is not C, yet we have many of the benefits of C with the benefits of higher level programming languages.
+
 [Learn More](https://talks.golang.org/2012/splash.article) - Go Team  
 [Getting Started In Go](http://aarti.github.io/2016/08/13/getting-started-in-go) - Aarti Parikh  
 
@@ -182,6 +184,9 @@ _"Should be mentioned that though I am no expert, I have been using Go for about
 
 ## Testimonials
 
+Ana-Maria Lazar, Software Engineer at Sainsbury's  
+_"Intensive crash course in Go that literally takes you to a whole new level. Not only Bill provides lots of examples and exercises to familiarize yourself faster with the language but there is also a lot of  information that can be applied to other languages as well. Perfect combination!"_
+
 Greg Hammond, Founder & CEO at Best Option Trading  
 _"Bill helped me learn enough Go to work with him and his team to take a program with a lot of complexity, accumulated over years, and make it into an enterprise product. As architect, he made it more extensible, tested, and created an external API. Bill has a gift for writing readable code that is easy to reason about. He demonstrates coding restraint by favoring code that is maintainable, rather than relying upon overly clever solutions. At the same time, he is a performance hawk, always thinking about how to cut milliseconds from runtime. When I began the project with Bill, I was under pressure from both schedule and cost perspectives. He put in extra effort at the end of the project to deliver what I needed. I highly recommend Bill for his well-written book, his 'Ultimate Go' course, and development work through Ardan Labs."_
 
@@ -225,7 +230,6 @@ If you are interested in holding an event in your area please let me know. I wil
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Corporate	Go			Nordstroms		Seattle, WA	 			September	Bill Kennedy
 		Free		Go			WWG				London, England			October		Bill Kennedy 		https://skillsmatter.com/conferences/8373-women-who-go-workshop-with-bill-kennedy
 		Public		Adv Go		Rackspace		SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
 		Free		Go			WWG				SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
@@ -247,6 +251,7 @@ If you are interested in holding an event in your area please let me know. I wil
 
 											Completed
 
+		Corporate	Go			Nordstroms		Seattle, WA	 			September	Bill Kennedy
 		Corporate	Go			Viacom			NYC, NY					September	Bill Kennedy
 		Corporate	Go			CapitalOne		McLean, VA	 			September	Bill Kennedy
 		Corporate	Go			Capital One 	Richmond, VA 			January		Bill Kennedy
