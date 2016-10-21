@@ -4,13 +4,14 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 
 ## Notes
 
-* If you don't understand the data, you don't understand the problem.
-* If you don't understand the cost of solving the problem, you can't reason about the problem.
-* If you don't understand the hardware, you can't reason about the cost of solving the problem.
 * Arrays are fixed length data structures that can't change.
 * Arrays of different sizes are considered to be of different types.
 * Memory is allocated as a contiguous block.
 * Go gives you control over spacial locality.
+
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#data-oriented-design) for data oriented design.
 
 ## CPU Caches
 This content is provided by Scott Meyers from his talk in 2014 at Dive:

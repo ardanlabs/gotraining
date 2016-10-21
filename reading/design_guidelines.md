@@ -137,7 +137,7 @@ Concurrency is about managing a lot of things at once. Parallelism is about doin
 
 #### Channels
 
-It about keeping the data moving between goroutines with the least amount of risk and with greatest amount of integrity and predictability. This is a game of trade-offs that can't be isolated to one data flow but all the data flows in the system. You must focus on what happens when things are going bad, not when things are going well.
+It's about keeping the data moving between goroutines with the least amount of risk and with greatest amount of integrity and predictability. This is a game of trade-offs that can't be isolated to one data flow but all the data flows in the system. You must focus on what happens when things are going bad, not when things are going well.
 
 * Use channels to orchestrate goroutines, not to synchronize access to shared state.
 * Don't use a channel as a queue, they are not queues, they provide guarantees for data delivery. 

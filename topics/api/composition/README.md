@@ -14,7 +14,7 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../../reading/design_guidelines.md#Interface_and_Composition_Design) for composition.
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#interface-and-composition-design) for composition.
 
 ## Links
 

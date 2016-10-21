@@ -7,7 +7,7 @@ It about keeping the data moving between goroutines with the least amount of ris
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../../reading/design_guidelines.md#Channels) for channels.
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#channels) for channels.
 
 ## Diagrams
 
