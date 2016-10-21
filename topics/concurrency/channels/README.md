@@ -5,9 +5,8 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 
 * Use channels to orchestrate goroutines, not to synchronize access to shared state.
 * Unbuffered channels provide a 100% guarantee that data has been exchanged at some point in space and time.
-* Buffered channels provide a way of maintaining continuity. Don't use them just for performance.
-* Buffered channels if used incorrectly can increase latency not reduce it (Buffer Bloat).
-* Closed channels can provide a system wide mechanism for notifications.
+* Buffered channels provide a way of reducing latency. Don't use them just for performance.
+* Channels can also provide a mechanism for signaling goroutines.
 * A send on an unbuffered channel happens before the corresponding receive from that channel completes.
 * A receive from an unbuffered channel happens before the send on that channel completes.
 * The closing of a channel happens before a receive that returns a zero value because the channel is closed.

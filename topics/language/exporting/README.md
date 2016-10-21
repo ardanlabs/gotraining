@@ -10,6 +10,10 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 * Any package can use a value of an unexported type.
 * Package design and understanding the components you need is critical.
 
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#package-oriented-design) for package oriented design.
+
 ## Links
 
 http://blog.golang.org/organizing-go-code  
