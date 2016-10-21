@@ -43,7 +43,7 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 #### Interface Pollution
 
-[Create Interface Pollution](pollution/example1/example1.go) ([Go Playground](https://play.golang.org/p/wHDLvxe8hC))
+[Create Interface Pollution](pollution/example1/example1.go) ([Go Playground](https://play.golang.org/p/wHDLvxe8hC))  
 [Remove Interface Pollution](pollution/example2/example2.go) ([Go Playground](https://play.golang.org/p/s6HAmeT6oT))
 
 #### Mocking
