@@ -10,6 +10,10 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 * Any package can use a value of an unexported type.
 * Package design and understanding the components you need is critical.
 
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#package-oriented-design) for packaging.
+
 ## Links
 
 http://blog.golang.org/organizing-go-code  
@@ -23,10 +27,6 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html
 
 _I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help._ - July 2000
-
-## Design Guidelines
-
-* Learn about the [design guidelines](../../../reading/design_guidelines.md#package-oriented-design) for packaging.
 
 ## Code Review
 
