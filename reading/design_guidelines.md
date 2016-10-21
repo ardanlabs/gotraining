@@ -118,7 +118,7 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 Concurrency is about managing a lot of things at once. Parallelism is about doing a lot of things at once. These are completly two different ideas. Managing concurrency is a two way street between the runtime and you. You are responsible for managing three things in your concurrent software:
 
 * Your software must start up and shutdown with integrity.
-    * You are now allowed to create a goroutine unless you know when and how they terminate.
+    * You are not allowed to create a goroutine unless you know when and how they terminate.
     * All goroutines must terminate before the application shuts down.
     * Anything less is an integrity issue that must be resolved.
     * This will help to identify race conditions.
