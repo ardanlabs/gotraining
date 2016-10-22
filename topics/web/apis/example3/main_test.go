@@ -1,3 +1,5 @@
+// Tests for the sample program to show how to create
+// a basic CRUD based web api for customers.
 package main
 
 import (
