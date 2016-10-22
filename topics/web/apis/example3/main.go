@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/pat"
 )
@@ -54,7 +55,13 @@ func indexHandler(res http.ResponseWriter, req *http.Request) {
 func showHandler(res http.ResponseWriter, req *http.Request) {
 
 	// Retrieve the customer id from the request.
-	id := req.URL.Query().Get(":id")
+	idStr := req.URL.Query().Get(":id")
+
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
+	}
 
 	// Retreive that customer from the DB.
 	c, err := DB.FindCustomer(id)
@@ -84,7 +91,11 @@ func createHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Save the customer in the DB.
-	DB.SaveCustomer(c)
+	c.ID, err = DB.SaveCustomer(c)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	// Encode the customer to JSON and send the response.
 	err = json.NewEncoder(res).Encode(&c)

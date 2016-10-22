@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func Test_App(t *testing.T) {
+func TestApp(t *testing.T) {
 
 	// Startup a server to handle processing these routes.
 	ts := httptest.NewServer(App())

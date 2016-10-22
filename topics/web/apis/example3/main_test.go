@@ -5,90 +5,106 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 )
 
-func Test_indexHandler(t *testing.T) {
+func TestIndexHandler(t *testing.T) {
+
+	// Startup a server to handle processing these routes.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
+	// Request all the customers in the DB.
 	res, err := http.Get(ts.URL + "/customers")
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	// Read in the response from the api call.
 	b, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	body := string(b)
-	for _, n := range []string{"Mary Jane", "Bob Smith"} {
-		if !strings.Contains(body, n) {
-			t.Fatalf("Expected %s to contain %s", body, n)
-		}
+	// Validate we received all the known customers.
+	got := string(b)
+	want := `[{"ID":1,"Name":"Mary Jane"},{"ID":2,"Name":"Bob Smith"}]`
+	if got[:len(got)-1] != want {
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
+		t.Fatal("Mismatch")
 	}
 }
 
-func Test_showHandler(t *testing.T) {
+func TestShowHandler(t *testing.T) {
+
+	// Startup a server to handle processing these routes.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
-	c1, _ := Customers.Find("1")
-	c2, _ := Customers.Find("2")
-
-	res, err := http.Get(ts.URL + "/customers/" + c1.ID)
+	// Find customer 1 in the DB.
+	c1, err := DB.FindCustomer(1)
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	// Request customer 1 from the DB.
+	url := fmt.Sprintf("%s/customers/%d", ts.URL, c1.ID)
+	res, err := http.Get(url)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Read in the response from the api call.
 	b, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	body := string(b)
-
-	if !strings.Contains(body, c1.Name) {
-		t.Fatalf("Expected %s to contain %s", body, c1.Name)
-	}
-	if strings.Contains(body, c2.Name) {
-		t.Fatalf("(pat) Expected %s to not contain %s", body, c2.Name)
+	// Validate we received all the known customers.
+	got := string(b)
+	want := `{"ID":1,"Name":"Mary Jane"}`
+	if got[:len(got)-1] != want {
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
+		t.Fatal("Mismatch")
 	}
 }
 
-func Test_createHandler(t *testing.T) {
+func TestCreateHandler(t *testing.T) {
+
+	// Startup a server to handle processing these routes.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
-	b, err := json.Marshal(&Customer{Name: "Jane Doe"})
+	// Create a JSON document from this Customer value.
+	b, err := json.Marshal(Customer{Name: "Jane Doe"})
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	// Save this customer into the database.
 	res, err := http.Post(ts.URL+"/customers", "application/json", bytes.NewReader(b))
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	// Read in the response from the api call.
 	b, err = ioutil.ReadAll(res.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	body := string(b)
-
-	if !strings.Contains(body, "Jane Doe") {
-		t.Fatalf("(pat) Expected %s to contain %s", body, "Jane Doe")
-	}
-
-	for _, n := range []string{"Mary Jane", "Bob Smith"} {
-		if strings.Contains(body, n) {
-			t.Fatalf("Expected %s to not contain %s", body, n)
-		}
+	// Validate we received all the known customers.
+	got := string(b)
+	want := `{"ID":3,"Name":"Jane Doe"}`
+	if got[:len(got)-1] != want {
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
+		t.Fatal("Mismatch")
 	}
 }
