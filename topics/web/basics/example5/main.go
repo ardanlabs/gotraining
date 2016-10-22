@@ -22,7 +22,7 @@ func main() {
 		m := http.NewServeMux()
 
 		// Bind a handler to the root route that
-		f := func(res http.ResponseWriter, req *http.Request) {
+		m.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
 			log.Println(req.URL.Path)
 
 			// Create some fake latency.
@@ -32,16 +32,17 @@ func main() {
 			// in the HTTP error code 418 I'm a teapot and the resulting
 			// entity body MAY be short and stout.
 			res.WriteHeader(http.StatusTeapot)
-		}
-		m.HandleFunc("/", f)
+		})
 
 		// Start the http server to handle the request.
 		http.ListenAndServe(":3000", m)
 	}()
 
-	// This function will be passed into the call function to
-	// process multiple requests concurrently.
-	wf := func(i int) {
+	// Get the current time so we can time how long this request takes.
+	start := time.Now()
+
+	// Call the handler function 100 times.
+	call(100, func(i int) {
 
 		// Call into the running service we started above.
 		res, err := http.Get(fmt.Sprintf("http://localhost:3000/%d", i))
@@ -53,13 +54,7 @@ func main() {
 		if res.StatusCode != http.StatusTeapot {
 			log.Fatal("Oops!")
 		}
-	}
-
-	// Get the current time so we can time how long this request takes.
-	start := time.Now()
-
-	// Call the handler function 100 times.
-	call(100, wf)
+	})
 
 	// Display how long the request took.
 	fmt.Printf("\nduration: %s\n", time.Now().Sub(start))

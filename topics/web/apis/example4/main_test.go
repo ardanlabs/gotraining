@@ -1,5 +1,5 @@
-// Tests for the sample program to show how to create a basic
-// CRUD based web api for customers with a middleware component.
+// Tests for the sample program to show how to create a basic CRUD
+// based web api for customers with a middleware component.
 package main
 
 import (

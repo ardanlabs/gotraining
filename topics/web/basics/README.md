@@ -18,12 +18,12 @@ https://golang.org/doc/articles/wiki/
 [Using a New Server Mux](example2/main.go) ([Go Playground](https://play.golang.org/p/J-qm4cPv3Z))  
 [User Defined Handler I](example3/main.go) ([Go Playground](https://play.golang.org/p/dYqPRQ1X7u))  
 [User Defined Handler II](example4/main.go) ([Go Playground](https://play.golang.org/p/yEHFj6cQl1))
-[Concurrency](example5/main.go) ([Go Playground](https://play.golang.org/p/SCBsFDZhYV))
+[Concurrency](example5/main.go) ([Go Playground](https://play.golang.org/p/FdUQ1Gi8bz))
 
 ## Exercises
 
 ### Exercise 1
 
-TBD
+Write a simple web service that has a set of different routes that return the string "Hello World" in multiple languages. Build the service using an Application context that will own the different handler methods. Then create your own mux, bind the routes and start the service. Validate your routes work in your browser.
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
