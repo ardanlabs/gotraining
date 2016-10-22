@@ -74,7 +74,7 @@ This is about squeezing every ounce of performance as possible. When code is wri
 
 #### Interface and Composition Design
 
-_With help from [Sandi Metz](https://twitter.com/sandimetz). and Rob Pike_
+_With help from [Sandi Metz](https://twitter.com/sandimetz). and [Rob Pike](https://twitter.com/rob_pike)_
 
 * Interfaces give programs structure.
 * Interfaces encourage design by composition.
@@ -82,12 +82,13 @@ _With help from [Sandi Metz](https://twitter.com/sandimetz). and Rob Pike_
     * The standardization of interfaces can set clear and consistent expectations.
 * Interfaces allow you to group concrete types by what they do.
     * Don't group types by a common DNA but by a common behavior.
-    * Everyone can work together when we focus on what we do and not what we are.
+    * Everyone can work together when we focus on what we do and not who we are.
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
     * Decoupling means reducing the amount of intimate knowledge code must have about concrete types.
     * When dependencies are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
-* Interfaces with more than one method has more than one reason to change.
-    * You must do your best to understand what could change and decouple those aspects of your code.
+* Interfaces help your code decouple itself from change.
+    * You must do your best to understand what could change and use interfaces to decouple.
+    * Interfaces with more than one method have more than one reason to change.
     * Uncertainty about change is not a license to guess but a directive to STOP and learn more.
     * Recognizing and minimizing cascading changes across the code is a way to architect adaptability and stability in your software.
 
