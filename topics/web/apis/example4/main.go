@@ -1,68 +1,125 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Sample program to show how to create a basic CRUD based
+// web api for customers with a middleware component.
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
-	"github.com/julienschmidt/httprouter"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/engine/standard"
+	"github.com/labstack/echo/middleware"
 )
 
+// App loads the entire API set together for use.
 func App() http.Handler {
-	r := httprouter.New()
 
-	// Order matters
+	// Create an echo mux to handle routes and middleware.
+	r := echo.New()
+
+	// Add in the middleware for logging.
+	r.Use(middleware.Logger())
+
+	// Add in a custom middleware for setting
+	// the context type in the request for later.
+	r.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
+		return func(ctx echo.Context) error {
+			ctx.Request().Header().Set("Content-Type", "application/json")
+			return h(ctx)
+		}
+	})
+
+	// Define the routes and order matters.
 	r.GET("/customers/:id", showHandler)
 	r.GET("/customers", indexHandler)
 	r.POST("/customers", createHandler)
-
-	// TODO: EXERCISE: Implement the PUT and PATCH response by accepting a
-	// "name" form value, assigning it to the customer, saving it back
-	// to the database, and then rendering the customer JSON.
-	// r.POST("/customers/:id", updateHandler)
-
-	// TODO: EXERCISE: Implement the DELETE response by removing the
-	// customer from the database.
-	// r.DELETE("/customers/:id", deleteHandler)
-
 	r.GET("/", indexHandler)
-	return r
+
+	// Create a standard echo server and bind
+	// the echo mux as the handler.
+	st := standard.New("")
+	st.SetHandler(r)
+
+	return st
 }
 
-func indexHandler(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	err := json.NewEncoder(res).Encode(Customers.All())
-	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
+// indexHandler returns the entire list of customers in the DB.
+func indexHandler(ctx echo.Context) error {
+
+	// Retrieve the list of customers, encode to JSON
+	// and send the response.
+	if err := ctx.JSON(http.StatusOK, DB.AllCustomers()); err != nil {
+		ctx.Error(err)
+		return err
 	}
+
+	return nil
 }
 
-func showHandler(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	id := params.ByName("id")
-	c, err := Customers.Find(id)
+// showHandler returns a single specified customer.
+func showHandler(ctx echo.Context) error {
+
+	// Retrieve the customer id from the request.
+	idStr := ctx.Param("id")
+
+	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		http.Error(res, err.Error(), http.StatusNotFound)
-		return
+		ctx.Error(err)
+		return err
 	}
-	err = json.NewEncoder(res).Encode(c)
+
+	// Retreive that customer from the DB.
+	c, err := DB.FindCustomer(id)
 	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
+		ctx.Error(err)
+		return err
 	}
+
+	// Encode the customer to JSON and send the response.
+	if err := ctx.JSON(http.StatusOK, c); err != nil {
+		ctx.Error(err)
+		return err
+	}
+
+	return nil
 }
 
-func createHandler(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	c := &Customer{}
-	err := json.NewDecoder(req.Body).Decode(c)
+// createHandler adds new customers to the DB.
+func createHandler(ctx echo.Context) error {
+
+	// Create a customer value.
+	var c Customer
+
+	// Encode the customer document received into the customer value.
+	err := ctx.Bind(&c)
 	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
-		return
+		ctx.Error(err)
+		return err
 	}
-	Customers.Save(c)
-	err = json.NewEncoder(res).Encode(c)
+
+	// Save the customer in the DB.
+	c.ID, err = DB.SaveCustomer(c)
 	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
+		ctx.Error(err)
+		return err
 	}
+
+	// Encode the customer to JSON and send the response.
+	if err := ctx.JSON(http.StatusOK, c); err != nil {
+		ctx.Error(err)
+		return err
+	}
+
+	return nil
 }
 
 func main() {
+
+	// Start the http server to handle the request for
+	// both versions of the API.
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }

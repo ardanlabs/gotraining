@@ -1,50 +1,91 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
-	"strconv"
 	"sync"
 	"time"
 )
 
-type customers map[string]*Customer
-
-var Customers = customers{}
-var lock = &sync.Mutex{}
-
-func init() {
-	rand.Seed(time.Now().UnixNano())
-
-	Customers.Save(&Customer{ID: "1", Name: "Mary Jane"})
-	Customers.Save(&Customer{ID: "2", Name: "Bob Smith"})
-}
-
+// Customer represents a customer document we
+// store in our database.
 type Customer struct {
-	ID   string
+	ID   int
 	Name string
 }
 
-func (db customers) Save(c *Customer) {
-	lock.Lock()
-	defer lock.Unlock()
-	if c.ID == "" {
-		c.ID = strconv.Itoa(rand.Int())
-	}
-	db[c.ID] = c
+// db represents our internal database system.
+type db struct {
+	customers map[int]Customer
+	lock      sync.Mutex
 }
 
-func (db customers) Find(id string) (*Customer, error) {
-	if c, ok := db[id]; ok {
-		return c, nil
+// SaveCustomer stores a customer document in the database.
+func (db *db) SaveCustomer(c Customer) (int, error) {
+	db.lock.Lock()
+	defer db.lock.Unlock()
+
+	// How many customers do we have. Customer Id's
+	// are generated in order.
+	maxID := len(db.customers)
+
+	// If this customer id is out of the range
+	// then we have an integrity issue.
+	if c.ID > maxID {
+		return 0, errors.New("Invalid customer id")
 	}
-	return nil, fmt.Errorf("Could not find Customer with ID %s", id)
+
+	// If no id is provided this is a new customer.
+	// Generate a new id.
+	if c.ID == 0 {
+		c.ID = maxID + 1
+	}
+
+	// Save the customer in the database.
+	db.customers[c.ID] = c
+
+	// Return the customer id.
+	return c.ID, nil
 }
 
-func (db customers) All() []*Customer {
-	all := []*Customer{}
-	for _, v := range db {
-		all = append(all, v)
+// FindCustomer locates a customer by id in the database.
+func (db *db) FindCustomer(id int) (Customer, error) {
+
+	// Locate the customer in the database.
+	c, found := db.customers[id]
+	if !found {
+		return Customer{}, fmt.Errorf("customer with ID %d does not exist", id)
 	}
+
+	return c, nil
+}
+
+// AllCustomers returns the full database of customers.
+func (db *db) AllCustomers() []Customer {
+
+	// Allocate enough elements for the customers.
+	all := make([]Customer, len(db.customers))
+
+	// Range over the map storing each customer
+	// in their ordered position.
+	for _, c := range db.customers {
+		all[c.ID-1] = c
+	}
+
+	// Return the slice exlcusing index 0.
 	return all
+}
+
+// DB is an instance of the database.
+var DB = db{
+	customers: map[int]Customer{},
+}
+
+// Initalize the database with some values.
+func init() {
+	rand.Seed(time.Now().UnixNano())
+
+	DB.SaveCustomer(Customer{Name: "Mary Jane"})
+	DB.SaveCustomer(Customer{Name: "Bob Smith"})
 }

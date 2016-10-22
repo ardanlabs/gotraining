@@ -1,66 +1,101 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Sample program to show how to create a basic CRUD based
+// web api for customers.
 package main
 
 import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/pat"
 )
 
+// App loads the entire API set together for use.
 func App() http.Handler {
+
+	// Create a version of the pat router.
 	r := pat.New()
 
-	// Order matters
+	// Define the routes and order matters.
 	r.Get("/customers/{id}", showHandler)
 	r.Get("/customers", indexHandler)
 	r.Post("/customers", createHandler)
-
-	// TODO: EXERCISE: Implement the PUT and PATCH response by accepting a
-	// "name" form value, assigning it to the customer, saving it back
-	// to the database, and then rendering the customer JSON.
-	// r.Post("/customers/{id}", updateHandler)
-
-	// TODO: EXERCISE: Implement the DELETE response by removing the
-	// customer from the database.
-	// r.Delete("/customers/{id}", deleteHandler)
-
 	r.Get("/", indexHandler)
 
 	return r
 }
 
+// indexHandler returns the entire list of customers in the DB.
 func indexHandler(res http.ResponseWriter, req *http.Request) {
-	err := json.NewEncoder(res).Encode(Customers.All())
-	if err != nil {
+
+	// Retrieve the list of customers, encode to JSON
+	// and send the response.
+	if err := json.NewEncoder(res).Encode(DB.AllCustomers()); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
+// showHandler returns a single specified customer.
 func showHandler(res http.ResponseWriter, req *http.Request) {
-	id := req.URL.Query().Get(":id")
-	c, err := Customers.Find(id)
+
+	// Retrieve the customer id from the request.
+	idStr := req.URL.Query().Get(":id")
+
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Retreive that customer from the DB.
+	c, err := DB.FindCustomer(id)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusNotFound)
 		return
 	}
-	err = json.NewEncoder(res).Encode(c)
-	if err != nil {
+
+	// Encode the customer to JSON and send the response.
+	if err := json.NewEncoder(res).Encode(c); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
+// createHandler adds new customers to the DB.
 func createHandler(res http.ResponseWriter, req *http.Request) {
-	c := &Customer{}
-	err := json.NewDecoder(req.Body).Decode(c)
+
+	// Create a customer value.
+	var c Customer
+
+	// Encode the customer document received into the customer value.
+	err := json.NewDecoder(req.Body).Decode(&c)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	Customers.Save(c)
-	json.NewEncoder(res).Encode(c)
+
+	// Save the customer in the DB.
+	c.ID, err = DB.SaveCustomer(c)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Encode the customer to JSON and send the response.
+	if err := json.NewEncoder(res).Encode(&c); err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func main() {
+
+	// Start the http server to handle the request for
+	// both versions of the API.
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }
