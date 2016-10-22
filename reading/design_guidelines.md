@@ -114,6 +114,85 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 * Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
 * When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
 
+#### Concurrency
+
+Concurrency is about managing multiple things at once. Like one person cleaning up the dishes while they are also cooking dinner. You're making progress on both but you're only ever doing one of those things at the same time. Parallelism is about doing multiple things at once. This is like walking and chewing gum. They are happening at the same time.
+
+Both you and the runtime have a responsibility in managing the concurrency of the application. You are responsible for managing these three things:
+
+* The application must startup and shutdown with integrity.
+    * Know how and when every goroutine you create terminates.
+    * All goroutines you create should terminate before main returns.
+    * Applications should be capable of shutting down on demand, even under load, in a controlled way.
+* Identify and monitor critical points of back pressure that can exist inside your application.
+    * Channels, mutexes and atomic functions can create back pressure when goroutines are required to wait.
+    * A little back pressure is good, it means there is a good balance of concerns.
+    * A lot of back pressure is bad, it means things are imbalanced.
+    * Back pressure that is imbalanced will cause.
+        * Failures inside the software and across the entire platform.
+        * Your application to collapse, implode or freeze.
+    * Measuring back pressure is a way to measure the health of the application.
+* Rate limit to prevent overwhelming back pressure inside your application.
+    * Limit the number of requests or tasks coming into your application.
+    * Don’t take in more work than you can reasonably work on at a time.
+    * Push back when you are at critical mass. Create your own external back pressure.
+    * Every system has a breaking point, you must know what it is for your application.
+    * Use an external system for rate limiting when it is reasonable and practical.
+* Use timeouts to release the back pressure inside your application.
+    * No request or task is allowed to take forever.
+    * Set timeouts for anything related to network calls.
+    * Set timeouts for requests and time sensitive tasks.
+
+#### Channels
+
+Channels are for the orchestration of goroutines. Channels accomplish this by synchronizing the sending and receiving of data between goroutines or by providing mechanisms to signal goroutines about events.
+
+* Use channels to orchestrate goroutines, not to synchronize access to shared state.
+    * Use mutexes or atomic functions when accessing sharing state.
+    * Channels are much slower than mutexes and atomic functions.
+    * Channels allow you to write simpler and readable code for orchestration.
+* Channels deliver information.
+    * Don’t think of channels as a queue when designing software.
+    * Channels are a mechanism for delivering information between two or more goroutines.
+    * Information exchange comes with trade-offs between guarantees of delivery and blocking latency.
+* Unbuffered channels:
+    * Provides a full guarantee that information being exchanged has been delivered to another goroutine.
+    * Both goroutines making the exchange must be at the channel at the same time.
+    * Provides the highest level of integrity and predictability within channel communication.
+        * Integrity benefits:
+            * Sending goroutine is immediately no longer responsible for the information that was exchanged.
+        * Predictability benefits:
+            * The information is still visible and actively being worked on.
+    * Trade-offs:
+        * We take the benefit of the full guarantee for the cost of higher blocking latency.
+* Buffered channels:
+    * Provides a weaker guarantee that information being exchanged has been delivered to another goroutine.
+    * Both goroutines making the exchange don’t need to be at the channel at the same time.
+    * Provides a lower level of integrity and predictability within channel communication.
+        * Integrity loss:
+            * Sending goroutine is still responsible for the information that is being exchanged. This is true until another goroutine receives it.
+            * The buffer creates risk for the sending goroutine because of the responsibility it maintains while losing control of the information.
+        * Predictability loss:
+            * The information is hidden and waiting to be rediscovered.
+    * Trade-off:
+        * We take the benefit of reducing blocking latency for the cost of weaker guarantees.
+    * Disadvantages:
+        * The larger the buffer, the weaker the guarantee is on that channel.
+        * The weaker the guarantee, the less integrity and predictability you have in the exchange of information on that channel.
+        * Adds more complexity into the application.
+        * More care must be taken with designing, configuring and balancing the application.
+* Less is more with buffers:
+    * Don’t think about performance when thinking about buffers.
+    * Buffers can help to reduce blocking latency in the exchange of information.
+        * Reducing blocking latency towards zero does not necessarily mean better throughput.
+        * If a buffer of one is giving you good enough throughput then keep it.
+        * Question buffers that are larger than one and measure for size.
+        * Find the smallest buffer possible that provides good enough throughput.
+    * The more information that is being buffered the longer it takes to:
+        * Identify problems when they are happening.
+        * Stop the bleeding.
+        * Return the system back to a normal state.
+
 #### Code Reviews
 
 I teach a lot about the things I look for in code reviews. I am slowly attempting to document this.

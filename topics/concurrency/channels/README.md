@@ -11,6 +11,10 @@ Channels are a reference type that provide a safe mechanism to share data betwee
 * A receive from an unbuffered channel happens before the send on that channel completes.
 * The closing of a channel happens before a receive that returns a zero value because the channel is closed.
 
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#channels) for channels.
+
 ## Diagrams
 
 ### How an unbuffered channel works.
