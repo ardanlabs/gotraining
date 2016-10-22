@@ -1,15 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// TODO: EXERCISE: Implement the PUT and PATCH response by accepting a
-// "name" form value, assigning it to the customer, saving it back
-// to the database, and then rendering the customer JSON.
-// r.Post("/customers/{id}", updateHandler)
-
-// TODO: EXERCISE: Implement the DELETE response by removing the
-// customer from the database.
-// r.Delete("/customers/{id}", deleteHandler)
-
 // Sample program to show how to create a basic CRUD based
 // web api for customers.
 package main
@@ -33,8 +24,6 @@ func App() http.Handler {
 	r.Get("/customers/{id}", showHandler)
 	r.Get("/customers", indexHandler)
 	r.Post("/customers", createHandler)
-
-	// Define the root route.
 	r.Get("/", indexHandler)
 
 	return r
@@ -45,9 +34,9 @@ func indexHandler(res http.ResponseWriter, req *http.Request) {
 
 	// Retrieve the list of customers, encode to JSON
 	// and send the response.
-	err := json.NewEncoder(res).Encode(DB.AllCustomers())
-	if err != nil {
+	if err := json.NewEncoder(res).Encode(DB.AllCustomers()); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -71,9 +60,9 @@ func showHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Encode the customer to JSON and send the response.
-	err = json.NewEncoder(res).Encode(c)
-	if err != nil {
+	if err := json.NewEncoder(res).Encode(c); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -98,9 +87,9 @@ func createHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Encode the customer to JSON and send the response.
-	err = json.NewEncoder(res).Encode(&c)
-	if err != nil {
+	if err := json.NewEncoder(res).Encode(&c); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 

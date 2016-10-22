@@ -125,6 +125,9 @@ _**Writing**_
 [Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
 [Go In Action](https://www.manning.com/books/go-in-action)  
 
+_**Articles**_  
+[IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
+
 _**Video**_  
 [GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
 [GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
