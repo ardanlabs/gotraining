@@ -1,50 +1,68 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
-	"strconv"
 	"sync"
 	"time"
 )
 
-type customers map[string]*Customer
-
-var Customers = customers{}
-var lock = &sync.Mutex{}
-
-func init() {
-	rand.Seed(time.Now().UnixNano())
-
-	Customers.Save(&Customer{ID: "1", Name: "Mary Jane"})
-	Customers.Save(&Customer{ID: "2", Name: "Bob Smith"})
-}
-
+// Customer represents a customer document we
+// store in our database.
 type Customer struct {
 	ID   string
 	Name string
 }
 
-func (db customers) Save(c *Customer) {
-	lock.Lock()
-	defer lock.Unlock()
-	if c.ID == "" {
-		c.ID = strconv.Itoa(rand.Int())
-	}
-	db[c.ID] = c
+// db represents our internal database system.
+type db struct {
+	customers map[string]Customer
+	lock      sync.Mutex
 }
 
-func (db customers) Find(id string) (*Customer, error) {
-	if c, ok := db[id]; ok {
+// SaveCustomer stores a customer document in the database.
+func (db *db) SaveCustomer(c Customer) error {
+	if c.ID == "" {
+		return errors.New("invalid customer, missing id")
+	}
+
+	db.lock.Lock()
+	{
+		db.customers[c.ID] = c
+	}
+	db.lock.Unlock()
+
+	return nil
+}
+
+// FindCustomer locates a customer by id in the database.
+func (db *db) FindCustomer(id string) (Customer, error) {
+	if c, ok := db.customers[id]; ok {
 		return c, nil
 	}
-	return nil, fmt.Errorf("Could not find Customer with ID %s", id)
+
+	return Customer{}, fmt.Errorf("Could not find Customer with ID %s", id)
 }
 
-func (db customers) All() []*Customer {
-	all := []*Customer{}
-	for _, v := range db {
-		all = append(all, v)
+// AllCustomers returns the full database of customers.
+func (db *db) AllCustomers() []Customer {
+	all := make([]Customer, 0, len(db.customers))
+
+	for _, c := range db.customers {
+		all = append(all, c)
 	}
+
 	return all
+}
+
+// DB is an instance of the database.
+var DB db
+
+// Initalize the database with some values.
+func init() {
+	rand.Seed(time.Now().UnixNano())
+
+	DB.SaveCustomer(Customer{ID: "1", Name: "Mary Jane"})
+	DB.SaveCustomer(Customer{ID: "2", Name: "Bob Smith"})
 }
