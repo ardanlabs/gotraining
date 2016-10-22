@@ -28,6 +28,7 @@ func main() {
 
 	// Declare an anonymous function and create a goroutine.
 	go func() {
+
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
 			for rune := 'a'; rune < 'a'+26; rune++ {
@@ -41,6 +42,7 @@ func main() {
 
 	// Declare an anonymous function and create a goroutine.
 	go func() {
+
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
 			for rune := 'A'; rune < 'A'+26; rune++ {

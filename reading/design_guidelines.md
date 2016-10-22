@@ -1,10 +1,32 @@
 ## Design Guidelines
 
-These are a set of design guidelines for data, interfaces, composition and packages. Please consider these principles when designing your own software.
+Performance and productivity both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is out pacing the hardware’s ability to make them faster.
 
-***"The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski***
+By following Go’s idioms and a few guidelines, we can write code that can be reasoned about by anyone who looks at it. We can write software that simplifies, minimizes and reduces the amount of code we need to solve the problems we are working on. We don’t have to choose productivity over performance or performance over productivity anymore. We can have both.
 
-#### Bottom Line
+#### Quotes
+
+*"The hope is that the progress in hardware will cure all software ills. However, a critical observer may observe that software manages to outgrow hardware in size and sluggishness. Other observers had noted this for some time before, indeed the trend was becoming obvious as early as 1987." - Niklaus Wirth*
+
+*"The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski*
+
+*"The hardware folks will not put more cores into their hardware if the software isn’t going to use them, so, it is this balancing act of each other staring at each other, and we are hoping that Go is going to break through on the software side.” - Rick Hudson*
+
+*"C is the best balance I've ever seen between power and expressiveness. You can do almost anything you want to do by programming fairly straightforwardly and you will have a very good mental model of what's going to happen on the machine; you can predict reasonably well how quickly it's going to run, you understand what's going on .... - Brian Kernighan*
+
+#### Somewhere Along The Line
+
+* We became impressed with programs that contain large amounts of code.
+* We strived to create large abstractions in our code base.
+* We forgot that the hardware is the platform.
+* We lost the understanding that every decision comes with a cost.
+
+#### These Days Are Gone
+
+* We can throw more hardware at the problem.
+* We can throw more developers at the problem.
+
+#### Remember
 
 The **compiler** is a tool and it's not all knowing or perfect.  
 You need to work with it and help it.
@@ -52,17 +74,21 @@ This is about squeezing every ounce of performance as possible. When code is wri
 
 #### Interface and Composition Design
 
-_With help from [Sandi Metz](https://twitter.com/sandimetz). and Rob Pike_
+_With help from [Sandi Metz](https://twitter.com/sandimetz). and [Rob Pike](https://twitter.com/rob_pike)_
 
 * Interfaces give programs structure.
 * Interfaces encourage design by composition.
 * Interfaces enable and enforce clean divisions between components.
     * The standardization of interfaces can set clear and consistent expectations.
+* Interfaces allow you to group concrete types by what they do.
+    * Don't group types by a common DNA but by a common behavior.
+    * Everyone can work together when we focus on what we do and not who we are.
 * Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
     * Decoupling means reducing the amount of intimate knowledge code must have about concrete types.
     * When dependencies are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
-* Interfaces with more than one method has more than one reason to change.
-    * You must do your best to understand what could change and decouple those aspects of your code.
+* Interfaces help your code decouple itself from change.
+    * You must do your best to understand what could change and use interfaces to decouple.
+    * Interfaces with more than one method have more than one reason to change.
     * Uncertainty about change is not a license to guess but a directive to STOP and learn more.
     * Recognizing and minimizing cascading changes across the code is a way to architect adaptability and stability in your software.
 
@@ -96,5 +122,3 @@ I teach a lot about the things I look for in code reviews. I am slowly attemptin
 * Eliminate the use of the else statements when it is practical. Do not attempt to push code paths to the end of a function. Keep your positive path code in the first tabbed position and use the if statement to process negative path. Return from the function as part of error handling.
 * Don't start off with pointer variables if it can be avoided. It is easier to work with variables that represent a value, even if that value is going to escape to the heap. The use of the & operator can go a long way to maintaining readability in your code.
 * Use the keyword var to represent the declaration of a variable that is being set to its zero value. This helps with readability and can provide the basis for developing a consistent set of rules around variable declarations. One of Go's biggest warts is there are too many ways to declare and create variables.
-
-

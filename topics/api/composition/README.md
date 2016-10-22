@@ -9,34 +9,47 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 * Understand the problem you are trying to solve first. This means understanding the data.
 * The goal is to reduce and minimize cascading changes across your software.
 * Interfaces provide the highest form of composition.
+* Don't group types by a common DNA but by a common behavior.
+* Everyone can work together when we focus when we do and not what we are.
+
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#interface-and-composition-design) for composition.
 
 ## Links
 
 http://golang.org/doc/effective_go.html#embedding  
+https://www.goinggo.net/2016/10/reducing-type-hierarchies.html  
 http://www.goinggo.net/2015/09/composition-with-go.html
-
-## Design Guidelines
-
-* Learn about the [design guidelines](../../../reading/design_guidelines.md) for composition.
 
 ## Code Review
 
-#### Composition and Decoupling
+#### Grouping Types
 
-[Struct Composition](example1/example1.go) ([Go Playground](https://play.golang.org/p/axLYwteYkK))  
-[Decoupling With Interface](example2/example2.go) ([Go Playground](https://play.golang.org/p/EnzMrT7Fdo))  
-[Interface Composition](example3/example3.go) ([Go Playground](https://play.golang.org/p/ES4BOnDX6O))  
+[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/iwci4dKqLW))  
+[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/mnJMHPew08))  
+
+#### Decoupling
+
+[Struct Composition](decoupling/example1/example1.go) ([Go Playground](https://play.golang.org/p/axLYwteYkK))  
+[Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/EnzMrT7Fdo))  
+[Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/ES4BOnDX6O))  
 [Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/ufFSFxCdEs))  
 
 #### Conversion and Assertions
 
-[Interface Conversions](example5/example5.go) ([Go Playground](https://play.golang.org/p/2K2svo0MR0))  
-[Runtime Type Assertions](example6/example6.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
+[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/2K2svo0MR0))  
+[Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
+
+#### Interface Pollution
+
+[Create Interface Pollution](pollution/example1/example1.go) ([Go Playground](https://play.golang.org/p/wHDLvxe8hC))  
+[Remove Interface Pollution](pollution/example2/example2.go) ([Go Playground](https://play.golang.org/p/s6HAmeT6oT))
 
 #### Mocking
 
-[Package To Mock](example7/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/3a_zYeR8M7))  
-[Client](example7/example7.go) ([Go Playground](https://play.golang.org/p/guvjysMjgb))
+[Package To Mock](mocking/example1/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/3a_zYeR8M7))  
+[Client](mocking/example1/example1.go) ([Go Playground](https://play.golang.org/p/guvjysMjgb))
 
 ## Exercises
 

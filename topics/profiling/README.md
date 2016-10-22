@@ -2,21 +2,65 @@
 
 We can use the go tooling to inspect and profile our programs. Profiling is more of a journey and detective work. It requires some understanding about the application and expectations. The profiling data in and of itself is just raw numbers. We have to give it meaning and understanding.
 
+## The Basics of Profiling
+
+### How does a profiler work?
+
+A profiler runs your program and configures the operating system to interrupt it at regular intervals. This is done by sending SIGPROF to the program being profiled, which suspends and transfers execution to the profiler. The profiler then grabs the program counter for each executing thread and restarts the program.
+
+### Profiling do's and don't's
+
+Before you profile, you must have a stable environment to get repeatable results.
+
+* The machine must be idle—don't profile on shared hardware, don't browse the web while waiting for a long benchmark to run.
+* Watch out for power saving and thermal scaling.
+* Avoid virtual machines and shared cloud hosting; they are too noisy for consistent measurements.
+* There is a kernel bug on OS X versions less than El Capitan; upgrade or avoid profiling on OS X.
+
+If you can afford it, buy dedicated performance test hardware. Rack them, disable all the power management and thermal scaling and never update the software on those machines.
+
+For everyone else, have a before and after sample and run them multiple times to get consistent results.
+
+### Types of Profiling
+
+**CPU profiling**  
+CPU profiling is the most common type of profile. When CPU profiling is enabled, the runtime will interrupt itself every 10ms and record the stack trace of the currently running goroutines. Once the profile is saved to disk, we can analyse it to determine the hottest code paths. The more times a function appears in the profile, the more time that code path is taking as a percentage of the total runtime.
+
+**Memory profiling**  
+Memory profiling records the stack trace when a heap allocation is made. Memory profiling, like CPU profiling is sample based. By default memory profiling samples 1 in every 1000 allocations. This rate can be changed. Stack allocations are assumed to be free and are not tracked in the memory profile. Because of memory profiling is sample based and because it tracks allocations not use, using memory profiling to determine your application's overall memory usage is difficult.
+
+**Block profiling**  
+Block profiling is quite unique. A block profile is similar to a CPU profile, but it records the amount of time a goroutine spent waiting for a shared resource. This can be useful for determining concurrency bottlenecks in your application. Block profiling can show you when a large number of goroutines could make progress, but were blocked. 
+
+Blocking includes:
+
+* Sending or receiving on a unbuffered channel.
+* Sending to a full channel, receiving from an empty one.
+* Trying to Lock a sync.Mutex that is locked by another goroutine.
+* Block profiling is a very specialised tool, it should not be used until you believe you have eliminated all your CPU and memory usage bottlenecks.
+
+**One profile at at time**  
+Profiling is not free. Profiling has a moderate, but measurable impact on program performance—especially if you increase the memory profile sample rate. Most tools will not stop you from enabling multiple profiles at once. If you enable multiple profiles at the same time, they will observe their own interactions and skew your results.
+
+**Do not enable more than one kind of profile at a time.**
+
+### Hints to interpret what you see in the profile
+
+If you see lots of time spent in `runtime.mallocgc` function, the program potentially makes excessive amount of small memory allocations. The profile will tell you where the allocations are coming from. See the memory profiler section for suggestions on how to optimize this case.
+
+If lots of time is spent in channel operations, `sync.Mutex` code and other synchronization primitives or System component, the program probably suffers from contention. Consider to restructure program to eliminate frequently accessed shared resources. Common techniques for this include sharding/partitioning, local buffering/batching and copy-on-write technique.
+
+If lots of time is spent in `syscall.Read/Write`, the program potentially makes excessive amount of small reads and writes. Bufio wrappers around os.File or net.Conn can help in this case.
+
+If lots of time is spent in GC component, the program either allocates too many transient objects or heap size is very small so garbage collections happen too frequently.
+
+* Large objects affect memory consumption and GC time, while large number of tiny allocations affects execution speed.
+
+* Combine values into larger values. This will reduce number of memory allocations (faster) and also reduce pressure on garbage collector (faster garbage collections).
+
+* Values that do not contain any pointers are not scanned by garbage collector. Removing pointers from actively used value can positively impact garbage collection time.
+
 ## Installing Tools
-
-You don't need `graphviz` or `ghostscript` unless you want to produce PDF's for your call graphs.
-
-**Graph Visualization Tools**    
-Download the package for your target OS/Arch:
-[http://www.graphviz.org/Download.php](http://www.graphviz.org/Download.php)
-
-**Ghostscript**    
-Download and uncompress the source code:
-[http://ghostscript.com/download/gsdnld.html](http://ghostscript.com/download/gsdnld.html)
-
-	./configure
-	make
-	sudo make install
 
 **boom**  
 boom is a modern HTTP benchmarking tool capable of generating the load you need to run tests. It's built using the Go language and leverages goroutines for behind the scenes async IO and concurrency.
@@ -79,65 +123,7 @@ If you're a linux user, then perf(1) is a great tool for profiling applications.
 
        5.476816754 seconds time elapsed
 
-## The Basics of Profiling
-
-### How does a profiler work?
-
-A profiler runs your program and configures the operating system to interrupt it at regular intervals. This is done by sending SIGPROF to the program being profiled, which suspends and transfers execution to the profiler. The profiler then grabs the program counter for each executing thread and restarts the program.
-
-### Profiling do's and don't's
-
-Before you profile, you must have a stable environment to get repeatable results.
-
-* The machine must be idle—don't profile on shared hardware, don't browse the web while waiting for a long benchmark to run.
-* Watch out for power saving and thermal scaling.
-* Avoid virtual machines and shared cloud hosting; they are too noisy for consistent measurements.
-* There is a kernel bug on OS X versions less than El Capitan; upgrade or avoid profiling on OS X.
-
-If you can afford it, buy dedicated performance test hardware. Rack them, disable all the power management and thermal scaling and never update the software on those machines.
-
-For everyone else, have a before and after sample and run them multiple times to get consistent results.
-
-### Types of Profiling
-
-**CPU profiling**  
-CPU profiling is the most common type of profile. When CPU profiling is enabled, the runtime will interrupt itself every 10ms and record the stack trace of the currently running goroutines. Once the profile is saved to disk, we can analyse it to determine the hottest code paths. The more times a function appears in the profile, the more time that code path is taking as a percentage of the total runtime.
-
-**Memory profiling**  
-Memory profiling records the stack trace when a heap allocation is made. Memory profiling, like CPU profiling is sample based. By default memory profiling samples 1 in every 1000 allocations. This rate can be changed. Stack allocations are assumed to be free and are not tracked in the memory profile. Because of memory profiling is sample based and because it tracks allocations not use, using memory profiling to determine your application's overall memory usage is difficult.
-
-**Block profiling**  
-Block profiling is quite unique. A block profile is similar to a CPU profile, but it records the amount of time a goroutine spent waiting for a shared resource. This can be useful for determining concurrency bottlenecks in your application. Block profiling can show you when a large number of goroutines could make progress, but were blocked. 
-
-Blocking includes:
-
-* Sending or receiving on a unbuffered channel.
-* Sending to a full channel, receiving from an empty one.
-* Trying to Lock a sync.Mutex that is locked by another goroutine.
-* Block profiling is a very specialised tool, it should not be used until you believe you have eliminated all your CPU and memory usage bottlenecks.
-
-**One profile at at time**  
-Profiling is not free. Profiling has a moderate, but measurable impact on program performance—especially if you increase the memory profile sample rate. Most tools will not stop you from enabling multiple profiles at once. If you enable multiple profiles at the same time, they will observe their own interactions and skew your results.
-
-**Do not enable more than one kind of profile at a time.**
-
-### Hints to interpret what you see in the profile
-
-If you see lots of time spent in `runtime.mallocgc` function, the program potentially makes excessive amount of small memory allocations. The profile will tell you where the allocations are coming from. See the memory profiler section for suggestions on how to optimize this case.
-
-If lots of time is spent in channel operations, `sync.Mutex` code and other synchronization primitives or System component, the program probably suffers from contention. Consider to restructure program to eliminate frequently accessed shared resources. Common techniques for this include sharding/partitioning, local buffering/batching and copy-on-write technique.
-
-If lots of time is spent in `syscall.Read/Write`, the program potentially makes excessive amount of small reads and writes. Bufio wrappers around os.File or net.Conn can help in this case.
-
-If lots of time is spent in GC component, the program either allocates too many transient objects or heap size is very small so garbage collections happen too frequently.
-
-* Large objects affect memory consumption and GC time, while large number of tiny allocations affects execution speed.
-
-* Combine values into larger values. This will reduce number of memory allocations (faster) and also reduce pressure on garbage collector (faster garbage collections).
-
-* Values that do not contain any pointers are not scanned by garbage collector. Removing pointers from actively used value can positively impact garbage collection time.
-
-## Basic Profiling
+## Basic Go Profiling
 
 Learn the basics of using GODEBUG.  
 [Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
@@ -373,6 +359,12 @@ The `godoc` tool can help you perform static analysis on your code.
 	godoc -analysis pointer -http=:8080
 
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
+
+## HTTP Tracing
+
+HTTP tracing facilitate the gathering of fine-grained information throughout the lifecycle of an HTTP client request.
+
+[HTTP Tracing Package](http_trace)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
