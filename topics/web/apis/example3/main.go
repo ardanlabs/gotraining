@@ -24,7 +24,8 @@ func App() http.Handler {
 	r.Get("/customers/{id}", showHandler)
 	r.Get("/customers", indexHandler)
 	r.Post("/customers", createHandler)
-	r.Get("/", indexHandler)
+	// Redirect requests to / to /customers
+	r.Handle("/", http.RedirectHandler("/customers", http.StatusMovedPermanently))
 
 	return r
 }
