@@ -50,9 +50,12 @@ func TestApp(t *testing.T) {
 		}
 
 		// Validate we received the correct version.
-		act := string(b)
-		if act != tt.version {
-			t.Fatalf("expected %s, got %s", tt.version, act)
+		got := string(b)
+		want := tt.version
+		if got != want {
+			t.Log("Wanted:", want)
+			t.Log("Got   :", got)
+			t.Fatal("Mismatch")
 		}
 	}
 }

@@ -1,3 +1,9 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Tests for the sample program to show how to use create, parse and execute
+// a template with simple data processing. This example uses a struct type
+// value with a slice and method for generating HTML markup.
 package main
 
 import (
@@ -6,24 +12,36 @@ import (
 	"testing"
 )
 
-func Test_Exec(t *testing.T) {
-	bb := &bytes.Buffer{}
-	err := Exec(bb)
-	if err != nil {
+func TestExec(t *testing.T) {
+
+	// Create a bytes Buffer for our Writer.
+	var bb bytes.Buffer
+
+	// Execute the template putting the output
+	// into our bytes buffer.
+	if err := Exec(&bb); err != nil {
 		t.Fatal(err)
 	}
 
-	act := bb.String()
+	// Validate we received the correct version.
+	got := strings.TrimSpace(bb.String())
+	want := strings.TrimSpace(`
+<h1>Mary Smith</h1>
+<h2>MARY SMITH</h2>
 
-	expectations := []string{
-		"<h1>Mary Smith</h1>",
-		"<li>Scarface</li>",
-		"<li>MC Skat Kat</li>",
-	}
+Aliases:
+<ul>
+	<li>Scarface</li>
+	<li>MC Skat Kat</li>
+	
+</ul>`)
 
-	for _, exp := range expectations {
-		if !strings.Contains(act, exp) {
-			t.Fatalf("expected %s to contain %s", act, exp)
-		}
+	// NOTE: The above test string has a TAB on line 36
+	//       to match the HTML string being produced.
+
+	if got != want {
+		t.Logf("Wanted: %v", want)
+		t.Logf("Got   : %v", got)
+		t.Fatal("Mismatch")
 	}
 }
