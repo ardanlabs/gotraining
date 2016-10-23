@@ -15,14 +15,18 @@ https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-[Versioning - Code](example1/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[Versioning - Test](example1/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
-[Route Versioning - Code](example2/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[Route Versioning - Test](example2/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
-[CRUD - Code](example3/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[CRUD - Test](example3/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))      
-[Middleware - Code](example4/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[Middleware - Test](example4/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
+Versioning:
+[Code](example1/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
+[Test](example1/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
+Route Versioning:
+[Code](example2/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
+[Test](example2/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
+CRUD:
+[Code](example3/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
+[Test](example3/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))      
+Middleware:
+[Code](example4/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
+[Test](example4/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
 
 ## Exercises
 

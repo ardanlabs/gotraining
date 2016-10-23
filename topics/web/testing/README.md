@@ -14,7 +14,7 @@ https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-[Basic Unit Teste](example1/unit_test.go) ([Go Playground](https://play.golang.org/p/BNQhhKzMqJ))  
+[Basic Unit Testing](example1/unit_test.go) ([Go Playground](https://play.golang.org/p/BNQhhKzMqJ))  
 [Using an Application Context](example2/unit_test.go) ([Go Playground](https://play.golang.org/p/YZJuNtlhDI))  
 [Testing Routes](example3/unit_test.go) ([Go Playground](https://play.golang.org/p/XeGvc3lE7n))  
 [Mocking Servers](example4/integration_test.go) ([Go Playground](https://play.golang.org/p/QqK6Jy0bda))
