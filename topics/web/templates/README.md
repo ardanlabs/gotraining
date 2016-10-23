@@ -16,21 +16,28 @@ https://github.com/GeertJohan/go.rice
 
 ## Code Review
 
-[Basic Template - Code](example1/main.go) ([Go Playground](https://play.golang.org/p/WPOIJ0B2Lt)) | 
-[Basic Template - Test](example1/main_test.go) ([Go Playground](https://play.golang.org/p/n1wqyeyioL))    
-[Data Parsing - Code](example2/main.go) ([Go Playground](https://play.golang.org/p/H7ftbGtIFO) | 
-[Data Parsing - Test](example2/main_test.go) ([Go Playground](https://play.golang.org/p/kPDlG_hkU4))    
-[Struct Parsing - Code](example3/main.go) ([Go Playground](https://play.golang.org/p/nWxoAtMNoT)) | 
-[Struct Parsing - Test](example3/main_test.go) ([Go Playground](https://play.golang.org/p/aO7mKDf6sZ))      
-[Generating Markup - Code](example4/main.go) ([Go Playground](https://play.golang.org/p/7DK_ISr8Cb)) | 
-[Generating Markup - Test](example4/main_test.go) ([Go Playground](https://play.golang.org/p/PNfkzwyety))    
-[Complex Markup - Code](example5/main.go) ([Go Playground](https://play.golang.org/p/ljKK-0OxsX)) | 
-[Complex Markup - Test](example5/main_test.go) ([Go Playground](https://play.golang.org/p/OKHfh9y1rn))    
-[Serving Assets - Code](example6/main.go) ([Go Playground](https://play.golang.org/p/BNSNaDcDvW)) | 
-[Serving Assets - Test](example6/main_test.go) ([Go Playground](https://play.golang.org/p/VjHHW8n1M_))    
-[Bundling Assets - Code](example7/main.go) ([Go Playground](https://play.golang.org/p/Z17Aopw3QP)) | 
-[Bundling Assets - Test](example7/main_test.go) ([Go Playground](https://play.golang.org/p/Sj3QrmIAzB)) | 
-[Bundling Assets - Test](example7/rice-box.go) ([Go Playground](https://play.golang.org/p/dCuaTv27FM))   
+Basic Template:
+[Code](example1/main.go) ([Go Playground](https://play.golang.org/p/WPOIJ0B2Lt)) | 
+[Test](example1/main_test.go) ([Go Playground](https://play.golang.org/p/n1wqyeyioL))    
+Data Parsing:
+[Code](example2/main.go) ([Go Playground](https://play.golang.org/p/H7ftbGtIFO) | 
+[Test](example2/main_test.go) ([Go Playground](https://play.golang.org/p/kPDlG_hkU4))    
+Struct Parsing:
+[Code](example3/main.go) ([Go Playground](https://play.golang.org/p/nWxoAtMNoT)) | 
+[Test](example3/main_test.go) ([Go Playground](https://play.golang.org/p/aO7mKDf6sZ))      
+Generating Markup:
+[Code](example4/main.go) ([Go Playground](https://play.golang.org/p/7DK_ISr8Cb)) | 
+[Test](example4/main_test.go) ([Go Playground](https://play.golang.org/p/PNfkzwyety))    
+Complex Markup:
+[Code](example5/main.go) ([Go Playground](https://play.golang.org/p/ljKK-0OxsX)) | 
+[Test](example5/main_test.go) ([Go Playground](https://play.golang.org/p/OKHfh9y1rn))    
+Serving Assets:
+[Code](example6/main.go) ([Go Playground](https://play.golang.org/p/BNSNaDcDvW)) | 
+[Test](example6/main_test.go) ([Go Playground](https://play.golang.org/p/VjHHW8n1M_))    
+Bundling Assets:
+[Code](example7/main.go) ([Go Playground](https://play.golang.org/p/Z17Aopw3QP)) | 
+[Test](example7/main_test.go) ([Go Playground](https://play.golang.org/p/Sj3QrmIAzB)) | 
+[Assets](example7/rice-box.go) ([Go Playground](https://play.golang.org/p/dCuaTv27FM))   
 
 ## Exercises
 
