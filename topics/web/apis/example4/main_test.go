@@ -12,6 +12,28 @@ import (
 	"testing"
 )
 
+func TestRoot(t *testing.T) {
+
+	// Startup a server to handle processing these routes.
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+
+	// Request the root URL
+	res, err := http.Get(ts.URL)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Find the URL we were redirected to:
+	got := res.Request.URL.String()
+	want := ts.URL + "/customers"
+	if got != want {
+		t.Log("Wanted:", got)
+		t.Log("Got   :", want)
+		t.Fatal("Mismatch")
+	}
+}
+
 func TestIndexHandler(t *testing.T) {
 
 	// Startup a server to handle processing these routes.

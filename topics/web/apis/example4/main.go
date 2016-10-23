@@ -37,7 +37,9 @@ func App() http.Handler {
 	r.GET("/customers/:id", showHandler)
 	r.GET("/customers", indexHandler)
 	r.POST("/customers", createHandler)
-	r.GET("/", indexHandler)
+	r.GET("/", func(ctx echo.Context) error {
+		return ctx.Redirect(http.StatusMovedPermanently, "/customers")
+	})
 
 	// Create a standard echo server and bind
 	// the echo mux as the handler.
