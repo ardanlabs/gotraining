@@ -14,11 +14,11 @@ https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-[Basic Unit Testing](example1/unit_test.go) ([Go Playground](https://play.golang.org/p/BNQhhKzMqJ))  
-[Using an Application Context](example2/unit_test.go) ([Go Playground](https://play.golang.org/p/YZJuNtlhDI))  
-[Testing Routes](example3/unit_test.go) ([Go Playground](https://play.golang.org/p/XeGvc3lE7n))  
-[Mocking Servers](example4/integration_test.go) ([Go Playground](https://play.golang.org/p/QqK6Jy0bda))
-[Mocking Servers With App Context](example5/integration_test.go) ([Go Playground](https://play.golang.org/p/Zjfx0ZzETO))
+[Basic Unit Testing](example1/unit_test.go)  
+[Using an Application Context](example2/unit_test.go)  
+[Testing Routes](example3/unit_test.go)  
+[Mocking Servers](example4/integration_test.go)  
+[Mocking Servers With App Context](example5/integration_test.go)  
 
 ## Exercises
 

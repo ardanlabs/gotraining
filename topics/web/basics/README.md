@@ -14,11 +14,11 @@ https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-[Simple Web Service](example1/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))  
-[Using a New Server Mux](example2/main.go) ([Go Playground](https://play.golang.org/p/J-qm4cPv3Z))  
-[User Defined Handler I](example3/main.go) ([Go Playground](https://play.golang.org/p/dYqPRQ1X7u))  
-[User Defined Handler II](example4/main.go) ([Go Playground](https://play.golang.org/p/yEHFj6cQl1))
-[Concurrency](example5/main.go) ([Go Playground](https://play.golang.org/p/FdUQ1Gi8bz))
+[Simple Web Service](example1/main.go)  
+[Using a New Server Mux](example2/main.go)  
+[User Defined Handler I](example3/main.go)  
+[User Defined Handler II](example4/main.go)  
+[Concurrency](example5/main.go)  
 
 ## Exercises
 

@@ -15,18 +15,10 @@ https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-Versioning:
-[Code](example1/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[Test](example1/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
-Route Versioning:
-[Code](example2/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[Test](example2/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
-CRUD:
-[Code](example3/main.go) ([Go Playground](https://play.golang.org/p/aOF__dzj_P)) | 
-[Test](example3/main_test.go) ([Go Playground](https://play.golang.org/p/vhJ8lGlnJU))      
-Middleware:
-[Code](example4/main.go) ([Go Playground](https://play.golang.org/p/jnIhNbsQPo)) | 
-[Test](example4/main_test.go) ([Go Playground](https://play.golang.org/p/LP4Uw6RMlo))    
+Versioning: [Code](example1/main.go) | [Test](example1/main_test.go)  
+Route Versioning: [Code](example2/main.go) | [Test](example2/main_test.go)      
+CRUD: [Code](example3/main.go) | [Test](example3/main_test.go)  
+Middleware: [Code](example4/main.go) | [Test](example4/main_test.go)     
 
 ## Exercises
 
