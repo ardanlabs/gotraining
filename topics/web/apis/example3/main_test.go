@@ -18,13 +18,13 @@ func TestRoot(t *testing.T) {
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
-	// Request the root URL
+	// Request the root URL `/`.
 	res, err := http.Get(ts.URL)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// Find the URL we were redirected to:
+	// Validate we were redirected to the customers url.
 	got := res.Request.URL.String()
 	want := ts.URL + "/customers"
 	if got != want {

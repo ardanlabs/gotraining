@@ -24,8 +24,8 @@ func App() http.Handler {
 	// Add in the middleware for logging.
 	r.Use(middleware.Logger())
 
-	// Add in a custom middleware for setting
-	// the context type in the request for later.
+	// Add in a custom middleware for setting the
+	// context type in the request for later.
 	r.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
 		return func(ctx echo.Context) error {
 			ctx.Request().Header().Set("Content-Type", "application/json")
@@ -37,6 +37,8 @@ func App() http.Handler {
 	r.GET("/customers/:id", showHandler)
 	r.GET("/customers", indexHandler)
 	r.POST("/customers", createHandler)
+
+	// Redirect requests from `/`` to `/customers`.
 	r.GET("/", func(ctx echo.Context) error {
 		return ctx.Redirect(http.StatusMovedPermanently, "/customers")
 	})

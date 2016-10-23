@@ -22,11 +22,11 @@ Route Versioning:
 [Code](example2/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
 [Test](example2/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
 CRUD:
-[Code](example3/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[Test](example3/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))      
+[Code](example3/main.go) ([Go Playground](https://play.golang.org/p/aOF__dzj_P)) | 
+[Test](example3/main_test.go) ([Go Playground](https://play.golang.org/p/vhJ8lGlnJU))      
 Middleware:
-[Code](example4/main.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V)) | 
-[Test](example4/main_test.go) ([Go Playground](https://play.golang.org/p/GfaSx7Rg7V))    
+[Code](example4/main.go) ([Go Playground](https://play.golang.org/p/jnIhNbsQPo)) | 
+[Test](example4/main_test.go) ([Go Playground](https://play.golang.org/p/LP4Uw6RMlo))    
 
 ## Exercises
 
