@@ -19,8 +19,9 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 ## Links
 
 http://golang.org/doc/effective_go.html#embedding  
+https://www.goinggo.net/2016/10/avoid-interface-pollution.html  
 https://www.goinggo.net/2016/10/reducing-type-hierarchies.html  
-http://www.goinggo.net/2015/09/composition-with-go.html
+https://www.goinggo.net/2015/09/composition-with-go.html  
 
 ## Code Review
 
