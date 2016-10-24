@@ -233,10 +233,6 @@ If you are interested in holding an event in your area please let me know. I wil
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Free		Go			WWG				London, England			October		Bill Kennedy 		https://skillsmatter.com/conferences/8373-women-who-go-workshop-with-bill-kennedy
-		Public		Adv Go		Rackspace		SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
-		Free		Go			WWG				SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
-		Corporate	Go			Traderev		Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
 		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
 		Public		Go			dotGo			Paris, France			October		Ernesto Jimenez
 		Public		Kubernetes	OSCON 			London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
@@ -248,12 +244,16 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Data		GDG DevFest		Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
 		Public		Data		H2O.ai 			Mountain View, CA		November	Daniel Whitenack
 		Free		Web			WWG				NYC, NY					November	Mark Bates
-		Corporate	Go			Skillsmatter	London, England			November	Bill Kennedy
+		Corporate	Go			Skillsmatter	London, England			November	Ernesto Jimenez
 		Public		Web			Ardan			SF, CA					December	Mark Bates			https://www.eventbrite.com/e/ultimate-go-web-san-francisco-nov-2016-tickets-27326208425
 		Corporate	Go			GNS Science		New Zealand				December	Bill Kennedy
 
 											Completed
 
+		Free		Go			WWG				London, England			October		Bill Kennedy 		https://skillsmatter.com/conferences/8373-women-who-go-workshop-with-bill-kennedy
+		Public		Adv Go		Rackspace		SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
+		Free		Go			WWG				SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
+		Corporate	Go			Traderev		Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
 		Corporate	Go			Nordstroms		Seattle, WA	 			September	Bill Kennedy
 		Corporate	Go			Viacom			NYC, NY					September	Bill Kennedy
 		Corporate	Go			CapitalOne		McLean, VA	 			September	Bill Kennedy
