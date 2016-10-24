@@ -13,9 +13,11 @@ Despite a huge focus on machine learning in the context of data science, solid s
 
 ## Code Review
 
+[github.com/gonum/stats docs](https://godoc.org/github.com/gonum/stat)  
 [Mean, Mode, Median](example1/example1.go)  
 [Min, Max, Range](example2/example2.go)  
-[Quantiles](example3/example3.go)  
+[Variance, Standard Deviation](example3/example3.go)    
+[Quantiles](example4/example4.go)  
 
 ## Exercises
 
