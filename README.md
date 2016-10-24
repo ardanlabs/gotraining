@@ -243,10 +243,12 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Go			Dev Fest		NYC, NY					November	Bill Kennedy
 		Public		Data		GDG DevFest		Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
 		Public		Data		H2O.ai 			Mountain View, CA		November	Daniel Whitenack
+		Corporate	Go			Hootsuite		Vancouver, Canada		November	Bill Kennedy
 		Free		Web			WWG				NYC, NY					November	Mark Bates
 		Corporate	Go			Skillsmatter	London, England			November	Ernesto Jimenez
 		Public		Web			Ardan			SF, CA					December	Mark Bates			https://www.eventbrite.com/e/ultimate-go-web-san-francisco-nov-2016-tickets-27326208425
 		Corporate	Go			GNS Science		New Zealand				December	Bill Kennedy
+		Corporate	Go			Viacom			NYC, NY					December	Bill Kennedy		
 
 											Completed
 
