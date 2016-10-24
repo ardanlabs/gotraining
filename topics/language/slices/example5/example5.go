@@ -10,16 +10,21 @@ import "fmt"
 func main() {
 
 	// Declare a slice of integers with 7 values.
-	x := []int{100, 200, 300, 400, 500, 600, 700}
+	x := make([]int, 7)
 
 	// Set a pointer to the second element of the slice.
 	twohundred := &x[1]
+
+	// Random starting counters.
+	for i := 0; i < 7; i++ {
+		x[i] = i * 100
+	}
 
 	// Append a new value to the slice.
 	x = append(x, 800)
 
 	// Change the value of the second element of the slice.
-	x[1] = 250
+	x[1]++
 
 	// Display the value that the pointer points to and the
 	// second element of the slice.
