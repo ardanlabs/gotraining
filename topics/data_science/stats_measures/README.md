@@ -1,6 +1,6 @@
 ## Summary Measures
 
-Despite a huge focus on machine learning in the context of data science, solid statistical analysis (e.g., via summary and aggregation) needs to be part of every data science project and, in all honestly, can provide more value (and quicker value) than sophisticated ML.  However, even in cases where more sophisticated ML is justified, data scientists must understand the statistics of there data to determine the validity of modeling techniques and to develop intuition about the data. 
+Despite a huge focus on machine learning in the context of data science, solid statistical analysis (e.g., via summary and aggregation) needs to be part of every data science project and, in all honestly, can provide more value (and quicker value) than sophisticated ML.  However, even in cases where more sophisticated ML is justified, data scientists must understand the statistics of their data to determine the validity of modeling techniques and to develop intuition about the data. 
 
 ## Notes
 

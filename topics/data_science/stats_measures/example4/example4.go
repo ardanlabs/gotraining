@@ -2,9 +2,9 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // go build
-// ./example2
+// ./example4
 
-// Sample program to calculate means, modes, and medians.
+// Sample program to calculate quantiles
 package main
 
 import (
@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 	"log"
 
+	"github.com/gonum/floats"
 	"github.com/gonum/stat"
 	"github.com/kniren/gota/data-frame"
 )
@@ -41,14 +42,15 @@ func main() {
 		sepalLength = append(sepalLength, *val.Float())
 	}
 
-	// Calculate the variance of the variable.
-	varianceVal := stat.Variance(sepalLength, nil)
+	// Sort the values.
+	inds := make([]int, len(sepalLength))
+	floats.Argsort(sepalLength, inds)
 
-	// Calculate the Max of the variable.
-	stdDevVal := stat.StdDev(sepalLength, nil)
+	// Get the Quantiles.
+	quant25 := stat.Quantile(0.25, stat.Empirical, sepalLength, nil)
 
 	// Output the results to standard out.
 	fmt.Printf("\nSepal Length Summary Statistics:\n")
-	fmt.Printf("Variance value: %0.2f\n", varianceVal)
-	fmt.Printf("Std Dev value: %0.2f\n\n", stdDevVal)
+	fmt.Printf("25 Quantile: %0.2f\n", quant25)
+	//fmt.Printf("Std Dev value: %0.2f\n\n", stdDevVal)
 }
