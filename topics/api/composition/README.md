@@ -9,22 +9,26 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 * Understand the problem you are trying to solve first. This means understanding the data.
 * The goal is to reduce and minimize cascading changes across your software.
 * Interfaces provide the highest form of composition.
+* Don't group types by a common DNA but by a common behavior.
+* Everyone can work together when we focus when we do and not what we are.
+
+## Design Guidelines
+
+* Learn about the [design guidelines](../../../reading/design_guidelines.md#interface-and-composition-design) for composition.
 
 ## Links
 
 http://golang.org/doc/effective_go.html#embedding  
-http://www.goinggo.net/2015/09/composition-with-go.html
-
-## Design Guidelines
-
-* Learn about the [design guidelines](../../../reading/design_guidelines.md) for composition.
+https://www.goinggo.net/2016/10/avoid-interface-pollution.html  
+https://www.goinggo.net/2016/10/reducing-type-hierarchies.html  
+https://www.goinggo.net/2015/09/composition-with-go.html  
 
 ## Code Review
 
 #### Grouping Types
 
-[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/hKEhvhetlu))  
-[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/8ZsLe4nrAj))  
+[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/iwci4dKqLW))  
+[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/mnJMHPew08))  
 
 #### Decoupling
 
@@ -37,6 +41,11 @@ http://www.goinggo.net/2015/09/composition-with-go.html
 
 [Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/2K2svo0MR0))  
 [Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
+
+#### Interface Pollution
+
+[Create Interface Pollution](pollution/example1/example1.go) ([Go Playground](https://play.golang.org/p/wHDLvxe8hC))  
+[Remove Interface Pollution](pollution/example2/example2.go) ([Go Playground](https://play.golang.org/p/s6HAmeT6oT))
 
 #### Mocking
 

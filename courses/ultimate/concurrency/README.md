@@ -16,6 +16,6 @@ This material covers all the concurrency aspects of the language. Once you are d
 [Patterns](../../../topics/concurrency/patterns/README.md)
 
 #### Context Package
-[Context](../../../topics/standard_library/context/README.md)
+[Context](../../../topics/packages/context/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

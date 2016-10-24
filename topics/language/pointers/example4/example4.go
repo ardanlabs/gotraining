@@ -40,7 +40,9 @@ func escapeToHeap() *user {
 }
 
 /*
-// go build -gcflags -m
+// See escape analysis and inling decisions.
+
+go build -gcflags -m
 
 ./example4.go:23: can inline stayOnStack
 ./example4.go:33: can inline escapeToHeap
@@ -52,6 +54,9 @@ func escapeToHeap() *user {
 ./example4.go:39: &u escapes to heap
 
 
+// See the intermediate assembly phase before
+// generating the actual arch-specific assembly.
+
 go build -gcflags -S
 
 0x000f 00015 (pointers/example4/example4.go:18)	MOVQ	$4, DX
@@ -59,4 +64,29 @@ go build -gcflags -S
 0x001d 00029 (pointers/example4/example4.go:18)	MOVQ	$18, AX
 0x0024 00036 (pointers/example4/example4.go:18)	NOP
 0x0024 00036 (pointers/example4/example4.go:19)	MOVQ	$0, AX
+
+
+// See the actual machine representation by using
+// the disasembler.
+
+go tool objdump -s main.main example4
+
+example4.go:17	0x2040	4883ec28		SUBQ $0x28, SP
+example4.go:17	0x2044	48896c2420		MOVQ BP, 0x20(SP)
+example4.go:17	0x2049	488d6c2420		LEAQ 0x20(SP), BP
+example4.go:19	0x204e	48c7042400000000	MOVQ $0x0, 0(SP)
+example4.go:19	0x2056	48c744240800000000	MOVQ $0x0, 0x8(SP)
+
+// See a list of the symbols in an artifact with
+// annotations and size.
+
+go tool nm example4
+
+6cea0 R $f64.bfe62e42fefa39ef
+96d20 B __cgo_init
+96d28 B __cgo_notify_runtime_init_done
+96d30 B __cgo_thread_start
+4c8a0 T __rt0_amd64_darwin
+4af50 T _gosave
+4c8c0 T _main
 */

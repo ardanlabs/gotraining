@@ -52,6 +52,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Structuring Tests in Go](https://medium.com/@benbjohnson/structuring-tests-in-go-46ddee7a25c#.b2m3nziyb) - Ben Johnson  
 [Structuring Applications in Go](https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091#.xc85lg2kf) - Ben Johnson  
+[Advanced Testing with Go - Video](https://www.youtube.com/shared?ci=LARb45o5TpA) - Mitchell Hashimoto  
+[Advanced Testing with Go - Deck](https://speakerdeck.com/mitchellh/advanced-testing-with-go) - Mitchell Hashimoto  
 
 ### Vendoring / Versioning
 
