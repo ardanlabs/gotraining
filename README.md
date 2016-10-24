@@ -234,9 +234,6 @@ If you are interested in holding an event in your area please let me know. I wil
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
 		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
-		Public		Go			dotGo			Paris, France			October		Ernesto Jimenez
-		Public		Kubernetes	OSCON 			London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
-		Public		Go			GopherCon		Florianópolis, Brazil	 November	 Bill Kennedy
 		Free		Web			WWG				SF, CA					November	Mark Bates
 		Public		Data		Ardan			SF, CA					November	Daniel Whitenack
 		Public		Go			GothamGo		NYC, NY					November	Bill Kennedy
@@ -285,6 +282,8 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Adv Go		Rackspace		SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
 		Free		Go			WWG				SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
 		Corporate	Go			Traderev		Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
+		Public		Go			dotGo			Paris, France			October		Ernesto Jimenez
+		Public		Kubernetes	OSCON 			London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
 
 ### Past Years
 

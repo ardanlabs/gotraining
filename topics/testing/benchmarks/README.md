@@ -8,6 +8,7 @@ Go has support for testing the performance of your code.
 [Sub Benchmarks](sub/sub_test.go) ([Go Playground](https://play.golang.org/p/q4qV9BdH4R))  
 [Prediction](prediction/README.md)  
 [Caching](caching/README.md)  
+[False Sharing](falseshare/README.md)  
 
 _Look at the profiling topic to learn more about using benchmarks to [profile](../profiling) code._
 
