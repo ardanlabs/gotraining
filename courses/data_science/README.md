@@ -18,5 +18,10 @@ This material covers the organization of data into matrices and matrix operation
 
 [Matrices and Linear Algebra](matrices/README.md)
 
+## Statistics and Aggregation
+This material covers statistical measures and operations key to day-to-day data science work.  Once you are done with this material you will understand how to perform solid summary data analysis, describe and visualize distributions, quantify hypotheses, and transform data sets with, e.g., dimensionality reductions.
+
+[Statistics and Aggregation](statistics/README.md)
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
