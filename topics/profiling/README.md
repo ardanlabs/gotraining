@@ -60,6 +60,13 @@ If lots of time is spent in GC component, the program either allocates too many 
 
 * Values that do not contain any pointers are not scanned by garbage collector. Removing pointers from actively used value can positively impact garbage collection time.
 
+## Rules of Performance 
+
+1) Never guess about performance.
+2) Measurements must be relevant.
+3) Profile before you decide something is performance critical.
+4) Test to know you are correct. 
+
 ## Installing Tools
 
 **boom**  

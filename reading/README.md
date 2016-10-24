@@ -138,6 +138,7 @@ Much of this content can be found under [arrays](../topics/arrays) and [data rac
 [NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman  
 [The Myth Of Ram](http://www.ilikebigbits.com/blog/2014/4/21/the-myth-of-ram-part-i) - Emil Ernerfeldt  
 [Understanding Transaction Hardware Memory](https://www.infoq.com/presentations/hardware-transactional-memory) - Gil Gene  
+[Want fast C++? Know your hardware!](https://www.youtube.com/watch?v=BP6NxVxDQIs) - Timur Doumler  
 
 #### Data-Oriented Design
 
