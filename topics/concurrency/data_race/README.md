@@ -19,13 +19,11 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 ## Cache Coherency and False Sharing Notes
 
 * Thread memory access matters.
-
 * If your algorithm is not scaling look for false sharing problems.
 
 ## Links
 
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206)
-
 
 [The Go Memory Model](https://golang.org/ref/mem)  
 http://blog.golang.org/race-detector  
