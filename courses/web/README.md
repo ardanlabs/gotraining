@@ -57,3 +57,8 @@ By this point we should be able to build fully featured HTML applications in Go,
 What good is having an API if we can’t consume it? We’ll learn how to use Go to speak with APIs, marshal & unmarshal data, set request headers, and more.
 
 [Consuming API's](../../topics/web/consuming/README.md)
+
+## Web Sockets
+The web is changing and users are expecting fast, dynamic, and interactive web applications. Web Sockets allow for direct two-way communication between the front-end (JavaScript/HTML) and the back-end (Go).
+
+[Web Sockets](../../topics/web/sockets/README.md)

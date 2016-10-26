@@ -10,15 +10,15 @@ Learn the basics of building a web API in Go.
 
 ## Links
 
-https://golang.org/pkg/net/http/  
-https://golang.org/doc/articles/wiki/  
+https://golang.org/pkg/net/http/
+https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-Versioning: [Code](example1/main.go) | [Test](example1/main_test.go)  
-Route Versioning: [Code](example2/main.go) | [Test](example2/main_test.go)      
-CRUD: [Code](example3/main.go) | [Test](example3/main_test.go)  
-Middleware: [Code](example4/main.go) | [Test](example4/main_test.go)     
+Versioning: [Code](example1/main.go) | [Test](example1/main_test.go)
+Route Versioning: [Code](example2/main.go) | [Test](example2/main_test.go)
+CRUD: [Code](example3/main.go) | [Test](example3/main_test.go)
+Middleware: [Code](example4/main.go) | [Test](example4/main_test.go)
 
 ## Exercises
 
