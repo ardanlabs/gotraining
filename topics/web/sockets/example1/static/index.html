@@ -1,0 +1,24 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Ultimate Web</title>
+  <link rel="stylesheet" href="/styles.css" type="text/css" media="all" />
+</head>
+
+<body>
+  <div id="open-connection">
+    <h1>Messages</h1>
+    <ul id="messages"></ul>
+    <form onsubmit="return sendMessage()">
+      <input type="text" id="message" placeholder="Type message here" />
+      <input type="submit" value="Send Message" />
+    </form>
+  </div>
+  <div id="closed-connection">
+    <h1>There is currently no open connection!</h1>
+  </div>
+  <script src="/app.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>
