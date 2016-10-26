@@ -30,7 +30,6 @@ func TestExec(t *testing.T) {
 <script>
 	window.user = {"name":"Mark","email":"mark@example.com"};
 </script>`)
-
 	if got != want {
 		t.Log("Wanted:", want)
 		t.Log("Got   :", got)
