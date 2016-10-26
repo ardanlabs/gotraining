@@ -166,21 +166,25 @@ Channels are for the orchestration of goroutines. Channels accomplish this by sy
     * Trade-offs:
         * We take the benefit of the full guarantee for the cost of higher blocking latency.
 * Buffered channels:
-    * Provides a weaker guarantee that information being exchanged has been delivered to another goroutine.
-    * Both goroutines making the exchange don’t need to be at the channel at the same time.
-    * Provides a lower level of integrity and predictability within channel communication.
-        * Integrity loss:
-            * Sending goroutine is still responsible for the information that is being exchanged. This is true until another goroutine receives it.
-            * The buffer creates risk for the sending goroutine because of the responsibility it maintains while losing control of the information.
-        * Predictability loss:
-            * The information is hidden and waiting to be rediscovered.
-    * Trade-off:
-        * We take the benefit of reducing blocking latency for the cost of weaker guarantees.
-    * Disadvantages:
-        * The larger the buffer, the weaker the guarantee is on that channel.
-        * The weaker the guarantee, the less integrity and predictability you have in the exchange of information on that channel.
-        * Adds more complexity into the application.
-        * More care must be taken with designing, configuring and balancing the application.
+    * Send/Receive can block:
+        * Provides a weaker guarantee that information being exchanged has been delivered to another goroutine.
+        * Both goroutines making the exchange don’t need to be at the channel at the same time.
+        * Provides a lower level of integrity and predictability within channel communication.
+            * Integrity loss:
+                * Sending goroutine is still responsible for the information that is being exchanged. This is true until another goroutine receives it.
+                * The buffer creates risk for the sending goroutine because of the responsibility it maintains while losing control of the information.
+            * Predictability loss:
+                * The information is hidden and waiting to be rediscovered.
+        * Trade-off:
+            * We take the benefit of reducing blocking latency for the cost of weaker guarantees.
+        * Notes:
+            * The larger the buffer, the weaker the guarantee is on that channel.
+            * The weaker the guarantee, the less integrity and predictability you have in the exchange of information on that channel.
+            * Adds more complexity into the application.
+            * More care must be taken with designing, configuring and balancing the application.
+    * Send/Receive can't block:
+        * You get the full guarantee without the latency cost.
+        * A Fan Out pattern is an example of this.
 * Less is more with buffers:
     * Don’t think about performance when thinking about buffers.
     * Buffers can help to reduce blocking latency in the exchange of information.
