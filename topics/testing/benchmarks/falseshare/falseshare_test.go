@@ -13,17 +13,14 @@ import (
 // cnt represents a data value for our counter.
 type cnt struct {
 	counter int64
-
-	// Uncomment to put each counter on its own cache line.
-	// padding [7]int64
 }
 
 // Create an array of 8 counters.
 var countersPad [8]cnt
 
-// BenchmarkPad tests the performance of 8 goroutines
+// BenchmarkGlobal tests the performance of 8 goroutines
 // incrementing the global counter in parallel.
-func BenchmarkPad(b *testing.B) {
+func BenchmarkGlobal(b *testing.B) {
 
 	// Create and set the WaitGroup.
 	var wg sync.WaitGroup
