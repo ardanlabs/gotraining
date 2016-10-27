@@ -62,6 +62,8 @@ func testGet(ts *httptest.Server) func(*testing.T) {
 			t.Fatal("Mismatch")
 		}
 	}
+
+	return tf
 }
 
 // testPost validates the POST verb.

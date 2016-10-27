@@ -71,7 +71,7 @@ func PostHandler(res http.ResponseWriter, req *http.Request) {
 	var u User
 
 	// Decode the JSON from the Post data to the User value.
-	if err = schema.NewDecoder().Decode(&u, req.PostForm); err != nil {
+	if err := schema.NewDecoder().Decode(&u, req.PostForm); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
