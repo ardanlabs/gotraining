@@ -48,9 +48,12 @@ func main() {
 
 	// Get the Quantiles.
 	quant25 := stat.Quantile(0.25, stat.Empirical, sepalLength, nil)
+	quant50 := stat.Quantile(0.50, stat.Empirical, sepalLength, nil)
+	quant75 := stat.Quantile(0.75, stat.Empirical, sepalLength, nil)
 
 	// Output the results to standard out.
 	fmt.Printf("\nSepal Length Summary Statistics:\n")
 	fmt.Printf("25 Quantile: %0.2f\n", quant25)
-	//fmt.Printf("Std Dev value: %0.2f\n\n", stdDevVal)
+	fmt.Printf("50 Quantile: %0.2f\n", quant50)
+	fmt.Printf("75 Quantile: %0.2f\n\n", quant75)
 }
