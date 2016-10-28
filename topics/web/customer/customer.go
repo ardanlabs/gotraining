@@ -1,4 +1,7 @@
-package main
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+package customer
 
 import (
 	"errors"
@@ -12,17 +15,27 @@ import (
 // store in our database.
 type Customer struct {
 	ID   int
-	Name string
+	Name string `form:"name"`
 }
 
 // db represents our internal database system.
-type db struct {
+var db = struct {
 	customers map[int]Customer
 	lock      sync.Mutex
+}{
+	customers: map[int]Customer{},
 }
 
-// SaveCustomer stores a customer document in the database.
-func (db *db) SaveCustomer(c Customer) (int, error) {
+// Initalize the database with some values.
+func init() {
+	rand.Seed(time.Now().UnixNano())
+
+	Save(Customer{Name: "Mary Jane"})
+	Save(Customer{Name: "Bob Smith"})
+}
+
+// Save stores a customer document in the database.
+func Save(c Customer) (int, error) {
 	db.lock.Lock()
 	defer db.lock.Unlock()
 
@@ -49,8 +62,10 @@ func (db *db) SaveCustomer(c Customer) (int, error) {
 	return c.ID, nil
 }
 
-// FindCustomer locates a customer by id in the database.
-func (db *db) FindCustomer(id int) (Customer, error) {
+// Find locates a customer by id in the database.
+func Find(id int) (Customer, error) {
+	db.lock.Lock()
+	defer db.lock.Unlock()
 
 	// Locate the customer in the database.
 	c, found := db.customers[id]
@@ -61,8 +76,10 @@ func (db *db) FindCustomer(id int) (Customer, error) {
 	return c, nil
 }
 
-// AllCustomers returns the full database of customers.
-func (db *db) AllCustomers() []Customer {
+// All returns the full database of customers.
+func All() []Customer {
+	db.lock.Lock()
+	defer db.lock.Unlock()
 
 	// Allocate enough elements for the customers.
 	all := make([]Customer, len(db.customers))
@@ -75,17 +92,4 @@ func (db *db) AllCustomers() []Customer {
 
 	// Return the slice exlcusing index 0.
 	return all
-}
-
-// DB is an instance of the database.
-var DB = db{
-	customers: map[int]Customer{},
-}
-
-// Initalize the database with some values.
-func init() {
-	rand.Seed(time.Now().UnixNano())
-
-	DB.SaveCustomer(Customer{Name: "Mary Jane"})
-	DB.SaveCustomer(Customer{Name: "Bob Smith"})
 }
