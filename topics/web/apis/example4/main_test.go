@@ -1,3 +1,6 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
 // Tests for the sample program to show how to create a basic CRUD
 // based web api for customers with a middleware component.
 package main
@@ -10,6 +13,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/ardanlabs/gotraining/topics/web/customer"
 )
 
 func TestRoot(t *testing.T) {
@@ -69,7 +74,7 @@ func TestShowHandler(t *testing.T) {
 	defer ts.Close()
 
 	// Find customer 1 in the DB.
-	c1, err := DB.FindCustomer(1)
+	c1, err := customer.Find(1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -104,7 +109,7 @@ func TestCreateHandler(t *testing.T) {
 	defer ts.Close()
 
 	// Create a JSON document from this Customer value.
-	b, err := json.Marshal(Customer{Name: "Jane Doe"})
+	b, err := json.Marshal(customer.Customer{Name: "Jane Doe"})
 	if err != nil {
 		t.Fatal(err)
 	}

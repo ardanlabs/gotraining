@@ -1,99 +1,138 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Sample program to show how to use a regex to handle REST based
+// URL schemas and routes.
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
 	"regexp"
+	"strconv"
+
+	"github.com/ardanlabs/gotraining/topics/web/customer"
 )
 
-type router struct{}
+// App handles the routing of all the incoming customer
+// requests into the server.
+func App() http.Handler {
 
-func (r router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	// Log the request
-	log.Printf("[%s] %s\n", req.Method, req.URL.Path)
-
-	// Requests should match /customers/:id
+	// The regex allows us to match `/customers/:id`
 	rx := regexp.MustCompile(`^/([^/]+)/?(\d*)$`)
-	m := rx.FindAllStringSubmatch(req.URL.Path, -1)
-	if len(m) == 0 {
-		// Redirect to /customers if there isn't a match
-		http.Redirect(res, req, "/customers", http.StatusPermanentRedirect)
+
+	h := func(res http.ResponseWriter, req *http.Request) {
+		log.Printf("[%s] %s\n", req.Method, req.URL.Path)
+
+		// Validate we have a customer url.
+		m := rx.FindAllStringSubmatch(req.URL.Path, -1)
+		if len(m) == 0 {
+
+			// Redirect to `/customers` if there isn't a match.
+			http.Redirect(res, req, "/customers", http.StatusPermanentRedirect)
+			return
+		}
+
+		// Extract the id portion of the customer url, `/customers/:id`.
+		idStr := m[0][2]
+
+		switch {
+		case req.Method == "GET":
+
+			// Show the content of the requested customer.
+			if idStr != "" {
+				showHandler(res, req, idStr)
+				return
+			}
+
+			// Show the base index page.
+			indexHandler(res, req)
+			return
+
+		case req.Method == "POST":
+
+			// Show the create customer page.
+			createHandler(res, req)
+			return
+
+		// The request is not formatted properly.
+		default:
+
+			// The request does not conform to what we expect.
+			err := errors.New("invalid")
+			http.Error(res, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+
+	return http.HandlerFunc(h)
+}
+
+// indexHandler returns the entire list of customers in the DB.
+func indexHandler(res http.ResponseWriter, req *http.Request) {
+
+	// Retrieve the list of customers and render the document.
+	err := customer.T.ExecuteTemplate(res, "index.html", customer.All())
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+// createHandler adds new customers to the DB.
+func createHandler(res http.ResponseWriter, req *http.Request) {
+
+	// Parse the raw query from the URL and update r.Form.
+	if err := req.ParseForm(); err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	id := m[0][2]
+	// Create a customer to save.
+	c := customer.Customer{
+		Name: req.FormValue("name"),
+	}
 
-	// If the request is a GET and there is no ID we want to
-	// render the index template.
-	if req.Method == "GET" && id == "" {
-		indexHandler(res, req)
+	// Save the customer in the DB.
+	var err error
+	c.ID, err = customer.Save(c)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	// If the request is a POST we want to create a new customer
-	if req.Method == "POST" {
-		createHandler(res, req)
+	// Redirect the user to the customer page.
+	http.Redirect(res, req, fmt.Sprintf("/customers/%d", c.ID), http.StatusSeeOther)
+}
+
+// showHandler provides information about the specified customer.
+func showHandler(res http.ResponseWriter, req *http.Request, idStr string) {
+
+	// Convert the id to an integer.
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	// The rest of the actions all work on a specific customer.
 	// Find that customer in the database. If that customer does
 	// not exist, then return a 404 and stop processing the request.
-	c, err := Customers.Find(id)
+	c, err := customer.Find(id)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusNotFound)
 		return
 	}
 
-	// Switch on the request method (HTTP verb) and handle the verb
-	// appropriately.
-	switch req.Method {
-	case "GET":
-		// Render the show.html template to display the customer.
-		err := templates.ExecuteTemplate(res, "show.html", c)
-		if err != nil {
-			http.Error(res, err.Error(), http.StatusInternalServerError)
-		}
-		return
-	case "PUT", "PATCH":
-		// TODO: EXERCISE: Implement the PUT and PATCH response by accepting a
-		// "name" form value, assigning it to the customer, saving it back
-		// to the database, and then redirecting to the customer show page.
-		return
-	case "DELETE":
-		// TODO: EXERCISE: Implement the DELETE response by removing the
-		// customer from the database and then redirecting back to the index page.
-		return
-	default:
-		http.Error(res, fmt.Sprintf("unable to handle the HTTP method: %s", req.Method), http.StatusBadRequest)
-		return
-	}
-}
-
-func App() http.Handler {
-	return router{}
-}
-
-func indexHandler(res http.ResponseWriter, req *http.Request) {
-	err := templates.ExecuteTemplate(res, "index.html", Customers)
-	if err != nil {
+	// Render the show.html template to display the customer.
+	if err := customer.T.ExecuteTemplate(res, "show.html", c); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 	}
-}
-
-func createHandler(res http.ResponseWriter, req *http.Request) {
-	err := req.ParseForm()
-	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	c := &Customer{Name: req.FormValue("name")}
-	Customers.Save(c)
-	http.Redirect(res, req, fmt.Sprintf("/customers/%s", c.ID), http.StatusSeeOther)
 }
 
 func main() {
+
+	// Start the http server to handle the request for
+	// both versions of the API.
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }

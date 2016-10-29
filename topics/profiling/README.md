@@ -62,9 +62,9 @@ If lots of time is spent in GC component, the program either allocates too many 
 
 ## Rules of Performance 
 
-1) Never guess about performance.
-2) Measurements must be relevant.
-3) Profile before you decide something is performance critical.
+1) Never guess about performance.  
+2) Measurements must be relevant.  
+3) Profile before you decide something is performance critical.  
 4) Test to know you are correct. 
 
 ## Installing Tools

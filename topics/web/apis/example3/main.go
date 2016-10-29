@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ardanlabs/gotraining/topics/web/customer"
 	"github.com/gorilla/pat"
 )
 
@@ -36,7 +37,7 @@ func indexHandler(res http.ResponseWriter, req *http.Request) {
 
 	// Retrieve the list of customers, encode to JSON
 	// and send the response.
-	if err := json.NewEncoder(res).Encode(DB.AllCustomers()); err != nil {
+	if err := json.NewEncoder(res).Encode(customer.All()); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -55,7 +56,7 @@ func showHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Retreive that customer from the DB.
-	c, err := DB.FindCustomer(id)
+	c, err := customer.Find(id)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusNotFound)
 		return
@@ -72,7 +73,7 @@ func showHandler(res http.ResponseWriter, req *http.Request) {
 func createHandler(res http.ResponseWriter, req *http.Request) {
 
 	// Create a customer value.
-	var c Customer
+	var c customer.Customer
 
 	// Encode the customer document received into the customer value.
 	err := json.NewDecoder(req.Body).Decode(&c)
@@ -82,7 +83,7 @@ func createHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Save the customer in the DB.
-	c.ID, err = DB.SaveCustomer(c)
+	c.ID, err = customer.Save(c)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
