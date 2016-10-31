@@ -1,3 +1,8 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Tests for the sample program to show how to handle
+// forms with JSON.
 package main
 
 import (
@@ -5,65 +10,95 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"strings"
 	"testing"
 )
 
-func Test_App(t *testing.T) {
+func TestApp(t *testing.T) {
+
+	// Startup a server to handle processing these routes.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
-	t.Run("GET", test_Get(ts))
-	t.Run("POST", test_Post(ts))
+	// Create a sub-test for each verb.
+	t.Run("GET", testGet(ts))
+	t.Run("POST", testPost(ts))
 }
 
-func test_Get(ts *httptest.Server) func(*testing.T) {
-	return func(t *testing.T) {
+// testGet validates the GET verb.
+func testGet(ts *httptest.Server) func(*testing.T) {
+
+	// Test function for execution as a sub-test.
+	tf := func(t *testing.T) {
+
+		// Perform a GET call against the url.
 		res, err := http.Get(ts.URL)
 		if err != nil {
 			t.Fatal(err)
 		}
 
+		// Read in the response from the call.
 		b, err := ioutil.ReadAll(res.Body)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		act := string(b)
-		exp := "CLICK ME!!"
-		if !strings.Contains(act, exp) {
-			t.Fatalf("expected %s to contain %s", exp, act)
+		// Validate we received the correct document.
+		got := string(b)
+		want := `
+<form action="/" method="POST">
+<p>
+	<input type="text" name="FirstName" placeholder="First Name" />
+</p>
+<p>
+	<input type="text" name="LastName" placeholder="Last Name" />
+</p>
+<p>
+	<input type="submit" value="CLICK ME!!" />
+</p>
+</form>`
+		if got != want {
+			t.Log("Wanted:", want)
+			t.Log("Got   :", got)
+			t.Fatal("Mismatch")
 		}
 	}
+
+	return tf
 }
 
-func test_Post(ts *httptest.Server) func(*testing.T) {
-	return func(t *testing.T) {
+// testPost validates the POST verb.
+func testPost(ts *httptest.Server) func(*testing.T) {
+
+	// Test function for execution as a sub-test.
+	tf := func(t *testing.T) {
+
+		// Add form variables with expected values.
 		form := url.Values{
 			"FirstName": []string{"Mary"},
 			"LastName":  []string{"Jane"},
 		}
+
+		// Perform a POST call against the url.
 		res, err := http.PostForm(ts.URL, form)
 		if err != nil {
 			t.Fatal(err)
 		}
 
+		// Read in the response from the call.
 		b, err := ioutil.ReadAll(res.Body)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		act := string(b)
-
-		expectations := []string{
-			"First Name: Mary",
-			"Last Name: Jane",
-		}
-
-		for _, exp := range expectations {
-			if !strings.Contains(act, exp) {
-				t.Fatalf("expected %s to contain %s", act, exp)
-			}
+		// Validate we received the correct document.
+		got := string(b)
+		want := "First Name: Mary\nLast Name: Jane"
+		if got != want {
+			t.Log("Wanted:", want)
+			t.Log("Got   :", got)
+			t.Fatal("Mismatch")
 		}
 	}
+
+	return tf
 }

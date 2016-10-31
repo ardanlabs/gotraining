@@ -1,66 +1,101 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Sample program to show how to use the httprouter router.
 package main
 
 import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
+	"github.com/ardanlabs/gotraining/topics/web/customer"
 	"github.com/julienschmidt/httprouter"
 )
 
+// App loads the entire API set together for use.
 func App() http.Handler {
+
+	// Create a version of the pat router.
 	r := httprouter.New()
 
-	// Order matters
+	// Define the routes and order matters.
 	r.GET("/customers/:id", showHandler)
 	r.GET("/customers", indexHandler)
 	r.POST("/customers", createHandler)
 
-	// TODO: EXERCISE: Implement the PUT and PATCH response by accepting a
-	// "name" form value, assigning it to the customer, saving it back
-	// to the database, and then redirecting to the customer show page.
-	// r.POST("/customers/:id", updateHandler)
-
-	// TODO: EXERCISE: Implement the DELETE response by removing the
-	// customer from the database and then redirecting back to the index page.
-	// r.DELETE("/customers/:id", deleteHandler)
-
 	r.GET("/", indexHandler)
+
 	return r
 }
 
-func indexHandler(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	err := templates.ExecuteTemplate(res, "index.html", Customers)
+// indexHandler returns the entire list of customers in the DB.
+func indexHandler(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
+
+	// Retrieve the list of customers and render the document.
+	err := customer.T.ExecuteTemplate(res, "index.html", customer.All())
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 	}
 }
 
+// showHandler provides information about the specified customer.
 func showHandler(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	id := params.ByName("id")
-	c, err := Customers.Find(id)
+
+	// Capture the id from the request.
+	idStr := params.ByName("id")
+
+	// Convert the id to an integer.
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Find that customer in the database. If that customer does
+	// not exist, then return a 404 and stop processing the request.
+	c, err := customer.Find(id)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusNotFound)
 		return
 	}
-	err = templates.ExecuteTemplate(res, "show.html", c)
-	if err != nil {
+
+	// Render the show.html template to display the customer.
+	if err := customer.T.ExecuteTemplate(res, "show.html", c); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 	}
 }
 
-func createHandler(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	err := req.ParseForm()
+// createHandler adds new customers to the DB.
+func createHandler(res http.ResponseWriter, req *http.Request, p httprouter.Params) {
+
+	// Parse the raw query from the URL and update r.Form.
+	if err := req.ParseForm(); err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Create a customer to save.
+	c := customer.Customer{
+		Name: req.FormValue("name"),
+	}
+
+	// Save the customer in the DB.
+	var err error
+	c.ID, err = customer.Save(c)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	c := &Customer{Name: req.FormValue("name")}
-	Customers.Save(c)
-	http.Redirect(res, req, fmt.Sprintf("/customers/%s", c.ID), http.StatusSeeOther)
+	// Redirect the user to the customer page.
+	http.Redirect(res, req, fmt.Sprintf("/customers/%d", c.ID), http.StatusSeeOther)
 }
 
 func main() {
+
+	// Start the http server to handle the request for
+	// both versions of the API.
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }

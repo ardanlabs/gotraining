@@ -1,0 +1,13 @@
+#message {
+  font-size: 18px;
+  padding: 2px;
+  width: 50%;
+}
+
+#messages-block {
+  display: none;
+}
+
+#closed-connection h1 {
+  color: red;
+}

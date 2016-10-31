@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ardanlabs/gotraining/topics/web/customer"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
@@ -56,7 +57,7 @@ func indexHandler(ctx echo.Context) error {
 
 	// Retrieve the list of customers, encode to JSON
 	// and send the response.
-	if err := ctx.JSON(http.StatusOK, DB.AllCustomers()); err != nil {
+	if err := ctx.JSON(http.StatusOK, customer.All()); err != nil {
 		ctx.Error(err)
 		return err
 	}
@@ -77,7 +78,7 @@ func showHandler(ctx echo.Context) error {
 	}
 
 	// Retreive that customer from the DB.
-	c, err := DB.FindCustomer(id)
+	c, err := customer.Find(id)
 	if err != nil {
 		ctx.Error(err)
 		return err
@@ -96,7 +97,7 @@ func showHandler(ctx echo.Context) error {
 func createHandler(ctx echo.Context) error {
 
 	// Create a customer value.
-	var c Customer
+	var c customer.Customer
 
 	// Encode the customer document received into the customer value.
 	err := ctx.Bind(&c)
@@ -106,7 +107,7 @@ func createHandler(ctx echo.Context) error {
 	}
 
 	// Save the customer in the DB.
-	c.ID, err = DB.SaveCustomer(c)
+	c.ID, err = customer.Save(c)
 	if err != nil {
 		ctx.Error(err)
 		return err
