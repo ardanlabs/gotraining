@@ -6,13 +6,13 @@ By following Go’s idioms and a few guidelines, we can write code that can be r
 
 #### Quotes
 
-* "The hope is that the progress in hardware will cure all software ills. However, a critical observer may observe that software manages to outgrow hardware in size and sluggishness. Other observers had noted this for some time before, indeed the trend was becoming obvious as early as 1987." - Niklaus Wirth*
+_"The hope is that the progress in hardware will cure all software ills. However, a critical observer may observe that software manages to outgrow hardware in size and sluggishness. Other observers had noted this for some time before, indeed the trend was becoming obvious as early as 1987." - Niklaus Wirth_
 
-* "The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski*
+_"The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry." - Henry Petroski_
 
-* "The hardware folks will not put more cores into their hardware if the software isn’t going to use them, so, it is this balancing act of each other staring at each other, and we are hoping that Go is going to break through on the software side.” - Rick Hudson*
+_"The hardware folks will not put more cores into their hardware if the software isn’t going to use them, so, it is this balancing act of each other staring at each other, and we are hoping that Go is going to break through on the software side.” - Rick Hudson_
 
-* "C is the best balance I've ever seen between power and expressiveness. You can do almost anything you want to do by programming fairly straightforwardly and you will have a very good mental model of what's going to happen on the machine; you can predict reasonably well how quickly it's going to run, you understand what's going on .... - Brian Kernighan*
+_"C is the best balance I've ever seen between power and expressiveness. You can do almost anything you want to do by programming fairly straightforwardly and you will have a very good mental model of what's going to happen on the machine; you can predict reasonably well how quickly it's going to run, you understand what's going on .... - Brian Kernighan_
 
 #### Somewhere Along The Line
 
@@ -55,7 +55,7 @@ This is about not wasting effort and achieving execution efficiency. Writing cod
 **4) Micro-Optimization**  
 This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
-_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._
+**_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._**
 
 #### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
@@ -118,7 +118,7 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 
 #### Writing Concurrent Software
 
-_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._
+**_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
 Concurrency is about managing multiple things at once. Like one person washing the dishes while they are also cooking dinner. You're making progress on both but you're only ever doing one of those things at the same time. Parallelism is about doing multiple things at once. Like one person cooking and placing dirty dishes in the sink, while another washes the dishes. They are happening at the same time.
 
@@ -161,7 +161,7 @@ Both you and the runtime have a responsibility in managing the concurrency of th
 
 #### Channels
 
-_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._
+**_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
 Channels are for the orchestration and coordinate of goroutines. Channels accomplish this by synchronizing the sending and receiving of data between goroutines or by providing mechanisms to signal goroutines about events.
 
