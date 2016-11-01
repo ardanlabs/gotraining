@@ -68,3 +68,8 @@ The web is changing and users are expecting fast, dynamic, and interactive web a
 
 [Web Sockets](../../topics/web/sockets/README.md)
 
+## Authentication
+
+Learn several different techniques and packages for adding authentication to web apps.
+
+[Authentication](../../topics/web/auth/README.md)
