@@ -230,10 +230,14 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
+### 2017
+		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
+		===========================================================================================================
+		Corporate	Go			GNS Science		New Zealand				January 	Bill Kennedy
+
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
 		Free		Web			WWG				SF, CA					November	Mark Bates
 		Public		Data		Ardan			SF, CA					November	Daniel Whitenack
 		Public		Go			GothamGo		NYC, NY					November	Bill Kennedy
@@ -244,7 +248,6 @@ If you are interested in holding an event in your area please let me know. I wil
 		Free		Web			WWG				NYC, NY					November	Mark Bates
 		Corporate	Go			Skillsmatter	London, England			November	Ernesto Jimenez
 		Public		Web			Ardan			SF, CA					December	Mark Bates			https://www.eventbrite.com/e/ultimate-go-web-san-francisco-nov-2016-tickets-27326208425
-		Corporate	Go			GNS Science		New Zealand				December	Bill Kennedy
 		Corporate	Go			Viacom			NYC, NY					December	Bill Kennedy		
 
 											Completed
@@ -284,6 +287,8 @@ If you are interested in holding an event in your area please let me know. I wil
 		Corporate	Go			Traderev		Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
 		Public		Go			dotGo			Paris, France			October		Ernesto Jimenez
 		Public		Kubernetes	OSCON 			London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
+		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
+
 
 ### Past Years
 
