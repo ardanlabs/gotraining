@@ -1,37 +1,61 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Tests for the sample program to show how to use the JSON encoder.
 package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"strings"
 	"testing"
 )
 
-func Test_EncodeUser_Blank(t *testing.T) {
-	bb := &bytes.Buffer{}
-	err := EncodeUser(bb, User{})
+func TestEncodeZeroValueUser(t *testing.T) {
+
+	// Create a bytes buffer for our writer.
+	var bb bytes.Buffer
+
+	// Encode a zero value user and write the JSON
+	// to the bytes buffer.
+	err := json.NewEncoder(&bb).Encode(&User{})
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	act := strings.TrimSpace(bb.String())
-	exp := `{"first_name":"","CreatedAt":"0001-01-01T00:00:00Z","Admin":false,"Bio":null}`
-
-	if act != exp {
-		t.Fatalf("expected %s to equal '%s'", exp, act)
+	// Validate we received the expected response.
+	got := strings.TrimSpace(bb.String())
+	want := `{"first_name":"","CreatedAt":"0001-01-01T00:00:00Z","Admin":false,"Bio":null}`
+	if got != want {
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
+		t.Fatal("Mismatch")
 	}
 }
 
-func Test_EncodeUser_WithData(t *testing.T) {
-	bb := &bytes.Buffer{}
-	err := EncodeUser(bb, User{FirstName: "Mary", LastName: "Jane"})
+func TestEncodeUser(t *testing.T) {
+
+	// Create a bytes buffer for our writer.
+	var bb bytes.Buffer
+
+	// Create a user value for Mary Jane.
+	u := User{
+		FirstName: "Mary",
+		LastName:  "Jane",
+	}
+
+	// Encode the user and write the JSON to the bytes buffer.
+	err := json.NewEncoder(&bb).Encode(&u)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	act := strings.TrimSpace(bb.String())
-	exp := `{"first_name":"Mary","LastName":"Jane","CreatedAt":"0001-01-01T00:00:00Z","Admin":false,"Bio":null}`
-
-	if act != exp {
-		t.Fatalf("expected %s to equal '%s'", exp, act)
+	// Validate we received the expected response.
+	got := strings.TrimSpace(bb.String())
+	want := `{"first_name":"Mary","LastName":"Jane","CreatedAt":"0001-01-01T00:00:00Z","Admin":false,"Bio":null}`
+	if got != want {
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
+		t.Fatal("Mismatch")
 	}
 }
