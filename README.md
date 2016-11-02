@@ -233,7 +233,8 @@ If you are interested in holding an event in your area please let me know. I wil
 ### 2017
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Corporate	Go			GNS Science		New Zealand				January 	Bill Kennedy
+		Corporate	Go			GNS Science		Wellington, NZ 			January 	Bill Kennedy
+		Public 		Adv Go 		GopherCon India Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/ 
 
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
