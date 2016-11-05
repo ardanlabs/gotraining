@@ -7,7 +7,6 @@ package unit
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -40,14 +39,7 @@ func Test_App(t *testing.T) {
 	// Execute the handler from the application value.
 	a.ServeHTTP(res, req)
 
-	// Read in the response from the call.
-	b, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Validate we received all the known customers.
-	got := string(b)
+	got := res.Body.String()
 	want := "Hello World!"
 	if got != want {
 		t.Log("Wanted:", want)

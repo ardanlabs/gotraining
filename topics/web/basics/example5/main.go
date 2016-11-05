@@ -68,8 +68,8 @@ func call(count int, f func(index int)) {
 
 	for i := 0; i < count; i++ {
 		go func(index int) {
+			defer w.Done()
 			f(index)
-			w.Done()
 		}(i)
 	}
 
