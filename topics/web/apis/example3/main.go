@@ -89,11 +89,14 @@ func createHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// Encode the customer to JSON and send the response.
-	if err := json.NewEncoder(res).Encode(&c); err != nil {
+	b, err := json.Marshal(&c)
+	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	res.WriteHeader(http.StatusCreated)
+	res.Write(b)
 }
 
 func main() {
