@@ -15,8 +15,8 @@ https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-Versioning: [Code](example1/main.go) | [Test](example1/main_test.go)
-Route Versioning: [Code](example2/main.go) | [Test](example2/main_test.go)
+Route Versioning: [Code](example1/main.go) | [Test](example1/main_test.go)
+Header Versioning: [Code](example2/main.go) | [Test](example2/main_test.go)
 CRUD: [Code](example3/main.go) | [Test](example3/main_test.go)
 Middleware: [Code](example4/main.go) | [Test](example4/main_test.go)
 

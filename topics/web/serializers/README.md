@@ -10,15 +10,15 @@ Learn the basics of using and applying custom JSON and XML serializers.
 
 ## Links
 
-https://golang.org/pkg/net/http/  
-https://golang.org/doc/articles/wiki/  
+https://golang.org/pkg/net/http/
+https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-JSON Encoding: [Code](example1/main.go) | [Test](example1/main_test.go)  
-MarshalJSON Interface: [Code](example2/main.go) | [Test](example2/main_test.go)    
-XML Encoding: [Code](example3/main.go) | [Test](example3/main_test.go)    
-MarshalXML Interface: [Code](example4/main.go) | [Test](example4/main_test.go)    
+JSON Encoding: [Code](example1/main.go) | [Test](example1/main_test.go)
+MarshalJSON Interface: [Code](example2/main.go) | [Test](example2/main_test.go)
+XML Encoding: [Code](example3/main.go) | [Test](example3/main_test.go)
+MarshalXML Interface: [Code](example4/main.go) | [Test](example4/main_test.go)
 
 ## Exercises
 

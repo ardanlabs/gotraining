@@ -27,8 +27,8 @@ func App() http.Handler {
 	n := negroni.New()
 
 	// Add the two middleware handlers.
-	n.Use(negroni.HandlerFunc(logger))
-	n.Use(negroni.HandlerFunc(fooHeader))
+	n.UseFunc(logger)
+	n.UseFunc(fooHeader)
 
 	// Apply the mux to negroni.
 	n.UseHandler(m)

@@ -10,17 +10,17 @@ Learn the basics of using some of the more popular routers and routing support.
 
 ## Links
 
-https://golang.org/pkg/net/http/  
-https://golang.org/doc/articles/wiki/  
-github.com/gorilla/pat  
-github.com/julienschmidt/httprouter  
-github.com/labstack/echo  
+https://golang.org/pkg/net/http/
+https://golang.org/doc/articles/wiki/
+github.com/gorilla/pat
+github.com/julienschmidt/httprouter
+github.com/labstack/echo
 
 ## Code Review
 
-Pat router: [Code](example1/main.go) | [Test](example1/main_test.go)  
-Httprouter router: [Code](example2/main.go) | [Test](example2/main_test.go)  
-Echo router: [Code](example3/main.go) | [Test](example3/main_test.go)  
+Pat router: [Code](example1/main.go) | [Test](example1/main_test.go)
+Httprouter router: [Code](example2/main.go) | [Test](example2/main_test.go)
+Echo router: [Code](example3/main.go) | [Test](example3/main_test.go)
 
 ## Exercises
 

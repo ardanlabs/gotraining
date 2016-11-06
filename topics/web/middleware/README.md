@@ -10,14 +10,14 @@ Learn the basics of using and applying middleware.
 
 ## Links
 
-https://golang.org/pkg/net/http/  
-https://golang.org/doc/articles/wiki/  
-github.com/urfave/negroni    
+https://golang.org/pkg/net/http/
+https://golang.org/doc/articles/wiki/
+github.com/urfave/negroni
 
 ## Code Review
 
-Basic middleware: [Code](example1/main.go) | [Test](example1/main_test.go)  
-Negroni router: [Code](example2/main.go) | [Test](example2/main_test.go)    
+Basic middleware: [Code](example1/main.go) | [Test](example1/main_test.go)
+Negroni router: [Code](example2/main.go) | [Test](example2/main_test.go)
 
 ## Exercises
 
