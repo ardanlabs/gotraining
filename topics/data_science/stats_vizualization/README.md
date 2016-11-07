@@ -14,10 +14,10 @@ Although summary statistics are very useful and should be utilized to describe d
 ## Code Review
 
 [github.com/gonum/plot docs](https://godoc.org/github.com/gonum/plot)  
-[Histogram of a Normal Distribution](example1/example1.go)  
-[Histograms with Real Data](example2/example2.go)  
-[Box Plot with a Normal Distribution](example3/example3.go)  
-[Box Plots with Real Data](example4/example4.go)    
+[Histogram of a normal distribution](example1/example1.go)  
+[Histograms with real data](example2/example2.go)  
+[Box Plot with various distribution](example3/example3.go)  
+[Box Plots with real data](example4/example4.go)    
 
 ## Exercises
 

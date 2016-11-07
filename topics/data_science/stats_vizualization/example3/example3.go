@@ -4,10 +4,11 @@
 // go build
 // ./example3
 
-// Sample program to generate a box plot of a normal distribution.
+// Sample program to generate a box plot of example distributions.
 package main
 
 import (
+	"log"
 	"math/rand"
 
 	"github.com/gonum/plot"
@@ -39,18 +40,18 @@ func main() {
 	p.Y.Label.Text = "Values"
 
 	// Make boxes for our data and add them to the plot.
-	w := vg.Points(20)
+	w := vg.Points(50)
 	b0, err := plotter.NewBoxPlot(w, 0, uniform)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	b1, err := plotter.NewBoxPlot(w, 1, normal)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	b2, err := plotter.NewBoxPlot(w, 2, expon)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	p.Add(b0, b1, b2)
 
@@ -60,6 +61,6 @@ func main() {
 		"Exponential\nDistribution")
 
 	if err := p.Save(6*vg.Inch, 8*vg.Inch, "boxplot.png"); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
