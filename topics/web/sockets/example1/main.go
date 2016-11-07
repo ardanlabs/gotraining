@@ -6,7 +6,6 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 	"path"
@@ -33,40 +32,29 @@ func socketHandler(ws *websocket.Conn) {
 	log.Println("Connection established")
 	defer log.Println("Connection dropped")
 
-	// Create a buffer for use processing messages.
-	msg := make([]byte, 512)
-
 	// Maintain a read loop until the connection is
 	// broken or lost.
 	for {
 
-		// Read a frame of data from the WebSocket connection.
-		// If msg is not large enough for the frame data, it fills
-		// the msg and next Read will read the rest of the frame data.
-		n, err := ws.Read(msg)
+		// Read one message.
+		var data string
+		err := websocket.JSON.Receive(ws, &data)
 		if err != nil {
 			log.Println(err)
 			break
 		}
 
-		// If we received any data process it.
-		if n > 0 {
+		// Create a message and store the data.
+		msg := Message{
+			Original:  data,
+			Formatted: strings.ToUpper(data),
+			Received:  time.Now(),
+		}
 
-			// Convert the bytes we received to a string.
-			data := string(msg[:n])
-
-			// Create a message and store the data.
-			msg := Message{
-				Original:  data,
-				Formatted: strings.ToUpper(data),
-				Received:  time.Now(),
-			}
-
-			// Encode the message to JSON and send it back.
-			if err := json.NewEncoder(ws).Encode(&msg); err != nil {
-				log.Println(err)
-				break
-			}
+		// Encode the message to JSON and send it back.
+		if err := websocket.JSON.Send(ws, msg); err != nil {
+			log.Println(err)
+			break
 		}
 	}
 }
