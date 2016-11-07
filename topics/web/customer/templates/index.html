@@ -1,0 +1,28 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ultimate Web - Customers</title>
+</head>
+<body>
+  <h1>Customers</h1>
+  <ul>
+    {{range $customer := .}}
+      <li>
+        <a href="/customers/{{$customer.ID}}">{{$customer.ID}} - {{$customer.Name}}</a>
+      </li>
+    {{end}}
+  </ul>
+  <div>
+    <h2>New Customer</h2>
+    <form action="/customers" method="POST" accept-charset="utf-8">
+      <p>
+        <label for="Name">Name</label>
+        <input type="text" name="name" id="name" value="" />
+      </p>
+      <p>
+        <input type="submit" value="Create!" />
+      </p>
+    </form>
+  </div>
+</body>
+</html>

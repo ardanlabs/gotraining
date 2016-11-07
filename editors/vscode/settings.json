@@ -1,16 +1,46 @@
-// Place your settings in this file to overwrite the default settings
 {
-    "editor.fontSize": 14,
-    "editor.wrappingColumn": 300,
-    "editor.tabSize": 4,
-    "editor.insertSpaces": false,
-	"editor.quickSuggestions": false,
-    
-	"go.buildOnSave": true,
-    "go.lintOnSave": true,
-    "go.vetOnSave": true,
-	"go.formatTool": "gofmt",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+
     "go.formatOnSave": true,
+    "go.buildOnSave": true,
+    "go.lintOnSave": true,
+    "go.lintTool": "golint",
+    "go.vetOnSave": true,
+    "go.buildFlags": ["-i"],
+    "go.lintFlags": [],
+    "go.vetFlags": [],
+    "go.coverOnSave": false,
+    "go.useCodeSnippetsOnFunctionSuggest": false,
     "go.goroot": "/usr/local/go",
-    "go.gopath": "/Users/bill/code/go"
+    "go.gopath": "/Users/bill/code/go",
+    "go.formatTool": "goreturns",
+    "go.gocodeAutoBuild": true,
+
+    "editor.fontSize": 14,
+    "editor.formatOnType": true,
+    "editor.mouseWheelZoom": true,
+    "editor.rulers": [80,120],
+    "editor.trimAutoWhitespace": true,
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/dist/public": true,
+        "**/tmp": true,
+        "**/tags": true,
+        "**/public/dist": true,
+        "**/.vscode": true
+    },
+    "files.trimTrailingWhitespace": false,
+
+    "spellchecker.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
+
+    "spellchecker.ignoreFileExtensions": [
+        ".go"
+    ]
 }

@@ -21,16 +21,13 @@ Cobra is both a library for creating powerful modern CLI applications as well as
 
 ## Links
 
-https://github.com/spf13/cobra
-
-http://spf13.com/post/announcing-cobra/
+https://github.com/spf13/cobra  
+http://spf13.com/post/announcing-cobra
 
 ## Code Review
 
-[main](main.go)
-
-[commands](cmduser/commands.go)
-
+[main](main.go)  
+[commands](cmduser/commands.go)  
 [create command](cmduser/create.go)
 
 ## Exercises

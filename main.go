@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"strings"
 
 	"github.com/theplant/blackfriday"
@@ -36,6 +38,14 @@ func main() {
 				return
 			}
 		} else if strings.HasSuffix(r.URL.Path, ".go") {
+
+			// Do we want to run code or render it?
+			if strings.HasPrefix(r.URL.Path, "/run") {
+				if err := runCode(rw, r.URL.Path[5:]); err != nil {
+					log.Println("Error:", err)
+				}
+				return
+			}
 			if err := renderCode(rw, r.URL.Path[1:]); err != nil {
 				return
 			}
@@ -68,6 +78,29 @@ func renderCode(rw http.ResponseWriter, name string) error {
 		return err
 	}
 
-	Render.HTML(rw, 200, "code", string(data))
+	d := struct {
+		Code string
+		File string
+	}{
+		Code: string(data),
+		File: name,
+	}
+
+	Render.HTML(rw, 200, "code", d)
+	return nil
+}
+
+func runCode(rw http.ResponseWriter, name string) error {
+	log.Println("Running file", name)
+
+	cmd := exec.Command("go", "run", name)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		http.Error(rw, string(out), http.StatusInternalServerError)
+		return err
+	}
+
+	rw.Write(out)
+
 	return nil
 }
