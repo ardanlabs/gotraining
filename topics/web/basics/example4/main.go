@@ -24,8 +24,8 @@ func (a App) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	a.h(res, req)
 }
 
-// myHander handles the implementation of the request.
-func myHander(res http.ResponseWriter, req *http.Request) {
+// myHandler handles the implementation of the request.
+func myHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(res, "Hello World!")
 }
 
@@ -42,7 +42,7 @@ func main() {
 
 	// Bind a new App handler to the root route using
 	// the provided handler function to process requests.
-	m.Handle("/", wrap(myHander))
+	m.Handle("/", wrap(myHandler))
 
 	// Start the http server to handle the request.
 	log.Panic(http.ListenAndServe(":3000", m))

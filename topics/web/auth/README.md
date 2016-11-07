@@ -1,6 +1,6 @@
-## Web - Web Sockets
+## Web - Authentication
 
-The web is changing and users are expecting fast, dynamic, and interactive web applications. Web Sockets allow for direct two-way communication between the front-end (JavaScript/HTML) and the back-end (Go).
+Learn several different techniques and packages for adding authentication to web apps.
 
 ## Notes
 
@@ -12,12 +12,12 @@ The web is changing and users are expecting fast, dynamic, and interactive web a
 
 https://golang.org/pkg/net/http/  
 https://golang.org/doc/articles/wiki/  
-http://www.gorillatoolkit.org/pkg/websocket  
+https://github.com/markbates/goth   
 
 ## Code Review
 
-Google websockets: [Code](example1/main.go) | [Test](example1/main_test.go)  
-Gorilla websockets: [Code](example2/main.go) | [Test](example2/main_test.go)  
+HTTP Basic Authentication: [Code](example1/main.go) | [Test](example1/main_test.go)  
+Authentication with Goth: [Code](example2/main.go) | [Test](example2/main_test.go)  
 
 ## Exercises
 

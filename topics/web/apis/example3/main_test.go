@@ -126,7 +126,7 @@ func TestCreateHandler(t *testing.T) {
 	// Validate we received all the known customers.
 	got := string(b)
 	want := `{"ID":3,"Name":"Jane Doe"}`
-	if got[:len(got)-1] != want {
+	if got != want {
 		t.Log("Wanted:", want)
 		t.Log("Got   :", got)
 		t.Fatal("Mismatch")

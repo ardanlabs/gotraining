@@ -6,7 +6,6 @@ package unit
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -32,14 +31,8 @@ func Test_MyHandler(t *testing.T) {
 	// Execute the handler function direction.
 	MyHandler(res, req)
 
-	// Read in the response from the call.
-	b, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	// Validate we received all the known customers.
-	got := string(b)
+	got := res.Body.String()
 	want := "Hello World!"
 	if got != want {
 		t.Log("Wanted:", want)

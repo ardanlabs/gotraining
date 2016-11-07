@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 // html represents the template asking for data substitution.
@@ -30,9 +31,10 @@ Aliases:
 
 // User represents user data.
 type User struct {
-	First   string
-	Last    string
-	Aliases []string
+	First     string
+	Last      string
+	CreatedAt time.Time
+	Aliases   []string
 }
 
 // FullName provides template support for formatting
@@ -48,8 +50,9 @@ func Exec(w io.Writer) error {
 	// A FuncMap is a map of functions that are bound
 	// to a name for template processing.
 	funcs := template.FuncMap{
-		"upper": func(s string) string {
-			return strings.ToUpper(s)
+		"upper": strings.ToUpper,
+		"fdate": func(t time.Time) string {
+			return t.Format(time.RubyDate)
 		},
 	}
 
@@ -62,9 +65,10 @@ func Exec(w io.Writer) error {
 
 	// Create a value of type user.
 	u := User{
-		First:   "Mary",
-		Last:    "Smith",
-		Aliases: []string{"Scarface", "MC Skat Kat"},
+		First:     "Mary",
+		Last:      "Smith",
+		CreatedAt: time.Now(),
+		Aliases:   []string{"Scarface", "MC Skat Kat"},
 	}
 
 	// Execute the parsed template writing the output to

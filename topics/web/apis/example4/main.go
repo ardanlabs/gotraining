@@ -57,12 +57,7 @@ func indexHandler(ctx echo.Context) error {
 
 	// Retrieve the list of customers, encode to JSON
 	// and send the response.
-	if err := ctx.JSON(http.StatusOK, customer.All()); err != nil {
-		ctx.Error(err)
-		return err
-	}
-
-	return nil
+	return ctx.JSON(http.StatusOK, customer.All())
 }
 
 // showHandler returns a single specified customer.
@@ -73,24 +68,17 @@ func showHandler(ctx echo.Context) error {
 
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		ctx.Error(err)
-		return err
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
 	// Retreive that customer from the DB.
 	c, err := customer.Find(id)
 	if err != nil {
-		ctx.Error(err)
-		return err
+		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
 
 	// Encode the customer to JSON and send the response.
-	if err := ctx.JSON(http.StatusOK, c); err != nil {
-		ctx.Error(err)
-		return err
-	}
-
-	return nil
+	return ctx.JSON(http.StatusOK, c)
 }
 
 // createHandler adds new customers to the DB.
@@ -109,17 +97,11 @@ func createHandler(ctx echo.Context) error {
 	// Save the customer in the DB.
 	c.ID, err = customer.Save(c)
 	if err != nil {
-		ctx.Error(err)
-		return err
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, err.Error())
 	}
 
 	// Encode the customer to JSON and send the response.
-	if err := ctx.JSON(http.StatusOK, c); err != nil {
-		ctx.Error(err)
-		return err
-	}
-
-	return nil
+	return ctx.JSON(http.StatusOK, c)
 }
 
 func main() {

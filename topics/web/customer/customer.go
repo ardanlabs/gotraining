@@ -62,6 +62,29 @@ func Save(c Customer) (int, error) {
 	return c.ID, nil
 }
 
+func Update(c Customer) error {
+	db.lock.Lock()
+	defer db.lock.Unlock()
+
+	if _, ok := db.customers[c.ID]; !ok {
+		return fmt.Errorf("customer with ID %d does not exist", c.ID)
+	}
+
+	db.customers[c.ID] = c
+	return nil
+}
+
+func Delete(c Customer) error {
+	db.lock.Lock()
+	defer db.lock.Unlock()
+
+	if _, ok := db.customers[c.ID]; !ok {
+		return fmt.Errorf("customer with ID %d does not exist", c.ID)
+	}
+	delete(db.customers, c.ID)
+	return nil
+}
+
 // Find locates a customer by id in the database.
 func Find(id int) (Customer, error) {
 	db.lock.Lock()

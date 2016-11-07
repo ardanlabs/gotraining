@@ -63,7 +63,7 @@ func UploadHandler(res http.ResponseWriter, req *http.Request) {
 	os.MkdirAll(uploadDir, 0777)
 
 	// Generate a file name for the uploaded file.
-	filename := fmt.Sprintf("%s/%s", uploadDir, handler.Filename)
+	filename := path.Join(uploadDir, handler.Filename)
 
 	// Create the new file we need for the uploaded file.
 	outfile, err := os.Create(filename)

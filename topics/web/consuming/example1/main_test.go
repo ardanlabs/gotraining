@@ -1,3 +1,8 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Tests to show how to consume a web API using the default http
+// support in the standard library.
 package main
 
 import (
@@ -9,32 +14,45 @@ import (
 	"testing"
 )
 
+// App returns a handler that can be used to mock the GET call.
 func App() http.Handler {
-	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+
+	// Handler function will be used for mocking.
+	h := func(res http.ResponseWriter, req *http.Request) {
 		json.NewEncoder(res).Encode(map[string]string{
 			"first_name": "Mary",
 			"last_name":  "Jane",
 		})
-	})
+	}
+
+	// Return the handler function.
+	return http.HandlerFunc(h)
 }
 
-func Test_App(t *testing.T) {
+func TestApp(t *testing.T) {
+
+	// Startup a server to handle processing these routes.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
+	// Perform the GET request for our mock handler.
 	res, err := http.Get(ts.URL)
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	// Read in the response from the api call.
 	b, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	act := strings.TrimSpace(string(b))
-	exp := `{"first_name":"Mary","last_name":"Jane"}`
-	if act != exp {
-		t.Fatalf("Expected %s to equal %s", act, exp)
+	// Validate we received the expected response.
+	got := strings.TrimSpace(string(b))
+	want := `{"first_name":"Mary","last_name":"Jane"}`
+	if got != want {
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
+		t.Fatal("Mismatch")
 	}
 }

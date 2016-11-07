@@ -13,15 +13,15 @@ Now that we have some code written, let’s start understanding how to test HTTP
 
 [Testing](../../topics/web/testing/README.md)
 
-## HTML Templates
-We can now write primitive web apps, as well as test them. Now we need to start adding some meat to it. This section covers generating HTML using Go templates, as well as how to serve up static files, and how to bundle those files in a finished binary.
-
-[Templates](../../topics/web/templates/README.md)
-
 ## POST Requests
 HTTP applications don’t just serve content, they also take in content. We’ll branch out of GET requests and start taking in POST requests, processing forms, handling file uploads, and of course, how to test all of this.
 
 [Post Requests](../../topics/web/posts/README.md)
+
+## HTML Templates
+We can now write primitive web apps, as well as test them. Now we need to start adding some meat to it. This section covers generating HTML using Go templates, as well as how to serve up static files, and how to bundle those files in a finished binary.
+
+[Templates](../../topics/web/templates/README.md)
 
 ## Sessions and Cookies
 Managing sessions and cookies is an important part of every web application. Whether it's keeping a user "logged in" or tracking who visits your site, these concepts are essential to learn.
@@ -68,3 +68,8 @@ The web is changing and users are expecting fast, dynamic, and interactive web a
 
 [Web Sockets](../../topics/web/sockets/README.md)
 
+## Authentication
+
+Learn several different techniques and packages for adding authentication to web apps.
+
+[Authentication](../../topics/web/auth/README.md)

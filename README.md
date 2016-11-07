@@ -230,21 +230,25 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 
 If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
 
+### 2017
+		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
+		===========================================================================================================
+		Corporate	Go			GNS Science		Wellington, NZ 			January 	Bill Kennedy
+		Public 		Adv Go 		GopherCon India Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/ 
+
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
 		Free		Web			WWG				SF, CA					November	Mark Bates
 		Public		Data		Ardan			SF, CA					November	Daniel Whitenack
 		Public		Go			GothamGo		NYC, NY					November	Bill Kennedy
-		Public		Go			Dev Fest		NYC, NY					November	Bill Kennedy
+		Public		Go			Dev Fest		NYC, NY					November	Bill Kennedy 		https://generalassemb.ly/education/devfestnyc-ultimate-go-training/new-york-city/30237
+		Free		Web			WWG				NYC, NY					November	Mark Bates 			https://generalassemb.ly/education/ultimate-go-web-edition/new-york-city/30692
 		Public		Data		GDG DevFest		Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
-		Public		Data		H2O.ai 			Mountain View, CA		November	Daniel Whitenack
 		Corporate	Go			Hootsuite		Vancouver, Canada		November	Bill Kennedy
-		Free		Web			WWG				NYC, NY					November	Mark Bates
 		Corporate	Go			Skillsmatter	London, England			November	Ernesto Jimenez
+		Corporate	Go			CISCO 			San Jose, CA 			November	Cory LaNou
 		Public		Web			Ardan			SF, CA					December	Mark Bates			https://www.eventbrite.com/e/ultimate-go-web-san-francisco-nov-2016-tickets-27326208425
-		Corporate	Go			GNS Science		New Zealand				December	Bill Kennedy
 		Corporate	Go			Viacom			NYC, NY					December	Bill Kennedy		
 
 											Completed
@@ -284,6 +288,8 @@ If you are interested in holding an event in your area please let me know. I wil
 		Corporate	Go			Traderev		Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
 		Public		Go			dotGo			Paris, France			October		Ernesto Jimenez
 		Public		Kubernetes	OSCON 			London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
+		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
+
 
 ### Past Years
 
