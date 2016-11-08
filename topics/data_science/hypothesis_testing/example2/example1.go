@@ -4,10 +4,13 @@
 // go build
 // ./example1
 
-// Sample program to calculate expected values.
+// Sample program to calculate a chi-squared value.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // This example program calculates the chi-squared test statistic relevant to
 // the following example problem from here:
@@ -58,8 +61,12 @@ func main() {
 		totalObserved * 0.15,
 	}
 
-	// Output the expected values to standard out.
-	fmt.Printf("\nExpected # that don't regularly exercise: %0.0f\n", expected[0])
-	fmt.Printf("Expected # that sporatically exercise: %0.0f\n", expected[1])
-	fmt.Printf("Expected # that regularly exercise: %0.0f\n\n", expected[2])
+	// Calculate the chi-squared test statistic.
+	var chiSquared float64
+	for idx, val := range observed {
+		chiSquared += math.Pow(val-expected[idx], 2.0) / expected[idx]
+	}
+
+	// Output the test statistic to standard out.
+	fmt.Printf("\nChi-squared: %0.2f\n\n", chiSquared)
 }
