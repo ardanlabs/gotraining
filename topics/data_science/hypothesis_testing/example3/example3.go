@@ -82,5 +82,5 @@ func main() {
 	}
 
 	// Output the test results to standard out.
-	fmt.Printf("\nOut hypothesis is: %t\n\n", result)
+	fmt.Printf("\nOur hypothesis is: %t\n\n", result)
 }

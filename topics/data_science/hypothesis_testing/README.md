@@ -13,7 +13,7 @@ While working as a data scientist, you will encounter the need to test many hypo
 [Chi-Squared Table](http://sites.stat.psu.edu/~mga/401/tables/Chi-square-table.pdf)   
 [Calculate Expected Frequencies](example1/example1.go)   
 [Calculate Chi-squared Test Statistic](example2/example2.go)  
-[Calculate the p-value](example3/example3.go)   
+[Output the Result of the Test](example3/example3.go)   
 
 
 ## Exercises
