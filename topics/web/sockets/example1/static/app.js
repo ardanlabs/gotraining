@@ -29,7 +29,7 @@ connect();
 function sendMessage(e) {
   el = document.getElementById("message");
   val = el.value;
-  ws.send(val);
+  ws.send(JSON.stringify(val));
   el.value = "";
   el.focus();
   return false;
