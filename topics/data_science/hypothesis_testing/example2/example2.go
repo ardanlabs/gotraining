@@ -2,7 +2,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // go build
-// ./example1
+// ./example2
 
 // Sample program to calculate a chi-squared value.
 package main
