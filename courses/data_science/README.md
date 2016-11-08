@@ -23,5 +23,10 @@ This material covers statistical measures and operations key to day-to-day data 
 
 [Statistics and Aggregation](statistics/README.md)
 
+## Prediction
+This material introduces various types of machine learning along with evaluation and validation techniques.  Once you are done with this material you will understand how to train, evaluate, validate, and utilize various models (e.g., for regression, clustering, and classification).
+
+[Prediction](prediction/README.md)
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
