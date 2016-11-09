@@ -89,6 +89,7 @@ func createHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	// Encode the customer to JSON and send the response.
 	b, err := json.Marshal(&c)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
