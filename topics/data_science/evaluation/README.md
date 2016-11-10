@@ -11,6 +11,10 @@ Being able to properly evaluate a model is essential. Without evaluation, the mo
 ## Code Review
 
 [Calculate R2 (Coefficient of Determination)](example1/example1.go)  
+[Calculate Mean Absolute Error](example2/example2.go)   
+[Caclulate Accuracy](example3/example3.go)   
+[Caclulate Precision](example4/example4.go)   
+[Caclulate Recall](example5/example5.go) 
 
 ## Exercises
 
