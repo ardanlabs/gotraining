@@ -2,9 +2,9 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // go build
-// ./example1
+// ./example2
 
-// Sample program to calculate an R^2 value.
+// Sample program to calculate a mean squared error.
 package main
 
 import (
@@ -12,10 +12,9 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"os"
 	"strconv"
-
-	"github.com/gonum/stat"
 )
 
 func main() {
@@ -67,9 +66,12 @@ func main() {
 		line++
 	}
 
-	// Calculate the R^2 value.
-	rSquared := stat.RSquaredFrom(observed, predicted, nil)
+	// Calculate the mean absolute error.
+	var mAE float64
+	for idx, oVal := range observed {
+		mAE += math.Abs(oVal-predicted[idx]) / float64(len(observed))
+	}
 
-	// Output the R^2 value to standard out.
-	fmt.Printf("\nR^2 = %0.2f\n\n", rSquared)
+	// Output the MAE value to standard out.
+	fmt.Printf("\nMAE = %0.2f\n\n", mAE)
 }
