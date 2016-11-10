@@ -25,7 +25,7 @@ from [Cambridge Coding Academy](https://blog.cambridgecoding.com/2016/03/24/misl
 
 ### The 3rd Data Set
 
-![alt tag](3_data_sets.png)   
+![alt tag](3_data_sets.jpg)   
 from [here](http://www.intechopen.com/books/advances-in-data-mining-knowledge-discovery-and-applications/selecting-representative-data-sets)
 
 ## Cross Validation
