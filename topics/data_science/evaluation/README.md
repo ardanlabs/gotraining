@@ -10,7 +10,7 @@ Being able to properly evaluate a model is essential. Without evaluation, the mo
 
 ## Code Review
 
-[Mean squared error](example1/example1.go)  
+[Calculate R2 (Coefficient of Determination)](example1/example1.go)  
 
 ## Exercises
 
