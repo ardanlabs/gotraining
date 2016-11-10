@@ -8,12 +8,12 @@ Even if you evaluate a model, how can you have any confidence that your model wi
 
 ### Regression
 
-![alt tag](overfitting_reg.jpg)
+![alt tag](overfitting_reg.png)
 from [The Shape of Data](https://shapeofdata.wordpress.com/2013/03/26/general-regression-and-over-fitting/)
 
 ### Classification
 
-![alt tag](overfitting_class.jpg)
+![alt tag](overfitting_class.png)
 from [Chelsea Troy](https://chelseatroy.com/2016/03/22/machine-learning-part-2-classification/)
 
 ## Links
