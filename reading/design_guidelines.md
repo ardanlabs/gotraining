@@ -48,20 +48,24 @@ You can't make the best decisions without understanding the impact of your decis
 * Design principals are not rules, they're guidelines.
 
 **1) Integrity**  
-_We need to become very serious about reliability._  
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
 
-**2) Readability**  
-_We must structure our systems to be more comprehensible._  
+_We need to become very serious about reliability._  
+
+**2) Readability**    
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
-**3) Performance**  
-_We must compute less to get the results we need._  
+_We must structure our systems to be more comprehensible._
+
+**3) Performance**    
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
 
-**4) Micro-Optimization**  
-_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._  
+_We must compute less to get the results we need._
+
+**4) Micro-Optimization**    
 This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
+
+_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._
 
 **_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
