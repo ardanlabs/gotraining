@@ -53,13 +53,15 @@ _We need to become very serious about reliability._
 **2) Readability**    
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
+_We must structure our systems to be more comprehensible._
+
 Example of classic readability issues:  
 http://codepad.org/Xw7eUSSA
 
-_We must structure our systems to be more comprehensible._
-
 **3) Performance**    
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
+
+_We must compute less to get the results we need._
 
 Rules of Performance:   
 1) Never guess about performance.  
@@ -67,15 +69,13 @@ Rules of Performance:
 3) Profile before you decide something is performance critical.  
 4) Test to know you are correct. 
 
-_We must compute less to get the results we need._
-
 **4) Micro-Optimization**    
 This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
+_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._
+
 Example of a micro optimization:  
 https://play.golang.org/p/D_bImirgXL
-
-_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._
 
 **_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
