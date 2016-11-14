@@ -4,7 +4,7 @@ Classification is distinct from Regression in that the target variable is typica
 
 ## k Nearest Neighbors
 
-![alt tag](kNN.gif)
+![alt tag](kNN.gif)    
 from [Machine Learning Mastery](http://machinelearningmastery.com/tutorial-to-implement-k-nearest-neighbors-in-python-from-scratch/)
 
 ## Notes
