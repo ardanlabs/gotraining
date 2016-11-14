@@ -4,7 +4,7 @@
 // go build
 // ./example2
 
-// Sample program to calculate a mean squared error.
+// Sample program to calculate a mean absolute error.
 package main
 
 import (
