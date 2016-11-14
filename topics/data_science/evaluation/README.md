@@ -4,9 +4,19 @@ Being able to properly evaluate a model is essential. Without evaluation, the mo
 
 ## Notes
 
+- "When building prediction models, the primary goal should be to make a model that most accurately predicts the desired target value for new data. The measure of model error that is used should be one that achieves this goal." from [here](http://scott.fortmann-roe.com/docs/MeasuringError.html)
+- Let's say we are predicting if people have or don't have a disease (from [here](http://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/)):
+    - true positives (TP): These are cases in which we predicted yes (they have the disease), and they do have the disease.
+    -true negatives (TN): We predicted no, and they don't have the disease.
+    false positives (FP): We predicted yes, but they don't actually have the disease. (Also known as a "Type I error.")
+    false negatives (FN): We predicted no, but they actually do have the disease. (Also known as a "Type II error.")
+
 ## Links
 
-[Comparison of Evaluation Measures - Wikipedia](https://en.wikipedia.org/wiki/Precision_and_recall)  
+[Comparison of Evaluation Measures - Wikipedia](https://en.wikipedia.org/wiki/Precision_and_recall)    
+[Accurately Measuring Model Prediction Errors](http://scott.fortmann-roe.com/docs/MeasuringError.html)       
+[Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)    
+[Simple guide to confusion matrix terminology](http://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/)
 
 ## Code Review
 
@@ -19,6 +29,18 @@ Being able to properly evaluate a model is essential. Without evaluation, the mo
 ## Exercises
 
 ### Exercise 1
+
+For the `labeled.csv` results, implement and calculate the evaluation metric called "specificity" as defined [here](https://en.wikipedia.org/wiki/Confusion_matrix).  Think about when we might want to use this as compared with accuracy, precision, or recall.
+
+[Template](exercises/template1/template1.go) |
+[Answer](exercises/exercise1/exercise1.go)
+
+### Exercise 2
+
+For the `continuous.csv` results, implement and calculate the evaluation metric called "mean squared error" as defined [here](https://en.wikipedia.org/wiki/Mean_squared_error).  What advantages or disadvantages might this metric have as compared to mean absolute error?
+
+[Template](exercises/template1/template2.go) |
+[Answer](exercises/exercise1/exercise2.go)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
