@@ -9,6 +9,8 @@ This is material for scientists, analysts, and developers who have some experien
 
 #### Regression
 
+[Regression](../../../topics/data_science/regression/README.md) 
+
 #### Classification
 
 #### Clustering
