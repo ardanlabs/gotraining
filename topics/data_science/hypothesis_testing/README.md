@@ -4,9 +4,15 @@ While working as a data scientist, you will encounter the need to test many hypo
 
 ## Notes
 
+- A "null hypothesis," usually denoted by H0, is the hypothesis that observations result purely from chance, the opposite of the alternative hypothesis.
+- An "alternative hypothesis," usually denoted by H1, is the hypothesis that observations caused by some non-random process.
+- A "p-value" measures the probability of observing a test statistic as extreme as the current test statistic. 
+- Hypothesis tests are carried out assuming the null hypothesis is true.
+
 ## Links
 
-[Hypothesis Testing - Penn State](https://onlinecourses.science.psu.edu/statprogram/node/136)  
+[Hypothesis Testing - Penn State](https://onlinecourses.science.psu.edu/statprogram/node/136)    
+[The four steps of hypothesis testing](http://mathworld.wolfram.com/HypothesisTesting.html)
 
 ## Code Review
 
@@ -15,10 +21,15 @@ While working as a data scientist, you will encounter the need to test many hypo
 [Calculate Chi-squared Test Statistic](example2/example2.go)  
 [Output the Result of the Test](example3/example3.go)   
 
-
 ## Exercises
 
 ### Exercise 1
+
+Design a test to determine if die is fair. Use the Chi-squared test statistic and a 5% level of significance.  Answer the following:
+
+- What would you measure?
+- How would you calculate the test statistic?
+- What range of Chi-squared values would cause you to abandon your null hypothesis?
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
