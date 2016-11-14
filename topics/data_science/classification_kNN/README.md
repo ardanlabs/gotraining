@@ -1,4 +1,4 @@
-## Classification
+## Classification - k Nearest Neighbors
 
 Classification is distinct from Regression in that the target variable is typically categorical or labeled.  For example, a classification model may classify emails into spam and not-spam categories or classify network traffic as fraudulent or not fraudulent.  Generally, these models may classify into any number of categories.  Here we will explore classification using the k Nearest Neighbor algorithm.
 

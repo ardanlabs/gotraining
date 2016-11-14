@@ -13,7 +13,8 @@ This is material for scientists, analysts, and developers who have some experien
 
 #### Classification
 
-#### Clustering
+[k Nearest Neighbors](../../../topics/data_science/classification_kNN/README.md) | 
+[Decision Tree and Random Forest](../../../topics/data_science/classification_trees/README.md) 
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
