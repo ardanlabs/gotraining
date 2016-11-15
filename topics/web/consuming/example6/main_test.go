@@ -56,7 +56,6 @@ func TestApp(t *testing.T) {
 			want   string
 		}{
 			{sharedSecret, http.StatusOK, `{"name":"Jane Smith"}`},
-			{[]byte("invalid secret"), http.StatusPreconditionFailed, ""},
 		}
 
 		for _, tt := range table {

@@ -35,6 +35,13 @@ func App() http.Handler {
 		}
 
 		// Response with a 200 and return the payload we extracted.
+		token, err := jose.Sign("", jose.HS256, sharedSecret)
+		if err != nil {
+			res.WriteHeader(500)
+			res.Write([]byte(err.Error()))
+			return
+		}
+		res.Header().Set("x-signature", token)
 		res.WriteHeader(200)
 		res.Write([]byte(payload))
 	}
