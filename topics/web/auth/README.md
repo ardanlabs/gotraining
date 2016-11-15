@@ -10,14 +10,14 @@ Learn several different techniques and packages for adding authentication to web
 
 ## Links
 
-https://golang.org/pkg/net/http/
-https://golang.org/doc/articles/wiki/
-https://github.com/markbates/goth
+https://golang.org/pkg/net/http/  
+https://golang.org/doc/articles/wiki/  
+https://github.com/markbates/goth  
 
 ## Code Review
 
-HTTP Basic Authentication: [Code](example1/main.go) | [Test](example1/main_test.go)
-Authentication with Goth: [Code](example2/main.go) | [Test](example2/main_test.go)
+HTTP Basic Authentication: [Code](example1/main.go) | [Test](example1/main_test.go)  
+Authentication with Goth: [Code](example2/main.go) | [Test](example2/main_test.go)  
 
 ## Exercises
 
