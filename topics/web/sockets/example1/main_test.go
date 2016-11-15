@@ -31,7 +31,7 @@ func TestApp(t *testing.T) {
 	}
 
 	// Send this string across the websocket connection.
-	if _, err = ws.Write([]byte("hello, world!")); err != nil {
+	if _, err = ws.Write([]byte(`"hello, world!"`)); err != nil {
 		t.Fatal(err)
 	}
 

@@ -10,14 +10,14 @@ Being able to hold onto context while moving from different pieces of middleware
 
 ## Links
 
-https://golang.org/pkg/net/http/
-https://golang.org/doc/articles/wiki/
-http://www.gorillatoolkit.org/pkg/context
+https://golang.org/pkg/net/http/  
+https://golang.org/doc/articles/wiki/  
+http://www.gorillatoolkit.org/pkg/context  
 
 ## Code Review
 
-Standard Library: [Code](example1/main.go) | [Test](example1/main_test.go)
-Gorilla Context: [Code](example2/main.go) | [Test](example2/main_test.go)
+Standard Library: [Code](example1/main.go) | [Test](example1/main_test.go)  
+Gorilla Context: [Code](example2/main.go) | [Test](example2/main_test.go)  
 
 ## Exercises
 

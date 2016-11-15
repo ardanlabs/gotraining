@@ -34,7 +34,9 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob  
 [The Best Programming Advice I Ever Got](http://www.informit.com/articles/article.aspx?p=1941206) - Rob Pike  
 
-[A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh
+[A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh  
+
+[Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
 
 ### Contribute to Go
 

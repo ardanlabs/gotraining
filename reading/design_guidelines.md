@@ -39,23 +39,45 @@ You need to work with it and help it.
 
 Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
 
-#### Decision Making and Trade-Offs
+#### Guidelines, Decision Making and Trade-Offs
 
-You can't make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs. Evaluate the trade-offs of a decision in this order: Integrity, Readability, and then Performance. Before you allow a lower priority trade-off to trump you must consciously and with great reason be able to explain yourself.
+You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
+
+Develop your design philosophy around these three major categories in this order: Integrity, Readability, and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
 **1) Integrity**  
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
 
-**2) Readability**  
+_We need to become very serious about reliability._  
+
+**2) Readability**    
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
-**3) Performance**  
+_We must structure our systems to be more comprehensible._
+
+Example of classic readability issues:  
+http://codepad.org/Xw7eUSSA
+
+**3) Performance**    
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
 
-**4) Micro-Optimization**  
+_We must compute less to get the results we need._
+
+Rules of Performance:   
+1) Never guess about performance.  
+2) Measurements must be relevant.  
+3) Profile before you decide something is performance critical.  
+4) Test to know you are correct. 
+
+**4) Micro-Optimization**    
 This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
-**_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._**
+_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._
+
+Example of a micro optimization:  
+https://play.golang.org/p/D_bImirgXL
+
+**_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
 #### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
