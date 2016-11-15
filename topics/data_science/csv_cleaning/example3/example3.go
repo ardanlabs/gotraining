@@ -36,10 +36,14 @@ func main() {
 	}
 	defer rows.Close()
 
+	// irow will help us keep track of row numbers for logging.
+	var irow int
+
 	// Scan the rows and read each row into a struct. Output
 	// only the Petal measure and Species to standard out.
-	var irow int
 	for rows.Next() {
+
+		// Define a struct that specifies the types of the columns.
 		data := struct {
 			SepalLength float64
 			SepalWidth  float64
@@ -47,13 +51,19 @@ func main() {
 			PetalWidth  float64
 			Species     string
 		}{}
+
+		// Scan the row for the struct fields.
 		if err = rows.Scan(&data); err != nil {
 			log.Fatalf("error reading row %d: %v\n", irow, err)
 		}
+
+		// Output the parsed values to standard out.
 		fmt.Printf("petal length: %.2f, petal width: %.2f, species: %s\n",
 			data.PetalLength, data.PetalWidth, data.Species)
 	}
+
+	// Handle any errors from rows.Next().
 	if err = rows.Err(); err != nil {
-		log.Fatalf("error: %v\n", err)
+		log.Fatal(err)
 	}
 }

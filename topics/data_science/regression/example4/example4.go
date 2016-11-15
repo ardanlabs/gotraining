@@ -43,6 +43,8 @@ func main() {
 	var r regression.Regression
 	r.SetObserved("diabetes progression")
 	r.SetVar(0, "bmi")
+
+	// Loop of records in the CSV, adding the training data to the regression value.
 	for i, record := range trainingData {
 
 		// Skip the header.

@@ -35,10 +35,12 @@ func main() {
 	}
 	defer tx.Commit()
 
-	// Query the CSV via a SQL statement.  Here we will only get
+	// Define a SQL query that we will execute against the CSV file.
+	query := "SELECT var3, var4, var5 FROM csv WHERE var5 = \"Iris-versicolor\""
+
+	// Query the CSV via the SQL statement.  Here we will only get
 	// the petal length, petal width, and species for all rows
 	// where the species is "Iris-versicolor".
-	query := "SELECT var3, var4, var5 FROM csv WHERE var5 = \"Iris-versicolor\""
 	rows, err := tx.Query(query)
 	if err != nil {
 		log.Fatal(err)
@@ -47,15 +49,27 @@ func main() {
 
 	// Output the results of the query to standard out.
 	for rows.Next() {
+
+		// Define variables for the result values.
 		var (
 			petalLength float64
 			petalWidth  float64
 			species     string
 		)
+
+		// Scan for the results.
 		if err = rows.Scan(&petalLength, &petalWidth, &species); err != nil {
 			log.Fatal(err)
 		}
+
+		// Output the results to standard out.
 		fmt.Printf("petal length: %.2f, petal width: %.2f, species: %s\n",
 			petalLength, petalWidth, species)
 	}
+
+	// Handle any errors from rows.Next().
+	if err = rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+
 }
