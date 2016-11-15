@@ -2,6 +2,11 @@
 
 Linear regression is widely used to model continuous variables and is used as the basis for other models. It also produces models that are immediately interpretable. Thus, linear regression can provide an excellent starting point when introducing predictive capabilities in a organization.
 
+## Linear Regression / Least Squares
+
+![alt tag](regression.gif)    
+from [University of Cumbria](http://ictedusrv.cumbria.ac.uk/maths/SecMaths/U4/page_95.htm)
+
 ## Notes
 
 - A linear regression model assumes that the regression function is linear in the inputs.
