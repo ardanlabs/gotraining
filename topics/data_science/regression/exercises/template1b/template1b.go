@@ -2,9 +2,9 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // go build
-// ./example4
+// ./template1b
 
-// Sample program to train and test a regression model.
+// Sample program to train and test a multiple regression model.
 package main
 
 import (
@@ -21,7 +21,7 @@ import (
 func main() {
 
 	// Open the training dataset file.
-	trainingFile, err := os.Open("../data/training.csv")
+	trainingFile, err := os.Open("../../data/training.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,6 +43,10 @@ func main() {
 	var r regression.Regression
 	r.SetObserved("diabetes progression")
 	r.SetVar(0, "bmi")
+
+	// Add a second variable to the regression value.
+
+	// Loop over the CSV records adding the training data to the regression value.
 	for i, record := range trainingData {
 
 		// Skip the header.
@@ -62,8 +66,9 @@ func main() {
 			log.Fatal(err)
 		}
 
+		// Parse a second value.
+
 		// Add these points to the regression value.
-		r.Train(regression.DataPoint(yVal, []float64{bmiVal}))
 	}
 
 	// Train/fit the regression model.
@@ -73,7 +78,7 @@ func main() {
 	fmt.Printf("\nRegression Formula:\n%v\n\n", r.Formula)
 
 	// Open the test dataset file.
-	testFile, err := os.Open("../data/test.csv")
+	testFile, err := os.Open("../../data/test.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -111,8 +116,9 @@ func main() {
 			log.Fatal(err)
 		}
 
+		// Parse the second value.
+
 		// Predict y with our trained model.
-		yPredicted, err := r.Predict([]float64{bmiVal})
 
 		// Add the to the mean absolute error.
 		mAE += math.Abs(yObserved-yPredicted) / float64(len(testData))

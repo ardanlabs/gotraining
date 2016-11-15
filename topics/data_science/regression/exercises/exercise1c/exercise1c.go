@@ -2,9 +2,9 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // go build
-// ./example5
+// ./exercise1c
 
-// Sample program to validate a trained regression model on a holdout data set.
+// Sample program to validate a trained multiple regression model on a holdout data set.
 package main
 
 import (
@@ -19,7 +19,7 @@ import (
 func main() {
 
 	// Open the holdout dataset file.
-	holdoutFile, err := os.Open("../data/holdout.csv")
+	holdoutFile, err := os.Open("../../data/holdout.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -57,8 +57,14 @@ func main() {
 			log.Fatal(err)
 		}
 
+		// Parse the ltg value.
+		ltgVal, err := strconv.ParseFloat(record[8], 64)
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		// Predict y with our trained model.
-		yPredicted := predict(bmiVal)
+		yPredicted := predict(bmiVal, ltgVal)
 
 		// Add the to the mean absolute error.
 		mAE += math.Abs(yObserved-yPredicted) / float64(len(holdoutData))
@@ -69,7 +75,7 @@ func main() {
 }
 
 // predict uses our trained regression model to made a prediction based on a
-// bmi value.
-func predict(bmi float64) float64 {
-	return 149.96 + bmi*916.19
+// bmi and ltg value.
+func predict(bmi, ltg float64) float64 {
+	return 151.50 + bmi*623.59 + ltg*644.50
 }
