@@ -19,10 +19,11 @@ https://github.com/GeertJohan/go.rice
 Basic Template: [Code](example1/main.go) | [Test](example1/main_test.go)  
 Data Parsing: [Code](example2/main.go) | [Test](example2/main_test.go)  
 Struct Parsing: [Code](example3/main.go) | [Test](example3/main_test.go)  
-Generating Markup: [Code](example4/main.go) | [Test](example4/main_test.go)  
-Complex Markup: [Code](example5/main.go) | [Test](example5/main_test.go)  
-Serving Assets: [Code](example6/main.go) | [Test](example6/main_test.go)  
-Bundling Assets: [Code](example7/main.go) | [Test](example7/main_test.go) | [Assets](example7/rice-box.go)  
+Escaping: [Code](example4/main.go) | [Test](example4/main_test.go)  
+Escaping 2: [Code](example5/main.go) | [Test](example5/main_test.go)  
+Complex Markup: [Code](example6/main.go) | [Test](example6/main_test.go)  
+Serving Assets: [Code](example7/main.go) | [Test](example7/main_test.go)  
+Bundling Assets: [Code](example8/main.go) | [Test](example8/main_test.go) | [Assets](example8/rice-box.go)  
 
 ## Exercises
 

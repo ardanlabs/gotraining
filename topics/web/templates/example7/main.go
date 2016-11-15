@@ -1,44 +1,41 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// To bundle assets into the source code so the binary
-// has everything it needs:
-// $ rice embed-go
-// $ go build
-
-// Sample program to show how to bundle assets, static files, etc
-// into web application and access these bundled resources.
+// Sample program to show how to serve up static files from
+// a web application and deliver a home page.
 package main
 
 import (
 	"log"
 	"net/http"
-
-	rice "github.com/GeertJohan/go.rice"
+	"path"
+	"runtime"
 )
 
-// App creates a mux and binds the routes for use in our server.
+// App creates a mux and binds the root route for processing
+// static files.
 func App() http.Handler {
 
 	// Create a new mux for this service.
 	m := http.NewServeMux()
 
-	// Create a rice box for our static folder. These assest
-	// are now cached into memory.
-	box := rice.MustFindBox("./static")
-
-	// Bind the rice box into the http FileServer and create a
-	// route for these assests under an imaginary assets folder.
-	assets := http.StripPrefix("/assets/", http.FileServer(box.HTTPBox()))
-	m.Handle("/assets/", assets)
-
-	// Bind the root handler to serve up the home page.
-	m.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		b, _ := box.Bytes("index.html")
-		res.Write(b)
-	})
+	// Bind the route for serving static files using the
+	// default FileServer. This will load the home page.
+	m.Handle("/", http.FileServer(http.Dir(staticDir())))
 
 	return m
+}
+
+// staticDir builds a full path to the 'static' directory
+// that is relative to this file.
+func staticDir() string {
+
+	// Locate from the runtime the location of
+	// the apps static files.
+	_, filename, _, _ := runtime.Caller(1)
+
+	// Return a path to the static folder.
+	return path.Join(path.Dir(filename), "static")
 }
 
 func main() {
