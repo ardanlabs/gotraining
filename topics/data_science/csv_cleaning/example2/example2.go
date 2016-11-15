@@ -28,15 +28,21 @@ func main() {
 	// The types of the columns will be inferred.
 	irisDF := df.ReadCSV(string(irisData))
 
-	// Filter the dataframe to see only the rows where
-	// the iris species is "Iris-versicolor". Output the results
-	// to standard out.
+	// Create a filter for the dataframe.
 	filter := df.F{
 		Colname:    "species",
 		Comparator: "==",
 		Comparando: "Iris-versicolor",
 	}
+
+	// Filter the dataframe to see only the rows where
+	// the iris species is "Iris-versicolor".
 	versicolorDF := irisDF.Filter(filter)
+	if versicolorDF.Err() != nil {
+		log.Fatal(versicolorDF.Err())
+	}
+
+	// Output the results to standard out.
 	fmt.Println(versicolorDF)
 
 	// Filter the dataframe again, but only select out the
