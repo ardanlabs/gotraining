@@ -2,7 +2,20 @@
 
 Although summary statistics are very useful and should be utilized to describe data, visualizing distributions of data can provide very quick intuition about how to proceed in an analysis.  Tools like histograms and box plots provide a visual representation about the distribution of variables.   
 
+## Example Histogram
+
+![alt tag](histogram.png)    
+from [here](https://statistics.laerd.com/statistical-guides/understanding-histograms.php)
+
+## Example Box Plot
+
+![alt tag](box.gif)    
+from [here](http://www.physics.csbsju.edu/stats/box2.html)
+
 ## Notes
+
+- A histogram is an estimate of the probability distribution of a continuous variable created by "binning" data together into a certain number of bins defined by variable ranges.
+- A box plot also displays the distribution of data.  In this case, based on a five number summary: minimum, first quartile, median, third quartile, and maximum
 
 ## Links
 

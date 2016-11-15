@@ -44,7 +44,7 @@ func main() {
 	// Calculate the variance of the variable.
 	varianceVal := stat.Variance(sepalLength, nil)
 
-	// Calculate the Max of the variable.
+	// Calculate the standard deviation of the variable.
 	stdDevVal := stat.StdDev(sepalLength, nil)
 
 	// Output the results to standard out.
