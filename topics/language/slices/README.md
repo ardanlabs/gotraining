@@ -18,7 +18,8 @@ http://www.goinggo.net/2013/08/understanding-slices-in-go-programming.html
 http://www.goinggo.net/2013/08/collections-of-unknown-length-in-go.html  
 http://www.goinggo.net/2013/09/iterating-over-slices-in-go.html  
 http://www.goinggo.net/2013/09/slices-of-slices-of-slices-in-go.html  
-http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html
+http://www.goinggo.net/2013/12/three-index-slices-in-go-12.html  
+https://github.com/golang/go/wiki/SliceTricks  
 
 ## Code Review
 
