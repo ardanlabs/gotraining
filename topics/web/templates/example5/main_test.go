@@ -1,9 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Tests for the sample program to show how to use create, parse and execute
-// a template with simple data processing. This example uses a struct type
-// value with a slice and method for generating HTML markup.
+// Test for the sample program to show how to use create, parse
+// and execute a template with simple data processing. This
+// example uses a struct type value and generates HTML markup.
 package main
 
 import (
@@ -26,22 +26,11 @@ func TestExec(t *testing.T) {
 	// Validate we received the correct version.
 	got := strings.TrimSpace(bb.String())
 	want := strings.TrimSpace(`
-<h1>Mary Smith</h1>
-<h2>MARY SMITH</h2>
-
-Aliases:
-<ul>
-	<li>Scarface</li>
-	<li>MC Skat Kat</li>
-	
-</ul>`)
-
-	// NOTE: The above test string has a TAB on line 36
-	//       to match the HTML string being produced.
-
+&lt;script&gt;alert(&#34;boo!&#34;)&lt;/script&gt;
+<script>alert("boo!")</script>`)
 	if got != want {
-		t.Logf("Wanted: %v", want)
-		t.Logf("Got   : %v", got)
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
 		t.Fatal("Mismatch")
 	}
 }

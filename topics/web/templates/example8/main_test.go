@@ -1,8 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Tests for the sample program to show how to serve up static
-// files from a web application and deliver a home page.
+// Tests for the sample program to show how to bundle assets, static files,
+// etc into web application and access these bundled resources.
 package main
 
 import (
@@ -31,7 +31,7 @@ func testJS(ts *httptest.Server) func(*testing.T) {
 	return func(t *testing.T) {
 
 		// Perform a call to get the app.js file.
-		res, err := http.Get(ts.URL + "/app.js")
+		res, err := http.Get(ts.URL + "/assets/app.js")
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -60,7 +60,7 @@ func testCSS(ts *httptest.Server) func(*testing.T) {
 	return func(t *testing.T) {
 
 		// Perform a call to get the styles.css file.
-		res, err := http.Get(ts.URL + "/styles.css")
+		res, err := http.Get(ts.URL + "/assets/styles.css")
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -89,7 +89,7 @@ func testHTML(ts *httptest.Server) func(*testing.T) {
 	return func(t *testing.T) {
 
 		// Perform a call to get the index.html file.
-		res, err := http.Get(ts.URL + "/index.html")
+		res, err := http.Get(ts.URL + "/assets/index.html")
 		if err != nil {
 			t.Fatal(err)
 		}
