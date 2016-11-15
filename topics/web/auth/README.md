@@ -16,13 +16,8 @@ https://github.com/markbates/goth
 
 ## Code Review
 
-<<<<<<< HEAD
 HTTP Basic Authentication: [Code](example1/main.go) | [Test](example1/main_test.go)
 Authentication with Goth: [Code](example2/main.go) | [Test](example2/main_test.go)
-=======
-HTTP Basic Authentication: [Code](example1/main.go) | [Test](example1/main_test.go)   
-Authentication with Goth: [Code](example2/main.go) | [Test](example2/main_test.go)  
->>>>>>> f31f57c999ca392d36cdd5cc366b78b0cd25ca63
 
 ## Exercises
 
