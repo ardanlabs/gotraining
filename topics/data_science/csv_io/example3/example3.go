@@ -28,9 +28,14 @@ func main() {
 	// Create a new CSV reader reading from the opened file.
 	reader := csv.NewReader(csvFile)
 
-	// Read in the records looking for unexpected types in the second column.
+	// secondColumn will hold the float values parsed from the second
+	// column of the CSV file.
 	var secondColumn []float64
+
+	// line will help us keep track of line numbers for logging.
 	line := 1
+
+	// Read in the records looking for unexpected types in the second column.
 	for {
 
 		// Read in a row. Check if we are at the end of the file.

@@ -35,10 +35,14 @@ func main() {
 	// Get the maximum value in the integer column.
 	var intMax int
 	for _, record := range records {
+
+		// Parse the integer value.
 		intVal, err := strconv.Atoi(record[0])
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		// Replace the maximum value if appropriate.
 		if intVal > intMax {
 			intMax = intVal
 		}

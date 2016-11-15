@@ -10,18 +10,16 @@ package main
 
 import (
 	"encoding/csv"
-	"io"
 	"log"
 	"os"
 )
 
-// Define a struct here that will hold the successfully parsed
-// records in each column of our CSV.
+// Define a struct that will contain a sucessfully parsed row of the CSV file.
 
 func main() {
 
 	// Open the iris dataset file.
-	csvFile, err := os.Open("../data/iris_mixed_types.csv")
+	csvFile, err := os.Open("../../data/iris_multiple_mixed_types.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,28 +28,22 @@ func main() {
 	// Create a new CSV reader reading from the opened file.
 	reader := csv.NewReader(csvFile)
 
-	// Create a value of the type you defined above that will hold
-	// all of your successfully parsed records from the CSV.
+	// Create a slice value that will hold all of the successfully parsed
+	// records from the CSV.
 
 	// Read in the records looking for unexpected types.
-	line := 1
-	for {
 
-		// Read in a row. Check if we are at the end of the file.
-		record, err := reader.Read()
-		if err == io.EOF {
-			break
-		}
+	// Read in a row. Check if we are at the end of the file.
 
-		// Parse each of the columns based on an expected type.
+	// Create a CSVRecord value for the row.
 
-		// Handle any errors such that you only append successfully
-		// parsed records to the value you defined above.  Also,
-		// log any parsing errors.
+	// Parse each of the values in the record based on an expected type.
 
-		line++
-	}
+	// Parse the value in the record as a string for the string column.
+
+	// Otherwise, parse the value in the record as a float64.
+
+	// Append successfully parsed records to the slice defined above.
 
 	// Output the number of records sucessfully parsed to stdout.
-	log.Printf("Sucessfully parsed %d rows\n", len(secondColumn))
 }
