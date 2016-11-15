@@ -39,6 +39,8 @@ func main() {
 	// Get the maximum value in the integer column.
 	var intMax int
 	for _, record := range records {
+
+		// Parse the integer value.
 		intVal, err := strconv.Atoi(record[0])
 		if err != nil {
 
@@ -46,6 +48,8 @@ func main() {
 			// treat missing integer values as the zero value.
 			intVal = 0
 		}
+
+		// Replace the maximum value if appropriate.
 		if intVal > intMax {
 			intMax = intVal
 		}

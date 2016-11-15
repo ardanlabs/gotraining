@@ -32,9 +32,10 @@ func main() {
 	// rows in our CSV has the correct number of fields.
 	reader.FieldsPerRecord = 5
 
-	// Read in the records looking for unexpected numbers of fields.
+	// rawCSVData will hold our succesfully parsed rows.
 	var rawCSVData [][]string
-	line := 1
+
+	// Read in the records looking for unexpected numbers of fields.
 	for {
 
 		// Read in a row. Check if we are at the end of the file.
@@ -52,7 +53,6 @@ func main() {
 		// Append the record to our data set, if it has the expected
 		// number of fields.
 		rawCSVData = append(rawCSVData, record)
-		line++
 	}
 
 	// Output the number of records sucessfully read to stdout.

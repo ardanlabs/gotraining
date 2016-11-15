@@ -26,12 +26,12 @@ func main() {
 	// Create a new CSV reader reading from the opened file.
 	reader := csv.NewReader(csvFile)
 
-	// Assume we don't the number of fields per line.  By setting
+	// Assume we don't know the number of fields per line.  By setting
 	// FieldsPerRecord negative, each row may have a variable
 	// number of fields.
 	reader.FieldsPerRecord = -1
 
-	// Read in all of the CSV records
+	// Read in all of the CSV records.
 	rawCSVData, err := reader.ReadAll()
 	if err != nil {
 		log.Fatal(err)
