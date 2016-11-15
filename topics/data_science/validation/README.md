@@ -4,6 +4,9 @@ Even if you evaluate a model, how can you have any confidence that your model wi
 
 ## Notes
 
+- "As model complexity increases (for instance by adding parameters terms in a linear regression) the model will always do a better job fitting the training data." from [here](http://scott.fortmann-roe.com/docs/MeasuringError.html)
+- Preventing this "overfitting" is a key to building robust models and data science applications.
+
 ## Overfitting
 
 ### Regression
@@ -35,9 +38,7 @@ from [Kaggle](http://blog.kaggle.com/2015/06/29/scikit-learn-video-7-optimizing-
 
 ## Links
 
-## Exercises
-
-### Excercise 1
-
+[Accurately Measuring Model Prediction Error](http://scott.fortmann-roe.com/docs/MeasuringError.html)    
+[Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

@@ -35,8 +35,10 @@ func main() {
 	}
 	defer tx.Commit()
 
-	// Query the CSV via a SQL statement.
+	// Define a query we will execute against our CSV file.
 	query := "SELECT var1, var2, var3, var4, var5 FROM csv WHERE var1 != \"sepal_length\";"
+
+	// Query the CSV via the SQL statement.
 	rows, err := tx.Query(query)
 	if err != nil {
 		log.Fatal(err)

@@ -27,13 +27,15 @@ func main() {
 	// The types of the columns will be inferred.
 	irisDF := df.ReadCSV(string(irisData))
 
-	// Filter the dataset into three separate dataframes,
-	// each corresponding to one of the Iris species.
+	// Define the names of the three separate species contained in the CSV file.
 	speciesNames := []string{
 		"Iris-setosa",
 		"Iris-versicolor",
 		"Iris-virginica",
 	}
+
+	// Filter the dataset into three separate dataframes,
+	// each corresponding to one of the Iris species.
 	for _, species := range speciesNames {
 
 		// Filer the original dataset.

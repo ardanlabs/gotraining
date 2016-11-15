@@ -6,10 +6,10 @@ Being able to properly evaluate a model is essential. Without evaluation, the mo
 
 - "When building prediction models, the primary goal should be to make a model that most accurately predicts the desired target value for new data. The measure of model error that is used should be one that achieves this goal." from [here](http://scott.fortmann-roe.com/docs/MeasuringError.html)
 - Let's say we are predicting if people have or don't have a disease (from [here](http://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/)):
-    - true positives (TP): These are cases in which we predicted yes (they have the disease), and they do have the disease.
-    -true negatives (TN): We predicted no, and they don't have the disease.
-    false positives (FP): We predicted yes, but they don't actually have the disease. (Also known as a "Type I error.")
-    false negatives (FN): We predicted no, but they actually do have the disease. (Also known as a "Type II error.")
+    - true positives (TP): These are cases in which we predicted yes (they have the disease), and they do have the disease.   
+    - true negatives (TN): We predicted no, and they don't have the disease.   
+    - false positives (FP): We predicted yes, but they don't actually have the disease. (Also known as a "Type I error.")    
+    - false negatives (FN): We predicted no, but they actually do have the disease. (Also known as a "Type II error.")
 
 ## Links
 

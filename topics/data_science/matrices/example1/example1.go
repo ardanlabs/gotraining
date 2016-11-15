@@ -37,9 +37,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Sequentially move the rows into a slice of floats.
+	// floatData will hold all the float values that will eventually be
+	// used to form out matrix.
 	floatData := make([]float64, 4*len(rawCSVData))
+
+	// dataIndex will track the current index of the matrix values.
 	var dataIndex int
+
+	// Sequentially move the rows into a slice of floats.
 	for _, record := range rawCSVData {
 
 		// Loop over the float columns.
