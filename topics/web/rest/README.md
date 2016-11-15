@@ -15,7 +15,7 @@ https://golang.org/doc/articles/wiki/
 
 ## Code Review
 
-REST With regex: [Code](example1/main.go) | [Test](example1/main_test.go)
+REST With regex: [Code](example1/main.go) | [Test](example1/main_test.go)  
 
 ## Exercises
 

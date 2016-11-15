@@ -57,6 +57,7 @@ func App() http.Handler {
 
 // indexHandler returns the entire list of customers in the DB.
 func indexHandler(ctx echo.Context) error {
+
 	// Retrieve the list of customers and render the document.
 	return ctx.Render(http.StatusOK, "index.html", customer.All())
 }

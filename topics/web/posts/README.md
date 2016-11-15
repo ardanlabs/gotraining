@@ -10,15 +10,15 @@ Learn the basics of making POST calls and working with multipart form data.
 
 ## Links
 
-https://golang.org/pkg/net/http/
-https://golang.org/doc/articles/wiki/
+https://golang.org/pkg/net/http/  
+https://golang.org/doc/articles/wiki/  
 
 ## Code Review
 
-Basic POST: [Code](example1/main.go) | [Test](example1/main_test.go)
-Simple Form: [Code](example2/main.go) | [Test](example2/main_test.go)
-Form With JSON: [Code](example3/main.go) | [Test](example3/main_test.go)
-Multipart Forms: [Code](example4/main.go) | [Test](example4/main_test.go)
+Basic POST: [Code](example1/main.go) | [Test](example1/main_test.go)  
+Simple Form: [Code](example2/main.go) | [Test](example2/main_test.go)  
+Form With JSON: [Code](example3/main.go) | [Test](example3/main_test.go)  
+Multipart Forms: [Code](example4/main.go) | [Test](example4/main_test.go)  
 
 ## Exercises
 

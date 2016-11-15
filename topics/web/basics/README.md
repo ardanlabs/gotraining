@@ -9,16 +9,16 @@ Learn the basics of building web services and applications in Go.
 
 ## Links
 
-https://golang.org/pkg/net/http/
-https://golang.org/doc/articles/wiki/
+https://golang.org/pkg/net/http/  
+https://golang.org/doc/articles/wiki/  
 
 ## Code Review
 
-[Simple Web Service](example1/main.go)
-[Using a New Server Mux](example2/main.go)
-[User Defined Handler I](example3/main.go)
-[User Defined Handler II](example4/main.go)
-[Concurrency](example5/main.go)
+[Simple Web Service](example1/main.go)  
+[Using a New Server Mux](example2/main.go)  
+[User Defined Handler I](example3/main.go)  
+[User Defined Handler II](example4/main.go)  
+[Concurrency](example5/main.go)  
 
 ## Exercises
 

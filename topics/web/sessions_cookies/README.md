@@ -10,14 +10,14 @@ Learn the basics of working with session and cookies for web applications.
 
 ## Links
 
-https://golang.org/pkg/net/http/
-https://golang.org/doc/articles/wiki/
-https://github.com/gorilla/sessions
+https://golang.org/pkg/net/http/  
+https://golang.org/doc/articles/wiki/  
+https://github.com/gorilla/sessions  
 
 ## Code Review
 
-Using Session: [Code](example1/main.go) | [Test](example1/main_test.go)
-Using Cookies: [Code](example2/main.go) | [Test](example2/main_test.go)
+Using Session: [Code](example1/main.go) | [Test](example1/main_test.go)  
+Using Cookies: [Code](example2/main.go) | [Test](example2/main_test.go)  
 
 ## Exercises
 

@@ -9,16 +9,16 @@ Learn the basics of testing web services and applications in Go.
 
 ## Links
 
-https://golang.org/pkg/net/http/
-https://golang.org/doc/articles/wiki/
+https://golang.org/pkg/net/http/  
+https://golang.org/doc/articles/wiki/  
 
 ## Code Review
 
-[Basic Unit Testing](example1/unit_test.go)
-[Using a http.Handler](example2/unit_test.go)
-[Testing Routes](example3/unit_test.go)
-[Mocking Servers](example4/integration_test.go)
-[Mocking Servers With http.Handler](example5/integration_test.go)
+[Basic Unit Testing](example1/unit_test.go)  
+[Using a http.Handler](example2/unit_test.go)  
+[Testing Routes](example3/unit_test.go)  
+[Mocking Servers](example4/integration_test.go)  
+[Mocking Servers With http.Handler](example5/integration_test.go)  
 
 ## Exercises
 

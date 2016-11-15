@@ -62,6 +62,7 @@ func Save(c Customer) (int, error) {
 	return c.ID, nil
 }
 
+// Update updates the customer in the database.
 func Update(c Customer) error {
 	db.lock.Lock()
 	defer db.lock.Unlock()
@@ -74,6 +75,7 @@ func Update(c Customer) error {
 	return nil
 }
 
+// Delete removes the customer from the database.
 func Delete(c Customer) error {
 	db.lock.Lock()
 	defer db.lock.Unlock()
