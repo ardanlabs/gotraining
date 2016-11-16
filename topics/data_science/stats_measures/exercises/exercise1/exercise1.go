@@ -37,15 +37,9 @@ func main() {
 		if colName != "species" {
 
 			// Get the float values from the column.
-			floatCol, ok := irisDF.Col(colName).Elements.(df.FloatElements)
-			if !ok {
-				log.Fatal(fmt.Errorf("Could not parse float column"))
-			}
-
-			// Convert the Gota float values to a normal slice of floats.
-			var col []float64
-			for _, val := range floatCol {
-				col = append(col, *val.Float())
+			col, err := irisDF.Col(colName).Float()
+			if err != nil {
+				log.Fatal(err)
 			}
 
 			// Calculate the Mean of the variable.

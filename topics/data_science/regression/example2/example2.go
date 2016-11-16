@@ -8,7 +8,6 @@
 package main
 
 import (
-	"fmt"
 	"image/color"
 	"io/ioutil"
 	"log"
@@ -32,24 +31,24 @@ func main() {
 	diabetesDF := df.ReadCSV(string(diabetesData))
 
 	// Extract the target column.
-	yCol, ok := diabetesDF.Col("y").Elements.(df.FloatElements)
-	if !ok {
-		log.Fatal(fmt.Errorf("Could not parse y values"))
+	yCol, err := diabetesDF.Col("y").Float()
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// Convert the target column to a slice of floats.
 	yVals := make([]float64, len(yCol))
 	for i, yVal := range yCol {
-		yVals[i] = *yVal.Float()
+		yVals[i] = yVal
 	}
 
 	// Create a scatter plot for each of the features in the dataset.
 	for _, colName := range diabetesDF.Names() {
 
 		// Extract the columns as a slice of floats.
-		floatCol, ok := diabetesDF.Col(colName).Elements.(df.FloatElements)
-		if !ok {
-			log.Fatal(fmt.Errorf("Could not parse float column."))
+		floatCol, err := diabetesDF.Col(colName).Float()
+		if err != nil {
+			log.Fatal(err)
 		}
 
 		// pts will hold the values for plotting
@@ -57,7 +56,7 @@ func main() {
 
 		// Fill pts with data.
 		for i, floatVal := range floatCol {
-			pts[i].X = *floatVal.Float()
+			pts[i].X = floatVal
 			pts[i].Y = yVals[i]
 		}
 

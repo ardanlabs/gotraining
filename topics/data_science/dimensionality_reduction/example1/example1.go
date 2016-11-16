@@ -8,52 +8,62 @@
 package main
 
 import (
+	"encoding/csv"
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
+	"strconv"
 
 	"github.com/gonum/matrix/mat64"
 	"github.com/gonum/stat"
-	"github.com/kniren/gota/data-frame"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	irisData, err := ioutil.ReadFile("../data/iris.csv")
+	// Open the iris dataset file.
+	csvFile, err := os.Open("../data/iris.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer csvFile.Close()
+
+	// Create a new CSV reader reading from the opened file.
+	reader := csv.NewReader(csvFile)
+	reader.FieldsPerRecord = 5
+
+	// Read in all of the CSV records
+	rawCSVData, err := reader.ReadAll()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Create a dataframe from the CSV string.
-	// The types of the columns will be inferred.
-	irisDF := df.ReadCSV(string(irisData))
+	// floatData will hold all the float values that will eventually be
+	// used to form out matrix.
+	floatData := make([]float64, 4*len(rawCSVData))
 
-	// Sequentially move the columns into a slice of floats.
-	floatData := make([]float64, 4*irisDF.Nrow())
+	// dataIndex will track the current index of the matrix values.
 	var dataIndex int
-	for colIndex, colName := range irisDF.Names() {
 
-		// If the column is one of the float columns, move it
-		// into the slice of floats.
-		if colIndex < 4 {
+	// Sequentially move the rows into a slice of floats.
+	for _, record := range rawCSVData {
 
-			// Extract the columns as a slice of floats.
-			floatCol, ok := irisDF.Col(colName).Elements.(df.FloatElements)
-			if !ok {
-				log.Fatal(fmt.Errorf("Could not parse float column."))
+		// Loop over the float columns.
+		for i := 0; i < 4; i++ {
+
+			// Convert the value to a float.
+			val, err := strconv.ParseFloat(record[i], 64)
+			if err != nil {
+				log.Fatal(fmt.Errorf("Could not parse float value"))
 			}
 
-			// Append the float values to floatData.
-			for _, floatVal := range floatCol {
-				floatData[dataIndex] = *floatVal.Float()
-				dataIndex++
-			}
+			// Add the float value to the slice of floats.
+			floatData[dataIndex] = val
+			dataIndex++
 		}
 	}
 
 	// Form the matrix.
-	mat := mat64.NewDense(irisDF.Nrow(), 4, floatData)
+	mat := mat64.NewDense(len(rawCSVData), 4, floatData)
 
 	// Calculate the principal component direction vectors
 	// and variances.

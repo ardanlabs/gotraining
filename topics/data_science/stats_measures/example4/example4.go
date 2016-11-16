@@ -31,15 +31,9 @@ func main() {
 
 	// Get the float values from the "sepal_length" column as
 	// we will be looking at the measures for this variable.
-	floatCol, ok := irisDF.Col("sepal_length").Elements.(df.FloatElements)
-	if !ok {
-		log.Fatal(fmt.Errorf("Could not parse float column"))
-	}
-
-	// Convert the Gota float values to a normal slice of floats.
-	var sepalLength []float64
-	for _, val := range floatCol {
-		sepalLength = append(sepalLength, *val.Float())
+	sepalLength, err := irisDF.Col("sepal_length").Float()
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// Sort the values.

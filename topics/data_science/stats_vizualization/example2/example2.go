@@ -38,16 +38,16 @@ func main() {
 		if colName != "species" {
 
 			// Extract the columns as a slice of floats.
-			floatCol, ok := irisDF.Col(colName).Elements.(df.FloatElements)
-			if !ok {
-				log.Fatal(fmt.Errorf("Could not parse float column."))
+			floatCol, err := irisDF.Col(colName).Float()
+			if err != nil {
+				log.Fatal(err)
 			}
 
 			// Create a plotter.Values value and fill it with the
 			// values from the respective column of the dataframe.
 			v := make(plotter.Values, len(floatCol))
 			for i, floatVal := range floatCol {
-				v[i] = *floatVal.Float()
+				v[i] = floatVal
 			}
 
 			// Make a plot and set its title.
