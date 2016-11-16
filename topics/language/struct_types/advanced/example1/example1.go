@@ -51,7 +51,7 @@ func main() {
 	// Since all the fields are based on a single byte,
 	// the all align perfectly within a single word.
 	//
-	// structlayout -json github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 np | structlayout-pretty
+	// structlayout -json github.com/ardanlabs/gotraining/topics/language/struct_types/advanced/example1 np | structlayout-pretty
 	// 	np.a bool: 0-1 (size 1, align 1)
 	// 	np.b bool: 1-2 (size 1, align 1)
 	// 	np.c bool: 2-3 (size 1, align 1)
@@ -81,7 +81,7 @@ func main() {
 	// 0, 2, 4, 6, 8, A, C, E.
 	// 1 byte of padding is included to align the int16 properly.
 	//
-	// structlayout -json github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 sbp | structlayout-pretty
+	// structlayout -json github.com/ardanlabs/gotraining/topics/language/struct_types/advanced/example1 sbp | structlayout-pretty
 	// 	sbp.a bool:  0-1 (size 1, align 1)
 	// 	padding:     1-2 (size 1, align 0)
 	// 	sbp.b int16: 2-4 (size 2, align 2)
@@ -113,7 +113,7 @@ func main() {
 	// 0, 4, 8, C.
 	// 3 byte of padding is included to align the int32 properly.
 	//
-	// structlayout -json github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 tbp | structlayout-pretty
+	// structlayout -json github.com/ardanlabs/gotraining/topics/language/struct_types/advanced/example1 tbp | structlayout-pretty
 	// 	tbp.a bool:  0-1 (size 1, align 1)
 	// 	padding:     1-4 (size 3, align 0)
 	// 	tbp.b int32: 4-8 (size 4, align 4)
@@ -151,7 +151,7 @@ func main() {
 	// 0, 8.
 	// 4 byte of padding is included to align the int64 properly.
 	//
-	// structlayout -json github.com/ardanlabs/gotraining/topics/struct_types/advanced/example1 fbp | structlayout-pretty
+	// structlayout -json github.com/ardanlabs/gotraining/topics/language/struct_types/advanced/example1 fbp | structlayout-pretty
 	// 	fbp.a bool:  0-1  (size 1, align 1)
 	// 	padding:     1-8  (size 7, align 0)
 	// 	fbp.b int64: 8-16 (size 8, align 8)
