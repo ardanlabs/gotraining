@@ -33,8 +33,6 @@ func main() {
 
 	// Get the float values from the column.
 
-	// Convert the Gota float values to a normal slice of floats.
-
 	// Calculate the Mean of the variable.
 
 	// Calculate the Mode of the variable.
