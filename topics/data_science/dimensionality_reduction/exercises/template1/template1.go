@@ -4,7 +4,7 @@
 // go build
 // ./template1
 
-// Sample program to project iris data on to 3 principle components.
+// Sample program to project iris data on to 3 principal components.
 package main
 
 import (

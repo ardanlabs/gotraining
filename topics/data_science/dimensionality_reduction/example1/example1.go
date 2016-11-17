@@ -4,7 +4,7 @@
 // go build
 // ./example1
 
-// Sample program to illustrate the calculation of principle components.
+// Sample program to illustrate the calculation of principal components.
 package main
 
 import (
@@ -69,9 +69,9 @@ func main() {
 	// and variances.
 	_, vars, ok := stat.PrincipalComponents(mat, nil)
 	if !ok {
-		log.Fatal(fmt.Errorf("Could not calculate prinicple components"))
+		log.Fatal("Could not calculate principal components")
 	}
 
-	// Output the principle component direction variances to standard out.
+	// Output the principal component direction variances to standard out.
 	fmt.Printf("\nvariances = %.4f\n\n", vars)
 }

@@ -4,7 +4,7 @@
 // go build
 // ./exercise1
 
-// Sample program to project iris data on to 3 principle components.
+// Sample program to project iris data on to 3 principal components.
 package main
 
 import (
@@ -69,7 +69,7 @@ func main() {
 	// and variances.
 	vecs, _, ok := stat.PrincipalComponents(mat, nil)
 	if !ok {
-		log.Fatal(fmt.Errorf("Could not calculate prinicple components"))
+		log.Fatal("Could not calculate prinicple components")
 	}
 
 	// Project the data onto the first 3 principal components.

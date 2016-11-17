@@ -75,7 +75,7 @@ func main() {
 	// and variances.
 	_, vars, ok := stat.PrincipalComponents(mat, nil)
 	if !ok {
-		log.Fatal(fmt.Errorf("Could not calculate prinicple components"))
+		log.Fatal("Could not calculate principal components")
 	}
 
 	// Sum the eignvalues (variances).
@@ -94,7 +94,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	p.X.Label.Text = "Principle components"
+	p.X.Label.Text = "Principal components"
 	p.Y.Label.Text = "Percent of variance captured"
 	p.Y.Max = 110.0
 	p.X.Max = 3.1
