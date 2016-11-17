@@ -74,4 +74,9 @@ func main() {
 			log.Fatal(err)
 		}
 	}
+
+	// Make sure the output file is properly saved.
+	if err := tbl.Close(); err != nil {
+		log.Fatal(err)
+	}
 }

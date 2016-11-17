@@ -69,6 +69,11 @@ func main() {
 	if err := w.Error(); err != nil {
 		log.Fatal(err)
 	}
+
+	// Make sure the file is correctly closed.
+	if err := f.Close(); err != nil {
+		log.Fatal(err)
+	}
 }
 
 // cleanFile parses and cleans the file similar to what we did in exercise1.
