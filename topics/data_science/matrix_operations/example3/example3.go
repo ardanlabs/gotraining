@@ -22,7 +22,7 @@ func main() {
 	// Solve the eigenvalue problem.
 	var eig mat64.Eigen
 	if ok := eig.Factorize(a, true); !ok {
-		log.Fatal(fmt.Errorf("Could not factorize the EigenSym value."))
+		log.Fatal("Could not factorize the EigenSym value.")
 	}
 
 	// Output the eigenvalues.

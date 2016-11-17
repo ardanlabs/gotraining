@@ -9,7 +9,6 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -52,7 +51,7 @@ func main() {
 			// Convert the value to a float.
 			val, err := strconv.ParseFloat(record[i], 64)
 			if err != nil {
-				log.Fatal(fmt.Errorf("Could not parse float value"))
+				log.Fatal("Could not parse float value")
 			}
 
 			// Add the float value to the slice of floats.
