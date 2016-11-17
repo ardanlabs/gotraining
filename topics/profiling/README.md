@@ -69,10 +69,10 @@ If lots of time is spent in GC component, the program either allocates too many 
 
 ## Installing Tools
 
-**boom**  
-boom is a modern HTTP benchmarking tool capable of generating the load you need to run tests. It's built using the Go language and leverages goroutines for behind the scenes async IO and concurrency.
+**hey**
+hey is a modern HTTP benchmarking tool capable of generating the load you need to run tests. It's built using the Go language and leverages goroutines for behind the scenes async IO and concurrency.
 
-	go get -u github.com/rakyll/boom
+	go get -u github.com/rakyll/hey
 
 ## Dave Cheney's Profiling Presentation:  
 
@@ -162,29 +162,29 @@ We have a website that we will use to learn and explore more about profiling. Th
 To add load to the service while running profiling we can run these command.
 
 	// Send 100k request using 8 connections.
-	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ### GODEBUG
 
 #### GC Trace
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
-	
+
 	GODEBUG=gctrace=1 ./project > /dev/null
 
 Put some load of the web application.
 
-	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 #### Scheduler Trace
 
 Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
-	
+
 	GODEBUG=schedtrace=1000 GOMAXPROCS=2 ./project > /dev/null
 
 Put some load of the web application.
 
-	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 ### PPROF
 
@@ -209,7 +209,7 @@ Run a single search from the Browser and then refresh the profile information.
 
 Put some load of the web application. Review the raw profiling information once again.
 
-	boom -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	hey -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Look at the heap profile
 
@@ -226,7 +226,7 @@ Look at the heap profile
 
 Put some load of the web application using a single connection.
 
- 	boom -m POST -c 1 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+       hey -m POST -c 1 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Run the Go pprof tool in another window or tab to review heap information.
 
@@ -280,7 +280,7 @@ Go-Torch is a tool for stochastically profiling Go programs. Collects stack trac
 
 Put some load of the web application.
 
-	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Run the torch tool and visualize the profile.
 
@@ -306,7 +306,7 @@ Run the benchmarks and produce a cpu and memory profile.
 
 Put some load of the web application.
 
-	boom -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
+	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
 
 Capture a trace file for a brief duration.
 
