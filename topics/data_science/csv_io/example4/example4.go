@@ -28,14 +28,14 @@ var data = [][]string{
 func main() {
 
 	// Create the output file.
-	file, err := os.Create("output.csv")
+	f, err := os.Create("output.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
+	defer f.Close()
 
 	// Create a CSV writer.
-	w := csv.NewWriter(file)
+	w := csv.NewWriter(f)
 
 	// Write all the records out to the file. Note, this can
 	// also we done record by record, with a final call to

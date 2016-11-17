@@ -46,14 +46,14 @@ func main() {
 func cleanFile(filename string) ([]CSVRecord, error) {
 
 	// Open the dataset file.
-	csvFile, err := os.Open(filename)
+	f, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer csvFile.Close()
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
+	reader := csv.NewReader(f)
 
 	// Create a slice value that will hold all of the successfully parsed
 	// records from the CSV.

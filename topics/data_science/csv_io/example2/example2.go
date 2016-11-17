@@ -18,14 +18,14 @@ import (
 func main() {
 
 	// Open the iris dataset file.
-	csvFile, err := os.Open("../data/iris_extra_field.csv")
+	f, err := os.Open("../data/iris_extra_field.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer csvFile.Close()
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
+	reader := csv.NewReader(f)
 
 	// We should have 5 fields per line.  By setting
 	// FieldsPerRecord to 5, we can validate that each of the

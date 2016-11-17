@@ -55,14 +55,14 @@ func main() {
 	}
 
 	// Save the records to a CSV file called processed.csv.
-	file, err := os.Create("processed.csv")
+	f, err := os.Create("processed.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
+	defer f.Close()
 
 	// Create a CSV writer.
-	w := csv.NewWriter(file)
+	w := csv.NewWriter(f)
 
 	// Write all the records out to the file.
 	w.WriteAll(records)
@@ -75,14 +75,14 @@ func main() {
 func cleanFile(filename string) ([]CSVRecord, error) {
 
 	// Open the dataset file.
-	csvFile, err := os.Open(filename)
+	f, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer csvFile.Close()
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
+	reader := csv.NewReader(f)
 
 	// Create a slice value that will hold all of the successfully parsed
 	// records from the CSV.
