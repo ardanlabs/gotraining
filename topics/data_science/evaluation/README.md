@@ -39,8 +39,8 @@ For the `labeled.csv` results, implement and calculate the evaluation metric cal
 
 For the `continuous.csv` results, implement and calculate the evaluation metric called "mean squared error" as defined [here](https://en.wikipedia.org/wiki/Mean_squared_error).  What advantages or disadvantages might this metric have as compared to mean absolute error?
 
-[Template](exercises/template1/template2.go) |
-[Answer](exercises/exercise1/exercise2.go)
+[Template](exercises/template2/template2.go) |
+[Answer](exercises/exercise2/exercise2.go)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
