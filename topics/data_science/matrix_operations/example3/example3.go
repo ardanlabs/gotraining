@@ -4,7 +4,7 @@
 // go build
 // ./example3
 
-// Sample program to solve a eignvalue/vector problem.
+// Sample program to solve an eigenvalue/vector problem.
 package main
 
 import (

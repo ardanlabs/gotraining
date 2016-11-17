@@ -78,7 +78,7 @@ func main() {
 		log.Fatal("Could not calculate principal components")
 	}
 
-	// Sum the eignvalues (variances).
+	// Sum the eigenvalues (variances).
 	total := floats.Sum(vars)
 
 	// Calculate cumulative variance percentages for each sorted value.
