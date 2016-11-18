@@ -32,7 +32,7 @@ func main() {
 	// we will be looking at the measures for this variable.
 	floatCol, ok := irisDF.Col("sepal_length").Elements.(df.FloatElements)
 	if !ok {
-		log.Fatal(fmt.Errorf("Could not parse float column"))
+		log.Fatal("Could not parse float column")
 	}
 
 	// Convert the Gota float values to a normal slice of floats.

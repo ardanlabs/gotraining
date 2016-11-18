@@ -9,7 +9,6 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"image/color"
 	"log"
 	"os"
@@ -27,14 +26,14 @@ import (
 func main() {
 
 	// Open the iris dataset file.
-	csvFile, err := os.Open("../data/iris.csv")
+	f, err := os.Open("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer csvFile.Close()
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
+	reader := csv.NewReader(f)
 	reader.FieldsPerRecord = 5
 
 	// Read in all of the CSV records
@@ -59,7 +58,7 @@ func main() {
 			// Convert the value to a float.
 			val, err := strconv.ParseFloat(record[i], 64)
 			if err != nil {
-				log.Fatal(fmt.Errorf("Could not parse float value"))
+				log.Fatal("Could not parse float value")
 			}
 
 			// Add the float value to the slice of floats.
@@ -75,10 +74,10 @@ func main() {
 	// and variances.
 	_, vars, ok := stat.PrincipalComponents(mat, nil)
 	if !ok {
-		log.Fatal(fmt.Errorf("Could not calculate prinicple components"))
+		log.Fatal("Could not calculate principal components")
 	}
 
-	// Sum the eignvalues (variances).
+	// Sum the eigenvalues (variances).
 	total := floats.Sum(vars)
 
 	// Calculate cumulative variance percentages for each sorted value.
@@ -94,7 +93,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	p.X.Label.Text = "Principle components"
+	p.X.Label.Text = "Principal components"
 	p.Y.Label.Text = "Percent of variance captured"
 	p.Y.Max = 110.0
 	p.X.Max = 3.1

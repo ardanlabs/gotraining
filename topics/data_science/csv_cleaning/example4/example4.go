@@ -36,7 +36,7 @@ func main() {
 	defer tx.Commit()
 
 	// Define a SQL query that we will execute against the CSV file.
-	query := "SELECT var3, var4, var5 FROM csv WHERE var5 = \"Iris-versicolor\""
+	query := `SELECT var3, var4, var5 FROM csv WHERE var5 = "Iris-versicolor"`
 
 	// Query the CSV via the SQL statement.  Here we will only get
 	// the petal length, petal width, and species for all rows
