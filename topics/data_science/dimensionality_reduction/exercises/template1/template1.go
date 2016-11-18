@@ -4,12 +4,11 @@
 // go build
 // ./template1
 
-// Sample program to project iris data on to 3 principle components.
+// Sample program to project iris data on to 3 principal components.
 package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -20,14 +19,14 @@ import (
 func main() {
 
 	// Open the iris dataset file.
-	csvFile, err := os.Open("../../data/iris.csv")
+	f, err := os.Open("../../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer csvFile.Close()
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
+	reader := csv.NewReader(f)
 	reader.FieldsPerRecord = 5
 
 	// Read in all of the CSV records
@@ -52,7 +51,7 @@ func main() {
 			// Convert the value to a float.
 			val, err := strconv.ParseFloat(record[i], 64)
 			if err != nil {
-				log.Fatal(fmt.Errorf("Could not parse float value"))
+				log.Fatal("Could not parse float value")
 			}
 
 			// Add the float value to the slice of floats.

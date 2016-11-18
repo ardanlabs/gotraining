@@ -58,7 +58,7 @@ func main() {
 	p.Add(h)
 
 	// Overlay The normal distribution function for comparison.
-	norm := plotter.NewFunction(distuv.UnitNormal.Prob)
+	norm := plotter.NewFunction(normDist.Prob)
 	norm.Color = color.RGBA{R: 255, A: 255}
 	norm.Width = vg.Points(2)
 	p.Add(norm)

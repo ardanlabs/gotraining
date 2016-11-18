@@ -17,14 +17,14 @@ import (
 func main() {
 
 	// Open the iris dataset file.
-	csvFile, err := os.Open("../data/iris.csv")
+	f, err := os.Open("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer csvFile.Close()
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
+	reader := csv.NewReader(f)
 
 	// Assume we don't know the number of fields per line.  By setting
 	// FieldsPerRecord negative, each row may have a variable

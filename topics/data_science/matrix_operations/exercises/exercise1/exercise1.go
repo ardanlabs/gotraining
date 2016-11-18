@@ -4,7 +4,7 @@
 // go build
 // ./exercise1
 
-// Sample program to divde a matrix by its norm.
+// Sample program to divide a matrix by its norm.
 package main
 
 import (

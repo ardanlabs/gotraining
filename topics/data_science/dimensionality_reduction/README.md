@@ -1,6 +1,6 @@
 ## Dimensionality Reduction
 
-Data scientists use dimensionality reduction to transfrom high-dimensional data sets into more compact, low-dimensional data sets.  This process can be very useful when there is redundancy and correlation between features, when a data set includes irrelevant features, and when computational or modeling constraints necessitate lower dimensions. Principle Component Analysis is a widely used dimensionality reduction technique that we will explore here.
+Data scientists use dimensionality reduction to transfrom high-dimensional data sets into more compact, low-dimensional data sets.  This process can be very useful when there is redundancy and correlation between features, when a data set includes irrelevant features, and when computational or modeling constraints necessitate lower dimensions. Principal Component Analysis is a widely used dimensionality reduction technique that we will explore here.
 
 ## Notes
 
@@ -14,14 +14,14 @@ Data scientists use dimensionality reduction to transfrom high-dimensional data 
 
 ## Links
 
-[A tutorial on principle component analysis](http://faculty.iiit.ac.in/~mkrishna/PrincipalComponents.pdf)    
-[Another tutorial on principle component analysis](https://www.cs.princeton.edu/picasso/mats/PCA-Tutorial-Intuition_jp.pdf)    
+[A tutorial on principal component analysis](http://faculty.iiit.ac.in/~mkrishna/PrincipalComponents.pdf)
+[Another tutorial on principal component analysis](https://www.cs.princeton.edu/picasso/mats/PCA-Tutorial-Intuition_jp.pdf)
 [A survey of dimensionality reduction techniques](http://computation.llnl.gov/casc/sapphire/pubs/148494.pdf)
 
 ## Code Review
 
 [github.com/gonum/stat docs](https://godoc.org/github.com/gonum/stat)  
-[Caclulate Principle Components](example1/example1.go)  
+[Calculate Principal Components](example1/example1.go)
 [Determine a Number of Target Dimensions](example2/example2.go)  
 [Project the Data](example3/example3.go)  
 

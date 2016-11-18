@@ -36,7 +36,7 @@ func main() {
 	defer tx.Commit()
 
 	// Define a query we will execute against our CSV file.
-	query := "SELECT var1, var2, var3, var4, var5 FROM csv WHERE var1 != \"sepal_length\";"
+	query := `SELECT var1, var2, var3, var4, var5 FROM csv WHERE var1 != "sepal_length";`
 
 	// Query the CSV via the SQL statement.
 	rows, err := tx.Query(query)
@@ -73,5 +73,10 @@ func main() {
 		if err = tbl.WriteRow(f1+f2+f3+f4, species); err != nil {
 			log.Fatal(err)
 		}
+	}
+
+	// Make sure the output file is properly saved.
+	if err := tbl.Close(); err != nil {
+		log.Fatal(err)
 	}
 }

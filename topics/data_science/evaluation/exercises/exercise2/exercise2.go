@@ -20,14 +20,14 @@ import (
 func main() {
 
 	// Open the continuous observations and predictions.
-	csvFile, err := os.Open("../../data/continuous.csv")
+	f, err := os.Open("../../data/continuous.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer csvFile.Close()
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
+	reader := csv.NewReader(f)
 
 	// observed and predicted will hold the parsed observed and predicted values
 	// form the continous data file.
