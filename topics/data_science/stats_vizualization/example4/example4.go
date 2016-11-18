@@ -32,15 +32,16 @@ func main() {
 	// Create the plot and set its title and axis label.
 	p, err := plot.New()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
+
 	p.Title.Text = "Box plots"
 	p.Y.Label.Text = "Values"
 
 	// Create the box for our data.
 	w := vg.Points(50)
 
-	// Create a histogram for each of the feature columns in the dataset.
+	// Create a box plot for each of the feature columns in the dataset.
 	for idx, colName := range irisDF.Names() {
 
 		// If the column is one of the feature columns, let's create
