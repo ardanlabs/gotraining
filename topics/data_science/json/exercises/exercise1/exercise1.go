@@ -38,7 +38,7 @@ type station struct {
 	IsInstalled       int    `json:"is_installed"`
 	IsRenting         int    `json:"is_renting"`
 	IsReturning       int    `json:"is_returning"`
-	LastReported      string `json:"last_reported"`
+	LastReported      int    `json:"last_reported"`
 	HasAvailableKeys  bool   `json:"eightd_has_available_keys"`
 }
 
@@ -58,6 +58,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Defer closing the response Body.
+	defer response.Body.Close()
 
 	// Read the body of the response into []byte.
 	body, err := ioutil.ReadAll(response.Body)

@@ -35,9 +35,4 @@ func main() {
 	}
 	fi := mat64.Formatted(aInverse, mat64.Prefix("       "))
 	fmt.Printf("a^-1 = %v\n\n", fi)
-
-	// Compute the dot product of a with another matrix b.
-	b := mat64.NewDense(3, 3, []float64{2, 3, 1, 8, 0, 7, 1, 1, 9})
-	dot := mat64.Dot(a, b)
-	fmt.Printf("dot(a, b) = %.2f\n\n", dot)
 }

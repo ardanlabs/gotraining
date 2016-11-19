@@ -29,6 +29,9 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Defer response body close.
+	defer response.Body.Close()
+
 	// Read the body of the response into []byte.
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
