@@ -9,7 +9,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/csv"
 	"fmt"
 	"log"
@@ -26,7 +25,7 @@ func main() {
 	}
 
 	// Read in the CSV records.
-	r := csv.NewReader(bufio.NewReader(f))
+	r := csv.NewReader(f)
 	records, err := r.ReadAll()
 	if err != nil {
 		log.Fatal(err)
