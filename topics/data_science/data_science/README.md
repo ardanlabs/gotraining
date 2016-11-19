@@ -19,7 +19,8 @@ from [Forbes](http://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-m
 
 ## Links
 
-[Go for Data Science](https://youtu.be/D5tDubyXLrQ)  
+[Go for Data Science](https://youtu.be/D5tDubyXLrQ)   
+[Go Data Science Resources, Tooling, Community](https://github.com/gopherds/resources)     
 [Doing data science at Twitter](https://medium.com/@rchang/my-two-year-journey-as-a-data-scientist-at-twitter-f0c13298aee6#.hdprnhlv5)  
 [A Guide to Building a High Functioning Data Science Department](http://multithreaded.stitchfix.com/blog/2016/03/16/engineers-shouldnt-write-etl/)  
 [Data Science at the Speed of Hype](http://www.john-foreman.com/blog/surviving-data-science-at-the-speed-of-hype)  
