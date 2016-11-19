@@ -18,6 +18,10 @@ type player struct {
 
 // average calculates the batting average for a player.
 func (p *player) average() float64 {
+	if p.atBats == 0 {
+		return 0.0
+	}
+
 	return float64(p.hits) / float64(p.atBats)
 }
 
