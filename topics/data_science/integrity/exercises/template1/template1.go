@@ -43,7 +43,6 @@ func main() {
 		if err != nil {
 
 			// Handle this error related to missing data.
-
 		}
 		if intVal > intMax {
 			intMax = intVal
