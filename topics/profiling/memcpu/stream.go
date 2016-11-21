@@ -12,7 +12,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io"
 )
 
 // data represents a table of input and expected output.
@@ -74,41 +73,34 @@ func algOne(data []byte, output *bytes.Buffer) {
 	end := size - 1
 
 	// Read in an initial number of bytes we need to get started.
-	if n, err := io.ReadFull(input, buf[:end]); err != nil {
+	if n, err := input.Read(buf[:end]); err != nil {
 		output.Write(buf[:n])
 		return
 	}
 
 	for {
-
-		// Read in one byte from the input stream.
-		n, err := io.ReadFull(input, tmp)
-
-		// If we have a byte then process it.
-		if n == 1 {
-
-			// Add this byte to the end of the buffer.
-			buf[end] = tmp[0]
-
-			// If we have a match, replace the bytes.
-			if bytes.Compare(buf, find) == 0 {
-				copy(buf, repl)
-			}
-
-			// Write the front byte since it has been compared.
-			output.WriteByte(buf[0])
-
-			// Slice that front byte out.
-			copy(buf, buf[1:])
-		}
-
-		// Did we hit the end of the stream, then we are done.
+		var err error
+		tmp[0], err = input.ReadByte()
 		if err != nil {
 
 			// Flush the reset of the bytes we have.
 			output.Write(buf[:end])
 			break
 		}
+
+		// Add this byte to the end of the buffer.
+		buf[end] = tmp[0]
+
+		// If we have a match, replace the bytes.
+		if bytes.Compare(buf, find) == 0 {
+			copy(buf, repl)
+		}
+
+		// Write the front byte since it has been compared.
+		output.WriteByte(buf[0])
+
+		// Slice that front byte out.
+		copy(buf, buf[1:])
 	}
 }
 

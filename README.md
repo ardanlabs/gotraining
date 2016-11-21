@@ -233,18 +233,14 @@ If you are interested in holding an event in your area please let me know. I wil
 ### 2017
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
+		Public		Adv Go		Golab			Florance, IT 			January 	Bill Kennedy 		http://golab.io/
 		Corporate	Go			GNS Science		Wellington, NZ 			January 	Bill Kennedy
-		Public 		Adv Go 		GopherCon India Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/ 
+		Public 		Adv Go 		GopherCon India Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/
+		GoBridge	Go 			Framingham 		Framingham, MA			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/ 
 
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Free		Web			WWG				SF, CA					November	Mark Bates
-		Public		Data		Ardan			SF, CA					November	Daniel Whitenack
-		Public		Go			GothamGo		NYC, NY					November	Bill Kennedy
-		Public		Go			Dev Fest		NYC, NY					November	Bill Kennedy 		https://generalassemb.ly/education/devfestnyc-ultimate-go-training/new-york-city/30237
-		Free		Web			WWG				NYC, NY					November	Mark Bates 			https://generalassemb.ly/education/ultimate-go-web-edition/new-york-city/30692
-		Public		Data		GDG DevFest		Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
 		Corporate	Go			Hootsuite		Vancouver, Canada		November	Bill Kennedy
 		Corporate	Go			Skillsmatter	London, England			November	Ernesto Jimenez
 		Corporate	Go			CISCO 			San Jose, CA 			November	Cory LaNou
@@ -289,7 +285,9 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Go			dotGo			Paris, France			October		Ernesto Jimenez
 		Public		Kubernetes	OSCON 			London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
 		Corporate	Go			Centralway		Zürich, Switzerland	 October	 Bill Kennedy  
-
+		Public		Go			GothamGo		NYC, NY					November	Bill Kennedy
+		Public		Go			Dev Fest		NYC, NY					November	Bill Kennedy 		https://generalassemb.ly/education/devfestnyc-ultimate-go-training/new-york-city/30237
+		Public		Data		GDG DevFest		Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
 
 ### Past Years
 

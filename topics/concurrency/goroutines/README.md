@@ -50,6 +50,6 @@ http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 **Part B** Run the program in parallel.
 
 [Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/kjtlMXkAAv)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/6iGzF8rMTN))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/pUV-FPd3CE))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
