@@ -12,6 +12,11 @@ gotraining
 _obj
 _test
 
+# Editor files
+.idea/
+*.iml
+*.swp
+
 # Architecture specific extensions/prefixes
 *.[568vq]
 [568vq].out
