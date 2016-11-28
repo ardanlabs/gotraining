@@ -20,6 +20,7 @@ func main() {
 
 // increment declares count as a variable whose value is
 // always an integer.
+//go:noinline
 func increment(inc int) {
 
 	// Increment the "value of" inc.
