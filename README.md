@@ -147,14 +147,15 @@ _**Podcasts**_
 **Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
 Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
 
-https://github.com/dwhitena/slides
+_**Video**_  
+[GopherCon 2016 - Go for Data Science](https://www.youtube.com/watch?v=D5tDubyXLrQ)  
 
 **John Gosset** ([@jgosset_](https://twitter.com/jgosset_))  
 John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
 
 _**Video**_  
 [GopherCon Brazil - Go Scratch That Itch](https://www.youtube.com/watch?v=EIUvUBS-3ZE)  
-  
+
 ## Twitter
 
 Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
