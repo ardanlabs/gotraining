@@ -9,9 +9,6 @@ This material covers the essential things you need to know about the standard li
 #### Encoding and Decoding
 [Encoding](../../../topics/packages/encoding/README.md)
 
-#### HTTP
-[HTTP](../../../topics/packages/http/README.md)
-
 #### Input and Output
 [IO](../../../topics/packages/io/README.md)
 
