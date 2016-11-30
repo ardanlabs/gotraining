@@ -144,23 +144,13 @@ _**Podcasts**_
 [The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
 [Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime-6/)  
 
-**Kevin Gillette** ([@kevingillette](https://twitter.com/kevingillette))  
-_Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history._
-
-**Cory LaNou** ([@corylanou](https://twitter.com/corylanou))  
-_Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time._
-
-https://corylanou.github.io/
-
-**Mark Bates** ([@markbates](https://twitter.com/markbates))  
-_Mark Bates is a full stack web developer with over 17 years of experience. He has written three books, “Distributed Programming with Ruby”, “Programming in CoffeeScript”, and “Conquering the Command Line”. Mark has spoken at conferences around the world, has led user groups such as Boston Ruby and Boston Golang, and has helped to organize conferences such as GothamGo and GopherCon (lightning talks)._
-
-https://www.papercall.io/speakers/markbates
-
 **Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
 Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
 
 https://github.com/dwhitena/slides
+
+**John Gosset** ([@jgosset_](https://twitter.com/jgosset_))  
+John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
 
 ## Twitter
 
