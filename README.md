@@ -147,8 +147,18 @@ _**Podcasts**_
 **Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
 Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
 
+_**Writing**_  
+[Data Dan](https://www.datadan.io/)    
+[Elephantine Analytics](https://medium.com/pachyderm-data)
+
+_**Articles**_  
+[O'Reilly Data Blog](https://www.oreilly.com/ideas/data-science-gophers)
+
 _**Video**_  
 [GopherCon 2016 - Go for Data Science](https://www.youtube.com/watch?v=D5tDubyXLrQ)  
+
+_**Podcasts**_  
+[Go Time - Episode 4](https://changelog.com/gotime/4)    
 
 **John Gosset** ([@jgosset_](https://twitter.com/jgosset_))  
 John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
