@@ -12,13 +12,13 @@ func main() {
 	// Declare a slice of integers with 7 values.
 	x := make([]int, 7)
 
-	// Set a pointer to the second element of the slice.
-	twohundred := &x[1]
-
 	// Random starting counters.
 	for i := 0; i < 7; i++ {
 		x[i] = i * 100
 	}
+
+	// Set a pointer to the second element of the slice.
+	twohundred := &x[1]
 
 	// Append a new value to the slice.
 	x = append(x, 800)
