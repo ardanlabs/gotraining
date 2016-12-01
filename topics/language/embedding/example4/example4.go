@@ -19,8 +19,8 @@ type user struct {
 	email string
 }
 
-// notify implements a method that can be called via
-// a value of type user.
+// notify implements a method notifies users
+// of different events.
 func (u *user) notify() {
 	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
@@ -33,8 +33,8 @@ type admin struct {
 	level string
 }
 
-// notify implements a method that can be called via
-// a value of type Admin.
+// notify implements a method notifies admins
+// of different events.
 func (a *admin) notify() {
 	fmt.Printf("Sending admin Email To %s<%s>\n",
 		a.name,

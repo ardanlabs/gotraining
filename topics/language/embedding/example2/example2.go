@@ -13,8 +13,8 @@ type user struct {
 	email string
 }
 
-// notify implements a method that can be called via
-// a pointer of type user.
+// notify implements a method notifies users
+// of different events.
 func (u *user) notify() {
 	fmt.Printf("Sending user email To %s<%s>\n",
 		u.name,
