@@ -176,6 +176,9 @@ This content can be found under [pointers](../topics/pointers). We feel this con
 [Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection) - Wikipedia  
 [Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm) - Rick Hudson  
+[Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)  
+[Go 1.5 concurrent garbage collector pacing](https://docs.google.com/document/d/1wmjrocXIWTr1JxU-3EQBI6BK6KgtiFArkG47XK73xIQ/edit)  
+[Eliminating Stack Re-Scanning](https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md)
 
 #### Single Static Assignment Optimizations
 
