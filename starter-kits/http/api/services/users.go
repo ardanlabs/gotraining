@@ -22,7 +22,7 @@ type usersService struct{}
 var Users usersService
 
 // List retrieves a list of existing users from the database.
-func (usersService) List(c *app.Context) ([]models.User, error) {
+func (usersService) List(c *app.Ctx) ([]models.User, error) {
 	log.Println(c.SessionID, ": services : Users : List : Started")
 
 	var u []models.User
@@ -31,7 +31,7 @@ func (usersService) List(c *app.Context) ([]models.User, error) {
 		return collection.Find(nil).All(&u)
 	}
 
-	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Values["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : List : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (usersService) List(c *app.Context) ([]models.User, error) {
 }
 
 // Retrieve gets the specified user from the database.
-func (usersService) Retrieve(c *app.Context, userID string) (*models.User, error) {
+func (usersService) Retrieve(c *app.Ctx, userID string) (*models.User, error) {
 	log.Println(c.SessionID, ": services : Users : Retrieve : Started")
 
 	if !bson.IsObjectIdHex(userID) {
@@ -61,7 +61,7 @@ func (usersService) Retrieve(c *app.Context, userID string) (*models.User, error
 		return collection.Find(q).One(&u)
 	}
 
-	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Values["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
 			log.Println(c.SessionID, ": services : Users : Retrieve : Completed : ERROR :", err)
 			return nil, err
@@ -76,7 +76,7 @@ func (usersService) Retrieve(c *app.Context, userID string) (*models.User, error
 }
 
 // Create inserts a new user into the database.
-func (usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, error) {
+func (usersService) Create(c *app.Ctx, u *models.User) ([]app.Invalid, error) {
 	log.Println(c.SessionID, ": services : Users : Create : Started")
 
 	now := time.Now()
@@ -99,7 +99,7 @@ func (usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, error
 		return collection.Insert(u)
 	}
 
-	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Values["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -109,7 +109,7 @@ func (usersService) Create(c *app.Context, u *models.User) ([]app.Invalid, error
 }
 
 // Update replaces a user document in the database.
-func (usersService) Update(c *app.Context, userID string, u *models.User) ([]app.Invalid, error) {
+func (usersService) Update(c *app.Ctx, userID string, u *models.User) ([]app.Invalid, error) {
 	log.Println(c.SessionID, ": services : Users : Update : Started")
 
 	if v, err := u.Validate(); err != nil {
@@ -142,7 +142,7 @@ func (usersService) Update(c *app.Context, userID string, u *models.User) ([]app
 		return collection.Update(q, u)
 	}
 
-	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Values["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : Create : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -152,7 +152,7 @@ func (usersService) Update(c *app.Context, userID string, u *models.User) ([]app
 }
 
 // Delete inserts a new user into the database.
-func (usersService) Delete(c *app.Context, userID string) error {
+func (usersService) Delete(c *app.Ctx, userID string) error {
 	log.Println(c.SessionID, ": services : Users : Delete : Started")
 
 	if !bson.IsObjectIdHex(userID) {
@@ -166,7 +166,7 @@ func (usersService) Delete(c *app.Context, userID string) error {
 		return collection.Remove(q)
 	}
 
-	if err := app.ExecuteDB(c.Ctx["DB"].(*mgo.Session), usersCollection, f); err != nil {
+	if err := app.ExecuteDB(c.Values["DB"].(*mgo.Session), usersCollection, f); err != nil {
 		log.Println(c.SessionID, ": services : Users : Delete : Completed : ERROR :", err)
 		return err
 	}

@@ -21,7 +21,7 @@ const Failed = "\u2717"
 // TestUsers validates a user can be created, retrieved and
 // then removed from the system.
 func TestUsers(t *testing.T) {
-	c := &app.Context{
+	c := &app.Ctx{
 		Ctx:       make(map[string]interface{}),
 		SessionID: "TESTING",
 	}

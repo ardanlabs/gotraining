@@ -54,9 +54,9 @@ var app = struct {
 
 // A Handler is a type that handles an http request within our own little mini
 // framework. The fun part is that our context is fully controlled and
-// configured by us so we can extend the functionality of the Context whenever
+// configured by us so we can extend the functionality of the Ctx whenever
 // we want.
-type Handler func(*Context) error
+type Handler func(*Ctx) error
 
 // A Middleware is a type that wraps a handler to remove boilerplate or other
 // concerns not direct to any given Handler.
@@ -112,13 +112,13 @@ func (a *App) Handle(verb, path string, handler Handler, mw ...Middleware) {
 
 	// The function to execute for each request.
 	h := func(w http.ResponseWriter, r *http.Request, p map[string]string) {
-		c := Context{
+		c := Ctx{
 			ResponseWriter: w,
 			Request:        r,
 			Now:            time.Now(),
 			Params:         p,
 			SessionID:      uuid.New(),
-			Ctx:            make(map[string]interface{}),
+			Values:         make(map[string]interface{}),
 			App:            a,
 		}
 

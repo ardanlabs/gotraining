@@ -20,7 +20,7 @@ var Users usersHandle
 
 // List returns all the existing users in the system.
 // 200 Success, 404 Not Found, 500 Internal
-func (usersHandle) List(c *app.Context) error {
+func (usersHandle) List(c *app.Ctx) error {
 	u, err := services.Users.List(c)
 	if err != nil {
 		return err
@@ -32,7 +32,7 @@ func (usersHandle) List(c *app.Context) error {
 
 // Retrieve returns the specified user from the system.
 // 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
-func (usersHandle) Retrieve(c *app.Context) error {
+func (usersHandle) Retrieve(c *app.Ctx) error {
 	u, err := services.Users.Retrieve(c, c.Params["id"])
 	if err != nil {
 		return err
@@ -44,7 +44,7 @@ func (usersHandle) Retrieve(c *app.Context) error {
 
 // Create inserts a new user into the system.
 // 200 OK, 400 Bad Request, 500 Internal
-func (usersHandle) Create(c *app.Context) error {
+func (usersHandle) Create(c *app.Ctx) error {
 	var u models.User
 	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
 		return err
@@ -67,7 +67,7 @@ func (usersHandle) Create(c *app.Context) error {
 
 // Update updates the specified user in the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func (usersHandle) Update(c *app.Context) error {
+func (usersHandle) Update(c *app.Ctx) error {
 	var u models.User
 	if err := json.NewDecoder(c.Request.Body).Decode(&u); err != nil {
 		return err
@@ -89,7 +89,7 @@ func (usersHandle) Update(c *app.Context) error {
 
 // Delete removed the specified user from the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func (usersHandle) Delete(c *app.Context) error {
+func (usersHandle) Delete(c *app.Ctx) error {
 	u, err := services.Users.Retrieve(c, c.Params["id"])
 	if err != nil {
 		return err

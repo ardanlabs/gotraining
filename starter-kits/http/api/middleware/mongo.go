@@ -13,11 +13,11 @@ import (
 func Mongo(h app.Handler) app.Handler {
 
 	// Wrap the handlers inside a session copy/close.
-	f := func(c *app.Context) error {
+	f := func(c *app.Ctx) error {
 
 		log.Printf("%s : Mongo : *****> Capture Mongo Session\n", c.SessionID)
 		ses := app.GetSession()
-		c.Ctx["DB"] = ses
+		c.Values["DB"] = ses
 
 		defer func() {
 			log.Printf("%s : Mongo : *****> Release Mongo Session\n", c.SessionID)

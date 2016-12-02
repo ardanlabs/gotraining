@@ -13,7 +13,7 @@ import (
 // RequestLogger writes some information about the request to the logs in
 // the format: SESSIONID : (200) GET /foo -> IP ADDR (latency)
 func RequestLogger(h app.Handler) app.Handler {
-	return func(c *app.Context) error {
+	return func(c *app.Ctx) error {
 		start := time.Now()
 		err := h(c)
 
