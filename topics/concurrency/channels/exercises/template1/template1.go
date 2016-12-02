@@ -9,13 +9,12 @@ package main
 
 // Add imports.
 
-// Declare a wait group variable.
-
 func main() {
 
 	// Create an unbuffered channel.
 
-	// Set the waitgroup, one for each goroutine.
+	// Create the WaitGroup and add a count
+	// of two, one for each goroutine.
 
 	// Launch the goroutine and handle Done.
 

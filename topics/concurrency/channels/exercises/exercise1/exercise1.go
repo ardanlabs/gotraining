@@ -12,15 +12,14 @@ import (
 	"sync"
 )
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
-
 func main() {
 
 	// Create an unbuffered channel.
 	share := make(chan int)
 
-	// Add a count of two, one for each goroutine.
+	// Create the WaitGroup and add a count
+	// of two, one for each goroutine.
+	var wg sync.WaitGroup
 	wg.Add(2)
 
 	// Launch two goroutines.
