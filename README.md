@@ -134,6 +134,7 @@ _**Video**_
 [GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
 [GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
 
+[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
 [London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
 [GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
 [Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
