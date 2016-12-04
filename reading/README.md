@@ -25,18 +25,16 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [The Evolution of Go](https://www.youtube.com/watch?v=0ReKdcpNyQg) - Robert Griesmer  
 [Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article) - Rob Pike  
-
 [A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015) - Martyn Thomas  
 [The Rise and Fall of Minicomputers](http://ethw.org/Rise_and_Fall_of_Minicomputers) - Gordon Bell  
 [After Moore's Law - Economist](http://www.economist.com/technology-quarterly/2016-03-12/after-moores-law) - Tim Cross  
 [A Crash Course in Modern Hardware](http://www.infoq.com/presentations/click-crash-course-modern-hardware#.VwoB63sl6no.twitter) -  Cliff Click  
-
 [The Future of Programming](https://www.youtube.com/watch?v=9Xy3QC7yxJw) - Uncle Bob  
 [The Best Programming Advice I Ever Got](http://www.informit.com/articles/article.aspx?p=1941206) - Rob Pike  
-
 [A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh  
-
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
+[Let’s stop copying C](https://eev.ee/blog/2016/12/01/lets-stop-copying-c/) - Eevee  
+[15 Years of Concurrency](http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/) - Joe Duffy  
 
 ### Contribute to Go
 

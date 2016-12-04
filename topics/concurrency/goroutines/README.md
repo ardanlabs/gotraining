@@ -34,6 +34,7 @@ http://talks.golang.org/2013/distsys.slide
 http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html  
 [The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
 [Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
+[15 Years of Concurrency](http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/) - Joe Duffy  
 
 ## Code Review
 
