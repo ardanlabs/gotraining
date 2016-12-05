@@ -246,10 +246,6 @@ If you are interested in holding an event in your area please let me know. I wil
 ### 2016
 		Type		Ultimate	Venue			City, ST				Month		Trainer				Url
 		===========================================================================================================
-		Corporate	Go			Hootsuite		Vancouver, Canada		November	Bill Kennedy
-		Corporate	Go			Skillsmatter	London, England			November	Ernesto Jimenez
-		Corporate	Go			CISCO 			San Jose, CA 			November	Cory LaNou
-		Public		Web			Ardan			SF, CA					December	Mark Bates			https://www.eventbrite.com/e/ultimate-go-web-san-francisco-nov-2016-tickets-27326208425
 		Corporate	Go			Viacom			NYC, NY					December	Bill Kennedy		
 
 											Completed
@@ -293,6 +289,8 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public		Go			GothamGo		NYC, NY					November	Bill Kennedy
 		Public		Go			Dev Fest		NYC, NY					November	Bill Kennedy 		https://generalassemb.ly/education/devfestnyc-ultimate-go-training/new-york-city/30237
 		Public		Data		GDG DevFest		Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
+		Corporate	Go			Hootsuite		Vancouver, Canada		November	Bill Kennedy
+		Corporate	Go			CISCO 			San Jose, CA 			November	Cory LaNou
 
 ### Past Years
 
