@@ -1,15 +1,16 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-package app
+package middleware
 
 import (
-	"encoding/json"
-	"fmt"
+	"context"
 	"log"
+	"net/http"
 	"time"
 
-	"gopkg.in/mgo.v2"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
+	mgo "gopkg.in/mgo.v2"
 )
 
 // MongoDB connection information.
@@ -25,11 +26,32 @@ const (
 	database     = "gotraining"
 )
 
-// session maintains the master session
-var session *mgo.Session
+// Mongo handles session management.
+func Mongo(h app.Handler) app.Handler {
 
-// init sets up the MongoDB environment.
-func init() {
+	// Init the MongoDB master session.
+	session := NewMGOSession()
+
+	// Wrap the handlers inside a session copy/close.
+	return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+		v := ctx.Value(app.KeyValues).(*app.Values)
+
+		// Get a MongoDB session connection.
+		log.Printf("%s : Mongo : *****> Capture Mongo Session\n", v.TraceID)
+		v.DB = session.Copy()
+
+		// Defer releasing the db session connection.
+		defer func() {
+			log.Printf("%s : Mongo : *****> Release Mongo Session\n", v.TraceID)
+			v.DB.Close()
+		}()
+
+		return h(ctx, w, r, params)
+	}
+}
+
+// NewMGOSession sets up the MongoDB environment.
+func NewMGOSession() *mgo.Session {
 	log.Printf("api : mongodb : init : Started : Host[%s] Database[%s]\n", mongoDBHosts, database)
 
 	// We need this object to establish a session to our MongoDB.
@@ -43,8 +65,8 @@ func init() {
 
 	// Create a session which maintains a pool of socket connections
 	// to our MongoDB.
-	var err error
-	if session, err = mgo.DialWithInfo(&mongoDBDialInfo); err != nil {
+	session, err := mgo.DialWithInfo(&mongoDBDialInfo)
+	if err != nil {
 		log.Fatalln("MongoDB Dial", err)
 	}
 
@@ -56,41 +78,5 @@ func init() {
 	session.SetMode(mgo.Monotonic, true)
 
 	log.Printf("api : mongodb : init : Completed : Host[%s] Database[%s]\n", mongoDBHosts, database)
-}
-
-// Query provides a string version of the value
-func Query(value interface{}) string {
-	json, err := json.Marshal(value)
-	if err != nil {
-		return ""
-	}
-
-	return string(json)
-}
-
-// GetSession returns a copy of the master session for use.
-func GetSession() *mgo.Session {
-	return session.Copy()
-}
-
-// ExecuteDB the MongoDB literal function.
-func ExecuteDB(session *mgo.Session, collectionName string, f func(*mgo.Collection) error) error {
-	log.Printf("api : mongodb : ExecuteDB : Started : Collection[%s]\n", collectionName)
-
-	// Capture the specified collection.
-	collection := session.DB(database).C(collectionName)
-	if collection == nil {
-		err := fmt.Errorf("Collection %s does not exist", collectionName)
-		log.Println("api : mongodb : ExecuteDB : Completed : ERROR :", err)
-		return err
-	}
-
-	// Execute the MongoDB call.
-	if err := f(collection); err != nil {
-		log.Println("api : mongodb : ExecuteDB : Completed : ERROR :", err)
-		return err
-	}
-
-	log.Println("api : mongodb : ExecuteDB : Completed")
-	return nil
+	return session
 }

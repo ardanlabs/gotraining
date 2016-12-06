@@ -10,7 +10,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/routes"
+	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
 	"github.com/braintree/manners"
 )
 

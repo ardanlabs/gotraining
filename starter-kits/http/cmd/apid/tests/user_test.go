@@ -9,25 +9,27 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/app"
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/models"
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/routes"
+	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 	"gopkg.in/mgo.v2/bson"
 )
 
-// Succeed is the Unicode codepoint for a check mark.
-const Succeed = "\u2713"
+const (
+	// Succeed is the Unicode codepoint for a check mark.
+	Succeed = "\u2713"
 
-// Failed is the Unicode codepoint for an X mark.
-const Failed = "\u2717"
+	// Failed is the Unicode codepoint for an X mark.
+	Failed = "\u2717"
+)
 
-var u = models.User{
+var u = user.User{
 	UserType:  1,
 	FirstName: "Bill",
 	LastName:  "Kennedy",
 	Email:     "bill@ardanlabs.com",
 	Company:   "Ardan Labs",
-	Addresses: []models.UserAddress{
+	Addresses: []user.UserAddress{
 		{
 			Type:    1,
 			LineOne: "12973 SW 112th ST",
@@ -44,17 +46,21 @@ var u = models.User{
 func TestUsers(t *testing.T) {
 	a := routes.API().(*app.App)
 
-	usersList404(t, a)
-	usersCreate200(t, a)
-	usersCreate400(t, a)
-	us := usersList200(t, a)
-	usersRetrieve200(t, a, us[0].UserID)
-	usersRetrieve404(t, a, bson.NewObjectId().Hex())
-	usersRetrieve400(t, a, "123")
-	usersUpdate200(t, a)
-	usersRetrieve200(t, a, us[0].UserID)
-	usersDelete200(t, a, us[0].UserID)
-	usersDelete404(t, a, us[0].UserID)
+	t.Run("usersList404", func(t *testing.T) { usersList404(t, a) })
+	t.Run("usersCreate200", func(t *testing.T) { usersCreate200(t, a) })
+	t.Run("usersCreate400", func(t *testing.T) { usersCreate400(t, a) })
+
+	t.Run("usersCreate400", func(t *testing.T) {
+		us := usersList200(t, a)
+
+		t.Run("usersRetrieve200", func(t *testing.T) { usersRetrieve200(t, a, us[0].UserID) })
+		t.Run("usersRetrieve404", func(t *testing.T) { usersRetrieve404(t, a, bson.NewObjectId().Hex()) })
+		t.Run("usersRetrieve400", func(t *testing.T) { usersRetrieve400(t, a, "123") })
+		t.Run("usersUpdate200", func(t *testing.T) { usersUpdate200(t, a) })
+		t.Run("usersRetrieve200", func(t *testing.T) { usersRetrieve200(t, a, us[0].UserID) })
+		t.Run("usersDelete200", func(t *testing.T) { usersDelete200(t, a, us[0].UserID) })
+		t.Run("usersDelete404", func(t *testing.T) { usersDelete404(t, a, us[0].UserID) })
+	})
 }
 
 // usersList404 validates an empty users list can be retrieved with the endpoint.
@@ -86,7 +92,7 @@ func usersCreate200(t *testing.T, a *app.App) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", Succeed)
 
-		var resp models.User
+		var resp user.User
 		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", Failed)
 		}
@@ -105,7 +111,7 @@ func usersCreate200(t *testing.T, a *app.App) {
 // usersCreate400 validates a user can't be created with the endpoint
 // unless a valid user document is submitted.
 func usersCreate400(t *testing.T, a *app.App) {
-	u := models.User{
+	u := user.User{
 		UserType: 1,
 		LastName: "Kennedy",
 		Email:    "bill@ardanstugios.com",
@@ -155,7 +161,7 @@ func usersCreate400(t *testing.T, a *app.App) {
 }
 
 // usersList200 validates a users list can be retrieved with the endpoint.
-func usersList200(t *testing.T, a *app.App) []models.User {
+func usersList200(t *testing.T, a *app.App) []user.User {
 	r := httptest.NewRequest("GET", "/v1/users", nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
@@ -167,7 +173,7 @@ func usersList200(t *testing.T, a *app.App) []models.User {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", Succeed)
 
-		var us []models.User
+		var us []user.User
 		if err := json.NewDecoder(w.Body).Decode(&us); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", Failed)
 		}
@@ -211,7 +217,7 @@ func usersRetrieve200(t *testing.T, a *app.App, id string) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", Succeed)
 
-		var ur models.User
+		var ur user.User
 		if err := json.NewDecoder(w.Body).Decode(&ur); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", Failed)
 		}
@@ -270,7 +276,7 @@ func usersUpdate200(t *testing.T, a *app.App) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", Succeed)
 
-		var resp models.User
+		var resp user.User
 		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", Failed)
 		}
@@ -296,7 +302,7 @@ func usersDelete200(t *testing.T, a *app.App, id string) {
 		}
 		t.Log("\tShould received a status code of 200 for the response.", Succeed)
 
-		var resp models.User
+		var resp user.User
 		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
 			t.Fatal("\tShould be able to unmarshal the response.", Failed)
 		}

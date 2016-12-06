@@ -1,15 +1,29 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-package models
+package user
 
 import (
 	"errors"
 	"fmt"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/app"
+	validator "dvcs.com/org/validator.v6"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
 )
+
+var validate *validator.Validate
+
+func init() {
+	config := validator.Config{
+		TagName:         "validate",
+		ValidationFuncs: validator.BakedInValidators,
+	}
+
+	validate = validator.New(config)
+}
+
+//==============================================================================
 
 // UserAddress contains information about a user's address.
 type UserAddress struct {
@@ -74,6 +88,8 @@ func (ua *UserAddress) Compare(uat *UserAddress) ([]app.Invalid, error) {
 
 	return nil, nil
 }
+
+//==============================================================================
 
 // User contains information about a user.
 type User struct {

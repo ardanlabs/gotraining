@@ -8,6 +8,7 @@
 package app
 
 import (
+	"context"
 	"errors"
 	"log"
 	"net/http"
@@ -18,11 +19,18 @@ import (
 	"github.com/braintree/manners"
 	"github.com/dimfeld/httptreemux"
 	"github.com/pborman/uuid"
+	"gopkg.in/mgo.v2"
 )
 
 // TraceIDHeader is the header added to outgoing requests which adds the
 // traceID to it.
 const TraceIDHeader = "X-Trace-ID"
+
+// Key represents the type of value for the context key.
+type ctxKey int
+
+// KeyValues is how request values or stored/retrieved.
+const KeyValues ctxKey = 1
 
 //==============================================================================
 
@@ -52,11 +60,18 @@ var app = struct {
 
 //==============================================================================
 
+// Values represent state for each request.
+type Values struct {
+	DB      *mgo.Session
+	TraceID string
+	Now     time.Time
+}
+
+//==============================================================================
+
 // A Handler is a type that handles an http request within our own little mini
-// framework. The fun part is that our context is fully controlled and
-// configured by us so we can extend the functionality of the Ctx whenever
-// we want.
-type Handler func(*Ctx) error
+// framework.
+type Handler func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error
 
 // A Middleware is a type that wraps a handler to remove boilerplate or other
 // concerns not direct to any given Handler.
@@ -69,7 +84,7 @@ type Middleware func(Handler) Handler
 // data/logic on this App struct
 type App struct {
 	*httptreemux.TreeMux
-	Ctx map[string]interface{}
+	Values map[string]interface{}
 
 	mw []Middleware
 }
@@ -80,7 +95,7 @@ type App struct {
 func New(mw ...Middleware) *App {
 	return &App{
 		TreeMux: httptreemux.New(),
-		Ctx:     make(map[string]interface{}),
+		Values:  make(map[string]interface{}),
 		mw:      mw,
 	}
 }
@@ -111,25 +126,28 @@ func (a *App) Handle(verb, path string, handler Handler, mw ...Middleware) {
 	handler = wrapMiddleware(wrapMiddleware(handler, mw), a.mw)
 
 	// The function to execute for each request.
-	h := func(w http.ResponseWriter, r *http.Request, p map[string]string) {
-		c := Ctx{
-			ResponseWriter: w,
-			Request:        r,
-			Now:            time.Now(),
-			Params:         p,
-			SessionID:      uuid.New(),
-			Values:         make(map[string]interface{}),
-			App:            a,
+	h := func(w http.ResponseWriter, r *http.Request, params map[string]string) {
+
+		// Create the context for the request.
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+
+		// Set the context with the required values to
+		// process requests.
+		v := Values{
+			TraceID: uuid.New(),
+			Now:     time.Now(),
 		}
+		ctx = context.WithValue(ctx, KeyValues, &v)
 
 		// Set the request id on the outgoing requests before any other header to
 		// ensure that the trace id is ALWAYS added to the request regardless of
 		// any error occuring or not.
-		c.Header().Set(TraceIDHeader, c.SessionID)
+		w.Header().Set(TraceIDHeader, v.TraceID)
 
 		// Call the wrapped handler and handle any possible error.
-		if err := handler(&c); err != nil {
-			c.Error(err)
+		if err := handler(ctx, w, r, params); err != nil {
+			Error(w, v.TraceID, err)
 		}
 	}
 

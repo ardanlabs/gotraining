@@ -6,9 +6,9 @@ package routes
 import (
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/app"
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/handlers"
-	"github.com/ardanlabs/gotraining/starter-kits/http/api/middleware"
+	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/handlers"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/middleware"
 )
 
 // API returns a handler for a set of routes.
@@ -21,11 +21,11 @@ func API() http.Handler {
 
 	// Initialize the routes for the API binding the route to the
 	// handler code for each specified verb.
-	a.Handle("GET", "/v1/users", handlers.Users.List)
-	a.Handle("POST", "/v1/users", handlers.Users.Create)
-	a.Handle("GET", "/v1/users/:id", handlers.Users.Retrieve)
-	a.Handle("PUT", "/v1/users/:id", handlers.Users.Update)
-	a.Handle("DELETE", "/v1/users/:id", handlers.Users.Delete)
+	a.Handle("GET", "/v1/users", handlers.User.List)
+	a.Handle("POST", "/v1/users", handlers.User.Create)
+	a.Handle("GET", "/v1/users/:id", handlers.User.Retrieve)
+	a.Handle("PUT", "/v1/users/:id", handlers.User.Update)
+	a.Handle("DELETE", "/v1/users/:id", handlers.User.Delete)
 
 	return a
 }
