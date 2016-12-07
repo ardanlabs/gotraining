@@ -9,7 +9,7 @@
 //		404 Not Found    : StatusNotFound            : Invalid URL or identifier.
 //		500 Internal     : StatusInternalServerError : Application specific beyond scope of user.
 
-package app
+package web
 
 import (
 	"context"

@@ -11,8 +11,8 @@ import (
 	"testing"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/services/user"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -50,7 +50,7 @@ var u = user.User{
 
 // TestUsers is the entry point for the users
 func TestUsers(t *testing.T) {
-	a := routes.API().(*app.App)
+	a := routes.API().(*web.App)
 
 	t.Run("usersList200Empty", func(t *testing.T) { usersList200Empty(t, a) })
 	t.Run("usersCreate200", func(t *testing.T) { usersCreate200(t, a) })
@@ -70,7 +70,7 @@ func TestUsers(t *testing.T) {
 }
 
 // usersList200Empty validates an empty users list can be retrieved with the endpoint.
-func usersList200Empty(t *testing.T, a *app.App) {
+func usersList200Empty(t *testing.T, a *web.App) {
 	r := httptest.NewRequest("GET", "/v1/users", nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
@@ -85,7 +85,7 @@ func usersList200Empty(t *testing.T, a *app.App) {
 }
 
 // usersCreate200 validates a user can be created with the endpoint.
-func usersCreate200(t *testing.T, a *app.App) {
+func usersCreate200(t *testing.T, a *web.App) {
 	body, _ := json.Marshal(&u)
 	r := httptest.NewRequest("POST", "/v1/users", bytes.NewBuffer(body))
 	w := httptest.NewRecorder()
@@ -116,7 +116,7 @@ func usersCreate200(t *testing.T, a *app.App) {
 
 // usersCreate400 validates a user can't be created with the endpoint
 // unless a valid user document is submitted.
-func usersCreate400(t *testing.T, a *app.App) {
+func usersCreate400(t *testing.T, a *web.App) {
 	u := user.User{
 		UserType: 1,
 		LastName: "Kennedy",
@@ -167,7 +167,7 @@ func usersCreate400(t *testing.T, a *app.App) {
 }
 
 // usersList200 validates a users list can be retrieved with the endpoint.
-func usersList200(t *testing.T, a *app.App) []user.User {
+func usersList200(t *testing.T, a *web.App) []user.User {
 	r := httptest.NewRequest("GET", "/v1/users", nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
@@ -211,7 +211,7 @@ func usersList200(t *testing.T, a *app.App) []user.User {
 }
 
 // usersList200 validates a users list can be retrieved with the endpoint.
-func usersRetrieve200(t *testing.T, a *app.App, id string) {
+func usersRetrieve200(t *testing.T, a *web.App, id string) {
 	r := httptest.NewRequest("GET", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
@@ -237,7 +237,7 @@ func usersRetrieve200(t *testing.T, a *app.App, id string) {
 }
 
 // usersRetrieve404 validates a user request for a user that does not exist with the endpoint.
-func usersRetrieve404(t *testing.T, a *app.App, id string) {
+func usersRetrieve404(t *testing.T, a *web.App, id string) {
 	r := httptest.NewRequest("GET", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
@@ -252,7 +252,7 @@ func usersRetrieve404(t *testing.T, a *app.App, id string) {
 }
 
 // usersRetrieve400 validates a user request with an invalid id with the endpoint.
-func usersRetrieve400(t *testing.T, a *app.App, id string) {
+func usersRetrieve400(t *testing.T, a *web.App, id string) {
 	r := httptest.NewRequest("GET", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
@@ -267,7 +267,7 @@ func usersRetrieve400(t *testing.T, a *app.App, id string) {
 }
 
 // usersUpdate200 validates a user can be updated with the endpoint.
-func usersUpdate200(t *testing.T, a *app.App) {
+func usersUpdate200(t *testing.T, a *web.App) {
 	u.FirstName = "Lisa"
 
 	body, _ := json.Marshal(&u)
@@ -285,7 +285,7 @@ func usersUpdate200(t *testing.T, a *app.App) {
 }
 
 // usersDelete200 validates a user can be deleted with the endpoint.
-func usersDelete200(t *testing.T, a *app.App, id string) {
+func usersDelete200(t *testing.T, a *web.App, id string) {
 	r := httptest.NewRequest("DELETE", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
@@ -311,7 +311,7 @@ func usersDelete200(t *testing.T, a *app.App, id string) {
 }
 
 // usersDelete404 validates a user that has been deleted is deleted.
-func usersDelete404(t *testing.T, a *app.App, id string) {
+func usersDelete404(t *testing.T, a *web.App, id string) {
 	r := httptest.NewRequest("DELETE", "/v1/users/"+id, nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)

@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
 	"gopkg.in/mgo.v2"
 )
 
@@ -27,17 +27,17 @@ const (
 )
 
 // Mongo initializes the master session and wires in the connection middleware.
-func Mongo() app.Middleware {
+func Mongo() web.Middleware {
 
 	// session contains the master session for accessing MongoDB.
 	session := NewMGOSession()
 
 	// Return this middleware to be chained together.
-	return func(next app.Handler) app.Handler {
+	return func(next web.Handler) web.Handler {
 
 		// Wrap this handler around the next one provided.
 		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) {
-			v := ctx.Value(app.KeyValues).(*app.Values)
+			v := ctx.Value(web.KeyValues).(*web.Values)
 
 			// Get a MongoDB session connection.
 			log.Printf("%s : Mongo : *****> Capture Mongo Session\n", v.TraceID)

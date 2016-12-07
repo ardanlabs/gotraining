@@ -8,7 +8,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app"
+	"dvcs.com/org/api/app"
+
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -27,7 +29,7 @@ func List(ctx context.Context, traceID string, db *mgo.Session) ([]User, error) 
 		return collection.Find(nil).All(&u)
 	}
 
-	if err := app.ExecuteDB(db, usersCollection, f); err != nil {
+	if err := web.ExecuteDB(db, usersCollection, f); err != nil {
 		log.Println(traceID, ": List : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -41,25 +43,25 @@ func Retrieve(ctx context.Context, traceID string, db *mgo.Session, userID strin
 	log.Println(traceID, ": Retrieve : Started")
 
 	if !bson.IsObjectIdHex(userID) {
-		log.Println(traceID, ": Retrieve : Completed : ERROR :", app.ErrInvalidID)
-		return nil, app.ErrInvalidID
+		log.Println(traceID, ": Retrieve : Completed : ERROR :", web.ErrInvalidID)
+		return nil, web.ErrInvalidID
 	}
 
 	var u *User
 	f := func(collection *mgo.Collection) error {
 		q := bson.M{"user_id": userID}
-		log.Printf("%s : Retrieve : MGO :\n\ndb.users.find(%s)\n\n", traceID, app.Query(q))
+		log.Printf("%s : Retrieve : MGO :\n\ndb.users.find(%s)\n\n", traceID, web.Query(q))
 		return collection.Find(q).One(&u)
 	}
 
-	if err := app.ExecuteDB(db, usersCollection, f); err != nil {
+	if err := web.ExecuteDB(db, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
 			log.Println(traceID, ": Retrieve : Completed : ERROR :", err)
 			return nil, err
 		}
 
 		log.Println(traceID, ": Retrieve : Completed : ERROR : Not Found")
-		return nil, app.ErrNotFound
+		return nil, web.ErrNotFound
 	}
 
 	log.Println(traceID, ": Retrieve : Completed")
@@ -103,7 +105,7 @@ func Create(ctx context.Context, traceID string, db *mgo.Session, cu *CreateUser
 		return collection.Insert(u)
 	}
 
-	if err := app.ExecuteDB(db, usersCollection, f); err != nil {
+	if err := web.ExecuteDB(db, usersCollection, f); err != nil {
 		log.Println(traceID, ": Create : Completed : ERROR :", err)
 		return nil, err
 	}
@@ -131,7 +133,7 @@ func Update(ctx context.Context, traceID string, db *mgo.Session, userID string,
 		return collection.Update(q, m)
 	}
 
-	if err := app.ExecuteDB(db, usersCollection, f); err != nil {
+	if err := web.ExecuteDB(db, usersCollection, f); err != nil {
 		log.Println(traceID, ": Create : Completed : ERROR :", err)
 		return err
 	}
@@ -146,7 +148,7 @@ func Delete(ctx context.Context, traceID string, db *mgo.Session, userID string)
 
 	if !bson.IsObjectIdHex(userID) {
 		log.Println(traceID, ": Delete : Completed : ERROR :", app.ErrInvalidID)
-		return app.ErrInvalidID
+		return web.ErrInvalidID
 	}
 
 	f := func(collection *mgo.Collection) error {
@@ -155,7 +157,7 @@ func Delete(ctx context.Context, traceID string, db *mgo.Session, userID string)
 		return collection.Remove(q)
 	}
 
-	if err := app.ExecuteDB(db, usersCollection, f); err != nil {
+	if err := web.ExecuteDB(db, usersCollection, f); err != nil {
 		log.Println(traceID, ": Delete : Completed : ERROR :", err)
 		return err
 	}

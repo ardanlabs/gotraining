@@ -8,12 +8,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
 )
 
 // CORS providing support for Cross-Origin Resource Sharing.
 // https://metajack.im/2010/01/19/crossdomain-ajax-for-xmpp-http-binding-made-easy/
-func CORS(a *app.App, origin string, methods string) app.Middleware {
+func CORS(a *web.App, origin string, methods string) web.Middleware {
 
 	// Create the options request handler which will attach CORS options to it.
 	a.TreeMux.OptionsHandler = func(w http.ResponseWriter, r *http.Request, p map[string]string) {
@@ -27,11 +27,11 @@ func CORS(a *app.App, origin string, methods string) app.Middleware {
 	}
 
 	// Return this middleware to be chained together.
-	return func(next app.Handler) app.Handler {
+	return func(next web.Handler) web.Handler {
 
 		// Wrap this handler around the next one provided.
 		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) {
-			v := ctx.Value(app.KeyValues).(*app.Values)
+			v := ctx.Value(web.KeyValues).(*web.Values)
 
 			// Add the access control to the header.
 			w.Header().Set("Access-Control-Allow-Origin", origin)
