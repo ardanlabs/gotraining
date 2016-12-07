@@ -72,7 +72,7 @@ func Retrieve(ctx context.Context, traceID string, db *mgo.Session, userID strin
 }
 
 // Create inserts a new user into the database.
-func Create(ctx context.Context, traceID string, db *mgo.Session, u *User) ([]app.Invalid, error) {
+func Create(ctx context.Context, traceID string, db *mgo.Session, u *User) error {
 	log.Println(traceID, ": services : Users : Create : Started")
 
 	now := time.Now()
@@ -85,9 +85,9 @@ func Create(ctx context.Context, traceID string, db *mgo.Session, u *User) ([]ap
 		ua.DateModified = &now
 	}
 
-	if v, err := u.Validate(); err != nil {
+	if err := u.Validate(); err != nil {
 		log.Println(traceID, ": services : Users : Create : Completed : ERROR :", err)
-		return v, app.ErrValidation
+		return err
 	}
 
 	f := func(collection *mgo.Collection) error {
@@ -97,20 +97,20 @@ func Create(ctx context.Context, traceID string, db *mgo.Session, u *User) ([]ap
 
 	if err := app.ExecuteDB(db, usersCollection, f); err != nil {
 		log.Println(traceID, ": services : Users : Create : Completed : ERROR :", err)
-		return nil, err
+		return err
 	}
 
 	log.Println(traceID, ": services : Users : Create : Completed")
-	return nil, nil
+	return nil
 }
 
 // Update replaces a user document in the database.
-func Update(ctx context.Context, traceID string, db *mgo.Session, userID string, u *User) ([]app.Invalid, error) {
+func Update(ctx context.Context, traceID string, db *mgo.Session, userID string, u *User) error {
 	log.Println(traceID, ": services : Users : Update : Started")
 
-	if v, err := u.Validate(); err != nil {
+	if err := u.Validate(); err != nil {
 		log.Println(traceID, ": services : Users : Update : Completed : ERROR :", err)
-		return v, app.ErrValidation
+		return err
 	}
 
 	if u.UserID == "" {
@@ -118,8 +118,9 @@ func Update(ctx context.Context, traceID string, db *mgo.Session, userID string,
 	}
 
 	if userID != u.UserID {
-		log.Println(traceID, ": services : Users : Update : Completed : ERROR :", app.ErrValidation)
-		return []app.Invalid{{Fld: "UserID", Err: "Specified UserID does not match user value."}}, app.ErrValidation
+		err := app.InvalidError{{Fld: "UserID", Err: "Specified UserID does not match user value."}}
+		log.Println(traceID, ": services : Users : Update : Completed : ERROR :", err)
+		return err
 	}
 
 	// This is a bug that needs to be fixed.
@@ -140,11 +141,11 @@ func Update(ctx context.Context, traceID string, db *mgo.Session, userID string,
 
 	if err := app.ExecuteDB(db, usersCollection, f); err != nil {
 		log.Println(traceID, ": services : Users : Create : Completed : ERROR :", err)
-		return nil, err
+		return err
 	}
 
 	log.Println(traceID, ": services : Users : Update : Completed")
-	return nil, nil
+	return nil
 }
 
 // Delete removes a user from the database.

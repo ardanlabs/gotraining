@@ -41,7 +41,7 @@ func TestUsers(t *testing.T) {
 		Company:      "Ardan Labs",
 		DateModified: &now,
 		DateCreated:  &now,
-		Addresses: []user.UserAddress{
+		Addresses: []user.Address{
 			{
 				Type:         1,
 				LineOne:      "12973 SW 112th ST",
@@ -58,12 +58,12 @@ func TestUsers(t *testing.T) {
 
 	t.Log("Given the need to add a new user, retrieve and remove that user from the system.")
 	{
-		if _, err := u.Validate(); err != nil {
+		if err := u.Validate(); err != nil {
 			t.Fatal("\tShould be able to validate the user data.", Failed)
 		}
 		t.Log("\tShould be able to validate the user data.", Succeed)
 
-		if _, err := user.Create(ctx, traceID, db, &u); err != nil {
+		if err := user.Create(ctx, traceID, db, &u); err != nil {
 			t.Fatal("\tShould be able to create a user in the system.", Failed)
 		}
 		t.Log("\tShould be able to create a user in the system.", Succeed)
@@ -78,11 +78,6 @@ func TestUsers(t *testing.T) {
 			t.Fatal("\tShould be able to retrieve the user back from the system.", Failed)
 		}
 		t.Log("\tShould be able to retrieve the user back from the system.", Succeed)
-
-		if _, err := u.Compare(ur); err != nil {
-			t.Fatal("\tShould find both the original and retrieved value are identical.", Failed)
-		}
-		t.Log("\tShould find both the original and retrieved value are identical.", Succeed)
 
 		if ur == nil || u.UserID != ur.UserID {
 			t.Fatal("\tShould have a match between the created user and the one retrieved.", Failed)

@@ -13,6 +13,7 @@ package app
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"log"
 	"net/http"
@@ -24,28 +25,80 @@ type Invalid struct {
 	Err string `json:"error"`
 }
 
+// InvalidError is a custom error type for invalid fields.
+type InvalidError []Invalid
+
+// Error implements the error interface for InvalidError.
+func (ei InvalidError) Error() string {
+	// TODO
+	return "TODO" // fmt.Sprintf("%+v", ei)
+}
+
 // jsonError is the response for errors that occur within the API.
 type jsonError struct {
-	Error  string    `json:"error"`
-	Fields []Invalid `json:"fields,omitempty"`
+	Error  string       `json:"error"`
+	Fields InvalidError `json:"fields,omitempty"`
 }
+
+//==============================================================================
+
+var (
+	// ErrNotAuthorized occurs when the call is not authorized.
+	ErrNotAuthorized = errors.New("Not authorized")
+
+	// ErrDBNotConfigured occurs when the DB is not initialized.
+	ErrDBNotConfigured = errors.New("DB not initialized")
+
+	// ErrNotFound is abstracting the mgo not found error.
+	ErrNotFound = errors.New("Entity not found")
+
+	// ErrInvalidID occurs when an ID is not in a valid form.
+	ErrInvalidID = errors.New("ID is not in it's proper form")
+
+	// ErrValidation occurs when there are validation errors.
+	ErrValidation = errors.New("Validation errors occurred")
+)
 
 //==============================================================================
 
 // Error handles all error responses for the API.
 func Error(w http.ResponseWriter, traceID string, err error) {
+
 	switch err {
 	case ErrNotFound:
 		RespondError(w, traceID, err, http.StatusNotFound)
+		return
+
 	case ErrInvalidID:
 		RespondError(w, traceID, err, http.StatusBadRequest)
+		return
+
 	case ErrValidation:
 		RespondError(w, traceID, err, http.StatusBadRequest)
+		return
+
 	case ErrNotAuthorized:
 		RespondError(w, traceID, err, http.StatusUnauthorized)
-	default:
-		RespondError(w, traceID, err, http.StatusInternalServerError)
+		return
 	}
+
+	switch e := err.(type) {
+	case InvalidError:
+		v := jsonError{
+			Error:  "field validation failure",
+			Fields: e,
+		}
+
+		Respond(w, traceID, v, http.StatusBadRequest)
+		return
+	}
+
+	RespondError(w, traceID, err, http.StatusInternalServerError)
+}
+
+// RespondError sends JSON describing the error
+func RespondError(w http.ResponseWriter, traceID string, err error, code int) {
+	Respond(w, traceID, jsonError{Error: err.Error()}, code)
 }
 
 // Respond sends JSON to the client.
@@ -84,19 +137,4 @@ func Respond(w http.ResponseWriter, traceID string, data interface{}, code int) 
 	io.WriteString(w, string(jsonData))
 
 	log.Printf("%s : api : Respond : Completed\n", traceID)
-}
-
-// RespondInvalid sends JSON describing field validation errors.
-func RespondInvalid(w http.ResponseWriter, traceID string, fields []Invalid) {
-	v := jsonError{
-		Error:  "field validation failure",
-		Fields: fields,
-	}
-
-	Respond(w, traceID, v, http.StatusBadRequest)
-}
-
-// RespondError sends JSON describing the error
-func RespondError(w http.ResponseWriter, traceID string, err error, code int) {
-	Respond(w, traceID, jsonError{Error: err.Error()}, code)
 }

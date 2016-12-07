@@ -21,11 +21,11 @@ func API() http.Handler {
 
 	// Initialize the routes for the API binding the route to the
 	// handler code for each specified verb.
-	a.Handle("GET", "/v1/users", handlers.User.List)
-	a.Handle("POST", "/v1/users", handlers.User.Create)
-	a.Handle("GET", "/v1/users/:id", handlers.User.Retrieve)
-	a.Handle("PUT", "/v1/users/:id", handlers.User.Update)
-	a.Handle("DELETE", "/v1/users/:id", handlers.User.Delete)
+	a.Handle("GET", "/v1/users", handlers.UserList)
+	a.Handle("POST", "/v1/users", handlers.UserCreate)
+	a.Handle("GET", "/v1/users/:id", handlers.UserRetrieve)
+	a.Handle("PUT", "/v1/users/:id", handlers.UserUpdate)
+	a.Handle("DELETE", "/v1/users/:id", handlers.UserDelete)
 
 	return a
 }

@@ -29,7 +29,7 @@ var u = user.User{
 	LastName:  "Kennedy",
 	Email:     "bill@ardanlabs.com",
 	Company:   "Ardan Labs",
-	Addresses: []user.UserAddress{
+	Addresses: []user.Address{
 		{
 			Type:    1,
 			LineOne: "12973 SW 112th ST",
@@ -87,7 +87,7 @@ func usersCreate200(t *testing.T, a *app.App) {
 
 	t.Log("Given the need to add a new user with the users endpoint.")
 	{
-		if w.Code != 200 {
+		if w.Code != 201 {
 			t.Fatalf("\tShould received a status code of 200 for the response. Received[%d] %s", w.Code, Failed)
 		}
 		t.Log("\tShould received a status code of 200 for the response.", Succeed)
@@ -271,21 +271,10 @@ func usersUpdate200(t *testing.T, a *app.App) {
 
 	t.Log("Given the need to validate a user can be updated with the users endpoint.")
 	{
-		if w.Code != 200 {
+		if w.Code != 204 {
 			t.Fatalf("\tShould received a status code of 200 for the response. Received[%d] %s", w.Code, Failed)
 		}
 		t.Log("\tShould received a status code of 200 for the response.", Succeed)
-
-		var resp user.User
-		if err := json.NewDecoder(w.Body).Decode(&resp); err != nil {
-			t.Fatal("\tShould be able to unmarshal the response.", Failed)
-		}
-		t.Log("\tShould be able to unmarshal the response.", Succeed)
-
-		if resp.UserID != u.UserID {
-			t.Fatal("\tShould have an a user value with the same id.", Failed)
-		}
-		t.Log("\tShould have an a user value with the same id.", Succeed)
 	}
 }
 

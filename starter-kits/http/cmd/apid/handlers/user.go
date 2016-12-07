@@ -12,15 +12,9 @@ import (
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 )
 
-// userHandle maintains the set of handlers for the users api.
-type userHandle struct{}
-
-// User fronts the access to the users service functionality.
-var User userHandle
-
-// List returns all the existing users in the system.
+// UserList returns all the existing users in the system.
 // 200 Success, 404 Not Found, 500 Internal
-func (userHandle) List(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+func UserList(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(app.KeyValues).(*app.Values)
 
 	u, err := user.List(ctx, v.TraceID, v.DB)
@@ -32,9 +26,9 @@ func (userHandle) List(ctx context.Context, w http.ResponseWriter, r *http.Reque
 	return nil
 }
 
-// Retrieve returns the specified user from the system.
+// UserRetrieve returns the specified user from the system.
 // 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
-func (userHandle) Retrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+func UserRetrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(app.KeyValues).(*app.Values)
 
 	u, err := user.Retrieve(ctx, v.TraceID, v.DB, params["id"])
@@ -46,9 +40,9 @@ func (userHandle) Retrieve(ctx context.Context, w http.ResponseWriter, r *http.R
 	return nil
 }
 
-// Create inserts a new user into the system.
+// UserCreate inserts a new user into the system.
 // 200 OK, 400 Bad Request, 500 Internal
-func (userHandle) Create(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+func UserCreate(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(app.KeyValues).(*app.Values)
 
 	var u user.User
@@ -56,25 +50,17 @@ func (userHandle) Create(ctx context.Context, w http.ResponseWriter, r *http.Req
 		return err
 	}
 
-	if invld, err := user.Create(ctx, v.TraceID, v.DB, &u); err != nil {
-		switch err {
-		case app.ErrValidation:
-			app.RespondInvalid(w, v.TraceID, invld)
-			return nil
-
-		default:
-			return err
-		}
+	if err := user.Create(ctx, v.TraceID, v.DB, &u); err != nil {
+		return err
 	}
 
-	params = map[string]string{"id": u.UserID}
-
-	return User.Retrieve(ctx, w, r, params)
+	app.Respond(w, v.TraceID, u, http.StatusCreated)
+	return nil
 }
 
-// Update updates the specified user in the system.
+// UserUpdate updates the specified user in the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func (userHandle) Update(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(app.KeyValues).(*app.Values)
 
 	var u user.User
@@ -82,23 +68,17 @@ func (userHandle) Update(ctx context.Context, w http.ResponseWriter, r *http.Req
 		return err
 	}
 
-	if invld, err := user.Update(ctx, v.TraceID, v.DB, params["id"], &u); err != nil {
-		switch err {
-		case app.ErrValidation:
-			app.RespondInvalid(w, v.TraceID, invld)
-			return nil
-
-		default:
-			return err
-		}
+	if err := user.Update(ctx, v.TraceID, v.DB, params["id"], &u); err != nil {
+		return err
 	}
 
-	return User.Retrieve(ctx, w, r, params)
+	app.Respond(w, v.TraceID, nil, http.StatusNoContent)
+	return nil
 }
 
-// Delete removed the specified user from the system.
+// UserDelete removed the specified user from the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func (userHandle) Delete(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+func UserDelete(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(app.KeyValues).(*app.Values)
 
 	u, err := user.Retrieve(ctx, v.TraceID, v.DB, params["id"])
