@@ -9,11 +9,15 @@ package app
 
 import (
 	"context"
+	"encoding/json"
+	"io"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
+
+	"gopkg.in/go-playground/validator.v8"
 
 	"github.com/braintree/manners"
 	"github.com/dimfeld/httptreemux"
@@ -30,6 +34,32 @@ type ctxKey int
 
 // KeyValues is how request values or stored/retrieved.
 const KeyValues ctxKey = 1
+
+//==============================================================================
+
+var validate = validator.New(&validator.Config{
+	TagName:      "validate",
+	FieldNameTag: "json",
+})
+
+// Unmarshal decodes the input to the struct type and checks the
+// fields to verify the value is in a proper state.
+func Unmarshal(r io.Reader, v interface{}) error {
+	if err := json.NewDecoder(r).Decode(v); err != nil {
+		return err
+	}
+
+	var inv InvalidError
+	if fve := validate.Struct(v); fve != nil {
+		for _, fe := range fve.(validator.ValidationErrors) {
+			inv = append(inv, Invalid{Fld: fe.Field, Err: fe.Tag})
+		}
+
+		return inv
+	}
+
+	return nil
+}
 
 //==============================================================================
 

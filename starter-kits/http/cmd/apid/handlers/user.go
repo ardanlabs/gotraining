@@ -5,7 +5,6 @@ package handlers
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
@@ -45,12 +44,13 @@ func UserRetrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, p
 func UserCreate(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(app.KeyValues).(*app.Values)
 
-	var u user.User
-	if err := json.NewDecoder(r.Body).Decode(&u); err != nil {
+	var cu user.CreateUser
+	if err := app.Unmarshal(r.Body, &cu); err != nil {
 		return err
 	}
 
-	if err := user.Create(ctx, v.TraceID, v.DB, &u); err != nil {
+	u, err := user.Create(ctx, v.TraceID, v.DB, &cu)
+	if err != nil {
 		return err
 	}
 
@@ -63,12 +63,12 @@ func UserCreate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(app.KeyValues).(*app.Values)
 
-	var u user.User
-	if err := json.NewDecoder(r.Body).Decode(&u); err != nil {
+	var cu user.CreateUser
+	if err := app.Unmarshal(r.Body, &cu); err != nil {
 		return err
 	}
 
-	if err := user.Update(ctx, v.TraceID, v.DB, params["id"], &u); err != nil {
+	if err := user.Update(ctx, v.TraceID, v.DB, params["id"], &cu); err != nil {
 		return err
 	}
 

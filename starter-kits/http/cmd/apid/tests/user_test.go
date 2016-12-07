@@ -46,7 +46,7 @@ var u = user.User{
 func TestUsers(t *testing.T) {
 	a := routes.API().(*app.App)
 
-	t.Run("usersList404", func(t *testing.T) { usersList404(t, a) })
+	t.Run("usersList200Empty", func(t *testing.T) { usersList200Empty(t, a) })
 	t.Run("usersCreate200", func(t *testing.T) { usersCreate200(t, a) })
 	t.Run("usersCreate400", func(t *testing.T) { usersCreate400(t, a) })
 
@@ -63,15 +63,15 @@ func TestUsers(t *testing.T) {
 	})
 }
 
-// usersList404 validates an empty users list can be retrieved with the endpoint.
-func usersList404(t *testing.T, a *app.App) {
+// usersList200Empty validates an empty users list can be retrieved with the endpoint.
+func usersList200Empty(t *testing.T, a *app.App) {
 	r := httptest.NewRequest("GET", "/v1/users", nil)
 	w := httptest.NewRecorder()
 	a.ServeHTTP(w, r)
 
 	t.Log("Given the need to validate an empty list of users with the users endpoint.")
 	{
-		if w.Code != 404 {
+		if w.Code != 200 {
 			t.Fatalf("\tShould received a status code of 404 for the response. Received[%d] %s", w.Code, Failed)
 		}
 		t.Log("\tShould received a status code of 404 for the response.", Succeed)
