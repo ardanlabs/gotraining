@@ -1,10 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Package app provides a thin layer of support for writing web services. It
-// integrates with the ardanlabs kit repo to provide support for logging,
-// configuration, database, routing and application context. The base things
-// you need to write a web service is provided.
+// Package app provides a thin layer of support for writing web services.
 package app
 
 import (
@@ -28,6 +25,8 @@ import (
 // traceID to it.
 const TraceIDHeader = "X-Trace-ID"
 
+//==============================================================================
+
 // Key represents the type of value for the context key.
 type ctxKey int
 
@@ -36,6 +35,7 @@ const KeyValues ctxKey = 1
 
 //==============================================================================
 
+// validate provides a validator for checking models.
 var validate = validator.New(&validator.Config{
 	TagName:      "validate",
 	FieldNameTag: "json",
@@ -136,19 +136,19 @@ func (a *App) Handle(verb, path string, handler Handler, mw ...Middleware) {
 		defer cancel()
 
 		// Set the context with the required values to
-		// process requests.
+		// process the request.
 		v := Values{
 			TraceID: uuid.New(),
 			Now:     time.Now(),
 		}
 		ctx = context.WithValue(ctx, KeyValues, &v)
 
-		// Set the request id on the outgoing requests before any other header to
+		// Set the trace id on the outgoing requests before any other header to
 		// ensure that the trace id is ALWAYS added to the request regardless of
 		// any error occuring or not.
 		w.Header().Set(TraceIDHeader, v.TraceID)
 
-		// Call the wrapped handler.
+		// Call the wrapped handler functions.
 		handler(ctx, w, r, params)
 	}
 
@@ -184,8 +184,7 @@ func (g *Group) Handle(verb, path string, handler Handler, mw ...Middleware) {
 
 // Run is called to start the web service.
 func Run(host string, routes http.Handler, readTimeout, writeTimeout time.Duration) error {
-
-	log.Printf("startup : Run : Start : Using Host[%s]\n", host)
+	log.Printf("Run : Start : Using Host[%s]\n", host)
 
 	// Create a new server and set timeout values.
 	server := manners.NewWithServer(&http.Server{
@@ -203,7 +202,7 @@ func Run(host string, routes http.Handler, readTimeout, writeTimeout time.Durati
 		signal.Notify(osSignals, os.Interrupt)
 
 		sig := <-osSignals
-		log.Printf("shutdown : Run : Captured %v. Shutting Down...\n", sig)
+		log.Printf("Run : Captured %v. Shutting Down...\n", sig)
 
 		// Shut down the API server.
 		server.Close()

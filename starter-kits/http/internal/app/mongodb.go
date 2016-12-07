@@ -21,11 +21,11 @@ func Query(value interface{}) string {
 	return string(json)
 }
 
-// ExecuteDB the MongoDB literal function.
+// ExecuteDB the MongoDB function using session and collection information.
 func ExecuteDB(session *mgo.Session, collectionName string, f func(*mgo.Collection) error) error {
 	log.Printf("ExecuteDB : Started : Collection[%s]\n", collectionName)
 
-	// Capture the specified collection.
+	// Capture the specified collection from our connection.
 	collection := session.DB("").C(collectionName)
 	if collection == nil {
 		err := fmt.Errorf("Collection %s does not exist", collectionName)

@@ -30,9 +30,9 @@ type Invalid struct {
 type InvalidError []Invalid
 
 // Error implements the error interface for InvalidError.
-func (ei InvalidError) Error() string {
+func (err InvalidError) Error() string {
 	// TODO
-	return "TODO" // fmt.Sprintf("%+v", ei)
+	return "TODO" // fmt.Sprintf("%+v", err)
 }
 
 // jsonError is the response for errors that occur within the API.
@@ -107,7 +107,7 @@ func RespondError(ctx context.Context, w http.ResponseWriter, traceID string, er
 func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data interface{}, code int) {
 	log.Printf("%s : api : Respond : Started : Code[%d]\n", traceID, code)
 
-	// Set the code for logging.
+	// Set the status code for the request logger middleware.
 	v := ctx.Value(KeyValues).(*Values)
 	v.StatusCode = code
 
@@ -130,7 +130,7 @@ func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data in
 		jsonData = []byte("{}")
 	}
 
-	// We can send the result straight through.
+	// Send the result back to the client.
 	io.WriteString(w, string(jsonData))
 
 	log.Printf("%s : api : Respond : Completed\n", traceID)

@@ -5,8 +5,6 @@ package user
 
 import "time"
 
-//==============================================================================
-
 // CreateAddress contains information about a user's address.
 type CreateAddress struct {
 	Type         int        `bson:"type" json:"type" validate:"required"`
