@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
-	mgo "gopkg.in/mgo.v2"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app"
+	"gopkg.in/mgo.v2"
 )
 
 // MongoDB connection information.
@@ -26,27 +26,31 @@ const (
 	database     = "gotraining"
 )
 
-// Mongo handles session management.
-func Mongo(h app.Handler) app.Handler {
+// Mongo initializes the master session and wires in the connection middleware.
+func Mongo() app.Middleware {
 
-	// Init the MongoDB master session.
+	// session contains the master session for accessing MongoDB.
 	session := NewMGOSession()
 
-	// Wrap the handlers inside a session copy/close.
-	return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
-		v := ctx.Value(app.KeyValues).(*app.Values)
+	// Return this middleware to be chained together.
+	return func(next app.Handler) app.Handler {
 
-		// Get a MongoDB session connection.
-		log.Printf("%s : Mongo : *****> Capture Mongo Session\n", v.TraceID)
-		v.DB = session.Copy()
+		// Wrap this handler around the next one provided.
+		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) {
+			v := ctx.Value(app.KeyValues).(*app.Values)
 
-		// Defer releasing the db session connection.
-		defer func() {
-			log.Printf("%s : Mongo : *****> Release Mongo Session\n", v.TraceID)
-			v.DB.Close()
-		}()
+			// Get a MongoDB session connection.
+			log.Printf("%s : Mongo : *****> Capture Mongo Session\n", v.TraceID)
+			v.DB = session.Copy()
 
-		return h(ctx, w, r, params)
+			// Defer releasing the db session connection.
+			defer func() {
+				log.Printf("%s : Mongo : *****> Release Mongo Session\n", v.TraceID)
+				v.DB.Close()
+			}()
+
+			next(ctx, w, r, params)
+		}
 	}
 }
 

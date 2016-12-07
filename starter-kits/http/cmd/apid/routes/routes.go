@@ -7,13 +7,14 @@ import (
 	"net/http"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/handlers"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/middleware"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app/middleware"
 )
 
 // API returns a handler for a set of routes.
 func API() http.Handler {
-	a := app.New(middleware.RequestLogger, middleware.Mongo)
+	a := app.New(middleware.RequestLogger, middleware.Mongo())
+	a.Use(middleware.CORS(a, "*", "GET, POST, PUT, PATCH, DELETE, OPTIONS"))
 
 	// Setup the file server to serve up static content such as
 	// the index.html page.

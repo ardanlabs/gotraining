@@ -7,8 +7,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/middleware"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/middleware"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/services/user"
 )
 
 const (

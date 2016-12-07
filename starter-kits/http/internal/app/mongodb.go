@@ -23,22 +23,22 @@ func Query(value interface{}) string {
 
 // ExecuteDB the MongoDB literal function.
 func ExecuteDB(session *mgo.Session, collectionName string, f func(*mgo.Collection) error) error {
-	log.Printf("api : mongodb : ExecuteDB : Started : Collection[%s]\n", collectionName)
+	log.Printf("ExecuteDB : Started : Collection[%s]\n", collectionName)
 
 	// Capture the specified collection.
 	collection := session.DB("").C(collectionName)
 	if collection == nil {
 		err := fmt.Errorf("Collection %s does not exist", collectionName)
-		log.Println("api : mongodb : ExecuteDB : Completed : ERROR :", err)
+		log.Println("ExecuteDB : Completed : ERROR :", err)
 		return err
 	}
 
 	// Execute the MongoDB call.
 	if err := f(collection); err != nil {
-		log.Println("api : mongodb : ExecuteDB : Completed : ERROR :", err)
+		log.Println("ExecuteDB : Completed : ERROR :", err)
 		return err
 	}
 
-	log.Println("api : mongodb : ExecuteDB : Completed")
+	log.Println("ExecuteDB : Completed")
 	return nil
 }

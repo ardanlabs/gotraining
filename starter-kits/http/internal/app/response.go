@@ -12,6 +12,7 @@
 package app
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"io"
@@ -62,23 +63,23 @@ var (
 //==============================================================================
 
 // Error handles all error responses for the API.
-func Error(w http.ResponseWriter, traceID string, err error) {
+func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error) {
 
 	switch err {
 	case ErrNotFound:
-		RespondError(w, traceID, err, http.StatusNotFound)
+		RespondError(cxt, w, traceID, err, http.StatusNotFound)
 		return
 
 	case ErrInvalidID:
-		RespondError(w, traceID, err, http.StatusBadRequest)
+		RespondError(cxt, w, traceID, err, http.StatusBadRequest)
 		return
 
 	case ErrValidation:
-		RespondError(w, traceID, err, http.StatusBadRequest)
+		RespondError(cxt, w, traceID, err, http.StatusBadRequest)
 		return
 
 	case ErrNotAuthorized:
-		RespondError(w, traceID, err, http.StatusUnauthorized)
+		RespondError(cxt, w, traceID, err, http.StatusUnauthorized)
 		return
 	}
 
@@ -89,30 +90,26 @@ func Error(w http.ResponseWriter, traceID string, err error) {
 			Fields: e,
 		}
 
-		Respond(w, traceID, v, http.StatusBadRequest)
+		Respond(cxt, w, traceID, v, http.StatusBadRequest)
 		return
 	}
 
-	RespondError(w, traceID, err, http.StatusInternalServerError)
+	RespondError(cxt, w, traceID, err, http.StatusInternalServerError)
 }
 
 // RespondError sends JSON describing the error
-func RespondError(w http.ResponseWriter, traceID string, err error, code int) {
-	Respond(w, traceID, jsonError{Error: err.Error()}, code)
+func RespondError(ctx context.Context, w http.ResponseWriter, traceID string, err error, code int) {
+	Respond(ctx, w, traceID, jsonError{Error: err.Error()}, code)
 }
 
 // Respond sends JSON to the client.
 // If code is StatusNoContent, v is expected to be nil.
-func Respond(w http.ResponseWriter, traceID string, data interface{}, code int) {
+func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data interface{}, code int) {
 	log.Printf("%s : api : Respond : Started : Code[%d]\n", traceID, code)
 
-	// Load any user defined header values.
-	if app.userHeaders != nil {
-		for key, value := range app.userHeaders {
-			log.Printf("%s : api : Respond : Setting user headers : %s:%s\n", traceID, key, value)
-			w.Header().Set(key, value)
-		}
-	}
+	// Set the code for logging.
+	v := ctx.Value(KeyValues).(*Values)
+	v.StatusCode = code
 
 	// Just set the status code and we are done.
 	if code == http.StatusNoContent {
@@ -123,7 +120,7 @@ func Respond(w http.ResponseWriter, traceID string, data interface{}, code int) 
 	// Set the content type.
 	w.Header().Set("Content-Type", "application/json")
 
-	// Write the status code.
+	// Write the status code to the response and context.
 	w.WriteHeader(code)
 
 	// Marshal the data into a JSON string.

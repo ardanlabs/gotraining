@@ -17,11 +17,10 @@ import (
 	"os/signal"
 	"time"
 
-	"gopkg.in/go-playground/validator.v8"
-
 	"github.com/braintree/manners"
 	"github.com/dimfeld/httptreemux"
 	"github.com/pborman/uuid"
+	"gopkg.in/go-playground/validator.v8"
 	"gopkg.in/mgo.v2"
 )
 
@@ -63,27 +62,19 @@ func Unmarshal(r io.Reader, v interface{}) error {
 
 //==============================================================================
 
-// app maintains some framework state.
-var app = struct {
-	userHeaders map[string]string
-}{
-	userHeaders: make(map[string]string),
-}
-
-//==============================================================================
-
 // Values represent state for each request.
 type Values struct {
-	DB      *mgo.Session
-	TraceID string
-	Now     time.Time
+	DB         *mgo.Session
+	TraceID    string
+	Now        time.Time
+	StatusCode int
 }
 
 //==============================================================================
 
 // A Handler is a type that handles an http request within our own little mini
 // framework.
-type Handler func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error
+type Handler func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string)
 
 // A Middleware is a type that wraps a handler to remove boilerplate or other
 // concerns not direct to any given Handler.
@@ -157,32 +148,12 @@ func (a *App) Handle(verb, path string, handler Handler, mw ...Middleware) {
 		// any error occuring or not.
 		w.Header().Set(TraceIDHeader, v.TraceID)
 
-		// Call the wrapped handler and handle any possible error.
-		if err := handler(ctx, w, r, params); err != nil {
-			Error(w, v.TraceID, err)
-		}
+		// Call the wrapped handler.
+		handler(ctx, w, r, params)
 	}
 
 	// Add this handler for the specified verb and route.
 	a.TreeMux.Handle(verb, path, h)
-}
-
-// CORS providing support for Cross-Origin Resource Sharing.
-// https://metajack.im/2010/01/19/crossdomain-ajax-for-xmpp-http-binding-made-easy/
-func (a *App) CORS() {
-	h := func(w http.ResponseWriter, r *http.Request, p map[string]string) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-		w.Header().Set("Access-Control-Max-Age", "86400")
-		w.Header().Set("Content-Type", "application/json")
-
-		w.WriteHeader(http.StatusOK)
-	}
-
-	a.TreeMux.OptionsHandler = h
-
-	app.userHeaders["Access-Control-Allow-Origin"] = "*"
 }
 
 //==============================================================================

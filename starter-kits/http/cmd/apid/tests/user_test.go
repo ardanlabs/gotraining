@@ -6,12 +6,13 @@ package endpointtests
 import (
 	"bytes"
 	"encoding/json"
+	"log"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/app"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/app"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/services/user"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -22,6 +23,11 @@ const (
 	// Failed is the Unicode codepoint for an X mark.
 	Failed = "\u2717"
 )
+
+// init is called before main. We are using init to customize logging output.
+func init() {
+	log.SetFlags(log.LstdFlags | log.Lmicroseconds | log.Lshortfile)
+}
 
 var u = user.User{
 	UserType:  1,
