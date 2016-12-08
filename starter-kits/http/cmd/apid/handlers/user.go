@@ -83,16 +83,10 @@ func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 func UserDelete(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) {
 	v := ctx.Value(web.KeyValues).(*web.Values)
 
-	u, err := user.Retrieve(ctx, v.TraceID, v.DB, params["id"])
-	if err != nil {
-		web.Error(ctx, w, v.TraceID, err)
-		return
-	}
-
 	if err := user.Delete(ctx, v.TraceID, v.DB, params["id"]); err != nil {
 		web.Error(ctx, w, v.TraceID, err)
 		return
 	}
 
-	web.Respond(ctx, w, v.TraceID, u, http.StatusOK)
+	web.Respond(ctx, w, v.TraceID, nil, http.StatusNoContent)
 }

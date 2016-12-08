@@ -53,7 +53,6 @@ func Unmarshal(r io.Reader, v interface{}) error {
 		for _, fe := range fve.(validator.ValidationErrors) {
 			inv = append(inv, Invalid{Fld: fe.Field, Err: fe.Tag})
 		}
-
 		return inv
 	}
 

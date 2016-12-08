@@ -15,6 +15,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -31,12 +32,15 @@ type InvalidError []Invalid
 
 // Error implements the error interface for InvalidError.
 func (err InvalidError) Error() string {
-	// TODO
-	return "TODO" // fmt.Sprintf("%+v", err)
+	var str string
+	for _, v := range err {
+		str = fmt.Sprintf("%s,{%s:%s}", str, v.Fld, v.Err)
+	}
+	return str
 }
 
-// jsonError is the response for errors that occur within the API.
-type jsonError struct {
+// JSONError is the response for errors that occur within the API.
+type JSONError struct {
 	Error  string       `json:"error"`
 	Fields InvalidError `json:"fields,omitempty"`
 }
@@ -64,6 +68,7 @@ var (
 
 // Error handles all error responses for the API.
 func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error) {
+	log.Printf("%s : ERROR : %v\n", traceID, err)
 
 	switch err {
 	case ErrNotFound:
@@ -85,7 +90,7 @@ func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error
 
 	switch e := err.(type) {
 	case InvalidError:
-		v := jsonError{
+		v := JSONError{
 			Error:  "field validation failure",
 			Fields: e,
 		}
@@ -99,13 +104,13 @@ func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error
 
 // RespondError sends JSON describing the error
 func RespondError(ctx context.Context, w http.ResponseWriter, traceID string, err error, code int) {
-	Respond(ctx, w, traceID, jsonError{Error: err.Error()}, code)
+	Respond(ctx, w, traceID, JSONError{Error: err.Error()}, code)
 }
 
 // Respond sends JSON to the client.
 // If code is StatusNoContent, v is expected to be nil.
 func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data interface{}, code int) {
-	log.Printf("%s : api : Respond : Started : Code[%d]\n", traceID, code)
+	log.Printf("%s : Respond : Started : Code[%d]\n", traceID, code)
 
 	// Set the status code for the request logger middleware.
 	v := ctx.Value(KeyValues).(*Values)
@@ -126,12 +131,12 @@ func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data in
 	// Marshal the data into a JSON string.
 	jsonData, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
-		log.Printf("%s : api : Respond %v Marshalling JSON response\n", traceID, err)
+		log.Printf("%s : Respond %v Marshalling JSON response\n", traceID, err)
 		jsonData = []byte("{}")
 	}
 
 	// Send the result back to the client.
 	io.WriteString(w, string(jsonData))
 
-	log.Printf("%s : api : Respond : Completed\n", traceID)
+	log.Printf("%s : Respond : Completed\n", traceID)
 }

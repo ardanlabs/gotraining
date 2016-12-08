@@ -118,7 +118,10 @@ func Create(ctx context.Context, traceID string, db *mgo.Session, cu *CreateUser
 func Update(ctx context.Context, traceID string, db *mgo.Session, userID string, cu *CreateUser) error {
 	log.Println(traceID, ": Update : Started")
 
-	// TODO: Check the userID is a valid bson id.
+	if !bson.IsObjectIdHex(userID) {
+		log.Println(traceID, ": Update : Completed : ERROR :", app.ErrInvalidID)
+		return web.ErrInvalidID
+	}
 
 	now := time.Now()
 	cu.DateModified = &now
@@ -134,7 +137,10 @@ func Update(ctx context.Context, traceID string, db *mgo.Session, userID string,
 	}
 
 	if err := web.ExecuteDB(db, usersCollection, f); err != nil {
-		log.Println(traceID, ": Create : Completed : ERROR :", err)
+		log.Println(traceID, ": Update : Completed : ERROR :", err)
+		if err == mgo.ErrNotFound {
+			return web.ErrNotFound
+		}
 		return err
 	}
 
@@ -159,6 +165,9 @@ func Delete(ctx context.Context, traceID string, db *mgo.Session, userID string)
 
 	if err := web.ExecuteDB(db, usersCollection, f); err != nil {
 		log.Println(traceID, ": Delete : Completed : ERROR :", err)
+		if err == mgo.ErrNotFound {
+			return web.ErrNotFound
+		}
 		return err
 	}
 

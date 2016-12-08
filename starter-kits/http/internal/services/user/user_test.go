@@ -7,8 +7,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/middleware"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/services/user"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web/middleware"
+	"github.com/ardanlabs/kit/tests"
 )
 
 const (
@@ -52,31 +53,34 @@ func TestUsers(t *testing.T) {
 
 	t.Log("Given the need to add a new user, retrieve and remove that user from the system.")
 	{
-		u, err := user.Create(ctx, traceID, db, &u)
-		if err != nil {
-			t.Fatal("\tShould be able to create a user in the system.", Failed)
-		}
-		t.Log("\tShould be able to create a user in the system.", Succeed)
+		t.Log("\tTest 0:\tWhen using a valid CreateUser value")
+		{
+			cu, err := user.Create(ctx, traceID, db, &u)
+			if err != nil {
+				t.Fatalf("\t%s\tShould be able to create a user in the system : %v", tests.Failed, err)
+			}
+			t.Logf("\t%s\tShould be able to create a user in the system.", tests.Success)
 
-		ur, err := user.Retrieve(ctx, traceID, db, u.UserID)
-		if err != nil {
-			t.Fatal("\tShould be able to retrieve the user back from the system.", Failed)
-		}
-		t.Log("\tShould be able to retrieve the user back from the system.", Succeed)
+			ru, err := user.Retrieve(ctx, traceID, db, cu.UserID)
+			if err != nil {
+				t.Fatalf("\t%s\tShould be able to retrieve the user back from the system : %v", tests.Failed, err)
+			}
+			t.Logf("\t%s\tShould be able to retrieve the user back from the system.", tests.Success)
 
-		if ur == nil || u.UserID != ur.UserID {
-			t.Fatal("\tShould have a match between the created user and the one retrieved.", Failed)
-		}
-		t.Log("\tShould have a match between the created user and the one retrieved.", Succeed)
+			if ru == nil || cu.UserID != ru.UserID {
+				t.Fatalf("\t%s\tShould have a match between the created user and the one retrieved : %v", tests.Failed, err)
+			}
+			t.Logf("\t%s\tShould have a match between the created user and the one retrieved.", tests.Success)
 
-		if err := user.Delete(ctx, traceID, db, u.UserID); err != nil {
-			t.Fatal("\tShould be able to remove the user from the system.", Failed)
-		}
-		t.Log("\tShould be able to remove the user from the system", Succeed)
+			if err := user.Delete(ctx, traceID, db, ru.UserID); err != nil {
+				t.Fatalf("\t%s\tShould be able to remove the user from the system : %v", tests.Failed, err)
+			}
+			t.Logf("\t%s\tShould be able to remove the user from the system.", tests.Success)
 
-		if _, err := user.Retrieve(ctx, traceID, db, u.UserID); err == nil {
-			t.Fatal("\tShould NOT be able to retrieve the user back from the system.", Failed)
+			if _, err := user.Retrieve(ctx, traceID, db, ru.UserID); err == nil {
+				t.Fatalf("\t%s\tShould NOT be able to retrieve the user back from the system : %v", tests.Failed, err)
+			}
+			t.Logf("\t%s\tShould NOT be able to retrieve the user back from the system.", tests.Success)
 		}
-		t.Log("\tShould NOT be able to retrieve the user back from the system.", Succeed)
 	}
 }
