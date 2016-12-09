@@ -27,14 +27,6 @@ const TraceIDHeader = "X-Trace-ID"
 
 //==============================================================================
 
-// Key represents the type of value for the context key.
-type ctxKey int
-
-// KeyValues is how request values or stored/retrieved.
-const KeyValues ctxKey = 1
-
-//==============================================================================
-
 // validate provides a validator for checking models.
 var validate = validator.New(&validator.Config{
 	TagName:      "validate",
@@ -60,6 +52,12 @@ func Unmarshal(r io.Reader, v interface{}) error {
 }
 
 //==============================================================================
+
+// Key represents the type of value for the context key.
+type ctxKey int
+
+// KeyValues is how request values or stored/retrieved.
+const KeyValues ctxKey = 1
 
 // Values represent state for each request.
 type Values struct {
