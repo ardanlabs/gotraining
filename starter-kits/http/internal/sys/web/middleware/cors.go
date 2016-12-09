@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
 )
 
 // CORS providing support for Cross-Origin Resource Sharing.

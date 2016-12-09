@@ -7,8 +7,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/services/user"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 )
 
 // UserList returns all the existing users in the system.

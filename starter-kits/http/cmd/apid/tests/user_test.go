@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-package endpointtests
+package tests
 
 import (
 	"bytes"
@@ -12,12 +12,10 @@ import (
 	"os"
 	"testing"
 
-	"gopkg.in/mgo.v2/bson"
-
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/services/user"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
-	"github.com/ardanlabs/kit/tests"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const (
@@ -30,7 +28,7 @@ const (
 
 //==============================================================================
 
-// The web application state for the tests.
+// The web application state for the
 var a *web.App
 
 // TestMain helps to clean up the test data.
@@ -42,7 +40,6 @@ func TestMain(m *testing.M) {
 // the proper return code if the test fails or succeeds.
 func runTest(m *testing.M) int {
 	log.SetFlags(log.LstdFlags | log.Lmicroseconds | log.Lshortfile)
-
 	a = routes.API().(*web.App)
 
 	return m.Run()
@@ -73,9 +70,9 @@ func getUsers200Empty(t *testing.T) {
 		t.Log("\tTest 0:\tWhen using the default user value.")
 		{
 			if w.Code != http.StatusOK {
-				t.Fatalf("\t%s\tShould received a status code of 200 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 200 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 200 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 200 for the response.", Succeed)
 		}
 	}
 }
@@ -100,12 +97,13 @@ func postUser400(t *testing.T) {
 		t.Log("\tTest 0:\tWhen using an incomplete user value.")
 		{
 			if w.Code != http.StatusBadRequest {
-				t.Fatalf("\t%s\tShould received a status code of 400 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 400 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 400 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 400 for the response.", Succeed)
 
 			recv := w.Body.String()
-			resp := `{
+			resps := []string{
+				`{
   "error": "field validation failure",
   "fields": [
     {
@@ -117,13 +115,37 @@ func postUser400(t *testing.T) {
       "error": "required"
     }
   ]
-}`
-			if resp != recv {
-				t.Log("Got :", recv)
-				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+}`,
+				`{
+  "error": "field validation failure",
+  "fields": [
+    {
+      "field_name": "FirstName",
+      "error": "required"
+    },
+    {
+      "field_name": "Addresses",
+      "error": "required"
+    }
+  ]
+}`,
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+
+			var found bool
+			for _, resp := range resps {
+				if resp == recv {
+					found = true
+					break
+				}
+			}
+
+			if !found {
+				t.Log("Got :", recv)
+				t.Log("Want:", resps[0])
+				t.Log("Want:", resps[1])
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
+			}
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 }
@@ -141,9 +163,9 @@ func getUser404(t *testing.T) {
 		t.Logf("\tTest 0:\tWhen using the new user %s.", userID)
 		{
 			if w.Code != http.StatusBadRequest {
-				t.Fatalf("\t%s\tShould received a status code of 400 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 400 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 400 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 400 for the response.", Succeed)
 
 			recv := w.Body.String()
 			resp := `{
@@ -152,9 +174,9 @@ func getUser404(t *testing.T) {
 			if resp != recv {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 }
@@ -172,9 +194,9 @@ func getUser400(t *testing.T) {
 		t.Logf("\tTest 0:\tWhen using the new user %s.", userID)
 		{
 			if w.Code != http.StatusNotFound {
-				t.Fatalf("\t%s\tShould received a status code of 404 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 404 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 404 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 404 for the response.", Succeed)
 
 			recv := w.Body.String()
 			resp := `{
@@ -183,9 +205,9 @@ func getUser400(t *testing.T) {
 			if resp != recv {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 }
@@ -203,9 +225,9 @@ func deleteUser404(t *testing.T) {
 		t.Logf("\tTest 0:\tWhen using the new user %s.", userID)
 		{
 			if w.Code != http.StatusNotFound {
-				t.Fatalf("\t%s\tShould received a status code of 404 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 404 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 404 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 404 for the response.", Succeed)
 
 			recv := w.Body.String()
 			resp := `{
@@ -214,9 +236,9 @@ func deleteUser404(t *testing.T) {
 			if resp != recv {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 }
@@ -246,9 +268,9 @@ func putUser404(t *testing.T) {
 		t.Logf("\tTest 0:\tWhen using the new user %s.", userID)
 		{
 			if w.Code != http.StatusNotFound {
-				t.Fatalf("\t%s\tShould received a status code of 404 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 404 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 404 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 404 for the response.", Succeed)
 
 			recv := w.Body.String()
 			resp := `{
@@ -257,9 +279,9 @@ func putUser404(t *testing.T) {
 			if resp != recv {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 }
@@ -306,13 +328,13 @@ func postUser201(t *testing.T) user.User {
 		t.Log("\tTest 0:\tWhen using the declared user value.")
 		{
 			if w.Code != http.StatusCreated {
-				t.Fatalf("\t%s\tShould received a status code of 201 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 201 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 201 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 201 for the response.", Succeed)
 
 			var u user.User
 			if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
-				t.Fatalf("\t%s\tShould be able to unmarshal the response : %v", tests.Failed, err)
+				t.Fatalf("\t%s\tShould be able to unmarshal the response : %v", Failed, err)
 			}
 
 			newUser = u
@@ -325,7 +347,7 @@ func postUser201(t *testing.T) user.User {
 
 			doc, err := json.Marshal(&u)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to marshal the response : %v", tests.Failed, err)
+				t.Fatalf("\t%s\tShould be able to marshal the response : %v", Failed, err)
 			}
 
 			recv := string(doc)
@@ -334,9 +356,9 @@ func postUser201(t *testing.T) user.User {
 			if resp != recv {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 
@@ -354,9 +376,9 @@ func deleteUser204(t *testing.T, userID string) {
 		t.Logf("\tTest 0:\tWhen using the new user %s.", userID)
 		{
 			if w.Code != http.StatusNoContent {
-				t.Fatalf("\t%s\tShould received a status code of 204 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 204 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 204 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 204 for the response.", Succeed)
 		}
 	}
 }
@@ -372,13 +394,13 @@ func getUser200(t *testing.T, userID string) {
 		t.Logf("\tTest 0:\tWhen using the new user %s.", userID)
 		{
 			if w.Code != http.StatusOK {
-				t.Fatalf("\t%s\tShould received a status code of 200 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 200 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 200 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 200 for the response.", Succeed)
 
 			var u user.User
 			if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
-				t.Fatalf("\t%s\tShould be able to unmarshal the response : %v", tests.Failed, err)
+				t.Fatalf("\t%s\tShould be able to unmarshal the response : %v", Failed, err)
 			}
 
 			u.UserID = "1234"
@@ -389,7 +411,7 @@ func getUser200(t *testing.T, userID string) {
 
 			doc, err := json.Marshal(&u)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to marshal the response : %v", tests.Failed, err)
+				t.Fatalf("\t%s\tShould be able to marshal the response : %v", Failed, err)
 			}
 
 			recv := string(doc)
@@ -398,9 +420,9 @@ func getUser200(t *testing.T, userID string) {
 			if resp != recv {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 }
@@ -421,22 +443,22 @@ func putUser204(t *testing.T, u user.User) {
 		t.Log("\tTest 0:\tWhen using the modified user value.")
 		{
 			if w.Code != http.StatusNoContent {
-				t.Fatalf("\t%s\tShould received a status code of 204 for the response : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 204 for the response : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 204 for the response.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 204 for the response.", Succeed)
 
 			r = httptest.NewRequest("GET", "/v1/users/"+u.UserID, nil)
 			w = httptest.NewRecorder()
 			a.ServeHTTP(w, r)
 
 			if w.Code != http.StatusOK {
-				t.Fatalf("\t%s\tShould received a status code of 200 for the retrieve : %v", tests.Failed, w.Code)
+				t.Fatalf("\t%s\tShould received a status code of 200 for the retrieve : %v", Failed, w.Code)
 			}
-			t.Logf("\t%s\tShould received a status code of 200 for the retrieve.", tests.Success)
+			t.Logf("\t%s\tShould received a status code of 200 for the retrieve.", Succeed)
 
 			var ru user.User
 			if err := json.NewDecoder(w.Body).Decode(&ru); err != nil {
-				t.Fatalf("\t%s\tShould be able to unmarshal the response : %v", tests.Failed, err)
+				t.Fatalf("\t%s\tShould be able to unmarshal the response : %v", Failed, err)
 			}
 
 			ru.UserID = "1234"
@@ -447,7 +469,7 @@ func putUser204(t *testing.T, u user.User) {
 
 			doc, err := json.Marshal(&ru)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to marshal the response : %v", tests.Failed, err)
+				t.Fatalf("\t%s\tShould be able to marshal the response : %v", Failed, err)
 			}
 
 			recv := string(doc)
@@ -456,9 +478,9 @@ func putUser204(t *testing.T, u user.User) {
 			if resp != recv {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
-				t.Fatalf("\t%s\tShould get the expected result.", tests.Failed)
+				t.Fatalf("\t%s\tShould get the expected result.", Failed)
 			}
-			t.Logf("\t%s\tShould get the expected result.", tests.Success)
+			t.Logf("\t%s\tShould get the expected result.", Succeed)
 		}
 	}
 }

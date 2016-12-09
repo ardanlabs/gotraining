@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
 )
 
 // RequestLogger writes some information about the request to the logs in

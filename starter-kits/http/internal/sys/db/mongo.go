@@ -1,15 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-package middleware
+package db
 
 import (
-	"context"
+	"encoding/json"
+	"fmt"
 	"log"
-	"net/http"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/web"
 	"gopkg.in/mgo.v2"
 )
 
@@ -26,37 +25,11 @@ const (
 	database     = "gotraining"
 )
 
-// Mongo initializes the master session and wires in the connection middleware.
-func Mongo() web.Middleware {
+//==============================================================================
 
-	// session contains the master session for accessing MongoDB.
-	session := NewMGOSession()
-
-	// Return this middleware to be chained together.
-	return func(next web.Handler) web.Handler {
-
-		// Wrap this handler around the next one provided.
-		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) {
-			v := ctx.Value(web.KeyValues).(*web.Values)
-
-			// Get a MongoDB session connection.
-			log.Printf("%s : Mongo : *****> Capture Mongo Session\n", v.TraceID)
-			v.DB = session.Copy()
-
-			// Defer releasing the db session connection.
-			defer func() {
-				log.Printf("%s : Mongo : *****> Release Mongo Session\n", v.TraceID)
-				v.DB.Close()
-			}()
-
-			next(ctx, w, r, params)
-		}
-	}
-}
-
-// NewMGOSession sets up the MongoDB environment.
-func NewMGOSession() *mgo.Session {
-	log.Printf("mongodb : NewMGOSession : Host[%s] Database[%s]\n", mongoDBHosts, database)
+// Init sets up the MongoDB environment and provides a master session.
+func Init() *mgo.Session {
+	log.Printf("Init : Host[%s] Database[%s]\n", mongoDBHosts, database)
 
 	// We need this object to establish a session to our MongoDB.
 	mongoDBDialInfo := mgo.DialInfo{
@@ -71,7 +44,7 @@ func NewMGOSession() *mgo.Session {
 	// to our MongoDB.
 	session, err := mgo.DialWithInfo(&mongoDBDialInfo)
 	if err != nil {
-		log.Fatalln("MongoDB Dial", err)
+		log.Fatalln("Init : MongoDB Dial", err)
 	}
 
 	// Reads may not be entirely up-to-date, but they will always see the
@@ -82,4 +55,36 @@ func NewMGOSession() *mgo.Session {
 	session.SetMode(mgo.Monotonic, true)
 
 	return session
+}
+
+// Query provides a string version of the value
+func Query(value interface{}) string {
+	json, err := json.Marshal(value)
+	if err != nil {
+		return ""
+	}
+
+	return string(json)
+}
+
+// Execute the MongoDB function using session and collection information.
+func Execute(session *mgo.Session, collectionName string, f func(*mgo.Collection) error) error {
+	log.Printf("Execute : Started : Collection[%s]\n", collectionName)
+
+	// Capture the specified collection from our connection.
+	collection := session.DB("").C(collectionName)
+	if collection == nil {
+		err := fmt.Errorf("Collection %s does not exist", collectionName)
+		log.Println("Execute : Completed : ERROR :", err)
+		return err
+	}
+
+	// Execute the MongoDB call.
+	if err := f(collection); err != nil {
+		log.Println("Execute : Completed : ERROR :", err)
+		return err
+	}
+
+	log.Println("Execute : Completed")
+	return nil
 }
