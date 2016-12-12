@@ -58,5 +58,9 @@ Level up your programming skills by solving small practice problems. Then submit
 
 [exercism.io](http://exercism.io/)
 
+### Gopher Puzzles
+
+[Dave Cheney Puzzles - 2016](http://talks.godoc.org/github.com/davecheney/presentations/gopher-puzzlers.slide#1)  
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
