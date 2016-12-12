@@ -79,6 +79,21 @@ https://play.golang.org/p/D_bImirgXL
 
 **_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
+#### Aspire To
+
+* Be a champion for quality and efficiency.
+* Be pro-active.
+* Be fearless in the face of hard problems.
+* Be responsible with expectations.
+* Be time and resources.
+* Be a leader.
+* Have an insatiable curiosity.
+* Have a point of view.
+* Value good communication.
+* Value introspection and self-review.
+* Value simplicity.
+* Give and receive feedback well.
+
 #### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
 [Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth

@@ -38,6 +38,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Contribute to Go
 
+[Contributing to the Go project](https://blog.gopheracademy.com/advent-2016/contributing-to-the-go-project/) - Matt Layher  
 [Contribution Guidelines](https://golang.org/doc/contribute.html) - Go Documentation  
 [CONTRIBUTING: The Talk!](https://github.com/matloob/contributing/blob/master/contributing.md) - Michael Matloob  
 

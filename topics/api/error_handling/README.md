@@ -17,6 +17,7 @@ http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html
 http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/  
 http://dave.cheney.net/2014/12/24/inspecting-errors  
 http://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully  
+[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce)  
 
 ## Code Review
 
