@@ -6,10 +6,10 @@ package main
 
 import "fmt"
 
-// handler represents a function for handling events.
-type handler func(string)
-
-// =============================================================================
+// event displays global events.
+func event(message string) {
+	fmt.Println(message)
+}
 
 // data is a struct to bind methods to.
 type data struct {
@@ -24,9 +24,17 @@ func (d *data) event(message string) {
 
 // =============================================================================
 
-// event displays global events.
-func event(message string) {
-	fmt.Println(message)
+// fireEvent1 uses an anonymous function type.
+func fireEvent1(f func(string)) {
+	f("anonymous")
+}
+
+// handler represents a function for handling events.
+type handler func(string)
+
+// fireEvent2 uses a function type.
+func fireEvent2(h handler) {
+	h("handler")
 }
 
 // =============================================================================
@@ -38,24 +46,29 @@ func main() {
 		name: "Bill",
 	}
 
-	// Use the fireEvent handler that accepts any
+	// Use the fireEvent1 handler that accepts any
 	// function or method with the right signature.
+	fireEvent1(event)
 	fireEvent1(d.event)
 
-	// Declare a variable of type handler for the global event function.
-	h := handler(event)
+	// Use the fireEvent2 handler that accepts any
+	// function or method of type `handler` or any
+	// literal function or method with the right signature.
+	fireEvent2(event)
+	fireEvent2(d.event)
 
-	// User the fireEvent handler that accepts
+	// Declare a variable of type handler for the
+	// global and method based event functions.
+	h1 := handler(event)
+	h2 := handler(d.event)
+
+	// User the fireEvent2 handler that accepts
 	// values of type handler.
-	fireEvent2(h)
-}
+	fireEvent2(h1)
+	fireEvent2(h2)
 
-// fireEvent1 uses an anonymous function type.
-func fireEvent1(f func(string)) {
-	f("message 1")
-}
-
-// fireEvent2 uses a function type.
-func fireEvent2(h handler) {
-	h("message 2")
+	// User the fireEvent1 handler that accepts
+	// any function or method with the right signature.
+	fireEvent1(h1)
+	fireEvent1(h2)
 }
