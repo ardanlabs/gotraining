@@ -217,16 +217,16 @@ Channels are for the orchestration and coordinate of goroutines. Channels accomp
     * Trade-offs:
         * We take the benefit of the full guarantee for the cost of higher blocking latency.
 * Buffered channels:
-    * If the Send/Receive can block:
+    * If the Send `can` block:
         * Provides a weaker guarantee that information being exchanged has been delivered to another goroutine.
         * Both goroutines making the exchange don’t need to be at the channel at the same time.
             * The Send happens before the Receive.
-        * If the Sender / Receiver care about the information:
+        * If the Sender `cares` about the information:
             * Provides a lower level of guarantee within channel communication.
                 * Responsibility for the information does not immediately changes hands.
                 * Creates risk for the sending goroutine because of the responsibility it maintains while losing control of the information.
             * The information is hidden and waiting to be rediscovered.
-        * If the Sender / Receiver `don't` care about the information:
+        * If the Sender `doesn't` care about the information:
             * The lost of the guarantee is not an issue.
             * Useful when creating pipelines that may be canceled or making replicated requests to backends.
             * The information is hidden but we don't care if it is rediscovered.
@@ -236,7 +236,7 @@ Channels are for the orchestration and coordinate of goroutines. Channels accomp
             * Adding the buffer is a semantic_change, not an optimization.
             * More care must be taken when designing, configuring and balancing the application.
             * Don't use buffered channels when you need application-level queues.
-    * If the Send/Receive `can't` block:
+    * If the Send `can't` block:
         * You get the full guarantee without the latency cost.
         * A Fan Out pattern is an example of this.
 * Less is more with buffers.
