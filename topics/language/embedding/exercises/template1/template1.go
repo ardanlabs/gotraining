@@ -27,7 +27,9 @@ func (s sport) match(searchTerm string) bool {
 }
 
 // Declare a struct type named hockey that represents specific
-// hockey information. Have it embed the sport type first.
+// hockey information:
+// - Have it embed the sport type first.
+// - Have it include a field with the country of the team.
 
 // match checks the value for the specified term.
 func ( /* receiver type */ ) match(searchTerm string) bool {
