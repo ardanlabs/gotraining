@@ -201,9 +201,4 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Research Papers
 
-[DINAMITE: A modern approach to memory performance profiling](http://arxiv.org/pdf/1606.00396v1.pdf)  
-[GoHotDraw: evaluating the Go programming language with design patterns](http://dl.acm.org/citation.cfm?id=1937127) - ACM  
-[Blade : A Datacenter Garbage Collector](http://www.scs.stanford.edu/14au-cs244b/labs/projects/terei.pdf) - David Terei  
-[Text Understanding from Scratch](https://arxiv.org/pdf/1502.01710.pdf) - Xiang Zhang, Yann LeCun  
-[Model Checking of Fault-Tolerant Distributed Algorithms?](http://forsyte.at/download/kvw-psi15.pdf) - Vienna University of Technology  
-[The Modelling and Analysis of Security Protocols: the CSP Approach](http://www.computing.surrey.ac.uk/personal/st/S.Schneider/books/MASP.pdf)
+[Damian Gryski's Interesting Papers](https://github.com/dgryski/interesting-papers)  
