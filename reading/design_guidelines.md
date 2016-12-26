@@ -50,6 +50,8 @@ This is the accuracy and consistency of your code performing every read, write a
 
 _We need to become very serious about reliability._  
 
+[Normalization of Deviance in Software](http://danluu.com/wat/)
+
 **2) Readability**    
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
@@ -200,48 +202,54 @@ Both you and the runtime have a responsibility in managing the concurrency of th
 
 **_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
-Channels are for the orchestration and coordinate of goroutines. Channels accomplish this by synchronizing the sending and receiving of data between goroutines or by providing mechanisms to signal goroutines about events.
+Channels allow goroutines to communicate with each other through the use of signaling semantics. Channels accomplish this signaling through the use of sending/receiving data or by identifying state changes on individual channels. Don't architect software with the idea of channels being a queue, focus on signaling and the semantics that simplify the orchestration required.
 
 * Use channels to orchestrate and coordinate goroutines.
-    * They can help to simplify and make code more readable over using mutexes and atomic functions.
-    * They provide support for cancellation and deadlines.
-    * Though slower than mutexes and atomic functions, if the code is simpler and fast enough use them.
-        * Mutexes and atomic functions can make accessing shared state simpler.
+    * Focus on the signaling semantics and not the sharing of data.
+    * Signal by passing data or by closing the channel.
+    * Question their use for synchronizing access to shared state.
+        * _There are cases where channels can be simpler for this but initially question._
 * Unbuffered channels:
-    * Provides a full guarantee that information being exchanged has been delivered to another goroutine.
-    * Both goroutines making the exchange must be at the channel at the same time.
-        * The Receive happens before the Send.
-    * Provides the highest level of guarantee within channel communication.
-        * Responsibility for the information immediately changes hands.
-        * The information is still visible and actively being worked on.
+    * Blocks the sending goroutine from moving forward until a different goroutine has received the data signal.
+        * The sending goroutine gains immediate knowledge their data signal has been received.
+    * Both goroutines involved must be at the channel at the same time.
+        * More important: The Receive happens before the Send.
     * Trade-offs:
-        * We take the benefit of the full guarantee for the cost of higher blocking latency.
+        * We take the benefit of knowing the data signal has been received for the cost of higher blocking latency.
 * Buffered channels:
-    * If the Send `can` block:
-        * Provides a weaker guarantee that information being exchanged has been delivered to another goroutine.
-        * Both goroutines making the exchange don’t need to be at the channel at the same time.
-            * The Send happens before the Receive.
-        * If the Sender `cares` about the information:
-            * Provides a lower level of guarantee within channel communication.
-                * Responsibility for the information does not immediately changes hands.
-                * Creates risk for the sending goroutine because of the responsibility it maintains while losing control of the information.
-            * The information is hidden and waiting to be rediscovered.
-        * If the Sender `doesn't` care about the information:
-            * The lost of the guarantee is not an issue.
-            * Useful when creating pipelines that may be canceled or making replicated requests to backends.
-            * The information is hidden but we don't care if it is rediscovered.
-        * Trade-offs:
-            * We take the benefit of reducing blocking latency for the cost of weaker guarantees.
-        * Notes:
-            * Adding the buffer is a semantic_change, not an optimization.
-            * More care must be taken when designing, configuring and balancing the application.
-            * Don't use buffered channels when you need application-level queues.
-    * If the Send `can't` block:
-        * You get the full guarantee without the latency cost.
-        * A Fan Out pattern is an example of this.
+    * Does NOT block the sending goroutine from moving forward until a different goroutine has received the data signal.
+        * The sending goroutine gains no knowledge that their data signal has been received.
+    * Both goroutines involved don't need to be at the channel at the same time.
+        * More important: The Send happens before the Receive.
+    * Trade-offs:
+        * We take the benefit of reducing blocking latency for the cost of not knowing if/when the data signal is received.
+* Closing channels:
+    * Signaling without the need for data passing.
+    * Perfect for signaling cancellations and deadlines.
+* NIL channels:
+    * Turn off signaling
+    * Perfect for rate limiting or short term stoppages.
+
+#### Channel Semantics
+
+**_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
+
+Depending on the problem you are solving, you may require different channel semantics. Depending on the semantics you need, different architectural choices must be taken.
+
+* If any given Send on a channel `CAN` cause the goroutine to block:
+    * You have less buffers compared to the number of goroutines that will perform a Send at any given time.
+    * An example would be a resource pool of database connections.
+    * This requires knowing what happens when the Send blocks because this will create a situation of back pressure inside the application in front of the channel.
+    * The things discussed above about [writing concurrent software](https://github.com/ardanlabs/gotraining/blob/master/reading/design_guidelines.md#writing-concurrent-software) must be taken into account for this channel.
+    * Not knowing what happens when the Send blocks on the channel is not a license to guess but a directive to STOP, understand and take appropriate measures.
+* If any given Send on a channel `WON'T` cause the goroutine to block:
+    * You have a buffer for every goroutine that will perform a Send.
+    * You will abandon the Send immediately if it can't be performed.
+    * An example would be a fan out pattern or pipelining.
+    * This requires knowing if the size of the buffer is appropriate and if it is acceptable to abandon the Send.
 * Less is more with buffers.
     * Don’t think about performance when thinking about buffers.
-    * Buffers can help to reduce blocking latency in the exchange of information.
+    * Buffers can help to reduce blocking latency between signaling.
         * Reducing blocking latency towards zero does not necessarily mean better throughput.
         * If a buffer of one is giving you good enough throughput then keep it.
         * Question buffers that are larger than one and measure for size.

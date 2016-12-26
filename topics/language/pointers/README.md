@@ -87,6 +87,7 @@ http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ### Garbage Collection
 
+[The Garbage Collection Handbook](http://gchandbook.org/)  
 [Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
 [Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)  

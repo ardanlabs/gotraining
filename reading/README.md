@@ -35,6 +35,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
 [Let’s stop copying C](https://eev.ee/blog/2016/12/01/lets-stop-copying-c/) - Eevee  
 [15 Years of Concurrency](http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/) - Joe Duffy  
+[Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 
 ### Contribute to Go
 
@@ -104,6 +105,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### Distributed Systems
 
 [Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods) - Jeff Hodges  
+[The Queen Does Not Rule](https://aeon.co/essays/how-ant-societies-point-to-radical-possibilities-for-humans) - Deborah M Gordon  
+[Load Balancing is Impossible](https://www.youtube.com/watch?v=kpvbOzHUakA) - Tyler McMullen  
 
 ### HTTP and Timeouts
 
@@ -118,6 +121,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
 [USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)  
 [You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
+[Latency Tip Of The Day](http://latencytipoftheday.blogspot.com/) -- Gil Tene  
 
 ## Mechanical Sympathy
 
@@ -172,6 +176,7 @@ This content can be found under [pointers](../topics/pointers). We feel this con
 
 #### Garbage Collection
 
+[The Garbage Collection Handbook](http://gchandbook.org/)  
 [Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection) - Wikipedia  
 [Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm) - Rick Hudson  
@@ -202,3 +207,4 @@ https://godoc.org/golang.org/x/tools/go/ssa
 ## Research Papers
 
 [Damian Gryski's Interesting Papers](https://github.com/dgryski/interesting-papers)  
+[“Balls into Bins” — A Simple and Tight Analysis](http://wwwmayr.informatik.tu-muenchen.de/personen/raab/publ/balls.pdf)  

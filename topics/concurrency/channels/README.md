@@ -1,15 +1,5 @@
 ## Channels
-Channels are a reference type that provide a safe mechanism to share data between goroutines. Unbuffered channel provide a 100% guarantee of delivery that data has passed from one goroutine to the other. Buffered channels allow for data to pass through the channel without such guarantees. Unbuffered channels require both a sending and receiving goroutine to be ready at the same instant before any send or receive operation can complete. Buffered channels don't force goroutines to be ready at the same instant to perform sends and receives.
-
-## Notes
-
-* Use channels to orchestrate goroutines, not to synchronize access to shared state.
-* Unbuffered channels provide a 100% guarantee that data has been exchanged at some point in space and time.
-* Buffered channels provide a way of reducing latency. Don't use them just for performance.
-* Channels can also provide a mechanism for signaling goroutines.
-* A send on an unbuffered channel happens before the corresponding receive from that channel completes.
-* A receive from an unbuffered channel happens before the send on that channel completes.
-* The closing of a channel happens before a receive that returns a zero value because the channel is closed.
+Channels allow goroutines to communicate with each other through the use of signaling semantics. Channels accomplish this signaling through the use of sending/receiving data or by identifying state changes on individual channels. Don't architect software with the idea of channels being a queue, focus on signaling and the semantics that simplify the orchestration required.
 
 ## Design Guidelines
 
