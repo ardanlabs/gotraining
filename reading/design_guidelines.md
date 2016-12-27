@@ -1,10 +1,44 @@
 ## Design Guidelines
 
+You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
+
+### Prepare Your Mind
+
+**Somewhere Along The Line**  
+* We became impressed with programs that contain large amounts of code.
+* We strived to create large abstractions in our code base.
+* We forgot that the hardware is the platform.
+* We lost the understanding that every decision comes with a cost.
+
+**These Days Are Gone**  
+* We can throw more hardware at the problem.
+* We can throw more developers at the problem.
+
+**Aspire To**  
+* Be a champion for quality and efficiency.
+* Be pro-active.
+* Be fearless in the face of hard problems.
+* Be responsible with expectations.
+* Be time and resources.
+* Be a leader.
+* Have an insatiable curiosity.
+* Have a point of view.
+* Value good communication.
+* Value introspection and self-review.
+* Value simplicity.
+* Give and receive feedback well.
+
+**Open Your Mind**  
+* Technology changes quickly but people's minds change slowly.
+* Easy to adopt new technology but hard to adopt new ways of thinking.
+
+### Performance vs Productivity
+
 Performance and productivity both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is out pacing the hardware’s ability to make them faster.
 
 By following Go’s idioms and a few guidelines, we can write code that can be reasoned about by anyone who looks at it. We can write software that simplifies, minimizes and reduces the amount of code we need to solve the problems we are working on. We don’t have to choose productivity over performance or performance over productivity anymore. We can have both.
 
-#### Quotes
+**Quotes**
 
 _"The hope is that the progress in hardware will cure all software ills. However, a critical observer may observe that software manages to outgrow hardware in size and sluggishness. Other observers had noted this for some time before, indeed the trend was becoming obvious as early as 1987." - Niklaus Wirth_
 
@@ -14,51 +48,26 @@ _"The hardware folks will not put more cores into their hardware if the software
 
 _"C is the best balance I've ever seen between power and expressiveness. You can do almost anything you want to do by programming fairly straightforwardly and you will have a very good mental model of what's going to happen on the machine; you can predict reasonably well how quickly it's going to run, you understand what's going on .... - Brian Kernighan_
 
-#### Somewhere Along The Line
-
-* We became impressed with programs that contain large amounts of code.
-* We strived to create large abstractions in our code base.
-* We forgot that the hardware is the platform.
-* We lost the understanding that every decision comes with a cost.
-
-#### These Days Are Gone
-
-* We can throw more hardware at the problem.
-* We can throw more developers at the problem.
-
-#### Remember
-
-The **compiler** is a tool and it's not all knowing or perfect.  
-You need to work with it and help it.
-
-The **operating system** is doing its best to keep cores busy and leverage the right core at the right time.  
-You need to work with it and help it.
-
-The **hardware** is doing its best to execute as many instructions per clock cycle as possible.  
-You need to work with it and help it.
-
-Writing idiomatic code in Go gets you a long way. But you can do so much more when you know how these things work.
-
-#### Guidelines, Decision Making and Trade-Offs
-
-You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
+### Guidelines, Decision Making and Trade-Offs
 
 Develop your design philosophy around these three major categories in this order: Integrity, Readability, and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
+
+**_Note: There are exceptions to everything but when you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
 **1) Integrity**  
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
 
 _We need to become very serious about reliability._  
 
-[Normalization of Deviance in Software](http://danluu.com/wat/)
+[Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
+[Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 
 **2) Readability**    
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
 _We must structure our systems to be more comprehensible._
 
-Example of classic readability issues:  
-http://codepad.org/Xw7eUSSA
+[Example of classic readability issues](http://codepad.org/Xw7eUSSA)
 
 **3) Performance**    
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
@@ -76,27 +85,10 @@ This is about squeezing every ounce of performance as possible. When code is wri
 
 _You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._
 
-Example of a micro optimization:  
-https://play.golang.org/p/D_bImirgXL
+[Example of a micro optimization](https://play.golang.org/p/D_bImirgXL)
 
-**_Note: There are exceptions to everything but as we teach, let your experience be your guide. When you are not sure an exception applies, follow the guidelines presented the best you can._** 
+### Data-Oriented Design
 
-#### Aspire To
-
-* Be a champion for quality and efficiency.
-* Be pro-active.
-* Be fearless in the face of hard problems.
-* Be responsible with expectations.
-* Be time and resources.
-* Be a leader.
-* Have an insatiable curiosity.
-* Have a point of view.
-* Value good communication.
-* Value introspection and self-review.
-* Value simplicity.
-* Give and receive feedback well.
-
-#### Data-Oriented Design
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
 [Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
 
@@ -113,7 +105,7 @@ https://play.golang.org/p/D_bImirgXL
 * Changing data layouts can yield more significant performance improvements than changing just the algorithms.
 * Efficiency is obtained through algorithms but performance is obtained through data structures and layouts.
 
-#### Interface and Composition Design
+### Interface and Composition Design
 
 _With help from [Sandi Metz](https://twitter.com/sandimetz). and [Rob Pike](https://twitter.com/rob_pike)_
 
@@ -133,7 +125,7 @@ _With help from [Sandi Metz](https://twitter.com/sandimetz). and [Rob Pike](http
     * Uncertainty about change is not a license to guess but a directive to STOP and learn more.
     * Recognizing and minimizing cascading changes across the code is a way to architect adaptability and stability in your software.
 
-#### Interface Pollution
+### Interface Pollution
 
 _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)_
 
@@ -143,7 +135,7 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 * Don’t export any interface unless your user needs it. This includes interfaces for internal testing. Users can declare their own interfaces.
 * If it's not clear how an abstraction makes the code better, it probably doesn't.
 
-#### Package-Oriented Design
+### Package-Oriented Design
 
 * Start with a Project that contains all the source code you need to build the products and services the Project owns.
 * Maintain each Project in a single repo.
@@ -155,7 +147,7 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 * Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
 * When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
 
-#### Writing Concurrent Software
+### Writing Concurrent Software
 
 **_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
@@ -198,7 +190,7 @@ Both you and the runtime have a responsibility in managing the concurrency of th
     * Stop the bleeding.
     * Return the system back to a normal state.
 
-#### Channels
+### Channels
 
 **_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
@@ -230,7 +222,7 @@ Channels allow goroutines to communicate with each other through the use of sign
     * Turn off signaling
     * Perfect for rate limiting or short term stoppages.
 
-#### Channel Semantics
+### Channel Semantics
 
 **_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
@@ -255,7 +247,7 @@ Depending on the problem you are solving, you may require different channel sema
         * Question buffers that are larger than one and measure for size.
         * Find the smallest buffer possible that provides good enough throughput.
 
-#### Code Reviews
+### Code Reviews
 
 I teach a lot about the things I look for in code reviews. I am slowly attempting to document this.
 
