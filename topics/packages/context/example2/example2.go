@@ -25,6 +25,12 @@ func timeout() {
 	// channel is closed, whichever happens first.
 	ctx, cancel := context.WithCancel(context.Background())
 
+	// Even though ctx will have expired already, it is good
+	// practice to call its cancelation function in any case.
+	// Failure to do so may keep the context and its parent alive
+	// longer than necessary.
+	defer cancel()
+
 	select {
 	case <-time.After(100 * time.Millisecond):
 		fmt.Println("overslept")
@@ -32,12 +38,6 @@ func timeout() {
 	case <-ctx.Done():
 		fmt.Println(ctx.Err()) // prints "context deadline exceeded"
 	}
-
-	// Even though ctx should have expired already, it is good
-	// practice to call its cancelation function in any case.
-	// Failure to do so may keep the context and its parent alive
-	// longer than necessary.
-	cancel()
 }
 
 // callCancel show how cancel works with the context.
@@ -48,6 +48,12 @@ func callCancel() {
 	// cancel function is called or when the parent context's Done
 	// channel is closed, whichever happens first.
 	ctx, cancel := context.WithCancel(context.Background())
+
+	// Even though ctx will have expired already, it is good
+	// practice to call its cancelation function in any case.
+	// Failure to do so may keep the context and its parent alive
+	// longer than necessary.
+	defer cancel()
 
 	go func() {
 		time.Sleep(50 * time.Millisecond)
@@ -61,10 +67,4 @@ func callCancel() {
 	case <-ctx.Done():
 		fmt.Println(ctx.Err()) // prints "context canceled"
 	}
-
-	// Even though we called cancel first, it is good
-	// practice to call its cancelation function in any case.
-	// Failure to do so may keep the context and its parent alive
-	// longer than necessary.
-	cancel()
 }

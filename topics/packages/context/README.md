@@ -24,9 +24,9 @@ The package context defines the Context type, which carries deadlines, cancelati
 ## Code Review
 
 [Store / Retrieve context values](example1/example1.go) ([Go Playground](https://play.golang.org/p/VkLs3x-Vbd))  
-[WithCancel API](example2/example2.go) ([Go Playground](https://play.golang.org/p/1p12kPZVKp))  
-[WithDeadline API](example3/example3.go) ([Go Playground](https://play.golang.org/p/KLuuhopJpS))  
-[WithTimeout API](example4/example4.go) ([Go Playground](https://play.golang.org/p/K4iMUT8cLc))  
+[WithCancel API](example2/example2.go) ([Go Playground](https://play.golang.org/p/ZLcBz25Q4r))  
+[WithDeadline API](example3/example3.go) ([Go Playground](https://play.golang.org/p/2lq42MzJAo))  
+[WithTimeout API](example4/example4.go) ([Go Playground](https://play.golang.org/p/hft7tgGNxS))  
 [Request/Response](example5/example5.go) ([Go Playground](https://play.golang.org/p/urtOUiAyCF))  
 [Avoid leaking goroutines](example6/example6.go) ([Go Playground](https://play.golang.org/p/36YjxYZKC3))
 
