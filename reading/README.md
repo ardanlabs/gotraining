@@ -36,6 +36,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Let’s stop copying C](https://eev.ee/blog/2016/12/01/lets-stop-copying-c/) - Eevee  
 [15 Years of Concurrency](http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/) - Joe Duffy  
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
+[The Future of Programming](https://vimeo.com/71278954) - Bret Victor  
 
 ### Contribute to Go
 
@@ -190,6 +191,10 @@ This content can be found under [pointers](../topics/pointers). We feel this con
 https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83  
 https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU) - Chandler Carruth  
+
+## Hardware
+
+[Learn how to build a processor](https://www.youtube.com/playlist?list=PLNmCdcvSgJj5bllQx5E3A6OsbMq2luA9J)
 
 ## Release Notes
 
