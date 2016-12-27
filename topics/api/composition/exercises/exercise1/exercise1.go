@@ -27,13 +27,13 @@ type adminlist struct {
 	list []administrator
 }
 
-// pushAdmin adds an administrator to the adminlist.
-func (l *adminlist) pushAdmin(a administrator) {
+// Enqueue adds an administrator to the adminlist.
+func (l *adminlist) Enqueue(a administrator) {
 	l.list = append(l.list, a)
 }
 
-// popAdmin removes an administrator from the adminlist.
-func (l *adminlist) popAdmin() administrator {
+// Dequeue removes an administrator from the adminlist.
+func (l *adminlist) Dequeue() administrator {
 	a := l.list[0]
 	l.list = l.list[1:]
 	return a
@@ -46,13 +46,13 @@ type devlist struct {
 	list []developer
 }
 
-// pushDev adds a developer to the devlist.
-func (l *devlist) pushDev(d developer) {
+// Enqueue adds a developer to the devlist.
+func (l *devlist) Enqueue(d developer) {
 	l.list = append(l.list, d)
 }
 
-// popDev removes a developer from the devlist.
-func (l *devlist) popDev() developer {
+// Dequeue removes a developer from the devlist.
+func (l *devlist) Dequeue() developer {
 	d := l.list[0]
 	l.list = l.list[1:]
 	return d
@@ -101,24 +101,24 @@ func main() {
 	// Create a variable named devs of type devlist.
 	var devs devlist
 
-	// Push a new sysadmin onto admins.
-	admins.pushAdmin(&sysadmin{"John"})
+	// Enqueue a new sysadmin onto admins.
+	admins.Enqueue(&sysadmin{"John"})
 
-	// Push two new programmers onto devs.
-	devs.pushDev(&programmer{"Mary"})
-	devs.pushDev(&programmer{"Steve"})
+	// Enqueue two new programmers onto devs.
+	devs.Enqueue(&programmer{"Mary"})
+	devs.Enqueue(&programmer{"Steve"})
 
 	// Create a variable named cmp of type company, and initialize it by
-	// hiring (popping) an administrator from admins and a developer from devs.
+	// hiring (dequeuing) an administrator from admins and a developer from devs.
 	cmp := company{
-		administrator: admins.popAdmin(),
-		developer:     devs.popDev(),
+		administrator: admins.Dequeue(),
+		developer:     devs.Dequeue(),
 	}
 
-	// Push the company value on both lists since the company implements
+	// Enqueue the company value on both lists since the company implements
 	// each interface.
-	admins.pushAdmin(&cmp)
-	devs.pushDev(&cmp)
+	admins.Enqueue(&cmp)
+	devs.Enqueue(&cmp)
 
 	// A set of tasks for administrators and developers to perform.
 	tasks := []struct {
@@ -136,17 +136,17 @@ func main() {
 		// Check if the task needs an administrator else use a developer.
 		if task.needsAdmin {
 
-			// Pop an administrator value from the admins list and
+			// Dequeue an administrator value from the admins list and
 			// call the administrate method.
-			adm := admins.popAdmin()
+			adm := admins.Dequeue()
 			adm.administrate(task.system)
 
 			continue
 		}
 
-		// Pop a developer value from the devs list and
+		// Dequeue a developer value from the devs list and
 		// call the develop method.
-		dev := devs.popDev()
+		dev := devs.Dequeue()
 		dev.develop(task.system)
 	}
 }
