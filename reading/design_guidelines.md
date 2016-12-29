@@ -18,9 +18,7 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * Be a champion for quality and efficiency.
 * Be pro-active.
 * Be fearless in the face of hard problems.
-* Be responsible with expectations.
-* Be time and resources.
-* Be a leader.
+* Be responsible with expectations, time and resources.
 * Have an insatiable curiosity.
 * Have a point of view.
 * Value good communication.
@@ -55,35 +53,48 @@ Develop your design philosophy around these three major categories in this order
 **_Note: There are exceptions to everything but when you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
 **1) Integrity**  
-This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Nothing trumps integrity - EVER.
+**_We need to become very serious about reliability._**
 
-_We need to become very serious about reliability._  
+This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Just as important, it's knowing the error handling code is the main code. Nothing trumps integrity - EVER.
+
+Case Study on Postmortems:  
+_48 critical failures were found in a study looking at a couple hundred bugs in Cassandra, HBase, HDFS, MapReduce, and Redis._  
+* 92% : Failures from bad error handling
+    * 35% : Incorrect handling
+        * 25% : Simply ignoring an error
+        * 8% : Catching the wrong exception
+        * 2% : Incomplete TODOs
+    * 57% System specific
+        * 23% : Easily detectable
+        * 34% : Complex bugs
+* 8% : Failures from latent human errors
 
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
+[Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 
-**2) Readability**    
+**2) Readability**   
+**_We must structure our systems to be more comprehensible._**
+
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
-
-_We must structure our systems to be more comprehensible._
 
 [Example of classic readability issues](http://codepad.org/Xw7eUSSA)
 
-**3) Performance**    
+**3) Performance**  
+**_We must compute less to get the results we need._**
+
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
 
-_We must compute less to get the results we need._
-
 Rules of Performance:   
-1) Never guess about performance.  
-2) Measurements must be relevant.  
-3) Profile before you decide something is performance critical.  
-4) Test to know you are correct. 
+    * Never guess about performance.  
+    * Measurements must be relevant.  
+    * Profile before you decide something is performance critical.  
+    * Test to know you are correct. 
 
-**4) Micro-Optimization**    
+**4) Micro-Optimization**  
+**_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._**
+
 This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
-
-_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._
 
 [Example of a micro optimization](https://play.golang.org/p/D_bImirgXL)
 
