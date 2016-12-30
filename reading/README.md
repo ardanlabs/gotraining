@@ -37,6 +37,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [15 Years of Concurrency](http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/) - Joe Duffy  
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 [The Future of Programming](https://vimeo.com/71278954) - Bret Victor  
+[Systems Past: the only 8 software innovations we actually use](http://davidad.github.io/blog/2014/03/12/the-operating-system-is-out-of-date/) - davidad  
 
 ### Contribute to Go
 
