@@ -7,8 +7,11 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
+
+	"time"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
 	"github.com/braintree/manners"
@@ -24,15 +27,24 @@ func main() {
 	log.Println("main : Started")
 
 	// Check the environment for a configured port value.
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "3000"
+	host := os.Getenv("HOST")
+	if host == "" {
+		host = ":3000"
 	}
+
+	// Create a new server and set timeout values.
+	server := manners.NewWithServer(&http.Server{
+		Addr:           host,
+		Handler:        routes.API(),
+		ReadTimeout:    5 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	})
 
 	// Create this goroutine to run the web server.
 	go func() {
-		log.Println("listener : Started : Listening on: http://localhost:" + port)
-		manners.ListenAndServe(":"+port, routes.API())
+		log.Println("listener : Started : Listening on" + host)
+		server.ListenAndServe()
 	}()
 
 	// Listen for an interrupt signal from the OS.
@@ -41,7 +53,7 @@ func main() {
 	<-sigChan
 
 	log.Println("main : Shutting down...")
-	manners.Close()
+	server.Close()
 
 	log.Println("main : Completed")
 }
