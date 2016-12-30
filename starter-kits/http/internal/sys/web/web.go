@@ -71,7 +71,7 @@ type Values struct {
 
 // A Handler is a type that handles an http request within our own little mini
 // framework.
-type Handler func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string)
+type Handler func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error
 
 // A Middleware is a type that wraps a handler to remove boilerplate or other
 // concerns not direct to any given Handler.

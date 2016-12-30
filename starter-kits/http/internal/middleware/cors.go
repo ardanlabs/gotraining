@@ -30,14 +30,14 @@ func CORS(a *web.App, origin string, methods string) web.Middleware {
 	return func(next web.Handler) web.Handler {
 
 		// Wrap this handler around the next one provided.
-		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) {
+		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 			v := ctx.Value(web.KeyValues).(*web.Values)
 
 			// Add the access control to the header.
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			log.Printf("%s : CORS : Access Control Allowed : Origin[%s] Methods[%s]", v.TraceID, origin, methods)
 
-			next(ctx, w, r, params)
+			return next(ctx, w, r, params)
 		}
 	}
 }

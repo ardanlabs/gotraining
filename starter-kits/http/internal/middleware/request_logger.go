@@ -17,17 +17,20 @@ import (
 func RequestLogger(next web.Handler) web.Handler {
 
 	// Wrap this handler around the next one provided.
-	return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) {
+	return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 		v := ctx.Value(web.KeyValues).(*web.Values)
 
 		start := time.Now()
-		next(ctx, w, r, params)
+		err := next(ctx, w, r, params)
 
-		log.Printf("%s : (%d) : %s %s -> %s (%s)",
+		log.Printf("%s : (%d) : %s %s -> %s (%s) : %s",
 			v.TraceID,
 			v.StatusCode,
 			r.Method, r.URL.Path,
 			r.RemoteAddr, time.Since(start),
+			err,
 		)
+
+		return err
 	}
 }
