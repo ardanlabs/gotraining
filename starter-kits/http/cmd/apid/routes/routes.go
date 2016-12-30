@@ -13,7 +13,7 @@ import (
 
 // API returns a handler for a set of routes.
 func API() http.Handler {
-	app := web.New(middleware.RequestLogger, middleware.Mongo())
+	app := web.New(middleware.RequestLogger, middleware.ErrorHandler, middleware.Mongo())
 	app.Use(middleware.CORS(app, "*", "GET, POST, PUT, PATCH, DELETE, OPTIONS"))
 
 	// Setup the file server to serve up static content such as

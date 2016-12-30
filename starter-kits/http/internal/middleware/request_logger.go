@@ -23,7 +23,7 @@ func RequestLogger(next web.Handler) web.Handler {
 		start := time.Now()
 		err := next(ctx, w, r, params)
 
-		log.Printf("%s : (%d) : %s %s -> %s (%s) : %s",
+		log.Printf("%s : (%d) : %s %s -> %s (%s) : Error[%v]",
 			v.TraceID,
 			v.StatusCode,
 			r.Method, r.URL.Path,

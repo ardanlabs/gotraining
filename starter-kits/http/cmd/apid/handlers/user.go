@@ -18,7 +18,6 @@ func UserList(ctx context.Context, w http.ResponseWriter, r *http.Request, param
 
 	u, err := user.List(ctx, v.TraceID, v.DB)
 	if err != nil {
-		web.Error(ctx, w, v.TraceID, err)
 		return err
 	}
 
@@ -33,7 +32,6 @@ func UserRetrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, p
 
 	u, err := user.Retrieve(ctx, v.TraceID, v.DB, params["id"])
 	if err != nil {
-		web.Error(ctx, w, v.TraceID, err)
 		return err
 	}
 
@@ -48,13 +46,11 @@ func UserCreate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 
 	var cu user.CreateUser
 	if err := web.Unmarshal(r.Body, &cu); err != nil {
-		web.Error(ctx, w, v.TraceID, err)
 		return err
 	}
 
 	u, err := user.Create(ctx, v.TraceID, v.DB, &cu)
 	if err != nil {
-		web.Error(ctx, w, v.TraceID, err)
 		return err
 	}
 
@@ -69,12 +65,10 @@ func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 
 	var cu user.CreateUser
 	if err := web.Unmarshal(r.Body, &cu); err != nil {
-		web.Error(ctx, w, v.TraceID, err)
 		return err
 	}
 
 	if err := user.Update(ctx, v.TraceID, v.DB, params["id"], &cu); err != nil {
-		web.Error(ctx, w, v.TraceID, err)
 		return err
 	}
 
@@ -88,7 +82,6 @@ func UserDelete(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 	v := ctx.Value(web.KeyValues).(*web.Values)
 
 	if err := user.Delete(ctx, v.TraceID, v.DB, params["id"]); err != nil {
-		web.Error(ctx, w, v.TraceID, err)
 		return err
 	}
 
