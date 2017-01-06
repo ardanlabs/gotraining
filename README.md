@@ -30,6 +30,8 @@ Please check out this page of [important reading](reading/README.md). You will f
 
 We have taught classes to thousands of students for over the past two years and all around the world.
 
+Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
+
 Look at our schedule: https://github.com/ardanlabs/gotraining#schedule
 
 ## Before You Come To Class
