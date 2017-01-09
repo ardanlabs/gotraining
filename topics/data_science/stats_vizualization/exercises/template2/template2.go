@@ -8,29 +8,24 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	diabetesData, err := ioutil.ReadFile("../../data/diabetes.csv")
+	// Pull in the CSV file.
+	diabetesFile, err := os.Open("../../data/diabetes.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer diabetesFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := df.ReadCSV(string(diabetesData))
-
-	// Extract the bmi col as a slice of floats.
-	bmi, err := diabetesDF.Col("bmi").Float()
-	if err != nil {
-		log.Fatal(err)
-	}
+	diabetesDF := dataframe.ReadCSV(diabetesFile)
 
 	// Create a plotter.Values value and fill it with the
 	// values from the respective column of the dataframe.

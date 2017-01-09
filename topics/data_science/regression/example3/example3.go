@@ -8,23 +8,26 @@
 package main
 
 import (
-	"io/ioutil"
+	"bufio"
 	"log"
+	"os"
+	"path/filepath"
 
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	diabetesData, err := ioutil.ReadFile("../data/diabetes.csv")
+	// Pull in the CSV file.
+	diabetesFile, err := os.Open("../data/diabetes.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer diabetesFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := df.ReadCSV(string(diabetesData))
+	diabetesDF := dataframe.ReadCSV(diabetesFile)
 
 	// Calculate the number of elements in each set.
 	trainingNum := diabetesDF.Nrow() / 2
@@ -59,31 +62,32 @@ func main() {
 	testDF := diabetesDF.Subset(testIdx)
 	holdoutDF := diabetesDF.Subset(holdoutIdx)
 
-	// Save the training data.
-	b, err := trainingDF.SaveCSV()
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err = ioutil.WriteFile("../data/training.csv", b, 0644); err != nil {
-		log.Fatal(err)
-	}
-
-	// Save the test data.
-	b, err = testDF.SaveCSV()
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err = ioutil.WriteFile("../data/test.csv", b, 0644); err != nil {
-		log.Fatal(err)
+	// Create a map that will be used in writing the data
+	// to files.
+	setMap := map[int]dataframe.DataFrame{
+		0: trainingDF,
+		1: testDF,
+		2: holdoutDF,
 	}
 
-	// Save the holdout data.
-	b, err = holdoutDF.SaveCSV()
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err = ioutil.WriteFile("../data/holdout.csv", b, 0644); err != nil {
-		log.Fatal(err)
-	}
+	// Create the respective files.
+	for idx, setName := range []string{"training", "test", "holdout"} {
 
+		// Create the filename.
+		fileName := filepath.Join("../data/", setName+".csv")
+
+		// Create the file
+		f, err := os.Create(fileName)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Create a writer for exporting the data.
+		w := bufio.NewWriter(f)
+
+		// Write the data.
+		if err := setMap[idx].WriteCSV(w); err != nil {
+			log.Fatal(err)
+		}
+	}
 }
