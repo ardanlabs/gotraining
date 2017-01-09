@@ -9,53 +9,39 @@ package main
 
 import (
 	"image/color"
-	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/vg"
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	diabetesData, err := ioutil.ReadFile("../data/diabetes.csv")
+	// Pull in the CSV file.
+	diabetesFile, err := os.Open("../data/diabetes.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer diabetesFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := df.ReadCSV(string(diabetesData))
+	diabetesDF := dataframe.ReadCSV(diabetesFile)
 
 	// Extract the target column.
-	yCol, err := diabetesDF.Col("y").Float()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Convert the target column to a slice of floats.
-	yVals := make([]float64, len(yCol))
-	for i, yVal := range yCol {
-		yVals[i] = yVal
-	}
+	yVals := diabetesDF.Col("y").Float()
 
 	// Create a scatter plot for each of the features in the dataset.
 	for _, colName := range diabetesDF.Names() {
 
-		// Extract the columns as a slice of floats.
-		floatCol, err := diabetesDF.Col(colName).Float()
-		if err != nil {
-			log.Fatal(err)
-		}
-
 		// pts will hold the values for plotting
-		pts := make(plotter.XYs, len(floatCol))
+		pts := make(plotter.XYs, diabetesDF.Nrow())
 
 		// Fill pts with data.
-		for i, floatVal := range floatCol {
+		for i, floatVal := range diabetesDF.Col(colName).Float() {
 			pts[i].X = floatVal
 			pts[i].Y = yVals[i]
 		}

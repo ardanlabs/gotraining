@@ -8,67 +8,33 @@
 package main
 
 import (
-	"encoding/csv"
 	"image/color"
 	"log"
 	"os"
-	"strconv"
 
 	"github.com/gonum/floats"
-	"github.com/gonum/matrix/mat64"
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/plotutil"
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/stat"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
 	// Open the iris dataset file.
-	f, err := os.Open("../data/iris.csv")
+	irisFile, err := os.Open("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
+	defer irisFile.Close()
 
-	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(f)
-	reader.FieldsPerRecord = 5
-
-	// Read in all of the CSV records
-	rawCSVData, err := reader.ReadAll()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// floatData will hold all the float values that will eventually be
-	// used to form out matrix.
-	floatData := make([]float64, 4*len(rawCSVData))
-
-	// dataIndex will track the current index of the matrix values.
-	var dataIndex int
-
-	// Sequentially move the rows into a slice of floats.
-	for _, record := range rawCSVData {
-
-		// Loop over the float columns.
-		for i := 0; i < 4; i++ {
-
-			// Convert the value to a float.
-			val, err := strconv.ParseFloat(record[i], 64)
-			if err != nil {
-				log.Fatal("Could not parse float value")
-			}
-
-			// Add the float value to the slice of floats.
-			floatData[dataIndex] = val
-			dataIndex++
-		}
-	}
+	// Parse the CSV file into a dataframe.
+	irisDF := dataframe.ReadCSV(irisFile)
 
 	// Form the matrix.
-	mat := mat64.NewDense(len(rawCSVData), 4, floatData)
+	mat := irisDF.Select([]string{"sepal_length", "sepal_width", "petal_length", "petal_width"}).Matrix()
 
 	// Calculate the principal component direction vectors
 	// and variances.

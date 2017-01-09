@@ -9,23 +9,24 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	irisData, err := ioutil.ReadFile("../data/iris.csv")
+	// Open the CSV file.
+	irisFile, err := os.Open("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer irisFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	irisDF := df.ReadCSV(string(irisData))
+	irisDF := dataframe.ReadCSV(irisFile)
 
 	// As a sanity check, display the records to stdout.
 	// Gota will format the dataframe for pretty printing.

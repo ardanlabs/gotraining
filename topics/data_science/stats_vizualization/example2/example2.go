@@ -9,26 +9,27 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/vg"
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	irisData, err := ioutil.ReadFile("../data/iris.csv")
+	// Pull in the CSV file.
+	irisFile, err := os.Open("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer irisFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	irisDF := df.ReadCSV(string(irisData))
+	irisDF := dataframe.ReadCSV(irisFile)
 
 	// Create a histogram for each of the feature columns in the dataset.
 	for _, colName := range irisDF.Names() {
@@ -37,16 +38,10 @@ func main() {
 		// a histogram of the values.
 		if colName != "species" {
 
-			// Extract the columns as a slice of floats.
-			floatCol, err := irisDF.Col(colName).Float()
-			if err != nil {
-				log.Fatal(err)
-			}
-
 			// Create a plotter.Values value and fill it with the
 			// values from the respective column of the dataframe.
-			v := make(plotter.Values, len(floatCol))
-			for i, floatVal := range floatCol {
+			v := make(plotter.Values, irisDF.Nrow())
+			for i, floatVal := range irisDF.Col(colName).Float() {
 				v[i] = floatVal
 			}
 

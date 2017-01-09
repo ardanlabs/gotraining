@@ -9,44 +9,39 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/gonum/floats"
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/stat"
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	diabetesData, err := ioutil.ReadFile("../data/diabetes.csv")
+	// Pull in the CSV file.
+	diabetesFile, err := os.Open("../data/diabetes.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer diabetesFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := df.ReadCSV(string(diabetesData))
+	diabetesDF := dataframe.ReadCSV(diabetesFile)
 
 	// Create a histogram for each of the columns in the dataset and
 	// output summary statistics.
 	for _, colName := range diabetesDF.Names() {
 
-		// Extract the columns as a slice of floats.
-		floatCol, err := diabetesDF.Col(colName).Float()
-		if err != nil {
-			log.Fatal(err)
-		}
-
 		// Create a plotter.Values value and fill it with the
 		// values from the respective column of the dataframe.
-		plotVals := make(plotter.Values, len(floatCol))
-		summaryVals := make([]float64, len(floatCol))
-		for i, floatVal := range floatCol {
+		plotVals := make(plotter.Values, diabetesDF.Nrow())
+		summaryVals := make([]float64, diabetesDF.Nrow())
+		for i, floatVal := range diabetesDF.Col(colName).Float() {
 			plotVals[i] = floatVal
 			summaryVals[i] = floatVal
 		}
