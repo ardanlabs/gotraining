@@ -10,17 +10,25 @@ package main
 import (
 	"database/sql"
 	"log"
+	"os"
 
-	// go-sqlite3 is the libary that allows us to connect
-	// to sqlite with databases/sql.
-	_ "github.com/mattn/go-sqlite3"
+	// pq is the libary that allows us to connect
+	// to postgres with databases/sql.
+	_ "github.com/lib/pq"
 )
 
 func main() {
 
-	// Open a database value.  Specify the sqlite3 driver
+	// Get my ElephantSQL postgres URL. I have it stored in
+	// an environmental variable.
+	pgURL := os.Getenv("PGURL")
+	if pgURL == "" {
+		log.Fatal("PGURL empty")
+	}
+
+	// Open a database value.  Specify the postgres driver
 	// for databases/sql.
-	db, err := sql.Open("sqlite3", "../../data/iris.db")
+	db, err := sql.Open("postgres", pgURL)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,6 +1,14 @@
 ## SQL-like Databases
 
-Although there is a good bit of hype around interesting NoSQL databases and key/values stores, SQL-like databases are still ubiquitous.  You can access, query, and otherwise interact with such databases via the `databases/sql` package in Go stdlib.  There are a variety of libraries for `databases/sql` that allow you to connect to MySQL, Postgres, etc.  In the following, we will be using [sqlite](https://sqlite.org/), a self-contained, embeddable, zero-configuration SQL database engine.
+Although there is a good bit of hype around interesting NoSQL databases and key/values stores, SQL-like databases are still ubiquitous.  You can access, query, and otherwise interact with such databases via the `databases/sql` package in Go stdlib.  There are a variety of libraries for `databases/sql` that allow you to connect to MySQL, Postgres, etc.  In the following, we will be using a Postgres database hosted by [ElephantSQL](https://www.elephantsql.com/) to illustrate database/sql functionality. 
+
+## Get a Postgres server
+
+- Create an account on [ElephantSQL](https://www.elephantsql.com/).
+- Create a free "tiny turtle" instance.
+- Get the URL from the details page of your "tiny turtle" instance.
+- Export this URL to a environmental variable `PGURL`.
+- Install the `psql` CLI tool.
 
 ## Notes
 
@@ -12,7 +20,8 @@ Although there is a good bit of hype around interesting NoSQL databases and key/
 
 ## Links
 
-[Go database/sql tutorial](http://go-database-sql.org/)  
+[Go database/sql tutorial](http://go-database-sql.org/)   
+[Common Go pitfalls when working with database/sql](https://www.vividcortex.com/blog/2015/09/22/common-pitfalls-go/)
 
 ## Code Review
 
