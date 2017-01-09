@@ -9,40 +9,26 @@ package main
 
 import (
 	"database/sql"
-	"encoding/csv"
+	"io"
 	"log"
 	"os"
 
-	// go-sqlite3 is the libary that allows us to connect
-	// to sqlite with databases/sql.
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/go-hep/csvutil"
+	"github.com/lib/pq"
 )
 
 func main() {
 
-	// Remove the database if it exists.
-	os.Remove("../data/iris.db")
-
-	// Open the iris dataset file.
-	csvFile, err := os.Open("../data/iris.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer csvFile.Close()
-
-	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(csvFile)
-	reader.FieldsPerRecord = 5
-
-	// Read in all of the CSV records
-	rawCSVData, err := reader.ReadAll()
-	if err != nil {
-		log.Fatal(err)
+	// Get my ElephantSQL postgres URL. I have it stored in
+	// an environmental variable.
+	pgURL := os.Getenv("PGURL")
+	if pgURL == "" {
+		log.Fatal("PGURL empty")
 	}
 
-	// Open a database value.  Specify the sqlite3 driver
+	// Open a database value.  Specify the postgres driver
 	// for databases/sql.
-	db, err := sql.Open("sqlite3", "../data/iris.db")
+	db, err := sql.Open("postgres", pgURL)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -55,11 +41,29 @@ func main() {
 			sepal_width NUMERIC,
 			petal_length NUMERIC,
 			petal_width NUMERIC,
-			species VARCHAR
+			species TEXT
 		)`
 	if _, err := db.Exec(createStmt); err != nil {
 		log.Fatal(err)
 	}
+
+	// Register the CSV file, holding the data we want to load, as a table.
+	tbl, err := csvutil.Open("../data/iris.csv")
+	if err != nil {
+		log.Fatalf("could not open %s: %v\n", "iris.csv", err)
+	}
+	defer tbl.Close()
+
+	// Specify the delimiter and comment character.
+	tbl.Reader.Comma = ','
+	tbl.Reader.Comment = '#'
+
+	// Read in all the non-header rows in the CSV.
+	rows, err := tbl.ReadRows(0, -1)
+	if err != nil {
+		log.Fatalf("could read csv rows: %v\n", err)
+	}
+	defer rows.Close()
 
 	// Create a transaction to load the data.
 	tx, err := db.Begin()
@@ -68,17 +72,42 @@ func main() {
 	}
 
 	// Prepare an insert statement.
-	insertStmt, err := tx.Prepare("INSERT INTO iris VALUES(?, ?, ?, ?, ?)")
+	insertStmt, err := tx.Prepare(pq.CopyIn("iris", "sepal_length", "sepal_width", "petal_length", "petal_width", "species"))
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer insertStmt.Close()
 
 	// Add the insert statements to the transaction.
-	for _, row := range rawCSVData {
-		if _, err := insertStmt.Exec(row[0], row[1], row[2], row[3], row[4]); err != nil {
+	for rows.Next() {
+
+		// Define a struct that specifies the types of the columns.
+		data := struct {
+			SepalLength float64
+			SepalWidth  float64
+			PetalLength float64
+			PetalWidth  float64
+			Species     string
+		}{}
+
+		// Scan the row for the struct fields.
+		if err = rows.Scan(&data); err != nil {
+			log.Fatalf("error reading row: %v\n", err)
+		}
+
+		// Add the struct fields to the prepared insert statement.
+		if _, err := insertStmt.Exec(data.SepalLength, data.SepalWidth, data.PetalLength, data.PetalWidth, data.Species); err != nil {
 			log.Fatal(err)
 		}
+	}
+
+	// Handle any errors from rows.Next().
+	if err = rows.Err(); err != nil && err != io.EOF {
+		log.Fatal(err)
+	}
+
+	// We have to close
+	if err = insertStmt.Close(); err != nil {
+		log.Fatal(err)
 	}
 
 	// Commit the transaction.

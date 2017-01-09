@@ -1,10 +1,9 @@
 # Go packages
 
-```
 github.com/kniren/gota/dataframe    
 github.com/go-hep/csvutil    
 github.com/go-hep/csvutil/csvdriver   
-github.com/mattn/go-sqlite3    
+github.com/lib/pq    
 github.com/patrickmn/go-cache    
 github.com/boltdb/bolt    
 github.com/gonum/matrix/mat64    
@@ -26,5 +25,5 @@ github.com/sjwhitworth/golearn/trees
 
 # Other dependencies
 
-- [sqlite](https://sqlite.org/)  
-
+- A free "tiny turtle" Postgres instance on [ElephantSQL](https://www.elephantsql.com/)
+- `psql` 9.2+
