@@ -9,21 +9,24 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
+
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	irisData, err := ioutil.ReadFile("../../data/iris.csv")
+	// Pull in the CSV file.
+	irisFile, err := os.Open("../../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer irisFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	irisDF := df.ReadCSV(string(irisData))
+	irisDF := dataframe.ReadCSV(irisFile)
 
 	// Filter the dataset into three separate dataframes,
 	// each corresponding to one of the Iris species.

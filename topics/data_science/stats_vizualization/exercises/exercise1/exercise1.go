@@ -8,26 +8,27 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/vg"
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	diabetesData, err := ioutil.ReadFile("../../data/diabetes.csv")
+	// Pull in the CSV file.
+	diabetesFile, err := os.Open("../../data/diabetes.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	diabetesFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := df.ReadCSV(string(diabetesData))
+	diabetesDF := dataframe.ReadCSV(diabetesFile)
 
 	// Create the plot and set its title and axis label.
 	p, err := plot.New()
@@ -39,16 +40,10 @@ func main() {
 	// Create the box for our data.
 	w := vg.Points(50)
 
-	// Extract the bmi col as a slice of floats.
-	bmi, err := diabetesDF.Col("bmi").Float()
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	// Create a plotter.Values value and fill it with the
 	// values from the respective column of the dataframe.
-	v := make(plotter.Values, len(bmi))
-	for i, val := range bmi {
+	v := make(plotter.Values, diabetesDF.Nrow())
+	for i, val := range diabetesDF.Col("bmi").Float() {
 		v[i] = val
 	}
 

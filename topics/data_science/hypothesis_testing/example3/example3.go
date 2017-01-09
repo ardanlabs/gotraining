@@ -82,5 +82,5 @@ func main() {
 	}
 
 	// Output the test results to standard out.
-	fmt.Printf("\nOur hypothesis is: %t\n\n", result)
+	fmt.Printf("\nOur hypothesis is most likely: %t\n\n", result)
 }

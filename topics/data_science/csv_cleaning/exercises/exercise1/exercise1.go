@@ -9,23 +9,25 @@
 package main
 
 import (
-	"io/ioutil"
+	"bufio"
 	"log"
+	"os"
 
-	"github.com/kniren/gota/data-frame"
+	"github.com/kniren/gota/dataframe"
 )
 
 func main() {
 
-	// Pull in the CSV data.
-	irisData, err := ioutil.ReadFile("../../data/iris.csv")
+	// Pull in the CSV file.
+	irisFile, err := os.Open("../../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer irisFile.Close()
 
-	// Create a dataframe from the CSV string.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	irisDF := df.ReadCSV(string(irisData))
+	irisDF := dataframe.ReadCSV(irisFile)
 
 	// Define the names of the three separate species contained in the CSV file.
 	speciesNames := []string{
@@ -39,20 +41,24 @@ func main() {
 	for _, species := range speciesNames {
 
 		// Filer the original dataset.
-		filter := df.F{
+		filter := dataframe.F{
 			Colname:    "species",
 			Comparator: "==",
 			Comparando: species,
 		}
 		filtered := irisDF.Filter(filter)
 
-		// Save the filtered dataset.
-		b, err := filtered.SaveCSV()
+		// Save the filtered dataset file.
+		f, err := os.Create(species + ".csv")
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		if err := ioutil.WriteFile(species+".csv", b, 0644); err != nil {
+		// Create a buffered writer.
+		w := bufio.NewWriter(f)
+
+		// Write the contents of the dataframe
+		if err := filtered.WriteCSV(w); err != nil {
 			log.Fatal(err)
 		}
 	}
