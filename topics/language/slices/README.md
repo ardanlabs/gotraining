@@ -30,6 +30,7 @@ https://github.com/golang/go/wiki/SliceTricks
 [Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/zYT3ls_DuV))  
 [Strings and slices](example6/example6.go) ([Go Playground](https://play.golang.org/p/x0Q5ByzxGS))  
 [Variadic functions](example7/example7.go) ([Go Playground](https://play.golang.org/p/aTGRT1rhoO))
+[Range mechanics](example8/example8.go) ([Go Playground](https://play.golang.org/p/JEFYMN-C6q))  
 
 ## Advanced Code Review
 

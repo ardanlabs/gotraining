@@ -113,6 +113,7 @@ This is subject to be different in different processors. For this content, the f
 [Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/wUzREuHhLY))  
 [Different type arrays](example2/example2.go) ([Go Playground](https://play.golang.org/p/tyOZ5_zBUN))  
 [Contiguous memory allocations](example3/example3.go) ([Go Playground](https://play.golang.org/p/DyZ7spMgZ3))  
+[Range mechanics](example4/example4.go) ([Go Playground](https://play.golang.org/p/sZJK2y94cJ))  
 
 ## Exercises
 
