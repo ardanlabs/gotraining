@@ -1,6 +1,21 @@
 ## Go Training
 
-[Click Here To See The Different Courses And Material](courses/README.md)
+**To learn about Corporate training events, options and pricing please contact:**  
+William Kennedy  
+ArdanLabs (www.ardanlabs.com)
+bill@ardanlabs.com  
+
+## Our Experience
+
+We have taught classes to thousands of students for over the past two years and all around the world.
+
+Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
+
+[Learn more about our teachers](https://github.com/ardanlabs/gotraining#teachers)  
+[Look at our current schedule](https://github.com/ardanlabs/gotraining#schedule)  
+[Review our different courses and material](courses/README.md)
+
+## More About Go
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
@@ -25,14 +40,6 @@ The material has been designed to be taught in a classroom environment. The code
 ## Important Reading
 
 Please check out this page of [important reading](reading/README.md). You will find articles and videos around mechanical sympathy, data-oriented design, Go runtime and optimizations and articles about the history of computing.
-
-## Our Experience
-
-We have taught classes to thousands of students for over the past two years and all around the world.
-
-Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
-
-Look at our schedule: https://github.com/ardanlabs/gotraining#schedule
 
 ## Before You Come To Class
 
@@ -242,12 +249,14 @@ If you are interested in holding an event in your area please let me know. I wil
 		================================================================================================================
 		Public		Adv Go		Golab					Florance, IT 			January 	Bill Kennedy 		http://golab.io/
 		Corporate	Go			GNS Science				Wellington, NZ 			January 	Bill Kennedy
-		GoBridge	Go 			Framingham 				Framingham, MA			February 	Bill Kennedy 		
+		GoBridge	Go 			Framingham 				Framingham, MA			February 	Bill Kennedy 		https://www.bridgetroll.org/events/329
 		Public 		Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/  
 		Public 		Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
 		Public 		Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
+		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
+		Corporate	Go			Jazz Networks			London, England			March 		Bill Kennedy
 		Public 		Adv Go 		GDG DevFest 			Siberia, Russia			April 		Bill Kennedy  
-		Public 		Adv Go 		China Conference 		China					April 		Bill Kennedy  
+		Public 		Adv Go 		China Conference 		ShangHai, China			April 		Bill Kennedy  
 		Public 		Adv Go 		Singapore Conference 	Singapore				May 		Bill Kennedy  
 		Public		Go			GopherCon				Denver, CO  			July		Cory LaNou
 		Public		Data		GopherCon				Denver, CO  			July		Daniel Whitenack  
