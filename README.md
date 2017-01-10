@@ -1,8 +1,9 @@
 ## Go Training
 
-**To learn about Corporate training events, options and pricing please contact:**  
+**To learn about Corporate training events, options and pricing please contact:**
+
 William Kennedy  
-ArdanLabs (www.ardanlabs.com)
+ArdanLabs (www.ardanlabs.com)  
 bill@ardanlabs.com  
 
 ## Our Experience
@@ -258,7 +259,7 @@ If you are interested in holding an event in your area please let me know. I wil
 		Public 		Adv Go 		GDG DevFest 			Siberia, Russia			April 		Bill Kennedy  
 		Public 		Adv Go 		China Conference 		ShangHai, China			April 		Bill Kennedy  
 		Public 		Adv Go 		Singapore Conference 	Singapore				May 		Bill Kennedy  
-		Public		Go			GopherCon				Denver, CO  			July		Cory LaNou
+		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
 		Public		Data		GopherCon				Denver, CO  			July		Daniel Whitenack  
  
 ### 2016
