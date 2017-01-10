@@ -27,3 +27,11 @@ github.com/sjwhitworth/golearn/trees
 
 - A free "tiny turtle" Postgres instance on [ElephantSQL](https://www.elephantsql.com/)
 - `psql` 9.2+
+- A [local installation of Pachyderm](http://pachyderm.readthedocs.io/en/stable/getting_started/local_installation.html).
+- `google.golang.com/grpc` v1.0.0:
+    
+    ```
+    go get google.golang.org/grpc
+    cd $GOPATH/src/google.golang.org/grpc
+    git checkout tag/v1.0.0
+    ```
