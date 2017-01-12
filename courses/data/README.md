@@ -1,10 +1,10 @@
-# Ultimate Data Science
-This is material for scientists, analysts, and developers who have some experience with Go and statistics and want to learn how to do data science with Go. We believe these classes are perfect for data scientist interested in working in Go or Go programmers interested in doing data science.
+# Ultimate Data 
+This is material for developers who have some experience with Go and statistics and want to learn how to work with data to make better decisions. We believe these classes are perfect for data analysts/scientists/engineers interested in working in Go or Go programmers interested in doing data analysis.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-## Introduction to Data Science
-This material introduces the basic principles and procedures of data science and motivates the use of Go in the context of data science.  Once you are done with this material you will understand what data science is and how Go can help data scientists maintain integrity in the applications they develop. 
+## Introduction to Data Analysis
+This material introduces the basic principles and procedures of rigorous data analysis and motivates the use of Go in this context.  Once you are done with this material you will understand what data analysis is and how Go can help developers maintain integrity while using data to make decisions. 
 
 [Introduction to Data Science](introduction/README.md)
 
