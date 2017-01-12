@@ -8,9 +8,9 @@
 package main
 
 import (
+	"bytes"
 	"image/color"
 	"log"
-	"os"
 
 	"github.com/gonum/floats"
 	"github.com/gonum/plot"
@@ -19,19 +19,28 @@ import (
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/stat"
 	"github.com/kniren/gota/dataframe"
+	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Open the iris dataset file.
-	irisFile, err := os.Open("../data/iris.csv")
+	// Connect to Pachyderm on our localhost.  By default
+	// Pachyderm will be exposed on port 30650.
+	c, err := client.NewFromAddress("0.0.0.0:30650")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer irisFile.Close()
+	defer c.Close()
+
+	// Get the Iris dataset from Pachyderm's data
+	// versioning at the latest commit.
+	var b bytes.Buffer
+	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, "", false, nil, &b); err != nil {
+		log.Fatal()
+	}
 
 	// Parse the CSV file into a dataframe.
-	irisDF := dataframe.ReadCSV(irisFile)
+	irisDF := dataframe.ReadCSV(bytes.NewReader(b.Bytes()))
 
 	// Form the matrix.
 	mat := irisDF.Select([]string{"sepal_length", "sepal_width", "petal_length", "petal_width"}).Matrix()

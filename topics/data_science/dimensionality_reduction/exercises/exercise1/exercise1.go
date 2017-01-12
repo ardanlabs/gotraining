@@ -8,26 +8,35 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/gonum/matrix/mat64"
 	"github.com/gonum/stat"
 	"github.com/kniren/gota/dataframe"
+	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Open the iris dataset file.
-	irisFile, err := os.Open("../../data/iris.csv")
+	// Connect to Pachyderm on our localhost.  By default
+	// Pachyderm will be exposed on port 30650.
+	c, err := client.NewFromAddress("0.0.0.0:30650")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer irisFile.Close()
+	defer c.Close()
+
+	// Get the Iris dataset from Pachyderm's data
+	// versioning at the latest commit.
+	var b bytes.Buffer
+	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, "", false, nil, &b); err != nil {
+		log.Fatal()
+	}
 
 	// Parse the file into a Gota dataframe.
-	irisDF := dataframe.ReadCSV(irisFile)
+	irisDF := dataframe.ReadCSV(bytes.NewReader(b.Bytes()))
 
 	// Form a matrix from the dataframe.
 	mat := irisDF.Select([]string{"sepal_length", "sepal_width", "petal_length", "petal_width"}).Matrix()

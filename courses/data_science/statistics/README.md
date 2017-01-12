@@ -5,7 +5,7 @@ This is material for scientists, analysts, and developers who have some experien
 
 #### Summary Statistics and Visualization
 [Statistical Measures](../../../topics/data_science/stats_measures/README.md) | 
-[Visualizing Distributions](../../../topics/data_science/stats_vizualization/README.md) 
+[Visualizing Distributions](../../../topics/data_science/stats_visualization/README.md) 
 
 #### Dimensionality Reduction
 
