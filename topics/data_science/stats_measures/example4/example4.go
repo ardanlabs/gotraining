@@ -8,27 +8,36 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/gonum/floats"
 	"github.com/gonum/stat"
 	"github.com/kniren/gota/dataframe"
+	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Pull in the CSV file.
-	irisFile, err := os.Open("../data/iris.csv")
+	// Connect to Pachyderm on our localhost.  By default
+	// Pachyderm will be exposed on port 30650.
+	c, err := client.NewFromAddress("0.0.0.0:30650")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer irisFile.Close()
+	defer c.Close()
+
+	// Get the Iris dataset from Pachyderm's data
+	// versioning at the latest commit.
+	var b bytes.Buffer
+	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, "", false, nil, &b); err != nil {
+		log.Fatal()
+	}
 
 	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	irisDF := dataframe.ReadCSV(irisFile)
+	irisDF := dataframe.ReadCSV(bytes.NewReader(b.Bytes()))
 
 	// Get the float values from the "sepal_length" column as
 	// we will be looking at the measures for this variable.

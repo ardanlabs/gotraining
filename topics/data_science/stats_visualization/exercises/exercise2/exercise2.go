@@ -8,27 +8,36 @@
 package main
 
 import (
+	"bytes"
 	"log"
-	"os"
 
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/vg"
 	"github.com/kniren/gota/dataframe"
+	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Pull in the CSV file.
-	diabetesFile, err := os.Open("../../data/diabetes.csv")
+	// Connect to Pachyderm on our localhost.  By default
+	// Pachyderm will be exposed on port 30650.
+	c, err := client.NewFromAddress("0.0.0.0:30650")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer diabetesFile.Close()
+	defer c.Close()
+
+	// Get the diabetes dataset from Pachyderm's data
+	// versioning at the latest commit.
+	var b bytes.Buffer
+	if err := c.GetFile("diabetes", "master", "diabetes.csv", 0, 0, "", false, nil, &b); err != nil {
+		log.Fatal()
+	}
 
 	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := dataframe.ReadCSV(diabetesFile)
+	diabetesDF := dataframe.ReadCSV(bytes.NewReader(b.Bytes()))
 
 	// Create a plotter.Values value and fill it with the
 	// values from the respective column of the dataframe.

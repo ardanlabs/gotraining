@@ -8,26 +8,34 @@
 package main
 
 import (
-	"bufio"
+	"bytes"
+	"io"
 	"log"
-	"os"
-	"path/filepath"
 
 	"github.com/kniren/gota/dataframe"
+	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Pull in the CSV file.
-	diabetesFile, err := os.Open("../data/diabetes.csv")
+	// Connect to Pachyderm on our localhost.  By default
+	// Pachyderm will be exposed on port 30650.
+	c, err := client.NewFromAddress("0.0.0.0:30650")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer diabetesFile.Close()
+	defer c.Close()
+
+	// Get the diabetes dataset from Pachyderm's data
+	// versioning at the latest commit.
+	var b bytes.Buffer
+	if err := c.GetFile("diabetes", "master", "diabetes.csv", 0, 0, "", false, nil, &b); err != nil {
+		log.Fatal()
+	}
 
 	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := dataframe.ReadCSV(diabetesFile)
+	diabetesDF := dataframe.ReadCSV(bytes.NewReader(b.Bytes()))
 
 	// Calculate the number of elements in each set.
 	trainingNum := diabetesDF.Nrow() / 2
@@ -70,23 +78,53 @@ func main() {
 		2: holdoutDF,
 	}
 
+	// Create a repo for our training, test, and holdout data.
+	if err := c.CreateRepo("regression_split"); err != nil {
+		log.Fatal(err)
+	}
+
 	// Create the respective files.
-	for idx, setName := range []string{"training", "test", "holdout"} {
+	for idx, setName := range []string{"training.csv", "test.csv", "holdout.csv"} {
 
-		// Create the filename.
-		fileName := filepath.Join("../data/", setName+".csv")
+		// Create a pipe to push data from the dataframes
+		// into Pachyderm.
+		r, w := io.Pipe()
 
-		// Create the file
-		f, err := os.Create(fileName)
+		// Create a "regression_split" repo.
+		commit, err := c.StartCommit("regression_split", "master")
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		// Create a writer for exporting the data.
-		w := bufio.NewWriter(f)
+		// Put the file into the repo.  Here we will utilize a go
+		// routine, because putfile will only end after we close the
+		// writer.  However, we can't close the writer until we
+		// read it all out of the reader.
+		go func() {
+			if _, err := c.PutFile("regression_split", commit.ID, setName, r); err != nil {
+				log.Fatal(err)
+			}
+			return
+		}()
 
-		// Write the data.
+		// Write the dataframe out as a CSV.
 		if err := setMap[idx].WriteCSV(w); err != nil {
+			log.Fatal(err)
+		}
+
+		// Close the writer or reading from the other end of the
+		// pipe will never finish.
+		if err := w.Close(); err != nil {
+			log.Fatal(err)
+		}
+
+		// Finish the commit.
+		if err := c.FinishCommit("regression_split", commit.ID); err != nil {
+			log.Fatal(err)
+		}
+
+		// Close the pipe reader.
+		if err := r.Close(); err != nil {
 			log.Fatal(err)
 		}
 	}
