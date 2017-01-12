@@ -6,7 +6,7 @@ This is material for developers who have some experience with Go and statistics 
 ## Introduction to Data Analysis
 This material introduces the basic principles and procedures of rigorous data analysis and motivates the use of Go in this context.  Once you are done with this material you will understand what data analysis is and how Go can help developers maintain integrity while using data to make decisions. 
 
-[Introduction to Data Science](introduction/README.md)
+[Introduction to Data Analysis](introduction/README.md)
 
 ## Data Gathering, Organization, and Parsing
 This material covers the gathering, organization, and parsing of data to/from a local and remote sources.  Once you are done with this material you will understand how to interact with data stored in various places and in various formats, how to parse and clean that data, and how to output that cleaned and parsed data.
