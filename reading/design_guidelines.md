@@ -48,7 +48,7 @@ _"C is the best balance I've ever seen between power and expressiveness. You can
 
 ### Guidelines, Decision Making and Trade-Offs
 
-Develop your design philosophy around these three major categories in this order: Integrity, Readability, and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
+Develop your design philosophy around these three major categories in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
 **_Note: There are exceptions to everything but when you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
@@ -74,13 +74,21 @@ _48 critical failures were found in a study looking at a couple hundred bugs in 
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 
 **2) Readability**   
-**_We must structure our systems to be more comprehensible._**
+**_We must structure our systems to be more comprehensible._**  
+**_Readability means reliability._**
 
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
-[Example of classic readability issues](http://codepad.org/Xw7eUSSA)
+[Example of classic readability issues](http://codepad.org/Xw7eUSSA)  
 
-**3) Performance**  
+**3) Simplicity**  
+**_We must understand that simplicity is hard to design and complicated to build._**  
+
+This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Validate that abstractions are not generalized or even too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
+
+[Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
+
+**4) Performance**  
 **_We must compute less to get the results we need._**
 
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
@@ -91,10 +99,7 @@ Rules of Performance:
     * Profile before you decide something is performance critical.  
     * Test to know you are correct. 
 
-**4) Micro-Optimization**  
-**_You can choose to ignore everything above if there is a good reason, but be aware of the risk of ignoring them._**
-
-This is about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
+Micro-Optimizations are about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
 [Example of a micro optimization](https://play.golang.org/p/D_bImirgXL)
 

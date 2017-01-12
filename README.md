@@ -14,7 +14,7 @@ Our classes are perfect for both experienced and beginning engineers. We start e
 
 [Learn more about our teachers](https://github.com/ardanlabs/gotraining#teachers)  
 [Look at our current schedule](https://github.com/ardanlabs/gotraining#schedule)  
-[Review our different courses and material](courses/README.md)
+[Review our different courses and material](courses/README.md)  
 
 ## More About Go
 
@@ -23,6 +23,7 @@ Go is an open source programming language that makes it easy to build simple, re
 Go is the fusion of performance and productivity wrapped in a language that software developers can learn, use and understand. Go is not C, yet we have many of the benefits of C with the benefits of higher level programming languages.
 
 [Learn More](https://talks.golang.org/2012/splash.article) - Go Team  
+[Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
 [Getting Started In Go](http://aarti.github.io/2016/08/13/getting-started-in-go) - Aarti Parikh  
 
 ## Minimal Qualified Student
