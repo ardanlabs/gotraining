@@ -169,7 +169,8 @@ This content can be found under [pointers](../topics/pointers). We feel this con
 
 #### Stacks
 
-[Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)
+[Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
+[Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
 
 #### Escape Analysis and Inlining
 
@@ -192,10 +193,6 @@ This content can be found under [pointers](../topics/pointers). We feel this con
 https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83  
 https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU) - Chandler Carruth  
-
-### Misc
-
-[Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
 
 ## Hardware
 
