@@ -1,6 +1,6 @@
 ## Packaging / Exporting
 
-Packages contain the basic unit of compiled code. They define a scope for the indentifiers that are declared within them. Learning how to package our code is vital because exported identifiers become part of the packages API. Stable and useable API's are incredibily important.
+Packages contain the basic unit of compiled code. They define a scope for the identifiers that are declared within them. Learning how to package our code is vital because exported identifiers become part of the packages API. Stable and usable API's are incredibly important.
 
 ## Notes
 
@@ -9,6 +9,7 @@ Packages contain the basic unit of compiled code. They define a scope for the in
 * We import packages to access exported identifiers.
 * Any package can use a value of an unexported type.
 * Package design and understanding the components you need is critical.
+* Go has given up one feature (cyclic imports) in favor of another one (simple and correct initialization).
 
 ## Design Guidelines
 
