@@ -26,7 +26,7 @@ http://www.catb.org/esr/structure-packing
 
 ## Advanced Code Review
 
-[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/SubiHoJ4nl))
+[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/nwOX0grify))
 
 ## Exercises
 
