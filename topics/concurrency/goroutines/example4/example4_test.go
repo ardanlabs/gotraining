@@ -1,9 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// BenchmarkSort-8         	      50	  83676084 ns/op
-// BenchmarkSortFull-8     	       3	1048402210 ns/op
-// BenchmarkSortNumCPU-8   	      50	  92312898 ns/op
+// BenchmarkSingle-8          50	  83368977 ns/op
+// BenchmarkUnlimited-8        3	1430902678 ns/op
+// BenchmarkNumCPU-8   	     100	  54668707 ns/op
 
 // Sample program to show how concurrency doesn't necessarily mean
 // better performance.
@@ -26,26 +26,26 @@ func init() {
 	}
 }
 
-func BenchmarkSort(b *testing.B) {
+func BenchmarkSingle(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		sort(n)
+		single(n)
 	}
 }
 
-func BenchmarkSortFull(b *testing.B) {
+func BenchmarkUnlimited(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		sortFull(n)
+		unlimited(n)
 	}
 }
 
-func BenchmarkSortNumCPU(b *testing.B) {
+func BenchmarkNumCPU(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		sortNumCPU(n, 0)
+		numCPU(n, 0)
 	}
 }
 
-// sort uses a single goroutine to perform the merge sort.
-func sort(n []int) []int {
+// single uses a single goroutine to perform the merge sort.
+func single(n []int) []int {
 
 	// Once we have a list of one we can begin to merge values.
 	if len(n) <= 1 {
@@ -56,17 +56,17 @@ func sort(n []int) []int {
 	i := len(n) / 2
 
 	// Sort the left side.
-	l := sort(n[:i])
+	l := single(n[:i])
 
 	// Sort the right side.
-	r := sort(n[i:])
+	r := single(n[i:])
 
 	// Place things in order and merge ordered lists.
 	return merge(l, r)
 }
 
-// sortFull uses a goroutine for every split to perform the merge sort.
-func sortFull(n []int) []int {
+// unlimited uses a goroutine for every split to perform the merge sort.
+func unlimited(n []int) []int {
 
 	// Once we have a list of one we can begin to merge values.
 	if len(n) <= 1 {
@@ -85,13 +85,13 @@ func sortFull(n []int) []int {
 
 	// Sort the left side concurrently.
 	go func() {
-		l = sortFull(n[:i])
+		l = unlimited(n[:i])
 		wg.Done()
 	}()
 
 	// Sort the right side concurrenyly.
 	go func() {
-		r = sortFull(n[i:])
+		r = unlimited(n[i:])
 		wg.Done()
 	}()
 
@@ -102,9 +102,9 @@ func sortFull(n []int) []int {
 	return merge(l, r)
 }
 
-// sortNumCPU uses the same number of goroutines that we have cores
+// numCPU uses the same number of goroutines that we have cores
 // to perform the merge sort.
-func sortNumCPU(n []int, lvl int) []int {
+func numCPU(n []int, lvl int) []int {
 
 	// Once we have a list of one we can begin to merge values.
 	if len(n) <= 1 {
@@ -119,15 +119,17 @@ func sortNumCPU(n []int, lvl int) []int {
 
 	// Cacluate how many levels deep we can create goroutines.
 	// On an 8 core machine we can keep creating goroutines until level 4.
-	// 		Lvl 1		1  Lists		1  Goroutine
-	//		Lvl 2		2  Lists		2  Goroutines
-	//		Lvl 3		4  Lists		4  Goroutines
-	//		Lvl 4		8  Lists		8  Goroutines
-	//		Lvl 5		16 Lists		16 Goroutines
+	// 		Lvl 0		1  Lists		1  Goroutine
+	//		Lvl 1		2  Lists		2  Goroutines
+	//		Lvl 2		4  Lists		4  Goroutines
+	//		Lvl 3		8  Lists		8  Goroutines
+	//		Lvl 4		16 Lists		16 Goroutines
+
+	// On 8 core machine this will produce the value of 3.
 	maxLevel := int(math.Log2(float64(runtime.NumCPU())))
 
 	// We don't need more goroutines then we have logical processors.
-	if lvl < (maxLevel + 1) {
+	if lvl <= maxLevel {
 		lvl++
 
 		// For each split we will have 2 goroutines.
@@ -136,13 +138,13 @@ func sortNumCPU(n []int, lvl int) []int {
 
 		// Sort the left side concurrently.
 		go func() {
-			l = sortNumCPU(n[:i], lvl)
+			l = numCPU(n[:i], lvl)
 			wg.Done()
 		}()
 
 		// Sort the right side concurrenyly.
 		go func() {
-			r = sortNumCPU(n[i:], lvl)
+			r = numCPU(n[i:], lvl)
 			wg.Done()
 		}()
 
@@ -154,8 +156,8 @@ func sortNumCPU(n []int, lvl int) []int {
 	}
 
 	// Sort the left and right side on this goroutine.
-	l = sortNumCPU(n[:i], lvl)
-	r = sortNumCPU(n[i:], lvl)
+	l = numCPU(n[:i], lvl)
+	r = numCPU(n[i:], lvl)
 
 	// Place things in order and merge ordered lists.
 	return merge(l, r)
