@@ -58,7 +58,7 @@ Develop your design philosophy around these three major categories in this order
 This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Just as important, it's knowing the error handling code is the main code. Nothing trumps integrity - EVER.
 
 Case Study on Postmortems:  
-_48 critical failures were found in a study looking at a couple hundred bugs in Cassandra, HBase, HDFS, MapReduce, and Redis._  
+48 critical failures were found in a study looking at a couple hundred bugs in Cassandra, HBase, HDFS, MapReduce, and Redis.  
 * 92% : Failures from bad error handling
     * 35% : Incorrect handling
         * 25% : Simply ignoring an error
@@ -69,9 +69,28 @@ _48 critical failures were found in a study looking at a couple hundred bugs in 
         * 34% : Complex bugs
 * 8% : Failures from latent human errors
 
+Ignorance vs Carelessness:  
+Anytime we identify an integrity issue we need to ask ourselves why it happened. 
+```
+                    Not Deliberate               Deliberate
+              ------------------------------------------------------
+              |                          |                         |
+              |                          |                         |
+   Ignorance  |  Learning / Prototyping  |    Hacking / Guessing   |
+              |                          |                         |
+              |                          |                         |
+              |-----------------------------------------------------
+              |                          |                         |
+              |                          |                         |
+Carelessness  |        Education         |   Dangerous Situation   |
+              |                          |                         |
+              |                          |                         |
+              ------------------------------------------------------
+```
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
+[Technical Debt Quadrant](https://martinfowler.com/bliki/TechnicalDebtQuadrant.html) - Martin Fowler  
 
 **2) Readability**   
 **_We must structure our systems to be more comprehensible._**  

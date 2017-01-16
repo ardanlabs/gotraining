@@ -38,6 +38,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 [The Future of Programming](https://vimeo.com/71278954) - Bret Victor  
 [Systems Past: the only 8 software innovations we actually use](http://davidad.github.io/blog/2014/03/12/the-operating-system-is-out-of-date/) - davidad  
+[Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 
 ### Contribute to Go
 
@@ -194,6 +195,10 @@ https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.g
 https://godoc.org/golang.org/x/tools/go/ssa  
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU) - Chandler Carruth  
 
+#### Misc
+
+[Runtime Hacking](https://github.com/golang/go/blob/master/src/runtime/HACKING.md)  
+
 ## Hardware
 
 [Learn how to build a processor](https://www.youtube.com/playlist?list=PLNmCdcvSgJj5bllQx5E3A6OsbMq2luA9J)
@@ -215,3 +220,4 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Damian Gryski's Interesting Papers](https://github.com/dgryski/interesting-papers)  
 [“Balls into Bins” — A Simple and Tight Analysis](http://wwwmayr.informatik.tu-muenchen.de/personen/raab/publ/balls.pdf)  
+[Thoughts and links about programming, by Russ Cox](https://research.swtch.com)  
