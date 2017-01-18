@@ -27,20 +27,29 @@ func init() {
 }
 
 func BenchmarkSingle(b *testing.B) {
+	runtime.GC()
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		single(n)
 	}
 }
 
-func BenchmarkUnlimited(b *testing.B) {
+func BenchmarkNumCPU(b *testing.B) {
+	runtime.GC()
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
-		unlimited(n)
+		numCPU(n, 0)
 	}
 }
 
-func BenchmarkNumCPU(b *testing.B) {
+func BenchmarkUnlimited(b *testing.B) {
+	runtime.GC()
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
-		numCPU(n, 0)
+		unlimited(n)
 	}
 }
 
