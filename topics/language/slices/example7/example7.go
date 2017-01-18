@@ -37,11 +37,23 @@ func main() {
 
 	// Display all the user values from the slice.
 	display(u3...)
+
+	change(u3...)
+	fmt.Println("**************************")
+	for _, u := range u3 {
+		fmt.Printf("%+v\n", u)
+	}
 }
 
 // display can accept and display multiple values of user types.
 func display(users ...user) {
+	fmt.Println("**************************")
 	for _, u := range users {
 		fmt.Printf("%+v\n", u)
 	}
+}
+
+// change shows how the backing array is shared.
+func change(users ...user) {
+	users[1] = user{99, "Same Backing Array"}
 }
