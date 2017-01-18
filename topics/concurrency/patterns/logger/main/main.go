@@ -6,38 +6,46 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"os"
+	"os/signal"
 	"time"
 
-	"github.com/ardanlabs/gotraining/topics/concurrency_patterns/logger"
+	"github.com/ardanlabs/gotraining/topics/concurrency/patterns/logger"
 )
 
 func main() {
 
-	// Create a logger value.
-	l := logger.New(10)
+	// Number of goroutines to simulate.
+	const grs = 10
 
-	// Generate 100 gorutines each writing to disk.
-	for i := 0; i < 100; i++ {
+	// Create a logger value with 3 times the capacity.
+	l := logger.New(grs * 3)
+
+	// Generate gorutines each writing to disk.
+	for i := 0; i < grs; i++ {
 		go func(id int) {
 			for {
 				l.Write(fmt.Sprintf("%d: log data", id))
-				time.Sleep(10 * time.Millisecond)
+				time.Sleep(50 * time.Millisecond)
 			}
 		}(i)
 	}
 
-	time.Sleep(1 * time.Second)
+	// We want to control the simulated disk blocking.
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt)
 
-	// Simulate large latencies now so data will be thrown away.
-	log.Println("Simulate the Disk is out of space.")
+	<-sigChan
+	fmt.Println("Simulate the Disk is out of space.")
 	l.DiskFull()
 
-	time.Sleep(3 * time.Second)
+	<-sigChan
+	fmt.Println("Simulate the Disk good again.")
+	l.DiskFull()
 
-	// Shutdown the log while goroutines are still writing to it.
-	log.Println("Shutdown the log.")
+	<-sigChan
+	fmt.Println("Shutting down.")
 	l.Shutdown()
 
-	log.Println("DOWN")
+	fmt.Println("DOWN")
 }
