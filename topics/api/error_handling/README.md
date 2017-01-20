@@ -17,6 +17,7 @@ http://www.goinggo.net/2014/11/error-handling-in-go-part-ii.html
 http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/  
 http://dave.cheney.net/2014/12/24/inspecting-errors  
 http://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully  
+https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package  
 [Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce)  
 
 ## Code Review
@@ -26,7 +27,8 @@ http://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully
 [Type As Context](example3/example3.go) ([Go Playground](https://play.golang.org/p/FeR2nE3eAH))  
 [Behavior As Context](example4/example4.go) ([Go Playground](https://play.golang.org/p/Aylgou6Gq0))  
 [Find The Bug](example5/example5.go) ([Go Playground](https://play.golang.org/p/0AUU_sJsec)) | 
-[The Reason](example5/reason/reason.go) ([Go Playground](https://play.golang.org/p/TCANdwroOi))
+[The Reason](example5/reason/reason.go) ([Go Playground](https://play.golang.org/p/TCANdwroOi))  
+[Wrapping Errors](example6/example6.go) ([Go Playground](https://play.golang.org/p/mdjT1PeP_x))  
 
 ## Exercises
 
