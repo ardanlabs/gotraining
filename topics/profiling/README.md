@@ -15,7 +15,6 @@ Before you profile, you must have a stable environment to get repeatable results
 * The machine must be idle—don't profile on shared hardware, don't browse the web while waiting for a long benchmark to run.
 * Watch out for power saving and thermal scaling.
 * Avoid virtual machines and shared cloud hosting; they are too noisy for consistent measurements.
-* There is a kernel bug on OS X versions less than El Capitan; upgrade or avoid profiling on OS X.
 
 If you can afford it, buy dedicated performance test hardware. Rack them, disable all the power management and thermal scaling and never update the software on those machines.
 
@@ -138,225 +137,17 @@ Learn the basics of using GODEBUG.
 Learn the basics of using memory and cpu profiling.  
 [Memory and CPU Profiling](memcpu)
 
+Learn the basics of using http/pprof.  
+[pprof Profiling](pprof)
+
 Learn the basics of blocking profiling.  
 [Blocking Profiling](blocking)
 
 Learn the basics of trace profiling.  
 [Trace Profiling](trace)
 
-## Profiling a Web Service
-
-We have a web application that extends a web service. Let's profile this application and attempt to understand how it is working.
-
-### Building and Running the Project
-
-We have a website that we will use to learn and explore more about profiling. This project is a search engine for RSS feeds. Run the website and validate it is working.
-
-	go build
-	./project
-
-	http://localhost:5000/search
-
-### Adding Load
-
-To add load to the service while running profiling we can run these command.
-
-	// Send 100k request using 8 connections.
-	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-### GODEBUG
-
-#### GC Trace
-
-Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
-	
-	GODEBUG=gctrace=1 ./project > /dev/null
-
-Put some load of the web application.
-
-	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-#### Scheduler Trace
-
-Run the website redirecting the stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
-	
-	GODEBUG=schedtrace=1000 GOMAXPROCS=2 ./project > /dev/null
-
-Put some load of the web application.
-
-	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-### PPROF
-
-pprof descends from the Google Performance Tools suite. pprof profiling is built into the Go runtime and comes in two parts:
-
-* runtime/pprof package built into every Go program
-* go tool pprof for investigating profiles.
-
-#### Raw http/pprof
-
-We already added the following import so we can include the profiling route to our web service.
-
-	import _ "net/http/pprof"
-
-Look at the basic profiling stats from the new endpoint.
-
-	http://localhost:5000/debug/pprof
-
-Run a single search from the Browser and then refresh the profile information.
-
-	http://localhost:5000/search?term=house&cnn=on
-
-Put some load of the web application. Review the raw profiling information once again.
-
-	hey -m POST -c 8 -n 10000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-Look at the heap profile
-
-	http://localhost:5000/debug/pprof/heap?debug=1
-
-	heap profile: 4: 3280 [1645: 13352240] @ heap/1048576
-
-	[4:] 		Currently live objects,
-	[3280] 		Amount of memory occupied by live objects
-	[1645:] 	Total number of allocations
-	[13352240] 	Amount of memory occupied by all allocations
-
-#### Interactive Profiling
-
-Put some load of the web application using a single connection.
-
- 	hey -m POST -c 1 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-Run the Go pprof tool in another window or tab to review heap information.
-
-	go tool pprof -<PICK_MEM_PROFILE> ./project http://localhost:5000/debug/pprof/heap
-
-	// Useful to see current status of heap.
-	-inuse_space  : Allocations live at the time of profile  	** default
-	-inuse_objects: Number of bytes allocated at the time of profile
-
-	// Useful to see pressure on heap over time.
-	-alloc_space  : All allocations happened since program start
-	-alloc_objects: Number of object allocated at the time of profile
-
-	If you want to reduce memory consumption, look at the `-inuse_space` profile collected during
-	normal program operation.
-	
-	If you want to improve execution speed, look at the `-alloc_objects` profile collected after
-	significant running time or at program end.
-
-Run the Go pprof tool in another window or tab to review cpu information.
-
-	go tool pprof ./project http://localhost:5000/debug/pprof/profile
-
-	_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not
-	(except for goroutines that called runtime.LockOSThread, which is, unfortunately, not
-	visible in the profile). Note that goroutines in "IO wait" state also do not consume
-	threads, they are parked on non-blocking network poller
-	(which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
-
-Explore using the **top**, **list**, **web** and **web list** commands.
-
-#### Comparing Profiles
-
-Take a snapshot of the current heap profile. Then do the same for the cpu profile.
-
-    curl -s http://localhost:5000/debug/pprof/heap > base.heap
-
-After some time, take another snapshot:
-
-    curl -s http://localhost:5000/debug/pprof/heap > current.heap
-
-Now compare both snapshots against the binary and get into the pprof tool:
-
-    go tool pprof -inuse_space -base base.heap memory_trace current.heap
-
-#### Flame Graphs
-
-Go-Torch is a tool for stochastically profiling Go programs. Collects stack traces and synthesizes them into a flame graph.
-
-	https://github.com/uber/go-torch
-
-Put some load of the web application.
-
-	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-Run the torch tool and visualize the profile.
-
-	go-torch -u http://localhost:5000/
-
-### Benchmark Profiling
-
-Run the benchmarks and produce a cpu and memory profile.
-
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
-	
-	go test -run none -bench . -benchtime 3s -benchmem -cpuprofile cpu.out
-	go tool pprof ./search.test cpu.out
-	(pprof) web list rssSearch
-
-	go test -run none -bench . -benchtime 3s -benchmem -memprofile mem.out
-	go tool pprof -inuse_space ./search.test mem.out
-	(pprof) web list rssSearch
-
-### Trace Profiles
-
-#### Trace Web Application
-
-Put some load of the web application.
-
-	hey -m POST -c 8 -n 100000 "http://localhost:5000/search?term=house&cnn=on&bbc=on&nyt=on"
-
-Capture a trace file for a brief duration.
-
-	curl -s http://localhost:5000/debug/pprof/trace?seconds=2 > trace.out
-
-Run the Go trace tool.
-
-	go tool trace trace.out
-
-Use the RSS Search test instead.
-
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
-	go test -run none -bench . -benchtime 3s -trace trace.out
-	go tool trace trace.out
-
-## Expvar
-
-Package expvar provides a standardized interface to public variables, such as operation counters in servers. It exposes these variables via HTTP at /debug/vars in JSON format.
-
-### Adding New Variables
-
-	import "expvar"
-
-	// expvars is adding the goroutine counts to the variable set.
-	func expvars() {
-
-		// Add goroutine counts to the variable set.
-		gr := expvar.NewInt("Goroutines")
-		go func() {
-			for _ = range time.Tick(time.Millisecond * 250) {
-				gr.Set(int64(runtime.NumGoroutine()))
-			}
-		}()
-	}
-
-	// main is the entry point for the application.
-	func main() {
-		expvars()
-		service.Run()
-	}
-
-### Expvarmon
-
-TermUI based Go apps monitor using expvars variables (/debug/vars). Quickest way to monitor your Go app.
-
-	go get github.com/divan/expvarmon
-
-Running expvarmon
-
-	expvarmon -ports=":5000" -vars="requests,goroutines,mem:memstats.Alloc"
+Learn the basics of profiling and tracing a larger application.  
+[Real World Example](project)
 
 ## Godoc Analysis
 
