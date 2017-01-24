@@ -10,16 +10,15 @@ bill@ardanlabs.com
 
 ## Our Experience
 
-We have taught Go to thousands of students all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
+We have taught Go to thousands of developers all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
 
 Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
 
-[Learn more about our teachers](https://github.com/ardanlabs/gotraining#teachers)  
 [Look at our current schedule](https://github.com/ardanlabs/gotraining#schedule)  
 
 ## Our Teachers
 
-**William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
+### William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
 _William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
 _**Writing**_  
@@ -48,7 +47,7 @@ _**Podcasts**_
 [Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime/6)  
 [Discussing Imposter Syndrome](https://changelog.com/gotime/30)  
 
-**Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
+### Daniel Whitenack ([@dwhitena](https://twitter.com/dwhitena))  
 Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
 
 _**Writing**_  
@@ -64,11 +63,18 @@ _**Video**_
 _**Podcasts**_  
 [Go Time - Episode 4](https://changelog.com/gotime/4)    
 
-**John Gosset** ([@jgosset_](https://twitter.com/jgosset_))  
+### John Gosset ([@jgosset_](https://twitter.com/jgosset_))  
 John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
 
 _**Video**_  
 [GopherCon Brazil - Go Scratch That Itch](https://www.youtube.com/watch?v=EIUvUBS-3ZE)  
+
+### Ernesto Jimenez ([@ernesto_jimenez](https://twitter.com/ernesto_jimenez))  
+Ernesto is a combination of engineer and product manager who has worked on different kinds of products, from webapps to APIs and games in both startups and big corporations. He sees technology as a tool to build great products that solve real problems for customers. Based in London, Ernesto spends spare time contributing to open source projects, building small hacks and rock climbing. He is originally from Spain and studied Computer Science in Spain and Finland.
+
+_**Writing**_  
+[Reducing boilerplate with go generate](https://blog.gopheracademy.com/advent-2015/reducing-boilerplate-with-go-generate)  
+[Writing good unit tests for SOLID Go](https://blog.gopheracademy.com/advent-2016/how-to-write-good-tests-for-solid-code)  
 
 ## Our Pricing
 
@@ -76,21 +82,21 @@ We are working hard to maintain pricing that can fit your budget.
 
 **This is our current pricing if you book a class in the first quarter of this year (2017).**
 
-Ultimate Go
-3 Days (21 hours) - $15,000 for up to 15 students
-2 Days (14 hours) - $10,000 for up to 15 students
-$5,000 T&E
+**Ultimate Go**  
+3 Days (21 hours) - $15,000 for up to 15 students  
+2 Days (14 hours) - $10,000 for up to 15 students  
+$5,000 T&E  
 Classes that exceed 15 students are charged an extra $500 each per additional student.
 
-Ultimate Data Science
-3 Days (21 hours) - $15,000 for up to 15 students
-2 Days (14 hours) - $10,000 for up to 15 students
-$5,000 T&E
+**Ultimate Data Science**  
+3 Days (21 hours) - $15,000 for up to 15 students  
+2 Days (14 hours) - $10,000 for up to 15 students  
+$5,000 T&E  
 Classes that exceed 15 students are charged an extra $500 each per additional student.
 
-Ultimate Web
-2 Days (14 hours) - $10,000 for up to 15 students
-$5,000 T&E
+**Ultimate Web**  
+2 Days (14 hours) - $10,000 for up to 15 students  
+$5,000 T&E  
 Classes that exceed 15 students are charged an extra $500 each per additional student.
 
 ## Current Schedule
@@ -107,7 +113,6 @@ If you are interested in holding an event in your area please let me know. We wi
 		Public 		Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
 		Public 		Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
 		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
-		Corporate	Go			Jazz Networks			London, England			March 		Bill Kennedy
 		Public 		Data		Brandless 				Chicago, IL 			April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-science-chicago-april-2017-tickets-31455935550
 		Public 		Adv Go 		Singapore Conference 	Singapore				May 		Bill Kennedy  
 		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy

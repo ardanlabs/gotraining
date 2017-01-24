@@ -76,6 +76,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Reduce allocation in Go code](https://methane.github.io/2015/02/reduce-allocation-in-go-code) - Python Bytes  
 [Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team    
+[Go's execution tracer](http://www.thedotpost.com/2016/10/rhys-hiltner-go-execution-tracer) - Rhys Hiltner  
 
 ### Interfaces and Composition
 
