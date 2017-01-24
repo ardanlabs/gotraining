@@ -1,6 +1,8 @@
 ## Go Training
 
-**To learn about Corporate training events, options and pricing please contact:**
+[Review our different courses and material](courses/README.md)  
+
+**To learn about Corporate training events, options and special pricing please contact:**
 
 William Kennedy  
 ArdanLabs (www.ardanlabs.com)  
@@ -8,13 +10,108 @@ bill@ardanlabs.com
 
 ## Our Experience
 
-We have taught classes to thousands of students for over the past two years and all around the world.
+We have taught Go to thousands of students all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
 
 Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
 
 [Learn more about our teachers](https://github.com/ardanlabs/gotraining#teachers)  
 [Look at our current schedule](https://github.com/ardanlabs/gotraining#schedule)  
-[Review our different courses and material](courses/README.md)  
+
+## Our Teachers
+
+**William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
+_William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
+
+_**Writing**_  
+[Going Go](https://www.goinggo.net/)    
+[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
+[Go In Action](https://www.manning.com/books/go-in-action)  
+
+_**Articles**_  
+[IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
+
+_**Video**_  
+[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
+[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
+[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
+[GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
+
+[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
+[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
+[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
+[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
+[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)    
+
+_**Podcasts**_  
+[Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
+[The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
+[Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime/6)  
+[Discussing Imposter Syndrome](https://changelog.com/gotime/30)  
+
+**Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
+Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
+
+_**Writing**_  
+[Data Dan](https://www.datadan.io/)    
+[Elephantine Analytics](https://medium.com/pachyderm-data)
+
+_**Articles**_  
+[O'Reilly Data Blog](https://www.oreilly.com/ideas/data-science-gophers)
+
+_**Video**_  
+[GopherCon 2016 - Go for Data Science](https://www.youtube.com/watch?v=D5tDubyXLrQ)  
+
+_**Podcasts**_  
+[Go Time - Episode 4](https://changelog.com/gotime/4)    
+
+**John Gosset** ([@jgosset_](https://twitter.com/jgosset_))  
+John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
+
+_**Video**_  
+[GopherCon Brazil - Go Scratch That Itch](https://www.youtube.com/watch?v=EIUvUBS-3ZE)  
+
+## Our Pricing
+
+We are working hard to maintain pricing that can fit your budget.
+
+**This is our current pricing if you book a class in the first quarter of this year (2017).**
+
+Ultimate Go
+3 Days (21 hours) - $15,000 for up to 15 students
+2 Days (14 hours) - $10,000 for up to 15 students
+$5,000 T&E
+Classes that exceed 15 students are charged an extra $500 each per additional student.
+
+Ultimate Data Science
+3 Days (21 hours) - $15,000 for up to 15 students
+2 Days (14 hours) - $10,000 for up to 15 students
+$5,000 T&E
+Classes that exceed 15 students are charged an extra $500 each per additional student.
+
+Ultimate Web
+2 Days (14 hours) - $10,000 for up to 15 students
+$5,000 T&E
+Classes that exceed 15 students are charged an extra $500 each per additional student.
+
+## Current Schedule
+
+If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
+
+### 2017
+		Type		Ultimate	Venue					City, ST				Month		Trainer				Url
+		================================================================================================================
+		Public		Adv Go		Golab					Florance, IT 			January 	Bill Kennedy 		http://golab.io/
+		Corporate	Go			GNS Science				Wellington, NZ 			January 	Bill Kennedy
+		GoBridge	Go 			Framingham 				Framingham, MA			February 	Bill Kennedy 		https://www.bridgetroll.org/events/329
+		Public 		Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/  
+		Public 		Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
+		Public 		Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
+		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
+		Corporate	Go			Jazz Networks			London, England			March 		Bill Kennedy
+		Public 		Data		Brandless 				Chicago, IL 			April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-science-chicago-april-2017-tickets-31455935550
+		Public 		Adv Go 		Singapore Conference 	Singapore				May 		Bill Kennedy  
+		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
+		Public		Data		GopherCon				Denver, CO  			July		Daniel Whitenack  
 
 ## More About Go
 
@@ -126,58 +223,6 @@ http://www.goinggo.net/
 
     go get github.com/ardanlabs/gotraining
 
-## Teachers
-
-**William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
-_William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
-
-_**Writing**_  
-[Going Go](https://www.goinggo.net/)    
-[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
-[Go In Action](https://www.manning.com/books/go-in-action)  
-
-_**Articles**_  
-[IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
-
-_**Video**_  
-[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
-[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
-[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
-[GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
-
-[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
-[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
-[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
-[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
-[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)    
-
-_**Podcasts**_  
-[Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
-[The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
-[Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime-6/)  
-
-**Daniel Whitenack** ([@dwhitena](https://twitter.com/dwhitena))  
-Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
-
-_**Writing**_  
-[Data Dan](https://www.datadan.io/)    
-[Elephantine Analytics](https://medium.com/pachyderm-data)
-
-_**Articles**_  
-[O'Reilly Data Blog](https://www.oreilly.com/ideas/data-science-gophers)
-
-_**Video**_  
-[GopherCon 2016 - Go for Data Science](https://www.youtube.com/watch?v=D5tDubyXLrQ)  
-
-_**Podcasts**_  
-[Go Time - Episode 4](https://changelog.com/gotime/4)    
-
-**John Gosset** ([@jgosset_](https://twitter.com/jgosset_))  
-John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
-
-_**Video**_  
-[GopherCon Brazil - Go Scratch That Itch](https://www.youtube.com/watch?v=EIUvUBS-3ZE)  
-
 ## Twitter
 
 Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
@@ -242,26 +287,9 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
-## Schedule
+## Past Schedule
 
-If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
-
-### 2017
-		Type		Ultimate	Venue					City, ST				Month		Trainer				Url
-		================================================================================================================
-		Public		Adv Go		Golab					Florance, IT 			January 	Bill Kennedy 		http://golab.io/
-		Corporate	Go			GNS Science				Wellington, NZ 			January 	Bill Kennedy
-		GoBridge	Go 			Framingham 				Framingham, MA			February 	Bill Kennedy 		https://www.bridgetroll.org/events/329
-		Public 		Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/  
-		Public 		Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
-		Public 		Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
-		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
-		Corporate	Go			Jazz Networks			London, England			March 		Bill Kennedy
-		Public 		Adv Go 		GDG DevFest 			Siberia, Russia			April 		Bill Kennedy  
-		Public 		Adv Go 		China Conference 		ShangHai, China			April 		Bill Kennedy  
-		Public 		Adv Go 		Singapore Conference 	Singapore				May 		Bill Kennedy  
-		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
-		Public		Data		GopherCon				Denver, CO  			July		Daniel Whitenack  
+Look at how busy we have been training thousands of developers in Go over the past three years.
  
 ### 2016
 		Type		Ultimate	Venue					City, ST				Month		Trainer				Url
@@ -314,14 +342,6 @@ If you are interested in holding an event in your area please let me know. I wil
 
 		2015 : 33 Events
 		2014 :  3 Events
-  
-## Contact Information
-
-William Kennedy  
-Ardan Studios  
-12973 SW 112 ST, Suite 153  
-Miami, FL 33186  
-bill@ardanlabs.com
 ___
 
 #### Running Docker
