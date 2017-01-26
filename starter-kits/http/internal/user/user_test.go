@@ -26,7 +26,10 @@ func TestUsers(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	dbSes := db.Init()
+	dbSes, err := db.Init()
+	if err != nil {
+		t.Fatal(err)
+	}
 	defer dbSes.Close()
 
 	traceID := "traceid"

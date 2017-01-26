@@ -14,11 +14,12 @@ package web
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/pkg/errors"
 )
 
 // Invalid describes a validation error belonging to a specific field.
@@ -45,8 +46,6 @@ type JSONError struct {
 	Fields InvalidError `json:"fields,omitempty"`
 }
 
-//==============================================================================
-
 var (
 	// ErrNotAuthorized occurs when the call is not authorized.
 	ErrNotAuthorized = errors.New("Not authorized")
@@ -64,13 +63,9 @@ var (
 	ErrValidation = errors.New("Validation errors occurred")
 )
 
-//==============================================================================
-
 // Error handles all error responses for the API.
 func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error) {
-	log.Printf("%s : ERROR : %v\n", traceID, err)
-
-	switch err {
+	switch errors.Cause(err) {
 	case ErrNotFound:
 		RespondError(cxt, w, traceID, err, http.StatusNotFound)
 		return
@@ -88,7 +83,7 @@ func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error
 		return
 	}
 
-	switch e := err.(type) {
+	switch e := errors.Cause(err).(type) {
 	case InvalidError:
 		v := JSONError{
 			Error:  "field validation failure",
@@ -110,7 +105,6 @@ func RespondError(ctx context.Context, w http.ResponseWriter, traceID string, er
 // Respond sends JSON to the client.
 // If code is StatusNoContent, v is expected to be nil.
 func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data interface{}, code int) {
-	log.Printf("%s : Respond : Started : Code[%d]\n", traceID, code)
 
 	// Set the status code for the request logger middleware.
 	v := ctx.Value(KeyValues).(*Values)
@@ -137,6 +131,4 @@ func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data in
 
 	// Send the result back to the client.
 	io.WriteString(w, string(jsonData))
-
-	log.Printf("%s : Respond : Completed\n", traceID)
 }

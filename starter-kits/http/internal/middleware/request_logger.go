@@ -21,16 +21,17 @@ func RequestLogger(next web.Handler) web.Handler {
 		v := ctx.Value(web.KeyValues).(*web.Values)
 
 		start := time.Now()
-		err := next(ctx, w, r, params)
+		next(ctx, w, r, params)
 
-		log.Printf("%s : (%d) : %s %s -> %s (%s) : Error[%v]",
+		log.Printf("%s : (%d) : %s %s -> %s (%s)",
 			v.TraceID,
 			v.StatusCode,
 			r.Method, r.URL.Path,
 			r.RemoteAddr, time.Since(start),
-			err,
 		)
 
-		return err
+		// This is the top of the food chain. At this point all error
+		// handling has been done including logging.
+		return nil
 	}
 }

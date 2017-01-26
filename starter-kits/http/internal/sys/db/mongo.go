@@ -5,10 +5,10 @@ package db
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"time"
 
+	"github.com/pkg/errors"
 	"gopkg.in/mgo.v2"
 )
 
@@ -25,11 +25,14 @@ const (
 	database     = "gotraining"
 )
 
-//==============================================================================
+func init() {
+
+	// Logging this here because it is currently hardcoded.
+	log.Printf("Init : Host[%s] Database[%s]\n", mongoDBHosts, database)
+}
 
 // Init sets up the MongoDB environment and provides a master session.
-func Init() *mgo.Session {
-	log.Printf("Init : Host[%s] Database[%s]\n", mongoDBHosts, database)
+func Init() (*mgo.Session, error) {
 
 	// We need this object to establish a session to our MongoDB.
 	mongoDBDialInfo := mgo.DialInfo{
@@ -44,7 +47,7 @@ func Init() *mgo.Session {
 	// to our MongoDB.
 	session, err := mgo.DialWithInfo(&mongoDBDialInfo)
 	if err != nil {
-		log.Fatalln("Init : MongoDB Dial", err)
+		return nil, errors.Wrap(err, "dial connection")
 	}
 
 	// Reads may not be entirely up-to-date, but they will always see the
@@ -54,7 +57,7 @@ func Init() *mgo.Session {
 	// http://godoc.org/labix.org/v2/mgo#Session.SetMode
 	session.SetMode(mgo.Monotonic, true)
 
-	return session
+	return session, nil
 }
 
 // Query provides a string version of the value
@@ -69,22 +72,17 @@ func Query(value interface{}) string {
 
 // Execute the MongoDB function using session and collection information.
 func Execute(session *mgo.Session, collectionName string, f func(*mgo.Collection) error) error {
-	log.Printf("Execute : Started : Collection[%s]\n", collectionName)
 
 	// Capture the specified collection from our connection.
 	collection := session.DB("").C(collectionName)
 	if collection == nil {
-		err := fmt.Errorf("Collection %s does not exist", collectionName)
-		log.Println("Execute : Completed : ERROR :", err)
-		return err
+		return errors.Errorf("Collection %s does not exist", collectionName)
 	}
 
 	// Execute the MongoDB call.
 	if err := f(collection); err != nil {
-		log.Println("Execute : Completed : ERROR :", err)
-		return err
+		return errors.Wrap(err, "executing mgo")
 	}
 
-	log.Println("Execute : Completed")
 	return nil
 }

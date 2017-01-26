@@ -169,7 +169,7 @@ func getUser404(t *testing.T) {
 
 			recv := w.Body.String()
 			resp := `{
-  "error": "ID is not in it's proper form"
+  "error": "check objectid: ID is not in it's proper form"
 }`
 			if resp != recv {
 				t.Log("Got :", recv)
@@ -200,7 +200,7 @@ func getUser400(t *testing.T) {
 
 			recv := w.Body.String()
 			resp := `{
-  "error": "Entity not found"
+  "error": "retrieve user: Entity not found"
 }`
 			if resp != recv {
 				t.Log("Got :", recv)
@@ -231,7 +231,7 @@ func deleteUser404(t *testing.T) {
 
 			recv := w.Body.String()
 			resp := `{
-  "error": "Entity not found"
+  "error": "delete user: Entity not found"
 }`
 			if resp != recv {
 				t.Log("Got :", recv)
@@ -274,7 +274,7 @@ func putUser404(t *testing.T) {
 
 			recv := w.Body.String()
 			resp := `{
-  "error": "Entity not found"
+  "error": "update user: Entity not found"
 }`
 			if resp != recv {
 				t.Log("Got :", recv)

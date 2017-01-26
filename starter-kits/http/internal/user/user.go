@@ -10,67 +10,51 @@ import (
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/db"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
+	"github.com/pkg/errors"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
 const usersCollection = "users"
 
-//==============================================================================
-
 // List retrieves a list of existing users from the database.
 func List(ctx context.Context, traceID string, dbSes *mgo.Session) ([]User, error) {
-	log.Println(traceID, ": List : Started")
-
 	u := []User{}
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : List : MGO :\n\ndb.users.find()\n\n", traceID)
+		log.Printf("%s : List : MGO : db.users.find()\n", traceID)
 		return collection.Find(nil).All(&u)
 	}
-
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		log.Println(traceID, ": List : Completed : ERROR :", err)
-		return nil, err
+		return nil, errors.Wrap(err, "list users")
 	}
 
-	log.Println(traceID, ": List : Completed")
 	return u, nil
 }
 
 // Retrieve gets the specified user from the database.
 func Retrieve(ctx context.Context, traceID string, dbSes *mgo.Session, userID string) (*User, error) {
-	log.Println(traceID, ": Retrieve : Started")
-
 	if !bson.IsObjectIdHex(userID) {
-		log.Println(traceID, ": Retrieve : Completed : ERROR :", web.ErrInvalidID)
-		return nil, web.ErrInvalidID
+		return nil, errors.Wrap(web.ErrInvalidID, "check objectid")
 	}
 
 	var u *User
 	f := func(collection *mgo.Collection) error {
 		q := bson.M{"user_id": userID}
-		log.Printf("%s : Retrieve : MGO :\n\ndb.users.find(%s)\n\n", traceID, db.Query(q))
+		log.Printf("%s : Retrieve : MGO : db.users.find(%s)\n", traceID, db.Query(q))
 		return collection.Find(q).One(&u)
 	}
-
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
-			log.Println(traceID, ": Retrieve : Completed : ERROR :", err)
-			return nil, err
+			return nil, errors.Wrap(web.ErrNotFound, "retrieve user")
 		}
-
-		log.Println(traceID, ": Retrieve : Completed : ERROR : Not Found")
-		return nil, web.ErrNotFound
+		return nil, errors.Wrap(err, "retrieve user")
 	}
 
-	log.Println(traceID, ": Retrieve : Completed")
 	return u, nil
 }
 
 // Create inserts a new user into the database.
 func Create(ctx context.Context, traceID string, dbSes *mgo.Session, cu *CreateUser) (*User, error) {
-	log.Println(traceID, ": Create : Started")
-
 	now := time.Now()
 
 	u := User{
@@ -100,26 +84,20 @@ func Create(ctx context.Context, traceID string, dbSes *mgo.Session, cu *CreateU
 	}
 
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : Create : MGO :\n\ndb.users.insert(%s)\n\n", traceID, db.Query(u))
+		log.Printf("%s : Create : MGO : db.users.insert(%s)\n", traceID, db.Query(u))
 		return collection.Insert(u)
 	}
-
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		log.Println(traceID, ": Create : Completed : ERROR :", err)
-		return nil, err
+		return nil, errors.Wrap(err, "inser user")
 	}
 
-	log.Println(traceID, ": Create : Completed")
 	return &u, nil
 }
 
 // Update replaces a user document in the database.
 func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID string, cu *CreateUser) error {
-	log.Println(traceID, ": Update : Started")
-
 	if !bson.IsObjectIdHex(userID) {
-		log.Println(traceID, ": Update : Completed : ERROR :", web.ErrInvalidID)
-		return web.ErrInvalidID
+		return errors.Wrap(web.ErrInvalidID, "check objectid")
 	}
 
 	now := time.Now()
@@ -131,45 +109,37 @@ func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 	f := func(collection *mgo.Collection) error {
 		q := bson.M{"user_id": userID}
 		m := bson.M{"$set": cu}
-		log.Printf("%s : Update : MGO :\n\ndb.users.update(%s, %s)\n\n", traceID, db.Query(q), db.Query(m))
+		log.Printf("%s : Update : MGO : db.users.update(%s, %s)\n", traceID, db.Query(q), db.Query(m))
 		return collection.Update(q, m)
 	}
-
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		log.Println(traceID, ": Update : Completed : ERROR :", err)
-		if err == mgo.ErrNotFound {
-			return web.ErrNotFound
+		if err != mgo.ErrNotFound {
+			return errors.Wrap(web.ErrNotFound, "update user")
 		}
-		return err
+		return errors.Wrap(err, "update user")
 	}
 
-	log.Println(traceID, ": Update : Completed")
 	return nil
 }
 
 // Delete removes a user from the database.
 func Delete(ctx context.Context, traceID string, dbSes *mgo.Session, userID string) error {
-	log.Println(traceID, ": Delete : Started")
-
 	if !bson.IsObjectIdHex(userID) {
-		log.Println(traceID, ": Delete : Completed : ERROR :", web.ErrInvalidID)
-		return web.ErrInvalidID
+		return errors.Wrap(web.ErrInvalidID, "check objectid")
 	}
 
 	f := func(collection *mgo.Collection) error {
 		q := bson.M{"user_id": userID}
-		log.Printf("%s : Delete : MGO :\n\ndb.users.remove(%s)\n\n", traceID, db.Query(q))
+		log.Printf("%s : Delete : MGO : db.users.remove(%s)\n", traceID, db.Query(q))
 		return collection.Remove(q)
 	}
 
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		log.Println(traceID, ": Delete : Completed : ERROR :", err)
-		if err == mgo.ErrNotFound {
-			return web.ErrNotFound
+		if err != mgo.ErrNotFound {
+			return errors.Wrap(web.ErrNotFound, "delete user")
 		}
-		return err
+		return errors.Wrap(err, "delete user")
 	}
 
-	log.Println(traceID, ": Delete : Completed")
 	return nil
 }

@@ -5,7 +5,6 @@ package middleware
 
 import (
 	"context"
-	"log"
 	"net/http"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
@@ -31,13 +30,14 @@ func CORS(a *web.App, origin string, methods string) web.Middleware {
 
 		// Wrap this handler around the next one provided.
 		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
-			v := ctx.Value(web.KeyValues).(*web.Values)
 
 			// Add the access control to the header.
 			w.Header().Set("Access-Control-Allow-Origin", origin)
-			log.Printf("%s : CORS : Access Control Allowed : Origin[%s] Methods[%s]", v.TraceID, origin, methods)
 
-			return next(ctx, w, r, params)
+			if err := next(ctx, w, r, params); err != nil {
+				return err
+			}
+			return nil
 		}
 	}
 }

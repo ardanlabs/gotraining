@@ -16,7 +16,10 @@ import (
 func Mongo() web.Middleware {
 
 	// session contains the master session for accessing MongoDB.
-	session := db.Init()
+	session, err := db.Init()
+	if err != nil {
+		log.Fatalf("startup : Mongo : Initialize Mongo : %+v\n", err)
+	}
 
 	// Return this middleware to be chained together.
 	return func(next web.Handler) web.Handler {
@@ -26,16 +29,13 @@ func Mongo() web.Middleware {
 			v := ctx.Value(web.KeyValues).(*web.Values)
 
 			// Get a MongoDB session connection.
-			log.Printf("%s : Mongo : *****> Capture Mongo Session\n", v.TraceID)
 			v.DB = session.Copy()
+			defer v.DB.Close()
 
-			// Defer releasing the db session connection.
-			defer func() {
-				log.Printf("%s : Mongo : *****> Release Mongo Session\n", v.TraceID)
-				v.DB.Close()
-			}()
-
-			return next(ctx, w, r, params)
+			if err := next(ctx, w, r, params); err != nil {
+				return err
+			}
+			return nil
 		}
 	}
 }
