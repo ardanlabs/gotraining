@@ -47,7 +47,7 @@ func Init() (*mgo.Session, error) {
 	// to our MongoDB.
 	session, err := mgo.DialWithInfo(&mongoDBDialInfo)
 	if err != nil {
-		return nil, errors.Wrap(err, "dial connection")
+		return nil, errors.Wrapf(err, "mgo.DialWithInfo: %v", mongoDBDialInfo)
 	}
 
 	// Reads may not be entirely up-to-date, but they will always see the

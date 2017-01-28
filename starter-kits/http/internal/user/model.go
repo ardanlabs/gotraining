@@ -30,8 +30,6 @@ type Address struct {
 	DateCreated  *time.Time `bson:"date_created,omitempty" json:"date_created"`
 }
 
-//==============================================================================
-
 // CreateUser contains information about a user.
 type CreateUser struct {
 	UserType     int             `bson:"type" json:"type" validate:"required"`

@@ -25,7 +25,7 @@ func List(ctx context.Context, traceID string, dbSes *mgo.Session) ([]User, erro
 		return collection.Find(nil).All(&u)
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		return nil, errors.Wrap(err, "list users")
+		return nil, errors.Wrap(err, "db.Execute")
 	}
 
 	return u, nil
@@ -34,7 +34,7 @@ func List(ctx context.Context, traceID string, dbSes *mgo.Session) ([]User, erro
 // Retrieve gets the specified user from the database.
 func Retrieve(ctx context.Context, traceID string, dbSes *mgo.Session, userID string) (*User, error) {
 	if !bson.IsObjectIdHex(userID) {
-		return nil, errors.Wrap(web.ErrInvalidID, "check objectid")
+		return nil, errors.Wrapf(web.ErrInvalidID, "bson.IsObjectIdHex: %s", userID)
 	}
 
 	var u *User
@@ -45,9 +45,9 @@ func Retrieve(ctx context.Context, traceID string, dbSes *mgo.Session, userID st
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
-			return nil, errors.Wrap(web.ErrNotFound, "retrieve user")
+			err = web.ErrNotFound
 		}
-		return nil, errors.Wrap(err, "retrieve user")
+		return nil, errors.Wrap(err, "db.Execute")
 	}
 
 	return u, nil
@@ -88,7 +88,7 @@ func Create(ctx context.Context, traceID string, dbSes *mgo.Session, cu *CreateU
 		return collection.Insert(u)
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		return nil, errors.Wrap(err, "inser user")
+		return nil, errors.Wrap(err, "db.Execute")
 	}
 
 	return &u, nil
@@ -114,9 +114,9 @@ func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
-			return errors.Wrap(web.ErrNotFound, "update user")
+			err = web.ErrNotFound
 		}
-		return errors.Wrap(err, "update user")
+		return errors.Wrap(err, "db.Execute")
 	}
 
 	return nil
@@ -125,7 +125,7 @@ func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 // Delete removes a user from the database.
 func Delete(ctx context.Context, traceID string, dbSes *mgo.Session, userID string) error {
 	if !bson.IsObjectIdHex(userID) {
-		return errors.Wrap(web.ErrInvalidID, "check objectid")
+		return errors.Wrapf(web.ErrInvalidID, "bson.IsObjectIdHex: %s", userID)
 	}
 
 	f := func(collection *mgo.Collection) error {
@@ -133,12 +133,11 @@ func Delete(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 		log.Printf("%s : Delete : MGO : db.users.remove(%s)\n", traceID, db.Query(q))
 		return collection.Remove(q)
 	}
-
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
-			return errors.Wrap(web.ErrNotFound, "delete user")
+			err = web.ErrNotFound
 		}
-		return errors.Wrap(err, "delete user")
+		return errors.Wrap(err, "db.Execute")
 	}
 
 	return nil

@@ -220,6 +220,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Research Papers
 
-[Damian Gryski's Interesting Papers](https://github.com/dgryski/interesting-papers)  
+[Interesting Papers](https://github.com/dgryski/interesting-papers) - Damian Gryski  
 [“Balls into Bins” — A Simple and Tight Analysis](http://wwwmayr.informatik.tu-muenchen.de/personen/raab/publ/balls.pdf)  
-[Thoughts and links about programming, by Russ Cox](https://research.swtch.com)  
+[Thoughts and links about programming](https://research.swtch.com) - Russ Cox  
+[Rules of Machine Learning](http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf?imm_mid=0ec4d7&cmp=em-na-na-na-newsltr_four_short_links_20170117) - Martin Zinkevich  
