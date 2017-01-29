@@ -19,7 +19,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### Interviews
 
 [An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)  
-[Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)
+[Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)  
+["C" Programming Language: Brian Kernighan](https://www.youtube.com/watch?feature=youtu.be&v=de2Hsvxaf8M)  
 
 ### History
 
