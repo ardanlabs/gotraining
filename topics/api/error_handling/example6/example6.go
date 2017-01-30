@@ -23,7 +23,7 @@ func (c *AppError) Error() string {
 func main() {
 
 	// Make the function call and validate the error.
-	if err := firstCall(); err != nil {
+	if err := firstCall(10); err != nil {
 
 		// Use type as context to determine cause.
 		switch v := errors.Cause(err).(type) {
@@ -45,13 +45,19 @@ func main() {
 }
 
 // firstCall makes a call to a second function and wraps any error.
-func firstCall() error {
-	return errors.Wrap(secondCall(), "attempted firstCall")
+func firstCall(i int) error {
+	if err := secondCall(i); err != nil {
+		return errors.Wrapf(err, "secondCall: %d", i)
+	}
+	return nil
 }
 
 // secondCall makes a call to a third function and wraps any error.
-func secondCall() error {
-	return errors.Wrap(thirdCall(), "attempted doSomething")
+func secondCall(i int) error {
+	if err := thirdCall(); err != nil {
+		return errors.Wrapf(err, "thirdCall")
+	}
+	return nil
 }
 
 // thirdCall create an error value we will validate.
