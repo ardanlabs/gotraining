@@ -2,71 +2,75 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Sample program to show how to use an unbuffered channel to
-// simulate a relay race between four goroutines.
+// simulate a game of tennis between two goroutines.
 package main
 
 import (
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
 )
 
-// wg is used to wait for the program to finish.
-var wg sync.WaitGroup
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
 
 	// Create an unbuffered channel.
-	track := make(chan int)
+	court := make(chan int)
 
-	// Add a count of one for the last runner.
-	wg.Add(1)
+	// wg is used to manage concurrency.
+	var wg sync.WaitGroup
+	wg.Add(2)
 
-	// First runner to his mark.
-	go Runner(track)
+	// Launch two players.
+	go func() {
+		player("Serena", court)
+		wg.Done()
+	}()
 
-	// Start the race.
-	track <- 1
+	go func() {
+		player("Venus", court)
+		wg.Done()
+	}()
 
-	// Wait for the race to finish.
+	// Start the set.
+	court <- 1
+
+	// Wait for the game to finish.
 	wg.Wait()
 }
 
-// Runner simulates a person running in the relay race.
-func Runner(track chan int) {
+// player simulates a person playing the game of tennis.
+func player(name string, court chan int) {
+	for {
 
-	// The number of exchanges of the baton.
-	const maxExchanges = 4
+		// Wait for the ball to be hit back to us.
+		ball, ok := <-court
+		if !ok {
 
-	var exchange int
+			// If the channel was closed we won.
+			fmt.Printf("Player %s Won\n", name)
+			return
+		}
 
-	// Wait to receive the baton.
-	baton := <-track
+		// Pick a random number and see if we miss the ball.
+		n := rand.Intn(100)
+		if n%13 == 0 {
+			fmt.Printf("Player %s Missed\n", name)
 
-	// Start running around the track.
-	fmt.Printf("Runner %d Running With Baton\n", baton)
+			// Close the channel to signal we lost.
+			close(court)
+			return
+		}
 
-	// New runner to the line.
-	if baton < maxExchanges {
-		exchange = baton + 1
-		fmt.Printf("Runner %d To The Line\n", exchange)
-		go Runner(track)
+		// Display and then increment the hit count by one.
+		fmt.Printf("Player %s Hit %d\n", name, ball)
+		ball++
+
+		// Hit the ball back to the opposing player.
+		court <- ball
 	}
-
-	// Running around the track.
-	time.Sleep(100 * time.Millisecond)
-
-	// Is the race over.
-	if baton == maxExchanges {
-		fmt.Printf("Runner %d Finished, Race Over\n", baton)
-		wg.Done()
-		return
-	}
-
-	// Exchange the baton for the next runner.
-	fmt.Printf("Runner %d Exchange With Runner %d\n",
-		baton,
-		exchange)
-
-	track <- exchange
 }

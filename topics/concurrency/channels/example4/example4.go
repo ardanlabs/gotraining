@@ -1,143 +1,93 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// This sample program demonstrates how to use a channel to
-// monitor the amount of time the program is running and terminate
-// the program if it runs too long.
+// This sample program demonstrates how to use a buffered
+// channel to receive results from other goroutines in a guaranteed way.
 package main
 
 import (
-	"errors"
+	"fmt"
 	"log"
-	"os"
-	"os/signal"
+	"math/rand"
 	"time"
 )
 
-// Give the program 3 seconds to complete the work.
-const timeoutSeconds = 3 * time.Second
+// result is what is sent back from each operation.
+type result struct {
+	id  int
+	op  string
+	err error
+}
 
-var (
-	// sigChan receives os signals.
-	sigChan = make(chan os.Signal, 1)
-
-	// timeout limits the amount of time the program has.
-	timeout = time.After(timeoutSeconds)
-
-	// complete is used to report processing is done.
-	complete = make(chan error)
-
-	// shutdown provides system wide notification.
-	shutdown = make(chan struct{})
-)
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
-	log.Println("Starting Process")
 
-	// We want to receive all interrupt based signals.
-	signal.Notify(sigChan, os.Interrupt)
+	// Set the number of routines and inserts.
+	const routines = 10
+	const inserts = routines * 2
 
-	// Launch the process.
-	log.Println("Launching Processors")
-	go processor(complete)
+	// Buffered channel to receive information about any possible insert.
+	ch := make(chan result, inserts)
 
-ControlLoop:
-	for {
-		select {
-		case <-sigChan:
+	// Number of responses we need to handle.
+	waitInserts := inserts
 
-			// Interrupt event signaled by the operation system.
-			log.Println("OS INTERRUPT")
+	// Perform all the inserts.
+	for i := 0; i < routines; i++ {
+		go func(id int) {
+			ch <- insertUser(id)
 
-			// Close the channel to signal to the processor
-			// it needs to shutdown.
-			close(shutdown)
-
-			// Set the channel to nil so we no longer process
-			// any more of these events.
-			sigChan = nil
-
-		case <-timeout:
-
-			// We have taken too much time. Kill the app hard.
-			log.Println("Timeout - Killing Program")
-			os.Exit(1)
-
-		case err := <-complete:
-
-			// Everything completed within the time given.
-			log.Printf("Task Completed: Error[%s]", err)
-			break ControlLoop
-		}
+			// We don't need to wait to start the second insert
+			// thanks to the buffered channel. The first send
+			// will happen immediately.
+			ch <- insertTrans(id)
+		}(i)
 	}
 
-	// Program finished.
-	log.Println("Process Ended")
+	// Process the insert results as they complete.
+	for waitInserts > 0 {
+		// Wait for a response from a goroutine.
+		r := <-ch
+
+		// Display the result.
+		log.Printf("N: %d ID: %d OP: %s ERR: %v", waitInserts, r.id, r.op, r.err)
+
+		// Decrement the wait count and determine if we are done.
+		waitInserts--
+	}
+
+	log.Println("Inserts Complete")
 }
 
-// processor provides the main program logic for the program.
-func processor(complete chan<- error) {
-	log.Println("Processor - Starting")
+// insertUser simulates a database operation.
+func insertUser(id int) result {
+	r := result{
+		id: id,
+		op: fmt.Sprintf("insert USERS value (%d)", id),
+	}
 
-	// Variable to store any error that occurs.
-	// Passed into the defer function via closures.
-	var err error
+	// Randomize if the insert fails or not.
+	if rand.Intn(10) == 0 {
+		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
+	}
 
-	// Defer the send on the channel so it happens
-	// regardless of how this function terminates.
-	defer func() {
-
-		// Capture any potential panic.
-		if r := recover(); r != nil {
-			log.Println("Processor - Panic", r)
-		}
-
-		// Signal the goroutine we have shutdown.
-		complete <- err
-	}()
-
-	// Perform the work.
-	err = doWork()
-
-	log.Println("Processor - Completed")
+	return r
 }
 
-// doWork simulates task work.
-func doWork() error {
-	log.Println("Processor - Task 1")
-	time.Sleep(2 * time.Second)
-
-	if checkShutdown() {
-		return errors.New("Early Shutdown")
+// insertTrans simulates a database operation.
+func insertTrans(id int) result {
+	r := result{
+		id: id,
+		op: fmt.Sprintf("insert TRANS value (%d)", id),
 	}
 
-	log.Println("Processor - Task 2")
-	time.Sleep(1 * time.Second)
-
-	if checkShutdown() {
-		return errors.New("Early Shutdown")
+	// Randomize if the insert fails or not.
+	if rand.Intn(10) == 0 {
+		r.err = fmt.Errorf("Unable to insert %d into USER table", id)
 	}
 
-	log.Println("Processor - Task 3")
-	time.Sleep(1 * time.Second)
-
-	return nil
-}
-
-// checkShutdown checks the shutdown flag to determine
-// if we have been asked to interrupt processing.
-func checkShutdown() bool {
-	select {
-	case <-shutdown:
-
-		// We have been asked to shutdown cleanly.
-		log.Println("checkShutdown - Shutdown Early")
-		return true
-
-	default:
-
-		// If the shutdown channel was not closed,
-		// presume with normal processing.
-		return false
-	}
+	return r
 }

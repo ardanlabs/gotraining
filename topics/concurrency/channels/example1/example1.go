@@ -1,14 +1,13 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to use an unbuffered channel to
-// simulate a game of tennis between two goroutines.
+// This sample program demonstrates the basic channel mechanics
+// for goroutine signaling.
 package main
 
 import (
 	"fmt"
 	"math/rand"
-	"sync"
 	"time"
 )
 
@@ -17,60 +16,115 @@ func init() {
 }
 
 func main() {
-
-	// Create an unbuffered channel.
-	court := make(chan int)
-
-	// wg is used to manage concurrency.
-	var wg sync.WaitGroup
-	wg.Add(2)
-
-	// Launch two players.
-	go func() {
-		player("Serena", court)
-		wg.Done()
-	}()
-
-	go func() {
-		player("Venus", court)
-		wg.Done()
-	}()
-
-	// Start the set.
-	court <- 1
-
-	// Wait for the game to finish.
-	wg.Wait()
+	// basicSendRecv()
+	// signalClose()
+	// signalAck()
+	// closeRange()
+	// selectRecv()
+	// selectSend()
+	// selectDrop()
 }
 
-// player simulates a person playing the game of tennis.
-func player(name string, court chan int) {
-	for {
+// basicSendRecv shows the basics of a send and receive.
+func basicSendRecv() {
+	ch := make(chan string)
+	go func() {
+		ch <- "hello"
+	}()
 
-		// Wait for the ball to be hit back to us.
-		ball, ok := <-court
-		if !ok {
+	fmt.Println(<-ch)
+}
 
-			// If the channel was closed we won.
-			fmt.Printf("Player %s Won\n", name)
-			return
-		}
+// signalClose shows how to close a channel to signal an event.
+func signalClose() {
+	ch := make(chan struct{})
+	go func() {
+		time.Sleep(100 * time.Millisecond)
+		fmt.Println("signal event")
+		close(ch)
+	}()
 
-		// Pick a random number and see if we miss the ball.
-		n := rand.Intn(100)
-		if n%13 == 0 {
-			fmt.Printf("Player %s Missed\n", name)
+	<-ch
+	fmt.Println("event received")
+}
 
-			// Close the channel to signal we lost.
-			close(court)
-			return
-		}
+// signalAck shows how to signal an event and wait for an
+// acknowledgment it is done.
+func signalAck() {
+	ch := make(chan string)
+	go func() {
+		fmt.Println(<-ch)
+		ch <- "ok done"
+	}()
 
-		// Display and then increment the hit count by one.
-		fmt.Printf("Player %s Hit %d\n", name, ball)
-		ball++
+	ch <- "do this"
+	fmt.Println(<-ch)
+}
 
-		// Hit the ball back to the opposing player.
-		court <- ball
+// closeRange shows how to use range to receive value and
+// using close to terminate the loop.
+func closeRange() {
+	ch := make(chan int, 5)
+	for i := 0; i < 5; i++ {
+		ch <- i
 	}
+	close(ch)
+
+	for v := range ch {
+		fmt.Println(v)
+	}
+}
+
+// selectRecv shows how to use the select statement to wait for a
+// specified amount of time to receive a value.
+func selectRecv() {
+	ch := make(chan string)
+	go func() {
+		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+		ch <- "work"
+	}()
+
+	select {
+	case v := <-ch:
+		fmt.Println(v)
+	case <-time.After(100 * time.Millisecond):
+		fmt.Println("timed out")
+	}
+}
+
+// selectRecv shows how to use the select statement to attempt a
+// send on a channel for a specified amount of time.
+func selectSend() {
+	ch := make(chan string)
+	go func() {
+		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+		fmt.Println(<-ch)
+	}()
+
+	select {
+	case ch <- "work":
+		fmt.Println("send work")
+	case <-time.After(100 * time.Millisecond):
+		fmt.Println("timed out")
+	}
+}
+
+// selectDrop shows how to use the select to walk away from a channel
+// operation if it will immediately block.
+func selectDrop() {
+	ch := make(chan int, 5)
+	go func() {
+		for v := range ch {
+			fmt.Println("recv", v)
+		}
+	}()
+
+	for i := 0; i < 20; i++ {
+		select {
+		case ch <- i:
+		default:
+			fmt.Println("drop", i)
+		}
+	}
+	close(ch)
 }
