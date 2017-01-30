@@ -26,6 +26,16 @@ Run the website redirecting stdout (logs) to the null device. This will allow us
 	
 	GODEBUG=gctrace=1 ./project > /dev/null
 
+#### GOGC
+
+GOGC will change the way the heap grows. Changing this value could help reduce the number of GC's that occur.
+
+Run the website again adding load. Look at the pacing of the GC with these different GOGC values.
+
+	GODEBUG=gctrace=1 ./project > /dev/null  
+	GODEBUG=gctrace=1 GOGC=200 ./project > /dev/null  
+	GODEBUG=gctrace=1 GOGC=500 ./project > /dev/null
+
 #### Scheduler Trace
 
 Run the website redirecting stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.

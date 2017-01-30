@@ -83,6 +83,7 @@ We are working hard to maintain pricing that can fit your budget.
 **This is our current pricing if you book a class in the first quarter of this year (2017).**
 
 **Ultimate Go**  
+4 Days (24 hours) - $20,000 for up to 15 students  
 3 Days (21 hours) - $15,000 for up to 15 students  
 2 Days (14 hours) - $10,000 for up to 15 students  
 $5,000 T&E  
@@ -99,6 +100,15 @@ Classes that exceed 15 students are charged an extra $500 each per additional st
 $5,000 T&E  
 Classes that exceed 15 students are charged an extra $500 each per additional student.
 
+**Our 4 day class option:**  
+_This option is the best for teams with little to no Go experience. We can do more exercises and each day is not as mentally exhausting._
+
+**Our 3 day class option:**  
+_This option is best for teams with 3+ months for Go experience. We need to push the team a bit harder and there will be less exercises. For the Data and Web classes we can teach all the material._
+
+**Our 2 day class option:**  
+_This options is skips most of the exercises to get through the material. We will push the team very hard and we maintain a very fast pace._
+
 ## Current Schedule
 
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
@@ -109,14 +119,18 @@ If you are interested in holding an event in your area please let me know. We wi
 		Public		Adv Go		Golab					Florance, IT 			January 	Bill Kennedy 		http://golab.io/
 		Corporate	Go			GNS Science				Wellington, NZ 			January 	Bill Kennedy
 		GoBridge	Go 			Framingham 				Framingham, MA			February 	Bill Kennedy 		https://www.bridgetroll.org/events/329
-		Public 		Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/  
-		Public 		Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
-		Public 		Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
+		Conference	Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/  
+		Conference	Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
+		Dev Fest	Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
 		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public 		Data		Brandless 				Chicago, IL 			April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-science-chicago-april-2017-tickets-31455935550
-		Public 		Adv Go 		Singapore Conference 	Singapore				May 		Bill Kennedy  
-		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
-		Public		Data		GopherCon				Denver, CO  			July		Daniel Whitenack  
+		Public 		Go 			1up Events 				San Francisco, CA		April 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
+		Public 		Web			1up Events 				San Francisco, CA		April 		Jacob Walker 		https://www.eventbrite.com/e/ultimate-go-web-san-francisco-april-2017-tickets-31485605293
+		Public 		Data		1up Events 				San Francisco, CA		April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-san-francisco-april-2017-tickets-31485334483
+		Conference	Adv Go 		China Conference 		Shanghai, China			April 		Bill Kennedy  
+		Conference	Go 			Singapore Conference 	Singapore				May 		Bill Kennedy 		http://gophercon.sg/workshop
+		Conference	Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
+		Conference	Data		GopherCon				Denver, CO  			July		Daniel Whitenack  
 
 ## More About Go
 
