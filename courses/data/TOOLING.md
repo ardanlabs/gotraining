@@ -21,17 +21,18 @@ github.com/sajari/regression
 github.com/sjwhitworth/golearn/base     
 github.com/sjwhitworth/golearn/evaluation    
 github.com/sjwhitworth/golearn/knn     
-github.com/sjwhitworth/golearn/trees     
+github.com/sjwhitworth/golearn/trees    
+github.com/Sirupsen/logrus 
 
 # Other dependencies
 
 - A free "tiny turtle" Postgres instance on [ElephantSQL](https://www.elephantsql.com/)
 - `psql` 9.2+
 - A [local installation of Pachyderm](http://pachyderm.readthedocs.io/en/stable/getting_started/local_installation.html).
-- `google.golang.com/grpc` v1.0.0:
+- A specific version of `google.golang.com/grpc`:
     
     ```
     go get google.golang.org/grpc
     cd $GOPATH/src/google.golang.org/grpc
-    git checkout tag/v1.0.0
+    git checkout 9d682f9293b408c42d17c587d0e2a31237ac3f10
     ```
