@@ -10,11 +10,11 @@ bill@ardanlabs.com
 
 ## Our Experience
 
-We have taught Go to thousands of developers all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
+We have taught Go to thousands of developers all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump-start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
 
 Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
 
-[Look at our current schedule](https://github.com/ardanlabs/gotraining#schedule)  
+[Look at our current schedule](https://github.com/ardanlabs/gotraining#current-schedule)  
 
 ## Our Teachers
 

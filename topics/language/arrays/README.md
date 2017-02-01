@@ -21,8 +21,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 
 [CPU Caches and Why You Care (18:50-20:30)](https://youtu.be/WDIkqP4JbkE?t=1129) - Scott Meyers  
 [CPU Caches and Why You Care (44:36-45:40)](https://youtu.be/WDIkqP4JbkE?t=2676) - Scott Meyers   
-[Modern Hardware to Gain 'Mechanical Sympathy' (17:20-20:08)](https://youtu.be/MC1EKLQ2Wmg?t=1040) - Martin Thompson  
-[Want fast C++? Know your hardware!](https://www.youtube.com/watch?v=BP6NxVxDQIs) - Timur Doumler  
+[Performance Through Cache-Friendliness (4:25-5:48)](https://youtu.be/jEG4Qyo_4Bc?t=266) - Damian Gryski  
 
 ## CPU Cache Notes
 
@@ -97,6 +96,7 @@ This is subject to be different in different processors. For this content, the f
 [NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
 [The Myth Of Ram](http://www.ilikebigbits.com/blog/2014/4/21/the-myth-of-ram-part-i) - Emil Ernerfeldt  
 [Understanding Transaction Hardware Memory](https://www.infoq.com/presentations/hardware-transactional-memory) - Gil Gene  
+[Performance Through Cache-Friendliness (4:25-5:48)](https://youtu.be/jEG4Qyo_4Bc?t=266) - Damian Gryski  
 
 #### Data-Oriented Design
 
