@@ -27,6 +27,8 @@ http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html
 
 http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html
 
+_Can you tell us about the worse features of C, from your point of view?_
+
 _I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help._ - July 2000
 
 ## Design Guidelines

@@ -13,7 +13,7 @@ import (
 	"testing"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 	"gopkg.in/mgo.v2/bson"
 )

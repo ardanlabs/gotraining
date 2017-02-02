@@ -8,8 +8,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/db"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/db"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/web"
 	"github.com/pkg/errors"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

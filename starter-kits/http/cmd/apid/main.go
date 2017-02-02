@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-
 	"time"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"

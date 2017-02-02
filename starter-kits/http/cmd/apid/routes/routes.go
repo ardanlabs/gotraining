@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/handlers"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/middleware"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
 )
 
 // API returns a handler for a set of routes.

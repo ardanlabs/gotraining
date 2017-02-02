@@ -7,7 +7,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/sys/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 )
 
