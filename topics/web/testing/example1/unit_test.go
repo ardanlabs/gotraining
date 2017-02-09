@@ -19,16 +19,13 @@ func MyHandler(res http.ResponseWriter, req *http.Request) {
 func Test_MyHandler(t *testing.T) {
 
 	// Create a new request.
-	req, err := http.NewRequest("GET", "http://example.com/foo", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("GET", "http://example.com/foo", nil)
 
 	// Create a new ResponseRecorder which implements
 	// the ResponseWriter interface.
 	res := httptest.NewRecorder()
 
-	// Execute the handler function direction.
+	// Execute the handler function directly.
 	MyHandler(res, req)
 
 	// Validate we received the expected response.

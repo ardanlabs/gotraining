@@ -25,17 +25,14 @@ func GoodbyeHandler(res http.ResponseWriter, req *http.Request) {
 func Test_MyHandler(t *testing.T) {
 
 	// Create a new request.
-	req, err := http.NewRequest("GET", "http://example.com/goodbye", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("GET", "http://example.com/goodbye", nil)
 
 	// Create a new ResponseRecorder which implements
 	// the ResponseWriter interface.
 	res := httptest.NewRecorder()
 
 	// Create a mux instead of using the default. Bind the
-	// handler inside the mux.
+	// handlers inside the mux.
 	m := http.NewServeMux()
 	m.HandleFunc("/goodbye", GoodbyeHandler)
 	m.HandleFunc("/hello", HelloHandler)

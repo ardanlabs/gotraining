@@ -29,7 +29,7 @@ func TestSendJSON(t *testing.T) {
 
 	t.Log("Given the need to test the SendJSON endpoint.")
 	{
-		r, _ := http.NewRequest("GET", url, nil)
+		r := httptest.NewRequest("GET", url, nil)
 		w := httptest.NewRecorder()
 		http.DefaultServeMux.ServeHTTP(w, r)
 

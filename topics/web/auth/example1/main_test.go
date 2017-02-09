@@ -32,10 +32,7 @@ func TestIndexHandler(t *testing.T) {
 	for _, tt := range tests {
 
 		// Create a new request for the GET call.
-		req, err := http.NewRequest("GET", ts.URL, nil)
-		if err != nil {
-			t.Fatal(err)
-		}
+		req := httptest.NewRequest("GET", ts.URL, nil)
 
 		// Only apply the credentials if we have them.
 		if tt.Username != "" {

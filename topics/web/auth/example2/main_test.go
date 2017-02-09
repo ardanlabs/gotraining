@@ -59,10 +59,7 @@ func TestCallback(t *testing.T) {
 	res := httptest.NewRecorder()
 
 	// Create a new GET request for the user page.
-	req, err := http.NewRequest("GET", "/auth/faux/callback", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("GET", "/auth/faux/callback", nil)
 
 	// Create a faux session with the connection details.
 	sess := faux.Session{

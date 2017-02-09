@@ -12,7 +12,7 @@ import (
 
 // TestRSSSearch tests the search screen loads.
 func TestRSSSearch(t *testing.T) {
-	r, _ := http.NewRequest("GET", "/search", nil)
+	r := httptest.NewRequest("GET", "/search", nil)
 	w := httptest.NewRecorder()
 
 	http.DefaultServeMux.ServeHTTP(w, r)

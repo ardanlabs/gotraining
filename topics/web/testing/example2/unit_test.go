@@ -24,10 +24,7 @@ func (a App) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 func Test_App(t *testing.T) {
 
 	// Create a new request.
-	req, err := http.NewRequest("GET", "http://example.com/foo", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("GET", "http://example.com/foo", nil)
 
 	// Create a new ResponseRecorder which implements
 	// the ResponseWriter interface.

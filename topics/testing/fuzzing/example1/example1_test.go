@@ -36,7 +36,7 @@ func TestProcess(t *testing.T) {
 		for i, tt := range tests {
 			t.Logf("\tTest %d:\tWhen checking %q for status code %d with data %s", i, tt.url, tt.status, tt.val)
 			{
-				r, _ := http.NewRequest("POST", tt.url, bytes.NewBuffer(tt.val))
+				r := httptest.NewRequest("POST", tt.url, bytes.NewBuffer(tt.val))
 				w := httptest.NewRecorder()
 				http.DefaultServeMux.ServeHTTP(w, r)
 

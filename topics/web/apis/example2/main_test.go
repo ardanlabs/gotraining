@@ -28,10 +28,7 @@ func TestApp(t *testing.T) {
 	for _, tt := range tests {
 
 		// Setup a request for user api without thinking about version.
-		req, err := http.NewRequest("GET", ts.URL+"/api/users", nil)
-		if err != nil {
-			t.Fatal(err)
-		}
+		req := httptest.NewRequest("GET", ts.URL+"/api/users", nil)
 
 		// Set the version header into the request.
 		req.Header.Set("x-version", tt.version)
