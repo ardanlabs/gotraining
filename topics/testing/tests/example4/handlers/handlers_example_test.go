@@ -16,7 +16,7 @@ import (
 
 // ExampleSendJSON provides a basic example example.
 func ExampleSendJSON() {
-	r, _ := http.NewRequest("GET", "/sendjson", nil)
+	r := httptest.NewRequest("GET", "/sendjson", nil)
 	w := httptest.NewRecorder()
 	http.DefaultServeMux.ServeHTTP(w, r)
 

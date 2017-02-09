@@ -36,10 +36,7 @@ func TestApp(t *testing.T) {
 	defer ts.Close()
 
 	// Create a new request for the PUT call.
-	req, err := http.NewRequest("PUT", ts.URL, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("PUT", ts.URL, nil)
 
 	// Create a Client and perform the PUT call.
 	var client http.Client

@@ -33,10 +33,7 @@ func TestApp(t *testing.T) {
 	defer ts.Close()
 
 	// Create a new request for the GET call.
-	req, err := http.NewRequest("GET", ts.URL, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("GET", ts.URL, nil)
 
 	// Create a Client value with a timeout.
 	client := http.Client{
