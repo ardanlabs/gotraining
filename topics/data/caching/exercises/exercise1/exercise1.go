@@ -14,6 +14,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	cache "github.com/patrickmn/go-cache"
@@ -99,7 +100,7 @@ func main() {
 	for _, station := range sd.StationBeanList {
 
 		// Get the respective code from the Cache.
-		v, found := c.Get(string(station.StatusKey))
+		v, found := c.Get(strconv.Itoa(station.StatusKey))
 		if found && v == "Not In Service" {
 			fmt.Printf("%s station not in service\n", station.StationName)
 		}
