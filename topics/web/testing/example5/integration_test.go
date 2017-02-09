@@ -25,7 +25,7 @@ func (a App) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 func Test_MyHandler(t *testing.T) {
 
 	// Start a server to call the handler through
-	// the applciation value.
+	// the application value.
 	ts := httptest.NewServer(App{})
 	defer ts.Close()
 
@@ -41,7 +41,7 @@ func Test_MyHandler(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Validate we received all the known customers.
+	// Validate we received the expected response.
 	got := string(b)
 	want := "Hello World!"
 	if got != want {

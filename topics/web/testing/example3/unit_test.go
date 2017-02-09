@@ -44,7 +44,7 @@ func Test_MyHandler(t *testing.T) {
 	// us also test the routes are valid.
 	m.ServeHTTP(res, req)
 
-	// Validate we received all the known customers.
+	// Validate we received the expected response.
 	got := res.Body.String()
 	want := "Goodbye Cruel World!"
 	if got != want {

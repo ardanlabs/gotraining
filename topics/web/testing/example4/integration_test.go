@@ -37,7 +37,7 @@ func Test_MyHandler(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Validate we received all the known customers.
+	// Validate we received the expected response.
 	got := string(b)
 	want := "Hello World!"
 	if got != want {
