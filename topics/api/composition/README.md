@@ -40,7 +40,7 @@ http://golang.org/doc/effective_go.html#embedding
 
 #### Conversion and Assertions
 
-[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/2K2svo0MR0))  
+[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/u5Jrk9wSWW))  
 [Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
 
 #### Interface Pollution

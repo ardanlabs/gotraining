@@ -81,4 +81,9 @@ func main() {
 	// interface.
 	b := m.(bike)
 	ml = b
+
+	// It's important to note that the type assertion syntax provides a way
+	// to state what type of value is stored inside the interface. This is
+	// more powerful from a language and readability standpoint, than using
+	// a casting syntax, like in other languages.
 }
