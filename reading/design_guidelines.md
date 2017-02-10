@@ -15,16 +15,9 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * We can throw more developers at the problem.
 
 **Aspire To**  
-* Be a champion for quality and efficiency.
-* Be pro-active.
-* Be fearless in the face of hard problems.
-* Be responsible with expectations, time and resources.
-* Have an insatiable curiosity.
+* Be a champion for quality, efficiency and simplicity.
 * Have a point of view.
-* Value good communication.
 * Value introspection and self-review.
-* Value simplicity.
-* Give and receive feedback well.
 
 **Open Your Mind**  
 * Technology changes quickly but people's minds change slowly.
@@ -55,7 +48,9 @@ Develop your design philosophy around these three major categories in this order
 **1) Integrity**  
 **_We need to become very serious about reliability._**
 
-This is the accuracy and consistency of your code performing every read, write and the execution of every instruction. Just as important, it's knowing the error handling code is the main code. Nothing trumps integrity - EVER.
+There are two driving forces behind integrity:  
+* Integrity is about every allocation, read and write of memory being accurate, consistent and efficient. The type system is critical to making sure we have this `micro` level of integrity.
+* Integrity is about every data transformation being accurate, consistent and efficient. Writing less code and error handling is critical to making sure we have this `macro` level of integrity.
 
 Case Study on Postmortems:  
 48 critical failures were found in a study looking at a couple hundred bugs in Cassandra, HBase, HDFS, MapReduce, and Redis.  
@@ -87,16 +82,32 @@ Carelessness  |        Education         |   Dangerous Situation   |
               |                          |                         |
               ------------------------------------------------------
 ```
+
+Write Less Code:  
+There have been studies that have researched the number of bugs you can expect to have in your software. The industry average is around 15 to 50 bugs per 1000 lines of code. One simple way to reduce the number of bugs, and increase the integrity of your software, is to write less code.
+
+Bjarne Stroustrup stated that writing more code than you need results in `Ugly`, `Large` and `Slow` code:
+
+* `Ugly`: Leaves places for bugs to hide.
+* `Large`: Ensures incomplete tests.
+* `Slow`: Encourages the use of shortcuts and dirty tricks.
+
+Resources:  
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 [Technical Debt Quadrant](https://martinfowler.com/bliki/TechnicalDebtQuadrant.html) - Martin Fowler  
+[Design Philosophy On Integrity](https://www.goinggo.net/2017/02/design-philosophy-on-integrity.html) - William Kennedy  
+[Ratio of bugs per line of code](https://www.mayerdan.com/ruby/2012/11/11/bugs-per-line-of-code-ratio) - Dan Mayer  
+[Masterminds of Programming](http://dl.acm.org/citation.cfm?id=1592983) - Federico Biancuzzi and Shane Warden  
 
 **2) Readability**   
 **_We must structure our systems to be more comprehensible._**  
 **_Readability means reliability._**
 
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
+
+In Go, the underlying machine is the real machine rather than a single abstract machine. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
 
 [Example of classic readability issues](http://codepad.org/Xw7eUSSA)  
 
@@ -105,6 +116,9 @@ This is about writing simple code that is easy to read and understand without th
 
 This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Validate that abstractions are not generalized or even too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
 
+_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup_
+
+Resources:  
 [Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
 
 **4) Performance**  
@@ -124,9 +138,6 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 ### Data-Oriented Design
 
-[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
-[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
-
 * If you don't understand the data, you don't understand the problem.
 * All problems are unique and specific to the data you are working with.
 * Data transformations are at the heart of solving problems. Each function, method and work-flow must focus on implementing the specific data transformations required to solve the problems.
@@ -140,35 +151,51 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 * Changing data layouts can yield more significant performance improvements than changing just the algorithms.
 * Efficiency is obtained through algorithms but performance is obtained through data structures and layouts.
 
-### Interface and Composition Design
+Resources:  
+[Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
+[Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
 
-_With help from [Sandi Metz](https://twitter.com/sandimetz). and [Rob Pike](https://twitter.com/rob_pike)_
+### Interface And Composition Design
 
 * Interfaces give programs structure.
 * Interfaces encourage design by composition.
 * Interfaces enable and enforce clean divisions between components.
     * The standardization of interfaces can set clear and consistent expectations.
+* Decoupling means reducing the dependencies between components and the types they use.
+    * This leads to correctness, quality and performance.
 * Interfaces allow you to group concrete types by what they do.
     * Don't group types by a common DNA but by a common behavior.
     * Everyone can work together when we focus on what we do and not who we are.
-* Interfaces provide the highest form of decoupling when the concrete types used to implement them can remain opaque.
-    * Decoupling means reducing the amount of intimate knowledge code must have about concrete types.
-    * When dependencies are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
 * Interfaces help your code decouple itself from change.
     * You must do your best to understand what could change and use interfaces to decouple.
     * Interfaces with more than one method have more than one reason to change.
     * Uncertainty about change is not a license to guess but a directive to STOP and learn more.
-    * Recognizing and minimizing cascading changes across the code is a way to architect adaptability and stability in your software.
+* You must distinguish between code that:
+    * defends against fraud vs
+    * protects against accidents
+
+Resources:  
+[Methods, interfaces and Embedding](https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
+[Composition with Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
+[Reducing type hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy
 
 ### Interface Pollution
 
-_With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)_
+Declare an interface when:  
+* users of the API need to provide an implementation detail.
+* API’s have multiple implementations they need to maintain internally.
+* parts of the API that can change have been identified and require decoupling.
 
-* Don't use an interface for the sake of using an interface.
-* Don't use an interface to generalize an algorithm.
-* Unless the user needs to provide an implementation or you have multiple implementations, question.
-* Don’t export any interface unless your user needs it. This includes interfaces for internal testing. Users can declare their own interfaces.
-* If it's not clear how an abstraction makes the code better, it probably doesn't.
+Don't declare an interface:  
+* for the sake of using an interface.
+* to generalize an algorithm.
+* when users can declare their own interfaces.
+* if it's not clear how the ineterface makes the code better.
+
+Resources:  
+[Interface pollution in Go](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
+[Application Focused API Design](https://www.goinggo.net/2016/11/application-focused-api-design.html) - William Kennedy  
+[Avoid interface pollution](https://www.goinggo.net/2016/10/avoid-interface-pollution.html) - William Kennedy  
 
 ### Package-Oriented Design
 
@@ -181,6 +208,9 @@ _With help from [Sarah Mei](https://twitter.com/sarahmei) and [Burcu Dogan](http
 * You must understand how changes to the API for a particular package affects the other packages that depend on it.
 * Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
 * When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
+
+Resources:  
+Coming Soon
 
 ### Writing Concurrent Software
 
@@ -281,12 +311,3 @@ Depending on the problem you are solving, you may require different channel sema
         * If a buffer of one is giving you good enough throughput then keep it.
         * Question buffers that are larger than one and measure for size.
         * Find the smallest buffer possible that provides good enough throughput.
-
-### Code Reviews
-
-I teach a lot about the things I look for in code reviews. I am slowly attempting to document this.
-
-* Try to use functions over methods when it is practical. Functions allow for better readability and reusability because all the input is passed in and the output is returned out. No information is lost or abstracted.
-* Eliminate the use of the else statements when it is practical. Do not attempt to push code paths to the end of a function. Keep your positive path code in the first tabbed position and use the if statement to process negative path. Return from the function as part of error handling.
-* Don't start off with pointer variables if it can be avoided. It is easier to work with variables that represent a value, even if that value is going to escape to the heap. The use of the & operator can go a long way to maintaining readability in your code.
-* Use the keyword var to represent the declaration of a variable that is being set to its zero value. This helps with readability and can provide the basis for developing a consistent set of rules around variable declarations. One of Go's biggest warts is there are too many ways to declare and create variables.
