@@ -18,7 +18,7 @@ func MyHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Hello World!")
 }
 
-func Test_MyHandler(t *testing.T) {
+func Test_IntegrationHandler(t *testing.T) {
 
 	// Start a server to call the handler through a
 	// GET call.

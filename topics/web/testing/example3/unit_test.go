@@ -22,7 +22,7 @@ func GoodbyeHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Goodbye Cruel World!")
 }
 
-func Test_MyHandler(t *testing.T) {
+func Test_GoodbyeMux(t *testing.T) {
 
 	// Create a new request.
 	req := httptest.NewRequest("GET", "http://example.com/goodbye", nil)
