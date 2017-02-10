@@ -128,5 +128,5 @@ func generatePlayLink(srcCode []byte) (string, error) {
 		return "", err
 	}
 
-	return fmt.Sprintf("http://play.golang.org/p/%s", string(b)), nil
+	return fmt.Sprintf("https://play.golang.org/p/%s", string(b)), nil
 }
