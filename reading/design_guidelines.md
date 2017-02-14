@@ -109,6 +109,8 @@ This is about writing simple code that is easy to read and understand without th
 
 In Go, the underlying machine is the real machine rather than a single abstract machine. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
 
+_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_
+
 [Example of classic readability issues](http://codepad.org/Xw7eUSSA)  
 
 **3) Simplicity**  
@@ -116,7 +118,7 @@ In Go, the underlying machine is the real machine rather than a single abstract 
 
 This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Validate that abstractions are not generalized or even too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
 
-_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup_
+_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup (inventor of C++)_
 
 Resources:  
 [Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
