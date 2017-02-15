@@ -114,23 +114,36 @@ _This options is skips most of the exercises to get through the material. We wil
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
 
 ### 2017
-		Type		Ultimate	Venue					City, ST				Month		Trainer				Url
-		================================================================================================================
-		Public		Adv Go		Golab					Florance, IT 			January 	Bill Kennedy 		http://golab.io/
+		Type		Type		Venue					City, ST				Month		Trainer				Url
+		================================================================================================================	
+		Public		Adv Go		Golab					Florance, IT 			January 	Bill Kennedy 		http://golab.io
 		Corporate	Go			GNS Science				Wellington, NZ 			January 	Bill Kennedy
 		GoBridge	Go 			Framingham 				Framingham, MA			February 	Bill Kennedy 		https://www.bridgetroll.org/events/329
-		Conference	Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop/  
-		Conference	Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
+		Conference	Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop		
 		Dev Fest	Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
 		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
-		Public 		Data		Brandless 				Chicago, IL 			April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-science-chicago-april-2017-tickets-31455935550
 		Public 		Go 			1up Events 				San Francisco, CA		April 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
-		Public 		Web			1up Events 				San Francisco, CA		April 		Jacob Walker 		https://www.eventbrite.com/e/ultimate-go-web-san-francisco-april-2017-tickets-31485605293
-		Public 		Data		1up Events 				San Francisco, CA		April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-san-francisco-april-2017-tickets-31485334483
-		Conference	Adv Go 		China Conference 		Shanghai, China			April 		Bill Kennedy  
+		GoBridge	Go 			Framingham 				Framingham, MA			April 		Bill Kennedy 		TBA
+		Conference	Adv Go 		Capital Golang	 		Washington, D.C. 		April 		Bill Kennedy 		http://capitalgolang.com
+		Public 		Go 			The Lab		 			Miami, FL 				May 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-miami-may-2017-tickets-32131447023
 		Conference	Go 			Singapore Conference 	Singapore				May 		Bill Kennedy 		http://gophercon.sg/workshop
+		Public 		Go 			Skillsmatter			London, England			May 		Ernesto Jimenez 	https://skillsmatter.com/courses/563-ardanlabs-ultimate-go-workshop
+		Public 		Go 			bol.com		 			Utrecht, Netherlands 	June 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-netherlands-june-2017-tickets-32131027769
 		Conference	Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
-		Conference	Data		GopherCon				Denver, CO  			July		Daniel Whitenack  
+
+		Type		Type		Venue					City, ST				Month		Trainer				Url
+		================================================================================================================	
+		Conference	Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
+		Public 		Data		Brandless 				Chicago, IL 			April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-science-chicago-april-2017-tickets-31455935550
+		Public 		Data		1up Events 				San Francisco, CA		April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-san-francisco-april-2017-tickets-31485334483
+		WWG 		Data		TBA	 					San Francisco, CA		April 		Daniel Whitenack 	https://www.meetup.com/Women-Who-Go/events/237660548
+		Public 		Data		Fieldlens 				NYC, NY 				June 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-new-york-june-2017-tickets-32130974610
+		Conference	Data		GopherCon				Denver, CO  			July		Daniel Whitenack  		
+
+		Type		Type		Venue					City, ST				Month		Trainer				Url
+		================================================================================================================	
+		WWG 		Web			Buzzfeed 				San Francisco, CA		March 		Jacob Walker 		https://www.meetup.com/Women-Who-Go/events/237660344
+		Public 		Web			1up Events 				San Francisco, CA		April 		Jacob Walker 		https://www.eventbrite.com/e/ultimate-go-web-san-francisco-april-2017-tickets-31485605293
 
 ## More About Go
 
@@ -311,7 +324,7 @@ _"Great course and a perfect introduction to Go.  Bill is very friendly and extr
 Look at how busy we have been training thousands of developers in Go over the past three years.
  
 ### 2016
-		Type		Ultimate	Venue					City, ST				Month		Trainer				Url
+		Type		Type		Venue					City, ST				Month		Trainer				Url
 		================================================================================================================
 		Corporate	Go			Capital One 			Richmond, VA 			January		Bill Kennedy
 		Corporate	Go			BOT 					Miami, FL 				January		Bill Kennedy
@@ -321,11 +334,8 @@ Look at how busy we have been training thousands of developers in Go over the pa
 		Free		Go			WWG						SF, CA 					March		Bill Kennedy
 		Public		Go 			Fidelity				SLC, UT 				March		Bill Kennedy
 		Corporate	Go			SAS 					Cary, NC 				March		Bill Kennedy
-		Public		Go			Ardan					Minneapolis, MN			March		Cory LaNou
 		Public		Go			Minio					SF, CA 					April		Bill Kennedy
-		Corporate	Go			Salesforce 				Dublin, Ireland 		April		Kevin Gillette
 		Corporate	Go			CapitalOne 				Richmond, VA 			April		Bill Kennedy
-		Corporate	Go			HP Enterprise 			Seattle, WA 			May			Cory LaNou
 		Corporate	Go			CISCO 					Lawrenceville, GA 		May			Bill Kennedy
 		Corporate	Go			Rackspace 				San Antonio, TX 		May			Bill Kennedy
 		Public		Go			OSCON 					Portland, OR  			May			Bill Kennedy
@@ -333,10 +343,8 @@ Look at how busy we have been training thousands of developers in Go over the pa
 		Corporate	Go			Staples 				Framingham, MA  		May			Bill Kennedy
 		Public		Go 			Halio					London, England 		June		Bill Kennedy
 		Public		Go 			Shutterfly				Phoenix, AZ  			June		Bill Kennedy
-		Public		Go			GopherCon				Denver, CO  			July		Cory LaNou
 		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
 		Corporate	Go			Red Ventures 			South Carolina	 		August		Bill Kennedy
-		Public		Go			GolangUK 				London, England 		August		Cory LaNou
 		Public		Adv Go		GolangUK 				London, England 		August		Bill Kennedy
 		Corporate	Go			Tune 					Seattle, WA	 			August		Bill Kennedy
 		Corporate	Go			Nordstroms				Seattle, WA	 			September	Bill Kennedy
@@ -346,15 +354,17 @@ Look at how busy we have been training thousands of developers in Go over the pa
 		Public		Adv Go		Rackspace				SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
 		Free		Go			WWG						SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
 		Corporate	Go			Traderev				Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
-		Public		Go			dotGo					Paris, France			October		Ernesto Jimenez
-		Public		Kubernetes	OSCON 					London, England			October		Brian Ketelsen		http://conferences.oreilly.com/oscon/open-source-eu/public/schedule/detail/54454
 		Corporate	Go			Centralway				Zürich, Switzerland	 October	 Bill Kennedy  
 		Public		Go			GothamGo				NYC, NY					November	Bill Kennedy
 		Public		Go			Dev Fest				NYC, NY					November	Bill Kennedy 		https://generalassemb.ly/education/devfestnyc-ultimate-go-training/new-york-city/30237
-		Public		Data		GDG DevFest				Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
 		Corporate	Go			Hootsuite				Vancouver, Canada		November	Bill Kennedy
-		Corporate	Go			CISCO 					San Jose, CA 			November	Cory LaNou
 		Corporate	Go			Viacom					NYC, NY					December	Bill Kennedy		
+		
+		Type		Type		Venue					City, ST				Month		Trainer				Url
+		================================================================================================================
+		Corporate	Go			Salesforce 				Dublin, Ireland 		April		Kevin Gillette
+		Public		Go			dotGo					Paris, France			October		Ernesto Jimenez
+		Public		Data		GDG DevFest				Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
 		Corporate	Go			Intel					Zapopan, Mexico			December	Ernesto Jimenez		
 
 ### Past Years
