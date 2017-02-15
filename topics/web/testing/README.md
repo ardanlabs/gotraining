@@ -24,6 +24,6 @@ https://golang.org/doc/articles/wiki/
 
 ### Exercise 1
 
-Write a simple web service that has a set of different routes that return the string "Hello World" in multiple languages. Build the service using an Application context that will own the different handler methods. Then create your own mux, bind the routes and start the service. Validate your routes work in your browser.
+Write tests that exercise the different endpoints of the "Hello world" language exercise from [the basics](../basics/README.md).
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
