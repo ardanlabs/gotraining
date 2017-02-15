@@ -24,6 +24,8 @@ https://golang.org/doc/articles/wiki/
 
 ### Exercise 1
 
-Write tests that exercise the different endpoints of the "Hello world" language exercise from [the basics](../basics/README.md).
+Write tests that exercise the different endpoints of the "Hello world" language
+exercise from [the basics](../basics/README.md). Do this by combining the mux
+with the defined routes with a `httptest.NewServer`.
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
