@@ -63,6 +63,21 @@ _**Video**_
 _**Podcasts**_  
 [Go Time - Episode 4](https://changelog.com/gotime/4)    
 
+### Jacob Walker ([@jcbwlkr](https://twitter.com/jcbwlkr))  
+Jacob is a software developer, consultant, community organizer, and has really nice hair. Like ridiculously nice hair. He started his career creating web applications in PHP, Ruby, and Node.js. When he discovered Go he dove in deep and hasn't regretted it for a minute. Coming from the thriving metropolis of Wichita, Kansas he organizes the [devICT](https://devict.org/) community whose mission is to "Educate, Empower, and Connect software developers in the Wichita area". Jacob also works closely with [Women Who Code Wichita](https://www.meetup.com/WWCWichita/), [Open Wichita](http://openwichita.com/), [MakeICT](http://makeict.org/), and [Kansas Linux Fest](http://kansaslinuxfest.org/). When he isn't working or organizing Jacob is spending time with his wife and three kids, staying up too late with video games, cooking, or playing Dungeons and Dragons.
+
+_**Writing**_  
+[Jacob Walker's blog](http://www.jacob-walker.com/)  
+
+_**Video**_  
+[An Informal Intro to Docker](https://www.youtube.com/watch?v=xYNJ_IAj35Q)  
+[Women Who Code Intro To Go Workshop](https://www.youtube.com/watch?v=gDxSiKNk0Pw)  
+[Getting Started with Go](https://www.youtube.com/watch?v=zVvjpLu6iIo)  
+[Vim and Emacs Chat: Part 1: Vim](https://www.youtube.com/watch?v=SaGgc8xnO1U)  
+[Regular Expressions 101](https://www.youtube.com/watch?v=4LnyHF8dnIk)  
+[Implementing OOP (Ruby and PHP)](https://www.youtube.com/watch?v=7QoEfPYULXM)  
+[Templating In PHP With Twig](https://www.youtube.com/watch?v=deqGYV8P0Nc)  
+
 ### John Gosset ([@jgosset_](https://twitter.com/jgosset_))  
 John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
 
