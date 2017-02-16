@@ -11,7 +11,7 @@ import (
 	"testing"
 )
 
-// MyHandler is provide support for mocking the GET call.
+// MyHandler is the application handler we want to test.
 func MyHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Hello World!")
 }

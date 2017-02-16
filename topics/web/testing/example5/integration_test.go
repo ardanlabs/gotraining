@@ -22,7 +22,7 @@ func (a App) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Hello World!")
 }
 
-func Test_MyHandler(t *testing.T) {
+func Test_IntegrationApp(t *testing.T) {
 
 	// Start a server to call the handler through
 	// the application value.

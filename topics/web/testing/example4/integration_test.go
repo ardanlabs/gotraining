@@ -13,19 +13,19 @@ import (
 	"testing"
 )
 
-// MyHandler is provide support for mocking the GET call.
+// MyHandler is the application handler we want to test.
 func MyHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Hello World!")
 }
 
-func Test_MyHandler(t *testing.T) {
+func Test_IntegrationHandler(t *testing.T) {
 
-	// Start a server to call the handler through a
-	// GET call.
+	// Start an actual server that serves our handler.
 	ts := httptest.NewServer(http.HandlerFunc(MyHandler))
 	defer ts.Close()
 
-	// Call the handler through the server's URL.
+	// Call the handler through the server's URL. This makes
+	// an actual GET request.
 	res, err := http.Get(ts.URL)
 	if err != nil {
 		t.Fatal(err)

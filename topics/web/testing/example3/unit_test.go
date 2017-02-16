@@ -12,19 +12,19 @@ import (
 	"testing"
 )
 
-// HelloHandler is provide support for mocking the GET call.
+// HelloHandler is one of the handlers in our application.
 func HelloHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Hello World!")
 }
 
-// GoodbyeHandler is provide support for mocking the GET call.
+// GoodbyeHandler is the application handler we want to test.
 func GoodbyeHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Goodbye Cruel World!")
 }
 
-func Test_MyHandler(t *testing.T) {
+func Test_GoodbyeMux(t *testing.T) {
 
-	// Create a new request.
+	// Create a new request for the /goodbye path.
 	req := httptest.NewRequest("GET", "http://example.com/goodbye", nil)
 
 	// Create a new ResponseRecorder which implements
