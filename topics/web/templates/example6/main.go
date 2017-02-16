@@ -38,7 +38,7 @@ type User struct {
 }
 
 // FullName provides template support for formatting
-// data within the processingn of the template.
+// data within the processing of the template.
 func (u User) FullName() string {
 	return fmt.Sprintf("%s %s", u.First, u.Last)
 }
@@ -72,7 +72,7 @@ func Exec(w io.Writer) error {
 	}
 
 	// Execute the parsed template writing the output to
-	// the writer. Pass the user value for proecssing.
+	// the writer. Pass the user value for processing.
 	return t.Execute(w, u)
 }
 

@@ -29,7 +29,7 @@ func Exec(w io.Writer) error {
 	}
 
 	// Execute the parsed template writing the output to
-	// the writer. Pass the input data for proecssing.
+	// the writer. Pass the input data for processing.
 	return t.Execute(w, "World")
 }
 

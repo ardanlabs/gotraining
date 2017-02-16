@@ -45,7 +45,7 @@ func Exec(w io.Writer) error {
 	}
 
 	// Execute the parsed template writing the output to
-	// the writer. Pass the user value for proecssing.
+	// the writer. Pass the user value for processing.
 	return t.Execute(w, u)
 }
 

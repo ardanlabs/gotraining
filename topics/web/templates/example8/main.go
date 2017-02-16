@@ -23,12 +23,12 @@ func App() http.Handler {
 	// Create a new mux for this service.
 	m := http.NewServeMux()
 
-	// Create a rice box for our static folder. These assest
+	// Create a rice box for our static folder. These assets
 	// are now cached into memory.
 	box := rice.MustFindBox("./static")
 
 	// Bind the rice box into the http FileServer and create a
-	// route for these assests under an imaginary assets folder.
+	// route for these assets under an imaginary assets folder.
 	assets := http.StripPrefix("/assets/", http.FileServer(box.HTTPBox()))
 	m.Handle("/assets/", assets)
 
@@ -43,7 +43,6 @@ func App() http.Handler {
 
 func main() {
 
-	// Start the http server to handle the request for
-	// both versions of the API.
+	// Start the http server to serve our App
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }
