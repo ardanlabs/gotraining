@@ -28,6 +28,7 @@ func TestExec(t *testing.T) {
 	want := strings.TrimSpace(`
 <h1>Mary Smith</h1>
 <h2>MARY SMITH</h2>
+Created: 2017-02-14T12:00:00Z
 
 Aliases:
 <ul>
@@ -36,7 +37,7 @@ Aliases:
 	
 </ul>`)
 
-	// NOTE: The above test string has a TAB on line 36
+	// NOTE: The above test string has a TAB on line 37
 	//       to match the HTML string being produced.
 
 	if got != want {

@@ -20,6 +20,7 @@ import (
 var html = `
 <h1>{{.FullName}}</h1>
 <h2>{{.FullName | upper}}</h2>
+Created: {{.CreatedAt | fdate}}
 
 Aliases:
 <ul>
@@ -52,7 +53,7 @@ func Exec(w io.Writer) error {
 	funcs := template.FuncMap{
 		"upper": strings.ToUpper,
 		"fdate": func(t time.Time) string {
-			return t.Format(time.RubyDate)
+			return t.Format(time.RFC3339)
 		},
 	}
 
@@ -67,7 +68,7 @@ func Exec(w io.Writer) error {
 	u := User{
 		First:     "Mary",
 		Last:      "Smith",
-		CreatedAt: time.Now(),
+		CreatedAt: time.Date(2017, time.February, 14, 12, 0, 0, 0, time.UTC),
 		Aliases:   []string{"Scarface", "MC Skat Kat"},
 	}
 
