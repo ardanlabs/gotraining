@@ -22,6 +22,8 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
+**_"Polymorphsim means that you write a certain program and it behaves differently depending on the data that it operates on." - Tom Kurtz (inventor of BASIC)_**
+
 [Polymorphism](example1/example1.go) ([Go Playground](https://play.golang.org/p/Uag9qj7Pu5))  
 [Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/4R3_QVKNli))  
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/hJtuUbNICG))  

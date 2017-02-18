@@ -132,6 +132,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)  
 [You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
 [Latency Tip Of The Day](http://latencytipoftheday.blogspot.com/) -- Gil Tene  
+[Proposal: Monotonic Elapsed Time Measurements in Go](https://github.com/golang/proposal/blob/master/design/12914-monotonic.md) - Russ Cox  
 
 ## Mechanical Sympathy
 

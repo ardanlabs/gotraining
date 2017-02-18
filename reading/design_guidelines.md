@@ -2,6 +2,8 @@
 
 You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
 
+---
+
 ### Prepare Your Mind
 
 **Somewhere Along The Line**  
@@ -23,6 +25,8 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * Technology changes quickly but people's minds change slowly.
 * Easy to adopt new technology but hard to adopt new ways of thinking.
 
+---
+
 ### Performance vs Productivity
 
 Performance and productivity both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is out pacing the hardware’s ability to make them faster.
@@ -39,13 +43,16 @@ _"The hardware folks will not put more cores into their hardware if the software
 
 _"C is the best balance I've ever seen between power and expressiveness. You can do almost anything you want to do by programming fairly straightforwardly and you will have a very good mental model of what's going to happen on the machine; you can predict reasonably well how quickly it's going to run, you understand what's going on .... - Brian Kernighan_
 
+---
+
 ### Guidelines, Decision Making and Trade-Offs
 
 Develop your design philosophy around these three major categories in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
 **_Note: There are exceptions to everything but when you are not sure an exception applies, follow the guidelines presented the best you can._** 
 
-**1) Integrity**  
+#### 1) Integrity
+
 **_We need to become very serious about reliability._**
 
 There are two driving forces behind integrity:  
@@ -101,7 +108,8 @@ Resources:
 [Ratio of bugs per line of code](https://www.mayerdan.com/ruby/2012/11/11/bugs-per-line-of-code-ratio) - Dan Mayer  
 [Masterminds of Programming](http://dl.acm.org/citation.cfm?id=1592983) - Federico Biancuzzi and Shane Warden  
 
-**2) Readability**   
+#### 2) Readability
+
 **_We must structure our systems to be more comprehensible._**  
 **_Readability means reliability._**
 
@@ -109,21 +117,23 @@ This is about writing simple code that is easy to read and understand without th
 
 In Go, the underlying machine is the real machine rather than a single abstract machine. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
 
-_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_
+**_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_**
 
-[Example of classic readability issues](http://codepad.org/Xw7eUSSA)  
+[Example Readability Issue](http://codepad.org/Xw7eUSSA)  
 
-**3) Simplicity**  
+#### 3) Simplicity
+
 **_We must understand that simplicity is hard to design and complicated to build._**  
 
 This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Validate that abstractions are not generalized or even too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
 
-_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup (inventor of C++)_
+**_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup (inventor of C++)_**
 
 Resources:  
 [Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
 
-**4) Performance**  
+#### 4) Performance
+
 **_We must compute less to get the results we need._**
 
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
@@ -132,11 +142,19 @@ Rules of Performance:
     * Never guess about performance.  
     * Measurements must be relevant.  
     * Profile before you decide something is performance critical.  
-    * Test to know you are correct. 
+    * Test to know you are correct.
+
+[Example Benchmark](https://github.com/ardanlabs/gotraining/blob/master/topics/testing/benchmarks/basic/basic_test.go)  
+
+**_"When we're computer programmers we're concentrating on the intricate little fascinating details of programming and we don't take a broad engineering point of view about trying to optimize the total system. You try to optimize the bits and bytes." - Tom Kurtz (inventor of BASIC)_**
+
+#### 5) Micro-Optimizations
 
 Micro-Optimizations are about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
-[Example of a micro optimization](https://play.golang.org/p/D_bImirgXL)
+[Example Micro Optimization](https://play.golang.org/p/D_bImirgXL)
+
+---
 
 ### Data-Oriented Design
 
@@ -156,6 +174,8 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 Resources:  
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
 [Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
+
+---
 
 ### Interface And Composition Design
 
@@ -181,6 +201,8 @@ Resources:
 [Composition with Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
 [Reducing type hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy
 
+---
+
 ### Interface Pollution
 
 Declare an interface when:  
@@ -199,6 +221,8 @@ Resources:
 [Application Focused API Design](https://www.goinggo.net/2016/11/application-focused-api-design.html) - William Kennedy  
 [Avoid interface pollution](https://www.goinggo.net/2016/10/avoid-interface-pollution.html) - William Kennedy  
 
+---
+
 ### Package-Oriented Design
 
 * Start with a Project that contains all the source code you need to build the products and services the Project owns.
@@ -214,7 +238,9 @@ Resources:
 Resources:  
 Coming Soon
 
-### Writing Concurrent Software
+---
+
+### Concurrent Software Design
 
 **_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
@@ -257,7 +283,9 @@ Both you and the runtime have a responsibility in managing the concurrency of th
     * Stop the bleeding.
     * Return the system back to a normal state.
 
-### Channels
+---
+
+### Channel Design
 
 **_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
 
@@ -288,6 +316,8 @@ Channels allow goroutines to communicate with each other through the use of sign
 * NIL channels:
     * Turn off signaling
     * Perfect for rate limiting or short term stoppages.
+
+---
 
 ### Channel Semantics
 
