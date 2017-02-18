@@ -8,8 +8,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/db"
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/web"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 )
 
 // Mongo initializes the master session and wires in the connection middleware.

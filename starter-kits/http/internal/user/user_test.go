@@ -7,7 +7,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/kit/db"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 )
 
