@@ -38,8 +38,9 @@ _**Video**_
 [Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
 [London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
 [GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
-[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
-[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)    
+[Bangalore Meetup (2015) - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
+[Vancouver Meetup (2016) - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)  
+[Chicago Meetup (2016) - An Evening](https://vimeo.com/199832344)  
 
 _**Podcasts**_  
 [Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
