@@ -10,10 +10,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/ardanlabs/gotraining/topics/web/customer"
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
+
+	"github.com/ardanlabs/gotraining/topics/web/customer"
 )
 
 // App loads the entire API set together for use.
@@ -29,7 +29,7 @@ func App() http.Handler {
 	// context type in the request for later.
 	r.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
 		return func(ctx echo.Context) error {
-			ctx.Request().Header().Set("Content-Type", "application/json")
+			ctx.Request().Header.Set("Content-Type", "application/json")
 			return h(ctx)
 		}
 	})
@@ -44,12 +44,7 @@ func App() http.Handler {
 		return ctx.Redirect(http.StatusMovedPermanently, "/customers")
 	})
 
-	// Create a standard echo server and bind
-	// the echo mux as the handler.
-	st := standard.New("")
-	st.SetHandler(r)
-
-	return st
+	return r
 }
 
 // indexHandler returns the entire list of customers in the DB.
