@@ -98,7 +98,10 @@ func testPostGet(ts *httptest.Server) func(*testing.T) {
 		}
 
 		// Set up a second GET request.
-		req := httptest.NewRequest("GET", ts.URL, nil)
+		req, err := http.NewRequest("GET", ts.URL, nil)
+		if err != nil {
+			t.Fatal(err)
+		}
 
 		// Copy the cookies over into the new request
 		// for the call.

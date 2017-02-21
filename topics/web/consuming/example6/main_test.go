@@ -30,7 +30,10 @@ func TestApp(t *testing.T) {
 	t.Run("without signature", func(st *testing.T) {
 
 		// Create a new request for the POST call with our payload.
-		req := httptest.NewRequest("POST", ts.URL, bytes.NewReader(payload))
+		req, err := http.NewRequest("POST", ts.URL, bytes.NewReader(payload))
+		if err != nil {
+			t.Fatal(err)
+		}
 
 		// Create a Client and perform the POST call.
 		var client http.Client
@@ -58,7 +61,10 @@ func TestApp(t *testing.T) {
 		for _, tt := range table {
 
 			// Create a new request for the POST call with our payload.
-			req := httptest.NewRequest("POST", ts.URL, bytes.NewReader(payload))
+			req, err := http.NewRequest("POST", ts.URL, bytes.NewReader(payload))
+			if err != nil {
+				t.Fatal(err)
+			}
 
 			// Create a Client using our custom transporter. Provide
 			// the shared secret.
