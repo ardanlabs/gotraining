@@ -62,9 +62,12 @@ func PostHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Write this formatted string into the response.
-	fmt.Fprintf(res, "First Name: %s\nLast Name: %s",
+	fmt.Fprintf(
+		res,
+		"First Name: %s\nLast Name: %s",
 		req.Form.Get("FirstName"),
-		req.Form.Get("LastName"))
+		req.Form.Get("LastName"),
+	)
 }
 
 func main() {

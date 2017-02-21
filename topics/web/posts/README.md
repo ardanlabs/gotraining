@@ -5,7 +5,7 @@ Learn the basics of making POST calls and working with multipart form data.
 ## Notes
 
 * The standard library has much of what you need to build services and apps.
-* The http package provides the building blocks.
+* The `net/http` package provides the building blocks.
 * There are other great packages in the Go ecosystem to help.
 
 ## Links
