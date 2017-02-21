@@ -71,7 +71,7 @@ func showHandler(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	// Retreive that customer from the DB.
+	// Retrieve that customer from the DB.
 	c, err := customer.Find(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err.Error())

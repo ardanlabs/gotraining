@@ -78,7 +78,7 @@ func main() {
 		// start a timer for this request
 		begin := time.Now()
 		
-		// Retreive the site
+		// Retrieve the site
 		if _, err := http.Get(site); err != nil {
 			fmt.Println(site, err)
 			continue
@@ -148,7 +148,7 @@ func main() {
 			
 			begin := time.Now()
 			
-			// Retreive the site
+			// Retrieve the site
 			if _, err := http.Get(site); err != nil {
 				fmt.Println(site, err)
 				continue
