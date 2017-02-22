@@ -141,10 +141,12 @@ If you are interested in holding an event in your area please let me know. We wi
 		Public 		Go 			1up Events 				San Francisco, CA		April 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
 		GoBridge	Go 			Framingham 				Framingham, MA			April 		Bill Kennedy 		TBA
 		Conference	Adv Go 		Capital Golang	 		Washington, D.C. 		April 		Bill Kennedy 		http://capitalgolang.com
+		Corporate	Go			Capital One				SF, CA		 			May		 	Bill Kennedy
+		Public 		Go 			Skillsmatter			London, England			May 		Ernesto Jimenez 	https://skillsmatter.com/courses/563-ardanlabs-ultimate-go-workshop
 		Public 		Go 			The Lab		 			Miami, FL 				May 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-miami-may-2017-tickets-32131447023
 		Conference	Go 			Singapore Conference 	Singapore				May 		Bill Kennedy 		http://gophercon.sg/workshop
-		Public 		Go 			Skillsmatter			London, England			May 		Ernesto Jimenez 	https://skillsmatter.com/courses/563-ardanlabs-ultimate-go-workshop
 		Public 		Go 			bol.com		 			Utrecht, Netherlands 	June 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-netherlands-june-2017-tickets-32131027769
+		GoBridge	Go 			Google 					Brazil					June		Bill Kennedy 		TBA
 		Conference	Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
 
 		Type		Type		Venue					City, ST				Month		Trainer				Url
