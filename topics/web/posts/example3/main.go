@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to handle forms with JSON.
+// Sample program to show how to decode forms into structs.
 package main
 
 import (
@@ -70,7 +70,7 @@ func PostHandler(res http.ResponseWriter, req *http.Request) {
 	// Create a user value.
 	var u User
 
-	// Decode the JSON from the Post data to the User value.
+	// Decode the form data into the User value.
 	if err := schema.NewDecoder().Decode(&u, req.PostForm); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return

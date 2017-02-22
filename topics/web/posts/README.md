@@ -17,7 +17,7 @@ https://golang.org/doc/articles/wiki/
 
 Basic POST: [Code](example1/main.go) | [Test](example1/main_test.go)  
 Simple Form: [Code](example2/main.go) | [Test](example2/main_test.go)  
-Form With JSON: [Code](example3/main.go) | [Test](example3/main_test.go)  
+Structured Form Parsing: [Code](example3/main.go) | [Test](example3/main_test.go)  
 Multipart Forms: [Code](example4/main.go) | [Test](example4/main_test.go)  
 
 ## Exercises
