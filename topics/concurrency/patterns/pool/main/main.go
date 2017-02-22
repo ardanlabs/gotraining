@@ -13,7 +13,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ardanlabs/gotraining/topics/concurrency_patterns/pool"
+	"github.com/ardanlabs/gotraining/topics/concurrency/patterns/pool"
 )
 
 const (
