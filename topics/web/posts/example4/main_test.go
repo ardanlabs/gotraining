@@ -115,7 +115,10 @@ func testPost(ts *httptest.Server) func(*testing.T) {
 
 		// Create a POST request using the bytes buffer as
 		// the post data.
-		req := httptest.NewRequest("POST", ts.URL+"/upload", &bb)
+		req, err := http.NewRequest("POST", ts.URL+"/upload", &bb)
+		if err != nil {
+			t.Fatal(err)
+		}
 
 		// Set the content-type properly for this call.
 		req.Header.Set("Content-Type", writer.FormDataContentType())

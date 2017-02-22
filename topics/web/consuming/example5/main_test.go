@@ -54,7 +54,10 @@ func TestApp(t *testing.T) {
 	defer ts.Close()
 
 	// Create a new request for the GET call.
-	req := httptest.NewRequest("GET", ts.URL, nil)
+	req, err := http.NewRequest("GET", ts.URL, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	// Create a value of the custom transporter.
 	trans := customTransporter{

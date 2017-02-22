@@ -55,7 +55,7 @@ func showHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// Retreive that customer from the DB.
+	// Retrieve that customer from the DB.
 	c, err := customer.Find(id)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusNotFound)

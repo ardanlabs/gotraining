@@ -12,10 +12,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/ardanlabs/gotraining/topics/web/customer"
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
+
+	"github.com/ardanlabs/gotraining/topics/web/customer"
 )
 
 // render contains a pointer to the templates.
@@ -38,7 +38,7 @@ func App() http.Handler {
 	r.Use(middleware.Logger())
 
 	// Load the customer templates.
-	r.SetRenderer(&render{customer.T})
+	r.Renderer = &render{customer.T}
 
 	// Define the routes and order matters.
 	r.GET("/customers/:id", showHandler)
@@ -47,12 +47,7 @@ func App() http.Handler {
 
 	r.GET("/", indexHandler)
 
-	// Create an echo server binding the
-	// echo router.
-	st := standard.New("")
-	st.SetHandler(r)
-
-	return st
+	return r
 }
 
 // indexHandler returns the entire list of customers in the DB.
