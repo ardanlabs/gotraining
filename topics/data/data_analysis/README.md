@@ -4,7 +4,7 @@ Data analysis, and what is sometimes called "Data Science," uses Datasets to mak
 
 ## Design, Mechanics and Philoshopy
 
-[The Design, Mechanics and Philoshopy of Data Analysis](design_philosophy.md)   
+[The Design, Mechanics and Philoshopy of Data Analysis](../README.md)   
 [The Data Science Bill Of Rights for Rigorous Data Analysis](http://www.pachyderm.io/dsbor.html)
 
 ## Practical Skills
