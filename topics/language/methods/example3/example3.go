@@ -36,7 +36,7 @@ func main() {
 	d.displayName()
 	d.setAge(45)
 
-	fmt.Println("\nWhat the Complier is Doing:")
+	fmt.Println("\nWhat the Compiler is Doing:")
 
 	// This is what Go is doing underneath.
 	data.displayName(d)
