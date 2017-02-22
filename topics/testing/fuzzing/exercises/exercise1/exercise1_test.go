@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	fuzzprot "github.com/ardanlabs/gotraining/topics/fuzzing/exercises/exercise1"
+	fuzzprot "github.com/ardanlabs/gotraining/topics/testing/fuzzing/exercises/exercise1"
 )
 
 const succeed = "\u2713"
