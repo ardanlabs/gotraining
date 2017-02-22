@@ -1,8 +1,10 @@
 # Data Analysis Design Philosophy
 
+[(see here for Data classes)](../../courses/data/README.md)
+
 ## What is data analysis?
 
-Data analysis uses Datasets to make **Decisions** that have **Actions** and **Consequences**.
+Data analysis uses Datasets to make **Decisions** that have corresponding **Actions** and **Consequences**.
 
 ## Prepare your mind
 
