@@ -6,7 +6,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/handlers"
+	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes/handlers"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/middleware"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 )
