@@ -68,13 +68,13 @@ func TestCallback(t *testing.T) {
 	}
 
 	// Get the cached session.
-	session, err := gothic.Store.Get(req, gothic.SessionName)
+	session, err := gothic.Store.Get(req, "faux"+gothic.SessionName)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// Marshal the fuz session for this test.
-	session.Values[gothic.SessionName] = sess.Marshal()
+	// Marshal the faux session for this test.
+	session.Values["faux"] = sess.Marshal()
 
 	// Save this session.
 	if err := session.Save(req, res); err != nil {
