@@ -146,11 +146,13 @@ func testPost(ts *httptest.Server) func(*testing.T) {
 		}
 		defer orig.Close()
 
-		// Read the image data into the slice.
-		var origBytes []byte
-		orig.Read(origBytes)
+		// Read the original image data
+		origBytes, err := ioutil.ReadAll(orig)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-		// Open the file we wrote to disk after the request.
+		// Open the file we expect the server to have written to disk.
 		upFile := path.Join(uploadDir, path.Base(img))
 		uploaded, err := os.Open(upFile)
 		if err != nil {
@@ -158,11 +160,13 @@ func testPost(ts *httptest.Server) func(*testing.T) {
 		}
 		defer uploaded.Close()
 
-		// Read the image data into the slice.
-		var upBytes []byte
-		uploaded.Read(upBytes)
+		// Read the new image data
+		upBytes, err := ioutil.ReadAll(uploaded)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-		// Validate we received the correct document.
+		// Validate the saved document is the same length
 		got := len(upBytes)
 		want := len(origBytes)
 		if got != want {
