@@ -6,17 +6,17 @@ This is material for any intermediate-level developer who has some experience wi
 
 [Design Document](../../go/README.md)
 
-## Language
+## Language Mechanics
 
 This material covers all the language syntax, idioms, implementation and specification of the language. Once you are done with this material you will understand the mechanics of the language and mechanical sympathies the language has for both the hardware and operating system. 
 
-[Language](language/README.md)
+[Language Mechanics](language/README.md)
 
-## API Design
+## Software Design
 
-This material covers the essential things you need to know about API design principles. Along the way you also learn about composition and error handling.
+This material covers the essential things you need to know about designing software in Go. Along the way you also learn about composition and error handling.
 
-[API](api/README.md)
+[Software Design](design/README.md)
 
 ## Concurrency
 
