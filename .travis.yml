@@ -1,0 +1,13 @@
+language: go
+
+go:
+  - tip
+
+# Install dependencies including test dependencies. We could just use `go get
+# -t ./...` but not all examples are meant to compile.
+install:
+  - find . -name "*_test.go" -exec dirname {} \; | uniq | xargs go get -t -v
+
+# Get a list of all directories with test files and test them.
+script:
+  - find . -name "*_test.go" -exec dirname {} \; | uniq | xargs go test
