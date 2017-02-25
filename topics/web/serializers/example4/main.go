@@ -27,10 +27,44 @@ type User struct {
 // can dictate how the user is marshaled.
 func (u *User) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 
-	// Create a slice of XML tokens for our document and a
-	// closure to add to it.
-	var tokens []xml.Token
-	addToken := func(key string, value []byte) {
+	// Call into MarshalText directly for the time value.
+	ca, err := u.CreatedAt.MarshalText()
+	if err != nil {
+		return err
+	}
+
+	// Create a document of key/value pairs for each field
+	m := map[string][]byte{
+		"first_name": []byte(u.FirstName),
+		"CreatedAt":  ca,
+		"Admin":      []byte(strconv.FormatBool(u.Admin)),
+		"Bio":        nil,
+	}
+
+	// Add the Bio value if we have one.
+	if u.Bio != nil {
+		m["Bio"] = []byte(*u.Bio)
+	}
+
+	// Omit the last name from the document unless
+	// we have a value.
+	if u.LastName != "" {
+		m["LastName"] = []byte(u.LastName)
+	}
+
+	// Create a slice of tokens starting with the element
+	// provided with the call.
+	tokens := []xml.Token{start}
+
+	// Range of the key/value pairs creating XML elements. We could just range
+	// over the map directly but we want to control the order of the elements.
+	keys := []string{"first_name", "LastName", "Admin", "Bio", "CreatedAt"}
+	for _, key := range keys {
+		value, ok := m[key]
+		if !ok {
+			continue
+		}
+
 		// Declare the starting element.
 		se := xml.StartElement{
 			Name: xml.Name{
@@ -48,36 +82,7 @@ func (u *User) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 		tokens = append(tokens, se, xml.CharData(value), ee)
 	}
 
-	// First append the starting token provided in the call to MarshalXML
-	// <User>
-	tokens = append(tokens, start)
-
-	// Add tokens for each piece of our User
-	addToken("first_name", []byte(u.FirstName))
-
-	// Omit the last name from the document unless we have a value.
-	if u.LastName != "" {
-		addToken("LastName", []byte(u.LastName))
-	}
-
-	addToken("Admin", []byte(strconv.FormatBool(u.Admin)))
-
-	// Add the Bio value if we have one. If not add an empty element.
-	var bio []byte
-	if u.Bio != nil {
-		bio = []byte(*u.Bio)
-	}
-	addToken("Bio", bio)
-
-	// Call into MarshalText directly for the time value.
-	ca, err := u.CreatedAt.MarshalText()
-	if err != nil {
-		return err
-	}
-	addToken("CreatedAt", ca)
-
-	// Finally append the ending element to match the start.
-	// </User>
+	// Append the final ending element with the slice.
 	tokens = append(tokens, xml.EndElement{Name: start.Name})
 
 	// Range over the tokens.
