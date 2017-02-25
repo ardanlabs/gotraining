@@ -1,12 +1,18 @@
-# Data Analysis Design Philosophy
+## Ultimate Data
 
-[(see here for Data classes)](../../courses/data/README.md)
+This is material for developers who have some experience with Go and statistics and want to learn how to work with data to make better decisions. We believe these classes are perfect for data analysts/scientists/engineers interested in working in Go or Go programmers interested in doing data analysis.
 
-## What is data analysis?
+[Ultimate Data](../../data/README.md)
+
+## Design Guidelines
+
+You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
+
+### What is data analysis?
 
 Data analysis uses Datasets to make **Decisions** that have corresponding **Actions** and **Consequences**.
 
-## Prepare your mind
+### Prepare your mind
 
 Every data analytics or data science project must begin by considering the:
 
@@ -27,7 +33,7 @@ Before and during any data analytics project, you must be able to answer the fol
 
 Remember, uncertainty is not a license to guess but a directive to stop.
 
-## Order of Operations
+### Order of Operations
 
 Data analytics projects should follow these steps in this order:
 
@@ -54,7 +60,7 @@ When the results don’t meet the expectations, ask yourself if modifying the de
     - Am I using the best data?
     - Are my expectations incorrect?
 
-## Guidelines, Decision Making and Trade-Offs
+### Guidelines, Decision Making and Trade-Offs
 
 Develop your design philosophy around these major categories in this order: Integrity, Value, Readability/Interpretability, and Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
