@@ -12,29 +12,29 @@ For a great talk/video that reinforces many of these ideas, see Andrew Gerrand's
 
 Easy to learn and reason about, trivial to machine-process.
 
-[Variables, Builtins, and Type Safety](https://play.golang.org/p/B5mjJKPYLh) ([Source](../../topics/language/variables/example1/example1.go))
+[Variables, Builtins, and Type Safety](https://play.golang.org/p/B5mjJKPYLh) ([Source](../../topics/go/language/variables/example1/example1.go))
 
-[Constants](https://play.golang.org/p/OqJLBLhO7_) ([Source](../../topics/language/constants/example3/example3.go))
+[Constants](https://play.golang.org/p/OqJLBLhO7_) ([Source](../../topics/go/language/constants/example3/example3.go))
 
-[Structs](https://play.golang.org/p/TEmOrIxl_P) ([Source](../../topics/language/struct_types/example1/example1.go))
+[Structs](https://play.golang.org/p/TEmOrIxl_P) ([Source](../../topics/go/language/struct_types/example1/example1.go))
 
 ## Pointers and Reference Types
 
 Safe and simple. Strings and slices solve many traditional pointer use-cases.
 
-[Arrays](https://play.golang.org/p/wUzREuHhLY) ([Source](../../topics/language/arrays/example1/example1.go))
+[Arrays](https://play.golang.org/p/wUzREuHhLY) ([Source](../../topics/go/language/arrays/example1/example1.go))
 
-[Slices](https://play.golang.org/p/Okc2EZG5_M) ([Source](../../topics/language/slices/example3/example3.go))
+[Slices](https://play.golang.org/p/Okc2EZG5_M) ([Source](../../topics/go/language/slices/example3/example3.go))
 
-[Appending](https://play.golang.org/p/3WKISOXA-L) ([Source](../../topics/language/slices/exercises/exercise1/exercise1.go))
+[Appending](https://play.golang.org/p/3WKISOXA-L) ([Source](../../topics/go/language/slices/exercises/exercise1/exercise1.go))
 
-[Strings](https://play.golang.org/p/x0Q5ByzxGS) ([Source](../../topics/language/slices/example6/example6.go))
+[Strings](https://play.golang.org/p/x0Q5ByzxGS) ([Source](../../topics/go/language/slices/example6/example6.go))
 
-[Variadic Functions](https://play.golang.org/p/aTGRT1rhoO) ([Source](../../topics/language/slices/example7/example7.go))
+[Variadic Functions](https://play.golang.org/p/aTGRT1rhoO) ([Source](../../topics/go/language/slices/example7/example7.go))
 
-[Maps](https://play.golang.org/p/B2klwmqmPZ) ([Source](../../topics/language/maps/example2/example2.go))
+[Maps](https://play.golang.org/p/B2klwmqmPZ) ([Source](../../topics/go/language/maps/example2/example2.go))
 
-[Pointers](https://play.golang.org/p/6GUcA7-x3j) ([Source](../../topics/language/pointers/example2/example2.go))
+[Pointers](https://play.golang.org/p/6GUcA7-x3j) ([Source](../../topics/go/language/pointers/example2/example2.go))
 
 [Peano Pointers](https://play.golang.org/p/7XdrgbTfZn) ([Source](https://golang.org/doc/play/peano.go)) *
 
@@ -42,21 +42,21 @@ Safe and simple. Strings and slices solve many traditional pointer use-cases.
 
 Allow your code to grow gracefully without you.
 
-[Methods](https://play.golang.org/p/nxAwTRWk4N) ([Source](../../topics/language/methods/example1/example1.go))
+[Methods](https://play.golang.org/p/nxAwTRWk4N) ([Source](../../topics/go/language/methods/example1/example1.go))
 
 [Fibonacci Closures](https://play.golang.org/p/A0nH96VB4S) ([Source](https://golang.org/doc/play/fib.go)) *
 
-[First-Class Methods](https://play.golang.org/p/UP7qzHN-Au) ([Source](../../topics/language/methods/example3/example3.go))
+[First-Class Methods](https://play.golang.org/p/UP7qzHN-Au) ([Source](../../topics/go/language/methods/example3/example3.go))
 
-[Interfaces](https://play.golang.org/p/06fecJbfE4) ([Source](../../topics/language/interfaces/exercises/exercise1/exercise1.go))
+[Interfaces](https://play.golang.org/p/06fecJbfE4) ([Source](../../topics/go/language/interfaces/exercises/exercise1/exercise1.go))
 
 ## Embedding and Composition
 
 An extension/wrapping mechanism based on composition, not inheritance.
 
-[Embedding](https://play.golang.org/p/QncBd6A5A4) ([Source](../../topics/language/embedding/example2/example2.go))
+[Embedding](https://play.golang.org/p/QncBd6A5A4) ([Source](../../topics/go/language/embedding/example2/example2.go))
 
-[Embedding and Interfaces](https://play.golang.org/p/vMEEJ7rOb4) ([Source](../../topics/language/embedding/example3/example3.go))
+[Embedding and Interfaces](https://play.golang.org/p/vMEEJ7rOb4) ([Source](../../topics/go/language/embedding/example3/example3.go))
 
 [Composition](https://play.golang.org/p/ufFSFxCdEs) ([Source](../../topics/api/composition/example4/example4.go))
 
@@ -74,7 +74,7 @@ Goroutines and channels for convenient and safe concurrent algorithms.
 
 Excellent value for its volume. I/O is especially powerful.
 
-[Packages](../../topics/language/exporting/example5/example5.go) and [Exporting](../../topics/language/exporting/example5/users/users.go)
+[Packages](../../topics/go/language/exporting/example5/example5.go) and [Exporting](../../topics/go/language/exporting/example5/users/users.go)
 
 [Errors](https://play.golang.org/p/aSjTxzNfP2) ([Source](../../topics/api/error_handling/example1/example1.go))
 

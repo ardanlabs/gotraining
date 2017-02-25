@@ -136,7 +136,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ## Mechanical Sympathy
 
-Much of this content can be found under [arrays](../topics/language/arrays) and [data races](../topics/concurrency/data_race). We feel this content is so important it has been moved out to this general materials page.
+Much of this content can be found under [arrays](../topics/go/language/arrays) and [data races](../topics/concurrency/data_race). We feel this content is so important it has been moved out to this general materials page.
 
 #### CPU Caches / Memory
 
@@ -175,7 +175,7 @@ Much of this content can be found under [arrays](../topics/language/arrays) and 
 
 ## Runtime
 
-This content can be found under [pointers](../topics/language/pointers). We feel this content is so important it has been moved out to this general materials page.
+This content can be found under [pointers](../topics/go/language/pointers). We feel this content is so important it has been moved out to this general materials page.
 
 #### Stacks
 
