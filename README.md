@@ -1,6 +1,6 @@
 ## Go Training
 
-[Review our different courses and material](courses/README.md)  
+[Review our different courses and material](topics/README.md)  
 
 **To learn about Corporate training events, options and special pricing please contact:**
 
