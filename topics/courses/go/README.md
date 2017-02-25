@@ -28,7 +28,7 @@ This material covers all the concurrency aspects of the language. Once you are d
 
 This material covers a good portion of the tooling that comes with go. Specifically we cover testing and benchmarking. We also cover profiling memory and the scheduler. Finally we learn how to read stack traces.
 
-[Tooling](tooling/README.md)
+[Testing and Profiling](tooling/README.md)
 
 ## Packages
 
