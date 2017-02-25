@@ -10,7 +10,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/topics/fuzzing/example1"
+	"github.com/ardanlabs/gotraining/topics/go/testing/fuzzing/example1"
 )
 
 const succeed = "\u2713"
