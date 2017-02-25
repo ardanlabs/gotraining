@@ -2,7 +2,7 @@
 
 This is material for developers who have some experience with Go and statistics and want to learn how to work with data to make better decisions. We believe these classes are perfect for data analysts/scientists/engineers interested in working in Go or Go programmers interested in doing data analysis.
 
-[Ultimate Data](../../data/README.md)
+[Ultimate Data](../../courses/data/README.md)
 
 ## Design Guidelines
 
