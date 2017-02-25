@@ -26,22 +26,9 @@ func TestEncodeZeroValueUser(t *testing.T) {
 
 	// Validate we received the expected response.
 	got := strings.TrimSpace(bb.String())
-	want := []string{
-		`<User><first_name></first_name><CreatedAt>0001-01-01T00:00:00Z</CreatedAt><Admin>false</Admin><Bio></Bio></User>`,
-		`<User><Bio></Bio><first_name></first_name><CreatedAt>0001-01-01T00:00:00Z</CreatedAt><Admin>false</Admin></User>`,
-		`<User><Admin>false</Admin><Bio></Bio><first_name></first_name><CreatedAt>0001-01-01T00:00:00Z</CreatedAt></User>`,
-		`<User><CreatedAt>0001-01-01T00:00:00Z</CreatedAt><Admin>false</Admin><Bio></Bio><first_name></first_name></User>`,
-	}
+	want := `<User><first_name></first_name><Admin>false</Admin><Bio></Bio><CreatedAt>0001-01-01T00:00:00Z</CreatedAt></User>`
 
-	var found bool
-	for _, w := range want {
-		if got == w {
-			found = true
-			break
-		}
-	}
-
-	if !found {
+	if got != want {
 		t.Log("Wanted:", want)
 		t.Log("Got   :", got)
 		t.Fatal("Mismatch")
@@ -71,22 +58,9 @@ func TestEncodeUser(t *testing.T) {
 
 	// Validate we received the expected response.
 	got := strings.TrimSpace(bb.String())
-	want := []string{
-		`<User><first_name>Mary</first_name><CreatedAt>0001-01-01T00:00:00Z</CreatedAt><Admin>false</Admin><Bio>An Awesome Coder!</Bio><LastName>Jane</LastName></User>`,
-		`<User><Admin>false</Admin><Bio>An Awesome Coder!</Bio><LastName>Jane</LastName><first_name>Mary</first_name><CreatedAt>0001-01-01T00:00:00Z</CreatedAt></User>`,
-		`<User><CreatedAt>0001-01-01T00:00:00Z</CreatedAt><Admin>false</Admin><Bio>An Awesome Coder!</Bio><LastName>Jane</LastName><first_name>Mary</first_name></User>`,
-		`<User><Bio>An Awesome Coder!</Bio><LastName>Jane</LastName><first_name>Mary</first_name><CreatedAt>0001-01-01T00:00:00Z</CreatedAt><Admin>false</Admin></User>`,
-	}
+	want := `<User><first_name>Mary</first_name><LastName>Jane</LastName><Admin>false</Admin><Bio>An Awesome Coder!</Bio><CreatedAt>0001-01-01T00:00:00Z</CreatedAt></User>`
 
-	var found bool
-	for _, w := range want {
-		if got == w {
-			found = true
-			break
-		}
-	}
-
-	if !found {
+	if got != want {
 		t.Log("Wanted:", want)
 		t.Log("Got   :", got)
 		t.Fatal("Mismatch")

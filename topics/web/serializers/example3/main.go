@@ -6,6 +6,7 @@ package main
 
 import (
 	"encoding/xml"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -29,6 +30,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println()
 
 	// Create a user value for Mary Jane.
 	u := User{

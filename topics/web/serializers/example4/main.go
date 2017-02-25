@@ -56,8 +56,14 @@ func (u *User) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	// provided with the call.
 	tokens := []xml.Token{start}
 
-	// Range of the key/value pairs creating XML elements.
-	for key, value := range m {
+	// Range of the key/value pairs creating XML elements. We could just range
+	// over the map directly but we want to control the order of the elements.
+	keys := []string{"first_name", "LastName", "Admin", "Bio", "CreatedAt"}
+	for _, key := range keys {
+		value, ok := m[key]
+		if !ok {
+			continue
+		}
 
 		// Declare the starting element.
 		se := xml.StartElement{
