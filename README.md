@@ -263,8 +263,6 @@ git clone https://github.com/ardanlabs/gotraining.git
 
 ## Starter Material
   
-[Quick Tour](courses/quick_tour)
-  
 http://golang.org/  
 https://tour.golang.org/welcome/1  
 http://www.goinggo.net/

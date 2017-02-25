@@ -3,7 +3,7 @@ Channels allow goroutines to communicate with each other through the use of sign
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../../reading/design_guidelines.md#channels) for channels.
+* Learn about the [design guidelines](../../#design_guidelines.md#channels) for channels.
 
 ## Diagrams
 

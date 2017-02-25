@@ -22,8 +22,8 @@ This material covers all the language syntax, idioms, implementation and specifi
 [Interfaces](../../../go/language/interfaces/README.md) | 
 [Embedding](../../../go/language/embedding/README.md)
 
-#### Packaging / Exporting
-[Packaging/Exporting](../../../go/language/exporting/README.md)
+#### Exporting Identifiers
+[Exporting](../../../go/language/exporting/README.md)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

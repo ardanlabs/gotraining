@@ -107,7 +107,8 @@ Bjarne Stroustrup stated that writing more code than you need results in `Ugly`,
 * `Large`: Ensures incomplete tests.
 * `Slow`: Encourages the use of shortcuts and dirty tricks.
 
-Resources:  
+**Resources:**
+
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
@@ -137,7 +138,8 @@ This is about hiding complexity. A lot of care and design must go into simplicit
 
 **_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup (inventor of C++)_**
 
-Resources:  
+**Resources:**
+
 [Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
 
 #### 4) Performance
@@ -179,7 +181,8 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 * Changing data layouts can yield more significant performance improvements than changing just the algorithms.
 * Efficiency is obtained through algorithms but performance is obtained through data structures and layouts.
 
-Resources:  
+**Resources:**
+
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
 [Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth
 
@@ -204,7 +207,8 @@ Resources:
     * defends against fraud vs
     * protects against accidents
 
-Resources:  
+**Resources:**
+
 [Methods, interfaces and Embedding](https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
 [Composition with Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
 [Reducing type hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy
@@ -213,18 +217,19 @@ Resources:
 
 ### Interface Pollution
 
-Declare an interface when:  
+**Declare an interface when:**  
 * users of the API need to provide an implementation detail.
 * API’s have multiple implementations they need to maintain internally.
 * parts of the API that can change have been identified and require decoupling.
 
-Don't declare an interface:  
+**Don't declare an interface:**  
 * for the sake of using an interface.
 * to generalize an algorithm.
 * when users can declare their own interfaces.
 * if it's not clear how the ineterface makes the code better.
 
-Resources:  
+**Resources:**
+
 [Interface pollution in Go](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
 [Application Focused API Design](https://www.goinggo.net/2016/11/application-focused-api-design.html) - William Kennedy  
 [Avoid interface pollution](https://www.goinggo.net/2016/10/avoid-interface-pollution.html) - William Kennedy  
@@ -233,18 +238,57 @@ Resources:
 
 ### Package-Oriented Design
 
-* Start with a Project that contains all the source code you need to build the products and services the Project owns.
-* Maintain each Project in a single repo.
-* Only break a Project up when developer productivity is a cost.
-* Breaking a Project into multiple projects comes with extra dependency costs.
-* In many languages folders are used to organize code, in Go folders are used to organize API's (packages).
-* Packages in Go provide API boundaries that should focus on solving one specific problem or a highly focused group of problems.
-* You must understand how changes to the API for a particular package affects the other packages that depend on it.
-* Recognizing and minimizing cascading changes across different packages is a way to architect adaptability and stability in your software.
-* When dependencies between packages are weakened and the coupling loosened, cascading changes are minimized and stability is improved.
+**Design Philosophy:**
 
-Resources:  
-Coming Soon
+* Packaging directly conflicts with how we have been taught to organize source code in other languages.
+* In other languages, packaging is a feature that you can choose to use or ignore.
+* You can think of packaging as applying the idea of microservices on a source tree.
+* All packages are "first class," and the only hierarchy is what you define in the source tree for your project.
+* There needs to be a way to “open” parts of the package to the outside world.
+* Two packages can’t cross-import each other. Imports are a one way street. 
+
+**Package Design:**
+
+* To be purposeful, packages must provide, not contain.
+    * Packages must be named with the intent to describe what it provides.
+    * Packages must not become a dumping ground of disparate concerns.
+* To be usable, packages must be designed with the user as their focus.
+    * Packages must be intuitive and simple to use.
+    * Packages must respect their impact on resources and performance.
+    * Packages must protect the user’s application from cascading changes.
+    * Packages must prevent the need for type assertions to the concrete.
+    * Packages must reduce, minimize and simplify its code base.
+* To be portable, packages must be designed with reusability in mind.
+    * Packages must aspire for the highest level of portability.
+    * Packages must reduce taking on opinions when it’s reasonable and practical.
+    * Packages must not become a single point of dependency.
+
+**Package Oriented Design:**
+
+_Package Oriented Design allows a developer to identify where a package belongs inside a Go project and the design guidelines the package must respect. It defines what a Go project is and how a Go project is structured. Finally, it improves communication between team members and promotes clean package design and project architecture that is discussable._
+
+**Project Structure:**
+
+```
+Kit                     Application
+
+├── CONTRIBUTORS        ├── cmd/
+├── LICENSE             ├── internal/
+├── README.md           │   └── platform/
+├── cfg/                └── vendor/
+├── examples/
+├── log/
+├── pool/
+├── tcp/
+├── timezone/
+├── udp/
+└── web/
+```
+
+**Resources:**
+
+[Design Philosophy on Packaging](https://www.goinggo.net/2017/02/design-philosophy-on-packaging.html)  
+[Package Oriented Design](https://www.goinggo.net/2017/02/package-oriented-design.html)  
 
 ---
 

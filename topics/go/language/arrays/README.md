@@ -14,7 +14,7 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../../reading/design_guidelines.md#data-oriented-design) for data oriented design.
+* Learn about the [design guidelines](../../#data-oriented-design) for data oriented design.
 
 ## CPU Caches
 This content is provided by Scott Meyers from his talk in 2014 at Dive:

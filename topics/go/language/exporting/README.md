@@ -1,39 +1,17 @@
-## Packaging / Exporting
+## Exporting
 
-Packages contain the basic unit of compiled code. They define a scope for the identifiers that are declared within them. Learning how to package our code is vital because exported identifiers become part of the packages API. Stable and usable API's are incredibly important.
+Packages contain the basic unit of compiled code. They define a scope for the identifiers that are declared within them. Exporting is not the same as public and private semantics in other languages. But exporting is how we provide encapsulation in Go.
 
 ## Notes
 
 * Code in go is complied into packages and then linked together.
 * Identifiers are exported (or remain unexported) based on letter-case.
 * We import packages to access exported identifiers.
-* Any package can use a value of an unexported type.
-* Package design and understanding the components you need is critical.
-* Go has given up one feature (cyclic imports) in favor of another one (simple and correct initialization).
-
-## Design Guidelines
-
-* Learn about the [design guidelines](../../../reading/design_guidelines.md#package-oriented-design) for package oriented design.
+* Any package can use a value of an unexported type, but this is annoying to use.
 
 ## Links
 
-http://blog.golang.org/organizing-go-code  
-http://blog.golang.org/package-names  
 http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html  
-http://www.goinggo.net/2013/08/organizing-code-to-support-go-get.html  
-[Structuring Applications in Go](https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091#.xc85lg2kf) - Ben Johnson  
-
-## An Interview with Brian Kernighan
-
-http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html
-
-_Can you tell us about the worse features of C, from your point of view?_
-
-_I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help._ - July 2000
-
-## Design Guidelines
-
-* Learn about the [design guidelines](../../../reading/design_guidelines.md#package-oriented-design) for packaging.
 
 ## Code Review
 
