@@ -104,7 +104,7 @@ Here is more reading and videos to also help get you started.
 The **time** command provide information that can help you get a sense how your program is performing.
 
 Use the **time** command to see data about building the program.
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project
+	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project
 	/usr/bin/time -lp go build		-- Mac OS X
 	/usr/bin/time -v go build		-- Linux
 

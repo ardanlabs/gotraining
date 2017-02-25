@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ardanlabs/gotraining/topics/profiling/project/search"
+	"github.com/ardanlabs/gotraining/topics/go/profiling/project/search"
 	"github.com/pborman/uuid"
 )
 

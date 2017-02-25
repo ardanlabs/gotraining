@@ -12,7 +12,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/topics/testing/tests/example4/handlers"
+	"github.com/ardanlabs/gotraining/topics/go/testing/tests/example4/handlers"
 )
 
 const succeed = "\u2713"

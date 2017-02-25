@@ -122,7 +122,7 @@ Put some load of the web application and run the torch tool and visualize the pr
 
 Run the benchmarks and produce a cpu and memory profile.
 
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
+	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project/search
 	
 	go test -run none -bench . -benchtime 3s -benchmem -cpuprofile cpu.out
 	go tool pprof ./search.test cpu.out
@@ -146,7 +146,7 @@ Run the Go trace tool.
 
 Use the RSS Search test instead to create a trace.
 
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/profiling/project/search
+	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project/search
 	go test -run none -bench . -benchtime 3s -trace trace.out
 	go tool trace trace.out
 

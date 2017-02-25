@@ -146,7 +146,7 @@ Rules of Performance:
     * Profile before you decide something is performance critical.  
     * Test to know you are correct.
 
-[Example Benchmark](https://github.com/ardanlabs/gotraining/blob/master/topics/testing/benchmarks/basic/basic_test.go)  
+[Example Benchmark](https://github.com/ardanlabs/gotraining/blob/master/topics/go/testing/benchmarks/basic/basic_test.go)  
 
 **_"When we're computer programmers we're concentrating on the intricate little fascinating details of programming and we don't take a broad engineering point of view about trying to optimize the total system. You try to optimize the bits and bytes." - Tom Kurtz (inventor of BASIC)_**
 
