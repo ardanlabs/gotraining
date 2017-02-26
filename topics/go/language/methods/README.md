@@ -1,13 +1,12 @@
 ## Methods
 
-Methods are functions that are declared with a receiver which binds the method to a type. Then the method and can be used to operate on values or pointers of that type.
+Methods are functions that are declared with a receiver which binds the method to a type. Methods and can be used to operate on values or pointers of that type.
 
 ## Notes
 
-* Methods are functions that contain a receiver value.
-* Receivers bind a method to a type and can be value or pointers.
-* Methods are called against values and pointers, not packages.
-* Go supports function and method variables.
+* Methods are functions that declare a receiver variable.
+* Receivers bind a method to a type and can use value or pointer semantics.
+* Methods are valid when it is practical or reasonable for a piece of data to expose a capability.
 
 ## Links
 

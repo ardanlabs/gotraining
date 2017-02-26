@@ -8,6 +8,15 @@ This is material for any intermediate-level developer who has some experience wi
 
 You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
 
+* [Prepare Your Mind](https://github.com/ardanlabs/gotraining/tree/master/topics/go#prepare-your-mind)
+* [Performance vs Productivity](https://github.com/ardanlabs/gotraining/tree/master/topics/go#performance-vs-productivity)
+* [Guidelines, Decision Making and Trade-Offs](https://github.com/ardanlabs/gotraining/tree/master/topics/go#guidelines-decision-making-and-trade-offs)
+* [Data Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#data-oriented-design)
+* [Interface And Composition Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#interface-and-composition-design)
+* [Package Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#package-oriented-design)
+* [Concurrent Software Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#concurrent-software-design)
+* [Channel Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#channel-design)
+
 ---
 
 ### Prepare Your Mind
@@ -128,7 +137,7 @@ In Go, the underlying machine is the real machine rather than a single abstract 
 
 **_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_**
 
-[Example Readability Issue](http://codepad.org/Xw7eUSSA)  
+[Example Readability Issue](http://cpp.sh/6i7d)  
 
 #### 3) Simplicity
 
@@ -168,6 +177,8 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 ### Data-Oriented Design
 
+**Design Philosophy:**
+
 * If you don't understand the data, you don't understand the problem.
 * All problems are unique and specific to the data you are working with.
 * Data transformations are at the heart of solving problems. Each function, method and work-flow must focus on implementing the specific data transformations required to solve the problems.
@@ -190,6 +201,8 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 ### Interface And Composition Design
 
+**Design Philosophy:**
+
 * Interfaces give programs structure.
 * Interfaces encourage design by composition.
 * Interfaces enable and enforce clean divisions between components.
@@ -204,25 +217,16 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
     * Interfaces with more than one method have more than one reason to change.
     * Uncertainty about change is not a license to guess but a directive to STOP and learn more.
 * You must distinguish between code that:
-    * defends against fraud vs
-    * protects against accidents
+    * defends against fraud vs protects against accidents
 
-**Resources:**
+**Validation:**
 
-[Methods, interfaces and Embedding](https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
-[Composition with Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
-[Reducing type hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy
-
----
-
-### Interface Pollution
-
-**Declare an interface when:**  
+Declare an interface when:  
 * users of the API need to provide an implementation detail.
 * API’s have multiple implementations they need to maintain internally.
 * parts of the API that can change have been identified and require decoupling.
 
-**Don't declare an interface:**  
+Don't declare an interface:  
 * for the sake of using an interface.
 * to generalize an algorithm.
 * when users can declare their own interfaces.
@@ -230,6 +234,9 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 **Resources:**
 
+[Methods, interfaces and Embedding](https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
+[Composition with Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
+[Reducing type hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy  
 [Interface pollution in Go](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
 [Application Focused API Design](https://www.goinggo.net/2016/11/application-focused-api-design.html) - William Kennedy  
 [Avoid interface pollution](https://www.goinggo.net/2016/10/avoid-interface-pollution.html) - William Kennedy  
@@ -238,7 +245,9 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 ### Package-Oriented Design
 
-**Design Philosophy:**
+_Package Oriented Design allows a developer to identify where a package belongs inside a Go project and the design guidelines the package must respect. It defines what a Go project is and how a Go project is structured. Finally, it improves communication between team members and promotes clean package design and project architecture that is discussable._
+
+**Language Mechanics:**
 
 * Packaging directly conflicts with how we have been taught to organize source code in other languages.
 * In other languages, packaging is a feature that you can choose to use or ignore.
@@ -247,7 +256,7 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 * There needs to be a way to “open” parts of the package to the outside world.
 * Two packages can’t cross-import each other. Imports are a one way street. 
 
-**Package Design:**
+**Design Philosophy:**
 
 * To be purposeful, packages must provide, not contain.
     * Packages must be named with the intent to describe what it provides.
@@ -262,10 +271,6 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
     * Packages must aspire for the highest level of portability.
     * Packages must reduce taking on opinions when it’s reasonable and practical.
     * Packages must not become a single point of dependency.
-
-**Package Oriented Design:**
-
-_Package Oriented Design allows a developer to identify where a package belongs inside a Go project and the design guidelines the package must respect. It defines what a Go project is and how a Go project is structured. Finally, it improves communication between team members and promotes clean package design and project architecture that is discussable._
 
 **Project Structure:**
 
@@ -285,6 +290,93 @@ Kit                     Application
 └── web/
 ```
 
+* **vendor/**  
+Good documentation for the `vendor/` folder can be found in this Gopher Academy [post](https://blog.gopheracademy.com/advent-2015/vendor-folder) by Daniel Theophanes. For the purpose of this post, all the source code for 3rd party packages need to be vendored (or copied) into the `vendor/` folder. This includes packages that will be used from the company `Kit` project. Consider packages from the `Kit` project as 3rd party packages.
+
+* **cmd/**  
+All the programs this project owns belongs inside the `cmd/` folder. The folders under `cmd/` are always named for each program that will be built. Use the letter `d` at the end of a program folder to denote it as a daemon. Each folder has a matching source code file that contains the `main` package.
+
+* **internal/**  
+Packages that need to be imported by multiple programs within the project belong inside the `internal/` folder. One benefit of using the name `internal/` is that the project gets an extra level of protection from the compiler. No package outside of this project can import packages from inside of `internal/`. These packages are therefore internal to this project only.
+
+* **internal/platform/**  
+Packages that are foundational but specific to the project belong in the `internal/platform/` folder. These would be packages that provide support for things like databases, authentication or even marshaling.
+
+**Validation:**
+
+<u>Validate the location of a package.</u>
+* `Kit`
+    * Packages that provide foundational support for the different `Application` projects that exist.
+    * logging, configuration or web functionality.
+* `cmd/`
+    * Packages that provide support for a specific program that is being built.
+    * startup, shutdown and configuration.
+* `internal/`
+    * Packages that provide support for the different programs the project owns.
+    * CRUD, services or business logic.
+* `internal/platform/`
+    * Packages that provide internal foundational support for the project..
+    * database, authentication or marshaling.
+    
+<u>Validate the dependency choices.</u>
+* `All`
+    * Validate the cost/benefit of each dependency.
+    * Question imports for the sake of sharing existing types.
+    * Question imports to others packages at the same level.
+    * If a package wants to import another package at the same level:
+        * Question the current design choices of these packages.
+        * If reasonable, move the package inside the source tree for the package that wants to import it.
+        * Use the source tree to show the dependency relationships.
+* `internal/`
+    * Packages from these locations CAN’T be imported:
+        * `cmd/`
+* `internal/platform/`
+    * Packages from these locations CAN’T be imported:
+        * `cmd/`
+        * `internal/`
+        
+<u>Validate the opinions being imposed.</u>
+* `Kit`, `internal/platform/`
+    * NOT allowed to have opinions about any application concerns.
+    * NOT allowed to log, but access to trace information must be decoupled.
+    * Configuration and runtime changes must be decoupled.
+    * Retrieving metric and telemetry values must be decoupled.
+* `cmd/`, `internal/`
+    * Allowed to have opinions about any application concerns.
+    * Allowed to log and handle configuration natively.
+    
+<u>Validate how data is accepted/returned.</u>
+* `All`
+    * Validate the consistent use of value/pointer semantics for a given type.
+    * When using an interface type to accept a value, the focus must be on the behavior that is required and not the value itself.
+    * If behavior is not required, use a concrete type.
+    * When reasonable, use an existing type before declaring a new one.
+    * Question types from dependencies that leak into the exported API.
+        * An existing type may no longer be reasonable to use.
+        
+<u>Validate how errors are handled.</u>
+* `All`
+    * Handling an error means:
+        * The error is no longer a concern.
+        * There is no more action that needs to be taken.
+        * It has been logged if necessary.
+* `Kit`
+    * NOT allowed to panic an application.
+    * NOT allowed to wrap errors.
+    * Return only root cause error values.
+* `cmd/`
+    * Allowed to panic an application.
+    * Wrap errors with context if not being handled.
+    * Majority of handling errors happen here.
+* `internal/`
+    * NOT allowed to panic an application.
+    * Wrap errors with context if not being handled.
+    * Minority of handling errors happen here.
+* `internal/platform/`
+    * NOT allowed to panic an application.
+    * NOT allowed to wrap errors.
+    * Return only root cause error values.
+
 **Resources:**
 
 [Design Philosophy on Packaging](https://www.goinggo.net/2017/02/design-philosophy-on-packaging.html)  
@@ -294,11 +386,11 @@ Kit                     Application
 
 ### Concurrent Software Design
 
-**_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
-
 Concurrency is about managing multiple things at once. Like one person washing the dishes while they are also cooking dinner. You're making progress on both but you're only ever doing one of those things at the same time. Parallelism is about doing multiple things at once. Like one person cooking and placing dirty dishes in the sink, while another washes the dishes. They are happening at the same time.
 
 Both you and the runtime have a responsibility in managing the concurrency of the application. You are responsible for managing these three things when writing concurrent software:
+
+**Design Philosophy:**
 
 * The application must startup and shutdown with integrity.
     * Know how and when every goroutine you create terminates.
@@ -339,9 +431,9 @@ Both you and the runtime have a responsibility in managing the concurrency of th
 
 ### Channel Design
 
-**_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
-
 Channels allow goroutines to communicate with each other through the use of signaling semantics. Channels accomplish this signaling through the use of sending/receiving data or by identifying state changes on individual channels. Don't architect software with the idea of channels being a queue, focus on signaling and the semantics that simplify the orchestration required.
+
+**Language Mechanics:**
 
 * Use channels to orchestrate and coordinate goroutines.
     * Focus on the signaling semantics and not the sharing of data.
@@ -369,11 +461,7 @@ Channels allow goroutines to communicate with each other through the use of sign
     * Turn off signaling
     * Perfect for rate limiting or short term stoppages.
 
----
-
-### Channel Semantics
-
-**_Note: This material is covered in detail in the classroom. This is a summary of the guidelines that are discussed._**
+**Design Philosophy:**
 
 Depending on the problem you are solving, you may require different channel semantics. Depending on the semantics you need, different architectural choices must be taken.
 
