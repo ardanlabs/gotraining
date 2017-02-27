@@ -42,9 +42,9 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 
 ---
 
-### Performance vs Productivity
+### Productivity vs Performance
 
-Performance and productivity both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is out pacing the hardware’s ability to make them faster.
+Productivity and performance both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is out pacing the hardware’s ability to make them faster.
 
 By following Go’s idioms and a few guidelines, we can write code that can be reasoned about by anyone who looks at it. We can write software that simplifies, minimizes and reduces the amount of code we need to solve the problems we are working on. We don’t have to choose productivity over performance or performance over productivity anymore. We can have both.
 
@@ -62,7 +62,25 @@ _"The trend in programming language design has been to create languages that enh
 
 ---
 
-### Guidelines, Decision Making and Trade-Offs
+### Correctness vs Performance
+
+You want to write code that is optimized for correctness. Don't make coding decisions based on what you think might perform better. You must benchmark or profile to know if code is not fast enough. Then and only then should you optimize for performance. This can't be done until you have something working.
+
+Improvement comes from writing code and thinking about the code you write. Then refactoring the code to make it better. This requires the help of other people to also read the code you are writing. Prototype ideas first to validate them. Try different approaches or ask others to attempt a solution. Then compare what you have learned.
+
+**Quotes**
+
+_"The correctness of the implementation is the most important concern, but there is no royal road to correctness. It involves diverse tasks such as thinking of invariants, testing and code reviews. Optimization should be done, but not prematurely." - Al Aho (2009)_
+
+_"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan (2009)_
+
+_"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probablility that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan (2009)_
+
+_"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all" - Brian Kernighan (2009)_
+
+---
+
+### Design Philosophy
 
 Develop your design philosophy around these three major categories in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
@@ -76,7 +94,10 @@ There are two driving forces behind integrity:
 * Integrity is about every allocation, read and write of memory being accurate, consistent and efficient. The type system is critical to making sure we have this `micro` level of integrity.
 * Integrity is about every data transformation being accurate, consistent and efficient. Writing less code and error handling is critical to making sure we have this `macro` level of integrity.
 
-Case Study on Postmortems:  
+**Error Handling:**
+
+When error handling is treated as an exception and not part of the main code, you can expect the majority of your critical failures to be due to error handling.
+
 48 critical failures were found in a study looking at a couple hundred bugs in Cassandra, HBase, HDFS, MapReduce, and Redis.  
 * 92% : Failures from bad error handling
     * 35% : Incorrect handling
@@ -88,7 +109,8 @@ Case Study on Postmortems:
         * 34% : Complex bugs
 * 8% : Failures from latent human errors
 
-Ignorance vs Carelessness:  
+**Ignorance vs Carelessness:**
+
 Anytime we identify an integrity issue we need to ask ourselves why it happened. 
 ```
                     Not Deliberate               Deliberate
@@ -107,7 +129,8 @@ Carelessness  |        Education         |   Dangerous Situation   |
               ------------------------------------------------------
 ```
 
-Write Less Code:  
+**Write Less Code:**
+
 There have been studies that have researched the number of bugs you can expect to have in your software. The industry average is around 15 to 50 bugs per 1000 lines of code. One simple way to reduce the number of bugs, and increase the integrity of your software, is to write less code.
 
 Bjarne Stroustrup stated that writing more code than you need results in `Ugly`, `Large` and `Slow` code:
