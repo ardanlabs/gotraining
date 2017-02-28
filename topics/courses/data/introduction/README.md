@@ -4,9 +4,9 @@ This is material for developers who have some experience with Go and statistics 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
 #### Introduction to Data Analysis
-[Data Analysis](../../../topics/data/data_analysis/README.md)
+[Data Analysis](../../../data/data_analysis/README.md)
 
 #### Maintaining Integrity in Data Analytics Applications
-[Integrity](../../../topics/data/integrity/README.md)   
+[Integrity](../../../data/integrity/README.md)   
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
