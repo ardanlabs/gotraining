@@ -10,7 +10,7 @@ Go has support for testing the performance of your code.
 [Caching](caching/README.md)  
 [False Sharing](falseshare/README.md)  
 
-_Look at the profiling topic to learn more about using benchmarks to [profile](../profiling) code._
+_Look at the profiling topic to learn more about using benchmarks to [profile](../../profiling/README.md) code._
 
 ## Links
 
