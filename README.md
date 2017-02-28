@@ -138,6 +138,8 @@ If you are interested in holding an event in your area please let me know. We wi
 		Conference	Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop		
 		Dev Fest	Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
 		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
+		Filming 	Go 			Pearson					San Francisco, CA 		March 		Bill Kennedy 		
+		Corporate 	Go 			Intel 					Portland, OR 			March 		Bill Kennedy 		
 		Public 		Go 			1up Events 				San Francisco, CA		April 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
 		GoBridge	Go 			Framingham 				Framingham, MA			April 		Bill Kennedy 		TBA
 		Conference	Adv Go 		Capital Golang	 		Washington, D.C. 		April 		Bill Kennedy 		http://capitalgolang.com
