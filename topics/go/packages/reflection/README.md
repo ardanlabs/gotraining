@@ -36,10 +36,10 @@ Example shows how to reflect on a struct type with tags.
 ### Inspection / Decoding
 
 Example shows how to inspect a structs fields and display the field name, type and value.  
-[Struct Types](code/inspect/struct/struct.go) ([Go Playground](https://play.golang.org/p/ahHLMtun9y))  
+[Struct Types](inspect/struct/struct.go) ([Go Playground](https://play.golang.org/p/ahHLMtun9y))  
 
 Example shows how to use reflection to decode an integer.  
-[Integers](code/interface/integer/integer.go) ([Go Playground](https://play.golang.org/p/LmVkzpm57a))  
+[Integers](inspect/integer/integer.go) ([Go Playground](https://play.golang.org/p/LmVkzpm57a))  
 
 ## Exercises
 

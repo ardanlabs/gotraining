@@ -36,7 +36,7 @@ http://golang.org/doc/effective_go.html#embedding
 [Struct Composition](decoupling/example1/example1.go) ([Go Playground](https://play.golang.org/p/axLYwteYkK))  
 [Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/EnzMrT7Fdo))  
 [Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/ES4BOnDX6O))  
-[Decoupling With Interface Composition](example4/example4.go) ([Go Playground](https://play.golang.org/p/ufFSFxCdEs))  
+[Decoupling With Interface Composition](decoupling/example4/example4.go) ([Go Playground](https://play.golang.org/p/ufFSFxCdEs))  
 
 #### Conversion and Assertions
 

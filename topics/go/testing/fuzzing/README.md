@@ -32,7 +32,7 @@ Review the code we want to find problems with and the existing test:
 
 Create a corpus file with the initial input data to use and that will be mutated.
 
-[Fuzzing Input Data](workdir/corpus/input.txt) ([Go Playground](http://play.golang.org/p/RkYDgyQsF8))
+[Fuzzing Input Data](example1/workdir/corpus/input.txt) ([Go Playground](http://play.golang.org/p/RkYDgyQsF8))
 
 Create a fuzzing function that takes mutated input and executes the code we care about using it.
 

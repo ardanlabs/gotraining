@@ -134,22 +134,22 @@ If you're a linux user, then perf(1) is a great tool for profiling applications.
 ## Basic Go Profiling
 
 Learn the basics of using GODEBUG.  
-[Memory Tracing](godebug/gctrace) | [Scheduler Tracing](godebug/schedtrace)
+[Memory Tracing](godebug/gctrace/README.md) | [Scheduler Tracing](godebug/schedtrace/README.md)
 
 Learn the basics of using memory and cpu profiling.  
-[Memory and CPU Profiling](memcpu)
+[Memory and CPU Profiling](memcpu/README.md)
 
 Learn the basics of using http/pprof.  
-[pprof Profiling](pprof)
+[pprof Profiling](pprof/README.md)
 
 Learn the basics of blocking profiling.  
-[Blocking Profiling](blocking)
+[Blocking Profiling](blocking/README.md)
 
 Learn the basics of trace profiling.  
-[Trace Profiling](trace)
+[Trace Profiling](trace/README.md)
 
 Learn the basics of profiling and tracing a larger application.  
-[Real World Example](project)
+[Real World Example](project/README.md)
 
 ## Godoc Analysis
 
@@ -164,7 +164,7 @@ The `godoc` tool can help you perform static analysis on your code.
 
 HTTP tracing facilitate the gathering of fine-grained information throughout the lifecycle of an HTTP client request.
 
-[HTTP Tracing Package](http_trace)
+[HTTP Tracing Package](http_trace/README.md)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
