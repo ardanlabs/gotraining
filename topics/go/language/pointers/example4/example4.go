@@ -42,17 +42,17 @@ func escapeToHeap() *user {
 /*
 // See escape analysis and inling decisions.
 
-go build -gcflags -m
+go build -gcflags "-m -m"
 
-./example4.go:23: can inline stayOnStack
-./example4.go:33: can inline escapeToHeap
-./example4.go:17: can inline main
-./example4.go:18: inlining call to stayOnStack
-./example4.go:19: inlining call to escapeToHeap
+./example4.go:23: can inline stayOnStack as: func() user { u := user literal; return u }
+./example4.go:33: can inline escapeToHeap as: func() *user { u := user literal; return &u }
+./example4.go:17: can inline main as: func() { stayOnStack(); escapeToHeap() }
+./example4.go:18: inlining call to stayOnStack func() user { u := user literal; return u }
+./example4.go:19: inlining call to escapeToHeap func() *user { u := user literal; return &u }
 ./example4.go:19: main &u does not escape
-./example4.go:37: moved to heap: u
 ./example4.go:39: &u escapes to heap
-
+./example4.go:39: 	from ~r0 (return) at ./example4.go:39
+./example4.go:37: moved to heap: u
 
 // See the intermediate assembly phase before
 // generating the actual arch-specific assembly.
