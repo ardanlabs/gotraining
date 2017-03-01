@@ -11,9 +11,13 @@ https://www.goinggo.net/2017/02/package-oriented-design.html
 
 http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html
 
-_Can you tell us about the worse features of C, from your point of view?_
+_"Can you tell us about the worse features of C, from your point of view"?_
 
-_I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help._ - July 2000
+_"I think that the real problem with C is that it doesn't give you enough mechanisms for structuring really big programs, for creating ``firewalls'' within programs so you can keep the various pieces apart. It's not that you can't do all of these things, that you can't simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn't giving you any help."_ - July 2000
+
+## Quotes
+
+_"Object orientation is very useful in some settings... As languages evolve, there will surely be other mechanisms for packaging up computational units and organizing a program." - Brain Kernighan (2009)_
 
 ## Design Review
 
