@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-// indexHandler handles the root route and validates authentication.
+// indexHandler handles the root route and requires authentication.
 func indexHandler(res http.ResponseWriter, req *http.Request) {
 
 	// Set the following header into the response.

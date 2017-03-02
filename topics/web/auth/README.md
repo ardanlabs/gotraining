@@ -18,6 +18,7 @@ https://github.com/markbates/goth
 
 HTTP Basic Authentication: [Code](example1/main.go) | [Test](example1/main_test.go)  
 Authentication with Goth: [Code](example2/main.go) | [Test](example2/main_test.go)  
+JSON Web Tokens: [Code](example3/main.go) | [Test](example3/main_test.go)  
 
 ## Exercises
 
