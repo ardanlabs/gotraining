@@ -4,7 +4,7 @@ The Go standard library provides all the critical building blocks for producing 
 
 ## Notes
 
-* net/http provides an HTTP/1.1 compliant protocol implementation.
+* net/http provides an HTTP/1.1 and HTTP/2 compliant protocol implementation.
 * There is support for SSL/TLS.
 * Adding routing and middleware to your applications requires only a few simple patterns.
 
