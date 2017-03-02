@@ -14,7 +14,7 @@ func BenchmarkRssSearch(b *testing.B) {
 	var err error
 
 	for i := 0; i < b.N; i++ {
-		result, err = rssSearch("1", "president", "nyt", "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml")
+		result, err = rssSearch("1", "trump", "nyt", "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml")
 		if err != nil {
 			b.FailNow()
 		}

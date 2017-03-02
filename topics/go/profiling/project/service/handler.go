@@ -4,7 +4,6 @@ import (
 	"expvar"
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 
 	"github.com/ardanlabs/gotraining/topics/go/profiling/project/search"
@@ -18,14 +17,11 @@ var req = expvar.NewInt("requests")
 func handler(w http.ResponseWriter, r *http.Request) {
 	uid := uuid.New()
 
-	log.Printf("%s : handler : Started : Method[%s] URL[%s]\n", uid, r.Method, r.URL)
-
 	// Add a new counter for monitoring.
 	req.Add(1)
 
 	// Capture all the form values.
 	fv, options := formValues(r)
-	log.Printf("%s : handler : Info : options[%#v]\n", uid, options)
 
 	// If this is a post, perform a search.
 	var results []search.Result
@@ -38,8 +34,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	// Write the final markup as the response.
 	fmt.Fprint(w, string(markup))
-
-	log.Printf("%s : handler : Completed\n", uid)
 }
 
 // formValues extracts the form data.

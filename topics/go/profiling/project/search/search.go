@@ -2,10 +2,7 @@
 // news feeds.
 package search
 
-import (
-	"html/template"
-	"log"
-)
+import "html/template"
 
 // Options provides the search options for performing searches.
 type Options struct {
@@ -47,25 +44,20 @@ type Searcher interface {
 // Submit uses goroutines and channels to perform a search against the
 // feeds concurrently.
 func Submit(uid string, options Options) []Result {
-	log.Printf("%s : Submit : Started : %#v\n", uid, options)
-
 	searchers := make(map[string]Searcher)
 
 	// Create a CNN Searcher if checked.
 	if options.CNN {
-		log.Printf("%s : Submit : Info : Adding CNN\n", uid)
 		searchers["cnn"] = NewCNN()
 	}
 
 	// Create a NYT Searcher if checked.
 	if options.NYT {
-		log.Printf("%s : Submit : Info : Adding NYT\n", uid)
 		searchers["nyt"] = NewNYT()
 	}
 
 	// Create a BBC Searcher if checked.
 	if options.BBC {
-		log.Printf("%s : Submit : Info : Adding BBC\n", uid)
 		searchers["bbc"] = NewBBC()
 	}
 
@@ -87,21 +79,17 @@ func Submit(uid string, options Options) []Result {
 		// Failing to do so will leave the Searchers blocked forever.
 		if options.First && (search > 0 && len(final) > 0) {
 			go func() {
-				found := <-results
-				log.Printf("%s : Submit : Info : Results Discarded : Results[%d]\n", uid, len(found))
+				<-results
 			}()
 			continue
 		}
 
 		// Wait to recieve results.
-		log.Printf("%s : Submit : Info : Waiting For Results...\n", uid)
 		found := <-results
 
 		// Save the results to the final slice.
-		log.Printf("%s : Submit : Info : Results Used : Results[%d]\n", uid, len(found))
 		final = append(final, found...)
 	}
 
-	log.Printf("%s : Submit : Completed : Found [%d] Results\n", uid, len(final))
 	return final
 }

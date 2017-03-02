@@ -19,13 +19,12 @@ func NewNYT() Searcher {
 
 // Search performs a search against the NYT RSS feeds.
 func (NYT) Search(uid string, term string, found chan<- []Result) {
-	log.Printf("%s : NYT : Search : Started : searchTerm[%s]\n", uid, term)
-
 	results := []Result{}
 
 	for _, feed := range nytFeeds {
 		res, err := rssSearch(uid, term, "NYT", feed)
 		if err != nil {
+			log.Println("ERROR: ", err)
 			continue
 		}
 
@@ -33,6 +32,4 @@ func (NYT) Search(uid string, term string, found chan<- []Result) {
 	}
 
 	found <- results
-
-	log.Printf("%s : NYT : Search : Completed\n", uid)
 }

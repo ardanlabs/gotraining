@@ -2,7 +2,6 @@ package search
 
 import (
 	"encoding/xml"
-	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -59,8 +58,6 @@ type (
 
 // rssSearch is used against any RSS feeds.
 func rssSearch(uid, term, engine, uri string) ([]Result, error) {
-	log.Printf("%s : %s-%s : rssSearch : Started\n", uid, engine, uri)
-
 	var d Document
 	key := term + engine + uri
 
@@ -70,16 +67,13 @@ func rssSearch(uid, term, engine, uri string) ([]Result, error) {
 	// Based on the cache lookup determine what to do.
 	switch {
 	case found:
-		log.Printf("%s : %s-%s : rssSearch : CACHE : Found\n", uid, engine, uri)
 		d = v.(Document)
 
 	default:
-		log.Printf("%s : %s-%s : rssSearch : GET\n", uid, engine, uri)
 
 		// Pull down the rss feed.
 		resp, err := http.Get(uri)
 		if err != nil {
-			log.Printf("%s : %s-%s : rssSearch : ERROR : %s\n", uid, engine, uri, err)
 			return []Result{}, err
 		}
 
@@ -89,7 +83,6 @@ func rssSearch(uid, term, engine, uri string) ([]Result, error) {
 		// Decode the results into a document.
 		err = xml.NewDecoder(resp.Body).Decode(&d)
 		if err != nil {
-			log.Printf("%s : %s-%s : rssSearch : ERROR : Decode : %s\n", uid, engine, uri, err)
 			return []Result{}, err
 		}
 
@@ -112,6 +105,5 @@ func rssSearch(uid, term, engine, uri string) ([]Result, error) {
 		}
 	}
 
-	log.Printf("%s : %s-%s : rssSearch : Completed : Found[%d]\n", uid, engine, uri, len(results))
 	return results, nil
 }

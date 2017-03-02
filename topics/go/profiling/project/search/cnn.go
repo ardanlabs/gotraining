@@ -19,13 +19,12 @@ func NewCNN() Searcher {
 
 // Search performs a search against the CNN RSS feeds.
 func (CNN) Search(uid string, term string, found chan<- []Result) {
-	log.Printf("%s : CNN : Search : Started : searchTerm[%s]\n", uid, term)
-
 	results := []Result{}
 
 	for _, feed := range cnnFeeds {
 		res, err := rssSearch(uid, term, "CNN", feed)
 		if err != nil {
+			log.Println("ERROR: ", err)
 			continue
 		}
 
@@ -33,6 +32,4 @@ func (CNN) Search(uid string, term string, found chan<- []Result) {
 	}
 
 	found <- results
-
-	log.Printf("%s : CNN : Search : Completed\n", uid)
 }
