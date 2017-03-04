@@ -13,6 +13,7 @@ Learn the basics of using and applying middleware.
 https://golang.org/pkg/net/http/  
 https://golang.org/doc/articles/wiki/  
 github.com/urfave/negroni  
+github.com/gorilla/handlers  
 
 ## Code Review
 
