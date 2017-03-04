@@ -44,7 +44,7 @@ func TestApp(t *testing.T) {
 	// Perform a POST request to save a customer.
 	res = w.Request("/customers").Post(url.Values{"Name": []string{"Homer Simpson"}})
 
-	// Check that we now how three customers.
+	// Check that we now have three customers.
 	r.Equal(3, len(customer.All()))
 
 	// Check we got the correct redirect url.

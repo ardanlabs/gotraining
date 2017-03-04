@@ -12,6 +12,7 @@ Learn the basics of using regex to provide support for building a REST based API
 
 https://golang.org/pkg/net/http/  
 https://golang.org/doc/articles/wiki/  
+https://martinfowler.com/articles/richardsonMaturityModel.html  
 
 ## Code Review
 
