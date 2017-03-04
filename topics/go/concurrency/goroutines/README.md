@@ -12,7 +12,7 @@ Goroutines are functions that are created and scheduled to be run independently 
 
 ## Design Guidelines
 
-* Learn about the [design guidelines](../../go#concurrent-software-design) for concurrency.
+* Learn about the [design guidelines](../../#concurrent-software-design) for concurrency.
 
 ## Diagrams
 
