@@ -12,13 +12,13 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-// sessionName contains the name of the session key.
+// sessionName contains the session key.
 const sessionName = "ultimate-web-session"
 
-// store represents the session store for the app.
+// store represents the session store for the app. Don't hard code the key like this.
 var store = sessions.NewCookieStore([]byte("something-very-secret"))
 
-// htmlWithSession contains the document we will use we
+// htmlNoSession contains the document we will use we
 // have a request has not submited state yet.
 var htmlNoSession = `
 <html>
@@ -29,14 +29,15 @@ var htmlNoSession = `
     </form>
 </html>`
 
-// htmlWithSession contains the document we will use we
-// have a request has already submited state.
+// htmlWithSession contains the document we will use when we have a request
+// that has already submited state. We're just using printf for the example
+// instead of a full template.
 var htmlWithSession = `
 <html>
     <h1>Hello %s!</h1>
 </html>`
 
-// App loads the entire API set together for use.
+// App loads all of our routes
 func App() http.Handler {
 
 	// Create a new mux which will process the requests.
@@ -95,14 +96,12 @@ func saveHandler(res http.ResponseWriter, req *http.Request) {
 	// or returning from the handler.
 	session.Save(req, res)
 
-	// Return the form value within the scope of
-	// the html for when we use session.
+	// Print our template including the name.
 	fmt.Fprintf(res, htmlWithSession, name)
 }
 
 func main() {
 
-	// Start the http server to handle the request for
-	// both versions of the API.
+	// Start the http server to handle requests
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }
