@@ -44,6 +44,15 @@ func App() http.Handler {
 		res.Header().Set("x-signature", token)
 		res.WriteHeader(200)
 		res.Write([]byte(payload))
+
+		// Note that we are using the payload from the signature and are
+		// effectively ignoring the actual request body. If you intend to use
+		// the request body for anything you should confirm that it matches the
+		// payload or they could reuse a valid signature for some other body
+		// but change the body. Why even include the body then? Why not just
+		// send the JWT in the body instead of a header? The benefit here is
+		// improved readability in dev tools. You'd have to weigh that cost
+		// against the cost of larger requests.
 	}
 
 	return http.HandlerFunc(h)
