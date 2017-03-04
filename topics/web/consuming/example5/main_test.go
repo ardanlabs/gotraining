@@ -21,7 +21,6 @@ func App() http.Handler {
 		res.Write([]byte("Hello World!"))
 	}
 
-	// Return the handler function.
 	return http.HandlerFunc(h)
 }
 

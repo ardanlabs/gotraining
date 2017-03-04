@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-// App returns a handler that can be used to mock the PUT call.
+// App returns a handler tells us what http method we used.
 func App() http.Handler {
 
 	// Handler function will be used for mocking. It returns
@@ -25,7 +25,6 @@ func App() http.Handler {
 		})
 	}
 
-	// Return the handler function.
 	return http.HandlerFunc(h)
 }
 

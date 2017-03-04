@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-// App returns a handler that can be used to mock the GET call.
+// App returns a handler that always serves the same response.
 func App() http.Handler {
 
 	// Handler function will be used for mocking.
@@ -25,7 +25,6 @@ func App() http.Handler {
 		})
 	}
 
-	// Return the handler function.
 	return http.HandlerFunc(h)
 }
 

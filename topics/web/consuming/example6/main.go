@@ -14,10 +14,10 @@ import (
 // sharedSecret contains our key for decoding the JWT token.
 var sharedSecret = []byte("some shared secret")
 
-// App returns a handler for handling requets with JWT.
+// App returns a handler for handling requests with JWT.
 func App() http.Handler {
 
-	// Handler function to process the reuqest.
+	// Handler function to process the request.
 	h := func(res http.ResponseWriter, req *http.Request) {
 
 		// Extract the JWT from the request header.
@@ -27,14 +27,14 @@ func App() http.Handler {
 			return
 		}
 
-		// Verify, decrypt and decompresses the JWT received in the request.
+		// Verify, decrypt and decompress the JWT received in the request.
 		payload, _, err := jose.Decode(s, sharedSecret)
 		if err != nil || payload == "" {
 			res.WriteHeader(http.StatusPreconditionFailed)
 			return
 		}
 
-		// Response with a 200 and return the payload we extracted.
+		// Respond with a 200 and return the payload we extracted.
 		token, err := jose.Sign("", jose.HS256, sharedSecret)
 		if err != nil {
 			res.WriteHeader(500)
@@ -51,7 +51,6 @@ func App() http.Handler {
 
 func main() {
 
-	// Start the http server to handle the request for
-	// both versions of the API.
+	// Start the http server to handle requests
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }
