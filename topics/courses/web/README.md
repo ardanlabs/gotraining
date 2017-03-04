@@ -89,3 +89,9 @@ The web is changing and users are expecting fast, dynamic, and interactive web a
 Learn several different techniques and packages for adding authentication to web apps.
 
 [Authentication](../../web/auth/README.md)
+
+## TLS
+
+Sending sensitive data in plain text is a bad idea! Learn about securing your application using TLS.
+
+[TLS](../../web/tls/README.md)
