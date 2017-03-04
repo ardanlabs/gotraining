@@ -20,6 +20,15 @@ https://golang.org/doc/articles/wiki/
 [User Defined Handler II](example4/main.go)  
 [Concurrency](example5/main.go)  
 
+## Notes
+
+An HTTP Request
+![Request](request.png)
+
+The Response
+
+![Response](response.png)
+
 ## Exercises
 
 ### Exercise 1
