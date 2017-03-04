@@ -13,6 +13,7 @@ Learn several different techniques and packages for adding authentication to web
 https://golang.org/pkg/net/http/  
 https://golang.org/doc/articles/wiki/  
 https://github.com/markbates/goth  
+https://jwt.io/  
 
 ## Code Review
 
