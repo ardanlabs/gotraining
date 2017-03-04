@@ -21,7 +21,6 @@ func App() http.Handler {
 		res.Write([]byte("Hello World!"))
 	}
 
-	// Return the handler function.
 	return http.HandlerFunc(h)
 }
 
@@ -49,7 +48,7 @@ func (c *customTransporter) RoundTrip(req *http.Request) (*http.Response, error)
 
 func TestApp(t *testing.T) {
 
-	// Startup a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 

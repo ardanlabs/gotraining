@@ -28,26 +28,28 @@ func App() http.Handler {
 
 func TestApp(t *testing.T) {
 
-	// Startup a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
 	// Create a new request for the GET call.
 	req := httptest.NewRequest("GET", ts.URL, nil)
 
-	// Create a Client value with a timeout.
+	// Create a Client value. Instead of specifying a timeout here
+	//we'll cancel the request ourselves when the time is right.
 	client := http.Client{
 	// Timeout: 50 * time.Millisecond,
 	}
 	ctx, cancel := context.WithCancel(req.Context())
 	req = req.WithContext(ctx)
 
+	// Simulate some condition where we'd like to cancel
 	go func() {
 		time.Sleep(50 * time.Millisecond)
 		cancel()
 	}()
 
-	// Perform the GET call with the excepted timeout.
+	// Perform the GET call. We except this co error.
 	if _, err := client.Do(req); err == nil {
 		t.Fatal("request was supposed to timeout")
 	}

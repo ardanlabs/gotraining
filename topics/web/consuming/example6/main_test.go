@@ -16,7 +16,7 @@ import (
 
 func TestApp(t *testing.T) {
 
-	// Startup a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
@@ -32,7 +32,7 @@ func TestApp(t *testing.T) {
 		// Create a new request for the POST call with our payload.
 		req, err := http.NewRequest("POST", ts.URL, bytes.NewReader(payload))
 		if err != nil {
-			t.Fatal(err)
+			st.Fatal(err)
 		}
 
 		// Create a Client and perform the POST call.
@@ -63,7 +63,7 @@ func TestApp(t *testing.T) {
 			// Create a new request for the POST call with our payload.
 			req, err := http.NewRequest("POST", ts.URL, bytes.NewReader(payload))
 			if err != nil {
-				t.Fatal(err)
+				st.Fatal(err)
 			}
 
 			// Create a Client using our custom transporter. Provide
@@ -91,16 +91,16 @@ func TestApp(t *testing.T) {
 				// Read in the response from the api call.
 				b, err := ioutil.ReadAll(res.Body)
 				if err != nil {
-					t.Fatal(err)
+					st.Fatal(err)
 				}
 
 				// Validate we received the expected response.
 				got := strings.TrimSpace(string(b))
 				want := tt.want
 				if got != want {
-					t.Log("Wanted:", want)
-					t.Log("Got   :", got)
-					t.Fatal("Mismatch")
+					st.Log("Wanted:", want)
+					st.Log("Got   :", got)
+					st.Fatal("Mismatch")
 				}
 			}
 		}

@@ -105,7 +105,6 @@ func currentDirectory() string {
 
 func main() {
 
-	// Start the http server to handle the request for
-	// both versions of the API.
+	// Start the http server to handle requests.
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }

@@ -16,11 +16,11 @@ import (
 	"testing"
 )
 
-// App returns a handler that can be used to mock the POST call.
+// App returns a handler that parrots requests back to callers.
 func App() http.Handler {
 
 	// Handler function will be used for mocking. It just
-	// returns the request back as the repsonse.
+	// returns the request back as the response.
 	h := func(res http.ResponseWriter, req *http.Request) {
 		io.Copy(res, req.Body)
 	}
@@ -31,7 +31,7 @@ func App() http.Handler {
 
 func TestApp(t *testing.T) {
 
-	// Startup a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 

@@ -25,7 +25,7 @@ func TestIndexHandler(t *testing.T) {
 		{"", "", "Not authorized", http.StatusUnauthorized},
 	}
 
-	// Startup a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 

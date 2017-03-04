@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// App returns a handler that can be used to mock the GET call.
+// App returns a handler takes a while to respond.
 func App() http.Handler {
 
 	// Handler function will be used for mocking. It waits
@@ -27,7 +27,7 @@ func App() http.Handler {
 
 func TestApp(t *testing.T) {
 
-	// Startup a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
@@ -39,7 +39,8 @@ func TestApp(t *testing.T) {
 		Timeout: 50 * time.Millisecond,
 	}
 
-	// Perform the GET call with the excepted timeout.
+	// Perform the GET call with the excepted timeout. We are expecting an
+	// error here so we fail if err == nil.
 	if _, err := client.Do(req); err == nil {
 		t.Fatal("request was supposed to timeout")
 	}

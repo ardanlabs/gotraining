@@ -25,7 +25,7 @@ func TestLoginHandler(t *testing.T) {
 		{``, http.StatusBadRequest},
 	}
 
-	// Start a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
@@ -71,7 +71,7 @@ func TestLoginHandler(t *testing.T) {
 const expired = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODg0OTM0ODMsImlhdCI6MTQ4ODQ5MzQ4MiwibmJmIjoxNDg4NDkzNDgyLCJzdWIiOiJqYWNvYkBleGFtcGxlLmNvbSJ9.e0cWExi4hHxODo44x5P1wHHPKlZukFk93ib3f2UOwEY`
 
 func TestSecureHandler(t *testing.T) {
-	// Start a server to handle processing these routes.
+	// Start a server to handle these requests.
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 

@@ -10,9 +10,8 @@ import (
 	"time"
 )
 
-// fooHeader returns a handler function that will set
-// the `foo` header key. Then call the provided
-// handler function.
+// fooHeader returns a handler function that will set the
+// `foo` header key then call the provided handler function.
 func fooHeader(hf http.HandlerFunc) http.HandlerFunc {
 	return func(res http.ResponseWriter, req *http.Request) {
 
@@ -25,7 +24,7 @@ func fooHeader(hf http.HandlerFunc) http.HandlerFunc {
 }
 
 // logger returns a handler function that will log info about
-// the request. Then it calls the provided handler function.
+// the request then call the provided handler function.
 func logger(hf http.HandlerFunc) http.HandlerFunc {
 	return func(res http.ResponseWriter, req *http.Request) {
 
@@ -53,12 +52,14 @@ func App() http.Handler {
 	// For the root route, the logger handler first calls into the
 	// fooHeader handler which first calls into the Hello World handler.
 	// This chain of calls happen on the processing of the route.
-	m.HandleFunc("/",
+	hello := func(res http.ResponseWriter, req *http.Request) {
+		res.Write([]byte("Hello World"))
+	}
+	m.HandleFunc(
+		"/",
 		logger(
 			fooHeader(
-				func(res http.ResponseWriter, req *http.Request) {
-					res.Write([]byte("Hello World"))
-				},
+				hello,
 			),
 		),
 	)
@@ -68,7 +69,6 @@ func App() http.Handler {
 
 func main() {
 
-	// Start the http server to handle the request for
-	// both versions of the API.
+	// Start the http server to handle requests.
 	log.Fatal(http.ListenAndServe(":3000", App()))
 }
