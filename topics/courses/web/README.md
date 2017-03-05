@@ -62,7 +62,7 @@ Being able to hold onto context while moving from different pieces of middleware
 
 ## Data Serialization
 
-Before we start building APIs we need to understand how to serialize data. We’ll look at 3 common data formats, as well as ways to customize those formats to match the needs of your API.
+Before we start building APIs we need to understand how to serialize data. We’ll look at 2 common data formats, as well as ways to customize those formats to match the needs of your API.
 
 [Serializers](../../web/serializers/README.md)
 

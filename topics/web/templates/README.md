@@ -29,6 +29,6 @@ Bundling Assets: [Code](example8/main.go) | [Test](example8/main_test.go) | [Ass
 
 ### Exercise 1
 
-Take the code from example 5 (Complex Markup) and add a map of key/value pairs that represents the user's roles. Then add a section to the template to render the set of roles a user has.
+Take the code from example 6 (Complex Markup) and add a map of key/value pairs that represents the user's roles. Then add a section to the template to render the set of roles a user has.
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
