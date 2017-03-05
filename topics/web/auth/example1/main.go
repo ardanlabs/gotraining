@@ -26,7 +26,7 @@ func indexHandler(res http.ResponseWriter, req *http.Request) {
 
 	// If the username and password is not what we expect, then
 	// respond with not authorized.
-	if u != "username" && p != "password" {
+	if u != "username" || p != "password" {
 		http.Error(res, "Not authorized", http.StatusUnauthorized)
 		return
 	}

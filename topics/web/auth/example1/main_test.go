@@ -21,6 +21,7 @@ func TestIndexHandler(t *testing.T) {
 		StatusCode int
 	}{
 		{"username", "password", "Welcome Authorized User!", http.StatusOK},
+		{"username", "badpassword", "Not authorized", http.StatusUnauthorized},
 		{"badusername", "badpassword", "Not authorized", http.StatusUnauthorized},
 		{"", "", "Not authorized", http.StatusUnauthorized},
 	}
