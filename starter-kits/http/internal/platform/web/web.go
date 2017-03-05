@@ -8,13 +8,9 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-	"log"
 	"net/http"
-	"os"
-	"os/signal"
 	"time"
 
-	"github.com/braintree/manners"
 	"github.com/dimfeld/httptreemux"
 	"github.com/pborman/uuid"
 	"gopkg.in/go-playground/validator.v8"
@@ -165,35 +161,6 @@ func (g *Group) Handle(verb, path string, handler Handler, mw ...Middleware) {
 
 	// Wrap it with the App wrapper and additionally the group level middleware.
 	g.app.Handle(verb, path, handler, g.mw...)
-}
-
-// Run is called to start the web service.
-func Run(host string, routes http.Handler, readTimeout, writeTimeout time.Duration) error {
-	log.Printf("Run : Start : Using Host[%s]\n", host)
-
-	// Create a new server and set timeout values.
-	server := manners.NewWithServer(&http.Server{
-		Addr:           host,
-		Handler:        routes,
-		ReadTimeout:    readTimeout,
-		WriteTimeout:   writeTimeout,
-		MaxHeaderBytes: 1 << 20,
-	})
-
-	go func() {
-
-		// Listen for an interrupt signal from the OS.
-		osSignals := make(chan os.Signal)
-		signal.Notify(osSignals, os.Interrupt)
-
-		sig := <-osSignals
-		log.Printf("Run : Captured %v. Shutting Down...\n", sig)
-
-		// Shut down the API server.
-		server.Close()
-	}()
-
-	return server.ListenAndServe()
 }
 
 // wrapMiddleware wraps a handler with some middleware.
