@@ -5,6 +5,8 @@ package routes
 
 import (
 	"net/http"
+	"path"
+	"runtime"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes/handlers"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/middleware"
@@ -16,9 +18,10 @@ func API() http.Handler {
 	app := web.New(middleware.RequestLogger, middleware.ErrorHandler, middleware.Mongo())
 	app.Use(middleware.CORS(app, "*", "GET, POST, PUT, PATCH, DELETE, OPTIONS"))
 
-	// Setup the file server to serve up static content such as
+	// Create the file server to serve static content such as
 	// the index.html page.
-	app.TreeMux.NotFoundHandler = http.FileServer(http.Dir("views")).ServeHTTP
+	views := http.FileServer(http.Dir(viewsDir()))
+	app.TreeMux.NotFoundHandler = views.ServeHTTP
 
 	// Initialize the routes for the API binding the route to the
 	// handler code for each specified verb.
@@ -29,4 +32,13 @@ func API() http.Handler {
 	app.Handle("DELETE", "/v1/users/:id", handlers.UserDelete)
 
 	return app
+}
+
+// viewsDir builds a full path to the 'views' directory
+// that is relative to this file. It uses a trick of the
+// runtime package to get the path of the file that calls
+// this function.
+func viewsDir() string {
+	_, filename, _, _ := runtime.Caller(1)
+	return path.Join(path.Dir(filename), "../views")
 }

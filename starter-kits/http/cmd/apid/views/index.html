@@ -3,33 +3,9 @@
     <meta charset="utf-8">
     <title>Users Example</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
-    <script>
-      var usersApp = angular.module('usersApp', []);
-      usersApp.controller('UsersCtrl', function ($scope, $http){
-        $http.get('/v1/users').success(function(data) {
-          $scope.users = data;
-        });
-      });
-    </script>
-    <style>
-      table, th, td {
-         border: 1px solid black;
-      }
-      th {
-        text-align: left;
-        padding: 5px;
-      }
-      td {
-          text-align: left;
-          padding: 5px;
-      }
-      .addr {
-        border: none;
-      }
-      .addr td {
-        border: none;
-      }
-    </style>
+    <script src="/js/users.js"></script>
+
+    <link rel="stylesheet" href="/css/users.css" />
   </head>
   <body ng-controller="UsersCtrl">
     <h1>Current Users</h1>
@@ -39,7 +15,7 @@
         <th>Last</th>
         <th>Email</th>
         <th>Company</th>
-        <th>address</th>
+        <th>Address</th>
       </tr>
       <tr ng-repeat="user in users">
         <td>{{user.first_name}}</td>
