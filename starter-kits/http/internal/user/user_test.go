@@ -38,7 +38,7 @@ func TestUsers(t *testing.T) {
 		UserType:  1,
 		FirstName: "Bill",
 		LastName:  "Kennedy",
-		Email:     "bill@ardanstugios.com",
+		Email:     "bill@ardanstudios.com",
 		Company:   "Ardan Labs",
 		Addresses: []user.CreateAddress{
 			{

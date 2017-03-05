@@ -5,7 +5,7 @@ package user
 
 import "time"
 
-// CreateAddress contains information about a user's address.
+// CreateAddress contains information needed to create or update a user's address.
 type CreateAddress struct {
 	Type         int        `bson:"type" json:"type" validate:"required"`
 	LineOne      string     `bson:"line_one" json:"line_one" validate:"required"`
@@ -30,7 +30,7 @@ type Address struct {
 	DateCreated  *time.Time `bson:"date_created,omitempty" json:"date_created"`
 }
 
-// CreateUser contains information about a user.
+// CreateUser contains information needed to create or update a user.
 type CreateUser struct {
 	UserType     int             `bson:"type" json:"type" validate:"required"`
 	FirstName    string          `bson:"first_name" json:"first_name" validate:"required"`

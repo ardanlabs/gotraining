@@ -28,12 +28,17 @@ Sample code that provides best practices for building a RESTful API in Go. It le
 ### Exercise 1
 
 **Step 1**  
-Add a new set of routes to CRUD User Roles.
+Add a new set of routes to CRUD Reviews. A review should have these fields:
+
+* Store: string
+* Rating: int
+* Comments: string
 
 **Step 2**  
-Add a new piece of middleware to mock authentication. Then apply this middleware to the Group of routes that create, update for delete data.
+Add a new piece of middleware to mock authentication. Then apply this middleware to the Group of routes that create, update or delete data.
 
 **Step 3**  
 Add tests for the new CRUD API.
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

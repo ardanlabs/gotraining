@@ -81,7 +81,7 @@ type App struct {
 	mw []Middleware
 }
 
-// New create an App value that handle a set of routes for the application.
+// New creates an App value that handle a set of routes for the application.
 // You can provide any number of middleware and they'll be used to wrap every
 // request handler.
 func New(mw ...Middleware) *App {
