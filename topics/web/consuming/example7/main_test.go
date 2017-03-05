@@ -33,10 +33,13 @@ func TestApp(t *testing.T) {
 	defer ts.Close()
 
 	// Create a new request for the GET call.
-	req := httptest.NewRequest("GET", ts.URL, nil)
+	req, err := http.NewRequest("GET", ts.URL, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	// Create a Client value. Instead of specifying a timeout here
-	//we'll cancel the request ourselves when the time is right.
+	// we'll cancel the request ourselves when the time is right.
 	client := http.Client{
 	// Timeout: 50 * time.Millisecond,
 	}
@@ -49,7 +52,7 @@ func TestApp(t *testing.T) {
 		cancel()
 	}()
 
-	// Perform the GET call. We except this co error.
+	// Perform the GET call. We except this to error.
 	if _, err := client.Do(req); err == nil {
 		t.Fatal("request was supposed to timeout")
 	}
