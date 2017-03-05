@@ -95,3 +95,9 @@ Learn several different techniques and packages for adding authentication to web
 Sending sensitive data in plain text is a bad idea! Learn about securing your application using TLS.
 
 [TLS](../../web/tls/README.md)
+
+## Shutdown
+
+We can create web servers like professionals now but what about when we need to shut them down? Don't rudely interrupt anyone; shut them down gracefully!
+
+[Shutdown](../../web/shutdown/README.md)

@@ -1,50 +1,51 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// This program provides a sample web service that implements a
-// RESTFul CRUD API against a MongoDB database.
+// This program shows how to launch a web server then shut it down gracefully.
 package main
 
 import (
 	"context"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
-
-	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
 )
 
-// init is called before main. We are using init to customize logging output.
-func init() {
-	log.SetFlags(log.LstdFlags | log.Lmicroseconds | log.Lshortfile)
+// app is our application handler. We log requests when they start so we can
+// see them happening then log again when they're over. We have a random sleep
+// from 800-1200 milliseconds so everything goes slow enough to see.
+func app(res http.ResponseWriter, req *http.Request) {
+	id := time.Now().Nanosecond()
+	log.Printf("app : Start %d", id)
+
+	sleep := rand.Intn(400) + 800
+	time.Sleep(time.Duration(sleep) * time.Millisecond)
+
+	log.Printf("app : End   %d", id)
 }
 
-// main is the entry point for the application.
 func main() {
-	log.Println("main : Started")
 
-	// Check the environment for a configured port value.
-	host := os.Getenv("HOST")
-	if host == "" {
-		host = ":3000"
-	}
+	log.Println("main : Started")
 
 	// Create a new server and set timeout values.
 	server := http.Server{
-		Addr:           host,
-		Handler:        routes.API(),
+		Addr:           ":3000",
+		Handler:        http.HandlerFunc(app),
 		ReadTimeout:    5 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	// Start listening for requests.
+	// Start listening for requests. We do this in a goroutine so our main func
+	// can be blocked waiting on the shutdown code.
 	go func() {
-		log.Println("listener : Listening on " + host)
+		log.Println("listener : Started : Listening on :3000")
 		err := server.ListenAndServe()
-		log.Printf("listener : %v", err)
+		log.Printf("listener : Completed : %v", err)
 	}()
 
 	// Block until there's an interrupt then shut the server down. The main
