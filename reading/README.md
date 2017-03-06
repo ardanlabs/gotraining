@@ -78,7 +78,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Write High Performance Go](http://go-talks.appspot.com/github.com/davecheney/presentations/writing-high-performance-go.slide) - Dave Cheney  
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team    
 [Go's execution tracer](http://www.thedotpost.com/2016/10/rhys-hiltner-go-execution-tracer) - Rhys Hiltner  
-[Using Instruments to profile Go programs](https://rakyll.org/instruments) - rakyll  
+[Using Instruments to profile Go programs](https://rakyll.org/instruments) - Burcu Dogan  
 [Designing for Performance](https://www.youtube.com/watch?v=03GsLxVdVzU&feature=youtu.be) - Martin Thompson  
 
 ### Interfaces and Composition

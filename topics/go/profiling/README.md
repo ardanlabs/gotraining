@@ -145,6 +145,9 @@ Learn the basics of using http/pprof.
 Learn the basics of blocking profiling.  
 [Blocking Profiling](blocking/README.md)
 
+Learn the basics of mutex profiling.  
+[Mutex Profiling](mutex/README.md)
+
 Learn the basics of trace profiling.  
 [Trace Profiling](trace/README.md)
 
