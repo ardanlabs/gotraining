@@ -9,8 +9,9 @@ This is material for any intermediate-level developer who has some experience wi
 You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
 
 * [Prepare Your Mind](https://github.com/ardanlabs/gotraining/tree/master/topics/go#prepare-your-mind)
-* [Performance vs Productivity](https://github.com/ardanlabs/gotraining/tree/master/topics/go#performance-vs-productivity)
-* [Guidelines, Decision Making and Trade-Offs](https://github.com/ardanlabs/gotraining/tree/master/topics/go#guidelines-decision-making-and-trade-offs)
+* [Productivity vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#productivity-vs-performance)
+* [Correctness vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#correctness-vs-performance)
+* [Design Philosophy](https://github.com/ardanlabs/gotraining/tree/master/topics/go#design-philosophy)
 * [Data Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#data-oriented-design)
 * [Interface And Composition Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#interface-and-composition-design)
 * [Package Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#package-oriented-design)
@@ -68,15 +69,27 @@ You want to write code that is optimized for correctness. Don't make coding deci
 
 Improvement comes from writing code and thinking about the code you write. Then refactoring the code to make it better. This requires the help of other people to also read the code you are writing. Prototype ideas first to validate them. Try different approaches or ask others to attempt a solution. Then compare what you have learned.
 
+Too many developers are not prototyping their ideas first before writing production code. It is through prototyping that you can validate your thoughts, ideas and designs. This is the time when you can break down walls and figure out how things work. Prototype in the concrete and consider contracts after you have a working prototype.
+
+Refactoring must become part of the development cycle. Refactoring is the process of improving the code from the things that you learn on a daily basis. Without time to refactor, code will become impossible to manage and maintain over time. This creates the legacy issues we are seeing today.
+
 **Quotes**
 
-_"The correctness of the implementation is the most important concern, but there is no royal road to correctness. It involves diverse tasks such as thinking of invariants, testing and code reviews. Optimization should be done, but not prematurely." - Al Aho (2009)_
+_"The correctness of the implementation is the most important concern, but there is no royal road to correctness. It involves diverse tasks such as thinking of invariants, testing and code reviews. Optimization should be done, but not prematurely." - Al Aho (inventor of AWK)_
 
-_"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan (2009)_
+_"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan_
 
-_"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probablility that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan (2009)_
+_"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probablility that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
-_"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all" - Brian Kernighan (2009)_
+_"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all" - Brian Kernighan_
+
+_"There are two kinds of software projects: those that fail, and those that turn into legacy horrors." - Peter Weinberger (inventor of AWK)_
+
+_"Legacy software is an unappreciated but serious problem. Legacy code may be the downfall of our civilization." - Chuck Moore (inventor of Forth)_
+
+**Resources:**
+
+[Prototype your design!](https://www.youtube.com/watch?v=vLxX3yZmw5Q) - Robert Griesemer
 
 ---
 
@@ -160,6 +173,8 @@ In Go, the underlying machine is the real machine rather than a single abstract 
 
 **_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_**
 
+**_"Can you explain it to the median user (developer)? as opposed to will the smartest user (developer) figure it out?" - Peter Weinberger (inventor of AWK)_**
+
 [Example Readability Issue](http://cpp.sh/6i7d)  
 
 #### 3) Simplicity
@@ -169,6 +184,8 @@ In Go, the underlying machine is the real machine rather than a single abstract 
 This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Validate that abstractions are not generalized or even too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
 
 **_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup (inventor of C++)_**
+
+**_"Everything should be made as simple as possible, but not simpler." - Albert Einstein_**
 
 **Resources:**
 

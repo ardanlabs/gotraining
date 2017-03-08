@@ -154,7 +154,6 @@ If you are interested in holding an event in your area please let me know. We wi
 		Type		Type		Venue					City, ST				Month		Trainer				Url
 		================================================================================================================	
 		Conference	Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
-		Public 		Data		Brandless 				Chicago, IL 			April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-science-chicago-april-2017-tickets-31455935550
 		Public 		Data		1up Events 				San Francisco, CA		April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-san-francisco-april-2017-tickets-31485334483
 		WWG 		Data		TBA	 					San Francisco, CA		April 		Daniel Whitenack 	https://www.meetup.com/Women-Who-Go/events/237660548
 		Public 		Data		Fieldlens 				NYC, NY 				June 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-new-york-june-2017-tickets-32130974610
