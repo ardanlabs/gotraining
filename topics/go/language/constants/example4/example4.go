@@ -24,8 +24,8 @@ const (
 func (t Time) Add(d Duration) Time
 */
 
-// Sample program to show a idiomatic use of named types from the
-// standard library and how they work in concert with other Go concepts.
+// Sample program to show how literal, constant and variables work
+// within the scope of implicit conversion.
 package main
 
 import (
@@ -33,28 +33,27 @@ import (
 	"time"
 )
 
-// fiveSeconds is an typed constant of type Duration.
-const fiveSeconds = 5 * time.Second // time.Duration(5) * time.Duration(1000000000)
-
 func main() {
 
 	// Use the time package to get the current date/time.
 	now := time.Now()
 
-	// Convert the literal constant -5 to a value of type int64.
-	minusFive := int64(-5)
-
-	// Attempt to use the variable of type int64.
-	lessFiveNanoseconds := now.Add(minusFive)
-
-	// ./example2.go:48: cannot use minusFive (type int64) as type
-	// time.Duration in argument to now.Add
+	// Subtract 5 nanoseconds from now using a literal constant.
+	literal := now.Add(-5)
 
 	// Subtract 5 seconds from now using a declared constant.
-	lessFiveSeconds := now.Add(-fiveSeconds)
+	const timeout = 5 * time.Second // time.Duration(5) * time.Duration(1000000000)
+	constant := now.Add(-timeout)
+
+	// Subtract 5 nanoseconds from now using a variable of type int64.
+	minusFive := int64(-5)
+	variable := now.Add(minusFive)
+
+	// example4.go:50: cannot use minusFive (type int64) as type time.Duration in argument to now.Add
 
 	// Display the values.
 	fmt.Printf("Now     : %v\n", now)
-	fmt.Printf("Nano    : %v\n", lessFiveNanoseconds)
-	fmt.Printf("Seconds : %v\n", lessFiveSeconds)
+	fmt.Printf("Literal : %v\n", literal)
+	fmt.Printf("Constant: %v\n", constant)
+	fmt.Printf("Variable: %v\n", variable)
 }

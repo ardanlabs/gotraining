@@ -8,6 +8,8 @@ Constants are a way to create a named identifier whose value can never change. T
 * They existing only at compilation.
 * Untyped constants can be implictly converted where typed constants and variables can't.
 * Think of untyped constants as having a Kind, not a Type.
+* Learn about explicit and implicit conversions.
+* See the power of constants and their use in the standard library.
 
 ## Links
 
@@ -17,9 +19,10 @@ http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 ## Code Review
 
-[Declare and inialize constants](example1/example1.go) ([Go Playground](https://play.golang.org/p/dIJb3S6CIb))  
+[Declare and initialize constants](example1/example1.go) ([Go Playground](https://play.golang.org/p/dIJb3S6CIb))  
 [Parallel type system (Kind)](example2/example2.go) ([Go Playground](https://play.golang.org/p/-DUJAVsTMp))  
-[iota](example3/example3.go) ([Go Playground](https://play.golang.org/p/OqJLBLhO7_))  
+[iota](example3/example3.go) ([Go Playground](https://play.golang.org/p/1Y9qjOuPt0))  
+[Implicit conversion](example4/example4.go) ([Go Playground](https://play.golang.org/p/QzVFcMdU5S))  
 
 ## Exercises
 

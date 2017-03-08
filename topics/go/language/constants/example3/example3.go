@@ -8,25 +8,30 @@ import "fmt"
 
 func main() {
 
-	// Constant block with iota using increment.
 	const (
-		A int         = iota //  0 : Start at 0
-		B                    //  1 : Increment by 1
-		C                    //  2 : Increment by 1
-		D = 10               // 10 : Set to 10
-		E                    // 10 : Set to 10
-		F = iota             //  5 : This is the 6th constant so set to 5.
-		G = 20 + iota        // 26 : Add 20 + 6
-		H                    // 27 : Increment by 1
-		I                    // 28 : Increment by 1
-		J = iota             //  9 : This is the 10th constant so set to 9.
-		K                    // 10 : Increment by 1
-		L                    // 11 : Increment by 1
+		A1 = iota // 0 : Start at 0
+		B1 = iota // 1 : Increment by 1
+		C1 = iota // 2 : Increment by 1
 	)
 
-	fmt.Println("A-L:", A, B, C, D, E, "-", F, G, H, I, "-", J, K, L)
+	fmt.Println("1:", A1, B1, C1)
 
-	// New constant block with iota using bitwise operation.
+	const (
+		A2 = iota // 0 : Start at 0
+		B2        // 1 : Increment by 1
+		C2        // 2 : Increment by 1
+	)
+
+	fmt.Println("2:", A2, B2, C2)
+
+	const (
+		A3 = iota + 1 // 1 : Start at 0 + 1
+		B3            // 2 : Increment by 1
+		C3            // 3 : Increment by 1
+	)
+
+	fmt.Println("3:", A3, B3, C3)
+
 	const (
 		Ldate         = 1 << iota //  1 : Shift 1 to the left 0.  0000 0001
 		Ltime                     //  2 : Shift 1 to the left 1.  0000 0010

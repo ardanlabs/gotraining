@@ -9,7 +9,6 @@ This material covers all the language syntax, idioms, implementation and specifi
 [Struct Types](../../../go/language/struct_types/README.md) | 
 [Pointers](../../../go/language/pointers/README.md) | 
 [Constants](../../../go/language/constants/README.md) | 
-[Type Conversions](../../../go/language/type_conversions/README.md) | 
 [Functions](../../../go/language/functions/README.md)
 
 #### Data Structures
