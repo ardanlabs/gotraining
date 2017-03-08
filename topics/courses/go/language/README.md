@@ -16,12 +16,10 @@ This material covers all the language syntax, idioms, implementation and specifi
 [Slices](../../../go/language/slices/README.md) | 
 [Maps](../../../go/language/maps/README.md)
 
-#### Methods, Interfaces and Embedding
+#### Decoupling
 [Methods](../../../go/language/methods/README.md) | 
 [Interfaces](../../../go/language/interfaces/README.md) | 
-[Embedding](../../../go/language/embedding/README.md)
-
-#### Exporting Identifiers
+[Embedding](../../../go/language/embedding/README.md) | 
 [Exporting](../../../go/language/exporting/README.md)
 
 ___
