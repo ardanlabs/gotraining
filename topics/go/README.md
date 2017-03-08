@@ -11,7 +11,7 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * [Prepare Your Mind](https://github.com/ardanlabs/gotraining/tree/master/topics/go#prepare-your-mind)
 * [Productivity vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#productivity-vs-performance)
 * [Correctness vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#correctness-vs-performance)
-* [Design Philosophy](https://github.com/ardanlabs/gotraining/tree/master/topics/go#design-philosophy)
+* [Code Reviews](https://github.com/ardanlabs/gotraining/tree/master/topics/go#code-reviews)
 * [Data Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#data-oriented-design)
 * [Interface And Composition Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#interface-and-composition-design)
 * [Package Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#package-oriented-design)
@@ -93,9 +93,9 @@ _"Legacy software is an unappreciated but serious problem. Legacy code may be th
 
 ---
 
-### Design Philosophy
+### Code Reviews
 
-Develop your design philosophy around these three major categories in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
+You can't look at a piece of code, function or algorithm and determine if it smells good or bad without a design philosophy. These four major categories are the basis for code reviews and should be prioritized in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
 **_Note: There are exceptions to everything but when you are not sure an exception applies, follow the guidelines presented the best you can._** 
 

@@ -6,9 +6,7 @@ This material covers a good portion of the tooling that comes with go. Specifica
 
 #### Testing and Benchmarking
 [Testing](../../../go/testing/tests/README.md) | 
-[Benchmarking](../../../go/testing/benchmarks/README.md)
-
-#### Go Fuzzing
+[Benchmarking](../../../go/testing/benchmarks/README.md) | 
 [Fuzzing](../../../go/testing/fuzzing/README.md)
 
 #### Profiling and Tracing
