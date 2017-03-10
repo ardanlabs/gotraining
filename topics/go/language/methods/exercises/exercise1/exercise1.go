@@ -28,14 +28,19 @@ func (p *player) average() float64 {
 func main() {
 
 	// Create a few players.
-	players := []player{
+	ps := []player{
 		{"bill", 10, 7},
 		{"jim", 12, 6},
 		{"ed", 6, 4},
 	}
 
 	// Display the batting average for each player.
-	for _, p := range players {
+	for i := range ps {
+		fmt.Printf("%s: AVG[.%.f]\n", ps[i].name, ps[i].average()*1000)
+	}
+
+	// Why did I not choose this form?
+	for _, p := range ps {
 		fmt.Printf("%s: AVG[.%.f]\n", p.name, p.average()*1000)
 	}
 }
