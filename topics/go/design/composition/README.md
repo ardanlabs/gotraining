@@ -12,6 +12,10 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 * Don't group types by a common DNA but by a common behavior.
 * Everyone can work together when we focus when we do and not what we are.
 
+## Quotes
+
+_"Methods are valid when it is practical or reasonable for a piece of data to expose a capability." - William Kennedy_
+
 ## Design Guidelines
 
 * Learn about the [design guidelines](../../#interface-and-composition-design) for composition.

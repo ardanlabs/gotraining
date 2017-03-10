@@ -8,6 +8,10 @@ Methods are functions that are declared with a receiver which binds the method t
 * Receivers bind a method to a type and can use value or pointer semantics.
 * Methods are valid when it is practical or reasonable for a piece of data to expose a capability.
 
+## Quotes
+
+_"Methods are valid when it is practical or reasonable for a piece of data to expose a capability." - William Kennedy_
+
 ## Links
 
 https://golang.org/doc/effective_go.html#methods  
