@@ -21,7 +21,7 @@ func TestApp(t *testing.T) {
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
-	// Replace the `http to `ws` in the url.
+	// Replace the `http` with `ws` in the url.
 	wsURL := strings.Replace(ts.URL, "http", "ws", 1) + "/socket"
 
 	// Dial a websocket into our mock server.
