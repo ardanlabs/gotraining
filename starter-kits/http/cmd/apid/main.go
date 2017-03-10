@@ -68,7 +68,7 @@ func blockUntilShutdown(server *http.Server) {
 	log.Println("shutdown : Attempting graceful shut down...")
 
 	// Create a context to attempt a graceful 5 second shutdown.
-	timeout := 5 * time.Second
+	const timeout = 5 * time.Second
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 
@@ -78,7 +78,7 @@ func blockUntilShutdown(server *http.Server) {
 
 		// Looks like we timedout on the graceful shutdown. Kill it hard.
 		if err := server.Close(); err != nil {
-			log.Printf("shutdown : Errors killing server : %v", err)
+			log.Printf("shutdown : Error killing server : %v", err)
 		}
 	}
 }

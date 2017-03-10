@@ -65,28 +65,26 @@ func shutdownOnInterrupt(server *http.Server) {
 	signal.Notify(c, os.Interrupt)
 
 	// Block until a signal is received.
-	log.Println("closer : Waiting for a shutdown signal")
+	log.Println("shutdown : Waiting for a shutdown signal")
 	<-c
 
-	log.Println("closer : Signal received. Attempting graceful shut down...")
+	log.Println("shutdown : Signal received. Attempting graceful shut down...")
 
 	// Create a context with a 5 second timeout. If the server can't
 	// gracefully shut down in that time we'll kill it.
-	timeout := 5 * time.Second
+	const timeout = 5 * time.Second
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 
-	// Try a graceful shutdown. If there's no error we're done.
-	err := server.Shutdown(ctx)
-	if err == nil {
-		return
-	}
+	// Try a graceful shutdown.
+	if err := server.Shutdown(ctx); err != nil {
 
-	// Try a forceful shutdown
-	log.Printf("closer : Graceful shutdown did not complete in %v : %v", timeout, err)
-	log.Println("closer : Killing server.")
-	err = server.Close()
-	if err != nil {
-		log.Printf("closer : Errors killing server : %v", err)
+		// Couldn't shut down gracefully. Try a forceful shutdown.
+		log.Printf("shutdown : Graceful shutdown did not complete in %v : %v", timeout, err)
+		log.Print("shutdown : Killing server.")
+
+		if err := server.Close(); err != nil {
+			log.Printf("shutdown : Error killing server : %v", err)
+		}
 	}
 }
