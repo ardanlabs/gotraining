@@ -16,6 +16,10 @@ import (
 
 func main() {
 
+	// Create a context with a timeout of 50 milliseconds.
+	ctx, cancel := context.WithTimeout(context.Background(), 150*time.Millisecond)
+	defer cancel()
+
 	// Create a new request.
 	req, err := http.NewRequest("GET", "https://www.goinggo.net/post/index.xml", nil)
 	if err != nil {
@@ -23,68 +27,44 @@ func main() {
 		return
 	}
 
-	// Create a context with a timeout of 50 milliseconds.
-	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
-	defer cancel()
-
-	// Perform the call which much finish in 50 milliseconds.
-	if err = httpDo(ctx, req, handler); err != nil {
-		log.Println(err)
-		return
-	}
-}
-
-// handler is used to hande the response from the request.
-func handler(resp *http.Response, err error) error {
-
-	// If we received an error, just return it.
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	// Write the response to stdout.
-	io.Copy(os.Stdout, resp.Body)
-	return nil
-}
-
-// httpDo performs a request and will return when the request completes
-// or the specified time based on the context runs out.
-func httpDo(ctx context.Context, req *http.Request, h func(*http.Response, error) error) error {
-
 	// Declare a new transport and client for the call.
 	var tr http.Transport
 	client := http.Client{
 		Transport: &tr,
 	}
 
-	// Make the request call in a separate goroutine.
+	// Make the web call in a separate goroutine so it can be cancelled.
 	ch := make(chan error, 1)
 	go func() {
 		log.Println("Starting Request")
 
-		// Call the provided handler function which processes
-		// the request and returns error information.
-		ch <- h(client.Do(req))
+		// Make the web call and return any error.
+		resp, err := client.Do(req)
+		if err != nil {
+			ch <- err
+			return
+		}
+
+		// Close the response body on the return.
+		defer resp.Body.Close()
+
+		// Write the response to stdout.
+		io.Copy(os.Stdout, resp.Body)
+		ch <- nil
 	}()
 
 	// Wait the request or timeout.
 	select {
 	case <-ctx.Done():
-		log.Println("Context Timedout")
+		log.Println("timeout, cancel work...")
 
-		// Cancel the request.
+		// Cancel the request and wait for it to complete.
 		tr.CancelRequest(req)
-
-		log.Println("Waiting For Request To Cancel")
-
-		// Wait for request to return.
-		<-ch
-		return ctx.Err()
+		log.Println(<-ch)
 
 	case err := <-ch:
-
-		// The request is complete.
-		return err
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }

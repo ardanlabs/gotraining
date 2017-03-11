@@ -1,8 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to use the WithCancel function
-// of the Context package.
+// Sample program to show how to use the WithCancel function.
 package main
 
 import (
@@ -12,59 +11,31 @@ import (
 )
 
 func main() {
-	timeout()
-	callCancel()
-}
 
-// timeout show how to handle a context that does not timeout.
-func timeout() {
-
-	// WithCancel returns a copy of parent with a new Done channel.
-	// The returned context's Done channel is closed when the returned
-	// cancel function is called or when the parent context's Done
-	// channel is closed, whichever happens first.
+	// Create a context that is cancellable only manually.
 	ctx, cancel := context.WithCancel(context.Background())
 
-	// Even though ctx will have expired already, it is good
-	// practice to call its cancelation function in any case.
-	// Failure to do so may keep the context and its parent alive
-	// longer than necessary.
+	// The cancel function must be called regardless of the outcome.
 	defer cancel()
 
-	select {
-	case <-time.After(100 * time.Millisecond):
-		fmt.Println("overslept")
-
-	case <-ctx.Done():
-		fmt.Println(ctx.Err()) // prints "context deadline exceeded"
-	}
-}
-
-// callCancel show how cancel works with the context.
-func callCancel() {
-
-	// WithCancel returns a copy of parent with a new Done channel.
-	// The returned context's Done channel is closed when the returned
-	// cancel function is called or when the parent context's Done
-	// channel is closed, whichever happens first.
-	ctx, cancel := context.WithCancel(context.Background())
-
-	// Even though ctx will have expired already, it is good
-	// practice to call its cancelation function in any case.
-	// Failure to do so may keep the context and its parent alive
-	// longer than necessary.
-	defer cancel()
-
+	// Ask the goroutine to do some work for us.
 	go func() {
-		time.Sleep(50 * time.Millisecond)
-		cancel()
+		for {
+
+			// Simulate work.
+			time.Sleep(50 * time.Millisecond)
+
+			// Report the work is done.
+			cancel()
+		}
 	}()
 
+	// Wait for the work to finish. If it takes too long move on.
 	select {
 	case <-time.After(100 * time.Millisecond):
-		fmt.Println("overslept")
+		fmt.Println("moving on")
 
 	case <-ctx.Done():
-		fmt.Println(ctx.Err()) // prints "context canceled"
+		fmt.Println("work complete")
 	}
 }
