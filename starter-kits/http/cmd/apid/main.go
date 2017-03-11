@@ -43,19 +43,19 @@ func main() {
 	// Start listening for requests.
 	go func() {
 		log.Println("listener : Listening on " + host)
-		err := server.ListenAndServe()
-		log.Printf("listener : %v", err)
+		server.ListenAndServe()
 	}()
 
 	// Block until there's an interrupt then shut the server down. The main
 	// func must not return before this process is complete or in-flight
 	// requests will be aborted.
-	shutdownOnInterrupt(&server)
+	blockUntilShutdown(&server)
 
 	log.Println("main : Completed")
 }
 
-func shutdownOnInterrupt(server *http.Server) {
+// blockUntilShutdown holds the goroutine waiting for a signal to shutdown.
+func blockUntilShutdown(server *http.Server) {
 
 	// Set up channel to receive interrupt signals.
 	// We must use a buffered channel or risk missing the signal
@@ -64,28 +64,21 @@ func shutdownOnInterrupt(server *http.Server) {
 	signal.Notify(c, os.Interrupt)
 
 	// Block until a signal is received.
-	log.Println("closer : Waiting for a shutdown signal")
 	<-c
+	log.Println("shutdown : Attempting graceful shut down...")
 
-	log.Println("closer : Signal received. Attempting graceful shut down...")
-
-	// Create a context with a 5 second timeout. If the server can't
-	// gracefully shut down in that time we'll kill it.
+	// Create a context to attempt a graceful 5 second shutdown.
 	timeout := 5 * time.Second
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 
-	// Try a graceful shutdown. If there's no error we're done.
-	err := server.Shutdown(ctx)
-	if err == nil {
-		return
-	}
+	// Attempt the graceful shutdown.
+	if err := server.Shutdown(ctx); err != nil {
+		log.Printf("shutdown : Graceful shutdown did not complete in %v : %v", timeout, err)
 
-	// Try a forceful shutdown
-	log.Printf("closer : Graceful shutdown did not complete in %v : %v", timeout, err)
-	log.Println("closer : Killing server.")
-	err = server.Close()
-	if err != nil {
-		log.Printf("closer : Errors killing server : %v", err)
+		// Looks like we timedout on the graceful shutdown. Kill it hard.
+		if err := server.Close(); err != nil {
+			log.Printf("shutdown : Errors killing server : %v", err)
+		}
 	}
 }
