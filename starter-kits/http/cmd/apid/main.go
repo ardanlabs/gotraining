@@ -43,7 +43,7 @@ func main() {
 	// Start listening for requests.
 	go func() {
 		log.Println("listener : Listening on " + host)
-		server.ListenAndServe()
+		log.Println("listener :", server.ListenAndServe())
 	}()
 
 	// Block until there's an interrupt then shut the server down. The main
