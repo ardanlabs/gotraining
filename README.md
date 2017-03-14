@@ -96,8 +96,6 @@ _**Writing**_
 
 We are working hard to maintain pricing that can fit your budget.
 
-**This is our current pricing if you book a class in the first quarter of this year (2017).**
-
 **Ultimate Go**  
 4 Days (24 hours) - $20,000 for up to 15 students  
 3 Days (21 hours) - $15,000 for up to 15 students  
@@ -129,40 +127,38 @@ _This options is skips most of the exercises to get through the material. We wil
 
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
 
-### 2017
-		Type		Type		Venue					City, ST				Month		Trainer				Url
-		================================================================================================================	
-		Public		Adv Go		Golab					Florance, IT 			January 	Bill Kennedy 		http://golab.io
-		Corporate	Go			GNS Science				Wellington, NZ 			January 	Bill Kennedy
-		GoBridge	Go 			Framingham 				Framingham, MA			February 	Bill Kennedy 		https://www.bridgetroll.org/events/329
-		Conference	Adv Go 		GopherCon India 		Pune, India 			February 	Bill Kennedy 		http://www.gophercon.in/go-workshop		
-		Dev Fest	Adv Go 		SUNY Potsdam 			Potsdam, NY 			March 		Bill Kennedy  
-		Public 		Go 			Fire Tavern 			Atlanta, GA 			March 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
-		Filming 	Go 			Pearson					San Francisco, CA 		March 		Bill Kennedy 		
-		Corporate 	Go 			Intel 					Portland, OR 			March 		Bill Kennedy 		
-		Public 		Go 			1up Events 				San Francisco, CA		April 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
-		GoBridge	Go 			Framingham 				Framingham, MA			April 		Bill Kennedy 		TBA
-		Conference	Adv Go 		Capital Golang	 		Washington, D.C. 		April 		Bill Kennedy 		http://capitalgolang.com
-		Corporate	Go			Capital One				SF, CA		 			May		 	Bill Kennedy
-		Public 		Go 			Skillsmatter			London, England			May 		Ernesto Jimenez 	https://skillsmatter.com/courses/563-ardanlabs-ultimate-go-workshop
-		Public 		Go 			The Lab		 			Miami, FL 				May 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-miami-may-2017-tickets-32131447023
-		Conference	Go 			Singapore Conference 	Singapore				May 		Bill Kennedy 		http://gophercon.sg/workshop
-		Public 		Go 			bol.com		 			Utrecht, Netherlands 	June 		Bill Kennedy 		https://www.eventbrite.com/e/ultimate-go-netherlands-june-2017-tickets-32131027769
-		GoBridge	Go 			Google 					Brazil					June		Bill Kennedy 		TBA
-		Conference	Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
+### 2017       
+		Type         Type     Venue             Location               Month      Trainer            Url
+		=====================================================================================================================================================================================
+		Corporate    Go       GNS Science       Wellington, NZ         January    Bill Kennedy
+		Corporate    Go       Pearson           San Francisco, CA      March      Bill Kennedy 		
+		Corporate    Go       Intel             Portland, OR           March      Bill Kennedy 		
+		Corporate    Go       Capital One       SF, CA                 May        Bill Kennedy
 
-		Type		Type		Venue					City, ST				Month		Trainer				Url
-		================================================================================================================	
-		Conference	Data 		GopherCon India 		Pune, India 			February 	Daniel Whitenack	
-		Public 		Data		1up Events 				San Francisco, CA		April 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-san-francisco-april-2017-tickets-31485334483
-		WWG 		Data		TBA	 					San Francisco, CA		April 		Daniel Whitenack 	https://www.meetup.com/Women-Who-Go/events/237660548
-		Public 		Data		Fieldlens 				NYC, NY 				June 		Daniel Whitenack 	https://www.eventbrite.com/e/ultimate-data-new-york-june-2017-tickets-32130974610
-		Conference	Data		GopherCon				Denver, CO  			July		Daniel Whitenack  		
-
-		Type		Type		Venue					City, ST				Month		Trainer				Url
-		================================================================================================================	
-		WWG 		Web			Buzzfeed 				San Francisco, CA		March 		Jacob Walker 		https://www.meetup.com/Women-Who-Go/events/237660344
-		Public 		Web			1up Events 				San Francisco, CA		April 		Jacob Walker 		https://www.eventbrite.com/e/ultimate-go-web-san-francisco-april-2017-tickets-31485605293
+		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
+		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
+		Public       Data     1up Events        San Francisco, CA      April      Daniel Whitenack   https://www.eventbrite.com/e/ultimate-data-san-francisco-april-2017-tickets-31485334483
+		Public       Go       Skillsmatter      London, England        May        Ernesto Jimenez    https://skillsmatter.com/courses/563-ardanlabs-ultimate-go-workshop
+		Public       Go       The Lab           Miami, FL              May        Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-miami-may-2017-tickets-32131447023
+		Public       Go       bol.com           Utrecht, Netherlands   June       Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-netherlands-june-2017-tickets-32131027769
+		Public       Data     Fieldlens         NYC, NY                June       Daniel Whitenack   https://www.eventbrite.com/e/ultimate-data-new-york-june-2017-tickets-32130974610
+		
+		GoBridge     Go       Framingham        Framingham, MA         February   Bill Kennedy       https://www.bridgetroll.org/events/329
+		WWG          Web      Buzzfeed          San Francisco, CA      March      Jacob Walker       https://www.meetup.com/Women-Who-Go/events/237660344
+		WWG          Data     TuneIn            San Francisco, CA      April      Daniel Whitenack   https://www.meetup.com/Women-Who-Go/events/237660548
+		GoBridge     Go       Framingham        Framingham, MA         April      Bill Kennedy       https://www.bridgetroll.org/events/343
+		GoBridge     Go       SUNY Potsdam      Potsdam, NY            May        Bill Kennedy       TBA
+		WWG          Web      TBA               NYC, NY                May        Jacob Walker       TBA
+		GoBridge     Go       Google            Brazil                 June       Bill Kennedy       TBA
+		
+		Conference   Adv Go   Golab             Florance, IT           January    Bill Kennedy       http://golab.io
+		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy       http://www.gophercon.in/go-workshop		
+		Conference   Data     GopherCon India   Pune, India            February   Daniel Whitenack	
+		Dev Fest     Adv Go   SUNY Potsdam      Potsdam, NY            March      Bill Kennedy  
+		Conference   Adv Go   Capital Golang    Washington, D.C.       April      Bill Kennedy       http://capitalgolang.com
+		Conference   Go       Singapore         Singapore              May        Bill Kennedy       http://gophercon.sg/workshop
+		Conference   Adv Go   GopherCon         Denver, CO             July       Bill Kennedy
+		Conference   Data     GopherCon         Denver, CO             July       Daniel Whitenack  				
 
 ## More About Go
 
