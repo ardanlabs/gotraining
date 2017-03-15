@@ -40,45 +40,33 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	// Start listening for requests.
 	go func() {
-		log.Println("listener : Listening on " + host)
-		log.Println("listener :", server.ListenAndServe())
+
+		// Listen for an interrupt signal from the OS.
+		osSignals := make(chan os.Signal)
+		signal.Notify(osSignals, os.Interrupt)
+
+		<-osSignals
+
+		// Create a context to attempt a graceful 5 second shutdown.
+		const timeout = 5 * time.Second
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
+		defer cancel()
+
+		// Attempt the graceful shutdown.
+		if err := server.Shutdown(ctx); err != nil {
+			log.Printf("shutdown : Graceful shutdown did not complete in %v : %v", timeout, err)
+
+			// Looks like we timedout on the graceful shutdown. Kill it hard.
+			if err := server.Close(); err != nil {
+				log.Printf("shutdown : Error killing server : %v", err)
+			}
+		}
 	}()
 
-	// Block until there's an interrupt then shut the server down. The main
-	// func must not return before this process is complete or in-flight
-	// requests will be aborted.
-	blockUntilShutdown(&server)
+	if err := server.ListenAndServe(); err != nil {
+		log.Printf("shutdown : %v", err)
+	}
 
 	log.Println("main : Completed")
-}
-
-// blockUntilShutdown holds the goroutine waiting for a signal to shutdown.
-func blockUntilShutdown(server *http.Server) {
-
-	// Set up channel to receive interrupt signals.
-	// We must use a buffered channel or risk missing the signal
-	// if we're not ready to receive when the signal is sent.
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt)
-
-	// Block until a signal is received.
-	<-c
-	log.Println("shutdown : Attempting graceful shut down...")
-
-	// Create a context to attempt a graceful 5 second shutdown.
-	const timeout = 5 * time.Second
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
-	defer cancel()
-
-	// Attempt the graceful shutdown.
-	if err := server.Shutdown(ctx); err != nil {
-		log.Printf("shutdown : Graceful shutdown did not complete in %v : %v", timeout, err)
-
-		// Looks like we timedout on the graceful shutdown. Kill it hard.
-		if err := server.Close(); err != nil {
-			log.Printf("shutdown : Error killing server : %v", err)
-		}
-	}
 }
