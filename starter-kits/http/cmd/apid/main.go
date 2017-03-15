@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"sync"
 	"time"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
@@ -40,18 +41,22 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
+	// We want to report the listener is closed.
+	var wg sync.WaitGroup
+	wg.Add(1)
+
+	// Start the listener.
 	go func() {
 		log.Printf("startup : Listening : %s", host)
-
-		if err := server.ListenAndServe(); err != nil {
-			log.Printf("shutdown : Listener closed : %v", err)
-		}
+		log.Printf("shutdown : Listener closed : %v", server.ListenAndServe())
+		wg.Done()
 	}()
 
 	// Listen for an interrupt signal from the OS.
 	osSignals := make(chan os.Signal)
 	signal.Notify(osSignals, os.Interrupt)
 
+	// Wait for a signal to shutdown.
 	<-osSignals
 
 	// Create a context to attempt a graceful 5 second shutdown.
@@ -59,7 +64,8 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 
-	// Attempt the graceful shutdown.
+	// Attempt the graceful shutdown by closing the listener and
+	// completing all inflight requests.
 	if err := server.Shutdown(ctx); err != nil {
 		log.Printf("shutdown : Graceful shutdown did not complete in %v : %v", timeout, err)
 
@@ -69,5 +75,7 @@ func main() {
 		}
 	}
 
+	// Wait for the listener to report it is closed.
+	wg.Wait()
 	log.Println("main : Completed")
 }
