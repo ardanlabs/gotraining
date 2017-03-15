@@ -5,8 +5,9 @@ package user
 
 import (
 	"context"
-	"log"
 	"time"
+
+	"fmt"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
@@ -20,12 +21,12 @@ const usersCollection = "users"
 // List retrieves a list of existing users from the database.
 func List(ctx context.Context, traceID string, dbSes *mgo.Session) ([]User, error) {
 	u := []User{}
+
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : List : MGO : db.users.find()\n", traceID)
 		return collection.Find(nil).All(&u)
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		return nil, errors.Wrap(err, "db.Execute")
+		return nil, errors.Wrap(err, "db.users.find()")
 	}
 
 	return u, nil
@@ -37,17 +38,17 @@ func Retrieve(ctx context.Context, traceID string, dbSes *mgo.Session, userID st
 		return nil, errors.Wrapf(web.ErrInvalidID, "bson.IsObjectIdHex: %s", userID)
 	}
 
+	q := bson.M{"user_id": userID}
+
 	var u *User
 	f := func(collection *mgo.Collection) error {
-		q := bson.M{"user_id": userID}
-		log.Printf("%s : Retrieve : MGO : db.users.find(%s)\n", traceID, db.Query(q))
 		return collection.Find(q).One(&u)
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
 			err = web.ErrNotFound
 		}
-		return nil, errors.Wrap(err, "db.Execute")
+		return nil, errors.Wrap(err, fmt.Sprintf("db.users.find(%s)", db.Query(q)))
 	}
 
 	return u, nil
@@ -84,11 +85,10 @@ func Create(ctx context.Context, traceID string, dbSes *mgo.Session, cu *CreateU
 	}
 
 	f := func(collection *mgo.Collection) error {
-		log.Printf("%s : Create : MGO : db.users.insert(%s)\n", traceID, db.Query(u))
 		return collection.Insert(u)
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		return nil, errors.Wrap(err, "db.Execute")
+		return nil, errors.Wrap(err, fmt.Sprintf("db.users.insert(%s)", db.Query(u)))
 	}
 
 	return &u, nil
@@ -106,17 +106,17 @@ func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 		cua.DateModified = &now
 	}
 
+	q := bson.M{"user_id": userID}
+	m := bson.M{"$set": cu}
+
 	f := func(collection *mgo.Collection) error {
-		q := bson.M{"user_id": userID}
-		m := bson.M{"$set": cu}
-		log.Printf("%s : Update : MGO : db.users.update(%s, %s)\n", traceID, db.Query(q), db.Query(m))
 		return collection.Update(q, m)
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
 			err = web.ErrNotFound
 		}
-		return errors.Wrap(err, "db.Execute")
+		return errors.Wrap(err, fmt.Sprintf("db.users.update(%s, %s)", db.Query(q), db.Query(m)))
 	}
 
 	return nil
@@ -128,16 +128,16 @@ func Delete(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 		return errors.Wrapf(web.ErrInvalidID, "bson.IsObjectIdHex: %s", userID)
 	}
 
+	q := bson.M{"user_id": userID}
+
 	f := func(collection *mgo.Collection) error {
-		q := bson.M{"user_id": userID}
-		log.Printf("%s : Delete : MGO : db.users.remove(%s)\n", traceID, db.Query(q))
 		return collection.Remove(q)
 	}
 	if err := db.Execute(dbSes, usersCollection, f); err != nil {
 		if err != mgo.ErrNotFound {
 			err = web.ErrNotFound
 		}
-		return errors.Wrap(err, "db.Execute")
+		return errors.Wrap(err, fmt.Sprintf("db.users.remove(%s)", db.Query(q)))
 	}
 
 	return nil
