@@ -12,6 +12,8 @@ import (
 	"os"
 	"testing"
 
+	"strings"
+
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
@@ -25,8 +27,6 @@ const (
 	// Failed is the Unicode codepoint for an X mark.
 	Failed = "\u2717"
 )
-
-//==============================================================================
 
 // The web application state for tests
 var a *web.App
@@ -44,8 +44,6 @@ func runTest(m *testing.M) int {
 
 	return m.Run()
 }
-
-//==============================================================================
 
 // TestUsers is the entry point for the users
 func TestUsers(t *testing.T) {
@@ -207,10 +205,8 @@ func getUser404(t *testing.T) {
 			t.Logf("\t%s\tShould receive a status code of 404 for the response.", Succeed)
 
 			recv := w.Body.String()
-			resp := `{
-  "error": "db.Execute: Entity not found"
-}`
-			if resp != recv {
+			resp := "Entity not found"
+			if !strings.Contains(recv, resp) {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
 				t.Fatalf("\t%s\tShould get the expected result.", Failed)
@@ -238,10 +234,8 @@ func deleteUser404(t *testing.T) {
 			t.Logf("\t%s\tShould receive a status code of 404 for the response.", Succeed)
 
 			recv := w.Body.String()
-			resp := `{
-  "error": "db.Execute: Entity not found"
-}`
-			if resp != recv {
+			resp := "Entity not found"
+			if !strings.Contains(recv, resp) {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
 				t.Fatalf("\t%s\tShould get the expected result.", Failed)
@@ -281,10 +275,8 @@ func putUser404(t *testing.T) {
 			t.Logf("\t%s\tShould receive a status code of 404 for the response.", Succeed)
 
 			recv := w.Body.String()
-			resp := `{
-  "error": "db.Execute: Entity not found"
-}`
-			if resp != recv {
+			resp := "Entity not found"
+			if !strings.Contains(recv, resp) {
 				t.Log("Got :", recv)
 				t.Log("Want:", resp)
 				t.Fatalf("\t%s\tShould get the expected result.", Failed)
