@@ -17,7 +17,7 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 * Learn about the [design guidelines](../../#data-oriented-design) for data oriented design.
 
 ## CPU Caches
-![CPU Relative Cache Speed](cpu_cache.m4v)
+![CPU Relative Cache Speed](cpu_cache.gif)
 
 [CPU Caches and Why You Care (18:50-20:30)](https://youtu.be/WDIkqP4JbkE?t=1129) - Scott Meyers  
 [CPU Caches and Why You Care (44:36-45:40)](https://youtu.be/WDIkqP4JbkE?t=2676) - Scott Meyers   
