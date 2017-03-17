@@ -17,7 +17,7 @@ Arrays are a special data structure in Go that allow us to allocate contiguous b
 * Learn about the [design guidelines](../../#data-oriented-design) for data oriented design.
 
 ## CPU Caches
-This content is provided by Scott Meyers from his talk in 2014 at Dive:
+![CPU Relative Cache Speed](cpu_cache.m4v)
 
 [CPU Caches and Why You Care (18:50-20:30)](https://youtu.be/WDIkqP4JbkE?t=1129) - Scott Meyers  
 [CPU Caches and Why You Care (44:36-45:40)](https://youtu.be/WDIkqP4JbkE?t=2676) - Scott Meyers   
@@ -52,6 +52,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 	* Waiting on the OS to tell us where the memory is.
 
 ### Cache Hierarchies
+
 This is a diagram showing the relationship of the cache hierarchy for the 4 Core i7-9xx processor. The caches in the diagram are not to scale. This processor has four cores and each core has two hardware threads. The hardware threads per core share the Level 1 caches. The cores have individual Level 1 and Level 2 caches. All cores for all the processor share the L3 cache.
 
 ![figure1](figure1.png)
@@ -78,7 +79,26 @@ This is subject to be different in different processors. For this content, the f
 	Main Memory
 		107 cycle of latency
 
-## Links
+### Latencies
+
+```
+L1 cache reference ......................... 0.5 ns
+Branch mispredict ............................ 5 ns
+L2 cache reference ........................... 7 ns
+Mutex lock/unlock ........................... 25 ns
+Main memory reference ...................... 100 ns             
+Compress 1K bytes with Zippy ............. 3,000 ns  =   3 µs
+Send 2K bytes over 1 Gbps network ....... 20,000 ns  =  20 µs
+SSD random read ........................ 150,000 ns  = 150 µs
+Read 1 MB sequentially from memory ..... 250,000 ns  = 250 µs
+Round trip within same datacenter ...... 500,000 ns  = 0.5 ms
+Read 1 MB sequentially from SSD* ..... 1,000,000 ns  =   1 ms
+Disk seek ........................... 10,000,000 ns  =  10 ms
+Read 1 MB sequentially from disk .... 20,000,000 ns  =  20 ms
+Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
+```
+
+![Cache Latencies Image](cache_latencies_graph.png)
 
 #### CPU Caches / Memory
 
