@@ -1,10 +1,175 @@
-## Go Training
+## Go Training [![Build Status](https://travis-ci.org/ardanlabs/gotraining.svg?branch=master)](https://travis-ci.org/ardanlabs/gotraining)
 
-[Click Here To Review The Course Material](courses/README.md)
+[Review our different courses and material](topics/README.md)  
+
+**To learn about Corporate training events, options and special pricing please contact:**
+
+William Kennedy  
+ArdanLabs (www.ardanlabs.com)  
+bill@ardanlabs.com  
+
+## Our Experience
+
+We have taught Go to thousands of developers all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump-start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
+
+Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
+
+[Look at our current schedule](https://github.com/ardanlabs/gotraining#current-schedule)  
+
+## Our Teachers
+
+### William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
+_William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
+
+_**Writing**_  
+[Going Go](https://www.goinggo.net/)    
+[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
+[Go In Action](https://www.manning.com/books/go-in-action)  
+
+_**Articles**_  
+[IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
+
+_**Video**_  
+[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
+[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
+[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
+[GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
+
+[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
+[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
+[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
+[Bangalore Meetup (2015) - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
+[Vancouver Meetup (2016) - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)  
+[Chicago Meetup (2016) - An Evening](https://vimeo.com/199832344)  
+
+_**Podcasts**_  
+[Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
+[The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
+[Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime/6)  
+[Discussing Imposter Syndrome](https://changelog.com/gotime/30)  
+
+### Daniel Whitenack ([@dwhitena](https://twitter.com/dwhitena))  
+Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
+
+_**Writing**_  
+[Data Dan](https://www.datadan.io/)    
+[Elephantine Analytics](https://medium.com/pachyderm-data)
+
+_**Articles**_  
+[O'Reilly Data Blog](https://www.oreilly.com/ideas/data-science-gophers)
+
+_**Video**_  
+[GopherCon 2016 - Go for Data Science](https://www.youtube.com/watch?v=D5tDubyXLrQ)  
+
+_**Podcasts**_  
+[Go Time - Episode 4](https://changelog.com/gotime/4)    
+
+### Jacob Walker ([@jcbwlkr](https://twitter.com/jcbwlkr))  
+Jacob is a software developer, consultant, community organizer, and has really nice hair. Like ridiculously nice hair. He started his career creating web applications in PHP, Ruby, and Node.js. When he discovered Go he dove in deep and hasn't regretted it for a minute. Coming from the thriving metropolis of Wichita, Kansas he organizes the [devICT](https://devict.org/) community whose mission is to "Educate, Empower, and Connect software developers in the Wichita area". Jacob also works closely with [Women Who Code Wichita](https://www.meetup.com/WWCWichita/), [Open Wichita](http://openwichita.com/), [MakeICT](http://makeict.org/), and [Kansas Linux Fest](http://kansaslinuxfest.org/). When he isn't working or organizing Jacob is spending time with his wife and three kids, staying up too late with video games, cooking, or playing Dungeons and Dragons.
+
+_**Writing**_  
+[Jacob Walker's blog](http://www.jacob-walker.com/)  
+
+_**Video**_  
+[An Informal Intro to Docker](https://www.youtube.com/watch?v=xYNJ_IAj35Q)  
+[Women Who Code Intro To Go Workshop](https://www.youtube.com/watch?v=gDxSiKNk0Pw)  
+[Getting Started with Go](https://www.youtube.com/watch?v=zVvjpLu6iIo)  
+[Vim and Emacs Chat: Part 1: Vim](https://www.youtube.com/watch?v=SaGgc8xnO1U)  
+[Regular Expressions 101](https://www.youtube.com/watch?v=4LnyHF8dnIk)  
+[Implementing OOP (Ruby and PHP)](https://www.youtube.com/watch?v=7QoEfPYULXM)  
+[Templating In PHP With Twig](https://www.youtube.com/watch?v=deqGYV8P0Nc)  
+
+### John Gosset ([@jgosset_](https://twitter.com/jgosset_))  
+John is a consultant and software developer based in Montreal, Canada. He works on server software and embedded systems, and has worked with organizations large and small in both the public and private sectors - from the Canadian government and FinTech companies to small carpet manufacturers in Saint-Jean-sur-Richelieu, Quebec. He is also a contractor for RedHat, and volunteers with the Software Carpentry Foundation to help research scientists learn programming fundamentals. He believes coding is a useful skill for anyone to have, and is passionate about helping make it more accessible to everybody.
+
+_**Video**_  
+[GopherCon Brazil - Go Scratch That Itch](https://www.youtube.com/watch?v=EIUvUBS-3ZE)  
+
+### Ernesto Jimenez ([@ernesto_jimenez](https://twitter.com/ernesto_jimenez))  
+Ernesto is a combination of engineer and product manager who has worked on different kinds of products, from webapps to APIs and games in both startups and big corporations. He sees technology as a tool to build great products that solve real problems for customers. Based in London, Ernesto spends spare time contributing to open source projects, building small hacks and rock climbing. He is originally from Spain and studied Computer Science in Spain and Finland.
+
+_**Writing**_  
+[Reducing boilerplate with go generate](https://blog.gopheracademy.com/advent-2015/reducing-boilerplate-with-go-generate)  
+[Writing good unit tests for SOLID Go](https://blog.gopheracademy.com/advent-2016/how-to-write-good-tests-for-solid-code)  
+
+## Our Pricing
+
+We are working hard to maintain pricing that can fit your budget.
+
+**Ultimate Go**  
+4 Days (24 hours) - $20,000 for up to 15 students  
+3 Days (21 hours) - $15,000 for up to 15 students  
+2 Days (14 hours) - $10,000 for up to 15 students  
+$5,000 T&E  
+Classes that exceed 15 students are charged an extra $500 each per additional student.
+
+**Ultimate Data Science**  
+3 Days (21 hours) - $15,000 for up to 15 students  
+2 Days (14 hours) - $10,000 for up to 15 students  
+$5,000 T&E  
+Classes that exceed 15 students are charged an extra $500 each per additional student.
+
+**Ultimate Web**  
+2 Days (14 hours) - $10,000 for up to 15 students  
+$5,000 T&E  
+Classes that exceed 15 students are charged an extra $500 each per additional student.
+
+**Our 4 day class option:**  
+_This option is the best for teams with little to no Go experience. We can do more exercises and each day is not as mentally exhausting._
+
+**Our 3 day class option:**  
+_This option is best for teams with 3+ months for Go experience. We need to push the team a bit harder and there will be less exercises. For the Data and Web classes we can teach all the material._
+
+**Our 2 day class option:**  
+_This options is skips most of the exercises to get through the material. We will push the team very hard and we maintain a very fast pace._
+
+## Current Schedule
+
+If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
+
+### 2017       
+		Type         Type     Venue             Location               Month      Trainer            Url
+		=====================================================================================================================================================================================
+		Corporate    Go       GNS Science       Wellington, NZ         January    Bill Kennedy
+		Corporate    Go       Pearson           San Francisco, CA      March      Bill Kennedy 		
+		Corporate    Go       Intel             Portland, OR           March      Bill Kennedy 		
+		Corporate    Go       Capital One       SF, CA                 May        Bill Kennedy
+
+		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
+		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
+		Public       Data     1up Events        San Francisco, CA      April      Daniel Whitenack   https://www.eventbrite.com/e/ultimate-data-san-francisco-april-2017-tickets-31485334483
+		Public       Go       Skillsmatter      London, England        May        Ernesto Jimenez    https://skillsmatter.com/courses/563-ardanlabs-ultimate-go-workshop
+		Public       Go       The Lab           Miami, FL              May        Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-miami-may-2017-tickets-32131447023
+		Public       Go       bol.com           Utrecht, Netherlands   June       Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-netherlands-june-2017-tickets-32131027769
+		Public       Data     Fieldlens         NYC, NY                June       Daniel Whitenack   https://www.eventbrite.com/e/ultimate-data-new-york-june-2017-tickets-32130974610
+		
+		GoBridge     Go       Framingham        Framingham, MA         February   Bill Kennedy       https://www.bridgetroll.org/events/329
+		WWG          Web      Buzzfeed          San Francisco, CA      March      Jacob Walker       https://www.meetup.com/Women-Who-Go/events/237660344
+		WWG          Data     TuneIn            San Francisco, CA      April      Daniel Whitenack   https://www.meetup.com/Women-Who-Go/events/237660548
+		GoBridge     Go       Framingham        Framingham, MA         April      Bill Kennedy       https://www.bridgetroll.org/events/343
+		GoBridge     Go       SUNY Potsdam      Potsdam, NY            May        Bill Kennedy       TBA
+		WWG          Web      TBA               NYC, NY                May        Jacob Walker       TBA
+		GoBridge     Go       Google            Brazil                 June       Bill Kennedy       TBA
+		
+		Conference   Adv Go   Golab             Florance, IT           January    Bill Kennedy       http://golab.io
+		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy       http://www.gophercon.in/go-workshop		
+		Conference   Data     GopherCon India   Pune, India            February   Daniel Whitenack	
+		Dev Fest     Adv Go   SUNY Potsdam      Potsdam, NY            March      Bill Kennedy  
+		Conference   Adv Go   Capital Golang    Washington, D.C.       April      Bill Kennedy       http://capitalgolang.com
+		Conference   Go       Singapore         Singapore              May        Bill Kennedy       http://gophercon.sg/workshop
+		Conference   Adv Go   GopherCon         Denver, CO             July       Bill Kennedy
+		Conference   Data     GopherCon         Denver, CO             July       Daniel Whitenack  				
+
+## More About Go
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
-[Learn More](https://talks.golang.org/2012/splash.article)
+Go is the fusion of performance and productivity wrapped in a language that software developers can learn, use and understand. Go is not C, yet we have many of the benefits of C with the benefits of higher level programming languages.
+
+[The eigenvector of "Why we moved from language X to language Y"](https://erikbern.com/2017/03/15/the-eigenvector-of-why-we-moved-from-language-x-to-language-y.html) - Erik Bernhardsson  
+[Learn More](https://talks.golang.org/2012/splash.article) - Go Team  
+[Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
+[Getting Started In Go](http://aarti.github.io/2016/08/13/getting-started-in-go) - Aarti Parikh  
 
 ## Minimal Qualified Student
 
@@ -18,30 +183,10 @@ The material has been designed to be taught in a classroom environment. The code
 	* Has worked with a command shell.
 	* Knows how to maneuver around the file system.
 	* Understands what environment variables are.
-	
-## Course Outline
-
-* Language Syntax
-* Arrays, Slices and Maps
-* Methods, Interfaces and Embedding
-* Packaging and Exporting
-* Using Pointers
-* Error Handling
-* Concurrency, Race Conditions and Channels
-* Concurrency Patterns
-* Testing and Debugging
-* Project Structure and Vendoring
-* Standard Library
 
 ## Important Reading
 
 Please check out this page of [important reading](reading/README.md). You will find articles and videos around mechanical sympathy, data-oriented design, Go runtime and optimizations and articles about the history of computing.
-
-## Our Experience
-
-We have taught classes to thousands of students for over the past two years and all around the world.
-
-Look at our schedule: https://github.com/ardanlabs/gotraining#schedule
 
 ## Before You Come To Class
 
@@ -58,8 +203,13 @@ We use a slack channel to share links, code, and examples during the training.  
 
 ### Installing Go
 
-**Using Docker container**   
-Installing Go may not be needed if you choose using [Docker container](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
+#### Local Installation
+I do not recommend using `homebrew` or `apt-get`.
+
+https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
+
+#### Using Docker
+Installing Go may not be needed if you choose to use [Docker](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
 
 ```
 git clone https://github.com/ardanlabs/gotraining.git
@@ -69,18 +219,6 @@ cd gotraining
 *NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
 
 To build and run docker container to start your training right away, see [here](#docker).
-
-**Mac OS X**  
-http://www.goinggo.net/2013/06/installing-go-gocode-gdb-and-liteide.html
-
-**Windows**  
-http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/
-
-**Linux**  
-I do not recommend using `apt-get`. Go is easy to install. Just download the
-archive and extract it into /usr/local, creating a Go tree in /usr/local/go.
-
-https://golang.org/doc/install
 
 ### Editors
 
@@ -121,37 +259,7 @@ git clone https://github.com/ardanlabs/gotraining.git
 
 *NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
 
-
-###<a name="docker" />Starting gotraining in Docker container
-
-**Install Docker Toolbox**  
-https://www.docker.com/products/docker-toolbox
-
-**Build Docker container**
-
-```
-# current path is the source root where Dockerfile exists
-docker build -t ardanlabs-gotraining .
-```
-
-**Start Docker container**
-
-```
-docker run -it -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs-gotraining
-# or start container with downloaded gotraining in the image
-docker run -it ardanlabs-gotraining
-```
-
-**Remove gotraining container and image**
-
-```
-docker rm -f $(docker ps -a | grep ardanlabs-gotraining | awk '{print $1}')
-docker rmi -f $(docker images -a | grep ardanlabs-gotraining | awk '{print $1}')
-```
-
 ## Starter Material
-  
-[Quick Tour](courses/quick_tour)
   
 http://golang.org/  
 https://tour.golang.org/welcome/1  
@@ -161,29 +269,13 @@ http://www.goinggo.net/
 
     go get github.com/ardanlabs/gotraining
 
-## Teachers
-
-**William Kennedy** ([@goinggodotnet](https://twitter.com/goinggodotnet))  
-_William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
-
-[Going Go](https://www.goinggo.net/) - Blog  
-[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go) - Blog  
-[Go In Action](https://www.manning.com/books/go-in-action) - Book  
-[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk) - Video  
-[GoSF - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ) - Video  
-[GothamGo - Error Handling in Go](https://vimeo.com/115782573) - Video  
-[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM) - Video  
-[Bangalore Meetup - OOP in Go](https://youtu.be/gRpUfjTwSOo) - Video  
-[Vancouver Meetup - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek) - Video  
-[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8) - Video  
-
-**Kevin Gillette** ([@kevingillette](https://twitter.com/kevingillette))  
-_Kevin is an experienced software engineer that has been enthusiastically using Go since 2012 to develop efficient, high-reliability backend systems. With a focus on breadth of knowledge, Kevin has expertise in a variety of languages and platforms, a firm grounding in theory, as well as a keen interest in computing history._
-
-**Cory LaNou** ([@corylanou](https://twitter.com/corylanou))  
-_Cory LaNou is a full stack web developer and entrepreneur with over 17 years of experience. After 11 years of being a successful serial entrepreneur, he has joined the InfluxDB team, working on building an open source time series database, written in Go. He is active in the Go community, leading the Denver Gophers meetup, as well as mentoring students in his free time._
-
 ## Twitter
+
+Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
+_"The unflappable @goinggodotnet demystifying Go stacktraces at #ultimatego day 3 at @tune. Thanks for leveling us up."_
+
+Camilo Aguilar ([@c4milo](https://twitter.com/c4milo/status/752317652563996672))  
+_"Holy cow, the best lighting talk I have ever seen about mechanical sympathy by @goinggodotnet. Here at #gophercon"_
 
 Jessie Frazelle ([@frazelledazzell](https://twitter.com/frazelledazzell/status/711355859066990592))  
 _"@goinggodotnet you were amazing!!! So enthusiastic!!! Thanks for doing this for everyone!"_
@@ -194,18 +286,27 @@ _"Day 1 of the [Ultimate] Go workshop was outstanding! Big shoutout to @intel, @
 Katrina Owen ([@kytrinyx](https://twitter.com/kytrinyx/status/673360428278222848))  
 _"OH: "You thought you knew Go..." (You do Go? You want to do Go?) You should take this workshop. Seriously.) "_
 
+Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/752246569554964480))
+_"If you're at @GopherCon, get yourself to a session with @goinggodotnet. Superb! Pretty sure his pic appears with the definition of "dynamo.""_
+
 Matt Oswalt ([@Mierdin](https://twitter.com/mierdin/status/673570058392616961))  
 _"Should be mentioned that though I am no expert, I have been using Go for about a year - and this meetup is kicking my ass."_
 
 ## Testimonials
 
-Susan Dady, Software Engineer - GE Digital
+Ana-Maria Lazar, Software Engineer at Sainsbury's  
+_"Intensive crash course in Go that literally takes you to a whole new level. Not only Bill provides lots of examples and exercises to familiarize yourself faster with the language but there is also a lot of  information that can be applied to other languages as well. Perfect combination!"_
+
+Greg Hammond, Founder & CEO at Best Option Trading  
+_"Bill helped me learn enough Go to work with him and his team to take a program with a lot of complexity, accumulated over years, and make it into an enterprise product. As architect, he made it more extensible, tested, and created an external API. Bill has a gift for writing readable code that is easy to reason about. He demonstrates coding restraint by favoring code that is maintainable, rather than relying upon overly clever solutions. At the same time, he is a performance hawk, always thinking about how to cut milliseconds from runtime. When I began the project with Bill, I was under pressure from both schedule and cost perspectives. He put in extra effort at the end of the project to deliver what I needed. I highly recommend Bill for his well-written book, his 'Ultimate Go' course, and development work through Ardan Labs."_
+
+Susan Dady, Software Engineer - GE Digital  
 _"Rarely will you come across a course as worthwhile as this one. I learned many things relevant and useful in my daily work and William's energy kept me engaged. I came back to work excited to get coding in Go."_
 
-Paul Garvey, Software Engineer - GE Digital
+Paul Garvey, Software Engineer - GE Digital  
 _"Looking back I am grateful I took the GoLang training course. I had planned to just buy a few books and learned it on my own. In retrospect that would have been a bad decision as I would missed out on all the pitfalls, best practices, practical exercises and discussions the instructor imparted from his years of experience in the field, writing a book and blogging with other gophers. In the end I felt I learn more in 3 days then I could reading books and learning GoLang on my own and all my colleagues who took the course all share this view. We also share the view that Bill the instructor brought an enthusiasm and energy to the course that made a really technical course easy to learn. I would recommend anyone who want to learn Go to sign up with Mr Kennedy. At the end of the course you will feel like you are ready to rewrite all your old apps in Go :-)"_
 
-Richard Stanley, Software Engineer - GE Digital
+Richard Stanley, Software Engineer - GE Digital  
 _"Not only does Bill deeply understands the technical details of Go, he also can explain them in an effective, enthusiastic manner that helped me retain somewhat dry material.  His passion for the language and its capabilities are obvious through out his training."_
 
 Shalab Goel, Ph.D.  
@@ -232,84 +333,86 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
-## Schedule
+## Past Schedule
 
-If you are interested in holding an event in your area please let me know. I will work with you and your organization to help make it happen. I can talk in person or over Google Hangout.
+Look at how busy we have been training thousands of developers in Go over the past three years.
+ 
+### 2016
+		Type		Type		Venue					City, ST				Month		Trainer				Url
+		================================================================================================================
+		Corporate	Go			Capital One 			Richmond, VA 			January		Bill Kennedy
+		Corporate	Go			BOT 					Miami, FL 				January		Bill Kennedy
+		Corporate	Go			CISCO 					Lawrenceville, GA 		February	Bill Kennedy
+		Public		Go			Bol 					Utrecht, Amsterdam		March		Bill Kennedy
+		Corporate	Go			GE 						San Ramon, CA 			March		Bill Kennedy
+		Free		Go			WWG						SF, CA 					March		Bill Kennedy
+		Public		Go 			Fidelity				SLC, UT 				March		Bill Kennedy
+		Corporate	Go			SAS 					Cary, NC 				March		Bill Kennedy
+		Public		Go			Minio					SF, CA 					April		Bill Kennedy
+		Corporate	Go			CapitalOne 				Richmond, VA 			April		Bill Kennedy
+		Corporate	Go			CISCO 					Lawrenceville, GA 		May			Bill Kennedy
+		Corporate	Go			Rackspace 				San Antonio, TX 		May			Bill Kennedy
+		Public		Go			OSCON 					Portland, OR  			May			Bill Kennedy
+		Corporate	Go			Intel 					Hillsboro, OR 			May			Bill Kennedy
+		Corporate	Go			Staples 				Framingham, MA  		May			Bill Kennedy
+		Public		Go 			Halio					London, England 		June		Bill Kennedy
+		Public		Go 			Shutterfly				Phoenix, AZ  			June		Bill Kennedy
+		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
+		Corporate	Go			Red Ventures 			South Carolina	 		August		Bill Kennedy
+		Public		Adv Go		GolangUK 				London, England 		August		Bill Kennedy
+		Corporate	Go			Tune 					Seattle, WA	 			August		Bill Kennedy
+		Corporate	Go			Nordstroms				Seattle, WA	 			September	Bill Kennedy
+		Corporate	Go			Viacom					NYC, NY					September	Bill Kennedy
+		Corporate	Go			CapitalOne				McLean, VA	 			September	Bill Kennedy
+		Free		Go			WWG						London, England			October		Bill Kennedy 		https://skillsmatter.com/conferences/8373-women-who-go-workshop-with-bill-kennedy
+		Public		Adv Go		Rackspace				SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
+		Free		Go			WWG						SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
+		Corporate	Go			Traderev				Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
+		Corporate	Go			Centralway				Zürich, Switzerland	 October	 Bill Kennedy  
+		Public		Go			GothamGo				NYC, NY					November	Bill Kennedy
+		Public		Go			Dev Fest				NYC, NY					November	Bill Kennedy 		https://generalassemb.ly/education/devfestnyc-ultimate-go-training/new-york-city/30237
+		Corporate	Go			Hootsuite				Vancouver, Canada		November	Bill Kennedy
+		Corporate	Go			Viacom					NYC, NY					December	Bill Kennedy		
+		
+		Type		Type		Venue					City, ST				Month		Trainer				Url
+		================================================================================================================
+		Corporate	Go			Salesforce 				Dublin, Ireland 		April		Kevin Gillette
+		Public		Go			dotGo					Paris, France			October		Ernesto Jimenez
+		Public		Data		GDG DevFest				Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
+		Corporate	Go			Intel					Zapopan, Mexico			December	Ernesto Jimenez		
 
-#### 2016
+### Past Years
 
-		Capital One 	Richmond, VA 		- January  
-		BOT 			Miami, FL 			- January  
-		CISCO 			Lawrenceville, GA 	- February  
-		Ultimate Go 	Utrecht, Amsterdam	- March  
-		GE 				San Ramon, CA 		- March  
-		WWG 			SF, CA 				- March  
-		Ultimate Go 	SLC, UT 			- March  
-		SAS 			Cary, NC 			- March  
-		Ultimate Go 	SF, CA 				- April  
-		Salesforce 		Dublin, Ireland 	- April  
-		CapitalOne 		Richmond, VA 		- April  
+		2015 : 33 Events
+		2014 :  3 Events
+___
 
-					--- Pending ---
+#### Running Docker
+<a name="docker" />
 
-		CISCO 			Lawrenceville, GA 	- May  
-		Rackspace 		San Antonio, TX 	- May  
-		OSCON 			Portland, OR  		- May  
-		Intel 			Hillsboro, OR 		- May  
-		Staples 		Framingham, MA  	- May  
-		HP Enterprise 	Seattle, WA 		- May  
-		Ultimate Go 	London, England 	- June  
-		Ultimate Go 	Phoenix, AZ  		- June  
-		GolangUK 		London, England 	- August  
-		CodeChix 		SF, CA 				- August  
-		Ultimate Go 	Toronto, Canada 	- September  
+**Install Docker Toolbox**  
+https://www.docker.com/products/docker-toolbox
 
-#### 2015
+**Build Docker container**
 
-		Edmonton Go 	Edmonton, Canada 	- January  
-		GopherCon 		Bangalore, India 	- February  
-		Ultimate Go 	Denver, CO 			- March  
-		Ultimate Go 	SF, CA 				- March  
-		Ultimate Go 	Denver, CO 			- April  
-		FluentConf 		SF, CA 				- April  
-		ACL 			Vancouver, Canada 	- May  
-		PowerChord 		Tampa, FL 			- May  
-		Rackspace 		San Antonio, TX 	- May  
-		Ultimate Go 	NYC, NY 			- June  
-		MagmaConf  		Manzanillo, Mexico 	- June  
-		Ultimate Go		Denver, CO 			- July  
-		NY Times   		NYC, NY 			- July  
-		OSCON      		Portland, OR 		- July  
-		WWG 			SF, CA 				- August  
-		GolangUK 		London, England 	- August  
-		YikYak 			Atlanta, GA 		- August  
-		Bridgevine 		Miami, FL 			- September  
-		Ultimate Go 	Seattle, WA 		- September  
-		Fidelity 		Dublin, Ireland 	- September  
-		Ultimate Go 	SF, CA 				- September  
-		GothamGo 		NYC, NY 			- October  
-		Economist 		NYC, NY 			- October  
-		GE 				San Ramon, CA 		- October  
-		Teradata 		San Diego, CA 		- October  
-		SAS 			Cary, NC 			- October  
-		NY Times 		NYC, NY 			- November  
-		Meetme 			New Paltz, NY 		- November  
-		NY Times 		NYC, NY 			- November 
-		Ultimate Go 	Portland, OR 		- November  
-		Nordstrom 		Seattle, WA 		- December  
+```
+# current path is the source root where Dockerfile exists
+docker build -t ardanlabs-gotraining .
+```
 
-#### 2014
+**Start Docker container**
 
-		Comcast 		SF, CA 				- August  
-		GothamGo 		NYC, NY 			- October  
-		Comcast 		Reston, VA 			- December
-  
-## Contact Information
+```
+docker run -it -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs-gotraining
+# or start container with downloaded gotraining in the image
+docker run -it ardanlabs-gotraining
+```
 
-William Kennedy  
-Ardan Studios  
-12973 SW 112 ST, Suite 153  
-Miami, FL 33186  
-bill@ardanlabs.com
+**Remove gotraining container and image**
+
+```
+docker rm -f $(docker ps -a | grep ardanlabs-gotraining | awk '{print $1}')
+docker rmi -f $(docker images -a | grep ardanlabs-gotraining | awk '{print $1}')
+```
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

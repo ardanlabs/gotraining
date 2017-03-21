@@ -1,0 +1,17 @@
+table, th, td {
+	border: 1px solid black;
+}
+th {
+	text-align: left;
+	padding: 5px;
+}
+td {
+	text-align: left;
+	padding: 5px;
+}
+.addr {
+	border: none;
+}
+.addr td {
+	border: none;
+}

@@ -1,0 +1,70 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Sample program that implements a web request with a context that is
+// used to timeout the request if it takes too long.
+package main
+
+import (
+	"context"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"time"
+)
+
+func main() {
+
+	// Create a context with a timeout of 50 milliseconds.
+	ctx, cancel := context.WithTimeout(context.Background(), 150*time.Millisecond)
+	defer cancel()
+
+	// Create a new request.
+	req, err := http.NewRequest("GET", "https://www.goinggo.net/post/index.xml", nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	// Declare a new transport and client for the call.
+	var tr http.Transport
+	client := http.Client{
+		Transport: &tr,
+	}
+
+	// Make the web call in a separate goroutine so it can be cancelled.
+	ch := make(chan error, 1)
+	go func() {
+		log.Println("Starting Request")
+
+		// Make the web call and return any error.
+		resp, err := client.Do(req)
+		if err != nil {
+			ch <- err
+			return
+		}
+
+		// Close the response body on the return.
+		defer resp.Body.Close()
+
+		// Write the response to stdout.
+		io.Copy(os.Stdout, resp.Body)
+		ch <- nil
+	}()
+
+	// Wait the request or timeout.
+	select {
+	case <-ctx.Done():
+		log.Println("timeout, cancel work...")
+
+		// Cancel the request and wait for it to complete.
+		tr.CancelRequest(req)
+		log.Println(<-ch)
+
+	case err := <-ch:
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}

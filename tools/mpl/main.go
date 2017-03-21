@@ -107,7 +107,7 @@ func process(mdFile string) error {
 // generatePlayLink returns the URL for the playground link based on the
 // source code that is provided.
 func generatePlayLink(srcCode []byte) (string, error) {
-	const url = "http://play.golang.org/share"
+	const url = "https://play.golang.org/share"
 	const mime = "application/x-www-form-urlencoded; charset=UTF-8"
 
 	// Make a call to the playground, posting the source code file contents.
@@ -128,5 +128,5 @@ func generatePlayLink(srcCode []byte) (string, error) {
 		return "", err
 	}
 
-	return fmt.Sprintf("http://play.golang.org/p/%s", string(b)), nil
+	return fmt.Sprintf("https://play.golang.org/p/%s", string(b)), nil
 }

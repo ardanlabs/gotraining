@@ -3,7 +3,7 @@
 This tool processes markdown files from the training materials to automatically
 update "Go Playground" links with the latest code from the linked samples.
 
-It will find mardown like the following and automatically update it:
+It will find markdown like the following and automatically update it:
 
 ```
 The following link will automatically be updated
@@ -13,7 +13,7 @@ The following link will automatically be updated
 The program searches for a link followed by a "([Go Playground](.*))" link.
 ```
 
-You can use an empty playground link and it will be automatically popullated
+You can use an empty playground link and it will be automatically populated
 with the right link.
 
 ## Usage
