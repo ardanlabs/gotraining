@@ -21,7 +21,9 @@ _"Object orientation is very useful in some settings... As languages evolve, the
 
 ## Design Review
 
-* Learn about the [design guidelines](../../#package-oriented-design) for packaging.
+[Presentation](POD-Talk.key)
+
+* Learn more about the [design guidelines](../../#package-oriented-design) for packaging.
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
