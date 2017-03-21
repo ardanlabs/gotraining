@@ -6,7 +6,9 @@ Methods are functions that are declared with a receiver which binds the method t
 
 * Methods are functions that declare a receiver variable.
 * Receivers bind a method to a type and can use value or pointer semantics.
-* Methods are valid when it is practical or reasonable for a piece of data to expose a capability.
+* Value semantics mean a copy of the value is passed across program boundaries.
+* Pointer semantics mean a copy of the values address is passed across program boundaries.
+* Stick to a single semantic for a given type and be consistent.
 
 ## Quotes
 
