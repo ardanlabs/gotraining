@@ -40,7 +40,7 @@ Create a fuzzing function that takes mutated input and executes the code we care
 
 Run the `go-fuzz-build` tool against the package to generate the fuzz zip file. The zip file contains all the instrumented binaries go-fuzz is going to use while fuzzing. Any time the source code changes this needs to be re-run.
 
-		go-fuzz-build github.com/ardanlabs/gotraining/topics/fuzzing/example1
+		go-fuzz-build github.com/ardanlabs/gotraining/topics/go/testing/fuzzing/example1
 
 Perform the actual fuzzing by running the `go-fuzz` tool and find data inputs that cause panics. Run this until you see an initial crash.
 
