@@ -44,7 +44,7 @@ Run the `go-fuzz-build` tool against the package to generate the fuzz zip file. 
 
 Perform the actual fuzzing by running the `go-fuzz` tool and find data inputs that cause panics. Run this until you see an initial crash.
 
-		go-fuzz -bin=./api-fuzz.zip -dup -workdir=workdir/corpus
+		go-fuzz -bin=./api-fuzz.zip -workdir=workdir/corpus
 
 Review the `crashers` folder under the `workdir/corpus` folders. This contains panic information. You will see an issue when the data passed into the web call is empty. Fix the `Process` function and add the table data to the test.
 
