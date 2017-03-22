@@ -26,7 +26,7 @@ type Dog struct {
 // Speak knows how to speak like a dog.
 // This makes a Dog now part of a group of concrete
 // types that know how to speak.
-func (d Dog) Speak() {
+func (d *Dog) Speak() {
 	fmt.Println("Woof!",
 		"My name is", d.Name,
 		", it is", d.IsMammal,
@@ -43,7 +43,7 @@ type Cat struct {
 // Speak knows how to speak like a cat.
 // This makes a Cat now part of a group of concrete
 // types that know how to speak.
-func (c Cat) Speak() {
+func (c *Cat) Speak() {
 	fmt.Println("Meow!",
 		"My name is", c.Name,
 		", it is", c.IsMammal,
@@ -57,7 +57,7 @@ func main() {
 
 		// Create a Dog by initializing its Animal parts
 		// and then its specific Dog attributes.
-		Dog{
+		&Dog{
 			Name:       "Fido",
 			IsMammal:   true,
 			PackFactor: 5,
@@ -65,7 +65,7 @@ func main() {
 
 		// Create a Cat by initializing its Animal parts
 		// and then its specific Cat attributes.
-		Cat{
+		&Cat{
 			Name:        "Milo",
 			IsMammal:    true,
 			ClimbFactor: 4,

@@ -32,8 +32,8 @@ http://golang.org/doc/effective_go.html#embedding
 
 #### Grouping Types
 
-[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/iwci4dKqLW))  
-[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/mnJMHPew08))  
+[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/ITFlrhvmpa))  
+[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/yOj1zJCRlj))  
 
 #### Decoupling
 

@@ -19,7 +19,7 @@ type Animal struct {
 // Speak provides generic behavior for all animals and
 // how they speak.
 // SMELL - This can't apply to all animals.
-func (a Animal) Speak() {
+func (a *Animal) Speak() {
 	fmt.Println("UGH!",
 		"My name is", a.Name,
 		", it is", a.IsMammal,
@@ -34,7 +34,7 @@ type Dog struct {
 }
 
 // Speak knows how to speak like a dog.
-func (d Dog) Speak() {
+func (d *Dog) Speak() {
 	fmt.Println("Woof!",
 		"My name is", d.Name,
 		", it is", d.IsMammal,
@@ -49,7 +49,7 @@ type Cat struct {
 }
 
 // Speak knows how to speak like a cat.
-func (c Cat) Speak() {
+func (c *Cat) Speak() {
 	fmt.Println("Meow!",
 		"My name is", c.Name,
 		", it is", c.IsMammal,
