@@ -10,42 +10,58 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/ardanlabs/gotraining/topics/concurrency/patterns/logger"
+	"github.com/ardanlabs/gotraining/topics/go/concurrency/patterns/logger"
 )
+
+// device allows us to mock a device we write logs to.
+type device struct {
+	off bool
+}
+
+// Write implements the io.Writer interface.
+func (d *device) Write(p []byte) (n int, err error) {
+	if d.off {
+
+		// Simulate disk problems.
+		time.Sleep(time.Second)
+	}
+
+	fmt.Print(string(p))
+	return len(p), nil
+}
 
 func main() {
 
-	// Number of goroutines to simulate.
+	// Number of goroutines that will be writing logs.
 	const grs = 10
 
-	// Create a logger value with 3 times the capacity.
-	l := logger.New(grs * 3)
+	// Create a logger value with a buffer of capacity
+	// for each goroutine that will be logging.
+	var d device
+	l := logger.New(&d, grs)
 
-	// Generate gorutines each writing to disk.
+	// Generate goroutines, each writing to disk.
 	for i := 0; i < grs; i++ {
 		go func(id int) {
 			for {
 				l.Write(fmt.Sprintf("%d: log data", id))
-				time.Sleep(50 * time.Millisecond)
+				time.Sleep(10 * time.Millisecond)
 			}
 		}(i)
 	}
 
-	// We want to control the simulated disk blocking.
+	// We want to control the simulated disk blocking. Capture
+	// interrupt signals to toggle device issues. Use <ctrl> z
+	// to kill the program.
+
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt)
 
-	<-sigChan
-	fmt.Println("Simulate the Disk is out of space.")
-	l.DiskFull()
+	for {
+		<-sigChan
 
-	<-sigChan
-	fmt.Println("Simulate the Disk good again.")
-	l.DiskFull()
-
-	<-sigChan
-	fmt.Println("Shutting down.")
-	l.Shutdown()
-
-	fmt.Println("DOWN")
+		// I appreciate we have a data race here with the Write
+		// method. Let's keep things simple to show the mechanics.
+		d.off = !d.off
+	}
 }

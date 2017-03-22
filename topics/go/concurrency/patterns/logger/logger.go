@@ -2,14 +2,13 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Package logger shows a pattern of using a buffer to handle log write
-// continuity but deal with write latencies by throwing away log data.
+// continuity by dealing with write latencies by throwing away log data.
 package logger
 
 import (
 	"fmt"
+	"io"
 	"sync"
-	"sync/atomic"
-	"time"
 )
 
 // Logger provides support to throw log lines away if log
@@ -17,16 +16,11 @@ import (
 type Logger struct {
 	write chan string    // Channel to send/recv data to be logged.
 	wg    sync.WaitGroup // Helps control the shutdown.
-
-	// Flag to simulate disk issues and latencies.
-	full int32
 }
-
-// =============================================================================
 
 // New creates a logger value and initializes it for use. The user can
 // pass the size of the buffer to use for continuity.
-func New(size int) *Logger {
+func New(w io.Writer, size int) *Logger {
 
 	// Create a value of type logger and init the channel
 	// and timer value.
@@ -45,17 +39,8 @@ func New(size int) *Logger {
 		// Once the channel is close and flushed the loop will terminate.
 		for d := range l.write {
 
-			// Simulate disk blocking when signaled.
-			for {
-				if atomic.LoadInt32(&l.full) == 1 {
-					time.Sleep(250 * time.Millisecond)
-					continue
-				}
-				break
-			}
-
 			// Simulate write to disk.
-			fmt.Println(d)
+			fmt.Fprintln(w, d)
 		}
 
 		// Mark that we are done and terminated.
@@ -87,17 +72,6 @@ func (l *Logger) Write(data string) {
 
 	default:
 		// Drop the write.
-		fmt.Println("***** DROPPING WRITE")
-	}
-}
-
-// =============================================================================
-
-// DiskFull can be used by the sample app to create large latencies.
-func (l *Logger) DiskFull() {
-	if atomic.LoadInt32(&l.full) == 0 {
-		atomic.StoreInt32(&l.full, 1)
-	} else {
-		atomic.StoreInt32(&l.full, 0)
+		fmt.Println("Dropping the write")
 	}
 }
