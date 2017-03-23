@@ -17,7 +17,7 @@ import (
 func main() {
 
 	// Create a context with a timeout of 50 milliseconds.
-	ctx, cancel := context.WithTimeout(context.Background(), 150*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
 	defer cancel()
 
 	// Create a new request.

@@ -20,14 +20,12 @@ func main() {
 
 	// Ask the goroutine to do some work for us.
 	go func() {
-		for {
 
-			// Simulate work.
-			time.Sleep(50 * time.Millisecond)
+		// Simulate work.
+		time.Sleep(150 * time.Millisecond)
 
-			// Report the work is done.
-			cancel()
-		}
+		// Report the work is done.
+		cancel()
 	}()
 
 	// Wait for the work to finish. If it takes too long move on.
