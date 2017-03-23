@@ -19,13 +19,13 @@ import (
 const usersCollection = "users"
 
 // List retrieves a list of existing users from the database.
-func List(ctx context.Context, traceID string, dbSes *mgo.Session) ([]User, error) {
+func List(ctx context.Context, traceID string, dbs *db.DB) ([]User, error) {
 	u := []User{}
 
 	f := func(collection *mgo.Collection) error {
 		return collection.Find(nil).All(&u)
 	}
-	if err := db.Execute(dbSes, usersCollection, f); err != nil {
+	if err := dbs.Execute(usersCollection, f); err != nil {
 		return nil, errors.Wrap(err, "db.users.find()")
 	}
 
@@ -33,7 +33,7 @@ func List(ctx context.Context, traceID string, dbSes *mgo.Session) ([]User, erro
 }
 
 // Retrieve gets the specified user from the database.
-func Retrieve(ctx context.Context, traceID string, dbSes *mgo.Session, userID string) (*User, error) {
+func Retrieve(ctx context.Context, traceID string, dbs *db.DB, userID string) (*User, error) {
 	if !bson.IsObjectIdHex(userID) {
 		return nil, errors.Wrapf(web.ErrInvalidID, "bson.IsObjectIdHex: %s", userID)
 	}
@@ -44,9 +44,9 @@ func Retrieve(ctx context.Context, traceID string, dbSes *mgo.Session, userID st
 	f := func(collection *mgo.Collection) error {
 		return collection.Find(q).One(&u)
 	}
-	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		if err != mgo.ErrNotFound {
-			err = web.ErrNotFound
+	if err := dbs.Execute(usersCollection, f); err != nil {
+		if err == mgo.ErrNotFound {
+			return nil, web.ErrNotFound
 		}
 		return nil, errors.Wrap(err, fmt.Sprintf("db.users.find(%s)", db.Query(q)))
 	}
@@ -55,7 +55,7 @@ func Retrieve(ctx context.Context, traceID string, dbSes *mgo.Session, userID st
 }
 
 // Create inserts a new user into the database.
-func Create(ctx context.Context, traceID string, dbSes *mgo.Session, cu *CreateUser) (*User, error) {
+func Create(ctx context.Context, traceID string, dbs *db.DB, cu *CreateUser) (*User, error) {
 	now := time.Now()
 
 	u := User{
@@ -87,7 +87,7 @@ func Create(ctx context.Context, traceID string, dbSes *mgo.Session, cu *CreateU
 	f := func(collection *mgo.Collection) error {
 		return collection.Insert(u)
 	}
-	if err := db.Execute(dbSes, usersCollection, f); err != nil {
+	if err := dbs.Execute(usersCollection, f); err != nil {
 		return nil, errors.Wrap(err, fmt.Sprintf("db.users.insert(%s)", db.Query(u)))
 	}
 
@@ -95,7 +95,7 @@ func Create(ctx context.Context, traceID string, dbSes *mgo.Session, cu *CreateU
 }
 
 // Update replaces a user document in the database.
-func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID string, cu *CreateUser) error {
+func Update(ctx context.Context, traceID string, dbs *db.DB, userID string, cu *CreateUser) error {
 	if !bson.IsObjectIdHex(userID) {
 		return errors.Wrap(web.ErrInvalidID, "check objectid")
 	}
@@ -112,9 +112,9 @@ func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 	f := func(collection *mgo.Collection) error {
 		return collection.Update(q, m)
 	}
-	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		if err != mgo.ErrNotFound {
-			err = web.ErrNotFound
+	if err := dbs.Execute(usersCollection, f); err != nil {
+		if err == mgo.ErrNotFound {
+			return web.ErrNotFound
 		}
 		return errors.Wrap(err, fmt.Sprintf("db.users.update(%s, %s)", db.Query(q), db.Query(m)))
 	}
@@ -123,7 +123,7 @@ func Update(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 }
 
 // Delete removes a user from the database.
-func Delete(ctx context.Context, traceID string, dbSes *mgo.Session, userID string) error {
+func Delete(ctx context.Context, traceID string, dbs *db.DB, userID string) error {
 	if !bson.IsObjectIdHex(userID) {
 		return errors.Wrapf(web.ErrInvalidID, "bson.IsObjectIdHex: %s", userID)
 	}
@@ -133,9 +133,9 @@ func Delete(ctx context.Context, traceID string, dbSes *mgo.Session, userID stri
 	f := func(collection *mgo.Collection) error {
 		return collection.Remove(q)
 	}
-	if err := db.Execute(dbSes, usersCollection, f); err != nil {
-		if err != mgo.ErrNotFound {
-			err = web.ErrNotFound
+	if err := dbs.Execute(usersCollection, f); err != nil {
+		if err == mgo.ErrNotFound {
+			return web.ErrNotFound
 		}
 		return errors.Wrap(err, fmt.Sprintf("db.users.remove(%s)", db.Query(q)))
 	}

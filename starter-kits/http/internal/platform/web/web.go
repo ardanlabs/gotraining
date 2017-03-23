@@ -11,10 +11,10 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/dimfeld/httptreemux"
 	"github.com/pborman/uuid"
 	"gopkg.in/go-playground/validator.v8"
-	"gopkg.in/mgo.v2"
 )
 
 // TraceIDHeader is the header added to outgoing requests which adds the
@@ -53,7 +53,7 @@ const KeyValues ctxKey = 1
 
 // Values represent state for each request.
 type Values struct {
-	DB         *mgo.Session
+	DB         *db.DB
 	TraceID    string
 	Now        time.Time
 	StatusCode int

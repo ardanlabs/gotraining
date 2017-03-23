@@ -5,7 +5,6 @@ package middleware
 
 import (
 	"context"
-	"log"
 	"net/http"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
@@ -15,12 +14,6 @@ import (
 // Mongo initializes the master session and wires in the connection middleware.
 func Mongo() web.Middleware {
 
-	// session contains the master session for accessing MongoDB.
-	session, err := db.Init()
-	if err != nil {
-		log.Fatalf("startup : Mongo : Initialize Mongo : %+v\n", err)
-	}
-
 	// Return this middleware to be chained together.
 	return func(next web.Handler) web.Handler {
 
@@ -28,8 +21,10 @@ func Mongo() web.Middleware {
 		return func(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 			v := ctx.Value(web.KeyValues).(*web.Values)
 
-			// Get a MongoDB session connection.
-			v.DB = session.Copy()
+			var err error
+			if v.DB, err = db.New("got"); err != nil {
+				return err
+			}
 			defer v.DB.Close()
 
 			if err := next(ctx, w, r, params); err != nil {

@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 )
 
 // init is called before main. We are using init to customize logging output.
@@ -25,6 +26,18 @@ func init() {
 // main is the entry point for the application.
 func main() {
 	log.Println("main : Started")
+
+	// Check the environment for a configured port value.
+	dbHost := os.Getenv("DB_HOST")
+	if dbHost == "" {
+		dbHost = "got:got2015@ds039441.mongolab.com:39441/gotraining"
+	}
+
+	// Register the Master Session for the database.
+	log.Println("main : Started : Registering DB...")
+	if err := db.RegMasterSession("got", dbHost, 25*time.Second); err != nil {
+		log.Fatalf("startup : Register DB : %v", err)
+	}
 
 	// Check the environment for a configured port value.
 	host := os.Getenv("HOST")
@@ -47,7 +60,7 @@ func main() {
 
 	// Start the listener.
 	go func() {
-		log.Printf("startup : Listening : %s", host)
+		log.Printf("startup : Listening %s", host)
 		log.Printf("shutdown : Listener closed : %v", server.ListenAndServe())
 		wg.Done()
 	}()

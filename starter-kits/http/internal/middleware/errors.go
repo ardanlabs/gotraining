@@ -35,8 +35,11 @@ func ErrorHandler(next web.Handler) web.Handler {
 
 		if err := next(ctx, w, r, params); err != nil {
 
-			// Log the error.
-			log.Printf("%s : ERROR : %+v\n", v.TraceID, err)
+			if err != web.ErrNotFound {
+
+				// Log the error.
+				log.Printf("%s : ERROR : %+v\n", v.TraceID, err)
+			}
 
 			// Respond with the error.
 			web.Error(ctx, w, v.TraceID, err)

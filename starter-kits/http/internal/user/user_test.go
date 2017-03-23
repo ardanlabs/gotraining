@@ -5,7 +5,10 @@ package user_test
 
 import (
 	"context"
+	"log"
+	"os"
 	"testing"
+	"time"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
@@ -26,11 +29,24 @@ func TestUsers(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	dbSes, err := db.Init()
+	// Check the environment for a configured port value.
+	dbHost := os.Getenv("DB_HOST")
+	if dbHost == "" {
+		dbHost = "got:got2015@ds039441.mongolab.com:39441/gotraining"
+	}
+
+	// Register the Master Session for the database.
+	log.Println("main : Started : Registering DB...")
+	if err := db.RegMasterSession("got", dbHost, 25*time.Second); err != nil {
+		t.Fatal(err)
+	}
+
+	// Capture a db connection.
+	dbs, err := db.New("got")
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer dbSes.Close()
+	defer dbs.Close()
 
 	traceID := "traceid"
 
@@ -57,13 +73,13 @@ func TestUsers(t *testing.T) {
 	{
 		t.Log("\tTest 0:\tWhen using a valid CreateUser value")
 		{
-			cu, err := user.Create(ctx, traceID, dbSes, &u)
+			cu, err := user.Create(ctx, traceID, dbs, &u)
 			if err != nil {
 				t.Fatalf("\t%s\tShould be able to create a user in the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould be able to create a user in the system.", Succeed)
 
-			ru, err := user.Retrieve(ctx, traceID, dbSes, cu.UserID)
+			ru, err := user.Retrieve(ctx, traceID, dbs, cu.UserID)
 			if err != nil {
 				t.Fatalf("\t%s\tShould be able to retrieve the user back from the system : %v", Failed, err)
 			}
@@ -74,12 +90,12 @@ func TestUsers(t *testing.T) {
 			}
 			t.Logf("\t%s\tShould have a match between the created user and the one retrieved.", Succeed)
 
-			if err := user.Delete(ctx, traceID, dbSes, ru.UserID); err != nil {
+			if err := user.Delete(ctx, traceID, dbs, ru.UserID); err != nil {
 				t.Fatalf("\t%s\tShould be able to remove the user from the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould be able to remove the user from the system.", Succeed)
 
-			if _, err := user.Retrieve(ctx, traceID, dbSes, ru.UserID); err == nil {
+			if _, err := user.Retrieve(ctx, traceID, dbs, ru.UserID); err == nil {
 				t.Fatalf("\t%s\tShould NOT be able to retrieve the user back from the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould NOT be able to retrieve the user back from the system.", Succeed)

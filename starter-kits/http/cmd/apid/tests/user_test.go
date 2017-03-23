@@ -11,10 +11,12 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
+	"time"
 
 	"strings"
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 	"gopkg.in/mgo.v2/bson"
@@ -39,6 +41,26 @@ func TestMain(m *testing.M) {
 // runTest initializes the environment for the tests and allows for
 // the proper return code if the test fails or succeeds.
 func runTest(m *testing.M) int {
+
+	// Check the environment for a configured port value.
+	dbHost := os.Getenv("DB_HOST")
+	if dbHost == "" {
+		dbHost = "got:got2015@ds039441.mongolab.com:39441/gotraining"
+	}
+
+	// Register the Master Session for the database.
+	log.Println("main : Started : Registering DB...")
+	if err := db.RegMasterSession("got", dbHost, 25*time.Second); err != nil {
+		log.Fatalf("startup : Register DB : %v", err)
+	}
+
+	// Capture a db connection.
+	dbs, err := db.New("got")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer dbs.Close()
+
 	log.SetFlags(log.LstdFlags | log.Lmicroseconds | log.Lshortfile)
 	a = routes.API().(*web.App)
 
