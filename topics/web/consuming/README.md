@@ -28,6 +28,15 @@ Canceling with Context: [Test](example7/main_test.go)
 
 ### Exercise 1
 
-TBD
+Call the GitHub API to get a list of contributors for the `ardanlabs/gotraining` repository.
+
+* The API url is https://api.github.com/repos/ardanlabs/gotraining/contributors
+* Docs for the API in general are https://developer.github.com/v3/
+* Docs for the contributors endpoint are https://developer.github.com/v3/repos/#list-contributors
+* To get around rate limiting you must generate a personal access token at https://github.com/settings/tokens
+
+[Exercise Template](exercises/template1/main.go)  
+[Exercise Answer](exercises/exercise1/main.go)
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
