@@ -41,6 +41,7 @@ func TestApp(t *testing.T) {
 		if err != nil {
 			st.Fatal(err)
 		}
+		defer res.Body.Close()
 
 		// Did the call fail authentication?
 		if res.StatusCode != http.StatusPreconditionRequired {
@@ -80,6 +81,7 @@ func TestApp(t *testing.T) {
 			if err != nil {
 				st.Fatal(err)
 			}
+			defer res.Body.Close()
 
 			// Did the call fail authentication?
 			if res.StatusCode != tt.status {

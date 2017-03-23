@@ -46,6 +46,7 @@ func TestApp(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer res.Body.Close()
 
 	// Read in the response from the api call.
 	b, err := ioutil.ReadAll(res.Body)
