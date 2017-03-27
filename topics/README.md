@@ -36,7 +36,7 @@ This is material for anyone looking to learn more about or use NATS to building 
 ### Todd McLeod's Go Training
 
 [Go Fundamentals](https://github.com/GoesToEleven/GolangTraining)
-[Go Web Development](https://github.com/GoesToEleven/golang-web)
+[Go Web Development](https://github.com/GoesToEleven/golang-web-dev)
 [You Tube](https://www.youtube.com/user/toddmcleod)
 [Udemy - Fee](https://www.udemy.com/learn-how-to-code/?couponCode=learngo)
 
@@ -52,7 +52,7 @@ Level up your programming skills by solving small practice problems. Then submit
 
 ### Gopher Puzzles
 
-[Dave Cheney Puzzles - 2016](http://talks.godoc.org/github.com/davecheney/presentations/gopher-puzzlers.slide#1)  
+[Dave Cheney Puzzles - 2016](http://talks.godoc.org/github.com/davecheney/presentations/gopher-puzzlers.slide#1)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
