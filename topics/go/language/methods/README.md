@@ -1,6 +1,6 @@
 ## Methods
 
-Methods are functions that are declared with a receiver which binds the method to a type. Methods and can be used to operate on values or pointers of that type.
+Methods are functions that are declared with a receiver which binds the method to a type. Methods can be used to operate on values or pointers of that type.
 
 ## Notes
 
