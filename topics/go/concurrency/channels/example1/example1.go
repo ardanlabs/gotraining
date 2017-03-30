@@ -16,13 +16,13 @@ func init() {
 }
 
 func main() {
-	// basicSendRecv()
-	// signalClose()
-	// signalAck()
-	// closeRange()
-	// selectRecv()
-	// selectSend()
-	// selectDrop()
+	basicSendRecv()
+	signalClose()
+	signalAck()
+	closeRange()
+	selectRecv()
+	selectSend()
+	selectDrop()
 }
 
 // basicSendRecv shows the basics of a send and receive.
@@ -78,7 +78,7 @@ func closeRange() {
 // selectRecv shows how to use the select statement to wait for a
 // specified amount of time to receive a value.
 func selectRecv() {
-	ch := make(chan string)
+	ch := make(chan string, 1)
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
 		ch <- "work"
@@ -98,7 +98,12 @@ func selectSend() {
 	ch := make(chan string)
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-		fmt.Println(<-ch)
+		d, ok := <-ch
+		if !ok {
+			fmt.Println("Cancel")
+			return
+		}
+		fmt.Println(d)
 	}()
 
 	select {
@@ -106,6 +111,7 @@ func selectSend() {
 		fmt.Println("send work")
 	case <-time.After(100 * time.Millisecond):
 		fmt.Println("timed out")
+		close(ch)
 	}
 }
 
