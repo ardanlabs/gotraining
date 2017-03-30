@@ -344,7 +344,7 @@ Channels allow goroutines to communicate with each other through the use of sign
 
 * Use channels to orchestrate and coordinate goroutines.
     * Focus on the signaling semantics and not the sharing of data.
-    * Signal by passing data or by closing the channel.
+    * Signal with data or without data.
     * Question their use for synchronizing access to shared state.
         * _There are cases where channels can be simpler for this but initially question._
 * Unbuffered channels:
@@ -362,7 +362,7 @@ Channels allow goroutines to communicate with each other through the use of sign
     * Trade-offs:
         * We take the benefit of reducing blocking latency for the cost of not knowing if/when the data signal is received.
 * Closing channels:
-    * Signaling without the need for data passing.
+    * Signaling without data.
     * Perfect for signaling cancellations and deadlines.
 * NIL channels:
     * Turn off signaling
