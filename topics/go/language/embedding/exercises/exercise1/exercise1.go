@@ -2,10 +2,10 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Copy the code from the template. Declare a new type called hockey
-// which embeds the sports type. Implement the matcher interface for hockey.
-// When implementing the match method for hockey, call into the match method
+// which embeds the sports type. Implement the finder interface for hockey.
+// When implementing the find method for hockey, call into the find method
 // for the embedded sport type to check the embedded fields first. Then create
-// two hockey values inside the slice of matchers and perform the search.
+// two hockey values inside the slice of finders and perform the search.
 package main
 
 import (
@@ -13,9 +13,9 @@ import (
 	"strings"
 )
 
-// matcher defines the behavior required for performing matching.
-type matcher interface {
-	match(searchTerm string) bool
+// finder defines the behavior required for performing matching.
+type finder interface {
+	find(needle string) bool
 }
 
 // sport represents a sports team.
@@ -24,9 +24,9 @@ type sport struct {
 	city string
 }
 
-// match checks the value for the specified term.
-func (s sport) match(searchTerm string) bool {
-	return strings.Contains(s.team, searchTerm) || strings.Contains(s.city, searchTerm)
+// find checks the value for the specified term.
+func (s sport) find(needle string) bool {
+	return strings.Contains(s.team, needle) || strings.Contains(s.city, needle)
 }
 
 // hockey represents specific hockey information.
@@ -35,29 +35,29 @@ type hockey struct {
 	country string
 }
 
-// match checks the value for the specified term.
-func (h hockey) match(searchTerm string) bool {
-	return h.sport.match(searchTerm) || strings.Contains(h.country, searchTerm)
+// find checks the value for the specified term.
+func (h hockey) find(needle string) bool {
+	return h.sport.find(needle) || strings.Contains(h.country, needle)
 }
 
 func main() {
 
-	// Define the term to match.
-	term := "Miami"
+	// Define the term to find.
+	needle := "Miami"
 
-	// Create a slice of matcher values and assign values
+	// Create a slice of finder values and assign values
 	// of the concrete hockey type.
-	matchers := []matcher{
+	haystack := []finder{
 		hockey{sport{"Panthers", "Miami"}, "USA"},
 		hockey{sport{"Canadiens", "Montreal"}, "Canada"},
 	}
 
-	// Display what we are trying to match.
-	fmt.Println("Matching For:", term)
+	// Display what we are trying to find.
+	fmt.Println("Matching For:", needle)
 
-	// Range of each matcher value and check the term.
-	for _, m := range matchers {
-		if m.match(term) {
+	// Range of each haystack value and check the term.
+	for _, m := range haystack {
+		if m.find(needle) {
 			fmt.Printf("FOUND: %+v", m)
 		}
 	}
