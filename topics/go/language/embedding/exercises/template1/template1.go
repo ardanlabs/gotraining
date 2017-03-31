@@ -22,7 +22,7 @@ type sport struct {
 }
 
 // find checks the value for the specified term.
-func (s sport) find(needle string) bool {
+func (s *sport) find(needle string) bool {
 	return strings.Contains(s.team, needle) || strings.Contains(s.city, needle)
 }
 

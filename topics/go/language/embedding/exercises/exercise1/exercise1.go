@@ -25,7 +25,7 @@ type sport struct {
 }
 
 // find checks the value for the specified term.
-func (s sport) find(needle string) bool {
+func (s *sport) find(needle string) bool {
 	return strings.Contains(s.team, needle) || strings.Contains(s.city, needle)
 }
 
@@ -36,7 +36,7 @@ type hockey struct {
 }
 
 // find checks the value for the specified term.
-func (h hockey) find(needle string) bool {
+func (h *hockey) find(needle string) bool {
 	return h.sport.find(needle) || strings.Contains(h.country, needle)
 }
 
@@ -48,17 +48,17 @@ func main() {
 	// Create a slice of finder values and assign values
 	// of the concrete hockey type.
 	haystack := []finder{
-		hockey{sport{"Panthers", "Miami"}, "USA"},
-		hockey{sport{"Canadiens", "Montreal"}, "Canada"},
+		&hockey{sport{"Panthers", "Miami"}, "USA"},
+		&hockey{sport{"Canadiens", "Montreal"}, "Canada"},
 	}
 
 	// Display what we are trying to find.
-	fmt.Println("Matching For:", needle)
+	fmt.Println("Searching For:", needle)
 
 	// Range of each haystack value and check the term.
-	for _, m := range haystack {
-		if m.find(needle) {
-			fmt.Printf("FOUND: %+v", m)
+	for _, hs := range haystack {
+		if hs.find(needle) {
+			fmt.Printf("FOUND: %+v", hs)
 		}
 	}
 }
