@@ -97,22 +97,22 @@ _**Writing**_
 We are working hard to maintain pricing that can fit your budget.
 
 **Ultimate Go**  
-4 Days (24 hours) - $20,000 for up to 15 students  
-3 Days (21 hours) - $15,000 for up to 15 students  
-2 Days (14 hours) - $10,000 for up to 15 students  
+4 Days (24 hours) - $24,000 for up to 15 students  
+3 Days (21 hours) - $18,000 for up to 15 students  
+2 Days (14 hours) - $12,000 for up to 15 students  
 $5,000 T&E  
-Classes that exceed 15 students are charged an extra $500 each per additional student.
+Classes that exceed 15 students are charged an extra $600 each per additional student.
 
 **Ultimate Data Science**  
-3 Days (21 hours) - $15,000 for up to 15 students  
-2 Days (14 hours) - $10,000 for up to 15 students  
+3 Days (21 hours) - $18,000 for up to 15 students  
+2 Days (14 hours) - $12,000 for up to 15 students  
 $5,000 T&E  
-Classes that exceed 15 students are charged an extra $500 each per additional student.
+Classes that exceed 15 students are charged an extra $600 each per additional student.
 
 **Ultimate Web**  
-2 Days (14 hours) - $10,000 for up to 15 students  
+2 Days (14 hours) - $12,000 for up to 15 students  
 $5,000 T&E  
-Classes that exceed 15 students are charged an extra $500 each per additional student.
+Classes that exceed 15 students are charged an extra $600 each per additional student.
 
 **Our 4 day class option:**  
 _This option is the best for teams with little to no Go experience. We can do more exercises and each day is not as mentally exhausting._
