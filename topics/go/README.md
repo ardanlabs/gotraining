@@ -107,6 +107,16 @@ There are two driving forces behind integrity:
 * Integrity is about every allocation, read and write of memory being accurate, consistent and efficient. The type system is critical to making sure we have this `micro` level of integrity.
 * Integrity is about every data transformation being accurate, consistent and efficient. Writing less code and error handling is critical to making sure we have this `macro` level of integrity.
 
+**Write Less Code:**
+
+There have been studies that have researched the number of bugs you can expect to have in your software. The industry average is around 15 to 50 bugs per 1000 lines of code. One simple way to reduce the number of bugs, and increase the integrity of your software, is to write less code.
+
+Bjarne Stroustrup stated that writing more code than you need results in `Ugly`, `Large` and `Slow` code:
+
+* `Ugly`: Leaves places for bugs to hide.
+* `Large`: Ensures incomplete tests.
+* `Slow`: Encourages the use of shortcuts and dirty tricks.
+
 **Error Handling:**
 
 When error handling is treated as an exception and not part of the main code, you can expect the majority of your critical failures to be due to error handling.
@@ -121,36 +131,6 @@ When error handling is treated as an exception and not part of the main code, yo
         * 23% : Easily detectable
         * 34% : Complex bugs
 * 8% : Failures from latent human errors
-
-**Ignorance vs Carelessness:**
-
-Anytime we identify an integrity issue we need to ask ourselves why it happened. 
-```
-                    Not Deliberate               Deliberate
-              ------------------------------------------------------
-              |                          |                         |
-              |                          |                         |
-   Ignorance  |  Learning / Prototyping  |    Hacking / Guessing   |
-              |                          |                         |
-              |                          |                         |
-              |-----------------------------------------------------
-              |                          |                         |
-              |                          |                         |
-Carelessness  |        Education         |   Dangerous Situation   |
-              |                          |                         |
-              |                          |                         |
-              ------------------------------------------------------
-```
-
-**Write Less Code:**
-
-There have been studies that have researched the number of bugs you can expect to have in your software. The industry average is around 15 to 50 bugs per 1000 lines of code. One simple way to reduce the number of bugs, and increase the integrity of your software, is to write less code.
-
-Bjarne Stroustrup stated that writing more code than you need results in `Ugly`, `Large` and `Slow` code:
-
-* `Ugly`: Leaves places for bugs to hide.
-* `Large`: Ensures incomplete tests.
-* `Slow`: Encourages the use of shortcuts and dirty tricks.
 
 **Resources:**
 

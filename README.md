@@ -136,7 +136,8 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Apcera            SF, CA                 April      Bill Kennedy 		
 		Corporate    Go       Capital One       SF, CA                 May        Bill Kennedy
 		Corporate    Go       Sky Betting       Leeds, UK              May        Bill Kennedy 		
-		Corporate    Go       Intel             Chandler, AZ           June       Bill Kennedy 		
+		Corporate    Go       Intel             Chandler, AZ           June       Bill Kennedy
+		Corporate    Go       NIST              Gaithersburg, MD       June       Bill Kennedy 		
 
 		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
