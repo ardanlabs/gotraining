@@ -1,10 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// BenchmarkSingle-8          50	  83368977 ns/op
-// BenchmarkUnlimited-8        3	1430902678 ns/op
-// BenchmarkNumCPU-8   	     100	  54668707 ns/op
-
 // Sample program to show how concurrency doesn't necessarily mean
 // better performance.
 package main
@@ -27,27 +23,18 @@ func init() {
 }
 
 func BenchmarkSingle(b *testing.B) {
-	runtime.GC()
-	b.ResetTimer()
-
 	for i := 0; i < b.N; i++ {
 		single(n)
 	}
 }
 
 func BenchmarkUnlimited(b *testing.B) {
-	runtime.GC()
-	b.ResetTimer()
-
 	for i := 0; i < b.N; i++ {
 		unlimited(n)
 	}
 }
 
 func BenchmarkNumCPU(b *testing.B) {
-	runtime.GC()
-	b.ResetTimer()
-
 	for i := 0; i < b.N; i++ {
 		numCPU(n, 0)
 	}
