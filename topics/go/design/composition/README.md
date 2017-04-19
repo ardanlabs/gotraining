@@ -41,6 +41,7 @@ http://golang.org/doc/effective_go.html#embedding
 [Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/EnzMrT7Fdo))  
 [Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/ES4BOnDX6O))  
 [Decoupling With Interface Composition](decoupling/example4/example4.go) ([Go Playground](https://play.golang.org/p/ufFSFxCdEs))  
+[Remove Interface Pollution](decoupling/example5/example5.go) ([Go Playground](https://play.golang.org/p/a8C4KM9AU2))  
 
 #### Conversion and Assertions
 
