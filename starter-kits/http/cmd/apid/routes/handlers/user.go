@@ -9,6 +9,7 @@ import (
 
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
+	"github.com/pkg/errors"
 )
 
 // UserList returns all the existing users in the system.
@@ -18,7 +19,7 @@ func UserList(ctx context.Context, w http.ResponseWriter, r *http.Request, param
 
 	u, err := user.List(ctx, v.TraceID, v.DB)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "")
 	}
 
 	web.Respond(ctx, w, v.TraceID, u, http.StatusOK)
@@ -32,7 +33,7 @@ func UserRetrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, p
 
 	u, err := user.Retrieve(ctx, v.TraceID, v.DB, params["id"])
 	if err != nil {
-		return err
+		return errors.Wrapf(err, "Id: %s", params["id"])
 	}
 
 	web.Respond(ctx, w, v.TraceID, u, http.StatusOK)
@@ -46,12 +47,12 @@ func UserCreate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 
 	var cu user.CreateUser
 	if err := web.Unmarshal(r.Body, &cu); err != nil {
-		return err
+		return errors.Wrap(err, "")
 	}
 
 	u, err := user.Create(ctx, v.TraceID, v.DB, &cu)
 	if err != nil {
-		return err
+		return errors.Wrapf(err, "User: %+v", &cu)
 	}
 
 	web.Respond(ctx, w, v.TraceID, u, http.StatusCreated)
@@ -65,11 +66,11 @@ func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 
 	var cu user.CreateUser
 	if err := web.Unmarshal(r.Body, &cu); err != nil {
-		return err
+		return errors.Wrap(err, "")
 	}
 
 	if err := user.Update(ctx, v.TraceID, v.DB, params["id"], &cu); err != nil {
-		return err
+		return errors.Wrapf(err, "Id: %s  User: %+v", params["id"], &cu)
 	}
 
 	web.Respond(ctx, w, v.TraceID, nil, http.StatusNoContent)
@@ -82,7 +83,7 @@ func UserDelete(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 	v := ctx.Value(web.KeyValues).(*web.Values)
 
 	if err := user.Delete(ctx, v.TraceID, v.DB, params["id"]); err != nil {
-		return err
+		return errors.Wrapf(err, "Id: %s", params["id"])
 	}
 
 	web.Respond(ctx, w, v.TraceID, nil, http.StatusNoContent)
