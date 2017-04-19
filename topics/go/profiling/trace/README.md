@@ -10,8 +10,11 @@ The trace profiling can help identify the health of your programs. We will use a
     // Run the trace tool with the generated profile.
     go tool trace trace.out
 
-    // Look at the profile data as well.
-    go tool pprof ./trace cpu.pprof
+    // Generate a CPU profile.
+    go tool trace -pprof=[net,syscall,sync,sched] trace.out > cpu.out
+    
+    // View the profile.
+    go tool pprof ./trace cpu.out  
 
 Navigating the tracing tool and interpreting the data requires in class instruction.
 
