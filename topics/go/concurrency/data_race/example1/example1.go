@@ -9,7 +9,6 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 	"sync"
 )
 
@@ -28,7 +27,18 @@ func main() {
 	// Create two goroutines.
 	for i := 0; i < grs; i++ {
 		go func() {
-			incCounter()
+			for count := 0; count < 2; count++ {
+
+				// Capture the value of Counter.
+				value := counter
+
+				// Increment our local value of Counter.
+				value++
+
+				// Store the value back into Counter.
+				counter = value
+			}
+
 			wg.Done()
 		}()
 	}
@@ -38,47 +48,24 @@ func main() {
 	fmt.Println("Final Counter:", counter)
 }
 
-// incCounter increments the package level counter variable.
-func incCounter() {
-	for count := 0; count < 2; count++ {
-
-		// Capture the value of Counter.
-		value := counter
-
-		// Yield the thread and be placed back in queue.
-		// DO NOT USE IN PRODUCTION CODE!
-		runtime.Gosched()
-
-		// Increment our local value of Counter.
-		value++
-
-		// Store the value back into Counter.
-		counter = value
-	}
-}
-
 /*
 ==================
 WARNING: DATA RACE
-Read by goroutine 7:
-  main.incCounter()
-      /Users/bill/.../data_race/example1/example1.go:46 +0x41
+Read at 0x0000011a5118 by goroutine 7:
   main.main.func1()
-      /Users/bill/.../data_race/example1/example1.go:31 +0x25
+      /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/concurrency/data_race/example1/example1.go:33 +0x4e
 
-Previous write by goroutine 6:
-  main.incCounter()
-      /Users/bill/.../data_race/example1/example1.go:56 +0x6f
+Previous write at 0x0000011a5118 by goroutine 6:
   main.main.func1()
-      /Users/bill/.../data_race/example1/example1.go:31 +0x25
+      /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/concurrency/data_race/example1/example1.go:39 +0x6d
 
 Goroutine 7 (running) created at:
   main.main()
-      /Users/bill/.../data_race/example1/example1.go:33 +0xa1
+      /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/concurrency/data_race/example1/example1.go:43 +0xc3
 
 Goroutine 6 (finished) created at:
   main.main()
-      /Users/bill/.../data_race/example1/example1.go:33 +0xa1
+      /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/concurrency/data_race/example1/example1.go:43 +0xc3
 ==================
 Final Counter: 4
 Found 1 data race(s)

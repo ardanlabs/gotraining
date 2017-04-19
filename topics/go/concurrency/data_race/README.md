@@ -38,15 +38,14 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/evBf1oagDj))  
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/uE-2Kl9CtC))  
-[Atomic Store/Load](example3/example3.go) ([Go Playground](https://play.golang.org/p/LqgPnirE1c))  
-[Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/tMH4D6XAXP))  
-[Read/Write Mutex](example5/example5.go) ([Go Playground](https://play.golang.org/p/Oc4QO7Fjqa))
+[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/yXiOONCG-2))  
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/SbWFzQT1zu))  
+[Mutex](example3/example3.go) ([Go Playground](https://play.golang.org/p/_4TYRcZ2vP))  
+[Read/Write Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/uMU7Crx6ZY))
 
 ## Advanced Code Review
 
-[Interface Based Race Condition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/uX16U3727N))
+[Interface Based Race Condition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/m08N8yYlpr))
 
 ## Exercises
 

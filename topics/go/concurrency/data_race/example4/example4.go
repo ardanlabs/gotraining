@@ -1,69 +1,95 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to use a mutex to define critical
-// sections of code that need synchronous access.
+// Sample program to show how to use a read/write mutex to define critical
+// sections of code that needs synchronous access.
 package main
 
 import (
 	"fmt"
-	"runtime"
+	"math/rand"
 	"sync"
+	"sync/atomic"
+	"time"
 )
 
-var (
-	// counter is a variable incremented by all goroutines.
-	counter int
+// data is a slice that will be shared.
+var data []string
 
-	// mutex is used to define a critical section of code.
-	mutex sync.Mutex
-)
+// rwMutex is used to define a critical section of code.
+var rwMutex sync.RWMutex
+
+// Number of reads occurring at ay given time.
+var readCount int64
+
+// init is called prior to main.
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
 
-	// Number of goroutines to use.
-	const grs = 2
-
 	// wg is used to manage concurrency.
 	var wg sync.WaitGroup
-	wg.Add(grs)
+	wg.Add(1)
 
-	// Create two goroutines.
-	for i := 0; i < grs; i++ {
+	// Create a writer goroutine.
+	go func() {
+		for i := 0; i < 10; i++ {
+			time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
+			writer(i)
+		}
+		wg.Done()
+	}()
+
+	// Create eight reader goroutines.
+	for i := 0; i < 8; i++ {
 		go func() {
-			incCounter()
-			wg.Done()
+			for {
+				reader(i)
+			}
 		}()
 	}
 
-	// Wait for the goroutines to finish.
+	// Wait for the write goroutine to finish.
 	wg.Wait()
-	fmt.Printf("Final Counter: %d\n", counter)
+	fmt.Println("Program Complete")
 }
 
-// incCounter increments the package level Counter variable
-// using the Mutex to synchronize and provide safe access.
-func incCounter() {
-	for count := 0; count < 2; count++ {
+// writer adds a new string to the slice in random intervals.
+func writer(i int) {
 
-		// Only allow one goroutine through this
-		// critical section at a time.
-		mutex.Lock()
-		{
-			// Capture the value of counter.
-			value := counter
+	// Only allow one goroutine to read/write to the slice at a time.
+	rwMutex.Lock()
+	{
+		// Capture the current read count.
+		// Keep this safe though we can due without this call.
+		rc := atomic.LoadInt64(&readCount)
 
-			// Yield the thread and be placed back in queue.
-			runtime.Gosched()
-
-			// Increment our local value of counter.
-			value++
-
-			// Store the value back into counter.
-			counter = value
-		}
-		mutex.Unlock()
-		// Release the lock and allow any
-		// waiting goroutine through.
+		// Perform some work since we have a full lock.
+		fmt.Printf("****> : Performing Write : RCount[%d]\n", rc)
+		data = append(data, fmt.Sprintf("String: %d", i))
 	}
+	rwMutex.Unlock()
+	// Release the lock.
+}
+
+// reader wakes up and iterates over the data slice.
+func reader(id int) {
+
+	// Any goroutine can read when no write operation is taking place.
+	rwMutex.RLock()
+	{
+		// Increment the read count value by 1.
+		rc := atomic.AddInt64(&readCount, 1)
+
+		// Perform some read work and display values.
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
+		fmt.Printf("%d : Performing Read : Length[%d] RCount[%d]\n", id, len(data), rc)
+
+		// Decrement the read count value by 1.
+		atomic.AddInt64(&readCount, -1)
+	}
+	rwMutex.RUnlock()
+	// Release the read lock.
 }

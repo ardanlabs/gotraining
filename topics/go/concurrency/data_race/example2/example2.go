@@ -7,7 +7,6 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 	"sync"
 	"sync/atomic"
 )
@@ -27,7 +26,10 @@ func main() {
 	// Create two goroutines.
 	for i := 0; i < grs; i++ {
 		go func() {
-			incCounter()
+			for count := 0; count < 2; count++ {
+				atomic.AddInt64(&counter, 1)
+			}
+
 			wg.Done()
 		}()
 	}
@@ -37,16 +39,4 @@ func main() {
 
 	// Display the final value.
 	fmt.Println("Final Counter:", counter)
-}
-
-// incCounter increments the package level counter variable.
-func incCounter() {
-	for count := 0; count < 2; count++ {
-
-		// Safely Add One To Counter.
-		atomic.AddInt64(&counter, 1)
-
-		// Yield the thread and be placed back in queue.
-		runtime.Gosched()
-	}
 }

@@ -9,6 +9,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"sync"
 )
 
 // Speaker allows for speaking behavior.
@@ -81,5 +82,7 @@ func main() {
 
 	// Just hold main from returning. The data race will
 	// cause the program to exit.
-	<-make(chan struct{})
+	var wg sync.WaitGroup
+	wg.Add(1)
+	wg.Wait()
 }
