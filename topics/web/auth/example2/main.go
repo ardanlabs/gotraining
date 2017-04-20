@@ -85,7 +85,7 @@ func indexHandler(res http.ResponseWriter, req *http.Request) {
 func App() http.Handler {
 
 	// Create a new Github provider with our connection details.
-	goth.UseProviders(github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), "http://127.0.0.1:3000/auth/github/callback"))
+	goth.UseProviders(github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), "http://localhost:3000/auth/github/callback"))
 
 	// Create a new pat router.
 	p := pat.New()
