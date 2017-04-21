@@ -2,6 +2,12 @@
 
 The trace profiling can help identify the health of your programs. We will use a simple program to learn how to navigate and read some of the tracing information you can find in the trace tool.
 
+## Basic Skills
+
+Review this post to gain basic skills.
+
+[go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell
+
 ## Trace Command
 
     // Run the website and hit the /work handler.
