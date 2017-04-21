@@ -197,7 +197,7 @@ func getUser400(t *testing.T) {
 
 			recv := w.Body.String()
 			resp := `{
-  "error": "bson.IsObjectIdHex: 12345: ID is not in it's proper form"
+  "error": "Id: 12345: bson.IsObjectIdHex: 12345: ID is not in it's proper form"
 }`
 			if resp != recv {
 				t.Log("Got :", recv)
