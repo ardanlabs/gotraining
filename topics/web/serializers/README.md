@@ -6,6 +6,7 @@ Learn the basics of using and applying custom JSON and XML serializers.
 
 https://golang.org/pkg/encoding/json  
 https://golang.org/pkg/encoding/xml  
+mholt.github.io/json-to-go/  
 
 ## Code Review
 
