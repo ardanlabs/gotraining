@@ -96,6 +96,8 @@ Here is more reading and videos to also help get you started.
 [runtime: goroutine execution stalled during GC](https://github.com/golang/go/issues/16293) - Caleb Spare  
 [Go's execution tracer](http://www.thedotpost.com/2016/10/rhys-hiltner-go-execution-tracer) - Rhys Hiltner  
 [Using Instruments to profile Go programs](https://rakyll.org/instruments) - rakyll  
+[Fighting latency: the CPU profiler is not your ally](https://www.youtube.com/watch?v=nsM_m4hZ-bA&t=973s) - Filippo Valsorda  
+[go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
 
 ## Go and OS Tooling
 
