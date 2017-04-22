@@ -41,6 +41,8 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * Technology changes quickly but people's minds change slowly.
 * Easy to adopt new technology but hard to adopt new ways of thinking.
 
+**_"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love_**
+
 ---
 
 ### Productivity vs Performance
@@ -144,8 +146,7 @@ When error handling is treated as an exception and not part of the main code, yo
 
 #### 2) Readability
 
-**_We must structure our systems to be more comprehensible._**  
-**_Readability means reliability._**
+**_We must structure our systems to be more comprehensible._**
 
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
