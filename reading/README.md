@@ -80,6 +80,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go's execution tracer](http://www.thedotpost.com/2016/10/rhys-hiltner-go-execution-tracer) - Rhys Hiltner  
 [Using Instruments to profile Go programs](https://rakyll.org/instruments) - Burcu Dogan  
 [Designing for Performance](https://www.youtube.com/watch?v=03GsLxVdVzU&feature=youtu.be) - Martin Thompson  
+[Fighting latency: the CPU profiler is not your ally](https://www.youtube.com/watch?v=nsM_m4hZ-bA&t=973s) - Filippo Valsorda  
+[go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
 
 ### Interfaces and Composition
 
