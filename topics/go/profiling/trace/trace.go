@@ -7,16 +7,12 @@ package main
 
 import (
 	"crypto/sha256"
-	"fmt"
 	"io/ioutil"
 	"log"
-	"net"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
 	"os/exec"
-	"os/signal"
-	"runtime/pprof"
 	"runtime/trace"
 	"time"
 )
@@ -84,12 +80,8 @@ func Exec() {
 	}
 }
 
-// SlowHandler performs a set of actions that take long to complete.
-func SlowHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("Started Request")
-
-	// Measure the time this takes.
-	start := time.Now()
+// Work performs a set of actions that take long to complete.
+func Work() {
 
 	// Download the file from the web.
 	data := Download()
@@ -97,40 +89,17 @@ func SlowHandler(w http.ResponseWriter, req *http.Request) {
 	// Write the file to disk.
 	Write(data)
 
-	// Block for a second.
-	Block()
+	// // Block for a second.
+	// Block()
 
-	// Hash the data we received.
-	Hash(data)
+	// // Hash the data we received.
+	// Hash(data)
 
-	// Execute an out of process command.
-	Exec()
-
-	// Log how long all this took.
-	s := fmt.Sprint("Request took:", time.Since(start))
-	fmt.Println(s)
-	fmt.Fprintf(w, s)
+	// // Execute an out of process command.
+	// Exec()
 }
 
 func main() {
-	fmt.Println("Listening on 127.0.0.1:12345")
-
-	// Start listening on the local ip.
-	l, err := net.Listen("tcp", "127.0.0.1:12345")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Create a file to hold profiling data.
-	pf, err := os.Create("cpu.pprof")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer pf.Close()
-
-	// Start gathering the profiling data.
-	pprof.StartCPUProfile(pf)
-	defer pprof.StopCPUProfile()
 
 	// Create a file to hold tracing data.
 	tf, err := os.Create("trace.out")
@@ -143,19 +112,6 @@ func main() {
 	trace.Start(tf)
 	defer trace.Stop()
 
-	// Bind the handler to the work route.
-	http.HandleFunc("/work", SlowHandler)
-
-	// Set up the OS interrup to stop the service.
-	go func() {
-		sigChan := make(chan os.Signal, 1)
-		signal.Notify(sigChan, os.Interrupt)
-		<-sigChan
-		l.Close()
-	}()
-
-	// This will server the website until we `/stop` the listener.
-	// This will allow us to write the file profile and trace data.
-	http.Serve(l, nil)
-	fmt.Println("Shutdown")
+	// Perform the work.
+	Work()
 }
