@@ -134,6 +134,25 @@ When error handling is treated as an exception and not part of the main code, yo
         * 34% : Complex bugs
 * 8% : Failures from latent human errors
 
+**Ignorance vs Carelessness:**
+
+Anytime we identify an integrity issue we need to ask ourselves why it happened.
+```
+                    Not Deliberate               Deliberate
+              ------------------------------------------------------
+              |                          |                         |
+              |                          |                         |
+   Ignorance  |  Learning / Prototyping  |    Hacking / Guessing   |
+              |                          |                         |
+              |                          |                         |
+              |-----------------------------------------------------
+              |                          |                         |
+              |                          |                         |
+Carelessness  |        Education         |   Dangerous Situation   |
+              |                          |                         |
+              |                          |                         |
+              ------------------------------------------------------
+```
 **Resources:**
 
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
