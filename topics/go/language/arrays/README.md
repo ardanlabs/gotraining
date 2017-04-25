@@ -58,25 +58,32 @@ This is a diagram showing the relationship of the cache hierarchy for the 4 Core
 
 This is subject to be different in different processors. For this content, the following is the multi-levels of cache associated with the Intel 4 Core i7-9xx processor:
 
+	3GHz * 4 instructions per cycle = 12 instructions per ns!
+
 	L1 - 64KB Cache (Per Core)
 		32KB I-Cache
 		32KB D-Cache
 		2 HW Threads
 		4 cycles of latency
+		Stalls for 16 instructions or 1.3 ns
 
 	L2 - 256KB Cache (Per Core)
 		Holds both Instructions and Data
 		2 HW Threads
 		11 cycles of latency
+		Stalls for 44 instructions or 3.6 ns
 
 	L3 - 8MB Cache
 		Holds both Instructions and Data
 		Shared across all 4 cores
 		8 HW Threads
 		39 cycles of latency
+		Stalls for 156 instructions or 13 ns
 
 	Main Memory
 		107 cycle of latency
+		Stalled for 428 instructions or 35.6 ns
+		27 times slower!
 
 ### Latencies
 
