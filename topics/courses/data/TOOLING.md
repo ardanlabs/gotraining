@@ -3,8 +3,8 @@
 All of these can be installed via `go get ...`
 
 github.com/kniren/gota/dataframe    
-github.com/go-hep/csvutil    
-github.com/go-hep/csvutil/csvdriver   
+go-hep.org/x/hep/csvutil   
+go-hep.org/x/hep/csvutil/csvdriver   
 github.com/lib/pq    
 github.com/patrickmn/go-cache    
 github.com/boltdb/bolt    
