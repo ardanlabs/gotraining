@@ -23,12 +23,12 @@ github.com/sjwhitworth/golearn/base
 github.com/sjwhitworth/golearn/evaluation    
 github.com/sjwhitworth/golearn/knn     
 github.com/sjwhitworth/golearn/trees    
-github.com/Sirupsen/logrus 
-github.com/satori/go.uuid
-github.com/gogo/protobuf/types
-github.com/gogo/protobuf/proto
-github.com/gogo/protobuf/gogoproto
-github.com/pachyderm/pachyderm
+github.com/Sirupsen/logrus   
+github.com/satori/go.uuid     
+github.com/gogo/protobuf/types     
+github.com/gogo/protobuf/proto     
+github.com/gogo/protobuf/gogoproto     
+github.com/pachyderm/pachyderm     
 
 # Other dependencies
 
