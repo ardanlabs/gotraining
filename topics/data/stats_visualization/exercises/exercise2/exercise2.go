@@ -31,7 +31,7 @@ func main() {
 	// Get the diabetes dataset from Pachyderm's data
 	// versioning at the latest commit.
 	var b bytes.Buffer
-	if err := c.GetFile("diabetes", "master", "diabetes.csv", 0, 0, "", false, nil, &b); err != nil {
+	if err := c.GetFile("diabetes", "master", "diabetes.csv", 0, 0, &b); err != nil {
 		log.Fatal()
 	}
 

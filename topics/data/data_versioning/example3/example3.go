@@ -50,7 +50,7 @@ func main() {
 	// actually happened. The nil, 1, 0, and false parameters are
 	// good defaults here and are explained further in the docs at
 	// https://godoc.org/github.com/pachyderm/pachyderm/src/client#APIClient.ListCommitByRepo.
-	commits, err := c.ListCommitByRepo([]string{"iris"}, nil, 1, 0, false)
+	commits, err := c.ListCommitByRepo("iris")
 	if err != nil {
 		log.Fatal(err)
 	}

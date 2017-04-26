@@ -9,22 +9,32 @@
 package main
 
 import (
+	"bytes"
 	"encoding/csv"
 	"log"
-	"os"
+
+	"github.com/dwhitena/pachyderm/src/client"
 )
 
 func main() {
 
-	// Open the iris dataset file.
-	f, err := os.Open("../../data/diabetes.csv")
+	// Connect to Pachyderm on our localhost.  By default
+	// Pachyderm will be exposed on port 30650.
+	c, err := client.NewFromAddress("0.0.0.0:30650")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
+	defer c.Close()
+
+	// Get the diabetes dataset from Pachyderm's data
+	// versioning at the latest commit.
+	var b bytes.Buffer
+	if err := c.GetFile("diabetes", "master", "diabetes.csv", 0, 0, &b); err != nil {
+		log.Fatal()
+	}
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(f)
+	reader := csv.NewReader(bytes.NewReader(b.Bytes()))
 	reader.FieldsPerRecord = 11
 
 	// Read in all of the CSV records
