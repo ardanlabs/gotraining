@@ -16,8 +16,7 @@ github.com/gonum/plot/plotter
 github.com/gonum/plot/vg     
 github.com/gonum/stat/distuv    
 github.com/gonum/mathext     
-bitbucket.org/zombiezen/gopdf/pdf      
-github.com/biogo/graphics/bezier     
+bitbucket.org/zombiezen/gopdf/pdf          
 github.com/gonum/floats     
 github.com/sajari/regression     
 github.com/sjwhitworth/golearn/base     
