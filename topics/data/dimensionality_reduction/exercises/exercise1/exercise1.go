@@ -31,7 +31,7 @@ func main() {
 	// Get the Iris dataset from Pachyderm's data
 	// versioning at the latest commit.
 	var b bytes.Buffer
-	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, "", false, nil, &b); err != nil {
+	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, &b); err != nil {
 		log.Fatal()
 	}
 
@@ -43,10 +43,14 @@ func main() {
 
 	// Calculate the principal component direction vectors
 	// and variances.
-	vecs, _, ok := stat.PrincipalComponents(mat, nil)
+	var pc stat.PC
+	ok := pc.PrincipalComponents(mat, nil)
 	if !ok {
 		log.Fatal("Could not calculate prinicple components")
 	}
+
+	var vecs *mat64.Dense
+	vecs = pc.Vectors(vecs)
 
 	// Project the data onto the first 3 principal components.
 	var proj mat64.Dense

@@ -32,7 +32,7 @@ func main() {
 	// Get the training dataset from Pachyderm's data
 	// versioning at the latest commit.
 	var b bytes.Buffer
-	if err := c.GetFile("regression_split", "master", "training.csv", 0, 0, "", false, nil, &b); err != nil {
+	if err := c.GetFile("regression_split", "master", "training.csv", 0, 0, &b); err != nil {
 		log.Fatal()
 	}
 
@@ -93,7 +93,7 @@ func main() {
 	// Get the test dataset from Pachyderm's data
 	// versioning at the latest commit.
 	b.Reset()
-	if err := c.GetFile("regression_split", "master", "test.csv", 0, 0, "", false, nil, &b); err != nil {
+	if err := c.GetFile("regression_split", "master", "test.csv", 0, 0, &b); err != nil {
 		log.Fatal()
 	}
 
