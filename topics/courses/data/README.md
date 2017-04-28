@@ -36,5 +36,11 @@ This material introduces various types of machine learning along with evaluation
 
 [Prediction](prediction/README.md)
 
+## Deployment, Distributed Processing
+
+This material introduces techniques for reproducible and scalable data science deployments.  Once you are done with this material you will understand how to Dockerize your Go data analysis code and how to integrate those Docker images in distributed data pipelines.
+
+[Deployment, Distributed Processing](distributed_processing/README.md)
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
