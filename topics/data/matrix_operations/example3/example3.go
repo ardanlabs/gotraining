@@ -21,7 +21,7 @@ func main() {
 
 	// Solve the eigenvalue problem.
 	var eig mat64.Eigen
-	if ok := eig.Factorize(a, true); !ok {
+	if ok := eig.Factorize(a, false, true); !ok {
 		log.Fatal("Could not factorize the EigenSym value.")
 	}
 

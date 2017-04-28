@@ -13,6 +13,7 @@ import (
 	"log"
 
 	"github.com/gonum/floats"
+	"github.com/gonum/matrix/mat64"
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/plotutil"
@@ -35,7 +36,7 @@ func main() {
 	// Get the Iris dataset from Pachyderm's data
 	// versioning at the latest commit.
 	var b bytes.Buffer
-	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, "", false, nil, &b); err != nil {
+	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, &b); err != nil {
 		log.Fatal()
 	}
 
@@ -47,10 +48,17 @@ func main() {
 
 	// Calculate the principal component direction vectors
 	// and variances.
-	_, vars, ok := stat.PrincipalComponents(mat, nil)
+	var pc stat.PC
+	ok := pc.PrincipalComponents(mat, nil)
 	if !ok {
 		log.Fatal("Could not calculate principal components")
 	}
+
+	// Get the prinipal components and the corresponding vectors.
+	var vars []float64
+	var vecs *mat64.Dense
+	vars = pc.Vars(vars)
+	vecs = pc.Vectors(vecs)
 
 	// Sum the eigenvalues (variances).
 	total := floats.Sum(vars)
