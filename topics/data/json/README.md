@@ -21,7 +21,7 @@ Typically JSON is used when ease-of-use is the primary goal of data interchange.
 
 ### Exercise 1
 
-Convert the station data in from the Citibike statin status API from JSON to CSV.  Unmarshal the station statuses from the API and save the station ID along with corresponding integer counts to a CSV file with a header.
+Convert the station data in from the Citibike station status API from JSON to CSV.  Unmarshal the station statuses from the API and save the station ID along with corresponding integer counts to a CSV file with a header.
 
 [Template](exercises/template1/template1.go) | 
 [Answer](exercises/exercise1/exercise1.go)
