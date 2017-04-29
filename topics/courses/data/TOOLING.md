@@ -3,8 +3,8 @@
 All of these can be installed via `go get ...`
 
 github.com/kniren/gota/dataframe    
-github.com/go-hep/csvutil    
-github.com/go-hep/csvutil/csvdriver   
+go-hep.org/x/hep/csvutil   
+go-hep.org/x/hep/csvutil/csvdriver   
 github.com/lib/pq    
 github.com/patrickmn/go-cache    
 github.com/boltdb/bolt    
@@ -16,20 +16,19 @@ github.com/gonum/plot/plotter
 github.com/gonum/plot/vg     
 github.com/gonum/stat/distuv    
 github.com/gonum/mathext     
-bitbucket.org/zombiezen/gopdf/pdf      
-github.com/biogo/graphics/bezier     
+bitbucket.org/zombiezen/gopdf/pdf          
 github.com/gonum/floats     
 github.com/sajari/regression     
 github.com/sjwhitworth/golearn/base     
 github.com/sjwhitworth/golearn/evaluation    
 github.com/sjwhitworth/golearn/knn     
 github.com/sjwhitworth/golearn/trees    
-github.com/Sirupsen/logrus 
-github.com/satori/go.uuid
-github.com/gogo/protobuf/types
-github.com/gogo/protobuf/proto
-github.com/gogo/protobuf/gogoproto
-github.com/pachyderm/pachyderm
+github.com/Sirupsen/logrus   
+github.com/satori/go.uuid     
+github.com/gogo/protobuf/types     
+github.com/gogo/protobuf/proto     
+github.com/gogo/protobuf/gogoproto     
+github.com/pachyderm/pachyderm     
 
 # Other dependencies
 

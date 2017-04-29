@@ -9,6 +9,10 @@ Error handling is critical for making your programs reliable, trustworthy and re
 * Create custom error types when the context of the error is more complex.
 * Error Values in Go aren't special, they are just values like any other, and so you have the entire language at your disposal.
 
+## Quotes
+
+_Systems cannot be developed assuming that human beings will be able to write millions of lines of code without making mistakes, and debugging alone is not an efficient way to develop reliable systems. - Al Aho (inventor of AWK)_
+
 ## Links
 
 http://blog.golang.org/error-handling-and-go  
