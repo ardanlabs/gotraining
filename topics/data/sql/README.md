@@ -34,14 +34,14 @@ Although there is a good bit of hype around interesting NoSQL databases and key/
 
 ### Exercise 1
 
-Query `data/iris.db` returning the sum of values in each of the sepal length, sepal width, petal length, and petal width columns grouped by species.  Output the results to standard out.
+Query the iris table returning the sum of values in each of the sepal length, sepal width, petal length, and petal width columns grouped by species.  Output the results to standard out.
 
 [Template](exercises/template1/template1.go) |
 [Answer](exercises/exercise1/exercise1.go)
 
 ### Exercise 2
 
-Remove any rows in `data/iris.db` with `sepal_length` greater than 6.0.
+Remove any rows in the iris table with `sepal_length` greater than 6.0.
 
 [Template](exercises/template2/template2.go) |
 [Answer](exercises/exercise2/exercise2.go)
