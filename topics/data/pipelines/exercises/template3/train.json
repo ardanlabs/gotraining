@@ -1,0 +1,25 @@
+{
+  "pipeline": {
+    "name": "model"
+  },
+  "transform": {
+    "image": "dwhitena/goregtrain:multiult",
+    "cmd": [ 
+	"/goregtrain",
+	"-indir=/pfs/training",
+	"-outdir=/pfs/out"
+    ] 
+  },
+  "parallelism_spec": {
+    "strategy": "CONSTANT",
+    "constant": "1"
+  },
+  "inputs": [
+    {
+      "repo": {
+        "name": "training"
+      },
+      "glob": "/"
+    }
+  ]
+}
