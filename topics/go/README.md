@@ -111,6 +111,8 @@ There are two driving forces behind integrity:
 
 **Write Less Code:**
 
+_100k lines of code fit inside a box of paper. - Tom Love (inventor of Objective C)_
+
 There have been studies that have researched the number of bugs you can expect to have in your software. The industry average is around 15 to 50 bugs per 1000 lines of code. One simple way to reduce the number of bugs, and increase the integrity of your software, is to write less code.
 
 Bjarne Stroustrup stated that writing more code than you need results in `Ugly`, `Large` and `Slow` code:
@@ -118,6 +120,8 @@ Bjarne Stroustrup stated that writing more code than you need results in `Ugly`,
 * `Ugly`: Leaves places for bugs to hide.
 * `Large`: Ensures incomplete tests.
 * `Slow`: Encourages the use of shortcuts and dirty tricks.
+
+_"Let's imagine a project that's going to end up with a million lines of code or more. The probability of those projects being successful in the United States these days is very low - well under 50%. That's debatable. - Tom Love (inventor of Objective C)_
 
 **Error Handling:**
 
@@ -162,6 +166,7 @@ Carelessness  |        Education         |   Dangerous Situation   |
 [Design Philosophy On Integrity](https://www.goinggo.net/2017/02/design-philosophy-on-integrity.html) - William Kennedy  
 [Ratio of bugs per line of code](https://www.mayerdan.com/ruby/2012/11/11/bugs-per-line-of-code-ratio) - Dan Mayer  
 [Masterminds of Programming](http://dl.acm.org/citation.cfm?id=1592983) - Federico Biancuzzi and Shane Warden  
+[Developing Software The Right Way, with Intent and Carefulness](http://ipengineer.net/2017/04/developing-software-the-right-way-with-intent-and-carefulness) - David Gee  
 
 #### 2) Readability
 
