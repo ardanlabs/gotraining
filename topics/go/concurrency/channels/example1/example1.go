@@ -27,43 +27,68 @@ func main() {
 
 // basicSendRecv shows the basics of a send and receive.
 func basicSendRecv() {
+	fmt.Println("** basicSendRecv")
+
 	ch := make(chan string)
 	go func() {
-		ch <- "hello"
+		time.Sleep(100 * time.Millisecond)
+		ch <- "done"
+		fmt.Println("g2 : send ack")
 	}()
 
-	fmt.Println(<-ch)
+	v := <-ch
+	fmt.Println("g1 : received :", v)
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
 }
 
 // signalClose shows how to close a channel to signal an event.
 func signalClose() {
+	fmt.Println("** signalClose")
+
 	ch := make(chan struct{})
 	go func() {
 		time.Sleep(100 * time.Millisecond)
-		fmt.Println("signal event")
 		close(ch)
+		fmt.Println("g2 : close ack")
 	}()
 
-	<-ch
-	fmt.Println("event received")
+	_, ok := <-ch
+	fmt.Println("g1 : received :", ok)
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
 }
 
 // signalAck shows how to signal an event and wait for an
 // acknowledgment it is done.
 func signalAck() {
+	fmt.Println("** signalAck")
+
 	ch := make(chan string)
 	go func() {
-		fmt.Println(<-ch)
-		ch <- "ok done"
+		v := <-ch
+		fmt.Println("g2 : received :", v)
+		time.Sleep(100 * time.Millisecond)
+		ch <- "done"
+		fmt.Println("g2 : send ack")
 	}()
 
-	ch <- "do this"
-	fmt.Println(<-ch)
+	ch <- "work"
+	fmt.Println("g1 : send ack")
+	v := <-ch
+	fmt.Println("g1 : received :", v)
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
 }
 
 // closeRange shows how to use range to receive value and
 // using close to terminate the loop.
 func closeRange() {
+	fmt.Println("** closeRange")
+
 	ch := make(chan int, 5)
 	for i := 0; i < 5; i++ {
 		ch <- i
@@ -71,66 +96,86 @@ func closeRange() {
 	close(ch)
 
 	for v := range ch {
-		fmt.Println(v)
+		fmt.Println("g1 : received :", v)
 	}
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
 }
 
 // selectRecv shows how to use the select statement to wait for a
 // specified amount of time to receive a value.
 func selectRecv() {
+	fmt.Println("** selectRecv")
+
 	ch := make(chan string, 1)
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
 		ch <- "work"
+		fmt.Println("g2 : send ack")
 	}()
 
 	select {
 	case v := <-ch:
-		fmt.Println(v)
-	case <-time.After(100 * time.Millisecond):
-		fmt.Println("timed out")
+		fmt.Println("g1 : received :", v)
+	case t := <-time.After(100 * time.Millisecond):
+		fmt.Println("g1 : timed out :", t)
 	}
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
 }
 
 // selectRecv shows how to use the select statement to attempt a
 // send on a channel for a specified amount of time.
 func selectSend() {
+	fmt.Println("** selectSend")
+
 	ch := make(chan string)
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-		d, ok := <-ch
+		v, ok := <-ch
+		fmt.Println("g2 : received :", v, ok)
 		if !ok {
-			fmt.Println("Cancel")
+			fmt.Println("g2 : cancelled")
 			return
 		}
-		fmt.Println(d)
 	}()
 
 	select {
 	case ch <- "work":
-		fmt.Println("send work")
-	case <-time.After(100 * time.Millisecond):
-		fmt.Println("timed out")
+		fmt.Println("g1 : send ack")
+	case t := <-time.After(100 * time.Millisecond):
+		fmt.Println("g1 : timed out :", t)
 		close(ch)
 	}
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
 }
 
 // selectDrop shows how to use the select to walk away from a channel
 // operation if it will immediately block.
 func selectDrop() {
+	fmt.Println("** selectDrop")
+
 	ch := make(chan int, 5)
 	go func() {
 		for v := range ch {
-			fmt.Println("recv", v)
+			fmt.Println("g2 : received :", v)
 		}
 	}()
 
-	for i := 0; i < 20; i++ {
+	for v := 0; v < 20; v++ {
 		select {
-		case ch <- i:
+		case ch <- v:
+			fmt.Println("g1 : send ack")
 		default:
-			fmt.Println("drop", i)
+			fmt.Println("g1 : drop")
 		}
 	}
 	close(ch)
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
 }
