@@ -1,0 +1,32 @@
+{
+  "pipeline": {
+    "name": "prediction"
+  },
+  "transform": {
+    "image": "dwhitena/goregpredict:ult",
+    "cmd": [ 
+	"/goregpredict", 
+	"-inmodeldir=/pfs/model", 
+	"-invardir=/pfs/attributes", 
+	"-outdir=/pfs/out"       
+    ]
+  },
+  "parallelism_spec": {
+    "strategy": "CONSTANT",
+    "constant": "42"
+  },
+  "inputs": [
+    {
+      "repo": {
+        "name": "attributes"
+      },
+      "glob": "/*"
+    },
+    {
+      "repo": {
+	"name": "model"
+      },
+      "glob": "/"
+    }
+  ]
+}

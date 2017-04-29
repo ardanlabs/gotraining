@@ -1,34 +1,34 @@
 ## Ultimate Data
 
-This is material for developers who have some experience with Go and statistics and want to learn how to work with data to make better decisions. We believe these classes are perfect for data analysts/scientists/engineers interested in working in Go or Go programmers interested in doing data analysis.
+This is material for developers who have some experience with Go and statistics and want to learn how to work with data to generate valuable insights. We believe these classes are perfect for data analysts/scientists/engineers interested in working in Go or Go programmers interested in doing data analysis.
 
 [Ultimate Data](../courses/data/README.md)
 
 ## Design Guidelines
 
-You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
+To be effective as a data analyst, you must develop a design philosophy that establishes a set of guidelines for your work. This is more than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't expect to generate valuable insights without understanding the impact of your implementation decisions. Every decision you make, every line of code you write comes with trade-offs.
 
 ### What is data analysis?
 
-Data analysis uses Datasets to make **Decisions** that have corresponding **Actions** and **Consequences**.
+Data analysis transforms Datasets into **Insights** that have corresponding **Actions** and **Consequences**.
 
 ### Prepare your mind
 
 Every data analytics or data science project must begin by considering the:
 
-1. Decisions
+1. Insights
 2. Actions
 3. Consequences
 
 Before and during any data analytics project, you must be able to answer the following questions:
 
-- What decisions do I want to make based on the results?
-- What actions are triggered by the decisions that will be made?
+- What insights do I want to generate?
+- What actions are triggered by the insights?
 - What are the consequences of those actions?
-- What do the results need to contain?
+- What do the results need to contain to best represent the desired insights?
 - What is the data required to produce a valid result?
-- How will I measure the results are valid?
-- Can the results be effectively conveyed to decision makers?
+- How will I measure the validity of results?
+- Can the results be effectively conveyed to decision makers as insights?
 - Am I confident in the results?
 
 Remember, uncertainty is not a license to guess but a directive to stop.
@@ -37,28 +37,28 @@ Remember, uncertainty is not a license to guess but a directive to stop.
 
 Data analytics projects should follow these steps in this order:
 
-1. Understand the decisions, actions and consequences involved.
+1. Understand the insights, actions and consequences involved.
 2. Understand the relevant data to be gathered and analyzed.
 3. Gather and organize the relevant data.
-4. Understand the readability and expectations for determining valid results.
-5. Determine the most interpretable process to produce the valid results.
-6. Determine how you will test the validity of the results.
+4. Understand the expectations for determining valid results.
+5. Determine the most interpretable process that can produce valid results.
+6. Determine how you will test the validity of results.
 7. Develop the determined process and tests.
 8. Test the results and evaluate against your expectations.
 9. Refactor as necessary.
 10. Looks for ways to simplify, minimize and reduce.
 
-When the results don’t meet the expectations, ask yourself if modifying the determined process or data improve the validity of the results?  
+When the results don’t meet the expectations, ask yourself if modifying the determined process or data might improve the validity of the results?  
 
 - If YES, you must re-evaluate:
     - Are such modifications warranted?
     - Can the modification be tested against the expectations?
     - Do I need to increase complexity?
     - Have I tested the most simplistic and interpretable solutions first?
-- In NO, you must re-evaluate:
+- If NO, you must re-evaluate:
     - Am I using the best determined process?
     - Am I using the best data?
-    - Are my expectations incorrect?
+    - Are my expectations unrealistic?
 
 ### Guidelines, Decision Making and Trade-Offs
 
@@ -66,7 +66,7 @@ Develop your design philosophy around these major categories in this order: Inte
 
 **_Note: There are exceptions to everything but when you are not sure an exception applies, follow the guidelines presented the best you can._**
 
-**1) Integrity** - If data science uses Datasets to make Decisions, a breakdown in integrity results in bad decisions. These decisions impact people, and therefore, making bad decisions may cause irreparable damage to real people. Nothing trumps integrity - EVER.
+**1) Integrity** - If data science/analysis generates insights from Datasets, a breakdown in integrity results in bad insights. These types of results impact people, and therefore, generating bad insights may cause irreparable damage to real people. Nothing trumps integrity - EVER.
 
 Rules of Integrity:
 - Error handling code is the main code.

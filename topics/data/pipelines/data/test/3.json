@@ -1,0 +1,12 @@
+{
+	"independent_variables": [
+		{
+			"name": "bmi",
+			"value": -0.0115950145052
+		},
+		{
+			"name": "ltg",
+			"value": 0.0226920225667
+		}
+	]
+}
