@@ -39,7 +39,7 @@ This was Brian’s response:
     * Packages must reduce, minimize and simplify its code base.
 * **To be portable, packages must be designed with reusability in mind.**
     * Packages must aspire for the highest level of portability.
-    * Packages must reduce taking on opinions when it’s reasonable and practical.
+    * Packages must reduce setting policy when it’s reasonable and practical.
     * Packages must not become a single point of dependency.
 
 ## Project Structure
@@ -105,14 +105,14 @@ Packages that are foundational but specific to the project belong in the `intern
         * `cmd/`
         * `internal/`
         
-<u>**Validate the opinions being imposed.**</u>
+<u>**Validate the policies being imposed.**</u>
 * `Kit`, `internal/platform/`
-    * NOT allowed to have opinions about any application concerns.
+    * NOT allowed to set policy about any application concerns.
     * NOT allowed to log, but access to trace information must be decoupled.
     * Configuration and runtime changes must be decoupled.
     * Retrieving metric and telemetry values must be decoupled.
 * `cmd/`, `internal/`
-    * Allowed to have opinions about any application concerns.
+    * Allowed to set policy about any application concerns.
     * Allowed to log and handle configuration natively.
     
 <u>**Validate how data is accepted/returned.**</u>

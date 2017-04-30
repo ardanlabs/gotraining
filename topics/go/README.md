@@ -186,9 +186,9 @@ In Go, the underlying machine is the real machine rather than a single abstract 
 
 **_We must understand that simplicity is hard to design and complicated to build._**  
 
-This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Validate that abstractions are not generalized or even too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
+This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Focus on encapsulation and validate that you're not generalizing or even being too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
 
-**_"The simple fact is that complexity will emerge somewhere, if not in the language definition, then in thousands of applications and libraries." - Bjarne Stroustrup (inventor of C++)_**
+**_Paraphrasing: "Encapsulation and the separation of concerns are drivers for designing software. This is largely based on how other industries handle complexity. There seems to be a human pattern of using encapsulation to wrestle complexity to the ground." - Brad Cox (inventor of Objective C)_**
 
 **_"Everything should be made as simple as possible, but not simpler." - Albert Einstein_**
 
