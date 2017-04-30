@@ -26,7 +26,7 @@ Many modeling, machine learning, and optimization algorithms rely on linear alge
 
 ### Exercise 1
 
-Create a matrix from [diabetes.csv](data/diabetes.csv) using `github.com/gonum/matrix/mat64`. Format and output the first 10 rows to standard out.
+Create a matrix from [diabetes.csv](../data_versioning/data/diabetes.csv) using `github.com/gonum/matrix/mat64`. Format and output the first 10 rows to standard out.
 
 [Template](exercises/template1/template1.go) |
 [Answer](exercises/exercise1/exercise1.go)
