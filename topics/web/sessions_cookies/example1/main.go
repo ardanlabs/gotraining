@@ -103,5 +103,6 @@ func saveHandler(res http.ResponseWriter, req *http.Request) {
 func main() {
 
 	// Start the http server to handle requests
-	log.Fatal(http.ListenAndServe(":3000", App()))
+	log.Print("Listening on localhost:3000")
+	log.Fatal(http.ListenAndServe("localhost:3000", App()))
 }

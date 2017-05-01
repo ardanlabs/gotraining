@@ -44,5 +44,6 @@ func App() http.Handler {
 func main() {
 
 	// Start the http server to serve our App
-	log.Fatal(http.ListenAndServe(":3000", App()))
+	log.Print("Listening on localhost:3000")
+	log.Fatal(http.ListenAndServe("localhost:3000", App()))
 }

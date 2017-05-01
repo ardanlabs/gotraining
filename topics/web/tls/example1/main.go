@@ -17,8 +17,9 @@ func main() {
 		res.Write([]byte("Hello, world"))
 	})
 
-	//http.ListenAndServe(":3000", m)
-	err := http.ListenAndServeTLS(":3000", "cert.pem", "key.pem", m)
+	log.Print("Listening on localhost:3000")
+	//http.ListenAndServe("localhost:3000", m)
+	err := http.ListenAndServeTLS("localhost:3000", "cert.pem", "key.pem", m)
 	if err != nil {
 		log.Println(err)
 	}
