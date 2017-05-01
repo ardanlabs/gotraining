@@ -14,11 +14,13 @@ Learn about securing your application using TLS.
 
 https://golang.org/pkg/net/http/  
 https://golang.org/pkg/crypto/tls/  
+https://golang.org/x/crypto/acme/autocert/  
 https://caddyserver.com/  
 
 ## Code Review
 
 TLS support: [Code](example1/main.go)
+Automatic TLS with ACME via LetsEncrypt: [Code](example2/main.go)
 
 ## Exercises
 
