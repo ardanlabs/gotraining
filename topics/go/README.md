@@ -277,7 +277,7 @@ Don't declare an interface:
 * for the sake of using an interface.
 * to generalize an algorithm.
 * when users can declare their own interfaces.
-* if it's not clear how the ineterface makes the code better.
+* if it's not clear how the interface makes the code better.
 
 **Resources:**
 
