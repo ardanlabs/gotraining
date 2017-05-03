@@ -30,17 +30,19 @@ _**Articles**_
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
-[GopherCon India - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
-[GolangUK - Dependency Management](https://youtu.be/CdhucJShJU8)  
-[GopherCon 2014 - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
-[GothamGo - Error Handling in Go](https://vimeo.com/115782573)  
+[GopherCon India (2015) - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
+[GolangUK (2016) - Dependency Management](https://youtu.be/CdhucJShJU8)  
+[GothamGo (2015) - Error Handling in Go](https://vimeo.com/115782573)  
+[GopherCon (2014) - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
 
-[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
-[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
-[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
-[Bangalore Meetup (2015) - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
-[Vancouver Meetup (2016) - Compiler Optimizations in Go](https://youtu.be/AQipeq39Aek)  
+[Hack Potsdam (2017) - Tech Talk with William Kennedy](https://www.youtube.com/watch?v=sBzJ-sjhgs8)  
 [Chicago Meetup (2016) - An Evening](https://vimeo.com/199832344)  
+[Vancouver Meetup (2016) - Go Talk & Ask Me Anything With William Kennedy](https://www.youtube.com/watch?v=7YcLIbG1ekM&t=91s)  
+[Vancouver Meetup (2015) - Compiler Optimizations in Go](https://www.youtube.com/watch?v=AQipeq39Aek)  
+[Bangalore Meetup (2015) - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
+[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
+[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
+[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
 
 _**Podcasts**_  
 [Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
