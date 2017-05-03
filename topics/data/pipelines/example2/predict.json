@@ -6,9 +6,9 @@
     "image": "dwhitena/goregpredict:ult",
     "cmd": [ 
 	"/goregpredict", 
-	"-inmodeldir=/pfs/model", 
-	"-invardir=/pfs/attributes", 
-	"-outdir=/pfs/out"       
+	"-inModelDir=/pfs/model", 
+	"-inVarDir=/pfs/attributes", 
+	"-outDir=/pfs/out"       
     ]
   },
   "parallelism_spec": {

@@ -6,8 +6,8 @@
     "image": "dwhitena/goregtrain:singleult",
     "cmd": [ 
 	"/goregtrain",
-	"-indir=/pfs/training",
-	"-outdir=/pfs/out"
+	"-inDir=/pfs/training",
+	"-outDir=/pfs/out"
     ] 
   },
   "parallelism_spec": {

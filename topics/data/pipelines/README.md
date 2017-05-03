@@ -37,13 +37,15 @@ $ pachctl create-repo attributes
 Version our training data set in Pachyderm:
 
 ```
-$ pachctl put-file training master -c -f data/diabetes.csv
+$ cd data
+$ pachctl put-file training master -c -f diabetes.csv
 ```
 
 Create the training data pipeline:
 
 ```
-$ pachctl create-pipeline -f example1/train.json
+$ cd ../example1/
+$ pachctl create-pipeline -f train.json
 ```
 
 Make sure the training job completes:
@@ -57,13 +59,15 @@ $ pachctl list-job
 Put example "attribute" files into the `attributes` data repository:
 
 ```
-$ pachctl put-file attributes -c -r -f data/test/
+$ cd ../data/test/
+$ pachctl put-file attributes -c -r -f .
 ```
 
 Create the prediction pipeline:
 
 ```
-$ pachctl create-pipeline -f example2/predict.json
+$ cd ../../example2/
+$ pachctl create-pipeline -f predict.json
 ```
 
 Make sure the prediction job completes:

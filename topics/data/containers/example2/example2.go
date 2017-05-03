@@ -45,8 +45,8 @@ type IndependentVar struct {
 func main() {
 
 	// Declare the input and output directory flags.
-	inModelDirPtr := flag.String("inmodeldir", "", "The directory containing the model.")
-	inVarDirPtr := flag.String("invardir", "", "The directory containing the input attributes.")
+	inModelDirPtr := flag.String("inModelDir", "", "The directory containing the model.")
+	inVarDirPtr := flag.String("inVarDir", "", "The directory containing the input attributes.")
 	outDirPtr := flag.String("outDir", "", "The output directory")
 
 	// Parse the command line flags.
