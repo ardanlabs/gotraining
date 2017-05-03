@@ -212,7 +212,7 @@ Rules of Performance:
 
 **_"When we're computer programmers we're concentrating on the intricate little fascinating details of programming and we don't take a broad engineering point of view about trying to optimize the total system. You try to optimize the bits and bytes." - Tom Kurtz (inventor of BASIC)_**
 
-"I don't trust anything until it runs... In fact, I don't trust anything until it runs twice." - Andrew Gelman (one of the greatest living statistians at Columbia University).
+"I don't trust anything until it runs... In fact, I don't trust anything until it runs twice." - Andrew Gelman (one of the greatest living statisticians at Columbia University).
 
 #### 5) Micro-Optimizations
 
@@ -277,7 +277,7 @@ Don't declare an interface:
 * for the sake of using an interface.
 * to generalize an algorithm.
 * when users can declare their own interfaces.
-* if it's not clear how the ineterface makes the code better.
+* if it's not clear how the interface makes the code better.
 
 **Resources:**
 
