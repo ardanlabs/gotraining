@@ -35,7 +35,7 @@ type CoefficientInfo struct {
 func main() {
 
 	// Declare the input and output directory flags.
-	inDirPtr := flag.String("indir", "", "The directory containing the training data.")
+	inDirPtr := flag.String("inDir", "", "The directory containing the training data.")
 	outDirPtr := flag.String("outDir", "", "The output directory")
 
 	// Parse the command line flags.
