@@ -22,7 +22,7 @@ func main() {
 	defer cancel()
 
 	// Create a channel to received a signal that work is done.
-	ch := make(chan struct{}, 1)
+	ch := make(chan bool, 1)
 
 	// Ask the goroutine to do some work for us.
 	go func() {
@@ -31,7 +31,7 @@ func main() {
 		time.Sleep(50 * time.Millisecond)
 
 		// Report the work is done.
-		ch <- struct{}{}
+		ch <- true
 	}()
 
 	// Wait for the work to finish. If it takes too long move on.

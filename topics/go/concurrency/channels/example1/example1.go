@@ -111,7 +111,7 @@ func selectRecv() {
 	ch := make(chan string, 1)
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-		ch <- "work"
+		ch <- "done"
 		fmt.Println("g2 : send ack")
 	}()
 
@@ -126,7 +126,7 @@ func selectRecv() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// selectRecv shows how to use the select statement to attempt a
+// selectSend shows how to use the select statement to attempt a
 // send on a channel for a specified amount of time.
 func selectSend() {
 	fmt.Println("** selectSend")
