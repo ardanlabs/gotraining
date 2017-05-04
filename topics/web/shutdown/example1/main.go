@@ -34,7 +34,7 @@ func main() {
 
 	// Create a new server and set timeout values.
 	server := http.Server{
-		Addr:           ":3000",
+		Addr:           "localhost:3000",
 		Handler:        http.HandlerFunc(app),
 		ReadTimeout:    5 * time.Second,
 		WriteTimeout:   10 * time.Second,
@@ -47,7 +47,7 @@ func main() {
 
 	// Start the listener.
 	go func() {
-		log.Println("listener : Listening on :3000")
+		log.Println("listener : Listening on localhost:3000")
 		log.Println("listener :", server.ListenAndServe())
 		wg.Done()
 	}()

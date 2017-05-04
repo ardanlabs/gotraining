@@ -28,5 +28,6 @@ func main() {
 	m.HandleFunc("/foo", f)
 
 	// Start the http server to handle the request.
-	log.Panic(http.ListenAndServe(":3000", m))
+	log.Print("Listening on localhost:3000")
+	log.Panic(http.ListenAndServe("localhost:3000", m))
 }

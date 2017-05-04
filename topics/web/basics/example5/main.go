@@ -35,7 +35,8 @@ func main() {
 		})
 
 		// Start the http server to handle the request.
-		http.ListenAndServe(":3000", m)
+		log.Print("Listening on localhost:3000")
+		http.ListenAndServe("localhost:3000", m)
 	}()
 
 	// Get the current time so we can time how long this request takes.

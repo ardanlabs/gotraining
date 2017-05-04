@@ -22,5 +22,6 @@ func main() {
 
 	// Start the http server to handle the requests using
 	// our new Handler.
-	log.Panic(http.ListenAndServe(":3000", App{}))
+	log.Print("Listening on localhost:3000")
+	log.Panic(http.ListenAndServe("localhost:3000", App{}))
 }

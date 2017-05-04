@@ -69,5 +69,6 @@ func main() {
 
 	// Start the http server to handle the request for
 	// both versions of the API.
-	log.Fatal(http.ListenAndServe(":3000", App()))
+	log.Print("Listening on localhost:3000")
+	log.Fatal(http.ListenAndServe("localhost:3000", App()))
 }
