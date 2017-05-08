@@ -22,6 +22,13 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 
 ### Prepare Your Mind
 
+**Questions**  
+* Is your goal to quickly solve problems today and tomorrow or is it to play with tech?
+* Do you care about the legacy you are leaving behind?
+* How do you know when a piece of code smells good or bad?
+* How do you know when you are done with a piece of code?
+* What does integrity mean to you?
+
 **Somewhere Along The Line**  
 * We became impressed with programs that contain large amounts of code.
 * We strived to create large abstractions in our code base.
