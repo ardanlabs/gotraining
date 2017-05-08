@@ -27,6 +27,7 @@ https://vimeo.com/141698770
 [Parallelize your table-driven tests](http://golang.rakyll.org/parallelize-test-tables/) - rakyll  
 [Advanced Testing with Go - Video](https://www.youtube.com/shared?ci=LARb45o5TpA) - Mitchell Hashimoto  
 [Advanced Testing with Go - Deck](https://speakerdeck.com/mitchellh/advanced-testing-with-go) - Mitchell Hashimoto  
+[The tragedy of 100% code coverage](http://labs.ig.com/code-coverage-100-percent-tragedy) - Daniel Lebrero's  
 
 ## Code Review
 
