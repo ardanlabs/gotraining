@@ -61,6 +61,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Advanced Testing with Go - Video](https://www.youtube.com/shared?ci=LARb45o5TpA) - Mitchell Hashimoto  
 [Advanced Testing with Go - Deck](https://speakerdeck.com/mitchellh/advanced-testing-with-go) - Mitchell Hashimoto  
 [The tragedy of 100% code coverage](http://labs.ig.com/code-coverage-100-percent-tragedy) - Daniel Lebrero's  
+[Logs and Metrics](https://medium.com/@cindysridharan/logs-and-metrics-6d34d3026e38) - Cindy Sridharan  
 
 ### Vendoring / Versioning
 
