@@ -127,9 +127,9 @@ Packages that are foundational but specific to the project belong in the `intern
 <u>**Validate how errors are handled.**</u>
 * `All`
     * Handling an error means:
-        * The error is no longer a concern.
-        * There is no more action that needs to be taken.
-        * It has been logged if necessary.
+        * The error has been logged.
+        * The application is back to 100% integrity.
+        * The current error is not reported any longer.
 * `Kit`
     * NOT allowed to panic an application.
     * NOT allowed to wrap errors.
