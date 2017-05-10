@@ -15,7 +15,7 @@ In an interview given to Brian Kernighan by Mihai Budiu in the year 2000, Brian 
 
 This was Brian’s response:
 
-**_“I think that the real problem with C is that it doesn’t give you enough mechanisms for structuring really big programs, for creating ``firewalls” within programs so you can keep the various pieces apart. It’s not that you can’t do all of these things, that you can’t simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn’t giving you any help.”_**
+**_“I think that the real problem with C is that it doesn’t give you enough mechanisms for structuring really big programs, for creating "firewalls" within programs so you can keep the various pieces apart. It’s not that you can’t do all of these things, that you can’t simulate object-oriented programming or other methodology you want in C. You can simulate it, but the compiler, the language itself isn’t giving you any help.”_**
 
 ## Language Mechanics
 
