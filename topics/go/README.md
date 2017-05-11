@@ -48,8 +48,6 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * Technology changes quickly but people's minds change slowly.
 * Easy to adopt new technology but hard to adopt new ways of thinking.
 
-**_"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love_**
-
 ---
 
 ### Productivity vs Performance
@@ -106,7 +104,7 @@ _"Legacy software is an unappreciated but serious problem. Legacy code may be th
 
 You can't look at a piece of code, function or algorithm and determine if it smells good or bad without a design philosophy. These four major categories are the basis for code reviews and should be prioritized in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
-**_Note: There are exceptions to everything but when you are not sure an exception applies, follow the guidelines presented the best you can._** 
+_"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love (inventor of Objective C)_
 
 #### 1) Integrity
 
