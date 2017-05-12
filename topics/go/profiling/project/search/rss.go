@@ -2,8 +2,10 @@ package search
 
 import (
 	"encoding/xml"
+	"log"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 
 	gc "github.com/patrickmn/go-cache"
@@ -20,9 +22,15 @@ const (
 
 var cache = gc.New(expiration, cleanup)
 
-// =============================================================================
+var fetch = struct {
+	sync.Mutex
+	m map[string]*sync.Mutex
+}{
+	m: make(map[string]*sync.Mutex),
+}
 
 type (
+
 	// Item defines the fields associated with the item tag in the buoy RSS document.
 	Item struct {
 		XMLName     xml.Name `xml:"item"`
@@ -54,53 +62,66 @@ type (
 	}
 )
 
-// =============================================================================
-
 // rssSearch is used against any RSS feeds.
 func rssSearch(uid, term, engine, uri string) ([]Result, error) {
-	var d Document
-	key := term + engine + uri
-
-	// Look in the cache.
-	v, found := cache.Get(key)
-
-	// Based on the cache lookup determine what to do.
-	switch {
-	case found:
-		d = v.(Document)
-
-	default:
-
-		// Pull down the rss feed.
-		resp, err := http.Get(uri)
-		if err != nil {
-			return []Result{}, err
+	var mu *sync.Mutex
+	fetch.Lock()
+	{
+		var found bool
+		mu, found = fetch.m[uri]
+		if !found {
+			mu = &sync.Mutex{}
+			fetch.m[uri] = mu
 		}
-
-		// Schedule the close of the response body.
-		defer resp.Body.Close()
-
-		// Decode the results into a document.
-		err = xml.NewDecoder(resp.Body).Decode(&d)
-		if err != nil {
-			return []Result{}, err
-		}
-
-		// Save this document into the cache.
-		cache.Set(key, d, expiration)
 	}
+	fetch.Unlock()
+
+	var d Document
+	mu.Lock()
+	{
+		// Look in the cache.
+		v, found := cache.Get(uri)
+
+		// Based on the cache lookup determine what to do.
+		switch {
+		case found:
+			d = v.(Document)
+
+		default:
+
+			// Pull down the rss feed.
+			resp, err := http.Get(uri)
+			if err != nil {
+				return []Result{}, err
+			}
+
+			// Schedule the close of the response body.
+			defer resp.Body.Close()
+
+			// Decode the results into a document.
+			if err := xml.NewDecoder(resp.Body).Decode(&d); err != nil {
+				return []Result{}, err
+			}
+
+			// Save this document into the cache.
+			cache.Set(uri, d, expiration)
+
+			log.Println("reloaded cache", uri)
+		}
+	}
+	mu.Unlock()
 
 	// Create an empty slice of results.
 	results := []Result{}
 
 	// Capture the data we need for our results if we find the search term.
-	for _, result := range d.Channel.Items {
-		if strings.Contains(strings.ToLower(result.Description), term) {
+	for _, item := range d.Channel.Items {
+		if strings.Contains(strings.ToLower(item.Description), strings.ToLower(term)) {
 			results = append(results, Result{
 				Engine:  engine,
-				Title:   result.Title,
-				Link:    result.Link,
-				Content: result.Description,
+				Title:   item.Title,
+				Link:    item.Link,
+				Content: item.Description,
 			})
 		}
 	}

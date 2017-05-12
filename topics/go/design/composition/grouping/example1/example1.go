@@ -18,7 +18,6 @@ type Animal struct {
 
 // Speak provides generic behavior for all animals and
 // how they speak.
-// SMELL - This can't apply to all animals.
 func (a *Animal) Speak() {
 	fmt.Println("UGH!",
 		"My name is", a.Name,
@@ -57,12 +56,6 @@ func (c *Cat) Speak() {
 }
 
 func main() {
-
-	// SMELL - I can't create a list of Cats and Dogs using
-	// the Animal type. Can't create a list based on a
-	// common set of state.
-
-	// DOES NOT COMPILE
 
 	// Create a list of Animals that know how to speak.
 	animals := []Animal{

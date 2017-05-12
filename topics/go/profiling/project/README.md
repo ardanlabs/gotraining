@@ -15,8 +15,8 @@ We have a website that we will use to learn and explore more about profiling. Th
 
 To add load to the service while running profiling we can run these command.
 
-	// Send 1M request using 8 connections.
-	hey -m POST -c 8 -n 1000000 "http://localhost:5000/search?term=politics&cnn=on&bbc=on&nyt=on"
+	// Send 10k request using 100 connections.
+	hey -m POST -c 100 -n 10000 "http://localhost:5000/search?term=trump&cnn=on&bbc=on&nyt=on"
 
 ### GODEBUG
 
@@ -40,7 +40,7 @@ Run the website again adding load. Look at the pacing of the GC with these diffe
 
 Run the website redirecting stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
-	GODEBUG=schedtrace=1000 GOMAXPROCS=2 ./project > /dev/null
+	GODEBUG=schedtrace=1000 ./project > /dev/null
 
 ### PPROF
 
@@ -50,23 +50,23 @@ We already added the following import so we can include the profiling route to o
 
 #### Raw http/pprof
 
-Look at the basic profiling stats from the new endpoint.
+Look at the basic profiling stats from the new endpoint:
 
 	http://localhost:5000/debug/pprof
 
-Run a single search from the Browser and then refresh the profile information.
+Capture heap profile:
 
-	http://localhost:5000/search?term=politics&cnn=on
+	http://localhost:5000/debug/pprof/heap
 
-Put some load of the web application and look at the heap profile.
+Capture cpu profile:
 
-	http://localhost:5000/debug/pprof/heap?debug=1
+	http://localhost:5000/debug/pprof/profile
 
 #### Interactive Profiling
 
 Run the Go pprof tool in another window or tab to review heap information.
 
-	go tool pprof -<PICK_MEM_PROFILE> ./project http://localhost:5000/debug/pprof/heap
+	go tool pprof -alloc_space ./project http://localhost:5000/debug/pprof/heap
 
 	// Useful to see current status of heap.
 	-inuse_space  : Allocations live at the time of profile  	** default
