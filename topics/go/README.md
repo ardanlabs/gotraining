@@ -1,6 +1,6 @@
 ## Ultimate Go
 
-This is material for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. We believe these classes are perfect for anyone who wants a jump start in learning Go or who wants a more thorough understanding of the language and its internals.
+This is material for any intermediate-level developer who has at least a few months to years of experience writing code in Go. This class provides a very deep knowledge of the programming langauge with a big push on language mechanics, design philosophies and guidelines. We focus on teaching how to write code with a priority on consistency, integrity, readability and simplicity. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software. We close the class with benchmarking, profiling, tracing and debugging. If you want your team to be better Go developers, code reviewers, designers and architects, this is the class they need.
 
 [Ultimate Go](../courses/go/README.md)
 

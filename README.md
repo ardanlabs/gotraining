@@ -12,7 +12,7 @@ bill@ardanlabs.com
 
 We have taught Go to thousands of developers all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump-start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
 
-Our classes are perfect for both experienced and beginning engineers. We start every class from the beginning and get very detailed about the internals, mechanics, specification, guidelines, best practices and design philosophies. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software.
+Our classes are perfect for intermediate-level developers who have at least a few months to years of experience writing code in Go. Our classes provide a very deep knowledge of the programming langauge with a big push on language mechanics, design philosophies and guidelines. We focus on teaching how to write code with a priority on consistency, integrity, readability and simplicity. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing/debugging production software.
 
 [Look at our current schedule](https://github.com/ardanlabs/gotraining#current-schedule)  
 
@@ -115,14 +115,8 @@ Classes that exceed 15 students are charged an extra $1,000 each per additional 
 $5,000 T&E  
 Classes that exceed 15 students are charged an extra $1,000 each per additional student.
 
-**Our 4 day class option:**  
-_This option is the best for teams with little to no Go experience. We can do more exercises and each day is not as mentally exhausting._
-
-**Our 3 day class option:**  
-_This option is best for teams with 3+ months for Go experience. We need to push the team a bit harder and there will be less exercises. For the Data and Web classes we can teach all the material._
-
 **Our 2 day class option:**  
-_This options is skips most of the exercises to get through the material. We will push the team very hard and we maintain a very fast pace._
+_This options skips most of the exercises to get through the material. We will push the team very hard and we maintain a very fast pace._
 
 ## Current Schedule
 
