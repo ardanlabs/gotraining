@@ -46,9 +46,9 @@ func (p *Pool) Acquire() (io.Closer, error) {
 	select {
 
 	// Check for a free resource.
-	case r, ok := <-p.resources:
+	case r, wd := <-p.resources:
 		log.Println("Acquire:", "Shared Resource")
-		if !ok {
+		if !wd {
 			return nil, ErrPoolClosed
 		}
 		return r, nil

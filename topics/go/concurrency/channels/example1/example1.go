@@ -54,8 +54,8 @@ func signalClose() {
 		fmt.Println("g2 : close ack")
 	}()
 
-	_, ok := <-ch
-	fmt.Println("g1 : received :", ok)
+	_, wd := <-ch
+	fmt.Println("g1 : received :", wd)
 
 	time.Sleep(time.Second)
 	fmt.Println("-------------------------------------------------------------")
@@ -134,9 +134,9 @@ func selectSend() {
 	ch := make(chan string)
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-		v, ok := <-ch
-		fmt.Println("g2 : received :", v, ok)
-		if !ok {
+		v, wd := <-ch
+		fmt.Println("g2 : received :", v, wd)
+		if !wd {
 			fmt.Println("g2 : cancelled")
 			return
 		}

@@ -45,8 +45,8 @@ http://golang.org/doc/effective_go.html#embedding
 
 #### Conversion and Assertions
 
-[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/u5Jrk9wSWW))  
-[Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/tr-RGBxES-))
+[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/GVLf2sZcA1))  
+[Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/awq1LSTwXV))
 
 #### Interface Pollution
 

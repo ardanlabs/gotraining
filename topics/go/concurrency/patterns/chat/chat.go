@@ -50,7 +50,7 @@ func (c *client) read() {
 			continue
 		}
 
-		if e, ok := err.(temporary); ok && !e.Temporary() {
+		if e, is := err.(temporary); is && !e.Temporary() {
 			log.Println("Temporary: Client leaving chat")
 			c.wg.Done()
 			return
@@ -167,7 +167,7 @@ func (r *Room) start() {
 			if err != nil {
 
 				// Check if the error is temporary or not.
-				if e, ok := err.(temporary); ok {
+				if e, is := err.(temporary); is {
 					if !e.Temporary() {
 						log.Println("Temporary: Chat room shutting down")
 						r.wg.Done()

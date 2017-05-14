@@ -7,8 +7,6 @@ package main
 
 import "fmt"
 
-// =============================================================================
-
 // Mover provides support for moving things.
 type Mover interface {
 	Move()
@@ -25,8 +23,6 @@ type MoveLocker interface {
 	Mover
 	Locker
 }
-
-// =============================================================================
 
 // bike represents a concrete type for the example.
 type bike struct{}
@@ -45,8 +41,6 @@ func (bike) Lock() {
 func (bike) Unlock() {
 	fmt.Println("Unlocking the bike")
 }
-
-// =============================================================================
 
 func main() {
 
