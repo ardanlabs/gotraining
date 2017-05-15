@@ -11,12 +11,12 @@ func main() {
 	count := 10
 
 	// Display the "value of" and "address of" count.
-	println("Before:", count, &count)
+	println("count:\tValue Of[",count, "]\t\tAddr Of[", &count, "]")
 
 	// Pass the "address of" the variable count.
 	increment(&count)
 
-	println("After: ", count, &count)
+	println("count:\tValue Of[",count, "]\t\tAddr Of[", &count, "]")
 }
 
 // increment declares count as a pointer variable whose value is
@@ -26,5 +26,5 @@ func increment(inc *int) {
 
 	// Increment the value that the "pointer points to". (de-referencing)
 	*inc++
-	println("Inc:   ", *inc, &inc, inc)
+	println("inc:\tValue Of[",inc, "]\tAddr Of[", &inc, "]\tValue Points To[", *inc, "]")
 }
