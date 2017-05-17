@@ -109,7 +109,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Code Review
 
-[Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/xC4bDm3u-U))  
+[Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/ufunQgPsYA))  
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/g0Cs0FVpyi))  
 [Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/KRKrUCcTYe))  
 [Stack vs Heap](example4/example4.go) ([Go Playground](https://play.golang.org/p/jYkpV-zQ_o))  

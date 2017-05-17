@@ -10,12 +10,12 @@ func main() {
 	count := 10
 
 	// Display the "value of" and "address of" count.
-	println("count:\tValue Of[",count, "]\tAddr Of[", &count, "]")
+	println("count:\tValue Of[", count, "]\tAddr Of[", &count, "]")
 
-	// Pass the "address of" the variable count.
+	// Pass the "value of" the variable count.
 	increment(count)
 
-	println("count:\tValue Of[",count, "]\tAddr Of[", &count, "]")
+	println("count:\tValue Of[", count, "]\tAddr Of[", &count, "]")
 }
 
 // increment declares count as a pointer variable whose value is
@@ -23,7 +23,7 @@ func main() {
 //go:noinline
 func increment(inc int) {
 
-	// Increment the value that the "pointer points to". (de-referencing)
+	// Increment the value.
 	inc++
-	println("inc:\tValue Of[",inc, "]\tAddr Of[", &inc, "]")
+	println("inc:\tValue Of[", inc, "]\tAddr Of[", &inc, "]")
 }
