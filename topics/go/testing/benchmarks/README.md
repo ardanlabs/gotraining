@@ -4,8 +4,9 @@ Go has support for testing the performance of your code.
 
 ## Package Review
 
-[Basic Benchmarking](basic/basic_test.go) ([Go Playground](https://play.golang.org/p/Kwqe4zYpMi))  
-[Sub Benchmarks](sub/sub_test.go) ([Go Playground](https://play.golang.org/p/q4qV9BdH4R))  
+[Basic Benchmarking](basic/basic_test.go)  
+[Sub Benchmarks](sub/sub_test.go)  
+[Validate Benchmarks](validate/validate_test.go)  
 [Prediction](prediction/README.md)  
 [Caching](caching/README.md)  
 [False Sharing](falseshare/README.md)  
