@@ -133,7 +133,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Sky Betting       Leeds, UK              May        Bill Kennedy 		
 		Corporate    Go       Intel             Chandler, AZ           June       Bill Kennedy
 		Corporate    Go       Apcera            SF, CA                 June       Bill Kennedy 		
-		Corporate    Go       NIST              Gaithersburg, MD       June       Bill Kennedy 		** Pending
+		Corporate    Go       Comcast           Reston, VA             July       Bill Kennedy 		
 
 		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
@@ -148,7 +148,8 @@ If you are interested in holding an event in your area please let me know. We wi
 		WWG          Data     TuneIn            San Francisco, CA      April      Daniel Whitenack   https://www.meetup.com/Women-Who-Go/events/237660548
 		GoBridge     Go       Framingham        Framingham, MA         April      Bill Kennedy       https://www.bridgetroll.org/events/343
 		GoBridge     Go       SUNY Potsdam      Potsdam, NY            May        Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-with-william-kennedy-tickets-33174514867
-		WWG          Web      TBA               NYC, NY                May        Jacob Walker       https://www.meetup.com/NYC-Women-Who-Go/events/239306971/
+		WWG          Web      Packet HQ         NYC, NY                May        Jacob Walker       https://www.meetup.com/NYC-Women-Who-Go/events/239306971/
+		WWG          Go       FullStory         Atlanta, GA            September  Bill Kennedy       TBD
 		
 		Conference   Adv Go   Golab             Florance, IT           January    Bill Kennedy       http://golab.io
 		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy       http://www.gophercon.in/go-workshop		
@@ -158,7 +159,8 @@ If you are interested in holding an event in your area please let me know. We wi
 		Conference   Go       Singapore         Singapore              May        Bill Kennedy       http://gophercon.sg/workshop
 		Conference   Adv Go   GopherCon         Denver, CO             July       Bill Kennedy
 		Conference   Data     GopherCon         Denver, CO             July       Daniel Whitenack  				
-		
+		Conference   Adv Go   GolangUK          London, England        August     Bill Kennedy       https://www.golanguk.com
+		Conference   Web      GolangUK          London, England        August     Jacob Walker       https://www.golanguk.com
 		Conference   Talk     Code::Dive        Wroclaw, Poland        November   Bill Kennedy       http://codedive.pl/
 
 ## More About Go
