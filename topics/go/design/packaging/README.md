@@ -146,5 +146,24 @@ Packages that are foundational but specific to the project belong in the `intern
     * NOT allowed to panic an application.
     * NOT allowed to wrap errors.
     * Return only root cause error values.
+
+<u>**Validate testing.**</u>
+* `cmd/`
+    * Allowed to use 3rd party testing packages.
+    * Can have a `test` folder for tests.
+    * Focus more on integration than unit testing.
+* `kit/`, `internal/`, `internal/platform/`
+    * Stick to the testing package in go.
+    * Test files belong inside the package.
+    * Focus more on unit than integration testing.
+
+<u>**Validate recovering panics.**</u>
+* `cmd/`
+    * Can recover any panic.
+    * Only if system can be returned to 100% integrity.
+* `kit/`, `internal/`, `internal/platform/`
+    * Can not recover from panics unless:
+        * Goroutine is owned by the package.
+        * Can provide an event to the app about the panic.
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
