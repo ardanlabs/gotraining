@@ -54,14 +54,14 @@ func GetHandler(res http.ResponseWriter, req *http.Request) {
 // PostHandler provides support for the POST reponse.
 func PostHandler(res http.ResponseWriter, req *http.Request) {
 
-	// Parse the raw query from the URL and update r.Form.
+	// Parse the raw query from the URL which updates r.Form.
 	if err := req.ParseForm(); err != nil {
 		res.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(res, err)
 		return
 	}
 
-	// Write this formatted string into the response.
+	// Write a formatted string into the response.
 	fmt.Fprintf(
 		res,
 		"First Name: %s\nLast Name: %s",
@@ -71,9 +71,6 @@ func PostHandler(res http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-
-	// Start the http server to handle the request for
-	// both versions of the API.
 	log.Print("Listening on localhost:3000")
 	log.Fatal(http.ListenAndServe("localhost:3000", App()))
 }

@@ -47,9 +47,6 @@ func PostHandler(res http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-
-	// Start the http server to handle the request for
-	// both versions of the API.
 	log.Print("Listening on localhost:3000")
 	log.Fatal(http.ListenAndServe("localhost:3000", App()))
 }
