@@ -1,8 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to implement your own App Handler
-// that can use any provided handler function.
+// Sample program to show how to use methods as
 package main
 
 import (
@@ -11,40 +10,36 @@ import (
 	"net/http"
 )
 
-// App provides application level context for our handler.
-type App struct {
-	h http.HandlerFunc
+// App is an application level context for our service.
+type App struct{}
+
+// Default is the default greeting.
+func (a App) Default(res http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(res, "Hello World!")
 }
 
-// ServeHTTP implements the http.Handler interface.
-func (a App) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-
-	// Execute the handler that was configured for
-	// this custom App handler.
-	a.h(res, req)
+// Foo greets requests at the /foo route.
+func (a App) Foo(res http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(res, "Hello Foo!")
 }
 
-// myHandler handles the implementation of the request.
-func myHandler(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(res, "Hello World!")
-}
-
-// wrap takes a handler function and configures the custom
-// App handler to use it.
-func wrap(h http.HandlerFunc) http.Handler {
-	return App{h: h}
+// Bar greets requests at the /bar route.
+func (a App) Bar(res http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(res, "Hello Bar!")
 }
 
 func main() {
 
-	// Create a new mux for handling routes.
-	m := http.NewServeMux()
+	// Create our app
+	var a App
 
-	// Bind a new App handler to the root route using
-	// the provided handler function to process requests.
-	m.Handle("/", wrap(myHandler))
+	// Use http.HandleFunc instead of http.Handle. Instead of requiring a
+	// full-blown type implementing http.Handler this just wants any function
+	// that accepts a response writer and request.
+	http.HandleFunc("/", a.Default)
+	http.HandleFunc("/foo", a.Foo)
+	http.HandleFunc("/bar", a.Bar)
 
-	// Start the http server to handle the request.
 	log.Print("Listening on localhost:3000")
-	log.Panic(http.ListenAndServe("localhost:3000", m))
+	log.Fatal(http.ListenAndServe("localhost:3000", nil))
 }

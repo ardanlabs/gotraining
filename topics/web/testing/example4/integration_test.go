@@ -1,8 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample test to show how to test a handler using a
-// mocking server.
+// Sample test to show how to test a handler using a mocking server.
 package unit
 
 import (

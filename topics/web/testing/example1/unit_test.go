@@ -11,7 +11,8 @@ import (
 	"testing"
 )
 
-// MyHandler is the application handler we want to test.
+// MyHandler is the application handler we want to test. It wouldn't
+// be in this file, it would be in another file in the same package.
 func MyHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Hello World!")
 }

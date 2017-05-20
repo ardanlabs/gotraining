@@ -12,6 +12,10 @@ import (
 	"testing"
 )
 
+//////////////////////////////////////////////////////////////////////
+// Application Code                                                 //
+//////////////////////////////////////////////////////////////////////
+
 // HelloHandler is one of the handlers in our application.
 func HelloHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Hello World!")
@@ -22,20 +26,30 @@ func GoodbyeHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(res, "Goodbye Cruel World!")
 }
 
+// App bootstraps the application and returns a handler that can be
+// used to serve requests.
+func App() http.Handler {
+	m := http.NewServeMux()
+	m.HandleFunc("/goodbye", GoodbyeHandler)
+	m.HandleFunc("/hello", HelloHandler)
+
+	return m
+}
+
+//////////////////////////////////////////////////////////////////////
+// Test Code                                                        //
+//////////////////////////////////////////////////////////////////////
+
 func Test_GoodbyeMux(t *testing.T) {
 
 	// Create a new request for the /goodbye path.
 	req := httptest.NewRequest("GET", "http://example.com/goodbye", nil)
 
-	// Create a new ResponseRecorder which implements
-	// the ResponseWriter interface.
+	// Create a ResponseRecorder which implements http.ResponseWriter
 	res := httptest.NewRecorder()
 
-	// Create a mux instead of using the default. Bind the
-	// handlers inside the mux.
-	m := http.NewServeMux()
-	m.HandleFunc("/goodbye", GoodbyeHandler)
-	m.HandleFunc("/hello", HelloHandler)
+	// Get a handler for the app to test
+	m := App()
 
 	// Execute the handler through the mux. This will let
 	// us also test the routes are valid.

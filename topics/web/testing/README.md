@@ -18,7 +18,6 @@ https://golang.org/doc/articles/wiki/
 [Using a http.Handler](example2/unit_test.go)  
 [Testing Routes](example3/unit_test.go)  
 [Mocking Servers](example4/integration_test.go)  
-[Mocking Servers With http.Handler](example5/integration_test.go)  
 
 ## Exercises
 

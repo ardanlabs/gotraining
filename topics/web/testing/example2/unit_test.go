@@ -1,8 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample test to show how to write a unit test that declares
-// a type that implement the http Handler interface.
+// Sample test to show how to write a unit test for a type that
+// implements the http Handler interface.
 package unit
 
 import (
