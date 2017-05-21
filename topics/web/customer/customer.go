@@ -6,9 +6,7 @@ package customer
 import (
 	"errors"
 	"fmt"
-	"math/rand"
 	"sync"
-	"time"
 )
 
 // Customer represents a customer document we
@@ -21,6 +19,7 @@ type Customer struct {
 // db represents our internal database system.
 var db = struct {
 	customers map[int]Customer
+	maxID     int
 	lock      sync.Mutex
 }{
 	customers: map[int]Customer{},
@@ -28,8 +27,6 @@ var db = struct {
 
 // Initalize the database with some values.
 func init() {
-	rand.Seed(time.Now().UnixNano())
-
 	Save(Customer{Name: "Mary Jane"})
 	Save(Customer{Name: "Bob Smith"})
 }
@@ -39,20 +36,17 @@ func Save(c Customer) (int, error) {
 	db.lock.Lock()
 	defer db.lock.Unlock()
 
-	// How many customers do we have. Customer Id's
-	// are generated in order.
-	maxID := len(db.customers)
-
 	// If this customer id is out of the range
 	// then we have an integrity issue.
-	if c.ID > maxID {
+	if c.ID > db.maxID {
 		return 0, errors.New("Invalid customer id")
 	}
 
 	// If no id is provided this is a new customer.
 	// Generate a new id.
 	if c.ID == 0 {
-		c.ID = maxID + 1
+		c.ID = db.maxID + 1
+		db.maxID = c.ID
 	}
 
 	// Save the customer in the database.
@@ -106,15 +100,15 @@ func All() []Customer {
 	db.lock.Lock()
 	defer db.lock.Unlock()
 
-	// Allocate enough elements for the customers.
-	all := make([]Customer, len(db.customers))
+	all := []Customer{}
 
 	// Range over the map storing each customer
 	// in their ordered position.
-	for _, c := range db.customers {
-		all[c.ID-1] = c
+	for i := 1; i <= db.maxID; i++ {
+		if c, ok := db.customers[i]; ok {
+			all = append(all, c)
+		}
 	}
 
-	// Return the slice exlcusing index 0.
 	return all
 }
