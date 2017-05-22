@@ -135,7 +135,7 @@ func selectRecv() {
 func fanOut() {
 	fmt.Println("** fanOut")
 
-	const grs = 20
+	grs := 20
 	ch := make(chan data, grs)
 
 	for g := 0; g < grs; g++ {
@@ -145,9 +145,10 @@ func fanOut() {
 		}(g)
 	}
 
-	for g := 0; g < grs; g++ {
-		v := <-ch
-		fmt.Println(v)
+	for grs > 0 {
+		d := <-ch
+		fmt.Println(d)
+		grs--
 	}
 
 	time.Sleep(time.Second)

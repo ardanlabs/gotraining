@@ -40,7 +40,7 @@ Using benchmarks you can profile your programs and see exactly where your perfor
 
 ## Code Review
 
-[Profiling](stream.go) ([Go Playground](https://play.golang.org/p/hskmoFeVVw)) | 
+[Profiling](stream.go) ([Go Playground](https://play.golang.org/p/o6zf-2GeHW)) | 
 [Profiling Test](stream_test.go) ([Go Playground](https://play.golang.org/p/Q6shkgJ5rR))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

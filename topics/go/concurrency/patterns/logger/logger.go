@@ -20,12 +20,12 @@ type Logger struct {
 
 // New creates a logger value and initializes it for use. The user can
 // pass the size of the buffer to use for continuity.
-func New(w io.Writer, size int) *Logger {
+func New(w io.Writer, capacity int) *Logger {
 
 	// Create a value of type logger and init the channel
 	// and timer value.
 	l := Logger{
-		write: make(chan string, size), // Buffered channel if size > 0.
+		write: make(chan string, capacity), // Buffered channel if size > 0.
 	}
 
 	// Add one to the waitgroup to track the write goroutine.

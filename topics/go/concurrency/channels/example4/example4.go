@@ -49,6 +49,7 @@ func main() {
 
 	// Process the insert results as they complete.
 	for waitInserts > 0 {
+
 		// Wait for a response from a goroutine.
 		r := <-ch
 
