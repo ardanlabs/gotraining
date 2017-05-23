@@ -11,26 +11,18 @@ import (
 	"testing"
 )
 
-// assembleInputStream appends all the input slices together to allow for
-// consistent testing across all benchmarks.
-func assembleInputStream() []byte {
-	var out []byte
-	for _, d := range data {
-		out = append(out, d.input...)
-	}
-	return out
-}
-
 // Capture the time it takes to execute algorithm one.
 func BenchmarkAlgorithmOne(b *testing.B) {
 	var output bytes.Buffer
 	in := assembleInputStream()
+	find := []byte("elvis")
+	repl := []byte("Elvis")
 
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
 		output.Reset()
-		algOne(in, &output)
+		algOne(in, find, repl, &output)
 	}
 }
 
@@ -38,11 +30,13 @@ func BenchmarkAlgorithmOne(b *testing.B) {
 func BenchmarkAlgorithmTwo(b *testing.B) {
 	var output bytes.Buffer
 	in := assembleInputStream()
+	find := []byte("elvis")
+	repl := []byte("Elvis")
 
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
 		output.Reset()
-		algTwo(in, &output)
+		algTwo(in, find, repl, &output)
 	}
 }

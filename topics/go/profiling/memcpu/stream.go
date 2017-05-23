@@ -35,45 +35,62 @@ var data = []struct {
 	{[]byte("elvielviselvis"), []byte("elviElvisElvis")},
 }
 
-// Declare what needs to be found and its replacement.
-var find = []byte("elvis")
-var repl = []byte("Elvis")
+// assembleInputStream combines all the input into a
+// single stream for processing.
+func assembleInputStream() []byte {
+	var in []byte
+	for _, d := range data {
+		in = append(in, d.input...)
+	}
+	return in
+}
 
-// Calculate the number of bytes we need to locate.
-var size = len(find)
+// assembleOutputStream combines all the output into a
+// single stream for comparing.
+func assembleOutputStream() []byte {
+	var out []byte
+	for _, d := range data {
+		out = append(out, d.output...)
+	}
+	return out
+}
 
 func main() {
 	var output bytes.Buffer
+	in := assembleInputStream()
+	out := assembleOutputStream()
+
+	find := []byte("elvis")
+	repl := []byte("Elvis")
 
 	fmt.Println("=======================================\nRunning Algorithm One")
-	for _, d := range data {
-		output.Reset()
-		algOne(d.input, &output)
-		matched := bytes.Compare(d.output, output.Bytes())
-		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
-	}
+	output.Reset()
+	algOne(in, find, repl, &output)
+	matched := bytes.Compare(out, output.Bytes())
+	fmt.Printf("Matched: %v\nInp: [%s]\nExp: [%s]\nGot: [%s]\n", matched == 0, in, out, output.Bytes())
 
 	fmt.Println("=======================================\nRunning Algorithm Two")
-	for _, d := range data {
-		output.Reset()
-		algTwo(d.input, &output)
-		matched := bytes.Compare(d.output, output.Bytes())
-		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
-	}
+	output.Reset()
+	algTwo(in, find, repl, &output)
+	matched = bytes.Compare(out, output.Bytes())
+	fmt.Printf("Matched: %v\nInp: [%s]\nExp: [%s]\nGot: [%s]\n", matched == 0, in, out, output.Bytes())
 }
 
 // algOne is one way to solve the problem.
-func algOne(data []byte, output *bytes.Buffer) {
+func algOne(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 
 	// Use a bytes Buffer to provide a stream to process.
 	input := bytes.NewBuffer(data)
+
+	// The number of bytes we are looking for.
+	size := len(find)
 
 	// Declare the buffers we need to process the stream.
 	buf := make([]byte, size)
 	end := size - 1
 
 	// Read in an initial number of bytes we need to get started.
-	if n, err := io.ReadFull(input, buf[:end]); err != nil {
+	if n, err := input.Read(buf[:end]); err != nil || n < end {
 		output.Write(buf[:n])
 		return
 	}
@@ -111,10 +128,13 @@ func algOne(data []byte, output *bytes.Buffer) {
 
 // algTwo is a second way to solve the problem.
 // Provided by Tyler Bunnell https://twitter.com/TylerJBunnell
-func algTwo(data []byte, output *bytes.Buffer) {
+func algTwo(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 
 	// Use the bytes Reader to provide a stream to process.
 	input := bytes.NewReader(data)
+
+	// The number of bytes we are looking for.
+	size := len(find)
 
 	// Create an index variable to match bytes.
 	idx := 0
