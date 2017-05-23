@@ -112,7 +112,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/JJMHWiZ9h9))  
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/y_FHIdUbAw))  
 [Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/KRKrUCcTYe))  
-[Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/AB5UgBxLpI))  
+[Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/BBB8-XLezV))  
 [Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/tpDOwBCvqW))  
 
 ## Exercises
