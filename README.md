@@ -8,6 +8,17 @@ William Kennedy
 ArdanLabs (www.ardanlabs.com)  
 bill@ardanlabs.com  
 
+* [Experience](https://github.com/ardanlabs/gotraining#our-experience)
+* [Teachers](https://github.com/ardanlabs/gotraining#our-teachers)
+* [Pricing](https://github.com/ardanlabs/gotraining#our-pricing)
+* [Current Schedule](https://github.com/ardanlabs/gotraining#current-schedule)
+* [More About Go](https://github.com/ardanlabs/gotraining#more-about-go)
+* [Minimal Qualified Student](https://github.com/ardanlabs/gotraining#minimal-qualified-student)
+* [Important Reading](https://github.com/ardanlabs/gotraining#important-reading)
+* [Before You Come To Class](https://github.com/ardanlabs/gotraining#before-you-come-to-class)
+* [Starter Material](https://github.com/ardanlabs/gotraining#starter-material)
+* [Get The Training Material](https://github.com/ardanlabs/gotraining#go-get-the-training-material)
+
 ## Our Experience
 
 We have taught Go to thousands of developers all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump-start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
@@ -132,6 +143,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Capital One       SF, CA                 May        Bill Kennedy
 		Corporate    Go       Sky Betting       Leeds, UK              May        Bill Kennedy 		
 		Corporate    Go       Intel             Chandler, AZ           June       Bill Kennedy
+		Corporate    Go       Finxact           Jaxksonville, FL       June       Bill Kennedy
 		Corporate    Go       Apcera            SF, CA                 June       Bill Kennedy 		
 		Corporate    Go       Comcast           Reston, VA             July       Bill Kennedy 		
 
@@ -336,61 +348,17 @@ _"The Intro to Go Workshop enabled me to come into class with very little knowle
 Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
 _"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
-## Past Schedule
+## Past Events
 
-Look at how busy we have been training thousands of developers in Go over the past three years.
- 
-### 2016
-		Type		Type		Venue					City, ST				Month		Trainer				Url
-		================================================================================================================
-		Corporate	Go			Capital One 			Richmond, VA 			January		Bill Kennedy
-		Corporate	Go			BOT 					Miami, FL 				January		Bill Kennedy
-		Corporate	Go			CISCO 					Lawrenceville, GA 		February	Bill Kennedy
-		Public		Go			Bol 					Utrecht, Amsterdam		March		Bill Kennedy
-		Corporate	Go			GE 						San Ramon, CA 			March		Bill Kennedy
-		Free		Go			WWG						SF, CA 					March		Bill Kennedy
-		Public		Go 			Fidelity				SLC, UT 				March		Bill Kennedy
-		Corporate	Go			SAS 					Cary, NC 				March		Bill Kennedy
-		Public		Go			Minio					SF, CA 					April		Bill Kennedy
-		Corporate	Go			CapitalOne 				Richmond, VA 			April		Bill Kennedy
-		Corporate	Go			CISCO 					Lawrenceville, GA 		May			Bill Kennedy
-		Corporate	Go			Rackspace 				San Antonio, TX 		May			Bill Kennedy
-		Public		Go			OSCON 					Portland, OR  			May			Bill Kennedy
-		Corporate	Go			Intel 					Hillsboro, OR 			May			Bill Kennedy
-		Corporate	Go			Staples 				Framingham, MA  		May			Bill Kennedy
-		Public		Go 			Halio					London, England 		June		Bill Kennedy
-		Public		Go 			Shutterfly				Phoenix, AZ  			June		Bill Kennedy
-		Public		Adv Go		GopherCon				Denver, CO  			July		Bill Kennedy
-		Corporate	Go			Red Ventures 			South Carolina	 		August		Bill Kennedy
-		Public		Adv Go		GolangUK 				London, England 		August		Bill Kennedy
-		Corporate	Go			Tune 					Seattle, WA	 			August		Bill Kennedy
-		Corporate	Go			Nordstroms				Seattle, WA	 			September	Bill Kennedy
-		Corporate	Go			Viacom					NYC, NY					September	Bill Kennedy
-		Corporate	Go			CapitalOne				McLean, VA	 			September	Bill Kennedy
-		Free		Go			WWG						London, England			October		Bill Kennedy 		https://skillsmatter.com/conferences/8373-women-who-go-workshop-with-bill-kennedy
-		Public		Adv Go		Rackspace				SF, CA					October		Bill Kennedy		https://www.eventbrite.com/e/advanced-ultimate-go-san-francisco-oct-2016-tickets-26919899143
-		Free		Go			WWG						SF, CA					October		Bill Kennedy		http://www.meetup.com/Women-Who-Go/events/232670825
-		Corporate	Go			Traderev				Toronto, Canada 		October		Bill Kennedy 		http://www.helpingcanadacode.com
-		Corporate	Go			Centralway				Zürich, Switzerland	 October	 Bill Kennedy  
-		Public		Go			GothamGo				NYC, NY					November	Bill Kennedy
-		Public		Go			Dev Fest				NYC, NY					November	Bill Kennedy 		https://generalassemb.ly/education/devfestnyc-ultimate-go-training/new-york-city/30237
-		Corporate	Go			Hootsuite				Vancouver, Canada		November	Bill Kennedy
-		Corporate	Go			Viacom					NYC, NY					December	Bill Kennedy		
-		
-		Type		Type		Venue					City, ST				Month		Trainer				Url
-		================================================================================================================
-		Corporate	Go			Salesforce 				Dublin, Ireland 		April		Kevin Gillette
-		Public		Go			dotGo					Paris, France			October		Ernesto Jimenez
-		Public		Data		GDG DevFest				Siberia, Russia			November	Daniel Whitenack	https://devfest.gdg.org.ru/en/
-		Corporate	Go			Intel					Zapopan, Mexico			December	Ernesto Jimenez		
+Look at how busy we have been training thousands of developers in Go over the past four years.
 
-### Past Years
-
-		2015 : 33 Events
-		2014 :  3 Events
+		2017 : 35 Events and counting  
+		2016 : 37 Events  
+		2015 : 33 Events  
+		2014 :  3 Events  
 ___
 
-#### Running Docker
+## Running Docker
 <a name="docker" />
 
 **Install Docker Toolbox**  

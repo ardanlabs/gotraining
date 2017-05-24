@@ -74,12 +74,13 @@ If the GC begins to believe that it can’t finish the collection within the dec
 ### Pointer Mechanics
 
 https://golang.org/doc/effective_go.html#pointers_vs_values  
+https://www.goinggo.net/2017/05/language-mechanics-on-stacks-and-pointers.html  
+http://www.goinggo.net/2014/12/using-pointers-in-go.html  
 http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html  
-http://www.goinggo.net/2014/12/using-pointers-in-go.html
 
 ### Stacks
 
-[Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)
+[Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
 
 ### Escape Analysis and Inlining
 
