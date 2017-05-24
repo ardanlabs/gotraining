@@ -90,7 +90,7 @@ func algOne(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 	end := size - 1
 
 	// Read in an initial number of bytes we need to get started.
-	if n, err := input.Read(buf[:end]); err != nil || n < end {
+	if n, err := io.ReadFull(input, buf[:end]); err != nil {
 		output.Write(buf[:n])
 		return
 	}

@@ -273,12 +273,12 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 **Validation:**
 
-Declare an interface when:  
+Use an interface when:  
 * users of the API need to provide an implementation detail.
 * API’s have multiple implementations they need to maintain internally.
 * parts of the API that can change have been identified and require decoupling.
 
-Don't declare an interface:  
+Don't use an interface:  
 * for the sake of using an interface.
 * to generalize an algorithm.
 * when users can declare their own interfaces.
