@@ -22,13 +22,6 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 
 ### Prepare Your Mind
 
-**Questions**  
-* Is your goal to quickly solve problems today and tomorrow or is it to play with tech?
-* Do you care about the legacy you are leaving behind?
-* How do you know when a piece of code smells good or bad?
-* How do you know when you are done with a piece of code?
-* What does integrity mean to you?
-
 **Somewhere Along The Line**  
 * We became impressed with programs that contain large amounts of code.
 * We strived to create large abstractions in our code base.
@@ -47,6 +40,16 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 **Open Your Mind**  
 * Technology changes quickly but people's minds change slowly.
 * Easy to adopt new technology but hard to adopt new ways of thinking.
+
+---
+
+### Legacy Software
+
+Do you care about the legacy you are leaving behind?
+
+_"There are two kinds of software projects: those that fail, and those that turn into legacy horrors." - Peter Weinberger (inventor of AWK)_
+
+_"Legacy software is an unappreciated but serious problem. Legacy code may be the downfall of our civilization." - Chuck Moore (inventor of Forth)_
 
 ---
 
@@ -90,9 +93,7 @@ _"Unless the developer has a really good idea of what the software is going to b
 
 _"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all" - Brian Kernighan_
 
-_"There are two kinds of software projects: those that fail, and those that turn into legacy horrors." - Peter Weinberger (inventor of AWK)_
-
-_"Legacy software is an unappreciated but serious problem. Legacy code may be the downfall of our civilization." - Chuck Moore (inventor of Forth)_
+_"Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?" - Brian Kernighan_
 
 **Resources:**
 
