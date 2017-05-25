@@ -286,12 +286,6 @@ http://www.goinggo.net/
 
 ## Twitter
 
-Ian Molee ([@ianfoo](https://twitter.com/ianfoo/status/770076293169840128))  
-_"The unflappable @goinggodotnet demystifying Go stacktraces at #ultimatego day 3 at @tune. Thanks for leveling us up."_
-
-Camilo Aguilar ([@c4milo](https://twitter.com/c4milo/status/752317652563996672))  
-_"Holy cow, the best lighting talk I have ever seen about mechanical sympathy by @goinggodotnet. Here at #gophercon"_
-
 Jessie Frazelle ([@frazelledazzell](https://twitter.com/frazelledazzell/status/711355859066990592))  
 _"@goinggodotnet you were amazing!!! So enthusiastic!!! Thanks for doing this for everyone!"_
 
@@ -309,17 +303,16 @@ _"Should be mentioned that though I am no expert, I have been using Go for about
 
 ## Testimonials
 
+Paul Yeoh  
+_"Today’s workshop was just mind blowing! You kept us all on the edge all day long - it was the most exhilarating all day workshop I have attended, period. The content was inspiring, moving - caused me to think deeply and gave me a lot of meat to chew on about what it is we are really doing as programmers, what an awesome day!
+
+And most of all, I just got such a kick out of the energy which you were putting out - larger than life, it felt like you were turned up to 200%. I really took a lot from it at many levels. Thank you!!"_
+
 Ana-Maria Lazar, Software Engineer at Sainsbury's  
 _"Intensive crash course in Go that literally takes you to a whole new level. Not only Bill provides lots of examples and exercises to familiarize yourself faster with the language but there is also a lot of  information that can be applied to other languages as well. Perfect combination!"_
 
-Greg Hammond, Founder & CEO at Best Option Trading  
-_"Bill helped me learn enough Go to work with him and his team to take a program with a lot of complexity, accumulated over years, and make it into an enterprise product. As architect, he made it more extensible, tested, and created an external API. Bill has a gift for writing readable code that is easy to reason about. He demonstrates coding restraint by favoring code that is maintainable, rather than relying upon overly clever solutions. At the same time, he is a performance hawk, always thinking about how to cut milliseconds from runtime. When I began the project with Bill, I was under pressure from both schedule and cost perspectives. He put in extra effort at the end of the project to deliver what I needed. I highly recommend Bill for his well-written book, his 'Ultimate Go' course, and development work through Ardan Labs."_
-
 Susan Dady, Software Engineer - GE Digital  
 _"Rarely will you come across a course as worthwhile as this one. I learned many things relevant and useful in my daily work and William's energy kept me engaged. I came back to work excited to get coding in Go."_
-
-Paul Garvey, Software Engineer - GE Digital  
-_"Looking back I am grateful I took the GoLang training course. I had planned to just buy a few books and learned it on my own. In retrospect that would have been a bad decision as I would missed out on all the pitfalls, best practices, practical exercises and discussions the instructor imparted from his years of experience in the field, writing a book and blogging with other gophers. In the end I felt I learn more in 3 days then I could reading books and learning GoLang on my own and all my colleagues who took the course all share this view. We also share the view that Bill the instructor brought an enthusiasm and energy to the course that made a really technical course easy to learn. I would recommend anyone who want to learn Go to sign up with Mr Kennedy. At the end of the course you will feel like you are ready to rewrite all your old apps in Go :-)"_
 
 Richard Stanley, Software Engineer - GE Digital  
 _"Not only does Bill deeply understands the technical details of Go, he also can explain them in an effective, enthusiastic manner that helped me retain somewhat dry material.  His passion for the language and its capabilities are obvious through out his training."_
@@ -344,9 +337,6 @@ _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is ext
 
 Georgi Knox ([@GeorgiCodes](https://twitter.com/georgicodes))  
 _"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
-
-Jackie Heitzer ([@JackieHeitzer](https://twitter.com/jackieheitzer))  
-_"Great course and a perfect introduction to Go.  Bill is very friendly and extremely knowledgeable about the Go language and I am excited to speak with him about Go in the future.  The training had an excellent format with hands on coding examples.  After the class I feel as though I have a better understanding of the key concepts, especially how pointers work.  I highly recommend this course to anyone interested in learning more about Go."_
 
 ## Past Events
 
