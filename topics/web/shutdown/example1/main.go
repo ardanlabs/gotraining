@@ -52,8 +52,9 @@ func main() {
 		wg.Done()
 	}()
 
-	// Listen for an interrupt signal from the OS.
-	osSignals := make(chan os.Signal)
+	// Listen for an interrupt signal from the OS. Use a buffered
+	// channel because of how the signal package is implemented.
+	osSignals := make(chan os.Signal, 1)
 	signal.Notify(osSignals, os.Interrupt)
 
 	// Wait for a signal to shutdown.

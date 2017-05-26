@@ -66,7 +66,7 @@ func main() {
 	}()
 
 	// Listen for an interrupt signal from the OS.
-	osSignals := make(chan os.Signal)
+	osSignals := make(chan os.Signal, 1)
 	signal.Notify(osSignals, os.Interrupt)
 
 	// Wait for a signal to shutdown.
