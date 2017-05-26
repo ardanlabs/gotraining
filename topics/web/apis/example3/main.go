@@ -32,6 +32,8 @@ func App() http.Handler {
 	return contentType(r)
 }
 
+// contentType is middleware that adds an application/json Content-Type header
+// to all outgoing responses.
 func contentType(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		res.Header().Add("Content-Type", "application/json")
