@@ -1,4 +1,4 @@
-## Web - Shutodnw
+## Web - Shutdown
 
 Learn how to gracefully shut a server down.
 
