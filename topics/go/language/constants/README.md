@@ -5,7 +5,7 @@ Constants are a way to create a named identifier whose value can never change. T
 ## Notes
 
 * Constants are not variables.
-* They existing only at compilation.
+* They exist only at compilation.
 * Untyped constants can be implictly converted where typed constants and variables can't.
 * Think of untyped constants as having a Kind, not a Type.
 * Learn about explicit and implicit conversions.
@@ -30,7 +30,7 @@ http://www.goinggo.net/2014/04/introduction-to-numeric-constants-in-go.html
 
 **Part A:** Declare an untyped and typed constant and display their values.
 
-**Part B:** Multiply two literal constants into a typed variable and display the value.
+**Part B:** Divide two literal constants into a typed variable and display the value.
 
 [Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/QMrOCsHjcC)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/aUZ-7VPb9H))
