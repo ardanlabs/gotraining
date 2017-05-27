@@ -6,18 +6,17 @@
 package main
 
 import (
-	"crypto/sha256"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 	"runtime/trace"
-	"time"
 )
 
-// Download does network I/O.
-func Download() []byte {
+// LoadWrite reads a file from the network into memory and then
+// writes it to disk.
+func LoadWrite() {
 
 	// Download the tar file.
 	r, err := http.Get("https://ftp.gnu.org/gnu/binutils/binutils-2.7.tar.gz")
@@ -32,70 +31,48 @@ func Download() []byte {
 	}
 	defer r.Body.Close()
 
-	// Return the file.
-	return body
-}
-
-// Write does disk I/O.
-func Write(data []byte) {
-
-	// Perform the disk I/O 50 times.
-	for i := 0; i < 50; i++ {
-
-		// Create a new file.
-		tmpfile, err := ioutil.TempFile("", "example")
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer os.Remove(tmpfile.Name())
-
-		// Write the data to the file.
-		_, err = tmpfile.Write(data)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		// Close the file and flush the final writes.
-		tmpfile.Close()
+	// Create a new file.
+	f, err := ioutil.TempFile("", "example")
+	if err != nil {
+		log.Fatal(err)
 	}
-}
 
-// Block waits on a channel for one second.
-func Block() {
-	<-time.NewTimer(time.Second).C
-}
+	// Defer the close and removal of the file.
+	defer os.Remove(f.Name())
+	defer f.Close()
 
-// Hash does CPU-intensive work.
-func Hash(data []byte) {
-	for i := 0; i < 50; i++ {
-		sha256.Sum256(data)
-	}
-}
-
-// Exec runs an external command.
-func Exec() {
-	if err := exec.Command("sleep", "1").Run(); err != nil {
+	// Write the data to the file.
+	_, err = f.Write(body)
+	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-// Work performs a set of actions that take long to complete.
-func Work() {
+// StreamWrite streams a file from the network, writing it to disk.
+func StreamWrite() {
 
-	// Download the file from the web.
-	data := Download()
+	// Download the tar file.
+	r, err := http.Get("https://ftp.gnu.org/gnu/binutils/binutils-2.7.tar.gz")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// Write the file to disk.
-	Write(data)
+	// Create a new file.
+	f, err := ioutil.TempFile("", "example")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// // Block for a second.
-	// Block()
+	// Defer the close and removal of the file.
+	defer os.Remove(f.Name())
+	defer f.Close()
 
-	// // Hash the data we received.
-	// Hash(data)
-
-	// // Execute an out of process command.
-	// Exec()
+	// Stream the file to disk.
+	if _, err = io.Copy(f, r.Body); err != nil {
+		if err != io.EOF {
+			log.Fatal(err)
+		}
+	}
 }
 
 func main() {
@@ -112,5 +89,6 @@ func main() {
 	defer trace.Stop()
 
 	// Perform the work.
-	Work()
+	LoadWrite()
+	StreamWrite()
 }

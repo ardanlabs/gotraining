@@ -26,6 +26,6 @@ Navigating the tracing tool and interpreting the data requires in class instruct
 
 ## Code Review
  
-[Profiling Test](trace.go) ([Go Playground](https://play.golang.org/p/N2Q-djdhIk))
+[Profiling Test](trace.go) ([Go Playground](https://play.golang.org/p/k3ehRw1Iig))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

@@ -16,12 +16,12 @@ func init() {
 }
 
 func main() {
-	// basicSendRecv()
+	// sendRecv()
 	// signalClose()
-	// signalAck()
 	// closeRange()
-	// selectRecv()
 	// fanOut()
+	// fanOutSem()
+	// selectCancel()
 	// selectDrop()
 }
 
@@ -29,11 +29,12 @@ type data struct {
 	UserID string
 }
 
-// basicSendRecv shows the basics of a send and receive.
-func basicSendRecv() {
+// sendRecv shows the basics of a send and receive.
+func sendRecv() {
 	fmt.Println("** basicSendRecv")
 
 	ch := make(chan data)
+
 	go func() {
 		time.Sleep(100 * time.Millisecond)
 		ch <- data{"123"}
@@ -52,6 +53,7 @@ func signalClose() {
 	fmt.Println("** signalClose")
 
 	ch := make(chan struct{})
+
 	go func() {
 		time.Sleep(100 * time.Millisecond)
 		close(ch)
@@ -65,66 +67,30 @@ func signalClose() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// signalAck shows how to signal an event and wait for an
-// acknowledgment it is done.
-func signalAck() {
-	fmt.Println("** signalAck")
-
-	ch := make(chan data)
-	go func() {
-		v := <-ch
-		fmt.Println("g2 : received :", v)
-		time.Sleep(100 * time.Millisecond)
-		ch <- data{"123"}
-		fmt.Println("g2 : send ack")
-	}()
-
-	ch <- data{"123"}
-	fmt.Println("g1 : send ack")
-	v := <-ch
-	fmt.Println("g1 : received :", v)
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
-}
-
-// closeRange shows how to use range to receive value and
-// using close to terminate the loop.
+// closeRange shows how to use range to receive values and
+// how using close terminates the loop.
 func closeRange() {
 	fmt.Println("** closeRange")
 
-	ch := make(chan data, 5)
-	for i := 0; i < 5; i++ {
+	ch := make(chan data)
+
+	const grs = 2
+	for g := 0; g < grs; g++ {
+		go func(id int) {
+			for v := range ch {
+				fmt.Println("g2 : received :", v, ": on :", id)
+			}
+			fmt.Println("g2 : received close : on :", id)
+		}(g)
+	}
+
+	const reqs = 10
+	for i := 0; i < reqs; i++ {
 		ch <- data{fmt.Sprintf("%d", i)}
 	}
+
 	close(ch)
-
-	for v := range ch {
-		fmt.Println("g1 : received :", v)
-	}
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
-}
-
-// selectRecv shows how to use the select statement to wait for a
-// specified amount of time to receive a value.
-func selectRecv() {
-	fmt.Println("** selectRecv")
-
-	ch := make(chan data, 1)
-	go func() {
-		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-		ch <- data{"123"}
-		fmt.Println("g2 : send ack")
-	}()
-
-	select {
-	case v := <-ch:
-		fmt.Println("g1 : received :", v)
-	case t := <-time.After(100 * time.Millisecond):
-		fmt.Println("g1 : timed out :", t)
-	}
+	fmt.Println("g1 : close ack")
 
 	time.Sleep(time.Second)
 	fmt.Println("-------------------------------------------------------------")
@@ -155,19 +121,78 @@ func fanOut() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
+// fanOutSem shows how to use the fan out pattern to get work
+// done concurrently but limiting the number of active routines.
+func fanOutSem() {
+	fmt.Println("** fanOutSem")
+
+	grs := 20
+	ch := make(chan data, grs)
+
+	const cap = 5
+	sem := make(chan bool, cap)
+
+	for g := 0; g < grs; g++ {
+		go func(g int) {
+			sem <- true
+			{
+				time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+				ch <- data{fmt.Sprintf("%d", g)}
+			}
+			<-sem
+		}(g)
+	}
+
+	for grs > 0 {
+		d := <-ch
+		fmt.Println(d, len(sem))
+		grs--
+	}
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
+}
+
+// selectCancel shows how to use the select statement to wait for a
+// specified amount of time to receive a value.
+func selectCancel() {
+	fmt.Println("** selectRecv")
+
+	ch := make(chan data, 1)
+
+	go func() {
+		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
+		ch <- data{"123"}
+		fmt.Println("g2 : send ack")
+	}()
+
+	select {
+	case v := <-ch:
+		fmt.Println("g1 : received :", v)
+	case t := <-time.After(100 * time.Millisecond):
+		fmt.Println("g1 : timed out :", t)
+	}
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
+}
+
 // selectDrop shows how to use the select to walk away from a channel
 // operation if it will immediately block.
 func selectDrop() {
 	fmt.Println("** selectDrop")
 
-	ch := make(chan data, 5)
+	const cap = 5
+	ch := make(chan data, cap)
+
 	go func() {
 		for v := range ch {
 			fmt.Println("g2 : received :", v)
 		}
 	}()
 
-	for i := 0; i < 20; i++ {
+	const reqs = 20
+	for i := 0; i < reqs; i++ {
 		select {
 		case ch <- data{fmt.Sprintf("%d", i)}:
 			fmt.Println("g1 : send ack")
