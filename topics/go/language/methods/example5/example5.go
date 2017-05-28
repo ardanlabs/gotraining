@@ -19,17 +19,25 @@ import (
 
 type IP []byte
 
-// To16 is using a value receiver and returning a value of type IP. This
+// Mask is using a value receiver and returning a value of type IP. This
 // method is using value semantics for type IP.
 
-func (ip IP) To16() IP {
-	if len(ip) == IPv4len {
-		return IPv4(ip[0], ip[1], ip[2], ip[3])
+func (ip IP) Mask(mask IPMask) IP {
+	if len(mask) == IPv6len && len(ip) == IPv4len && allFF(mask[:12]) {
+		mask = mask[12:]
 	}
-	if len(ip) == IPv6len {
-		return ip
+	if len(mask) == IPv4len && len(ip) == IPv6len && bytesEqual(ip[:12], v4InV6Prefix) {
+		ip = ip[12:]
 	}
-	return nil
+	n := len(ip)
+	if n != len(mask) {
+		return nil
+	}
+	out := make(IP, n)
+	for i := 0; i < n; i++ {
+		out[i] = ip[i] & mask[i]
+	}
+	return out
 }
 
 // ipEmptyString accepts a value of type IP and returns a value of type string.
