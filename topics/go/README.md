@@ -107,7 +107,9 @@ You can't look at a piece of code, function or algorithm and determine if it sme
 
 _"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love (inventor of Objective C)_
 
-#### 1) Integrity
+---
+
+### Integrity
 
 **_We need to become very serious about reliability._**
 
@@ -117,8 +119,6 @@ There are two driving forces behind integrity:
 
 **Write Less Code:**
 
-_100k lines of code fit inside a box of paper. - Tom Love (inventor of Objective C)_
-
 There have been studies that have researched the number of bugs you can expect to have in your software. The industry average is around 15 to 50 bugs per 1000 lines of code. One simple way to reduce the number of bugs, and increase the integrity of your software, is to write less code.
 
 Bjarne Stroustrup stated that writing more code than you need results in `Ugly`, `Large` and `Slow` code:
@@ -126,8 +126,6 @@ Bjarne Stroustrup stated that writing more code than you need results in `Ugly`,
 * `Ugly`: Leaves places for bugs to hide.
 * `Large`: Ensures incomplete tests.
 * `Slow`: Encourages the use of shortcuts and dirty tricks.
-
-_"Let's imagine a project that's going to end up with a million lines of code or more. The probability of those projects being successful in the United States these days is very low - well under 50%. That's debatable. - Tom Love (inventor of Objective C)_
 
 **Error Handling:**
 
@@ -174,39 +172,69 @@ Carelessness  |        Education         |   Dangerous Situation   |
 [Masterminds of Programming](http://dl.acm.org/citation.cfm?id=1592983) - Federico Biancuzzi and Shane Warden  
 [Developing Software The Right Way, with Intent and Carefulness](http://ipengineer.net/2017/04/developing-software-the-right-way-with-intent-and-carefulness) - David Gee  
 
-#### 2) Readability
+---
+
+### Readability
 
 **_We must structure our systems to be more comprehensible._**
 
 This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
-In Go, the underlying machine is the real machine rather than a single abstract machine. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
-
-**_"Can you explain it to the median user (developer)? as opposed to will the smartest user (developer) figure it out?" - Peter Weinberger (inventor of AWK)_**
-
-**_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_**
-
 [Example Readability Issue](http://cpp.sh/6i7d)  
 
-#### 3) Simplicity
+**Real Machine**
 
-**_We must understand that simplicity is hard to design and complicated to build._**  
+_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_
 
-This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance. Focus on encapsulation and validate that you're not generalizing or even being too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
+In Go, the underlying machine is the real machine rather than a single abstract machine. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
 
-**_Paraphrasing: "Encapsulation and the separation of concerns are drivers for designing software. This is largely based on how other industries handle complexity. There seems to be a human pattern of using encapsulation to wrestle complexity to the ground." - Brad Cox (inventor of Objective C)_**
+**Mental Models**
 
-**_"Everything should be made as simple as possible, but not simpler." - Albert Einstein_**
+_"Let's imagine a project that's going to end up with a million lines of code or more. The probability of those projects being successful in the United States these days is very low - well under 50%. That's debatable. - Tom Love (inventor of Objective C)_
+
+_100k lines of code fit inside a box of paper. - Tom Love (inventor of Objective C)_
+
+How much code in that box do you think you can maintain a mental model of in your head? I believe asking a single developer to maintain a mental model of more than one ream of paper in that box (~10k lines of code) is asking a lot. If you do the math, then it takes a team of 100 people to work on a code base that hits a million lines of code. That is 100 people that need to be coordinated, grouped, tracked and in a constant feedback loop of communication.
+
+**Average Developer**
+
+_"Can you explain it to the median user (developer)? as opposed to will the smartest user (developer) figure it out?" - Peter Weinberger (inventor of AWK)_
+
+You must be aware of who you are on your team. When hiring new people, you must be aware of where they fall. The code must be written for the average developer to comprehend. If you are below average, you have the responsibility to come up to speed. If you are the expert, you have the responsbility to reduce being clever.
+
+---
+
+### Simplicity
+
+**_We must understand that simplicity is hard to design and complicated to build._**
+
+This is about hiding complexity. A lot of care and design must go into simplicity because this can cause more problems then good. It can create issues with readability and it can cause issues with performance.
+
+**Simple, But Not Simpler**
+
+_"Everything should be made as simple as possible, but not simpler." - Albert Einstein_
+
+Focus on encapsulation and validate that you're not generalizing or even being too concise. You might think you are helping the programmer or the code but validate things are still easy to use, understand, debug and maintain.
+
+**Encapsulation**
+
+_Paraphrasing: "Encapsulation and the separation of concerns are drivers for designing software. This is largely based on how other industries handle complexity. There seems to be a human pattern of using encapsulation to wrestle complexity to the ground." - Brad Cox (inventor of Objective C)_
+
+Encapsulation is what we have been trying to figure out as an industry for 40 years. Go is taking a slightly new approach with the package. Brining encapsulation up a level and providing richer support at the language level.
 
 **Resources:**
 
 [Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
 
-#### 4) Performance
+---
+
+### Performance
 
 **_We must compute less to get the results we need._**
 
 This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
+
+_"I don't trust anything until it runs... In fact, I don't trust anything until it runs twice." - Andrew Gelman (one of the greatest living statisticians at Columbia University)._
 
 Rules of Performance:   
     * Never guess about performance.  
@@ -216,11 +244,15 @@ Rules of Performance:
 
 [Example Benchmark](https://github.com/ardanlabs/gotraining/blob/master/topics/go/testing/benchmarks/basic/basic_test.go)  
 
-**_"When we're computer programmers we're concentrating on the intricate little fascinating details of programming and we don't take a broad engineering point of view about trying to optimize the total system. You try to optimize the bits and bytes." - Tom Kurtz (inventor of BASIC)_**
+**Broad Engineering**
 
-"I don't trust anything until it runs... In fact, I don't trust anything until it runs twice." - Andrew Gelman (one of the greatest living statisticians at Columbia University).
+_"When we're computer programmers we're concentrating on the intricate little fascinating details of programming and we don't take a broad engineering point of view about trying to optimize the total system. You try to optimize the bits and bytes." - Tom Kurtz (inventor of BASIC)_
 
-#### 5) Micro-Optimizations
+Performance is important but it can't be your priority unless the code is not running fast enough. You only know this once you have a working program and you have validated it. We place those who we think know how to write performant code on a pedestal. We need to put those who write code that is optimized for correctness and performs fast enough on those pedestals.
+
+---
+
+### Micro-Optimizations
 
 Micro-Optimizations are about squeezing every ounce of performance as possible. When code is written with this as the priority, it is very difficult to write code that is readable, simple or idiomatic. You are writing clever code that may require the unsafe package or you may need to drop into assembly.
 
