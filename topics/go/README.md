@@ -89,7 +89,7 @@ _"The correctness of the implementation is the most important concern, but there
 
 _"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan_
 
-_"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probablility that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
+_"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
 _"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all" - Brian Kernighan_
 
