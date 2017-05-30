@@ -13,12 +13,14 @@ Learn the basics of using and applying middleware.
 https://golang.org/pkg/net/http/  
 https://golang.org/doc/articles/wiki/  
 github.com/urfave/negroni  
+github.com/justinas/alice  
 github.com/gorilla/handlers  
 
 ## Code Review
 
 Basic middleware: [Code](example1/main.go) | [Test](example1/main_test.go)  
 Negroni router: [Code](example2/main.go) | [Test](example2/main_test.go)  
+Alice with Gorilla Handlers: [Code](example3/main.go)  
 
 ## Exercises
 
