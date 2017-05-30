@@ -121,6 +121,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods) - Jeff Hodges  
 [The Queen Does Not Rule](https://aeon.co/essays/how-ant-societies-point-to-radical-possibilities-for-humans) - Deborah M Gordon  
 [Load Balancing is Impossible](https://www.youtube.com/watch?v=kpvbOzHUakA) - Tyler McMullen  
+[Dapper: Distributed Tracing](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf) - Google  
 
 ### HTTP and Timeouts
 
