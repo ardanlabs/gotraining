@@ -106,15 +106,15 @@ Here is more reading and videos to also help get you started.
 The **time** command provide information that can help you get a sense how your program is performing.
 
 Use the **time** command to see data about building the program.
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project
-	/usr/bin/time -lp go build		-- Mac OS X
-	/usr/bin/time -v go build		-- Linux
+	$ cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project
+	$ /usr/bin/time -lp go build		-- Mac OS X
+	$ /usr/bin/time -v go build		-- Linux
 
 ### perf
 
 If you're a linux user, then perf(1) is a great tool for profiling applications. Now we have frame pointers, perf can profile Go applications.
 
-	% go build -toolexec="perf stat" cmd/compile/internal/gc
+	$ go build -toolexec="perf stat" cmd/compile/internal/gc
 	# cmd/compile/internal/gc
 
  	Performance counter stats for '/home/dfc/go/pkg/tool/linux_amd64/compile -o $WORK/cmd/compile/internal/gc.a -trimpath $WORK -p cmd/compile/internal/gc -complete -buildid 87cd803267511b4d9e753d68b5b66a70e2f878c4 -D _/home/dfc/go/src/cmd/compile/internal/gc -I $WORK -pack ./alg.go ./align.go ./bexport.go ./bimport.go ./builtin.go ./bv.go ./cgen.go ./closure.go ./const.go ./cplx.go ./dcl.go ./esc.go ./export.go ./fmt.go ./gen.go ./go.go ./gsubr.go ./init.go ./inl.go ./lex.go ./magic.go ./main.go ./mpfloat.go ./mpint.go ./obj.go ./opnames.go ./order.go ./parser.go ./pgen.go ./plive.go ./popt.go ./racewalk.go ./range.go ./reflect.go ./reg.go ./select.go ./sinit.go ./sparselocatephifunctions.go ./ssa.go ./subr.go ./swt.go ./syntax.go ./type.go ./typecheck.go ./universe.go ./unsafe.go ./util.go ./walk.go':
@@ -135,8 +135,11 @@ If you're a linux user, then perf(1) is a great tool for profiling applications.
 
 ## Basic Go Profiling
 
+Learn the basics of reading Stack Traces.  
+[Stack Traces and Core Dumps](stack_trace/README.md)
+
 Learn the basics of using GODEBUG.  
-[Memory Tracing](godebug/gctrace/README.md) | [Scheduler Tracing](godebug/schedtrace/README.md)
+[GODEBUG](godebug/README.md)
 
 Learn the basics of using memory and cpu profiling.  
 [Memory and CPU Profiling](memcpu/README.md)
@@ -150,8 +153,8 @@ Learn the basics of blocking profiling.
 Learn the basics of mutex profiling.  
 [Mutex Profiling](mutex/README.md)
 
-Learn the basics of trace profiling.  
-[Trace Profiling](trace/README.md)
+Learn the basics of tracing.    
+[Tracing](trace/README.md)
 
 Learn the basics of profiling and tracing a larger application.  
 [Real World Example](project/README.md)
@@ -161,7 +164,7 @@ Learn the basics of profiling and tracing a larger application.
 The `godoc` tool can help you perform static analysis on your code.
 
 	// Perform a pointer analysis and then run the godoc website.
-	godoc -analysis pointer -http=:8080
+	$ godoc -analysis pointer -http=:8080
 
 [Static analysis features of godoc](https://golang.org/lib/godoc/analysis/help.html) - Go Team
 

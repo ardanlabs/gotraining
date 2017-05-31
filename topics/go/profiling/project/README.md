@@ -4,10 +4,12 @@ We have a web application that extends a web service. Let's profile this applica
 
 ### Building and Running the Project
 
-We have a website that we will use to learn and explore more about profiling. This project is a search engine for RSS feeds. Run the website and validate it is working.
+We have a website that we will use to learn and explore more about profiling. This project is a search engine for RSS feeds.
 
-	go build
-	./project
+Run the website and validate it is working.
+
+	$ go build
+	$ ./project
 
 	http://localhost:5000/search
 
@@ -16,7 +18,7 @@ We have a website that we will use to learn and explore more about profiling. Th
 To add load to the service while running profiling we can run these command.
 
 	// Send 10k request using 100 connections.
-	hey -m POST -c 100 -n 10000 "http://localhost:5000/search?term=trump&cnn=on&bbc=on&nyt=on"
+	$ hey -m POST -c 100 -n 10000 "http://localhost:5000/search?term=trump&cnn=on&bbc=on&nyt=on"
 
 ### GODEBUG
 
@@ -24,7 +26,7 @@ To add load to the service while running profiling we can run these command.
 
 Run the website redirecting stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
-	GODEBUG=gctrace=1 ./project > /dev/null
+	$ GODEBUG=gctrace=1 ./project > /dev/null
 
 #### GOGC
 
@@ -32,15 +34,15 @@ GOGC will change the way the heap grows. Changing this value could help reduce t
 
 Run the website again adding load. Look at the pacing of the GC with these different GOGC values.
 
-	GODEBUG=gctrace=1 ./project > /dev/null  
-	GODEBUG=gctrace=1 GOGC=200 ./project > /dev/null  
-	GODEBUG=gctrace=1 GOGC=500 ./project > /dev/null
+	$ GODEBUG=gctrace=1 ./project > /dev/null  
+	$ GODEBUG=gctrace=1 GOGC=200 ./project > /dev/null  
+	$ GODEBUG=gctrace=1 GOGC=500 ./project > /dev/null
 
 #### Scheduler Trace
 
 Run the website redirecting stdout (logs) to the null device. This will allow us to just see the trace information from the runtime.
 	
-	GODEBUG=schedtrace=1000 ./project > /dev/null
+	$ GODEBUG=schedtrace=1000 ./project > /dev/null
 
 ### PPROF
 
@@ -66,9 +68,11 @@ Capture cpu profile:
 
 Run the Go pprof tool in another window or tab to review heap information.
 
-	go tool pprof -alloc_space ./project http://localhost:5000/debug/pprof/heap
+	$ go tool pprof -alloc_space ./project http://localhost:5000/debug/pprof/heap
 
-	// Useful to see current status of heap.
+Documentation of memory profile options.
+
+    // Useful to see current status of heap.
 	-inuse_space  : Allocations live at the time of profile  	** default
 	-inuse_objects: Number of bytes allocated at the time of profile
 
@@ -76,21 +80,15 @@ Run the Go pprof tool in another window or tab to review heap information.
 	-alloc_space  : All allocations happened since program start
 	-alloc_objects: Number of object allocated at the time of profile
 
-	If you want to reduce memory consumption, look at the `-inuse_space` profile collected during
-	normal program operation.
+If you want to reduce memory consumption, look at the `-inuse_space` profile collected during normal program operation.
 	
-	If you want to improve execution speed, look at the `-alloc_objects` profile collected after
-	significant running time or at program end.
+If you want to improve execution speed, look at the `-alloc_objects` profile collected after significant running time or at program end.
 
 Run the Go pprof tool in another window or tab to review cpu information.
 
-	go tool pprof ./project http://localhost:5000/debug/pprof/profile
+	$ go tool pprof ./project http://localhost:5000/debug/pprof/profile
 
-	_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not
-	(except for goroutines that called runtime.LockOSThread, which is, unfortunately, not
-	visible in the profile). Note that goroutines in "IO wait" state also do not consume
-	threads, they are parked on non-blocking network poller
-	(which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
+_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile). Note that goroutines in "IO wait" state also do not consume threads, they are parked on non-blocking network poller (which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
 
 Explore using the **top**, **list**, **web** and **web list** commands.
 
@@ -98,15 +96,15 @@ Explore using the **top**, **list**, **web** and **web list** commands.
 
 Take a snapshot of the current heap profile. Then do the same for the cpu profile.
 
-    curl -s http://localhost:5000/debug/pprof/heap > base.heap
+    $ curl -s http://localhost:5000/debug/pprof/heap > base.heap
 
 After some time, take another snapshot:
 
-    curl -s http://localhost:5000/debug/pprof/heap > current.heap
+    $ curl -s http://localhost:5000/debug/pprof/heap > current.heap
 
 Now compare both snapshots against the binary and get into the pprof tool:
 
-    go tool pprof -inuse_space -base base.heap memory_trace current.heap
+    $ go tool pprof -inuse_space -base base.heap memory_trace current.heap
 
 #### Flame Graphs
 
@@ -116,20 +114,20 @@ Go-Torch is a tool for stochastically profiling Go programs. Collects stack trac
 
 Put some load of the web application and run the torch tool and visualize the profile.
 
-	go-torch -u http://localhost:5000/
+	$ go-torch -u http://localhost:5000/
 
 ### Benchmark Profiling
 
 Run the benchmarks and produce a cpu and memory profile.
 
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project/search
+	$ cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project/search
 	
-	go test -run none -bench . -benchtime 3s -benchmem -cpuprofile cpu.out
-	go tool pprof ./search.test cpu.out
+	$ go test -run none -bench . -benchtime 3s -benchmem -cpuprofile cpu.out
+	$ go tool pprof ./search.test cpu.out
 	(pprof) web list rssSearch
 
-	go test -run none -bench . -benchtime 3s -benchmem -memprofile mem.out
-	go tool pprof -inuse_space ./search.test mem.out
+	$ go test -run none -bench . -benchtime 3s -benchmem -memprofile mem.out
+	$ go tool pprof -inuse_space ./search.test mem.out
 	(pprof) web list rssSearch
 
 ### Trace Profiles
@@ -138,17 +136,17 @@ Run the benchmarks and produce a cpu and memory profile.
 
 Capture a trace file for a brief duration.
 
-	curl -s http://localhost:5000/debug/pprof/trace?seconds=2 > trace.out
+	$ curl -s http://localhost:5000/debug/pprof/trace?seconds=2 > trace.out
 
 Run the Go trace tool.
 
-	go tool trace trace.out
+	$ go tool trace trace.out
 
 Use the RSS Search test instead to create a trace.
 
-	cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project/search
-	go test -run none -bench . -benchtime 3s -trace trace.out
-	go tool trace trace.out
+	$ cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project/search
+	$ go test -run none -bench . -benchtime 3s -trace trace.out
+	$ go tool trace trace.out
 
 ## Expvar
 
@@ -180,8 +178,8 @@ Package expvar provides a standardized interface to public variables, such as op
 
 TermUI based Go apps monitor using expvars variables (/debug/vars). Quickest way to monitor your Go app.
 
-	go get github.com/divan/expvarmon
+	$ go get github.com/divan/expvarmon
 
 Running expvarmon
 
-	expvarmon -ports=":5000" -vars="requests,goroutines,mem:memstats.Alloc"
+	$ expvarmon -ports=":5000" -vars="requests,goroutines,mem:memstats.Alloc"

@@ -10,7 +10,6 @@ This material covers a good portion of the tooling that comes with go. Specifica
 [Fuzzing](../../../go/testing/fuzzing/README.md)
 
 #### Profiling and Tracing
-[Profiling](../../../go/profiling/README.md) | 
-[Stack Traces](../../../go/profiling/stack_trace/README.md)
+[Profiling](../../../go/profiling/README.md)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

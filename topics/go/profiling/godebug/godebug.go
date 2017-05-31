@@ -2,7 +2,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Sample program that implements a simple web service that will allow us to
-// explore how to use the schedtrace. This code is leaking a gorutine.
+// explore how to use the GODEBUG variable.
 package main
 
 import (

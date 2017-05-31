@@ -5,8 +5,7 @@
 package main
 
 func main() {
-	slice := make([]string, 2, 4)
-	example(slice, "hello", 10)
+	example(make([]string, 2, 4), "hello", 10)
 }
 
 func example(slice []string, str string, i int) {
@@ -20,7 +19,7 @@ goroutine 1 [running]:
 panic(0x56a60, 0xc82000a110)
 	/usr/local/go/src/runtime/panic.go:464 +0x3e6
 main.example(0xc82003bf08, 0x2, 0x4, 0x708a8, 0x5, 0xa)
-	/Users/bill/.../stack_trace/example1/example1.go:13 +0x65
+	/Users/bill/.../stack_trace/example1/example1.go:12 +0x65
 main.main()
-	/Users/bill/.../stack_trace/example1/example1.go:9 +0xa5
+	/Users/bill/.../stack_trace/example1/example1.go:8 +0xa5
 */

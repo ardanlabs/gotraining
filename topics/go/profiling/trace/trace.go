@@ -89,6 +89,6 @@ func main() {
 	defer trace.Stop()
 
 	// Perform the work.
-	LoadWrite()
-	StreamWrite()
+	//LoadWrite()
+	//StreamWrite()
 }

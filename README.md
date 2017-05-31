@@ -41,7 +41,7 @@ _**Articles**_
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
-[GopherCon Singapore (2017) - Escape Analysis](https://engineers.sg/video/go-concurrency-live-gophercon-sg-2017--1746)  
+[GopherCon Singapore (2017) - Escape Analysis](https://engineers.sg/video/escape-analysis-and-memory-profiling-gophercon-sg-2017--1746)  
 [GopherCon India (2015) - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
 [GolangUK (2016) - Dependency Management](https://youtu.be/CdhucJShJU8)  
 [GothamGo (2015) - Error Handling in Go](https://vimeo.com/115782573)  
