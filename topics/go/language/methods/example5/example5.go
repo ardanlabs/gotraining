@@ -13,11 +13,12 @@ import (
 
 // *****************************************************************************
 
-// This is a named type from the net package called IP with a base type that
-// is a slice of bytes. Since we use value semantics for reference types, the
-// implementation is using value semantics.
+// These is a named type from the net package called IP and IPMask with a base
+// type that is a slice of bytes. Since we use value semantics for reference
+// types, the implementation is using value semantics for both.
 
 type IP []byte
+type IPMask []byte
 
 // Mask is using a value receiver and returning a value of type IP. This
 // method is using value semantics for type IP.

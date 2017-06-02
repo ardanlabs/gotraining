@@ -28,34 +28,26 @@ func (u *user) changeEmail(email string) {
 func main() {
 
 	// Values of type user can be used to call methods
-	// declared with a value receiver.
+	// declared with both value and pointer receivers.
 	bill := user{"Bill", "bill@email.com"}
 	bill.notify()
+	bill.changeEmail("bill@hotmail.com")
 
 	// Pointers of type user can also be used to call methods
-	// declared with a value receiver.
+	// declared with both value and pointer receiver.
 	lisa := &user{"Lisa", "lisa@email.com"}
 	lisa.notify()
-
-	// Values of type user can be used to call methods
-	// declared with a pointer receiver.
-	bill.changeEmail("bill@hotmail.com")
-	bill.notify()
-
-	// Pointers of type user can be used to call methods
-	// declared with a pointer receiver.
 	lisa.changeEmail("lisa@hotmail.com")
-	lisa.notify()
 
-	// Create a slice of users with two users.
+	// Create a slice of user values with two users.
 	users := []user{
 		{"bill", "bill@email.com"},
 		{"lisa", "lisa@email.com"},
 	}
 
-	// Iterate over the slice of users
-	// calling notify.
+	// Iterate over the slice of users switching
+	// semantics. Not Good!
 	for _, u := range users {
-		u.notify()
+		u.changeEmail("it@wontmatter.com")
 	}
 }
