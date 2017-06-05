@@ -95,6 +95,14 @@ func div(t Time, d Duration) (qmod2 int, r Duration) {
 	// Code here
 }
 
+// The only use pointer semantics for the `Time` api are these
+// unmarshal related functions.
+
+func (t *Time) UnmarshalBinary(data []byte) error {
+func (t *Time) GobDecode(data []byte) error {
+func (t *Time) UnmarshalJSON(data []byte) error {
+func (t *Time) UnmarshalText(data []byte) error {
+
 // *****************************************************************************
 
 // Factory functions dictate the semantics that will be used. The Open function
