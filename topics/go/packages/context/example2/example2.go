@@ -13,27 +13,29 @@ import (
 func main() {
 
 	// Create a context that is cancellable only manually.
-	ctx, cancel := context.WithCancel(context.Background())
-
 	// The cancel function must be called regardless of the outcome.
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	// Ask the goroutine to do some work for us.
 	go func() {
 
-		// Simulate work.
-		time.Sleep(150 * time.Millisecond)
+		// Wait for the work to finish. If it takes too long move on.
+		select {
+		case <-time.After(100 * time.Millisecond):
+			fmt.Println("moving on")
 
-		// Report the work is done.
-		cancel()
+		case <-ctx.Done():
+			fmt.Println("work complete")
+		}
 	}()
 
-	// Wait for the work to finish. If it takes too long move on.
-	select {
-	case <-time.After(100 * time.Millisecond):
-		fmt.Println("moving on")
+	// Simulate work.
+	time.Sleep(50 * time.Millisecond)
 
-	case <-ctx.Done():
-		fmt.Println("work complete")
-	}
+	// Report the work is done.
+	cancel()
+
+	// Just hold the program to see the output.
+	time.Sleep(time.Second)
 }
