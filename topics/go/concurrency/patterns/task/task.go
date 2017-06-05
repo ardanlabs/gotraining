@@ -45,13 +45,13 @@ func New(maxGoroutines int) *Task {
 	return &t
 }
 
-// Do submits work to the pool.
-func (t *Task) Do(w Worker) {
-	t.work <- w
-}
-
 // Shutdown waits for all the goroutines to shutdown.
 func (t *Task) Shutdown() {
 	close(t.work)
 	t.wg.Wait()
+}
+
+// Do submits work to the pool.
+func (t *Task) Do(w Worker) {
+	t.work <- w
 }
