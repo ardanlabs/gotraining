@@ -139,6 +139,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Latency Tip Of The Day](http://latencytipoftheday.blogspot.com/) -- Gil Tene  
 [Proposal: Monotonic Elapsed Time Measurements in Go](https://github.com/golang/proposal/blob/master/design/12914-monotonic.md) - Russ Cox  
 [Exploring shared objects in Go](https://blog.ksub.org/bytes/2017/02/12/exploring-shared-objects-in-go/) - Marcelo Bytes  
+[Evaluation of read-only slices](https://docs.google.com/document/d/1-NzIYu0qnnsshMBpMPmuO21qd8unlimHgKjRD9qwp2A/edit) - Russ Cox  
 
 ## Mechanical Sympathy
 
