@@ -166,10 +166,12 @@ func selectCancel() {
 		fmt.Println("g2 : send ack")
 	}()
 
+	tc := time.After(100 * time.Millisecond)
+
 	select {
 	case v := <-ch:
 		fmt.Println("g1 : received :", v)
-	case t := <-time.After(100 * time.Millisecond):
+	case t := <-tc:
 		fmt.Println("g1 : timed out :", t)
 	}
 
