@@ -17,12 +17,12 @@ import (
 func UserList(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(web.KeyValues).(*web.Values)
 
-	u, err := user.List(ctx, v.TraceID, v.DB)
+	u, err := user.List(ctx, v.DB)
 	if err != nil {
 		return errors.Wrap(err, "")
 	}
 
-	web.Respond(ctx, w, v.TraceID, u, http.StatusOK)
+	web.Respond(ctx, w, u, http.StatusOK)
 	return nil
 }
 
@@ -31,12 +31,12 @@ func UserList(ctx context.Context, w http.ResponseWriter, r *http.Request, param
 func UserRetrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(web.KeyValues).(*web.Values)
 
-	u, err := user.Retrieve(ctx, v.TraceID, v.DB, params["id"])
+	u, err := user.Retrieve(ctx, v.DB, params["id"])
 	if err != nil {
 		return errors.Wrapf(err, "Id: %s", params["id"])
 	}
 
-	web.Respond(ctx, w, v.TraceID, u, http.StatusOK)
+	web.Respond(ctx, w, u, http.StatusOK)
 	return nil
 }
 
@@ -50,12 +50,12 @@ func UserCreate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 		return errors.Wrap(err, "")
 	}
 
-	u, err := user.Create(ctx, v.TraceID, v.DB, &cu)
+	u, err := user.Create(ctx, v.DB, &cu)
 	if err != nil {
 		return errors.Wrapf(err, "User: %+v", &cu)
 	}
 
-	web.Respond(ctx, w, v.TraceID, u, http.StatusCreated)
+	web.Respond(ctx, w, u, http.StatusCreated)
 	return nil
 }
 
@@ -69,11 +69,11 @@ func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 		return errors.Wrap(err, "")
 	}
 
-	if err := user.Update(ctx, v.TraceID, v.DB, params["id"], &cu); err != nil {
+	if err := user.Update(ctx, v.DB, params["id"], &cu); err != nil {
 		return errors.Wrapf(err, "Id: %s  User: %+v", params["id"], &cu)
 	}
 
-	web.Respond(ctx, w, v.TraceID, nil, http.StatusNoContent)
+	web.Respond(ctx, w, nil, http.StatusNoContent)
 	return nil
 }
 
@@ -82,10 +82,10 @@ func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, par
 func UserDelete(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
 	v := ctx.Value(web.KeyValues).(*web.Values)
 
-	if err := user.Delete(ctx, v.TraceID, v.DB, params["id"]); err != nil {
+	if err := user.Delete(ctx, v.DB, params["id"]); err != nil {
 		return errors.Wrapf(err, "Id: %s", params["id"])
 	}
 
-	web.Respond(ctx, w, v.TraceID, nil, http.StatusNoContent)
+	web.Respond(ctx, w, nil, http.StatusNoContent)
 	return nil
 }

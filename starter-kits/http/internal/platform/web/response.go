@@ -64,22 +64,22 @@ var (
 )
 
 // Error handles all error responses for the API.
-func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error) {
+func Error(cxt context.Context, w http.ResponseWriter, err error) {
 	switch errors.Cause(err) {
 	case ErrNotFound:
-		RespondError(cxt, w, traceID, err, http.StatusNotFound)
+		RespondError(cxt, w, err, http.StatusNotFound)
 		return
 
 	case ErrInvalidID:
-		RespondError(cxt, w, traceID, err, http.StatusBadRequest)
+		RespondError(cxt, w, err, http.StatusBadRequest)
 		return
 
 	case ErrValidation:
-		RespondError(cxt, w, traceID, err, http.StatusBadRequest)
+		RespondError(cxt, w, err, http.StatusBadRequest)
 		return
 
 	case ErrNotAuthorized:
-		RespondError(cxt, w, traceID, err, http.StatusUnauthorized)
+		RespondError(cxt, w, err, http.StatusUnauthorized)
 		return
 	}
 
@@ -90,21 +90,21 @@ func Error(cxt context.Context, w http.ResponseWriter, traceID string, err error
 			Fields: e,
 		}
 
-		Respond(cxt, w, traceID, v, http.StatusBadRequest)
+		Respond(cxt, w, v, http.StatusBadRequest)
 		return
 	}
 
-	RespondError(cxt, w, traceID, err, http.StatusInternalServerError)
+	RespondError(cxt, w, err, http.StatusInternalServerError)
 }
 
 // RespondError sends JSON describing the error
-func RespondError(ctx context.Context, w http.ResponseWriter, traceID string, err error, code int) {
-	Respond(ctx, w, traceID, JSONError{Error: err.Error()}, code)
+func RespondError(ctx context.Context, w http.ResponseWriter, err error, code int) {
+	Respond(ctx, w, JSONError{Error: err.Error()}, code)
 }
 
 // Respond sends JSON to the client.
 // If code is StatusNoContent, v is expected to be nil.
-func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data interface{}, code int) {
+func Respond(ctx context.Context, w http.ResponseWriter, data interface{}, code int) {
 
 	// Set the status code for the request logger middleware.
 	v := ctx.Value(KeyValues).(*Values)
@@ -125,7 +125,7 @@ func Respond(ctx context.Context, w http.ResponseWriter, traceID string, data in
 	// Marshal the data into a JSON string.
 	jsonData, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
-		log.Printf("%s : Respond %v Marshalling JSON response\n", traceID, err)
+		log.Printf("%s : Respond %v Marshalling JSON response\n", v.TraceID, err)
 		jsonData = []byte("{}")
 	}
 

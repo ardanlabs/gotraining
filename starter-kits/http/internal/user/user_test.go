@@ -48,8 +48,6 @@ func TestUsers(t *testing.T) {
 	}
 	defer dbs.Close()
 
-	traceID := "traceid"
-
 	u := user.CreateUser{
 		UserType:  1,
 		FirstName: "Bill",
@@ -73,13 +71,13 @@ func TestUsers(t *testing.T) {
 	{
 		t.Log("\tTest 0:\tWhen using a valid CreateUser value")
 		{
-			cu, err := user.Create(ctx, traceID, dbs, &u)
+			cu, err := user.Create(ctx, dbs, &u)
 			if err != nil {
 				t.Fatalf("\t%s\tShould be able to create a user in the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould be able to create a user in the system.", Succeed)
 
-			ru, err := user.Retrieve(ctx, traceID, dbs, cu.UserID)
+			ru, err := user.Retrieve(ctx, dbs, cu.UserID)
 			if err != nil {
 				t.Fatalf("\t%s\tShould be able to retrieve the user back from the system : %v", Failed, err)
 			}
@@ -90,12 +88,12 @@ func TestUsers(t *testing.T) {
 			}
 			t.Logf("\t%s\tShould have a match between the created user and the one retrieved.", Succeed)
 
-			if err := user.Delete(ctx, traceID, dbs, ru.UserID); err != nil {
+			if err := user.Delete(ctx, dbs, ru.UserID); err != nil {
 				t.Fatalf("\t%s\tShould be able to remove the user from the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould be able to remove the user from the system.", Succeed)
 
-			if _, err := user.Retrieve(ctx, traceID, dbs, ru.UserID); err == nil {
+			if _, err := user.Retrieve(ctx, dbs, ru.UserID); err == nil {
 				t.Fatalf("\t%s\tShould NOT be able to retrieve the user back from the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould NOT be able to retrieve the user back from the system.", Succeed)

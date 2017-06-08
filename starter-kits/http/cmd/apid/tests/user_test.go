@@ -33,6 +33,11 @@ const (
 // The web application state for tests
 var a *web.App
 
+// init is called before main. We are using init to customize logging output.
+func init() {
+	log.SetFlags(log.LstdFlags | log.Lmicroseconds | log.Lshortfile)
+}
+
 // TestMain gives you a chance to setup / tear down before tests in this package.
 func TestMain(m *testing.M) {
 	os.Exit(runTest(m))
@@ -197,7 +202,7 @@ func getUser400(t *testing.T) {
 
 			recv := w.Body.String()
 			resp := `{
-  "error": "Id: 12345: bson.IsObjectIdHex: 12345: ID is not in it's proper form"
+  "error": "ID is not in it's proper form"
 }`
 			if resp != recv {
 				t.Log("Got :", recv)

@@ -26,7 +26,7 @@ func ErrorHandler(next web.Handler) web.Handler {
 				log.Printf("%s : ERROR : Panic Caught : %s\n", v.TraceID, r)
 
 				// Respond with the error.
-				web.RespondError(ctx, w, v.TraceID, errors.New("unhandled"), http.StatusInternalServerError)
+				web.RespondError(ctx, w, errors.New("unhandled"), http.StatusInternalServerError)
 
 				// Print out the stack.
 				log.Printf("%s : ERROR : Stacktrace\n%s\n", v.TraceID, debug.Stack())
@@ -35,14 +35,14 @@ func ErrorHandler(next web.Handler) web.Handler {
 
 		if err := next(ctx, w, r, params); err != nil {
 
-			if err != web.ErrNotFound {
+			if errors.Cause(err) != web.ErrNotFound {
 
 				// Log the error.
 				log.Printf("%s : ERROR : %+v\n", v.TraceID, err)
 			}
 
 			// Respond with the error.
-			web.Error(ctx, w, v.TraceID, err)
+			web.Error(ctx, w, errors.Cause(err))
 
 			// The error has been handled so we can stop propigating it.
 			return nil

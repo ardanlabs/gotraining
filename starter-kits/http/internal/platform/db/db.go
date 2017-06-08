@@ -4,6 +4,7 @@
 package db
 
 import (
+	"context"
 	"encoding/json"
 	"sync"
 	"time"
@@ -123,7 +124,7 @@ func (db *DB) Close() {
 }
 
 // Execute is used to execute MongoDB commands.
-func (db *DB) Execute(collName string, f func(*mgo.Collection) error) error {
+func (db *DB) Execute(ctx context.Context, collName string, f func(*mgo.Collection) error) error {
 	if db == nil || db.session == nil {
 		return errors.Wrap(ErrInvalidDBProvided, "db == nil || db.session == nil")
 	}
@@ -132,7 +133,7 @@ func (db *DB) Execute(collName string, f func(*mgo.Collection) error) error {
 }
 
 // ExecuteTimeout is used to execute MongoDB commands with a timeout.
-func (db *DB) ExecuteTimeout(collName string, f func(*mgo.Collection) error, timeout time.Duration) error {
+func (db *DB) ExecuteTimeout(ctx context.Context, collName string, f func(*mgo.Collection) error, timeout time.Duration) error {
 	if db == nil || db.session == nil {
 		return errors.Wrap(ErrInvalidDBProvided, "db == nil || db.session == nil")
 	}
