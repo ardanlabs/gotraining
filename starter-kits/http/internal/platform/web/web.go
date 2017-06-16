@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/dimfeld/httptreemux"
 	"github.com/pborman/uuid"
 	"gopkg.in/go-playground/validator.v8"
@@ -53,7 +52,6 @@ const KeyValues ctxKey = 1
 
 // Values represent state for each request.
 type Values struct {
-	DB         *db.DB
 	TraceID    string
 	Now        time.Time
 	StatusCode int
@@ -72,8 +70,6 @@ type Middleware func(Handler) Handler
 // data/logic on this App struct
 type App struct {
 	*httptreemux.TreeMux
-	Values map[string]interface{}
-
 	mw []Middleware
 }
 
@@ -83,7 +79,6 @@ type App struct {
 func New(mw ...Middleware) *App {
 	return &App{
 		TreeMux: httptreemux.New(),
-		Values:  make(map[string]interface{}),
 		mw:      mw,
 	}
 }

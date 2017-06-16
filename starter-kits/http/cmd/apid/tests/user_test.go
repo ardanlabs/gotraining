@@ -15,7 +15,7 @@ import (
 
 	"strings"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
+	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/handlers"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
@@ -54,20 +54,15 @@ func runTest(m *testing.M) int {
 	}
 
 	// Register the Master Session for the database.
-	log.Println("main : Started : Registering DB...")
-	if err := db.RegMasterSession("got", dbHost, 25*time.Second); err != nil {
-		log.Fatalf("startup : Register DB : %v", err)
-	}
-
-	// Capture a db connection.
-	dbs, err := db.New("got")
+	log.Println("main : Started : Capturing Master DB...")
+	masterDB, err := db.NewMGO(dbHost, 25*time.Second)
 	if err != nil {
-		log.Fatal(err)
+		return 1
 	}
-	defer dbs.Close()
+	defer masterDB.MGOClose()
 
 	log.SetFlags(log.LstdFlags | log.Lmicroseconds | log.Lshortfile)
-	a = routes.API().(*web.App)
+	a = handlers.API(masterDB).(*web.App)
 
 	return m.Run()
 }

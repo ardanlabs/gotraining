@@ -36,17 +36,12 @@ func TestUsers(t *testing.T) {
 	}
 
 	// Register the Master Session for the database.
-	log.Println("main : Started : Registering DB...")
-	if err := db.RegMasterSession("got", dbHost, 25*time.Second); err != nil {
-		t.Fatal(err)
-	}
-
-	// Capture a db connection.
-	dbs, err := db.New("got")
+	log.Println("main : Started : Capturing Master DB...")
+	masterDB, err := db.NewMGO(dbHost, 25*time.Second)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer dbs.Close()
+	defer masterDB.MGOClose()
 
 	u := user.CreateUser{
 		UserType:  1,
@@ -71,13 +66,13 @@ func TestUsers(t *testing.T) {
 	{
 		t.Log("\tTest 0:\tWhen using a valid CreateUser value")
 		{
-			cu, err := user.Create(ctx, dbs, &u)
+			cu, err := user.Create(ctx, masterDB, &u)
 			if err != nil {
 				t.Fatalf("\t%s\tShould be able to create a user in the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould be able to create a user in the system.", Succeed)
 
-			ru, err := user.Retrieve(ctx, dbs, cu.UserID)
+			ru, err := user.Retrieve(ctx, masterDB, cu.UserID)
 			if err != nil {
 				t.Fatalf("\t%s\tShould be able to retrieve the user back from the system : %v", Failed, err)
 			}
@@ -88,12 +83,12 @@ func TestUsers(t *testing.T) {
 			}
 			t.Logf("\t%s\tShould have a match between the created user and the one retrieved.", Succeed)
 
-			if err := user.Delete(ctx, dbs, ru.UserID); err != nil {
+			if err := user.Delete(ctx, masterDB, ru.UserID); err != nil {
 				t.Fatalf("\t%s\tShould be able to remove the user from the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould be able to remove the user from the system.", Succeed)
 
-			if _, err := user.Retrieve(ctx, dbs, ru.UserID); err == nil {
+			if _, err := user.Retrieve(ctx, masterDB, ru.UserID); err == nil {
 				t.Fatalf("\t%s\tShould NOT be able to retrieve the user back from the system : %v", Failed, err)
 			}
 			t.Logf("\t%s\tShould NOT be able to retrieve the user back from the system.", Succeed)

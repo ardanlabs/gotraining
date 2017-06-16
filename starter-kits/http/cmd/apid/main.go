@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/routes"
+	"github.com/ardanlabs/gotraining/starter-kits/http/cmd/apid/handlers"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 )
 
@@ -34,10 +34,12 @@ func main() {
 	}
 
 	// Register the Master Session for the database.
-	log.Println("main : Started : Registering DB...")
-	if err := db.RegMasterSession("got", dbHost, 25*time.Second); err != nil {
+	log.Println("main : Started : Capturing Master DB...")
+	masterDB, err := db.NewMGO(dbHost, 25*time.Second)
+	if err != nil {
 		log.Fatalf("startup : Register DB : %v", err)
 	}
+	defer masterDB.MGOClose()
 
 	// Check the environment for a configured port value.
 	host := os.Getenv("HOST")
@@ -48,7 +50,7 @@ func main() {
 	// Create a new server and set timeout values.
 	server := http.Server{
 		Addr:           host,
-		Handler:        routes.API(),
+		Handler:        handlers.API(masterDB),
 		ReadTimeout:    5 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
