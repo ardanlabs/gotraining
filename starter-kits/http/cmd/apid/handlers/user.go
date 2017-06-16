@@ -7,96 +7,102 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/db"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/user"
 	"github.com/pkg/errors"
 )
 
-// UserList returns all the existing users in the system.
+// User represents the User API method handler set.
+type User struct {
+	MasterDB *db.DB
+}
+
+// List returns all the existing users in the system.
 // 200 Success, 404 Not Found, 500 Internal
-func UserList(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
-	reqDB, err := MasterDB.MGOCopy()
+func (u *User) List(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+	reqDB, err := u.MasterDB.MGOCopy()
 	if err != nil {
 		return errors.Wrapf(web.ErrDBNotConfigured, "")
 	}
 	defer reqDB.MGOClose()
 
-	u, err := user.List(ctx, reqDB)
+	usrs, err := user.List(ctx, reqDB)
 	if err != nil {
 		return errors.Wrap(err, "")
 	}
 
-	web.Respond(ctx, w, u, http.StatusOK)
+	web.Respond(ctx, w, usrs, http.StatusOK)
 	return nil
 }
 
-// UserRetrieve returns the specified user from the system.
+// Retrieve returns the specified user from the system.
 // 200 Success, 400 Bad Request, 404 Not Found, 500 Internal
-func UserRetrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
-	reqDB, err := MasterDB.MGOCopy()
+func (u *User) Retrieve(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+	reqDB, err := u.MasterDB.MGOCopy()
 	if err != nil {
 		return errors.Wrapf(web.ErrDBNotConfigured, "")
 	}
 	defer reqDB.MGOClose()
 
-	u, err := user.Retrieve(ctx, reqDB, params["id"])
+	usr, err := user.Retrieve(ctx, reqDB, params["id"])
 	if err != nil {
 		return errors.Wrapf(err, "Id: %s", params["id"])
 	}
 
-	web.Respond(ctx, w, u, http.StatusOK)
+	web.Respond(ctx, w, usr, http.StatusOK)
 	return nil
 }
 
-// UserCreate inserts a new user into the system.
+// Create inserts a new user into the system.
 // 200 OK, 400 Bad Request, 500 Internal
-func UserCreate(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
-	reqDB, err := MasterDB.MGOCopy()
+func (u *User) Create(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+	reqDB, err := u.MasterDB.MGOCopy()
 	if err != nil {
 		return errors.Wrapf(web.ErrDBNotConfigured, "")
 	}
 	defer reqDB.MGOClose()
 
-	var cu user.CreateUser
-	if err := web.Unmarshal(r.Body, &cu); err != nil {
+	var usr user.CreateUser
+	if err := web.Unmarshal(r.Body, &usr); err != nil {
 		return errors.Wrap(err, "")
 	}
 
-	u, err := user.Create(ctx, reqDB, &cu)
+	nUsr, err := user.Create(ctx, reqDB, &usr)
 	if err != nil {
-		return errors.Wrapf(err, "User: %+v", &cu)
+		return errors.Wrapf(err, "User: %+v", &usr)
 	}
 
-	web.Respond(ctx, w, u, http.StatusCreated)
+	web.Respond(ctx, w, nUsr, http.StatusCreated)
 	return nil
 }
 
-// UserUpdate updates the specified user in the system.
+// Update updates the specified user in the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func UserUpdate(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
-	reqDB, err := MasterDB.MGOCopy()
+func (u *User) Update(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+	reqDB, err := u.MasterDB.MGOCopy()
 	if err != nil {
 		return errors.Wrapf(web.ErrDBNotConfigured, "")
 	}
 	defer reqDB.MGOClose()
 
-	var cu user.CreateUser
-	if err := web.Unmarshal(r.Body, &cu); err != nil {
+	var usr user.CreateUser
+	if err := web.Unmarshal(r.Body, &usr); err != nil {
 		return errors.Wrap(err, "")
 	}
 
-	if err := user.Update(ctx, reqDB, params["id"], &cu); err != nil {
-		return errors.Wrapf(err, "Id: %s  User: %+v", params["id"], &cu)
+	if err := user.Update(ctx, reqDB, params["id"], &usr); err != nil {
+		return errors.Wrapf(err, "Id: %s  User: %+v", params["id"], &usr)
 	}
 
 	web.Respond(ctx, w, nil, http.StatusNoContent)
 	return nil
 }
 
-// UserDelete removed the specified user from the system.
+// Delete removed the specified user from the system.
 // 200 Success, 400 Bad Request, 500 Internal
-func UserDelete(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
-	reqDB, err := MasterDB.MGOCopy()
+func (u *User) Delete(ctx context.Context, w http.ResponseWriter, r *http.Request, params map[string]string) error {
+	reqDB, err := u.MasterDB.MGOCopy()
 	if err != nil {
 		return errors.Wrapf(web.ErrDBNotConfigured, "")
 	}

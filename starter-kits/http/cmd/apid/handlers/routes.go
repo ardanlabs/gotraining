@@ -13,14 +13,8 @@ import (
 	"github.com/ardanlabs/gotraining/starter-kits/http/internal/platform/web"
 )
 
-// MasterDB contains the master database connections.
-var MasterDB *db.DB
-
 // API returns a handler for a set of routes.
 func API(masterDB *db.DB) http.Handler {
-
-	// Set the global master database connections.
-	MasterDB = masterDB
 
 	// Create the web handler for setting routes and middleware.
 	app := web.New(middleware.RequestLogger, middleware.ErrorHandler)
@@ -32,11 +26,12 @@ func API(masterDB *db.DB) http.Handler {
 
 	// Initialize the routes for the API binding the route to the
 	// handler code for each specified verb.
-	app.Handle("GET", "/v1/users", UserList)
-	app.Handle("POST", "/v1/users", UserCreate)
-	app.Handle("GET", "/v1/users/:id", UserRetrieve)
-	app.Handle("PUT", "/v1/users/:id", UserUpdate)
-	app.Handle("DELETE", "/v1/users/:id", UserDelete)
+	u := User{masterDB}
+	app.Handle("GET", "/v1/users", u.List)
+	app.Handle("POST", "/v1/users", u.Create)
+	app.Handle("GET", "/v1/users/:id", u.Retrieve)
+	app.Handle("PUT", "/v1/users/:id", u.Update)
+	app.Handle("DELETE", "/v1/users/:id", u.Delete)
 
 	return app
 }
