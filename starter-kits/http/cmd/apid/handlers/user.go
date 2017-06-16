@@ -16,6 +16,8 @@ import (
 // User represents the User API method handler set.
 type User struct {
 	MasterDB *db.DB
+
+	// ADD OTHER STATE LIKE THE LOGGER AND CONFIG HERE.
 }
 
 // List returns all the existing users in the system.
