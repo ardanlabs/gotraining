@@ -215,6 +215,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 #### Misc
 
 [Runtime Hacking](https://github.com/golang/go/blob/master/src/runtime/HACKING.md)  
+[How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
 
 ## Hardware
 
