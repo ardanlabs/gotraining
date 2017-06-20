@@ -14,14 +14,16 @@
     "go.useCodeSnippetsOnFunctionSuggest": false,
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/bill/code/go",
-    "go.formatTool": "goreturns",
+    "go.formatTool": "goimports",
     "go.gocodeAutoBuild": true,
+    "go.enableCodeLens": {"references": false, "runtest": false},
 
     "editor.fontSize": 14,
     "editor.formatOnType": true,
-    "editor.mouseWheelZoom": true,
+    "editor.mouseWheelZoom": false,
     "editor.rulers": [80,120],
     "editor.trimAutoWhitespace": true,
+    "editor.minimap.enabled": false,
 
     "files.exclude": {
         "**/.git": true,
@@ -41,6 +43,13 @@
     ],
 
     "spellchecker.ignoreFileExtensions": [
-        ".go"
+        ".go",
+        ".cfg",
+        ".sh"
     ]
+,
+"window.zoomLevel": -1,
+"editor.wordWrap": "off",
+"workbench.colorTheme": "Zenburn",
+"workbench.colorCustomizations": {"editorLineNumber.foreground": "#9F9F9F"}
 }
