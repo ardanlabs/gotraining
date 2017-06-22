@@ -148,7 +148,8 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Intel             Chandler, AZ           June       Bill Kennedy
 		Corporate    Go       Finxact           Jaxksonville, FL       June       Bill Kennedy
 		Corporate    Go       Apcera            SF, CA                 June       Bill Kennedy 		
-		Corporate    Go       Comcast           Reston, VA             July       Bill Kennedy 		
+		Corporate    Go       Comcast           Reston, VA             July       Bill Kennedy
+		Corporate    Go       Capital One       Washington, D.C.       August     Bill Kennedy 		
 
 		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
