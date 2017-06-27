@@ -5,6 +5,8 @@ This is material for any intermediate-level developer who has at least a few mon
 [Ultimate Go](../courses/go/README.md)
 
 ## Design Guidelines
+ 
+_"An architecture isn't a set of pieces, it's a set of rules about what you can expect of them." - Michael Feathers_
 
 You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
 
