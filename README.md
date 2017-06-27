@@ -32,8 +32,13 @@ Our classes are perfect for intermediate-level developers who have at least a fe
 ### William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
 _William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
-_**Writing**_  
+_**Video Training**_  
+[Ultimate Go Live Lessons](http://www.informit.com/store/ultimate-go-programming-livelessons-9780134757483)
+
+_**Blog**_  
 [Going Go](https://www.goinggo.net/)    
+
+_**Writing**_  
 [Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
 [Go In Action](https://www.manning.com/books/go-in-action)  
 
