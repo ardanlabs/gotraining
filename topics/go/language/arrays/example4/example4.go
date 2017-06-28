@@ -1,15 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how the range will make a copy of the supplied
-// data structure when the second value is requested during iteration.
+// Sample program to show how the for range has both value and pointer semantics.
 package main
 
 import "fmt"
 
 func main() {
 
-	// In this case the range is using the `five` array directly.
+	// Using the pointer semantic form of the for range.
 	five := [5]string{"Annie", "Betty", "Charley", "Doug", "Edward"}
 	fmt.Printf("Bfr[%s] : ", five[1])
 
@@ -21,8 +20,7 @@ func main() {
 		}
 	}
 
-	// In this case the range makes a copy of the `five` array. The v
-	// variable is based on the copy.
+	// Using the value semantic form of the for range.
 	five = [5]string{"Annie", "Betty", "Charley", "Doug", "Edward"}
 	fmt.Printf("Bfr[%s] : ", five[1])
 
@@ -34,8 +32,8 @@ func main() {
 		}
 	}
 
-	// In this case the range makes a copy of the `five` array's address.
-	// The v variable is based on the five array directly.
+	// Using the value semantic form of the for range but with pointer
+	// semantic access. DON'T DO THIS.
 	five = [5]string{"Annie", "Betty", "Charley", "Doug", "Edward"}
 	fmt.Printf("Bfr[%s] : ", five[1])
 
