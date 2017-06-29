@@ -16,16 +16,16 @@ import (
 
 func main() {
 
-	// Create a context with a timeout of 50 milliseconds.
-	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
-	defer cancel()
-
 	// Create a new request.
 	req, err := http.NewRequest("GET", "https://www.goinggo.net/post/index.xml", nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
+
+	// Create a context with a timeout of 50 milliseconds.
+	ctx, cancel := context.WithTimeout(req.Context(), 50*time.Millisecond)
+	defer cancel()
 
 	// Declare a new transport and client for the call.
 	var tr http.Transport
