@@ -111,17 +111,13 @@ func (a *App) Handle(verb, path string, handler Handler, mw ...Middleware) {
 	// The function to execute for each request.
 	h := func(w http.ResponseWriter, r *http.Request, params map[string]string) {
 
-		// Create the context for the request.
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
-
 		// Set the context with the required values to
 		// process the request.
 		v := Values{
 			TraceID: uuid.New(),
 			Now:     time.Now(),
 		}
-		ctx = context.WithValue(ctx, KeyValues, &v)
+		ctx := context.WithValue(r.Context(), KeyValues, &v)
 
 		// Set the trace id on the outgoing requests before any other header to
 		// ensure that the trace id is ALWAYS added to the request regardless of
