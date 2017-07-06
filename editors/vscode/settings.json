@@ -3,11 +3,11 @@
     "telemetry.enableTelemetry": false,
 
     "go.formatOnSave": true,
-    "go.buildOnSave": true,
-    "go.lintOnSave": true,
+    "go.buildOnSave": "package",
+    "go.lintOnSave": "package",
     "go.lintTool": "golint",
-    "go.vetOnSave": true,
-    "go.buildFlags": ["-i"],
+    "go.vetOnSave": "package",
+    "go.buildFlags": [],
     "go.lintFlags": [],
     "go.vetFlags": [],
     "go.coverOnSave": false,
@@ -48,7 +48,7 @@
         ".sh"
     ]
 ,
-"window.zoomLevel": -1,
+"window.zoomLevel": 0,
 "editor.wordWrap": "off",
 "workbench.colorTheme": "Zenburn",
 "workbench.colorCustomizations": {"editorLineNumber.foreground": "#9F9F9F"}
