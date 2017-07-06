@@ -125,15 +125,11 @@ Classes that exceed 15 students are charged an extra $1,000 each per additional 
 **Ultimate Data Science**  
 3 Days (21 hours) - $30,000 for up to 15 students including T&E    
 2 Days (14 hours) - $25,000 for up to 15 students including T&E    
-$5,000 T&E  
 Classes that exceed 15 students are charged an extra $1,000 each per additional student.
 
 **Ultimate Web**  
 2 Days (14 hours) - $25,000 for up to 15 students including T&E    
 Classes that exceed 15 students are charged an extra $1,000 each per additional student.
-
-**Our 2 day class option:**  
-_This options skips most of the exercises to get through the material. We will push the team very hard and we maintain a very fast pace._
 
 ## Current Schedule
 
