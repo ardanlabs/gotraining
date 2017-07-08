@@ -9,35 +9,26 @@
 package main
 
 import (
-	"bytes"
 	"encoding/csv"
 	"fmt"
 	"log"
+	"os"
 	"strconv"
 
 	"github.com/gonum/matrix/mat64"
-	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Connect to Pachyderm on our localhost.  By default
-	// Pachyderm will be exposed on port 30650.
-	c, err := client.NewFromAddress("0.0.0.0:30650")
+	// Open the iris dataset file.
+	f, err := os.Open("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer c.Close()
-
-	// Get the Iris dataset from Pachyderm's data
-	// versioning at the latest commit.
-	var b bytes.Buffer
-	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, &b); err != nil {
-		log.Fatal()
-	}
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(bytes.NewReader(b.Bytes()))
+	reader := csv.NewReader(f)
 	reader.FieldsPerRecord = 5
 
 	// Read in all of the CSV records
