@@ -8,9 +8,9 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/gonum/floats"
 	"github.com/gonum/plot"
@@ -18,29 +18,20 @@ import (
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/stat"
 	"github.com/kniren/gota/dataframe"
-	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Connect to Pachyderm on our localhost.  By default
-	// Pachyderm will be exposed on port 30650.
-	c, err := client.NewFromAddress("0.0.0.0:30650")
+	// Open the diabetes dataset file.
+	f, err := os.Open("../data/diabetes.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer c.Close()
-
-	// Get the diabetes dataset from Pachyderm's data
-	// versioning at the latest commit.
-	var b bytes.Buffer
-	if err := c.GetFile("diabetes", "master", "diabetes.csv", 0, 0, &b); err != nil {
-		log.Fatal()
-	}
+	defer f.Close()
 
 	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
-	diabetesDF := dataframe.ReadCSV(bytes.NewReader(b.Bytes()))
+	diabetesDF := dataframe.ReadCSV(f)
 
 	// Create a histogram for each of the columns in the dataset and
 	// output summary statistics.

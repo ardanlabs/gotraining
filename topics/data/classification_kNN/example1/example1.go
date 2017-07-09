@@ -8,9 +8,9 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/gonum/floats"
 	"github.com/gonum/plot"
@@ -18,28 +18,19 @@ import (
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/stat"
 	"github.com/kniren/gota/dataframe"
-	"github.com/pachyderm/pachyderm/src/client"
 )
 
 func main() {
 
-	// Connect to Pachyderm on our localhost.  By default
-	// Pachyderm will be exposed on port 30650.
-	c, err := client.NewFromAddress("0.0.0.0:30650")
+	// Open the iris dataset file.
+	f, err := os.Open("../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer c.Close()
-
-	// Get the Iris dataset from Pachyderm's data
-	// versioning at the latest commit.
-	var b bytes.Buffer
-	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, &b); err != nil {
-		log.Fatal()
-	}
+	defer f.Close()
 
 	// Parse the file into a Gota dataframe.
-	irisDF := dataframe.ReadCSV(bytes.NewReader(b.Bytes()))
+	irisDF := dataframe.ReadCSV(f)
 
 	// Create a histogram for each of the float columns in the dataset and
 	// output summary statistics.

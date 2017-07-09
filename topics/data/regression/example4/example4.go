@@ -8,36 +8,27 @@
 package main
 
 import (
-	"bytes"
 	"encoding/csv"
 	"fmt"
 	"log"
 	"math"
+	"os"
 	"strconv"
 
-	"github.com/pachyderm/pachyderm/src/client"
 	"github.com/sajari/regression"
 )
 
 func main() {
 
-	// Connect to Pachyderm on our localhost.  By default
-	// Pachyderm will be exposed on port 30650.
-	c, err := client.NewFromAddress("0.0.0.0:30650")
+	// Open the training dataset file.
+	f, err := os.Open("../data/training.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer c.Close()
-
-	// Get the training dataset from Pachyderm's data
-	// versioning at the latest commit.
-	var b bytes.Buffer
-	if err := c.GetFile("regression_split", "master", "training.csv", 0, 0, &b); err != nil {
-		log.Fatal()
-	}
+	defer f.Close()
 
 	// Create a new CSV reader reading from the opened file.
-	reader := csv.NewReader(bytes.NewReader(b.Bytes()))
+	reader := csv.NewReader(f)
 
 	// Read in all of the CSV records
 	reader.FieldsPerRecord = 11
@@ -83,15 +74,15 @@ func main() {
 	// Output the trained model parameters.
 	fmt.Printf("\nRegression Formula:\n%v\n\n", r.Formula)
 
-	// Get the test dataset from Pachyderm's data
-	// versioning at the latest commit.
-	b.Reset()
-	if err := c.GetFile("regression_split", "master", "test.csv", 0, 0, &b); err != nil {
-		log.Fatal()
+	// Open the test dataset file.
+	f, err = os.Open("../data/test.csv")
+	if err != nil {
+		log.Fatal(err)
 	}
+	defer f.Close()
 
 	// Create a CSV reader reading from the opened file.
-	reader = csv.NewReader(bytes.NewReader(b.Bytes()))
+	reader = csv.NewReader(f)
 
 	// Read in all of the CSV records
 	reader.FieldsPerRecord = 11
