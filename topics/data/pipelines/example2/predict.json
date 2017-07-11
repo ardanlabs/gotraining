@@ -5,28 +5,29 @@
   "transform": {
     "image": "dwhitena/goregpredict:ult",
     "cmd": [ 
-	"/goregpredict", 
-	"-inModelDir=/pfs/model", 
-	"-inVarDir=/pfs/attributes", 
-	"-outDir=/pfs/out"       
+      "/goregpredict", 
+      "-inModelDir=/pfs/model", 
+      "-inVarDir=/pfs/attributes", 
+      "-outDir=/pfs/out"       
     ]
   },
   "parallelism_spec": {
-    "strategy": "CONSTANT",
-    "constant": "42"
+    "constant": "1"
   },
-  "inputs": [
-    {
-      "repo": {
-        "name": "attributes"
+  "input": {
+    "cross": [
+      {
+        "atom": {
+          "repo": "attributes",
+          "glob": "/*"
+	}
       },
-      "glob": "/*"
-    },
-    {
-      "repo": {
-	"name": "model"
-      },
-      "glob": "/"
-    }
-  ]
+      {
+	"atom": {
+          "repo": "model",
+          "glob": "/"
+	}
+      }
+    ]
+  }
 }

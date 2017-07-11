@@ -9,7 +9,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/csv"
 	"io"
 	"log"
@@ -17,29 +16,20 @@ import (
 
 	"github.com/gonum/plot"
 	"github.com/gonum/plot/vg"
-	"github.com/pachyderm/pachyderm/src/client"
 	"github.com/sjwhitworth/golearn/base"
 )
 
 func main() {
 
-	// Connect to Pachyderm on our localhost.  By default
-	// Pachyderm will be exposed on port 30650.
-	c, err := client.NewFromAddress("0.0.0.0:30650")
+	// Open the iris dataset file.
+	f, err := os.Open("../../data/iris.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer c.Close()
-
-	// Get the Iris dataset from Pachyderm's data
-	// versioning at the latest commit.
-	var b bytes.Buffer
-	if err := c.GetFile("iris", "master", "iris.csv", 0, 0, &b); err != nil {
-		log.Fatal(err)
-	}
+	defer f.Close()
 
 	// Create golearn instances from the iris data.
-	irisData, err := CreateInstancesFromReader(bytes.NewReader(b.Bytes()))
+	irisData, err := CreateInstancesFromReader(f)
 	if err != nil {
 		log.Fatal(err)
 	}

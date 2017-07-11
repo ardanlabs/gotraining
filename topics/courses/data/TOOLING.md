@@ -40,5 +40,5 @@ github.com/pachyderm/pachyderm
     ```
     go get google.golang.org/grpc
     cd $GOPATH/src/google.golang.org/grpc
-    git checkout 9d682f9293b408c42d17c587d0e2a31237ac3f10
+    git checkout 21f8ed309495401e6fd79b3a9fd549582aed1b4c 
     ```

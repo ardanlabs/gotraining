@@ -1,7 +1,10 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to make a prediction based on a persisted regression model.
+// go build
+// ./example2
+
+// Sample program to predict based on a persisted regression model.
 package main
 
 import (
