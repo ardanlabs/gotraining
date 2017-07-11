@@ -60,7 +60,7 @@ Put example "attribute" files into the `attributes` data repository:
 
 ```
 $ cd ../data/test/
-$ pachctl put-file attributes -c -r -f .
+$ pachctl put-file attributes master -c -r -f .
 ```
 
 Create the prediction pipeline:

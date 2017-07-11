@@ -1,7 +1,10 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to train a regression model.
+// go build
+// ./example1
+
+// Sample program to train a regression model with multiple independent variables.
 package main
 
 import (
@@ -35,7 +38,7 @@ type CoefficientInfo struct {
 func main() {
 
 	// Declare the input and output directory flags.
-	inDirPtr := flag.String("indir", "", "The directory containing the training data.")
+	inDirPtr := flag.String("inDir", "", "The directory containing the training data.")
 	outDirPtr := flag.String("outDir", "", "The output directory")
 
 	// Parse the command line flags.

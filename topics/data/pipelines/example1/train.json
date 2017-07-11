@@ -5,21 +5,18 @@
   "transform": {
     "image": "dwhitena/goregtrain:singleult",
     "cmd": [ 
-	"/goregtrain",
-	"-inDir=/pfs/training",
-	"-outDir=/pfs/out"
+      "/goregtrain",
+      "-inDir=/pfs/training",
+      "-outDir=/pfs/out"
     ] 
   },
   "parallelism_spec": {
-    "strategy": "CONSTANT",
     "constant": "1"
   },
-  "inputs": [
-    {
-      "repo": {
-        "name": "training"
-      },
+  "input": {
+    "atom": {
+      "repo": "training",
       "glob": "/"
     }
-  ]
+  }
 }
