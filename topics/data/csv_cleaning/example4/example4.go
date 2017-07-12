@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/go-hep/csvutil/csvdriver"
+	"go-hep.org/x/hep/csvutil/csvdriver"
 )
 
 func main() {

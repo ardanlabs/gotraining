@@ -13,7 +13,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/go-hep/csvutil"
+	"go-hep.org/x/hep/csvutil"
 )
 
 // citiBikeURL provides the station statuses of CitiBike bike sharing stations.

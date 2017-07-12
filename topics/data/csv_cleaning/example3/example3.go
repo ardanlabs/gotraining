@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/go-hep/csvutil"
+	"go-hep.org/x/hep/csvutil"
 )
 
 func main() {
