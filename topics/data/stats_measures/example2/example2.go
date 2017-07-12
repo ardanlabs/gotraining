@@ -4,7 +4,7 @@
 // go build
 // ./example2
 
-// Sample program to calculate means, modes, and medians.
+// Sample program to calculate min, max, and range.
 package main
 
 import (
