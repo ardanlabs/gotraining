@@ -27,7 +27,7 @@ func main() {
 	}
 	defer f.Close()
 
-	// Create a dataframr from the CSV file.
+	// Create a dataframe from the CSV file.
 	// The types of the columns will be inferred.
 	irisDF := dataframe.ReadCSV(f)
 
