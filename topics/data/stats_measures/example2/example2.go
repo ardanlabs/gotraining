@@ -4,7 +4,7 @@
 // go build
 // ./example2
 
-// Sample program to calculate means, modes, and medians.
+// Sample program to calculate min, max, and range.
 package main
 
 import (
@@ -33,13 +33,13 @@ func main() {
 	// we will be looking at the measures for this variable.
 	sepalLength := irisDF.Col("sepal_length").Float()
 
-	// Calculate the Max of the variable.
+	// Calculate the Min of the variable.
 	minVal := floats.Min(sepalLength)
 
 	// Calculate the Max of the variable.
 	maxVal := floats.Max(sepalLength)
 
-	// Calculate the Median of the variable.
+	// Calculate the Range of the variable.
 	rangeVal := maxVal - minVal
 
 	// Output the results to standard out.
