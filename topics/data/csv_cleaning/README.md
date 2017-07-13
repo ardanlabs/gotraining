@@ -6,7 +6,7 @@ When dealing with CSV data or other forms of tabular data, you will likely want 
 
 * Use `encoding/csv` unless there is a need to do more complicated filtering, merging, etc.
 * Dataframes are useful for quick filtering, subsetting, merging, etc. with your dataset in memory.
-* The CSV driver for `databases/sql` is useful for iterating over your dataset, while cleaning/organizing it, without pulling it into memory. 
+* The CSV driver for `databases/sql` is useful for iterating over your dataset, while cleaning/organizing it, without pulling it into memory. (Windows needs gcc setup or the purego version of ql installed ```go get -tags purego github.com/cznic/ql```)
 
 ## Links
 
