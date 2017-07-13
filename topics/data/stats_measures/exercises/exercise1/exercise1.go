@@ -63,7 +63,7 @@ func main() {
 			fmt.Printf("Mean value: %0.2f\n", meanVal)
 			fmt.Printf("Mode value: %0.2f\n", modeVal)
 			fmt.Printf("Mode count: %d\n", int(modeCount))
-			fmt.Printf("Media value: %0.2f\n", medianVal)
+			fmt.Printf("Median value: %0.2f\n", medianVal)
 			fmt.Printf("Variance value: %0.2f\n", varianceVal)
 			fmt.Printf("Std Dev value: %0.2f\n", stdDevVal)
 		}
