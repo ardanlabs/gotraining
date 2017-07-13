@@ -13,8 +13,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/go-hep/csvutil"
 	"github.com/lib/pq"
+	"go-hep.org/x/hep/csvutil"
 )
 
 func main() {
