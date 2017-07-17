@@ -149,6 +149,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Apcera            SF, CA                 June       Bill Kennedy 		
 		Corporate    Go       Comcast           Reston, VA             July       Bill Kennedy
 		Corporate    Go       Capital One       Washington, D.C.       August     Bill Kennedy 		
+		Corporate    Go       Teradata          San Diego              August     Bill Kennedy 		
 
 		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
@@ -156,7 +157,6 @@ If you are interested in holding an event in your area please let me know. We wi
 		Public       Go       The Lab           Miami, FL              May        Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-miami-may-2017-tickets-32131447023
 		Public       Go       bol.com           Utrecht, Netherlands   June       Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-netherlands-june-2017-tickets-32131027769
 		Public       Data     Fieldlens         NYC, NY                June       Daniel Whitenack   https://www.eventbrite.com/e/ultimate-data-new-york-june-2017-tickets-32130974610
-		Public       Go       Skillstemple      Poland                 June       Bill Kennedy       https://skillstemple.com/workshops/ultimate-go.html
 		
 		GoBridge     Go       Framingham        Framingham, MA         February   Bill Kennedy       https://www.bridgetroll.org/events/329
 		WWG          Web      Buzzfeed          San Francisco, CA      March      Jacob Walker       https://www.meetup.com/Women-Who-Go/events/237660344
@@ -164,7 +164,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		GoBridge     Go       Framingham        Framingham, MA         April      Bill Kennedy       https://www.bridgetroll.org/events/343
 		GoBridge     Go       SUNY Potsdam      Potsdam, NY            May        Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-with-william-kennedy-tickets-33174514867
 		WWG          Web      Packet HQ         NYC, NY                May        Jacob Walker       https://www.meetup.com/NYC-Women-Who-Go/events/239306971/
-		WWG          Go       FullStory         Atlanta, GA            September  Bill Kennedy       TBD
+		WWG          Go       TBD               London England         August     Bill Kennedy       https://www.meetup.com/Women-Who-Go-London/events/241708328/
 		
 		Conference   Adv Go   Golab             Florance, IT           January    Bill Kennedy       http://golab.io
 		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy       http://www.gophercon.in/go-workshop		
