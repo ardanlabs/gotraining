@@ -21,6 +21,7 @@ github.com/gorilla/handlers
 Basic middleware: [Code](example1/main.go) | [Test](example1/main_test.go)  
 Negroni router: [Code](example2/main.go) | [Test](example2/main_test.go)  
 Alice with Gorilla Handlers: [Code](example3/main.go)  
+Passing data with context: [Code](example4/main.go) | [Test](example4/main_test.go)  
 
 ## Exercises
 

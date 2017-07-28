@@ -1,14 +1,14 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to work with the Gorilla Context package.
+// Sample program to show how to pass data between handlers using context.
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 
-	"github.com/gorilla/context"
 	"github.com/urfave/negroni"
 )
 
@@ -17,12 +17,18 @@ type User struct {
 	Username string
 }
 
+// key is an unexported type for context keys defined in this package.
+// This prevents collisions with keys defined in other packages.
+type key int
+
+// userKey is the key for User values in Contexts.
+const userKey key = 0
+
 // indexHandler handles the index route request.
 func indexHandler(res http.ResponseWriter, req *http.Request) {
 
-	// We expect to find a user for this request under
-	// the specified key.
-	u := context.Get(req, "current_user").(*User)
+	// We expect to find a user in the request context.
+	u := req.Context().Value(userKey).(*User)
 
 	// Send the user's username as the response.
 	res.Write([]byte(u.Username))
@@ -35,11 +41,14 @@ func userHandler(res http.ResponseWriter, req *http.Request, next http.HandlerFu
 	// Create a user value.
 	u := User{"mary-jane"}
 
-	// Add the user to the context for this request
-	// under the specified key.
-	context.Set(req, "current_user", &u)
+	// Create a new Context with the specfied key/user value.
+	ctx := context.WithValue(req.Context(), userKey, &u)
 
-	// Call the handler that was provided.
+	// WithContext returns a shallow copy of the request with
+	// its context changed to the provided Context.
+	req = req.WithContext(ctx)
+
+	// Call the handler that was provided using the copied request.
 	next(res, req)
 }
 
@@ -58,17 +67,15 @@ func App() http.Handler {
 	// Add the middleware handler.
 	n.UseFunc(userHandler)
 
-	// Apply the mux to negroni and wrap it around the ClearHandler
-	// which clears request values at the end of a request lifetime.
-	n.UseHandler(context.ClearHandler(m))
+	// Apply the mux to negroni.
+	n.UseHandler(m)
 
 	return n
 }
 
 func main() {
 
-	// Start the http server to handle the request for
-	// both versions of the API.
+	// Start the http server to handle requests.
 	log.Print("Listening on localhost:3000")
 	log.Fatal(http.ListenAndServe("localhost:3000", App()))
 }
