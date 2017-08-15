@@ -1,128 +1,64 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to implement the xml.Marshaler interface
-// to dictate the marshaling.
+// Sample program to show common JSON mistakes.
 package main
 
 import (
-	"encoding/xml"
+	"encoding/json"
+	"fmt"
 	"log"
-	"os"
-	"strconv"
-	"time"
 )
 
-// User represents a user in the system.
+// User represents a user in our system. email is not exported so it won't be
+// marshaled.
 type User struct {
-	FirstName string
-	LastName  string
-	Age       int
-	CreatedAt time.Time
-	Admin     bool
-	Bio       *string
-}
-
-// MarshalXML implements the xml.Marshaler interface so we
-// can dictate how the user is marshaled.
-func (u *User) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
-
-	// Call into MarshalText directly for the time value.
-	ca, err := u.CreatedAt.MarshalText()
-	if err != nil {
-		return err
-	}
-
-	// Create a document of key/value pairs for each field
-	m := map[string][]byte{
-		"first_name": []byte(u.FirstName),
-		"CreatedAt":  ca,
-		"Admin":      []byte(strconv.FormatBool(u.Admin)),
-		"Bio":        nil,
-	}
-
-	// Add the Bio value if we have one.
-	if u.Bio != nil {
-		m["Bio"] = []byte(*u.Bio)
-	}
-
-	// Omit the last name from the document unless
-	// we have a value.
-	if u.LastName != "" {
-		m["LastName"] = []byte(u.LastName)
-	}
-
-	// Create a slice of tokens starting with the element
-	// provided with the call.
-	tokens := []xml.Token{start}
-
-	// Range of the key/value pairs creating XML elements. We could just range
-	// over the map directly but we want to control the order of the elements.
-	keys := []string{"first_name", "LastName", "Admin", "Bio", "CreatedAt"}
-	for _, key := range keys {
-		value, ok := m[key]
-		if !ok {
-			continue
-		}
-
-		// Declare the starting element.
-		se := xml.StartElement{
-			Name: xml.Name{
-				Space: "",
-				Local: key,
-			},
-		}
-
-		// Declare the ending element.
-		ee := xml.EndElement{
-			Name: se.Name,
-		}
-
-		// Append the starting element, the value and the ending element.
-		tokens = append(tokens, se, xml.CharData(value), ee)
-	}
-
-	// Append the final ending element with the slice.
-	tokens = append(tokens, xml.EndElement{Name: start.Name})
-
-	// Range over the tokens.
-	for _, t := range tokens {
-
-		// Encode each token into the encoder.
-		if err := e.EncodeToken(t); err != nil {
-			return err
-		}
-	}
-
-	// Flush the encoder to ensure tokens are written.
-	if err := e.Flush(); err != nil {
-		return err
-	}
-
-	return nil
+	Name  string   `json:"name"`
+	email string   `json:"email"`
+	Roles []string `json:"roles"`
 }
 
 func main() {
 
-	// Encode a zero valued version of a user and write to stdout.
-	err := xml.NewEncoder(os.Stdout).Encode(&User{})
+	// Marshal a zero value User
+	b, err := json.Marshal(User{})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Create a string variable so we can take its address.
-	bio := "An Awesome Coder!"
+	print("Zero value User", b)
+	print("Note 'roles' is null", nil)
 
-	// Create a user value for Mary Jane.
+	// Initialize roles for an otherwise zeroed User
 	u := User{
-		FirstName: "Mary",
-		LastName:  "Jane",
-		Bio:       &bio,
+		Roles: []string{},
 	}
 
-	// Encode the user value and write to stdout.
-	err = xml.NewEncoder(os.Stdout).Encode(&u)
+	b, err = json.Marshal(u)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	print("User with empty roles slice", b)
+	print("Note 'roles' is [] not null", nil)
+
+	// Fill in data for user
+	u = User{
+		Name:  "Alice",
+		email: "alice@example.com",
+		Roles: []string{"admin", "agent"},
+	}
+
+	b, err = json.Marshal(u)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	print("User with data", b)
+
+	fmt.Println("\nNote in all examples 'email' is missing.")
+}
+
+func print(msg string, data []byte) {
+	fmt.Printf("%30s | %s\n", msg, string(data))
 }
