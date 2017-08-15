@@ -30,8 +30,8 @@ func TestRoot(t *testing.T) {
 	got := res.Request.URL.String()
 	want := ts.URL + "/customers"
 	if got != want {
-		t.Log("Wanted:", got)
-		t.Log("Got   :", want)
+		t.Log("Wanted:", want)
+		t.Log("Got   :", got)
 		t.Fatal("Mismatch")
 	}
 }

@@ -1,64 +1,88 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show common JSON mistakes.
+// Sample program that sends and receives JSON.
 package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
+	"net/http"
 )
 
-// User represents a user in our system. email is not exported so it won't be
-// marshaled.
-type User struct {
-	Name  string   `json:"name"`
-	email string   `json:"email"`
-	Roles []string `json:"roles"`
+// Status is the status of our logging system.
+type Status struct {
+	Load     float64 `json:"load"`
+	Messages int     `json:"messages"`
+}
+
+// Event is a message we need to log.
+type Event struct {
+	Host    string `json:"host"`
+	Message string `json:"message"`
+	Level   int    `json:"level"`
+}
+
+// App gives the handler which is the main entry point for our application.
+func App() http.Handler {
+
+	h := func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			status(w, r)
+		case http.MethodPost:
+			logEvent(w, r)
+		default:
+			w.WriteHeader(http.StatusMethodNotAllowed)
+		}
+	}
+
+	return http.HandlerFunc(h)
+}
+
+// status responds to GET requests by guaging the status of the system and
+// writing it to the ResponseWriter as JSON.
+func status(res http.ResponseWriter, req *http.Request) {
+
+	s := Status{
+		Load:     1.0, // TODO
+		Messages: 42,  // TODO
+	}
+
+	res.Header().Set("Content-Type", "application/json; charset=utf-8")
+
+	if err := json.NewEncoder(res).Encode(s); err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+// logEvent reads a JSON string from the request body and turns it into an
+// Event value. It is then logged and we respond 204 No Content.
+func logEvent(res http.ResponseWriter, req *http.Request) {
+
+	var e Event
+
+	// Encode the json value received into the event value.
+	if err := json.NewDecoder(req.Body).Decode(&e); err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	log.Printf(
+		"Level %d event from %s: %s",
+		e.Level,
+		e.Host,
+		e.Message,
+	)
+
+	res.WriteHeader(http.StatusNoContent)
 }
 
 func main() {
 
-	// Marshal a zero value User
-	b, err := json.Marshal(User{})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	print("Zero value User", b)
-	print("Note 'roles' is null", nil)
-
-	// Initialize roles for an otherwise zeroed User
-	u := User{
-		Roles: []string{},
-	}
-
-	b, err = json.Marshal(u)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	print("User with empty roles slice", b)
-	print("Note 'roles' is [] not null", nil)
-
-	// Fill in data for user
-	u = User{
-		Name:  "Alice",
-		email: "alice@example.com",
-		Roles: []string{"admin", "agent"},
-	}
-
-	b, err = json.Marshal(u)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	print("User with data", b)
-
-	fmt.Println("\nNote in all examples 'email' is missing.")
-}
-
-func print(msg string, data []byte) {
-	fmt.Printf("%30s | %s\n", msg, string(data))
+	// Start the http server to handle the request for
+	// both versions of the API.
+	log.Print("Listening on localhost:3000")
+	log.Fatal(http.ListenAndServe("localhost:3000", App()))
 }
