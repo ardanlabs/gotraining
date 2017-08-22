@@ -1,31 +1,57 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how method sets can affect behavior.
+// Sample program to show how the concrete value assigned to
+// the interface is what is stored inside the interface.
 package main
 
 import "fmt"
 
-// user defines a user in the system.
-type user struct {
-	name  string
-	email string
+// printer displays information.
+type printer interface {
+	print()
 }
 
-// String implements the fmt.Stringer interface.
-func (u *user) String() string {
-	return fmt.Sprintf("My name is %q and my email is %q", u.name, u.email)
+// user defines a user in the program.
+type user struct {
+	name string
+}
+
+// print displays the user's name.
+func (u user) print() {
+	fmt.Printf("User Name: %s\n", u.name)
 }
 
 func main() {
 
-	// Create a value of type user.
-	u := user{
-		name:  "Bill",
-		email: "bill@ardanlabs.com",
+	// Create values of type user and admin.
+	u := user{"Bill"}
+
+	// Add the values and pointers to the slice of
+	// printer interface values.
+	entities := []printer{
+
+		// Store a copy of the user value in the interface value.
+		u,
+
+		// Store a copy of the address of the user value in the interface value.
+		&u,
 	}
 
-	// Display the values.
-	fmt.Println(u)
-	fmt.Println(&u)
+	// Change the name field on the user value.
+	u.name = "Bill_CHG"
+
+	// Iterate over the slice of entities and call
+	// print against the copied interface value.
+	for _, e := range entities {
+		e.print()
+	}
+
+	// When we store a value, the interface value has its own
+	// copy of the value. Changes to the original value will
+	// not be seen.
+
+	// When we store a pointer, the interface value has its own
+	// copy of the address. Changes to the original value will
+	// be seen.
 }
