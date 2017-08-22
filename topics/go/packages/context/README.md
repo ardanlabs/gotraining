@@ -23,6 +23,8 @@ The package context defines the Context type, which carries deadlines, cancelati
 
 ## Code Review
 
+**_"Context values are for request-scoped data that passes through programs in a distributed system. Litmus test: Could it be an HTTP header?" - Sameer Ajmani_**
+
 [Store / Retrieve context values](example1/example1.go) ([Go Playground](https://play.golang.org/p/a3qXpFsQ8_))  
 [WithCancel](example2/example2.go) ([Go Playground](https://play.golang.org/p/YfWzzfDqGu))  
 [WithDeadline](example3/example3.go) ([Go Playground](https://play.golang.org/p/WVUdqD0Dan))  
