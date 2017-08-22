@@ -109,7 +109,7 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 
 * Rules have costs.
 * Rules must pull their weight - Don’t be clever (high level).
-* Value the standard, don’t idolize it,
+* Value the standard, don’t idolize it.
 * Be consistent!
 * Semantics convey ownership.
 
