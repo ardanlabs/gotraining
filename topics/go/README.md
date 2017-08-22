@@ -11,8 +11,10 @@ _"An architecture isn't a set of pieces, it's a set of rules about what you can 
 You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
 
 * [Prepare Your Mind](https://github.com/ardanlabs/gotraining/tree/master/topics/go#prepare-your-mind)
+* [Legacy Software](https://github.com/ardanlabs/gotraining/tree/master/topics/go#legacy-software)
 * [Productivity vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#productivity-vs-performance)
 * [Correctness vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#correctness-vs-performance)
+* [Rules](https://github.com/ardanlabs/gotraining/tree/master/topics/go#rules)
 * [Code Reviews](https://github.com/ardanlabs/gotraining/tree/master/topics/go#code-reviews)
 * [Data Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#data-oriented-design)
 * [Interface And Composition Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#interface-and-composition-design)
@@ -100,6 +102,20 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 **Resources:**
 
 [Prototype your design!](https://www.youtube.com/watch?v=vLxX3yZmw5Q) - Robert Griesemer
+
+---
+
+### Rules
+
+* Rules have costs.
+* Rules must pull their weight - Don’t be clever (high level).
+* Value the standard, don’t idolize it,
+* Be consistent!
+* Semantics convey ownership.
+
+**Resources:**
+
+[The Philosophy of Google's C++ Code](https://www.youtube.com/watch?v=NOCElcMcFik) - Titus Winters
 
 ---
 
