@@ -167,6 +167,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		WWG          Web      Packet HQ         NYC, NY                May        Jacob Walker       https://www.meetup.com/NYC-Women-Who-Go/events/239306971/
 		WWG          Go       TBD               London England         August     Bill Kennedy       https://www.meetup.com/Women-Who-Go-London/events/241708328/
 		WWG          Go       TBD               Atlanta, GA            October    Bill Kennedy       TBD
+		GoBridge     Go       TBD               Berlin, Germany        November   Bill Kennedy       TBD
 		
 		Conference   Adv Go   Golab             Florance, IT           January    Bill Kennedy       http://golab.io
 		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy       http://www.gophercon.in/go-workshop		
