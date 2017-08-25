@@ -118,18 +118,18 @@ _**Writing**_
 We are working hard to maintain pricing that can fit your budget.
 
 **Ultimate Go**  
-3 Days (21 hours) - $25,000 for up to 15 students including T&E  
-2 Days (14 hours) - $17,000 for up to 15 students including T&E  
-Classes that exceed 15 students are charged an extra $1,000 each per additional student.
+3 Days (21 hours) - $30,000 for up to 15 students including T&E  
+2 Days (14 hours) - $20,000 for up to 15 students including T&E  
+Classes that exceed 15 students are charged an extra $1,500 each per additional student.
 
 **Ultimate Data Science**  
-3 Days (21 hours) - $25,000 for up to 15 students including T&E    
-2 Days (14 hours) - $17,000 for up to 15 students including T&E    
-Classes that exceed 15 students are charged an extra $1,000 each per additional student.
+3 Days (21 hours) - $30,000 for up to 15 students including T&E    
+2 Days (14 hours) - $20,000 for up to 15 students including T&E    
+Classes that exceed 15 students are charged an extra $1,500 each per additional student.
 
 **Ultimate Web**  
-2 Days (14 hours) - $17,000 for up to 15 students including T&E    
-Classes that exceed 15 students are charged an extra $1,000 each per additional student.
+2 Days (14 hours) - $20,000 for up to 15 students including T&E    
+Classes that exceed 15 students are charged an extra $1,500 each per additional student.
 
 ## Current Schedule
 
