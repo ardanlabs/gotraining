@@ -166,7 +166,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		GoBridge     Go       SUNY Potsdam      Potsdam, NY            May        Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-with-william-kennedy-tickets-33174514867
 		WWG          Web      Packet HQ         NYC, NY                May        Jacob Walker       https://www.meetup.com/NYC-Women-Who-Go/events/239306971/
 		WWG          Go       TBD               London England         August     Bill Kennedy       https://www.meetup.com/Women-Who-Go-London/events/241708328/
-		WWG          Go       TBD               Atlanta, GA            September  Bill Kennedy       TBD
+		WWG          Go       TBD               Atlanta, GA            October    Bill Kennedy       TBD
 		
 		Conference   Adv Go   Golab             Florance, IT           January    Bill Kennedy       http://golab.io
 		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy       http://www.gophercon.in/go-workshop		
@@ -178,6 +178,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		Conference   Data     GopherCon         Denver, CO             July       Daniel Whitenack  				
 		Conference   Adv Go   GolangUK          London, England        August     Bill Kennedy       https://www.golanguk.com
 		Conference   Web      GolangUK          London, England        August     Jacob Walker       https://www.golanguk.com
+		Conference   Adv Go   dotGo             Paris, France          November   Bill Kennedy       https://www.dotgo.eu/
 		Conference   Talk     Code::Dive        Wroclaw, Poland        November   Bill Kennedy       http://codedive.pl/
 
 ## More About Go
