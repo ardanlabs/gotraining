@@ -282,6 +282,12 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 ---
 
+### Mistakes
+
+_"Mistakes are an inevitable consequence of doing something new and, as such, should be seen as valuable; without them, we'd have no originality." - Ed Catmull (President of Pixar)_
+
+---
+
 ### Data-Oriented Design
 
 **Design Philosophy:**
