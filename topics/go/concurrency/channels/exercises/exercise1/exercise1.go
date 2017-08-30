@@ -29,7 +29,7 @@ func main() {
 	}()
 
 	go func() {
-		goroutine("Lisa", share)
+		goroutine("Joan", share)
 		wg.Done()
 	}()
 

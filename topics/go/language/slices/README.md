@@ -29,7 +29,7 @@ https://github.com/golang/go/wiki/SliceTricks
 [Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/Wq9JbadHkC))  
 [Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/zYT3ls_DuV))  
 [Strings and slices](example6/example6.go) ([Go Playground](https://play.golang.org/p/x0Q5ByzxGS))  
-[Variadic functions](example7/example7.go) ([Go Playground](https://play.golang.org/p/TkJxbZKFRl))  
+[Variadic functions](example7/example7.go) ([Go Playground](https://play.golang.org/p/58YyAeWjzw))  
 [Range mechanics](example8/example8.go) ([Go Playground](https://play.golang.org/p/cve_NbA6Qn))  
 
 ## Advanced Code Review
@@ -45,6 +45,6 @@ https://github.com/golang/go/wiki/SliceTricks
 **Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of index one and two and display the index position and value of each element in the new slice.
 
 [Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/sE06PRtw7h)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/3WKISOXA-L))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/DLX9f0Lek0))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

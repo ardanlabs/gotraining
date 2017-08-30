@@ -27,7 +27,7 @@ func main() {
 	}
 
 	// Declare a slice of strings.
-	names := []string{"Bill", "Lisa", "Jim", "Cathy", "Beth"}
+	names := []string{"Bill", "Joan", "Jim", "Cathy", "Beth"}
 
 	// Display each index position and name.
 	for i, name := range names {

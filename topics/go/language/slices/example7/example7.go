@@ -32,7 +32,7 @@ func main() {
 	// Create a slice of user values.
 	u3 := []user{
 		{24, "Bill"},
-		{32, "Lisa"},
+		{32, "Joan"},
 	}
 
 	// Display all the user values from the slice.

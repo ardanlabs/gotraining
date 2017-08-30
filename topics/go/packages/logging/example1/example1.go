@@ -40,7 +40,7 @@ func setFlags() {
 func main() {
 	log.Println("main function started")
 
-	names := []string{"Henry", "Lisa", "Bill", "Matt"}
+	names := []string{"Henry", "Joan", "Bill", "Matt"}
 	log.Printf("These are named %+v\n", names)
 
 	log.Fatalln("Terminate Program")

@@ -55,7 +55,7 @@ func main() {
 	f1()
 
 	// Change the value of d.
-	d.name = "Lisa"
+	d.name = "Joan"
 
 	// Call the method via the variable. We don't see the change.
 	f1()
@@ -73,7 +73,7 @@ func main() {
 	f2(45)
 
 	// Change the value of d.
-	d.name = "Joan"
+	d.name = "Sammy"
 
 	// Call the method via the variable. We see the change.
 	f2(45)

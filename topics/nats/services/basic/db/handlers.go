@@ -7,7 +7,7 @@ import (
 	"errors"
 	"log"
 
-	"github.com/nats-io/nats"
+	nats "github.com/nats-io/go-nats"
 )
 
 // GetUsers is a sample database requrest to get all the users.
@@ -19,7 +19,7 @@ func GetUsers(conn *nats.EncodedConn, reply string, req Request) {
 		Name string `json:"message"`
 	}{
 		{17896678, "Bill"},
-		{89778799, "Lisa"},
+		{89778799, "Joan"},
 	}
 
 	SendResponse(conn, reply, data)

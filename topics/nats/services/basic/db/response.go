@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/nats-io/nats"
+	nats "github.com/nats-io/go-nats"
 )
 
 // Request represents the message structure we receive for request.

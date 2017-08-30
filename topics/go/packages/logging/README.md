@@ -13,7 +13,7 @@ http://www.goinggo.net/2013/11/using-log-package-in-go.html
 
 ## Code Review
 
-[Use of log package](example1/example1.go) ([Go Playground](http://play.golang.org/p/UCGUZZ--OP))  
+[Use of log package](example1/example1.go) ([Go Playground](https://play.golang.org/p/bMw0Q8hDjC))  
 [Customizing your own log](example2/example2.go) ([Go Playground](http://play.golang.org/p/wD06PQAefc))
 
 ## Exercises
@@ -23,6 +23,6 @@ http://www.goinggo.net/2013/11/using-log-package-in-go.html
 Setup a new program to use the log package. Set the Prefix to your first name and on each log line show the date and long path for the code file.
 
 [Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/9si47xIX0q)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/ShXBoI1XN-))
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/qCdmtza8AI))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

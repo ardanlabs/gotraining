@@ -11,7 +11,7 @@ import (
 	"os/signal"
 
 	"github.com/braintree/manners"
-	"github.com/nats-io/nats"
+	nats "github.com/nats-io/go-nats"
 )
 
 var rawConn *nats.Conn

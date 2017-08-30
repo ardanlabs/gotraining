@@ -5,7 +5,7 @@ package main
 import (
 	"sync"
 
-	"github.com/nats-io/nats"
+	nats "github.com/nats-io/go-nats"
 )
 
 func init() {
