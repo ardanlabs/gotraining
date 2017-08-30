@@ -200,6 +200,20 @@ This is about writing simple code that is easy to read and understand without th
 
 [Example Readability Issue](http://cpp.sh/6i7d)  
 
+**Code Must Never Lie**
+
+_"This is a cardinal sin amongst programmers. If code looks like it’s doing one thing when it’s actually doing something else, someone down the road will read that code and misunderstand it, and use it or alter it in a way that causes bugs. That someone might be you, even if it was your code in the first place." - Nate Finch_
+
+We have all been here if you have been programming long enough. At this point it doesn't matter how fast the code might be if no one can understand or maintain it moving forward.
+
+[Code Must Never Lie](https://npf.io/2017/08/lies)
+
+**Average Developer**
+
+_"Can you explain it to the median user (developer)? as opposed to will the smartest user (developer) figure it out?" - Peter Weinberger (inventor of AWK)_
+
+You must be aware of who you are on your team. When hiring new people, you must be aware of where they fall. The code must be written for the average developer to comprehend. If you are below average, you have the responsibility to come up to speed. If you are the expert, you have the responsbility to reduce being clever.
+
 **Real Machine**
 
 _"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_
@@ -213,12 +227,6 @@ _"Let's imagine a project that's going to end up with a million lines of code or
 _100k lines of code fit inside a box of paper. - Tom Love (inventor of Objective C)_
 
 How much code in that box do you think you can maintain a mental model of in your head? I believe asking a single developer to maintain a mental model of more than one ream of paper in that box (~10k lines of code) is asking a lot. If you do the math, then it takes a team of 100 people to work on a code base that hits a million lines of code. That is 100 people that need to be coordinated, grouped, tracked and in a constant feedback loop of communication.
-
-**Average Developer**
-
-_"Can you explain it to the median user (developer)? as opposed to will the smartest user (developer) figure it out?" - Peter Weinberger (inventor of AWK)_
-
-You must be aware of who you are on your team. When hiring new people, you must be aware of where they fall. The code must be written for the average developer to comprehend. If you are below average, you have the responsibility to come up to speed. If you are the expert, you have the responsbility to reduce being clever.
 
 ---
 
