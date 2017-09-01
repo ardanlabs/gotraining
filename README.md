@@ -10,7 +10,6 @@ bill@ardanlabs.com
 
 * [Experience](https://github.com/ardanlabs/gotraining#our-experience)
 * [Teachers](https://github.com/ardanlabs/gotraining#our-teachers)
-* [Pricing](https://github.com/ardanlabs/gotraining#our-pricing)
 * [Current Schedule](https://github.com/ardanlabs/gotraining#current-schedule)
 * [More About Go](https://github.com/ardanlabs/gotraining#more-about-go)
 * [Minimal Qualified Student](https://github.com/ardanlabs/gotraining#minimal-qualified-student)
@@ -112,24 +111,6 @@ Ernesto is a combination of engineer and product manager who has worked on diffe
 _**Writing**_  
 [Reducing boilerplate with go generate](https://blog.gopheracademy.com/advent-2015/reducing-boilerplate-with-go-generate)  
 [Writing good unit tests for SOLID Go](https://blog.gopheracademy.com/advent-2016/how-to-write-good-tests-for-solid-code)  
-
-## Our Pricing
-
-We are working hard to maintain pricing that can fit your budget.
-
-**Ultimate Go**  
-3 Days (21 hours) - $30,000 for up to 15 students including T&E  
-2 Days (14 hours) - $20,000 for up to 15 students including T&E  
-Classes that exceed 15 students are charged an extra $1,500 each per additional student.
-
-**Ultimate Data Science**  
-3 Days (21 hours) - $30,000 for up to 15 students including T&E    
-2 Days (14 hours) - $20,000 for up to 15 students including T&E    
-Classes that exceed 15 students are charged an extra $1,500 each per additional student.
-
-**Ultimate Web**  
-2 Days (14 hours) - $20,000 for up to 15 students including T&E    
-Classes that exceed 15 students are charged an extra $1,500 each per additional student.
 
 ## Current Schedule
 

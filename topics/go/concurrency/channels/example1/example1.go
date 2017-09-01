@@ -156,7 +156,7 @@ func fanOutSem() {
 // selectCancel shows how to use the select statement to wait for a
 // specified amount of time to receive a value.
 func selectCancel() {
-	fmt.Println("** selectRecv")
+	fmt.Println("** selectCancel")
 
 	ch := make(chan data, 1)
 
