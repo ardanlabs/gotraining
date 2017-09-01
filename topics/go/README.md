@@ -13,6 +13,7 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * [Prepare Your Mind](https://github.com/ardanlabs/gotraining/tree/master/topics/go#prepare-your-mind)
 * [Legacy Software](https://github.com/ardanlabs/gotraining/tree/master/topics/go#legacy-software)
 * [Productivity vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#productivity-vs-performance)
+* [Mental Models](https://github.com/ardanlabs/gotraining/tree/master/topics/go#mental-models)
 * [Correctness vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#correctness-vs-performance)
 * [Rules](https://github.com/ardanlabs/gotraining/tree/master/topics/go#rules)
 * [Code Reviews](https://github.com/ardanlabs/gotraining/tree/master/topics/go#code-reviews)
@@ -77,6 +78,28 @@ _"The trend in programming language design has been to create languages that enh
 
 ---
 
+### Mental Models
+
+You must constantly make sure your mental model of your projects are clear. When you can't remember where a piece of logic is or you can't remember how something works, you are losing your mental model of the code. This is a clear indication that refactoring is a must. Focus time on structuring code that provides the best mental model possible and code review for this as well.
+
+**Quotes**
+
+_"Let's imagine a project that's going to end up with a million lines of code or more. The probability of those projects being successful in the United States these days is very low - well under 50%. That's debatable. - Tom Love (inventor of Objective C)_
+
+_100k lines of code fit inside a box of paper. - Tom Love (inventor of Objective C)_
+
+How much code in that box do you think you can maintain a mental model of in your head? I believe asking a single developer to maintain a mental model of more than one ream of paper in that box (~10k lines of code) is asking a lot. If you do the math, then it takes a team of 100 people to work on a code base that hits a million lines of code. That is 100 people that need to be coordinated, grouped, tracked and in a constant feedback loop of communication.
+
+**Quotes**
+
+_"Making things easy to do is a false economy. Focus on making things easy to understand and the rest will follow." - Peter Bourgon_
+
+_"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all" - Brian Kernighan_
+
+_"Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?" - Brian Kernighan_
+
+---
+
 ### Correctness vs Performance
 
 You want to write code that is optimized for correctness. Don't make coding decisions based on what you think might perform better. You must benchmark or profile to know if code is not fast enough. Then and only then should you optimize for performance. This can't be done until you have something working.
@@ -94,10 +117,6 @@ _"The correctness of the implementation is the most important concern, but there
 _"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan_
 
 _"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
-
-_"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all" - Brian Kernighan_
-
-_"Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?" - Brian Kernighan_
 
 **Resources:**
 
@@ -160,25 +179,6 @@ When error handling is treated as an exception and not part of the main code, yo
         * 34% : Complex bugs
 * 8% : Failures from latent human errors
 
-**Ignorance vs Carelessness:**
-
-Anytime we identify an integrity issue we need to ask ourselves why it happened.
-```
-                    Not Deliberate               Deliberate
-              ------------------------------------------------------
-              |                          |                         |
-              |                          |                         |
-   Ignorance  |  Learning / Prototyping  |    Hacking / Guessing   |
-              |                          |                         |
-              |                          |                         |
-              |-----------------------------------------------------
-              |                          |                         |
-              |                          |                         |
-Carelessness  |        Education         |   Dangerous Situation   |
-              |                          |                         |
-              |                          |                         |
-              ------------------------------------------------------
-```
 **Resources:**
 
 [Software Development for Infrastructure](http://www.stroustrup.com/Software-for-infrastructure.pdf) - Bjarne Stroustrup  
@@ -219,14 +219,6 @@ You must be aware of who you are on your team. When hiring new people, you must 
 _"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_
 
 In Go, the underlying machine is the real machine rather than a single abstract machine. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
-
-**Mental Models**
-
-_"Let's imagine a project that's going to end up with a million lines of code or more. The probability of those projects being successful in the United States these days is very low - well under 50%. That's debatable. - Tom Love (inventor of Objective C)_
-
-_100k lines of code fit inside a box of paper. - Tom Love (inventor of Objective C)_
-
-How much code in that box do you think you can maintain a mental model of in your head? I believe asking a single developer to maintain a mental model of more than one ream of paper in that box (~10k lines of code) is asking a lot. If you do the math, then it takes a team of 100 people to work on a code base that hits a million lines of code. That is 100 people that need to be coordinated, grouped, tracked and in a constant feedback loop of communication.
 
 ---
 
