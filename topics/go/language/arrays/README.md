@@ -58,7 +58,7 @@ This is a diagram showing the relationship of the cache hierarchy for the 4 Core
 
 This is subject to be different in different processors. For this content, the following is the multi-levels of cache associated with the Intel 4 Core i7-9xx processor:
 
-	3GHz * 4 instructions per cycle = 12 instructions per ns!
+	3GHz(3 clock cycles/ns) * 4 instructions per cycle = 12 instructions per ns!
 
 	L1 - 64KB Cache (Per Core)
 		32KB I-Cache
