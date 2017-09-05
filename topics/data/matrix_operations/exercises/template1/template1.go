@@ -7,12 +7,12 @@
 // Sample program to divide a matrix by its norm.
 package main
 
-import "github.com/gonum/matrix/mat64"
+import "gonum.org/v1/gonum/mat"
 
 func main() {
 
 	// Create an example matrix.
-	mat := mat64.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
+	m := mat.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
 
 	// Get the Euclidean norm of the matrix.
 

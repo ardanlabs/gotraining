@@ -11,16 +11,16 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 func main() {
 
 	// Create two matrices of the same size, a and b.
-	a := mat64.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
+	a := mat.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
 
 	// Solve the eigenvalue problem.
-	var eig mat64.Eigen
+	var eig mat.Eigen
 	if ok := eig.Factorize(a, false, true); !ok {
 		log.Fatal("Could not factorize the EigenSym value.")
 	}
@@ -30,6 +30,6 @@ func main() {
 
 	// Output the eigenvectors.
 	vectors := eig.Vectors()
-	fv := mat64.Formatted(vectors, mat64.Prefix("               "))
+	fv := mat.Formatted(vectors, mat.Prefix("               "))
 	fmt.Printf("eigenvectors = %v\n\n", fv)
 }

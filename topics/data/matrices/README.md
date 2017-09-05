@@ -6,7 +6,7 @@ Many modeling, machine learning, and optimization algorithms rely on linear alge
 
 - A matrix is a rectangular array representation of numbers, expressions, etc.
 - Elements in a matrix are referenced by a row and column index.
-- `github.com/gonum/matrix/mat64` provides functionality to create, modify, and manipulate matrices made up of float64 values.
+- `gonum.org/v1/gonum/mat` provides functionality to create, modify, and manipulate matrices made up of float64 values.
 
 ## Links
 
@@ -16,7 +16,7 @@ Many modeling, machine learning, and optimization algorithms rely on linear alge
 
 ## Code Review
 
-[github/gonum/matrix/mat64 docs](https://godoc.org/github.com/gonum/matrix/mat64)    
+[gonum.org/v1/mat docs](https://godoc.org/gonum.org/v1/gonum/mat)    
 [Form a float64 matrix](example1/example1.go)  
 [Modify a matrix](example2/example2.go)  
 [Access values in a matrix](example3/example3.go)  
@@ -26,7 +26,7 @@ Many modeling, machine learning, and optimization algorithms rely on linear alge
 
 ### Exercise 1
 
-Create a matrix from [diabetes.csv](../data_versioning/data/diabetes.csv) using `github.com/gonum/matrix/mat64`. Format and output the first 10 rows to standard out.
+Create a matrix from [diabetes.csv](../data_versioning/data/diabetes.csv) using `gonum.org/v1/gonum/mat`. Format and output the first 10 rows to standard out.
 
 [Template](exercises/template1/template1.go) |
 [Answer](exercises/exercise1/exercise1.go)
