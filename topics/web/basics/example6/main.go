@@ -18,7 +18,10 @@ func main() {
 	// Launch a goroutine to run the web service.
 	go func() {
 
-		h := http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+		m := http.NewServeMux()
+
+		// The main handler for our service
+		m.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
 			log.Println(req.URL.Path)
 
 			// Create some fake latency.
@@ -30,11 +33,19 @@ func main() {
 			res.WriteHeader(http.StatusTeapot)
 		})
 
+		// A route that returns 200 OK when the service is up
+		m.HandleFunc("/ready", func(res http.ResponseWriter, req *http.Request) {
+			res.WriteHeader(http.StatusOK)
+		})
+
 		log.Print("Listening on localhost:3000")
-		log.Fatal(http.ListenAndServe("localhost:3000", h))
+		log.Fatal(http.ListenAndServe("localhost:3000", m))
 	}()
 
-	// Get the current time so we can time how long this all takes.
+	// Call /ready until we get a 200 OK
+	waitForReady()
+
+	// Get the current time so we can measure how long this all takes.
 	start := time.Now()
 
 	// Call the handler function 100 times.
@@ -42,6 +53,23 @@ func main() {
 
 	// Display how long all of the requests took.
 	fmt.Printf("\nduration: %s\n", time.Now().Sub(start))
+}
+
+// waitForReady calls the /ready endpoint until it gets a successful response.
+// It waits for 100ms after the first attempt, 200ms after the second, and so
+// on for up to 20 attempts. If it does not succeed after that it kills the
+// application.
+func waitForReady() {
+	max := 20
+	for attempts := 1; attempts <= max; attempts++ {
+		res, err := http.Get("http://localhost:3000/ready")
+		if err == nil && res.StatusCode == http.StatusOK {
+			return
+		}
+		time.Sleep(time.Duration(attempts) * 100 * time.Millisecond)
+	}
+
+	log.Fatal("application did not start in time")
 }
 
 // process makes n concurrent requests against our service.
