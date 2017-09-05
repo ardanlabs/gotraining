@@ -12,6 +12,7 @@ import (
 	"log"
 	"os"
 
+	// These use the deprecated import because of a dependency on mat64 in gota
 	"github.com/gonum/matrix/mat64"
 	"github.com/gonum/stat"
 	"github.com/kniren/gota/dataframe"

@@ -13,9 +13,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/gonum/stat"
 	"github.com/kniren/gota/dataframe"
 	"github.com/montanaflynn/stats"
+	"gonum.org/v1/gonum/stat"
 )
 
 func main() {

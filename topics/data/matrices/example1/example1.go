@@ -15,7 +15,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 func main() {
@@ -68,9 +68,9 @@ func main() {
 	}
 
 	// Form the matrix.
-	mat := mat64.NewDense(len(rawCSVData), 4, floatData)
+	m := mat.NewDense(len(rawCSVData), 4, floatData)
 
 	// As a sanity check, output the matrix to standard out.
-	fMat := mat64.Formatted(mat, mat64.Prefix("      "))
+	fMat := mat.Formatted(m, mat.Prefix("      "))
 	fmt.Printf("mat = %v\n\n", fMat)
 }

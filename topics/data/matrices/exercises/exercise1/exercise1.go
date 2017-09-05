@@ -15,7 +15,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 func main() {
@@ -63,12 +63,12 @@ func main() {
 	}
 
 	// Form the matrix.
-	mat := mat64.NewDense(len(rawCSVData), 11, floatData)
+	m := mat.NewDense(len(rawCSVData), 11, floatData)
 
 	// Get the first 10 rows.
-	firstTen := mat.View(0, 0, 10, 11)
+	firstTen := m.Slice(0, 10, 0, 11)
 
 	// As a sanity check, output the rows to standard out.
-	fMat := mat64.Formatted(firstTen, mat64.Prefix("      "))
-	fmt.Printf("mat = %v\n\n", fMat)
+	fMat := mat.Formatted(firstTen, mat.Prefix("    "))
+	fmt.Printf("m = %v\n\n", fMat)
 }

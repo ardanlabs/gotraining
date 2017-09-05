@@ -15,7 +15,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/gonum/stat"
+	"gonum.org/v1/gonum/stat"
 )
 
 func main() {

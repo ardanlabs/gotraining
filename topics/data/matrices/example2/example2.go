@@ -10,13 +10,13 @@ package main
 import (
 	"fmt"
 
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 func main() {
 
 	// Create a small matrix.
-	a := mat64.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
+	a := mat.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
 
 	// Modify a single element.
 	a.Set(0, 2, 0)
@@ -28,6 +28,6 @@ func main() {
 	a.SetCol(0, []float64{1.0, 3.0, 2.0})
 
 	// Print it again without zero value elements.
-	fa := mat64.Formatted(a, mat64.Prefix("    "))
+	fa := mat.Formatted(a, mat.Prefix("    "))
 	fmt.Printf("after modification:\na = % v\n\n", fa)
 }

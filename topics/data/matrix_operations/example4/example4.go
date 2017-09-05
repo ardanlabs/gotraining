@@ -10,8 +10,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/gonum/floats"
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/floats"
+	"gonum.org/v1/gonum/mat"
 )
 
 func main() {
@@ -24,10 +24,10 @@ func main() {
 	fmt.Printf("\nThe Vector norm of vec is: %0.2f\n\n", vecNorm)
 
 	// Create an example matrix.
-	mat := mat64.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
+	m := mat.NewDense(3, 3, []float64{1, 2, 3, 0, 4, 5, 0, 0, 6})
 
 	// Get the Euclidean norm of the matrix.
-	matNorm := mat64.Norm(mat, 2)
+	matNorm := mat.Norm(m, 2)
 	fmt.Printf("The Matrix norm of mat is: %0.2f\n\n", matNorm)
 
 }
