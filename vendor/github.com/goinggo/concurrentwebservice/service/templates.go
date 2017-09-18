@@ -7,7 +7,8 @@ import (
 	"html/template"
 	"io/ioutil"
 	"log"
-	"os"
+	"path"
+	"runtime"
 )
 
 // views contains a map of templates for rendering views.
@@ -17,10 +18,18 @@ var views = make(map[string]*template.Template)
 func init() {
 	// In order for the endpoint tests to run this needs to be
 	// physically located. Trying to avoid configuration for now.
-	tmplPath := os.Getenv("GOPATH") + "/src/github.com/goinggo/concurrentwebservice"
-	loadTemplate("layout", tmplPath+"/views/basic-layout.html")
-	loadTemplate("index", tmplPath+"/views/index.html")
-	loadTemplate("results", tmplPath+"/views/results.html")
+	tmplPath := currentDir() + "/../views"
+	loadTemplate("layout", tmplPath+"/basic-layout.html")
+	loadTemplate("index", tmplPath+"/index.html")
+	loadTemplate("results", tmplPath+"/results.html")
+}
+
+func currentDir() string {
+	_, filename, _, ok := runtime.Caller(1)
+	if !ok {
+		panic("could not identify path to package directory")
+	}
+	return path.Dir(filename)
 }
 
 // loadTemplate reads the specified template file for use.
