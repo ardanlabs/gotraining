@@ -1,0 +1,23 @@
+sudo: false
+
+language: go
+
+# Versions of go that are explicitly supported by gonum.
+go:
+ - 1.5.4
+ - 1.6.3
+ - 1.7.3
+
+# Required for coverage.
+before_install:
+ - go get golang.org/x/tools/cmd/cover
+ - go get github.com/mattn/goveralls
+
+# Get deps, build, test, and ensure the code is gofmt'ed.
+# If we are building as gonum, then we have access to the coveralls api key, so we can run coverage as well.
+script:
+ - go get -d -t -v ./...
+ - go build -v ./...
+ - go test -v ./...
+ - test -z "$(gofmt -d .)"
+ - if [[ $TRAVIS_SECURE_ENV_VARS = "true" ]]; then bash ./.travis/test-coverage.sh; fi

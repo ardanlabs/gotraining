@@ -1,0 +1,7 @@
+*.out
+*.swp
+*.8
+*.6
+_obj
+_test*
+markdown

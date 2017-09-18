@@ -1,0 +1,18 @@
+language: go
+go:
+ - 1.4
+ - 1.5
+ - 1.6
+ - 1.7
+ - 1.8
+env:
+ # Temporary workaround for go 1.6
+ - GODEBUG=cgocheck=0
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq libatlas-base-dev
+ - cd /tmp && wget http://www.csie.ntu.edu.tw/~cjlin/liblinear/oldfiles/liblinear-1.94.tar.gz && tar xf liblinear-1.94.tar.gz && cd liblinear-1.94 && make lib && sudo install -vm644 linear.h /usr/include && sudo install -vm755 liblinear.so.1 /usr/lib && sudo ln -sfv liblinear.so.1 /usr/lib/liblinear.so
+ - cd $TRAVIS_BUILD_DIR
+install:
+ - go get github.com/smartystreets/goconvey/convey
+ - go get -v ./...

@@ -1,0 +1,16 @@
+# Mac
+.DS_Store
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# C/C++
+*.o
+*.a
+*.so
+*.dll
+
+# go test coverprofiles
+*.coverprofile

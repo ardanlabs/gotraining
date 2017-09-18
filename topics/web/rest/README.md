@@ -16,7 +16,7 @@ https://martinfowler.com/articles/richardsonMaturityModel.html
 
 ## Code Review
 
-REST With regex: [Code](example1/main.go) | [Test](example1/main_test.go)  
+REST With regex: [Code](example1/main.go)  
 
 ## Exercises
 

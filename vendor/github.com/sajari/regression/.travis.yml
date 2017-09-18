@@ -1,0 +1,9 @@
+sudo: false
+language: go
+go:
+- 1.4
+- 1.5
+- tip
+notifications:
+  email:
+    - infra@sajari.com

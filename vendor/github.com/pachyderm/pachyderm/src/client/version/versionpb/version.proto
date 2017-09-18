@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package versionpb;
+
+message Version {
+  uint32 major = 1;
+  uint32 minor = 2;
+  uint32 micro = 3;
+  string additional = 4;
+}
+
+service API {
+  rpc GetVersion(google.protobuf.Empty) returns (Version) {}
+}

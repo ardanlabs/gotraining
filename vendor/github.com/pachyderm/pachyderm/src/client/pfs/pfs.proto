@@ -1,0 +1,397 @@
+syntax = "proto3";
+package pfs;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "gogoproto/gogo.proto";
+
+import "client/auth/auth.proto";
+
+message Repo {
+  string name = 1;
+}
+
+message Commit {
+  Repo repo = 1;
+  string id = 2 [(gogoproto.customname) = "ID"];
+}
+
+message Commits {
+  repeated Commit commit = 1;
+}
+
+message BranchInfo {
+  string name = 1;
+  Commit head = 2;
+}
+
+message BranchInfos {
+  repeated BranchInfo branch_info = 1;
+}
+
+message File {
+  Commit commit = 1;
+  string path = 2;
+}
+
+message Block {
+  string hash = 1;
+}
+
+message Object {
+  string hash = 1;
+}
+
+message Tag {
+  string name = 1;
+}
+
+message RepoInfo {
+  Repo repo = 1;
+  google.protobuf.Timestamp created = 2;
+  uint64 size_bytes = 3;
+  repeated Repo provenance = 4;
+  string description = 5;
+}
+
+message RepoInfos {
+  repeated RepoInfo repo_info = 1;
+  repeated auth.Scope scopes = 2;
+}
+
+message CommitInfo {
+  Commit commit = 1;
+  Commit parent_commit = 2;
+  google.protobuf.Timestamp started = 3;
+  google.protobuf.Timestamp finished = 4;
+  uint64 size_bytes = 5;
+  repeated Commit provenance = 6;
+  // this is the block that stores the serialized form of a tree that
+  // represents the entire file system hierarchy of the repo at this commit 
+  Object tree = 7;
+}
+
+message CommitInfos {
+  repeated CommitInfo commit_info = 1;
+}
+
+enum FileType {
+  RESERVED = 0;
+  FILE = 1;
+  DIR = 2;
+}
+
+message FileInfo {
+  File file = 1;
+  FileType file_type = 2;
+  uint64 size_bytes = 3;
+  // the base names (i.e. just the filenames, not the full paths) of
+  // the children
+  repeated string children = 6;
+  repeated Object objects = 8;
+  bytes hash = 7;
+}
+
+message FileInfos {
+  repeated FileInfo file_info = 1;
+}
+
+message ByteRange {
+  uint64 lower = 1;
+  uint64 upper = 2;
+}
+
+message BlockRef {
+  Block block = 1;
+  ByteRange range = 2;
+}
+
+message ObjectInfo {
+  Object object = 1;
+  BlockRef block_ref = 2;
+}
+
+message CreateRepoRequest {
+  Repo repo = 1;
+  repeated Repo provenance = 2;
+  string description = 3;
+  bool update = 4;
+}
+
+message InspectRepoRequest {
+  Repo repo = 1;
+}
+
+message ListRepoRequest {
+    repeated Repo provenance = 1;
+    // Include auth information in the response, i.e. what kind of
+    // scope the user has over each repo.
+    bool include_auth = 2;
+}
+
+message DeleteRepoRequest {
+  Repo repo = 1;
+  bool force = 2;
+  bool all = 3;
+}
+
+message StartCommitRequest {
+  // Parent.ID may be empty in which case the commit that Branch points to will be used as the parent.
+  // If branch is empty, or if branch does not exist, the commit will have no parent.
+  Commit parent = 1;
+  string branch = 3;
+  repeated Commit provenance = 2;
+}
+
+message BuildCommitRequest {
+  Commit parent = 1;
+  string branch = 4;
+  repeated Commit provenance = 2;
+  Object tree = 3;
+}
+
+message FinishCommitRequest {
+  Commit commit = 1;
+}
+
+message InspectCommitRequest {
+  Commit commit = 1;
+}
+
+message ListCommitRequest {
+  Repo repo = 1;
+  Commit from = 2;
+  Commit to = 3;
+  uint64 number = 4;
+}
+
+message ListBranchRequest {
+  Repo repo = 1;
+}
+
+message SetBranchRequest {
+  Commit commit = 1;
+  string branch = 2;
+}
+
+message DeleteBranchRequest {
+  Repo repo = 1;
+  string branch = 2;
+}
+
+message DeleteCommitRequest {
+  Commit commit = 1;
+}
+
+message FlushCommitRequest {
+  repeated Commit commits = 1;
+  repeated Repo to_repos = 2;
+}
+
+message SubscribeCommitRequest {
+  Repo repo = 1;
+  string branch = 2;
+  // only commits created since this commit are returned
+  Commit from = 3;
+}
+
+message GetFileRequest {
+  File file = 1;
+  int64 offset_bytes = 2;
+  int64 size_bytes = 3;
+}
+
+enum Delimiter {
+  NONE = 0;
+  JSON = 1;
+  LINE = 2;
+}
+
+message PutFileRequest {
+  reserved 2;
+  File file = 1;
+  bytes value = 3;
+  string url = 5;
+  // applies only to URLs that can be recursively walked, for example s3:// URLs
+  bool recursive = 6;
+  // Delimiter causes data to be broken up into separate files with File.Path
+  // as a prefix.
+  Delimiter delimiter = 7;
+  // TargetFileDatums specifies the target number of datums in each written
+  // file it may be lower if data does not split evenly, but will never be
+  // higher, unless the value is 0.
+  int64 target_file_datums = 8;
+  // TargetFileBytes specifies the target number of bytes in each written
+  // file, files may have more or fewer bytes than the target.
+  int64 target_file_bytes = 9;
+  // If true overwrite the existing value of the file, equivalent to calling
+  // DeleteFile followed by PutFile.
+  bool overwrite = 10;
+}
+
+message InspectFileRequest {
+  File file = 1;
+}
+
+enum ListFileMode {
+  ListFile_NORMAL = 0;
+  ListFile_FAST = 1;
+  ListFile_RECURSE = 2;
+}
+
+message ListFileRequest {
+  File file = 1;
+}
+
+message GlobFileRequest {
+  Commit commit = 1;
+  string pattern = 2;
+}
+
+message DiffFileRequest {
+  File new_file = 1;
+  // OldFile may be left nil in which case the same path in the parent of
+  // NewFile's commit will be used.
+  File old_file = 2;
+  bool shallow = 3;
+}
+
+message DiffFileResponse {
+  repeated FileInfo new_files = 1;
+  repeated FileInfo old_files = 2;
+}
+
+message DeleteFileRequest {
+  File file = 1;
+}
+
+service API {
+  // Repo rpcs
+  // CreateRepo creates a new repo.
+  // An error is returned if the repo already exists.
+  rpc CreateRepo(CreateRepoRequest) returns (google.protobuf.Empty) {}
+  // InspectRepo returns info about a repo.
+  rpc InspectRepo(InspectRepoRequest) returns (RepoInfo) {}
+  // ListRepo returns info about all repos.
+  rpc ListRepo(ListRepoRequest) returns (RepoInfos) {}
+  // DeleteRepo deletes a repo.
+  rpc DeleteRepo(DeleteRepoRequest) returns (google.protobuf.Empty) {}
+
+  // Commit rpcs
+  // StartCommit creates a new write commit from a parent commit.
+  rpc StartCommit(StartCommitRequest) returns (Commit) {}
+  // FinishCommit turns a write commit into a read commit.
+  rpc FinishCommit(FinishCommitRequest) returns (google.protobuf.Empty) {}
+  // InspectCommit returns the info about a commit.
+  rpc InspectCommit(InspectCommitRequest) returns (CommitInfo) {}
+  // ListCommit returns info about all commits.
+  rpc ListCommit(ListCommitRequest) returns (CommitInfos) {}
+  // DeleteCommit deletes a commit.
+  rpc DeleteCommit(DeleteCommitRequest) returns (google.protobuf.Empty) {}
+  // FlushCommit waits for downstream commits to finish
+  rpc FlushCommit(FlushCommitRequest) returns (stream CommitInfo) {}
+  // SubscribeCommit subscribes for new commits on a given branch
+  rpc SubscribeCommit(SubscribeCommitRequest) returns (stream CommitInfo) {}
+  // BuildCommit builds a commit that's backed by the given tree
+  rpc BuildCommit(BuildCommitRequest) returns (Commit) {}
+
+  // ListBranch returns info about the heads of branches.
+  rpc ListBranch(ListBranchRequest) returns (BranchInfos) {}
+  // SetBranch assigns a commit and its ancestors to a branch.
+  rpc SetBranch(SetBranchRequest) returns (google.protobuf.Empty) {}
+  // DeleteBranch deletes a branch; note that the commits still exist.
+  rpc DeleteBranch(DeleteBranchRequest) returns (google.protobuf.Empty) {}
+
+  // File rpcs
+  // PutFile writes the specified file to pfs.
+  rpc PutFile(stream PutFileRequest) returns (google.protobuf.Empty) {}
+  // GetFile returns a byte stream of the contents of the file.
+  rpc GetFile(GetFileRequest) returns (stream google.protobuf.BytesValue) {}
+  // InspectFile returns info about a file.
+  rpc InspectFile(InspectFileRequest) returns (FileInfo) {}
+  // ListFile returns info about all files.
+  rpc ListFile(ListFileRequest) returns (FileInfos) {}
+  // GlobFile returns info about all files.
+  rpc GlobFile(GlobFileRequest) returns (FileInfos) {}
+  // DiffFile returns the differences between 2 paths at 2 commits.
+  rpc DiffFile(DiffFileRequest) returns (DiffFileResponse) {}
+  // DeleteFile deletes a file.
+  rpc DeleteFile(DeleteFileRequest) returns (google.protobuf.Empty) {}
+
+  // DeleteAll deletes everything
+  rpc DeleteAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+message PutObjectRequest {
+  bytes value = 1;
+  repeated Tag tags = 2;
+}
+
+message GetObjectsRequest {
+  repeated Object objects = 1;
+  uint64 offset_bytes = 2;
+  uint64 size_bytes = 3;
+}
+
+message TagObjectRequest {
+  Object object = 1;
+  repeated Tag tags = 2;
+}
+
+message ListObjectsRequest {}
+
+message ListTagsRequest {
+  string prefix = 1;
+  bool includeObject = 2;
+}
+
+message ListTagsResponse {
+  string tag = 1;
+  Object object = 2;
+}
+
+message DeleteObjectsRequest {
+  repeated Object objects = 1;
+}
+
+message DeleteObjectsResponse {}
+
+message DeleteTagsRequest {
+  repeated string tags = 1;
+}
+
+message DeleteTagsResponse {}
+
+message CheckObjectRequest {
+  Object object = 1;
+}
+
+message CheckObjectResponse {
+  bool exists = 1;
+}
+
+service ObjectAPI {
+  rpc PutObject(stream PutObjectRequest) returns (Object) {}
+  rpc GetObject(Object) returns (stream google.protobuf.BytesValue) {}
+  rpc GetObjects(GetObjectsRequest) returns (stream google.protobuf.BytesValue) {}
+  rpc TagObject(TagObjectRequest) returns (google.protobuf.Empty) {}
+  rpc InspectObject(Object) returns (ObjectInfo) {}
+  // CheckObject checks if an object exists in the blob store without
+  // actually reading the object.
+  rpc CheckObject(CheckObjectRequest) returns (CheckObjectResponse) {}
+  rpc ListObjects(ListObjectsRequest) returns (stream Object) {}
+  rpc DeleteObjects(DeleteObjectsRequest) returns (DeleteObjectsResponse) {}
+  rpc GetTag(Tag) returns (stream google.protobuf.BytesValue) {}
+  rpc InspectTag(Tag) returns (ObjectInfo) {}
+  rpc ListTags(ListTagsRequest) returns (stream ListTagsResponse) {}
+  rpc DeleteTags(DeleteTagsRequest) returns (DeleteTagsResponse) {}
+  rpc Compact(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+message ObjectIndex {
+  map<string, BlockRef> objects = 1;
+  map<string, Object> tags = 2;
+}
+

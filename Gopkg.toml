@@ -1,0 +1,174 @@
+# Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
+# for detailed Gopkg.toml documentation.
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/GeertJohan/go.rice"
+
+[[constraint]]
+  name = "github.com/boltdb/bolt"
+  version = "1.3.1"
+
+[[constraint]]
+  name = "github.com/braintree/manners"
+  version = "0.4.0"
+
+[[constraint]]
+  name = "github.com/dgrijalva/jwt-go"
+  version = "3.0.0"
+
+[[constraint]]
+  name = "github.com/dimfeld/httptreemux"
+  version = "4.0.1"
+
+[[constraint]]
+  name = "github.com/dvsekhvalnov/jose2go"
+  version = "1.3.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/goinggo/concurrentwebservice"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gonum/matrix"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gonum/stat"
+
+[[constraint]]
+  name = "github.com/gorilla/handlers"
+  version = "1.2.1"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gorilla/pat"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gorilla/schema"
+
+[[constraint]]
+  name = "github.com/gorilla/sessions"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/gorilla/websocket"
+  version = "1.2.0"
+
+[[constraint]]
+  name = "github.com/julienschmidt/httprouter"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/justinas/alice"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/kniren/gota"
+  version = "0.8.0"
+
+[[constraint]]
+  name = "github.com/labstack/echo"
+  version = "3.2.3"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/lib/pq"
+
+[[constraint]]
+  name = "github.com/markbates/goth"
+  version = "1.41.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/markbates/willie"
+
+[[constraint]]
+  name = "github.com/mattn/go-runewidth"
+  version = "0.0.2"
+
+[[constraint]]
+  name = "github.com/montanaflynn/stats"
+  version = "0.2.0"
+
+[[constraint]]
+  name = "github.com/nats-io/go-nats"
+  version = "1.3.0"
+
+[[constraint]]
+  name = "github.com/nats-io/nats"
+  version = "1.3.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/nsf/termbox-go"
+
+[[constraint]]
+  name = "github.com/pachyderm/pachyderm"
+  version = "1.5.3"
+
+[[constraint]]
+  name = "github.com/patrickmn/go-cache"
+  version = "2.0.0"
+
+[[constraint]]
+  name = "github.com/pborman/uuid"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/pkg/errors"
+  version = "0.8.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/sajari/regression"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/sjwhitworth/golearn"
+
+[[constraint]]
+  name = "github.com/stretchr/testify"
+  version = "1.1.4"
+
+[[constraint]]
+  name = "github.com/theplant/blackfriday"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/urfave/negroni"
+  version = "0.2.0"
+
+[[constraint]]
+  name = "go-hep.org/x/hep"
+  version = "0.6.0"
+
+[[constraint]]
+  branch = "master"
+  name = "golang.org/x/crypto"
+
+[[constraint]]
+  branch = "master"
+  name = "golang.org/x/net"
+
+[[constraint]]
+  branch = "master"
+  name = "gonum.org/v1/gonum"
+
+[[constraint]]
+  branch = "master"
+  name = "gonum.org/v1/plot"
+
+[[constraint]]
+  name = "gopkg.in/go-playground/validator.v8"
+  version = "8.18.2"
+
+[[constraint]]
+  branch = "v2"
+  name = "gopkg.in/mgo.v2"
+
+[[constraint]]
+  branch = "v1"
+  name = "gopkg.in/unrolled/render.v1"
