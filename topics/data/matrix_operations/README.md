@@ -11,7 +11,7 @@ As mentioned, matrix operations are ubiquitous in the data science world.  Most 
 
 ## Links
 
-[github/gonum/matrix/mat64 docs](https://godoc.org/github.com/gonum/matrix/mat64)  
+[gonum.org/v1/gonum/mat docs](https://godoc.org/gonum.org/v1/gonum/mat)  
 [The Matrix Cookbook](http://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)  
 [Khan Academy - Matrices](https://www.khanacademy.org/math/algebra-home/precalculus/precalc-matrices)  
 [Khan Academy - Linear Algebra](https://www.khanacademy.org/math/linear-algebra)   

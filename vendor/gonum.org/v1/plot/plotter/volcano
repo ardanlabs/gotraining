@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+cat >volcano_example.go <<EOF
+// Generated code do not edit. Run \`go generate volcano_example.go\`.
+
+// Copyright ©2015 The gonum Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:generate ./volcano
+
+//+build ignore
+
+package main
+
+import (
+	"image/color"
+
+	"gonum.org/v1/gonum/mat"
+	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/palette"
+	"gonum.org/v1/plot/plotter"
+	"gonum.org/v1/plot/vg"
+	"gonum.org/v1/plot/vg/draw"
+)
+
+type deciGrid struct{ mat.Matrix }
+
+func (g deciGrid) Dims() (c, r int)   { r, c = g.Matrix.Dims(); return c, r }
+func (g deciGrid) Z(c, r int) float64 { return g.Matrix.At(r, c) }
+func (g deciGrid) X(c int) float64 {
+	_, n := g.Matrix.Dims()
+	if c < 0 || c >= n {
+		panic("index out of range")
+	}
+	return 10 * float64(c)
+}
+func (g deciGrid) Y(r int) float64 {
+	m, _ := g.Matrix.Dims()
+	if r < 0 || r >= m {
+		panic("index out of range")
+	}
+	return 10 * float64(r)
+}
+
+func main() {
+	var levels []float64
+	for l := 100.5; l < volcano.Matrix.(*mat64.Dense).Max(); l += 5 {
+		levels = append(levels, l)
+	}
+	c := plotter.NewContour(volcano, levels, palette.Rainbow(len(levels), (palette.Yellow+palette.Red)/2, palette.Blue, 1, 1, 1))
+	quarterStyle := draw.LineStyle{
+		Color:  color.Black,
+		Width:  vg.Points(0.5),
+		Dashes: []vg.Length{0.2, 0.4},
+	}
+	halfStyle := draw.LineStyle{
+		Color:  color.Black,
+		Width:  vg.Points(0.5),
+		Dashes: []vg.Length{5, 2, 1, 2},
+	}
+	c.LineStyles = append(c.LineStyles, quarterStyle, halfStyle, quarterStyle)
+
+	h := plotter.NewHeatMap(volcano, palette.Heat(len(levels)*2, 1))
+
+	p, err := plot.New()
+	if err != nil {
+		panic(err)
+	}
+	p.Title.Text = "Maunga Whau Volcano"
+
+	p.Add(h)
+	p.Add(c)
+
+	p.X.Padding = 0
+	p.Y.Padding = 0
+	_, p.X.Max, _, p.Y.Max = h.DataRange()
+
+	name := "example_volcano"
+
+	for _, ext := range []string{
+		".eps",
+		".pdf",
+		".svg",
+		".png",
+		".tiff",
+		".jpg",
+	} {
+		if err := p.Save(4, 4, name+ext); err != nil {
+			panic(err)
+		}
+	}
+}
+
+// Data extracted from RDatasets volcano data for the Maunga Whau volcano topographic data.
+var volcano = deciGrid{mat64.NewDense(87, 61, []float64{
+EOF
+R -q -e 'write.table(as.data.frame(volcano), file="volcano_example.go", sep=", ", eol=",\n", col.names=FALSE, row.names=FALSE, append=TRUE)'
+echo >> volcano_example.go '})}'
+go fmt volcano_example.go

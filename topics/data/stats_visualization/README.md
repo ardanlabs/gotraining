@@ -26,7 +26,7 @@ from [here](http://www.physics.csbsju.edu/stats/box2.html)
 
 ## Code Review
 
-[github.com/gonum/plot docs](https://godoc.org/github.com/gonum/plot)  
+[gonum.org/v1/plot docs](https://godoc.org/gonum.org/v1/plot)  
 [Histogram of a normal distribution](example1/example1.go)  
 [Histograms with real data](example2/example2.go)  
 [Box Plot with various distribution](example3/example3.go)  

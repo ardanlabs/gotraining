@@ -20,7 +20,7 @@ Data scientists use dimensionality reduction to transfrom high-dimensional data 
 
 ## Code Review
 
-[github.com/gonum/stat docs](https://godoc.org/github.com/gonum/stat)    
+[gonum.org/v1/gonum/stat docs](https://godoc.org/gonum.org/v1/gonum/stat)    
 [Calculate Principal Components](example1/example1.go)      
 [Determine a Number of Target Dimensions](example2/example2.go)       
 [Project the Data](example3/example3.go)  

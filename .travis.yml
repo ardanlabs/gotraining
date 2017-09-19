@@ -7,11 +7,11 @@ env:
 go:
   - tip
 
-# Install dependencies including test dependencies. We could just use `go get
-# -t ./...` but not all examples are meant to compile.
-install:
-  - find . -name "*_test.go" -exec dirname {} \; | uniq | xargs go get -t -v
+# Disable installing anything by just running the program `true`
+install: true
 
-# Get a list of all directories with test files and test them.
+# Get a list of all non-vendor directories with test files and test them.
+# We could just do `go test ./...` but we have some packages that aren't
+# intended to compile
 script:
-  - find . -name "*_test.go" -exec dirname {} \; | uniq | xargs go test
+  - find . -name "*_test.go" -not -wholename "*vendor*" -exec dirname {} \; | uniq | xargs go test
