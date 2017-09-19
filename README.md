@@ -131,6 +131,8 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Comcast           Reston, VA             July       Bill Kennedy
 		Corporate    Go       Capital One       Washington, D.C.       August     Bill Kennedy 		
 		Corporate    Go       Teradata          San Diego              August     Bill Kennedy 		
+		Corporate    Go       Visa              Denver                 September  Jacob Walker 		
+		Corporate    Go       Capital One       Washington, D.C.       October    Bill Kennedy 		
 
 		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
@@ -149,6 +151,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		WWG          Go       TBD               London England         August     Bill Kennedy       https://www.meetup.com/Women-Who-Go-London/events/241708328/
 		WWG          Go       TBD               Atlanta, GA            October    Bill Kennedy       TBD
 		GoBridge     Go       TBD               Berlin, Germany        November   Bill Kennedy       TBD
+		WWG          Go       TBD               San Francisco, CA      November   Bill Kennedy       https://www.meetup.com/Women-Who-Go/events/243468818/
 		
 		Conference   Adv Go   Golab             Florance, IT           January    Bill Kennedy       http://golab.io
 		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy       http://www.gophercon.in/go-workshop		
