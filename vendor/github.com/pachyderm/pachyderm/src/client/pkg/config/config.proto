@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "gogoproto/gogo.proto";
+
+// Config specifies the pachyderm config that is read and interpreted by the
+// pachctl command-line tool. Right now, this is stored at
+// $HOME/.pachyderm/config.
+//
+// Different versions of the pachyderm config are specified as subfields of this
+// message (this allows us to make significant changes to the config structure
+// without breaking existing users by defining a new config version).
+//
+// DO NOT change or remove field numbers from this proto, otherwise ALL
+// pachyderm user configs will fail to parse.
+message Config {
+    string user_id = 1 [(gogoproto.customname) = "UserID"];
+
+    // Configuration options. Exactly one of these fields should be set
+    // (depending on which version of the config is being used)
+    ConfigV1 v1 = 2;
+}
+
+// ConfigV1 specifies v1 of the pachyderm config (June 30 2017 - present)
+// DO NOT change or remove field numbers from this proto, as if you do, v1 user
+// configs will become unparseable.
+message ConfigV1 {
+    // A host:port pointing pachd at a pachyderm cluster. Similar to the
+    // ADDRESS environment variable, though ADDRESS overrides this.
+    string pachd_address = 2;
+
+    // A secret token identifying the current pachctl user within their
+    // pachyderm cluster. This is included in all RPCs sent by pachctl, and used
+    // to determine if pachctl actions are authorized.
+    string session_token = 1;
+}
+

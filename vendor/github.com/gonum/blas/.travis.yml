@@ -1,0 +1,46 @@
+sudo: required
+
+language: go
+
+# Versions of go that are explicitly supported by gonum.
+go:
+ - 1.5.4
+ - 1.6.3
+ - 1.7.3
+
+os:
+ - linux
+ - osx
+
+env:
+  matrix:
+  - BLAS_LIB=OpenBLAS
+  - BLAS_LIB=gonum
+  - BLAS_LIB=Accelerate
+  - BLAS_LIB=ATLAS
+
+matrix:
+ exclude:
+  - os: linux
+    env: BLAS_LIB=Accelerate
+  - os: linux
+    env: BLAS_LIB=ATLAS
+  - os: osx
+    env: BLAS_LIB=ATLAS
+  - os: osx
+    env: BLAS_LIB=OpenBLAS
+
+# Cache used to persist the compiled BLAS library between CI calls.
+cache:
+  directories:
+  - .travis/OpenBLAS.cache
+
+# Install the appropriate blas library (if any) and associated gonum software.
+install:
+ - source ${TRAVIS_BUILD_DIR}/.travis/$TRAVIS_OS_NAME/$BLAS_LIB/install.sh
+
+script:
+ - source ${TRAVIS_BUILD_DIR}/.travis/$TRAVIS_OS_NAME/$BLAS_LIB/test.sh
+ - test -z "$(gofmt -d .)"
+ # This is run last since it alters the tree.
+ - ${TRAVIS_BUILD_DIR}/.travis/check-generate.sh

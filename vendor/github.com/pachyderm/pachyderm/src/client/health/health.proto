@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package health;
+
+service Health {
+  rpc Health(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}

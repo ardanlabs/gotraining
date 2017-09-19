@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+    	<div class="col-md-8 col-md-offset-2">
+            {{range $index, $val := .Items}}
+            	<div class="result-item">
+                    <div style="clear:both; font-size:16px; margin-top: 10px">
+                        {{$val.Engine}} : <a target="_blank" href="{{$val.Link}}">{{$val.TitleHTML}}</a>
+                    </div>
+                    <div style="clear:both; font-size:14px">{{$val.ContentHTML}}</div>
+                </div><!-- result-item -->
+            {{end}}
+    	</div><!-- col-md-12 -->
+    </div><!-- row -->
+</div><!-- container -->
