@@ -210,7 +210,6 @@ We use a slack channel to share links, code, and examples during the training.  
 ### Installing Go
 
 #### Local Installation
-I do not recommend using `homebrew` or `apt-get`.
 
 https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
 
