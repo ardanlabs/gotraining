@@ -149,7 +149,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		GoBridge     Go       SUNY Potsdam      Potsdam, NY            May        Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-with-william-kennedy-tickets-33174514867
 		WWG          Web      Packet HQ         NYC, NY                May        Jacob Walker       https://www.meetup.com/NYC-Women-Who-Go/events/239306971/
 		WWG          Go       TBD               London England         August     Bill Kennedy       https://www.meetup.com/Women-Who-Go-London/events/241708328/
-		WWG          Go       TBD               Atlanta, GA            October    Bill Kennedy       TBD
+		WWG          Go       FullStory         Atlanta, GA            October    Bill Kennedy       https://local.anitaborg.org/event/go-women-with-bill-kennedy/
 		GoBridge     Go       TBD               Berlin, Germany        November   Bill Kennedy       TBD
 		WWG          Go       TBD               San Francisco, CA      November   Bill Kennedy       https://www.meetup.com/Women-Who-Go/events/243468818/
 		
