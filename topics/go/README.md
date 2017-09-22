@@ -422,14 +422,14 @@ Channels allow goroutines to communicate with each other through the use of sign
         * _There are cases where channels can be simpler for this but initially question._
 * Unbuffered channels:
     * Receive happens before the Send.
-    * Benefit: 100% guarentee the signal has been received.
+    * Benefit: 100% guarantee the signal has been received.
     * Cost: Unknown latency on when the signal will be received.
 * Buffered channels:
     * Send happens before the Receive.
     * Benefit: Reduce blocking latency between signaling.
-    * Cost: No guarentee when the signal has been received.
-        * The larger the buffer, the less guarentee.
-        * Buffer of 1 can give you one delayed send of guarentee.
+    * Cost: No guarantee when the signal has been received.
+        * The larger the buffer, the less guarantee.
+        * Buffer of 1 can give you one delayed send of guarantee.
 * Closing channels:
     * Close happens before the Receive. (like Buffered)
     * Signaling without data.
