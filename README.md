@@ -133,6 +133,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Teradata          San Diego              August     Bill Kennedy 		
 		Corporate    Go       Visa              Denver                 September  Jacob Walker 		
 		Corporate    Go       Capital One       Washington, D.C.       October    Bill Kennedy 		
+		Corporate    Go       Red Ventures      Charlotte, NC          December   Bill Kennedy 		
 
 		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
