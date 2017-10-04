@@ -73,6 +73,6 @@ The Response
 
 ### Exercise 1
 
-Write a simple web service that has a set of different routes that return the string "Hello World" in multiple languages. Build the service using an Application context that will own the different handler methods. Then create your own mux, bind the routes and start the service. Validate your routes work in your browser.
+Write a simple web service that has a set of different routes that return the string "Hello World" in multiple languages. Build the service using an Application context (example4) that will own the different handler methods. Then create your own mux (example2), bind the routes and start the service. Validate your routes work in your browser.
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

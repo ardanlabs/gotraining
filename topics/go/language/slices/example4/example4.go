@@ -15,7 +15,7 @@ func main() {
 	// Capture the capacity of the slice.
 	lastCap := cap(data)
 
-	// Append ~10k strings to the slice.
+	// Append ~100k strings to the slice.
 	for record := 1; record <= 102400; record++ {
 
 		// Use the built-in function append to add to the slice.
