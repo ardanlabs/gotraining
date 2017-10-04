@@ -39,9 +39,9 @@ http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 ## Code Review
 
-[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/eV4l2JqLZL))  
+[Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/OrouX37XR5))  
 [Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/8NwVeZG6IB))  
-[Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/5A0VFp03vb))  
+[Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/b0itBwIuUU))  
 
 ## Exercises
 
