@@ -12,6 +12,10 @@ Variables are at the heart of the language and provide the ability to read from 
 * When variables are being declared to their zero value, use the keyword var.
 * When variables are being declared and initialized, use the short variable declaration operator.
 
+## Quotes
+
+_"Implicit conversion of types is the Halloween special of coding. Whoever thought of them deserves their own special hell." - Martin Thompson_
+
 ## Links
 
 [Built-In Types](http://golang.org/ref/spec#Boolean_types)  
