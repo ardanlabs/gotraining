@@ -16,7 +16,7 @@ import (
 // for every request.
 func App() http.Handler {
 
-	// Delcare the handler function to handle the GET and POST call.
+	// Declare the handler function to handle the GET and POST call.
 	h := func(res http.ResponseWriter, req *http.Request) {
 		switch req.Method {
 		case "GET":

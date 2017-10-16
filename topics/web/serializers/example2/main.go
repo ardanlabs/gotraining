@@ -25,7 +25,7 @@ type User struct {
 func main() {
 
 	// Encode a zero valued version of a user and write to stdout.
-	err := json.NewEncoder(os.Stdout).Encode(&User{})
+	err := json.NewEncoder(os.Stdout).Encode(User{})
 	if err != nil {
 		log.Fatal(err)
 	}

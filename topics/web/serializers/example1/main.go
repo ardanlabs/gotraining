@@ -69,7 +69,7 @@ func useBytes() {
 
 	input := []byte(`{"FirstName": "Samuel", "LastName": "O'Shea"}`)
 
-	// Decode input using a Decoder. The relevant signatures are
+	// Decode input using Unmarshal. The relevant signature is
 	//	func Unmarshal(data []byte, v interface{}) error
 	if err := json.Unmarshal(input, &u); err != nil {
 		log.Fatal(err)
