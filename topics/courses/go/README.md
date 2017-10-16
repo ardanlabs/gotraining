@@ -1,6 +1,8 @@
 ## Ultimate Go
 
-This is material for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. We believe these classes are perfect for anyone who wants a jump start in learning Go or who wants a more thorough understanding of the language and its internals.
+This class has been designed over the past 3 years and goes beyond just being a language class. There will be very little teaching of syntax and a big focus on learning how to read and understand the code you are writing. With a big understanding of “if performance matters” then these things matter. We will talk about semantics, guidelines, mechanical sympathy and data oriented design. We are going to talk about package oriented design and how to structure your Go projects for the long term. We are going to talk about writing concurrent code and how to effectively use channels. Then I will dig into the testing, benchmarking and profile tooling. We will talk a lot about composition and design.
+
+Everyone is going to be mentally exhausted by the end of each day. We will be challenging every student to think about what they are doing and why. In the 3 years we have taught this material, we never had someone not appreciate the class and feel like they are a better developer for it. If you want your team to be better Go developers, code reviewers, designers and architects, this is the class they need.
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
