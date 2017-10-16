@@ -1,6 +1,8 @@
 ## Ultimate Go
 
-This is material for any intermediate-level developer who has at least a few months to years of experience writing code in Go. This class provides a very deep knowledge of the programming language with a big push on language mechanics, design philosophies and guidelines. We focus on teaching how to write code with a priority on consistency, integrity, readability and simplicity. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing production software. We close the class with benchmarking, profiling, tracing and debugging. If you want your team to be better Go developers, code reviewers, designers and architects, this is the class they need.
+This class has been designed over the past 3 years and goes beyond just being a language class. There will be very little teaching of syntax and a big focus on learning how to read and understand the code you are writing. With a big understanding of “if performance matters” then these things matter. We will talk about semantics, guidelines, mechanical sympathy and data oriented design. We are going to talk about package oriented design and how to structure your Go projects for the long term. We are going to talk about writing concurrent code and how to effectively use channels. Then I will dig into the testing, benchmarking and profile tooling. We will talk a lot about composition and design.
+
+Everyone is going to be mentally exhausted by the end of each day. We will be challenging every student to think about what they are doing and why. In the 3 years we have taught this material, we never had someone not appreciate the class and feel like they are a better developer for it. If you want your team to be better Go developers, code reviewers, designers and architects, this is the class they need.
 
 [Ultimate Go](../courses/go/README.md)
 
