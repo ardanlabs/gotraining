@@ -10,6 +10,10 @@ A computer architecture’s potential performance is determined predominantly by
 * The dot (.) operator allows us to access individual field values.
 * We can create anonymous structs.
 
+## Quotes
+
+_"Implicit conversion of types is the Halloween special of coding. Whoever thought of them deserves their own special hell." - Martin Thompson_
+
 ## Links
 
 http://www.goinggo.net/2013/07/understanding-type-in-go.html  

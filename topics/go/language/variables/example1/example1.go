@@ -34,10 +34,6 @@ func main() {
 	fmt.Printf("cc := 3.14159 \t %T [%v]\n", cc, cc)
 	fmt.Printf("dd := true \t %T [%v]\n\n", dd, dd)
 
-	// "Implicit conversion of types is the Halloween special of coding.
-	// Whoever thought of them deserves their own special hell."
-	// - Martin Thompson
-
 	// Specify type and perform a conversion.
 	aaa := int32(10)
 
