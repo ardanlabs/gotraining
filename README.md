@@ -346,25 +346,20 @@ ___
 https://www.docker.com/products/docker-toolbox
 
 **Build Docker container**
-
 ```
 # current path is the source root where Dockerfile exists
-docker build -t ardanlabs-gotraining .
+docker build -t ardanlabs/gotraining:latest .
 ```
 
 **Start Docker container**
-
 ```
-docker run -it -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs-gotraining
-# or start container with downloaded gotraining in the image
-docker run -it ardanlabs-gotraining
+cd $GOPATH/src/github.com/ardanlabs/gotraining
+docker run -i -t -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs/gotraining:latest /bin/sh
 ```
 
-**Remove gotraining container and image**
-
+**What is running**
 ```
-docker rm -f $(docker ps -a | grep ardanlabs-gotraining | awk '{print $1}')
-docker rmi -f $(docker images -a | grep ardanlabs-gotraining | awk '{print $1}')
+docker ps -a
 ```
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
