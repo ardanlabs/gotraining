@@ -142,6 +142,8 @@ _"The basic ideas of good style, which are fundamental to write clearly and simp
 
 ### Mistakes
 
+"You are personally responsible for the software you write." - Stephen Bourne (Bourne shell)
+
 _"Mistakes are an inevitable consequence of doing something new and, as such, should be seen as valuable; without them, we'd have no originality." - Ed Catmull (President of Pixar)_
 
 ---

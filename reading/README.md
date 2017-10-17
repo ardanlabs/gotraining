@@ -40,6 +40,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Future of Programming](https://vimeo.com/71278954) - Bret Victor  
 [Systems Past: the only 8 software innovations we actually use](http://davidad.github.io/blog/2014/03/12/the-operating-system-is-out-of-date/) - davidad  
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
+[Early days of Unix and design of sh](https://www.youtube.com/watch?feature=youtu.be&v=2kEJoWfobpA&app=desktop) - Stephen Bourne  
 
 ### Contribute to Go
 
@@ -84,6 +85,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Designing for Performance](https://www.youtube.com/watch?v=03GsLxVdVzU&feature=youtu.be) - Martin Thompson  
 [Fighting latency: the CPU profiler is not your ally](https://www.youtube.com/watch?v=nsM_m4hZ-bA&t=973s) - Filippo Valsorda  
 [go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
+[Analyzing production using Flamegraphs](https://www.youtube.com/watch?v=aAhNDgEZj_U&app=desktop) - Prashant Varanasi  
 
 ### Interfaces and Composition
 
@@ -140,6 +142,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Proposal: Monotonic Elapsed Time Measurements in Go](https://github.com/golang/proposal/blob/master/design/12914-monotonic.md) - Russ Cox  
 [Exploring shared objects in Go](https://blog.ksub.org/bytes/2017/02/12/exploring-shared-objects-in-go/) - Marcelo Bytes  
 [Evaluation of read-only slices](https://docs.google.com/document/d/1-NzIYu0qnnsshMBpMPmuO21qd8unlimHgKjRD9qwp2A/edit) - Russ Cox  
+[Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
 
 ## Mechanical Sympathy
 
