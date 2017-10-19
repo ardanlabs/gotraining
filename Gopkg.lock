@@ -123,12 +123,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/goinggo/concurrentwebservice"
-  packages = ["search","service"]
-  revision = "f861f193de2f01b306743f84d98c39324d88043b"
-
-[[projects]]
-  branch = "master"
   name = "github.com/golang/freetype"
   packages = [".","raster","truetype"]
   revision = "e2365dfdc4a05e4b8299a783240d4a7d5a65d4e4"
@@ -380,10 +374,10 @@
   revision = "daa59528eefd43623a4c8e36373a86f9eef870a2"
 
 [[projects]]
+  branch = "master"
   name = "github.com/theplant/blackfriday"
   packages = ["."]
-  revision = "583b3c5e1dcb22f284b040675c11024081a4a66c"
-  version = "v1.1"
+  revision = "979429e1c46cdf38ac4556e1f28ee60720e80c33"
 
 [[projects]]
   name = "github.com/urfave/negroni"
@@ -496,6 +490,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "da199697719fe09d3190a4b64176c12fd4ef509b3badd848e3d202cb2208275b"
+  inputs-digest = "92584629fcb0ae1c90437eba78294d219aa94b4830cea1512a453a53e507b385"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -134,8 +134,8 @@
   version = "1.1.4"
 
 [[constraint]]
+  branch = "master"
   name = "github.com/theplant/blackfriday"
-  version = "1.1.0"
 
 [[constraint]]
   name = "github.com/urfave/negroni"

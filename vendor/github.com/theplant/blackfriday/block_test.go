@@ -59,6 +59,35 @@ func doTestsBlock(t *testing.T, tests []string, extensions int) {
 
 func TestPrefixHeaderNoExtensions(t *testing.T) {
 	var tests = []string{
+		"#\n",
+		"<h1></h1>\n",
+
+		"# \n",
+		"<h1></h1>\n",
+
+		`#
+
+![](/5018d345558fbe46c4000001/537f27fc18c8bca41a000010/file/5422741b6c08982b400000be/m/undefined "undefined")
+
+He Orders a beer.
+
+![](/5018d345558fbe46c4000001/537f27fc18c8bca41a000010/file/542274696c08982b400000da/m/undefined "undefined")
+
+# He Orders 0 beers.`,
+
+		`<h1></h1>
+
+<p><img src="/5018d345558fbe46c4000001/537f27fc18c8bca41a000010/file/5422741b6c08982b400000be/m/undefined" alt="" title="undefined" />
+</p>
+
+<p>He Orders a beer.</p>
+
+<p><img src="/5018d345558fbe46c4000001/537f27fc18c8bca41a000010/file/542274696c08982b400000da/m/undefined" alt="" title="undefined" />
+</p>
+
+<h1>He Orders 0 beers.</h1>
+`,
+
 		"# Header 1\n",
 		"<h1>Header 1</h1>\n",
 
@@ -115,6 +144,32 @@ func TestPrefixHeaderNoExtensions(t *testing.T) {
 			"<h1>Nested header</h1></li>\n</ul></li>\n</ul>\n",
 	}
 	doTestsBlock(t, tests, 0)
+}
+
+func TestNoListItemBlockExtension(t *testing.T) {
+	var tests = []string{
+
+		`# Title
+* a point
+  it worked?
+
+* second point
+
+* third point`,
+
+		`<h1>Title</h1>
+
+<ul>
+<li>a point
+it worked?</li>
+
+<li>second point</li>
+
+<li>third point</li>
+</ul>
+`,
+	}
+	doTestsBlock(t, tests, 0|EXTENSION_NO_LIST_ITEM_BLOCK)
 }
 
 func TestPrefixHeaderSpaceExtension(t *testing.T) {
@@ -339,17 +394,11 @@ func TestUnorderedList(t *testing.T) {
 		"- Ting\n\n- Bong\n- Goo\n",
 		"<ul>\n<li><p>Ting</p></li>\n\n<li><p>Bong</p></li>\n\n<li><p>Goo</p></li>\n</ul>\n",
 
-		"*Hello\n",
-		"<p>*Hello</p>\n",
-
 		"*   Hello \n",
 		"<ul>\n<li>Hello</li>\n</ul>\n",
 
 		"*   Hello \n    Next line \n",
 		"<ul>\n<li>Hello\nNext line</li>\n</ul>\n",
-
-		"Paragraph\n* No linebreak\n",
-		"<p>Paragraph\n* No linebreak</p>\n",
 
 		"Paragraph\n\n* Linebreak\n",
 		"<p>Paragraph</p>\n\n<ul>\n<li>Linebreak</li>\n</ul>\n",
@@ -391,6 +440,9 @@ func TestUnorderedList(t *testing.T) {
 		"* List\n        extra indent, same paragraph\n",
 		"<ul>\n<li>List\n    extra indent, same paragraph</li>\n</ul>\n",
 
+		"* List\n\n    >indent quote\n",
+		"<ul>\n<li><p>List</p>\n\n<blockquote>\n<p>indent quote</p>\n</blockquote></li>\n</ul>\n",
+
 		"* List\n\n        code block\n",
 		"<ul>\n<li><p>List</p>\n\n<pre><code>code block\n</code></pre></li>\n</ul>\n",
 
@@ -400,7 +452,133 @@ func TestUnorderedList(t *testing.T) {
 		"* List\n\n    * sublist\n\n    normal text\n\n    * another sublist\n",
 		"<ul>\n<li><p>List</p>\n\n<ul>\n<li>sublist</li>\n</ul>\n\n<p>normal text</p>\n\n<ul>\n<li>another sublist</li>\n</ul></li>\n</ul>\n",
 	}
-	doTestsBlock(t, tests, 0)
+
+	var tests1 = append(tests, []string{
+		"*Hello\n",
+		"<p>*Hello</p>\n",
+
+		"Paragraph\n* No linebreak\n",
+		"<p>Paragraph\n* No linebreak</p>\n",
+	}...)
+	doTestsBlock(t, tests1, 0)
+
+	var tests2 = append(tests, []string{
+		"*Hello\n",
+		"<p>*Hello</p>\n",
+
+		"Paragraph\n* No linebreak\n",
+		"<p>Paragraph</p>\n\n<ul>\n<li>No linebreak</li>\n</ul>\n",
+	}...)
+	doTestsBlock(t, tests2, EXTENSION_NO_EMPTY_LINE_BEFORE_BLOCK)
+
+	var tests3 = append(tests, []string{
+		"*Hello\n",
+		"<ul>\n<li>Hello</li>\n</ul>\n",
+
+		"-Hello\n",
+		"<ul>\n<li>Hello</li>\n</ul>\n",
+
+		"+Hello\n",
+		"<ul>\n<li>Hello</li>\n</ul>\n",
+
+		"*Hello*\n",
+		"<p><em>Hello</em></p>\n",
+
+		"-Hello-\n",
+		"<ul>\n<li>Hello-</li>\n</ul>\n",
+
+		"+Hello+\n",
+		"<ul>\n<li>Hello+</li>\n</ul>\n",
+
+		"Paragraph\n* No linebreak\n",
+		"<p>Paragraph\n* No linebreak</p>\n",
+
+		"Paragraph\n\n*Linebreak\n",
+		"<p>Paragraph</p>\n\n<ul>\n<li>Linebreak</li>\n</ul>\n",
+
+		"-*-\n",
+		"<ul>\n<li>*-</li>\n</ul>\n",
+
+		"*-*\n",
+		"<p><em>-</em></p>\n",
+
+		"*at the* beginning\n",
+		"<p><em>at the</em> beginning</p>\n",
+
+		"*try two* in *one line*\n",
+		"<p><em>try two</em> in <em>one line</em></p>\n",
+
+		"*__triple emphasis__*\n",
+		"<p><em><strong>triple emphasis</strong></em></p>\n",
+
+		"*improper **nesting* is** bad\n",
+		"<p><em>improper </em><em>nesting</em> is** bad</p>\n",
+
+		"-http://foo.com/\n",
+		"<ul>\n<li><a href=\"http://foo.com/\">http://foo.com/</a></li>\n</ul>\n",
+
+		"*http://foo.com/\n",
+		"<ul>\n<li><a href=\"http://foo.com/\">http://foo.com/</a></li>\n</ul>\n",
+
+		"*List\n" +
+			" *shallow indent\n" +
+			"  *part of second list\n" +
+			"   *still second\n" +
+			"    *almost there\n" +
+			"     *third level\n",
+		"<ul>\n" +
+			"<li>List\n\n" +
+			"<ul>\n" +
+			"<li>shallow indent</li>\n" +
+			"<li>part of second list</li>\n" +
+			"<li>still second</li>\n" +
+			"<li>almost there\n\n" +
+			"<ul>\n" +
+			"<li>third level</li>\n" +
+			"</ul></li>\n" +
+			"</ul></li>\n" +
+			"</ul>\n",
+
+		"*List\n        extra indent, same paragraph\n",
+		"<ul>\n<li>List\n    extra indent, same paragraph</li>\n</ul>\n",
+
+		"*List\n\n        code block\n",
+		"<ul>\n<li><p>List</p>\n\n<pre><code>code block\n</code></pre></li>\n</ul>\n",
+
+		"*List\n\n          code block with spaces\n",
+		"<ul>\n<li><p>List</p>\n\n<pre><code>  code block with spaces\n</code></pre></li>\n</ul>\n",
+
+		"*List\n\n    *sublist\n\n    normal text\n\n    *another sublist\n",
+		"<ul>\n<li><p>List</p>\n\n<ul>\n<li>sublist</li>\n</ul>\n\n<p>normal text</p>\n\n<ul>\n<li>another sublist</li>\n</ul></li>\n</ul>\n",
+	}...)
+	doTestsBlock(t, tests3, EXTENSION_NO_SPACE_LISTS|EXTENSION_AUTOLINK)
+
+	var tests4 = append(tests, []string{
+		"* List\n\n 1 space indent paragraph\n",
+		"<ul>\n<li><p>List</p>\n\n<p>1 space indent paragraph</p></li>\n</ul>\n",
+
+		"* List\n\n  2 spaces indent paragraph\n",
+		"<ul>\n<li><p>List</p>\n\n<p>2 spaces indent paragraph</p></li>\n</ul>\n",
+
+		"* List\n\n   3 spaces indent paragraph\n",
+		"<ul>\n<li><p>List</p>\n\n<p>3 spaces indent paragraph</p></li>\n</ul>\n",
+
+		"* List\n\n >1 space indent quote\n",
+		"<ul>\n<li><p>List</p>\n\n<blockquote>\n<p>1 space indent quote</p>\n</blockquote></li>\n</ul>\n",
+
+		"* List\n\n  >2 spaces indent quote\n",
+		"<ul>\n<li><p>List</p>\n\n<blockquote>\n<p>2 spaces indent quote</p>\n</blockquote></li>\n</ul>\n",
+
+		"* List\n\n   >3 spaces indent quote\n",
+		"<ul>\n<li><p>List</p>\n\n<blockquote>\n<p>3 spaces indent quote</p>\n</blockquote></li>\n</ul>\n",
+	}...)
+	doTestsBlock(t, tests4, EXTENSION_ONE_SPACE_INDENT)
+
+	var tests5 = append(tests, []string{
+		"– Item1\n\n – Item2\n\n",
+		"<ul>\n<li><p>Item1</p>\n\n<ul>\n<li>Item2</li>\n</ul></li>\n</ul>\n",
+	}...)
+	doTestsBlock(t, tests5, EXTENSION_UNICODE_LIST_ITEM)
 }
 
 func TestOrderedList(t *testing.T) {
@@ -423,17 +601,11 @@ func TestOrderedList(t *testing.T) {
 		"1 Hello\n",
 		"<p>1 Hello</p>\n",
 
-		"1.Hello\n",
-		"<p>1.Hello</p>\n",
-
 		"1.  Hello \n",
 		"<ol>\n<li>Hello</li>\n</ol>\n",
 
 		"1.  Hello \n    Next line \n",
 		"<ol>\n<li>Hello\nNext line</li>\n</ol>\n",
-
-		"Paragraph\n1. No linebreak\n",
-		"<p>Paragraph\n1. No linebreak</p>\n",
 
 		"Paragraph\n\n1. Linebreak\n",
 		"<p>Paragraph</p>\n\n<ol>\n<li>Linebreak</li>\n</ol>\n",
@@ -496,7 +668,132 @@ func TestOrderedList(t *testing.T) {
 		"1. numbers\n1. are ignored\n",
 		"<ol>\n<li>numbers</li>\n<li>are ignored</li>\n</ol>\n",
 	}
-	doTestsBlock(t, tests, 0)
+	var tests1 = append(tests, []string{
+		"1.Hello\n",
+		"<p>1.Hello</p>\n",
+
+		"Paragraph\n1. No linebreak\n",
+		"<p>Paragraph\n1. No linebreak</p>\n",
+	}...)
+	doTestsBlock(t, tests1, 0)
+
+	var tests2 = append(tests, []string{
+		"1.Hello\n",
+		"<p>1.Hello</p>\n",
+
+		"Paragraph\n1. No linebreak\n",
+		"<p>Paragraph</p>\n\n<ol>\n<li>No linebreak</li>\n</ol>\n",
+	}...)
+	doTestsBlock(t, tests2, EXTENSION_NO_EMPTY_LINE_BEFORE_BLOCK)
+
+	var tests3 = append(tests, []string{
+		"1.Hello\n",
+		"<ol>\n<li>Hello</li>\n</ol>\n",
+
+		"1.Yin\n2.Yang\n",
+		"<ol>\n<li>Yin</li>\n<li>Yang</li>\n</ol>\n",
+
+		"1.Ting\n2.Bong\n3.Goo\n",
+		"<ol>\n<li>Ting</li>\n<li>Bong</li>\n<li>Goo</li>\n</ol>\n",
+
+		"1.Yin\n\n2.Yang\n",
+		"<ol>\n<li><p>Yin</p></li>\n\n<li><p>Yang</p></li>\n</ol>\n",
+
+		"1.Ting\n\n2.Bong\n3. Goo\n",
+		"<ol>\n<li><p>Ting</p></li>\n\n<li><p>Bong</p></li>\n\n<li><p>Goo</p></li>\n</ol>\n",
+
+		"1.Hello \n    Next line \n",
+		"<ol>\n<li>Hello\nNext line</li>\n</ol>\n",
+
+		"Paragraph\n\n1.Linebreak\n",
+		"<p>Paragraph</p>\n\n<ol>\n<li>Linebreak</li>\n</ol>\n",
+
+		"1.List\n    1.Nested list\n",
+		"<ol>\n<li>List\n\n<ol>\n<li>Nested list</li>\n</ol></li>\n</ol>\n",
+
+		"1.List\n\n    1.Nested list\n",
+		"<ol>\n<li><p>List</p>\n\n<ol>\n<li>Nested list</li>\n</ol></li>\n</ol>\n",
+
+		"1.List\n    Second line\n\n    1.Nested\n",
+		"<ol>\n<li><p>List\nSecond line</p>\n\n<ol>\n<li>Nested</li>\n</ol></li>\n</ol>\n",
+
+		"1.List\n    1.Nested\n\n    Continued\n",
+		"<ol>\n<li><p>List</p>\n\n<ol>\n<li>Nested</li>\n</ol>\n\n<p>Continued</p></li>\n</ol>\n",
+
+		"1.List\n   1.shallow indent\n",
+		"<ol>\n<li>List\n\n<ol>\n<li>shallow indent</li>\n</ol></li>\n</ol>\n",
+
+		"1.List\n" +
+			" 1.shallow indent\n" +
+			"  2.part of second list\n" +
+			"   3.still second\n" +
+			"    4.almost there\n" +
+			"     1.third level\n",
+		"<ol>\n" +
+			"<li>List\n\n" +
+			"<ol>\n" +
+			"<li>shallow indent</li>\n" +
+			"<li>part of second list</li>\n" +
+			"<li>still second</li>\n" +
+			"<li>almost there\n\n" +
+			"<ol>\n" +
+			"<li>third level</li>\n" +
+			"</ol></li>\n" +
+			"</ol></li>\n" +
+			"</ol>\n",
+
+		"1.List\n        extra indent, same paragraph\n",
+		"<ol>\n<li>List\n    extra indent, same paragraph</li>\n</ol>\n",
+
+		"1.List\n\n        code block\n",
+		"<ol>\n<li><p>List</p>\n\n<pre><code>code block\n</code></pre></li>\n</ol>\n",
+
+		"1.List\n\n          code block with spaces\n",
+		"<ol>\n<li><p>List</p>\n\n<pre><code>  code block with spaces\n</code></pre></li>\n</ol>\n",
+
+		"1.List\n    *Mixted list\n",
+		"<ol>\n<li>List\n\n<ul>\n<li>Mixted list</li>\n</ul></li>\n</ol>\n",
+
+		"1.List\n *Mixed list\n",
+		"<ol>\n<li>List\n\n<ul>\n<li>Mixed list</li>\n</ul></li>\n</ol>\n",
+
+		"*Start with unordered\n 1.Ordered\n",
+		"<ul>\n<li>Start with unordered\n\n<ol>\n<li>Ordered</li>\n</ol></li>\n</ul>\n",
+
+		"*Start with unordered\n    1.Ordered\n",
+		"<ul>\n<li>Start with unordered\n\n<ol>\n<li>Ordered</li>\n</ol></li>\n</ul>\n",
+
+		"1.numbers\n1.are ignored\n",
+		"<ol>\n<li>numbers</li>\n<li>are ignored</li>\n</ol>\n",
+
+		"Qortex costs\n\n1.9 billion!",
+		"<p>Qortex costs</p>\n\n<p>1.9 billion!</p>\n",
+
+		"1.",
+		"<p>1.</p>\n",
+	}...)
+	doTestsBlock(t, tests3, EXTENSION_NO_SPACE_LISTS)
+
+	var tests4 = append(tests, []string{
+		"1. List\n\n 1 space indent paragraph\n",
+		"<ol>\n<li><p>List</p>\n\n<p>1 space indent paragraph</p></li>\n</ol>\n",
+
+		"1. List\n\n  2 spaces indent paragraph\n",
+		"<ol>\n<li><p>List</p>\n\n<p>2 spaces indent paragraph</p></li>\n</ol>\n",
+
+		"1. List\n\n   3 spaces indent paragraph\n",
+		"<ol>\n<li><p>List</p>\n\n<p>3 spaces indent paragraph</p></li>\n</ol>\n",
+
+		"1. List\n\n >1 space indent quote\n",
+		"<ol>\n<li><p>List</p>\n\n<blockquote>\n<p>1 space indent quote</p>\n</blockquote></li>\n</ol>\n",
+
+		"1. List\n\n  >2 spaces indent quote\n",
+		"<ol>\n<li><p>List</p>\n\n<blockquote>\n<p>2 spaces indent quote</p>\n</blockquote></li>\n</ol>\n",
+
+		"1. List\n\n   >3 spaces indent quote\n",
+		"<ol>\n<li><p>List</p>\n\n<blockquote>\n<p>3 spaces indent quote</p>\n</blockquote></li>\n</ol>\n",
+	}...)
+	doTestsBlock(t, tests4, EXTENSION_ONE_SPACE_INDENT)
 }
 
 func TestPreformattedHtml(t *testing.T) {
@@ -639,11 +936,21 @@ func TestFencedCodeBlock(t *testing.T) {
 
 		"``` oz\nleading spaces\n   ```\n",
 		"<pre><code class=\"oz\">leading spaces\n</code></pre>\n",
+	}
 
+	var tests1 = append(tests, []string{
 		"    ``` oz\nleading spaces\n    ```\n",
 		"<pre><code>``` oz\n</code></pre>\n\n<p>leading spaces\n    ```</p>\n",
-	}
-	doTestsBlock(t, tests, EXTENSION_FENCED_CODE)
+	}...)
+
+	doTestsBlock(t, tests1, EXTENSION_FENCED_CODE)
+
+	var tests2 = append(tests, []string{
+		"    ``` oz\nleading spaces\n    ```\n",
+		"<pre><code>``` oz\n</code></pre>\n\n<p>leading spaces</p>\n\n<pre><code>```\n</code></pre>\n",
+	}...)
+
+	doTestsBlock(t, tests2, EXTENSION_FENCED_CODE|EXTENSION_NO_EMPTY_LINE_BEFORE_BLOCK)
 }
 
 func TestTable(t *testing.T) {
@@ -686,6 +993,9 @@ func TestTable(t *testing.T) {
 		"a| b|c | d | e\n---|---|---|---|---\nf| g|h | i |j\n",
 		"<table>\n<thead>\n<tr>\n<td>a</td>\n<td>b</td>\n<td>c</td>\n<td>d</td>\n<td>e</td>\n</tr>\n</thead>\n\n" +
 			"<tbody>\n<tr>\n<td>f</td>\n<td>g</td>\n<td>h</td>\n<td>i</td>\n<td>j</td>\n</tr>\n</tbody>\n</table>\n",
+
+		"a|b\\|c|d\n---|---|---\nf|g\\|h|i\n",
+		"<table>\n<thead>\n<tr>\n<td>a</td>\n<td>b|c</td>\n<td>d</td>\n</tr>\n</thead>\n\n<tbody>\n<tr>\n<td>f</td>\n<td>g|h</td>\n<td>i</td>\n</tr>\n</tbody>\n</table>\n",
 	}
 	doTestsBlock(t, tests, EXTENSION_TABLES)
 }

@@ -6,8 +6,6 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
-
-	_ "github.com/goinggo/concurrentwebservice/service"
 )
 
 // TestRSSSearch tests the search screen loads.
