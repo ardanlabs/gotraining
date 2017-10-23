@@ -54,7 +54,7 @@ func waitForResult() {
 	ch := make(chan string)
 
 	go func() {
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
 		ch <- "paper"
 		fmt.Println("employee : sent signal")
 	}()
@@ -75,7 +75,7 @@ func waitForFinished() {
 	ch := make(chan struct{})
 
 	go func() {
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
 		close(ch)
 		fmt.Println("employee : sent signal")
 	}()

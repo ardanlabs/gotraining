@@ -7,14 +7,6 @@ Channels allow goroutines to communicate with each other through the use of sign
 
 ## Diagrams
 
-### Behavior of Unbuffered channels.
-
-![Ardan Labs](unbuffered.png)
-
-### Behavior of Buffered channels.
-
-![Ardan Labs](buffered.png)
-
 ### Guarantee Of Delivery
 
 The `Guarantee Of Delivery` is based on one question: “Do I need a guarantee that the signal sent by a particular goroutine has been received?”
@@ -27,13 +19,11 @@ The behavior of a channel is directly influenced by its current `State`. The sta
 
 ![Ardan Labs](state.png)
 
-### Signaling With Data
+### Signaling With Or Without Data
 
 When you are going to signal `with` data, there are three channel configuration options you can choose depending on the type of `guarantee` you need.
 
 ![Ardan Labs](signaling_with_data.png)
-
-### Signaling Without Data
 
 Signaling without data serves the main purpose of cancellation. It allows one goroutine to signal another goroutine to cancel what they are doing and move on. Cancellation can be implemented using both `unbuffered` and `buffered` channels.
 
@@ -61,7 +51,7 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/NcdftO5WMD))  
+[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/AwSxPorARm))  
 [Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/wlM-cY000f))  
 [Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OsyUwckOie))  
 [Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/kT0F-_fCob))  
