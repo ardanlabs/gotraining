@@ -51,7 +51,7 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/AwSxPorARm))  
+[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/n5N9pviByX))  
 [Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/wlM-cY000f))  
 [Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OsyUwckOie))  
 [Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/kT0F-_fCob))  

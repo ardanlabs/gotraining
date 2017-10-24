@@ -94,20 +94,20 @@ func waitForFinished() {
 func pooling() {
 	ch := make(chan string)
 
-	const grs = 2
-	for g := 0; g < grs; g++ {
-		go func(id int) {
+	const emps = 2
+	for e := 0; e < emps; e++ {
+		go func(emp int) {
 			for p := range ch {
-				fmt.Printf("employee %d : recv'd signal : %s\n", id, p)
+				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
 			}
-			fmt.Printf("employee %d : recv'd shutdown signal\n", id)
-		}(g)
+			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
+		}(e)
 	}
 
-	const reqs = 10
-	for i := 0; i < reqs; i++ {
+	const work = 10
+	for w := 0; w < work; w++ {
 		ch <- "paper"
-		fmt.Println("manager : sent signal :", i)
+		fmt.Println("manager : sent signal :", w)
 	}
 
 	close(ch)
@@ -123,22 +123,22 @@ func pooling() {
 // You need to wait because you need the paper from each of them before you
 // can continue.
 func fanOut() {
-	grs := 20
-	ch := make(chan string, grs)
+	emps := 20
+	ch := make(chan string, emps)
 
-	for g := 0; g < grs; g++ {
-		go func(g int) {
+	for e := 0; e < emps; e++ {
+		go func(emp int) {
 			time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
 			ch <- "paper"
-			fmt.Println("employee : sent signal :", g)
-		}(g)
+			fmt.Println("employee : sent signal :", emp)
+		}(e)
 	}
 
-	for grs > 0 {
+	for emps > 0 {
 		p := <-ch
 		fmt.Println(p)
-		fmt.Println("manager : recv'd signal :", grs)
-		grs--
+		fmt.Println("manager : recv'd signal :", emps)
+		emps--
 	}
 
 	time.Sleep(time.Second)
@@ -151,29 +151,29 @@ func fanOut() {
 // You need to wait for all the results of their work. You need to wait because
 // you need the paper from each of them before you can continue.
 func fanOutSem() {
-	grs := 20
-	ch := make(chan string, grs)
+	emps := 20
+	ch := make(chan string, emps)
 
 	const cap = 5
 	sem := make(chan bool, cap)
 
-	for g := 0; g < grs; g++ {
-		go func(g int) {
+	for e := 0; e < emps; e++ {
+		go func(emp int) {
 			sem <- true
 			{
 				time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
 				ch <- "paper"
-				fmt.Println("employee : sent signal :", g)
+				fmt.Println("employee : sent signal :", emp)
 			}
 			<-sem
-		}(g)
+		}(e)
 	}
 
-	for grs > 0 {
+	for emps > 0 {
 		p := <-ch
 		fmt.Println(p)
-		fmt.Println("manager : recv'd signal :", grs)
-		grs--
+		fmt.Println("manager : recv'd signal :", emps)
+		emps--
 	}
 
 	time.Sleep(time.Second)
@@ -197,13 +197,13 @@ func drop() {
 		}
 	}()
 
-	const reqs = 20
-	for r := 0; r < reqs; r++ {
+	const work = 20
+	for w := 0; w < work; w++ {
 		select {
 		case ch <- "paper":
-			fmt.Println("manager : sent signal :", r)
+			fmt.Println("manager : sent signal :", w)
 		default:
-			fmt.Println("manager : dropped data :", r)
+			fmt.Println("manager : dropped data :", w)
 		}
 	}
 
