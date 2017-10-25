@@ -124,11 +124,15 @@ func Copy(sys *System, batch int) error {
 // =============================================================================
 
 func main() {
-
-	// Initialize the system for use.
 	sys := System{
-		Puller: &Xenia{},
-		Storer: &Pillar{},
+		Puller: &Xenia{
+			Host:    "localhost:8000",
+			Timeout: time.Second,
+		},
+		Storer: &Pillar{
+			Host:    "localhost:9000",
+			Timeout: time.Second,
+		},
 	}
 
 	if err := Copy(&sys, 3); err != io.EOF {

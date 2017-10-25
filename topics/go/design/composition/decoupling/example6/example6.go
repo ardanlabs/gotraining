@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program demonstrating decoupling with interface composition.
+// Sample program demonstrating being more precise with API design.
 package main
 
 import (
@@ -33,12 +33,6 @@ type Puller interface {
 // Storer declares behavior for storing data.
 type Storer interface {
 	Store(d *Data) error
-}
-
-// PullStorer declares behavior for both pulling and storing.
-type PullStorer interface {
-	Puller
-	Storer
 }
 
 // =============================================================================
@@ -79,14 +73,6 @@ func (*Pillar) Store(d *Data) error {
 
 // =============================================================================
 
-// System wraps Pullers and Stores together into a single system.
-type System struct {
-	Puller
-	Storer
-}
-
-// =============================================================================
-
 // pull knows how to pull bulks of data from any Puller.
 func pull(p Puller, data []Data) (int, error) {
 	for i := range data {
@@ -110,13 +96,13 @@ func store(s Storer, data []Data) (int, error) {
 }
 
 // Copy knows how to pull and store data from any System.
-func Copy(ps PullStorer, batch int) error {
+func Copy(p Puller, s Storer, batch int) error {
 	data := make([]Data, batch)
 
 	for {
-		i, err := pull(ps, data)
+		i, err := pull(p, data)
 		if i > 0 {
-			if _, err := store(ps, data[:i]); err != nil {
+			if _, err := store(s, data[:i]); err != nil {
 				return err
 			}
 		}
@@ -130,18 +116,17 @@ func Copy(ps PullStorer, batch int) error {
 // =============================================================================
 
 func main() {
-	sys := System{
-		Puller: &Xenia{
-			Host:    "localhost:8000",
-			Timeout: time.Second,
-		},
-		Storer: &Pillar{
-			Host:    "localhost:9000",
-			Timeout: time.Second,
-		},
-	}
+	p := Puller(&Xenia{
+		Host:    "localhost:8000",
+		Timeout: time.Second,
+	})
 
-	if err := Copy(&sys, 3); err != io.EOF {
+	s := Storer(&Pillar{
+		Host:    "localhost:9000",
+		Timeout: time.Second,
+	})
+
+	if err := Copy(p, s, 3); err != io.EOF {
 		fmt.Println(err)
 	}
 }

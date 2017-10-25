@@ -14,7 +14,7 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 
 ## Quotes
 
-_"Methods are valid when it is practical or reasonable for a piece of data to expose a capability." - William Kennedy_
+_"A good API is not just easy to use but also hard to misuse." - JBD_
 
 ## Design Guidelines
 
@@ -37,11 +37,12 @@ http://golang.org/doc/effective_go.html#embedding
 
 #### Decoupling
 
-[Struct Composition](decoupling/example1/example1.go) ([Go Playground](https://play.golang.org/p/axLYwteYkK))  
-[Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/EnzMrT7Fdo))  
-[Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/ES4BOnDX6O))  
-[Decoupling With Interface Composition](decoupling/example4/example4.go) ([Go Playground](https://play.golang.org/p/ufFSFxCdEs))  
-[Remove Interface Pollution](decoupling/example5/example5.go) ([Go Playground](https://play.golang.org/p/a8C4KM9AU2))  
+[Struct Composition](decoupling/example1/example1.go) ([Go Playground](https://play.golang.org/p/5kJ_R7bhxC))  
+[Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/Ceo2f2sWLx))  
+[Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/s7B4mmIvtj))  
+[Decoupling With Interface Composition](decoupling/example4/example4.go) ([Go Playground](https://play.golang.org/p/pRyZ5UQ_L0))  
+[Remove Interface Pollution](decoupling/example5/example5.go) ([Go Playground](https://play.golang.org/p/K5bbsDnlIM))  
+[More Precise API](decoupling/example6/example6.go) ([Go Playground](https://play.golang.org/p/udStbohP4y))  
 
 #### Conversion and Assertions
 
