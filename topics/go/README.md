@@ -80,8 +80,6 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 
 _"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
-**_"An architecture isn't a set of pieces, it's a set of rules about what you can expect of them." - Michael Feathers_**
-
 ---
 
 ### Productivity vs Performance
@@ -129,6 +127,8 @@ _"The basic ideas of good style, which are fundamental to write clearly and simp
 ---
 
 ### Rules
+
+**_"An architecture isn't a set of pieces, it's a set of rules about what you can expect of them." - Michael Feathers_**
 
 * Rules have costs.
 * Rules must pull their weight - Don’t be clever (high level).
