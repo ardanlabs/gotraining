@@ -7,8 +7,6 @@ Note: This material has been designed to be taught in a classroom environment. T
 [Ultimate Go](../courses/go/README.md)
 
 ## Design Guidelines
- 
-_"An architecture isn't a set of pieces, it's a set of rules about what you can expect of them." - Michael Feathers_
 
 You must develop a design philosophy that establishes a set of guidelines. This is more important than developing a set of rules or patterns you apply blindly. Guidelines help to formulate, drive and validate decisions. You can't begin to make the best decisions without understanding the impact of your decisions. Every decision you make, every line of code you write comes with trade-offs.
 
@@ -82,6 +80,8 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 
 _"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
+**_"An architecture isn't a set of pieces, it's a set of rules about what you can expect of them." - Michael Feathers_**
+
 ---
 
 ### Productivity vs Performance
@@ -119,6 +119,8 @@ Refactoring must become part of the development cycle. Refactoring is the proces
 _"The correctness of the implementation is the most important concern, but there is no royal road to correctness. It involves diverse tasks such as thinking of invariants, testing and code reviews. Optimization should be done, but not prematurely." - Al Aho (inventor of AWK)_
 
 _"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan_
+
+**_Problems can usually be solved with simple, mundane solutions. That means there's no glamorous work. You don't get to show off your amazing skills. You just build something that gets the job done and then move on. This approach may not earn you oohs and aahs, but it lets you get on with it._** - unknown
 
 **Resources:**
 
