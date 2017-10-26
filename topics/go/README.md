@@ -118,7 +118,7 @@ _"The correctness of the implementation is the most important concern, but there
 
 _"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan_
 
-**_Problems can usually be solved with simple, mundane solutions. That means there's no glamorous work. You don't get to show off your amazing skills. You just build something that gets the job done and then move on. This approach may not earn you oohs and aahs, but it lets you get on with it._** - unknown
+_"Problems can usually be solved with simple, mundane solutions. That means there's no glamorous work. You don't get to show off your amazing skills. You just build something that gets the job done and then move on. This approach may not earn you oohs and aahs, but it lets you get on with it."_ - unknown
 
 **Resources:**
 
@@ -128,7 +128,7 @@ _"The basic ideas of good style, which are fundamental to write clearly and simp
 
 ### Rules
 
-**_"An architecture isn't a set of pieces, it's a set of rules about what you can expect of them." - Michael Feathers_**
+_"An architecture isn't a set of pieces, it's a set of rules about what you can expect of them." - Michael Feathers_
 
 * Rules have costs.
 * Rules must pull their weight - Don’t be clever (high level).
