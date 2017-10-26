@@ -15,12 +15,12 @@ import (
 
 // device allows us to mock a device we write logs to.
 type device struct {
-	off bool
+	problem bool
 }
 
 // Write implements the io.Writer interface.
 func (d *device) Write(p []byte) (n int, err error) {
-	if d.off {
+	if d.problem {
 
 		// Simulate disk problems.
 		time.Sleep(time.Second)
@@ -62,6 +62,6 @@ func main() {
 
 		// I appreciate we have a data race here with the Write
 		// method. Let's keep things simple to show the mechanics.
-		d.off = !d.off
+		d.problem = !d.problem
 	}
 }
