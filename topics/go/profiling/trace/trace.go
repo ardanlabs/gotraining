@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"runtime/trace"
+	"sync"
 )
 
 // LoadWrite reads a file from the network into memory and then
@@ -75,6 +76,44 @@ func StreamWrite() {
 	}
 }
 
+// Sort implements quick sort.
+func Sort(values []int, l int, r int, calls int) {
+	if l >= r {
+		return
+	}
+
+	pivot := values[l]
+	i := l + 1
+
+	for j := l; j <= r; j++ {
+		if pivot > values[j] {
+			values[i], values[j] = values[j], values[i]
+			i++
+		}
+	}
+
+	values[l], values[i-1] = values[i-1], pivot
+
+	if calls < 0 {
+		calls++
+		var wg sync.WaitGroup
+		wg.Add(2)
+
+		go func() {
+			Sort(values, l, i-2, calls)
+			wg.Done()
+		}()
+		go func() {
+			Sort(values, i, r, calls)
+			wg.Done()
+		}()
+		wg.Wait()
+	} else {
+		Sort(values, l, i-2, calls)
+		Sort(values, i, r, calls)
+	}
+}
+
 func main() {
 
 	// Create a file to hold tracing data.
@@ -88,7 +127,13 @@ func main() {
 	trace.Start(tf)
 	defer trace.Stop()
 
-	// Perform the work.
-	//LoadWrite()
-	//StreamWrite()
+	// LoadWrite()
+	// StreamWrite()
+
+	// rand.Seed(time.Now().UnixNano())
+	// numbers := make([]int, 100000)
+	// for i := range numbers {
+	// 	numbers[i] = rand.Intn(10000000)
+	// }
+	// Sort(numbers, 0, len(numbers)-1, 0)
 }
