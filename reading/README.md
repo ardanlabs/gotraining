@@ -41,6 +41,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Systems Past: the only 8 software innovations we actually use](http://davidad.github.io/blog/2014/03/12/the-operating-system-is-out-of-date/) - davidad  
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 [Early days of Unix and design of sh](https://www.youtube.com/watch?feature=youtu.be&v=2kEJoWfobpA&app=desktop) - Stephen Bourne  
+[What did Alan Kay mean by, "Lisp is the greatest single programming language ever designed"?](https://www.quora.com/What-did-Alan-Kay-mean-by-Lisp-is-the-greatest-single-programming-language-ever-designed/answer/Alan-Kay-11) - Alan Kay  
 
 ### Contribute to Go
 

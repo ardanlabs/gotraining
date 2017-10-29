@@ -80,6 +80,10 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 
 _"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
+**Resources:**
+
+[What did Alan Kay mean by, "Lisp is the greatest single programming language ever designed"?](https://www.quora.com/What-did-Alan-Kay-mean-by-Lisp-is-the-greatest-single-programming-language-ever-designed/answer/Alan-Kay-11) - Alan Kay
+
 ---
 
 ### Productivity vs Performance
