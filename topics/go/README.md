@@ -80,10 +80,6 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 
 _"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
-**Resources:**
-
-[What did Alan Kay mean by, "Lisp is the greatest single programming language ever designed"?](https://www.quora.com/What-did-Alan-Kay-mean-by-Lisp-is-the-greatest-single-programming-language-ever-designed/answer/Alan-Kay-11) - Alan Kay
-
 ---
 
 ### Productivity vs Performance
@@ -252,15 +248,18 @@ Focus on encapsulation and validate that you're not generalizing or even being t
 
 **Encapsulation**
 
+Encapsulation is what we have been trying to figure out as an industry for 40 years. Go is taking a slightly new approach with the package. Brining encapsulation up a level and providing richer support at the language level.
+
 _Paraphrasing: "Encapsulation and the separation of concerns are drivers for designing software. This is largely based on how other industries handle complexity. There seems to be a human pattern of using encapsulation to wrestle complexity to the ground." - Brad Cox (inventor of Objective C)_
 
 _"The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise - Edsger W. Dijkstra_
 
-Encapsulation is what we have been trying to figure out as an industry for 40 years. Go is taking a slightly new approach with the package. Brining encapsulation up a level and providing richer support at the language level.
+_"One of our many problems with thinking is “cognitive load”: the number of things we can pay attention to at once. The cliche is 7±2, but for many things it is even less. We make progress by making those few things be more powerful." - Alan Kay_
 
 **Resources:**
 
 [Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
+[What did Alan Kay mean by, "Lisp is the greatest single programming language ever designed"?](https://www.quora.com/What-did-Alan-Kay-mean-by-Lisp-is-the-greatest-single-programming-language-ever-designed/answer/Alan-Kay-11) - Alan Kay
 
 ---
 
