@@ -6,6 +6,7 @@ Learn the basics of testing web services and applications in Go.
 
 * The standard library has a package named httptest with good support.
 * There are several ways to create unit and integration tests in Go.
+* Example 5 is a complement for example 1 written in the popular BDD style.
 
 ## Links
 
@@ -18,6 +19,7 @@ https://golang.org/doc/articles/wiki/
 [Using a http.Handler](example2/unit_test.go)  
 [Testing Routes](example3/unit_test.go)  
 [Mocking Servers](example4/integration_test.go)  
+[BDD Testing](example5/bdd_test.go)
 
 ## Exercises
 
