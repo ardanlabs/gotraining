@@ -31,8 +31,8 @@ func main() {
 
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
-			for rune := 'a'; rune < 'a'+26; rune++ {
-				fmt.Printf("%c ", rune)
+			for r := 'a'; r <= 'z'; r++ {
+				fmt.Printf("%c ", r)
 			}
 		}
 
@@ -45,8 +45,8 @@ func main() {
 
 		// Display the alphabet three times.
 		for count := 0; count < 3; count++ {
-			for rune := 'A'; rune < 'A'+26; rune++ {
-				fmt.Printf("%c ", rune)
+			for r := 'A'; r <= 'Z'; r++ {
+				fmt.Printf("%c ", r)
 			}
 		}
 
