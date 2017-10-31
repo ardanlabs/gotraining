@@ -16,13 +16,13 @@ github.com/dvsekhvalnov/jose2go
 
 ## Code Review
 
-Default HTTP support: [Test](example1/main_test.go)
-POST calls: [Test](example2/main_test.go)
-PUT calls: [Test](example3/main_test.go)
-Client timeouts: [Test](example4/main_test.go)
-Custom transporter: [Test](example5/main_test.go)
-Signing requests with JSON Web Tokens: [Code](example6/main.go) | [Test](example6/main_test.go)
-Canceling with Context: [Test](example7/main_test.go)
+Default HTTP support: [Test](example1/main_test.go)  
+POST calls: [Test](example2/main_test.go)  
+PUT calls: [Test](example3/main_test.go)  
+Client timeouts: [Test](example4/main_test.go)  
+Custom transporter: [Test](example5/main_test.go)  
+Signing requests with JSON Web Tokens: [Code](example6/main.go) | [Test](example6/main_test.go)  
+Canceling with Context: [Test](example7/main_test.go)  
 
 ## Exercises
 

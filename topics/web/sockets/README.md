@@ -16,8 +16,8 @@ http://www.gorillatoolkit.org/pkg/websocket
 
 ## Code Review
 
-Standard Library websockets: [Code](example1/main.go) | [Test](example1/main_test.go)
-Gorilla websockets: [Code](example2/main.go) | [Test](example2/main_test.go)
+Standard Library websockets: [Code](example1/main.go) | [Test](example1/main_test.go)  
+Gorilla websockets: [Code](example2/main.go) | [Test](example2/main_test.go)  
 
 ## Exercises
 
