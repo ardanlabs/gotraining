@@ -116,6 +116,14 @@ _**Writing**_
 
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
 
+### 2018
+		Type         Type     Venue             Location               Month      Trainer            Url
+		=====================================================================================================================================================================================
+		Meetup       Go       Loyola University Loyola                 February   Bill Kennedy
+		Conference   Adv Go   GopherCon India   Pune, India            February   Bill Kennedy
+		CodeFest     Go       TBD               Novosibirsk, Russia    March      Bill Kennedy       https://www.codefest.ru/speakers/en/index.html
+		Conference   Adv Go   TBD               China                  April      Bill Kennedy
+
 ### 2017       
 		Type         Type     Venue             Location               Month      Trainer            Url
 		=====================================================================================================================================================================================
@@ -134,7 +142,9 @@ If you are interested in holding an event in your area please let me know. We wi
 		Corporate    Go       Visa              Denver                 September  Jacob Walker 		
 		Corporate    Go       Capital One       Washington, D.C.       October    Bill Kennedy 		
 		Corporate    Go       CISCO             San Jose, CA           October    Bill Kennedy 		
-		Corporate    Go       Red Ventures      Charlotte, NC          December   Bill Kennedy 		
+		Corporate    Go       Wayfair           Boston, MA             December   Bill Kennedy 	
+		Corporate    Go       Red Ventures      Charlotte, NC          December   Bill Kennedy 	
+		Corporate    Go       Skillsmatter      London, UK             December   Bill Kennedy 		
 
 		Public       Go       Fire Tavern       Atlanta, GA            March      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-atlanta-march-2017-tickets-31036843033
 		Public       Go       1up Events        San Francisco, CA      April      Bill Kennedy       https://www.eventbrite.com/e/ultimate-go-san-francisco-april-2017-tickets-31485558152
