@@ -144,6 +144,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Exploring shared objects in Go](https://blog.ksub.org/bytes/2017/02/12/exploring-shared-objects-in-go/) - Marcelo Bytes  
 [Evaluation of read-only slices](https://docs.google.com/document/d/1-NzIYu0qnnsshMBpMPmuO21qd8unlimHgKjRD9qwp2A/edit) - Russ Cox  
 [Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
+[The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
 
 ## Mechanical Sympathy
 

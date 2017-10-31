@@ -80,6 +80,10 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 
 _"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
+**Resources:**
+
+[The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
+
 ---
 
 ### Productivity vs Performance
