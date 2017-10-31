@@ -19,8 +19,8 @@ https://caddyserver.com/
 
 ## Code Review
 
-TLS support: [Code](example1/main.go)
-Automatic TLS with ACME via LetsEncrypt: [Code](example2/main.go)
+TLS support: [Code](example1/main.go)  
+Automatic TLS with ACME via LetsEncrypt: [Code](example2/main.go)  
 
 ## Exercises
 
