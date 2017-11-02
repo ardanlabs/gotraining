@@ -133,6 +133,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### Queuing Theory
 
 [Basic Queuing Theory](http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main_Angol.pdf) - Dr. János Sztrik  
+[Queueing Theory](https://speakerdeck.com/emfree/queueing-theory) - Eben Freeman  
 
 ### Misc
 
@@ -168,6 +169,7 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 [Understanding Transaction Hardware Memory](https://www.infoq.com/presentations/hardware-transactional-memory) - Gil Gene  
 [Want fast C++? Know your hardware!](https://www.youtube.com/watch?v=BP6NxVxDQIs) - Timur Doumler  
 [Performance Through Cache-Friendliness (4:25-5:48)](https://youtu.be/jEG4Qyo_4Bc?t=266) - Damian Gryski  
+[Going Nowhere Faster](https://www.youtube.com/watch?v=2EWejmkKlxs) - Chandler Carruth  
 
 #### Data-Oriented Design
 
