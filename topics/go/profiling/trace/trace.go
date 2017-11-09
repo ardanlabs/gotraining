@@ -10,28 +10,27 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"runtime/trace"
+	"runtime/pprof"
 	"strings"
 	"sync"
 	"sync/atomic"
 )
 
 type (
-
-	// Item defines the fields associated with the item tag in the buoy RSS document.
+	// Item defines the fields associated with the item tag in the RSS document.
 	Item struct {
 		XMLName     xml.Name `xml:"item"`
 		Title       string   `xml:"title"`
 		Description string   `xml:"description"`
 	}
 
-	// Channel defines the fields associated with the channel tag in the buoy RSS document.
+	// Channel defines the fields associated with the channel tag in the RSS document.
 	Channel struct {
 		XMLName xml.Name `xml:"channel"`
 		Items   []Item   `xml:"item"`
 	}
 
-	// Document defines the fields associated with the buoy RSS document.
+	// Document defines the fields associated with the RSS document.
 	Document struct {
 		XMLName xml.Name `xml:"rss"`
 		Channel Channel  `xml:"channel"`
@@ -39,16 +38,12 @@ type (
 )
 
 func findSingle(topic string) int {
+	const feeds = 100
 
-	// Track the number of articles that contain
-	// the topic.
 	var found int
 
-	// Pretend we have 100 feeds to search.
-	for i := 0; i < 100; i++ {
+	for i := 0; i < feeds; i++ {
 		feed := "newsfeed.xml"
-
-		// Open the file to search.
 		f, err := os.Open(feed)
 		if err != nil {
 			log.Printf("Opening File [%s] : ERROR : %v", feed, err)
@@ -56,14 +51,12 @@ func findSingle(topic string) int {
 		}
 		defer f.Close()
 
-		// Read the string into memory.
 		doc, err := ioutil.ReadAll(f)
 		if err != nil {
 			log.Printf("Reading File [%s] : ERROR : %v", feed, err)
 			return 0
 		}
 
-		// Decode the RSS document.
 		var d Document
 		if err := xml.Unmarshal(doc, &d); err != nil {
 			log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
@@ -71,7 +64,6 @@ func findSingle(topic string) int {
 			return 0
 		}
 
-		// Find the topic.
 		for _, item := range d.Channel.Items {
 			if strings.Contains(item.Title, topic) {
 				found++
@@ -88,20 +80,18 @@ func findSingle(topic string) int {
 }
 
 func findConcurrent(topic string) int {
+	const feeds = 100
 
-	// Track the number of articles that contain
-	// the topic.
 	var found int32
 
 	var wg sync.WaitGroup
-	wg.Add(100)
+	wg.Add(feeds)
 
-	// Pretend we have 100 feeds to search.
-	for i := 0; i < 100; i++ {
+	for i := 0; i < feeds; i++ {
 		go func() {
-			feed := "newsfeed.xml"
+			defer wg.Done()
 
-			// Open the file to search.
+			feed := "newsfeed.xml"
 			f, err := os.Open(feed)
 			if err != nil {
 				log.Printf("Opening File [%s] : ERROR : %v", feed, err)
@@ -109,14 +99,12 @@ func findConcurrent(topic string) int {
 			}
 			defer f.Close()
 
-			// Read the string into memory.
 			doc, err := ioutil.ReadAll(f)
 			if err != nil {
 				log.Printf("Reading File [%s] : ERROR : %v", feed, err)
 				return
 			}
 
-			// Decode the RSS document.
 			var d Document
 			if err := xml.Unmarshal(doc, &d); err != nil {
 				log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
@@ -125,8 +113,6 @@ func findConcurrent(topic string) int {
 			}
 
 			var localFound int32
-
-			// Find the topic.
 			for _, item := range d.Channel.Items {
 				if strings.Contains(item.Title, topic) {
 					localFound++
@@ -139,35 +125,34 @@ func findConcurrent(topic string) int {
 			}
 
 			atomic.AddInt32(&found, localFound)
-			wg.Done()
 		}()
 	}
 
 	wg.Wait()
-
 	return int(found)
 }
 
-func findLimit(topic string) int {
+func findWorkers(topic string) int {
+	const feeds = 100
+	const workers = 8
 
-	// Track the number of articles that contain
-	// the topic.
 	var found int32
 
+	ch := make(chan string, feeds)
+	for i := 0; i < feeds; i++ {
+		ch <- "newsfeed.xml"
+	}
+	close(ch)
+
 	var wg sync.WaitGroup
-	wg.Add(8)
+	wg.Add(workers)
 
-	ch := make(chan bool, 100)
-
-	// Pretend we have 100 feeds to search.
-	for i := 0; i < 8; i++ {
+	for i := 0; i < workers; i++ {
 		go func() {
+			defer wg.Done()
 			var localFound int32
 
-			for range ch {
-				feed := "newsfeed.xml"
-
-				// Open the file to search.
+			for feed := range ch {
 				f, err := os.Open(feed)
 				if err != nil {
 					log.Printf("Opening File [%s] : ERROR : %v", feed, err)
@@ -175,14 +160,12 @@ func findLimit(topic string) int {
 				}
 				defer f.Close()
 
-				// Read the string into memory.
 				doc, err := ioutil.ReadAll(f)
 				if err != nil {
 					log.Printf("Reading File [%s] : ERROR : %v", feed, err)
 					return
 				}
 
-				// Decode the RSS document.
 				var d Document
 				if err := xml.Unmarshal(doc, &d); err != nil {
 					log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
@@ -190,7 +173,6 @@ func findLimit(topic string) int {
 					return
 				}
 
-				// Find the topic.
 				for _, item := range d.Channel.Items {
 					if strings.Contains(item.Title, topic) {
 						localFound++
@@ -204,25 +186,19 @@ func findLimit(topic string) int {
 			}
 
 			atomic.AddInt32(&found, localFound)
-			wg.Done()
 		}()
 	}
 
-	for i := 0; i < 100; i++ {
-		ch <- true
-	}
-	close(ch)
-
 	wg.Wait()
-
 	return int(found)
 }
 
 func main() {
+	pprof.StartCPUProfile(os.Stdout)
+	defer pprof.StopCPUProfile()
 
-	// Start gathering the tracing data.
-	trace.Start(os.Stdout)
-	defer trace.Stop()
+	// trace.Start(os.Stdout)
+	// defer trace.Stop()
 
 	topic := "president"
 	n := findSingle(topic)

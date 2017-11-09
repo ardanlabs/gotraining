@@ -31,7 +31,7 @@ var fetch = struct {
 
 type (
 
-	// Item defines the fields associated with the item tag in the buoy RSS document.
+	// Item defines the fields associated with the item tag in the RSS document.
 	Item struct {
 		XMLName     xml.Name `xml:"item"`
 		PubDate     string   `xml:"pubDate"`
@@ -40,7 +40,7 @@ type (
 		Link        string   `xml:"link"`
 	}
 
-	// Image defines the fields associated with the image tag in the buoy RSS document.
+	// Image defines the fields associated with the image tag in the RSS document.
 	Image struct {
 		XMLName xml.Name `xml:"image"`
 		URL     string   `xml:"url"`
@@ -48,14 +48,14 @@ type (
 		Link    string   `xml:"link"`
 	}
 
-	// Channel defines the fields associated with the channel tag in the buoy RSS document.
+	// Channel defines the fields associated with the channel tag in the RSS document.
 	Channel struct {
 		XMLName xml.Name `xml:"channel"`
 		Image   Image    `xml:"image"`
 		Items   []Item   `xml:"item"`
 	}
 
-	// Document defines the fields associated with the buoy RSS document.
+	// Document defines the fields associated with the RSS document.
 	Document struct {
 		XMLName xml.Name `xml:"rss"`
 		Channel Channel  `xml:"channel"`
