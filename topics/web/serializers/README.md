@@ -12,7 +12,7 @@ http://mholt.github.io/json-to-go/
 
 JSON Encoding: [Code](example1/main.go)  
 JSON Struct Tags: [Code](example2/main.go) | [Test](example2/main_test.go)  
-MarshalJSON Interface: [Code](example2/main.go) | [Test](example2/main_test.go)  
+MarshalJSON Interface: [Code](example3/main.go) | [Test](example3/main_test.go)  
 JSON Mistakes: [Code](example4/main.go)  
 JSON and net/http: [Code](example5/main.go)  
 XML Encoding: [Code](example6/main.go) | [Test](example6/main_test.go)  
