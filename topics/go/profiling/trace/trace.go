@@ -6,134 +6,225 @@
 package main
 
 import (
-	"io"
+	"encoding/xml"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"runtime/trace"
+	"strings"
 	"sync"
+	"sync/atomic"
 )
 
-// LoadWrite reads a file from the network into memory and then
-// writes it to disk.
-func LoadWrite() {
+type (
 
-	// Download the tar file.
-	r, err := http.Get("https://ftp.gnu.org/gnu/binutils/binutils-2.7.tar.gz")
-	if err != nil {
-		log.Fatal(err)
+	// Item defines the fields associated with the item tag in the buoy RSS document.
+	Item struct {
+		XMLName     xml.Name `xml:"item"`
+		Title       string   `xml:"title"`
+		Description string   `xml:"description"`
 	}
 
-	// Read in the entire contents of the file.
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer r.Body.Close()
-
-	// Create a new file.
-	f, err := ioutil.TempFile("", "example")
-	if err != nil {
-		log.Fatal(err)
+	// Channel defines the fields associated with the channel tag in the buoy RSS document.
+	Channel struct {
+		XMLName xml.Name `xml:"channel"`
+		Items   []Item   `xml:"item"`
 	}
 
-	// Defer the close and removal of the file.
-	defer os.Remove(f.Name())
-	defer f.Close()
-
-	// Write the data to the file.
-	_, err = f.Write(body)
-	if err != nil {
-		log.Fatal(err)
+	// Document defines the fields associated with the buoy RSS document.
+	Document struct {
+		XMLName xml.Name `xml:"rss"`
+		Channel Channel  `xml:"channel"`
 	}
-}
+)
 
-// StreamWrite streams a file from the network, writing it to disk.
-func StreamWrite() {
+func findSingle(topic string) int {
 
-	// Download the tar file.
-	r, err := http.Get("https://ftp.gnu.org/gnu/binutils/binutils-2.7.tar.gz")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// Track the number of articles that contain
+	// the topic.
+	var found int
 
-	// Create a new file.
-	f, err := ioutil.TempFile("", "example")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// Pretend we have 100 feeds to search.
+	for i := 0; i < 100; i++ {
+		feed := "newsfeed.xml"
 
-	// Defer the close and removal of the file.
-	defer os.Remove(f.Name())
-	defer f.Close()
-
-	// Stream the file to disk.
-	if _, err = io.Copy(f, r.Body); err != nil {
-		if err != io.EOF {
-			log.Fatal(err)
+		// Open the file to search.
+		f, err := os.Open(feed)
+		if err != nil {
+			log.Printf("Opening File [%s] : ERROR : %v", feed, err)
+			return 0
 		}
-	}
-}
+		defer f.Close()
 
-// Sort implements quick sort.
-func Sort(values []int, l int, r int, calls int) {
-	if l >= r {
-		return
-	}
+		// Read the string into memory.
+		doc, err := ioutil.ReadAll(f)
+		if err != nil {
+			log.Printf("Reading File [%s] : ERROR : %v", feed, err)
+			return 0
+		}
 
-	pivot := values[l]
-	i := l + 1
+		// Decode the RSS document.
+		var d Document
+		if err := xml.Unmarshal(doc, &d); err != nil {
+			log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
+			f.Close()
+			return 0
+		}
 
-	for j := l; j <= r; j++ {
-		if pivot > values[j] {
-			values[i], values[j] = values[j], values[i]
-			i++
+		// Find the topic.
+		for _, item := range d.Channel.Items {
+			if strings.Contains(item.Title, topic) {
+				found++
+				continue
+			}
+
+			if strings.Contains(item.Description, topic) {
+				found++
+			}
 		}
 	}
 
-	values[l], values[i-1] = values[i-1], pivot
+	return found
+}
 
-	if calls < 0 {
-		calls++
-		var wg sync.WaitGroup
-		wg.Add(2)
+func findConcurrent(topic string) int {
 
+	// Track the number of articles that contain
+	// the topic.
+	var found int32
+
+	var wg sync.WaitGroup
+	wg.Add(100)
+
+	// Pretend we have 100 feeds to search.
+	for i := 0; i < 100; i++ {
 		go func() {
-			Sort(values, l, i-2, calls)
+			feed := "newsfeed.xml"
+
+			// Open the file to search.
+			f, err := os.Open(feed)
+			if err != nil {
+				log.Printf("Opening File [%s] : ERROR : %v", feed, err)
+				return
+			}
+			defer f.Close()
+
+			// Read the string into memory.
+			doc, err := ioutil.ReadAll(f)
+			if err != nil {
+				log.Printf("Reading File [%s] : ERROR : %v", feed, err)
+				return
+			}
+
+			// Decode the RSS document.
+			var d Document
+			if err := xml.Unmarshal(doc, &d); err != nil {
+				log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
+				f.Close()
+				return
+			}
+
+			var localFound int32
+
+			// Find the topic.
+			for _, item := range d.Channel.Items {
+				if strings.Contains(item.Title, topic) {
+					localFound++
+					continue
+				}
+
+				if strings.Contains(item.Description, topic) {
+					localFound++
+				}
+			}
+
+			atomic.AddInt32(&found, localFound)
 			wg.Done()
 		}()
-		go func() {
-			Sort(values, i, r, calls)
-			wg.Done()
-		}()
-		wg.Wait()
-	} else {
-		Sort(values, l, i-2, calls)
-		Sort(values, i, r, calls)
 	}
+
+	wg.Wait()
+
+	return int(found)
+}
+
+func findLimit(topic string) int {
+
+	// Track the number of articles that contain
+	// the topic.
+	var found int32
+
+	var wg sync.WaitGroup
+	wg.Add(8)
+
+	ch := make(chan bool, 100)
+
+	// Pretend we have 100 feeds to search.
+	for i := 0; i < 8; i++ {
+		go func() {
+			var localFound int32
+
+			for range ch {
+				feed := "newsfeed.xml"
+
+				// Open the file to search.
+				f, err := os.Open(feed)
+				if err != nil {
+					log.Printf("Opening File [%s] : ERROR : %v", feed, err)
+					return
+				}
+				defer f.Close()
+
+				// Read the string into memory.
+				doc, err := ioutil.ReadAll(f)
+				if err != nil {
+					log.Printf("Reading File [%s] : ERROR : %v", feed, err)
+					return
+				}
+
+				// Decode the RSS document.
+				var d Document
+				if err := xml.Unmarshal(doc, &d); err != nil {
+					log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
+					f.Close()
+					return
+				}
+
+				// Find the topic.
+				for _, item := range d.Channel.Items {
+					if strings.Contains(item.Title, topic) {
+						localFound++
+						continue
+					}
+
+					if strings.Contains(item.Description, topic) {
+						localFound++
+					}
+				}
+			}
+
+			atomic.AddInt32(&found, localFound)
+			wg.Done()
+		}()
+	}
+
+	for i := 0; i < 100; i++ {
+		ch <- true
+	}
+	close(ch)
+
+	wg.Wait()
+
+	return int(found)
 }
 
 func main() {
 
-	// Create a file to hold tracing data.
-	tf, err := os.Create("trace.out")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer tf.Close()
-
 	// Start gathering the tracing data.
-	trace.Start(tf)
+	trace.Start(os.Stdout)
 	defer trace.Stop()
 
-	// LoadWrite()
-	// StreamWrite()
-
-	// rand.Seed(time.Now().UnixNano())
-	// numbers := make([]int, 100000)
-	// for i := range numbers {
-	// 	numbers[i] = rand.Intn(10000000)
-	// }
-	// Sort(numbers, 0, len(numbers)-1, 0)
+	topic := "president"
+	n := findSingle(topic)
+	log.Printf("Found %s %d times.", topic, n)
 }

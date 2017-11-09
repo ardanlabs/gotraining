@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet title="XSL_formatting" type="text/xsl" href="/shared/bsp/xsl/rss/nolsol.xsl"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+    <channel>
+        <title><![CDATA[BBC News - US & Canada]]></title>
+        <description><![CDATA[BBC News - US & Canada]]></description>
+        <link>http://www.bbc.co.uk/news/</link>
+        <image>
+            <url>http://news.bbcimg.co.uk/nol/shared/img/bbc_news_120x60.gif</url>
+            <title>BBC News - US &amp; Canada</title>
+            <link>http://www.bbc.co.uk/news/</link>
+        </image>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Thu, 09 Nov 2017 15:38:45 GMT</lastBuildDate>
+        <copyright><![CDATA[Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/2/hi/help/rss/4498287.stm for terms and conditions of reuse.]]></copyright>
+        <language><![CDATA[en-gb]]></language>
+        <ttl>15</ttl>
+        <item>
+            <title><![CDATA[Trump China visit: US leader strikes warmer tone with Xi Jinping]]></title>
+            <description><![CDATA[The US president praises China on a visit to Beijing, with no reproaches over North Korea or trade.]]></description>
+            <link>http://www.bbc.co.uk/news/world-asia-china-41924228</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-asia-china-41924228</guid>
+            <pubDate>Thu, 09 Nov 2017 12:46:10 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/7D80/production/_98682123_trump_crop_getty.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Kevin Spacey: Completed film to be reshot without accused actor]]></title>
+            <description><![CDATA[Ridley Scott is to reshoot scenes with actor Christopher Plummer in time for a December release.]]></description>
+            <link>http://www.bbc.co.uk/news/entertainment-arts-41925767</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/entertainment-arts-41925767</guid>
+            <pubDate>Thu, 09 Nov 2017 12:26:33 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/5205/production/_98679902_spacey1_afppa.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Texas execution of Ruben Cardenas Ramirez sparks row with Mexico]]></title>
+            <description><![CDATA[The president of Mexico, which has no death penalty, accuses the US of ignoring human rights.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41928904</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41928904</guid>
+            <pubDate>Thu, 09 Nov 2017 15:30:11 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/C22C/production/_98680794_001313955.jpgc.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Justice Dept may seek CNN sale for merger]]></title>
+            <description><![CDATA[US competition regulators are reviewing AT&T's proposed takeover of Time Warner, according to reports.]]></description>
+            <link>http://www.bbc.co.uk/news/business-41919961</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/business-41919961</guid>
+            <pubDate>Wed, 08 Nov 2017 22:02:49 GMT</pubDate>
+            <media:thumbnail width="2048" height="1152" url="http://c.files.bbci.co.uk/67A9/production/_98673562_gettyimages-617513254.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Obama reports for jury duty in Chicago and is dismissed]]></title>
+            <description><![CDATA[Crowds turned out to see him, only for the judge to decide his services were no longer required.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41921910</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41921910</guid>
+            <pubDate>Thu, 09 Nov 2017 09:21:41 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/14EC1/production/_98679658_obama_getty.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Romance novel model pleads guilty to bank robbery spree]]></title>
+            <description><![CDATA[Connecticut media called the tattooed robber the "Beefcake bandit" due to his muscular physique.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41921914</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41921914</guid>
+            <pubDate>Thu, 09 Nov 2017 14:29:56 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/BED0/production/_98684884_920e701d-8cf6-420e-adb9-fcbdc5fa2fc8.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[This woman sent pictures of herself to her insurers instead of her car]]></title>
+            <description><![CDATA[A woman's car insurance blunder is being shared on Facebook after she sent front and side pictures of herself instead of her car]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41928752</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41928752</guid>
+            <pubDate>Thu, 09 Nov 2017 14:49:29 GMT</pubDate>
+            <media:thumbnail width="549" height="309" url="http://c.files.bbci.co.uk/25B0/production/_98684690_2c14bc62-3a6b-4546-9ec5-3478e71359f5.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Corey Feldman reports child abuse claims to police]]></title>
+            <description><![CDATA[He has long alleged Hollywood figures molested child stars including himself and Corey Haim.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41923271</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41923271</guid>
+            <pubDate>Wed, 08 Nov 2017 22:23:48 GMT</pubDate>
+            <media:thumbnail width="2048" height="1152" url="http://c.files.bbci.co.uk/7631/production/_98675203_corey.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Skateboarder wins hearts with apology note]]></title>
+            <description><![CDATA[The hunt is on for a skateboarder who left their "grass-cutting money" to pay for truck repairs.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41915515</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41915515</guid>
+            <pubDate>Wed, 08 Nov 2017 18:45:08 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/821B/production/_98670333_zelnioletter.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Transgender politician makes history in Virginia]]></title>
+            <description><![CDATA[Danica Roem becomes the first openly transgender politicians to serve in any US state legislature.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41923504</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41923504</guid>
+            <pubDate>Wed, 08 Nov 2017 21:26:55 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/5043/production/_98674502_p05mh3qm.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[US 'loses 60% of career ambassadors' since January]]></title>
+            <description><![CDATA[The labour union representing career US diplomats writes of a 'decapitation' of US leadership.]]></description>
+            <link>http://www.bbc.co.uk/news/41921907</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/41921907</guid>
+            <pubDate>Wed, 08 Nov 2017 20:21:36 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/13841/production/_98673997_gettyimages-632782096.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Ex-news anchor says Spacey groped her son]]></title>
+            <description><![CDATA[Men and women allege the Hollywood actor groped or made advances towards them.]]></description>
+            <link>http://www.bbc.co.uk/news/entertainment-arts-41918966</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/entertainment-arts-41918966</guid>
+            <pubDate>Wed, 08 Nov 2017 18:43:50 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/1150F/production/_98672907_hi042716177.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[US administration publishes new Cuba travel restrictions]]></title>
+            <description><![CDATA[The Treasury announces fresh curbs on US dealings with Cuba, including visits to the island.]]></description>
+            <link>http://www.bbc.co.uk/news/world-latin-america-41918907</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-latin-america-41918907</guid>
+            <pubDate>Wed, 08 Nov 2017 18:29:20 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/17D96/production/_98668679_042878303-1.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Trump tweets]]></title>
+            <description><![CDATA[Donald Trump has kept up his tweeting in China - even though Twitter is officially blocked there.]]></description>
+            <link>http://www.bbc.co.uk/news/world-asia-china-41924747</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-asia-china-41924747</guid>
+            <pubDate>Thu, 09 Nov 2017 07:12:33 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/15E43/production/_98676698_trumptwitterkids.png"/>
+        </item>
+        <item>
+            <title><![CDATA[Toronto royalty]]></title>
+            <description><![CDATA[Five things that Prince Harry's girlfriend's life in Toronto tells us about the possible future royal.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41768867</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41768867</guid>
+            <pubDate>Thu, 09 Nov 2017 00:51:53 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/9E63/production/_98674504_meghan_976getty.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Tax experiment]]></title>
+            <description><![CDATA[The president wants to cut taxes on income of "pass-through" businesses, and some conservatives are worried.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41862975</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41862975</guid>
+            <pubDate>Thu, 09 Nov 2017 00:58:22 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/4ED4/production/_98608102_trumptax.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Preparing for Mars ]]></title>
+            <description><![CDATA[Far from home, with great views... the International Space Station is not your typical holiday spot.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41908978</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41908978</guid>
+            <pubDate>Wed, 08 Nov 2017 20:55:08 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/54C1/production/_98679612_p05mk8wh.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Election night remembered]]></title>
+            <description><![CDATA[Clinton supporters thought they were gathering to witness history. They were, but not like they imagined.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41861675</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41861675</guid>
+            <pubDate>Tue, 07 Nov 2017 22:02:37 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/16AD5/production/_98658829_compfinal.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[One-note pop star?]]></title>
+            <description><![CDATA[The singer has dozens of melodies that sit on one note - but it's less of a cop-out than you think.]]></description>
+            <link>http://www.bbc.co.uk/news/entertainment-arts-41886475</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/entertainment-arts-41886475</guid>
+            <pubDate>Wed, 08 Nov 2017 04:12:06 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/9110/production/_98663173_taylor_index2.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Tailor to the stars]]></title>
+            <description><![CDATA[From the Apollo spacesuits to the Mars rovers, women behind the scenes have stitched vital spaceflight components.]]></description>
+            <link>http://www.bbc.co.uk/news/science-environment-41887973</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/science-environment-41887973</guid>
+            <pubDate>Wed, 08 Nov 2017 03:09:57 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/3D1D/production/_98654651_leadimagelienpham.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Play it again]]></title>
+            <description><![CDATA[Is the president popular enough to win an election today? We asked five experts - and a bookmaker.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41839706</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41839706</guid>
+            <pubDate>Wed, 08 Nov 2017 03:37:43 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/277A/production/_98660101_trump_976getty.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Reality Check]]></title>
+            <description><![CDATA[The Texas killer had previously assaulted his wife and child. It's a familiar pattern.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41906203</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41906203</guid>
+            <pubDate>Wed, 08 Nov 2017 03:02:31 GMT</pubDate>
+            <media:thumbnail width="2048" height="1152" url="http://c.files.bbci.co.uk/01BD/production/_98654400_gettyimages-871059014.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Boss or bully?]]></title>
+            <description><![CDATA["Democracy", "the NBA", and "boss of the world" are just some of the phrases they use.]]></description>
+            <link>http://www.bbc.co.uk/news/world-asia-china-41896439</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-asia-china-41896439</guid>
+            <pubDate>Wed, 08 Nov 2017 00:25:15 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/B9E0/production/_98648574_p05m9qnr.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[More mass shootings ]]></title>
+            <description><![CDATA[The number of people killed in US mass shootings has gone up. Analysts have different theories about why.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41890277</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41890277</guid>
+            <pubDate>Tue, 07 Nov 2017 02:44:56 GMT</pubDate>
+            <media:thumbnail width="768" height="432" url="http://c.files.bbci.co.uk/2DCC/production/_98642711_mediaitem98642710.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Kevin Spacey ]]></title>
+            <description><![CDATA[A day-by-day breakdown of the allegations made against the actor and the various responses to them.]]></description>
+            <link>http://www.bbc.co.uk/news/entertainment-arts-41884878</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/entertainment-arts-41884878</guid>
+            <pubDate>Thu, 09 Nov 2017 09:34:23 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/113CB/production/_98630607_spacey1_getty.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Happy anniversary?]]></title>
+            <description><![CDATA[A year after they cast their vote for President Trump, voters in Florida are reassessing their choice.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41851273</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41851273</guid>
+            <pubDate>Sun, 05 Nov 2017 23:36:47 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/5456/production/_98609512_p05lzl68.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Trump does not blame China for 'unfair' trade]]></title>
+            <description><![CDATA[Speaking in Beijing, the US president gives China "credit" for taking economic advantage of the US.]]></description>
+            <link>http://www.bbc.co.uk/news/business-41924797</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/business-41924797</guid>
+            <pubDate>Thu, 09 Nov 2017 08:07:29 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/17937/production/_98676569_gettyimages-871865922.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[US jobs growth in October falls short of forecasts]]></title>
+            <description><![CDATA[Employment rose by 261,000 after markets had predicted a post-hurricane rebound of 310,000.]]></description>
+            <link>http://www.bbc.co.uk/news/business-41856443</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/business-41856443</guid>
+            <pubDate>Fri, 03 Nov 2017 16:19:53 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/1417C/production/_98600328_employment4.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Apple shares hit record as iPhone X launches]]></title>
+            <description><![CDATA[The tech firm also predicts a strong holiday season as the high-end iPhone X hits shelves.]]></description>
+            <link>http://www.bbc.co.uk/news/business-41853801</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/business-41853801</guid>
+            <pubDate>Fri, 03 Nov 2017 14:04:08 GMT</pubDate>
+            <media:thumbnail width="2048" height="1152" url="http://c.files.bbci.co.uk/9753/production/_98593783_gettyimages-851606198.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Why Trump keeps saying Indo-Pacific]]></title>
+            <description><![CDATA[It's the latest "catchphrase" in a long history of diplomatic slogans from American presidents.]]></description>
+            <link>http://www.bbc.co.uk/news/world-asia-41912990</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-asia-41912990</guid>
+            <pubDate>Thu, 09 Nov 2017 00:01:58 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/9E4F/production/_98672504_p05mghj5.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Kevin Spacey's All the Money in the World role to be acted by Christopher Plummer]]></title>
+            <description><![CDATA[US actor Kevin Spacey is to be erased from a completed Hollywood film following the allegations of predatory sexual behaviour against him.]]></description>
+            <link>http://www.bbc.co.uk/news/entertainment-arts-41928159</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/entertainment-arts-41928159</guid>
+            <pubDate>Thu, 09 Nov 2017 11:28:23 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/06A1/production/_98679610_p05mk579.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA['To Kevin Spacey: Shame on you for what you did to my son']]></title>
+            <description><![CDATA[A former Boston news anchor says that her son was sexually assaulted by actor Kevin Spacey in 2016.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41921906</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41921906</guid>
+            <pubDate>Wed, 08 Nov 2017 17:44:05 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/CAB8/production/_98669815_p05mgmxx.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Hurricane Maria survivors still struggling in Puerto Rico]]></title>
+            <description><![CDATA[Jennifer doesn't not even have a proper home to live in two months after Hurricane Maria.]]></description>
+            <link>http://www.bbc.co.uk/news/world-latin-america-41920424</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-latin-america-41920424</guid>
+            <pubDate>Thu, 09 Nov 2017 00:55:10 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/CC21/production/_98675225_p05mh7by.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Barack Obama rocks up for jury duty]]></title>
+            <description><![CDATA[The former US president turned up at a courthouse in Chicago, where he has a home.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41925178</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41925178</guid>
+            <pubDate>Thu, 09 Nov 2017 06:10:27 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/1479B/production/_98676838_p05mjh31.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Kathy Griffin: ‘Not sorry’ for Trump photo]]></title>
+            <description><![CDATA[The comedian who posed with a severed head prop says she takes back the apology she made.]]></description>
+            <link>http://www.bbc.co.uk/news/entertainment-arts-41918064</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/entertainment-arts-41918064</guid>
+            <pubDate>Wed, 08 Nov 2017 13:46:23 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/FD12/production/_98668746_p05mfzm0.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[US President Donald Trump: The political survivor?]]></title>
+            <description><![CDATA[Donald Trump is marking a year since his US election victory. Political scientist Barbara Perry looks at how he has survived some tricky situations.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41907052</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41907052</guid>
+            <pubDate>Wed, 08 Nov 2017 05:21:04 GMT</pubDate>
+            <media:thumbnail width="1024" height="576" url="http://c.files.bbci.co.uk/14EA1/production/_98656658_p05mb8rd.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA['This is the way I'm built. This is the way I was born']]></title>
+            <description><![CDATA[A US TV traffic presenter "claps back" after a body-shaming social media post about her went viral.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41907475</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41907475</guid>
+            <pubDate>Tue, 07 Nov 2017 22:35:08 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/A843/production/_98657034_p05mcj4r.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Texas shooting: How to spot a hoax]]></title>
+            <description><![CDATA[Here's three of the hoaxes spread after the church tragedy and some tips on how to spot a hoax.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41893514</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41893514</guid>
+            <pubDate>Tue, 07 Nov 2017 19:27:17 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/3313/production/_98657031_p05mbf3x.jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Warning signs of a potential mass shooter]]></title>
+            <description><![CDATA[What motivates someone to commit a mass shooting? A former FBI director gives his thoughts.]]></description>
+            <link>http://www.bbc.co.uk/news/world-us-canada-41910106</link>
+            <guid isPermaLink="true">http://www.bbc.co.uk/news/world-us-canada-41910106</guid>
+            <pubDate>Wed, 08 Nov 2017 00:06:54 GMT</pubDate>
+            <media:thumbnail width="976" height="549" url="http://c.files.bbci.co.uk/2319/production/_98658980_p05mctdk.jpg"/>
+        </item>
+    </channel>
+</rss>

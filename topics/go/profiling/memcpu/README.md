@@ -12,7 +12,7 @@ Run the benchmark.
 
 Run the pprof tool.
     
-    $ go tool pprof benchmarks.test cpu.out
+    $ go tool pprof cpu.out
 
 Run these pprof commands.
 
@@ -29,7 +29,7 @@ Run the benchmark.
 
 Run the pprof tool.
 
-    $ go tool pprof -<PICK_MEM_PROFILE> benchmarks.test mem.out
+    $ go tool pprof -<PICK_MEM_PROFILE> mem.out
 
 Run these pprof commands.
 

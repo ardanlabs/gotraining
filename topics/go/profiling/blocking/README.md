@@ -12,7 +12,7 @@ Generate a block profile from running the test.
 
 Run the pprof tool to view the blocking profile.
 
-	$ go tool pprof blocking.test block.out
+	$ go tool pprof block.out
 
 Review the TestLatency function.
 

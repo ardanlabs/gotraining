@@ -134,4 +134,4 @@ After some time, take another snapshot:
 
 Now compare both snapshots against the binary and get into the pprof tool:
 
-    $ go tool pprof -inuse_space -base base.heap ./pprof current.heap
+    $ go tool pprof -inuse_space -base base.heap current.heap

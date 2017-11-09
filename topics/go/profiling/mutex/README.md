@@ -12,7 +12,7 @@ Generate a mutex profile from running the test.
 
 Run the pprof tool to view the mutex profile.
 
-	$ go tool pprof mutex.test mutex.out
+	$ go tool pprof mutex.out
 
 Review the TestMutexProfile function.
 
