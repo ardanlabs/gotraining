@@ -7,6 +7,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -56,7 +57,9 @@ func main() {
 
 	// Ensure we get a 200 OK status back
 	if res.StatusCode != http.StatusOK {
-		log.Fatalln("API responded with", res.Status)
+		log.Println("API responded with", res.Status)
+		io.Copy(os.Stderr, res.Body)
+		os.Exit(1)
 	}
 
 	// Decode the results into a []contributor
