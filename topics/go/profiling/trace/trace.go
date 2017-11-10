@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"runtime"
 	"runtime/trace"
 	"strings"
 	"sync"
@@ -47,13 +48,13 @@ func main() {
 	}
 
 	topic := "president"
-	n := findSingle(topic, docs)
+	n := find(topic, docs)
 	// n := findConcurrent(topic, docs)
 	// n := findNumCPU(topic, docs)
 	log.Printf("Found %s %d times.", topic, n)
 }
 
-func findSingle(topic string, docs []string) int {
+func find(topic string, docs []string) int {
 	var found int
 
 	for _, doc := range docs {
@@ -151,11 +152,10 @@ func findNumCPU(topic string, docs []string) int {
 	}
 	close(ch)
 
-	const workers = 8
 	var wg sync.WaitGroup
-	wg.Add(workers)
+	wg.Add(runtime.NumCPU())
 
-	for i := 0; i < workers; i++ {
+	for i := 0; i < runtime.NumCPU(); i++ {
 		go func() {
 			defer wg.Done()
 
