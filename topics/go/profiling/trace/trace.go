@@ -58,7 +58,7 @@ func find(topic string, docs []string) int {
 	var found int
 
 	for _, doc := range docs {
-		f, err := os.Open(doc)
+		f, err := os.OpenFile(doc, os.O_RDONLY, 0)
 		if err != nil {
 			log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 			return 0
@@ -103,7 +103,7 @@ func findConcurrent(topic string, docs []string) int {
 		go func(doc string) {
 			defer wg.Done()
 
-			f, err := os.Open(doc)
+			f, err := os.OpenFile(doc, os.O_RDONLY, 0)
 			if err != nil {
 				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 				return
@@ -162,7 +162,7 @@ func findNumCPU(topic string, docs []string) int {
 			var localFound int32
 
 			for doc := range ch {
-				f, err := os.Open(doc)
+				f, err := os.OpenFile(doc, os.O_RDONLY, 0)
 				if err != nil {
 					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 					return
