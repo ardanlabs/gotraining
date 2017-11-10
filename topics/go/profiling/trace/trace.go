@@ -48,9 +48,9 @@ func main() {
 	}
 
 	topic := "president"
-	// n := find(topic, docs)
+	n := find(topic, docs)
 	// n := findActor(topic, docs)
-	n := findConcurrent(topic, docs)
+	// n := findConcurrent(topic, docs)
 	// n := findNumCPU(topic, docs)
 
 	log.Printf("Found %s %d times.", topic, n)
@@ -101,7 +101,7 @@ func findActor(topic string, docs []string) int {
 			f, err := os.OpenFile(doc, os.O_RDONLY, 0)
 			if err != nil {
 				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
-				return
+				break
 			}
 			files <- f
 		}
@@ -111,10 +111,11 @@ func findActor(topic string, docs []string) int {
 	data := make(chan []byte, 100)
 	go func() {
 		for f := range files {
+			defer f.Close()
 			d, err := ioutil.ReadAll(f)
 			if err != nil {
 				log.Printf("Reading Document [%s] : ERROR : %v", f.Name(), err)
-				return
+				break
 			}
 			data <- d
 		}
@@ -127,7 +128,7 @@ func findActor(topic string, docs []string) int {
 			var d document
 			if err := xml.Unmarshal(dt, &d); err != nil {
 				log.Printf("Decoding Document : ERROR : %v", err)
-				return
+				break
 			}
 			rss <- d
 		}
