@@ -48,9 +48,11 @@ func main() {
 	}
 
 	topic := "president"
-	n := find(topic, docs)
-	// n := findConcurrent(topic, docs)
+	// n := find(topic, docs)
+	// n := findActor(topic, docs)
+	n := findConcurrent(topic, docs)
 	// n := findNumCPU(topic, docs)
+
 	log.Printf("Found %s %d times.", topic, n)
 }
 
@@ -74,7 +76,6 @@ func find(topic string, docs []string) int {
 		var d document
 		if err := xml.Unmarshal(data, &d); err != nil {
 			log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
-			f.Close()
 			return 0
 		}
 
@@ -90,6 +91,69 @@ func find(topic string, docs []string) int {
 		}
 	}
 
+	return found
+}
+
+func findActor(topic string, docs []string) int {
+	files := make(chan *os.File, 100)
+	go func() {
+		for _, doc := range docs {
+			f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+			if err != nil {
+				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
+				return
+			}
+			files <- f
+		}
+		close(files)
+	}()
+
+	data := make(chan []byte, 100)
+	go func() {
+		for f := range files {
+			d, err := ioutil.ReadAll(f)
+			if err != nil {
+				log.Printf("Reading Document [%s] : ERROR : %v", f.Name(), err)
+				return
+			}
+			data <- d
+		}
+		close(data)
+	}()
+
+	rss := make(chan document, 100)
+	go func() {
+		for dt := range data {
+			var d document
+			if err := xml.Unmarshal(dt, &d); err != nil {
+				log.Printf("Decoding Document : ERROR : %v", err)
+				return
+			}
+			rss <- d
+		}
+		close(rss)
+	}()
+
+	var wg sync.WaitGroup
+	wg.Add(1)
+	var found int
+	go func() {
+		for d := range rss {
+			for _, item := range d.Channel.Items {
+				if strings.Contains(item.Title, topic) {
+					found++
+					continue
+				}
+
+				if strings.Contains(item.Description, topic) {
+					found++
+				}
+			}
+		}
+		wg.Done()
+	}()
+
+	wg.Wait()
 	return found
 }
 
@@ -119,7 +183,6 @@ func findConcurrent(topic string, docs []string) int {
 			var d document
 			if err := xml.Unmarshal(data, &d); err != nil {
 				log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
-				f.Close()
 				return
 			}
 
@@ -178,7 +241,6 @@ func findNumCPU(topic string, docs []string) int {
 				var d document
 				if err := xml.Unmarshal(data, &d); err != nil {
 					log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
-					f.Close()
 					return
 				}
 
