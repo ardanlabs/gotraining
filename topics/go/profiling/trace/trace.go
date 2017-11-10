@@ -10,56 +10,69 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"runtime/pprof"
+	"runtime/trace"
 	"strings"
 	"sync"
 	"sync/atomic"
 )
 
 type (
-	// Item defines the fields associated with the item tag in the RSS document.
-	Item struct {
+	item struct {
 		XMLName     xml.Name `xml:"item"`
 		Title       string   `xml:"title"`
 		Description string   `xml:"description"`
 	}
 
-	// Channel defines the fields associated with the channel tag in the RSS document.
-	Channel struct {
+	channel struct {
 		XMLName xml.Name `xml:"channel"`
-		Items   []Item   `xml:"item"`
+		Items   []item   `xml:"item"`
 	}
 
-	// Document defines the fields associated with the RSS document.
-	Document struct {
+	document struct {
 		XMLName xml.Name `xml:"rss"`
-		Channel Channel  `xml:"channel"`
+		Channel channel  `xml:"channel"`
 	}
 )
 
-func findSingle(topic string) int {
-	const feeds = 100
+func main() {
+	// pprof.StartCPUProfile(os.Stdout)
+	// defer pprof.StopCPUProfile()
 
+	trace.Start(os.Stdout)
+	defer trace.Stop()
+
+	docs := make([]string, 100)
+	for i := range docs {
+		docs[i] = "newsfeed.xml"
+	}
+
+	topic := "president"
+	n := findSingle(topic, docs)
+	// n := findConcurrent(topic, docs)
+	// n := findNumCPU(topic, docs)
+	log.Printf("Found %s %d times.", topic, n)
+}
+
+func findSingle(topic string, docs []string) int {
 	var found int
 
-	for i := 0; i < feeds; i++ {
-		feed := "newsfeed.xml"
-		f, err := os.Open(feed)
+	for _, doc := range docs {
+		f, err := os.Open(doc)
 		if err != nil {
-			log.Printf("Opening File [%s] : ERROR : %v", feed, err)
+			log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 			return 0
 		}
 		defer f.Close()
 
-		doc, err := ioutil.ReadAll(f)
+		data, err := ioutil.ReadAll(f)
 		if err != nil {
-			log.Printf("Reading File [%s] : ERROR : %v", feed, err)
+			log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 			return 0
 		}
 
-		var d Document
-		if err := xml.Unmarshal(doc, &d); err != nil {
-			log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
+		var d document
+		if err := xml.Unmarshal(data, &d); err != nil {
+			log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
 			f.Close()
 			return 0
 		}
@@ -79,35 +92,32 @@ func findSingle(topic string) int {
 	return found
 }
 
-func findConcurrent(topic string) int {
-	const feeds = 100
-
+func findConcurrent(topic string, docs []string) int {
 	var found int32
 
 	var wg sync.WaitGroup
-	wg.Add(feeds)
+	wg.Add(len(docs))
 
-	for i := 0; i < feeds; i++ {
-		go func() {
+	for _, doc := range docs {
+		go func(doc string) {
 			defer wg.Done()
 
-			feed := "newsfeed.xml"
-			f, err := os.Open(feed)
+			f, err := os.Open(doc)
 			if err != nil {
-				log.Printf("Opening File [%s] : ERROR : %v", feed, err)
+				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 				return
 			}
 			defer f.Close()
 
-			doc, err := ioutil.ReadAll(f)
+			data, err := ioutil.ReadAll(f)
 			if err != nil {
-				log.Printf("Reading File [%s] : ERROR : %v", feed, err)
+				log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 				return
 			}
 
-			var d Document
-			if err := xml.Unmarshal(doc, &d); err != nil {
-				log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
+			var d document
+			if err := xml.Unmarshal(data, &d); err != nil {
+				log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
 				f.Close()
 				return
 			}
@@ -125,50 +135,49 @@ func findConcurrent(topic string) int {
 			}
 
 			atomic.AddInt32(&found, localFound)
-		}()
+		}(doc)
 	}
 
 	wg.Wait()
 	return int(found)
 }
 
-func findWorkers(topic string) int {
-	const feeds = 100
-	const workers = 8
-
+func findNumCPU(topic string, docs []string) int {
 	var found int32
 
-	ch := make(chan string, feeds)
-	for i := 0; i < feeds; i++ {
-		ch <- "newsfeed.xml"
+	ch := make(chan string, len(docs))
+	for _, doc := range docs {
+		ch <- doc
 	}
 	close(ch)
 
+	const workers = 8
 	var wg sync.WaitGroup
 	wg.Add(workers)
 
 	for i := 0; i < workers; i++ {
 		go func() {
 			defer wg.Done()
+
 			var localFound int32
 
-			for feed := range ch {
-				f, err := os.Open(feed)
+			for doc := range ch {
+				f, err := os.Open(doc)
 				if err != nil {
-					log.Printf("Opening File [%s] : ERROR : %v", feed, err)
+					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 					return
 				}
 				defer f.Close()
 
-				doc, err := ioutil.ReadAll(f)
+				data, err := ioutil.ReadAll(f)
 				if err != nil {
-					log.Printf("Reading File [%s] : ERROR : %v", feed, err)
+					log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 					return
 				}
 
-				var d Document
-				if err := xml.Unmarshal(doc, &d); err != nil {
-					log.Printf("Decoding File [%s] : ERROR : %v", feed, err)
+				var d document
+				if err := xml.Unmarshal(data, &d); err != nil {
+					log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
 					f.Close()
 					return
 				}
@@ -191,16 +200,4 @@ func findWorkers(topic string) int {
 
 	wg.Wait()
 	return int(found)
-}
-
-func main() {
-	pprof.StartCPUProfile(os.Stdout)
-	defer pprof.StopCPUProfile()
-
-	// trace.Start(os.Stdout)
-	// defer trace.Stop()
-
-	topic := "president"
-	n := findSingle(topic)
-	log.Printf("Found %s %d times.", topic, n)
 }

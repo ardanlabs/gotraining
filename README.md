@@ -176,6 +176,7 @@ If you are interested in holding an event in your area please let me know. We wi
 		Conference   Web      GolangUK          London, England        August     Jacob Walker       https://www.golanguk.com
 		Conference   Adv Go   dotGo             Paris, France          November   Bill Kennedy       https://www.dotgo.eu/
 		Conference   Talk     Code::Dive        Wroclaw, Poland        November   Bill Kennedy       http://codedive.pl/
+		Meetup       Talk     Golang Charlotte  Charlotte, NC          November   Bill Kennedy       https://www.meetup.com/golangclt/events/244091465/
 
 ## More About Go
 
