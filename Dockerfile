@@ -3,4 +3,4 @@ RUN apk add --update --no-cache \
            graphviz \
            ttf-freefont
 WORKDIR /go/src/github.com/ardanlabs/gotraining
-CMD /bin/bash
+CMD /bin/sh
