@@ -365,7 +365,7 @@ docker build -t ardanlabs/gotraining:latest .
 **Start Docker container**
 ```
 cd $GOPATH/src/github.com/ardanlabs/gotraining
-docker run -i -t -p 8080:8080 -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs/gotraining:latest /bin/sh
+docker run -i -t -p 8080:8080 -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs/gotraining:latest
 ```
 
 **What is running**
