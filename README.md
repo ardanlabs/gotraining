@@ -356,7 +356,7 @@ ___
 **Install Docker Toolbox**  
 https://www.docker.com/products/docker-toolbox
 
-**Build Docker container**
+**Build Docker image**
 ```
 # current path is the source root where Dockerfile exists
 docker build -t ardanlabs/gotraining:latest .
