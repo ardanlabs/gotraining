@@ -42,7 +42,7 @@ http://golang.org/doc/effective_go.html#embedding
 [Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/s7B4mmIvtj))  
 [Decoupling With Interface Composition](decoupling/example4/example4.go) ([Go Playground](https://play.golang.org/p/pRyZ5UQ_L0))  
 [Remove Interface Pollution](decoupling/example5/example5.go) ([Go Playground](https://play.golang.org/p/K5bbsDnlIM))  
-[More Precise API](decoupling/example6/example6.go) ([Go Playground](https://play.golang.org/p/udStbohP4y))  
+[More Precise API](decoupling/example6/example6.go) ([Go Playground](https://play.golang.org/p/yX_ioKxY9J))
 
 #### Conversion and Assertions
 
