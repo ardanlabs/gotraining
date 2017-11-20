@@ -232,7 +232,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
-[Go 1.9 Release Notes](https://golang.org/doc/go1.9) - 2017/24/17  
+[Go 1.9 Release Notes](https://golang.org/doc/go1.9) - 2017/08/24  
 [Go 1.8 Release Notes](https://golang.org/doc/go1.8) - 2017/02/16  
 [Go 1.7 Release Notes](https://golang.org/doc/go1.7) - 2016/08/15  
 [Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
