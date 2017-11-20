@@ -1,4 +1,4 @@
-FROM golang:1.9.1-alpine3.6
+FROM golang:1.9-alpine3.6
 RUN apk add --update --no-cache \
            graphviz \
            ttf-freefont
