@@ -116,17 +116,17 @@ func Copy(p Puller, s Storer, batch int) error {
 // =============================================================================
 
 func main() {
-	p := Puller(&Xenia{
+	x := Xenia{
 		Host:    "localhost:8000",
 		Timeout: time.Second,
-	})
+	}
 
-	s := Storer(&Pillar{
+	p := Pillar{
 		Host:    "localhost:9000",
 		Timeout: time.Second,
-	})
+	}
 
-	if err := Copy(p, s, 3); err != io.EOF {
+	if err := Copy(&x, &p, 3); err != io.EOF {
 		fmt.Println(err)
 	}
 }
