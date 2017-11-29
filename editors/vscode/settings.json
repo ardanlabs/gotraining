@@ -1,3 +1,4 @@
+// Place your settings in this file to overwrite the default settings
 {
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
@@ -36,20 +37,11 @@
     },
     "files.trimTrailingWhitespace": false,
 
-    "spellchecker.documentTypes": [
-        "markdown",
-        "latex",
-        "plaintext"
-    ],
-
-    "spellchecker.ignoreFileExtensions": [
-        ".go",
-        ".cfg",
-        ".sh"
-    ]
-,
-"window.zoomLevel": 0,
-"editor.wordWrap": "off",
-"workbench.colorTheme": "Zenburn",
-"workbench.colorCustomizations": {"editorLineNumber.foreground": "#9F9F9F"}
+    "window.zoomLevel": 1,
+    "editor.wordWrap": "off",
+    "workbench.colorTheme": "Zenburn",
+    "workbench.colorCustomizations": {
+        "editorLineNumber.foreground": "#9F9F9F"
+    },
+    "extensions.ignoreRecommendations": false
 }
