@@ -14,8 +14,8 @@ var (
 	// ErrBadRequest is returned when there are problems with the request.
 	ErrBadRequest = errors.New("Bad Request")
 
-	// ErrMovedPermanently is returned when a 301/302 is returned.
-	ErrMovedPermanently = errors.New("Moved Permanently")
+	// ErrPageMoved is returned when a 301/302 is returned.
+	ErrPageMoved = errors.New("Page Moved")
 )
 
 func main() {
@@ -25,8 +25,8 @@ func main() {
 			fmt.Println("Bad Request Occurred")
 			return
 
-		case ErrMovedPermanently:
-			fmt.Println("The URL moved, check it again")
+		case ErrPageMoved:
+			fmt.Println("The Page moved")
 			return
 
 		default:
@@ -44,5 +44,5 @@ func webCall(b bool) error {
 		return ErrBadRequest
 	}
 
-	return ErrMovedPermanently
+	return ErrPageMoved
 }
