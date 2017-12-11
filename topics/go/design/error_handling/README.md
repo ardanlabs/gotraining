@@ -28,7 +28,7 @@ https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package
 ## Code Review
 
 [Default Error Values](example1/example1.go) ([Go Playground](https://play.golang.org/p/aSjTxzNfP2))  
-[Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/-vBG0m1Scs))  
+[Error Variables](example2/example2.go) ([Go Playground](https://play.golang.org/p/EFPJu4mTJA))  
 [Type As Context](example3/example3.go) ([Go Playground](https://play.golang.org/p/FeR2nE3eAH))  
 [Behavior As Context](example4/example4.go) ([Go Playground](https://play.golang.org/p/Aylgou6Gq0))  
 [Find The Bug](example5/example5.go) ([Go Playground](https://play.golang.org/p/0AUU_sJsec)) | 
