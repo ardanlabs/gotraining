@@ -24,6 +24,7 @@ http://dave.cheney.net/2014/12/24/inspecting-errors
 http://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully  
 https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package  
 [Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce)  
+[Error handling in Upspin](https://commandcenter.blogspot.com.au/2017/12/error-handling-in-upspin.html)
 
 ## Code Review
 
