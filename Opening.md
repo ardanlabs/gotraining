@@ -1,5 +1,3 @@
-# TITLE
-
 ## Info
 Name:     William Kennedy (Bill)  bill@ardanlabs.com
 Twitter:  @goinggodotnet #golang
