@@ -283,7 +283,7 @@ Focus on encapsulation and validate that you're not generalizing or even being t
 
 **Quotes**
 
-"Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better." - Rob Pike
+"Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better." - Edsger W. Dijkstra
 
 _"Everything should be made as simple as possible, but not simpler." - Albert Einstein_
 
