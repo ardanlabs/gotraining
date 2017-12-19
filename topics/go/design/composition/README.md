@@ -10,7 +10,7 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 * The goal is to reduce and minimize cascading changes across your software.
 * Interfaces provide the highest form of composition.
 * Don't group types by a common DNA but by a common behavior.
-* Everyone can work together when we focus when we do and not what we are.
+* Everyone can work together when we focus on what we do and not what we are.
 
 ## Quotes
 
