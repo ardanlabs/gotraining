@@ -87,6 +87,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Fighting latency: the CPU profiler is not your ally](https://www.youtube.com/watch?v=nsM_m4hZ-bA&t=973s) - Filippo Valsorda  
 [go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
 [Analyzing production using Flamegraphs](https://www.youtube.com/watch?v=aAhNDgEZj_U&app=desktop) - Prashant Varanasi  
+[Go’s hidden #pragmas](https://dave.cheney.net/2018/01/08/gos-hidden-pragmas) - Dave Cheney  
 
 ### Interfaces and Composition
 
@@ -227,7 +228,12 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Hardware
 
-[Learn how to build a processor](https://www.youtube.com/playlist?list=PLNmCdcvSgJj5bllQx5E3A6OsbMq2luA9J)
+[Learn how to build a processor](https://www.youtube.com/playlist?list=PLNmCdcvSgJj5bllQx5E3A6OsbMq2luA9J)  
+[Reading Silicon: How to Reverse Engineer Integrated Circuits](https://www.youtube.com/watch?feature=youtu.be&v=aHx-XUA6f9g&app=desktop) - Ken Shirriff  
+
+## Kubernetes
+
+[What happens when ... Kubernetes edition!](https://github.com/jamiehannaford/what-happens-when-k8s/blob/master/README.md) - Jamie Hannaford  
 
 ## Release Notes
 

@@ -116,6 +116,14 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/VoQBQk8ijj))  
 [Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/tpDOwBCvqW))  
 
+### Escape Analysis Flaws
+
+[Literal Function Escape](flaws/example1/example1.go) ([Go Playground](https://play.golang.org/p/mlX0WVLOBGW))  
+[AssignmentIndirect](flaws/example2/example2.go) ([Go Playground](https://play.golang.org/p/uZXXbcwfmEx))  
+[Assignment Slices Maps](flaws/example3/example3.go) ([Go Playground](https://play.golang.org/p/R5ESK-cH6Vp))  
+[Indirection Level Interfaces](flaws/example4/example4.go) ([Go Playground](https://play.golang.org/p/TbeFMawF2tV))  
+[Unknown](flaws/example5/example5.go) ([Go Playground](https://play.golang.org/p/BGSe5I0vwES))  
+
 ## Exercises
 
 ### Exercise 1
