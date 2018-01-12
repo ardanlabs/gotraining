@@ -38,9 +38,6 @@ Type: alloc_space
 Total: 2.19GB
 ROUTINE ======================== github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example5.BenchmarkUnknown in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example5/example5_test.go
     2.19GB     2.19GB (flat, cum)   100% of Total
-         .          .      5:	"testing"
-         .          .      6:)
-         .          .      7:
          .          .      8:func BenchmarkUnknown(b *testing.B) {
          .          .      9:	for i := 0; i < b.N; i++ {
     2.19GB     2.19GB     10:		var buf bytes.Buffer

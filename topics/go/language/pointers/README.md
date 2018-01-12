@@ -118,11 +118,11 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ### Escape Analysis Flaws
 
-[Literal Function Escape](flaws/example1/example1_test.go) ([Go Playground](https://play.golang.org/p/mlX0WVLOBGW))  
-[Assignment Indirect](flaws/example2/example2_test.go) ([Go Playground](https://play.golang.org/p/uZXXbcwfmEx))  
-[Assignment Slices Maps](flaws/example3/example3_test.go) ([Go Playground](https://play.golang.org/p/R5ESK-cH6Vp))  
-[Indirection Level Interfaces](flaws/example4/example4_test.go) ([Go Playground](https://play.golang.org/p/TbeFMawF2tV))  
-[Unknown](flaws/example5/example5_test.go) ([Go Playground](https://play.golang.org/p/BGSe5I0vwES))  
+[Literal Function Escape](flaws/example1/example1_test.go)  
+[Assignment Indirect](flaws/example2/example2_test.go)  
+[Assignment Slices Maps](flaws/example3/example3_test.go)  
+[Indirection Level Interfaces](flaws/example4/example4_test.go)  
+[Unknown](flaws/example5/example5_test.go)  
 
 ## Exercises
 
