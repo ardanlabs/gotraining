@@ -9,7 +9,7 @@ func BenchmarkAssignmentIndirect(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		var i1 int
 		x1 := &X{
-			p: &i1,
+			p: &i1, // GOOD: i1 does not escape
 		}
 		_ = x1
 
@@ -45,7 +45,7 @@ Total: 759.51MB
 ROUTINE ======================== github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example2.BenchmarkAssignmentIndirect in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example2/example2_test.go
   759.51MB   759.51MB (flat, cum)   100% of Total
          .          .     11:		x1 := &X{
-         .          .     12:			p: &i1,
+         .          .     12:			p: &i1, // GOOD: i1 does not escape
          .          .     13:		}
          .          .     14:		_ = x1
          .          .     15:

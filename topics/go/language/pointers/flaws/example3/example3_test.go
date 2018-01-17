@@ -8,11 +8,11 @@ func BenchmarkSliceMapAssignment(b *testing.B) {
 	}
 	for i := 0; i < b.N; i++ {
 		m := make(map[int]*X)
-		x1 := X{}
+		var x1 X
 		m[0] = &x1 // BAD: cause of x1 escape
 
 		s := make([]*X, 1)
-		x2 := X{}
+		var x2 X
 		s[0] = &x2 // BAD: cause of x2 escape
 	}
 }
@@ -48,11 +48,11 @@ ROUTINE ======================== github.com/ardanlabs/gotraining/topics/go/langu
          .          .      8:	}
          .          .      9:	for i := 0; i < b.N; i++ {
          .          .     10:		m := make(map[int]*X)
-     175MB      175MB     11:		x1 := X{}
+     175MB      175MB     11:		var x1 X
          .          .     12:		m[0] = &x1 // BAD: cause of x1 escape
          .          .     13:
          .          .     14:		s := make([]*X, 1)
-     170MB      170MB     15:		x2 := X{}
+     170MB      170MB     15:		var x2 X
          .          .     16:		s[0] = &x2 // BAD: cause of x2 escape
          .          .     17:	}
          .          .     18:}

@@ -7,10 +7,10 @@ func BenchmarkLiteralFunctions(b *testing.B) {
 		var y1 int
 		func(p *int, x int) {
 			*p = x
-		}(&y1, 42) // BAD: Cause of y escape
+		}(&y1, 42) // BAD: Cause of y1 escape
 
 		var y2 int
-		foo(&y2, 42)
+		foo(&y2, 42) // GOOD: y2 does not escape
 	}
 }
 

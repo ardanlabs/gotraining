@@ -18,8 +18,8 @@ func BenchmarkInterfaces(b *testing.B) {
 		var i1 Iface = x1
 		var i2 Iface = &x1
 
-		i1.Method() // BAD: cause copy of x to escape
-		i2.Method() // BAD: cause x to escape
+		i1.Method() // BAD: cause copy of x1 to escape
+		i2.Method() // BAD: cause x1 to escape
 
 		x2 := X{"bill"}
 		foo(x2)
