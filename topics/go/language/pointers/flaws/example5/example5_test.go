@@ -37,12 +37,12 @@ Type: alloc_space
 (pprof) list Benchmark
 Total: 2.19GB
 ROUTINE ======================== github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example5.BenchmarkUnknown in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example5/example5_test.go
-    2.19GB     2.19GB (flat, cum)   100% of Total
-         .          .      8:func BenchmarkUnknown(b *testing.B) {
-         .          .      9:	for i := 0; i < b.N; i++ {
-    2.19GB     2.19GB     10:		var buf bytes.Buffer
-         .          .     11:		buf.Write([]byte{1})
-         .          .     12:		_ = buf.Bytes()
-         .          .     13:	}
-         .          .     14:}
+	2.19GB     2.19GB (flat, cum)   100% of Total
+		 .          .      8:func BenchmarkUnknown(b *testing.B) {
+		 .          .      9:	for i := 0; i < b.N; i++ {
+	2.19GB     2.19GB     10:		var buf bytes.Buffer
+		 .          .     11:		buf.Write([]byte{1})
+		 .          .     12:		_ = buf.Bytes()
+		 .          .     13:	}
+		 .          .     14:}
 */

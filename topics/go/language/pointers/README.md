@@ -118,8 +118,8 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ### Escape Analysis Flaws
 
-[Literal Function Escape](flaws/example1/example1_test.go)  
-[Assignment Indirect](flaws/example2/example2_test.go)  
+[Indirect Assignment](flaws/example1/example1_test.go)  
+[Indirection Execution](flaws/example2/example2_test.go)  
 [Assignment Slices Maps](flaws/example3/example3_test.go)  
 [Indirection Level Interfaces](flaws/example4/example4_test.go)  
 [Unknown](flaws/example5/example5_test.go)  

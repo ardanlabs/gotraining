@@ -73,22 +73,22 @@ Type: alloc_space
 (pprof) list Benchmark
 Total: 658.01MB
 ROUTINE ======================== github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example4.BenchmarkInterfaces in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example4/example4_test.go
-  658.01MB   658.01MB (flat, cum)   100% of Total
-         .          .     12:
-         .          .     13:func (x X) Method() {}
-         .          .     14:
-         .          .     15:func BenchmarkInterfaces(b *testing.B) {
-         .          .     16:	for i := 0; i < b.N; i++ {
-  167.50MB   167.50MB     17:		x1 := X{"bill"}
-  163.50MB   163.50MB     18:		var i1 Iface = x1
-         .          .     19:		var i2 Iface = &x1
-         .          .     20:
-         .          .     21:		i1.Method() // BAD: cause copy of x to escape
-         .          .     22:		i2.Method() // BAD: cause x to escape
-         .          .     23:
-  163.50MB   163.50MB     24:		x2 := X{"bill"}
-  163.50MB   163.50MB     25:		foo(x2)
-         .          .     26:		foo(&x2)
-         .          .     27:	}
-         .          .     28:}
+	658.01MB   658.01MB (flat, cum)   100% of Total
+				 .          .     12:
+				 .          .     13:func (x X) Method() {}
+				 .          .     14:
+				 .          .     15:func BenchmarkInterfaces(b *testing.B) {
+				 .          .     16:	for i := 0; i < b.N; i++ {
+	167.50MB   167.50MB     17:		x1 := X{"bill"}
+	163.50MB   163.50MB     18:		var i1 Iface = x1
+				 .          .     19:		var i2 Iface = &x1
+				 .          .     20:
+				 .          .     21:		i1.Method() // BAD: cause copy of x to escape
+				 .          .     22:		i2.Method() // BAD: cause x to escape
+				 .          .     23:
+	163.50MB   163.50MB     24:		x2 := X{"bill"}
+	163.50MB   163.50MB     25:		foo(x2)
+				 .          .     26:		foo(&x2)
+				 .          .     27:	}
+				 .          .     28:}
 */
