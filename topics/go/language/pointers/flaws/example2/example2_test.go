@@ -25,7 +25,7 @@ func foo(p *int, x int) {
 }
 
 /*
-$ go test -gcflags "-m -m" -run none -bench . -benchmem -memprofile mem.out
+$ go test -gcflags "-m -m" -run none -bench BenchmarkLiteralFunctions -benchmem -memprofile mem.out
 
 # github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example2
 ./example2_test.go:21:6: can inline foo as: func(*int, int) { *p = x }
