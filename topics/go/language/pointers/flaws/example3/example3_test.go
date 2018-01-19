@@ -39,16 +39,16 @@ Type: alloc_space
 (pprof) list Benchmark
 Total: 162.50MB
 ROUTINE ======================== github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example3.BenchmarkSliceMapAssignment in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example3/example3_test.go
-  162.50MB   162.50MB (flat, cum)   100% of Total
-         .          .      5:func BenchmarkSliceMapAssignment(b *testing.B) {
-         .          .      6:	for i := 0; i < b.N; i++ {
-         .          .      7:		m := make(map[int]*int)
-  107.50MB   107.50MB      8:		var x1 int
-         .          .      9:		m[0] = &x1 // BAD: cause of x1 escape
-         .          .     10:
-         .          .     11:		s := make([]*int, 1)
-      55MB       55MB     12:		var x2 int
-         .          .     13:		s[0] = &x2 // BAD: cause of x2 escape
-         .          .     14:	}
-         .          .     15:}
+	162.50MB   162.50MB (flat, cum)   100% of Total
+				 .          .      5:func BenchmarkSliceMapAssignment(b *testing.B) {
+				 .          .      6:	for i := 0; i < b.N; i++ {
+				 .          .      7:		m := make(map[int]*int)
+	107.50MB   107.50MB      8:		var x1 int
+				 .          .      9:		m[0] = &x1 // BAD: cause of x1 escape
+				 .          .     10:
+				 .          .     11:		s := make([]*int, 1)
+			55MB       55MB     12:		var x2 int
+				 .          .     13:		s[0] = &x2 // BAD: cause of x2 escape
+				 .          .     14:	}
+				 .          .     15:}
 */

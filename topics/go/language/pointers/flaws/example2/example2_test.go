@@ -1,6 +1,8 @@
 package flaws
 
-import "testing"
+import (
+	"testing"
+)
 
 func BenchmarkLiteralFunctions(b *testing.B) {
 	for i := 0; i < b.N; i++ {
@@ -53,20 +55,20 @@ Type: alloc_space
 (pprof) list Benchmark
 Total: 768.01MB
 ROUTINE ======================== github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example2.BenchmarkLiteralFunctions in /Users/bill/code/go/src/github.com/ardanlabs/gotraining/topics/go/language/pointers/flaws/example2/example2_test.go
-  768.01MB   768.01MB (flat, cum)   100% of Total
-         .          .      5:func BenchmarkLiteralFunctions(b *testing.B) {
-         .          .      6:	for i := 0; i < b.N; i++ {
-         .          .      7:		var y1 int
-         .          .      8:		foo(&y1, 42) // GOOD: y1 does not escape
-         .          .      9:
-  380.51MB   380.51MB     10:		var y2 int
-         .          .     11:		func(p *int, x int) {
-         .          .     12:			*p = x
-         .          .     13:		}(&y2, 42) // BAD: Cause of y2 escape
-         .          .     14:
-  387.51MB   387.51MB     15:		var y3 int
-         .          .     16:		p := foo
-         .          .     17:		p(&y3, 42) // BAD: Cause of y3 escape
-         .          .     18:	}
-         .          .     19:}
+	768.01MB   768.01MB (flat, cum)   100% of Total
+				 .          .      5:func BenchmarkLiteralFunctions(b *testing.B) {
+				 .          .      6:	for i := 0; i < b.N; i++ {
+				 .          .      7:		var y1 int
+				 .          .      8:		foo(&y1, 42) // GOOD: y1 does not escape
+				 .          .      9:
+	380.51MB   380.51MB     10:		var y2 int
+				 .          .     11:		func(p *int, x int) {
+				 .          .     12:			*p = x
+				 .          .     13:		}(&y2, 42) // BAD: Cause of y2 escape
+				 .          .     14:
+	387.51MB   387.51MB     15:		var y3 int
+				 .          .     16:		p := foo
+				 .          .     17:		p(&y3, 42) // BAD: Cause of y3 escape
+				 .          .     18:	}
+				 .          .     19:}
 */
