@@ -42,6 +42,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 [Early days of Unix and design of sh](https://www.youtube.com/watch?feature=youtu.be&v=2kEJoWfobpA&app=desktop) - Stephen Bourne  
 [What did Alan Kay mean by, "Lisp is the greatest single programming language ever designed"?](https://www.quora.com/What-did-Alan-Kay-mean-by-Lisp-is-the-greatest-single-programming-language-ever-designed/answer/Alan-Kay-11) - Alan Kay  
+[What Have We Learned from the PDP-11?](https://dave.cheney.net/2017/12/04/what-have-we-learned-from-the-pdp-11) - C. Gordon Bell  
 
 ### Contribute to Go
 
@@ -172,6 +173,7 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 [Want fast C++? Know your hardware!](https://www.youtube.com/watch?v=BP6NxVxDQIs) - Timur Doumler  
 [Performance Through Cache-Friendliness (4:25-5:48)](https://youtu.be/jEG4Qyo_4Bc?t=266) - Damian Gryski  
 [Going Nowhere Faster](https://www.youtube.com/watch?v=2EWejmkKlxs) - Chandler Carruth  
+[Meltdown and Spectre](https://blog.acolyer.org/2018/01/15/meltdown/amp/?__twitter_impression=true) - Adrian Colyer  
 
 #### Data-Oriented Design
 
