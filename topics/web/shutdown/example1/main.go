@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"sync"
+	"syscall"
 	"time"
 )
 
@@ -20,17 +20,15 @@ import (
 // from 800-1200 milliseconds so everything goes slow enough to see.
 func app(res http.ResponseWriter, req *http.Request) {
 	id := time.Now().Nanosecond()
-	log.Printf("app : Start %d", id)
+	log.Printf("Request Start %d", id)
 
 	sleep := rand.Intn(400) + 800
 	time.Sleep(time.Duration(sleep) * time.Millisecond)
 
-	log.Printf("app : End   %d", id)
+	log.Printf("Request End   %d", id)
 }
 
 func main() {
-
-	log.Println("main : Started")
 
 	// Create a new server and set timeout values.
 	server := http.Server{
@@ -41,42 +39,43 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	// We want to report the listener is closed.
-	var wg sync.WaitGroup
-	wg.Add(1)
+	// Make a channel to listen for errors coming from the listener. Use a
+	// buffered channel so the goroutine can exit if we don't collect this error.
+	serverErrors := make(chan error, 1)
 
 	// Start the listener.
 	go func() {
-		log.Println("listener : Listening on localhost:3000")
-		log.Println("listener :", server.ListenAndServe())
-		wg.Done()
+		log.Println("Listening on", server.Addr)
+		serverErrors <- server.ListenAndServe()
 	}()
 
-	// Listen for an interrupt signal from the OS. Use a buffered
-	// channel because of how the signal package is implemented.
+	// Make a channel to listen for an interrupt or terminate signal from the OS.
+	// Use a buffered channel because the signal package requires it.
 	osSignals := make(chan os.Signal, 1)
-	signal.Notify(osSignals, os.Interrupt)
+	signal.Notify(osSignals, os.Interrupt, syscall.SIGTERM)
 
-	// Wait for a signal to shutdown.
-	<-osSignals
+	// Block waiting for a receive on either channel
+	select {
+	case err := <-serverErrors:
+		log.Fatalf("Error starting server: %v", err)
 
-	// Create a context to attempt a graceful 5 second shutdown.
-	const timeout = 5 * time.Second
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
-	defer cancel()
+	case <-osSignals:
 
-	// Attempt the graceful shutdown by closing the listener and
-	// completing all inflight requests.
-	if err := server.Shutdown(ctx); err != nil {
-		log.Printf("shutdown : Graceful shutdown did not complete in %v : %v", timeout, err)
+		// Create a context to attempt a graceful 5 second shutdown.
+		const timeout = 5 * time.Second
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
+		defer cancel()
 
-		// Looks like we timedout on the graceful shutdown. Kill it hard.
-		if err := server.Close(); err != nil {
-			log.Printf("shutdown : Error killing server : %v", err)
+		// Attempt the graceful shutdown by closing the listener and
+		// completing all inflight requests.
+		if err := server.Shutdown(ctx); err != nil {
+			log.Printf("Could not stop server gracefully: %v", err)
+			log.Print("Initiating hard shutdown")
+			if err := server.Close(); err != nil {
+				log.Fatalf("Could not stop http server: %v", err)
+			}
 		}
 	}
 
-	// Wait for the listener to report it is closed.
-	wg.Wait()
-	log.Println("main : Completed")
+	log.Println("Shut down successful")
 }
