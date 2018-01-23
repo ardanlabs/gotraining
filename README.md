@@ -35,7 +35,7 @@ _**Video Training**_
 [Ultimate Go Live Lessons](http://www.informit.com/store/ultimate-go-programming-livelessons-9780134757483)
 
 _**Blog**_  
-[Going Go](https://www.goinggo.net/)    
+[Going Go](https://www.ardanlabs.com/blog/)    
 
 _**Writing**_  
 [Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    

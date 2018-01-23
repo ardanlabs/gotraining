@@ -173,7 +173,7 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 [Want fast C++? Know your hardware!](https://www.youtube.com/watch?v=BP6NxVxDQIs) - Timur Doumler  
 [Performance Through Cache-Friendliness (4:25-5:48)](https://youtu.be/jEG4Qyo_4Bc?t=266) - Damian Gryski  
 [Going Nowhere Faster](https://www.youtube.com/watch?v=2EWejmkKlxs) - Chandler Carruth  
-[Meltdown and Spectre](https://blog.acolyer.org/2018/01/15/meltdown/amp/?__twitter_impression=true) - Adrian Colyer  
+[Meltdown and Spectre](https://blog.acolyer.org/2018/01/15/meltdown/amp) - Adrian Colyer  
 
 #### Data-Oriented Design
 
