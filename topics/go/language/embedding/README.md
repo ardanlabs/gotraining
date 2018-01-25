@@ -12,7 +12,8 @@ Embedding types provides the final piece of sharing and reusing state and behavi
 
 ## Links
 
-http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
+http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html  
+[Embedding is not inheritance](https://rakyll.org/typesystem/) - JBD  
 
 ## Code Review
 
