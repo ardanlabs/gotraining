@@ -5,6 +5,8 @@ Company:  [ArdanLabs](https://www.ardanlabs.com)
 Blog:     [GoingGo.net](https://goinggo.net)
 Training: [Go](http://github.com/ardanlabs/gotraining)
 
+Password: IXRocket / 2JP3358W76
+
 ## Quote
 “If most computer people lack understanding and knowledge, then what they will select will also be lacking.” - Alan Kay
 
