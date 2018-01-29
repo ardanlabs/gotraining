@@ -289,7 +289,7 @@ _"Everything should be made as simple as possible, but not simpler." - Albert Ei
 
 **Encapsulation**
 
-Encapsulation is what we have been trying to figure out as an industry for 40 years. Go is taking a slightly new approach with the package. Brining encapsulation up a level and providing richer support at the language level.
+Encapsulation is what we have been trying to figure out as an industry for 40 years. Go is taking a slightly new approach with the package. Bringing encapsulation up a level and providing richer support at the language level.
 
 **Quotes**
 
