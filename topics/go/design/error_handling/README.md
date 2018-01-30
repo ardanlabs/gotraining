@@ -34,7 +34,7 @@ https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package
 [Behavior As Context](example4/example4.go) ([Go Playground](https://play.golang.org/p/Aylgou6Gq0))  
 [Find The Bug](example5/example5.go) ([Go Playground](https://play.golang.org/p/0AUU_sJsec)) | 
 [The Reason](example5/reason/reason.go) ([Go Playground](https://play.golang.org/p/TCANdwroOi))  
-[Wrapping Errors](example6/example6.go) ([Go Playground](https://play.golang.org/p/VfqgeCH-v2))  
+[Wrapping Errors](example6/example6.go) ([Go Playground](https://play.golang.org/p/Zt1Z5k4HbDG))  
 
 ## Exercises
 

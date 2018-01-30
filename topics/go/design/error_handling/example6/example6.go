@@ -40,14 +40,16 @@ func main() {
 
 		// Display the stack trace for the error.
 		fmt.Println("\nStack Trace\n********************************")
-		fmt.Printf("%+v", err)
+		fmt.Printf("%+v\n", err)
+		fmt.Println("\nNo Trace\n********************************")
+		fmt.Printf("%v\n", err)
 	}
 }
 
 // firstCall makes a call to a second function and wraps any error.
 func firstCall(i int) error {
 	if err := secondCall(i); err != nil {
-		return errors.Wrapf(err, "secondCall: %d", i)
+		return errors.Wrapf(err, "firstCall->secondCall(%d)", i)
 	}
 	return nil
 }
@@ -55,7 +57,7 @@ func firstCall(i int) error {
 // secondCall makes a call to a third function and wraps any error.
 func secondCall(i int) error {
 	if err := thirdCall(); err != nil {
-		return errors.Wrapf(err, "thirdCall")
+		return errors.Wrap(err, "secondCall->thirdCall()")
 	}
 	return nil
 }
