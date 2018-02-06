@@ -46,6 +46,7 @@ _**Articles**_
 
 _**Video**_  
 [Code::Dive (2017) - Optimizing For Correctness](https://www.youtube.com/watch?v=OTLjN8NQDyo)  
+[Code::Dive (2017) - Go: Concurrency Design](https://www.youtube.com/watch?v=OrctYMf4btA)  
 [dotGo (2017) - Behavior Of Channels](https://www.youtube.com/watch?v=zDCKZn4-dck)  
 [GopherCon Singapore (2017) - Escape Analysis](https://engineers.sg/video/escape-analysis-and-memory-profiling-gophercon-sg-2017--1746)  
 [Capital Go (2017) - Concurrency Design](https://www.youtube.com/watch?v=yGOOUCrrgrE&index=10&list=PLeGxIOPLk9EKdl-h_Y-sbLhLoP-ia7CJ5)  
