@@ -18,7 +18,7 @@ import (
 func main() {
 
 	// Create a new request.
-	req, err := http.NewRequest("GET", "https://www.goinggo.net/post/index.xml", nil)
+	req, err := http.NewRequest("GET", "https://www.ardanlabs.com/blog/post/index.xml", nil)
 	if err != nil {
 		log.Println(err)
 		return
