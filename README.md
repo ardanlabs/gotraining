@@ -120,21 +120,23 @@ _**Writing**_
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
 
 ### 2018
-		Type         Type     Venue             Location               Date                Trainer            Url
-		=====================================================================================================================================================================================
-		Corporate    Go       Centene           St. Louis, MO          January(23-25)      Bill Kennedy
-		Corporate    Go       Index Exchange    Toronto, Canada        January(29-31)      Bill Kennedy
-		Corporate    Go       Oxiane            Paris, France          February(06-08)     Bill Kennedy
-		Meetup       Go       Loyola University Chicago, IL            February(15)        Bill Kennedy
-		Corporate    Go       Fincore           Belgrade, Serbia       February(20-21)     Bill Kennedy
-		WWG          Go       Hello Fresh       Berlin, Germany        February(24-25)     Bill Kennedy       https://www.meetup.com/Women-Who-Go-Berlin/events/247056137/
-		Corporate    Go       Nutanix           San Jose, CA           February(28-29)     Jacob Walker
-		Conference   Adv Go   GopherCon India   Pune, India            March(07-10)        Bill Kennedy       http://www.gophercon.in/go-workshop1/
-		Corporate    Go       Spectra Logic     TBD                    March(13-15)        Jacob Walker
-		Corporate    Go       McMurdo Group     Lanham, MD             March(20-22)        Bill Kennedy
-		Conference   Adv Go   Garden Hotel      Shanghai, China        April(14-15)        Bill Kennedy       http://gopherchina.org/
-		Conference   Adv Go   Google            Singapore              May(02-04)          Bill Kennedy       https://2018.gophercon.sg/
-		Conference   Adv Go   Harpa             Reykjavík, Iceland     May(31-02)          Bill Kennedy       https://gophercon.is/
+```
+Date                Location              Venue               Type         Type        Trainer     Url
+===============================================================================================================================================================
+January(23-25)      St. Louis, MO         Centene             Corporate    Go       Bill Kennedy
+January(29-31)      Toronto, Canada       Index Exchange      Corporate    Go       Bill Kennedy
+February(06-08)     Paris, France         Oxiane              Corporate    Go       Bill Kennedy
+February(15)        Chicago, IL           Loyola University   Meetup       Go       Bill Kennedy
+February(20-21)     Belgrade, Serbia      Fincore             Corporate    Go       Bill Kennedy
+February(24-25)     Berlin, Germany       Hello Fresh         WWG          Go       Bill Kennedy   https://www.meetup.com/Women-Who-Go-Berlin/events/247056137/
+February(28-29)     San Jose, CA          Nutanix             Corporate    Go       Jacob Walker
+March(07-10)        Pune, India           GopherCon India     Conference   Adv Go   Bill Kennedy   http://www.gophercon.in/go-workshop1/
+March(13-15)        TBD                   Spectra Logic       Corporate    Go       Jacob Walker
+March(20-22)        Lanham, MD            McMurdo Group       Corporate    Go       Bill Kennedy
+April(14-15)        Shanghai, China       Garden Hotel        Conference   Adv Go   Bill Kennedy   http://gopherchina.org/
+May(02-04)          Singapore             Google              Conference   Adv Go   Bill Kennedy   https://2018.gophercon.sg/
+May(31-02)          Reykjavík, Iceland    Harpa               Conference   Adv Go   Bill Kennedy   https://gophercon.is/
+```
 
 ## More About Go
 
