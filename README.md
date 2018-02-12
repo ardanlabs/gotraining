@@ -316,7 +316,7 @@ ___
 **Install Docker Toolbox**  
 https://www.docker.com/products/docker-toolbox
 
-**Build Docker container**
+**Build Docker image**
 ```
 # current path is the source root where Dockerfile exists
 docker build -t ardanlabs/gotraining:latest .
@@ -325,7 +325,7 @@ docker build -t ardanlabs/gotraining:latest .
 **Start Docker container**
 ```
 cd $GOPATH/src/github.com/ardanlabs/gotraining
-docker run -i -t -p 8080:8080 -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs/gotraining:latest /bin/sh
+docker run -i -t -p 8080:8080 -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs/gotraining:latest
 ```
 
 **What is running**
