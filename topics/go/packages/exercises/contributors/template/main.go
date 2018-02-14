@@ -9,12 +9,12 @@ import (
 	"os"
 )
 
-// Create a type where we can decode contributor json values
-// It needs the fields "login" and "contributions"
+// Create a type where we can decode contributor json values.
+// It needs the fields "login" and "contributions".
 
 func main() {
 
-	// Get an access token from the environment
+	// Get an access token from the environment.
 	tkn := os.Getenv("GITHUB_TOKEN")
 	if tkn == "" {
 		log.Print("Token not found. You must set it in your environment like")
@@ -23,18 +23,18 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Create a request for the contributors api endpoint
+	// Create a request for the contributors api endpoint.
 
 	// Add the access token in the "Authorization" header.
 	// The value should be in the form "token 000aa0a0..."
 
-	// Create an http.Client and make the request
+	// Create an http.Client and make the request.
 
-	// Defer closing the response body
+	// Defer closing the response body.
 
-	// Ensure we get a 200 OK status back
+	// Ensure we get a 200 OK status back.
 
-	// Decode the results into a []contributor
+	// Decode the results into a []contributor.
 
-	// Loop through the []contributor and print values
+	// Loop through the []contributor and print the values.
 }

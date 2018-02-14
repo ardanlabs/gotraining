@@ -15,16 +15,16 @@ import (
 
 func main() {
 
-	// Make a hash value from crypto/sha256
+	// Make a hash value from crypto/sha256.
 	hash := sha256.New()
 
-	// Keep track of how many failures we encounter
+	// Keep track of how many failures we encounter.
 	var failures int
 
-	// Loop through all of os.Args skipping the first value
+	// Loop through all of os.Args skipping the first value.
 	for _, name := range os.Args[1:] {
 
-		// Attempt to open the file in question using os.Open
+		// Attempt to open the file in question using os.Open.
 		f, err := os.Open(name)
 		if err != nil {
 			log.Printf("could not open file %s: %v", name, err)
@@ -32,7 +32,7 @@ func main() {
 			continue
 		}
 
-		// Call the Stat method so we can see if the named argument is a directory
+		// Call the Stat method so we can see if the named argument is a directory.
 		stat, err := f.Stat()
 		if err != nil {
 			log.Printf("could not stat file %s: %v", name, err)
@@ -40,28 +40,28 @@ func main() {
 			continue
 		}
 
-		// Skip directories
+		// Skip directories.
 		if stat.IsDir() {
 			continue
 		}
 
-		// Reset the hash value before each use
+		// Reset the hash value before each use.
 		hash.Reset()
 
 		// Write the file to the hash so we can calculate it.
-		// Tip: hash is an io.Writer and file is an os.Reader.
+		// Tip: hash is an io.Writer and file is an io.Reader.
 		if _, err := io.Copy(hash, f); err != nil {
 			log.Printf("could not hash file %s: %v", name, err)
 			failures++
 			continue
 		}
 
-		// Print the sha256 sum in hex format followed by the name of the file
-		// You can use the %x directive of fmt.Printf or use encoding/hex
+		// Print the sha256 sum in hex format followed by the name of the file.
+		// You can use the %x directive of fmt.Printf or use encoding/hex.
 		fmt.Printf("%x  %s\n", hash.Sum(nil), name)
 	}
 
-	// If at least one failure was encountered then exit with status code 1
+	// If at least one failure was encountered then exit with status code 1.
 	if failures > 0 {
 		os.Exit(1)
 	}

@@ -10,22 +10,22 @@ func main() {
 
 	// Print a > to prompt the user to type something. Don't use Println for this.
 
-	// Create a bufio.Scanner that will read lines from os.Stdin
+	// Create a bufio.Scanner that will read lines from os.Stdin.
 
-	// Call the Scan method of the scanner until it returns false
+	// Call the Scan method of the scanner until it returns false.
 	{
 
-		// Get the user's input from the Text() method
+		// Get the user's input from the Text() method.
 
-		// Decide if you should exit
+		// Decide if you should exit.
 
-		// Choose a response based on their input
+		// Choose a response based on their input.
 
 		// Print a < followed by the chatbot's response. Try adding a short random
 		// delay between characters so it looks like someone is typing.
 
-		// Start the next line and print a > again to prompt for more input
+		// Start the next line and print a > again to prompt for more input.
 	}
 
-	// Check the Err() method of the scanner to see if it failed for some reason
+	// Check the Err() method of the scanner to see if it failed for some reason.
 }

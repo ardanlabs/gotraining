@@ -6,21 +6,18 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jcbwlkr/contributors/github"
+	"github.com/ardanlabs/gotraining/topics/go/packages/exercises/contributors/part3/github"
 )
 
-// mock implements the "contributors" interface in this package.
-type mock func() ([]github.Contributor, error)
+// mock implements the "contributors" interface without requiring us to
+// actually call the GitHub API.
+type mock struct{}
 
-// Contributors satisfies the main package's "contributors" interface.
-func (fn mock) Contributors() ([]github.Contributor, error) {
-	return fn()
-}
-
-func TestPrintContributorsSuccess(t *testing.T) {
-
-	// create a mock where the API works
-	c := mock(func() ([]github.Contributor, error) {
+// Contributors satisfies the main package's "contributors" interface. It
+// returns predefined result sets for different repo values.
+func (mock) Contributors(repo string) ([]github.Contributor, error) {
+	switch repo {
+	case "golang/go":
 		return []github.Contributor{
 			{Login: "anna", Contributions: 27},
 			{Login: "jacob", Contributions: 18},
@@ -28,19 +25,28 @@ func TestPrintContributorsSuccess(t *testing.T) {
 			{Login: "carter", Contributions: 6},
 			{Login: "rory", Contributions: 1},
 		}, nil
-	})
-	// use a bytes.Buffer to hold the output from our function
+	}
+
+	return nil, errors.New("could not reach API")
+}
+
+func TestPrintContributorsSuccess(t *testing.T) {
+
+	// Create a mock of the API.
+	var c mock
+
+	// Use a bytes.Buffer to hold the output from our function.
 	var buf bytes.Buffer
 
-	// Call the function under test
-	status := printContributors(&buf, c)
+	// Call the function under test.
+	status := printContributors(&buf, "golang/go", c)
 
-	// Assert on our results
-	want := `anna	27
-jacob	18
-kell	9
-carter	6
-rory	1`
+	// Assert on our results.
+	want := `0 anna 27
+1 jacob 18
+2 kell 9
+3 carter 6
+4 rory 1`
 	got := strings.TrimSpace(buf.String())
 
 	if got != want {
@@ -56,12 +62,10 @@ rory	1`
 
 func TestPrintContributorsFailure(t *testing.T) {
 
-	c := mock(func() ([]github.Contributor, error) {
-		return nil, errors.New("could not reach API")
-	})
+	var c mock
 	var buf bytes.Buffer
 
-	status := printContributors(&buf, c)
+	status := printContributors(&buf, "failure", c)
 
 	want := `Error fetching contributors: could not reach API`
 	got := strings.TrimSpace(buf.String())

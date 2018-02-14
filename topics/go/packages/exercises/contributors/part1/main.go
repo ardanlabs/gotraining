@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// contributor is a type where we can decode contributor json values
+// contributor is a type where we can decode contributor json values.
 type contributor struct {
 	Login         string `json:"login"`
 	Contributions int    `json:"contributions"`
@@ -22,7 +22,7 @@ type contributor struct {
 
 func main() {
 
-	// Get an access token from the environment
+	// Get an access token from the environment.
 	tkn := os.Getenv("GITHUB_TOKEN")
 	if tkn == "" {
 		log.Print("Token not found. You must set it in your environment like")
@@ -31,16 +31,17 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Create a request for the contributors api endpoint
+	// Create a request for the contributors api endpoint.
 	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/ardanlabs/gotraining/contributors", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Add the access token in the "Authorization" header. The value should be like "token 000aa0a0..."
+	// Add the access token in the "Authorization" header.
+	// The value should be like "token 000aa0a0..."
 	req.Header.Set("Authorization", "token "+tkn)
 
-	// Create an http.Client and make the request
+	// Create an http.Client and make the request.
 	client := http.Client{
 		Timeout: 5 * time.Second,
 	}
@@ -50,23 +51,23 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Defer closing the response body
+	// Defer closing the response body.
 	defer res.Body.Close()
 
-	// Ensure we get a 200 OK status back
+	// Ensure we get a 200 OK status back.
 	if res.StatusCode != http.StatusOK {
 		log.Println("API responded with", res.Status)
 		io.Copy(os.Stderr, res.Body)
 		os.Exit(1)
 	}
 
-	// Decode the results into a []contributor
+	// Decode the results into a []contributor.
 	var cons []contributor
 	if err := json.NewDecoder(res.Body).Decode(&cons); err != nil {
 		log.Fatal(err)
 	}
 
-	// Loop through the []contributor and print values
+	// Loop through the []contributor and print the values.
 	for i, con := range cons {
 		fmt.Println(i, con.Login, con.Contributions)
 	}

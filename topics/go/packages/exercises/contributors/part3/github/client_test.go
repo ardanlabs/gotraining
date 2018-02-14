@@ -8,7 +8,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-// token is a valid token we can reuse in testing
+// token is a valid token we can reuse in testing.
 const token = "781b0bdab2315c62134544eff45811333c663797"
 
 // TestNewClient builds clients with different token values and asserts on what
@@ -28,9 +28,9 @@ func TestNewClient(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		test := test // Copy the value into this scope for our closure
+		test := test // Copy the value into this scope for our closure.
 
-		// Kick off a subtest for this scenario
+		// Kick off a subtest for this scenario.
 		t.Run(test.name, func(t *testing.T) {
 			_, err := NewClient(test.token)
 
@@ -49,21 +49,22 @@ func TestContributorsSuccess(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Create a server to mock out the response from GitHub
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Ensure they made a GET request
+	// Create a server to mock out the response from GitHub.
+	f := func(w http.ResponseWriter, r *http.Request) {
+
+		// Ensure they made a GET request.
 		if got, want := r.Method, http.MethodGet; got != want {
 			t.Errorf("Method did not match: Got %q want %q", got, want)
 			return
 		}
 
-		// Ensure they're asking for the correct path based on our repo
+		// Ensure they're asking for the correct path based on our repo.
 		if got, want := r.URL.Path, "/repos/golang/go/contributors"; got != want {
 			t.Errorf("Path did not match: Got %q want %q", got, want)
 			return
 		}
 
-		// Ensure they sent the token in the auth header
+		// Ensure they sent the token in the auth header.
 		if got, want := r.Header.Get("Authorization"), `Bearer `+token; got != want {
 			t.Errorf("Auth token did not match: Got %q want %q", got, want)
 			return
@@ -73,12 +74,14 @@ func TestContributorsSuccess(t *testing.T) {
 		if _, err := w.Write([]byte(body)); err != nil {
 			t.Fatal(err)
 		}
-	}))
+	}
+	srv := httptest.NewServer(http.HandlerFunc(f))
 
-	// Set this server's URL to the client's baseURL so requests go here
+	// Set this server's URL to the client's baseURL so requests go here.
+	// TODO pass this in
 	c.baseURL = srv.URL
 
-	// Call the method under test
+	// Call the method under test.
 	got, err := c.Contributors("golang/go")
 
 	if err != nil {

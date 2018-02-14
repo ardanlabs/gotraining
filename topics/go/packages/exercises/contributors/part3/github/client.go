@@ -33,19 +33,19 @@ var tokenRE = regexp.MustCompile(`^[0-9a-f]{40}$`)
 // and is of a valid form. It sets internal state for the http client.
 // Call it like:
 //	github.NewClient(os.Getenv("GITHUB_TOKEN"))
-func NewClient(token string) (Client, error) {
+func NewClient(token string) (*Client, error) {
 
 	if token == "" {
-		return Client{}, errors.New("token is required")
+		return nil, errors.New("token is required")
 	}
 	if !tokenRE.MatchString(token) {
-		return Client{}, errors.New("token is required")
+		return nil, errors.New("token is required")
 	}
 
-	return Client{
+	return &Client{
 		token:   token,
 		client:  http.Client{Timeout: 5 * time.Second},
-		baseURL: "https://api.github.com",
+		baseURL: "https://api.github.com", // TODO pass this in
 	}, nil
 }
 
@@ -57,7 +57,7 @@ var repoRE = regexp.MustCompile(`[a-zA-Z0-9]+/[a-zA-Z0-9]+`)
 // Contributors gives a list of the top 30 contributors. It returns an error
 // for network problems reaching the API or for application problems such as a
 // 404 or 403 response from GitHub.
-func (c Client) Contributors(repo string) ([]Contributor, error) {
+func (c *Client) Contributors(repo string) ([]Contributor, error) {
 	if repo == "" {
 		return nil, errors.New("repo is required")
 	}
@@ -65,7 +65,7 @@ func (c Client) Contributors(repo string) ([]Contributor, error) {
 		return nil, errors.New("repo is invalid")
 	}
 
-	// Make a request and set the auth token in the header
+	// Make a request and set the auth token in the header.
 	u := fmt.Sprintf("%s/repos/%s/contributors", c.baseURL, repo)
 	req, err := http.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
@@ -73,7 +73,7 @@ func (c Client) Contributors(repo string) ([]Contributor, error) {
 	}
 	req.Header.Set("Authorization", "Bearer "+c.token)
 
-	// Execute the request
+	// Execute the request.
 	resp, err := c.client.Do(req)
 	if err != nil {
 		return nil, err
@@ -84,7 +84,7 @@ func (c Client) Contributors(repo string) ([]Contributor, error) {
 		return nil, fmt.Errorf("API responded with a %d %s", resp.StatusCode, resp.Status)
 	}
 
-	// Decode the result
+	// Decode the result.
 	var cons []Contributor
 	if err := json.NewDecoder(resp.Body).Decode(&cons); err != nil {
 		return nil, err
