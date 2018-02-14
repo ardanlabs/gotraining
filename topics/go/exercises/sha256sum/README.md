@@ -18,3 +18,5 @@ Topics covered by this exercise:
 - Interpreting command line arguments and opening files with the `os` package.
 - Formatting a `[]byte` as a hex string using `encoding/hex` or `fmt.Printf`
   with the `%x` verb.
+
+A [template file](template/main.go) is included to get you started.

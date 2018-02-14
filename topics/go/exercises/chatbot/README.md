@@ -11,3 +11,5 @@ Topics covered by this exercise:
 - String handling.
 - Reading one line at a time from an `io.Writer` using the `bufio` package.
 - Using `math/rand` for picking pseudo-random numbers.
+
+A [template file](template/main.go) is included to get you started.
