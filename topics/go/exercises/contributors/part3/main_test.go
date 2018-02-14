@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/topics/go/packages/exercises/contributors/part3/github"
+	"github.com/ardanlabs/gotraining/topics/go/exercises/contributors/part3/github"
 )
 
 // mock implements the "contributors" interface without requiring us to

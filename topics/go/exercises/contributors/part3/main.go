@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ardanlabs/gotraining/topics/go/packages/exercises/contributors/part3/github"
+	"github.com/ardanlabs/gotraining/topics/go/exercises/contributors/part3/github"
 )
 
 func main() {

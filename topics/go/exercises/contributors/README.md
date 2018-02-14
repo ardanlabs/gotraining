@@ -32,3 +32,4 @@ A [template file](template/main.go) is included to get you started.
 # Just for Fun
 - Add flags to the main package for specifying the repo to pull. Use the [`flag`](https://golang.org/pkg/flag/) package.
 - Add a flag to the main package to specify an output file name then encode the results to that file in CSV format. Use the [`encoding/csv`](https://golang.org/pkg/encoding/csv/) package.
+- Create a web app that accepts a repo name then shows the contributor list for that repo
