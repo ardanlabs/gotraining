@@ -21,12 +21,15 @@ A [template file](template/main.go) is included to get you started.
 
 - Refactor your GitHub API client to a type called `Client` with a method `Contributors`.
 - Move your client code from `package main` to another package like `package github`.
-- Create a `printContributors` function in package `main` that uses the client.
+- Create a function in package `main` that uses the client. `func
+  printContributors(repo string, c *github.Client) int`
 - Decouple the `printContributors` function to depend on an interface instead of the concrete type.
 
 # Part 3: Testing
 
-- Add tests for `printContributors`. Create a mock version of the github client and pass that in.
+- Add tests for `printContributors`. Create a mock version of the github client
+  and pass that in. To capture the ouput you can change the `printContributors`
+  function to accept an `io.Writer` where it should print results.
 - Add tests for the `github` package using `net/http/httptest.NewServer`.
 
 # Just for Fun

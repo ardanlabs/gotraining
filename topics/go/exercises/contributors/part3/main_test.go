@@ -30,53 +30,57 @@ func (mock) Contributors(repo string) ([]github.Contributor, error) {
 	return nil, errors.New("could not reach API")
 }
 
-func TestPrintContributorsSuccess(t *testing.T) {
+func TestPrintContributors(t *testing.T) {
 
-	// Create a mock of the API.
-	var c mock
-
-	// Use a bytes.Buffer to hold the output from our function.
-	var buf bytes.Buffer
-
-	// Call the function under test.
-	status := printContributors(&buf, "golang/go", c)
-
-	// Assert on our results.
-	want := `0 anna 27
+	tests := []struct {
+		name   string
+		repo   string
+		status int
+		want   string
+	}{
+		{
+			name:   "failure",
+			repo:   "should/fail",
+			status: 1,
+			want:   `Error fetching contributors: could not reach API`,
+		},
+		{
+			name:   "success",
+			repo:   "golang/go",
+			status: 0,
+			want: `0 anna 27
 1 jacob 18
 2 kell 9
 3 carter 6
-4 rory 1`
-	got := strings.TrimSpace(buf.String())
-
-	if got != want {
-		t.Errorf("Printed report did not match expectation")
-		t.Logf("Got:\n%s", got)
-		t.Logf("Want:\n%s", want)
+4 rory 1`,
+		},
 	}
 
-	if status != 0 {
-		t.Errorf("Successful run should return status code 0, got %d", status)
-	}
-}
+	for _, test := range tests {
+		test := test // Copy to this scope for our closure.
 
-func TestPrintContributorsFailure(t *testing.T) {
+		t.Run(test.name, func(t *testing.T) {
 
-	var c mock
-	var buf bytes.Buffer
+			// Create a mock of the API.
+			var c mock
+			// Use a bytes.Buffer to hold the output from our function.
+			var buf bytes.Buffer
 
-	status := printContributors(&buf, "failure", c)
+			// Call the function under test.
+			status := printContributors(&buf, test.repo, c)
 
-	want := `Error fetching contributors: could not reach API`
-	got := strings.TrimSpace(buf.String())
+			// Assert on our results.
+			got := strings.TrimSpace(buf.String())
 
-	if got != want {
-		t.Errorf("Printed report did not match expectation")
-		t.Logf("Got:\n%s", got)
-		t.Logf("Want:\n%s", want)
-	}
+			if got != test.want {
+				t.Errorf("Printed report did not match expectation")
+				t.Logf("Got:\n%s", got)
+				t.Logf("Want:\n%s", test.want)
+			}
 
-	if status != 1 {
-		t.Errorf("Failed run should return status code 1, got %d", status)
+			if status != test.status {
+				t.Errorf("printContributors should return status code %d, got %d", test.status, status)
+			}
+		})
 	}
 }
