@@ -18,7 +18,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	c, err := github.NewClient(tkn)
+	c, err := github.NewClient(github.API, tkn)
 	if err != nil {
 		log.Fatal(err)
 	}

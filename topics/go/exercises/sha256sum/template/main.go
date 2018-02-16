@@ -23,8 +23,8 @@ func main() {
 		// Reset the hash value before each use.
 
 		// Write the file to the hash so we can calculate it.
-		// Tip: hash is an io.Writer and the file is an io.Reader. The io.Copy
-		// function works with both.
+		// Tip: Your hash value is an io.Writer and the file value is an io.Reader.
+		// The io.Copy function works with both.
 
 		// Print the sha256 sum in hex format followed by the name of the file.
 		// You can use the %x directive of fmt.Printf or use encoding/hex.

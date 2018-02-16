@@ -9,6 +9,9 @@ import (
 	"time"
 )
 
+// API is the root URL for the github.com api. Use this with NewClient.
+const API = "https://api.github.com"
+
 // Contributor summarizes one person's contributions to a particular
 // GitHub repository.
 type Contributor struct {
@@ -18,10 +21,9 @@ type Contributor struct {
 
 // Client knows how to call the GitHub API to get contributor information.
 type Client struct {
-	token  string
-	client http.Client
-
-	baseURL string // The root URL of the API. We make this an unexported field so we can override it in tests.
+	token   string
+	client  http.Client
+	baseURL string
 }
 
 // tokenRE defines the form of a valid token. We compile it once at package
@@ -29,11 +31,12 @@ type Client struct {
 // regexp is always valid.
 var tokenRE = regexp.MustCompile(`^[0-9a-f]{40}$`)
 
-// NewClient builds a Client value. It validates that the token field is set
-// and is of a valid form. It sets internal state for the http client.
+// NewClient builds a Client value. It needs the root url for the API. Use the
+// const API for github.com or pass your own url for tests or an enterprise
+// installation. NewClient will error if the token field is invalid.
 // Call it like:
-//	github.NewClient(os.Getenv("GITHUB_TOKEN"))
-func NewClient(token string) (*Client, error) {
+//	github.NewClient(github.API, os.Getenv("GITHUB_TOKEN"))
+func NewClient(root, token string) (*Client, error) {
 
 	if token == "" {
 		return nil, errors.New("token is required")
@@ -45,7 +48,7 @@ func NewClient(token string) (*Client, error) {
 	return &Client{
 		token:   token,
 		client:  http.Client{Timeout: 5 * time.Second},
-		baseURL: "https://api.github.com", // TODO pass this in
+		baseURL: root,
 	}, nil
 }
 

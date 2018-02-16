@@ -49,8 +49,8 @@ func main() {
 		hash.Reset()
 
 		// Write the file to the hash so we can calculate it.
-		// Tip: hash is an io.Writer and the file is an io.Reader. The io.Copy
-		// function works with both.
+		// Tip: Your hash value is an io.Writer and the file value is an io.Reader.
+		// The io.Copy function works with both.
 		if _, err := io.Copy(hash, f); err != nil {
 			log.Printf("could not hash file %s: %v", name, err)
 			failures++

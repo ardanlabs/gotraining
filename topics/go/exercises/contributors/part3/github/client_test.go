@@ -32,7 +32,7 @@ func TestNewClient(t *testing.T) {
 
 		// Kick off a subtest for this scenario.
 		t.Run(test.name, func(t *testing.T) {
-			_, err := NewClient(test.token)
+			_, err := NewClient(API, test.token)
 
 			if test.shouldErr && err == nil {
 				t.Errorf("NewClient(%q) should error but did not", test.token)
@@ -44,11 +44,6 @@ func TestNewClient(t *testing.T) {
 }
 
 func TestContributorsSuccess(t *testing.T) {
-	c, err := NewClient(token)
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	// Create a server to mock out the response from GitHub.
 	f := func(w http.ResponseWriter, r *http.Request) {
 
@@ -76,10 +71,13 @@ func TestContributorsSuccess(t *testing.T) {
 		}
 	}
 	srv := httptest.NewServer(http.HandlerFunc(f))
+	defer srv.Close()
 
-	// Set this server's URL to the client's baseURL so requests go here.
-	// TODO pass this in
-	c.baseURL = srv.URL
+	// Create the client using the test server's URL for the api.
+	c, err := NewClient(srv.URL, token)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	// Call the method under test.
 	got, err := c.Contributors("golang/go")
@@ -106,16 +104,17 @@ func TestContributorsSuccess(t *testing.T) {
 }
 
 func TestContributorsAPIFailure(t *testing.T) {
-	c, err := NewClient(token)
+
+	// Make a mock server where the API fails
+	fn := func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusForbidden)
+	}
+	srv := httptest.NewServer(http.HandlerFunc(fn))
+
+	c, err := NewClient(srv.URL, token)
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusForbidden)
-	}))
-	c.baseURL = srv.URL
-
 	if _, err := c.Contributors("golang/go"); err == nil {
 		t.Fatal("Client should error but did not")
 	}
