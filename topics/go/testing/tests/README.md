@@ -12,6 +12,10 @@ Testing is built right into the go tools and the standard library. Testing needs
 * If performance problems are observed, profile your code to see what functions to focus on.
 * The tools can interfere with each other. For example, precise memory profiling skews CPU profiles, goroutine blocking profiling affects scheduler trace, etc. Rerun tests for each needed profiling mode.
 
+## Quotes
+
+_"A unit test is a test of behavior whose success or failure is wholly determined by the correctness of the test and the correctness of the unit under test." - Kevin Henney
+
 ## Links
 
 http://golang.org/pkg/testing/  

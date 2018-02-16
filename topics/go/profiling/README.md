@@ -4,6 +4,8 @@ We can use the go tooling to inspect and profile our programs. Profiling is more
 
 ## The Basics of Profiling
 
+_"Those who can make you believe absurdities can make you commit atrocities" - Voltaire_
+
 ### How does a profiler work?
 
 A profiler runs your program and configures the operating system to interrupt it at regular intervals. This is done by sending SIGPROF to the program being profiled, which suspends and transfers execution to the profiler. The profiler then grabs the program counter for each executing thread and restarts the program.

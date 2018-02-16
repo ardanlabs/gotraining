@@ -12,6 +12,10 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 * Interfaces are reference types, don't share with a pointer.
 * This is how we create polymorphic behavior in go.
 
+## Quotes
+
+_"Polymorphism means that you write a certain program and it behaves differently depending on the data that it operates on." - Tom Kurtz (inventor of BASIC)_
+
 ## Links
 
 https://golang.org/doc/effective_go.html#interfaces  
@@ -21,8 +25,6 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 [Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful)
 
 ## Code Review
-
-**_"Polymorphism means that you write a certain program and it behaves differently depending on the data that it operates on." - Tom Kurtz (inventor of BASIC)_**
 
 [Polymorphism](example1/example1.go) ([Go Playground](https://play.golang.org/p/Uag9qj7Pu5))  
 [Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/4R3_QVKNli))  

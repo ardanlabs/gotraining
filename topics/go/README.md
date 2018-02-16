@@ -61,7 +61,7 @@ _"There are two kinds of software projects: those that fail, and those that turn
 
 _"Legacy software is an unappreciated but serious problem. Legacy code may be the downfall of our civilization." - Chuck Moore (inventor of Forth)_
 
-_"We think awful code is written by awful devs. But in reality, it's written by reasonable devs in awful circumstances."_ - Sarah Mei
+_"We think awful code is written by awful devs. But in reality, it's written by reasonable devs in awful circumstances." - Sarah Mei_
 
 ---
 
@@ -77,15 +77,11 @@ _"Let's imagine a project that's going to end up with a million lines of code or
 
 _"100k lines of code fit inside a box of paper." - Tom Love (inventor of Objective C)_
 
-_"Good engineering is less about finding the "perfect" solution and more about understanding the tradeoffs and being able to explain them."_ - JBD
-
-_"Making things easy to do is a false economy. Focus on making things easy to understand and the rest will follow." - Peter Bourgon_
+_"One of our many problems with thinking is “cognitive load”: the number of things we can pay attention to at once. The cliche is 7±2, but for many things it is even less. We make progress by making those few things be more powerful." - Alan Kay_
 
 _"The hardest bugs are those where your mental model of the situation is just wrong, so you can't see the problem at all." - Brian Kernighan_
 
 _"Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?" - Brian Kernighan_
-
-_"Unless the developer has a really good idea of what the software is going to be used for, there's a very high probability that the software will turn out badly. If the developers don't know and understand the application well, then it's crucial to get as much user input and experience as possible." - Brian Kernighan_
 
 **Resources:**
 
@@ -125,15 +121,17 @@ Refactoring must become part of the development cycle. Refactoring is the proces
 
 **Quotes**
 
-_"Good engineering is less about finding the "perfect" solution and more about understanding the tradeoffs and being able to explain them."_ - JBD
+_"Make it correct, make it clear, make it concise, make it fast. In that order." - Wes Dyer_
 
-_"Choosing the right limitations for a certain problem domain is often much more powerful that allowing anything."_ - Jason Moiron
+_"Good engineering is less about finding the "perfect" solution and more about understanding the tradeoffs and being able to explain them." - JBD_
+
+_"Choosing the right limitations for a certain problem domain is often much more powerful that allowing anything." - Jason Moiron_
 
 _"The correctness of the implementation is the most important concern, but there is no royal road to correctness. It involves diverse tasks such as thinking of invariants, testing and code reviews. Optimization should be done, but not prematurely." - Al Aho (inventor of AWK)_
 
 _"The basic ideas of good style, which are fundamental to write clearly and simply, are just as important now as they were 35 years ago. Simple, straightforward code is just plain easier to work with and less likely to have problems. As programs get bigger and more complicated, it's even more important to have clean, simple code." - Brian Kernighan_
 
-_"Problems can usually be solved with simple, mundane solutions. That means there's no glamorous work. You don't get to show off your amazing skills. You just build something that gets the job done and then move on. This approach may not earn you oohs and aahs, but it lets you get on with it."_ - unknown
+_"Problems can usually be solved with simple, mundane solutions. That means there's no glamorous work. You don't get to show off your amazing skills. You just build something that gets the job done and then move on. This approach may not earn you oohs and aahs, but it lets you get on with it." - Jason Fried_
 
 **Resources:**
 
@@ -165,11 +163,13 @@ What is the difference between a Senior and Junior developer?
 
 **Quotes**
 
-"You are personally responsible for the software you write." - Stephen Bourne (Bourne shell)
+_"You are personally responsible for the software you write." - Stephen Bourne (Bourne shell)_
 
-_"And the difference between juniors+seniors to those who are in-between, is the confidence to ask "dumb" questions."_ - Natalie Pistunovich
+_"And the difference between juniors+seniors to those who are in-between, is the confidence to ask "dumb" questions." - Natalie Pistunovich_
 
 _"Mistakes are an inevitable consequence of doing something new and, as such, should be seen as valuable; without them, we'd have no originality." - Ed Catmull (President of Pixar)_
+
+_"It takes considerable knowledge just to realize the extent of your own ignorance." - Thomas Sowell_
 
 ---
 
@@ -180,6 +180,8 @@ You can't look at a piece of code, function or algorithm and determine if it sme
 **Quotes**
 
 _"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love (inventor of Objective C)_
+
+_"Design depends largely on constraint." - Charles Eames"_
 
 ---
 
@@ -218,9 +220,9 @@ When error handling is treated as an exception and not part of the main code, yo
 
 **Quotes**
 
-_"Failure is expected, failure is not an odd case. Design systems that help you identify failure. Design systems that can recover from failure."_ - JBD
+_"Failure is expected, failure is not an odd case. Design systems that help you identify failure. Design systems that can recover from failure." - JBD_
 
-_"Product excellence is the difference between something that only works under certain conditions, and something that only breaks under certain conditions"._ - Kelsey Hightower
+_"Product excellence is the difference between something that only works under certain conditions, and something that only breaks under certain conditions". - Kelsey Hightower_
 
 **Resources:**
 
@@ -267,7 +269,7 @@ In Go, the underlying machine is the real machine rather than a single abstract 
 
 **Quotes**
 
-_"A well-designed language has a one-one correlation between source code and object code. It's obvious to the programmer what code will be generated from their source. This provides its own satisfaction, is efficient, and reduces the need for documentation." - Chuck Moore (inventor of Forth)_
+_"Making things easy to do is a false economy. Focus on making things easy to understand and the rest will follow." - Peter Bourgon_
 
 ---
 
@@ -283,7 +285,7 @@ Focus on encapsulation and validate that you're not generalizing or even being t
 
 **Quotes**
 
-"Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better." - Edsger W. Dijkstra
+_"Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better." - Edsger W. Dijkstra_
 
 _"Everything should be made as simple as possible, but not simpler." - Albert Einstein_
 
@@ -297,7 +299,7 @@ _Paraphrasing: "Encapsulation and the separation of concerns are drivers for des
 
 _"The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise - Edsger W. Dijkstra_
 
-_"One of our many problems with thinking is “cognitive load”: the number of things we can pay attention to at once. The cliche is 7±2, but for many things it is even less. We make progress by making those few things be more powerful." - Alan Kay_
+_"Computing is all about abstractions. Those below yours are just details. Those above yours are limiting complicated crazy town." - Joe Beda_
 
 **Resources:**
 
