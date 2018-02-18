@@ -16,6 +16,7 @@ import (
 )
 
 func main() {
+
 	// Print something to welcome users and tell them what they can ask about.
 	fmt.Println(`Welcome to my chatbot! Exit with ctrl-c or type "exit" or "quit".`)
 	fmt.Println(`You can ask me about:`)
