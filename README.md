@@ -120,24 +120,43 @@ _**Writing**_
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
 
 ### 2018
+
+**Bill Kennedy**  
 ```
-Date                Location              Venue               Type         Type             Trainer        Url
-===============================================================================================================================================================
-January(23-25)      St. Louis, MO         Centene             Corporate    Go (3 day)       Bill Kennedy
-January(29-31)      Toronto, Canada       Index Exchange      Corporate    Go (3 day)       Bill Kennedy
-February(06-08)     Paris, France         Oxiane              Corporate    Go (3 day)       Bill Kennedy
-February(15)        Chicago, IL           Loyola University   Meetup       Go (talk)        Bill Kennedy
-February(20-21)     Belgrade, Serbia      Fincore             Corporate    Go (2 day)       Bill Kennedy
-February(24-25)     Berlin, Germany       Hello Fresh         WWG          Go (2 day)       Bill Kennedy   https://www.meetup.com/Women-Who-Go-Berlin/events/247056137/
-February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)       Jacob Walker
-March(07-10)        Pune, India           GopherCon India     Conference   Adv Go (1 day)   Bill Kennedy   http://www.gophercon.in/go-workshop1/
-March(13-15)        TBD                   Spectra Logic       Corporate    Go (3 day)       Jacob Walker
-March(20-22)        Lanham, MD            McMurdo Group       Corporate    Go (3 day)       Bill Kennedy
-April(14-15)        Shanghai, China       Garden Hotel        Conference   Adv Go (1 day)   Bill Kennedy   http://gopherchina.org/
-May(02-04)          Singapore             Google              Conference   Adv Go (1 day)   Bill Kennedy   https://2018.gophercon.sg/
-May(31-02)          Reykjavík, Iceland    Harpa               Conference   Adv Go (1 day)   Bill Kennedy   https://gophercon.is/
-June(25-26)         NYC, NY               QCON                Conference   Adv Go (1 day)   Bill Kennedy   https://qconnewyork.com/
-November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   Bill Kennedy   https://qconsf.com/
+Date                Location              Venue               Type         Type             Url
+================================================================================================================================================
+January(23-25)      St. Louis, MO         Centene             Corporate    Go (3 day)       
+January(29-31)      Toronto, Canada       Index Exchange      Corporate    Go (3 day)       
+February(06-08)     Paris, France         Oxiane              Corporate    Go (3 day)       
+February(15)        Chicago, IL           Loyola University   Meetup       Go (talk)        
+February(20-21)     Belgrade, Serbia      Fincore             Corporate    Go (2 day)       
+February(24-25)     Berlin, Germany       Hello Fresh         WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin/events/247056137/
+March(07-10)        Pune, India           GopherCon India     Conference   Adv Go (1 day)   http://www.gophercon.in/go-workshop1/
+March(20-22)        Lanham, MD            McMurdo Group       Corporate    Go (3 day)       
+April(09-11)        Singapore             NCS                 Corporate    Go (3 day)       
+April(14-15)        Shanghai, China       Garden Hotel        Conference   Adv Go (1 day)   http://gopherchina.org/
+May(02-04)          Singapore             Google              Conference   Adv Go (1 day)   https://2018.gophercon.sg/
+May(08-10)          Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
+May(31-02)          Reykjavík, Iceland    Harpa               Conference   Adv Go (1 day)   https://gophercon.is/
+June(25-26)         NYC, NY               QCON                Conference   Adv Go (1 day)   https://qconnewyork.com/
+November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
+```
+
+**Jacob Walker**  
+```
+Date                Location              Venue               Type         Type             Url
+================================================================================================================================================
+February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)       
+March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)       
+March(13-15)        Bolder, CO            Spectra Logic       Corporate    Go (3 day)       
+April(03-05)        Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
+```
+
+**Daniel Whitenack**  
+```
+Date                Location              Venue               Type         Type             Url
+================================================================================================================================================
+April(10)           San Francisco, CA     QCON                Conference   AI (1 day)       https://qconsf.com/
 ```
 
 ## More About Go
