@@ -41,7 +41,7 @@ func main() {
 	f := file{"data.json"}
 	p := pipe{"cfg_service"}
 
-	// Call the retrieve funcion for each concrete type.
+	// Call the retrieve function for each concrete type.
 	retrieve(f)
 	retrieve(p)
 }

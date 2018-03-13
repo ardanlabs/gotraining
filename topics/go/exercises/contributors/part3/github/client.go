@@ -42,7 +42,7 @@ func NewClient(root, token string) (*Client, error) {
 		return nil, errors.New("token is required")
 	}
 	if !tokenRE.MatchString(token) {
-		return nil, errors.New("token is required")
+		return nil, errors.New("token is invalid")
 	}
 
 	return &Client{
