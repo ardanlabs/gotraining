@@ -8,7 +8,7 @@ import (
 
 // Sample code to show how it is important to use value or pointer semantics
 // in a consistent way. Choose the semantic that is reasonable and practical
-// for the given type and big consistent. One exception is an unmarshal
+// for the given type and be consistent. One exception is an unmarshal
 // operation since that always requires the address of a value.
 
 // *****************************************************************************

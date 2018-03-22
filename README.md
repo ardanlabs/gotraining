@@ -148,7 +148,7 @@ Date                Location              Venue               Type         Type 
 ================================================================================================================================================
 February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)       
 March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)       
-March(13-15)        Bolder, CO            Spectra Logic       Corporate    Go (3 day)       
+March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)       
 April(03-05)        Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
 ```
 

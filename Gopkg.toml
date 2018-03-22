@@ -172,3 +172,7 @@
 [[constraint]]
   branch = "v1"
   name = "gopkg.in/unrolled/render.v1"
+
+[[constraint]]
+  name = "github.com/google/go-cmp"
+  version = "0.2.0"

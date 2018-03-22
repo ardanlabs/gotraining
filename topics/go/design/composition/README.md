@@ -16,7 +16,7 @@ Composition goes beyond the mechanics of type embedding and is more than just a 
 
 _"A good API is not just easy to use but also hard to misuse." - JBD_
 
-_"You can always embed, but you cannot decompose big interfaces once they are out there. Keey interfaces small." - JBD_
+_"You can always embed, but you cannot decompose big interfaces once they are out there. Keep interfaces small." - JBD_
 
 ## Design Guidelines
 
