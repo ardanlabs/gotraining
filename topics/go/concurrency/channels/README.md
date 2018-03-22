@@ -13,12 +13,6 @@ The `Guarantee Of Delivery` is based on one question: “Do I need a guarantee t
 
 ![Ardan Labs](guarantee_of_delivery.png)
 
-### State
-
-The behavior of a channel is directly influenced by its current `State`. The state of a channel can be `nil`, `open` or `closed`.
-
-![Ardan Labs](state.png)
-
 ### Signaling With Or Without Data
 
 When you are going to signal `with` data, there are three channel configuration options you can choose depending on the type of `guarantee` you need.
@@ -28,6 +22,12 @@ When you are going to signal `with` data, there are three channel configuration 
 Signaling without data serves the main purpose of cancellation. It allows one goroutine to signal another goroutine to cancel what they are doing and move on. Cancellation can be implemented using both `unbuffered` and `buffered` channels.
 
 ![Ardan Labs](signaling_without_data.png)
+
+### State
+
+The behavior of a channel is directly influenced by its current `State`. The state of a channel can be `nil`, `open` or `closed`.
+
+![Ardan Labs](state.png)
 
 ## Links
 
