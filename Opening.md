@@ -4,6 +4,7 @@ Twitter:  @goinggodotnet #golang
 Company:  [ArdanLabs](https://www.ardanlabs.com)
 Blog:     [GoingGo.net](https://goinggo.net)
 Training: [Go](http://github.com/ardanlabs/gotraining)
+Slack:    [Slack](invite.slack.golangbridge.org)
 
 ## Quote
 “If most computer people lack understanding and knowledge, then what they will select will also be lacking.” - Alan Kay

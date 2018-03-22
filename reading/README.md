@@ -21,6 +21,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [An Interview with Brian Kernighan](http://www.cs.cmu.edu/~mihaib/kernighan-interview/index.html)  
 [Interview with Dennis Ritchie, Bjarne Stroustrup, and James Gosling](http://www.gotw.ca/publications/c_family_interview.htm)  
 ["C" Programming Language: Brian Kernighan](https://www.youtube.com/watch?feature=youtu.be&v=de2Hsvxaf8M)  
+[Language Design with Brian Kernighan](https://softwareengineeringdaily.com/2017/12/28/language-design-with-brian-kernighan-holiday-repeat)  
 
 ### History
 
