@@ -66,9 +66,10 @@ _**Video**_
 [Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
 
 _**Podcasts**_  
+[GoTime: Learning and teaching Go](https://changelog.com/gotime/72)  
 [Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
 [The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
-[Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime/6)  
+[GoTime: Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime/6)  
 [Discussing Imposter Syndrome](https://changelog.com/gotime/30)  
 
 ### Daniel Whitenack ([@dwhitena](https://twitter.com/dwhitena))  
@@ -133,12 +134,15 @@ February(20-21)     Belgrade, Serbia      Fincore             Corporate    Go (2
 February(24-25)     Berlin, Germany       Hello Fresh         WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin/events/247056137/
 March(07-10)        Pune, India           GopherCon India     Conference   Adv Go (1 day)   http://www.gophercon.in/go-workshop1/
 March(20-22)        Lanham, MD            McMurdo Group       Corporate    Go (3 day)       
+April(02-04)        NYC, NY               Tumblr              Corporate    Go (3 day)       
 April(09-11)        Singapore             NCS                 Corporate    Go (3 day)       
 April(14-15)        Shanghai, China       Garden Hotel        Conference   Adv Go (1 day)   http://gopherchina.org/
 May(02-04)          Singapore             Google              Conference   Adv Go (1 day)   https://2018.gophercon.sg/
 May(08-10)          Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
 May(31-02)          Reykjavík, Iceland    Harpa               Conference   Adv Go (1 day)   https://gophercon.is/
+June(06-08)         Singapore             SP Digital          Corporate    Go (3 day)       
 June(25-26)         NYC, NY               QCON                Conference   Adv Go (1 day)   https://qconnewyork.com/
+October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
 ```
 

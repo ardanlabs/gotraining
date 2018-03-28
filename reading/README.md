@@ -91,6 +91,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
 [Analyzing production using Flamegraphs](https://www.youtube.com/watch?v=aAhNDgEZj_U&app=desktop) - Prashant Varanasi  
 [Go’s hidden #pragmas](https://dave.cheney.net/2018/01/08/gos-hidden-pragmas) - Dave Cheney  
+[Post-mortem debugging of Go Programs](https://fntlnz.wtf/post/gopostmortem/) - Lorenzo Fontana  
 
 ### Interfaces and Composition
 
