@@ -28,10 +28,8 @@ func TestNewClient(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		test := test // Copy the value into this scope for our closure.
-
 		// Kick off a subtest for this scenario.
-		t.Run(test.name, func(t *testing.T) {
+		fn := func(t *testing.T) {
 			_, err := NewClient(API, test.token)
 
 			if test.shouldErr && err == nil {
@@ -39,7 +37,8 @@ func TestNewClient(t *testing.T) {
 			} else if !test.shouldErr && err != nil {
 				t.Errorf("NewClient(%q) should not error but gave %v", test.token, err)
 			}
-		})
+		}
+		t.Run(test.name, fn)
 	}
 }
 
@@ -110,6 +109,7 @@ func TestContributorsAPIFailure(t *testing.T) {
 		w.WriteHeader(http.StatusForbidden)
 	}
 	srv := httptest.NewServer(http.HandlerFunc(fn))
+	defer srv.Close()
 
 	c, err := NewClient(srv.URL, token)
 	if err != nil {

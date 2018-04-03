@@ -57,12 +57,11 @@ func TestPrintContributors(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		test := test // Copy to this scope for our closure.
+		// Create a mock of the API.
+		var c mock
 
-		t.Run(test.name, func(t *testing.T) {
+		fn := func(t *testing.T) {
 
-			// Create a mock of the API.
-			var c mock
 			// Use a bytes.Buffer to hold the output from our function.
 			var buf bytes.Buffer
 
@@ -81,6 +80,7 @@ func TestPrintContributors(t *testing.T) {
 			if status != test.status {
 				t.Errorf("printContributors should return status code %d, got %d", test.status, status)
 			}
-		})
+		}
+		t.Run(test.name, fn)
 	}
 }
