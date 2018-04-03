@@ -15,6 +15,6 @@ func main() {
 	// Iterate over the array displaying the value and
 	// address of each element.
 	for i, v := range five {
-		fmt.Printf("Value[%s] Address[%p] IndexAddr[%p]\n", v, &v, &five[i])
+		fmt.Printf("Value[%s]\tAddress[%p] IndexAddr[%p]\n", v, &v, &five[i])
 	}
 }
