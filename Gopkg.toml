@@ -1,5 +1,29 @@
-# Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
+# Gopkg.toml example
+#
+# Refer to https://golang.github.io/dep/docs/Gopkg.toml.html
 # for detailed Gopkg.toml documentation.
+#
+# required = ["github.com/user/thing/cmd/thing"]
+# ignored = ["github.com/user/project/pkgX", "bitbucket.org/user/project/pkgA/pkgY"]
+#
+# [[constraint]]
+#   name = "github.com/user/project"
+#   version = "1.0.0"
+#
+# [[constraint]]
+#   name = "github.com/user/project2"
+#   branch = "dev"
+#   source = "github.com/myfork/project2"
+#
+# [[override]]
+#   name = "github.com/x/y"
+#   version = "2.4.0"
+#
+# [prune]
+#   non-go = false
+#   go-tests = true
+#   unused-packages = true
+
 
 [[constraint]]
   branch = "master"
@@ -15,19 +39,11 @@
 
 [[constraint]]
   name = "github.com/dgrijalva/jwt-go"
-  version = "3.0.0"
-
-[[constraint]]
-  name = "github.com/dimfeld/httptreemux"
-  version = "4.0.1"
+  version = "3.2.0"
 
 [[constraint]]
   name = "github.com/dvsekhvalnov/jose2go"
   version = "1.3.0"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/goinggo/concurrentwebservice"
 
 [[constraint]]
   branch = "master"
@@ -38,16 +54,20 @@
   name = "github.com/gonum/stat"
 
 [[constraint]]
+  name = "github.com/google/go-cmp"
+  version = "0.2.0"
+
+[[constraint]]
   name = "github.com/gorilla/handlers"
-  version = "1.2.1"
+  version = "1.3.0"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/gorilla/pat"
+  version = "1.0.0"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/gorilla/schema"
+  version = "1.0.2"
 
 [[constraint]]
   name = "github.com/gorilla/sessions"
@@ -62,16 +82,16 @@
   version = "1.1.0"
 
 [[constraint]]
+  branch = "master"
   name = "github.com/justinas/alice"
-  version = "1.0.0"
 
 [[constraint]]
   name = "github.com/kniren/gota"
-  version = "0.8.0"
+  version = "0.9.0"
 
 [[constraint]]
   name = "github.com/labstack/echo"
-  version = "3.2.3"
+  version = "3.3.4"
 
 [[constraint]]
   branch = "master"
@@ -79,11 +99,7 @@
 
 [[constraint]]
   name = "github.com/markbates/goth"
-  version = "1.41.0"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/markbates/willie"
+  version = "1.45.4"
 
 [[constraint]]
   name = "github.com/mattn/go-runewidth"
@@ -95,11 +111,11 @@
 
 [[constraint]]
   name = "github.com/nats-io/go-nats"
-  version = "1.3.0"
+  version = "1.5.0"
 
 [[constraint]]
   name = "github.com/nats-io/nats"
-  version = "1.3.0"
+  version = "1.5.0"
 
 [[constraint]]
   branch = "master"
@@ -107,11 +123,11 @@
 
 [[constraint]]
   name = "github.com/pachyderm/pachyderm"
-  version = "1.5.3"
+  version = "1.7.0"
 
 [[constraint]]
   name = "github.com/patrickmn/go-cache"
-  version = "2.0.0"
+  version = "2.1.0"
 
 [[constraint]]
   name = "github.com/pborman/uuid"
@@ -130,20 +146,16 @@
   name = "github.com/sjwhitworth/golearn"
 
 [[constraint]]
-  name = "github.com/stretchr/testify"
-  version = "1.1.4"
-
-[[constraint]]
-  branch = "master"
   name = "github.com/theplant/blackfriday"
+  version = "1.1.0"
 
 [[constraint]]
   name = "github.com/urfave/negroni"
-  version = "0.2.0"
+  version = "0.3.0"
 
 [[constraint]]
   name = "go-hep.org/x/hep"
-  version = "0.6.0"
+  version = "0.11.0"
 
 [[constraint]]
   branch = "master"
@@ -162,17 +174,9 @@
   name = "gonum.org/v1/plot"
 
 [[constraint]]
-  name = "gopkg.in/go-playground/validator.v8"
-  version = "8.18.2"
-
-[[constraint]]
-  branch = "v2"
-  name = "gopkg.in/mgo.v2"
-
-[[constraint]]
   branch = "v1"
   name = "gopkg.in/unrolled/render.v1"
 
-[[constraint]]
-  name = "github.com/google/go-cmp"
-  version = "0.2.0"
+[prune]
+  go-tests = true
+  unused-packages = true

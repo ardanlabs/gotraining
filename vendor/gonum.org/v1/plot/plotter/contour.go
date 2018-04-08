@@ -50,6 +50,8 @@ type Contour struct {
 // the 0.01, 0.05, 0.25, 0.5, 0.75, 0.95 and 0.99 quantiles.
 // If g has Min and Max methods that return a float, those returned
 // values are used to set the respective Contour fields.
+// If the returned Contour is used when Min is greater than Max, the
+// Plot method will panic.
 func NewContour(g GridXYZ, levels []float64, p palette.Palette) *Contour {
 	var min, max float64
 	type minMaxer interface {
@@ -122,6 +124,10 @@ const naive = false
 
 // Plot implements the Plot method of the plot.Plotter interface.
 func (h *Contour) Plot(c draw.Canvas, plt *plot.Plot) {
+	if h.Min > h.Max {
+		panic("contour: invalid Z range: min greater than max")
+	}
+
 	if naive {
 		h.naivePlot(c, plt)
 		return

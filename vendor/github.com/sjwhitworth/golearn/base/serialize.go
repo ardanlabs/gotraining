@@ -3,379 +3,424 @@ package base
 import (
 	"archive/tar"
 	"compress/gzip"
-	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
+	"log"
 	"os"
 	"reflect"
-	"runtime"
 )
 
 const (
-	SerializationFormatVersion = "golearn 0.5"
+	SerializationFormatVersion = "golearn 1.0"
 )
 
-func SerializeInstancesToFile(inst FixedDataGrid, path string) error {
-	f, err := os.OpenFile(path, os.O_RDWR, 0600)
-	if err != nil {
-		return err
-	}
-	err = SerializeInstances(inst, f)
-	if err != nil {
-		return err
-	}
-	err = f.Sync()
-	if err != nil {
-		return fmt.Errorf("Couldn't flush file: %s", err)
-	}
-	f.Close()
-	return nil
+// FunctionalTarReader allows you to read anything in a tar file in any order, rather than just
+// sequentially.
+type FunctionalTarReader struct {
+	Regenerate func() *tar.Reader
 }
 
-func SerializeInstancesToCSV(inst FixedDataGrid, path string) error {
-	f, err := os.OpenFile(path, os.O_RDWR, 0600)
-	if err != nil {
-		return err
+// NewFunctionalTarReader creates a new FunctionalTarReader using a function that it can call
+// to get a tar.Reader at the beginning of the file.
+func NewFunctionalTarReader(regenFunc func() *tar.Reader) *FunctionalTarReader {
+	return &FunctionalTarReader{
+		regenFunc,
 	}
-	defer func() {
-		f.Sync()
-		f.Close()
-	}()
-
-	return SerializeInstancesToCSVStream(inst, f)
 }
 
-func SerializeInstancesToCSVStream(inst FixedDataGrid, f io.Writer) error {
-	// Create the CSV writer
-	w := csv.NewWriter(f)
+// GetNamedFile returns a file named a given thing from the tar file. If there's more than one
+// entry, the most recent is returned.
+func (f *FunctionalTarReader) GetNamedFile(name string) ([]byte, error) {
+	tr := f.Regenerate()
 
-	colCount, _ := inst.Size()
-
-	// Write out Attribute headers
-	// Start with the regular Attributes
-	normalAttrs := NonClassAttributes(inst)
-	classAttrs := inst.AllClassAttributes()
-	allAttrs := make([]Attribute, colCount)
-	n := copy(allAttrs, normalAttrs)
-	copy(allAttrs[n:], classAttrs)
-	headerRow := make([]string, colCount)
-	for i, v := range allAttrs {
-		headerRow[i] = v.GetName()
-	}
-	w.Write(headerRow)
-
-	specs := ResolveAttributes(inst, allAttrs)
-	curRow := make([]string, colCount)
-	inst.MapOverRows(specs, func(row [][]byte, rowNo int) (bool, error) {
-		for i, v := range row {
-			attr := allAttrs[i]
-			curRow[i] = attr.GetStringFromSysVal(v)
-		}
-		w.Write(curRow)
-		return true, nil
-	})
-
-	w.Flush()
-	return nil
-}
-
-func writeAttributesToFilePart(attrs []Attribute, f *tar.Writer, name string) error {
-	// Get the marshaled Attribute array
-	body, err := json.Marshal(attrs)
-	if err != nil {
-		return err
-	}
-
-	// Write a header
-	hdr := &tar.Header{
-		Name: name,
-		Size: int64(len(body)),
-	}
-	if err := f.WriteHeader(hdr); err != nil {
-		return err
-	}
-
-	// Write the marshaled data
-	if _, err := f.Write([]byte(body)); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func getTarContent(tr *tar.Reader, name string) []byte {
+	var returnCandidate []byte = nil
 	for {
 		hdr, err := tr.Next()
 		if err == io.EOF {
 			break
 		} else if err != nil {
-			panic(err)
+			return nil, err
 		}
 
 		if hdr.Name == name {
-			ret := make([]byte, hdr.Size)
-			n, err := tr.Read(ret)
-			if int64(n) != hdr.Size {
-				panic("Size mismatch")
+			ret, err := ioutil.ReadAll(tr)
+			if err != nil {
+				return nil, WrapError(err)
+			}
+			if int64(len(ret)) != hdr.Size {
+				if int64(len(ret)) < hdr.Size {
+					log.Printf("Size mismatch, got %d byte(s) for %s, expected %d (err was %s)", len(ret), hdr.Name, hdr.Size, err)
+				} else {
+					return nil, WrapError(fmt.Errorf("Size mismatch, expected %d byte(s) for %s, got %d", len(ret), hdr.Name, hdr.Size))
+				}
 			}
 			if err != nil {
-				panic(err)
+				return nil, err
 			}
-			return ret
+			returnCandidate = ret
 		}
 	}
-	panic("File not found!")
+	if returnCandidate == nil {
+		return nil, WrapError(fmt.Errorf("Not found (looking for %s)", name))
+	}
+	return returnCandidate, nil
 }
 
-func deserializeAttributes(data []byte) []Attribute {
-
-	// Define a JSON shim Attribute
-	type JSONAttribute struct {
-		Type string          `json:"type"`
-		Name string          `json:"name"`
-		Attr json.RawMessage `json:"attr"`
+func tarPrefix(prefix string, suffix string) string {
+	if prefix == "" {
+		return suffix
 	}
-
-	var ret []Attribute
-	var attrs []JSONAttribute
-
-	err := json.Unmarshal(data, &attrs)
-	if err != nil {
-		panic(fmt.Errorf("Attribute decode error: %s", err))
-	}
-
-	for _, a := range attrs {
-		var attr Attribute
-		var err error
-		switch a.Type {
-		case "binary":
-			attr = new(BinaryAttribute)
-			break
-		case "float":
-			attr = new(FloatAttribute)
-			break
-		case "categorical":
-			attr = new(CategoricalAttribute)
-			break
-		default:
-			panic(fmt.Errorf("Unrecognised Attribute format: %s", a.Type))
-		}
-		err = attr.UnmarshalJSON(a.Attr)
-		if err != nil {
-			panic(fmt.Errorf("Can't deserialize: %s (error: %s)", a, err))
-		}
-		attr.SetName(a.Name)
-		ret = append(ret, attr)
-	}
-	return ret
+	return fmt.Sprintf("%s/%s", prefix, suffix)
 }
 
-func DeserializeInstances(f io.Reader) (ret *DenseInstances, err error) {
+// ClassifierMetadataV1 is what gets written into METADATA
+// in a classification file format.
+type ClassifierMetadataV1 struct {
+	// FormatVersion should always be 1 for this structure
+	FormatVersion int `json:"format_version"`
+	// Uses the classifier name (provided by the classifier)
+	ClassifierName string `json:"classifier"`
+	// ClassifierVersion is also provided by the classifier
+	// and checks whether this version of GoLearn can read what's
+	// be written.
+	ClassifierVersion string `json"classifier_version"`
+	// This is a custom metadata field, provided by the classifier
+	ClassifierMetadata map[string]interface{} `json:"classifier_metadata"`
+}
 
-	// Recovery function
-	defer func() {
-		if r := recover(); r != nil {
-			if _, ok := r.(runtime.Error); ok {
-				panic(r)
-			}
-			err = r.(error)
-		}
-	}()
+// ClassifierDeserializer attaches helper functions useful for reading classificatiers. (UNSTABLE).
+type ClassifierDeserializer struct {
+	gzipReader io.Reader
+	fileReader io.ReadCloser
+	tarReader  *FunctionalTarReader
+	Metadata   *ClassifierMetadataV1
+}
 
-	// Open the .gz layer
-	gzReader, err := gzip.NewReader(f)
-	if err != nil {
-		return nil, fmt.Errorf("Can't open: %s", err)
+// Prefix outputs a string in the right format for TAR
+func (c *ClassifierDeserializer) Prefix(prefix string, suffix string) string {
+	if prefix == "" {
+		return suffix
 	}
-	// Open the .tar layer
-	tr := tar.NewReader(gzReader)
+	return fmt.Sprintf("%s/%s", prefix, suffix)
+}
+
+// ReadMetadataAtPrefix reads the METADATA file after prefix. If an error is returned, the first value is undefined.
+func (c *ClassifierDeserializer) ReadMetadataAtPrefix(prefix string) (ClassifierMetadataV1, error) {
+	var ret ClassifierMetadataV1
+	err := c.GetJSONForKey(c.Prefix(prefix, "METADATA"), &ret)
+	return ret, err
+}
+
+// ReadSerializedClassifierStub is the counterpart of CreateSerializedClassifierStub.
+// It's used inside SaveableClassifiers to read information from a perviously saved
+// model file.
+func ReadSerializedClassifierStub(filePath string) (*ClassifierDeserializer, error) {
+
+	f, err := os.Open(filePath)
+	if err != nil {
+		return nil, DescribeError("Can't open file", err)
+	}
+
+	gzr, err := gzip.NewReader(f)
+	if err != nil {
+		return nil, DescribeError("Can't decompress", err)
+	}
+
+	regenerateFunc := func() *tar.Reader {
+		f.Seek(0, os.SEEK_SET)
+		gzr.Reset(f)
+		tz := tar.NewReader(gzr)
+		return tz
+	}
+
+	tz := NewFunctionalTarReader(regenerateFunc)
+
+	// Check that the serialization format is right
 	// Retrieve the MANIFEST and verify
-	manifestBytes := getTarContent(tr, "MANIFEST")
-	if !reflect.DeepEqual(manifestBytes, []byte(SerializationFormatVersion)) {
-		return nil, fmt.Errorf("Unsupported MANIFEST: %s", string(manifestBytes))
-	}
-
-	// Get the size
-	sizeBytes := getTarContent(tr, "DIMS")
-	attrCount := int(UnpackBytesToU64(sizeBytes[0:8]))
-	rowCount := int(UnpackBytesToU64(sizeBytes[8:]))
-
-	// Unmarshal the Attributes
-	attrBytes := getTarContent(tr, "CATTRS")
-	cAttrs := deserializeAttributes(attrBytes)
-	attrBytes = getTarContent(tr, "ATTRS")
-	normalAttrs := deserializeAttributes(attrBytes)
-
-	// Create the return instances
-	ret = NewDenseInstances()
-
-	// Normal Attributes first, class Attributes on the end
-	allAttributes := make([]Attribute, attrCount)
-	for i, v := range normalAttrs {
-		ret.AddAttribute(v)
-		allAttributes[i] = v
-	}
-	for i, v := range cAttrs {
-		ret.AddAttribute(v)
-		err = ret.AddClassAttribute(v)
-		if err != nil {
-			return nil, fmt.Errorf("Could not set Attribute as class Attribute: %s", err)
-		}
-		allAttributes[i+len(normalAttrs)] = v
-	}
-	// Allocate memory
-	err = ret.Extend(int(rowCount))
+	manifestBytes, err := tz.GetNamedFile("CLS_MANIFEST")
 	if err != nil {
-		return nil, fmt.Errorf("Could not allocate memory")
+		return nil, DescribeError("Error reading CLS_MANIFEST", err)
+	}
+	if !reflect.DeepEqual(manifestBytes, []byte(SerializationFormatVersion)) {
+		return nil, fmt.Errorf("Unsupported CLS_MANIFEST: %s", string(manifestBytes))
 	}
 
-	// Seek through the TAR file until we get to the DATA section
-	for {
-		hdr, err := tr.Next()
-		if err == io.EOF {
-			return nil, fmt.Errorf("DATA section missing!")
-		} else if err != nil {
-			return nil, fmt.Errorf("Error seeking to DATA section: %s", err)
-		}
-		if hdr.Name == "DATA" {
-			break
-		}
+	//
+	// Parse METADATA
+	//
+	var metadata ClassifierMetadataV1
+	ret := &ClassifierDeserializer{
+		f,
+		gzr,
+		tz,
+		&metadata,
 	}
 
-	// Resolve AttributeSpecs
-	specs := ResolveAttributes(ret, allAttributes)
-
-	// Finally, read the values out of the data section
-	for i := 0; i < rowCount; i++ {
-		for _, s := range specs {
-			r := ret.Get(s, i)
-			n, err := tr.Read(r)
-			if n != len(r) {
-				return nil, fmt.Errorf("Expected %d bytes (read %d) on row %d", len(r), n, i)
-			}
-			if err != nil {
-				return nil, fmt.Errorf("Read error: %s", err)
-			}
-			ret.Set(s, i, r)
-		}
+	metadata, err = ret.ReadMetadataAtPrefix("")
+	if err != nil {
+		return nil, fmt.Errorf("Error whilst reading METADATA: %s", err)
 	}
+	ret.Metadata = &metadata
 
-	if err = gzReader.Close(); err != nil {
-		return ret, fmt.Errorf("Error closing gzip stream: %s", err)
+	// Check that we can understand this archive
+	if metadata.FormatVersion != 1 {
+		return nil, fmt.Errorf("METADATA: wrong format_version for this version of golearn")
 	}
 
 	return ret, nil
 }
 
-func SerializeInstances(inst FixedDataGrid, f io.Writer) error {
-	var hdr *tar.Header
+// GetBytesForKey returns the bytes at a given location in the output.
+func (c *ClassifierDeserializer) GetBytesForKey(key string) ([]byte, error) {
+	return c.tarReader.GetNamedFile(key)
+}
 
-	gzWriter := gzip.NewWriter(f)
-	tw := tar.NewWriter(gzWriter)
+func (c *ClassifierDeserializer) GetStringForKey(key string) (string, error) {
+	b, err := c.GetBytesForKey(key)
+	if err != nil {
+		return "", err
+	}
+	return string(b), err
+}
 
-	// Write the MANIFEST entry
-	hdr = &tar.Header{
-		Name: "MANIFEST",
-		Size: int64(len(SerializationFormatVersion)),
-	}
-	if err := tw.WriteHeader(hdr); err != nil {
-		return fmt.Errorf("Could not write MANIFEST header: %s", err)
-	}
-
-	if _, err := tw.Write([]byte(SerializationFormatVersion)); err != nil {
-		return fmt.Errorf("Could not write MANIFEST contents: %s", err)
-	}
-
-	// Now write the dimensions of the dataset
-	attrCount, rowCount := inst.Size()
-	hdr = &tar.Header{
-		Name: "DIMS",
-		Size: 16,
-	}
-	if err := tw.WriteHeader(hdr); err != nil {
-		return fmt.Errorf("Could not write DIMS header: %s", err)
-	}
-
-	if _, err := tw.Write(PackU64ToBytes(uint64(attrCount))); err != nil {
-		return fmt.Errorf("Could not write DIMS (attrCount): %s", err)
-	}
-	if _, err := tw.Write(PackU64ToBytes(uint64(rowCount))); err != nil {
-		return fmt.Errorf("Could not write DIMS (rowCount): %s", err)
-	}
-
-	// Write the ATTRIBUTES files
-	classAttrs := inst.AllClassAttributes()
-	normalAttrs := NonClassAttributes(inst)
-	if err := writeAttributesToFilePart(classAttrs, tw, "CATTRS"); err != nil {
-		return fmt.Errorf("Could not write CATTRS: %s", err)
-	}
-	if err := writeAttributesToFilePart(normalAttrs, tw, "ATTRS"); err != nil {
-		return fmt.Errorf("Could not write ATTRS: %s", err)
-	}
-
-	// Data must be written out in the same order as the Attributes
-	allAttrs := make([]Attribute, attrCount)
-	normCount := copy(allAttrs, normalAttrs)
-	for i, v := range classAttrs {
-		allAttrs[normCount+i] = v
-	}
-
-	allSpecs := ResolveAttributes(inst, allAttrs)
-
-	// First, estimate the amount of data we'll need...
-	dataLength := int64(0)
-	inst.MapOverRows(allSpecs, func(val [][]byte, row int) (bool, error) {
-		for _, v := range val {
-			dataLength += int64(len(v))
-		}
-		return true, nil
-	})
-
-	// Then write the header
-	hdr = &tar.Header{
-		Name: "DATA",
-		Size: dataLength,
-	}
-	if err := tw.WriteHeader(hdr); err != nil {
-		return fmt.Errorf("Could not write DATA: %s", err)
-	}
-
-	// Then write the actual data
-	writtenLength := int64(0)
-	if err := inst.MapOverRows(allSpecs, func(val [][]byte, row int) (bool, error) {
-		for _, v := range val {
-			wl, err := tw.Write(v)
-			writtenLength += int64(wl)
-			if err != nil {
-				return false, err
-			}
-		}
-		return true, nil
-	}); err != nil {
+// GetJSONForKey deserializes a JSON key in the output file.
+func (c *ClassifierDeserializer) GetJSONForKey(key string, v interface{}) error {
+	b, err := c.GetBytesForKey(key)
+	if err != nil {
 		return err
 	}
+	return json.Unmarshal(b, v)
+}
 
-	if writtenLength != dataLength {
-		return fmt.Errorf("Could not write DATA: changed size from %v to %v", dataLength, writtenLength)
+// GetInstancesForKey deserializes some instances stored in a classifier output file
+func (c *ClassifierDeserializer) GetInstancesForKey(key string) (FixedDataGrid, error) {
+	return DeserializeInstancesFromTarReader(c.tarReader, key)
+}
+
+// GetUInt64ForKey returns a int64 stored at a given key
+func (c *ClassifierDeserializer) GetU64ForKey(key string) (uint64, error) {
+	b, err := c.GetBytesForKey(key)
+	if err != nil {
+		return 0, err
+	}
+	return UnpackBytesToU64(b), nil
+}
+
+// GetAttributeForKey returns an Attribute stored at a given key
+func (c *ClassifierDeserializer) GetAttributeForKey(key string) (Attribute, error) {
+	b, err := c.GetBytesForKey(key)
+	if err != nil {
+		return nil, WrapError(err)
+	}
+	attr, err := DeserializeAttribute(b)
+	if err != nil {
+		return nil, WrapError(err)
+	}
+	return attr, nil
+}
+
+// GetAttributesForKey returns an Attribute list stored at a given key
+func (c *ClassifierDeserializer) GetAttributesForKey(key string) ([]Attribute, error) {
+
+	attrCountKey := c.Prefix(key, "ATTR_COUNT")
+	attrCount, err := c.GetU64ForKey(attrCountKey)
+	if err != nil {
+		return nil, DescribeError("Unable to read ATTR_COUNT", err)
 	}
 
+	ret := make([]Attribute, attrCount)
+
+	for i := range ret {
+		attrKey := c.Prefix(key, fmt.Sprintf("%d", i))
+		ret[i], err = c.GetAttributeForKey(attrKey)
+		if err != nil {
+			return nil, DescribeError("Unable to read Attribute", err)
+		}
+	}
+	return ret, nil
+}
+
+// Close cleans up everything.
+func (c *ClassifierDeserializer) Close() {
+	c.fileReader.Close()
+}
+
+// ClassifierSerializer is an object used by SaveableClassifiers.
+type ClassifierSerializer struct {
+	gzipWriter *gzip.Writer
+	fileWriter *os.File
+	tarWriter  *tar.Writer
+	f          *os.File
+	filePath   string
+}
+
+// Close finalizes the Classifier serialization session.
+func (c *ClassifierSerializer) Close() error {
+
 	// Finally, close and flush the various levels
-	if err := tw.Flush(); err != nil {
+	if err := c.tarWriter.Flush(); err != nil {
 		return fmt.Errorf("Could not flush tar: %s", err)
 	}
 
-	if err := tw.Close(); err != nil {
+	if err := c.tarWriter.Close(); err != nil {
 		return fmt.Errorf("Could not close tar: %s", err)
 	}
 
-	if err := gzWriter.Flush(); err != nil {
+	if err := c.gzipWriter.Flush(); err != nil {
 		return fmt.Errorf("Could not flush gz: %s", err)
 	}
 
-	if err := gzWriter.Close(); err != nil {
+	if err := c.gzipWriter.Close(); err != nil {
 		return fmt.Errorf("Could not close gz: %s", err)
 	}
 
+	if err := c.fileWriter.Sync(); err != nil {
+		return fmt.Errorf("Could not close file writer: %s", err)
+	}
+
+	if err := c.fileWriter.Close(); err != nil {
+		return fmt.Errorf("Could not close file writer: %s", err)
+	}
+
 	return nil
+}
+
+// WriteBytesForKey creates a new entry in the serializer file with some user-defined bytes.
+func (c *ClassifierSerializer) WriteBytesForKey(key string, b []byte) error {
+
+	//
+	// Write header for key
+	//
+	hdr := &tar.Header{
+		Name: key,
+		Size: int64(len(b)),
+	}
+
+	if err := c.tarWriter.WriteHeader(hdr); err != nil {
+		return fmt.Errorf("Could not write header for '%s': %s", key, err)
+	}
+	//
+	// Write data
+	//
+	if _, err := c.tarWriter.Write(b); err != nil {
+		return fmt.Errorf("Could not write data for '%s': %s", key, err)
+	}
+
+	c.tarWriter.Flush()
+	c.gzipWriter.Flush()
+	c.fileWriter.Sync()
+	return nil
+}
+
+// WriteU64ForKey creates a new entry in the serializer file with the bytes of a uint64
+func (c *ClassifierSerializer) WriteU64ForKey(key string, v uint64) error {
+	b := PackU64ToBytes(v)
+	return c.WriteBytesForKey(key, b)
+}
+
+// WriteJSONForKey creates a new entry in the file with an interface serialized as JSON.
+func (c *ClassifierSerializer) WriteJSONForKey(key string, v interface{}) error {
+
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	return c.WriteBytesForKey(key, b)
+
+}
+
+// WriteAttributeForKey creates a new entry in the file containing a serialized representation of Attribute
+func (c *ClassifierSerializer) WriteAttributeForKey(key string, a Attribute) error {
+	b, err := SerializeAttribute(a)
+	if err != nil {
+		return WrapError(err)
+	}
+	return c.WriteBytesForKey(key, b)
+}
+
+// WriteAttributesForKey does the same as WriteAttributeForKey, just with more than one Attribute.
+func (c *ClassifierSerializer) WriteAttributesForKey(key string, attrs []Attribute) error {
+
+	attrCountKey := c.Prefix(key, "ATTR_COUNT")
+	err := c.WriteU64ForKey(attrCountKey, uint64(len(attrs)))
+	if err != nil {
+		return DescribeError("Unable to write ATTR_COUNT", err)
+	}
+	for i, a := range attrs {
+		attrKey := c.Prefix(key, fmt.Sprintf("%d", i))
+		err = c.WriteAttributeForKey(attrKey, a)
+		if err != nil {
+			return DescribeError("Unable to write Attribute", err)
+		}
+	}
+	return nil
+}
+
+// WriteInstances for key creates a new entry in the file containing some training instances
+func (c *ClassifierSerializer) WriteInstancesForKey(key string, g FixedDataGrid, includeData bool) error {
+	fmt.Sprintf("%v", c)
+	return SerializeInstancesToTarWriter(g, c.tarWriter, key, includeData)
+}
+
+// Prefix outputs a string in the right format for TAR
+func (c *ClassifierSerializer) Prefix(prefix string, suffix string) string {
+	if prefix == "" {
+		return suffix
+	}
+	return fmt.Sprintf("%s/%s", prefix, suffix)
+}
+
+// WriteMetadataAtPrefix outputs a METADATA entry in the right place
+func (c *ClassifierSerializer) WriteMetadataAtPrefix(prefix string, metadata ClassifierMetadataV1) error {
+	return c.WriteJSONForKey(c.Prefix(prefix, "METADATA"), &metadata)
+}
+
+// CreateSerializedClassifierStub generates a file to serialize into
+// and writes the METADATA header.
+func CreateSerializedClassifierStub(filePath string, metadata ClassifierMetadataV1) (*ClassifierSerializer, error) {
+
+	// Open the filePath
+	f, err := os.OpenFile(filePath, os.O_RDWR|os.O_TRUNC|os.O_CREATE, 0600)
+	if err != nil {
+		return nil, err
+	}
+
+	var hdr *tar.Header
+	gzWriter := gzip.NewWriter(f)
+	tw := tar.NewWriter(gzWriter)
+
+	ret := ClassifierSerializer{
+		gzipWriter: gzWriter,
+		fileWriter: f,
+		tarWriter:  tw,
+	}
+
+	//
+	// Write the MANIFEST entry
+	//
+	hdr = &tar.Header{
+		Name: "CLS_MANIFEST",
+		Size: int64(len(SerializationFormatVersion)),
+	}
+	if err := tw.WriteHeader(hdr); err != nil {
+		return nil, fmt.Errorf("Could not write CLS_MANIFEST header: %s", err)
+	}
+
+	if _, err := tw.Write([]byte(SerializationFormatVersion)); err != nil {
+		return nil, fmt.Errorf("Could not write CLS_MANIFEST contents: %s", err)
+	}
+
+	//
+	// Write the METADATA entry
+	//
+	err = ret.WriteMetadataAtPrefix("", metadata)
+	if err != nil {
+		return nil, fmt.Errorf("JSON marshal error: %s", err)
+	}
+
+	return &ret, nil
+
 }

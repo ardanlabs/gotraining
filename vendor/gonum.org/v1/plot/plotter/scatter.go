@@ -16,6 +16,10 @@ type Scatter struct {
 	// XYs is a copy of the points for this scatter.
 	XYs
 
+	// GlyphStyleFunc, if not nil, specifies GlyphStyles
+	// for individual points
+	GlyphStyleFunc func(int) draw.GlyphStyle
+
 	// GlyphStyle is the style of the glyphs drawn
 	// at each point.
 	draw.GlyphStyle
@@ -38,8 +42,12 @@ func NewScatter(xys XYer) (*Scatter, error) {
 // interface.
 func (pts *Scatter) Plot(c draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&c)
-	for _, p := range pts.XYs {
-		c.DrawGlyph(pts.GlyphStyle, vg.Point{X: trX(p.X), Y: trY(p.Y)})
+	glyph := func(i int) draw.GlyphStyle { return pts.GlyphStyle }
+	if pts.GlyphStyleFunc != nil {
+		glyph = pts.GlyphStyleFunc
+	}
+	for i, p := range pts.XYs {
+		c.DrawGlyph(glyph(i), vg.Point{X: trX(p.X), Y: trY(p.Y)})
 	}
 }
 
@@ -53,11 +61,19 @@ func (pts *Scatter) DataRange() (xmin, xmax, ymin, ymax float64) {
 // GlyphBoxes returns a slice of plot.GlyphBoxes,
 // implementing the plot.GlyphBoxer interface.
 func (pts *Scatter) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+	glyph := func(i int) draw.GlyphStyle { return pts.GlyphStyle }
+	if pts.GlyphStyleFunc != nil {
+		glyph = pts.GlyphStyleFunc
+	}
 	bs := make([]plot.GlyphBox, len(pts.XYs))
 	for i, p := range pts.XYs {
 		bs[i].X = plt.X.Norm(p.X)
 		bs[i].Y = plt.Y.Norm(p.Y)
-		bs[i].Rectangle = pts.GlyphStyle.Rectangle()
+		r := glyph(i).Radius
+		bs[i].Rectangle = vg.Rectangle{
+			Min: vg.Point{X: -r, Y: -r},
+			Max: vg.Point{X: +r, Y: +r},
+		}
 	}
 	return bs
 }

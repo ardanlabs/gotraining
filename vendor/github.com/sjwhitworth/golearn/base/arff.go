@@ -39,7 +39,6 @@ func SerializeInstancesToDenseARFFWithAttributes(inst FixedDataGrid, rawAttrs []
 
 	return SerializeInstancesToWriterDenseARFFWithAttributes(f, inst, rawAttrs, relation)
 
-
 }
 
 func SerializeInstancesToWriterDenseARFFWithAttributes(w io.Writer, inst FixedDataGrid, rawAttrs []Attribute, relation string) error {

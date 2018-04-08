@@ -4,7 +4,7 @@ import (
 	"math"
 
 	"github.com/gonum/matrix"
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 type Manhattan struct{}
@@ -15,7 +15,7 @@ func NewManhattan() *Manhattan {
 
 // Distance computes the Manhattan distance, also known as L1 distance.
 // == the sum of the absolute values of elements.
-func (m *Manhattan) Distance(vectorX *mat64.Dense, vectorY *mat64.Dense) float64 {
+func (m *Manhattan) Distance(vectorX *mat.Dense, vectorY *mat.Dense) float64 {
 	r1, c1 := vectorX.Dims()
 	r2, c2 := vectorY.Dims()
 	if r1 != r2 || c1 != c2 {

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package deploy;
+
+message DeployStorageSecretRequest {
+    map<string, bytes> secrets = 1;
+}
+
+message DeployStorageSecretResponse {}
+
+service API {
+  rpc DeployStorageSecret(DeployStorageSecretRequest) returns (DeployStorageSecretResponse) {}
+}

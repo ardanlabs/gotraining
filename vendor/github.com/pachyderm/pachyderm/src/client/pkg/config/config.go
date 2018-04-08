@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/pachyderm/pachyderm/src/client/pkg/uuid"
+	"github.com/satori/go.uuid"
 )
 
 var configDirPath = filepath.Join(os.Getenv("HOME"), ".pachyderm")
@@ -33,7 +33,11 @@ func Read() (*Config, error) {
 	if c.UserID == "" {
 		fmt.Printf("No UserID present in config. Generating new UserID and "+
 			"updating config at %s\n", configPath)
-		c.UserID = uuid.NewWithoutDashes()
+		uuid, err := uuid.NewV4()
+		if err != nil {
+			return nil, err
+		}
+		c.UserID = uuid.String()
 		if err := c.Write(); err != nil {
 			return nil, err
 		}

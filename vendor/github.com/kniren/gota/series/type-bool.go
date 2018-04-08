@@ -7,73 +7,72 @@ import (
 )
 
 type boolElement struct {
-	e *bool
+	e   bool
+	nan bool
 }
 
-func (e boolElement) Set(value interface{}) Element {
-	var val bool
+func (e *boolElement) Set(value interface{}) {
+	e.nan = false
 	switch value.(type) {
 	case string:
 		if value.(string) == "NaN" {
-			e.e = nil
-			return e
+			e.nan = true
+			return
 		}
 		switch strings.ToLower(value.(string)) {
 		case "true", "t", "1":
-			val = true
+			e.e = true
 		case "false", "f", "0":
-			val = false
+			e.e = false
 		default:
-			e.e = nil
-			return e
+			e.nan = true
+			return
 		}
 	case int:
 		switch value.(int) {
 		case 1:
-			val = true
+			e.e = true
 		case 0:
-			val = false
+			e.e = false
 		default:
-			e.e = nil
-			return e
+			e.nan = true
+			return
 		}
 	case float64:
 		switch value.(float64) {
 		case 1:
-			val = true
+			e.e = true
 		case 0:
-			val = false
+			e.e = false
 		default:
-			e.e = nil
-			return e
+			e.nan = true
+			return
 		}
 	case bool:
-		val = value.(bool)
+		e.e = value.(bool)
 	case Element:
 		b, err := value.(Element).Bool()
 		if err != nil {
-			e.e = nil
-			return e
+			e.nan = true
+			return
 		}
-		val = b
+		e.e = b
 	default:
-		e.e = nil
-		return e
+		e.nan = true
+		return
 	}
-	e.e = &val
-	return e
+	return
 }
 
 func (e boolElement) Copy() Element {
-	if e.e == nil {
-		return boolElement{nil}
+	if e.IsNA() {
+		return &boolElement{false, true}
 	}
-	copy := bool(*e.e)
-	return boolElement{&copy}
+	return &boolElement{e.e, false}
 }
 
 func (e boolElement) IsNA() bool {
-	if e.e == nil {
+	if e.nan {
 		return true
 	}
 	return false
@@ -87,14 +86,14 @@ func (e boolElement) Val() ElementValue {
 	if e.IsNA() {
 		return nil
 	}
-	return bool(*e.e)
+	return bool(e.e)
 }
 
 func (e boolElement) String() string {
-	if e.e == nil {
+	if e.IsNA() {
 		return "NaN"
 	}
-	if *e.e {
+	if e.e {
 		return "true"
 	}
 	return "false"
@@ -104,7 +103,7 @@ func (e boolElement) Int() (int, error) {
 	if e.IsNA() {
 		return 0, fmt.Errorf("can't convert NaN to int")
 	}
-	if *e.e == true {
+	if e.e == true {
 		return 1, nil
 	}
 	return 0, nil
@@ -114,7 +113,7 @@ func (e boolElement) Float() float64 {
 	if e.IsNA() {
 		return math.NaN()
 	}
-	if *e.e {
+	if e.e {
 		return 1.0
 	}
 	return 0.0
@@ -124,11 +123,7 @@ func (e boolElement) Bool() (bool, error) {
 	if e.IsNA() {
 		return false, fmt.Errorf("can't convert NaN to bool")
 	}
-	return bool(*e.e), nil
-}
-
-func (e boolElement) Addr() string {
-	return fmt.Sprint(e.e)
+	return bool(e.e), nil
 }
 
 func (e boolElement) Eq(elem Element) bool {
@@ -136,7 +131,7 @@ func (e boolElement) Eq(elem Element) bool {
 	if err != nil || e.IsNA() {
 		return false
 	}
-	return *e.e == b
+	return e.e == b
 }
 
 func (e boolElement) Neq(elem Element) bool {
@@ -144,7 +139,7 @@ func (e boolElement) Neq(elem Element) bool {
 	if err != nil || e.IsNA() {
 		return false
 	}
-	return *e.e != b
+	return e.e != b
 }
 
 func (e boolElement) Less(elem Element) bool {
@@ -152,7 +147,7 @@ func (e boolElement) Less(elem Element) bool {
 	if err != nil || e.IsNA() {
 		return false
 	}
-	return !*e.e && b
+	return !e.e && b
 }
 
 func (e boolElement) LessEq(elem Element) bool {
@@ -160,7 +155,7 @@ func (e boolElement) LessEq(elem Element) bool {
 	if err != nil || e.IsNA() {
 		return false
 	}
-	return !*e.e || b
+	return !e.e || b
 }
 
 func (e boolElement) Greater(elem Element) bool {
@@ -168,7 +163,7 @@ func (e boolElement) Greater(elem Element) bool {
 	if err != nil || e.IsNA() {
 		return false
 	}
-	return *e.e && !b
+	return e.e && !b
 }
 
 func (e boolElement) GreaterEq(elem Element) bool {
@@ -176,5 +171,5 @@ func (e boolElement) GreaterEq(elem Element) bool {
 	if err != nil || e.IsNA() {
 		return false
 	}
-	return *e.e || !b
+	return e.e || !b
 }

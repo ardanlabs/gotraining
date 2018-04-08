@@ -4,7 +4,7 @@ import (
 	"math"
 
 	"github.com/gonum/matrix"
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 type Cranberra struct{}
@@ -20,7 +20,7 @@ func cranberraDistanceStep(num float64, denom float64) float64 {
 	return num / denom
 }
 
-func (c *Cranberra) Distance(vectorX *mat64.Dense, vectorY *mat64.Dense) float64 {
+func (c *Cranberra) Distance(vectorX *mat.Dense, vectorY *mat.Dense) float64 {
 	r1, c1 := vectorX.Dims()
 	r2, c2 := vectorY.Dims()
 	if r1 != r2 || c1 != c2 {

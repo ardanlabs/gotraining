@@ -1,4 +1,4 @@
-// Copyright ©2014 The gonum Authors. All rights reserved.
+// Copyright ©2014 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -130,11 +130,11 @@ func corrToCov(c *mat.SymDense, sigma []float64) {
 
 // Mahalanobis computes the Mahalanobis distance
 //  D = sqrt((x-y)^T * Σ^-1 * (x-y))
-// between the vectors x and y given the cholesky decomposition of Σ.
+// between the column vectors x and y given the cholesky decomposition of Σ.
 // Mahalanobis returns NaN if the linear solve fails.
 //
 // See https://en.wikipedia.org/wiki/Mahalanobis_distance for more information.
-func Mahalanobis(x, y *mat.VecDense, chol *mat.Cholesky) float64 {
+func Mahalanobis(x, y mat.Vector, chol *mat.Cholesky) float64 {
 	var diff mat.VecDense
 	diff.SubVec(x, y)
 	var tmp mat.VecDense

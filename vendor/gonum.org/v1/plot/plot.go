@@ -155,8 +155,9 @@ func (p *Plot) Draw(c draw.Canvas) {
 	y := verticalAxis{p.Y}
 
 	ywidth := y.size()
-	x.draw(padX(p, draw.Crop(c, ywidth, 0, 0, 0)))
+
 	xheight := x.size()
+	x.draw(padX(p, draw.Crop(c, ywidth, 0, 0, 0)))
 	y.draw(padY(p, draw.Crop(c, 0, 0, xheight, 0)))
 
 	dataC := padY(p, padX(p, draw.Crop(c, ywidth, 0, xheight, 0)))
@@ -164,7 +165,7 @@ func (p *Plot) Draw(c draw.Canvas) {
 		data.Plot(dataC, p)
 	}
 
-	p.Legend.draw(draw.Crop(draw.Crop(c, ywidth, 0, 0, 0), 0, 0, xheight, 0))
+	p.Legend.draw(draw.Crop(c, ywidth, 0, xheight, 0))
 }
 
 // DataCanvas returns a new draw.Canvas that

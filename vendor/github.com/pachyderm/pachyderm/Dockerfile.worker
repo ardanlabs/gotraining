@@ -1,7 +1,0 @@
-FROM ubuntu:16.04
-MAINTAINER jdoliner@pachyderm.io
-
-RUN mkdir /pach
-ADD ./worker.sh /pach/
-ADD ./guest.sh /pach/
-ADD ./worker /pach/

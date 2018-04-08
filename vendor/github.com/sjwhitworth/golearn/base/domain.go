@@ -7,7 +7,7 @@ import (
 	"encoding/gob"
 	"io/ioutil"
 
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 // An Estimator is object that can ingest some data and train on it.
@@ -27,7 +27,7 @@ type Model interface {
 }
 
 type BaseEstimator struct {
-	Data *mat64.Dense
+	Data *mat.Dense
 }
 
 // SaveEstimatorToGob serialises an estimator to a provided filepath, in gob format.

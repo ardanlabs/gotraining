@@ -5,6 +5,10 @@ import (
 	"reflect"
 	"sort"
 	"strings"
+
+	"math"
+
+	"github.com/gonum/stat"
 )
 
 // Series is a data structure designed for operating on arrays of elements that
@@ -13,32 +17,69 @@ import (
 // elements. Most of the power of Series resides on the ability to compare and
 // subset Series of different types.
 type Series struct {
-	Name     string    // The name of the series
-	elements []Element // The values of the elements
-	t        Type      // The type of the series
-	Err      error     // If there are errors they are stored here
+	Name     string   // The name of the series
+	elements Elements // The values of the elements
+	t        Type     // The type of the series
+	Err      error    // If there are errors they are stored here
+}
+
+// Elements is the interface that represents the array of elements contained on
+// a Series.
+type Elements interface {
+	Elem(int) Element
+	Len() int
 }
 
 // Element is the interface that defines the types of methods to be present for
 // elements of a Series
 type Element interface {
-	Set(interface{}) Element
-	Copy() Element
-	IsNA() bool
-	Type() Type
-	Val() ElementValue
-	String() string
-	Int() (int, error)
-	Float() float64
-	Bool() (bool, error)
-	Addr() string
+	// Setter method
+	Set(interface{})
+
+	// Comparation methods
 	Eq(Element) bool
 	Neq(Element) bool
 	Less(Element) bool
 	LessEq(Element) bool
 	Greater(Element) bool
 	GreaterEq(Element) bool
+
+	// Accessor/conversion methods
+	Copy() Element     // FIXME: Returning interface is a recipe for pain
+	Val() ElementValue // FIXME: Returning interface is a recipe for pain
+	String() string
+	Int() (int, error)
+	Float() float64
+	Bool() (bool, error)
+
+	// Information methods
+	IsNA() bool
+	Type() Type
 }
+
+// intElements is the concrete implementation of Elements for Int elements.
+type intElements []intElement
+
+func (e intElements) Len() int           { return len(e) }
+func (e intElements) Elem(i int) Element { return &e[i] }
+
+// stringElements is the concrete implementation of Elements for String elements.
+type stringElements []stringElement
+
+func (e stringElements) Len() int           { return len(e) }
+func (e stringElements) Elem(i int) Element { return &e[i] }
+
+// floatElements is the concrete implementation of Elements for Float elements.
+type floatElements []floatElement
+
+func (e floatElements) Len() int           { return len(e) }
+func (e floatElements) Elem(i int) Element { return &e[i] }
+
+// boolElements is the concrete implementation of Elements for Bool elements.
+type boolElements []boolElement
+
+func (e boolElements) Len() int           { return len(e) }
+func (e boolElements) Elem(i int) Element { return &e[i] }
 
 // ElementValue represents the value that can be used for marshaling or
 // unmarshaling Elements.
@@ -81,74 +122,70 @@ const (
 //     Series [Bool]  // Same as []bool
 type Indexes interface{}
 
-// TODO:  New series values as an Alias (type Values interface{}) for better documentation
-
 // New is the generic Series constructor
 func New(values interface{}, t Type, name string) Series {
-	var elements []Element
 	ret := Series{
-		Name:     name,
-		elements: elements,
-		t:        t,
+		Name: name,
+		t:    t,
 	}
 
 	// Pre-allocate elements
 	preAlloc := func(n int) {
-		ret.elements = make([]Element, n)
-		for i := 0; i < n; i++ {
-			switch t {
-			case String:
-				ret.elements[i] = stringElement{}
-			case Int:
-				ret.elements[i] = intElement{}
-			case Float:
-				ret.elements[i] = floatElement{}
-			case Bool:
-				ret.elements[i] = boolElement{}
-			default:
-				panic(fmt.Sprintf("unknown type %v", t))
-			}
+		switch t {
+		case String:
+			ret.elements = make(stringElements, n)
+		case Int:
+			ret.elements = make(intElements, n)
+		case Float:
+			ret.elements = make(floatElements, n)
+		case Bool:
+			ret.elements = make(boolElements, n)
+		default:
+			panic(fmt.Sprintf("unknown type %v", t))
 		}
 	}
+
 	if values == nil {
 		preAlloc(1)
+		ret.elements.Elem(0).Set(nil)
 		return ret
 	}
+
 	switch values.(type) {
 	case []string:
 		v := values.([]string)
 		l := len(v)
 		preAlloc(l)
 		for i := 0; i < l; i++ {
-			ret.elements[i] = ret.elements[i].Set(v[i])
+			ret.elements.Elem(i).Set(v[i])
 		}
 	case []float64:
 		v := values.([]float64)
 		l := len(v)
 		preAlloc(l)
 		for i := 0; i < l; i++ {
-			ret.elements[i] = ret.elements[i].Set(v[i])
+			ret.elements.Elem(i).Set(v[i])
 		}
 	case []int:
 		v := values.([]int)
 		l := len(v)
 		preAlloc(l)
 		for i := 0; i < l; i++ {
-			ret.elements[i] = ret.elements[i].Set(v[i])
+			ret.elements.Elem(i).Set(v[i])
 		}
 	case []bool:
 		v := values.([]bool)
 		l := len(v)
 		preAlloc(l)
 		for i := 0; i < l; i++ {
-			ret.elements[i] = ret.elements[i].Set(v[i])
+			ret.elements.Elem(i).Set(v[i])
 		}
 	case Series:
 		v := values.(Series)
 		l := v.Len()
 		preAlloc(l)
-		for i, e := range v.elements {
-			ret.elements[i] = ret.elements[i].Set(e)
+		for i := 0; i < l; i++ {
+			ret.elements.Elem(i).Set(v.elements.Elem(i))
 		}
 	default:
 		switch reflect.TypeOf(values).Kind() {
@@ -158,15 +195,16 @@ func New(values interface{}, t Type, name string) Series {
 			preAlloc(v.Len())
 			for i := 0; i < l; i++ {
 				val := v.Index(i).Interface()
-				ret.elements[i] = ret.elements[i].Set(val)
+				ret.elements.Elem(i).Set(val)
 			}
 		default:
 			preAlloc(1)
 			v := reflect.ValueOf(values)
 			val := v.Interface()
-			ret.elements[0] = ret.elements[0].Set(val)
+			ret.elements.Elem(0).Set(val)
 		}
 	}
+
 	return ret
 }
 
@@ -192,12 +230,7 @@ func Bools(values interface{}) Series {
 
 // Empty returns an empty Series of the same type
 func (s Series) Empty() Series {
-	var elements []Element
-	return Series{
-		Name:     s.Name,
-		t:        s.t,
-		elements: elements,
-	}
+	return New([]int{}, s.t, s.Name)
 }
 
 // Append adds new elements to the end of the Series. When using Append, the
@@ -207,7 +240,16 @@ func (s *Series) Append(values interface{}) {
 		return
 	}
 	news := New(values, s.t, s.Name)
-	s.elements = append(s.elements, news.elements...)
+	switch s.t {
+	case String:
+		s.elements = append(s.elements.(stringElements), news.elements.(stringElements)...)
+	case Int:
+		s.elements = append(s.elements.(intElements), news.elements.(intElements)...)
+	case Float:
+		s.elements = append(s.elements.(floatElements), news.elements.(floatElements)...)
+	case Bool:
+		s.elements = append(s.elements.(boolElements), news.elements.(boolElements)...)
+	}
 }
 
 // Concat concatenates two series together. It will return a new Series with the
@@ -235,19 +277,39 @@ func (s Series) Subset(indexes Indexes) Series {
 		s.Err = err
 		return s
 	}
-	elements := make([]Element, len(idx))
-	for k, i := range idx {
-		if i < 0 || i >= s.Len() {
-			s.Err = fmt.Errorf("subsetting error: index out of range")
-			return s
+	ret := Series{
+		Name: s.Name,
+		t:    s.t,
+	}
+	switch s.t {
+	case String:
+		elements := make(stringElements, len(idx))
+		for k, i := range idx {
+			elements[k] = s.elements.(stringElements)[i]
 		}
-		elements[k] = s.elements[i].Copy()
+		ret.elements = elements
+	case Int:
+		elements := make(intElements, len(idx))
+		for k, i := range idx {
+			elements[k] = s.elements.(intElements)[i]
+		}
+		ret.elements = elements
+	case Float:
+		elements := make(floatElements, len(idx))
+		for k, i := range idx {
+			elements[k] = s.elements.(floatElements)[i]
+		}
+		ret.elements = elements
+	case Bool:
+		elements := make(boolElements, len(idx))
+		for k, i := range idx {
+			elements[k] = s.elements.(boolElements)[i]
+		}
+		ret.elements = elements
+	default:
+		panic("unknown series type")
 	}
-	return Series{
-		Name:     s.Name,
-		t:        s.t,
-		elements: elements,
-	}
+	return ret
 }
 
 // Set sets the values on the indexes of a Series and returns the reference
@@ -274,15 +336,15 @@ func (s Series) Set(indexes Indexes, newvalues Series) Series {
 			s.Err = fmt.Errorf("set error: index out of range")
 			return s
 		}
-		s.elements[i] = s.elements[i].Set(newvalues.elements[k])
+		s.elements.Elem(i).Set(newvalues.elements.Elem(k))
 	}
 	return s
 }
 
 // HasNaN checks whether the Series contain NaN elements.
 func (s Series) HasNaN() bool {
-	for _, e := range s.elements {
-		if e.IsNA() {
+	for i := 0; i < s.Len(); i++ {
+		if s.elements.Elem(i).IsNA() {
 			return true
 		}
 	}
@@ -292,8 +354,8 @@ func (s Series) HasNaN() bool {
 // IsNaN returns an array that identifies which of the elements are NaN.
 func (s Series) IsNaN() []bool {
 	ret := make([]bool, s.Len())
-	for i, e := range s.elements {
-		ret[i] = e.IsNA()
+	for i := 0; i < s.Len(); i++ {
+		ret[i] = s.elements.Elem(i).IsNA()
 	}
 	return ret
 }
@@ -330,9 +392,11 @@ func (s Series) Compare(comparator Comparator, comparando interface{}) Series {
 	bools := make([]bool, s.Len())
 	// In comparator comparation
 	if comparator == In {
-		for i, e := range s.elements {
+		for i := 0; i < s.Len(); i++ {
+			e := s.elements.Elem(i)
 			b := false
-			for _, m := range comp.elements {
+			for j := 0; j < comp.Len(); j++ {
+				m := comp.elements.Elem(j)
 				c, err := compareElements(e, m, Eq)
 				if err != nil {
 					s = s.Empty()
@@ -351,8 +415,9 @@ func (s Series) Compare(comparator Comparator, comparando interface{}) Series {
 
 	// Single element comparison
 	if comp.Len() == 1 {
-		for i, e := range s.elements {
-			c, err := compareElements(e, comp.elements[0], comparator)
+		for i := 0; i < s.Len(); i++ {
+			e := s.elements.Elem(i)
+			c, err := compareElements(e, comp.elements.Elem(0), comparator)
 			if err != nil {
 				s = s.Empty()
 				s.Err = err
@@ -369,8 +434,9 @@ func (s Series) Compare(comparator Comparator, comparando interface{}) Series {
 		s.Err = fmt.Errorf("can't compare: length mismatch")
 		return s
 	}
-	for i, e := range s.elements {
-		c, err := compareElements(e, comp.elements[i], comparator)
+	for i := 0; i < s.Len(); i++ {
+		e := s.elements.Elem(i)
+		c, err := compareElements(e, comp.elements.Elem(i), comparator)
 		if err != nil {
 			s = s.Empty()
 			s.Err = err
@@ -386,9 +452,20 @@ func (s Series) Copy() Series {
 	name := s.Name
 	t := s.t
 	err := s.Err
-	elements := make([]Element, s.Len())
-	for i, e := range s.elements {
-		elements[i] = e.Copy()
+	var elements Elements
+	switch s.t {
+	case String:
+		elements = make(stringElements, s.Len())
+		copy(elements.(stringElements), s.elements.(stringElements))
+	case Float:
+		elements = make(floatElements, s.Len())
+		copy(elements.(floatElements), s.elements.(floatElements))
+	case Bool:
+		elements = make(boolElements, s.Len())
+		copy(elements.(boolElements), s.elements.(boolElements))
+	case Int:
+		elements = make(intElements, s.Len())
+		copy(elements.(intElements), s.elements.(intElements))
 	}
 	ret := Series{
 		Name:     name,
@@ -402,7 +479,8 @@ func (s Series) Copy() Series {
 // Records returns the elements of a Series as a []string
 func (s Series) Records() []string {
 	ret := make([]string, s.Len())
-	for i, e := range s.elements {
+	for i := 0; i < s.Len(); i++ {
+		e := s.elements.Elem(i)
 		ret[i] = e.String()
 	}
 	return ret
@@ -413,7 +491,8 @@ func (s Series) Records() []string {
 // NaN.
 func (s Series) Float() []float64 {
 	ret := make([]float64, s.Len())
-	for i, e := range s.elements {
+	for i := 0; i < s.Len(); i++ {
+		e := s.elements.Elem(i)
 		ret[i] = e.Float()
 	}
 	return ret
@@ -423,7 +502,8 @@ func (s Series) Float() []float64 {
 // transformation is not possible.
 func (s Series) Int() ([]int, error) {
 	ret := make([]int, s.Len())
-	for i, e := range s.elements {
+	for i := 0; i < s.Len(); i++ {
+		e := s.elements.Elem(i)
 		val, err := e.Int()
 		if err != nil {
 			return nil, err
@@ -437,7 +517,8 @@ func (s Series) Int() ([]int, error) {
 // transformation is not possible.
 func (s Series) Bool() ([]bool, error) {
 	ret := make([]bool, s.Len())
-	for i, e := range s.elements {
+	for i := 0; i < s.Len(); i++ {
+		e := s.elements.Elem(i)
 		val, err := e.Bool()
 		if err != nil {
 			return nil, err
@@ -454,7 +535,7 @@ func (s Series) Type() Type {
 
 // Len returns the length of a given Series
 func (s Series) Len() int {
-	return len(s.elements)
+	return s.elements.Len()
 }
 
 // String implements the Stringer interface for Series
@@ -477,33 +558,20 @@ func (s Series) Str() string {
 	return strings.Join(ret, "\n")
 }
 
-// Val returns the value of a series for the given index
-func (s Series) Val(i int) (interface{}, error) {
-	if i >= s.Len() || i < 0 {
-		return nil, fmt.Errorf("index out of bounds")
-	}
-	return s.elements[i].Val(), nil
+// Val returns the value of a series for the given index. Will panic if the index
+// is out of bounds.
+func (s Series) Val(i int) interface{} {
+	return s.elements.Elem(i).Val()
 }
 
-// Elem returns the element of a series for the given index or nil if the index is
-// out of bounds
+// Elem returns the element of a series for the given index. Will panic if the
+// index is out of bounds.
 func (s Series) Elem(i int) Element {
-	if i >= s.Len() || i < 0 {
-		return nil
-	}
-	return s.elements[i]
+	return s.elements.Elem(i)
 }
 
-// Addr returns the string representation of the memory address that store the
-// values of a given Series.
-func (s Series) Addr() []string {
-	ret := make([]string, s.Len())
-	for i, e := range s.elements {
-		ret[i] = e.Addr()
-	}
-	return ret
-}
-
+// parseIndexes will parse the given indexes for a given series of length `l`. No
+// out of bounds checks is performed.
 func parseIndexes(l int, indexes Indexes) ([]int, error) {
 	var idx []int
 	switch indexes.(type) {
@@ -552,7 +620,8 @@ func parseIndexes(l int, indexes Indexes) ([]int, error) {
 func (s Series) Order(reverse bool) []int {
 	var ie indexedElements
 	var nasIdx []int
-	for i, e := range s.elements {
+	for i := 0; i < s.Len(); i++ {
+		e := s.elements.Elem(i)
 		if e.IsNA() {
 			nasIdx = append(nasIdx, i)
 		} else {
@@ -582,3 +651,92 @@ type indexedElements []indexedElement
 func (e indexedElements) Len() int           { return len(e) }
 func (e indexedElements) Less(i, j int) bool { return e[i].element.Less(e[j].element) }
 func (e indexedElements) Swap(i, j int)      { e[i], e[j] = e[j], e[i] }
+
+// StdDev calculates the standard deviation of a series
+func (s Series) StdDev() float64 {
+	stdDev := stat.StdDev(s.Float(), nil)
+	return stdDev
+}
+
+// Mean calculates the average value of a series
+func (s Series) Mean() float64 {
+	stdDev := stat.Mean(s.Float(), nil)
+	return stdDev
+}
+
+// Max return the biggest element in the series
+func (s Series) Max() float64 {
+	if s.elements.Len() == 0 || s.Type() == String {
+		return math.NaN()
+	}
+
+	max := s.elements.Elem(0)
+	for i := 1; i < s.elements.Len(); i++ {
+		elem := s.elements.Elem(i)
+		if elem.Greater(max) {
+			max = elem
+		}
+	}
+	return max.Float()
+}
+
+// MaxStr return the biggest element in a series of type String
+func (s Series) MaxStr() string {
+	if s.elements.Len() == 0 || s.Type() != String {
+		return ""
+	}
+
+	max := s.elements.Elem(0)
+	for i := 1; i < s.elements.Len(); i++ {
+		elem := s.elements.Elem(i)
+		if elem.Greater(max) {
+			max = elem
+		}
+	}
+	return max.String()
+}
+
+// Min return the lowest element in the series
+func (s Series) Min() float64 {
+	if s.elements.Len() == 0 || s.Type() == String {
+		return math.NaN()
+	}
+
+	min := s.elements.Elem(0)
+	for i := 1; i < s.elements.Len(); i++ {
+		elem := s.elements.Elem(i)
+		if elem.Less(min) {
+			min = elem
+		}
+	}
+	return min.Float()
+}
+
+// MinStr return the lowest element in a series of type String
+func (s Series) MinStr() string {
+	if s.elements.Len() == 0 || s.Type() != String {
+		return ""
+	}
+
+	min := s.elements.Elem(0)
+	for i := 1; i < s.elements.Len(); i++ {
+		elem := s.elements.Elem(i)
+		if elem.Less(min) {
+			min = elem
+		}
+	}
+	return min.String()
+}
+
+// Quantile returns the sample of x such that x is greater than or
+// equal to the fraction p of samples.
+// Note: gonum/stat panics when called with strings
+func (s Series) Quantile(p float64) float64 {
+	if s.Type() == String || s.Len() == 0 {
+		return math.NaN()
+	}
+
+	ordered := s.Subset(s.Order(false)).Float()
+
+	return stat.Quantile(p, stat.Empirical, ordered, nil)
+}

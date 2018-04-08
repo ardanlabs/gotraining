@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -11,8 +11,8 @@ import (
 )
 
 // Solve finds a minimum-norm solution to a system of linear equations defined
-// by the matrices a and b. If A is singular or near-singular, a Condition error
-// is returned. Please see the documentation for Condition for more information.
+// by the matrices A and B. If A is singular or near-singular, a Condition error
+// is returned. See the documentation for Condition for more information.
 //
 // The minimization problem solved depends on the input parameters:
 //  - if m >= n, find X such that ||A*X - B||_2 is minimized,
@@ -104,24 +104,37 @@ func (m *Dense) Solve(a, b Matrix) error {
 }
 
 // SolveVec finds a minimum-norm solution to a system of linear equations defined
-// by the matrix a and the right-hand side vector b. If A is singular or
-// near-singular, a Condition error is returned. Please see the documentation for
+// by the matrix a and the right-hand side column vector b. If A is singular or
+// near-singular, a Condition error is returned. See the documentation for
 // Dense.Solve for more information.
-func (v *VecDense) SolveVec(a Matrix, b *VecDense) error {
-	if v != b {
-		v.checkOverlap(b.mat)
+func (v *VecDense) SolveVec(a Matrix, b Vector) error {
+	if _, bc := b.Dims(); bc != 1 {
+		panic(ErrShape)
 	}
 	_, c := a.Dims()
+
 	// The Solve implementation is non-trivial, so rather than duplicate the code,
 	// instead recast the VecDenses as Dense and call the matrix code.
+
+	if rv, ok := b.(RawVectorer); ok {
+		bmat := rv.RawVector()
+		if v != b {
+			v.checkOverlap(bmat)
+		}
+		v.reuseAs(c)
+		m := v.asDense()
+		// We conditionally create bm as m when b and v are identical
+		// to prevent the overlap detection code from identifying m
+		// and bm as overlapping but not identical.
+		bm := m
+		if v != b {
+			b := VecDense{mat: bmat, n: b.Len()}
+			bm = b.asDense()
+		}
+		return m.Solve(a, bm)
+	}
+
 	v.reuseAs(c)
 	m := v.asDense()
-	// We conditionally create bm as m when b and v are identical
-	// to prevent the overlap detection code from identifying m
-	// and bm as overlapping but not identical.
-	bm := m
-	if v != b {
-		bm = b.asDense()
-	}
-	return m.Solve(a, bm)
+	return m.Solve(a, b)
 }

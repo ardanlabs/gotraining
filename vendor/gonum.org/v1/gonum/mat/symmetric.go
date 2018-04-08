@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -179,10 +179,10 @@ func (s *SymDense) AddSym(a, b Symmetric) {
 		if b, ok := b.(RawSymmetricer); ok {
 			amat, bmat := a.RawSymmetric(), b.RawSymmetric()
 			if s != a {
-				s.checkOverlap(amat)
+				s.checkOverlap(generalFromSymmetric(amat))
 			}
 			if s != b {
-				s.checkOverlap(bmat)
+				s.checkOverlap(generalFromSymmetric(bmat))
 			}
 			for i := 0; i < n; i++ {
 				btmp := bmat.Data[i*bmat.Stride+i : i*bmat.Stride+n]
@@ -232,19 +232,33 @@ func (s *SymDense) CopySym(a Symmetric) int {
 // SymRankOne performs a symetric rank-one update to the matrix a and stores
 // the result in the receiver
 //  s = a + alpha * x * x'
-func (s *SymDense) SymRankOne(a Symmetric, alpha float64, x *VecDense) {
-	n := x.Len()
-	if a.Symmetric() != n {
+func (s *SymDense) SymRankOne(a Symmetric, alpha float64, x Vector) {
+	n, c := x.Dims()
+	if a.Symmetric() != n || c != 1 {
 		panic(ErrShape)
 	}
 	s.reuseAs(n)
+
 	if s != a {
 		if rs, ok := a.(RawSymmetricer); ok {
-			s.checkOverlap(rs.RawSymmetric())
+			s.checkOverlap(generalFromSymmetric(rs.RawSymmetric()))
 		}
 		s.CopySym(a)
 	}
-	blas64.Syr(alpha, x.mat, s.mat)
+
+	xU, _ := untranspose(x)
+	if rv, ok := xU.(RawVectorer); ok {
+		xmat := rv.RawVector()
+		s.checkOverlap((&VecDense{mat: xmat, n: n}).asGeneral())
+		blas64.Syr(alpha, xmat, s.mat)
+		return
+	}
+
+	for i := 0; i < n; i++ {
+		for j := i; j < n; j++ {
+			s.set(i, j, s.at(i, j)+alpha*x.AtVec(i)*x.AtVec(j))
+		}
+	}
 }
 
 // SymRankK performs a symmetric rank-k update to the matrix a and stores the
@@ -266,7 +280,7 @@ func (s *SymDense) SymRankK(a Symmetric, alpha float64, x Matrix) {
 	}
 	if a != s {
 		if rs, ok := a.(RawSymmetricer); ok {
-			s.checkOverlap(rs.RawSymmetric())
+			s.checkOverlap(generalFromSymmetric(rs.RawSymmetric()))
 		}
 		s.reuseAs(n)
 		s.CopySym(a)
@@ -304,8 +318,13 @@ func (s *SymDense) SymOuterK(alpha float64, x Matrix) {
 			s.CopySym(w)
 			putWorkspaceSym(w)
 		} else {
-			if rs, ok := x.(RawSymmetricer); ok {
-				s.checkOverlap(rs.RawSymmetric())
+			switch r := x.(type) {
+			case RawMatrixer:
+				s.checkOverlap(r.RawMatrix())
+			case RawSymmetricer:
+				s.checkOverlap(generalFromSymmetric(r.RawSymmetric()))
+			case RawTriangular:
+				s.checkOverlap(generalFromTriangular(r.RawTriangular()))
 			}
 			// Only zero the upper triangle.
 			for i := 0; i < n; i++ {
@@ -322,27 +341,63 @@ func (s *SymDense) SymOuterK(alpha float64, x Matrix) {
 // RankTwo performs a symmmetric rank-two update to the matrix a and stores
 // the result in the receiver
 //  m = a + alpha * (x * y' + y * x')
-func (s *SymDense) RankTwo(a Symmetric, alpha float64, x, y *VecDense) {
+func (s *SymDense) RankTwo(a Symmetric, alpha float64, x, y Vector) {
 	n := s.mat.N
-	if x.Len() != n {
+	xr, xc := x.Dims()
+	if xr != n || xc != 1 {
 		panic(ErrShape)
 	}
-	if y.Len() != n {
+	yr, yc := y.Dims()
+	if yr != n || yc != 1 {
 		panic(ErrShape)
 	}
-	var w SymDense
-	if s == a {
-		w = *s
-	}
-	w.reuseAs(n)
+
 	if s != a {
 		if rs, ok := a.(RawSymmetricer); ok {
-			s.checkOverlap(rs.RawSymmetric())
+			s.checkOverlap(generalFromSymmetric(rs.RawSymmetric()))
 		}
-		w.CopySym(a)
 	}
-	blas64.Syr2(alpha, x.mat, y.mat, w.mat)
-	*s = w
+
+	var xmat, ymat blas64.Vector
+	fast := true
+	xU, _ := untranspose(x)
+	if rv, ok := xU.(RawVectorer); ok {
+		xmat = rv.RawVector()
+		s.checkOverlap((&VecDense{mat: xmat, n: x.Len()}).asGeneral())
+	} else {
+		fast = false
+	}
+	yU, _ := untranspose(y)
+	if rv, ok := yU.(RawVectorer); ok {
+		ymat = rv.RawVector()
+		s.checkOverlap((&VecDense{mat: ymat, n: y.Len()}).asGeneral())
+	} else {
+		fast = false
+	}
+
+	if s != a {
+		if rs, ok := a.(RawSymmetricer); ok {
+			s.checkOverlap(generalFromSymmetric(rs.RawSymmetric()))
+		}
+		s.reuseAs(n)
+		s.CopySym(a)
+	}
+
+	if fast {
+		if s != a {
+			s.reuseAs(n)
+			s.CopySym(a)
+		}
+		blas64.Syr2(alpha, xmat, ymat, s.mat)
+		return
+	}
+
+	for i := 0; i < n; i++ {
+		s.reuseAs(n)
+		for j := i; j < n; j++ {
+			s.set(i, j, a.At(i, j)+alpha*(x.AtVec(i)*y.AtVec(j)+y.AtVec(i)*x.AtVec(j)))
+		}
+	}
 }
 
 // ScaleSym multiplies the elements of a by f, placing the result in the receiver.
@@ -352,7 +407,7 @@ func (s *SymDense) ScaleSym(f float64, a Symmetric) {
 	if a, ok := a.(RawSymmetricer); ok {
 		amat := a.RawSymmetric()
 		if s != a {
-			s.checkOverlap(amat)
+			s.checkOverlap(generalFromSymmetric(amat))
 		}
 		for i := 0; i < n; i++ {
 			for j := i; j < n; j++ {
@@ -386,7 +441,7 @@ func (s *SymDense) SubsetSym(a Symmetric, set []int) {
 	if a, ok := a.(RawSymmetricer); ok {
 		raw := a.RawSymmetric()
 		if s != a {
-			s.checkOverlap(raw)
+			s.checkOverlap(generalFromSymmetric(raw))
 		}
 		for i := 0; i < n; i++ {
 			ssub := s.mat.Data[i*s.mat.Stride : i*s.mat.Stride+n]

@@ -8,10 +8,9 @@ import (
 	"os"
 	"path"
 	"runtime"
+	"strconv"
 	"sync"
 	"time"
-
-	"strconv"
 
 	"github.com/mattn/go-isatty"
 	"github.com/valyala/fasttemplate"
@@ -343,7 +342,7 @@ func (l *Logger) log(v Lvl, format string, args ...interface{}) {
 	buf := l.bufferPool.Get().(*bytes.Buffer)
 	buf.Reset()
 	defer l.bufferPool.Put(buf)
-	_, file, line, _ := runtime.Caller(3)
+	_, file, line, _ := runtime.Caller(2)
 
 	if v >= l.level || v == 0 {
 		message := ""

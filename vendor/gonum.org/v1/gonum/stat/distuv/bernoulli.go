@@ -1,4 +1,4 @@
-// Copyright ©2016 The gonum Authors. All rights reserved.
+// Copyright ©2016 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -6,15 +6,16 @@ package distuv
 
 import (
 	"math"
-	"math/rand"
+
+	"golang.org/x/exp/rand"
 )
 
 // Bernoulli represents a random variable whose value is 1 with probability p and
 // value of zero with probability 1-P. The value of P must be between 0 and 1.
 // More information at https://en.wikipedia.org/wiki/Bernoulli_distribution.
 type Bernoulli struct {
-	P      float64
-	Source *rand.Rand
+	P   float64
+	Src *rand.Rand
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -99,10 +100,10 @@ func (b Bernoulli) Quantile(p float64) float64 {
 // Rand returns a random sample drawn from the distribution.
 func (b Bernoulli) Rand() float64 {
 	var rnd float64
-	if b.Source == nil {
+	if b.Src == nil {
 		rnd = rand.Float64()
 	} else {
-		rnd = b.Source.Float64()
+		rnd = b.Src.Float64()
 	}
 	if rnd < b.P {
 		return 1

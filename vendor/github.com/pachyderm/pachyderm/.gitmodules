@@ -1,3 +1,0 @@
-[submodule "etc/plugin/logging"]
-	path = etc/plugin/logging
-	url = git://github.com/pachyderm/elk-kubernetes.git

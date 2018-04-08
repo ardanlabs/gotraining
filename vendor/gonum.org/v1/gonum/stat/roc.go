@@ -1,4 +1,4 @@
-// Copyright ©2016 The gonum Authors. All rights reserved.
+// Copyright ©2016 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -108,8 +108,13 @@ func ROC(n int, y []float64, classes []bool, weights []float64) (tpr, fpr []floa
 		fpr = fpr[:(bin + 1)]
 	}
 
-	invNeg := 1 / nNeg
-	invPos := 1 / nPos
+	var invNeg, invPos float64
+	if nNeg != 0 {
+		invNeg = 1 / nNeg
+	}
+	if nPos != 0 {
+		invPos = 1 / nPos
+	}
 	for i := range tpr {
 		tpr[i] *= invPos
 		fpr[i] *= invNeg

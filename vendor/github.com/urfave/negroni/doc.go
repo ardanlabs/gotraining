@@ -2,12 +2,12 @@
 //
 // If you like the idea of Martini, but you think it contains too much magic, then Negroni is a great fit.
 //
-// For a full guide visit http://github.com/codegangsta/negroni
+// For a full guide visit http://github.com/urfave/negroni
 //
 //  package main
 //
 //  import (
-//    "github.com/codegangsta/negroni"
+//    "github.com/urfave/negroni"
 //    "net/http"
 //    "fmt"
 //  )

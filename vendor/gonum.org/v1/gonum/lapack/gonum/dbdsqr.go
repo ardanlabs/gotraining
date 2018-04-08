@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -43,7 +43,7 @@ import (
 // C is a matrix of size n×ncc whose elements are stored in c. The elements
 // of c are modified to contain Q^T * C on exit. C is not used if ncc == 0.
 //
-// work contains temporary storage and must have length at least 4*n. Dbdsqr
+// work contains temporary storage and must have length at least 4*(n-1). Dbdsqr
 // will panic if there is insufficient working memory.
 //
 // Dbdsqr returns whether the decomposition was successful.
@@ -68,7 +68,7 @@ func (impl Implementation) Dbdsqr(uplo blas.Uplo, n, ncvt, nru, ncc int, d, e, v
 	if len(e) < n-1 {
 		panic(badE)
 	}
-	if len(work) < 4*n {
+	if len(work) < 4*(n-1) {
 		panic(badWork)
 	}
 	var info int

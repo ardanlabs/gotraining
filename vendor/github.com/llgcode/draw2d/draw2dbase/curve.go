@@ -4,6 +4,7 @@
 package draw2dbase
 
 import (
+	"errors"
 	"math"
 )
 
@@ -17,6 +18,7 @@ const (
 
 // SubdivideCubic a Bezier cubic curve in 2 equivalents Bezier cubic curves.
 // c1 and c2 parameters are the resulting curves
+// length of c, c1 and c2 must be 8 otherwise it panics.
 func SubdivideCubic(c, c1, c2 []float64) {
 	// First point of c is the first point of c1
 	c1[0], c1[1] = c[0], c[1]
@@ -48,7 +50,10 @@ func SubdivideCubic(c, c1, c2 []float64) {
 
 // TraceCubic generate lines subdividing the cubic curve using a Liner
 // flattening_threshold helps determines the flattening expectation of the curve
-func TraceCubic(t Liner, cubic []float64, flatteningThreshold float64) {
+func TraceCubic(t Liner, cubic []float64, flatteningThreshold float64) error {
+	if len(cubic) < 8 {
+		return errors.New("cubic length must be >= 8")
+	}
 	// Allocation curves
 	var curves [CurveRecursionLimit * 8]float64
 	copy(curves[0:8], cubic[0:8])
@@ -60,7 +65,7 @@ func TraceCubic(t Liner, cubic []float64, flatteningThreshold float64) {
 	var dx, dy, d2, d3 float64
 
 	for i >= 0 {
-		c = curves[i*8:]
+		c = curves[i:]
 		dx = c[6] - c[0]
 		dy = c[7] - c[1]
 
@@ -68,15 +73,16 @@ func TraceCubic(t Liner, cubic []float64, flatteningThreshold float64) {
 		d3 = math.Abs((c[4]-c[6])*dy - (c[5]-c[7])*dx)
 
 		// if it's flat then trace a line
-		if (d2+d3)*(d2+d3) < flatteningThreshold*(dx*dx+dy*dy) || i == len(curves)-1 {
+		if (d2+d3)*(d2+d3) <= flatteningThreshold*(dx*dx+dy*dy) || i == len(curves)-8 {
 			t.LineTo(c[6], c[7])
-			i--
+			i -= 8
 		} else {
 			// second half of bezier go lower onto the stack
-			SubdivideCubic(c, curves[(i+1)*8:], curves[i*8:])
-			i++
+			SubdivideCubic(c, curves[i+8:], curves[i:])
+			i += 8
 		}
 	}
+	return nil
 }
 
 // Quad
@@ -84,6 +90,7 @@ func TraceCubic(t Liner, cubic []float64, flatteningThreshold float64) {
 
 // SubdivideQuad a Bezier quad curve in 2 equivalents Bezier quad curves.
 // c1 and c2 parameters are the resulting curves
+// length of c, c1 and c2 must be 6 otherwise it panics.
 func SubdivideQuad(c, c1, c2 []float64) {
 	// First point of c is the first point of c1
 	c1[0], c1[1] = c[0], c[1]
@@ -103,7 +110,10 @@ func SubdivideQuad(c, c1, c2 []float64) {
 
 // TraceQuad generate lines subdividing the curve using a Liner
 // flattening_threshold helps determines the flattening expectation of the curve
-func TraceQuad(t Liner, quad []float64, flatteningThreshold float64) {
+func TraceQuad(t Liner, quad []float64, flatteningThreshold float64) error {
+	if len(quad) < 6 {
+		return errors.New("quad length must be >= 6")
+	}
 	// Allocates curves stack
 	var curves [CurveRecursionLimit * 6]float64
 	copy(curves[0:6], quad[0:6])
@@ -113,22 +123,23 @@ func TraceQuad(t Liner, quad []float64, flatteningThreshold float64) {
 	var dx, dy, d float64
 
 	for i >= 0 {
-		c = curves[i*6:]
+		c = curves[i:]
 		dx = c[4] - c[0]
 		dy = c[5] - c[1]
 
 		d = math.Abs(((c[2]-c[4])*dy - (c[3]-c[5])*dx))
 
 		// if it's flat then trace a line
-		if (d*d) < flatteningThreshold*(dx*dx+dy*dy) || i == len(curves)-1 {
+		if (d*d) <= flatteningThreshold*(dx*dx+dy*dy) || i == len(curves)-6 {
 			t.LineTo(c[4], c[5])
-			i--
+			i -= 6
 		} else {
 			// second half of bezier go lower onto the stack
-			SubdivideQuad(c, curves[(i+1)*6:], curves[i*6:])
-			i++
+			SubdivideQuad(c, curves[i+6:], curves[i:])
+			i += 6
 		}
 	}
+	return nil
 }
 
 // TraceArc trace an arc using a Liner

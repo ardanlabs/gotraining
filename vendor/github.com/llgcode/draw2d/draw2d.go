@@ -128,6 +128,14 @@ const (
 	SquareCap
 )
 
+func (cap LineCap) String() string {
+	return map[LineCap]string{
+		RoundCap:  "round",
+		ButtCap:   "cap",
+		SquareCap: "square",
+	}[cap]
+}
+
 // LineJoin is the style of segments joint
 type LineJoin int
 
@@ -139,6 +147,14 @@ const (
 	// MiterJoin represents peaker segments joint
 	MiterJoin
 )
+
+func (join LineJoin) String() string {
+	return map[LineJoin]string{
+		RoundJoin: "round",
+		BevelJoin: "bevel",
+		MiterJoin: "miter",
+	}[join]
+}
 
 // StrokeStyle keeps stroke style attributes
 // that is used by the Stroke method of a Drawer

@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -22,7 +22,7 @@ import (
 // and lower triangular otherwise. This function will panic if t is not of
 // sufficient size.
 //
-// store describes the storage of the elementary reflectors in v. Please see
+// store describes the storage of the elementary reflectors in v. See
 // Dlarfb for a description of layout.
 //
 // tau contains the scalar factors of the elementary reflectors H_i.

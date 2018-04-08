@@ -1,4 +1,4 @@
-// Copyright ©2017 The gonum Authors. All rights reserved.
+// Copyright ©2017 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -6,13 +6,14 @@ package distuv
 
 import (
 	"math"
-	"math/rand"
+
+	"golang.org/x/exp/rand"
 )
 
 // Triangle represents a triangle distribution (https://en.wikipedia.org/wiki/Triangular_distribution).
 type Triangle struct {
 	a, b, c float64
-	Source  *rand.Rand
+	Src     *rand.Rand
 }
 
 // NewTriangle constructs a new triangle distribution with lower limit a, upper limit b, and mode c.
@@ -124,10 +125,10 @@ func (t Triangle) Quantile(p float64) float64 {
 // Rand returns a random sample drawn from the distribution.
 func (t Triangle) Rand() float64 {
 	var rnd float64
-	if t.Source == nil {
+	if t.Src == nil {
 		rnd = rand.Float64()
 	} else {
-		rnd = t.Source.Float64()
+		rnd = t.Src.Float64()
 	}
 
 	return t.Quantile(rnd)

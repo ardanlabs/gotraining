@@ -1,4 +1,4 @@
-#SVGo: A Go library for SVG generation#
+# SVGo: A Go library for SVG generation #
 
 The library generates SVG as defined by the Scalable Vector Graphics 1.1 Specification (<http://www.w3.org/TR/SVG11/>). 
 Output goes to the specified io.Writer.

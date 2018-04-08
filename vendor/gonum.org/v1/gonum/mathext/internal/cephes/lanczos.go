@@ -5,7 +5,7 @@
 // license that can be found in the LICENSE file.
 // Copyright ©2006 John Maddock
 // Portions Copyright ©2003 Boost
-// Portions Copyright ©2016 The gonum Authors. All rights reserved.
+// Portions Copyright ©2016 The Gonum Authors. All rights reserved.
 
 package cephes
 

@@ -13,6 +13,22 @@ type AttributeSpec struct {
 	attr     Attribute
 }
 
+type byPosition []AttributeSpec
+
+func (b byPosition) Len() int {
+	return len(b)
+}
+func (b byPosition) Swap(i, j int) {
+	b[i], b[j] = b[j], b[i]
+}
+func (b byPosition) Less(i, j int) bool {
+
+	iPos := (uint64(b[i].pond) << 32) + (uint64(b[i].position))
+	jPos := (uint64(b[i].pond) << 32) + (uint64(b[i].position))
+
+	return iPos < jPos
+}
+
 // GetAttribute returns an AttributeSpec which matches a given
 // Attribute.
 func (a *AttributeSpec) GetAttribute() Attribute {

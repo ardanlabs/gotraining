@@ -2,7 +2,7 @@ package kdtree
 
 import (
 	"errors"
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 	"github.com/sjwhitworth/golearn/metrics/pairwise"
 	"sort"
 )
@@ -140,8 +140,8 @@ func (t *Tree) Search(k int, disType pairwise.PairwiseDistanceFunc, target []flo
 
 func (t *Tree) searchHandle(k int, disType pairwise.PairwiseDistanceFunc, target []float64, h *heap, n *node) {
 	if n.feature == -1 {
-		vectorX := mat64.NewDense(len(target), 1, target)
-		vectorY := mat64.NewDense(len(target), 1, n.value)
+		vectorX := mat.NewDense(len(target), 1, target)
+		vectorY := mat.NewDense(len(target), 1, n.value)
 		length := disType.Distance(vectorX, vectorY)
 		h.insert(n.value, length, n.srcRowNo)
 		return
@@ -157,8 +157,8 @@ func (t *Tree) searchHandle(k int, disType pairwise.PairwiseDistanceFunc, target
 		t.searchHandle(k, disType, target, h, n.right)
 	}
 
-	vectorX := mat64.NewDense(len(target), 1, target)
-	vectorY := mat64.NewDense(len(target), 1, n.value)
+	vectorX := mat.NewDense(len(target), 1, target)
+	vectorY := mat.NewDense(len(target), 1, n.value)
 	length := disType.Distance(vectorX, vectorY)
 
 	if k > h.size() {
@@ -177,8 +177,8 @@ func (t *Tree) searchHandle(k int, disType pairwise.PairwiseDistanceFunc, target
 			t.searchAllNodes(k, disType, target, h, n.left)
 		}
 	} else {
-		vectorX = mat64.NewDense(1, 1, []float64{target[n.feature]})
-		vectorY = mat64.NewDense(1, 1, []float64{n.value[n.feature]})
+		vectorX = mat.NewDense(1, 1, []float64{target[n.feature]})
+		vectorY = mat.NewDense(1, 1, []float64{n.value[n.feature]})
 		length = disType.Distance(vectorX, vectorY)
 
 		if h.maximum().length > length {
@@ -192,8 +192,8 @@ func (t *Tree) searchHandle(k int, disType pairwise.PairwiseDistanceFunc, target
 }
 
 func (t *Tree) searchAllNodes(k int, disType pairwise.PairwiseDistanceFunc, target []float64, h *heap, n *node) {
-	vectorX := mat64.NewDense(len(target), 1, target)
-	vectorY := mat64.NewDense(len(target), 1, n.value)
+	vectorX := mat.NewDense(len(target), 1, target)
+	vectorY := mat.NewDense(len(target), 1, n.value)
 	length := disType.Distance(vectorX, vectorY)
 
 	if k > h.size() {

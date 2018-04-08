@@ -1,4 +1,4 @@
-// Copyright ©2014 The gonum Authors. All rights reserved.
+// Copyright ©2014 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -6,7 +6,8 @@ package distuv
 
 import (
 	"math"
-	"math/rand"
+
+	"golang.org/x/exp/rand"
 
 	"gonum.org/v1/gonum/floats"
 	"gonum.org/v1/gonum/stat"
@@ -14,8 +15,8 @@ import (
 
 // Exponential represents the exponential distribution (https://en.wikipedia.org/wiki/Exponential_distribution).
 type Exponential struct {
-	Rate   float64
-	Source *rand.Rand
+	Rate float64
+	Src  *rand.Rand
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -125,10 +126,10 @@ func (e Exponential) Quantile(p float64) float64 {
 // Rand returns a random sample drawn from the distribution.
 func (e Exponential) Rand() float64 {
 	var rnd float64
-	if e.Source == nil {
+	if e.Src == nil {
 		rnd = rand.ExpFloat64()
 	} else {
-		rnd = e.Source.ExpFloat64()
+		rnd = e.Src.ExpFloat64()
 	}
 	return rnd / e.Rate
 }

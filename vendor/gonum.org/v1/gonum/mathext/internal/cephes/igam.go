@@ -6,7 +6,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 // Copyright ©1985, ©1987 by Stephen L. Moshier
-// Portions Copyright ©2016 The gonum Authors. All rights reserved.
+// Portions Copyright ©2016 The Gonum Authors. All rights reserved.
 
 package cephes
 

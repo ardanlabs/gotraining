@@ -24,7 +24,7 @@ The basic usage is really simple. Given this struct:
 
 This is just a simple example and it doesn't make a lot of sense to create
 the map manually. Typically it will come from a http.Request object and
-will be of type url.Values: http.Request.Form or http.Request.MultipartForm:
+will be of type url.Values, http.Request.Form, or http.Request.MultipartForm:
 
 	func MyHandler(w http.ResponseWriter, r *http.Request) {
 		err := r.ParseForm()
@@ -45,7 +45,7 @@ will be of type url.Values: http.Request.Form or http.Request.MultipartForm:
 	}
 
 Note: it is a good idea to set a Decoder instance as a package global,
-because it caches meta-data about structs, and a instance can be shared safely:
+because it caches meta-data about structs, and an instance can be shared safely:
 
 	var decoder = schema.NewDecoder()
 
@@ -121,7 +121,7 @@ field, we could not translate multiple values to it if we did not use an
 index for the parent struct.
 
 There's also the possibility to create a custom type that implements the
-TextUnmarshaler interface, and in this case there's no need to registry
+TextUnmarshaler interface, and in this case there's no need to register
 a converter, like:
 
 	type Person struct {

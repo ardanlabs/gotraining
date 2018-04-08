@@ -3,7 +3,7 @@ package base
 import (
 	"fmt"
 
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 func checkAllAttributesAreFloat(attrs []Attribute) error {
@@ -18,8 +18,8 @@ func checkAllAttributesAreFloat(attrs []Attribute) error {
 
 // ConvertRowToMat64 takes a list of Attributes, a FixedDataGrid
 // and a row number, and returns the float values of that row
-// in a mat64.Dense format.
-func ConvertRowToMat64(attrs []Attribute, f FixedDataGrid, r int) (*mat64.Dense, error) {
+// in a mat.Dense format.
+func ConvertRowToMat64(attrs []Attribute, f FixedDataGrid, r int) (*mat.Dense, error) {
 
 	err := checkAllAttributesAreFloat(attrs)
 	if err != nil {
@@ -27,7 +27,7 @@ func ConvertRowToMat64(attrs []Attribute, f FixedDataGrid, r int) (*mat64.Dense,
 	}
 
 	// Allocate the return value
-	ret := mat64.NewDense(1, len(attrs), nil)
+	ret := mat.NewDense(1, len(attrs), nil)
 
 	// Resolve all the attributes
 	attrSpecs := ResolveAttributes(f, attrs)
@@ -42,8 +42,8 @@ func ConvertRowToMat64(attrs []Attribute, f FixedDataGrid, r int) (*mat64.Dense,
 }
 
 // ConvertAllRowsToMat64 takes a list of Attributes and returns a vector
-// of all rows in a mat64.Dense format.
-func ConvertAllRowsToMat64(attrs []Attribute, f FixedDataGrid) ([]*mat64.Dense, error) {
+// of all rows in a mat.Dense format.
+func ConvertAllRowsToMat64(attrs []Attribute, f FixedDataGrid) ([]*mat.Dense, error) {
 
 	// Check for floats
 	err := checkAllAttributesAreFloat(attrs)
@@ -53,14 +53,14 @@ func ConvertAllRowsToMat64(attrs []Attribute, f FixedDataGrid) ([]*mat64.Dense, 
 
 	// Return value
 	_, rows := f.Size()
-	ret := make([]*mat64.Dense, rows)
+	ret := make([]*mat.Dense, rows)
 
 	// Resolve all attributes
 	attrSpecs := ResolveAttributes(f, attrs)
 
 	// Set the values in each return value
 	for i := 0; i < rows; i++ {
-		cur := mat64.NewDense(1, len(attrs), nil)
+		cur := mat.NewDense(1, len(attrs), nil)
 		for j, a := range attrSpecs {
 			cur.Set(0, j, UnpackBytesToFloat(f.Get(a, i)))
 		}

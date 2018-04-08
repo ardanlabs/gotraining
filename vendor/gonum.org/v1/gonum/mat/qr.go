@@ -1,4 +1,4 @@
-// Copyright ©2013 The gonum Authors. All rights reserved.
+// Copyright ©2013 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -138,14 +138,14 @@ func (qr *QR) QTo(dst *Dense) *Dense {
 
 // Solve finds a minimum-norm solution to a system of linear equations defined
 // by the matrices A and b, where A is an m×n matrix represented in its QR factorized
-// form. If A is singular or near-singular a Condition error is returned. Please
-// see the documentation for Condition for more information.
+// form. If A is singular or near-singular a Condition error is returned.
+// See the documentation for Condition for more information.
 //
 // The minimization problem solved depends on the input parameters.
-//  If trans == false, find X such that ||A*X - b||_2 is minimized.
-//  If trans == true, find the minimum norm solution of A^T * X = b.
+//  If trans == false, find X such that ||A*X - B||_2 is minimized.
+//  If trans == true, find the minimum norm solution of A^T * X = B.
 // The solution matrix, X, is stored in place into m.
-func (qr *QR) Solve(m *Dense, trans bool, b Matrix) error {
+func (qr *QR) Solve(x *Dense, trans bool, b Matrix) error {
 	r, c := qr.qr.Dims()
 	br, bc := b.Dims()
 
@@ -157,65 +157,77 @@ func (qr *QR) Solve(m *Dense, trans bool, b Matrix) error {
 		if c != br {
 			panic(ErrShape)
 		}
-		m.reuseAs(r, bc)
+		x.reuseAs(r, bc)
 	} else {
 		if r != br {
 			panic(ErrShape)
 		}
-		m.reuseAs(c, bc)
+		x.reuseAs(c, bc)
 	}
 	// Do not need to worry about overlap between m and b because x has its own
 	// independent storage.
-	x := getWorkspace(max(r, c), bc, false)
-	x.Copy(b)
+	w := getWorkspace(max(r, c), bc, false)
+	w.Copy(b)
 	t := qr.qr.asTriDense(qr.qr.mat.Cols, blas.NonUnit, blas.Upper).mat
 	if trans {
-		ok := lapack64.Trtrs(blas.Trans, t, x.mat)
+		ok := lapack64.Trtrs(blas.Trans, t, w.mat)
 		if !ok {
 			return Condition(math.Inf(1))
 		}
 		for i := c; i < r; i++ {
-			zero(x.mat.Data[i*x.mat.Stride : i*x.mat.Stride+bc])
+			zero(w.mat.Data[i*w.mat.Stride : i*w.mat.Stride+bc])
 		}
 		work := []float64{0}
-		lapack64.Ormqr(blas.Left, blas.NoTrans, qr.qr.mat, qr.tau, x.mat, work, -1)
+		lapack64.Ormqr(blas.Left, blas.NoTrans, qr.qr.mat, qr.tau, w.mat, work, -1)
 		work = getFloats(int(work[0]), false)
-		lapack64.Ormqr(blas.Left, blas.NoTrans, qr.qr.mat, qr.tau, x.mat, work, len(work))
+		lapack64.Ormqr(blas.Left, blas.NoTrans, qr.qr.mat, qr.tau, w.mat, work, len(work))
 		putFloats(work)
 	} else {
 		work := []float64{0}
-		lapack64.Ormqr(blas.Left, blas.Trans, qr.qr.mat, qr.tau, x.mat, work, -1)
+		lapack64.Ormqr(blas.Left, blas.Trans, qr.qr.mat, qr.tau, w.mat, work, -1)
 		work = getFloats(int(work[0]), false)
-		lapack64.Ormqr(blas.Left, blas.Trans, qr.qr.mat, qr.tau, x.mat, work, len(work))
+		lapack64.Ormqr(blas.Left, blas.Trans, qr.qr.mat, qr.tau, w.mat, work, len(work))
 		putFloats(work)
 
-		ok := lapack64.Trtrs(blas.NoTrans, t, x.mat)
+		ok := lapack64.Trtrs(blas.NoTrans, t, w.mat)
 		if !ok {
 			return Condition(math.Inf(1))
 		}
 	}
-	// M was set above to be the correct size for the result.
-	m.Copy(x)
-	putWorkspace(x)
+	// X was set above to be the correct size for the result.
+	x.Copy(w)
+	putWorkspace(w)
 	if qr.cond > ConditionTolerance {
 		return Condition(qr.cond)
 	}
 	return nil
 }
 
-// SolveVec finds a minimum-norm solution to a system of linear equations.
-// Please see QR.Solve for the full documentation.
-func (qr *QR) SolveVec(v *VecDense, trans bool, b *VecDense) error {
-	if v != b {
-		v.checkOverlap(b.mat)
-	}
+// SolveVec finds a minimum-norm solution to a system of linear equations,
+//  Ax = b.
+// See QR.Solve for the full documentation.
+func (qr *QR) SolveVec(x *VecDense, trans bool, b Vector) error {
 	r, c := qr.qr.Dims()
+	if _, bc := b.Dims(); bc != 1 {
+		panic(ErrShape)
+	}
+
 	// The Solve implementation is non-trivial, so rather than duplicate the code,
 	// instead recast the VecDenses as Dense and call the matrix code.
-	if trans {
-		v.reuseAs(r)
-	} else {
-		v.reuseAs(c)
+	bm := Matrix(b)
+	if rv, ok := b.(RawVectorer); ok {
+		bmat := rv.RawVector()
+		if x != b {
+			x.checkOverlap(bmat)
+		}
+		b := VecDense{mat: bmat, n: b.Len()}
+		bm = b.asDense()
 	}
-	return qr.Solve(v.asDense(), trans, b.asDense())
+	if trans {
+		x.reuseAs(r)
+	} else {
+		x.reuseAs(c)
+	}
+	return qr.Solve(x.asDense(), trans, bm)
+
 }

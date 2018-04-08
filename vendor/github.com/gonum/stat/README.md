@@ -6,7 +6,7 @@ This is a statistics package for the Go language.
 
 ## Issues
 
-If you find any bugs, feel free to file an issue on the github issue tracker. Discussions on API changes, added features, code review, or similar requests are preferred on the gonum-dev Google Group.
+If you find any bugs, feel free to file an issue on the github [issue tracker for gonum/gonum](https://github.com/gonum/gonum/issues) if the bug exists in that reposity; no code changes will be made to this repository. Other dicussions should be taken to the gonum-dev Google Group.
 
 https://groups.google.com/forum/#!forum/gonum-dev
 

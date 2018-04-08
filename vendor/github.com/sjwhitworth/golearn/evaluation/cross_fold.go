@@ -78,5 +78,4 @@ func GenerateCrossFoldValidationConfusionMatrices(data base.FixedDataGrid, cls b
 		ret[i] = cf
 	}
 	return ret, nil
-
 }

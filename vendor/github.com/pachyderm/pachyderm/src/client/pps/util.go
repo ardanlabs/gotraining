@@ -1,9 +1,13 @@
 package pps
 
 import (
+	"fmt"
 	"sort"
+	"strings"
 
 	"github.com/pachyderm/pachyderm/src/client/pfs"
+
+	"gopkg.in/src-d/go-git.v4"
 )
 
 // VisitInput visits each input recursively in ascending order (root last)
@@ -53,22 +57,62 @@ func SortInput(input *Input) {
 	})
 }
 
-// InputCommits returns the commits in an Input.
-func InputCommits(input *Input) []*pfs.Commit {
-	var result []*pfs.Commit
+// InputBranches returns the branches in an Input.
+func InputBranches(input *Input) []*pfs.Branch {
+	var result []*pfs.Branch
 	VisitInput(input, func(input *Input) {
 		if input.Atom != nil {
-			result = append(result, &pfs.Commit{
+			result = append(result, &pfs.Branch{
 				Repo: &pfs.Repo{input.Atom.Repo},
-				ID:   input.Atom.Commit,
+				Name: input.Atom.Branch,
 			})
 		}
 		if input.Cron != nil {
-			result = append(result, &pfs.Commit{
+			result = append(result, &pfs.Branch{
 				Repo: &pfs.Repo{input.Cron.Repo},
-				ID:   input.Cron.Commit,
+				Name: "master",
+			})
+		}
+		if input.Git != nil {
+			result = append(result, &pfs.Branch{
+				Repo: &pfs.Repo{input.Git.Name},
+				Name: input.Atom.Branch,
 			})
 		}
 	})
 	return result
+}
+
+// ValidateGitCloneURL returns an error if the provided URL is invalid
+func ValidateGitCloneURL(url string) error {
+	exampleURL := "https://github.com/org/foo.git"
+	if url == "" {
+		return fmt.Errorf("clone URL is missing (example clone URL %v)", exampleURL)
+	}
+	// Use the git client's validator to make sure its a valid URL
+	o := &git.CloneOptions{
+		URL: url,
+	}
+	if err := o.Validate(); err != nil {
+		return err
+	}
+
+	// Make sure its the type that we want. Of the following we
+	// only accept the 'clone' type of url:
+	//     git_url: "git://github.com/sjezewski/testgithook.git",
+	//     ssh_url: "git@github.com:sjezewski/testgithook.git",
+	//     clone_url: "https://github.com/sjezewski/testgithook.git",
+	//     svn_url: "https://github.com/sjezewski/testgithook",
+	invalidErr := fmt.Errorf("clone URL is missing .git suffix (example clone URL %v)", exampleURL)
+
+	if !strings.HasSuffix(url, ".git") {
+		// svn_url case
+		return invalidErr
+	}
+	if !strings.HasPrefix(url, "https://") {
+		// git_url or ssh_url cases
+		return invalidErr
+	}
+
+	return nil
 }

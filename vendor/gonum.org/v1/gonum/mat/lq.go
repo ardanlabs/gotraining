@@ -1,4 +1,4 @@
-// Copyright ©2013 The gonum Authors. All rights reserved.
+// Copyright ©2013 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -142,65 +142,65 @@ func (lq *LQ) QTo(dst *Dense) *Dense {
 
 // Solve finds a minimum-norm solution to a system of linear equations defined
 // by the matrices A and b, where A is an m×n matrix represented in its LQ factorized
-// form. If A is singular or near-singular a Condition error is returned. Please
-// see the documentation for Condition for more information.
+// form. If A is singular or near-singular a Condition error is returned.
+// See the documentation for Condition for more information.
 //
 // The minimization problem solved depends on the input parameters.
-//  If trans == false, find the minimum norm solution of A * X = b.
-//  If trans == true, find X such that ||A*X - b||_2 is minimized.
-// The solution matrix, X, is stored in place into m.
-func (lq *LQ) Solve(m *Dense, trans bool, b Matrix) error {
+//  If trans == false, find the minimum norm solution of A * X = B.
+//  If trans == true, find X such that ||A*X - B||_2 is minimized.
+// The solution matrix, X, is stored in place into x.
+func (lq *LQ) Solve(x *Dense, trans bool, b Matrix) error {
 	r, c := lq.lq.Dims()
 	br, bc := b.Dims()
 
 	// The LQ solve algorithm stores the result in-place into the right hand side.
 	// The storage for the answer must be large enough to hold both b and x.
 	// However, this method's receiver must be the size of x. Copy b, and then
-	// copy the result into m at the end.
+	// copy the result into x at the end.
 	if trans {
 		if c != br {
 			panic(ErrShape)
 		}
-		m.reuseAs(r, bc)
+		x.reuseAs(r, bc)
 	} else {
 		if r != br {
 			panic(ErrShape)
 		}
-		m.reuseAs(c, bc)
+		x.reuseAs(c, bc)
 	}
-	// Do not need to worry about overlap between m and b because x has its own
+	// Do not need to worry about overlap between x and b because w has its own
 	// independent storage.
-	x := getWorkspace(max(r, c), bc, false)
-	x.Copy(b)
+	w := getWorkspace(max(r, c), bc, false)
+	w.Copy(b)
 	t := lq.lq.asTriDense(lq.lq.mat.Rows, blas.NonUnit, blas.Lower).mat
 	if trans {
 		work := []float64{0}
-		lapack64.Ormlq(blas.Left, blas.NoTrans, lq.lq.mat, lq.tau, x.mat, work, -1)
+		lapack64.Ormlq(blas.Left, blas.NoTrans, lq.lq.mat, lq.tau, w.mat, work, -1)
 		work = getFloats(int(work[0]), false)
-		lapack64.Ormlq(blas.Left, blas.NoTrans, lq.lq.mat, lq.tau, x.mat, work, len(work))
+		lapack64.Ormlq(blas.Left, blas.NoTrans, lq.lq.mat, lq.tau, w.mat, work, len(work))
 		putFloats(work)
 
-		ok := lapack64.Trtrs(blas.Trans, t, x.mat)
+		ok := lapack64.Trtrs(blas.Trans, t, w.mat)
 		if !ok {
 			return Condition(math.Inf(1))
 		}
 	} else {
-		ok := lapack64.Trtrs(blas.NoTrans, t, x.mat)
+		ok := lapack64.Trtrs(blas.NoTrans, t, w.mat)
 		if !ok {
 			return Condition(math.Inf(1))
 		}
 		for i := r; i < c; i++ {
-			zero(x.mat.Data[i*x.mat.Stride : i*x.mat.Stride+bc])
+			zero(w.mat.Data[i*w.mat.Stride : i*w.mat.Stride+bc])
 		}
 		work := []float64{0}
-		lapack64.Ormlq(blas.Left, blas.Trans, lq.lq.mat, lq.tau, x.mat, work, -1)
+		lapack64.Ormlq(blas.Left, blas.Trans, lq.lq.mat, lq.tau, w.mat, work, -1)
 		work = getFloats(int(work[0]), false)
-		lapack64.Ormlq(blas.Left, blas.Trans, lq.lq.mat, lq.tau, x.mat, work, len(work))
+		lapack64.Ormlq(blas.Left, blas.Trans, lq.lq.mat, lq.tau, w.mat, work, len(work))
 		putFloats(work)
 	}
-	// M was set above to be the correct size for the result.
-	m.Copy(x)
-	putWorkspace(x)
+	// x was set above to be the correct size for the result.
+	x.Copy(w)
+	putWorkspace(w)
 	if lq.cond > ConditionTolerance {
 		return Condition(lq.cond)
 	}
@@ -208,18 +208,28 @@ func (lq *LQ) Solve(m *Dense, trans bool, b Matrix) error {
 }
 
 // SolveVec finds a minimum-norm solution to a system of linear equations.
-// Please see LQ.Solve for the full documentation.
-func (lq *LQ) SolveVec(v *VecDense, trans bool, b *VecDense) error {
-	if v != b {
-		v.checkOverlap(b.mat)
-	}
+// See LQ.Solve for the full documentation.
+func (lq *LQ) SolveVec(x *VecDense, trans bool, b Vector) error {
 	r, c := lq.lq.Dims()
+	if _, bc := b.Dims(); bc != 1 {
+		panic(ErrShape)
+	}
+
 	// The Solve implementation is non-trivial, so rather than duplicate the code,
 	// instead recast the VecDenses as Dense and call the matrix code.
-	if trans {
-		v.reuseAs(r)
-	} else {
-		v.reuseAs(c)
+	bm := Matrix(b)
+	if rv, ok := b.(RawVectorer); ok {
+		bmat := rv.RawVector()
+		if x != b {
+			x.checkOverlap(bmat)
+		}
+		b := VecDense{mat: bmat, n: b.Len()}
+		bm = b.asDense()
 	}
-	return lq.Solve(v.asDense(), trans, b.asDense())
+	if trans {
+		x.reuseAs(r)
+	} else {
+		x.reuseAs(c)
+	}
+	return lq.Solve(x.asDense(), trans, bm)
 }

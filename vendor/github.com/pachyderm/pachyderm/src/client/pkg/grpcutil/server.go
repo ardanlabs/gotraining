@@ -23,6 +23,7 @@ var (
 type ServeOptions struct {
 	Version    *versionpb.Version
 	MaxMsgSize int
+	Cancel     chan struct{}
 }
 
 // ServeEnv are environment variables for serving.
@@ -59,6 +60,14 @@ func Serve(
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", serveEnv.GRPCPort))
 	if err != nil {
 		return err
+	}
+	if options.Cancel != nil {
+		go func() {
+			<-options.Cancel
+			if err := listener.Close(); err != nil {
+				fmt.Printf("listener.Close(): %v\n", err)
+			}
+		}()
 	}
 	return grpcServer.Serve(listener)
 }

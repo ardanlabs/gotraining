@@ -1,4 +1,4 @@
-// Copyright ©2016 The gonum Authors. All rights reserved.
+// Copyright ©2016 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -6,7 +6,8 @@ package distuv
 
 import (
 	"math"
-	"math/rand"
+
+	"golang.org/x/exp/rand"
 
 	"gonum.org/v1/gonum/mathext"
 )
@@ -26,7 +27,7 @@ type Gamma struct {
 	// If Beta == 2, this is equivalent to a Chi-Squared distribution.
 	Beta float64
 
-	Source *rand.Rand
+	Src *rand.Rand
 }
 
 // CDF computes the value of the cumulative distribution function at x.
@@ -99,10 +100,10 @@ func (g Gamma) Rand() float64 {
 	unifrnd := rand.Float64
 	exprnd := rand.ExpFloat64
 	normrnd := rand.NormFloat64
-	if g.Source != nil {
-		unifrnd = g.Source.Float64
-		exprnd = g.Source.ExpFloat64
-		normrnd = g.Source.NormFloat64
+	if g.Src != nil {
+		unifrnd = g.Src.Float64
+		exprnd = g.Src.ExpFloat64
+		normrnd = g.Src.NormFloat64
 	}
 
 	a := g.Alpha

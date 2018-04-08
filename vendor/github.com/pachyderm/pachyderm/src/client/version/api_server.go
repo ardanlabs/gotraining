@@ -45,8 +45,3 @@ func GetServerVersion(clientConn *grpc.ClientConn) (*pb.Version, error) {
 func String(v *pb.Version) string {
 	return fmt.Sprintf("%d.%d.%d%s", v.Major, v.Minor, v.Micro, v.Additional)
 }
-
-// Println prints the VersionString() value with fmt.Println(...)
-// func (v *pb.Version) Println() {
-// 	fmt.Println(v.VersionString())
-// }

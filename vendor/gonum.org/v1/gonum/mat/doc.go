@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -154,8 +154,6 @@
 // mat will use the following rules to detect overlap between the receiver and one
 // of the inputs:
 //  - the input implements one of the Raw methods, and
-//  - the Raw type matches that of the receiver or
-//    one is a RawMatrixer and the other is a RawVectorer, and
 //  - the address ranges of the backing data slices overlap, and
 //  - the strides differ or there is an overlap in the used data elements.
 // If such an overlap is detected, the method will panic.
@@ -166,8 +164,6 @@
 //    the value has been untransposed if necessary.
 //
 // mat will not attempt to detect element overlap if the input does not implement a
-// Raw method, or if the Raw method differs from that of the receiver except when a
-// conversion has occurred through a mat API function. Method behavior is undefined
-// if there is undetected overlap.
+// Raw method. Method behavior is undefined if there is undetected overlap.
 //
 package mat // import "gonum.org/v1/gonum/mat"

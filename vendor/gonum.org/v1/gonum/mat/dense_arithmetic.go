@@ -1,4 +1,4 @@
-// Copyright ©2013 The gonum Authors. All rights reserved.
+// Copyright ©2013 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -457,67 +457,162 @@ func strictCopy(m *Dense, a Matrix) {
 
 // Exp calculates the exponential of the matrix a, e^a, placing the result
 // in the receiver. Exp will panic with matrix.ErrShape if a is not square.
-//
-// Exp uses the scaling and squaring method described in section 3 of
-// http://www.cs.cornell.edu/cv/researchpdf/19ways+.pdf.
 func (m *Dense) Exp(a Matrix) {
+	// The implementation used here is from Functions of Matrices: Theory and Computation
+	// Chapter 10, Algorithm 10.20. https://doi.org/10.1137/1.9780898717778.ch10
+
 	r, c := a.Dims()
 	if r != c {
 		panic(ErrShape)
 	}
 
-	var w *Dense
-	if m.IsZero() {
-		m.reuseAsZeroed(r, r)
-		w = m
-	} else {
-		w = getWorkspace(r, r, true)
-	}
-	for i := 0; i < r*r; i += r + 1 {
-		w.mat.Data[i] = 1
+	m.reuseAs(r, r)
+	if r == 1 {
+		m.mat.Data[0] = math.Exp(a.At(0, 0))
+		return
 	}
 
-	const (
-		terms   = 10
-		scaling = 4
-	)
+	pade := []struct {
+		theta float64
+		b     []float64
+	}{
+		{theta: 0.015, b: []float64{
+			120, 60, 12, 1,
+		}},
+		{theta: 0.25, b: []float64{
+			30240, 15120, 3360, 420, 30, 1,
+		}},
+		{theta: 0.95, b: []float64{
+			17297280, 8648640, 1995840, 277200, 25200, 1512, 56, 1,
+		}},
+		{theta: 2.1, b: []float64{
+			17643225600, 8821612800, 2075673600, 302702400, 30270240, 2162160, 110880, 3960, 90, 1,
+		}},
+	}
 
-	small := getWorkspace(r, r, false)
-	small.Scale(math.Pow(2, -scaling), a)
-	power := getWorkspace(r, r, false)
-	power.Copy(small)
+	a1 := m
+	a1.Copy(a)
+	v := getWorkspace(r, r, true)
+	vraw := v.RawMatrix()
+	vvec := blas64.Vector{Inc: 1, Data: vraw.Data}
+	defer putWorkspace(v)
 
-	var (
-		tmp   = getWorkspace(r, r, false)
-		factI = 1.
-	)
-	for i := 1.; i < terms; i++ {
-		factI *= i
+	u := getWorkspace(r, r, true)
+	uraw := u.RawMatrix()
+	uvec := blas64.Vector{Inc: 1, Data: uraw.Data}
+	defer putWorkspace(u)
 
-		// This is OK to do because power and tmp are
-		// new Dense values so all rows are contiguous.
-		// TODO(kortschak) Make this explicit in the NewDense doc comment.
-		for j, v := range power.mat.Data {
-			tmp.mat.Data[j] = v / factI
+	a2 := getWorkspace(r, r, false)
+	defer putWorkspace(a2)
+
+	n1 := Norm(a, 1)
+	for i, t := range pade {
+		if n1 > t.theta {
+			continue
 		}
 
-		w.Add(w, tmp)
-		if i < terms-1 {
-			tmp.Mul(power, small)
-			tmp, power = power, tmp
-		}
-	}
-	putWorkspace(small)
-	putWorkspace(power)
-	for i := 0; i < scaling; i++ {
-		tmp.Mul(w, w)
-		tmp, w = w, tmp
-	}
-	putWorkspace(tmp)
+		// This loop only executes once, so
+		// this is not as horrible as it looks.
+		p := getWorkspace(r, r, true)
+		praw := p.RawMatrix()
+		pvec := blas64.Vector{Inc: 1, Data: praw.Data}
+		defer putWorkspace(p)
 
-	if w != m {
-		m.Copy(w)
-		putWorkspace(w)
+		for k := 0; k < r; k++ {
+			p.set(k, k, 1)
+			v.set(k, k, t.b[0])
+			u.set(k, k, t.b[1])
+		}
+
+		a2.Mul(a1, a1)
+		for j := 0; j <= i; j++ {
+			p.Mul(p, a2)
+			blas64.Axpy(r*r, t.b[2*j+2], pvec, vvec)
+			blas64.Axpy(r*r, t.b[2*j+3], pvec, uvec)
+		}
+		u.Mul(a1, u)
+
+		// Use p as a workspace here and
+		// rename u for the second call's
+		// receiver.
+		vmu, vpu := u, p
+		vpu.Add(v, u)
+		vmu.Sub(v, u)
+
+		m.Solve(vmu, vpu)
+		return
+	}
+
+	// Remaining Padé table line.
+	const theta13 = 5.4
+	b := [...]float64{
+		64764752532480000, 32382376266240000, 7771770303897600, 1187353796428800,
+		129060195264000, 10559470521600, 670442572800, 33522128640,
+		1323241920, 40840800, 960960, 16380, 182, 1,
+	}
+
+	s := math.Log2(n1 / theta13)
+	if s >= 0 {
+		s = math.Ceil(s)
+		a1.Scale(1/math.Pow(2, s), a1)
+	}
+	a2.Mul(a1, a1)
+
+	i := getWorkspace(r, r, true)
+	for j := 0; j < r; j++ {
+		i.set(j, j, 1)
+	}
+	iraw := i.RawMatrix()
+	ivec := blas64.Vector{Inc: 1, Data: iraw.Data}
+	defer putWorkspace(i)
+
+	a2raw := a2.RawMatrix()
+	a2vec := blas64.Vector{Inc: 1, Data: a2raw.Data}
+
+	a4 := getWorkspace(r, r, false)
+	a4raw := a4.RawMatrix()
+	a4vec := blas64.Vector{Inc: 1, Data: a4raw.Data}
+	defer putWorkspace(a4)
+	a4.Mul(a2, a2)
+
+	a6 := getWorkspace(r, r, false)
+	a6raw := a6.RawMatrix()
+	a6vec := blas64.Vector{Inc: 1, Data: a6raw.Data}
+	defer putWorkspace(a6)
+	a6.Mul(a2, a4)
+
+	// V = A_6(b_12*A_6 + b_10*A_4 + b_8*A_2) + b_6*A_6 + b_4*A_4 + b_2*A_2 +b_0*I
+	blas64.Axpy(r*r, b[12], a6vec, vvec)
+	blas64.Axpy(r*r, b[10], a4vec, vvec)
+	blas64.Axpy(r*r, b[8], a2vec, vvec)
+	v.Mul(v, a6)
+	blas64.Axpy(r*r, b[6], a6vec, vvec)
+	blas64.Axpy(r*r, b[4], a4vec, vvec)
+	blas64.Axpy(r*r, b[2], a2vec, vvec)
+	blas64.Axpy(r*r, b[0], ivec, vvec)
+
+	// U = A(A_6(b_13*A_6 + b_11*A_4 + b_9*A_2) + b_7*A_6 + b_5*A_4 + b_2*A_3 +b_1*I)
+	blas64.Axpy(r*r, b[13], a6vec, uvec)
+	blas64.Axpy(r*r, b[11], a4vec, uvec)
+	blas64.Axpy(r*r, b[9], a2vec, uvec)
+	u.Mul(u, a6)
+	blas64.Axpy(r*r, b[7], a6vec, uvec)
+	blas64.Axpy(r*r, b[5], a4vec, uvec)
+	blas64.Axpy(r*r, b[3], a2vec, uvec)
+	blas64.Axpy(r*r, b[1], ivec, uvec)
+	u.Mul(u, a1)
+
+	// Use i as a workspace here and
+	// rename u for the second call's
+	// receiver.
+	vmu, vpu := u, i
+	vpu.Add(v, u)
+	vmu.Sub(v, u)
+
+	m.Solve(vmu, vpu)
+
+	for ; s > 0; s-- {
+		m.Mul(m, m)
 	}
 }
 
@@ -653,39 +748,74 @@ func (m *Dense) Apply(fn func(i, j int, v float64) float64, a Matrix) {
 // RankOne performs a rank-one update to the matrix a and stores the result
 // in the receiver. If a is zero, see Outer.
 //  m = a + alpha * x * y'
-func (m *Dense) RankOne(a Matrix, alpha float64, x, y *VecDense) {
+func (m *Dense) RankOne(a Matrix, alpha float64, x, y Vector) {
 	ar, ac := a.Dims()
-	if x.Len() != ar {
+	xr, xc := x.Dims()
+	if xr != ar || xc != 1 {
 		panic(ErrShape)
 	}
-	if y.Len() != ac {
+	yr, yc := y.Dims()
+	if yr != ac || yc != 1 {
 		panic(ErrShape)
 	}
 
-	m.checkOverlap(x.asGeneral())
-	m.checkOverlap(y.asGeneral())
-
-	var w Dense
-	if m == a {
-		w = *m
+	if a != m {
+		aU, _ := untranspose(a)
+		if rm, ok := aU.(RawMatrixer); ok {
+			m.checkOverlap(rm.RawMatrix())
+		}
 	}
-	w.reuseAs(ar, ac)
 
-	// Copy over to the new memory if necessary
-	if m != a {
-		w.Copy(a)
+	var xmat, ymat blas64.Vector
+	fast := true
+	xU, _ := untranspose(x)
+	if rv, ok := xU.(RawVectorer); ok {
+		xmat = rv.RawVector()
+		m.checkOverlap((&VecDense{mat: xmat, n: x.Len()}).asGeneral())
+	} else {
+		fast = false
 	}
-	blas64.Ger(alpha, x.mat, y.mat, w.mat)
-	*m = w
+	yU, _ := untranspose(y)
+	if rv, ok := yU.(RawVectorer); ok {
+		ymat = rv.RawVector()
+		m.checkOverlap((&VecDense{mat: ymat, n: y.Len()}).asGeneral())
+	} else {
+		fast = false
+	}
+
+	if fast {
+		if m != a {
+			m.reuseAs(ar, ac)
+			m.Copy(a)
+		}
+		blas64.Ger(alpha, xmat, ymat, m.mat)
+		return
+	}
+
+	m.reuseAs(ar, ac)
+	for i := 0; i < ar; i++ {
+		for j := 0; j < ac; j++ {
+			m.set(i, j, a.At(i, j)+alpha*x.AtVec(i)*y.AtVec(j))
+		}
+	}
 }
 
-// Outer calculates the outer product of x and y, and stores the result
-// in the receiver.
+// Outer calculates the outer product of the column vectors x and y,
+// and stores the result in the receiver.
 //  m = alpha * x * y'
 // In order to update an existing matrix, see RankOne.
-func (m *Dense) Outer(alpha float64, x, y *VecDense) {
-	r := x.Len()
-	c := y.Len()
+func (m *Dense) Outer(alpha float64, x, y Vector) {
+	xr, xc := x.Dims()
+	if xc != 1 {
+		panic(ErrShape)
+	}
+	yr, yc := y.Dims()
+	if yc != 1 {
+		panic(ErrShape)
+	}
+
+	r := xr
+	c := yr
 
 	// Copied from reuseAs with use replaced by useZeroed
 	// and a final zero of the matrix elements if we pass
@@ -707,13 +837,36 @@ func (m *Dense) Outer(alpha float64, x, y *VecDense) {
 		m.capCols = c
 	} else if r != m.mat.Rows || c != m.mat.Cols {
 		panic(ErrShape)
+	}
+
+	var xmat, ymat blas64.Vector
+	fast := true
+	xU, _ := untranspose(x)
+	if rv, ok := xU.(RawVectorer); ok {
+		xmat = rv.RawVector()
+		m.checkOverlap((&VecDense{mat: xmat, n: x.Len()}).asGeneral())
 	} else {
-		m.checkOverlap(x.asGeneral())
-		m.checkOverlap(y.asGeneral())
+		fast = false
+	}
+	yU, _ := untranspose(y)
+	if rv, ok := yU.(RawVectorer); ok {
+		ymat = rv.RawVector()
+		m.checkOverlap((&VecDense{mat: ymat, n: y.Len()}).asGeneral())
+	} else {
+		fast = false
+	}
+
+	if fast {
 		for i := 0; i < r; i++ {
 			zero(m.mat.Data[i*m.mat.Stride : i*m.mat.Stride+c])
 		}
+		blas64.Ger(alpha, xmat, ymat, m.mat)
+		return
 	}
 
-	blas64.Ger(alpha, x.mat, y.mat, m.mat)
+	for i := 0; i < r; i++ {
+		for j := 0; j < c; j++ {
+			m.set(i, j, alpha*x.AtVec(i)*y.AtVec(j))
+		}
+	}
 }

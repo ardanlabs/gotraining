@@ -5,7 +5,6 @@ import (
 	"runtime"
 
 	"github.com/labstack/echo"
-	"github.com/labstack/gommon/color"
 )
 
 type (
@@ -16,16 +15,16 @@ type (
 
 		// Size of the stack to be printed.
 		// Optional. Default value 4KB.
-		StackSize int `json:"stack_size"`
+		StackSize int `yaml:"stack_size"`
 
 		// DisableStackAll disables formatting stack traces of all other goroutines
 		// into buffer after the trace for the current goroutine.
 		// Optional. Default value false.
-		DisableStackAll bool `json:"disable_stack_all"`
+		DisableStackAll bool `yaml:"disable_stack_all"`
 
 		// DisablePrintStack disables printing stack trace.
 		// Optional. Default value as false.
-		DisablePrintStack bool `json:"disable_print_stack"`
+		DisablePrintStack bool `yaml:"disable_print_stack"`
 	}
 )
 
@@ -64,17 +63,14 @@ func RecoverWithConfig(config RecoverConfig) echo.MiddlewareFunc {
 
 			defer func() {
 				if r := recover(); r != nil {
-					var err error
-					switch r := r.(type) {
-					case error:
-						err = r
-					default:
+					err, ok := r.(error)
+					if !ok {
 						err = fmt.Errorf("%v", r)
 					}
 					stack := make([]byte, config.StackSize)
 					length := runtime.Stack(stack, !config.DisableStackAll)
 					if !config.DisablePrintStack {
-						c.Logger().Printf("[%s] %s %s\n", color.Red("PANIC RECOVER"), err, stack[:length])
+						c.Logger().Printf("[PANIC RECOVER] %v %s\n", err, stack[:length])
 					}
 					c.Error(err)
 				}

@@ -1,4 +1,4 @@
-// Copyright ©2014 The gonum Authors. All rights reserved.
+// Copyright ©2014 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -44,6 +44,12 @@ func (v *VecDense) At(i, j int) float64 {
 	if j != 0 {
 		panic(ErrColAccess)
 	}
+	return v.at(i)
+}
+
+// AtVec returns the element at row i.
+// It panics if i is out of bounds.
+func (v *VecDense) AtVec(i int) float64 {
 	return v.at(i)
 }
 

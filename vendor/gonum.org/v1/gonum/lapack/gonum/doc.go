@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -6,7 +6,7 @@
 // a set of algorithms for advanced matrix operations.
 //
 // The function definitions and implementations follow that of the netlib reference
-// implementation. Please see http://www.netlib.org/lapack/explore-html/ for more
+// implementation. See http://www.netlib.org/lapack/explore-html/ for more
 // information, and http://www.netlib.org/lapack/explore-html/d4/de1/_l_i_c_e_n_s_e_source.html
 // for more license information.
 //

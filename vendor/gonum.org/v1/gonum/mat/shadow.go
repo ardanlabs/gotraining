@@ -1,11 +1,10 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package mat
 
 import (
-	"gonum.org/v1/gonum/blas"
 	"gonum.org/v1/gonum/blas/blas64"
 )
 
@@ -28,130 +27,77 @@ const (
 //
 // checkOverlap methods return a boolean to allow the check call to be added to a
 // boolean expression, making use of short-circuit operators.
+func checkOverlap(a, b blas64.General) bool {
+	if cap(a.Data) == 0 || cap(b.Data) == 0 {
+		return false
+	}
+
+	off := offset(a.Data[:1], b.Data[:1])
+
+	if off == 0 {
+		// At least one element overlaps.
+		if a.Cols == b.Cols && a.Rows == b.Rows && a.Stride == b.Stride {
+			panic(regionIdentity)
+		}
+		panic(regionOverlap)
+	}
+
+	if off > 0 && len(a.Data) <= off {
+		// We know a is completely before b.
+		return false
+	}
+	if off < 0 && len(b.Data) <= -off {
+		// We know a is completely after b.
+		return false
+	}
+
+	if a.Stride != b.Stride {
+		// Too hard, so assume the worst.
+		panic(mismatchedStrides)
+	}
+
+	if off < 0 {
+		off = -off
+		a.Cols, b.Cols = b.Cols, a.Cols
+	}
+	if rectanglesOverlap(off, a.Cols, b.Cols, a.Stride) {
+		panic(regionOverlap)
+	}
+	return false
+}
 
 func (m *Dense) checkOverlap(a blas64.General) bool {
-	mat := m.RawMatrix()
-	if cap(mat.Data) == 0 || cap(a.Data) == 0 {
-		return false
-	}
-
-	off := offset(mat.Data[:1], a.Data[:1])
-
-	if off == 0 {
-		// At least one element overlaps.
-		if mat.Cols == a.Cols && mat.Rows == a.Rows && mat.Stride == a.Stride {
-			panic(regionIdentity)
-		}
-		panic(regionOverlap)
-	}
-
-	if off > 0 && len(mat.Data) <= off {
-		// We know m is completely before a.
-		return false
-	}
-	if off < 0 && len(a.Data) <= -off {
-		// We know m is completely after a.
-		return false
-	}
-
-	if mat.Stride != a.Stride {
-		// Too hard, so assume the worst.
-		panic(mismatchedStrides)
-	}
-
-	if off < 0 {
-		off = -off
-		mat.Cols, a.Cols = a.Cols, mat.Cols
-	}
-	if rectanglesOverlap(off, mat.Cols, a.Cols, mat.Stride) {
-		panic(regionOverlap)
-	}
-	return false
+	return checkOverlap(m.RawMatrix(), a)
 }
 
-func (s *SymDense) checkOverlap(a blas64.Symmetric) bool {
-	mat := s.RawSymmetric()
-	if cap(mat.Data) == 0 || cap(a.Data) == 0 {
-		return false
-	}
-
-	off := offset(mat.Data[:1], a.Data[:1])
-
-	if off == 0 {
-		// At least one element overlaps.
-		if mat.N == a.N && mat.Stride == a.Stride {
-			panic(regionIdentity)
-		}
-		panic(regionOverlap)
-	}
-
-	if off > 0 && len(mat.Data) <= off {
-		// We know s is completely before a.
-		return false
-	}
-	if off < 0 && len(a.Data) <= -off {
-		// We know s is completely after a.
-		return false
-	}
-
-	if mat.Stride != a.Stride {
-		// Too hard, so assume the worst.
-		panic(mismatchedStrides)
-	}
-
-	if off < 0 {
-		off = -off
-		mat.N, a.N = a.N, mat.N
-		// If we created the matrix it will always
-		// be in the upper triangle, but don't trust
-		// that this is the case.
-		mat.Uplo, a.Uplo = a.Uplo, mat.Uplo
-	}
-	if trianglesOverlap(off, mat.N, a.N, mat.Stride, mat.Uplo == blas.Upper, a.Uplo == blas.Upper) {
-		panic(regionOverlap)
-	}
-	return false
+func (s *SymDense) checkOverlap(a blas64.General) bool {
+	return checkOverlap(generalFromSymmetric(s.RawSymmetric()), a)
 }
 
-func (t *TriDense) checkOverlap(a blas64.Triangular) bool {
-	mat := t.RawTriangular()
-	if cap(mat.Data) == 0 || cap(a.Data) == 0 {
-		return false
+// generalFromSymmetric returns a blas64.General with the backing
+// data and dimensions of a.
+func generalFromSymmetric(a blas64.Symmetric) blas64.General {
+	return blas64.General{
+		Rows:   a.N,
+		Cols:   a.N,
+		Stride: a.Stride,
+		Data:   a.Data,
 	}
+}
 
-	off := offset(mat.Data[:1], a.Data[:1])
+func (t *TriDense) checkOverlap(a blas64.General) bool {
+	return checkOverlap(generalFromTriangular(t.RawTriangular()), a)
+}
 
-	if off == 0 {
-		// At least one element overlaps.
-		if mat.N == a.N && mat.Stride == a.Stride {
-			panic(regionIdentity)
-		}
-		panic(regionOverlap)
+// generalFromTriangular returns a blas64.General with the backing
+// data and dimensions of a.
+func generalFromTriangular(a blas64.Triangular) blas64.General {
+	return blas64.General{
+		Rows:   a.N,
+		Cols:   a.N,
+		Stride: a.Stride,
+		Data:   a.Data,
 	}
-
-	if off > 0 && len(mat.Data) <= off {
-		// We know t is completely before a.
-		return false
-	}
-	if off < 0 && len(a.Data) <= -off {
-		// We know t is completely after a.
-		return false
-	}
-
-	if mat.Stride != a.Stride {
-		// Too hard, so assume the worst.
-		panic(mismatchedStrides)
-	}
-
-	if off < 0 {
-		off = -off
-		mat.N, a.N = a.N, mat.N
-		mat.Uplo, a.Uplo = a.Uplo, mat.Uplo
-	}
-	if trianglesOverlap(off, mat.N, a.N, mat.Stride, mat.Uplo == blas.Upper, a.Uplo == blas.Upper) {
-		panic(regionOverlap)
-	}
-	return false
 }
 
 func (v *VecDense) checkOverlap(a blas64.Vector) bool {
@@ -223,58 +169,4 @@ func rectanglesOverlap(off, aCols, bCols, stride int) bool {
 
 	// b strictly wraps and so must overlap with a.
 	return true
-}
-
-// trianglesOverlap returns whether the strided triangles a and b overlap
-// when b is offset by off elements after a but has at least one element before
-// the end of a. off must be positive. a and b are aSize×aSize and bSize×bSize
-// respectively.
-func trianglesOverlap(off, aSize, bSize, stride int, aUpper, bUpper bool) bool {
-	if !rectanglesOverlap(off, aSize, bSize, stride) {
-		// Fast return if bounding rectangles do not overlap.
-		return false
-	}
-
-	// Find location of b relative to a.
-	rowOffset := off / stride
-	colOffset := off % stride
-	if (off+bSize)%stride < colOffset {
-		// We have wrapped, so readjust offsets.
-		rowOffset++
-		colOffset -= stride
-	}
-
-	if aUpper {
-		// Check whether the upper left of b
-		// is in the triangle of a
-		if rowOffset >= 0 && rowOffset <= colOffset {
-			return true
-		}
-		// Check whether the upper right of b
-		// is in the triangle of a.
-		return bUpper && rowOffset < colOffset+bSize
-	}
-
-	// Check whether the upper left of b
-	// is in the triangle of a
-	if colOffset >= 0 && rowOffset >= colOffset {
-		return true
-	}
-	if bUpper {
-		// Check whether the upper right corner of b
-		// is in a or the upper row of b spans a row
-		// of a.
-		return rowOffset > colOffset+bSize || colOffset < 0
-	}
-	if colOffset < 0 {
-		// Check whether the lower left of a
-		// is in the triangle of b or below
-		// the diagonal of a. This requires a
-		// swap of reference origin.
-		return -rowOffset+aSize > -colOffset
-	}
-	// Check whether the lower left of b
-	// is in the triangle of a or below
-	// the diagonal of a.
-	return rowOffset+bSize > colOffset
 }

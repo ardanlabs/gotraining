@@ -4,7 +4,7 @@ package utilities
 import (
 	"sort"
 
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 type sortedIntMap struct {
@@ -37,11 +37,12 @@ func SortIntMap(m map[int]float64) []int {
 	return sm.s
 }
 
-func FloatsToMatrix(floats []float64) *mat64.Dense {
-	return mat64.NewDense(1, len(floats), floats)
+func FloatsToMatrix(floats []float64) *mat.Dense {
+	return mat.NewDense(1, len(floats), floats)
 }
 
-func VectorToMatrix(vector *mat64.Vector) *mat64.Dense {
-	vec := vector.RawVector()
-	return mat64.NewDense(1, len(vec.Data), vec.Data)
+func VectorToMatrix(vector mat.Vector) *mat.Dense {
+	denseCopy := mat.VecDenseCopyOf(vector)
+	vec := denseCopy.RawVector()
+	return mat.NewDense(1, len(vec.Data), vec.Data)
 }

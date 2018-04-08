@@ -15,28 +15,31 @@
 		Service
 		AtomInput
 		CronInput
+		GitInput
 		Input
 		JobInput
 		ParallelismSpec
 		InputFile
 		Datum
 		DatumInfo
-		DatumInfos
 		Aggregate
 		ProcessStats
 		AggregateProcessStats
 		WorkerStatus
 		ResourceSpec
+		EtcdJobInfo
 		JobInfo
 		Worker
 		JobInfos
 		Pipeline
 		PipelineInput
+		EtcdPipelineInfo
 		PipelineInfo
 		PipelineInfos
 		CreateJobRequest
 		InspectJobRequest
 		ListJobRequest
+		FlushJobRequest
 		DeleteJobRequest
 		StopJobRequest
 		GetLogsRequest
@@ -44,6 +47,9 @@
 		RestartDatumRequest
 		InspectDatumRequest
 		ListDatumRequest
+		ListDatumResponse
+		ListDatumStreamResponse
+		ChunkSpec
 		CreatePipelineRequest
 		InspectPipelineRequest
 		ListPipelineRequest
@@ -53,6 +59,8 @@
 		RerunPipelineRequest
 		GarbageCollectRequest
 		GarbageCollectResponse
+		ActivateAuthRequest
+		ActivateAuthResponse
 */
 package pps
 
@@ -65,10 +73,10 @@ import google_protobuf2 "github.com/gogo/protobuf/types"
 import _ "github.com/gogo/protobuf/gogoproto"
 import pfs "github.com/pachyderm/pachyderm/src/client/pfs"
 
-import (
-	context "golang.org/x/net/context"
-	grpc "google.golang.org/grpc"
-)
+import context "golang.org/x/net/context"
+import grpc "google.golang.org/grpc"
+
+import binary "encoding/binary"
 
 import io "io"
 
@@ -207,8 +215,11 @@ func (PipelineState) EnumDescriptor() ([]byte, []int) { return fileDescriptorPps
 
 type Secret struct {
 	// Name must be the name of the secret in kubernetes.
-	Name      string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Key of the secret to load into env_var, this field only has meaning if EnvVar != "".
+	Key       string `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`
 	MountPath string `protobuf:"bytes,2,opt,name=mount_path,json=mountPath,proto3" json:"mount_path,omitempty"`
+	EnvVar    string `protobuf:"bytes,3,opt,name=env_var,json=envVar,proto3" json:"env_var,omitempty"`
 }
 
 func (m *Secret) Reset()                    { *m = Secret{} }
@@ -223,9 +234,23 @@ func (m *Secret) GetName() string {
 	return ""
 }
 
+func (m *Secret) GetKey() string {
+	if m != nil {
+		return m.Key
+	}
+	return ""
+}
+
 func (m *Secret) GetMountPath() string {
 	if m != nil {
 		return m.MountPath
+	}
+	return ""
+}
+
+func (m *Secret) GetEnvVar() string {
+	if m != nil {
+		return m.EnvVar
 	}
 	return ""
 }
@@ -335,8 +360,9 @@ func (m *Job) GetID() string {
 }
 
 type Service struct {
-	InternalPort int32 `protobuf:"varint,1,opt,name=internal_port,json=internalPort,proto3" json:"internal_port,omitempty"`
-	ExternalPort int32 `protobuf:"varint,2,opt,name=external_port,json=externalPort,proto3" json:"external_port,omitempty"`
+	InternalPort int32  `protobuf:"varint,1,opt,name=internal_port,json=internalPort,proto3" json:"internal_port,omitempty"`
+	ExternalPort int32  `protobuf:"varint,2,opt,name=external_port,json=externalPort,proto3" json:"external_port,omitempty"`
+	IP           string `protobuf:"bytes,3,opt,name=ip,proto3" json:"ip,omitempty"`
 }
 
 func (m *Service) Reset()                    { *m = Service{} }
@@ -358,14 +384,24 @@ func (m *Service) GetExternalPort() int32 {
 	return 0
 }
 
+func (m *Service) GetIP() string {
+	if m != nil {
+		return m.IP
+	}
+	return ""
+}
+
 type AtomInput struct {
-	Name       string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Repo       string `protobuf:"bytes,2,opt,name=repo,proto3" json:"repo,omitempty"`
-	Branch     string `protobuf:"bytes,3,opt,name=branch,proto3" json:"branch,omitempty"`
-	Commit     string `protobuf:"bytes,4,opt,name=commit,proto3" json:"commit,omitempty"`
-	Glob       string `protobuf:"bytes,5,opt,name=glob,proto3" json:"glob,omitempty"`
-	Lazy       bool   `protobuf:"varint,6,opt,name=lazy,proto3" json:"lazy,omitempty"`
-	FromCommit string `protobuf:"bytes,7,opt,name=from_commit,json=fromCommit,proto3" json:"from_commit,omitempty"`
+	Name   string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Repo   string `protobuf:"bytes,2,opt,name=repo,proto3" json:"repo,omitempty"`
+	Branch string `protobuf:"bytes,3,opt,name=branch,proto3" json:"branch,omitempty"`
+	Commit string `protobuf:"bytes,4,opt,name=commit,proto3" json:"commit,omitempty"`
+	Glob   string `protobuf:"bytes,5,opt,name=glob,proto3" json:"glob,omitempty"`
+	Lazy   bool   `protobuf:"varint,6,opt,name=lazy,proto3" json:"lazy,omitempty"`
+	// EmptyFiles, if true, will cause files from this atom to be presented as
+	// empty files. This is useful in shuffle pipelines where you want to read
+	// the names of files and reorganize them using symlinks.
+	EmptyFiles bool `protobuf:"varint,8,opt,name=empty_files,json=emptyFiles,proto3" json:"empty_files,omitempty"`
 }
 
 func (m *AtomInput) Reset()                    { *m = AtomInput{} }
@@ -415,11 +451,11 @@ func (m *AtomInput) GetLazy() bool {
 	return false
 }
 
-func (m *AtomInput) GetFromCommit() string {
+func (m *AtomInput) GetEmptyFiles() bool {
 	if m != nil {
-		return m.FromCommit
+		return m.EmptyFiles
 	}
-	return ""
+	return false
 }
 
 type CronInput struct {
@@ -470,17 +506,58 @@ func (m *CronInput) GetStart() *google_protobuf1.Timestamp {
 	return nil
 }
 
+type GitInput struct {
+	Name   string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	URL    string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	Branch string `protobuf:"bytes,3,opt,name=branch,proto3" json:"branch,omitempty"`
+	Commit string `protobuf:"bytes,4,opt,name=commit,proto3" json:"commit,omitempty"`
+}
+
+func (m *GitInput) Reset()                    { *m = GitInput{} }
+func (m *GitInput) String() string            { return proto.CompactTextString(m) }
+func (*GitInput) ProtoMessage()               {}
+func (*GitInput) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{7} }
+
+func (m *GitInput) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *GitInput) GetURL() string {
+	if m != nil {
+		return m.URL
+	}
+	return ""
+}
+
+func (m *GitInput) GetBranch() string {
+	if m != nil {
+		return m.Branch
+	}
+	return ""
+}
+
+func (m *GitInput) GetCommit() string {
+	if m != nil {
+		return m.Commit
+	}
+	return ""
+}
+
 type Input struct {
 	Atom  *AtomInput `protobuf:"bytes,1,opt,name=atom" json:"atom,omitempty"`
 	Cross []*Input   `protobuf:"bytes,2,rep,name=cross" json:"cross,omitempty"`
 	Union []*Input   `protobuf:"bytes,3,rep,name=union" json:"union,omitempty"`
 	Cron  *CronInput `protobuf:"bytes,4,opt,name=cron" json:"cron,omitempty"`
+	Git   *GitInput  `protobuf:"bytes,5,opt,name=git" json:"git,omitempty"`
 }
 
 func (m *Input) Reset()                    { *m = Input{} }
 func (m *Input) String() string            { return proto.CompactTextString(m) }
 func (*Input) ProtoMessage()               {}
-func (*Input) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{7} }
+func (*Input) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{8} }
 
 func (m *Input) GetAtom() *AtomInput {
 	if m != nil {
@@ -510,6 +587,13 @@ func (m *Input) GetCron() *CronInput {
 	return nil
 }
 
+func (m *Input) GetGit() *GitInput {
+	if m != nil {
+		return m.Git
+	}
+	return nil
+}
+
 type JobInput struct {
 	Name   string      `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	Commit *pfs.Commit `protobuf:"bytes,1,opt,name=commit" json:"commit,omitempty"`
@@ -520,7 +604,7 @@ type JobInput struct {
 func (m *JobInput) Reset()                    { *m = JobInput{} }
 func (m *JobInput) String() string            { return proto.CompactTextString(m) }
 func (*JobInput) ProtoMessage()               {}
-func (*JobInput) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{8} }
+func (*JobInput) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{9} }
 
 func (m *JobInput) GetName() string {
 	if m != nil {
@@ -570,7 +654,7 @@ type ParallelismSpec struct {
 func (m *ParallelismSpec) Reset()                    { *m = ParallelismSpec{} }
 func (m *ParallelismSpec) String() string            { return proto.CompactTextString(m) }
 func (*ParallelismSpec) ProtoMessage()               {}
-func (*ParallelismSpec) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{9} }
+func (*ParallelismSpec) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{10} }
 
 func (m *ParallelismSpec) GetConstant() uint64 {
 	if m != nil {
@@ -596,7 +680,7 @@ type InputFile struct {
 func (m *InputFile) Reset()                    { *m = InputFile{} }
 func (m *InputFile) String() string            { return proto.CompactTextString(m) }
 func (*InputFile) ProtoMessage()               {}
-func (*InputFile) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{10} }
+func (*InputFile) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{11} }
 
 func (m *InputFile) GetPath() string {
 	if m != nil {
@@ -621,7 +705,7 @@ type Datum struct {
 func (m *Datum) Reset()                    { *m = Datum{} }
 func (m *Datum) String() string            { return proto.CompactTextString(m) }
 func (*Datum) ProtoMessage()               {}
-func (*Datum) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{11} }
+func (*Datum) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{12} }
 
 func (m *Datum) GetID() string {
 	if m != nil {
@@ -638,17 +722,17 @@ func (m *Datum) GetJob() *Job {
 }
 
 type DatumInfo struct {
-	Datum    *Datum        `protobuf:"bytes,1,opt,name=datum" json:"datum,omitempty"`
-	State    DatumState    `protobuf:"varint,2,opt,name=state,proto3,enum=pps.DatumState" json:"state,omitempty"`
-	Stats    *ProcessStats `protobuf:"bytes,3,opt,name=stats" json:"stats,omitempty"`
-	PfsState *pfs.File     `protobuf:"bytes,4,opt,name=pfs_state,json=pfsState" json:"pfs_state,omitempty"`
-	Data     []*InputFile  `protobuf:"bytes,5,rep,name=data" json:"data,omitempty"`
+	Datum    *Datum          `protobuf:"bytes,1,opt,name=datum" json:"datum,omitempty"`
+	State    DatumState      `protobuf:"varint,2,opt,name=state,proto3,enum=pps.DatumState" json:"state,omitempty"`
+	Stats    *ProcessStats   `protobuf:"bytes,3,opt,name=stats" json:"stats,omitempty"`
+	PfsState *pfs.File       `protobuf:"bytes,4,opt,name=pfs_state,json=pfsState" json:"pfs_state,omitempty"`
+	Data     []*pfs.FileInfo `protobuf:"bytes,5,rep,name=data" json:"data,omitempty"`
 }
 
 func (m *DatumInfo) Reset()                    { *m = DatumInfo{} }
 func (m *DatumInfo) String() string            { return proto.CompactTextString(m) }
 func (*DatumInfo) ProtoMessage()               {}
-func (*DatumInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{12} }
+func (*DatumInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{13} }
 
 func (m *DatumInfo) GetDatum() *Datum {
 	if m != nil {
@@ -678,25 +762,9 @@ func (m *DatumInfo) GetPfsState() *pfs.File {
 	return nil
 }
 
-func (m *DatumInfo) GetData() []*InputFile {
+func (m *DatumInfo) GetData() []*pfs.FileInfo {
 	if m != nil {
 		return m.Data
-	}
-	return nil
-}
-
-type DatumInfos struct {
-	DatumInfo []*DatumInfo `protobuf:"bytes,1,rep,name=datum_info,json=datumInfo" json:"datum_info,omitempty"`
-}
-
-func (m *DatumInfos) Reset()                    { *m = DatumInfos{} }
-func (m *DatumInfos) String() string            { return proto.CompactTextString(m) }
-func (*DatumInfos) ProtoMessage()               {}
-func (*DatumInfos) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{13} }
-
-func (m *DatumInfos) GetDatumInfo() []*DatumInfo {
-	if m != nil {
-		return m.DatumInfo
 	}
 	return nil
 }
@@ -941,42 +1009,157 @@ func (m *ResourceSpec) GetGpu() int64 {
 	return 0
 }
 
+// EtcdJobInfo is the portion of the JobInfo that gets stored in etcd during
+// job execution. It contains fields which change over the lifetime of the job
+// but aren't used in the execution of the job.
+type EtcdJobInfo struct {
+	Job          *Job        `protobuf:"bytes,1,opt,name=job" json:"job,omitempty"`
+	Pipeline     *Pipeline   `protobuf:"bytes,2,opt,name=pipeline" json:"pipeline,omitempty"`
+	OutputCommit *pfs.Commit `protobuf:"bytes,3,opt,name=output_commit,json=outputCommit" json:"output_commit,omitempty"`
+	// Job restart count (e.g. due to datum failure)
+	Restart uint64 `protobuf:"varint,4,opt,name=restart,proto3" json:"restart,omitempty"`
+	// Counts of how many times we processed or skipped a datum
+	DataProcessed int64 `protobuf:"varint,5,opt,name=data_processed,json=dataProcessed,proto3" json:"data_processed,omitempty"`
+	DataSkipped   int64 `protobuf:"varint,6,opt,name=data_skipped,json=dataSkipped,proto3" json:"data_skipped,omitempty"`
+	DataTotal     int64 `protobuf:"varint,7,opt,name=data_total,json=dataTotal,proto3" json:"data_total,omitempty"`
+	DataFailed    int64 `protobuf:"varint,8,opt,name=data_failed,json=dataFailed,proto3" json:"data_failed,omitempty"`
+	// Download/process/upload time and download/upload bytes
+	Stats       *ProcessStats `protobuf:"bytes,9,opt,name=stats" json:"stats,omitempty"`
+	StatsCommit *pfs.Commit   `protobuf:"bytes,10,opt,name=stats_commit,json=statsCommit" json:"stats_commit,omitempty"`
+	State       JobState      `protobuf:"varint,11,opt,name=state,proto3,enum=pps.JobState" json:"state,omitempty"`
+	Reason      string        `protobuf:"bytes,12,opt,name=reason,proto3" json:"reason,omitempty"`
+}
+
+func (m *EtcdJobInfo) Reset()                    { *m = EtcdJobInfo{} }
+func (m *EtcdJobInfo) String() string            { return proto.CompactTextString(m) }
+func (*EtcdJobInfo) ProtoMessage()               {}
+func (*EtcdJobInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{19} }
+
+func (m *EtcdJobInfo) GetJob() *Job {
+	if m != nil {
+		return m.Job
+	}
+	return nil
+}
+
+func (m *EtcdJobInfo) GetPipeline() *Pipeline {
+	if m != nil {
+		return m.Pipeline
+	}
+	return nil
+}
+
+func (m *EtcdJobInfo) GetOutputCommit() *pfs.Commit {
+	if m != nil {
+		return m.OutputCommit
+	}
+	return nil
+}
+
+func (m *EtcdJobInfo) GetRestart() uint64 {
+	if m != nil {
+		return m.Restart
+	}
+	return 0
+}
+
+func (m *EtcdJobInfo) GetDataProcessed() int64 {
+	if m != nil {
+		return m.DataProcessed
+	}
+	return 0
+}
+
+func (m *EtcdJobInfo) GetDataSkipped() int64 {
+	if m != nil {
+		return m.DataSkipped
+	}
+	return 0
+}
+
+func (m *EtcdJobInfo) GetDataTotal() int64 {
+	if m != nil {
+		return m.DataTotal
+	}
+	return 0
+}
+
+func (m *EtcdJobInfo) GetDataFailed() int64 {
+	if m != nil {
+		return m.DataFailed
+	}
+	return 0
+}
+
+func (m *EtcdJobInfo) GetStats() *ProcessStats {
+	if m != nil {
+		return m.Stats
+	}
+	return nil
+}
+
+func (m *EtcdJobInfo) GetStatsCommit() *pfs.Commit {
+	if m != nil {
+		return m.StatsCommit
+	}
+	return nil
+}
+
+func (m *EtcdJobInfo) GetState() JobState {
+	if m != nil {
+		return m.State
+	}
+	return JobState_JOB_STARTING
+}
+
+func (m *EtcdJobInfo) GetReason() string {
+	if m != nil {
+		return m.Reason
+	}
+	return ""
+}
+
 type JobInfo struct {
-	Job             *Job                        `protobuf:"bytes,1,opt,name=job" json:"job,omitempty"`
-	Transform       *Transform                  `protobuf:"bytes,2,opt,name=transform" json:"transform,omitempty"`
-	Pipeline        *Pipeline                   `protobuf:"bytes,3,opt,name=pipeline" json:"pipeline,omitempty"`
-	PipelineVersion uint64                      `protobuf:"varint,13,opt,name=pipeline_version,json=pipelineVersion,proto3" json:"pipeline_version,omitempty"`
-	ParallelismSpec *ParallelismSpec            `protobuf:"bytes,12,opt,name=parallelism_spec,json=parallelismSpec" json:"parallelism_spec,omitempty"`
-	Inputs          []*JobInput                 `protobuf:"bytes,5,rep,name=inputs" json:"inputs,omitempty"`
-	Egress          *Egress                     `protobuf:"bytes,15,opt,name=egress" json:"egress,omitempty"`
-	ParentJob       *Job                        `protobuf:"bytes,6,opt,name=parent_job,json=parentJob" json:"parent_job,omitempty"`
-	Started         *google_protobuf1.Timestamp `protobuf:"bytes,7,opt,name=started" json:"started,omitempty"`
-	Finished        *google_protobuf1.Timestamp `protobuf:"bytes,8,opt,name=finished" json:"finished,omitempty"`
-	OutputCommit    *pfs.Commit                 `protobuf:"bytes,9,opt,name=output_commit,json=outputCommit" json:"output_commit,omitempty"`
-	State           JobState                    `protobuf:"varint,10,opt,name=state,proto3,enum=pps.JobState" json:"state,omitempty"`
-	Service         *Service                    `protobuf:"bytes,14,opt,name=service" json:"service,omitempty"`
-	OutputRepo      *pfs.Repo                   `protobuf:"bytes,18,opt,name=output_repo,json=outputRepo" json:"output_repo,omitempty"`
-	OutputBranch    string                      `protobuf:"bytes,17,opt,name=output_branch,json=outputBranch,proto3" json:"output_branch,omitempty"`
-	Restart         uint64                      `protobuf:"varint,20,opt,name=restart,proto3" json:"restart,omitempty"`
-	DataProcessed   int64                       `protobuf:"varint,22,opt,name=data_processed,json=dataProcessed,proto3" json:"data_processed,omitempty"`
-	DataSkipped     int64                       `protobuf:"varint,30,opt,name=data_skipped,json=dataSkipped,proto3" json:"data_skipped,omitempty"`
-	DataTotal       int64                       `protobuf:"varint,23,opt,name=data_total,json=dataTotal,proto3" json:"data_total,omitempty"`
-	Stats           *ProcessStats               `protobuf:"bytes,31,opt,name=stats" json:"stats,omitempty"`
-	WorkerStatus    []*WorkerStatus             `protobuf:"bytes,24,rep,name=worker_status,json=workerStatus" json:"worker_status,omitempty"`
-	ResourceSpec    *ResourceSpec               `protobuf:"bytes,25,opt,name=resource_spec,json=resourceSpec" json:"resource_spec,omitempty"`
-	Input           *Input                      `protobuf:"bytes,26,opt,name=input" json:"input,omitempty"`
-	NewBranch       *pfs.BranchInfo             `protobuf:"bytes,27,opt,name=new_branch,json=newBranch" json:"new_branch,omitempty"`
-	Incremental     bool                        `protobuf:"varint,28,opt,name=incremental,proto3" json:"incremental,omitempty"`
-	StatsCommit     *pfs.Commit                 `protobuf:"bytes,29,opt,name=stats_commit,json=statsCommit" json:"stats_commit,omitempty"`
-	EnableStats     bool                        `protobuf:"varint,32,opt,name=enable_stats,json=enableStats,proto3" json:"enable_stats,omitempty"`
-	Salt            string                      `protobuf:"bytes,33,opt,name=salt,proto3" json:"salt,omitempty"`
-	Batch           bool                        `protobuf:"varint,34,opt,name=batch,proto3" json:"batch,omitempty"`
+	Job              *Job                        `protobuf:"bytes,1,opt,name=job" json:"job,omitempty"`
+	Transform        *Transform                  `protobuf:"bytes,2,opt,name=transform" json:"transform,omitempty"`
+	Pipeline         *Pipeline                   `protobuf:"bytes,3,opt,name=pipeline" json:"pipeline,omitempty"`
+	PipelineVersion  uint64                      `protobuf:"varint,13,opt,name=pipeline_version,json=pipelineVersion,proto3" json:"pipeline_version,omitempty"`
+	ParallelismSpec  *ParallelismSpec            `protobuf:"bytes,12,opt,name=parallelism_spec,json=parallelismSpec" json:"parallelism_spec,omitempty"`
+	Egress           *Egress                     `protobuf:"bytes,15,opt,name=egress" json:"egress,omitempty"`
+	ParentJob        *Job                        `protobuf:"bytes,6,opt,name=parent_job,json=parentJob" json:"parent_job,omitempty"`
+	Started          *google_protobuf1.Timestamp `protobuf:"bytes,7,opt,name=started" json:"started,omitempty"`
+	Finished         *google_protobuf1.Timestamp `protobuf:"bytes,8,opt,name=finished" json:"finished,omitempty"`
+	OutputCommit     *pfs.Commit                 `protobuf:"bytes,9,opt,name=output_commit,json=outputCommit" json:"output_commit,omitempty"`
+	State            JobState                    `protobuf:"varint,10,opt,name=state,proto3,enum=pps.JobState" json:"state,omitempty"`
+	Reason           string                      `protobuf:"bytes,35,opt,name=reason,proto3" json:"reason,omitempty"`
+	Service          *Service                    `protobuf:"bytes,14,opt,name=service" json:"service,omitempty"`
+	OutputRepo       *pfs.Repo                   `protobuf:"bytes,18,opt,name=output_repo,json=outputRepo" json:"output_repo,omitempty"`
+	OutputBranch     string                      `protobuf:"bytes,17,opt,name=output_branch,json=outputBranch,proto3" json:"output_branch,omitempty"`
+	Restart          uint64                      `protobuf:"varint,20,opt,name=restart,proto3" json:"restart,omitempty"`
+	DataProcessed    int64                       `protobuf:"varint,22,opt,name=data_processed,json=dataProcessed,proto3" json:"data_processed,omitempty"`
+	DataSkipped      int64                       `protobuf:"varint,30,opt,name=data_skipped,json=dataSkipped,proto3" json:"data_skipped,omitempty"`
+	DataFailed       int64                       `protobuf:"varint,40,opt,name=data_failed,json=dataFailed,proto3" json:"data_failed,omitempty"`
+	DataTotal        int64                       `protobuf:"varint,23,opt,name=data_total,json=dataTotal,proto3" json:"data_total,omitempty"`
+	Stats            *ProcessStats               `protobuf:"bytes,31,opt,name=stats" json:"stats,omitempty"`
+	WorkerStatus     []*WorkerStatus             `protobuf:"bytes,24,rep,name=worker_status,json=workerStatus" json:"worker_status,omitempty"`
+	ResourceRequests *ResourceSpec               `protobuf:"bytes,25,opt,name=resource_requests,json=resourceRequests" json:"resource_requests,omitempty"`
+	ResourceLimits   *ResourceSpec               `protobuf:"bytes,36,opt,name=resource_limits,json=resourceLimits" json:"resource_limits,omitempty"`
+	Input            *Input                      `protobuf:"bytes,26,opt,name=input" json:"input,omitempty"`
+	NewBranch        *pfs.BranchInfo             `protobuf:"bytes,27,opt,name=new_branch,json=newBranch" json:"new_branch,omitempty"`
+	Incremental      bool                        `protobuf:"varint,28,opt,name=incremental,proto3" json:"incremental,omitempty"`
+	StatsCommit      *pfs.Commit                 `protobuf:"bytes,29,opt,name=stats_commit,json=statsCommit" json:"stats_commit,omitempty"`
+	EnableStats      bool                        `protobuf:"varint,32,opt,name=enable_stats,json=enableStats,proto3" json:"enable_stats,omitempty"`
+	Salt             string                      `protobuf:"bytes,33,opt,name=salt,proto3" json:"salt,omitempty"`
+	Batch            bool                        `protobuf:"varint,34,opt,name=batch,proto3" json:"batch,omitempty"`
+	ChunkSpec        *ChunkSpec                  `protobuf:"bytes,37,opt,name=chunk_spec,json=chunkSpec" json:"chunk_spec,omitempty"`
+	DatumTimeout     *google_protobuf2.Duration  `protobuf:"bytes,38,opt,name=datum_timeout,json=datumTimeout" json:"datum_timeout,omitempty"`
+	JobTimeout       *google_protobuf2.Duration  `protobuf:"bytes,39,opt,name=job_timeout,json=jobTimeout" json:"job_timeout,omitempty"`
 }
 
 func (m *JobInfo) Reset()                    { *m = JobInfo{} }
 func (m *JobInfo) String() string            { return proto.CompactTextString(m) }
 func (*JobInfo) ProtoMessage()               {}
-func (*JobInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{19} }
+func (*JobInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{20} }
 
 func (m *JobInfo) GetJob() *Job {
 	if m != nil {
@@ -1009,13 +1192,6 @@ func (m *JobInfo) GetPipelineVersion() uint64 {
 func (m *JobInfo) GetParallelismSpec() *ParallelismSpec {
 	if m != nil {
 		return m.ParallelismSpec
-	}
-	return nil
-}
-
-func (m *JobInfo) GetInputs() []*JobInput {
-	if m != nil {
-		return m.Inputs
 	}
 	return nil
 }
@@ -1062,6 +1238,13 @@ func (m *JobInfo) GetState() JobState {
 	return JobState_JOB_STARTING
 }
 
+func (m *JobInfo) GetReason() string {
+	if m != nil {
+		return m.Reason
+	}
+	return ""
+}
+
 func (m *JobInfo) GetService() *Service {
 	if m != nil {
 		return m.Service
@@ -1104,6 +1287,13 @@ func (m *JobInfo) GetDataSkipped() int64 {
 	return 0
 }
 
+func (m *JobInfo) GetDataFailed() int64 {
+	if m != nil {
+		return m.DataFailed
+	}
+	return 0
+}
+
 func (m *JobInfo) GetDataTotal() int64 {
 	if m != nil {
 		return m.DataTotal
@@ -1125,9 +1315,16 @@ func (m *JobInfo) GetWorkerStatus() []*WorkerStatus {
 	return nil
 }
 
-func (m *JobInfo) GetResourceSpec() *ResourceSpec {
+func (m *JobInfo) GetResourceRequests() *ResourceSpec {
 	if m != nil {
-		return m.ResourceSpec
+		return m.ResourceRequests
+	}
+	return nil
+}
+
+func (m *JobInfo) GetResourceLimits() *ResourceSpec {
+	if m != nil {
+		return m.ResourceLimits
 	}
 	return nil
 }
@@ -1181,6 +1378,27 @@ func (m *JobInfo) GetBatch() bool {
 	return false
 }
 
+func (m *JobInfo) GetChunkSpec() *ChunkSpec {
+	if m != nil {
+		return m.ChunkSpec
+	}
+	return nil
+}
+
+func (m *JobInfo) GetDatumTimeout() *google_protobuf2.Duration {
+	if m != nil {
+		return m.DatumTimeout
+	}
+	return nil
+}
+
+func (m *JobInfo) GetJobTimeout() *google_protobuf2.Duration {
+	if m != nil {
+		return m.JobTimeout
+	}
+	return nil
+}
+
 type Worker struct {
 	Name  string      `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	State WorkerState `protobuf:"varint,2,opt,name=state,proto3,enum=pps.WorkerState" json:"state,omitempty"`
@@ -1189,7 +1407,7 @@ type Worker struct {
 func (m *Worker) Reset()                    { *m = Worker{} }
 func (m *Worker) String() string            { return proto.CompactTextString(m) }
 func (*Worker) ProtoMessage()               {}
-func (*Worker) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{20} }
+func (*Worker) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{21} }
 
 func (m *Worker) GetName() string {
 	if m != nil {
@@ -1212,7 +1430,7 @@ type JobInfos struct {
 func (m *JobInfos) Reset()                    { *m = JobInfos{} }
 func (m *JobInfos) String() string            { return proto.CompactTextString(m) }
 func (*JobInfos) ProtoMessage()               {}
-func (*JobInfos) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{21} }
+func (*JobInfos) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{22} }
 
 func (m *JobInfos) GetJobInfo() []*JobInfo {
 	if m != nil {
@@ -1228,7 +1446,7 @@ type Pipeline struct {
 func (m *Pipeline) Reset()                    { *m = Pipeline{} }
 func (m *Pipeline) String() string            { return proto.CompactTextString(m) }
 func (*Pipeline) ProtoMessage()               {}
-func (*Pipeline) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{22} }
+func (*Pipeline) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{23} }
 
 func (m *Pipeline) GetName() string {
 	if m != nil {
@@ -1249,7 +1467,7 @@ type PipelineInput struct {
 func (m *PipelineInput) Reset()                    { *m = PipelineInput{} }
 func (m *PipelineInput) String() string            { return proto.CompactTextString(m) }
 func (*PipelineInput) ProtoMessage()               {}
-func (*PipelineInput) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{23} }
+func (*PipelineInput) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{24} }
 
 func (m *PipelineInput) GetName() string {
 	if m != nil {
@@ -1293,35 +1511,100 @@ func (m *PipelineInput) GetFrom() *pfs.Commit {
 	return nil
 }
 
+// EtcdPipelineInfo is proto that Pachd stores in etcd for each pipeline. It
+// tracks the state of the pipeline, and points to its metadata in PFS (and,
+// by pointing to a PFS commit, de facto tracks the pipeline's version)
+type EtcdPipelineInfo struct {
+	State      PipelineState   `protobuf:"varint,1,opt,name=state,proto3,enum=pps.PipelineState" json:"state,omitempty"`
+	Reason     string          `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
+	SpecCommit *pfs.Commit     `protobuf:"bytes,2,opt,name=spec_commit,json=specCommit" json:"spec_commit,omitempty"`
+	JobCounts  map[int32]int32 `protobuf:"bytes,3,rep,name=job_counts,json=jobCounts" json:"job_counts,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	AuthToken  string          `protobuf:"bytes,5,opt,name=auth_token,json=authToken,proto3" json:"auth_token,omitempty"`
+}
+
+func (m *EtcdPipelineInfo) Reset()                    { *m = EtcdPipelineInfo{} }
+func (m *EtcdPipelineInfo) String() string            { return proto.CompactTextString(m) }
+func (*EtcdPipelineInfo) ProtoMessage()               {}
+func (*EtcdPipelineInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{25} }
+
+func (m *EtcdPipelineInfo) GetState() PipelineState {
+	if m != nil {
+		return m.State
+	}
+	return PipelineState_PIPELINE_STARTING
+}
+
+func (m *EtcdPipelineInfo) GetReason() string {
+	if m != nil {
+		return m.Reason
+	}
+	return ""
+}
+
+func (m *EtcdPipelineInfo) GetSpecCommit() *pfs.Commit {
+	if m != nil {
+		return m.SpecCommit
+	}
+	return nil
+}
+
+func (m *EtcdPipelineInfo) GetJobCounts() map[int32]int32 {
+	if m != nil {
+		return m.JobCounts
+	}
+	return nil
+}
+
+func (m *EtcdPipelineInfo) GetAuthToken() string {
+	if m != nil {
+		return m.AuthToken
+	}
+	return ""
+}
+
 type PipelineInfo struct {
-	ID                 string                      `protobuf:"bytes,17,opt,name=id,proto3" json:"id,omitempty"`
-	Pipeline           *Pipeline                   `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
-	Version            uint64                      `protobuf:"varint,11,opt,name=version,proto3" json:"version,omitempty"`
-	Transform          *Transform                  `protobuf:"bytes,2,opt,name=transform" json:"transform,omitempty"`
-	ParallelismSpec    *ParallelismSpec            `protobuf:"bytes,10,opt,name=parallelism_spec,json=parallelismSpec" json:"parallelism_spec,omitempty"`
-	Inputs             []*PipelineInput            `protobuf:"bytes,4,rep,name=inputs" json:"inputs,omitempty"`
-	Egress             *Egress                     `protobuf:"bytes,15,opt,name=egress" json:"egress,omitempty"`
-	CreatedAt          *google_protobuf1.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt" json:"created_at,omitempty"`
-	State              PipelineState               `protobuf:"varint,7,opt,name=state,proto3,enum=pps.PipelineState" json:"state,omitempty"`
-	RecentError        string                      `protobuf:"bytes,8,opt,name=recent_error,json=recentError,proto3" json:"recent_error,omitempty"`
-	JobCounts          map[int32]int32             `protobuf:"bytes,9,rep,name=job_counts,json=jobCounts" json:"job_counts,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	OutputBranch       string                      `protobuf:"bytes,16,opt,name=output_branch,json=outputBranch,proto3" json:"output_branch,omitempty"`
-	ScaleDownThreshold *google_protobuf2.Duration  `protobuf:"bytes,18,opt,name=scale_down_threshold,json=scaleDownThreshold" json:"scale_down_threshold,omitempty"`
-	ResourceSpec       *ResourceSpec               `protobuf:"bytes,19,opt,name=resource_spec,json=resourceSpec" json:"resource_spec,omitempty"`
-	Input              *Input                      `protobuf:"bytes,20,opt,name=input" json:"input,omitempty"`
-	Description        string                      `protobuf:"bytes,21,opt,name=description,proto3" json:"description,omitempty"`
-	Incremental        bool                        `protobuf:"varint,22,opt,name=incremental,proto3" json:"incremental,omitempty"`
-	CacheSize          string                      `protobuf:"bytes,23,opt,name=cache_size,json=cacheSize,proto3" json:"cache_size,omitempty"`
-	EnableStats        bool                        `protobuf:"varint,24,opt,name=enable_stats,json=enableStats,proto3" json:"enable_stats,omitempty"`
-	Salt               string                      `protobuf:"bytes,25,opt,name=salt,proto3" json:"salt,omitempty"`
-	Capability         string                      `protobuf:"bytes,26,opt,name=capability,proto3" json:"capability,omitempty"`
-	Batch              bool                        `protobuf:"varint,27,opt,name=batch,proto3" json:"batch,omitempty"`
+	ID              string                      `protobuf:"bytes,17,opt,name=id,proto3" json:"id,omitempty"`
+	Pipeline        *Pipeline                   `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
+	Version         uint64                      `protobuf:"varint,11,opt,name=version,proto3" json:"version,omitempty"`
+	Transform       *Transform                  `protobuf:"bytes,2,opt,name=transform" json:"transform,omitempty"`
+	ParallelismSpec *ParallelismSpec            `protobuf:"bytes,10,opt,name=parallelism_spec,json=parallelismSpec" json:"parallelism_spec,omitempty"`
+	Egress          *Egress                     `protobuf:"bytes,15,opt,name=egress" json:"egress,omitempty"`
+	CreatedAt       *google_protobuf1.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt" json:"created_at,omitempty"`
+	// state indicates the current state of the pipeline. This is not stored in
+	// PFS along with the rest of this data structure--PPS.InspectPipeline fills
+	// it in
+	State       PipelineState `protobuf:"varint,7,opt,name=state,proto3,enum=pps.PipelineState" json:"state,omitempty"`
+	RecentError string        `protobuf:"bytes,8,opt,name=recent_error,json=recentError,proto3" json:"recent_error,omitempty"`
+	// job_counts indicates the number of jobs within this pipeline in a given
+	// state. This is not stored in PFS along with the rest of this data
+	// structure--PPS.InspectPipeline fills it in
+	JobCounts          map[int32]int32            `protobuf:"bytes,9,rep,name=job_counts,json=jobCounts" json:"job_counts,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	OutputBranch       string                     `protobuf:"bytes,16,opt,name=output_branch,json=outputBranch,proto3" json:"output_branch,omitempty"`
+	ScaleDownThreshold *google_protobuf2.Duration `protobuf:"bytes,18,opt,name=scale_down_threshold,json=scaleDownThreshold" json:"scale_down_threshold,omitempty"`
+	ResourceRequests   *ResourceSpec              `protobuf:"bytes,19,opt,name=resource_requests,json=resourceRequests" json:"resource_requests,omitempty"`
+	ResourceLimits     *ResourceSpec              `protobuf:"bytes,31,opt,name=resource_limits,json=resourceLimits" json:"resource_limits,omitempty"`
+	Input              *Input                     `protobuf:"bytes,20,opt,name=input" json:"input,omitempty"`
+	Description        string                     `protobuf:"bytes,21,opt,name=description,proto3" json:"description,omitempty"`
+	Incremental        bool                       `protobuf:"varint,22,opt,name=incremental,proto3" json:"incremental,omitempty"`
+	CacheSize          string                     `protobuf:"bytes,23,opt,name=cache_size,json=cacheSize,proto3" json:"cache_size,omitempty"`
+	EnableStats        bool                       `protobuf:"varint,24,opt,name=enable_stats,json=enableStats,proto3" json:"enable_stats,omitempty"`
+	Salt               string                     `protobuf:"bytes,25,opt,name=salt,proto3" json:"salt,omitempty"`
+	Batch              bool                       `protobuf:"varint,27,opt,name=batch,proto3" json:"batch,omitempty"`
+	// reason includes any error messages associated with a failed pipeline
+	Reason       string                     `protobuf:"bytes,28,opt,name=reason,proto3" json:"reason,omitempty"`
+	MaxQueueSize int64                      `protobuf:"varint,29,opt,name=max_queue_size,json=maxQueueSize,proto3" json:"max_queue_size,omitempty"`
+	Service      *Service                   `protobuf:"bytes,30,opt,name=service" json:"service,omitempty"`
+	ChunkSpec    *ChunkSpec                 `protobuf:"bytes,32,opt,name=chunk_spec,json=chunkSpec" json:"chunk_spec,omitempty"`
+	DatumTimeout *google_protobuf2.Duration `protobuf:"bytes,33,opt,name=datum_timeout,json=datumTimeout" json:"datum_timeout,omitempty"`
+	JobTimeout   *google_protobuf2.Duration `protobuf:"bytes,34,opt,name=job_timeout,json=jobTimeout" json:"job_timeout,omitempty"`
+	GithookURL   string                     `protobuf:"bytes,35,opt,name=githook_url,json=githookUrl,proto3" json:"githook_url,omitempty"`
+	SpecCommit   *pfs.Commit                `protobuf:"bytes,36,opt,name=spec_commit,json=specCommit" json:"spec_commit,omitempty"`
 }
 
 func (m *PipelineInfo) Reset()                    { *m = PipelineInfo{} }
 func (m *PipelineInfo) String() string            { return proto.CompactTextString(m) }
 func (*PipelineInfo) ProtoMessage()               {}
-func (*PipelineInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{24} }
+func (*PipelineInfo) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{26} }
 
 func (m *PipelineInfo) GetID() string {
 	if m != nil {
@@ -1354,13 +1637,6 @@ func (m *PipelineInfo) GetTransform() *Transform {
 func (m *PipelineInfo) GetParallelismSpec() *ParallelismSpec {
 	if m != nil {
 		return m.ParallelismSpec
-	}
-	return nil
-}
-
-func (m *PipelineInfo) GetInputs() []*PipelineInput {
-	if m != nil {
-		return m.Inputs
 	}
 	return nil
 }
@@ -1414,9 +1690,16 @@ func (m *PipelineInfo) GetScaleDownThreshold() *google_protobuf2.Duration {
 	return nil
 }
 
-func (m *PipelineInfo) GetResourceSpec() *ResourceSpec {
+func (m *PipelineInfo) GetResourceRequests() *ResourceSpec {
 	if m != nil {
-		return m.ResourceSpec
+		return m.ResourceRequests
+	}
+	return nil
+}
+
+func (m *PipelineInfo) GetResourceLimits() *ResourceSpec {
+	if m != nil {
+		return m.ResourceLimits
 	}
 	return nil
 }
@@ -1463,18 +1746,67 @@ func (m *PipelineInfo) GetSalt() string {
 	return ""
 }
 
-func (m *PipelineInfo) GetCapability() string {
-	if m != nil {
-		return m.Capability
-	}
-	return ""
-}
-
 func (m *PipelineInfo) GetBatch() bool {
 	if m != nil {
 		return m.Batch
 	}
 	return false
+}
+
+func (m *PipelineInfo) GetReason() string {
+	if m != nil {
+		return m.Reason
+	}
+	return ""
+}
+
+func (m *PipelineInfo) GetMaxQueueSize() int64 {
+	if m != nil {
+		return m.MaxQueueSize
+	}
+	return 0
+}
+
+func (m *PipelineInfo) GetService() *Service {
+	if m != nil {
+		return m.Service
+	}
+	return nil
+}
+
+func (m *PipelineInfo) GetChunkSpec() *ChunkSpec {
+	if m != nil {
+		return m.ChunkSpec
+	}
+	return nil
+}
+
+func (m *PipelineInfo) GetDatumTimeout() *google_protobuf2.Duration {
+	if m != nil {
+		return m.DatumTimeout
+	}
+	return nil
+}
+
+func (m *PipelineInfo) GetJobTimeout() *google_protobuf2.Duration {
+	if m != nil {
+		return m.JobTimeout
+	}
+	return nil
+}
+
+func (m *PipelineInfo) GetGithookURL() string {
+	if m != nil {
+		return m.GithookURL
+	}
+	return ""
+}
+
+func (m *PipelineInfo) GetSpecCommit() *pfs.Commit {
+	if m != nil {
+		return m.SpecCommit
+	}
+	return nil
 }
 
 type PipelineInfos struct {
@@ -1484,7 +1816,7 @@ type PipelineInfos struct {
 func (m *PipelineInfos) Reset()                    { *m = PipelineInfos{} }
 func (m *PipelineInfos) String() string            { return proto.CompactTextString(m) }
 func (*PipelineInfos) ProtoMessage()               {}
-func (*PipelineInfos) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{25} }
+func (*PipelineInfos) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{27} }
 
 func (m *PipelineInfos) GetPipelineInfo() []*PipelineInfo {
 	if m != nil {
@@ -1494,38 +1826,14 @@ func (m *PipelineInfos) GetPipelineInfo() []*PipelineInfo {
 }
 
 type CreateJobRequest struct {
-	Transform       *Transform       `protobuf:"bytes,1,opt,name=transform" json:"transform,omitempty"`
-	Pipeline        *Pipeline        `protobuf:"bytes,2,opt,name=pipeline" json:"pipeline,omitempty"`
-	PipelineVersion uint64           `protobuf:"varint,10,opt,name=pipeline_version,json=pipelineVersion,proto3" json:"pipeline_version,omitempty"`
-	ParallelismSpec *ParallelismSpec `protobuf:"bytes,7,opt,name=parallelism_spec,json=parallelismSpec" json:"parallelism_spec,omitempty"`
-	Inputs          []*JobInput      `protobuf:"bytes,4,rep,name=inputs" json:"inputs,omitempty"`
-	Egress          *Egress          `protobuf:"bytes,9,opt,name=egress" json:"egress,omitempty"`
-	// When service is defined, we create a long running job
-	// by using a k8s RC and Service instead of a k8s Job
-	Service      *Service        `protobuf:"bytes,8,opt,name=service" json:"service,omitempty"`
-	OutputRepo   *pfs.Repo       `protobuf:"bytes,12,opt,name=output_repo,json=outputRepo" json:"output_repo,omitempty"`
-	OutputBranch string          `protobuf:"bytes,11,opt,name=output_branch,json=outputBranch,proto3" json:"output_branch,omitempty"`
-	ParentJob    *Job            `protobuf:"bytes,13,opt,name=parent_job,json=parentJob" json:"parent_job,omitempty"`
-	ResourceSpec *ResourceSpec   `protobuf:"bytes,14,opt,name=resource_spec,json=resourceSpec" json:"resource_spec,omitempty"`
-	Input        *Input          `protobuf:"bytes,15,opt,name=input" json:"input,omitempty"`
-	NewBranch    *pfs.BranchInfo `protobuf:"bytes,16,opt,name=new_branch,json=newBranch" json:"new_branch,omitempty"`
-	Incremental  bool            `protobuf:"varint,17,opt,name=incremental,proto3" json:"incremental,omitempty"`
-	EnableStats  bool            `protobuf:"varint,18,opt,name=enable_stats,json=enableStats,proto3" json:"enable_stats,omitempty"`
-	Salt         string          `protobuf:"bytes,19,opt,name=salt,proto3" json:"salt,omitempty"`
-	Batch        bool            `protobuf:"varint,20,opt,name=batch,proto3" json:"batch,omitempty"`
+	Pipeline     *Pipeline   `protobuf:"bytes,2,opt,name=pipeline" json:"pipeline,omitempty"`
+	OutputCommit *pfs.Commit `protobuf:"bytes,25,opt,name=output_commit,json=outputCommit" json:"output_commit,omitempty"`
 }
 
 func (m *CreateJobRequest) Reset()                    { *m = CreateJobRequest{} }
 func (m *CreateJobRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreateJobRequest) ProtoMessage()               {}
-func (*CreateJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{26} }
-
-func (m *CreateJobRequest) GetTransform() *Transform {
-	if m != nil {
-		return m.Transform
-	}
-	return nil
-}
+func (*CreateJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{28} }
 
 func (m *CreateJobRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -1534,109 +1842,11 @@ func (m *CreateJobRequest) GetPipeline() *Pipeline {
 	return nil
 }
 
-func (m *CreateJobRequest) GetPipelineVersion() uint64 {
+func (m *CreateJobRequest) GetOutputCommit() *pfs.Commit {
 	if m != nil {
-		return m.PipelineVersion
-	}
-	return 0
-}
-
-func (m *CreateJobRequest) GetParallelismSpec() *ParallelismSpec {
-	if m != nil {
-		return m.ParallelismSpec
+		return m.OutputCommit
 	}
 	return nil
-}
-
-func (m *CreateJobRequest) GetInputs() []*JobInput {
-	if m != nil {
-		return m.Inputs
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetEgress() *Egress {
-	if m != nil {
-		return m.Egress
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetService() *Service {
-	if m != nil {
-		return m.Service
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetOutputRepo() *pfs.Repo {
-	if m != nil {
-		return m.OutputRepo
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetOutputBranch() string {
-	if m != nil {
-		return m.OutputBranch
-	}
-	return ""
-}
-
-func (m *CreateJobRequest) GetParentJob() *Job {
-	if m != nil {
-		return m.ParentJob
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetResourceSpec() *ResourceSpec {
-	if m != nil {
-		return m.ResourceSpec
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetInput() *Input {
-	if m != nil {
-		return m.Input
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetNewBranch() *pfs.BranchInfo {
-	if m != nil {
-		return m.NewBranch
-	}
-	return nil
-}
-
-func (m *CreateJobRequest) GetIncremental() bool {
-	if m != nil {
-		return m.Incremental
-	}
-	return false
-}
-
-func (m *CreateJobRequest) GetEnableStats() bool {
-	if m != nil {
-		return m.EnableStats
-	}
-	return false
-}
-
-func (m *CreateJobRequest) GetSalt() string {
-	if m != nil {
-		return m.Salt
-	}
-	return ""
-}
-
-func (m *CreateJobRequest) GetBatch() bool {
-	if m != nil {
-		return m.Batch
-	}
-	return false
 }
 
 type InspectJobRequest struct {
@@ -1647,7 +1857,7 @@ type InspectJobRequest struct {
 func (m *InspectJobRequest) Reset()                    { *m = InspectJobRequest{} }
 func (m *InspectJobRequest) String() string            { return proto.CompactTextString(m) }
 func (*InspectJobRequest) ProtoMessage()               {}
-func (*InspectJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{27} }
+func (*InspectJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{29} }
 
 func (m *InspectJobRequest) GetJob() *Job {
 	if m != nil {
@@ -1664,14 +1874,15 @@ func (m *InspectJobRequest) GetBlockState() bool {
 }
 
 type ListJobRequest struct {
-	Pipeline    *Pipeline     `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
-	InputCommit []*pfs.Commit `protobuf:"bytes,2,rep,name=input_commit,json=inputCommit" json:"input_commit,omitempty"`
+	Pipeline     *Pipeline     `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
+	InputCommit  []*pfs.Commit `protobuf:"bytes,2,rep,name=input_commit,json=inputCommit" json:"input_commit,omitempty"`
+	OutputCommit *pfs.Commit   `protobuf:"bytes,3,opt,name=output_commit,json=outputCommit" json:"output_commit,omitempty"`
 }
 
 func (m *ListJobRequest) Reset()                    { *m = ListJobRequest{} }
 func (m *ListJobRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListJobRequest) ProtoMessage()               {}
-func (*ListJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{28} }
+func (*ListJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{30} }
 
 func (m *ListJobRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -1687,6 +1898,37 @@ func (m *ListJobRequest) GetInputCommit() []*pfs.Commit {
 	return nil
 }
 
+func (m *ListJobRequest) GetOutputCommit() *pfs.Commit {
+	if m != nil {
+		return m.OutputCommit
+	}
+	return nil
+}
+
+type FlushJobRequest struct {
+	Commits     []*pfs.Commit `protobuf:"bytes,1,rep,name=commits" json:"commits,omitempty"`
+	ToPipelines []*Pipeline   `protobuf:"bytes,2,rep,name=to_pipelines,json=toPipelines" json:"to_pipelines,omitempty"`
+}
+
+func (m *FlushJobRequest) Reset()                    { *m = FlushJobRequest{} }
+func (m *FlushJobRequest) String() string            { return proto.CompactTextString(m) }
+func (*FlushJobRequest) ProtoMessage()               {}
+func (*FlushJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{31} }
+
+func (m *FlushJobRequest) GetCommits() []*pfs.Commit {
+	if m != nil {
+		return m.Commits
+	}
+	return nil
+}
+
+func (m *FlushJobRequest) GetToPipelines() []*Pipeline {
+	if m != nil {
+		return m.ToPipelines
+	}
+	return nil
+}
+
 type DeleteJobRequest struct {
 	Job *Job `protobuf:"bytes,1,opt,name=job" json:"job,omitempty"`
 }
@@ -1694,7 +1936,7 @@ type DeleteJobRequest struct {
 func (m *DeleteJobRequest) Reset()                    { *m = DeleteJobRequest{} }
 func (m *DeleteJobRequest) String() string            { return proto.CompactTextString(m) }
 func (*DeleteJobRequest) ProtoMessage()               {}
-func (*DeleteJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{29} }
+func (*DeleteJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{32} }
 
 func (m *DeleteJobRequest) GetJob() *Job {
 	if m != nil {
@@ -1710,7 +1952,7 @@ type StopJobRequest struct {
 func (m *StopJobRequest) Reset()                    { *m = StopJobRequest{} }
 func (m *StopJobRequest) String() string            { return proto.CompactTextString(m) }
 func (*StopJobRequest) ProtoMessage()               {}
-func (*StopJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{30} }
+func (*StopJobRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{33} }
 
 func (m *StopJobRequest) GetJob() *Job {
 	if m != nil {
@@ -1731,15 +1973,21 @@ type GetLogsRequest struct {
 	// filter may be an absolute path of a file within a pps repo, or it may be
 	// a hash for that file (to search for files at specific versions)
 	DataFilters []string `protobuf:"bytes,3,rep,name=data_filters,json=dataFilters" json:"data_filters,omitempty"`
-	InputFileID string   `protobuf:"bytes,4,opt,name=input_file_id,json=inputFileId,proto3" json:"input_file_id,omitempty"`
+	Datum       *Datum   `protobuf:"bytes,6,opt,name=datum" json:"datum,omitempty"`
 	// If true get logs from the master process
 	Master bool `protobuf:"varint,5,opt,name=master,proto3" json:"master,omitempty"`
+	// Continue to follow new logs as they become available.
+	Follow bool `protobuf:"varint,7,opt,name=follow,proto3" json:"follow,omitempty"`
+	// If nonzero, the number of lines from the end of the logs to return.  Note:
+	// tail applies per container, so you will get tail * <number of pods> total
+	// lines back.
+	Tail int64 `protobuf:"varint,8,opt,name=tail,proto3" json:"tail,omitempty"`
 }
 
 func (m *GetLogsRequest) Reset()                    { *m = GetLogsRequest{} }
 func (m *GetLogsRequest) String() string            { return proto.CompactTextString(m) }
 func (*GetLogsRequest) ProtoMessage()               {}
-func (*GetLogsRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{31} }
+func (*GetLogsRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{34} }
 
 func (m *GetLogsRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -1762,11 +2010,11 @@ func (m *GetLogsRequest) GetDataFilters() []string {
 	return nil
 }
 
-func (m *GetLogsRequest) GetInputFileID() string {
+func (m *GetLogsRequest) GetDatum() *Datum {
 	if m != nil {
-		return m.InputFileID
+		return m.Datum
 	}
-	return ""
+	return nil
 }
 
 func (m *GetLogsRequest) GetMaster() bool {
@@ -1774,6 +2022,20 @@ func (m *GetLogsRequest) GetMaster() bool {
 		return m.Master
 	}
 	return false
+}
+
+func (m *GetLogsRequest) GetFollow() bool {
+	if m != nil {
+		return m.Follow
+	}
+	return false
+}
+
+func (m *GetLogsRequest) GetTail() int64 {
+	if m != nil {
+		return m.Tail
+	}
+	return 0
 }
 
 // LogMessage is a log line from a PPS worker, annotated with metadata
@@ -1784,7 +2046,7 @@ type LogMessage struct {
 	PipelineName string `protobuf:"bytes,1,opt,name=pipeline_name,json=pipelineName,proto3" json:"pipeline_name,omitempty"`
 	JobID        string `protobuf:"bytes,3,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	WorkerID     string `protobuf:"bytes,7,opt,name=worker_id,json=workerId,proto3" json:"worker_id,omitempty"`
-	InputFileID  string `protobuf:"bytes,9,opt,name=input_file_id,json=inputFileId,proto3" json:"input_file_id,omitempty"`
+	DatumID      string `protobuf:"bytes,9,opt,name=datum_id,json=datumId,proto3" json:"datum_id,omitempty"`
 	Master       bool   `protobuf:"varint,10,opt,name=master,proto3" json:"master,omitempty"`
 	// The PFS files being processed (one per pipeline/job input)
 	Data []*InputFile `protobuf:"bytes,4,rep,name=data" json:"data,omitempty"`
@@ -1798,7 +2060,7 @@ type LogMessage struct {
 func (m *LogMessage) Reset()                    { *m = LogMessage{} }
 func (m *LogMessage) String() string            { return proto.CompactTextString(m) }
 func (*LogMessage) ProtoMessage()               {}
-func (*LogMessage) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{32} }
+func (*LogMessage) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{35} }
 
 func (m *LogMessage) GetPipelineName() string {
 	if m != nil {
@@ -1821,9 +2083,9 @@ func (m *LogMessage) GetWorkerID() string {
 	return ""
 }
 
-func (m *LogMessage) GetInputFileID() string {
+func (m *LogMessage) GetDatumID() string {
 	if m != nil {
-		return m.InputFileID
+		return m.DatumID
 	}
 	return ""
 }
@@ -1871,7 +2133,7 @@ type RestartDatumRequest struct {
 func (m *RestartDatumRequest) Reset()                    { *m = RestartDatumRequest{} }
 func (m *RestartDatumRequest) String() string            { return proto.CompactTextString(m) }
 func (*RestartDatumRequest) ProtoMessage()               {}
-func (*RestartDatumRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{33} }
+func (*RestartDatumRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{36} }
 
 func (m *RestartDatumRequest) GetJob() *Job {
 	if m != nil {
@@ -1894,7 +2156,7 @@ type InspectDatumRequest struct {
 func (m *InspectDatumRequest) Reset()                    { *m = InspectDatumRequest{} }
 func (m *InspectDatumRequest) String() string            { return proto.CompactTextString(m) }
 func (*InspectDatumRequest) ProtoMessage()               {}
-func (*InspectDatumRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{34} }
+func (*InspectDatumRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{37} }
 
 func (m *InspectDatumRequest) GetDatum() *Datum {
 	if m != nil {
@@ -1904,13 +2166,15 @@ func (m *InspectDatumRequest) GetDatum() *Datum {
 }
 
 type ListDatumRequest struct {
-	Job *Job `protobuf:"bytes,1,opt,name=job" json:"job,omitempty"`
+	Job      *Job  `protobuf:"bytes,1,opt,name=job" json:"job,omitempty"`
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Page     int64 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 }
 
 func (m *ListDatumRequest) Reset()                    { *m = ListDatumRequest{} }
 func (m *ListDatumRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListDatumRequest) ProtoMessage()               {}
-func (*ListDatumRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{35} }
+func (*ListDatumRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{38} }
 
 func (m *ListDatumRequest) GetJob() *Job {
 	if m != nil {
@@ -1919,16 +2183,131 @@ func (m *ListDatumRequest) GetJob() *Job {
 	return nil
 }
 
+func (m *ListDatumRequest) GetPageSize() int64 {
+	if m != nil {
+		return m.PageSize
+	}
+	return 0
+}
+
+func (m *ListDatumRequest) GetPage() int64 {
+	if m != nil {
+		return m.Page
+	}
+	return 0
+}
+
+type ListDatumResponse struct {
+	DatumInfos []*DatumInfo `protobuf:"bytes,1,rep,name=datum_infos,json=datumInfos" json:"datum_infos,omitempty"`
+	TotalPages int64        `protobuf:"varint,2,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	Page       int64        `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+}
+
+func (m *ListDatumResponse) Reset()                    { *m = ListDatumResponse{} }
+func (m *ListDatumResponse) String() string            { return proto.CompactTextString(m) }
+func (*ListDatumResponse) ProtoMessage()               {}
+func (*ListDatumResponse) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{39} }
+
+func (m *ListDatumResponse) GetDatumInfos() []*DatumInfo {
+	if m != nil {
+		return m.DatumInfos
+	}
+	return nil
+}
+
+func (m *ListDatumResponse) GetTotalPages() int64 {
+	if m != nil {
+		return m.TotalPages
+	}
+	return 0
+}
+
+func (m *ListDatumResponse) GetPage() int64 {
+	if m != nil {
+		return m.Page
+	}
+	return 0
+}
+
+// ListDatumStreamResponse is identical to ListDatumResponse, except that only
+// one DatumInfo is present (as these responses are streamed)
+type ListDatumStreamResponse struct {
+	DatumInfo *DatumInfo `protobuf:"bytes,1,opt,name=datum_info,json=datumInfo" json:"datum_info,omitempty"`
+	// total_pages is only set in the first response (and set to 0 in all other
+	// responses)
+	TotalPages int64 `protobuf:"varint,2,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	// page is only set in the first response (and set to 0 in all other
+	// responses)
+	Page int64 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+}
+
+func (m *ListDatumStreamResponse) Reset()                    { *m = ListDatumStreamResponse{} }
+func (m *ListDatumStreamResponse) String() string            { return proto.CompactTextString(m) }
+func (*ListDatumStreamResponse) ProtoMessage()               {}
+func (*ListDatumStreamResponse) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{40} }
+
+func (m *ListDatumStreamResponse) GetDatumInfo() *DatumInfo {
+	if m != nil {
+		return m.DatumInfo
+	}
+	return nil
+}
+
+func (m *ListDatumStreamResponse) GetTotalPages() int64 {
+	if m != nil {
+		return m.TotalPages
+	}
+	return 0
+}
+
+func (m *ListDatumStreamResponse) GetPage() int64 {
+	if m != nil {
+		return m.Page
+	}
+	return 0
+}
+
+// ChunkSpec specifies how a pipeline should chunk its datums.
+type ChunkSpec struct {
+	// number, if nonzero, specifies that each chunk should contain `number`
+	// datums. Chunks may contain fewer if the total number of datums don't
+	// divide evenly.
+	Number int64 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+	// size_bytes, if nonzero, specifies a target size for each chunk of datums.
+	// Chunks may be larger or smaller than size_bytes, but will usually be
+	// pretty close to size_bytes in size.
+	SizeBytes int64 `protobuf:"varint,2,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
+}
+
+func (m *ChunkSpec) Reset()                    { *m = ChunkSpec{} }
+func (m *ChunkSpec) String() string            { return proto.CompactTextString(m) }
+func (*ChunkSpec) ProtoMessage()               {}
+func (*ChunkSpec) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{41} }
+
+func (m *ChunkSpec) GetNumber() int64 {
+	if m != nil {
+		return m.Number
+	}
+	return 0
+}
+
+func (m *ChunkSpec) GetSizeBytes() int64 {
+	if m != nil {
+		return m.SizeBytes
+	}
+	return 0
+}
+
 type CreatePipelineRequest struct {
 	Pipeline           *Pipeline                  `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
 	Transform          *Transform                 `protobuf:"bytes,2,opt,name=transform" json:"transform,omitempty"`
 	ParallelismSpec    *ParallelismSpec           `protobuf:"bytes,7,opt,name=parallelism_spec,json=parallelismSpec" json:"parallelism_spec,omitempty"`
-	Inputs             []*PipelineInput           `protobuf:"bytes,4,rep,name=inputs" json:"inputs,omitempty"`
 	Egress             *Egress                    `protobuf:"bytes,9,opt,name=egress" json:"egress,omitempty"`
 	Update             bool                       `protobuf:"varint,5,opt,name=update,proto3" json:"update,omitempty"`
 	OutputBranch       string                     `protobuf:"bytes,10,opt,name=output_branch,json=outputBranch,proto3" json:"output_branch,omitempty"`
 	ScaleDownThreshold *google_protobuf2.Duration `protobuf:"bytes,11,opt,name=scale_down_threshold,json=scaleDownThreshold" json:"scale_down_threshold,omitempty"`
-	ResourceSpec       *ResourceSpec              `protobuf:"bytes,12,opt,name=resource_spec,json=resourceSpec" json:"resource_spec,omitempty"`
+	ResourceRequests   *ResourceSpec              `protobuf:"bytes,12,opt,name=resource_requests,json=resourceRequests" json:"resource_requests,omitempty"`
+	ResourceLimits     *ResourceSpec              `protobuf:"bytes,22,opt,name=resource_limits,json=resourceLimits" json:"resource_limits,omitempty"`
 	Input              *Input                     `protobuf:"bytes,13,opt,name=input" json:"input,omitempty"`
 	Description        string                     `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
 	Incremental        bool                       `protobuf:"varint,15,opt,name=incremental,proto3" json:"incremental,omitempty"`
@@ -1936,14 +2315,20 @@ type CreatePipelineRequest struct {
 	EnableStats        bool                       `protobuf:"varint,17,opt,name=enable_stats,json=enableStats,proto3" json:"enable_stats,omitempty"`
 	// Reprocess forces the pipeline to reprocess all datums.
 	// It only has meaning if Update is true
-	Reprocess bool `protobuf:"varint,18,opt,name=reprocess,proto3" json:"reprocess,omitempty"`
-	Batch     bool `protobuf:"varint,19,opt,name=batch,proto3" json:"batch,omitempty"`
+	Reprocess    bool                       `protobuf:"varint,18,opt,name=reprocess,proto3" json:"reprocess,omitempty"`
+	Batch        bool                       `protobuf:"varint,19,opt,name=batch,proto3" json:"batch,omitempty"`
+	MaxQueueSize int64                      `protobuf:"varint,20,opt,name=max_queue_size,json=maxQueueSize,proto3" json:"max_queue_size,omitempty"`
+	Service      *Service                   `protobuf:"bytes,21,opt,name=service" json:"service,omitempty"`
+	ChunkSpec    *ChunkSpec                 `protobuf:"bytes,23,opt,name=chunk_spec,json=chunkSpec" json:"chunk_spec,omitempty"`
+	DatumTimeout *google_protobuf2.Duration `protobuf:"bytes,24,opt,name=datum_timeout,json=datumTimeout" json:"datum_timeout,omitempty"`
+	JobTimeout   *google_protobuf2.Duration `protobuf:"bytes,25,opt,name=job_timeout,json=jobTimeout" json:"job_timeout,omitempty"`
+	Salt         string                     `protobuf:"bytes,26,opt,name=salt,proto3" json:"salt,omitempty"`
 }
 
 func (m *CreatePipelineRequest) Reset()                    { *m = CreatePipelineRequest{} }
 func (m *CreatePipelineRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreatePipelineRequest) ProtoMessage()               {}
-func (*CreatePipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{36} }
+func (*CreatePipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{42} }
 
 func (m *CreatePipelineRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -1962,13 +2347,6 @@ func (m *CreatePipelineRequest) GetTransform() *Transform {
 func (m *CreatePipelineRequest) GetParallelismSpec() *ParallelismSpec {
 	if m != nil {
 		return m.ParallelismSpec
-	}
-	return nil
-}
-
-func (m *CreatePipelineRequest) GetInputs() []*PipelineInput {
-	if m != nil {
-		return m.Inputs
 	}
 	return nil
 }
@@ -2001,9 +2379,16 @@ func (m *CreatePipelineRequest) GetScaleDownThreshold() *google_protobuf2.Durati
 	return nil
 }
 
-func (m *CreatePipelineRequest) GetResourceSpec() *ResourceSpec {
+func (m *CreatePipelineRequest) GetResourceRequests() *ResourceSpec {
 	if m != nil {
-		return m.ResourceSpec
+		return m.ResourceRequests
+	}
+	return nil
+}
+
+func (m *CreatePipelineRequest) GetResourceLimits() *ResourceSpec {
+	if m != nil {
+		return m.ResourceLimits
 	}
 	return nil
 }
@@ -2057,6 +2442,48 @@ func (m *CreatePipelineRequest) GetBatch() bool {
 	return false
 }
 
+func (m *CreatePipelineRequest) GetMaxQueueSize() int64 {
+	if m != nil {
+		return m.MaxQueueSize
+	}
+	return 0
+}
+
+func (m *CreatePipelineRequest) GetService() *Service {
+	if m != nil {
+		return m.Service
+	}
+	return nil
+}
+
+func (m *CreatePipelineRequest) GetChunkSpec() *ChunkSpec {
+	if m != nil {
+		return m.ChunkSpec
+	}
+	return nil
+}
+
+func (m *CreatePipelineRequest) GetDatumTimeout() *google_protobuf2.Duration {
+	if m != nil {
+		return m.DatumTimeout
+	}
+	return nil
+}
+
+func (m *CreatePipelineRequest) GetJobTimeout() *google_protobuf2.Duration {
+	if m != nil {
+		return m.JobTimeout
+	}
+	return nil
+}
+
+func (m *CreatePipelineRequest) GetSalt() string {
+	if m != nil {
+		return m.Salt
+	}
+	return ""
+}
+
 type InspectPipelineRequest struct {
 	Pipeline *Pipeline `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
 }
@@ -2064,7 +2491,7 @@ type InspectPipelineRequest struct {
 func (m *InspectPipelineRequest) Reset()                    { *m = InspectPipelineRequest{} }
 func (m *InspectPipelineRequest) String() string            { return proto.CompactTextString(m) }
 func (*InspectPipelineRequest) ProtoMessage()               {}
-func (*InspectPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{37} }
+func (*InspectPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{43} }
 
 func (m *InspectPipelineRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -2079,39 +2506,23 @@ type ListPipelineRequest struct {
 func (m *ListPipelineRequest) Reset()                    { *m = ListPipelineRequest{} }
 func (m *ListPipelineRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListPipelineRequest) ProtoMessage()               {}
-func (*ListPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{38} }
+func (*ListPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{44} }
 
 type DeletePipelineRequest struct {
-	Pipeline   *Pipeline `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
-	DeleteJobs bool      `protobuf:"varint,2,opt,name=delete_jobs,json=deleteJobs,proto3" json:"delete_jobs,omitempty"`
-	DeleteRepo bool      `protobuf:"varint,3,opt,name=delete_repo,json=deleteRepo,proto3" json:"delete_repo,omitempty"`
-	All        bool      `protobuf:"varint,4,opt,name=all,proto3" json:"all,omitempty"`
+	Pipeline *Pipeline `protobuf:"bytes,1,opt,name=pipeline" json:"pipeline,omitempty"`
+	All      bool      `protobuf:"varint,4,opt,name=all,proto3" json:"all,omitempty"`
 }
 
 func (m *DeletePipelineRequest) Reset()                    { *m = DeletePipelineRequest{} }
 func (m *DeletePipelineRequest) String() string            { return proto.CompactTextString(m) }
 func (*DeletePipelineRequest) ProtoMessage()               {}
-func (*DeletePipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{39} }
+func (*DeletePipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{45} }
 
 func (m *DeletePipelineRequest) GetPipeline() *Pipeline {
 	if m != nil {
 		return m.Pipeline
 	}
 	return nil
-}
-
-func (m *DeletePipelineRequest) GetDeleteJobs() bool {
-	if m != nil {
-		return m.DeleteJobs
-	}
-	return false
-}
-
-func (m *DeletePipelineRequest) GetDeleteRepo() bool {
-	if m != nil {
-		return m.DeleteRepo
-	}
-	return false
 }
 
 func (m *DeletePipelineRequest) GetAll() bool {
@@ -2128,7 +2539,7 @@ type StartPipelineRequest struct {
 func (m *StartPipelineRequest) Reset()                    { *m = StartPipelineRequest{} }
 func (m *StartPipelineRequest) String() string            { return proto.CompactTextString(m) }
 func (*StartPipelineRequest) ProtoMessage()               {}
-func (*StartPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{40} }
+func (*StartPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{46} }
 
 func (m *StartPipelineRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -2144,7 +2555,7 @@ type StopPipelineRequest struct {
 func (m *StopPipelineRequest) Reset()                    { *m = StopPipelineRequest{} }
 func (m *StopPipelineRequest) String() string            { return proto.CompactTextString(m) }
 func (*StopPipelineRequest) ProtoMessage()               {}
-func (*StopPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{41} }
+func (*StopPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{47} }
 
 func (m *StopPipelineRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -2162,7 +2573,7 @@ type RerunPipelineRequest struct {
 func (m *RerunPipelineRequest) Reset()                    { *m = RerunPipelineRequest{} }
 func (m *RerunPipelineRequest) String() string            { return proto.CompactTextString(m) }
 func (*RerunPipelineRequest) ProtoMessage()               {}
-func (*RerunPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{42} }
+func (*RerunPipelineRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{48} }
 
 func (m *RerunPipelineRequest) GetPipeline() *Pipeline {
 	if m != nil {
@@ -2191,7 +2602,7 @@ type GarbageCollectRequest struct {
 func (m *GarbageCollectRequest) Reset()                    { *m = GarbageCollectRequest{} }
 func (m *GarbageCollectRequest) String() string            { return proto.CompactTextString(m) }
 func (*GarbageCollectRequest) ProtoMessage()               {}
-func (*GarbageCollectRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{43} }
+func (*GarbageCollectRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{49} }
 
 type GarbageCollectResponse struct {
 }
@@ -2199,7 +2610,23 @@ type GarbageCollectResponse struct {
 func (m *GarbageCollectResponse) Reset()                    { *m = GarbageCollectResponse{} }
 func (m *GarbageCollectResponse) String() string            { return proto.CompactTextString(m) }
 func (*GarbageCollectResponse) ProtoMessage()               {}
-func (*GarbageCollectResponse) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{44} }
+func (*GarbageCollectResponse) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{50} }
+
+type ActivateAuthRequest struct {
+}
+
+func (m *ActivateAuthRequest) Reset()                    { *m = ActivateAuthRequest{} }
+func (m *ActivateAuthRequest) String() string            { return proto.CompactTextString(m) }
+func (*ActivateAuthRequest) ProtoMessage()               {}
+func (*ActivateAuthRequest) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{51} }
+
+type ActivateAuthResponse struct {
+}
+
+func (m *ActivateAuthResponse) Reset()                    { *m = ActivateAuthResponse{} }
+func (m *ActivateAuthResponse) String() string            { return proto.CompactTextString(m) }
+func (*ActivateAuthResponse) ProtoMessage()               {}
+func (*ActivateAuthResponse) Descriptor() ([]byte, []int) { return fileDescriptorPps, []int{52} }
 
 func init() {
 	proto.RegisterType((*Secret)(nil), "pps.Secret")
@@ -2209,28 +2636,31 @@ func init() {
 	proto.RegisterType((*Service)(nil), "pps.Service")
 	proto.RegisterType((*AtomInput)(nil), "pps.AtomInput")
 	proto.RegisterType((*CronInput)(nil), "pps.CronInput")
+	proto.RegisterType((*GitInput)(nil), "pps.GitInput")
 	proto.RegisterType((*Input)(nil), "pps.Input")
 	proto.RegisterType((*JobInput)(nil), "pps.JobInput")
 	proto.RegisterType((*ParallelismSpec)(nil), "pps.ParallelismSpec")
 	proto.RegisterType((*InputFile)(nil), "pps.InputFile")
 	proto.RegisterType((*Datum)(nil), "pps.Datum")
 	proto.RegisterType((*DatumInfo)(nil), "pps.DatumInfo")
-	proto.RegisterType((*DatumInfos)(nil), "pps.DatumInfos")
 	proto.RegisterType((*Aggregate)(nil), "pps.Aggregate")
 	proto.RegisterType((*ProcessStats)(nil), "pps.ProcessStats")
 	proto.RegisterType((*AggregateProcessStats)(nil), "pps.AggregateProcessStats")
 	proto.RegisterType((*WorkerStatus)(nil), "pps.WorkerStatus")
 	proto.RegisterType((*ResourceSpec)(nil), "pps.ResourceSpec")
+	proto.RegisterType((*EtcdJobInfo)(nil), "pps.EtcdJobInfo")
 	proto.RegisterType((*JobInfo)(nil), "pps.JobInfo")
 	proto.RegisterType((*Worker)(nil), "pps.Worker")
 	proto.RegisterType((*JobInfos)(nil), "pps.JobInfos")
 	proto.RegisterType((*Pipeline)(nil), "pps.Pipeline")
 	proto.RegisterType((*PipelineInput)(nil), "pps.PipelineInput")
+	proto.RegisterType((*EtcdPipelineInfo)(nil), "pps.EtcdPipelineInfo")
 	proto.RegisterType((*PipelineInfo)(nil), "pps.PipelineInfo")
 	proto.RegisterType((*PipelineInfos)(nil), "pps.PipelineInfos")
 	proto.RegisterType((*CreateJobRequest)(nil), "pps.CreateJobRequest")
 	proto.RegisterType((*InspectJobRequest)(nil), "pps.InspectJobRequest")
 	proto.RegisterType((*ListJobRequest)(nil), "pps.ListJobRequest")
+	proto.RegisterType((*FlushJobRequest)(nil), "pps.FlushJobRequest")
 	proto.RegisterType((*DeleteJobRequest)(nil), "pps.DeleteJobRequest")
 	proto.RegisterType((*StopJobRequest)(nil), "pps.StopJobRequest")
 	proto.RegisterType((*GetLogsRequest)(nil), "pps.GetLogsRequest")
@@ -2238,6 +2668,9 @@ func init() {
 	proto.RegisterType((*RestartDatumRequest)(nil), "pps.RestartDatumRequest")
 	proto.RegisterType((*InspectDatumRequest)(nil), "pps.InspectDatumRequest")
 	proto.RegisterType((*ListDatumRequest)(nil), "pps.ListDatumRequest")
+	proto.RegisterType((*ListDatumResponse)(nil), "pps.ListDatumResponse")
+	proto.RegisterType((*ListDatumStreamResponse)(nil), "pps.ListDatumStreamResponse")
+	proto.RegisterType((*ChunkSpec)(nil), "pps.ChunkSpec")
 	proto.RegisterType((*CreatePipelineRequest)(nil), "pps.CreatePipelineRequest")
 	proto.RegisterType((*InspectPipelineRequest)(nil), "pps.InspectPipelineRequest")
 	proto.RegisterType((*ListPipelineRequest)(nil), "pps.ListPipelineRequest")
@@ -2247,6 +2680,8 @@ func init() {
 	proto.RegisterType((*RerunPipelineRequest)(nil), "pps.RerunPipelineRequest")
 	proto.RegisterType((*GarbageCollectRequest)(nil), "pps.GarbageCollectRequest")
 	proto.RegisterType((*GarbageCollectResponse)(nil), "pps.GarbageCollectResponse")
+	proto.RegisterType((*ActivateAuthRequest)(nil), "pps.ActivateAuthRequest")
+	proto.RegisterType((*ActivateAuthResponse)(nil), "pps.ActivateAuthResponse")
 	proto.RegisterEnum("pps.JobState", JobState_name, JobState_value)
 	proto.RegisterEnum("pps.DatumState", DatumState_name, DatumState_value)
 	proto.RegisterEnum("pps.WorkerState", WorkerState_name, WorkerState_value)
@@ -2266,11 +2701,20 @@ const _ = grpc.SupportPackageIsVersion4
 type APIClient interface {
 	CreateJob(ctx context.Context, in *CreateJobRequest, opts ...grpc.CallOption) (*Job, error)
 	InspectJob(ctx context.Context, in *InspectJobRequest, opts ...grpc.CallOption) (*JobInfo, error)
+	// ListJob returns information about current and past Pachyderm jobs. This is
+	// deprecated in favor of ListJobStream
 	ListJob(ctx context.Context, in *ListJobRequest, opts ...grpc.CallOption) (*JobInfos, error)
+	// ListJobStream returns information about current and past Pachyderm jobs.
+	ListJobStream(ctx context.Context, in *ListJobRequest, opts ...grpc.CallOption) (API_ListJobStreamClient, error)
+	FlushJob(ctx context.Context, in *FlushJobRequest, opts ...grpc.CallOption) (API_FlushJobClient, error)
 	DeleteJob(ctx context.Context, in *DeleteJobRequest, opts ...grpc.CallOption) (*google_protobuf.Empty, error)
 	StopJob(ctx context.Context, in *StopJobRequest, opts ...grpc.CallOption) (*google_protobuf.Empty, error)
 	InspectDatum(ctx context.Context, in *InspectDatumRequest, opts ...grpc.CallOption) (*DatumInfo, error)
-	ListDatum(ctx context.Context, in *ListDatumRequest, opts ...grpc.CallOption) (*DatumInfos, error)
+	// ListDatum returns information about each datum fed to a Pachyderm job. This
+	// is deprecated in favor of ListDatumStream
+	ListDatum(ctx context.Context, in *ListDatumRequest, opts ...grpc.CallOption) (*ListDatumResponse, error)
+	// ListDatumStream returns information about each datum fed to a Pachyderm job
+	ListDatumStream(ctx context.Context, in *ListDatumRequest, opts ...grpc.CallOption) (API_ListDatumStreamClient, error)
 	RestartDatum(ctx context.Context, in *RestartDatumRequest, opts ...grpc.CallOption) (*google_protobuf.Empty, error)
 	CreatePipeline(ctx context.Context, in *CreatePipelineRequest, opts ...grpc.CallOption) (*google_protobuf.Empty, error)
 	InspectPipeline(ctx context.Context, in *InspectPipelineRequest, opts ...grpc.CallOption) (*PipelineInfo, error)
@@ -2284,6 +2728,9 @@ type APIClient interface {
 	GetLogs(ctx context.Context, in *GetLogsRequest, opts ...grpc.CallOption) (API_GetLogsClient, error)
 	// Garbage collection
 	GarbageCollect(ctx context.Context, in *GarbageCollectRequest, opts ...grpc.CallOption) (*GarbageCollectResponse, error)
+	// An internal call that causes PPS to put itself into an auth-enabled state
+	// (all pipeline have tokens, correct permissions, etcd)
+	ActivateAuth(ctx context.Context, in *ActivateAuthRequest, opts ...grpc.CallOption) (*ActivateAuthResponse, error)
 }
 
 type aPIClient struct {
@@ -2321,6 +2768,70 @@ func (c *aPIClient) ListJob(ctx context.Context, in *ListJobRequest, opts ...grp
 	return out, nil
 }
 
+func (c *aPIClient) ListJobStream(ctx context.Context, in *ListJobRequest, opts ...grpc.CallOption) (API_ListJobStreamClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_API_serviceDesc.Streams[0], c.cc, "/pps.API/ListJobStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &aPIListJobStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type API_ListJobStreamClient interface {
+	Recv() (*JobInfo, error)
+	grpc.ClientStream
+}
+
+type aPIListJobStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *aPIListJobStreamClient) Recv() (*JobInfo, error) {
+	m := new(JobInfo)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *aPIClient) FlushJob(ctx context.Context, in *FlushJobRequest, opts ...grpc.CallOption) (API_FlushJobClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_API_serviceDesc.Streams[1], c.cc, "/pps.API/FlushJob", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &aPIFlushJobClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type API_FlushJobClient interface {
+	Recv() (*JobInfo, error)
+	grpc.ClientStream
+}
+
+type aPIFlushJobClient struct {
+	grpc.ClientStream
+}
+
+func (x *aPIFlushJobClient) Recv() (*JobInfo, error) {
+	m := new(JobInfo)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *aPIClient) DeleteJob(ctx context.Context, in *DeleteJobRequest, opts ...grpc.CallOption) (*google_protobuf.Empty, error) {
 	out := new(google_protobuf.Empty)
 	err := grpc.Invoke(ctx, "/pps.API/DeleteJob", in, out, c.cc, opts...)
@@ -2348,13 +2859,45 @@ func (c *aPIClient) InspectDatum(ctx context.Context, in *InspectDatumRequest, o
 	return out, nil
 }
 
-func (c *aPIClient) ListDatum(ctx context.Context, in *ListDatumRequest, opts ...grpc.CallOption) (*DatumInfos, error) {
-	out := new(DatumInfos)
+func (c *aPIClient) ListDatum(ctx context.Context, in *ListDatumRequest, opts ...grpc.CallOption) (*ListDatumResponse, error) {
+	out := new(ListDatumResponse)
 	err := grpc.Invoke(ctx, "/pps.API/ListDatum", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
+}
+
+func (c *aPIClient) ListDatumStream(ctx context.Context, in *ListDatumRequest, opts ...grpc.CallOption) (API_ListDatumStreamClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_API_serviceDesc.Streams[2], c.cc, "/pps.API/ListDatumStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &aPIListDatumStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type API_ListDatumStreamClient interface {
+	Recv() (*ListDatumStreamResponse, error)
+	grpc.ClientStream
+}
+
+type aPIListDatumStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *aPIListDatumStreamClient) Recv() (*ListDatumStreamResponse, error) {
+	m := new(ListDatumStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *aPIClient) RestartDatum(ctx context.Context, in *RestartDatumRequest, opts ...grpc.CallOption) (*google_protobuf.Empty, error) {
@@ -2439,7 +2982,7 @@ func (c *aPIClient) DeleteAll(ctx context.Context, in *google_protobuf.Empty, op
 }
 
 func (c *aPIClient) GetLogs(ctx context.Context, in *GetLogsRequest, opts ...grpc.CallOption) (API_GetLogsClient, error) {
-	stream, err := grpc.NewClientStream(ctx, &_API_serviceDesc.Streams[0], c.cc, "/pps.API/GetLogs", opts...)
+	stream, err := grpc.NewClientStream(ctx, &_API_serviceDesc.Streams[3], c.cc, "/pps.API/GetLogs", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2479,16 +3022,34 @@ func (c *aPIClient) GarbageCollect(ctx context.Context, in *GarbageCollectReques
 	return out, nil
 }
 
+func (c *aPIClient) ActivateAuth(ctx context.Context, in *ActivateAuthRequest, opts ...grpc.CallOption) (*ActivateAuthResponse, error) {
+	out := new(ActivateAuthResponse)
+	err := grpc.Invoke(ctx, "/pps.API/ActivateAuth", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for API service
 
 type APIServer interface {
 	CreateJob(context.Context, *CreateJobRequest) (*Job, error)
 	InspectJob(context.Context, *InspectJobRequest) (*JobInfo, error)
+	// ListJob returns information about current and past Pachyderm jobs. This is
+	// deprecated in favor of ListJobStream
 	ListJob(context.Context, *ListJobRequest) (*JobInfos, error)
+	// ListJobStream returns information about current and past Pachyderm jobs.
+	ListJobStream(*ListJobRequest, API_ListJobStreamServer) error
+	FlushJob(*FlushJobRequest, API_FlushJobServer) error
 	DeleteJob(context.Context, *DeleteJobRequest) (*google_protobuf.Empty, error)
 	StopJob(context.Context, *StopJobRequest) (*google_protobuf.Empty, error)
 	InspectDatum(context.Context, *InspectDatumRequest) (*DatumInfo, error)
-	ListDatum(context.Context, *ListDatumRequest) (*DatumInfos, error)
+	// ListDatum returns information about each datum fed to a Pachyderm job. This
+	// is deprecated in favor of ListDatumStream
+	ListDatum(context.Context, *ListDatumRequest) (*ListDatumResponse, error)
+	// ListDatumStream returns information about each datum fed to a Pachyderm job
+	ListDatumStream(*ListDatumRequest, API_ListDatumStreamServer) error
 	RestartDatum(context.Context, *RestartDatumRequest) (*google_protobuf.Empty, error)
 	CreatePipeline(context.Context, *CreatePipelineRequest) (*google_protobuf.Empty, error)
 	InspectPipeline(context.Context, *InspectPipelineRequest) (*PipelineInfo, error)
@@ -2502,6 +3063,9 @@ type APIServer interface {
 	GetLogs(*GetLogsRequest, API_GetLogsServer) error
 	// Garbage collection
 	GarbageCollect(context.Context, *GarbageCollectRequest) (*GarbageCollectResponse, error)
+	// An internal call that causes PPS to put itself into an auth-enabled state
+	// (all pipeline have tokens, correct permissions, etcd)
+	ActivateAuth(context.Context, *ActivateAuthRequest) (*ActivateAuthResponse, error)
 }
 
 func RegisterAPIServer(s *grpc.Server, srv APIServer) {
@@ -2560,6 +3124,48 @@ func _API_ListJob_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		return srv.(APIServer).ListJob(ctx, req.(*ListJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _API_ListJobStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListJobRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(APIServer).ListJobStream(m, &aPIListJobStreamServer{stream})
+}
+
+type API_ListJobStreamServer interface {
+	Send(*JobInfo) error
+	grpc.ServerStream
+}
+
+type aPIListJobStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *aPIListJobStreamServer) Send(m *JobInfo) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _API_FlushJob_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FlushJobRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(APIServer).FlushJob(m, &aPIFlushJobServer{stream})
+}
+
+type API_FlushJobServer interface {
+	Send(*JobInfo) error
+	grpc.ServerStream
+}
+
+type aPIFlushJobServer struct {
+	grpc.ServerStream
+}
+
+func (x *aPIFlushJobServer) Send(m *JobInfo) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _API_DeleteJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2632,6 +3238,27 @@ func _API_ListDatum_Handler(srv interface{}, ctx context.Context, dec func(inter
 		return srv.(APIServer).ListDatum(ctx, req.(*ListDatumRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _API_ListDatumStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListDatumRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(APIServer).ListDatumStream(m, &aPIListDatumStreamServer{stream})
+}
+
+type API_ListDatumStreamServer interface {
+	Send(*ListDatumStreamResponse) error
+	grpc.ServerStream
+}
+
+type aPIListDatumStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *aPIListDatumStreamServer) Send(m *ListDatumStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _API_RestartDatum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2835,6 +3462,24 @@ func _API_GarbageCollect_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _API_ActivateAuth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ActivateAuthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(APIServer).ActivateAuth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pps.API/ActivateAuth",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(APIServer).ActivateAuth(ctx, req.(*ActivateAuthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _API_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pps.API",
 	HandlerType: (*APIServer)(nil),
@@ -2907,8 +3552,27 @@ var _API_serviceDesc = grpc.ServiceDesc{
 			MethodName: "GarbageCollect",
 			Handler:    _API_GarbageCollect_Handler,
 		},
+		{
+			MethodName: "ActivateAuth",
+			Handler:    _API_ActivateAuth_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ListJobStream",
+			Handler:       _API_ListJobStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "FlushJob",
+			Handler:       _API_FlushJob_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListDatumStream",
+			Handler:       _API_ListDatumStream_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "GetLogs",
 			Handler:       _API_GetLogs_Handler,
@@ -2944,6 +3608,18 @@ func (m *Secret) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(len(m.MountPath)))
 		i += copy(dAtA[i:], m.MountPath)
+	}
+	if len(m.EnvVar) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.EnvVar)))
+		i += copy(dAtA[i:], m.EnvVar)
+	}
+	if len(m.Key) > 0 {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Key)))
+		i += copy(dAtA[i:], m.Key)
 	}
 	return i, nil
 }
@@ -3147,6 +3823,12 @@ func (m *Service) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.ExternalPort))
 	}
+	if len(m.IP) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.IP)))
+		i += copy(dAtA[i:], m.IP)
+	}
 	return i, nil
 }
 
@@ -3205,11 +3887,15 @@ func (m *AtomInput) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
-	if len(m.FromCommit) > 0 {
-		dAtA[i] = 0x3a
+	if m.EmptyFiles {
+		dAtA[i] = 0x40
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(len(m.FromCommit)))
-		i += copy(dAtA[i:], m.FromCommit)
+		if m.EmptyFiles {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
 	}
 	return i, nil
 }
@@ -3262,6 +3948,48 @@ func (m *CronInput) MarshalTo(dAtA []byte) (int, error) {
 			return 0, err
 		}
 		i += n3
+	}
+	return i, nil
+}
+
+func (m *GitInput) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GitInput) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Name) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Name)))
+		i += copy(dAtA[i:], m.Name)
+	}
+	if len(m.URL) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.URL)))
+		i += copy(dAtA[i:], m.URL)
+	}
+	if len(m.Branch) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Branch)))
+		i += copy(dAtA[i:], m.Branch)
+	}
+	if len(m.Commit) > 0 {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Commit)))
+		i += copy(dAtA[i:], m.Commit)
 	}
 	return i, nil
 }
@@ -3325,6 +4053,16 @@ func (m *Input) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i += n5
 	}
+	if m.Git != nil {
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Git.Size()))
+		n6, err := m.Git.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n6
+	}
 	return i, nil
 }
 
@@ -3347,11 +4085,11 @@ func (m *JobInput) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Commit.Size()))
-		n6, err := m.Commit.MarshalTo(dAtA[i:])
+		n7, err := m.Commit.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n6
+		i += n7
 	}
 	if len(m.Glob) > 0 {
 		dAtA[i] = 0x12
@@ -3401,7 +4139,8 @@ func (m *ParallelismSpec) MarshalTo(dAtA []byte) (int, error) {
 	if m.Coefficient != 0 {
 		dAtA[i] = 0x19
 		i++
-		i = encodeFixed64Pps(dAtA, i, uint64(math.Float64bits(float64(m.Coefficient))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Coefficient))))
+		i += 8
 	}
 	return i, nil
 }
@@ -3461,11 +4200,11 @@ func (m *Datum) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n7, err := m.Job.MarshalTo(dAtA[i:])
+		n8, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n7
+		i += n8
 	}
 	return i, nil
 }
@@ -3489,11 +4228,11 @@ func (m *DatumInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Datum.Size()))
-		n8, err := m.Datum.MarshalTo(dAtA[i:])
+		n9, err := m.Datum.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n8
+		i += n9
 	}
 	if m.State != 0 {
 		dAtA[i] = 0x10
@@ -3504,55 +4243,25 @@ func (m *DatumInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Stats.Size()))
-		n9, err := m.Stats.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n9
-	}
-	if m.PfsState != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.PfsState.Size()))
-		n10, err := m.PfsState.MarshalTo(dAtA[i:])
+		n10, err := m.Stats.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n10
 	}
+	if m.PfsState != nil {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.PfsState.Size()))
+		n11, err := m.PfsState.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n11
+	}
 	if len(m.Data) > 0 {
 		for _, msg := range m.Data {
 			dAtA[i] = 0x2a
-			i++
-			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	return i, nil
-}
-
-func (m *DatumInfos) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DatumInfos) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.DatumInfo) > 0 {
-		for _, msg := range m.DatumInfo {
-			dAtA[i] = 0xa
 			i++
 			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
 			n, err := msg.MarshalTo(dAtA[i:])
@@ -3588,22 +4297,26 @@ func (m *Aggregate) MarshalTo(dAtA []byte) (int, error) {
 	if m.Mean != 0 {
 		dAtA[i] = 0x11
 		i++
-		i = encodeFixed64Pps(dAtA, i, uint64(math.Float64bits(float64(m.Mean))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Mean))))
+		i += 8
 	}
 	if m.Stddev != 0 {
 		dAtA[i] = 0x19
 		i++
-		i = encodeFixed64Pps(dAtA, i, uint64(math.Float64bits(float64(m.Stddev))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Stddev))))
+		i += 8
 	}
 	if m.FifthPercentile != 0 {
 		dAtA[i] = 0x21
 		i++
-		i = encodeFixed64Pps(dAtA, i, uint64(math.Float64bits(float64(m.FifthPercentile))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.FifthPercentile))))
+		i += 8
 	}
 	if m.NinetyFifthPercentile != 0 {
 		dAtA[i] = 0x29
 		i++
-		i = encodeFixed64Pps(dAtA, i, uint64(math.Float64bits(float64(m.NinetyFifthPercentile))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.NinetyFifthPercentile))))
+		i += 8
 	}
 	return i, nil
 }
@@ -3627,31 +4340,31 @@ func (m *ProcessStats) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.DownloadTime.Size()))
-		n11, err := m.DownloadTime.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n11
-	}
-	if m.ProcessTime != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ProcessTime.Size()))
-		n12, err := m.ProcessTime.MarshalTo(dAtA[i:])
+		n12, err := m.DownloadTime.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n12
 	}
-	if m.UploadTime != nil {
-		dAtA[i] = 0x1a
+	if m.ProcessTime != nil {
+		dAtA[i] = 0x12
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.UploadTime.Size()))
-		n13, err := m.UploadTime.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.ProcessTime.Size()))
+		n13, err := m.ProcessTime.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n13
+	}
+	if m.UploadTime != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.UploadTime.Size()))
+		n14, err := m.UploadTime.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n14
 	}
 	if m.DownloadBytes != 0 {
 		dAtA[i] = 0x20
@@ -3685,51 +4398,51 @@ func (m *AggregateProcessStats) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.DownloadTime.Size()))
-		n14, err := m.DownloadTime.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n14
-	}
-	if m.ProcessTime != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ProcessTime.Size()))
-		n15, err := m.ProcessTime.MarshalTo(dAtA[i:])
+		n15, err := m.DownloadTime.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n15
 	}
-	if m.UploadTime != nil {
-		dAtA[i] = 0x1a
+	if m.ProcessTime != nil {
+		dAtA[i] = 0x12
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.UploadTime.Size()))
-		n16, err := m.UploadTime.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.ProcessTime.Size()))
+		n16, err := m.ProcessTime.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n16
 	}
-	if m.DownloadBytes != nil {
-		dAtA[i] = 0x22
+	if m.UploadTime != nil {
+		dAtA[i] = 0x1a
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.DownloadBytes.Size()))
-		n17, err := m.DownloadBytes.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.UploadTime.Size()))
+		n17, err := m.UploadTime.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n17
 	}
-	if m.UploadBytes != nil {
-		dAtA[i] = 0x2a
+	if m.DownloadBytes != nil {
+		dAtA[i] = 0x22
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.UploadBytes.Size()))
-		n18, err := m.UploadBytes.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.DownloadBytes.Size()))
+		n18, err := m.DownloadBytes.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n18
+	}
+	if m.UploadBytes != nil {
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.UploadBytes.Size()))
+		n19, err := m.UploadBytes.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n19
 	}
 	return i, nil
 }
@@ -3777,21 +4490,21 @@ func (m *WorkerStatus) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Started.Size()))
-		n19, err := m.Started.MarshalTo(dAtA[i:])
+		n20, err := m.Started.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n19
+		i += n20
 	}
 	if m.Stats != nil {
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Stats.Size()))
-		n20, err := m.Stats.MarshalTo(dAtA[i:])
+		n21, err := m.Stats.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n20
+		i += n21
 	}
 	if m.QueueSize != 0 {
 		dAtA[i] = 0x30
@@ -3819,7 +4532,8 @@ func (m *ResourceSpec) MarshalTo(dAtA []byte) (int, error) {
 	if m.Cpu != 0 {
 		dAtA[i] = 0xd
 		i++
-		i = encodeFixed32Pps(dAtA, i, uint32(math.Float32bits(float32(m.Cpu))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Cpu))))
+		i += 4
 	}
 	if len(m.Memory) > 0 {
 		dAtA[i] = 0x12
@@ -3831,6 +4545,110 @@ func (m *ResourceSpec) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x18
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Gpu))
+	}
+	return i, nil
+}
+
+func (m *EtcdJobInfo) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *EtcdJobInfo) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Job != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
+		n22, err := m.Job.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n22
+	}
+	if m.Pipeline != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
+		n23, err := m.Pipeline.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n23
+	}
+	if m.OutputCommit != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.OutputCommit.Size()))
+		n24, err := m.OutputCommit.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n24
+	}
+	if m.Restart != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Restart))
+	}
+	if m.DataProcessed != 0 {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DataProcessed))
+	}
+	if m.DataSkipped != 0 {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DataSkipped))
+	}
+	if m.DataTotal != 0 {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DataTotal))
+	}
+	if m.DataFailed != 0 {
+		dAtA[i] = 0x40
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DataFailed))
+	}
+	if m.Stats != nil {
+		dAtA[i] = 0x4a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Stats.Size()))
+		n25, err := m.Stats.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n25
+	}
+	if m.StatsCommit != nil {
+		dAtA[i] = 0x52
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.StatsCommit.Size()))
+		n26, err := m.StatsCommit.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n26
+	}
+	if m.State != 0 {
+		dAtA[i] = 0x58
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.State))
+	}
+	if len(m.Reason) > 0 {
+		dAtA[i] = 0x62
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Reason)))
+		i += copy(dAtA[i:], m.Reason)
 	}
 	return i, nil
 }
@@ -3854,83 +4672,71 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n21, err := m.Job.MarshalTo(dAtA[i:])
+		n27, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n21
+		i += n27
 	}
 	if m.Transform != nil {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Transform.Size()))
-		n22, err := m.Transform.MarshalTo(dAtA[i:])
+		n28, err := m.Transform.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n22
+		i += n28
 	}
 	if m.Pipeline != nil {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n23, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n29, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n23
-	}
-	if len(m.Inputs) > 0 {
-		for _, msg := range m.Inputs {
-			dAtA[i] = 0x2a
-			i++
-			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
+		i += n29
 	}
 	if m.ParentJob != nil {
 		dAtA[i] = 0x32
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.ParentJob.Size()))
-		n24, err := m.ParentJob.MarshalTo(dAtA[i:])
+		n30, err := m.ParentJob.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n24
+		i += n30
 	}
 	if m.Started != nil {
 		dAtA[i] = 0x3a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Started.Size()))
-		n25, err := m.Started.MarshalTo(dAtA[i:])
+		n31, err := m.Started.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n25
+		i += n31
 	}
 	if m.Finished != nil {
 		dAtA[i] = 0x42
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Finished.Size()))
-		n26, err := m.Finished.MarshalTo(dAtA[i:])
+		n32, err := m.Finished.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n26
+		i += n32
 	}
 	if m.OutputCommit != nil {
 		dAtA[i] = 0x4a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.OutputCommit.Size()))
-		n27, err := m.OutputCommit.MarshalTo(dAtA[i:])
+		n33, err := m.OutputCommit.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n27
+		i += n33
 	}
 	if m.State != 0 {
 		dAtA[i] = 0x50
@@ -3941,11 +4747,11 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x62
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.ParallelismSpec.Size()))
-		n28, err := m.ParallelismSpec.MarshalTo(dAtA[i:])
+		n34, err := m.ParallelismSpec.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n28
+		i += n34
 	}
 	if m.PipelineVersion != 0 {
 		dAtA[i] = 0x68
@@ -3956,21 +4762,21 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x72
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Service.Size()))
-		n29, err := m.Service.MarshalTo(dAtA[i:])
+		n35, err := m.Service.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n29
+		i += n35
 	}
 	if m.Egress != nil {
 		dAtA[i] = 0x7a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Egress.Size()))
-		n30, err := m.Egress.MarshalTo(dAtA[i:])
+		n36, err := m.Egress.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n30
+		i += n36
 	}
 	if len(m.OutputBranch) > 0 {
 		dAtA[i] = 0x8a
@@ -3986,11 +4792,11 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.OutputRepo.Size()))
-		n31, err := m.OutputRepo.MarshalTo(dAtA[i:])
+		n37, err := m.OutputRepo.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n31
+		i += n37
 	}
 	if m.Restart != 0 {
 		dAtA[i] = 0xa0
@@ -4027,17 +4833,17 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 			i += n
 		}
 	}
-	if m.ResourceSpec != nil {
+	if m.ResourceRequests != nil {
 		dAtA[i] = 0xca
 		i++
 		dAtA[i] = 0x1
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ResourceSpec.Size()))
-		n32, err := m.ResourceSpec.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.ResourceRequests.Size()))
+		n38, err := m.ResourceRequests.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n32
+		i += n38
 	}
 	if m.Input != nil {
 		dAtA[i] = 0xd2
@@ -4045,11 +4851,11 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Input.Size()))
-		n33, err := m.Input.MarshalTo(dAtA[i:])
+		n39, err := m.Input.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n33
+		i += n39
 	}
 	if m.NewBranch != nil {
 		dAtA[i] = 0xda
@@ -4057,11 +4863,11 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.NewBranch.Size()))
-		n34, err := m.NewBranch.MarshalTo(dAtA[i:])
+		n40, err := m.NewBranch.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n34
+		i += n40
 	}
 	if m.Incremental {
 		dAtA[i] = 0xe0
@@ -4081,11 +4887,11 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.StatsCommit.Size()))
-		n35, err := m.StatsCommit.MarshalTo(dAtA[i:])
+		n41, err := m.StatsCommit.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n35
+		i += n41
 	}
 	if m.DataSkipped != 0 {
 		dAtA[i] = 0xf0
@@ -4100,11 +4906,11 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Stats.Size()))
-		n36, err := m.Stats.MarshalTo(dAtA[i:])
+		n42, err := m.Stats.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n36
+		i += n42
 	}
 	if m.EnableStats {
 		dAtA[i] = 0x80
@@ -4137,6 +4943,69 @@ func (m *JobInfo) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i++
+	}
+	if len(m.Reason) > 0 {
+		dAtA[i] = 0x9a
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Reason)))
+		i += copy(dAtA[i:], m.Reason)
+	}
+	if m.ResourceLimits != nil {
+		dAtA[i] = 0xa2
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.ResourceLimits.Size()))
+		n43, err := m.ResourceLimits.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n43
+	}
+	if m.ChunkSpec != nil {
+		dAtA[i] = 0xaa
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.ChunkSpec.Size()))
+		n44, err := m.ChunkSpec.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n44
+	}
+	if m.DatumTimeout != nil {
+		dAtA[i] = 0xb2
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DatumTimeout.Size()))
+		n45, err := m.DatumTimeout.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n45
+	}
+	if m.JobTimeout != nil {
+		dAtA[i] = 0xba
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.JobTimeout.Size()))
+		n46, err := m.JobTimeout.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n46
+	}
+	if m.DataFailed != 0 {
+		dAtA[i] = 0xc0
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DataFailed))
 	}
 	return i, nil
 }
@@ -4243,11 +5112,11 @@ func (m *PipelineInput) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Repo.Size()))
-		n37, err := m.Repo.MarshalTo(dAtA[i:])
+		n47, err := m.Repo.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n37
+		i += n47
 	}
 	if len(m.Branch) > 0 {
 		dAtA[i] = 0x12
@@ -4281,11 +5150,71 @@ func (m *PipelineInput) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x32
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.From.Size()))
-		n38, err := m.From.MarshalTo(dAtA[i:])
+		n48, err := m.From.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n38
+		i += n48
+	}
+	return i, nil
+}
+
+func (m *EtcdPipelineInfo) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *EtcdPipelineInfo) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.State != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.State))
+	}
+	if m.SpecCommit != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.SpecCommit.Size()))
+		n49, err := m.SpecCommit.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n49
+	}
+	if len(m.JobCounts) > 0 {
+		for k, _ := range m.JobCounts {
+			dAtA[i] = 0x1a
+			i++
+			v := m.JobCounts[k]
+			mapSize := 1 + sovPps(uint64(k)) + 1 + sovPps(uint64(v))
+			i = encodeVarintPps(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintPps(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintPps(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Reason) > 0 {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Reason)))
+		i += copy(dAtA[i:], m.Reason)
+	}
+	if len(m.AuthToken) > 0 {
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.AuthToken)))
+		i += copy(dAtA[i:], m.AuthToken)
 	}
 	return i, nil
 }
@@ -4309,43 +5238,31 @@ func (m *PipelineInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n39, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n50, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n39
+		i += n50
 	}
 	if m.Transform != nil {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Transform.Size()))
-		n40, err := m.Transform.MarshalTo(dAtA[i:])
+		n51, err := m.Transform.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n40
-	}
-	if len(m.Inputs) > 0 {
-		for _, msg := range m.Inputs {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
+		i += n51
 	}
 	if m.CreatedAt != nil {
 		dAtA[i] = 0x32
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.CreatedAt.Size()))
-		n41, err := m.CreatedAt.MarshalTo(dAtA[i:])
+		n52, err := m.CreatedAt.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n41
+		i += n52
 	}
 	if m.State != 0 {
 		dAtA[i] = 0x38
@@ -4377,11 +5294,11 @@ func (m *PipelineInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x52
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.ParallelismSpec.Size()))
-		n42, err := m.ParallelismSpec.MarshalTo(dAtA[i:])
+		n53, err := m.ParallelismSpec.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n42
+		i += n53
 	}
 	if m.Version != 0 {
 		dAtA[i] = 0x58
@@ -4392,11 +5309,11 @@ func (m *PipelineInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x7a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Egress.Size()))
-		n43, err := m.Egress.MarshalTo(dAtA[i:])
+		n54, err := m.Egress.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n43
+		i += n54
 	}
 	if len(m.OutputBranch) > 0 {
 		dAtA[i] = 0x82
@@ -4420,23 +5337,23 @@ func (m *PipelineInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.ScaleDownThreshold.Size()))
-		n44, err := m.ScaleDownThreshold.MarshalTo(dAtA[i:])
+		n55, err := m.ScaleDownThreshold.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n44
+		i += n55
 	}
-	if m.ResourceSpec != nil {
+	if m.ResourceRequests != nil {
 		dAtA[i] = 0x9a
 		i++
 		dAtA[i] = 0x1
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ResourceSpec.Size()))
-		n45, err := m.ResourceSpec.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.ResourceRequests.Size()))
+		n56, err := m.ResourceRequests.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n45
+		i += n56
 	}
 	if m.Input != nil {
 		dAtA[i] = 0xa2
@@ -4444,11 +5361,11 @@ func (m *PipelineInfo) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Input.Size()))
-		n46, err := m.Input.MarshalTo(dAtA[i:])
+		n57, err := m.Input.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n46
+		i += n57
 	}
 	if len(m.Description) > 0 {
 		dAtA[i] = 0xaa
@@ -4498,14 +5415,6 @@ func (m *PipelineInfo) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintPps(dAtA, i, uint64(len(m.Salt)))
 		i += copy(dAtA[i:], m.Salt)
 	}
-	if len(m.Capability) > 0 {
-		dAtA[i] = 0xd2
-		i++
-		dAtA[i] = 0x1
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(len(m.Capability)))
-		i += copy(dAtA[i:], m.Capability)
-	}
 	if m.Batch {
 		dAtA[i] = 0xd8
 		i++
@@ -4517,6 +5426,101 @@ func (m *PipelineInfo) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i++
+	}
+	if len(m.Reason) > 0 {
+		dAtA[i] = 0xe2
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Reason)))
+		i += copy(dAtA[i:], m.Reason)
+	}
+	if m.MaxQueueSize != 0 {
+		dAtA[i] = 0xe8
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.MaxQueueSize))
+	}
+	if m.Service != nil {
+		dAtA[i] = 0xf2
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Service.Size()))
+		n58, err := m.Service.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n58
+	}
+	if m.ResourceLimits != nil {
+		dAtA[i] = 0xfa
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.ResourceLimits.Size()))
+		n59, err := m.ResourceLimits.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n59
+	}
+	if m.ChunkSpec != nil {
+		dAtA[i] = 0x82
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.ChunkSpec.Size()))
+		n60, err := m.ChunkSpec.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n60
+	}
+	if m.DatumTimeout != nil {
+		dAtA[i] = 0x8a
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DatumTimeout.Size()))
+		n61, err := m.DatumTimeout.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n61
+	}
+	if m.JobTimeout != nil {
+		dAtA[i] = 0x92
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.JobTimeout.Size()))
+		n62, err := m.JobTimeout.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n62
+	}
+	if len(m.GithookURL) > 0 {
+		dAtA[i] = 0x9a
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.GithookURL)))
+		i += copy(dAtA[i:], m.GithookURL)
+	}
+	if m.SpecCommit != nil {
+		dAtA[i] = 0xa2
+		i++
+		dAtA[i] = 0x2
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.SpecCommit.Size()))
+		n63, err := m.SpecCommit.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n63
 	}
 	return i, nil
 }
@@ -4566,174 +5570,27 @@ func (m *CreateJobRequest) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.Transform != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.Transform.Size()))
-		n47, err := m.Transform.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n47
-	}
 	if m.Pipeline != nil {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n48, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n64, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n48
+		i += n64
 	}
-	if len(m.Inputs) > 0 {
-		for _, msg := range m.Inputs {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.ParallelismSpec != nil {
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ParallelismSpec.Size()))
-		n49, err := m.ParallelismSpec.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n49
-	}
-	if m.Service != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.Service.Size()))
-		n50, err := m.Service.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n50
-	}
-	if m.Egress != nil {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.Egress.Size()))
-		n51, err := m.Egress.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n51
-	}
-	if m.PipelineVersion != 0 {
-		dAtA[i] = 0x50
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.PipelineVersion))
-	}
-	if len(m.OutputBranch) > 0 {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(len(m.OutputBranch)))
-		i += copy(dAtA[i:], m.OutputBranch)
-	}
-	if m.OutputRepo != nil {
-		dAtA[i] = 0x62
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.OutputRepo.Size()))
-		n52, err := m.OutputRepo.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n52
-	}
-	if m.ParentJob != nil {
-		dAtA[i] = 0x6a
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ParentJob.Size()))
-		n53, err := m.ParentJob.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n53
-	}
-	if m.ResourceSpec != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ResourceSpec.Size()))
-		n54, err := m.ResourceSpec.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n54
-	}
-	if m.Input != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.Input.Size()))
-		n55, err := m.Input.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n55
-	}
-	if m.NewBranch != nil {
-		dAtA[i] = 0x82
+	if m.OutputCommit != nil {
+		dAtA[i] = 0xca
 		i++
 		dAtA[i] = 0x1
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.NewBranch.Size()))
-		n56, err := m.NewBranch.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.OutputCommit.Size()))
+		n65, err := m.OutputCommit.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n56
-	}
-	if m.Incremental {
-		dAtA[i] = 0x88
-		i++
-		dAtA[i] = 0x1
-		i++
-		if m.Incremental {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.EnableStats {
-		dAtA[i] = 0x90
-		i++
-		dAtA[i] = 0x1
-		i++
-		if m.EnableStats {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if len(m.Salt) > 0 {
-		dAtA[i] = 0x9a
-		i++
-		dAtA[i] = 0x1
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(len(m.Salt)))
-		i += copy(dAtA[i:], m.Salt)
-	}
-	if m.Batch {
-		dAtA[i] = 0xa0
-		i++
-		dAtA[i] = 0x1
-		i++
-		if m.Batch {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
+		i += n65
 	}
 	return i, nil
 }
@@ -4757,11 +5614,11 @@ func (m *InspectJobRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n57, err := m.Job.MarshalTo(dAtA[i:])
+		n66, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n57
+		i += n66
 	}
 	if m.BlockState {
 		dAtA[i] = 0x10
@@ -4795,14 +5652,66 @@ func (m *ListJobRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n58, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n67, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n58
+		i += n67
 	}
 	if len(m.InputCommit) > 0 {
 		for _, msg := range m.InputCommit {
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.OutputCommit != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.OutputCommit.Size()))
+		n68, err := m.OutputCommit.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n68
+	}
+	return i, nil
+}
+
+func (m *FlushJobRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *FlushJobRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Commits) > 0 {
+		for _, msg := range m.Commits {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.ToPipelines) > 0 {
+		for _, msg := range m.ToPipelines {
 			dAtA[i] = 0x12
 			i++
 			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
@@ -4835,11 +5744,11 @@ func (m *DeleteJobRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n59, err := m.Job.MarshalTo(dAtA[i:])
+		n69, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n59
+		i += n69
 	}
 	return i, nil
 }
@@ -4863,11 +5772,11 @@ func (m *StopJobRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n60, err := m.Job.MarshalTo(dAtA[i:])
+		n70, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n60
+		i += n70
 	}
 	return i, nil
 }
@@ -4891,21 +5800,21 @@ func (m *GetLogsRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n61, err := m.Job.MarshalTo(dAtA[i:])
+		n71, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n61
+		i += n71
 	}
 	if m.Pipeline != nil {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n62, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n72, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n62
+		i += n72
 	}
 	if len(m.DataFilters) > 0 {
 		for _, s := range m.DataFilters {
@@ -4922,12 +5831,6 @@ func (m *GetLogsRequest) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], s)
 		}
 	}
-	if len(m.InputFileID) > 0 {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintPps(dAtA, i, uint64(len(m.InputFileID)))
-		i += copy(dAtA[i:], m.InputFileID)
-	}
 	if m.Master {
 		dAtA[i] = 0x28
 		i++
@@ -4937,6 +5840,31 @@ func (m *GetLogsRequest) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i++
+	}
+	if m.Datum != nil {
+		dAtA[i] = 0x32
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Datum.Size()))
+		n73, err := m.Datum.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n73
+	}
+	if m.Follow {
+		dAtA[i] = 0x38
+		i++
+		if m.Follow {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Tail != 0 {
+		dAtA[i] = 0x40
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Tail))
 	}
 	return i, nil
 }
@@ -4984,11 +5912,11 @@ func (m *LogMessage) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Ts.Size()))
-		n63, err := m.Ts.MarshalTo(dAtA[i:])
+		n74, err := m.Ts.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n63
+		i += n74
 	}
 	if len(m.Message) > 0 {
 		dAtA[i] = 0x32
@@ -5012,11 +5940,11 @@ func (m *LogMessage) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
-	if len(m.InputFileID) > 0 {
+	if len(m.DatumID) > 0 {
 		dAtA[i] = 0x4a
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(len(m.InputFileID)))
-		i += copy(dAtA[i:], m.InputFileID)
+		i = encodeVarintPps(dAtA, i, uint64(len(m.DatumID)))
+		i += copy(dAtA[i:], m.DatumID)
 	}
 	if m.Master {
 		dAtA[i] = 0x50
@@ -5050,11 +5978,11 @@ func (m *RestartDatumRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n64, err := m.Job.MarshalTo(dAtA[i:])
+		n75, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n64
+		i += n75
 	}
 	if len(m.DataFilters) > 0 {
 		for _, s := range m.DataFilters {
@@ -5093,11 +6021,11 @@ func (m *InspectDatumRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Datum.Size()))
-		n65, err := m.Datum.MarshalTo(dAtA[i:])
+		n76, err := m.Datum.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n65
+		i += n76
 	}
 	return i, nil
 }
@@ -5121,11 +6049,127 @@ func (m *ListDatumRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Job.Size()))
-		n66, err := m.Job.MarshalTo(dAtA[i:])
+		n77, err := m.Job.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n66
+		i += n77
+	}
+	if m.PageSize != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.PageSize))
+	}
+	if m.Page != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Page))
+	}
+	return i, nil
+}
+
+func (m *ListDatumResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListDatumResponse) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.DatumInfos) > 0 {
+		for _, msg := range m.DatumInfos {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.TotalPages != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.TotalPages))
+	}
+	if m.Page != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Page))
+	}
+	return i, nil
+}
+
+func (m *ListDatumStreamResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListDatumStreamResponse) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.DatumInfo != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DatumInfo.Size()))
+		n78, err := m.DatumInfo.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n78
+	}
+	if m.TotalPages != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.TotalPages))
+	}
+	if m.Page != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Page))
+	}
+	return i, nil
+}
+
+func (m *ChunkSpec) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ChunkSpec) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Number != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Number))
+	}
+	if m.SizeBytes != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.SizeBytes))
 	}
 	return i, nil
 }
@@ -5149,33 +6193,21 @@ func (m *CreatePipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n67, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n79, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n67
+		i += n79
 	}
 	if m.Transform != nil {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Transform.Size()))
-		n68, err := m.Transform.MarshalTo(dAtA[i:])
+		n80, err := m.Transform.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n68
-	}
-	if len(m.Inputs) > 0 {
-		for _, msg := range m.Inputs {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintPps(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
+		i += n80
 	}
 	if m.Update {
 		dAtA[i] = 0x28
@@ -5191,21 +6223,21 @@ func (m *CreatePipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x3a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.ParallelismSpec.Size()))
-		n69, err := m.ParallelismSpec.MarshalTo(dAtA[i:])
+		n81, err := m.ParallelismSpec.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n69
+		i += n81
 	}
 	if m.Egress != nil {
 		dAtA[i] = 0x4a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Egress.Size()))
-		n70, err := m.Egress.MarshalTo(dAtA[i:])
+		n82, err := m.Egress.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n70
+		i += n82
 	}
 	if len(m.OutputBranch) > 0 {
 		dAtA[i] = 0x52
@@ -5217,31 +6249,31 @@ func (m *CreatePipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x5a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.ScaleDownThreshold.Size()))
-		n71, err := m.ScaleDownThreshold.MarshalTo(dAtA[i:])
+		n83, err := m.ScaleDownThreshold.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n71
+		i += n83
 	}
-	if m.ResourceSpec != nil {
+	if m.ResourceRequests != nil {
 		dAtA[i] = 0x62
 		i++
-		i = encodeVarintPps(dAtA, i, uint64(m.ResourceSpec.Size()))
-		n72, err := m.ResourceSpec.MarshalTo(dAtA[i:])
+		i = encodeVarintPps(dAtA, i, uint64(m.ResourceRequests.Size()))
+		n84, err := m.ResourceRequests.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n72
+		i += n84
 	}
 	if m.Input != nil {
 		dAtA[i] = 0x6a
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Input.Size()))
-		n73, err := m.Input.MarshalTo(dAtA[i:])
+		n85, err := m.Input.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n73
+		i += n85
 	}
 	if len(m.Description) > 0 {
 		dAtA[i] = 0x72
@@ -5303,6 +6335,81 @@ func (m *CreatePipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
+	if m.MaxQueueSize != 0 {
+		dAtA[i] = 0xa0
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.MaxQueueSize))
+	}
+	if m.Service != nil {
+		dAtA[i] = 0xaa
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.Service.Size()))
+		n86, err := m.Service.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n86
+	}
+	if m.ResourceLimits != nil {
+		dAtA[i] = 0xb2
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.ResourceLimits.Size()))
+		n87, err := m.ResourceLimits.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n87
+	}
+	if m.ChunkSpec != nil {
+		dAtA[i] = 0xba
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.ChunkSpec.Size()))
+		n88, err := m.ChunkSpec.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n88
+	}
+	if m.DatumTimeout != nil {
+		dAtA[i] = 0xc2
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.DatumTimeout.Size()))
+		n89, err := m.DatumTimeout.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n89
+	}
+	if m.JobTimeout != nil {
+		dAtA[i] = 0xca
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(m.JobTimeout.Size()))
+		n90, err := m.JobTimeout.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n90
+	}
+	if len(m.Salt) > 0 {
+		dAtA[i] = 0xd2
+		i++
+		dAtA[i] = 0x1
+		i++
+		i = encodeVarintPps(dAtA, i, uint64(len(m.Salt)))
+		i += copy(dAtA[i:], m.Salt)
+	}
 	return i, nil
 }
 
@@ -5325,11 +6432,11 @@ func (m *InspectPipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n74, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n91, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n74
+		i += n91
 	}
 	return i, nil
 }
@@ -5371,31 +6478,11 @@ func (m *DeletePipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n75, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n92, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n75
-	}
-	if m.DeleteJobs {
-		dAtA[i] = 0x10
-		i++
-		if m.DeleteJobs {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.DeleteRepo {
-		dAtA[i] = 0x18
-		i++
-		if m.DeleteRepo {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
+		i += n92
 	}
 	if m.All {
 		dAtA[i] = 0x20
@@ -5429,11 +6516,11 @@ func (m *StartPipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n76, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n93, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n76
+		i += n93
 	}
 	return i, nil
 }
@@ -5457,11 +6544,11 @@ func (m *StopPipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n77, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n94, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n77
+		i += n94
 	}
 	return i, nil
 }
@@ -5485,11 +6572,11 @@ func (m *RerunPipelineRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintPps(dAtA, i, uint64(m.Pipeline.Size()))
-		n78, err := m.Pipeline.MarshalTo(dAtA[i:])
+		n95, err := m.Pipeline.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n78
+		i += n95
 	}
 	if len(m.Exclude) > 0 {
 		for _, msg := range m.Exclude {
@@ -5554,24 +6641,42 @@ func (m *GarbageCollectResponse) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
-func encodeFixed64Pps(dAtA []byte, offset int, v uint64) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	dAtA[offset+4] = uint8(v >> 32)
-	dAtA[offset+5] = uint8(v >> 40)
-	dAtA[offset+6] = uint8(v >> 48)
-	dAtA[offset+7] = uint8(v >> 56)
-	return offset + 8
+func (m *ActivateAuthRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
 }
-func encodeFixed32Pps(dAtA []byte, offset int, v uint32) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	return offset + 4
+
+func (m *ActivateAuthRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	return i, nil
 }
+
+func (m *ActivateAuthResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ActivateAuthResponse) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	return i, nil
+}
+
 func encodeVarintPps(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
@@ -5589,6 +6694,14 @@ func (m *Secret) Size() (n int) {
 		n += 1 + l + sovPps(uint64(l))
 	}
 	l = len(m.MountPath)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	l = len(m.EnvVar)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	l = len(m.Key)
 	if l > 0 {
 		n += 1 + l + sovPps(uint64(l))
 	}
@@ -5676,6 +6789,10 @@ func (m *Service) Size() (n int) {
 	if m.ExternalPort != 0 {
 		n += 1 + sovPps(uint64(m.ExternalPort))
 	}
+	l = len(m.IP)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
 	return n
 }
 
@@ -5705,9 +6822,8 @@ func (m *AtomInput) Size() (n int) {
 	if m.Lazy {
 		n += 2
 	}
-	l = len(m.FromCommit)
-	if l > 0 {
-		n += 1 + l + sovPps(uint64(l))
+	if m.EmptyFiles {
+		n += 2
 	}
 	return n
 }
@@ -5738,6 +6854,28 @@ func (m *CronInput) Size() (n int) {
 	return n
 }
 
+func (m *GitInput) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	l = len(m.URL)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	l = len(m.Branch)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	l = len(m.Commit)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	return n
+}
+
 func (m *Input) Size() (n int) {
 	var l int
 	_ = l
@@ -5759,6 +6897,10 @@ func (m *Input) Size() (n int) {
 	}
 	if m.Cron != nil {
 		l = m.Cron.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.Git != nil {
+		l = m.Git.Size()
 		n += 1 + l + sovPps(uint64(l))
 	}
 	return n
@@ -5845,18 +6987,6 @@ func (m *DatumInfo) Size() (n int) {
 	}
 	if len(m.Data) > 0 {
 		for _, e := range m.Data {
-			l = e.Size()
-			n += 1 + l + sovPps(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *DatumInfos) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.DatumInfo) > 0 {
-		for _, e := range m.DatumInfo {
 			l = e.Size()
 			n += 1 + l + sovPps(uint64(l))
 		}
@@ -5982,6 +7112,54 @@ func (m *ResourceSpec) Size() (n int) {
 	return n
 }
 
+func (m *EtcdJobInfo) Size() (n int) {
+	var l int
+	_ = l
+	if m.Job != nil {
+		l = m.Job.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.Pipeline != nil {
+		l = m.Pipeline.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.OutputCommit != nil {
+		l = m.OutputCommit.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.Restart != 0 {
+		n += 1 + sovPps(uint64(m.Restart))
+	}
+	if m.DataProcessed != 0 {
+		n += 1 + sovPps(uint64(m.DataProcessed))
+	}
+	if m.DataSkipped != 0 {
+		n += 1 + sovPps(uint64(m.DataSkipped))
+	}
+	if m.DataTotal != 0 {
+		n += 1 + sovPps(uint64(m.DataTotal))
+	}
+	if m.DataFailed != 0 {
+		n += 1 + sovPps(uint64(m.DataFailed))
+	}
+	if m.Stats != nil {
+		l = m.Stats.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.StatsCommit != nil {
+		l = m.StatsCommit.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.State != 0 {
+		n += 1 + sovPps(uint64(m.State))
+	}
+	l = len(m.Reason)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	return n
+}
+
 func (m *JobInfo) Size() (n int) {
 	var l int
 	_ = l
@@ -5996,12 +7174,6 @@ func (m *JobInfo) Size() (n int) {
 	if m.Pipeline != nil {
 		l = m.Pipeline.Size()
 		n += 1 + l + sovPps(uint64(l))
-	}
-	if len(m.Inputs) > 0 {
-		for _, e := range m.Inputs {
-			l = e.Size()
-			n += 1 + l + sovPps(uint64(l))
-		}
 	}
 	if m.ParentJob != nil {
 		l = m.ParentJob.Size()
@@ -6060,8 +7232,8 @@ func (m *JobInfo) Size() (n int) {
 			n += 2 + l + sovPps(uint64(l))
 		}
 	}
-	if m.ResourceSpec != nil {
-		l = m.ResourceSpec.Size()
+	if m.ResourceRequests != nil {
+		l = m.ResourceRequests.Size()
 		n += 2 + l + sovPps(uint64(l))
 	}
 	if m.Input != nil {
@@ -6095,6 +7267,29 @@ func (m *JobInfo) Size() (n int) {
 	}
 	if m.Batch {
 		n += 3
+	}
+	l = len(m.Reason)
+	if l > 0 {
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.ResourceLimits != nil {
+		l = m.ResourceLimits.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.ChunkSpec != nil {
+		l = m.ChunkSpec.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.DatumTimeout != nil {
+		l = m.DatumTimeout.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.JobTimeout != nil {
+		l = m.JobTimeout.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.DataFailed != 0 {
+		n += 2 + sovPps(uint64(m.DataFailed))
 	}
 	return n
 }
@@ -6163,6 +7358,35 @@ func (m *PipelineInput) Size() (n int) {
 	return n
 }
 
+func (m *EtcdPipelineInfo) Size() (n int) {
+	var l int
+	_ = l
+	if m.State != 0 {
+		n += 1 + sovPps(uint64(m.State))
+	}
+	if m.SpecCommit != nil {
+		l = m.SpecCommit.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if len(m.JobCounts) > 0 {
+		for k, v := range m.JobCounts {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sovPps(uint64(k)) + 1 + sovPps(uint64(v))
+			n += mapEntrySize + 1 + sovPps(uint64(mapEntrySize))
+		}
+	}
+	l = len(m.Reason)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	l = len(m.AuthToken)
+	if l > 0 {
+		n += 1 + l + sovPps(uint64(l))
+	}
+	return n
+}
+
 func (m *PipelineInfo) Size() (n int) {
 	var l int
 	_ = l
@@ -6173,12 +7397,6 @@ func (m *PipelineInfo) Size() (n int) {
 	if m.Transform != nil {
 		l = m.Transform.Size()
 		n += 1 + l + sovPps(uint64(l))
-	}
-	if len(m.Inputs) > 0 {
-		for _, e := range m.Inputs {
-			l = e.Size()
-			n += 1 + l + sovPps(uint64(l))
-		}
 	}
 	if m.CreatedAt != nil {
 		l = m.CreatedAt.Size()
@@ -6222,8 +7440,8 @@ func (m *PipelineInfo) Size() (n int) {
 		l = m.ScaleDownThreshold.Size()
 		n += 2 + l + sovPps(uint64(l))
 	}
-	if m.ResourceSpec != nil {
-		l = m.ResourceSpec.Size()
+	if m.ResourceRequests != nil {
+		l = m.ResourceRequests.Size()
 		n += 2 + l + sovPps(uint64(l))
 	}
 	if m.Input != nil {
@@ -6248,12 +7466,43 @@ func (m *PipelineInfo) Size() (n int) {
 	if l > 0 {
 		n += 2 + l + sovPps(uint64(l))
 	}
-	l = len(m.Capability)
+	if m.Batch {
+		n += 3
+	}
+	l = len(m.Reason)
 	if l > 0 {
 		n += 2 + l + sovPps(uint64(l))
 	}
-	if m.Batch {
-		n += 3
+	if m.MaxQueueSize != 0 {
+		n += 2 + sovPps(uint64(m.MaxQueueSize))
+	}
+	if m.Service != nil {
+		l = m.Service.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.ResourceLimits != nil {
+		l = m.ResourceLimits.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.ChunkSpec != nil {
+		l = m.ChunkSpec.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.DatumTimeout != nil {
+		l = m.DatumTimeout.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.JobTimeout != nil {
+		l = m.JobTimeout.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	l = len(m.GithookURL)
+	if l > 0 {
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.SpecCommit != nil {
+		l = m.SpecCommit.Size()
+		n += 2 + l + sovPps(uint64(l))
 	}
 	return n
 }
@@ -6273,71 +7522,13 @@ func (m *PipelineInfos) Size() (n int) {
 func (m *CreateJobRequest) Size() (n int) {
 	var l int
 	_ = l
-	if m.Transform != nil {
-		l = m.Transform.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
 	if m.Pipeline != nil {
 		l = m.Pipeline.Size()
 		n += 1 + l + sovPps(uint64(l))
 	}
-	if len(m.Inputs) > 0 {
-		for _, e := range m.Inputs {
-			l = e.Size()
-			n += 1 + l + sovPps(uint64(l))
-		}
-	}
-	if m.ParallelismSpec != nil {
-		l = m.ParallelismSpec.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.Service != nil {
-		l = m.Service.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.Egress != nil {
-		l = m.Egress.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.PipelineVersion != 0 {
-		n += 1 + sovPps(uint64(m.PipelineVersion))
-	}
-	l = len(m.OutputBranch)
-	if l > 0 {
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.OutputRepo != nil {
-		l = m.OutputRepo.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.ParentJob != nil {
-		l = m.ParentJob.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.ResourceSpec != nil {
-		l = m.ResourceSpec.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.Input != nil {
-		l = m.Input.Size()
-		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.NewBranch != nil {
-		l = m.NewBranch.Size()
+	if m.OutputCommit != nil {
+		l = m.OutputCommit.Size()
 		n += 2 + l + sovPps(uint64(l))
-	}
-	if m.Incremental {
-		n += 3
-	}
-	if m.EnableStats {
-		n += 3
-	}
-	l = len(m.Salt)
-	if l > 0 {
-		n += 2 + l + sovPps(uint64(l))
-	}
-	if m.Batch {
-		n += 3
 	}
 	return n
 }
@@ -6364,6 +7555,28 @@ func (m *ListJobRequest) Size() (n int) {
 	}
 	if len(m.InputCommit) > 0 {
 		for _, e := range m.InputCommit {
+			l = e.Size()
+			n += 1 + l + sovPps(uint64(l))
+		}
+	}
+	if m.OutputCommit != nil {
+		l = m.OutputCommit.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	return n
+}
+
+func (m *FlushJobRequest) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.Commits) > 0 {
+		for _, e := range m.Commits {
+			l = e.Size()
+			n += 1 + l + sovPps(uint64(l))
+		}
+	}
+	if len(m.ToPipelines) > 0 {
+		for _, e := range m.ToPipelines {
 			l = e.Size()
 			n += 1 + l + sovPps(uint64(l))
 		}
@@ -6408,12 +7621,18 @@ func (m *GetLogsRequest) Size() (n int) {
 			n += 1 + l + sovPps(uint64(l))
 		}
 	}
-	l = len(m.InputFileID)
-	if l > 0 {
-		n += 1 + l + sovPps(uint64(l))
-	}
 	if m.Master {
 		n += 2
+	}
+	if m.Datum != nil {
+		l = m.Datum.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.Follow {
+		n += 2
+	}
+	if m.Tail != 0 {
+		n += 1 + sovPps(uint64(m.Tail))
 	}
 	return n
 }
@@ -6450,7 +7669,7 @@ func (m *LogMessage) Size() (n int) {
 	if m.User {
 		n += 2
 	}
-	l = len(m.InputFileID)
+	l = len(m.DatumID)
 	if l > 0 {
 		n += 1 + l + sovPps(uint64(l))
 	}
@@ -6493,6 +7712,58 @@ func (m *ListDatumRequest) Size() (n int) {
 		l = m.Job.Size()
 		n += 1 + l + sovPps(uint64(l))
 	}
+	if m.PageSize != 0 {
+		n += 1 + sovPps(uint64(m.PageSize))
+	}
+	if m.Page != 0 {
+		n += 1 + sovPps(uint64(m.Page))
+	}
+	return n
+}
+
+func (m *ListDatumResponse) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.DatumInfos) > 0 {
+		for _, e := range m.DatumInfos {
+			l = e.Size()
+			n += 1 + l + sovPps(uint64(l))
+		}
+	}
+	if m.TotalPages != 0 {
+		n += 1 + sovPps(uint64(m.TotalPages))
+	}
+	if m.Page != 0 {
+		n += 1 + sovPps(uint64(m.Page))
+	}
+	return n
+}
+
+func (m *ListDatumStreamResponse) Size() (n int) {
+	var l int
+	_ = l
+	if m.DatumInfo != nil {
+		l = m.DatumInfo.Size()
+		n += 1 + l + sovPps(uint64(l))
+	}
+	if m.TotalPages != 0 {
+		n += 1 + sovPps(uint64(m.TotalPages))
+	}
+	if m.Page != 0 {
+		n += 1 + sovPps(uint64(m.Page))
+	}
+	return n
+}
+
+func (m *ChunkSpec) Size() (n int) {
+	var l int
+	_ = l
+	if m.Number != 0 {
+		n += 1 + sovPps(uint64(m.Number))
+	}
+	if m.SizeBytes != 0 {
+		n += 1 + sovPps(uint64(m.SizeBytes))
+	}
 	return n
 }
 
@@ -6506,12 +7777,6 @@ func (m *CreatePipelineRequest) Size() (n int) {
 	if m.Transform != nil {
 		l = m.Transform.Size()
 		n += 1 + l + sovPps(uint64(l))
-	}
-	if len(m.Inputs) > 0 {
-		for _, e := range m.Inputs {
-			l = e.Size()
-			n += 1 + l + sovPps(uint64(l))
-		}
 	}
 	if m.Update {
 		n += 2
@@ -6532,8 +7797,8 @@ func (m *CreatePipelineRequest) Size() (n int) {
 		l = m.ScaleDownThreshold.Size()
 		n += 1 + l + sovPps(uint64(l))
 	}
-	if m.ResourceSpec != nil {
-		l = m.ResourceSpec.Size()
+	if m.ResourceRequests != nil {
+		l = m.ResourceRequests.Size()
 		n += 1 + l + sovPps(uint64(l))
 	}
 	if m.Input != nil {
@@ -6560,6 +7825,33 @@ func (m *CreatePipelineRequest) Size() (n int) {
 	if m.Batch {
 		n += 3
 	}
+	if m.MaxQueueSize != 0 {
+		n += 2 + sovPps(uint64(m.MaxQueueSize))
+	}
+	if m.Service != nil {
+		l = m.Service.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.ResourceLimits != nil {
+		l = m.ResourceLimits.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.ChunkSpec != nil {
+		l = m.ChunkSpec.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.DatumTimeout != nil {
+		l = m.DatumTimeout.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	if m.JobTimeout != nil {
+		l = m.JobTimeout.Size()
+		n += 2 + l + sovPps(uint64(l))
+	}
+	l = len(m.Salt)
+	if l > 0 {
+		n += 2 + l + sovPps(uint64(l))
+	}
 	return n
 }
 
@@ -6585,12 +7877,6 @@ func (m *DeletePipelineRequest) Size() (n int) {
 	if m.Pipeline != nil {
 		l = m.Pipeline.Size()
 		n += 1 + l + sovPps(uint64(l))
-	}
-	if m.DeleteJobs {
-		n += 2
-	}
-	if m.DeleteRepo {
-		n += 2
 	}
 	if m.All {
 		n += 2
@@ -6647,6 +7933,18 @@ func (m *GarbageCollectRequest) Size() (n int) {
 }
 
 func (m *GarbageCollectResponse) Size() (n int) {
+	var l int
+	_ = l
+	return n
+}
+
+func (m *ActivateAuthRequest) Size() (n int) {
+	var l int
+	_ = l
+	return n
+}
+
+func (m *ActivateAuthResponse) Size() (n int) {
 	var l int
 	_ = l
 	return n
@@ -6751,6 +8049,64 @@ func (m *Secret) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.MountPath = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EnvVar", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.EnvVar = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Key", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Key = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -6886,51 +8242,14 @@ func (m *Transform) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var stringLenmapkey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLenmapkey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLenmapkey := int(stringLenmapkey)
-			if intStringLenmapkey < 0 {
-				return ErrInvalidLengthPps
-			}
-			postStringIndexmapkey := iNdEx + intStringLenmapkey
-			if postStringIndexmapkey > l {
-				return io.ErrUnexpectedEOF
-			}
-			mapkey := string(dAtA[iNdEx:postStringIndexmapkey])
-			iNdEx = postStringIndexmapkey
 			if m.Env == nil {
 				m.Env = make(map[string]string)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey string
+			var mapvalue string
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowPps
@@ -6940,41 +8259,80 @@ func (m *Transform) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var stringLenmapvalue uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowPps
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPps
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= (uint64(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthPps
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLenmapvalue |= (uint64(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					var stringLenmapvalue uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPps
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapvalue |= (uint64(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
+					intStringLenmapvalue := int(stringLenmapvalue)
+					if intStringLenmapvalue < 0 {
+						return ErrInvalidLengthPps
+					}
+					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
+					if postStringIndexmapvalue > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
+					iNdEx = postStringIndexmapvalue
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipPps(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthPps
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
-				intStringLenmapvalue := int(stringLenmapvalue)
-				if intStringLenmapvalue < 0 {
-					return ErrInvalidLengthPps
-				}
-				postStringIndexmapvalue := iNdEx + intStringLenmapvalue
-				if postStringIndexmapvalue > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := string(dAtA[iNdEx:postStringIndexmapvalue])
-				iNdEx = postStringIndexmapvalue
-				m.Env[mapkey] = mapvalue
-			} else {
-				var mapvalue string
-				m.Env[mapkey] = mapvalue
 			}
+			m.Env[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
@@ -7393,6 +8751,35 @@ func (m *Service) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field IP", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.IP = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -7608,11 +8995,11 @@ func (m *AtomInput) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Lazy = bool(v != 0)
-		case 7:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FromCommit", wireType)
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EmptyFiles", wireType)
 			}
-			var stringLen uint64
+			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowPps
@@ -7622,21 +9009,12 @@ func (m *AtomInput) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FromCommit = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
+			m.EmptyFiles = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -7857,6 +9235,172 @@ func (m *CronInput) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *GitInput) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GitInput: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GitInput: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field URL", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.URL = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Branch", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Branch = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Commit", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Commit = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *Input) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -8011,6 +9555,39 @@ func (m *Input) Unmarshal(dAtA []byte) error {
 				m.Cron = &CronInput{}
 			}
 			if err := m.Cron.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Git", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Git == nil {
+				m.Git = &GitInput{}
+			}
+			if err := m.Git.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -8252,15 +9829,8 @@ func (m *ParallelismSpec) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Coefficient = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
@@ -8678,89 +10248,8 @@ func (m *DatumInfo) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Data = append(m.Data, &InputFile{})
+			m.Data = append(m.Data, &pfs.FileInfo{})
 			if err := m.Data[len(m.Data)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipPps(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthPps
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *DatumInfos) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowPps
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DatumInfos: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DatumInfos: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DatumInfo", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DatumInfo = append(m.DatumInfo, &DatumInfo{})
-			if err := m.DatumInfo[len(m.DatumInfo)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -8841,15 +10330,8 @@ func (m *Aggregate) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Mean = float64(math.Float64frombits(v))
 		case 3:
 			if wireType != 1 {
@@ -8859,15 +10341,8 @@ func (m *Aggregate) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Stddev = float64(math.Float64frombits(v))
 		case 4:
 			if wireType != 1 {
@@ -8877,15 +10352,8 @@ func (m *Aggregate) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.FifthPercentile = float64(math.Float64frombits(v))
 		case 5:
 			if wireType != 1 {
@@ -8895,15 +10363,8 @@ func (m *Aggregate) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.NinetyFifthPercentile = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
@@ -9589,11 +11050,8 @@ func (m *ResourceSpec) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.Cpu = float32(math.Float32frombits(v))
 		case 2:
 			if wireType != 2 {
@@ -9643,6 +11101,364 @@ func (m *ResourceSpec) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *EtcdJobInfo) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: EtcdJobInfo: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: EtcdJobInfo: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Job", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Job == nil {
+				m.Job = &Job{}
+			}
+			if err := m.Job.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pipeline", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pipeline == nil {
+				m.Pipeline = &Pipeline{}
+			}
+			if err := m.Pipeline.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field OutputCommit", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.OutputCommit == nil {
+				m.OutputCommit = &pfs.Commit{}
+			}
+			if err := m.OutputCommit.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Restart", wireType)
+			}
+			m.Restart = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Restart |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DataProcessed", wireType)
+			}
+			m.DataProcessed = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DataProcessed |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DataSkipped", wireType)
+			}
+			m.DataSkipped = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DataSkipped |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DataTotal", wireType)
+			}
+			m.DataTotal = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DataTotal |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DataFailed", wireType)
+			}
+			m.DataFailed = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DataFailed |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Stats", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Stats == nil {
+				m.Stats = &ProcessStats{}
+			}
+			if err := m.Stats.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StatsCommit", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.StatsCommit == nil {
+				m.StatsCommit = &pfs.Commit{}
+			}
+			if err := m.StatsCommit.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 11:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field State", wireType)
+			}
+			m.State = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.State |= (JobState(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 12:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Reason", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Reason = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -9789,37 +11605,6 @@ func (m *JobInfo) Unmarshal(dAtA []byte) error {
 				m.Pipeline = &Pipeline{}
 			}
 			if err := m.Pipeline.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Inputs", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Inputs = append(m.Inputs, &JobInput{})
-			if err := m.Inputs[len(m.Inputs)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -10244,7 +12029,7 @@ func (m *JobInfo) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 25:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ResourceSpec", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ResourceRequests", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -10268,10 +12053,10 @@ func (m *JobInfo) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.ResourceSpec == nil {
-				m.ResourceSpec = &ResourceSpec{}
+			if m.ResourceRequests == nil {
+				m.ResourceRequests = &ResourceSpec{}
 			}
-			if err := m.ResourceSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.ResourceRequests.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -10515,6 +12300,186 @@ func (m *JobInfo) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Batch = bool(v != 0)
+		case 35:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Reason", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Reason = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 36:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResourceLimits", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ResourceLimits == nil {
+				m.ResourceLimits = &ResourceSpec{}
+			}
+			if err := m.ResourceLimits.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 37:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChunkSpec", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ChunkSpec == nil {
+				m.ChunkSpec = &ChunkSpec{}
+			}
+			if err := m.ChunkSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 38:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DatumTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DatumTimeout == nil {
+				m.DatumTimeout = &google_protobuf2.Duration{}
+			}
+			if err := m.DatumTimeout.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 39:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field JobTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.JobTimeout == nil {
+				m.JobTimeout = &google_protobuf2.Duration{}
+			}
+			if err := m.JobTimeout.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 40:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DataFailed", wireType)
+			}
+			m.DataFailed = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DataFailed |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -11017,6 +12982,262 @@ func (m *PipelineInput) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *EtcdPipelineInfo) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: EtcdPipelineInfo: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: EtcdPipelineInfo: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field State", wireType)
+			}
+			m.State = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.State |= (PipelineState(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SpecCommit", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.SpecCommit == nil {
+				m.SpecCommit = &pfs.Commit{}
+			}
+			if err := m.SpecCommit.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field JobCounts", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.JobCounts == nil {
+				m.JobCounts = make(map[int32]int32)
+			}
+			var mapkey int32
+			var mapvalue int32
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPps
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPps
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else if fieldNum == 2 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPps
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapvalue |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipPps(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthPps
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.JobCounts[mapkey] = mapvalue
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Reason", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Reason = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AuthToken", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AuthToken = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -11109,37 +13330,6 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 				m.Transform = &Transform{}
 			}
 			if err := m.Transform.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Inputs", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Inputs = append(m.Inputs, &PipelineInput{})
-			if err := m.Inputs[len(m.Inputs)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -11250,41 +13440,14 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.JobCounts == nil {
 				m.JobCounts = make(map[int32]int32)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			var mapvalue int32
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowPps
@@ -11294,31 +13457,58 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapvalue int32
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowPps
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPps
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else if fieldNum == 2 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPps
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapvalue |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipPps(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthPps
+					}
+					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapvalue |= (int32(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
+					iNdEx += skippy
 				}
-				m.JobCounts[mapkey] = mapvalue
-			} else {
-				var mapvalue int32
-				m.JobCounts[mapkey] = mapvalue
 			}
+			m.JobCounts[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 10:
 			if wireType != 2 {
@@ -11498,7 +13688,7 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 19:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ResourceSpec", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ResourceRequests", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -11522,10 +13712,10 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.ResourceSpec == nil {
-				m.ResourceSpec = &ResourceSpec{}
+			if m.ResourceRequests == nil {
+				m.ResourceRequests = &ResourceSpec{}
 			}
-			if err := m.ResourceSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.ResourceRequests.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -11689,9 +13879,29 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 			}
 			m.Salt = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 26:
+		case 27:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Batch", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Batch = bool(v != 0)
+		case 28:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Capability", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Reason", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -11716,13 +13926,13 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Capability = string(dAtA[iNdEx:postIndex])
+			m.Reason = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 27:
+		case 29:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Batch", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxQueueSize", wireType)
 			}
-			var v int
+			m.MaxQueueSize = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowPps
@@ -11732,12 +13942,238 @@ func (m *PipelineInfo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= (int(b) & 0x7F) << shift
+				m.MaxQueueSize |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.Batch = bool(v != 0)
+		case 30:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Service", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Service == nil {
+				m.Service = &Service{}
+			}
+			if err := m.Service.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 31:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResourceLimits", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ResourceLimits == nil {
+				m.ResourceLimits = &ResourceSpec{}
+			}
+			if err := m.ResourceLimits.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 32:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChunkSpec", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ChunkSpec == nil {
+				m.ChunkSpec = &ChunkSpec{}
+			}
+			if err := m.ChunkSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 33:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DatumTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DatumTimeout == nil {
+				m.DatumTimeout = &google_protobuf2.Duration{}
+			}
+			if err := m.DatumTimeout.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 34:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field JobTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.JobTimeout == nil {
+				m.JobTimeout = &google_protobuf2.Duration{}
+			}
+			if err := m.JobTimeout.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 35:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GithookURL", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GithookURL = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 36:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SpecCommit", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.SpecCommit == nil {
+				m.SpecCommit = &pfs.Commit{}
+			}
+			if err := m.SpecCommit.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -11869,39 +14305,6 @@ func (m *CreateJobRequest) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: CreateJobRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Transform", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Transform == nil {
-				m.Transform = &Transform{}
-			}
-			if err := m.Transform.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Pipeline", wireType)
@@ -11935,9 +14338,9 @@ func (m *CreateJobRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 4:
+		case 25:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Inputs", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field OutputCommit", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -11961,412 +14364,13 @@ func (m *CreateJobRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Inputs = append(m.Inputs, &JobInput{})
-			if err := m.Inputs[len(m.Inputs)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if m.OutputCommit == nil {
+				m.OutputCommit = &pfs.Commit{}
+			}
+			if err := m.OutputCommit.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
-		case 7:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParallelismSpec", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.ParallelismSpec == nil {
-				m.ParallelismSpec = &ParallelismSpec{}
-			}
-			if err := m.ParallelismSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 8:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Service", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Service == nil {
-				m.Service = &Service{}
-			}
-			if err := m.Service.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 9:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Egress", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Egress == nil {
-				m.Egress = &Egress{}
-			}
-			if err := m.Egress.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 10:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PipelineVersion", wireType)
-			}
-			m.PipelineVersion = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.PipelineVersion |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 11:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field OutputBranch", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.OutputBranch = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 12:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field OutputRepo", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.OutputRepo == nil {
-				m.OutputRepo = &pfs.Repo{}
-			}
-			if err := m.OutputRepo.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 13:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParentJob", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.ParentJob == nil {
-				m.ParentJob = &Job{}
-			}
-			if err := m.ParentJob.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 14:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ResourceSpec", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.ResourceSpec == nil {
-				m.ResourceSpec = &ResourceSpec{}
-			}
-			if err := m.ResourceSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 15:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Input", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Input == nil {
-				m.Input = &Input{}
-			}
-			if err := m.Input.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 16:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NewBranch", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.NewBranch == nil {
-				m.NewBranch = &pfs.BranchInfo{}
-			}
-			if err := m.NewBranch.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 17:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Incremental", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Incremental = bool(v != 0)
-		case 18:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field EnableStats", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.EnableStats = bool(v != 0)
-		case 19:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Salt", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Salt = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Batch", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Batch = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -12581,6 +14585,151 @@ func (m *ListJobRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.InputCommit = append(m.InputCommit, &pfs.Commit{})
 			if err := m.InputCommit[len(m.InputCommit)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field OutputCommit", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.OutputCommit == nil {
+				m.OutputCommit = &pfs.Commit{}
+			}
+			if err := m.OutputCommit.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *FlushJobRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: FlushJobRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: FlushJobRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Commits", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Commits = append(m.Commits, &pfs.Commit{})
+			if err := m.Commits[len(m.Commits)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ToPipelines", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ToPipelines = append(m.ToPipelines, &Pipeline{})
+			if err := m.ToPipelines[len(m.ToPipelines)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -12895,35 +15044,6 @@ func (m *GetLogsRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.DataFilters = append(m.DataFilters, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field InputFileID", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.InputFileID = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Master", wireType)
@@ -12944,6 +15064,78 @@ func (m *GetLogsRequest) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Master = bool(v != 0)
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Datum", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Datum == nil {
+				m.Datum = &Datum{}
+			}
+			if err := m.Datum.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Follow", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Follow = bool(v != 0)
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Tail", wireType)
+			}
+			m.Tail = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Tail |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -13196,7 +15388,7 @@ func (m *LogMessage) Unmarshal(dAtA []byte) error {
 			m.User = bool(v != 0)
 		case 9:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field InputFileID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DatumID", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -13221,7 +15413,7 @@ func (m *LogMessage) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.InputFileID = string(dAtA[iNdEx:postIndex])
+			m.DatumID = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 10:
 			if wireType != 0 {
@@ -13521,6 +15713,372 @@ func (m *ListDatumRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PageSize", wireType)
+			}
+			m.PageSize = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.PageSize |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Page", wireType)
+			}
+			m.Page = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Page |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListDatumResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListDatumResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListDatumResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DatumInfos", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DatumInfos = append(m.DatumInfos, &DatumInfo{})
+			if err := m.DatumInfos[len(m.DatumInfos)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TotalPages", wireType)
+			}
+			m.TotalPages = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TotalPages |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Page", wireType)
+			}
+			m.Page = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Page |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListDatumStreamResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListDatumStreamResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListDatumStreamResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DatumInfo", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DatumInfo == nil {
+				m.DatumInfo = &DatumInfo{}
+			}
+			if err := m.DatumInfo.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TotalPages", wireType)
+			}
+			m.TotalPages = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TotalPages |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Page", wireType)
+			}
+			m.Page = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Page |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ChunkSpec) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ChunkSpec: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ChunkSpec: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Number", wireType)
+			}
+			m.Number = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Number |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SizeBytes", wireType)
+			}
+			m.SizeBytes = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SizeBytes |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -13634,37 +16192,6 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 				m.Transform = &Transform{}
 			}
 			if err := m.Transform.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Inputs", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPps
-			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Inputs = append(m.Inputs, &PipelineInput{})
-			if err := m.Inputs[len(m.Inputs)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -13818,7 +16345,7 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 12:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ResourceSpec", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ResourceRequests", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -13842,10 +16369,10 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.ResourceSpec == nil {
-				m.ResourceSpec = &ResourceSpec{}
+			if m.ResourceRequests == nil {
+				m.ResourceRequests = &ResourceSpec{}
 			}
-			if err := m.ResourceSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.ResourceRequests.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -14020,6 +16547,219 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Batch = bool(v != 0)
+		case 20:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxQueueSize", wireType)
+			}
+			m.MaxQueueSize = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MaxQueueSize |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 21:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Service", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Service == nil {
+				m.Service = &Service{}
+			}
+			if err := m.Service.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 22:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResourceLimits", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ResourceLimits == nil {
+				m.ResourceLimits = &ResourceSpec{}
+			}
+			if err := m.ResourceLimits.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 23:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChunkSpec", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ChunkSpec == nil {
+				m.ChunkSpec = &ChunkSpec{}
+			}
+			if err := m.ChunkSpec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 24:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DatumTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DatumTimeout == nil {
+				m.DatumTimeout = &google_protobuf2.Duration{}
+			}
+			if err := m.DatumTimeout.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 25:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field JobTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.JobTimeout == nil {
+				m.JobTimeout = &google_protobuf2.Duration{}
+			}
+			if err := m.JobTimeout.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 26:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Salt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPps
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPps
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Salt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPps(dAtA[iNdEx:])
@@ -14236,46 +16976,6 @@ func (m *DeletePipelineRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeleteJobs", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.DeleteJobs = bool(v != 0)
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeleteRepo", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPps
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.DeleteRepo = bool(v != 0)
 		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field All", wireType)
@@ -14728,6 +17428,106 @@ func (m *GarbageCollectResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *ActivateAuthRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ActivateAuthRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ActivateAuthRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ActivateAuthResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPps
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ActivateAuthResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ActivateAuthResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPps(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPps
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func skipPps(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
@@ -14836,205 +17636,247 @@ var (
 func init() { proto.RegisterFile("client/pps/pps.proto", fileDescriptorPps) }
 
 var fileDescriptorPps = []byte{
-	// 3189 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x59, 0xdd, 0x72, 0xdb, 0xc6,
-	0xf5, 0x17, 0xbf, 0x44, 0xe2, 0x10, 0x94, 0xa8, 0xd5, 0x87, 0x61, 0x3a, 0x96, 0x64, 0x64, 0x9c,
-	0xd8, 0x9e, 0xfc, 0xe5, 0x44, 0x4e, 0xfc, 0x4f, 0x93, 0x34, 0x89, 0xbe, 0xec, 0xa1, 0xac, 0x3a,
-	0x9c, 0x95, 0xdd, 0x5e, 0x72, 0x40, 0x60, 0x49, 0xc1, 0x06, 0x01, 0x04, 0x00, 0xed, 0x28, 0x57,
-	0x7d, 0x83, 0x4e, 0xdb, 0x99, 0x4e, 0xa7, 0xb7, 0x9d, 0xe9, 0x55, 0x2f, 0xf2, 0x10, 0xed, 0xb4,
-	0xb9, 0xeb, 0x45, 0xaf, 0x3d, 0x1d, 0xf7, 0x09, 0xfa, 0x00, 0x9d, 0xe9, 0xec, 0xd9, 0x05, 0x08,
-	0x90, 0x10, 0x25, 0xc5, 0xed, 0x05, 0x67, 0xb0, 0x67, 0xcf, 0xee, 0x9e, 0x73, 0x76, 0xcf, 0xef,
-	0xfc, 0x76, 0x09, 0x2b, 0xa6, 0x63, 0x33, 0x37, 0xba, 0xeb, 0xfb, 0x21, 0xff, 0x6d, 0xf9, 0x81,
-	0x17, 0x79, 0xa4, 0xe4, 0xfb, 0x61, 0xeb, 0xda, 0xc0, 0xf3, 0x06, 0x0e, 0xbb, 0x8b, 0xa2, 0xde,
-	0xa8, 0x7f, 0x97, 0x0d, 0xfd, 0xe8, 0x54, 0x68, 0xb4, 0x36, 0x26, 0x3b, 0x23, 0x7b, 0xc8, 0xc2,
-	0xc8, 0x18, 0xfa, 0x52, 0x61, 0x7d, 0x52, 0xc1, 0x1a, 0x05, 0x46, 0x64, 0x7b, 0xae, 0xec, 0x5f,
-	0x19, 0x78, 0x03, 0x0f, 0x3f, 0xef, 0xf2, 0xaf, 0x58, 0x1a, 0x9b, 0xd3, 0x0f, 0xf9, 0x4f, 0x48,
-	0xf5, 0x4f, 0x61, 0xfe, 0x98, 0x99, 0x01, 0x8b, 0x08, 0x81, 0xb2, 0x6b, 0x0c, 0x99, 0x56, 0xd8,
-	0x2c, 0xdc, 0x52, 0x28, 0x7e, 0x93, 0xeb, 0x00, 0x43, 0x6f, 0xe4, 0x46, 0x5d, 0xdf, 0x88, 0x4e,
-	0xb4, 0x22, 0xf6, 0x28, 0x28, 0xe9, 0x18, 0xd1, 0x89, 0xfe, 0xe7, 0x22, 0x28, 0x4f, 0x02, 0xc3,
-	0x0d, 0xfb, 0x5e, 0x30, 0x24, 0x2b, 0x50, 0xb1, 0x87, 0xc6, 0x20, 0x9e, 0x41, 0x34, 0x48, 0x13,
-	0x4a, 0xe6, 0xd0, 0xd2, 0x8a, 0x9b, 0xa5, 0x5b, 0x0a, 0xe5, 0x9f, 0xe4, 0x36, 0x94, 0x98, 0xfb,
-	0x42, 0x2b, 0x6d, 0x96, 0x6e, 0xd5, 0xb7, 0xaf, 0x6c, 0xf1, 0xd0, 0x24, 0x93, 0x6c, 0x1d, 0xb8,
-	0x2f, 0x0e, 0xdc, 0x28, 0x38, 0xa5, 0x5c, 0x87, 0xdc, 0x84, 0x6a, 0x88, 0xd6, 0x85, 0x5a, 0x19,
-	0xd5, 0xeb, 0xa8, 0x2e, 0x2c, 0xa6, 0x71, 0x1f, 0x5f, 0x39, 0x8c, 0x2c, 0xdb, 0xd5, 0x2a, 0xb8,
-	0x8a, 0x68, 0x90, 0xf7, 0x80, 0x18, 0xa6, 0xc9, 0xfc, 0xa8, 0x1b, 0xb0, 0x68, 0x14, 0xb8, 0x5d,
-	0xd3, 0xb3, 0x98, 0x36, 0xbf, 0x59, 0xba, 0x55, 0xa2, 0x4d, 0xd1, 0x43, 0xb1, 0x63, 0xcf, 0xb3,
-	0x18, 0x9f, 0xc3, 0x62, 0xbd, 0xd1, 0x40, 0xab, 0x6e, 0x16, 0x6e, 0xd5, 0xa8, 0x68, 0xf0, 0x39,
-	0xd0, 0x8d, 0xae, 0x3f, 0x72, 0x9c, 0x6e, 0x6c, 0x8b, 0x82, 0xcb, 0x34, 0xb1, 0xa7, 0x33, 0x72,
-	0x1c, 0x61, 0x4f, 0xd8, 0xba, 0x0f, 0xb5, 0xd8, 0x7e, 0xee, 0xf7, 0x73, 0x76, 0x2a, 0x63, 0xc1,
-	0x3f, 0xf9, 0x0a, 0x2f, 0x0c, 0x67, 0xc4, 0x64, 0x1c, 0x45, 0xe3, 0x93, 0xe2, 0xc7, 0x05, 0xbd,
-	0x05, 0xf3, 0x07, 0x83, 0x80, 0x85, 0x21, 0x1f, 0xf5, 0x94, 0x1e, 0xc5, 0xa3, 0x9e, 0xd2, 0x23,
-	0xfd, 0x3a, 0x94, 0x0e, 0xbd, 0x1e, 0x59, 0x83, 0xa2, 0x6d, 0x09, 0xf9, 0xee, 0xfc, 0xeb, 0x57,
-	0x1b, 0xc5, 0xf6, 0x3e, 0x2d, 0xda, 0x96, 0x7e, 0x0c, 0xd5, 0x63, 0x16, 0xbc, 0xb0, 0x4d, 0x46,
-	0xde, 0x86, 0x86, 0xed, 0x46, 0x2c, 0x70, 0x0d, 0xa7, 0xeb, 0x7b, 0x41, 0x84, 0xda, 0x15, 0xaa,
-	0xc6, 0xc2, 0x8e, 0x17, 0x44, 0x5c, 0x89, 0x7d, 0x93, 0x56, 0x2a, 0x0a, 0xa5, 0x58, 0xc8, 0x95,
-	0xf4, 0x3f, 0x16, 0x40, 0xd9, 0x89, 0xbc, 0x61, 0xdb, 0xf5, 0x47, 0xf9, 0x07, 0x83, 0x40, 0x39,
-	0x60, 0xbe, 0x27, 0x5d, 0xc1, 0x6f, 0xb2, 0x06, 0xf3, 0xbd, 0xc0, 0x70, 0xcd, 0x13, 0xad, 0x84,
-	0x52, 0xd9, 0xe2, 0x72, 0xd3, 0x1b, 0x0e, 0xed, 0x48, 0x2b, 0x0b, 0xb9, 0x68, 0xf1, 0x39, 0x06,
-	0x8e, 0xd7, 0xd3, 0x2a, 0x62, 0x0e, 0xfe, 0xcd, 0x65, 0x8e, 0xf1, 0xed, 0xa9, 0x36, 0x8f, 0x9b,
-	0x80, 0xdf, 0x64, 0x03, 0xea, 0xfd, 0xc0, 0x1b, 0x76, 0xe5, 0x24, 0x55, 0x54, 0x07, 0x2e, 0xda,
-	0x43, 0x89, 0xfe, 0xcb, 0x02, 0x28, 0x7b, 0x81, 0xe7, 0x5e, 0xda, 0x5c, 0x39, 0x63, 0x69, 0xd2,
-	0xac, 0xd0, 0x67, 0xa6, 0x34, 0x16, 0xbf, 0xc9, 0xfb, 0xfc, 0x80, 0x19, 0x41, 0x84, 0xb6, 0xd6,
-	0xb7, 0x5b, 0x5b, 0x22, 0x03, 0xb7, 0xe2, 0x0c, 0xdc, 0x7a, 0x12, 0xa7, 0x28, 0x15, 0x8a, 0xfa,
-	0xaf, 0x0b, 0x50, 0x11, 0xf6, 0xe8, 0x50, 0x36, 0x22, 0x6f, 0x88, 0xf6, 0xd4, 0xb7, 0x17, 0xf0,
-	0x00, 0x27, 0xc1, 0xa5, 0xd8, 0x47, 0x36, 0xa1, 0x62, 0x06, 0x5e, 0x18, 0x62, 0x9a, 0xd4, 0xb7,
-	0x01, 0x95, 0x84, 0x82, 0xe8, 0xe0, 0x1a, 0x23, 0xd7, 0xf6, 0x5c, 0x99, 0x36, 0x19, 0x0d, 0xec,
-	0xe0, 0xeb, 0x98, 0x81, 0xe7, 0xa2, 0xdd, 0xf1, 0x3a, 0x49, 0x54, 0x28, 0xf6, 0xe9, 0xcf, 0xa1,
-	0x76, 0xe8, 0xf5, 0x84, 0x5d, 0x6f, 0x27, 0xfe, 0x0b, 0xcb, 0xea, 0x5b, 0x1c, 0x15, 0x44, 0x48,
-	0xa7, 0xf6, 0xa8, 0x98, 0xb3, 0x47, 0xa5, 0xd4, 0x1e, 0xc5, 0x41, 0x2f, 0x8f, 0x83, 0xae, 0x3f,
-	0x85, 0xc5, 0x8e, 0x11, 0x18, 0x8e, 0xc3, 0x1c, 0x3b, 0x1c, 0x1e, 0xf3, 0x38, 0xb6, 0xa0, 0x66,
-	0x7a, 0x6e, 0x18, 0x19, 0xae, 0x38, 0x78, 0x65, 0x9a, 0xb4, 0xc9, 0x26, 0xd4, 0x4d, 0x8f, 0xf5,
-	0xfb, 0xb6, 0xc9, 0x61, 0x0a, 0x67, 0x2f, 0xd0, 0xb4, 0xe8, 0xb0, 0x5c, 0x2b, 0x34, 0x8b, 0xfa,
-	0x3d, 0x50, 0xd0, 0x81, 0x07, 0xb6, 0x83, 0x1b, 0x8b, 0xd0, 0x24, 0xd7, 0xe5, 0xdf, 0x5c, 0x76,
-	0x62, 0x84, 0x27, 0xb8, 0x57, 0x2a, 0xc5, 0x6f, 0xfd, 0x53, 0xa8, 0xec, 0x1b, 0xd1, 0x68, 0x78,
-	0x56, 0x1e, 0x91, 0x16, 0x94, 0x9e, 0x49, 0x3f, 0xeb, 0xdb, 0x35, 0x0c, 0xde, 0xa1, 0xd7, 0xa3,
-	0x5c, 0xa8, 0x7f, 0x5f, 0x00, 0x05, 0x47, 0xb7, 0xdd, 0xbe, 0xc7, 0x77, 0xc2, 0xe2, 0x0d, 0x19,
-	0x36, 0xb1, 0x13, 0xd8, 0x4d, 0x45, 0x07, 0xb9, 0x89, 0xa7, 0x25, 0x12, 0x89, 0xbe, 0xb0, 0xbd,
-	0x38, 0xd6, 0x38, 0xe6, 0x62, 0x2a, 0x7a, 0xc9, 0xbb, 0x42, 0x2d, 0x44, 0x57, 0xeb, 0xdb, 0x4b,
-	0xa8, 0xd6, 0x09, 0x3c, 0x93, 0x85, 0x21, 0x57, 0x0c, 0x85, 0x62, 0x48, 0xde, 0x01, 0xc5, 0xef,
-	0x87, 0x5d, 0x31, 0xa7, 0xd8, 0x5e, 0x05, 0x37, 0x8b, 0x87, 0x80, 0xd6, 0xfc, 0x3e, 0xaa, 0x33,
-	0x7e, 0x02, 0x2c, 0x23, 0x32, 0x10, 0x05, 0xe3, 0x13, 0x90, 0x84, 0x8a, 0x62, 0x9f, 0xfe, 0x29,
-	0x40, 0xe2, 0x4a, 0x48, 0xfe, 0x0f, 0x00, 0x4d, 0xee, 0xda, 0x6e, 0xdf, 0xd3, 0x0a, 0xa9, 0x71,
-	0x89, 0x12, 0x55, 0xac, 0xf8, 0x53, 0xff, 0x8e, 0xe3, 0xc2, 0x60, 0x10, 0xb0, 0x01, 0x5f, 0x6e,
-	0x05, 0x2a, 0x26, 0x2f, 0x05, 0x18, 0x88, 0x12, 0x15, 0x0d, 0x1e, 0xfd, 0x21, 0x33, 0x5c, 0xf4,
-	0xbd, 0x40, 0xf1, 0x9b, 0xa7, 0x5a, 0x18, 0x59, 0x16, 0x7b, 0x21, 0x77, 0x55, 0xb6, 0xc8, 0x6d,
-	0x68, 0xf6, 0xed, 0x7e, 0x74, 0xd2, 0xf5, 0x59, 0x60, 0x32, 0x37, 0xb2, 0x1d, 0xe1, 0x5f, 0x81,
-	0x2e, 0xa2, 0xbc, 0x93, 0x88, 0xc9, 0x7d, 0xb8, 0xe2, 0xda, 0x2e, 0x8b, 0x4e, 0xbb, 0x53, 0x23,
-	0x2a, 0x38, 0x62, 0x55, 0x74, 0x3f, 0xc8, 0x8e, 0xd3, 0x7f, 0x55, 0x04, 0x35, 0x1d, 0x53, 0xf2,
-	0x39, 0x34, 0x2c, 0xef, 0xa5, 0xeb, 0x78, 0x86, 0xd5, 0xe5, 0x85, 0x55, 0x6e, 0xe3, 0xd5, 0xa9,
-	0x94, 0xde, 0x97, 0x45, 0x95, 0xaa, 0xb1, 0x3e, 0x4f, 0x72, 0xf2, 0x19, 0xa8, 0xbe, 0x98, 0x4f,
-	0x0c, 0x2f, 0x9e, 0x37, 0xbc, 0x2e, 0xd5, 0x71, 0xf4, 0x27, 0x50, 0x1f, 0xf9, 0xe3, 0xb5, 0x4b,
-	0xe7, 0x0d, 0x06, 0xa1, 0x8d, 0x63, 0x6f, 0xc2, 0x42, 0x62, 0x79, 0xef, 0x34, 0x62, 0x21, 0xc6,
-	0xaa, 0x4c, 0x13, 0x7f, 0x76, 0xb9, 0x90, 0xdc, 0x00, 0x55, 0x2e, 0x21, 0x94, 0x2a, 0xa8, 0x24,
-	0x97, 0x45, 0x15, 0xfd, 0x77, 0x45, 0x58, 0x4d, 0xf6, 0x31, 0x13, 0x9d, 0x7b, 0xf9, 0xd1, 0x91,
-	0xa8, 0x15, 0x0f, 0x99, 0x08, 0xc9, 0x07, 0xb9, 0x21, 0x99, 0x1c, 0x93, 0x89, 0xc3, 0xdd, 0xbc,
-	0x38, 0x4c, 0x8e, 0x48, 0x3b, 0xff, 0x51, 0xae, 0xf3, 0xd3, 0x63, 0x26, 0x82, 0xf1, 0x41, 0x4e,
-	0x30, 0x72, 0x4c, 0x4b, 0x07, 0xe7, 0xdf, 0x05, 0x50, 0x7f, 0xe6, 0x05, 0xcf, 0x59, 0xc0, 0x43,
-	0x32, 0x0a, 0xc9, 0x6d, 0x50, 0x5e, 0x62, 0xbb, 0x9b, 0x20, 0x87, 0xfa, 0xfa, 0xd5, 0x46, 0x4d,
-	0x28, 0xb5, 0xf7, 0x69, 0x4d, 0x74, 0xb7, 0x2d, 0xb2, 0x09, 0xf3, 0xcf, 0xbc, 0x1e, 0xd7, 0x43,
-	0xc0, 0xdc, 0x55, 0x5e, 0xbf, 0xda, 0xa8, 0x70, 0xc4, 0xdd, 0xa7, 0x95, 0x67, 0x5e, 0xaf, 0x6d,
-	0x25, 0x39, 0x5a, 0x3a, 0x3b, 0x47, 0xc9, 0x87, 0x50, 0xc5, 0x22, 0xc2, 0x2c, 0xe9, 0xe4, 0xac,
-	0x7a, 0x13, 0xab, 0x8e, 0xe1, 0xa4, 0x72, 0x0e, 0x9c, 0x5c, 0x07, 0xf8, 0x7a, 0xc4, 0x46, 0xac,
-	0x1b, 0xda, 0xdf, 0x32, 0xac, 0xb4, 0x25, 0xaa, 0xa0, 0xe4, 0xd8, 0xfe, 0x96, 0xe9, 0x87, 0xa0,
-	0x52, 0x16, 0x7a, 0xa3, 0xc0, 0x64, 0x88, 0xd9, 0x9c, 0xc0, 0xf9, 0x23, 0x74, 0xbc, 0x48, 0xf9,
-	0x27, 0x4f, 0xe7, 0x21, 0x1b, 0x7a, 0xc1, 0xa9, 0x2c, 0x0b, 0xb2, 0xc5, 0x35, 0x07, 0xfe, 0x08,
-	0x37, 0xb3, 0x44, 0xf9, 0xa7, 0xfe, 0x9d, 0x02, 0x55, 0x2c, 0x38, 0x7d, 0x2f, 0x46, 0xd8, 0x42,
-	0x0e, 0xc2, 0x92, 0xf7, 0x40, 0x89, 0x62, 0x0a, 0x98, 0x39, 0x3e, 0x09, 0x31, 0xa4, 0x63, 0x05,
-	0x72, 0x1b, 0x6a, 0xbe, 0xed, 0x33, 0xc7, 0x76, 0xe3, 0x93, 0xd3, 0x10, 0xce, 0x4a, 0x21, 0x4d,
-	0xba, 0xc9, 0x4d, 0x98, 0xb7, 0x79, 0x74, 0x43, 0x09, 0x8a, 0x8d, 0x78, 0x5d, 0x51, 0x15, 0x65,
-	0x27, 0x79, 0x17, 0xc0, 0x37, 0x02, 0xe6, 0x46, 0x5d, 0x6e, 0xe2, 0xfc, 0x84, 0x89, 0x8a, 0xe8,
-	0xe3, 0x34, 0x2c, 0xb5, 0x35, 0xd5, 0x8b, 0x6f, 0xcd, 0x7d, 0xa8, 0xf5, 0x6d, 0xd7, 0x0e, 0x4f,
-	0x98, 0xa5, 0xd5, 0xce, 0x1d, 0x96, 0xe8, 0x92, 0xf7, 0xa1, 0xe1, 0x8d, 0x22, 0x7f, 0x14, 0xc5,
-	0xdc, 0x47, 0x99, 0xae, 0xd4, 0xaa, 0xd0, 0x10, 0x2d, 0xf2, 0x76, 0x5c, 0x7a, 0x00, 0x4b, 0x4f,
-	0xe2, 0x6e, 0xa6, 0xf0, 0x7c, 0x01, 0x4d, 0x7f, 0x5c, 0x98, 0xbb, 0xc8, 0x76, 0x54, 0x9c, 0x79,
-	0x45, 0xc4, 0x31, 0x5b, 0xb5, 0xe9, 0xa2, 0x3f, 0x51, 0xc6, 0x6f, 0x43, 0x33, 0x8e, 0x70, 0xf7,
-	0x05, 0x0b, 0x42, 0xce, 0x4b, 0x1a, 0x08, 0x33, 0x8b, 0xb1, 0xfc, 0xa7, 0x42, 0x4c, 0xde, 0xe1,
-	0x0c, 0x1e, 0xf9, 0xa9, 0xb6, 0x80, 0x4b, 0xa8, 0x92, 0xc1, 0xa3, 0x8c, 0xc6, 0x9d, 0x9c, 0x8d,
-	0x30, 0xa4, 0xc0, 0xda, 0x62, 0xec, 0xa3, 0x1f, 0x6e, 0x09, 0x56, 0x4c, 0x65, 0x17, 0x27, 0xaf,
-	0x32, 0x1e, 0x92, 0x68, 0x2e, 0xe1, 0xf9, 0x93, 0x21, 0xd8, 0x15, 0x74, 0xf3, 0x0e, 0xd4, 0xa5,
-	0x12, 0x52, 0x3e, 0x92, 0xaa, 0x97, 0x94, 0xf9, 0x1e, 0x05, 0xd1, 0xcb, 0xbf, 0x89, 0x06, 0xd5,
-	0x80, 0x09, 0x66, 0xb7, 0x82, 0xf6, 0xc7, 0x4d, 0x04, 0x5b, 0x23, 0x32, 0xba, 0x12, 0xb4, 0x98,
-	0xa5, 0xad, 0xe1, 0xb1, 0x6e, 0x70, 0x69, 0x27, 0x16, 0xf2, 0x5c, 0x42, 0xb5, 0xc8, 0x8b, 0x0c,
-	0x47, 0xbb, 0x22, 0x72, 0x89, 0x4b, 0x9e, 0x70, 0x01, 0xb9, 0x0f, 0x0d, 0x09, 0x1d, 0x21, 0x62,
-	0x89, 0xa6, 0xe1, 0x29, 0x14, 0xb9, 0x99, 0x06, 0x19, 0xaa, 0xbe, 0x4c, 0x43, 0xce, 0x7d, 0x68,
-	0x04, 0x32, 0x07, 0xc5, 0xf6, 0x5c, 0x4d, 0xe5, 0x74, 0x3a, 0x3b, 0xa9, 0x1a, 0xa4, 0x73, 0x75,
-	0x13, 0x2a, 0x78, 0xa2, 0xb5, 0x56, 0x8a, 0x9b, 0x48, 0x96, 0x88, 0x1d, 0x64, 0x0b, 0xc0, 0x65,
-	0x2f, 0xe3, 0xf8, 0x5d, 0x43, 0xb5, 0x45, 0x0c, 0x8e, 0x08, 0x9f, 0x28, 0xf9, 0x2e, 0x7b, 0x29,
-	0xa3, 0xb9, 0x09, 0x75, 0xdb, 0x35, 0x03, 0x36, 0x64, 0x2e, 0xf7, 0xf0, 0x2d, 0xe4, 0x7c, 0x69,
-	0x11, 0xd9, 0x02, 0x15, 0x71, 0x25, 0x3e, 0xa3, 0xd7, 0xa7, 0xcf, 0x68, 0x1d, 0x15, 0xe4, 0x11,
-	0xbd, 0x01, 0x2a, 0x86, 0x2c, 0x7c, 0x6e, 0xfb, 0x3e, 0xb3, 0xb4, 0x75, 0x0c, 0x5a, 0x9d, 0xcb,
-	0x8e, 0x85, 0x68, 0x0c, 0x65, 0x1b, 0xe7, 0x40, 0xd9, 0x0d, 0x50, 0x99, 0x6b, 0xf4, 0x1c, 0xd6,
-	0x15, 0xfa, 0x9b, 0xc2, 0x3c, 0x21, 0x13, 0x15, 0x8d, 0xd3, 0x79, 0xc3, 0x89, 0xb4, 0x1b, 0x92,
-	0xce, 0x1b, 0x4e, 0xc4, 0x99, 0x4b, 0xcf, 0x88, 0xcc, 0x13, 0x4d, 0x17, 0x77, 0x3d, 0x6c, 0x1c,
-	0x96, 0x6b, 0xe5, 0x66, 0x45, 0xdf, 0x87, 0x79, 0xb1, 0x31, 0xb9, 0x17, 0x89, 0x77, 0xb2, 0xd4,
-	0xae, 0x39, 0xb1, 0x91, 0x71, 0x8a, 0xe9, 0xf7, 0x24, 0xd1, 0xe6, 0x24, 0xeb, 0x5d, 0xa8, 0x61,
-	0x51, 0x18, 0x53, 0x2c, 0x75, 0x8c, 0x42, 0x7d, 0x8f, 0x56, 0x9f, 0x89, 0x0f, 0x7d, 0x1d, 0x6a,
-	0x31, 0x84, 0xe5, 0x2d, 0xae, 0xff, 0xbe, 0x00, 0x8d, 0x58, 0x41, 0x70, 0xf8, 0xeb, 0xf2, 0x5e,
-	0x53, 0x98, 0x3c, 0xe4, 0x93, 0x37, 0xb2, 0x62, 0xe6, 0x46, 0x16, 0xb3, 0xfa, 0x52, 0x0e, 0xab,
-	0x2f, 0xe7, 0xb0, 0xfa, 0x4a, 0x2a, 0x02, 0x1b, 0x50, 0xe6, 0x57, 0x2f, 0x09, 0x92, 0x99, 0x6d,
-	0xc6, 0x0e, 0xfd, 0xef, 0x55, 0x50, 0xc7, 0x56, 0xf6, 0xbd, 0x0c, 0x5c, 0x17, 0x66, 0xc3, 0xf5,
-	0xe5, 0xea, 0xc0, 0x9d, 0x04, 0xdc, 0xc5, 0xe3, 0x00, 0xc9, 0x4c, 0x9b, 0x45, 0xf8, 0x1f, 0x01,
-	0x98, 0x01, 0x33, 0x22, 0x66, 0x75, 0x8d, 0x48, 0x1a, 0x3f, 0x0b, 0x84, 0x15, 0xa9, 0xbd, 0x13,
-	0x91, 0x5b, 0xf1, 0x9e, 0x57, 0x71, 0xcf, 0xb3, 0xab, 0x64, 0x80, 0xf5, 0x06, 0xa8, 0x01, 0xe3,
-	0xcc, 0xb3, 0xcb, 0x82, 0xc0, 0x0b, 0x10, 0xeb, 0x15, 0x5a, 0x17, 0xb2, 0x03, 0x2e, 0x22, 0x5f,
-	0x00, 0xf0, 0xc3, 0x80, 0x5c, 0x59, 0x3c, 0x24, 0xd4, 0xb7, 0x37, 0x27, 0xec, 0xee, 0x7b, 0xfc,
-	0x6c, 0xec, 0xa1, 0x8a, 0x78, 0x0c, 0x51, 0x9e, 0xc5, 0xed, 0x5c, 0xf0, 0x86, 0xcb, 0x80, 0xb7,
-	0x06, 0xd5, 0x18, 0xb3, 0xeb, 0x02, 0xf3, 0x64, 0xf3, 0x07, 0x62, 0x70, 0x33, 0x07, 0x83, 0xc5,
-	0x2d, 0x6b, 0x69, 0xea, 0x96, 0xf5, 0x08, 0x56, 0x42, 0xd3, 0x70, 0x58, 0x97, 0xb3, 0xb4, 0x6e,
-	0x74, 0x12, 0xb0, 0xf0, 0xc4, 0x73, 0x2c, 0x09, 0xd2, 0x33, 0x78, 0x30, 0xc1, 0x61, 0xfb, 0xde,
-	0x4b, 0xf7, 0x49, 0x3c, 0x68, 0x1a, 0x24, 0x97, 0x2f, 0x09, 0x92, 0x2b, 0x67, 0x81, 0xe4, 0x26,
-	0xd4, 0x2d, 0x16, 0x9a, 0x81, 0xed, 0xf3, 0xc5, 0xb5, 0x55, 0xb1, 0x8d, 0x29, 0xd1, 0x24, 0x2c,
-	0xae, 0x4d, 0xc3, 0xe2, 0x75, 0x00, 0xd3, 0x30, 0x4f, 0x24, 0xcb, 0xba, 0x22, 0x9e, 0xce, 0x50,
-	0xc2, 0x59, 0xd6, 0x14, 0x72, 0x69, 0x67, 0x23, 0xd7, 0xd5, 0x14, 0x72, 0xad, 0xf3, 0x59, 0x7d,
-	0xa3, 0x67, 0x3b, 0x76, 0x74, 0x8a, 0x28, 0xaf, 0xd0, 0x94, 0x64, 0x8c, 0x6c, 0xd7, 0x52, 0xc8,
-	0xd6, 0xfa, 0x0c, 0x16, 0xb2, 0x07, 0x2a, 0xfd, 0x3a, 0x55, 0xc9, 0x79, 0x9d, 0xaa, 0xa4, 0x5e,
-	0xa7, 0x0e, 0xcb, 0xb5, 0x52, 0xb3, 0xac, 0x3f, 0x4c, 0x63, 0x0f, 0x87, 0xb5, 0xfb, 0xd0, 0x48,
-	0x48, 0x40, 0x0a, 0xdb, 0x96, 0xa6, 0x0e, 0x33, 0x55, 0xfd, 0x54, 0x4b, 0xff, 0x53, 0x05, 0x9a,
-	0x7b, 0x98, 0x5c, 0x9c, 0x5b, 0xb1, 0xaf, 0x47, 0x2c, 0x8c, 0xb2, 0x89, 0x5f, 0xb8, 0x0c, 0x01,
-	0x2c, 0x5e, 0x94, 0x00, 0x96, 0x67, 0x11, 0xc0, 0xbc, 0xac, 0xaa, 0x5e, 0x26, 0xab, 0x52, 0x3c,
-	0xa7, 0x76, 0x31, 0x9e, 0xa3, 0x9c, 0x9d, 0x63, 0x79, 0xfc, 0x0a, 0xf2, 0xf9, 0xd5, 0x54, 0x3a,
-	0xd6, 0xcf, 0xa7, 0x44, 0xea, 0x2c, 0x4a, 0x94, 0xa5, 0xc2, 0x8d, 0xb3, 0xa9, 0xf0, 0x54, 0xfa,
-	0x2d, 0x5c, 0x32, 0xfd, 0x16, 0x2f, 0xc6, 0x51, 0x9a, 0x97, 0xe5, 0x28, 0x4b, 0xd3, 0xc9, 0x38,
-	0x99, 0x6d, 0xe4, 0xec, 0x6c, 0x5b, 0xce, 0xe3, 0x09, 0x2b, 0x59, 0x9e, 0xc0, 0xf3, 0xa1, 0x03,
-	0x4b, 0x6d, 0x97, 0xfb, 0x1d, 0xa5, 0x8e, 0xf1, 0xac, 0x3b, 0xce, 0x06, 0xd4, 0x7b, 0x8e, 0x67,
-	0x3e, 0xef, 0x8e, 0x09, 0x44, 0x8d, 0x02, 0x8a, 0xb0, 0x88, 0xe8, 0xcf, 0x61, 0xe1, 0xc8, 0x0e,
-	0xd3, 0xd3, 0x5d, 0xa2, 0x72, 0x6e, 0x81, 0x8a, 0xc1, 0x8b, 0x59, 0x58, 0x31, 0x7e, 0x2e, 0x4f,
-	0xb1, 0x30, 0x54, 0x90, 0x6f, 0xa6, 0x5b, 0xd0, 0xdc, 0x67, 0x0e, 0xcb, 0x24, 0xe1, 0x0c, 0xeb,
-	0xf5, 0xf7, 0x60, 0xe1, 0x38, 0xf2, 0xfc, 0x0b, 0x6a, 0xff, 0xa5, 0x00, 0x0b, 0x0f, 0x59, 0x74,
-	0xe4, 0x0d, 0xc2, 0x8b, 0x84, 0xe6, 0x12, 0xf9, 0x1c, 0xb3, 0xc7, 0xbe, 0xed, 0x44, 0x2c, 0x08,
-	0xf1, 0x1e, 0xad, 0x08, 0xf6, 0xf8, 0x40, 0x88, 0xc8, 0x3d, 0x68, 0x88, 0x50, 0xf4, 0x6d, 0x87,
-	0xf1, 0xbb, 0x38, 0x3e, 0x0e, 0xee, 0x2e, 0xbe, 0x7e, 0xb5, 0x51, 0x4f, 0xae, 0xda, 0xed, 0x7d,
-	0x19, 0x0f, 0x6c, 0x58, 0x78, 0xa7, 0x35, 0xc2, 0x88, 0x05, 0x48, 0x76, 0x6a, 0x54, 0xb6, 0xf4,
-	0xef, 0x8b, 0x00, 0x47, 0xde, 0xe0, 0x27, 0x2c, 0x0c, 0x8d, 0x01, 0xbe, 0xb1, 0x27, 0x99, 0x99,
-	0xe2, 0x67, 0x09, 0xc2, 0x3d, 0xe6, 0x14, 0x69, 0xfc, 0x0a, 0x50, 0x3a, 0xe7, 0x15, 0xa0, 0x3c,
-	0xe3, 0x15, 0xe0, 0x0e, 0x14, 0x93, 0xcb, 0xfc, 0x2c, 0xa6, 0x52, 0x8c, 0x42, 0x5e, 0xd3, 0x87,
-	0xc2, 0x42, 0xa4, 0x36, 0x0a, 0x8d, 0x9b, 0xd9, 0xc7, 0x8b, 0xea, 0xcc, 0xc7, 0x0b, 0x02, 0xe5,
-	0x51, 0xc8, 0x04, 0x6b, 0xa9, 0x51, 0xfc, 0x9e, 0x8e, 0xa5, 0x72, 0xa9, 0x58, 0x42, 0x26, 0x96,
-	0x4f, 0x60, 0x99, 0x8a, 0xeb, 0x95, 0x78, 0x2e, 0xbd, 0xc0, 0xc9, 0x98, 0xdc, 0xee, 0xe2, 0xd4,
-	0x76, 0xeb, 0xff, 0x0f, 0xcb, 0x32, 0x11, 0x33, 0xb3, 0x9e, 0xfb, 0x4c, 0xcb, 0x53, 0x80, 0xe7,
-	0xdb, 0x45, 0x6d, 0xd1, 0xff, 0x50, 0x81, 0x55, 0x51, 0xb8, 0x92, 0x73, 0x79, 0xf9, 0x3c, 0xfd,
-	0xdf, 0x31, 0xdc, 0x35, 0x98, 0x1f, 0xf9, 0x16, 0x87, 0x16, 0x79, 0x82, 0x45, 0xeb, 0xcd, 0x4b,
-	0xdb, 0x85, 0x4a, 0xd6, 0x54, 0x1d, 0x82, 0x9c, 0x3a, 0x74, 0x16, 0xfd, 0xab, 0xff, 0x57, 0xe8,
-	0x9f, 0x7a, 0xc9, 0xfa, 0xd3, 0xb8, 0x20, 0xfd, 0x5b, 0x38, 0x97, 0xfe, 0x2d, 0x9e, 0x47, 0xff,
-	0x9a, 0xe7, 0xd1, 0xbf, 0xa5, 0xe9, 0x82, 0xf4, 0x16, 0x28, 0x01, 0x93, 0xcf, 0x0f, 0xb2, 0x60,
-	0x8d, 0x05, 0xe3, 0xd2, 0xb4, 0x3c, 0x5d, 0x9a, 0xf6, 0x60, 0x4d, 0x66, 0xc4, 0x0f, 0x3f, 0xa8,
-	0xfa, 0x2a, 0x2c, 0xf3, 0xec, 0x98, 0x98, 0x41, 0xff, 0x4d, 0x01, 0x56, 0x45, 0xe1, 0x78, 0x83,
-	0x24, 0xd8, 0xe0, 0x01, 0xe6, 0x73, 0x70, 0x8e, 0x11, 0xc6, 0xa5, 0xd0, 0x8a, 0xeb, 0x51, 0x98,
-	0x52, 0x40, 0xc2, 0x52, 0x4a, 0x2b, 0x20, 0x4b, 0x69, 0x42, 0xc9, 0x70, 0x1c, 0x79, 0x59, 0xe5,
-	0x9f, 0xfa, 0x0e, 0xac, 0x1c, 0x73, 0x68, 0x79, 0x03, 0x97, 0xbf, 0x84, 0x65, 0x5e, 0xe3, 0xde,
-	0x60, 0x86, 0x5f, 0x14, 0x60, 0x85, 0xb2, 0x60, 0xe4, 0xbe, 0x41, 0x70, 0x6e, 0x42, 0x95, 0x7d,
-	0x63, 0x3a, 0x23, 0x8b, 0xe5, 0x15, 0xf1, 0xb8, 0x8f, 0xab, 0xd9, 0xae, 0x50, 0x2b, 0xe5, 0xa8,
-	0xc9, 0x3e, 0xfd, 0x0a, 0xac, 0x3e, 0x34, 0x82, 0x9e, 0x31, 0x60, 0x7b, 0x9e, 0xe3, 0x30, 0x33,
-	0x8a, 0x37, 0x52, 0x83, 0xb5, 0xc9, 0x8e, 0xd0, 0xf7, 0xdc, 0x90, 0xdd, 0xe9, 0xe2, 0xdb, 0x85,
-	0xf8, 0x4b, 0xa9, 0x09, 0xea, 0xe1, 0x57, 0xbb, 0xdd, 0xe3, 0x27, 0x3b, 0xf4, 0x49, 0xfb, 0xf1,
-	0xc3, 0xe6, 0x1c, 0x59, 0x84, 0x3a, 0x97, 0xd0, 0xa7, 0x8f, 0x1f, 0x73, 0x41, 0x21, 0x16, 0x3c,
-	0xd8, 0x69, 0x1f, 0x3d, 0xa5, 0x07, 0xcd, 0x62, 0x2c, 0x38, 0x7e, 0xba, 0xb7, 0x77, 0x70, 0x7c,
-	0xdc, 0x2c, 0x91, 0x05, 0x00, 0x2e, 0x78, 0xd4, 0x3e, 0x3a, 0x3a, 0xd8, 0x6f, 0x96, 0xef, 0x7c,
-	0x29, 0xff, 0x83, 0x12, 0x4b, 0x00, 0xcc, 0xf3, 0xb1, 0x07, 0xfb, 0xcd, 0x39, 0x52, 0x87, 0x6a,
-	0x3c, 0xac, 0x80, 0x8d, 0x47, 0xed, 0x4e, 0xe7, 0x60, 0xbf, 0x59, 0x24, 0x2a, 0xd4, 0x12, 0x23,
-	0x4a, 0x77, 0xbe, 0x80, 0x7a, 0xea, 0xd1, 0x85, 0xaf, 0xd8, 0xf9, 0x6a, 0x3f, 0xb1, 0x69, 0x2e,
-	0x16, 0x8c, 0xe7, 0x5a, 0x00, 0xe0, 0x02, 0xb9, 0x50, 0xf1, 0xce, 0xcf, 0x53, 0x4f, 0x29, 0x62,
-	0x8e, 0x55, 0x58, 0xea, 0xb4, 0x3b, 0x07, 0x47, 0xed, 0xc7, 0x07, 0x69, 0x77, 0x57, 0xa0, 0x99,
-	0x88, 0xc7, 0x3e, 0x5f, 0x81, 0xe5, 0xb1, 0xf4, 0x20, 0x51, 0x2f, 0x66, 0xd4, 0xe3, 0x88, 0x94,
-	0xc8, 0x32, 0x2c, 0x26, 0xd2, 0xce, 0xce, 0xd3, 0x63, 0x1e, 0x85, 0xed, 0x7f, 0xd5, 0xa0, 0xb4,
-	0xd3, 0x69, 0x93, 0x2d, 0x50, 0x92, 0xeb, 0x10, 0x59, 0x95, 0x7f, 0xdb, 0x66, 0xaf, 0x47, 0xad,
-	0xa4, 0x12, 0xe9, 0x73, 0xe4, 0x43, 0x80, 0x31, 0xf1, 0x24, 0x6b, 0x12, 0xbe, 0x26, 0x98, 0x68,
-	0x2b, 0xf3, 0xc4, 0xa4, 0xcf, 0x91, 0xbb, 0x50, 0x95, 0xe4, 0x92, 0x2c, 0x63, 0x57, 0x96, 0x6a,
-	0xb6, 0x1a, 0x69, 0xfd, 0x50, 0x9f, 0x23, 0x9f, 0x81, 0x92, 0x10, 0x44, 0x69, 0xd6, 0x24, 0x61,
-	0x6c, 0xad, 0x4d, 0x21, 0xf6, 0xc1, 0xd0, 0x8f, 0x4e, 0xf5, 0x39, 0xf2, 0x31, 0x54, 0x25, 0x5d,
-	0x94, 0xcb, 0x65, 0xc9, 0xe3, 0x8c, 0x91, 0x9f, 0x80, 0x9a, 0x2e, 0xe7, 0x44, 0x4b, 0x3b, 0x98,
-	0xae, 0xd5, 0xad, 0x89, 0x3f, 0x2a, 0xf5, 0x39, 0xf2, 0x11, 0x28, 0x49, 0x45, 0x97, 0x36, 0x4f,
-	0x56, 0xf8, 0xd6, 0x62, 0x76, 0x14, 0x77, 0x75, 0x17, 0xff, 0xf1, 0x48, 0x78, 0x89, 0x5c, 0x32,
-	0x87, 0xaa, 0xcc, 0x30, 0xfb, 0x01, 0x2c, 0x64, 0xb9, 0x01, 0x69, 0xa5, 0xb6, 0x72, 0x02, 0x0e,
-	0x66, 0xcc, 0xb3, 0x07, 0x8b, 0x13, 0xd8, 0x4d, 0xae, 0xa5, 0x23, 0x30, 0x39, 0xd3, 0xf4, 0x75,
-	0x5b, 0x9f, 0x23, 0x9f, 0x83, 0x9a, 0xc6, 0x6e, 0xe9, 0x50, 0x0e, 0x9c, 0xb7, 0xc8, 0xd4, 0xf0,
-	0x50, 0x38, 0x93, 0xc5, 0x78, 0xe9, 0x4c, 0x2e, 0xf0, 0xcf, 0x70, 0x66, 0x1f, 0x1a, 0x19, 0x4c,
-	0x26, 0x57, 0xe5, 0x59, 0x98, 0xc6, 0xe9, 0x19, 0xb3, 0xec, 0x82, 0x9a, 0x86, 0x65, 0xe9, 0x4d,
-	0x0e, 0x52, 0xcf, 0xb6, 0x24, 0x83, 0xcb, 0xd2, 0x92, 0x3c, 0xac, 0x9e, 0x31, 0xcb, 0x8f, 0xe3,
-	0x9c, 0xd8, 0x71, 0x1c, 0x72, 0x86, 0xda, 0x8c, 0xe1, 0xf7, 0xa0, 0x2a, 0x2f, 0x45, 0x32, 0x29,
-	0xb2, 0x57, 0x24, 0x79, 0x34, 0xc7, 0xb7, 0x0d, 0x7d, 0xee, 0xfd, 0x02, 0x79, 0x04, 0x0b, 0x59,
-	0x9c, 0x96, 0x7b, 0x91, 0x8b, 0xea, 0xad, 0x6b, 0xb9, 0x7d, 0x02, 0xd8, 0xf5, 0xb9, 0xdd, 0xe6,
-	0x5f, 0x5f, 0xaf, 0x17, 0xfe, 0xf6, 0x7a, 0xbd, 0xf0, 0x8f, 0xd7, 0xeb, 0x85, 0xdf, 0xfe, 0x73,
-	0x7d, 0xae, 0x37, 0x8f, 0x56, 0xde, 0xfb, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x43, 0xb3, 0xd8,
-	0xd1, 0xad, 0x26, 0x00, 0x00,
+	// 3864 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x5a, 0x4f, 0x6f, 0xdb, 0xd8,
+	0x76, 0xb7, 0x44, 0xca, 0x22, 0x8f, 0x64, 0x99, 0xbe, 0xfe, 0x27, 0x2b, 0x93, 0xd8, 0xe1, 0x4c,
+	0x32, 0x49, 0x30, 0xcf, 0x99, 0xe7, 0xbc, 0xa6, 0xaf, 0xd3, 0xe9, 0xcc, 0xf3, 0xbf, 0x04, 0xd6,
+	0xb8, 0x79, 0x2a, 0x6d, 0xbf, 0x2e, 0x55, 0x9a, 0xba, 0x92, 0x19, 0x53, 0x24, 0x1f, 0x49, 0x39,
+	0xc9, 0x00, 0x05, 0xfa, 0x0d, 0x8a, 0x76, 0x55, 0x14, 0xe8, 0xaa, 0xfd, 0x00, 0x45, 0x51, 0xa0,
+	0x9b, 0x2e, 0xba, 0x29, 0x30, 0xcb, 0xf6, 0x0b, 0x04, 0x85, 0x0b, 0x74, 0xd7, 0x75, 0x57, 0x05,
+	0x8a, 0x7b, 0xee, 0x25, 0x45, 0x52, 0xb4, 0x14, 0x27, 0x5d, 0x18, 0xe0, 0x3d, 0xf7, 0xdc, 0x7f,
+	0xe7, 0xdc, 0x73, 0x7e, 0xbf, 0x73, 0x65, 0x58, 0xb1, 0x1c, 0x9b, 0xba, 0xd1, 0x53, 0xdf, 0x0f,
+	0xd9, 0xdf, 0xb6, 0x1f, 0x78, 0x91, 0x47, 0x24, 0xdf, 0x0f, 0x5b, 0x77, 0x06, 0x9e, 0x37, 0x70,
+	0xe8, 0x53, 0x14, 0x9d, 0x8f, 0xfa, 0x4f, 0xe9, 0xd0, 0x8f, 0xde, 0x71, 0x8d, 0xd6, 0x66, 0xbe,
+	0x33, 0xb2, 0x87, 0x34, 0x8c, 0xcc, 0xa1, 0x2f, 0x14, 0xee, 0xe5, 0x15, 0x7a, 0xa3, 0xc0, 0x8c,
+	0x6c, 0xcf, 0x15, 0xfd, 0x2b, 0x03, 0x6f, 0xe0, 0xe1, 0xe7, 0x53, 0xf6, 0x15, 0x4b, 0xe3, 0xed,
+	0xf4, 0x43, 0xf6, 0xc7, 0xa5, 0x7a, 0x1f, 0xe6, 0x4f, 0xa8, 0x15, 0xd0, 0x88, 0x10, 0x90, 0x5d,
+	0x73, 0x48, 0x9b, 0xa5, 0xad, 0xd2, 0x23, 0xd5, 0xc0, 0x6f, 0x72, 0x17, 0x60, 0xe8, 0x8d, 0xdc,
+	0xa8, 0xeb, 0x9b, 0xd1, 0x45, 0xb3, 0x8c, 0x3d, 0x2a, 0x4a, 0x3a, 0x66, 0x74, 0x41, 0xd6, 0xa1,
+	0x4a, 0xdd, 0xab, 0xee, 0x95, 0x19, 0x34, 0x25, 0xec, 0x9b, 0xa7, 0xee, 0xd5, 0x6f, 0xcc, 0x80,
+	0x68, 0x20, 0x5d, 0xd2, 0x77, 0x4d, 0x19, 0x85, 0xec, 0x53, 0xff, 0xd7, 0x32, 0xa8, 0xa7, 0x81,
+	0xe9, 0x86, 0x7d, 0x2f, 0x18, 0x92, 0x15, 0xa8, 0xd8, 0x43, 0x73, 0x10, 0x2f, 0xc6, 0x1b, 0x6c,
+	0x94, 0x35, 0xec, 0x35, 0xcb, 0x5b, 0x12, 0x1b, 0x65, 0x0d, 0x7b, 0xe4, 0x31, 0x48, 0xd4, 0xbd,
+	0x6a, 0x4a, 0x5b, 0xd2, 0xa3, 0xda, 0xce, 0xfa, 0x36, 0xb3, 0x62, 0x32, 0xc9, 0xf6, 0xa1, 0x7b,
+	0x75, 0xe8, 0x46, 0xc1, 0x3b, 0x83, 0xe9, 0x90, 0x07, 0x50, 0x0d, 0xf1, 0x20, 0x61, 0x53, 0x46,
+	0xf5, 0x1a, 0xaa, 0xf3, 0xc3, 0x19, 0x71, 0x1f, 0x5b, 0x39, 0x8c, 0x7a, 0xb6, 0xdb, 0xac, 0xe0,
+	0x2a, 0xbc, 0x41, 0xbe, 0x02, 0x62, 0x5a, 0x16, 0xf5, 0xa3, 0x6e, 0x40, 0xa3, 0x51, 0xe0, 0x76,
+	0x2d, 0xaf, 0x47, 0x9b, 0xf3, 0x5b, 0xd2, 0x23, 0xc9, 0xd0, 0x78, 0x8f, 0x81, 0x1d, 0xfb, 0x5e,
+	0x8f, 0xb2, 0x39, 0x7a, 0xf4, 0x7c, 0x34, 0x68, 0x56, 0xb7, 0x4a, 0x8f, 0x14, 0x83, 0x37, 0xd8,
+	0x1c, 0x78, 0x8c, 0xae, 0x3f, 0x72, 0x9c, 0x6e, 0xbc, 0x17, 0x15, 0x97, 0xd1, 0xb0, 0xa7, 0x33,
+	0x72, 0x1c, 0xbe, 0x9f, 0xb0, 0xf5, 0x1c, 0x94, 0x78, 0xff, 0xb1, 0xb5, 0x4a, 0x89, 0xb5, 0xd8,
+	0x0a, 0x57, 0xa6, 0x33, 0xa2, 0xc2, 0xe4, 0xbc, 0xf1, 0x4d, 0xf9, 0x97, 0x25, 0xbd, 0x05, 0xf3,
+	0x87, 0x83, 0x80, 0x86, 0x21, 0x1b, 0x75, 0x66, 0x1c, 0xc7, 0xa3, 0xce, 0x8c, 0x63, 0xfd, 0x2e,
+	0x48, 0x6d, 0xef, 0x9c, 0xac, 0x41, 0xd9, 0xee, 0x71, 0xf9, 0xde, 0xfc, 0xf5, 0xfb, 0xcd, 0xf2,
+	0xd1, 0x81, 0x51, 0xb6, 0x7b, 0xfa, 0x25, 0x54, 0x4f, 0x68, 0x70, 0x65, 0x5b, 0x94, 0x7c, 0x0e,
+	0x0b, 0xb6, 0x1b, 0xd1, 0xc0, 0x35, 0x9d, 0xae, 0xef, 0x05, 0x11, 0x6a, 0x57, 0x8c, 0x7a, 0x2c,
+	0xec, 0x78, 0x41, 0xc4, 0x94, 0xe8, 0xdb, 0xb4, 0x52, 0x99, 0x2b, 0xc5, 0x42, 0x54, 0x62, 0x8b,
+	0xf9, 0xdc, 0xfb, 0x62, 0xb1, 0x8e, 0x51, 0xb6, 0x7d, 0xfd, 0x1f, 0x4a, 0xa0, 0xee, 0x46, 0xde,
+	0xf0, 0xc8, 0xf5, 0x47, 0xc5, 0x77, 0x8b, 0x80, 0x1c, 0x50, 0xdf, 0x13, 0x47, 0xc4, 0x6f, 0xb2,
+	0x06, 0xf3, 0xe7, 0x81, 0xe9, 0x5a, 0x17, 0xf1, 0x7d, 0xe2, 0x2d, 0x26, 0xb7, 0xbc, 0xe1, 0xd0,
+	0x8e, 0xc4, 0x95, 0x12, 0x2d, 0x36, 0xc7, 0xc0, 0xf1, 0xce, 0x9b, 0x15, 0x3e, 0x07, 0xfb, 0x66,
+	0x32, 0xc7, 0xfc, 0xf1, 0x5d, 0x73, 0x1e, 0x9d, 0x83, 0xdf, 0x64, 0x13, 0x6a, 0x18, 0x61, 0xdd,
+	0xbe, 0xed, 0xd0, 0xb0, 0xa9, 0x60, 0x17, 0xa0, 0xe8, 0x05, 0x93, 0xb4, 0x65, 0xa5, 0xaa, 0x29,
+	0xfa, 0x5f, 0x94, 0x40, 0xdd, 0x0f, 0x3c, 0xf7, 0xd6, 0x9b, 0x16, 0x9b, 0x93, 0xf2, 0x9b, 0x0b,
+	0x7d, 0x6a, 0x89, 0x2d, 0xe3, 0x37, 0xf9, 0x9a, 0x5d, 0x3f, 0x33, 0x88, 0x70, 0xc7, 0xb5, 0x9d,
+	0xd6, 0x36, 0x0f, 0xe5, 0xed, 0x38, 0x94, 0xb7, 0x4f, 0xe3, 0x58, 0x37, 0xb8, 0xa2, 0x6e, 0x83,
+	0xf2, 0xd2, 0x8e, 0x6e, 0xde, 0xd1, 0x06, 0x48, 0xa3, 0xc0, 0xe1, 0x1b, 0xda, 0xab, 0x5e, 0xbf,
+	0xdf, 0x64, 0x57, 0xc1, 0x60, 0xb2, 0xdb, 0x5a, 0x53, 0xff, 0xc7, 0x12, 0x54, 0xf8, 0x42, 0x3a,
+	0xc8, 0x66, 0xe4, 0x0d, 0x71, 0xa1, 0xda, 0x4e, 0x03, 0x23, 0x29, 0xf1, 0xa6, 0x81, 0x7d, 0x64,
+	0x0b, 0x2a, 0x56, 0xe0, 0x85, 0x21, 0xc6, 0x6b, 0x6d, 0x07, 0x50, 0x89, 0x2b, 0xf0, 0x0e, 0xa6,
+	0x31, 0x72, 0x6d, 0xcf, 0x15, 0xf1, 0x9b, 0xd1, 0xc0, 0x0e, 0xb6, 0x8e, 0x15, 0x78, 0x2e, 0xee,
+	0x23, 0x5e, 0x27, 0x71, 0x80, 0x81, 0x7d, 0x64, 0x13, 0xa4, 0x81, 0x1d, 0x1b, 0x6c, 0x01, 0x55,
+	0x62, 0x83, 0x18, 0xac, 0x47, 0xbf, 0x04, 0xa5, 0xed, 0x9d, 0xf3, 0x8d, 0x7f, 0x9e, 0x1c, 0x8d,
+	0x6f, 0xbd, 0xb6, 0xcd, 0x52, 0xdd, 0x3e, 0x8a, 0x26, 0x6e, 0x4d, 0xb9, 0xe0, 0xd6, 0x48, 0xa9,
+	0x5b, 0x13, 0x9b, 0x5b, 0x1e, 0x9b, 0x5b, 0x3f, 0x83, 0xc5, 0x8e, 0x19, 0x98, 0x8e, 0x43, 0x1d,
+	0x3b, 0x1c, 0x9e, 0x30, 0x9f, 0xb6, 0x40, 0xb1, 0x3c, 0x37, 0x8c, 0x4c, 0x97, 0x87, 0x88, 0x6c,
+	0x24, 0x6d, 0xb2, 0x05, 0x35, 0xcb, 0xa3, 0xfd, 0xbe, 0x6d, 0xb1, 0xdc, 0x8b, 0xb3, 0x97, 0x8c,
+	0xb4, 0xa8, 0x2d, 0x2b, 0x25, 0xad, 0xac, 0x3f, 0x03, 0x15, 0x0f, 0xc0, 0x6e, 0x23, 0x5b, 0x17,
+	0xf3, 0xad, 0x58, 0x97, 0x7d, 0x33, 0xd9, 0x85, 0x19, 0x5e, 0xa0, 0x19, 0xea, 0x06, 0x7e, 0xeb,
+	0xbf, 0x0f, 0x95, 0x03, 0x33, 0x1a, 0x0d, 0x6f, 0x8a, 0x78, 0xd2, 0x02, 0xe9, 0xb5, 0x38, 0x67,
+	0x6d, 0x47, 0x41, 0xd3, 0xb5, 0xbd, 0x73, 0x83, 0x09, 0xf5, 0x9f, 0x4a, 0xa0, 0xe2, 0xe8, 0x23,
+	0xb7, 0xef, 0x31, 0x57, 0xf5, 0x58, 0x43, 0x98, 0x8d, 0xbb, 0x0a, 0xbb, 0x0d, 0xde, 0x41, 0x1e,
+	0xe0, 0xcd, 0x8d, 0x78, 0x4a, 0x6a, 0xec, 0x2c, 0x8e, 0x35, 0x4e, 0x98, 0xd8, 0xe0, 0xbd, 0xe4,
+	0x4b, 0xae, 0x16, 0xe2, 0x51, 0x6b, 0x3b, 0x4b, 0xa8, 0xd6, 0x09, 0x3c, 0x8b, 0x86, 0x21, 0x53,
+	0x0c, 0xb9, 0x62, 0x48, 0x1e, 0x82, 0xea, 0xf7, 0xc3, 0x2e, 0x9f, 0x93, 0xfb, 0x5f, 0x45, 0x67,
+	0x31, 0x13, 0x18, 0x8a, 0xdf, 0x47, 0x75, 0x4a, 0xee, 0x83, 0xdc, 0x33, 0x23, 0x13, 0xf3, 0x35,
+	0xfa, 0x5f, 0xa8, 0xb0, 0x6d, 0x1b, 0xd8, 0xa5, 0xff, 0x3d, 0xcb, 0x35, 0x83, 0x41, 0x40, 0x07,
+	0x6c, 0xc0, 0x0a, 0x54, 0x2c, 0x86, 0x50, 0x78, 0x14, 0xc9, 0xe0, 0x0d, 0x66, 0xbf, 0x21, 0x35,
+	0x5d, 0xdc, 0x7d, 0xc9, 0xc0, 0x6f, 0x16, 0x07, 0x61, 0xd4, 0xeb, 0xd1, 0x2b, 0xe1, 0x17, 0xd1,
+	0x22, 0x8f, 0x41, 0xeb, 0xdb, 0xfd, 0xe8, 0xa2, 0xeb, 0xd3, 0xc0, 0xa2, 0x6e, 0x64, 0x3b, 0x7c,
+	0x87, 0x25, 0x63, 0x11, 0xe5, 0x9d, 0x44, 0x4c, 0x9e, 0xc3, 0xba, 0x6b, 0xbb, 0x14, 0x33, 0x4b,
+	0x6e, 0x44, 0x05, 0x47, 0xac, 0xf2, 0xee, 0x17, 0xd9, 0x71, 0xfa, 0x5f, 0x96, 0xa1, 0x9e, 0xb6,
+	0x0a, 0xf9, 0x0e, 0x16, 0x7a, 0xde, 0x1b, 0xd7, 0xf1, 0xcc, 0x5e, 0x97, 0xe1, 0xbd, 0x70, 0xc4,
+	0xc6, 0x44, 0x82, 0x38, 0x10, 0x58, 0x6f, 0xd4, 0x63, 0x7d, 0x96, 0x32, 0xc8, 0xb7, 0x50, 0xf7,
+	0xf9, 0x7c, 0x7c, 0x78, 0x79, 0xd6, 0xf0, 0x9a, 0x50, 0xc7, 0xd1, 0xdf, 0x40, 0x6d, 0xe4, 0x8f,
+	0xd7, 0x96, 0x66, 0x0d, 0x06, 0xae, 0x8d, 0x63, 0x1f, 0x40, 0x23, 0xd9, 0xf9, 0xf9, 0xbb, 0x88,
+	0x86, 0x68, 0x2b, 0xd9, 0x48, 0xce, 0xb3, 0xc7, 0x84, 0xe4, 0x3e, 0xd4, 0xc5, 0x12, 0x5c, 0xa9,
+	0x82, 0x4a, 0x62, 0x59, 0x54, 0xd1, 0xff, 0xba, 0x0c, 0xab, 0x89, 0x1f, 0x33, 0xd6, 0x79, 0x56,
+	0x6c, 0x1d, 0x91, 0x98, 0xe2, 0x21, 0x39, 0x93, 0xfc, 0xbc, 0xd0, 0x24, 0xf9, 0x31, 0x19, 0x3b,
+	0x3c, 0x2d, 0xb2, 0x43, 0x7e, 0x44, 0xfa, 0xf0, 0xbf, 0x53, 0x78, 0xf8, 0xc9, 0x31, 0x39, 0x63,
+	0xfc, 0xbc, 0xc0, 0x18, 0x05, 0x5b, 0x4b, 0x1b, 0xe7, 0x7f, 0x4b, 0x50, 0xff, 0x63, 0x2f, 0xb8,
+	0xa4, 0x01, 0x33, 0xc9, 0x28, 0x24, 0x8f, 0x41, 0x7d, 0x83, 0xed, 0x6e, 0x12, 0xfb, 0xf5, 0xeb,
+	0xf7, 0x9b, 0x0a, 0x57, 0x3a, 0x3a, 0x30, 0x14, 0xde, 0x7d, 0xd4, 0x23, 0x5b, 0x30, 0xff, 0xda,
+	0x3b, 0x67, 0x7a, 0x1c, 0x26, 0xd4, 0xeb, 0xf7, 0x9b, 0x15, 0x96, 0x33, 0x0f, 0x8c, 0xca, 0x6b,
+	0xef, 0xfc, 0xa8, 0xc7, 0x12, 0x31, 0x46, 0x19, 0xcf, 0xd4, 0x8d, 0x71, 0xa6, 0xc6, 0x68, 0xc4,
+	0x3e, 0xf2, 0x0b, 0xa8, 0x22, 0x24, 0xd1, 0x9e, 0x38, 0xe4, 0x34, 0xf4, 0x8a, 0x55, 0xc7, 0x09,
+	0xa1, 0x32, 0x23, 0x21, 0xdc, 0x05, 0xf8, 0xed, 0x88, 0x8e, 0x68, 0x37, 0xb4, 0x7f, 0xa4, 0x88,
+	0xde, 0x92, 0xa1, 0xa2, 0xe4, 0xc4, 0xfe, 0x91, 0xea, 0x6d, 0xa8, 0x1b, 0x34, 0xf4, 0x46, 0x81,
+	0x45, 0x31, 0xeb, 0x32, 0xb2, 0xe8, 0x8f, 0xf0, 0xe0, 0x65, 0x83, 0x7d, 0xb2, 0x70, 0x1e, 0xd2,
+	0xa1, 0x17, 0xbc, 0x13, 0x89, 0x5d, 0xb4, 0x98, 0xe6, 0xc0, 0x1f, 0xa1, 0x33, 0x25, 0x83, 0x7d,
+	0xea, 0xff, 0x22, 0x41, 0xed, 0x30, 0xb2, 0x7a, 0x08, 0x1b, 0x7d, 0x2f, 0xce, 0x93, 0xa5, 0x82,
+	0x3c, 0x49, 0x1e, 0x83, 0xe2, 0xdb, 0x3e, 0x75, 0x6c, 0x37, 0xbe, 0x41, 0x1c, 0x83, 0x3a, 0x42,
+	0x68, 0x24, 0xdd, 0xe4, 0x6b, 0x58, 0xf0, 0x46, 0x91, 0x3f, 0x8a, 0xba, 0x29, 0x3e, 0x90, 0xc3,
+	0xa0, 0x3a, 0xd7, 0xe0, 0x2d, 0xd2, 0x84, 0x6a, 0x40, 0x39, 0x21, 0xe0, 0x41, 0x13, 0x37, 0x31,
+	0xaa, 0xcc, 0xc8, 0xec, 0x8a, 0xdb, 0x49, 0x7b, 0x68, 0x3f, 0xc9, 0x58, 0x60, 0xd2, 0x4e, 0x2c,
+	0x64, 0x51, 0x85, 0x6a, 0xe1, 0xa5, 0xed, 0xfb, 0xb4, 0x27, 0xcc, 0x56, 0x63, 0xb2, 0x13, 0x2e,
+	0x62, 0x76, 0x45, 0x95, 0xc8, 0x8b, 0x4c, 0x07, 0x29, 0xab, 0x64, 0xa8, 0x4c, 0x72, 0xca, 0x04,
+	0x8c, 0x1a, 0x61, 0x77, 0xdf, 0xb4, 0x1d, 0xda, 0x43, 0x6a, 0x24, 0x19, 0x38, 0xe2, 0x05, 0x4a,
+	0xc6, 0x0e, 0x54, 0x67, 0x38, 0x70, 0x1b, 0xea, 0xf8, 0x11, 0x9f, 0x1e, 0x26, 0x4f, 0x5f, 0x43,
+	0x05, 0x71, 0xf8, 0xcf, 0x63, 0x44, 0xa9, 0x21, 0xa2, 0x2c, 0xc4, 0x76, 0xcf, 0xe0, 0xc9, 0x1a,
+	0xcc, 0x07, 0xd4, 0x0c, 0x3d, 0xb7, 0x59, 0xe7, 0x4e, 0xe5, 0x2d, 0xfd, 0x9f, 0x6a, 0x50, 0xfd,
+	0x10, 0xf7, 0x7d, 0x05, 0x6a, 0x14, 0x57, 0x0c, 0x99, 0x0c, 0x90, 0xd4, 0x11, 0xc6, 0x58, 0x21,
+	0xe3, 0x6c, 0x69, 0xba, 0xb3, 0xbf, 0x04, 0xf0, 0xcd, 0x80, 0xba, 0x51, 0x97, 0xad, 0x3d, 0x9f,
+	0x5b, 0x5b, 0xe5, 0x7d, 0x8c, 0x8e, 0xa7, 0xc2, 0xa6, 0xfa, 0xe1, 0x61, 0xf3, 0x1c, 0x94, 0xbe,
+	0xed, 0xda, 0xe1, 0x85, 0xf0, 0xc9, 0xf4, 0x61, 0x89, 0xee, 0xe4, 0x1d, 0x54, 0x67, 0xdd, 0xc1,
+	0xc4, 0x0d, 0x30, 0xc5, 0x0d, 0xdf, 0x83, 0xe6, 0x8f, 0x69, 0x4f, 0x17, 0x79, 0x6d, 0x1d, 0x67,
+	0x5e, 0xe1, 0x06, 0xca, 0x72, 0x22, 0x63, 0xd1, 0xcf, 0x91, 0xa4, 0xc7, 0xa0, 0xc5, 0xa6, 0xeb,
+	0x5e, 0xd1, 0x20, 0x64, 0xb4, 0x70, 0x01, 0xaf, 0xfc, 0x62, 0x2c, 0xff, 0x0d, 0x17, 0x93, 0x87,
+	0xac, 0x92, 0xc3, 0x3a, 0xa5, 0xd9, 0xc0, 0x25, 0xea, 0xa2, 0x92, 0x43, 0x99, 0x11, 0x77, 0x32,
+	0xae, 0x47, 0xb1, 0x14, 0x6a, 0x2e, 0xc6, 0x67, 0xf4, 0xc3, 0x6d, 0x5e, 0x1d, 0x19, 0xa2, 0x8b,
+	0x15, 0x31, 0xc2, 0x1e, 0x82, 0x0a, 0x2f, 0xe1, 0x35, 0x12, 0x26, 0xd8, 0xe3, 0x84, 0xf8, 0x09,
+	0xd4, 0x84, 0x12, 0x92, 0x7b, 0x92, 0x62, 0x23, 0x06, 0xf5, 0x3d, 0x03, 0x78, 0x2f, 0xfb, 0x4e,
+	0x87, 0xec, 0xca, 0xac, 0x90, 0x5d, 0x2b, 0x0a, 0xd9, 0x6c, 0x3c, 0xae, 0xe7, 0xe3, 0xf1, 0x39,
+	0x2c, 0x88, 0xb4, 0x1e, 0x62, 0x9e, 0x6f, 0x36, 0x31, 0x25, 0xf3, 0xb0, 0x4b, 0x03, 0x80, 0x51,
+	0x7f, 0x93, 0x86, 0x83, 0xef, 0x60, 0x29, 0x10, 0xf9, 0xb1, 0x1b, 0xd0, 0xdf, 0x8e, 0x68, 0x18,
+	0x85, 0xcd, 0x8d, 0x54, 0xc8, 0xa6, 0xb3, 0xa7, 0xa1, 0xc5, 0xba, 0x86, 0x50, 0x65, 0x0c, 0xd0,
+	0x66, 0x09, 0xbf, 0xd9, 0x4a, 0x31, 0x40, 0x41, 0xd6, 0xb1, 0x83, 0x6c, 0x03, 0xb8, 0xf4, 0x4d,
+	0x6c, 0xc7, 0x3b, 0xa8, 0xb6, 0x88, 0x46, 0xe2, 0x66, 0x44, 0x46, 0xa6, 0xba, 0xf4, 0x8d, 0xb0,
+	0xea, 0x16, 0xd4, 0x6c, 0xd7, 0x0a, 0xe8, 0x90, 0xba, 0xec, 0xa4, 0x9f, 0x21, 0xb3, 0x4e, 0x8b,
+	0x26, 0x32, 0xc6, 0xdd, 0x19, 0x19, 0x23, 0x9f, 0xed, 0xee, 0x4d, 0x66, 0xbb, 0x24, 0x5b, 0x6d,
+	0xce, 0xc8, 0x56, 0xf7, 0xa1, 0x4e, 0x5d, 0xf3, 0xdc, 0xa1, 0x5d, 0xae, 0xbf, 0xc5, 0xb7, 0xc7,
+	0x65, 0x9c, 0x75, 0xb0, 0x02, 0xce, 0x74, 0xa2, 0xe6, 0x7d, 0x51, 0xc0, 0x99, 0x4e, 0xc4, 0xd8,
+	0xe5, 0xb9, 0x19, 0x59, 0x17, 0x4d, 0x9d, 0xd7, 0xfe, 0xd8, 0x48, 0x65, 0xa9, 0xcf, 0xd3, 0x59,
+	0x8a, 0x7c, 0x03, 0x8b, 0x89, 0x53, 0x1c, 0x7b, 0x68, 0x47, 0x61, 0xf3, 0x8b, 0x9b, 0x5c, 0xd2,
+	0x88, 0x35, 0x8f, 0x51, 0x91, 0xfc, 0x0c, 0xc0, 0xba, 0x18, 0xb9, 0x97, 0x3c, 0xd8, 0x1e, 0xa4,
+	0x2b, 0x24, 0x26, 0xc6, 0x31, 0xaa, 0x15, 0x7f, 0x22, 0x81, 0x64, 0x6c, 0x1c, 0x99, 0x8b, 0x37,
+	0x8a, 0x9a, 0x0f, 0x67, 0x13, 0x48, 0xa6, 0x7f, 0xca, 0xd5, 0x19, 0x05, 0x64, 0x1c, 0x21, 0x1e,
+	0xfd, 0xe5, 0x4c, 0x0a, 0xf8, 0xda, 0x3b, 0x8f, 0xc7, 0xe6, 0x30, 0xe4, 0x51, 0x1e, 0x43, 0xda,
+	0xb2, 0x22, 0x6b, 0x95, 0xb6, 0xac, 0x54, 0xb4, 0x79, 0xfd, 0x00, 0xe6, 0xf9, 0x35, 0x2e, 0x2c,
+	0x67, 0x1f, 0x66, 0xcb, 0x0c, 0x2d, 0x77, 0xed, 0xe3, 0x84, 0xa4, 0x3f, 0x13, 0x45, 0x5f, 0xdf,
+	0x0b, 0xc9, 0x97, 0xa0, 0x20, 0xbd, 0x71, 0xfb, 0x5e, 0xb3, 0x84, 0xd1, 0x52, 0x8f, 0x93, 0x18,
+	0xde, 0xc9, 0xea, 0x6b, 0xfe, 0xa1, 0xdf, 0x03, 0x25, 0xce, 0xe4, 0x45, 0x8b, 0xeb, 0x7f, 0x5b,
+	0x82, 0x85, 0x58, 0x81, 0xd7, 0x93, 0x77, 0x45, 0xbd, 0x5f, 0xca, 0xa7, 0x84, 0xfc, 0x7b, 0x45,
+	0x39, 0x53, 0x61, 0xc7, 0x15, 0xa6, 0x54, 0x50, 0x61, 0xca, 0x05, 0x15, 0x66, 0x25, 0x65, 0x81,
+	0x4d, 0x90, 0xfb, 0x81, 0x37, 0x14, 0x90, 0x92, 0x09, 0x06, 0xec, 0xd0, 0xff, 0xae, 0x0c, 0x1a,
+	0x63, 0x2f, 0xe3, 0x9d, 0xf6, 0x3d, 0xf2, 0x28, 0xb6, 0x5b, 0x09, 0xed, 0x46, 0x32, 0xb0, 0x95,
+	0x49, 0xe5, 0x5f, 0x41, 0x8d, 0xdd, 0xa8, 0x38, 0xe6, 0xca, 0x93, 0xcb, 0x00, 0xeb, 0x17, 0x21,
+	0xb7, 0x0f, 0xcc, 0xd1, 0x5d, 0x2c, 0xa2, 0x42, 0x41, 0x0f, 0xbf, 0xe0, 0x89, 0x36, 0xb7, 0x05,
+	0x66, 0xee, 0x7d, 0x54, 0xe3, 0xaf, 0x72, 0xea, 0xeb, 0xb8, 0x9d, 0x0a, 0x0f, 0x39, 0x13, 0x1e,
+	0x77, 0x01, 0xcc, 0x51, 0x74, 0xd1, 0x8d, 0xbc, 0x4b, 0xea, 0x0a, 0x23, 0xa8, 0x4c, 0x72, 0xca,
+	0x04, 0xad, 0x6f, 0xa1, 0x91, 0x9d, 0x33, 0xfd, 0x52, 0x56, 0x29, 0x78, 0x29, 0xab, 0xa4, 0x5f,
+	0xca, 0x7e, 0x02, 0xa8, 0x67, 0x4c, 0x94, 0x06, 0xf7, 0xd2, 0x74, 0x70, 0xbf, 0x1d, 0x6b, 0xf8,
+	0x3d, 0x00, 0x2b, 0xa0, 0x66, 0x44, 0x7b, 0x5d, 0x33, 0x12, 0x7e, 0x9b, 0x86, 0xd6, 0xaa, 0xd0,
+	0xde, 0x8d, 0xc6, 0x6e, 0xab, 0xce, 0x72, 0xdb, 0x7d, 0xa8, 0x07, 0x94, 0x95, 0x8f, 0x5d, 0x1a,
+	0x04, 0x5e, 0x80, 0xa4, 0x40, 0x35, 0x6a, 0x5c, 0x76, 0xc8, 0x44, 0xe4, 0xfb, 0x8c, 0xaf, 0x54,
+	0xf4, 0xd5, 0x56, 0x66, 0xc6, 0x19, 0x7e, 0x2a, 0x42, 0x79, 0xb8, 0x0d, 0xca, 0x37, 0xa1, 0x1a,
+	0x83, 0x7b, 0x8d, 0x83, 0xa3, 0x68, 0x7e, 0x24, 0x58, 0x6b, 0x05, 0x60, 0xcd, 0x1f, 0x3b, 0x96,
+	0x26, 0x1e, 0x3b, 0x7e, 0x80, 0x95, 0xd0, 0x32, 0x1d, 0xda, 0x65, 0xa5, 0x56, 0x37, 0xba, 0x08,
+	0x68, 0x78, 0xe1, 0x39, 0x3d, 0x81, 0xe6, 0x53, 0x32, 0x19, 0xc1, 0x61, 0x07, 0xde, 0x1b, 0xf7,
+	0x34, 0x1e, 0x54, 0x8c, 0xa6, 0xcb, 0x1f, 0x81, 0xa6, 0x2b, 0x37, 0xa1, 0xe9, 0x16, 0xd4, 0x7a,
+	0x34, 0xb4, 0x02, 0xdb, 0x67, 0x9b, 0x68, 0xae, 0x72, 0x77, 0xa6, 0x44, 0x79, 0xfc, 0x5c, 0x9b,
+	0xc4, 0xcf, 0xbb, 0x00, 0x96, 0x69, 0x5d, 0x88, 0x92, 0x69, 0x9d, 0xc7, 0x0f, 0x4a, 0x58, 0xc9,
+	0x34, 0x01, 0x71, 0xcd, 0x9b, 0x21, 0x6e, 0xa3, 0x08, 0xe2, 0xee, 0x14, 0x43, 0xdc, 0x67, 0x99,
+	0x18, 0xfe, 0x02, 0x1a, 0x43, 0xf3, 0x6d, 0x37, 0x55, 0xba, 0xdd, 0xc5, 0xf4, 0x5f, 0x1f, 0x9a,
+	0x6f, 0xff, 0x28, 0xae, 0xde, 0xd2, 0x9c, 0xee, 0xde, 0x34, 0x4e, 0x57, 0x00, 0x98, 0x9b, 0x1f,
+	0x07, 0x98, 0x5b, 0xb7, 0x06, 0xcc, 0xfb, 0x9f, 0x04, 0x98, 0xfa, 0x6d, 0x00, 0xf3, 0x29, 0xd4,
+	0x06, 0x76, 0x74, 0xe1, 0x79, 0x97, 0xdd, 0x51, 0xe0, 0x70, 0xd2, 0xb0, 0xd7, 0xb8, 0x7e, 0xbf,
+	0x09, 0x2f, 0xb9, 0xf8, 0xcc, 0x38, 0x36, 0x40, 0xa8, 0x9c, 0x05, 0x4e, 0x3e, 0x69, 0x7f, 0x31,
+	0x35, 0x69, 0x7f, 0x5a, 0xe2, 0x6c, 0xcb, 0x8a, 0xa4, 0xc9, 0x09, 0x64, 0xb7, 0xb4, 0x3b, 0xfa,
+	0xcb, 0x34, 0x2c, 0x32, 0xc4, 0x7d, 0x0e, 0x0b, 0x09, 0x9b, 0x4f, 0xc1, 0xee, 0xd2, 0x44, 0xb2,
+	0x31, 0xea, 0x7e, 0xaa, 0xa5, 0xff, 0x77, 0x09, 0xb4, 0x7d, 0x4c, 0x7e, 0xac, 0x48, 0xe2, 0xc1,
+	0xf2, 0x49, 0x15, 0xf6, 0xc6, 0x8c, 0xea, 0x26, 0x77, 0x98, 0x92, 0x56, 0x6e, 0xcb, 0x0a, 0x68,
+	0x35, 0xfe, 0xe0, 0xdf, 0x96, 0x15, 0x55, 0x83, 0xb6, 0xac, 0x28, 0x9a, 0xda, 0x96, 0x95, 0xba,
+	0xb6, 0xd0, 0x96, 0x95, 0x9a, 0x56, 0x6f, 0xcb, 0xca, 0x82, 0xd6, 0x68, 0xcb, 0x4a, 0x43, 0x5b,
+	0x6c, 0xcb, 0xca, 0xaa, 0xb6, 0xd6, 0x96, 0x95, 0x45, 0x4d, 0x6b, 0xcb, 0x8a, 0xa6, 0x2d, 0xb5,
+	0x65, 0x65, 0x49, 0x23, 0x6d, 0x59, 0x21, 0xda, 0x72, 0x5b, 0x56, 0x96, 0xb5, 0x95, 0xb6, 0xac,
+	0xac, 0x68, 0xab, 0x6d, 0x59, 0x59, 0xd3, 0xd6, 0xdb, 0xb2, 0xb2, 0xae, 0x35, 0xdb, 0xb2, 0xd2,
+	0xd4, 0x36, 0xf4, 0x0e, 0x2c, 0x1d, 0xb9, 0xcc, 0x31, 0x51, 0xea, 0xbc, 0xd3, 0xca, 0xd5, 0x4d,
+	0xa8, 0x9d, 0x3b, 0x9e, 0x75, 0xd9, 0x1d, 0x93, 0x20, 0xc5, 0x00, 0x14, 0x21, 0x1a, 0xe8, 0x7f,
+	0x53, 0x82, 0xc6, 0xb1, 0x1d, 0x46, 0x37, 0xd8, 0x6f, 0x06, 0xae, 0x6d, 0x43, 0x1d, 0xb3, 0xcf,
+	0x18, 0xfc, 0xa5, 0x09, 0xc2, 0x8d, 0x0a, 0x02, 0xfd, 0x6f, 0xfd, 0xa2, 0xa1, 0xbf, 0x86, 0xc5,
+	0x17, 0xce, 0x28, 0xbc, 0x48, 0xed, 0xef, 0x01, 0x54, 0xf9, 0xe8, 0x50, 0x5c, 0x93, 0xcc, 0xf0,
+	0xb8, 0x8f, 0x7c, 0x0d, 0xf5, 0xc8, 0xeb, 0xc6, 0x5b, 0x8d, 0x7f, 0x56, 0xc8, 0x1d, 0xa5, 0x16,
+	0x79, 0xf1, 0x77, 0xa8, 0x6f, 0x83, 0x76, 0x40, 0x1d, 0x9a, 0xb9, 0x4c, 0x53, 0x8c, 0xab, 0x7f,
+	0x05, 0x8d, 0x93, 0xc8, 0xf3, 0x3f, 0x50, 0xfb, 0xbf, 0x4a, 0xd0, 0x78, 0x49, 0xa3, 0x63, 0x6f,
+	0x10, 0x7e, 0x88, 0xe7, 0x6e, 0x71, 0x8b, 0xe3, 0x32, 0xa6, 0x6f, 0x3b, 0x11, 0x0d, 0x38, 0xab,
+	0x52, 0x79, 0x19, 0xf3, 0x82, 0x8b, 0xf0, 0x2d, 0xcb, 0x0c, 0x23, 0x1a, 0x20, 0x2b, 0x52, 0x0c,
+	0xd1, 0x1a, 0xbf, 0xd3, 0xcf, 0xdf, 0xf4, 0x4e, 0xbf, 0x06, 0xf3, 0x7d, 0xcf, 0x71, 0xbc, 0x37,
+	0xe2, 0xd7, 0x49, 0xd1, 0x62, 0x99, 0x3e, 0x32, 0x6d, 0x47, 0x3c, 0xf0, 0xe0, 0x37, 0x0f, 0x0b,
+	0xfd, 0x9f, 0xcb, 0x00, 0xc7, 0xde, 0xe0, 0x0f, 0x69, 0x18, 0x9a, 0x03, 0xfc, 0x6d, 0x30, 0x89,
+	0xed, 0x14, 0x43, 0x4e, 0x02, 0xf9, 0x15, 0x23, 0xa9, 0xe3, 0x17, 0x45, 0x69, 0xc6, 0x8b, 0xa2,
+	0x3c, 0xe5, 0x45, 0xf1, 0x09, 0x94, 0x93, 0x87, 0xc1, 0x69, 0x84, 0xa9, 0x1c, 0x85, 0x8c, 0x5a,
+	0x0c, 0xf9, 0x0e, 0xf1, 0xec, 0xaa, 0x11, 0x37, 0xb3, 0x0f, 0xa1, 0xd5, 0xa9, 0x0f, 0xa1, 0x04,
+	0xe4, 0x51, 0x48, 0x03, 0xf1, 0x03, 0x20, 0x7e, 0x93, 0x87, 0xa0, 0x70, 0x1c, 0xb0, 0x7b, 0xf8,
+	0x58, 0xa2, 0xee, 0xd5, 0xae, 0xdf, 0x6f, 0x56, 0xf9, 0x6f, 0x23, 0x07, 0x46, 0x15, 0x3b, 0x8f,
+	0x7a, 0x29, 0x97, 0x40, 0xda, 0x25, 0xfa, 0x29, 0x2c, 0x1b, 0xfc, 0x05, 0x80, 0xfb, 0xe1, 0x03,
+	0xee, 0x4a, 0xfe, 0x02, 0x94, 0x27, 0x2e, 0x80, 0xfe, 0xbb, 0xb0, 0x2c, 0x32, 0x47, 0x66, 0xd6,
+	0x99, 0xbf, 0xd3, 0xe8, 0x5d, 0xd0, 0x58, 0x7e, 0xf8, 0xe0, 0xbd, 0xdc, 0x01, 0xd5, 0x37, 0x07,
+	0x02, 0xba, 0xcb, 0x78, 0x39, 0x14, 0x26, 0x40, 0xd8, 0xc6, 0x5f, 0xa2, 0x06, 0x54, 0xbc, 0x9d,
+	0xe2, 0xb7, 0xfe, 0x0e, 0x96, 0x52, 0x0b, 0x84, 0xbe, 0xe7, 0x86, 0xf8, 0x70, 0x2e, 0x8c, 0xc8,
+	0xf0, 0x41, 0xc4, 0x79, 0x63, 0xbc, 0x3b, 0xc4, 0x02, 0xe8, 0xc5, 0x9f, 0x21, 0x4b, 0x74, 0xf8,
+	0x00, 0xd2, 0x65, 0x73, 0x86, 0x62, 0x61, 0x40, 0x51, 0x87, 0x49, 0x0a, 0x97, 0xfe, 0x53, 0x58,
+	0x4f, 0x96, 0x3e, 0x89, 0x02, 0x6a, 0x8e, 0x37, 0xf0, 0x33, 0x80, 0xf1, 0x06, 0x32, 0x3f, 0x0f,
+	0x8c, 0xd7, 0x57, 0x93, 0xf5, 0x3f, 0x6e, 0xf9, 0x3d, 0x50, 0x13, 0x26, 0xc1, 0xae, 0x83, 0x3b,
+	0x1a, 0x9e, 0xd3, 0x40, 0xfc, 0xce, 0x24, 0x5a, 0x8c, 0x93, 0x31, 0x53, 0x8a, 0x87, 0x7d, 0x3e,
+	0xb1, 0xca, 0x24, 0xfc, 0x19, 0xff, 0xdf, 0xab, 0xb0, 0xca, 0x11, 0x30, 0x49, 0x0c, 0xb7, 0x4f,
+	0xe3, 0xb7, 0x2b, 0x4f, 0xd6, 0x60, 0x7e, 0xe4, 0xf7, 0x18, 0x9c, 0x88, 0x5c, 0xc2, 0x5b, 0x85,
+	0x6c, 0xbf, 0x7a, 0x1b, 0xb6, 0x3f, 0xe6, 0xf4, 0xea, 0x2d, 0x38, 0x3d, 0x14, 0x70, 0xfa, 0x9b,
+	0xb8, 0x7b, 0xed, 0xff, 0x8d, 0xbb, 0xd7, 0x3f, 0x82, 0xbb, 0x2f, 0x7c, 0x20, 0x77, 0x6f, 0xcc,
+	0xe4, 0xee, 0x8b, 0xb3, 0xb8, 0xbb, 0x36, 0x8b, 0xbb, 0x2f, 0x4d, 0x72, 0xf7, 0xcf, 0x40, 0x0d,
+	0xa8, 0x78, 0x6c, 0xc4, 0x2a, 0x47, 0x31, 0xc6, 0x82, 0x31, 0x8b, 0x5f, 0x4e, 0xb3, 0xf8, 0x49,
+	0xb6, 0xbe, 0x32, 0x9d, 0xad, 0xaf, 0xde, 0x92, 0xad, 0xaf, 0x7d, 0x1c, 0x5b, 0x5f, 0xbf, 0x35,
+	0x5b, 0x6f, 0x7e, 0x12, 0x5b, 0xdf, 0xb8, 0x0d, 0x5b, 0x8f, 0x8b, 0xa4, 0xd6, 0xb8, 0x48, 0x4a,
+	0xf3, 0x4a, 0x7d, 0x1f, 0xd6, 0x44, 0xae, 0xfe, 0xf8, 0x98, 0xd6, 0x57, 0x61, 0x99, 0xe5, 0xb6,
+	0xdc, 0x0c, 0xfa, 0x9f, 0xc0, 0x2a, 0xe7, 0x38, 0x9f, 0x90, 0x2e, 0x34, 0x90, 0x4c, 0xc7, 0x11,
+	0x0f, 0x4f, 0xec, 0xb3, 0x2d, 0x2b, 0x65, 0x4d, 0xe2, 0x67, 0xd0, 0x77, 0x61, 0xe5, 0x84, 0xa1,
+	0xd7, 0x27, 0xec, 0xfd, 0x57, 0xb0, 0xcc, 0x88, 0xd5, 0x27, 0xcc, 0xf0, 0xe7, 0x25, 0x58, 0x31,
+	0x68, 0x30, 0x72, 0x3f, 0xe1, 0x98, 0x0f, 0xa0, 0x4a, 0xdf, 0x5a, 0xce, 0xa8, 0x47, 0x8b, 0x78,
+	0x6d, 0xdc, 0xc7, 0xd4, 0x6c, 0x97, 0xab, 0x49, 0x05, 0x6a, 0xa2, 0x4f, 0x5f, 0x87, 0xd5, 0x97,
+	0x66, 0x70, 0x6e, 0x0e, 0xe8, 0xbe, 0xe7, 0x38, 0xd4, 0x8a, 0x62, 0x8f, 0x34, 0x61, 0x2d, 0xdf,
+	0xc1, 0x31, 0x88, 0xb9, 0x70, 0xd7, 0x8a, 0xec, 0x2b, 0x33, 0xa2, 0xbb, 0xa3, 0xe8, 0x22, 0x1e,
+	0xb0, 0x06, 0x2b, 0x59, 0x31, 0x57, 0x7f, 0xd2, 0xc5, 0x27, 0x4c, 0xfe, 0x5f, 0x0e, 0x1a, 0xd4,
+	0xdb, 0xbf, 0xde, 0xeb, 0x9e, 0x9c, 0xee, 0x1a, 0xa7, 0x47, 0xaf, 0x5e, 0x6a, 0x73, 0x64, 0x11,
+	0x6a, 0x4c, 0x62, 0x9c, 0xbd, 0x7a, 0xc5, 0x04, 0xa5, 0x58, 0xf0, 0x62, 0xf7, 0xe8, 0xf8, 0xcc,
+	0x38, 0xd4, 0xca, 0xb1, 0xe0, 0xe4, 0x6c, 0x7f, 0xff, 0xf0, 0xe4, 0x44, 0x93, 0x48, 0x03, 0x80,
+	0x09, 0x7e, 0x38, 0x3a, 0x3e, 0x3e, 0x3c, 0xd0, 0xe4, 0x27, 0xbf, 0x02, 0x18, 0xff, 0x83, 0x06,
+	0x01, 0x98, 0x67, 0x63, 0x0f, 0x0f, 0xb4, 0x39, 0x52, 0x83, 0x6a, 0x3c, 0xac, 0x84, 0x8d, 0x1f,
+	0x8e, 0x3a, 0x9d, 0xc3, 0x03, 0xad, 0x4c, 0xea, 0xa0, 0x24, 0x9b, 0x90, 0x9e, 0x7c, 0x0f, 0xb5,
+	0xd4, 0xdb, 0x2b, 0x5b, 0xb1, 0xf3, 0xeb, 0x83, 0x64, 0x4f, 0x73, 0xb1, 0x60, 0x3c, 0x57, 0x03,
+	0x80, 0x09, 0xc4, 0x42, 0xe5, 0x27, 0x7f, 0x96, 0x7a, 0x51, 0xe5, 0x73, 0xac, 0xc2, 0x52, 0xe7,
+	0xa8, 0x73, 0x78, 0x7c, 0xf4, 0xea, 0x30, 0x7d, 0xdc, 0x15, 0xd0, 0x12, 0xf1, 0xf8, 0xcc, 0xeb,
+	0xb0, 0x3c, 0x96, 0x1e, 0x26, 0xea, 0xe5, 0x8c, 0x7a, 0x6c, 0x11, 0x89, 0x2c, 0xc3, 0x62, 0x22,
+	0xed, 0xec, 0x9e, 0x9d, 0x30, 0x2b, 0xec, 0xfc, 0x0f, 0x80, 0xb4, 0xdb, 0x39, 0x22, 0xdb, 0xa0,
+	0x26, 0xa5, 0x27, 0x59, 0x15, 0xff, 0x6a, 0x94, 0x2d, 0x45, 0x5b, 0x09, 0x37, 0xd2, 0xe7, 0xc8,
+	0x2f, 0x00, 0xc6, 0xb5, 0x1b, 0x59, 0x13, 0x28, 0x90, 0x2b, 0xe6, 0x5a, 0x99, 0x97, 0x66, 0x7d,
+	0x8e, 0x3c, 0x85, 0xaa, 0x28, 0xcf, 0xc8, 0x32, 0x76, 0x65, 0x8b, 0xb5, 0xd6, 0x42, 0x5a, 0x3f,
+	0xd4, 0xe7, 0x58, 0x29, 0x2d, 0x54, 0x38, 0xa3, 0x29, 0x1e, 0x96, 0x5b, 0xe6, 0xeb, 0x12, 0xd9,
+	0x01, 0x25, 0x2e, 0xb4, 0x08, 0xc7, 0xeb, 0x5c, 0xdd, 0x55, 0x30, 0xe6, 0x5b, 0x50, 0x93, 0x82,
+	0x49, 0x98, 0x20, 0x5f, 0x40, 0xb5, 0xd6, 0x26, 0x72, 0xe2, 0xe1, 0xd0, 0x8f, 0xde, 0xe9, 0x73,
+	0xe4, 0x97, 0x50, 0x15, 0xe5, 0x93, 0xd8, 0x63, 0xb6, 0x98, 0x9a, 0x32, 0xf2, 0x1b, 0xa8, 0xa7,
+	0xc9, 0x2c, 0x69, 0xa6, 0x8d, 0x99, 0x66, 0xaa, 0xad, 0x1c, 0x65, 0xd3, 0xe7, 0xd8, 0x9e, 0x13,
+	0xce, 0x27, 0xf6, 0x9c, 0xe7, 0xb7, 0xad, 0xb5, 0xbc, 0x58, 0x04, 0xe4, 0x1c, 0x69, 0xc3, 0x62,
+	0x8e, 0x31, 0xde, 0x34, 0xc7, 0x67, 0x59, 0x71, 0x96, 0x5e, 0xa2, 0xf5, 0xf6, 0xf0, 0x3f, 0x10,
+	0x12, 0xa2, 0x2f, 0x4e, 0x51, 0xc0, 0xfd, 0xa7, 0x58, 0xe2, 0x05, 0x34, 0xb2, 0xec, 0x8f, 0xb4,
+	0x52, 0x37, 0x31, 0x97, 0xfc, 0xa6, 0xcc, 0xb3, 0x0f, 0x8b, 0x39, 0xc8, 0x21, 0x77, 0xd2, 0x46,
+	0xcd, 0xcf, 0x34, 0xf9, 0x32, 0xa3, 0xcf, 0x91, 0xef, 0xa0, 0x9e, 0x86, 0x1c, 0x71, 0xa0, 0x02,
+	0x14, 0x6a, 0x91, 0x89, 0xe1, 0x21, 0x3f, 0x4c, 0x16, 0x9b, 0xc4, 0x61, 0x0a, 0x01, 0x6b, 0xca,
+	0x61, 0x0e, 0x60, 0x21, 0x83, 0x40, 0x64, 0x43, 0x5c, 0xaf, 0x49, 0x54, 0x9a, 0x32, 0xcb, 0x1e,
+	0xd4, 0xd3, 0x20, 0x24, 0x4e, 0x53, 0x80, 0x4b, 0xd3, 0x77, 0x92, 0x41, 0x21, 0xb1, 0x93, 0x22,
+	0x64, 0x9a, 0x32, 0xcb, 0x1f, 0xc4, 0x61, 0xb6, 0xeb, 0x38, 0xe4, 0x06, 0xb5, 0x29, 0xc3, 0x9f,
+	0x41, 0x55, 0xbc, 0x3b, 0x88, 0x38, 0xcb, 0xbe, 0x42, 0xb4, 0xf8, 0xbf, 0xde, 0x8d, 0x2b, 0x76,
+	0xbc, 0x9c, 0x3f, 0x40, 0x23, 0x8b, 0x4a, 0xc2, 0x17, 0x85, 0x18, 0xd6, 0xba, 0x53, 0xd8, 0x97,
+	0x44, 0xcd, 0x21, 0xd4, 0xd3, 0x88, 0x25, 0x4c, 0x59, 0x80, 0x6d, 0xad, 0x8d, 0x82, 0x9e, 0x78,
+	0x9a, 0x3d, 0xed, 0xa7, 0xeb, 0x7b, 0xa5, 0x7f, 0xbb, 0xbe, 0x57, 0xfa, 0x8f, 0xeb, 0x7b, 0xa5,
+	0xbf, 0xfa, 0xcf, 0x7b, 0x73, 0xe7, 0xf3, 0x78, 0xd8, 0x67, 0xff, 0x17, 0x00, 0x00, 0xff, 0xff,
+	0x15, 0xbe, 0x08, 0x96, 0x1b, 0x2f, 0x00, 0x00,
 }

@@ -1,0 +1,55 @@
+syntax = "proto3";
+package admin;
+
+import "google/protobuf/empty.proto";
+import "gogoproto/gogo.proto";
+
+import "client/pfs/pfs.proto";
+import "client/pps/pps.proto";
+
+message Op1_7 {
+  pfs.PutObjectRequest object = 2;
+  pfs.TagObjectRequest tag = 3;
+  pfs.CreateRepoRequest repo = 4;
+  pfs.BuildCommitRequest commit = 5;
+  pfs.CreateBranchRequest branch = 6;
+  pps.CreatePipelineRequest pipeline = 7;
+}
+
+message Op {
+  Op1_7 op1_7 = 1;
+}
+
+message ExtractRequest {
+  // URL is an object storage URL, if it's not "" data will be extracted to
+  // this URL rather than returned.
+  string URL = 1;
+  // NoObjects, if true, will cause extract to omit objects (and tags)
+  bool no_objects = 2;
+  // NoRepos, if true, will cause extract to omit repos, commits and branches.
+  bool no_repos = 3;
+  // NoPipelines, if true, will cause extract to omit pipelines.
+  bool no_pipelines = 4;
+}
+
+message ExtractPipelineRequest {
+  pps.Pipeline pipeline = 1;
+}
+
+message RestoreRequest {
+    Op op = 1;
+    // URL is an object storage URL, if it's not "" data will be restored from
+    // this URL.
+    string URL = 2;
+}
+
+message ClusterInfo {
+  string id = 1 [(gogoproto.customname) = "ID"];
+}
+
+service API {
+  rpc Extract(ExtractRequest) returns (stream Op) {}
+  rpc ExtractPipeline(ExtractPipelineRequest) returns (Op) {}
+  rpc Restore(stream RestoreRequest) returns (google.protobuf.Empty) {}
+  rpc InspectCluster(google.protobuf.Empty) returns (ClusterInfo) {}
+}

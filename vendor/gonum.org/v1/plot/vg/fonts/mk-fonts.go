@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	baseUrl   = "https://fedorahosted.org/releases/l/i/liberation-fonts/"
+	baseUrl   = "https://releases.pagure.org/liberation-fonts/"
 	fontsName = "liberation-fonts-ttf-2.00.1"
 )
 

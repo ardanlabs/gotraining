@@ -1,4 +1,4 @@
-// Copyright ©2013 The gonum Authors. All rights reserved.
+// Copyright ©2013 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -68,7 +68,7 @@ func (c *Cholesky) Cond() float64 {
 // factorization must not be used.
 func (c *Cholesky) Factorize(a Symmetric) (ok bool) {
 	n := a.Symmetric()
-	if c.isZero() {
+	if c.chol == nil {
 		c.chol = NewTriDense(n, Upper, nil)
 	} else {
 		c.chol = NewTriDense(n, Upper, use(c.chol.mat.Data, n*n))
@@ -91,7 +91,7 @@ func (c *Cholesky) Factorize(a Symmetric) (ok bool) {
 // Reset resets the factorization so that it can be reused as the receiver of a
 // dimensionally restricted operation.
 func (c *Cholesky) Reset() {
-	if !c.isZero() {
+	if c.chol != nil {
 		c.chol.Reset()
 	}
 	c.cond = math.Inf(1)
@@ -105,7 +105,7 @@ func (c *Cholesky) SetFromU(t *TriDense) {
 	if kind != Upper {
 		panic("cholesky: matrix must be upper triangular")
 	}
-	if c.isZero() {
+	if c.chol == nil {
 		c.chol = NewTriDense(n, Upper, nil)
 	} else {
 		c.chol = NewTriDense(n, Upper, use(c.chol.mat.Data, n*n))
@@ -122,7 +122,7 @@ func (c *Cholesky) Clone(chol *Cholesky) {
 		panic(badCholesky)
 	}
 	n := chol.Size()
-	if c.isZero() {
+	if c.chol == nil {
 		c.chol = NewTriDense(n, Upper, nil)
 	} else {
 		c.chol = NewTriDense(n, Upper, use(c.chol.mat.Data, n*n))
@@ -159,9 +159,9 @@ func (c *Cholesky) LogDet() float64 {
 	return det
 }
 
-// Solve finds the matrix m that solves A * m = b where A is represented
-// by the Cholesky decomposition, placing the result in m.
-func (c *Cholesky) Solve(m *Dense, b Matrix) error {
+// Solve finds the matrix x that solves A * X = B where A is represented
+// by the Cholesky decomposition, placing the result in x.
+func (c *Cholesky) Solve(x *Dense, b Matrix) error {
 	if !c.valid() {
 		panic(badCholesky)
 	}
@@ -171,21 +171,21 @@ func (c *Cholesky) Solve(m *Dense, b Matrix) error {
 		panic(ErrShape)
 	}
 
-	m.reuseAs(bm, bn)
-	if b != m {
-		m.Copy(b)
+	x.reuseAs(bm, bn)
+	if b != x {
+		x.Copy(b)
 	}
-	blas64.Trsm(blas.Left, blas.Trans, 1, c.chol.mat, m.mat)
-	blas64.Trsm(blas.Left, blas.NoTrans, 1, c.chol.mat, m.mat)
+	blas64.Trsm(blas.Left, blas.Trans, 1, c.chol.mat, x.mat)
+	blas64.Trsm(blas.Left, blas.NoTrans, 1, c.chol.mat, x.mat)
 	if c.cond > ConditionTolerance {
 		return Condition(c.cond)
 	}
 	return nil
 }
 
-// SolveChol finds the matrix m that solves A * m = B where A and B are represented
-// by their Cholesky decompositions a and b, placing the result in the receiver.
-func (a *Cholesky) SolveChol(m *Dense, b *Cholesky) error {
+// SolveChol finds the matrix x that solves A * X = B where A and B are represented
+// by their Cholesky decompositions a and b, placing the result in x.
+func (a *Cholesky) SolveChol(x *Dense, b *Cholesky) error {
 	if !a.valid() || !b.valid() {
 		panic(badCholesky)
 	}
@@ -194,42 +194,54 @@ func (a *Cholesky) SolveChol(m *Dense, b *Cholesky) error {
 		panic(ErrShape)
 	}
 
-	m.reuseAsZeroed(bn, bn)
-	m.Copy(b.chol.T())
-	blas64.Trsm(blas.Left, blas.Trans, 1, a.chol.mat, m.mat)
-	blas64.Trsm(blas.Left, blas.NoTrans, 1, a.chol.mat, m.mat)
-	blas64.Trmm(blas.Right, blas.NoTrans, 1, b.chol.mat, m.mat)
+	x.reuseAsZeroed(bn, bn)
+	x.Copy(b.chol.T())
+	blas64.Trsm(blas.Left, blas.Trans, 1, a.chol.mat, x.mat)
+	blas64.Trsm(blas.Left, blas.NoTrans, 1, a.chol.mat, x.mat)
+	blas64.Trmm(blas.Right, blas.NoTrans, 1, b.chol.mat, x.mat)
 	if a.cond > ConditionTolerance {
 		return Condition(a.cond)
 	}
 	return nil
 }
 
-// SolveVec finds the vector v that solves A * v = b where A is represented
-// by the Cholesky decomposition, placing the result in v.
-func (c *Cholesky) SolveVec(v, b *VecDense) error {
+// SolveVec finds the vector x that solves A * x = b where A is represented
+// by the Cholesky decomposition, placing the result in x.
+func (c *Cholesky) SolveVec(x *VecDense, b Vector) error {
 	if !c.valid() {
 		panic(badCholesky)
 	}
 	n := c.chol.mat.N
-	vn := b.Len()
-	if vn != n {
+	if br, bc := b.Dims(); br != n || bc != 1 {
 		panic(ErrShape)
 	}
-	if v != b {
-		v.checkOverlap(b.mat)
+	switch rv := b.(type) {
+	default:
+		x.reuseAs(n)
+		return c.Solve(x.asDense(), b)
+	case RawVectorer:
+		bmat := rv.RawVector()
+		if x != b {
+			x.checkOverlap(bmat)
+		}
+		x.reuseAs(n)
+		if x != b {
+			x.CopyVec(b)
+		}
+		blas64.Trsv(blas.Trans, c.chol.mat, x.mat)
+		blas64.Trsv(blas.NoTrans, c.chol.mat, x.mat)
+		if c.cond > ConditionTolerance {
+			return Condition(c.cond)
+		}
+		return nil
 	}
-	v.reuseAs(n)
-	if v != b {
-		v.CopyVec(b)
-	}
-	blas64.Trsv(blas.Trans, c.chol.mat, v.mat)
-	blas64.Trsv(blas.NoTrans, c.chol.mat, v.mat)
-	if c.cond > ConditionTolerance {
-		return Condition(c.cond)
-	}
-	return nil
+}
 
+// RawU returns the Triangular matrix used to store the Cholesky decomposition of
+// the original matrix A. The returned matrix should not be modified. If it is
+// modified, the decomposition is invalid and should not be used.
+func (c *Cholesky) RawU() Triangular {
+	return c.chol
 }
 
 // UTo extracts the n×n upper triangular matrix U from a Cholesky
@@ -268,10 +280,10 @@ func (c *Cholesky) LTo(dst *TriDense) *TriDense {
 	return dst
 }
 
-// To reconstructs the original positive definite matrix given its
+// ToSym reconstructs the original positive definite matrix given its
 // Cholesky decomposition into dst and returns the result. If dst is nil
 // a new SymDense is allocated.
-func (c *Cholesky) To(dst *SymDense) *SymDense {
+func (c *Cholesky) ToSym(dst *SymDense) *SymDense {
 	if !c.valid() {
 		panic(badCholesky)
 	}
@@ -308,6 +320,95 @@ func (c *Cholesky) InverseTo(s *SymDense) error {
 	return err
 }
 
+// Scale multiplies the original matrix A by a positive constant using
+// its Cholesky decomposition, storing the result in-place into the receiver.
+// That is, if the original Cholesky factorization is
+//  U^T * U = A
+// the updated factorization is
+//  U'^T * U' = f A = A'
+// Scale panics if the constant is non-positive, or if the receiver is non-zero
+// and is of a different Size from the input.
+func (c *Cholesky) Scale(f float64, orig *Cholesky) {
+	if !orig.valid() {
+		panic(badCholesky)
+	}
+	if f <= 0 {
+		panic("cholesky: scaling by a non-positive constant")
+	}
+	n := orig.Size()
+	if c.chol == nil {
+		c.chol = NewTriDense(n, Upper, nil)
+	} else if c.chol.mat.N != n {
+		panic(ErrShape)
+	}
+	c.chol.ScaleTri(math.Sqrt(f), orig.chol)
+	c.cond = orig.cond // Scaling by a positive constant does not change the condition number.
+}
+
+// ExtendVecSym computes the Cholesky decomposition of the original matrix A,
+// whose Cholesky decomposition is in a, extended by a the n×1 vector v according to
+//  [A  w]
+//  [w' k]
+// where k = v[n-1] and w = v[:n-1]. The result is stored into the receiver.
+// In order for the updated matrix to be positive definite, it must be the case
+// that k > w' A^-1 w. If this condition does not hold then ExtendVecSym will
+// return false and the receiver will not be updated.
+//
+// ExtendVecSym will panic if v.Len() != a.Size()+1 or if a does not contain
+// a valid decomposition.
+func (chol *Cholesky) ExtendVecSym(a *Cholesky, v Vector) (ok bool) {
+	n := a.Size()
+	if v.Len() != n+1 {
+		panic(badSliceLength)
+	}
+	if !a.valid() {
+		panic(badCholesky)
+	}
+
+	// The algorithm is commented here, but see also
+	//  https://math.stackexchange.com/questions/955874/cholesky-factor-when-adding-a-row-and-column-to-already-factorized-matrix
+	// We have A and want to compute the Cholesky of
+	//  [A  w]
+	//  [w' k]
+	// We want
+	//  [U c]
+	//  [0 d]
+	// to be the updated Cholesky, and so it must be that
+	//  [A  w] = [U' 0] [U c]
+	//  [w' k]   [c' d] [0 d]
+	// Thus, we need
+	//  1) A = U'U (true by the original decomposition being valid),
+	//  2) U' * c = w  =>  c = U'^-1 w
+	//  3) c'*c + d'*d = k  =>  d = sqrt(k-c'*c)
+
+	// First, compute c = U'^-1 a
+	// TODO(btracey): Replace this with CopyVec when issue 167 is fixed.
+	w := NewVecDense(n, nil)
+	for i := 0; i < n; i++ {
+		w.SetVec(i, v.At(i, 0))
+	}
+	k := v.At(n, 0)
+
+	c := NewVecDense(n, nil)
+	c.SolveVec(a.chol.T(), w)
+
+	dot := Dot(c, c)
+	if dot >= k {
+		return false
+	}
+	d := math.Sqrt(k - dot)
+
+	newU := NewTriDense(n+1, Upper, nil)
+	newU.Copy(a.chol)
+	for i := 0; i < n; i++ {
+		newU.SetTri(i, n, c.At(i, 0))
+	}
+	newU.SetTri(n, n, d)
+	chol.chol = newU
+	chol.updateCond(-1)
+	return true
+}
+
 // SymRankOne performs a rank-1 update of the original matrix A and refactorizes
 // its Cholesky factorization, storing the result into the receiver. That is, if
 // in the original Cholesky factorization
@@ -322,16 +423,16 @@ func (c *Cholesky) InverseTo(s *SymDense) error {
 //
 // SymRankOne updates a Cholesky factorization in O(n²) time. The Cholesky
 // factorization computation from scratch is O(n³).
-func (c *Cholesky) SymRankOne(orig *Cholesky, alpha float64, x *VecDense) (ok bool) {
+func (c *Cholesky) SymRankOne(orig *Cholesky, alpha float64, x Vector) (ok bool) {
 	if !orig.valid() {
 		panic(badCholesky)
 	}
 	n := orig.Size()
-	if x.Len() != n {
+	if r, c := x.Dims(); r != n || c != 1 {
 		panic(ErrShape)
 	}
 	if orig != c {
-		if c.isZero() {
+		if c.chol == nil {
 			c.chol = NewTriDense(n, Upper, nil)
 		} else if c.chol.mat.N != n {
 			panic(ErrShape)
@@ -371,7 +472,15 @@ func (c *Cholesky) SymRankOne(orig *Cholesky, alpha float64, x *VecDense) (ok bo
 
 	work := getFloats(n, false)
 	defer putFloats(work)
-	blas64.Copy(n, x.RawVector(), blas64.Vector{1, work})
+	var xmat blas64.Vector
+	if rv, ok := x.(RawVectorer); ok {
+		xmat = rv.RawVector()
+	} else {
+		var tmp *VecDense
+		tmp.CopyVec(x)
+		xmat = tmp.RawVector()
+	}
+	blas64.Copy(n, xmat, blas64.Vector{1, work})
 
 	if alpha > 0 {
 		// Compute rank-1 update.
@@ -470,10 +579,6 @@ func (c *Cholesky) SymRankOne(orig *Cholesky, alpha float64, x *VecDense) (ok bo
 	return ok
 }
 
-func (c *Cholesky) isZero() bool {
-	return c.chol == nil
-}
-
 func (c *Cholesky) valid() bool {
-	return !c.isZero() && !c.chol.IsZero()
+	return c.chol != nil && !c.chol.IsZero()
 }

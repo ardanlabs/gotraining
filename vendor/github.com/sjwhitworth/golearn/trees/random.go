@@ -88,3 +88,45 @@ func (rt *RandomTree) String() string {
 func (rt *RandomTree) Prune(with base.FixedDataGrid) {
 	rt.Root.Prune(with)
 }
+
+// Save outputs this model to a file
+func (rt *RandomTree) Save(filePath string) error {
+	writer, err := base.CreateSerializedClassifierStub(filePath, rt.GetMetadata())
+	if err != nil {
+		return err
+	}
+	defer func() {
+		writer.Close()
+	}()
+	return rt.SaveWithPrefix(writer, "")
+}
+
+// SaveWithPrefix outputs this model to a file with a prefix.
+func (rt *RandomTree) SaveWithPrefix(writer *base.ClassifierSerializer, prefix string) error {
+	return rt.Root.SaveWithPrefix(writer, prefix)
+}
+
+// Load retrieves this model from a file
+func (rt *RandomTree) Load(filePath string) error {
+	reader, err := base.ReadSerializedClassifierStub(filePath)
+	if err != nil {
+		return err
+	}
+	return rt.LoadWithPrefix(reader, "")
+}
+
+// LoadWithPrefix retrives this random tree from disk with a given prefix.
+func (rt *RandomTree) LoadWithPrefix(reader *base.ClassifierDeserializer, prefix string) error {
+	rt.Root = &DecisionTreeNode{}
+	return rt.Root.LoadWithPrefix(reader, prefix)
+}
+
+// GetMetadata returns required serialization metadata
+func (rt *RandomTree) GetMetadata() base.ClassifierMetadataV1 {
+	return base.ClassifierMetadataV1{
+		FormatVersion:      1,
+		ClassifierName:     "KNN",
+		ClassifierVersion:  "1.0",
+		ClassifierMetadata: nil,
+	}
+}

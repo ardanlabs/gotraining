@@ -2,6 +2,7 @@ package base
 
 import (
 	"fmt"
+	"sort"
 )
 
 // This file contains utility functions relating to Attributes and Attribute specifications.
@@ -42,15 +43,18 @@ func NonClassAttributes(d DataGrid) []Attribute {
 // all of the Attributes.
 func ResolveAttributes(d DataGrid, attrs []Attribute) []AttributeSpec {
 	ret := make([]AttributeSpec, len(attrs))
-        n := len(attrs)
-        for i := 0; i < n; i++ {
-                a := attrs[i]
+	n := len(attrs)
+	for i := 0; i < n; i++ {
+		a := attrs[i]
 		spec, err := d.GetAttribute(a)
 		if err != nil {
 			panic(fmt.Errorf("Error resolving Attribute %s: %s", a, err))
 		}
 		ret[i] = spec
 	}
+
+	sort.Sort(byPosition(ret))
+
 	return ret
 }
 

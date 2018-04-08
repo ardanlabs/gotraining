@@ -9,7 +9,6 @@ import (
 
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/palette"
-	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/draw"
 )
 
@@ -30,15 +29,15 @@ type ColorBar struct {
 
 // colors returns the number of colors to be shown
 // in the legend, substituting invalid values
-// with the default of one color per vg.Point.
+// with the default of one color per point.
 func (l *ColorBar) colors(c draw.Canvas) int {
 	if l.Colors > 0 {
 		return l.Colors
 	}
 	if l.Vertical {
-		return int((c.Max.Y - c.Min.Y).Points())
+		return int(c.Max.Y - c.Min.Y)
 	}
-	return int((c.Max.X - c.Min.X).Points())
+	return int(c.Max.X - c.Min.X)
 }
 
 // check determines whether the ColorBar is
@@ -56,16 +55,10 @@ func (l *ColorBar) check() {
 func (l *ColorBar) Plot(c draw.Canvas, p *plot.Plot) {
 	l.check()
 	colors := l.colors(c)
-	var img *image.NRGBA64
-	var xmin, xmax, ymin, ymax vg.Length
-	delta := (l.ColorMap.Max() - l.ColorMap.Min()) / float64(colors-1)
+	var pImg *Image
+	delta := (l.ColorMap.Max() - l.ColorMap.Min()) / float64(colors)
 	if l.Vertical {
-		trX, trY := p.Transforms(&c)
-		xmin = trX(0)
-		ymin = trY(l.ColorMap.Min())
-		xmax = trX(1)
-		ymax = trY(l.ColorMap.Max())
-		img = image.NewNRGBA64(image.Rectangle{
+		img := image.NewNRGBA64(image.Rectangle{
 			Min: image.Point{X: 0, Y: 0},
 			Max: image.Point{X: 1, Y: colors},
 		})
@@ -76,13 +69,9 @@ func (l *ColorBar) Plot(c draw.Canvas, p *plot.Plot) {
 			}
 			img.Set(0, colors-1-i, color)
 		}
+		pImg = NewImage(img, 0, l.ColorMap.Min(), 1, l.ColorMap.Max())
 	} else {
-		trX, trY := p.Transforms(&c)
-		xmin = trX(l.ColorMap.Min())
-		ymin = trY(0)
-		xmax = trX(l.ColorMap.Max())
-		ymax = trY(1)
-		img = image.NewNRGBA64(image.Rectangle{
+		img := image.NewNRGBA64(image.Rectangle{
 			Min: image.Point{X: 0, Y: 0},
 			Max: image.Point{X: colors, Y: 1},
 		})
@@ -93,12 +82,9 @@ func (l *ColorBar) Plot(c draw.Canvas, p *plot.Plot) {
 			}
 			img.Set(i, 0, color)
 		}
+		pImg = NewImage(img, l.ColorMap.Min(), 0, l.ColorMap.Max(), 1)
 	}
-	rect := vg.Rectangle{
-		Min: vg.Point{X: xmin, Y: ymin},
-		Max: vg.Point{X: xmax, Y: ymax},
-	}
-	c.DrawImage(rect, img)
+	pImg.Plot(c, p)
 }
 
 // DataRange implements the DataRange method

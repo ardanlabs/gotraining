@@ -103,24 +103,25 @@ func (s *streamingBytesWriter) Write(p []byte) (int, error) {
 	return len(p), nil
 }
 
-// Go's io.CopyBuffer has an annoying optimization wherein if the reader
-// has the WriteTo function defined, it doesn't actually use the given
-// buffer.  As a result, we might write a large chunk to the gRPC streaming
-// server even though we intend to use a small buffer.
-// Therefore we wrap readers in this wrapper so that only Read is defined.
-type readerWrapper struct {
-	reader io.Reader
+// ReaderWrapper wraps a reader for the following reason: Go's io.CopyBuffer
+// has an annoying optimization wherein if the reader has the WriteTo function
+// defined, it doesn't actually use the given buffer.  As a result, we might
+// write a large chunk to the gRPC streaming server even though we intend to
+// use a small buffer.  Therefore we wrap readers in this wrapper so that only
+// Read is defined.
+type ReaderWrapper struct {
+	Reader io.Reader
 }
 
-func (r readerWrapper) Read(p []byte) (int, error) {
-	return r.reader.Read(p)
+func (r ReaderWrapper) Read(p []byte) (int, error) {
+	return r.Reader.Read(p)
 }
 
 // WriteToStreamingBytesServer writes the data from the io.Reader to the StreamingBytesServer.
 func WriteToStreamingBytesServer(reader io.Reader, streamingBytesServer StreamingBytesServer) error {
 	buf := GetBuffer()
 	defer PutBuffer(buf)
-	_, err := io.CopyBuffer(NewStreamingBytesWriter(streamingBytesServer), readerWrapper{reader}, buf)
+	_, err := io.CopyBuffer(NewStreamingBytesWriter(streamingBytesServer), ReaderWrapper{reader}, buf)
 	return err
 }
 

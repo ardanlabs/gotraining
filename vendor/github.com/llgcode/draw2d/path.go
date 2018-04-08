@@ -190,3 +190,34 @@ func (p *Path) String() string {
 	}
 	return s
 }
+
+// Returns new Path with flipped y axes
+func (path *Path) VerticalFlip() *Path {
+	p := path.Copy()
+	j := 0
+	for _, cmd := range p.Components {
+		switch cmd {
+		case MoveToCmp, LineToCmp:
+			p.Points[j+1] = -p.Points[j+1]
+			j = j + 2
+		case QuadCurveToCmp:
+			p.Points[j+1] = -p.Points[j+1]
+			p.Points[j+3] = -p.Points[j+3]
+			j = j + 4
+		case CubicCurveToCmp:
+			p.Points[j+1] = -p.Points[j+1]
+			p.Points[j+3] = -p.Points[j+3]
+			p.Points[j+5] = -p.Points[j+5]
+			j = j + 6
+		case ArcToCmp:
+			p.Points[j+1] = -p.Points[j+1]
+			p.Points[j+3] = -p.Points[j+3]
+			p.Points[j+4] = -p.Points[j+4] // start angle
+			p.Points[j+5] = -p.Points[j+5] // angle
+			j = j + 6
+		case CloseCmp:
+		}
+	}
+	p.y = -p.y
+	return p
+}

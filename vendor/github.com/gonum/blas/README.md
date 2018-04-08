@@ -88,9 +88,9 @@ Currently blas/cblas64 and blas/cblas128 require blas/cgo.
 
 ## Issues
 
-If you find any bugs, feel free to file an issue on the github issue tracker.
-Discussions on API changes, added features, code review, or similar requests
-are preferred on the [gonum-dev Google Group](https://groups.google.com/forum/#!forum/gonum-dev).
+If you find any bugs, feel free to file an issue on the github [issue tracker for gonum/gonum](https://github.com/gonum/gonum/issues) or [gonum/netlib for the CGO implementation](https://github.com/gonum/netlib/issues) if the bug exists in that reposity; no code changes will be made to this repository. Other discussions should be taken to the gonum-dev Google Group.
+
+https://groups.google.com/forum/#!forum/gonum-dev
 
 ## License
 

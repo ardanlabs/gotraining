@@ -181,6 +181,9 @@ type XYZer interface {
 
 	// XYZ returns an x, y, z triple.
 	XYZ(int) (float64, float64, float64)
+
+	// XY returns an x, y pair.
+	XY(int) (float64, float64)
 }
 
 // XYZs implements the XYZer interface using a slice.
@@ -194,6 +197,11 @@ func (xyz XYZs) Len() int {
 // XYZ implements the XYZ method of the XYZer interface.
 func (xyz XYZs) XYZ(i int) (float64, float64, float64) {
 	return xyz[i].X, xyz[i].Y, xyz[i].Z
+}
+
+// XY implements the XY method of the XYer interface.
+func (xyz XYZs) XY(i int) (float64, float64) {
+	return xyz[i].X, xyz[i].Y
 }
 
 // CopyXYZs copies an XYZer.

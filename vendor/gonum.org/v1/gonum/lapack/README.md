@@ -11,28 +11,6 @@ and a wrapper using cgo to a c-based implementation.
   go get gonum.org/v1/gonum/lapack/...
 ```
 
-
-Install OpenBLAS:
-```
-  git clone https://github.com/xianyi/OpenBLAS
-  cd OpenBLAS
-  make
-```
-
-Then install the lapack/cgo package:
-```sh
-  CGO_LDFLAGS="-L/path/to/OpenBLAS -lopenblas" go install gonum.org/v1/netlib/lapack
-```
-
-For Windows you can download binary packages for OpenBLAS at
-http://sourceforge.net/projects/openblas/files/
-
-If you want to use a different BLAS package such as the Intel MKL you can
-adjust the `CGO_LDFLAGS` variable:
-```sh
-  CGO_LDFLAGS="-lmkl_rt" go install gonum.org/v1/netlib/lapack
-```
-
 ## Packages
 
 ### lapack

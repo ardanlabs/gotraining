@@ -56,7 +56,7 @@ func (img *Image) Plot(c draw.Canvas, p *plot.Plot) {
 		Min: vg.Point{X: xmin, Y: ymin},
 		Max: vg.Point{X: xmax, Y: ymax},
 	}
-	c.DrawImage(rect, img.img)
+	c.DrawImage(rect, img.transformFor(p))
 }
 
 // DataRange implements the DataRange method
@@ -69,6 +69,48 @@ func (img *Image) DataRange() (xmin, xmax, ymin, ymax float64) {
 // of the plot.GlyphBoxer interface.
 func (img *Image) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return nil
+}
+
+// transform warps the image to align with non-linear axes.
+func (img *Image) transformFor(p *plot.Plot) image.Image {
+	_, xLinear := p.X.Scale.(plot.LinearScale)
+	_, yLinear := p.Y.Scale.(plot.LinearScale)
+	if xLinear && yLinear {
+		return img.img
+	}
+	b := img.img.Bounds()
+	o := image.NewNRGBA64(b)
+	for c := 0; c < img.cols; c++ {
+		// Find the equivalent image column after applying axis transforms.
+		cTrans := int(p.X.Norm(img.x(c)) * float64(img.cols))
+		// Find the equivalent column of the previous image column after applying
+		// axis transforms.
+		cPrevTrans := int(p.X.Norm(img.x(maxInt(c-1, 0))) * float64(img.cols))
+		for r := 0; r < img.rows; r++ {
+			// Find the equivalent image row after applying axis transforms.
+			rTrans := int(p.Y.Norm(img.y(r)) * float64(img.rows))
+			// Find the equivalent row of the previous image row after applying
+			// axis transforms.
+			rPrevTrans := int(p.Y.Norm(img.y(maxInt(r-1, 0))) * float64(img.rows))
+			crColor := img.img.At(c, img.rows-r-1)
+			// Set all the pixels in the new image between (cPrevTrans, rPrevTrans)
+			// and (cTrans, rTrans) to the color at (c,r) in the original image.
+			// TODO: Improve interpolation.
+			for cPrime := cPrevTrans; cPrime <= cTrans; cPrime++ {
+				for rPrime := rPrevTrans; rPrime <= rTrans; rPrime++ {
+					o.Set(cPrime, img.rows-rPrime-1, crColor)
+				}
+			}
+		}
+	}
+	return o
+}
+
+func maxInt(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 func (img *Image) x(c int) float64 {

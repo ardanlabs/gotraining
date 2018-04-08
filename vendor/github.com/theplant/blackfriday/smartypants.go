@@ -250,14 +250,12 @@ func smartBacktick(out *bytes.Buffer, smrt *smartypantsData, previousChar byte, 
 		}
 	}
 
-	out.WriteByte(text[0])
 	return 0
 }
 
 func smartNumberGeneric(out *bytes.Buffer, smrt *smartypantsData, previousChar byte, text []byte) int {
 	if wordBoundary(previousChar) && len(text) >= 3 {
 		// is it of the form digits/digits(word boundary)?, i.e., \d+/\d+\b
-		// note: check for regular slash (/) or fraction slash (⁄, 0x2044, or 0xe2 81 84 in utf-8)
 		numEnd := 0
 		for len(text) > numEnd && isdigit(text[numEnd]) {
 			numEnd++
@@ -266,18 +264,15 @@ func smartNumberGeneric(out *bytes.Buffer, smrt *smartypantsData, previousChar b
 			out.WriteByte(text[0])
 			return 0
 		}
-		denStart := numEnd + 1
-		if len(text) > numEnd+3 && text[numEnd] == 0xe2 && text[numEnd+1] == 0x81 && text[numEnd+2] == 0x84 {
-			denStart = numEnd + 3
-		} else if len(text) < numEnd+2 || text[numEnd] != '/' {
+		if len(text) < numEnd+2 || text[numEnd] != '/' {
 			out.WriteByte(text[0])
 			return 0
 		}
-		denEnd := denStart
+		denEnd := numEnd + 1
 		for len(text) > denEnd && isdigit(text[denEnd]) {
 			denEnd++
 		}
-		if denEnd == denStart {
+		if denEnd == numEnd+1 {
 			out.WriteByte(text[0])
 			return 0
 		}
@@ -285,7 +280,7 @@ func smartNumberGeneric(out *bytes.Buffer, smrt *smartypantsData, previousChar b
 			out.WriteString("<sup>")
 			out.Write(text[:numEnd])
 			out.WriteString("</sup>&frasl;<sub>")
-			out.Write(text[denStart:denEnd])
+			out.Write(text[numEnd+1 : denEnd])
 			out.WriteString("</sub>")
 			return denEnd - 1
 		}
@@ -355,16 +350,20 @@ func smartypants(flags int) *smartypantsRenderer {
 	r['"'] = smartDoubleQuote
 	r['&'] = smartAmp
 	r['\''] = smartSingleQuote
-	// r['('] = smartParens
+	r['('] = smartParens
 	if flags&HTML_SMARTYPANTS_LATEX_DASHES == 0 {
 		r['-'] = smartDash
 	} else {
 		r['-'] = smartDashLatex
 	}
 	r['.'] = smartPeriod
-	if flags&HTML_SMARTYPANTS_FRACTIONS != 0 {
+	if flags&HTML_SMARTYPANTS_FRACTIONS == 0 {
 		r['1'] = smartNumber
 		r['3'] = smartNumber
+	} else {
+		for ch := '1'; ch <= '9'; ch++ {
+			r[ch] = smartNumberGeneric
+		}
 	}
 	r['<'] = smartLeftAngle
 	r['`'] = smartBacktick

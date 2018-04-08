@@ -7,12 +7,12 @@
 /*
 Package native is a Go implementation of the BLAS API. This implementation
 panics when the input arguments are invalid as per the standard, for example
-if a vector increment is zero. Please note that the treatment of NaN values
+if a vector increment is zero. Note that the treatment of NaN values
 is not specified, and differs among the BLAS implementations.
 gonum.org/v1/gonum/blas/blas64 provides helpful wrapper functions to the BLAS
 interface. The rest of this text describes the layout of the data for the input types.
 
-Please note that in the function documentation, x[i] refers to the i^th element
+Note that in the function documentation, x[i] refers to the i^th element
 of the vector, which will be different from the i^th element of the slice if
 incX != 1.
 

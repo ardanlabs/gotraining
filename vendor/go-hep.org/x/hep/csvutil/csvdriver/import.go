@@ -16,7 +16,8 @@ import (
 )
 
 func (conn *csvConn) importCSV() error {
-	tbl, err := csvutil.Open(conn.cfg.File)
+	fname := conn.f.Name()
+	tbl, err := csvutil.Open(fname)
 	if err != nil {
 		return err
 	}
@@ -89,7 +90,8 @@ func (conn *csvConn) importCSV() error {
 }
 
 func inferSchema(conn *csvConn, header bool, names []string) (schemaType, error) {
-	tbl, err := csvutil.Open(conn.cfg.File)
+	fname := conn.f.Name()
+	tbl, err := csvutil.Open(fname)
 	if err != nil {
 		return nil, err
 	}

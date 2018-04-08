@@ -2,9 +2,9 @@
 package pairwise
 
 import (
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 type PairwiseDistanceFunc interface {
-	Distance(vectorX *mat64.Dense, vectorY *mat64.Dense) float64
+	Distance(vectorX *mat.Dense, vectorY *mat.Dense) float64
 }

@@ -1,4 +1,4 @@
-// Copyright ©2014 The gonum Authors. All rights reserved.
+// Copyright ©2014 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -7,7 +7,8 @@ package distuv
 import (
 	"math"
 	"math/cmplx"
-	"math/rand"
+
+	"golang.org/x/exp/rand"
 )
 
 // Weibull distribution. Valid range for x is [0,+∞).
@@ -19,7 +20,7 @@ type Weibull struct {
 	// Scale parameter of the distribution. Valid range is (0,+∞).
 	Lambda float64
 	// Source of random numbers
-	Source *rand.Rand
+	Src *rand.Rand
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -129,10 +130,10 @@ func (w Weibull) Quantile(p float64) float64 {
 // Rand returns a random sample drawn from the distribution.
 func (w Weibull) Rand() float64 {
 	var rnd float64
-	if w.Source == nil {
+	if w.Src == nil {
 		rnd = rand.Float64()
 	} else {
-		rnd = w.Source.Float64()
+		rnd = w.Src.Float64()
 	}
 	return w.Quantile(rnd)
 }

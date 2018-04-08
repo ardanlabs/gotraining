@@ -51,7 +51,7 @@ The recommended (free) option for good performance on both linux and darwin is O
 
 ## Issues
 
-If you find any bugs, feel free to file an issue on the github issue tracker. Discussions on API changes, added features, code review, or similar requests are preferred on the gonum-dev Google Group.
+If you find any bugs, feel free to file an issue on the github [issue tracker for gonum/gonum](https://github.com/gonum/gonum/issues) or [gonum/netlib for the CGO implementation](https://github.com/gonum/netlib/issues) if the bug exists in that reposity; no code changes will be made to this repository. Other discussions should be taken to the gonum-dev Google Group.
 
 https://groups.google.com/forum/#!forum/gonum-dev
 

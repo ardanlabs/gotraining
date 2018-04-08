@@ -2,6 +2,7 @@ package trees
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"github.com/sjwhitworth/golearn/base"
 	"github.com/sjwhitworth/golearn/evaluation"
@@ -26,12 +27,73 @@ type RuleGenerator interface {
 
 // DecisionTreeRule represents the "decision" in "decision tree".
 type DecisionTreeRule struct {
-	SplitAttr base.Attribute
-	SplitVal  float64
+	SplitAttr base.Attribute `json:"split_attribute"`
+	SplitVal  float64        `json:"split_val"`
+}
+
+func (d *DecisionTreeRule) MarshalJSON() ([]byte, error) {
+	ret := make(map[string]interface{})
+	if d.SplitAttr == nil {
+		ret["split_attribute"] = "unknown"
+		ret["split_val"] = 0
+		return json.Marshal(ret)
+	}
+	marshaledSplitAttrRaw, err := d.SplitAttr.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	marshaledSplitAttr := make(map[string]interface{})
+	err = json.Unmarshal(marshaledSplitAttrRaw, &marshaledSplitAttr)
+	if err != nil {
+		panic(err)
+	}
+	ret["split_attribute"] = marshaledSplitAttr
+	ret["split_val"] = d.SplitVal
+	return json.Marshal(ret)
+}
+
+func (d *DecisionTreeRule) unmarshalJSON(data []byte) error {
+
+	var jsonMap map[string]interface{}
+	err := json.Unmarshal(data, &jsonMap)
+	if err != nil {
+		return err
+	}
+	if splitVal, ok := jsonMap["split_val"]; ok {
+		d.SplitVal = splitVal.(float64)
+	}
+	split := jsonMap["split_attribute"]
+	splitBytes, err := json.Marshal(split)
+	if err != nil {
+		panic(err)
+	}
+	if string(splitBytes) != "\"unknown\"" {
+		d.SplitAttr, err = base.DeserializeAttribute(splitBytes)
+		if err != nil {
+			return err
+		}
+		if d.SplitAttr == nil {
+			panic("Should not be nil")
+			return fmt.Errorf("base.DeserializeAttribute returned nil")
+		}
+	} else {
+		d.SplitAttr = nil
+	}
+	return nil
+}
+
+func (d *DecisionTreeRule) UnmarshalJSON(data []byte) error {
+	ret := d.unmarshalJSON(data)
+	return ret
 }
 
 // String prints a human-readable summary of this thing.
 func (d *DecisionTreeRule) String() string {
+
+	if d.SplitAttr == nil {
+		return fmt.Sprintf("INVALID:DecisionTreeRule(SplitAttr is nil)")
+	}
+
 	if _, ok := d.SplitAttr.(*base.FloatAttribute); ok {
 		return fmt.Sprintf("DecisionTreeRule(%s <= %f)", d.SplitAttr.GetName(), d.SplitVal)
 	}
@@ -40,12 +102,12 @@ func (d *DecisionTreeRule) String() string {
 
 // DecisionTreeNode represents a given portion of a decision tree.
 type DecisionTreeNode struct {
-	Type      NodeType
-	Children  map[string]*DecisionTreeNode
-	ClassDist map[string]int
-	Class     string
-	ClassAttr base.Attribute
-	SplitRule *DecisionTreeRule
+	Type      NodeType                     `json:"node_type"`
+	Children  map[string]*DecisionTreeNode `json:"children"`
+	ClassDist map[string]int               `json:"class_dist"`
+	Class     string                       `json:"class_string"`
+	ClassAttr base.Attribute               `json:"-"`
+	SplitRule *DecisionTreeRule            `json:"decision_tree_rule"`
 }
 
 func getClassAttr(from base.FixedDataGrid) base.Attribute {
@@ -53,11 +115,82 @@ func getClassAttr(from base.FixedDataGrid) base.Attribute {
 	return allClassAttrs[0]
 }
 
+// Save sends the classification tree to an output file
+func (d *DecisionTreeNode) Save(filePath string) error {
+	metadata := base.ClassifierMetadataV1{
+		FormatVersion:     1,
+		ClassifierName:    "test",
+		ClassifierVersion: "1",
+	}
+	serializer, err := base.CreateSerializedClassifierStub(filePath, metadata)
+	if err != nil {
+		return err
+	}
+	err = d.SaveWithPrefix(serializer, "")
+	if err != nil {
+		return err
+	}
+	return serializer.Close()
+}
+
+func (d *DecisionTreeNode) SaveWithPrefix(writer *base.ClassifierSerializer, prefix string) error {
+	b, err := json.Marshal(d)
+	if err != nil {
+		return err
+	}
+	err = writer.WriteBytesForKey(writer.Prefix(prefix, "tree"), b)
+	if err != nil {
+		return err
+	}
+
+	err = writer.WriteAttributeForKey(writer.Prefix(prefix, "treeClassAttr"), d.ClassAttr)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Load reads from the classifier from an output file
+func (d *DecisionTreeNode) Load(filePath string) error {
+
+	reader, err := base.ReadSerializedClassifierStub(filePath)
+	if err != nil {
+		return err
+	}
+
+	return d.LoadWithPrefix(reader, "")
+}
+
+// LoadWithPrefix reads from the classifier from part of another model
+func (d *DecisionTreeNode) LoadWithPrefix(reader *base.ClassifierDeserializer, prefix string) error {
+
+	b, err := reader.GetBytesForKey(reader.Prefix(prefix, "tree"))
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(b, d)
+	if err != nil {
+		return err
+	}
+
+	a, err := reader.GetAttributeForKey(reader.Prefix(prefix, "treeClassAttr"))
+	if err != nil {
+		return err
+	}
+
+	d.ClassAttr = a
+
+	return nil
+}
+
 // InferID3Tree builds a decision tree using a RuleGenerator
 // from a set of Instances (implements the ID3 algorithm)
 func InferID3Tree(from base.FixedDataGrid, with RuleGenerator) *DecisionTreeNode {
 	// Count the number of classes at this node
 	classes := base.GetClassDistribution(from)
+	classAttr := getClassAttr(from)
 	// If there's only one class, return a DecisionTreeLeaf with
 	// the only class available
 	if len(classes) == 1 {
@@ -70,7 +203,7 @@ func InferID3Tree(from base.FixedDataGrid, with RuleGenerator) *DecisionTreeNode
 			nil,
 			classes,
 			maxClass,
-			getClassAttr(from),
+			classAttr,
 			&DecisionTreeRule{nil, 0.0},
 		}
 		return ret
@@ -95,7 +228,7 @@ func InferID3Tree(from base.FixedDataGrid, with RuleGenerator) *DecisionTreeNode
 			nil,
 			classes,
 			maxClass,
-			getClassAttr(from),
+			classAttr,
 			&DecisionTreeRule{nil, 0.0},
 		}
 		return ret
@@ -107,7 +240,7 @@ func InferID3Tree(from base.FixedDataGrid, with RuleGenerator) *DecisionTreeNode
 		nil,
 		classes,
 		maxClass,
-		getClassAttr(from),
+		classAttr,
 		nil,
 	}
 
@@ -311,12 +444,12 @@ func (t *ID3DecisionTree) PredictProba(what base.FixedDataGrid) (ClassesProba, e
 		for {
 			if cur.Children == nil {
 				totalDist := 0
-				for _,dist:= range cur.ClassDist {
+				for _, dist := range cur.ClassDist {
 					totalDist += dist
 				}
-				for class,dist:= range cur.ClassDist {
-					classProba := ClassProba{ClassValue:class, Probability: float64(float64(dist)/float64(totalDist))}
-					results = append(results,classProba)
+				for class, dist := range cur.ClassDist {
+					classProba := ClassProba{ClassValue: class, Probability: float64(float64(dist) / float64(totalDist))}
+					results = append(results, classProba)
 				}
 				sort.Sort(results)
 				break
@@ -362,7 +495,6 @@ func (t *ID3DecisionTree) PredictProba(what base.FixedDataGrid) (ClassesProba, e
 	})
 	return results, nil
 }
-
 
 //
 // ID3 Tree type
@@ -421,4 +553,39 @@ func (t *ID3DecisionTree) Predict(what base.FixedDataGrid) (base.FixedDataGrid, 
 // String returns a human-readable version of this ID3 tree
 func (t *ID3DecisionTree) String() string {
 	return fmt.Sprintf("ID3DecisionTree(%s\n)", t.Root)
+}
+
+func (t *ID3DecisionTree) GetMetadata() base.ClassifierMetadataV1 {
+	return base.ClassifierMetadataV1{
+		FormatVersion:      1,
+		ClassifierName:     "ID3",
+		ClassifierVersion:  "1.0",
+		ClassifierMetadata: nil,
+	}
+}
+
+func (t *ID3DecisionTree) Save(filePath string) error {
+	writer, err := base.CreateSerializedClassifierStub(filePath, t.GetMetadata())
+	if err != nil {
+		return err
+	}
+	fmt.Printf("writer: %v", writer)
+	return t.SaveWithPrefix(writer, "")
+}
+
+func (t *ID3DecisionTree) SaveWithPrefix(writer *base.ClassifierSerializer, prefix string) error {
+	return t.Root.SaveWithPrefix(writer, prefix)
+}
+
+func (t *ID3DecisionTree) Load(filePath string) error {
+	reader, err := base.ReadSerializedClassifierStub(filePath)
+	if err != nil {
+		return err
+	}
+	return t.LoadWithPrefix(reader, "")
+}
+
+func (t *ID3DecisionTree) LoadWithPrefix(reader *base.ClassifierDeserializer, prefix string) error {
+	t.Root = &DecisionTreeNode{}
+	return t.Root.LoadWithPrefix(reader, "")
 }

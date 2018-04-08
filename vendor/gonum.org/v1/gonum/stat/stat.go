@@ -1,4 +1,4 @@
-// Copyright ©2014 The gonum Authors. All rights reserved.
+// Copyright ©2014 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -215,6 +215,59 @@ func Correlation(x, y, weights []float64) float64 {
 	syy -= ycompensation * ycompensation / sumWeights
 
 	return (sxy - xcompensation*ycompensation/sumWeights) / math.Sqrt(sxx*syy)
+}
+
+// Kendall returns the weighted Tau-a Kendall correlation between the
+// samples of x and y. The Kendall correlation measures the quantity of
+// concordant and discordant pairs of numbers. If weights are specified then
+// each pair is weighted by weights[i] * weights[j] and the final sum is
+// normalized to stay between -1 and 1.
+// The lengths of x and y must be equal. If weights is nil then all of the
+// weights are 1. If weights is not nil, then len(x) must equal len(weights).
+func Kendall(x, y, weights []float64) float64 {
+	if len(x) != len(y) {
+		panic("stat: slice length mismatch")
+	}
+
+	var (
+		cc float64 // number of concordant pairs
+		dc float64 // number of discordant pairs
+		n  = len(x)
+	)
+
+	if weights == nil {
+		for i := 0; i < n; i++ {
+			for j := i; j < n; j++ {
+				if i == j {
+					continue
+				}
+				if math.Signbit(x[j]-x[i]) == math.Signbit(y[j]-y[i]) {
+					cc++
+				} else {
+					dc++
+				}
+			}
+		}
+		return (cc - dc) / float64(n*(n-1)/2)
+	}
+
+	var sumWeights float64
+
+	for i := 0; i < n; i++ {
+		for j := i; j < n; j++ {
+			if i == j {
+				continue
+			}
+			weight := weights[i] * weights[j]
+			if math.Signbit(x[j]-x[i]) == math.Signbit(y[j]-y[i]) {
+				cc += weight
+			} else {
+				dc += weight
+			}
+			sumWeights += weight
+		}
+	}
+	return float64(cc-dc) / sumWeights
 }
 
 // Covariance returns the weighted covariance between the samples of x and y.
@@ -862,12 +915,48 @@ func Mode(x, weights []float64) (val float64, count float64) {
 	return max, maxCount
 }
 
+// BivariateMoment computes the weighted mixed moment between the samples x and y.
+//  E[(x - μ_x)^r*(y - μ_y)^s]
+// No degrees of freedom correction is done.
+// The lengths of x and y must be equal. If weights is nil then all of the
+// weights are 1. If weights is not nil, then len(x) must equal len(weights).
+func BivariateMoment(r, s float64, x, y, weights []float64) float64 {
+	meanX := Mean(x, weights)
+	meanY := Mean(y, weights)
+	if len(x) != len(y) {
+		panic("stat: slice length mismatch")
+	}
+	if weights == nil {
+		var m float64
+		for i, vx := range x {
+			vy := y[i]
+			m += math.Pow(vx-meanX, r) * math.Pow(vy-meanY, s)
+		}
+		return m / float64(len(x))
+	}
+	if len(weights) != len(x) {
+		panic("stat: slice length mismatch")
+	}
+	var (
+		m          float64
+		sumWeights float64
+	)
+	for i, vx := range x {
+		vy := y[i]
+		w := weights[i]
+		m += w * math.Pow(vx-meanX, r) * math.Pow(vy-meanY, s)
+		sumWeights += w
+	}
+	return m / sumWeights
+}
+
 // Moment computes the weighted n^th moment of the samples,
 //  E[(x - μ)^N]
 // No degrees of freedom correction is done.
 // If weights is nil then all of the weights are 1. If weights is not nil, then
 // len(x) must equal len(weights).
 func Moment(moment float64, x, weights []float64) float64 {
+	// This also checks that x and weights have the same length.
 	mean := Mean(x, weights)
 	if weights == nil {
 		var m float64
@@ -881,8 +970,9 @@ func Moment(moment float64, x, weights []float64) float64 {
 		sumWeights float64
 	)
 	for i, v := range x {
-		m += weights[i] * math.Pow(v-mean, moment)
-		sumWeights += weights[i]
+		w := weights[i]
+		m += w * math.Pow(v-mean, moment)
+		sumWeights += w
 	}
 	return m / sumWeights
 }
@@ -1125,7 +1215,6 @@ func Variance(x, weights []float64) float64 {
 // If weights is nil then all of the weights are 1. If weights is not nil, then
 // len(x) must equal len(weights).
 func MeanVariance(x, weights []float64) (mean, variance float64) {
-
 	// This uses the corrected two-pass algorithm (1.7), from "Algorithms for computing
 	// the sample variance: Analysis and recommendations" by Chan, Tony F., Gene H. Golub,
 	// and Randall J. LeVeque.

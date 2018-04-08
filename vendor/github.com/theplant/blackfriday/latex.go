@@ -23,6 +23,7 @@ import (
 //
 // Do not create this directly, instead use the LatexRenderer function.
 type Latex struct {
+
 }
 
 // LatexRenderer creates and configures a Latex object, which
@@ -158,15 +159,6 @@ func (options *Latex) TableCell(out *bytes.Buffer, text []byte, align int) {
 	out.Write(text)
 }
 
-// TODO: this
-func (options *Latex) Footnotes(out *bytes.Buffer, text func() bool) {
-
-}
-
-func (options *Latex) FootnoteItem(out *bytes.Buffer, name, text []byte, flags int) {
-
-}
-
 func (options *Latex) AutoLink(out *bytes.Buffer, link []byte, kind int) {
 	out.WriteString("\\href{")
 	if kind == LINK_TYPE_EMAIL {
@@ -236,11 +228,6 @@ func (options *Latex) StrikeThrough(out *bytes.Buffer, text []byte) {
 	out.WriteString("\\sout{")
 	out.Write(text)
 	out.WriteString("}")
-}
-
-// TODO: this
-func (options *Latex) FootnoteRef(out *bytes.Buffer, ref []byte, id int) {
-
 }
 
 func needsBackslash(c byte) bool {

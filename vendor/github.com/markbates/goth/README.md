@@ -8,6 +8,10 @@ protocol providers, as long as they implement the `Provider` and `Session` inter
 
 This package was inspired by [https://github.com/intridea/omniauth](https://github.com/intridea/omniauth).
 
+## Goth Needs a New Maintainer
+
+[https://blog.gobuffalo.io/goth-needs-a-new-maintainer-626cd47ca37b](https://blog.gobuffalo.io/goth-needs-a-new-maintainer-626cd47ca37b) - TL;DR: I, @markbates, won't be responding to any more issues, PRs, etc... for this package. A new maintainer needs to be found ASAP. Is this you?
+
 ## Installation
 
 ```text
@@ -18,6 +22,7 @@ $ go get github.com/markbates/goth
 
 * Amazon
 * Auth0
+* Azure AD
 * Battle.net
 * Bitbucket
 * Box
@@ -27,6 +32,7 @@ $ go get github.com/markbates/goth
 * Digital Ocean
 * Discord
 * Dropbox
+* Eve Online
 * Facebook
 * Fitbit
 * GitHub
@@ -39,6 +45,8 @@ $ go get github.com/markbates/goth
 * Lastfm
 * Linkedin
 * Meetup
+* MicrosoftOnline
+* Naver
 * OneDrive
 * OpenID Connect (auto discovery)
 * Paypal
@@ -51,6 +59,7 @@ $ go get github.com/markbates/goth
 * Twitch
 * Twitter
 * Uber
+* VK
 * Wepay
 * Xero
 * Yahoo
@@ -73,7 +82,7 @@ $ go get github.com/markbates/goth
 ```text
 $ cd goth/examples
 $ go get -v
-$ go build 
+$ go build
 $ ./examples
 ```
 
@@ -130,51 +139,3 @@ Would I love to see more providers? Certainly! Would you love to contribute one?
 4. Commit your changes (git commit -am 'Add some feature')
 5. Push to the branch (git push origin my-new-feature)
 6. Create new Pull Request
-
-## Contributors
-
-* Mark Bates
-* Tyler Bunnell
-* Corey McGrillis
-* willemvd
-* Rakesh Goyal
-* Andy Grunwald
-* Glenn Walker
-* Kevin Fitzpatrick
-* Ben Tranter
-* Sharad Ganapathy
-* Andrew Chilton
-* sharadgana
-* Aurorae
-* Craig P Jolicoeur
-* Zac Bergquist
-* Geoff Franks
-* Raphael Geronimi
-* Noah Shibley
-* lumost
-* oov
-* Felix Lamouroux
-* Rafael Quintela
-* Tyler
-* DenSm
-* Samy KACIMI
-* dante gray
-* Noah
-* Jacob Walker
-* Marin Martinic
-* Roy
-* Omni Adams
-* Sasa Brankovic
-* dkhamsing
-* Dante Swift
-* Attila Domokos
-* Albin Gilles
-* Syed Zubairuddin
-* Johnny Boursiquot
-* Jerome Touffe-Blin
-* bryanl
-* Masanobu YOSHIOKA
-* Jonathan Hall
-* HaiMing.Yin
-* Sairam Kunala
-* Regan Ashworth

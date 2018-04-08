@@ -1,7 +1,6 @@
 package client
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"time"
@@ -15,12 +14,24 @@ import (
 	types "github.com/gogo/protobuf/types"
 	log "github.com/sirupsen/logrus"
 
+	"github.com/pachyderm/pachyderm/src/client/admin"
 	"github.com/pachyderm/pachyderm/src/client/auth"
+	"github.com/pachyderm/pachyderm/src/client/deploy"
+	"github.com/pachyderm/pachyderm/src/client/enterprise"
 	"github.com/pachyderm/pachyderm/src/client/health"
 	"github.com/pachyderm/pachyderm/src/client/pfs"
 	"github.com/pachyderm/pachyderm/src/client/pkg/config"
 	"github.com/pachyderm/pachyderm/src/client/pkg/grpcutil"
 	"github.com/pachyderm/pachyderm/src/client/pps"
+	"github.com/pachyderm/pachyderm/src/client/version/versionpb"
+)
+
+const (
+	// MaxListItemsLog specifies the maximum number of items we log in response to a List* API
+	MaxListItemsLog = 10
+	// StorageSecretName is the name of the Kubernetes secret in which
+	// storage credentials are stored.
+	StorageSecretName = "pachyderm-storage-secret"
 )
 
 // PfsAPIClient is an alias for pfs.APIClient.
@@ -35,12 +46,25 @@ type ObjectAPIClient pfs.ObjectAPIClient
 // AuthAPIClient is an alias of auth.APIClient
 type AuthAPIClient auth.APIClient
 
+// DeployAPIClient is an alias of auth.APIClient
+type DeployAPIClient deploy.APIClient
+
+// VersionAPIClient is an alias of versionpb.APIClient
+type VersionAPIClient versionpb.APIClient
+
+// AdminAPIClient is an alias of admin.APIClient
+type AdminAPIClient admin.APIClient
+
 // An APIClient is a wrapper around pfs, pps and block APIClients.
 type APIClient struct {
 	PfsAPIClient
 	PpsAPIClient
 	ObjectAPIClient
 	AuthAPIClient
+	DeployAPIClient
+	VersionAPIClient
+	AdminAPIClient
+	Enterprise enterprise.APIClient // not embedded--method name conflicts with AuthAPIClient
 
 	// addr is a "host:port" string pointing at a pachd endpoint
 	addr string
@@ -72,7 +96,7 @@ type APIClient struct {
 	ctx context.Context
 }
 
-// GetAddress returns the pachd host:post with which 'c' is communicating. If
+// GetAddress returns the pachd host:port with which 'c' is communicating. If
 // 'c' was created using NewInCluster or NewOnUserMachine then this is how the
 // address may be retrieved from the environment.
 func (c *APIClient) GetAddress() string {
@@ -173,17 +197,23 @@ func (c *APIClient) Close() error {
 // DeleteAll deletes everything in the cluster.
 // Use with caution, there is no undo.
 func (c APIClient) DeleteAll() error {
+	if _, err := c.AuthAPIClient.Deactivate(
+		c.Ctx(),
+		&auth.DeactivateRequest{},
+	); err != nil && !auth.IsErrNotActivated(err) {
+		return grpcutil.ScrubGRPC(err)
+	}
 	if _, err := c.PpsAPIClient.DeleteAll(
 		c.Ctx(),
 		&types.Empty{},
 	); err != nil {
-		return sanitizeErr(err)
+		return grpcutil.ScrubGRPC(err)
 	}
 	if _, err := c.PfsAPIClient.DeleteAll(
 		c.Ctx(),
 		&types.Empty{},
 	); err != nil {
-		return sanitizeErr(err)
+		return grpcutil.ScrubGRPC(err)
 	}
 	return nil
 }
@@ -233,41 +263,53 @@ func (c *APIClient) connect() error {
 	dialOptions := append(PachDialOptions(), keepaliveOpt)
 	clientConn, err := grpc.Dial(c.addr, dialOptions...)
 	if err != nil {
-		return err
+		return grpcutil.ScrubGRPC(err)
 	}
-	c.AuthAPIClient = auth.NewAPIClient(clientConn)
 	c.PfsAPIClient = pfs.NewAPIClient(clientConn)
 	c.PpsAPIClient = pps.NewAPIClient(clientConn)
 	c.ObjectAPIClient = pfs.NewObjectAPIClient(clientConn)
+	c.AuthAPIClient = auth.NewAPIClient(clientConn)
+	c.Enterprise = enterprise.NewAPIClient(clientConn)
+	c.DeployAPIClient = deploy.NewAPIClient(clientConn)
+	c.VersionAPIClient = versionpb.NewAPIClient(clientConn)
+	c.AdminAPIClient = admin.NewAPIClient(clientConn)
 	c.clientConn = clientConn
 	c.healthClient = health.NewHealthClient(clientConn)
 	return nil
 }
 
 // AddMetadata adds necessary metadata (including authentication credentials)
-// to the context 'ctx'
+// to the context 'ctx', preserving any metadata that is present in either the
+// incoming or outgoing metadata of 'ctx'.
 func (c *APIClient) AddMetadata(ctx context.Context) context.Context {
-	// TODO(msteffen): this doesn't make sense outside the pachctl CLI
-	// (e.g. pachd making requests to the auth API) because the user's
-	// authentication token is fixed in the client. See Ctx()
-
+	// TODO(msteffen): There are several places in this client where it's possible
+	// to set per-request metadata (specifically auth tokens): client.WithCtx(),
+	// client.SetAuthToken(), etc. These should be consolidated, as this API
+	// doesn't make it obvious how these settings are resolved when they conflict.
+	clientData := make(map[string]string)
+	if c.authenticationToken != "" {
+		clientData[auth.ContextTokenKey] = c.authenticationToken
+	}
 	// metadata API downcases all the key names
 	if c.metricsUserID != "" {
-		ctx = metadata.NewOutgoingContext(
-			ctx,
-			metadata.Pairs(
-				"userid", c.metricsUserID,
-				"prefix", c.metricsPrefix,
-			),
-		)
+		clientData["userid"] = c.metricsUserID
+		clientData["prefix"] = c.metricsPrefix
 	}
 
-	return metadata.NewOutgoingContext(
-		ctx,
-		metadata.Pairs(
-			auth.ContextTokenKey, c.authenticationToken,
-		),
-	)
+	// Rescue any metadata pairs already in 'ctx' (otherwise
+	// metadata.NewOutgoingContext() would drop them). Note that this is similar
+	// to metadata.Join(), but distinct because it discards conflicting k/v pairs
+	// instead of merging them)
+	incomingMD, _ := metadata.FromIncomingContext(ctx)
+	outgoingMD, _ := metadata.FromOutgoingContext(ctx)
+	clientMD := metadata.New(clientData)
+	finalMD := make(metadata.MD) // Collect k/v pairs
+	for _, md := range []metadata.MD{incomingMD, outgoingMD, clientMD} {
+		for k, v := range md {
+			finalMD[k] = v
+		}
+	}
+	return metadata.NewOutgoingContext(ctx, finalMD)
 }
 
 // Ctx is a convenience function that returns adds Pachyderm authn metadata
@@ -293,12 +335,4 @@ func (c *APIClient) WithCtx(ctx context.Context) *APIClient {
 // API calls for this client.
 func (c *APIClient) SetAuthToken(token string) {
 	c.authenticationToken = token
-}
-
-func sanitizeErr(err error) error {
-	if err == nil {
-		return nil
-	}
-
-	return errors.New(grpc.ErrorDesc(err))
 }

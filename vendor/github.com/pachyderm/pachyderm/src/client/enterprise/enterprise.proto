@@ -1,0 +1,72 @@
+syntax = "proto3";
+package enterprise;
+
+import "google/protobuf/timestamp.proto";
+
+// Enterprise data structures
+
+// EnterpriseRecord is the record we store in etcd for a Pachyderm enterprise
+// token that has been provided to a Pachyderm cluster
+message EnterpriseRecord {
+  string activation_code = 1;
+
+  // expires is a timestamp indicating when this activation code will expire.
+  google.protobuf.Timestamp expires = 2;
+}
+
+//// Enterprise Activation API
+
+// TokenInfo contains information about the currently active enterprise token
+message TokenInfo {
+  // expires indicates when the current token expires (unset if there is no
+  // current token)
+  google.protobuf.Timestamp expires = 1;
+}
+
+message ActivateRequest {
+  // activation_code is a Pachyderm enterprise activation code. New users can
+  // obtain trial activation codes
+  string activation_code = 1;
+
+  // expires is a timestamp indicating when this activation code will expire.
+  // This should not generally be set (it's primarily used for testing), and is
+  // only applied if it's earlier than the signed expiration time in
+  // 'activation_code'.
+  google.protobuf.Timestamp expires = 2;
+}
+message ActivateResponse {
+  TokenInfo info = 1;
+}
+
+message GetStateRequest {}
+
+enum State {
+  NONE = 0;
+  ACTIVE = 1;
+  EXPIRED = 2;
+}
+
+message GetStateResponse {
+  State state = 1;
+  TokenInfo info = 2;
+}
+
+message DeactivateRequest{}
+message DeactivateResponse{}
+
+service API {
+  // Provide a Pachyderm enterprise token, enabling Pachyderm enterprise
+  // features, such as the Pachyderm Dashboard and Auth system
+  rpc Activate(ActivateRequest) returns (ActivateResponse) {}
+  rpc GetState(GetStateRequest) returns (GetStateResponse) {}
+
+  // Deactivate is a testing API. It removes a cluster's enterprise activation
+  // token and sets its enterprise state to NONE (normally, once a cluster has
+  // been activated, the only reachable state is EXPIRED).
+  //
+  // NOTE: This endpoint also calls DeleteAll (and deletes all Pachyderm data in
+  // its cluster). This is to avoid dealing with invalid, intermediate states
+  // (e.g. auth is activated but enterprise state is NONE)
+  rpc Deactivate(DeactivateRequest) returns (DeactivateResponse) {}
+}
+

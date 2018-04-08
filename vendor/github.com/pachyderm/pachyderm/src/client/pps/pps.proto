@@ -12,7 +12,10 @@ import "client/pfs/pfs.proto";
 message Secret {
   // Name must be the name of the secret in kubernetes.
   string name = 1;
+  // Key of the secret to load into env_var, this field only has meaning if EnvVar != "".
+  string key = 4;
   string mount_path = 2;
+  string env_var = 3;
 }
 
 message Transform {
@@ -45,16 +48,21 @@ enum JobState {
 message Service {
   int32 internal_port = 1;
   int32 external_port = 2;
+  string ip = 3 [(gogoproto.customname) = "IP"];
 }
 
 message AtomInput {
+  reserved 7;
   string name = 1;
   string repo = 2;
   string branch = 3;
   string commit = 4;
   string glob = 5;
   bool lazy = 6;
-  string from_commit = 7;
+  // EmptyFiles, if true, will cause files from this atom to be presented as
+  // empty files. This is useful in shuffle pipelines where you want to read
+  // the names of files and reorganize them using symlinks.
+  bool empty_files = 8;
 }
 
 message CronInput {
@@ -65,11 +73,19 @@ message CronInput {
   google.protobuf.Timestamp start = 5;
 }
 
+message GitInput {
+  string name = 1;
+  string url = 2 [(gogoproto.customname) = "URL"];
+  string branch = 3;
+  string commit = 4;
+}
+
 message Input {
   AtomInput atom = 1;
   repeated Input cross = 2;
   repeated Input union = 3;
   CronInput cron = 4;
+  GitInput git = 5;
 }
 
 message JobInput {
@@ -125,13 +141,8 @@ message DatumInfo {
   DatumState state = 2;
   ProcessStats stats = 3;
   pfs.File pfs_state = 4;
-  repeated InputFile data = 5;
+  repeated pfs.FileInfo data = 5;
 }
-
-message DatumInfos {
-  repeated DatumInfo datum_info = 1;
-}
-
 
 message Aggregate {
   int64 count = 1;
@@ -182,30 +193,58 @@ message ResourceSpec {
   int64 gpu = 3;
 }
 
+// EtcdJobInfo is the portion of the JobInfo that gets stored in etcd during
+// job execution. It contains fields which change over the lifetime of the job
+// but aren't used in the execution of the job.
+message EtcdJobInfo {
+  Job job = 1;
+  Pipeline pipeline = 2;
+  pfs.Commit output_commit = 3;
+  // Job restart count (e.g. due to datum failure)
+  uint64 restart = 4;
+
+  // Counts of how many times we processed or skipped a datum
+  int64 data_processed = 5;
+  int64 data_skipped = 6;
+  int64 data_total = 7;
+  int64 data_failed = 8;
+
+  // Download/process/upload time and download/upload bytes
+  ProcessStats stats = 9;
+
+  pfs.Commit stats_commit = 10;
+
+  JobState state = 11;
+
+  string reason = 12;
+}
+
 message JobInfo {
-  reserved 4;
+  reserved 4, 5;
   Job job = 1;
   Transform transform = 2;
   Pipeline pipeline = 3;
   uint64 pipeline_version = 13;
   ParallelismSpec parallelism_spec = 12;
-  repeated JobInput inputs = 5;
   Egress egress = 15;
   Job parent_job = 6;
   google.protobuf.Timestamp started = 7;
   google.protobuf.Timestamp finished = 8;
   pfs.Commit output_commit = 9;
   JobState state = 10;
+  string reason = 35;  // reason explains why the job is in the current state
   Service service = 14;
   pfs.Repo output_repo = 18;
   string output_branch = 17;
   uint64 restart = 20;
   int64 data_processed = 22;
   int64 data_skipped = 30;
+  int64 data_failed = 40;
   int64 data_total = 23;
   ProcessStats stats = 31;
   repeated WorkerStatus worker_status = 24;
-  ResourceSpec resource_spec = 25;
+  ResourceSpec resource_requests = 25;
+  ResourceSpec resource_limits = 36;
   Input input = 26;
   pfs.BranchInfo new_branch = 27;
   bool incremental = 28;
@@ -213,6 +252,9 @@ message JobInfo {
   bool enable_stats = 32;
   string salt = 33;
   bool batch = 34;
+  ChunkSpec chunk_spec = 37;
+  google.protobuf.Duration datum_timeout = 38;
+  google.protobuf.Duration job_timeout = 39;
 }
 
 enum WorkerState {
@@ -262,30 +304,58 @@ enum PipelineState {
   PIPELINE_PAUSED = 4;
 }
 
+// EtcdPipelineInfo is proto that Pachd stores in etcd for each pipeline. It
+// tracks the state of the pipeline, and points to its metadata in PFS (and,
+// by pointing to a PFS commit, de facto tracks the pipeline's version)
+message EtcdPipelineInfo {
+  PipelineState state = 1;
+  string reason = 4;
+  pfs.Commit spec_commit = 2;
+  map<int32, int32> job_counts = 3;
+  string auth_token = 5;
+}
+
 message PipelineInfo {
-  reserved 3;
+  reserved 3, 4, 26;
   string id = 17 [(gogoproto.customname) = "ID"];
   Pipeline pipeline = 1;
   uint64 version = 11;
   Transform transform = 2;
   ParallelismSpec parallelism_spec = 10;
-  repeated PipelineInput inputs = 4;
   Egress egress = 15;
   google.protobuf.Timestamp created_at = 6;
+
+  // state indicates the current state of the pipeline. This is not stored in
+  // PFS along with the rest of this data structure--PPS.InspectPipeline fills
+  // it in
   PipelineState state = 7;
   string recent_error = 8;
+
+  // job_counts indicates the number of jobs within this pipeline in a given
+  // state. This is not stored in PFS along with the rest of this data
+  // structure--PPS.InspectPipeline fills it in
   map<int32, int32> job_counts = 9;
   string output_branch = 16;
   google.protobuf.Duration scale_down_threshold = 18;
-  ResourceSpec resource_spec = 19;
+  ResourceSpec resource_requests = 19;
+  ResourceSpec resource_limits = 31;
   Input input = 20;
   string description = 21;
   bool incremental = 22;
   string cache_size = 23;
   bool enable_stats = 24;
   string salt = 25;
-  string capability = 26;
   bool batch = 27;
+
+  // reason includes any error messages associated with a failed pipeline
+  string reason = 28;
+  int64 max_queue_size = 29;
+  Service service = 30;
+  ChunkSpec chunk_spec = 32;
+  google.protobuf.Duration datum_timeout = 33;
+  google.protobuf.Duration job_timeout = 34;
+  string githook_url = 35 [(gogoproto.customname) = "GithookURL"];
+  pfs.Commit spec_commit = 36;
 }
 
 message PipelineInfos {
@@ -293,26 +363,9 @@ message PipelineInfos {
 }
 
 message CreateJobRequest {
-  reserved 3;
-  Transform transform = 1;
+  reserved 3, 4, 1, 10, 7, 9, 8, 12, 11, 13, 14, 21, 15, 16, 17, 18, 19, 20, 22, 23, 24;
   Pipeline pipeline = 2;
-  uint64 pipeline_version = 10;
-  ParallelismSpec parallelism_spec = 7;
-  repeated JobInput inputs = 4;
-  Egress egress = 9;
-  // When service is defined, we create a long running job
-  // by using a k8s RC and Service instead of a k8s Job
-  Service service = 8;
-  pfs.Repo output_repo = 12;
-  string output_branch = 11;
-  Job parent_job = 13;
-  ResourceSpec resource_spec = 14;
-  Input input = 15;
-  pfs.BranchInfo new_branch = 16;
-  bool incremental = 17;
-  bool enable_stats = 18;
-  string salt = 19;
-  bool batch = 20;
+  pfs.Commit output_commit = 25;
 }
 
 message InspectJobRequest {
@@ -323,6 +376,12 @@ message InspectJobRequest {
 message ListJobRequest {
   Pipeline pipeline = 1; // nil means all pipelines
   repeated pfs.Commit input_commit = 2; // nil means all inputs
+  pfs.Commit output_commit = 3;
+}
+
+message FlushJobRequest {
+  repeated pfs.Commit commits = 1;
+  repeated Pipeline to_pipelines = 2;
 }
 
 message DeleteJobRequest {
@@ -334,6 +393,7 @@ message StopJobRequest {
 }
 
 message GetLogsRequest {
+  reserved 4;
   // The pipeline from which we want to get logs (required if the job in 'job'
   // was created as part of a pipeline. To get logs from a non-orphan job
   // without the pipeline that created it, you need to use ElasticSearch).
@@ -348,10 +408,18 @@ message GetLogsRequest {
   // a hash for that file (to search for files at specific versions)
   repeated string data_filters = 3;
 
-  string input_file_id = 4 [(gogoproto.customname) = "InputFileID"];
+  Datum datum = 6;
 
   // If true get logs from the master process
   bool master = 5;
+
+  // Continue to follow new logs as they become available.
+  bool follow = 7;
+
+  // If nonzero, the number of lines from the end of the logs to return.  Note:
+  // tail applies per container, so you will get tail * <number of pods> total
+  // lines back.
+  int64 tail = 8;
 }
 
 // LogMessage is a log line from a PPS worker, annotated with metadata
@@ -362,7 +430,7 @@ message LogMessage {
   string pipeline_name = 1;
   string job_id = 3 [(gogoproto.customname) = "JobID"];
   string worker_id = 7 [(gogoproto.customname) = "WorkerID"];
-  string input_file_id = 9 [(gogoproto.customname) = "InputFileID"];
+  string datum_id = 9 [(gogoproto.customname) = "DatumID"];
   bool master = 10;
 
   // The PFS files being processed (one per pipeline/job input)
@@ -387,19 +455,51 @@ message InspectDatumRequest {
 
 message ListDatumRequest {
   Job job = 1;
+  int64 page_size = 2;
+  int64 page = 3;
+}
+
+message ListDatumResponse {
+  repeated DatumInfo datum_infos = 1;
+  int64 total_pages = 2;
+  int64 page = 3;
+}
+
+// ListDatumStreamResponse is identical to ListDatumResponse, except that only
+// one DatumInfo is present (as these responses are streamed)
+message ListDatumStreamResponse {
+  DatumInfo datum_info = 1;
+  // total_pages is only set in the first response (and set to 0 in all other
+  // responses)
+  int64 total_pages = 2;
+  // page is only set in the first response (and set to 0 in all other
+  // responses)
+  int64 page = 3;
+}
+
+// ChunkSpec specifies how a pipeline should chunk its datums.
+message ChunkSpec {
+  // number, if nonzero, specifies that each chunk should contain `number`
+  // datums. Chunks may contain fewer if the total number of datums don't
+  // divide evenly.
+  int64 number = 1;
+  // size_bytes, if nonzero, specifies a target size for each chunk of datums.
+  // Chunks may be larger or smaller than size_bytes, but will usually be
+  // pretty close to size_bytes in size.
+  int64 size_bytes = 2;
 }
 
 message CreatePipelineRequest {
-  reserved 3;
+  reserved 3, 4;
   Pipeline pipeline = 1;
   Transform transform = 2;
   ParallelismSpec parallelism_spec = 7;
-  repeated PipelineInput inputs = 4;
   Egress egress = 9;
   bool update = 5;
   string output_branch = 10;
   google.protobuf.Duration scale_down_threshold = 11;
-  ResourceSpec resource_spec = 12;
+  ResourceSpec resource_requests = 12;
+  ResourceSpec resource_limits = 22;
   Input input = 13;
   string description = 14;
   bool incremental = 15;
@@ -409,6 +509,12 @@ message CreatePipelineRequest {
   // It only has meaning if Update is true
   bool reprocess = 18;
   bool batch = 19;
+  int64 max_queue_size = 20;
+  Service service = 21;
+  ChunkSpec chunk_spec = 23;
+  google.protobuf.Duration datum_timeout = 24;
+  google.protobuf.Duration job_timeout = 25;
+  string salt = 26;
 }
 
 message InspectPipelineRequest {
@@ -419,9 +525,8 @@ message ListPipelineRequest {
 }
 
 message DeletePipelineRequest {
+  reserved 2, 3;
   Pipeline pipeline = 1;
-  bool delete_jobs = 2;
-  bool delete_repo = 3;
   bool all = 4;
 }
 
@@ -442,14 +547,26 @@ message RerunPipelineRequest {
 message GarbageCollectRequest {}
 message GarbageCollectResponse {}
 
+message ActivateAuthRequest {}
+message ActivateAuthResponse {}
+
 service API {
   rpc CreateJob(CreateJobRequest) returns (Job) {}
   rpc InspectJob(InspectJobRequest) returns (JobInfo) {}
+  // ListJob returns information about current and past Pachyderm jobs. This is
+  // deprecated in favor of ListJobStream
   rpc ListJob(ListJobRequest) returns (JobInfos) {}
+  // ListJobStream returns information about current and past Pachyderm jobs.
+  rpc ListJobStream(ListJobRequest) returns (stream JobInfo) {}
+  rpc FlushJob(FlushJobRequest) returns (stream JobInfo) {}
   rpc DeleteJob(DeleteJobRequest) returns (google.protobuf.Empty) {}
   rpc StopJob(StopJobRequest) returns (google.protobuf.Empty) {}
   rpc InspectDatum(InspectDatumRequest) returns (DatumInfo) {}
-  rpc ListDatum(ListDatumRequest) returns (DatumInfos) {}
+  // ListDatum returns information about each datum fed to a Pachyderm job. This
+  // is deprecated in favor of ListDatumStream
+  rpc ListDatum(ListDatumRequest) returns (ListDatumResponse) {}
+  // ListDatumStream returns information about each datum fed to a Pachyderm job
+  rpc ListDatumStream(ListDatumRequest) returns (stream ListDatumStreamResponse) {}
   rpc RestartDatum(RestartDatumRequest) returns (google.protobuf.Empty) {}
 
   rpc CreatePipeline(CreatePipelineRequest) returns (google.protobuf.Empty) {}
@@ -466,4 +583,8 @@ service API {
 
   // Garbage collection
   rpc GarbageCollect(GarbageCollectRequest) returns (GarbageCollectResponse) {}
+
+  // An internal call that causes PPS to put itself into an auth-enabled state
+  // (all pipeline have tokens, correct permissions, etcd)
+  rpc ActivateAuth(ActivateAuthRequest) returns (ActivateAuthResponse) {}
 }

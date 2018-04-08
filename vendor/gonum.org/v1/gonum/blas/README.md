@@ -8,38 +8,6 @@ language](http://golang.org)
   go get gonum.org/v1/gonum/blas/...
 ```
 
-### BLAS C-bindings
-
-If you want to use OpenBLAS, install it in any directory:
-```sh
-  git clone https://github.com/xianyi/OpenBLAS
-  cd OpenBLAS
-  make
-```
-
-The blas/cgo package provides bindings to C-backed BLAS packages. blas/cgo needs the `CGO_LDFLAGS`
-environment variable to point to the blas installation. More information can be found in the
-[cgo command documentation](http://golang.org/cmd/cgo/).
-
-Then install the blas/cgo package:
-```sh
-  CGO_LDFLAGS="-L/path/to/OpenBLAS -lopenblas" go install gonum.org/v1/netlib/blas
-```
-
-For Windows you can download binary packages for OpenBLAS at
-[SourceForge](http://sourceforge.net/projects/openblas/files/).
-
-If you want to use a different BLAS package such as the Intel MKL you can
-adjust the `CGO_LDFLAGS` variable:
-```sh
-  CGO_LDFLAGS="-lmkl_rt" go install gonum.org/v1/netlib/blas
-```
-
-On OS X the easiest solution is to use the libraries provided by the system:
-```sh
-  CGO_LDFLAGS="-framework Accelerate" go install gonum.org/v1/netlib/blas
-```
-
 ## Packages
 
 ### blas

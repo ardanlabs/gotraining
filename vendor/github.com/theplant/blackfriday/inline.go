@@ -15,7 +15,6 @@ package blackfriday
 
 import (
 	"bytes"
-	"strconv"
 )
 
 // Functions to parse text within a block
@@ -74,6 +73,7 @@ func emphasis(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 		if ret = helperEmphasis(p, out, data[1:], c); ret == 0 {
 			return 0
 		}
+
 		return ret + 1
 	}
 
@@ -168,49 +168,20 @@ func lineBreak(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 	return 1
 }
 
-type linkType int
-
-const (
-	linkNormal linkType = iota
-	linkImg
-	linkDeferredFootnote
-	linkInlineFootnote
-)
-
-// '[': parse a link or an image or a footnote
+// '[': parse a link or an image
 func link(p *parser, out *bytes.Buffer, data []byte, offset int) int {
-	// no links allowed inside regular links, footnote, and deferred footnotes
-	if p.insideLink && (offset > 0 && data[offset-1] == '[' || len(data)-1 > offset && data[offset+1] == '^') {
+	// no links allowed inside other links
+	if p.insideLink {
 		return 0
 	}
 
-	// [text] == regular link
-	// ![alt] == image
-	// ^[text] == inline footnote
-	// [^refId] == deferred footnote
-	var t linkType
-	if offset > 0 && data[offset-1] == '!' {
-		t = linkImg
-	} else if p.flags&EXTENSION_FOOTNOTES != 0 {
-		if offset > 0 && data[offset-1] == '^' {
-			t = linkInlineFootnote
-		} else if len(data)-1 > offset && data[offset+1] == '^' {
-			t = linkDeferredFootnote
-		}
-	}
+	isImg := offset > 0 && data[offset-1] == '!'
 
 	data = data[offset:]
 
-	var (
-		i           = 1
-		noteId      int
-		title, link []byte
-		textHasNl   = false
-	)
-
-	if t == linkDeferredFootnote {
-		i++
-	}
+	i := 1
+	var title, link []byte
+	textHasNl := false
 
 	// look for the matching closing bracket
 	for level := 1; level > 0 && i < len(data); i++ {
@@ -380,7 +351,6 @@ func link(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 		lr, ok := p.refs[key]
 		if !ok {
 			return 0
-
 		}
 
 		// keep link and title from reference
@@ -388,7 +358,7 @@ func link(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 		title = lr.title
 		i++
 
-	// shortcut reference style link or reference or inline footnote
+	// shortcut reference style link
 	default:
 		var id []byte
 
@@ -407,59 +377,19 @@ func link(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 
 			id = b.Bytes()
 		} else {
-			if t == linkDeferredFootnote {
-				id = data[2:txtE] // get rid of the ^
-			} else {
-				id = data[1:txtE]
-			}
+			id = data[1:txtE]
 		}
 
+		// find the reference with matching id
 		key := string(bytes.ToLower(id))
-		if t == linkInlineFootnote {
-			// create a new reference
-			noteId = len(p.notes) + 1
-
-			var fragment []byte
-			if len(id) > 0 {
-				if len(id) < 16 {
-					fragment = make([]byte, len(id))
-				} else {
-					fragment = make([]byte, 16)
-				}
-				copy(fragment, slugify(id))
-			} else {
-				fragment = append([]byte("footnote-"), []byte(strconv.Itoa(noteId))...)
-			}
-
-			ref := &reference{
-				noteId:   noteId,
-				hasBlock: false,
-				link:     fragment,
-				title:    id,
-			}
-
-			p.notes = append(p.notes, ref)
-
-			link = ref.link
-			title = ref.title
-		} else {
-			// find the reference with matching id
-			lr, ok := p.refs[key]
-			if !ok {
-				return 0
-			}
-
-			if t == linkDeferredFootnote {
-				lr.noteId = len(p.notes) + 1
-				p.notes = append(p.notes, lr)
-			}
-
-			// keep link and title from reference
-			link = lr.link
-			// if inline footnote, title == footnote contents
-			title = lr.title
-			noteId = lr.noteId
+		lr, ok := p.refs[key]
+		if !ok {
+			return 0
 		}
+
+		// keep link and title from reference
+		link = lr.link
+		title = lr.title
 
 		// rewind the whitespace
 		i = txtE + 1
@@ -468,7 +398,7 @@ func link(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 	// build content: img alt is escaped, link content is parsed
 	var content bytes.Buffer
 	if txtE > 1 {
-		if t == linkImg {
+		if isImg {
 			content.Write(data[1:txtE])
 		} else {
 			// links cannot contain other links, so turn off link parsing temporarily
@@ -480,25 +410,19 @@ func link(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 	}
 
 	var uLink []byte
-	if t == linkNormal || t == linkImg {
-		if len(link) > 0 {
-			var uLinkBuf bytes.Buffer
-			unescapeText(&uLinkBuf, link)
-			uLink = uLinkBuf.Bytes()
-		}
+	if len(link) > 0 {
+		var uLinkBuf bytes.Buffer
+		unescapeText(&uLinkBuf, link)
+		uLink = uLinkBuf.Bytes()
+	}
 
-		// links need something to click on and somewhere to go
-		if len(uLink) == 0 || (t == linkNormal && content.Len() == 0) {
-			return 0
-		}
+	// links need something to click on and somewhere to go
+	if len(uLink) == 0 || (!isImg && content.Len() == 0) {
+		return 0
 	}
 
 	// call the relevant rendering function
-	switch t {
-	case linkNormal:
-		p.r.Link(out, uLink, title, content.Bytes())
-
-	case linkImg:
+	if isImg {
 		outSize := out.Len()
 		outBytes := out.Bytes()
 		if outSize > 0 && outBytes[outSize-1] == '!' {
@@ -506,21 +430,8 @@ func link(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 		}
 
 		p.r.Image(out, uLink, title, content.Bytes())
-
-	case linkInlineFootnote:
-		outSize := out.Len()
-		outBytes := out.Bytes()
-		if outSize > 0 && outBytes[outSize-1] == '^' {
-			out.Truncate(outSize - 1)
-		}
-
-		p.r.FootnoteRef(out, link, noteId)
-
-	case linkDeferredFootnote:
-		p.r.FootnoteRef(out, link, noteId)
-
-	default:
-		return 0
+	} else {
+		p.r.Link(out, uLink, title, content.Bytes())
 	}
 
 	return i
@@ -548,7 +459,7 @@ func leftAngle(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 }
 
 // '\\' backslash escape
-var escapeChars = []byte("\\`*_{}[]()#+-.!:|&<>~^$")
+var escapeChars = []byte("\\`*_{}[]()#+-.!:|&<>")
 
 func escape(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 	data = data[offset:]
@@ -619,7 +530,7 @@ func autoLink(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 
 	// scan backward for a word boundary
 	rewind := 0
-	for offset-rewind > 0 && rewind <= 7 && isletter(data[offset-rewind-1]) {
+	for offset-rewind > 0 && rewind <= 7 && !isspace(data[offset-rewind-1]) && !isspace(data[offset-rewind-1]) {
 		rewind++
 	}
 	if rewind > 6 { // longest supported protocol is "mailto" which has 6 letters
@@ -924,10 +835,8 @@ func helperFindEmphChar(data []byte, c byte) int {
 func helperEmphasis(p *parser, out *bytes.Buffer, data []byte, c byte) int {
 	i := 0
 
-	fromEmph3 := false
 	// skip one symbol if coming from emph3
 	if len(data) > 1 && data[0] == c && data[1] == c {
-		fromEmph3 = true
 		i = 1
 	}
 
@@ -942,13 +851,6 @@ func helperEmphasis(p *parser, out *bytes.Buffer, data []byte, c byte) int {
 		}
 
 		if i+1 < len(data) && data[i+1] == c {
-			if !fromEmph3 {
-				var work bytes.Buffer
-				p.inline(&work, data[:i])
-				p.r.Emphasis(out, work.Bytes())
-				return i + 1
-			}
-
 			i++
 			continue
 		}

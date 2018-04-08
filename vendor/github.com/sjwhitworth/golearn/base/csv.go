@@ -5,21 +5,15 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
-	"os"
 	"regexp"
 	"runtime"
 	"strings"
 )
 
-// ParseCSVGetRows returns the number of rows in a given file.
-func ParseCSVGetRows(filepath string) (int, error) {
-	file, err := os.Open(filepath)
-	if err != nil {
-		return 0, err
-	}
-	defer file.Close()
-
-	reader := csv.NewReader(file)
+// ParseCSVGetRowsFromReader returns the number of rows in a given reader.
+func ParseCSVGetRowsFromReader(r io.ReadSeeker) (int, error) {
+	r.Seek(0, 0)
+	reader := csv.NewReader(r)
 	counter := 0
 	for {
 		_, err := reader.Read()
@@ -33,22 +27,17 @@ func ParseCSVGetRows(filepath string) (int, error) {
 	return counter, nil
 }
 
-// ParseCSVEstimateFilePrecision determines what the maximum number of
-// digits occuring anywhere after the decimal point within the file.
-func ParseCSVEstimateFilePrecision(filepath string) (int, error) {
+// ParseCSVEstimateFilePrecisionFromReader determines what the maximum number of
+// digits occuring anywhere after the decimal point within the reader.
+func ParseCSVEstimateFilePrecisionFromReader(r io.ReadSeeker) (int, error) {
 	// Creat a basic regexp
 	rexp := regexp.MustCompile("[0-9]+(.[0-9]+)?")
 
-	// Open the source file
-	f, err := os.Open(filepath)
-	if err != nil {
-		return 0, err
-	}
-	defer f.Close()
-
 	// Scan through the file line-by-line
 	maxL := 0
-	scanner := bufio.NewScanner(f)
+
+	r.Seek(0, 0)
+	scanner := bufio.NewScanner(r)
 	lineCount := 0
 	for scanner.Scan() {
 		if lineCount > 5 {
@@ -79,27 +68,23 @@ func ParseCSVEstimateFilePrecision(filepath string) (int, error) {
 	return maxL, nil
 }
 
-// ParseCSVGetAttributes returns an ordered slice of appropriate-ly typed
+// ParseCSVGetAttributesFromReader returns an ordered slice of appropriate-ly typed
 // and named Attributes.
-func ParseCSVGetAttributes(filepath string, hasHeaders bool) []Attribute {
-	attrs := ParseCSVSniffAttributeTypes(filepath, hasHeaders)
-	names := ParseCSVSniffAttributeNames(filepath, hasHeaders)
+func ParseCSVGetAttributesFromReader(r io.ReadSeeker, hasHeaders bool) []Attribute {
+	attrs := ParseCSVSniffAttributeTypesFromReader(r, hasHeaders)
+	names := ParseCSVSniffAttributeNamesFromReader(r, hasHeaders)
 	for i, attr := range attrs {
 		attr.SetName(names[i])
 	}
 	return attrs
 }
 
-// ParseCSVSniffAttributeNames returns a slice containing the top row
-// of a given CSV file, or placeholders if hasHeaders is false.
-func ParseCSVSniffAttributeNames(filepath string, hasHeaders bool) []string {
-	file, err := os.Open(filepath)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+// ParseCSVSniffAttributeNamesFromReader returns a slice containing the top row
+// of a given reader with CSV-contents, or placeholders if hasHeaders is false.
+func ParseCSVSniffAttributeNamesFromReader(r io.ReadSeeker, hasHeaders bool) []string {
 
-	reader := csv.NewReader(file)
+	r.Seek(0, 0)
+	reader := csv.NewReader(r)
 	headers, err := reader.Read()
 	if err != nil {
 		panic(err)
@@ -119,20 +104,16 @@ func ParseCSVSniffAttributeNames(filepath string, hasHeaders bool) []string {
 
 }
 
-// ParseCSVSniffAttributeTypes returns a slice of appropriately-typed Attributes.
+// ParseCSVSniffAttributeTypesFromReader returns a slice of appropriately-typed Attributes.
 //
 // The type of a given attribute is determined by looking at the first data row
 // of the CSV.
-func ParseCSVSniffAttributeTypes(filepath string, hasHeaders bool) []Attribute {
+func ParseCSVSniffAttributeTypesFromReader(r io.ReadSeeker, hasHeaders bool) []Attribute {
 	var attrs []Attribute
-	// Open file
-	file, err := os.Open(filepath)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+
 	// Create the CSV reader
-	reader := csv.NewReader(file)
+	r.Seek(0, 0)
+	reader := csv.NewReader(r)
 	if hasHeaders {
 		// Skip the headers
 		_, err := reader.Read()
@@ -161,7 +142,7 @@ func ParseCSVSniffAttributeTypes(filepath string, hasHeaders bool) []Attribute {
 	}
 
 	// Estimate file precision
-	maxP, err := ParseCSVEstimateFilePrecision(filepath)
+	maxP, err := ParseCSVEstimateFilePrecisionFromReader(r)
 	if err != nil {
 		panic(err)
 	}
@@ -175,7 +156,7 @@ func ParseCSVSniffAttributeTypes(filepath string, hasHeaders bool) []Attribute {
 }
 
 // ParseCSVBuildInstancesFromReader updates an [[#UpdatableDataGrid]] from a io.Reader
-func ParseCSVBuildInstancesFromReader(r io.Reader, attrs []Attribute, hasHeader bool, u UpdatableDataGrid) (err error) {
+func ParseCSVBuildInstancesFromReader(r io.ReadSeeker, attrs []Attribute, hasHeader bool, u UpdatableDataGrid) (err error) {
 	var rowCounter int
 
 	defer func() {
@@ -183,11 +164,13 @@ func ParseCSVBuildInstancesFromReader(r io.Reader, attrs []Attribute, hasHeader 
 			if _, ok := r.(runtime.Error); ok {
 				panic(err)
 			}
-			err = fmt.Errorf("Error at line %d (error %s)", rowCounter, r.(error))
+			err = fmt.Errorf("error at line %d (error %s)", rowCounter, r.(error))
 		}
 	}()
 
 	specs := ResolveAttributes(u, attrs)
+
+	r.Seek(0, 0)
 	reader := csv.NewReader(r)
 
 	for {
@@ -212,19 +195,11 @@ func ParseCSVBuildInstancesFromReader(r io.Reader, attrs []Attribute, hasHeader 
 	return nil
 }
 
-// ParseCSVToInstances reads the CSV file given by filepath and returns
+// ParseCSVToInstancesFromReader reads the reader containing CSV and returns
 // the read Instances.
-func ParseCSVToInstances(filepath string, hasHeaders bool) (instances *DenseInstances, err error) {
-
-	// Open the file
-	f, err := os.Open(filepath)
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-
+func ParseCSVToInstancesFromReader(r io.ReadSeeker, hasHeaders bool) (instances *DenseInstances, err error) {
 	// Read the number of rows in the file
-	rowCount, err := ParseCSVGetRows(filepath)
+	rowCount, err := ParseCSVGetRowsFromReader(r)
 	if err != nil {
 		return nil, err
 	}
@@ -234,7 +209,7 @@ func ParseCSVToInstances(filepath string, hasHeaders bool) (instances *DenseInst
 	}
 
 	// Read the row headers
-	attrs := ParseCSVGetAttributes(filepath, hasHeaders)
+	attrs := ParseCSVGetAttributesFromReader(r, hasHeaders)
 	specs := make([]AttributeSpec, len(attrs))
 	// Allocate the Instances to return
 	instances = NewDenseInstances()
@@ -244,7 +219,7 @@ func ParseCSVToInstances(filepath string, hasHeaders bool) (instances *DenseInst
 	}
 	instances.Extend(rowCount)
 
-	err = ParseCSVBuildInstancesFromReader(f, attrs, hasHeaders, instances)
+	err = ParseCSVBuildInstancesFromReader(r, attrs, hasHeaders, instances)
 	if err != nil {
 		return nil, err
 	}
@@ -268,19 +243,11 @@ func ParseMatchAttributes(attrs, templateAttrs []Attribute) {
 	}
 }
 
-// ParseCSVToInstancesTemplated reads the CSV file given by filepath and returns
+// ParseCSVToTemplatedInstancesFromReader reads the reader containing CSV and returns
 // the read Instances, using another already read DenseInstances as a template.
-func ParseCSVToTemplatedInstances(filepath string, hasHeaders bool, template *DenseInstances) (instances *DenseInstances, err error) {
-
-	// Open the file
-	f, err := os.Open(filepath)
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-
+func ParseCSVToTemplatedInstancesFromReader(r io.ReadSeeker, hasHeaders bool, template *DenseInstances) (instances *DenseInstances, err error) {
 	// Read the number of rows in the file
-	rowCount, err := ParseCSVGetRows(filepath)
+	rowCount, err := ParseCSVGetRowsFromReader(r)
 	if err != nil {
 		return nil, err
 	}
@@ -290,7 +257,7 @@ func ParseCSVToTemplatedInstances(filepath string, hasHeaders bool, template *De
 	}
 
 	// Read the row headers
-	attrs := ParseCSVGetAttributes(filepath, hasHeaders)
+	attrs := ParseCSVGetAttributesFromReader(r, hasHeaders)
 	templateAttrs := template.AllAttributes()
 	ParseMatchAttributes(attrs, templateAttrs)
 
@@ -298,7 +265,7 @@ func ParseCSVToTemplatedInstances(filepath string, hasHeaders bool, template *De
 	instances = CopyDenseInstances(template, templateAttrs)
 	instances.Extend(rowCount)
 
-	err = ParseCSVBuildInstancesFromReader(f, attrs, hasHeaders, instances)
+	err = ParseCSVBuildInstancesFromReader(r, attrs, hasHeaders, instances)
 	if err != nil {
 		return nil, err
 	}
@@ -313,26 +280,18 @@ func ParseCSVToTemplatedInstances(filepath string, hasHeaders bool, template *De
 	return instances, nil
 }
 
-// ParseCSVToInstancesWithAttributeGroups reads the CSV file given by filepath,
+// ParseCSVToInstancesWithAttributeGroupsFromReader reads the CSV file given by filepath,
 // and returns the read DenseInstances, but also makes sure to group any Attributes
 // specified in the first argument and also any class Attributes specified in the second
-func ParseCSVToInstancesWithAttributeGroups(filepath string, attrGroups, classAttrGroups map[string]string, attrOverrides map[int]Attribute, hasHeaders bool) (instances *DenseInstances, err error) {
-
-	// Open file
-	f, err := os.Open(filepath)
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-
+func ParseCSVToInstancesWithAttributeGroupsFromReader(r io.ReadSeeker, attrGroups, classAttrGroups map[string]string, attrOverrides map[int]Attribute, hasHeaders bool) (instances *DenseInstances, err error) {
 	// Read row count
-	rowCount, err := ParseCSVGetRows(filepath)
+	rowCount, err := ParseCSVGetRowsFromReader(r)
 	if err != nil {
 		return nil, err
 	}
 
 	// Read the row headers
-	attrs := ParseCSVGetAttributes(filepath, hasHeaders)
+	attrs := ParseCSVGetAttributesFromReader(r, hasHeaders)
 	for i := range attrs {
 		if a, ok := attrOverrides[i]; ok {
 			attrs[i] = a
@@ -399,7 +358,7 @@ func ParseCSVToInstancesWithAttributeGroups(filepath string, attrGroups, classAt
 	// Allocate
 	instances.Extend(rowCount)
 
-	err = ParseCSVBuildInstancesFromReader(f, attrs, hasHeaders, instances)
+	err = ParseCSVBuildInstancesFromReader(r, attrs, hasHeaders, instances)
 	if err != nil {
 		return nil, err
 	}

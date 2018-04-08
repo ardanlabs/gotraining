@@ -1,7 +1,7 @@
 package base
 
 import (
-	"github.com/gonum/matrix/mat64"
+	"gonum.org/v1/gonum/mat"
 )
 
 // Classifier implementations predict categorical class labels.
@@ -16,6 +16,19 @@ type Classifier interface {
 	Fit(FixedDataGrid) error
 	// Why not make every classifier return a nice-looking string?
 	String() string
+
+	// Save the classifier to a file
+	Save(string) error
+	// Read recreates the classifier from a file
+	Load(string) error
+
+	// Retrieves the metadata associated with this classifer
+	// (required for Ensembles)
+	GetMetadata() ClassifierMetadataV1
+
+	// Used when something is saved as part of an ensemble
+	SaveWithPrefix(*ClassifierSerializer, string) error
+	LoadWithPrefix(*ClassifierDeserializer, string) error
 }
 
 // BaseClassifier stores options common to every classifier.
@@ -24,7 +37,7 @@ type BaseClassifier struct {
 }
 
 type BaseRegressor struct {
-	Data   mat64.Dense
+	Data   mat.Dense
 	Name   string
 	Labels []float64
 }

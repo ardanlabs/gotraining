@@ -1,4 +1,4 @@
-// Copyright ©2013 The gonum Authors. All rights reserved.
+// Copyright ©2013 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -18,10 +18,59 @@ var (
 	_ Reseter = vector
 )
 
-// Vector is a column vector.
+// Vector is a vector.
 type Vector interface {
 	Matrix
+	AtVec(int) float64
 	Len() int
+}
+
+// TransposeVec is a type for performing an implicit transpose of a Vector.
+// It implements the Vector interface, returning values from the transpose
+// of the vector within.
+type TransposeVec struct {
+	Vector Vector
+}
+
+// At returns the value of the element at row i and column j of the transposed
+// matrix, that is, row j and column i of the Vector field.
+func (t TransposeVec) At(i, j int) float64 {
+	return t.Vector.At(j, i)
+}
+
+// AtVec returns the element at position i. It panics if i is out of bounds.
+func (t TransposeVec) AtVec(i int) float64 {
+	return t.Vector.AtVec(i)
+}
+
+// Dims returns the dimensions of the transposed vector.
+func (t TransposeVec) Dims() (r, c int) {
+	c, r = t.Vector.Dims()
+	return r, c
+}
+
+// T performs an implicit transpose by returning the Vector field.
+func (t TransposeVec) T() Matrix {
+	return t.Vector
+}
+
+// Len returns the number of columns in the vector.
+func (t TransposeVec) Len() int {
+	return t.Vector.Len()
+}
+
+// TVec performs an implicit transpose by returning the Vector field.
+func (t TransposeVec) TVec() Vector {
+	return t.Vector
+}
+
+// Untranspose returns the Vector field.
+func (t TransposeVec) Untranspose() Matrix {
+	return t.Vector
+}
+
+func (t TransposeVec) UntransposeVec() Vector {
+	return t.Vector
 }
 
 // VecDense represents a column vector.
@@ -53,11 +102,11 @@ func NewVecDense(n int, data []float64) *VecDense {
 	}
 }
 
-// SliceVec returns a new VecDense that shares backing data with the receiver.
+// SliceVec returns a new Vector that shares backing data with the receiver.
 // The returned matrix starts at i of the receiver and extends k-i elements.
 // SliceVec panics with ErrIndexOutOfRange if the slice is outside the capacity
 // of the receiver.
-func (v *VecDense) SliceVec(i, k int) *VecDense {
+func (v *VecDense) SliceVec(i, k int) Vector {
 	if i < 0 || k <= i || v.Cap() < k {
 		panic(ErrIndexOutOfRange)
 	}
@@ -106,6 +155,11 @@ func (v *VecDense) T() Matrix {
 	return Transpose{v}
 }
 
+// TVec performs an implicit transpose by returning the receiver inside a TransposeVec.
+func (v *VecDense) TVec() Vector {
+	return TransposeVec{v}
+}
+
 // Reset zeros the length of the vector so that it can be reused as the
 // receiver of a dimensionally restricted operation.
 //
@@ -120,16 +174,29 @@ func (v *VecDense) Reset() {
 
 // CloneVec makes a copy of a into the receiver, overwriting the previous value
 // of the receiver.
-func (v *VecDense) CloneVec(a *VecDense) {
+func (v *VecDense) CloneVec(a Vector) {
 	if v == a {
 		return
 	}
-	v.n = a.n
+	v.n = a.Len()
 	v.mat = blas64.Vector{
 		Inc:  1,
 		Data: use(v.mat.Data, v.n),
 	}
-	blas64.Copy(v.n, a.mat, v.mat)
+	if r, ok := a.(RawVectorer); ok {
+		blas64.Copy(v.n, r.RawVector(), v.mat)
+		return
+	}
+	for i := 0; i < a.Len(); i++ {
+		v.SetVec(i, a.AtVec(i))
+	}
+}
+
+// VecDenseCopyOf returns a newly allocated copy of the elements of a.
+func VecDenseCopyOf(a Vector) *VecDense {
+	v := &VecDense{}
+	v.CloneVec(a)
+	return v
 }
 
 func (v *VecDense) RawVector() blas64.Vector {
@@ -139,36 +206,55 @@ func (v *VecDense) RawVector() blas64.Vector {
 // CopyVec makes a copy of elements of a into the receiver. It is similar to the
 // built-in copy; it copies as much as the overlap between the two vectors and
 // returns the number of elements it copied.
-func (v *VecDense) CopyVec(a *VecDense) int {
+func (v *VecDense) CopyVec(a Vector) int {
 	n := min(v.Len(), a.Len())
-	if v != a {
-		blas64.Copy(n, a.mat, v.mat)
+	if v == a {
+		return n
+	}
+	if r, ok := a.(RawVectorer); ok {
+		blas64.Copy(n, r.RawVector(), v.mat)
+		return n
+	}
+	for i := 0; i < n; i++ {
+		v.setVec(i, a.AtVec(i))
 	}
 	return n
 }
 
 // ScaleVec scales the vector a by alpha, placing the result in the receiver.
-func (v *VecDense) ScaleVec(alpha float64, a *VecDense) {
+func (v *VecDense) ScaleVec(alpha float64, a Vector) {
 	n := a.Len()
-	if v != a {
-		v.reuseAs(n)
-		if v.mat.Inc == 1 && a.mat.Inc == 1 {
-			f64.ScalUnitaryTo(v.mat.Data, alpha, a.mat.Data)
+
+	if v == a {
+		if v.mat.Inc == 1 {
+			f64.ScalUnitary(alpha, v.mat.Data)
+			return
+		}
+		f64.ScalInc(alpha, v.mat.Data, uintptr(n), uintptr(v.mat.Inc))
+		return
+	}
+
+	v.reuseAs(n)
+
+	if rv, ok := a.(RawVectorer); ok {
+		mat := rv.RawVector()
+		v.checkOverlap(mat)
+		if v.mat.Inc == 1 && mat.Inc == 1 {
+			f64.ScalUnitaryTo(v.mat.Data, alpha, mat.Data)
 			return
 		}
 		f64.ScalIncTo(v.mat.Data, uintptr(v.mat.Inc),
-			alpha, a.mat.Data, uintptr(n), uintptr(a.mat.Inc))
+			alpha, mat.Data, uintptr(n), uintptr(mat.Inc))
 		return
 	}
-	if v.mat.Inc == 1 {
-		f64.ScalUnitary(alpha, v.mat.Data)
-		return
+
+	for i := 0; i < n; i++ {
+		v.setVec(i, alpha*a.AtVec(i))
 	}
-	f64.ScalInc(alpha, v.mat.Data, uintptr(n), uintptr(v.mat.Inc))
 }
 
 // AddScaledVec adds the vectors a and alpha*b, placing the result in the receiver.
-func (v *VecDense) AddScaledVec(a *VecDense, alpha float64, b *VecDense) {
+func (v *VecDense) AddScaledVec(a Vector, alpha float64, b Vector) {
 	if alpha == 1 {
 		v.AddVec(a, b)
 		return
@@ -185,42 +271,63 @@ func (v *VecDense) AddScaledVec(a *VecDense, alpha float64, b *VecDense) {
 		panic(ErrShape)
 	}
 
-	if v != a {
-		v.checkOverlap(a.mat)
+	var amat, bmat blas64.Vector
+	fast := true
+	aU, _ := untranspose(a)
+	if rv, ok := aU.(RawVectorer); ok {
+		amat = rv.RawVector()
+		if v != a {
+			v.checkOverlap(amat)
+		}
+	} else {
+		fast = false
 	}
-	if v != b {
-		v.checkOverlap(b.mat)
+	bU, _ := untranspose(b)
+	if rv, ok := bU.(RawVectorer); ok {
+		bmat = rv.RawVector()
+		if v != b {
+			v.checkOverlap(bmat)
+		}
+	} else {
+		fast = false
 	}
 
 	v.reuseAs(ar)
 
 	switch {
 	case alpha == 0: // v <- a
+		if v == a {
+			return
+		}
 		v.CopyVec(a)
 	case v == a && v == b: // v <- v + alpha * v = (alpha + 1) * v
 		blas64.Scal(ar, alpha+1, v.mat)
+	case !fast: // v <- a + alpha * b without blas64 support.
+		for i := 0; i < ar; i++ {
+			v.setVec(i, a.AtVec(i)+alpha*b.AtVec(i))
+		}
 	case v == a && v != b: // v <- v + alpha * b
-		if v.mat.Inc == 1 && b.mat.Inc == 1 {
+		if v.mat.Inc == 1 && bmat.Inc == 1 {
 			// Fast path for a common case.
-			f64.AxpyUnitaryTo(v.mat.Data, alpha, b.mat.Data, a.mat.Data)
+			f64.AxpyUnitaryTo(v.mat.Data, alpha, bmat.Data, amat.Data)
 		} else {
-			f64.AxpyInc(alpha, b.mat.Data, v.mat.Data,
-				uintptr(ar), uintptr(b.mat.Inc), uintptr(v.mat.Inc), 0, 0)
+			f64.AxpyInc(alpha, bmat.Data, v.mat.Data,
+				uintptr(ar), uintptr(bmat.Inc), uintptr(v.mat.Inc), 0, 0)
 		}
 	default: // v <- a + alpha * b or v <- a + alpha * v
-		if v.mat.Inc == 1 && a.mat.Inc == 1 && b.mat.Inc == 1 {
+		if v.mat.Inc == 1 && amat.Inc == 1 && bmat.Inc == 1 {
 			// Fast path for a common case.
-			f64.AxpyUnitaryTo(v.mat.Data, alpha, b.mat.Data, a.mat.Data)
+			f64.AxpyUnitaryTo(v.mat.Data, alpha, bmat.Data, amat.Data)
 		} else {
 			f64.AxpyIncTo(v.mat.Data, uintptr(v.mat.Inc), 0,
-				alpha, b.mat.Data, a.mat.Data,
-				uintptr(ar), uintptr(b.mat.Inc), uintptr(a.mat.Inc), 0, 0)
+				alpha, bmat.Data, amat.Data,
+				uintptr(ar), uintptr(bmat.Inc), uintptr(amat.Inc), 0, 0)
 		}
 	}
 }
 
 // AddVec adds the vectors a and b, placing the result in the receiver.
-func (v *VecDense) AddVec(a, b *VecDense) {
+func (v *VecDense) AddVec(a, b Vector) {
 	ar := a.Len()
 	br := b.Len()
 
@@ -228,27 +335,42 @@ func (v *VecDense) AddVec(a, b *VecDense) {
 		panic(ErrShape)
 	}
 
-	if v != a {
-		v.checkOverlap(a.mat)
-	}
-	if v != b {
-		v.checkOverlap(b.mat)
-	}
-
 	v.reuseAs(ar)
 
-	if v.mat.Inc == 1 && a.mat.Inc == 1 && b.mat.Inc == 1 {
-		// Fast path for a common case.
-		f64.AxpyUnitaryTo(v.mat.Data, 1, b.mat.Data, a.mat.Data)
-		return
+	aU, _ := untranspose(a)
+	bU, _ := untranspose(b)
+
+	if arv, ok := aU.(RawVectorer); ok {
+		if brv, ok := bU.(RawVectorer); ok {
+			amat := arv.RawVector()
+			bmat := brv.RawVector()
+
+			if v != a {
+				v.checkOverlap(amat)
+			}
+			if v != b {
+				v.checkOverlap(bmat)
+			}
+
+			if v.mat.Inc == 1 && amat.Inc == 1 && bmat.Inc == 1 {
+				// Fast path for a common case.
+				f64.AxpyUnitaryTo(v.mat.Data, 1, bmat.Data, amat.Data)
+				return
+			}
+			f64.AxpyIncTo(v.mat.Data, uintptr(v.mat.Inc), 0,
+				1, bmat.Data, amat.Data,
+				uintptr(ar), uintptr(bmat.Inc), uintptr(amat.Inc), 0, 0)
+			return
+		}
 	}
-	f64.AxpyIncTo(v.mat.Data, uintptr(v.mat.Inc), 0,
-		1, b.mat.Data, a.mat.Data,
-		uintptr(ar), uintptr(b.mat.Inc), uintptr(a.mat.Inc), 0, 0)
+
+	for i := 0; i < ar; i++ {
+		v.setVec(i, a.AtVec(i)+b.AtVec(i))
+	}
 }
 
 // SubVec subtracts the vector b from a, placing the result in the receiver.
-func (v *VecDense) SubVec(a, b *VecDense) {
+func (v *VecDense) SubVec(a, b Vector) {
 	ar := a.Len()
 	br := b.Len()
 
@@ -256,28 +378,43 @@ func (v *VecDense) SubVec(a, b *VecDense) {
 		panic(ErrShape)
 	}
 
-	if v != a {
-		v.checkOverlap(a.mat)
-	}
-	if v != b {
-		v.checkOverlap(b.mat)
-	}
-
 	v.reuseAs(ar)
 
-	if v.mat.Inc == 1 && a.mat.Inc == 1 && b.mat.Inc == 1 {
-		// Fast path for a common case.
-		f64.AxpyUnitaryTo(v.mat.Data, -1, b.mat.Data, a.mat.Data)
-		return
+	aU, _ := untranspose(a)
+	bU, _ := untranspose(b)
+
+	if arv, ok := aU.(RawVectorer); ok {
+		if brv, ok := bU.(RawVectorer); ok {
+			amat := arv.RawVector()
+			bmat := brv.RawVector()
+
+			if v != a {
+				v.checkOverlap(amat)
+			}
+			if v != b {
+				v.checkOverlap(bmat)
+			}
+
+			if v.mat.Inc == 1 && amat.Inc == 1 && bmat.Inc == 1 {
+				// Fast path for a common case.
+				f64.AxpyUnitaryTo(v.mat.Data, -1, bmat.Data, amat.Data)
+				return
+			}
+			f64.AxpyIncTo(v.mat.Data, uintptr(v.mat.Inc), 0,
+				-1, bmat.Data, amat.Data,
+				uintptr(ar), uintptr(bmat.Inc), uintptr(amat.Inc), 0, 0)
+			return
+		}
 	}
-	f64.AxpyIncTo(v.mat.Data, uintptr(v.mat.Inc), 0,
-		-1, b.mat.Data, a.mat.Data,
-		uintptr(ar), uintptr(b.mat.Inc), uintptr(a.mat.Inc), 0, 0)
+
+	for i := 0; i < ar; i++ {
+		v.setVec(i, a.AtVec(i)-b.AtVec(i))
+	}
 }
 
 // MulElemVec performs element-wise multiplication of a and b, placing the result
 // in the receiver.
-func (v *VecDense) MulElemVec(a, b *VecDense) {
+func (v *VecDense) MulElemVec(a, b Vector) {
 	ar := a.Len()
 	br := b.Len()
 
@@ -285,24 +422,48 @@ func (v *VecDense) MulElemVec(a, b *VecDense) {
 		panic(ErrShape)
 	}
 
-	if v != a {
-		v.checkOverlap(a.mat)
-	}
-	if v != b {
-		v.checkOverlap(b.mat)
-	}
-
 	v.reuseAs(ar)
 
-	amat, bmat := a.RawVector(), b.RawVector()
-	for i := 0; i < v.n; i++ {
-		v.mat.Data[i*v.mat.Inc] = amat.Data[i*amat.Inc] * bmat.Data[i*bmat.Inc]
+	aU, _ := untranspose(a)
+	bU, _ := untranspose(b)
+
+	if arv, ok := aU.(RawVectorer); ok {
+		if brv, ok := bU.(RawVectorer); ok {
+			amat := arv.RawVector()
+			bmat := brv.RawVector()
+
+			if v != a {
+				v.checkOverlap(amat)
+			}
+			if v != b {
+				v.checkOverlap(bmat)
+			}
+
+			if v.mat.Inc == 1 && amat.Inc == 1 && bmat.Inc == 1 {
+				// Fast path for a common case.
+				for i, a := range amat.Data {
+					v.mat.Data[i] = a * bmat.Data[i]
+				}
+				return
+			}
+			var ia, ib int
+			for i := 0; i < ar; i++ {
+				v.setVec(i, amat.Data[ia]*bmat.Data[ib])
+				ia += amat.Inc
+				ib += bmat.Inc
+			}
+			return
+		}
+	}
+
+	for i := 0; i < ar; i++ {
+		v.setVec(i, a.AtVec(i)*b.AtVec(i))
 	}
 }
 
 // DivElemVec performs element-wise division of a by b, placing the result
 // in the receiver.
-func (v *VecDense) DivElemVec(a, b *VecDense) {
+func (v *VecDense) DivElemVec(a, b Vector) {
 	ar := a.Len()
 	br := b.Len()
 
@@ -310,122 +471,162 @@ func (v *VecDense) DivElemVec(a, b *VecDense) {
 		panic(ErrShape)
 	}
 
-	if v != a {
-		v.checkOverlap(a.mat)
-	}
-	if v != b {
-		v.checkOverlap(b.mat)
-	}
-
 	v.reuseAs(ar)
 
-	amat, bmat := a.RawVector(), b.RawVector()
-	for i := 0; i < v.n; i++ {
-		v.mat.Data[i*v.mat.Inc] = amat.Data[i*amat.Inc] / bmat.Data[i*bmat.Inc]
+	aU, _ := untranspose(a)
+	bU, _ := untranspose(b)
+
+	if arv, ok := aU.(RawVectorer); ok {
+		if brv, ok := bU.(RawVectorer); ok {
+			amat := arv.RawVector()
+			bmat := brv.RawVector()
+
+			if v != a {
+				v.checkOverlap(amat)
+			}
+			if v != b {
+				v.checkOverlap(bmat)
+			}
+
+			if v.mat.Inc == 1 && amat.Inc == 1 && bmat.Inc == 1 {
+				// Fast path for a common case.
+				for i, a := range amat.Data {
+					v.setVec(i, a/bmat.Data[i])
+				}
+				return
+			}
+			var ia, ib int
+			for i := 0; i < ar; i++ {
+				v.setVec(i, amat.Data[ia]/bmat.Data[ib])
+				ia += amat.Inc
+				ib += bmat.Inc
+			}
+		}
+	}
+
+	for i := 0; i < ar; i++ {
+		v.setVec(i, a.AtVec(i)/b.AtVec(i))
 	}
 }
 
 // MulVec computes a * b. The result is stored into the receiver.
-// MulVec panics if the number of columns in a does not equal the number of rows in b.
-func (v *VecDense) MulVec(a Matrix, b *VecDense) {
+// MulVec panics if the number of columns in a does not equal the number of rows in b
+// or if the number of columns in b does not equal 1.
+func (v *VecDense) MulVec(a Matrix, b Vector) {
 	r, c := a.Dims()
-	br := b.Len()
-	if c != br {
+	br, bc := b.Dims()
+	if c != br || bc != 1 {
 		panic(ErrShape)
 	}
 
-	if v != b {
-		v.checkOverlap(b.mat)
+	aU, trans := untranspose(a)
+	var bmat blas64.Vector
+	fast := true
+	bU, _ := untranspose(b)
+	if rv, ok := bU.(RawVectorer); ok {
+		bmat = rv.RawVector()
+		if v != b {
+			v.checkOverlap(bmat)
+		}
+	} else {
+		fast = false
 	}
 
-	a, trans := untranspose(a)
-	ar, ac := a.Dims()
 	v.reuseAs(r)
 	var restore func()
-	if v == a {
-		v, restore = v.isolatedWorkspace(a.(*VecDense))
+	if v == aU {
+		v, restore = v.isolatedWorkspace(aU.(*VecDense))
 		defer restore()
 	} else if v == b {
 		v, restore = v.isolatedWorkspace(b)
 		defer restore()
 	}
 
-	switch a := a.(type) {
-	case *VecDense:
-		if v != a {
-			v.checkOverlap(a.mat)
+	// TODO(kortschak): Improve the non-fast paths.
+	switch aU := aU.(type) {
+	case Vector:
+		if b.Len() == 1 {
+			// {n,1} x {1,1}
+			v.ScaleVec(b.AtVec(0), aU)
+			return
 		}
 
-		if a.Len() == 1 {
-			// {1,1} x {1,n}
-			av := a.At(0, 0)
-			for i := 0; i < b.Len(); i++ {
-				v.mat.Data[i*v.mat.Inc] = av * b.mat.Data[i*b.mat.Inc]
+		// {1,n} x {n,1}
+		if fast {
+			if rv, ok := aU.(RawVectorer); ok {
+				amat := rv.RawVector()
+				if v != aU {
+					v.checkOverlap(amat)
+				}
+
+				if amat.Inc == 1 && bmat.Inc == 1 {
+					// Fast path for a common case.
+					v.setVec(0, f64.DotUnitary(amat.Data, bmat.Data))
+					return
+				}
+				v.setVec(0, f64.DotInc(amat.Data, bmat.Data,
+					uintptr(c), uintptr(amat.Inc), uintptr(bmat.Inc), 0, 0))
+				return
 			}
-			return
 		}
-		if b.Len() == 1 {
-			// {1,n} x {1,1}
-			bv := b.At(0, 0)
-			for i := 0; i < a.Len(); i++ {
-				v.mat.Data[i*v.mat.Inc] = bv * a.mat.Data[i*a.mat.Inc]
-			}
-			return
-		}
-		// {n,1} x {1,n}
 		var sum float64
 		for i := 0; i < c; i++ {
-			sum += a.At(i, 0) * b.At(i, 0)
+			sum += aU.AtVec(i) * b.AtVec(i)
 		}
-		v.SetVec(0, sum)
+		v.setVec(0, sum)
 		return
 	case RawSymmetricer:
-		amat := a.RawSymmetric()
-		blas64.Symv(1, amat, b.mat, 0, v.mat)
+		if fast {
+			amat := aU.RawSymmetric()
+			// We don't know that a is a *SymDense, so make
+			// a temporary SymDense to check overlap.
+			(&SymDense{mat: amat}).checkOverlap(v.asGeneral())
+			blas64.Symv(1, amat, bmat, 0, v.mat)
+			return
+		}
 	case RawTriangular:
 		v.CopyVec(b)
-		amat := a.RawTriangular()
+		amat := aU.RawTriangular()
+		// We don't know that a is a *TriDense, so make
+		// a temporary TriDense to check overlap.
+		(&TriDense{mat: amat}).checkOverlap(v.asGeneral())
 		ta := blas.NoTrans
 		if trans {
 			ta = blas.Trans
 		}
 		blas64.Trmv(ta, amat, v.mat)
 	case RawMatrixer:
-		amat := a.RawMatrix()
-		// We don't know that a is a *Dense, so make
-		// a temporary Dense to check overlap.
-		(&Dense{mat: amat}).checkOverlap(v.asGeneral())
-		t := blas.NoTrans
-		if trans {
-			t = blas.Trans
+		if fast {
+			amat := aU.RawMatrix()
+			// We don't know that a is a *Dense, so make
+			// a temporary Dense to check overlap.
+			(&Dense{mat: amat}).checkOverlap(v.asGeneral())
+			t := blas.NoTrans
+			if trans {
+				t = blas.Trans
+			}
+			blas64.Gemv(t, 1, amat, bmat, 0, v.mat)
+			return
 		}
-		blas64.Gemv(t, 1, amat, b.mat, 0, v.mat)
 	default:
-		if trans {
-			col := make([]float64, ar)
-			for c := 0; c < ac; c++ {
-				for i := range col {
-					col[i] = a.At(i, c)
-				}
+		if fast {
+			for i := 0; i < r; i++ {
 				var f float64
-				for i, e := range col {
-					f += e * b.mat.Data[i*b.mat.Inc]
+				for j := 0; j < c; j++ {
+					f += a.At(i, j) * bmat.Data[j*bmat.Inc]
 				}
-				v.mat.Data[c*v.mat.Inc] = f
+				v.setVec(i, f)
 			}
-		} else {
-			row := make([]float64, ac)
-			for r := 0; r < ar; r++ {
-				for i := range row {
-					row[i] = a.At(r, i)
-				}
-				var f float64
-				for i, e := range row {
-					f += e * b.mat.Data[i*b.mat.Inc]
-				}
-				v.mat.Data[r*v.mat.Inc] = f
-			}
+			return
 		}
+	}
+
+	for i := 0; i < r; i++ {
+		var f float64
+		for j := 0; j < c; j++ {
+			f += a.At(i, j) * b.AtVec(j)
+		}
+		v.setVec(i, f)
 	}
 }
 
@@ -453,7 +654,7 @@ func (v *VecDense) IsZero() bool {
 	return v.mat.Inc == 0
 }
 
-func (v *VecDense) isolatedWorkspace(a *VecDense) (n *VecDense, restore func()) {
+func (v *VecDense) isolatedWorkspace(a Vector) (n *VecDense, restore func()) {
 	l := a.Len()
 	n = getWorkspaceVec(l, false)
 	return n, func() {

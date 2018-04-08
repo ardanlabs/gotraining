@@ -99,7 +99,7 @@ func NewHeatMap(g GridXYZ, p palette.Palette) *HeatMap {
 // Plot implements the Plot method of the plot.Plotter interface.
 func (h *HeatMap) Plot(c draw.Canvas, plt *plot.Plot) {
 	if h.Min > h.Max {
-		panic("heatmap: negative Z range")
+		panic("contour: invalid Z range: min greater than max")
 	}
 	pal := h.Palette.Colors()
 	if len(pal) == 0 {

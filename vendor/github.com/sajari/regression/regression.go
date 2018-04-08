@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/skelterjohn/go.matrix"
+	"gonum.org/v1/gonum/mat"
 )
 
 var (
@@ -145,8 +145,8 @@ func (r *Regression) Run() error {
 	}
 
 	// Create some blank variable space
-	observed := matrix.Zeros(observations, 1)
-	variables := matrix.Zeros(observations, numOfvars+1)
+	observed := mat.NewDense(observations, 1, nil)
+	variables := mat.NewDense(observations, numOfvars+1, nil)
 
 	for i := 0; i < observations; i++ {
 		observed.Set(i, 0, r.data[i].Observed)
@@ -160,19 +160,24 @@ func (r *Regression) Run() error {
 	}
 
 	// Now run the regression
-	n := variables.Cols()
-	q, reg := variables.QR()
-	qty, err := q.Transpose().Times(observed)
-	if err != nil {
-		return err
-	}
+	_, n := variables.Dims() // cols
+	qr := new(mat.QR)
+	qr.Factorize(variables)
+	q := qr.QTo(nil)
+	reg := qr.RTo(nil)
+
+	qtr := q.T()
+	qtrd := mat.DenseCopyOf(qtr)
+	qty := new(mat.Dense)
+	qty.Mul(qtrd, observed)
+
 	c := make([]float64, n)
 	for i := n - 1; i >= 0; i-- {
-		c[i] = qty.Get(i, 0)
+		c[i] = qty.At(i, 0)
 		for j := i + 1; j < n; j++ {
-			c[i] -= c[j] * reg.Get(i, j)
+			c[i] -= c[j] * reg.At(i, j)
 		}
-		c[i] /= reg.Get(i, i)
+		c[i] /= reg.At(i, i)
 	}
 
 	// Output the regression results
@@ -272,4 +277,45 @@ func (r *Regression) String() string {
 	str += fmt.Sprintf("\nN = %v\nVariance observed = %v\nVariance Predicted = %v", len(r.data), r.Varianceobserved, r.VariancePredicted)
 	str += fmt.Sprintf("\nR2 = %v\n", r.R2)
 	return str
+}
+
+// MakeDataPoints makes a `[]*dataPoint` from a `[][]float64`. The expected fomat for the input is a row-major [][]float64.
+// That is to say the first slice represents a row, and the second represents the cols.
+// Furthermore it is expected that all the col slices are of the same length.
+// The obsIndex parameter indicates which column should be used
+func MakeDataPoints(a [][]float64, obsIndex int) []*dataPoint {
+	if obsIndex != 0 && obsIndex != len(a[0])-1 {
+		return perverseMakeDataPoints(a, obsIndex)
+	}
+
+	retVal := make([]*dataPoint, 0, len(a))
+	if obsIndex == 0 {
+		for _, r := range a {
+			retVal = append(retVal, DataPoint(r[0], r[1:]))
+		}
+		return retVal
+	}
+
+	// otherwise the observation is expected to be the last col
+	last := len(a[0]) - 1
+	for _, r := range a {
+		retVal = append(retVal, DataPoint(r[last], r[:last]))
+	}
+	return retVal
+}
+
+func perverseMakeDataPoints(a [][]float64, obsIndex int) []*dataPoint {
+	retVal := make([]*dataPoint, 0, len(a))
+	for _, r := range a {
+		obs := r[obsIndex]
+		others := make([]float64, 0, len(r)-1)
+		for i, c := range r {
+			if i == obsIndex {
+				continue
+			}
+			others = append(others, c)
+		}
+		retVal = append(retVal, DataPoint(obs, others))
+	}
+	return retVal
 }

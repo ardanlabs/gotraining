@@ -126,7 +126,7 @@ func (svg *SVG) Startraw(ns ...string) {
 // End the SVG document
 func (svg *SVG) End() { svg.println("</svg>") }
 
-// linkembed defines an element with a specified type, 
+// linkembed defines an element with a specified type,
 // (for example "application/javascript", or "text/css").
 // if the first variadic argument is a link, use only the link reference.
 // Otherwise, treat those arguments as the text of the script (marked up as CDATA).
@@ -867,7 +867,7 @@ func endstyle(s []string, endtag string) string {
 			if strings.Index(s[i], "=") > 0 {
 				nv += (s[i]) + " "
 			} else {
-				nv += style(s[i])
+				nv += style(s[i]) + " "
 			}
 		}
 		return nv + endtag

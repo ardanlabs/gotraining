@@ -10,6 +10,9 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"io"
+	"io/ioutil"
+	"net/http"
 	"os"
 	"strings"
 	"sync"
@@ -130,9 +133,35 @@ func (drv *csvDriver) Open(cfg string) (driver.Conn, error) {
 	conn := drv.dbs[c.File]
 	if conn == nil {
 		var f *os.File
-		f, err = os.OpenFile(c.File, c.Mode, c.Perm)
-		if err != nil {
-			return nil, err
+		switch {
+		case strings.HasPrefix(c.File, "http://"), strings.HasPrefix(c.File, "https://"):
+			// FIXME(sbinet: check that c.Mode makes sense (ie: only reading)
+			resp, err := http.Get(c.File)
+			if err != nil {
+				return nil, err
+			}
+			defer resp.Body.Close()
+			// FIXME(sbinet): devise a mechanism to remove that temporary file
+			// when we close the connection.
+			f, err = ioutil.TempFile("", "csvdriver-")
+			if err != nil {
+				return nil, err
+			}
+			_, err = io.Copy(f, resp.Body)
+			if err != nil {
+				return nil, err
+			}
+			_, err = f.Seek(0, io.SeekStart)
+			if err != nil {
+				return nil, err
+			}
+			doImport = true
+		default:
+			// local file
+			f, err = os.OpenFile(c.File, c.Mode, c.Perm)
+			if err != nil {
+				return nil, err
+			}
 		}
 		conn = &csvConn{
 			f:    f,
