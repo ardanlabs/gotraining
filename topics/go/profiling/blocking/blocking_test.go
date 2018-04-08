@@ -93,9 +93,7 @@ func TestLatencies(t *testing.T) {
 	}
 
 	// Make the plot of latencies.
-	if err := makePlot(pts); err != nil {
-		log.Fatal(err)
-	}
+	makePlot(pts)
 }
 
 // stream performs the moving of the data stream from
@@ -181,9 +179,5 @@ func makePlot(xys plotter.XYs) error {
 	}
 
 	// Save the plot to a PNG file.
-	if err := p.Save(10*vg.Inch, 5*vg.Inch, "latencies.png"); err != nil {
-		return err
-	}
-
-	return nil
+	return p.Save(10*vg.Inch, 5*vg.Inch, "latencies.png")
 }
