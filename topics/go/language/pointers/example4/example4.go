@@ -1,9 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Escape Analysis Flaws:
-// https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/view
-
 // Sample program to teach the mechanics of escape analysis.
 package main
 
@@ -65,7 +62,7 @@ $ go build -gcflags "-m -m"
 ./example4.go:21: main &u1 does not escape
 ./example4.go:21: main &u2 does not escape
 
-// See the intermediate assembly phase before
+// See the intermediate representation phase before
 // generating the actual arch-specific assembly.
 
 $ go build -gcflags -S
@@ -77,6 +74,11 @@ $ go build -gcflags -S
 	0x0013 00019 (github.com/ardanlabs/gotraining/.../example4.go:27)	SUBQ	$56, SP
 	0x0017 00023 (github.com/ardanlabs/gotraining/.../example4.go:27)	MOVQ	BP, 48(SP)
 	0x001c 00028 (github.com/ardanlabs/gotraining/.../example4.go:27)	LEAQ	48(SP), BP
+
+// See bounds checking decisions.
+
+go build -gcflags="-d=ssa/check_bce/debug=1"
+
 // See the actual machine representation by using
 // the disasembler.
 
