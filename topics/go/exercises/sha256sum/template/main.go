@@ -9,18 +9,18 @@ func main() {
 
 	// Make a hash value from crypto/sha256.
 
-	// Keep track of how many failures we encounter.
+	// Make a variable to count failures
 
 	// Loop through all of os.Args skipping the first value.
 	{
 
+		// Reset the hash value before each use.
+
+		// Skip this argument if it is a directory.
+
 		// Attempt to open the file in question using os.Open.
 
-		// Call the Stat method so we can see if the named argument is a directory.
-
-		// Skip directories.
-
-		// Reset the hash value before each use.
+		// Ensure the file is closed when we're done processing it
 
 		// Write the file to the hash so we can calculate it.
 		// Tip: Your hash value is an io.Writer and the file value is an io.Reader.

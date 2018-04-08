@@ -8,62 +8,72 @@ package main
 import (
 	"crypto/sha256"
 	"fmt"
+	"hash"
 	"io"
 	"log"
 	"os"
+
+	"github.com/pkg/errors"
 )
 
 func main() {
 
 	// Make a hash value from crypto/sha256.
-	hash := sha256.New()
+	h := sha256.New()
 
-	// Keep track of how many failures we encounter.
+	// Make a variable to count failures
 	var failures int
 
 	// Loop through all of os.Args skipping the first value.
-	for _, name := range os.Args[1:] {
-
-		// Attempt to open the file in question using os.Open.
-		f, err := os.Open(name)
-		if err != nil {
-			log.Printf("could not open file %s: %v", name, err)
-			failures++
-			continue
-		}
-
-		// Call the Stat method so we can see if the named argument is a directory.
-		stat, err := f.Stat()
-		if err != nil {
-			log.Printf("could not stat file %s: %v", name, err)
-			failures++
-			continue
-		}
-
-		// Skip directories.
-		if stat.IsDir() {
-			continue
-		}
+	for _, arg := range os.Args[1:] {
 
 		// Reset the hash value before each use.
-		hash.Reset()
+		h.Reset()
 
-		// Write the file to the hash so we can calculate it.
-		// Tip: Your hash value is an io.Writer and the file value is an io.Reader.
-		// The io.Copy function works with both.
-		if _, err := io.Copy(hash, f); err != nil {
-			log.Printf("could not hash file %s: %v", name, err)
+		if err := process(arg, h); err != nil {
 			failures++
-			continue
+			log.Print(err)
 		}
-
-		// Print the sha256 sum in hex format followed by the name of the file.
-		// You can use the %x directive of fmt.Printf or use encoding/hex.
-		fmt.Printf("%x  %s\n", hash.Sum(nil), name)
 	}
 
 	// If at least one failure was encountered then exit with status code 1.
 	if failures > 0 {
 		os.Exit(1)
 	}
+}
+
+func process(arg string, h hash.Hash) error {
+
+	// Skip this argument if it is a directory.
+	info, err := os.Stat(arg)
+	if err != nil {
+		return errors.Wrap(err, "stat file")
+	}
+	if info.IsDir() {
+		return nil
+	}
+
+	// Attempt to open the file in question using os.Open.
+	f, err := os.Open(arg)
+	if err != nil {
+		return errors.Wrap(err, "open file")
+	}
+
+	// Ensure the file is closed when we're done processing it
+	defer f.Close()
+
+	// Write the file to the hash so we can calculate it.
+	// Tip: Your hash value is an io.Writer and the file value is an io.Reader.
+	// The io.Copy function works with both.
+	if _, err := io.Copy(h, f); err != nil {
+		return errors.Wrap(err, "copying contents")
+	}
+
+	// Print the sha256 sum in hex format followed by the name of the file.
+	// You can use the %x directive of fmt.Printf or use encoding/hex.
+	sum := h.Sum(nil)
+
+	fmt.Printf("%x %s\n", sum, arg)
+
+	return nil
 }
