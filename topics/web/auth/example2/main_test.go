@@ -67,17 +67,8 @@ func TestCallback(t *testing.T) {
 		Email: "mary@example.com",
 	}
 
-	// Get the cached session.
-	session, err := gothic.Store.Get(req, "faux"+gothic.SessionName)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Marshal the faux session for this test.
-	session.Values["faux"] = sess.Marshal()
-
-	// Save this session.
-	if err := session.Save(req, res); err != nil {
+	// Save our oauth session so we are logged in
+	if err := gothic.StoreInSession("faux", sess.Marshal(), req, res); err != nil {
 		t.Fatal(err)
 	}
 
