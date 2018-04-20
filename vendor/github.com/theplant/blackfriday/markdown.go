@@ -20,7 +20,7 @@ package blackfriday
 
 import (
 	"bytes"
-	"utf8"
+	"unicode/utf8"
 )
 
 const VERSION = "1.0"
