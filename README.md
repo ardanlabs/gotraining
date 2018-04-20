@@ -139,9 +139,11 @@ April(09-11)        Singapore             NCS                 Corporate    Go (3
 April(14-15)        Shanghai, China       Garden Hotel        Conference   Adv Go (1 day)   http://gopherchina.org/
 May(02-04)          Singapore             Google              Conference   Adv Go (1 day)   https://2018.gophercon.sg/
 May(08-10)          Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
+May(16-18)          Belgrade, Serbia      Fincore             Corporate    Go (3 day)       
 May(31-02)          Reykjavík, Iceland    Harpa               Conference   Adv Go (1 day)   https://gophercon.is/
 June(06-08)         Singapore             SP Digital          Corporate    Go (3 day)       
 June(25-26)         NYC, NY               QCON                Conference   Adv Go (1 day)   https://qconnewyork.com/
+June(30-01)         Providence, RI        Intercity Geeks     GoBridge     Go (2 day)       TBD
 October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
 ```
@@ -152,7 +154,8 @@ Date                Location              Venue               Type         Type 
 ================================================================================================================================================
 February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)       
 March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)       
-March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)       
+March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)     
+May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)         
 April(03-05)        Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
 ```
 
