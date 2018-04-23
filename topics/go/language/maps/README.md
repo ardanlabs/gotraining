@@ -19,6 +19,8 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 [Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/EHfkoipKYF))  
 [Map literals and delete](example2/example2.go) ([Go Playground](https://play.golang.org/p/B2klwmqmPZ))  
 [Map key restrictions](example3/example3.go) ([Go Playground](https://play.golang.org/p/LZRHA7FG6s))  
+[Sorting maps by key](example4/example4.go) ([Go Playground](https://play.golang.org/p/EeBJ4Eixzxz))  
+
 
 ## Exercises
 
