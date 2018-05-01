@@ -18,6 +18,7 @@ package blackfriday
 import (
 	"bytes"
 	"fmt"
+	"html"
 	"strconv"
 	"strings"
 )
@@ -28,6 +29,8 @@ const (
 	HTML_SKIP_STYLE                           // skip embedded <style> elements
 	HTML_SKIP_IMAGES                          // skip embedded images
 	HTML_SKIP_LINKS                           // skip all links
+	HTML_SKIP_SCRIPT                          // skip embedded <script> elements
+	HTML_ESCAPE_HTML                          // escape preformatted HTML blocks
 	HTML_SAFELINK                             // only link to trusted protocols
 	HTML_TOC                                  // generate a table of contents
 	HTML_OMIT_CONTENTS                        // skip the main contents (for a standalone table of contents)
@@ -167,8 +170,33 @@ func (options *Html) BlockHtml(out *bytes.Buffer, text []byte) {
 	}
 
 	doubleSpace(out)
-	out.Write(text)
+	if options.flags&HTML_SKIP_SCRIPT != 0 {
+		out.Write(stripTag(string(text), "script", "p"))
+	} else if options.flags&HTML_ESCAPE_HTML != 0 {
+		text = []byte(html.EscapeString(string(text)))
+		out.Write(text)
+	} else {
+		out.Write(text)
+	}
 	out.WriteByte('\n')
+}
+
+func stripTag(text, tag, newTag string) []byte {
+	closeNewTag := fmt.Sprintf("</%s>", newTag)
+	i := 0
+	for i < len(text) && text[i] != '<' {
+		i++
+	}
+	if i == len(text) {
+		return []byte(text)
+	}
+	found, end := findHtmlTagPos([]byte(text[i:]), tag)
+	closeTag := fmt.Sprintf("</%s>", tag)
+	noOpen := text
+	if found {
+		noOpen = text[0:i+1] + newTag + text[end:]
+	}
+	return []byte(strings.Replace(noOpen, closeTag, closeNewTag, -1))
 }
 
 func (options *Html) HRule(out *bytes.Buffer) {
@@ -216,24 +244,22 @@ func (options *Html) BlockCodeNormal(out *bytes.Buffer, text []byte, lang string
 	out.WriteString("</code></pre>\n")
 }
 
-/*
- * GitHub style code block:
- *
- *              <pre lang="LANG"><code>
- *              ...
- *              </pre></code>
- *
- * Unlike other parsers, we store the language identifier in the <pre>,
- * and don't let the user generate custom classes.
- *
- * The language identifier in the <pre> block gets postprocessed and all
- * the code inside gets syntax highlighted with Pygments. This is much safer
- * than letting the user specify a CSS class for highlighting.
- *
- * Note that we only generate HTML for the first specifier.
- * E.g.
- *              ~~~~ {.python .numbered}        =>      <pre lang="python"><code>
- */
+// GitHub style code block:
+//
+//              <pre lang="LANG"><code>
+//              ...
+//              </code></pre>
+//
+// Unlike other parsers, we store the language identifier in the <pre>,
+// and don't let the user generate custom classes.
+//
+// The language identifier in the <pre> block gets postprocessed and all
+// the code inside gets syntax highlighted with Pygments. This is much safer
+// than letting the user specify a CSS class for highlighting.
+//
+// Note that we only generate HTML for the first specifier.
+// E.g.
+//              ~~~~ {.python .numbered}        =>      <pre lang="python"><code>
 func (options *Html) BlockCodeGithub(out *bytes.Buffer, text []byte, lang string) {
 	doubleSpace(out)
 
@@ -260,7 +286,6 @@ func (options *Html) BlockCodeGithub(out *bytes.Buffer, text []byte, lang string
 	attrEscape(out, text)
 	out.WriteString("</code></pre>\n")
 }
-
 
 func (options *Html) BlockQuote(out *bytes.Buffer, text []byte) {
 	doubleSpace(out)
@@ -300,6 +325,24 @@ func (options *Html) TableCell(out *bytes.Buffer, text []byte, align int) {
 
 	out.Write(text)
 	out.WriteString("</td>")
+}
+
+func (options *Html) Footnotes(out *bytes.Buffer, text func() bool) {
+	out.WriteString("<div class=\"footnotes\">\n")
+	options.HRule(out)
+	options.List(out, text, LIST_TYPE_ORDERED)
+	out.WriteString("</div>\n")
+}
+
+func (options *Html) FootnoteItem(out *bytes.Buffer, name, text []byte, flags int) {
+	if flags&LIST_ITEM_CONTAINS_BLOCK != 0 || flags&LIST_ITEM_BEGINNING_OF_LIST != 0 {
+		doubleSpace(out)
+	}
+	out.WriteString(`<li id="fn:`)
+	out.Write(slugify(name))
+	out.WriteString(`">`)
+	out.Write(text)
+	out.WriteString("</li>\n")
 }
 
 func (options *Html) List(out *bytes.Buffer, text func() bool, flags int) {
@@ -463,6 +506,12 @@ func (options *Html) RawHtmlTag(out *bytes.Buffer, text []byte) {
 	if options.flags&HTML_SKIP_IMAGES != 0 && isHtmlTag(text, "img") {
 		return
 	}
+	if options.flags&HTML_SKIP_SCRIPT != 0 && isHtmlTag(text, "script") {
+		return
+	}
+	if options.flags&HTML_ESCAPE_HTML != 0 {
+		text = []byte(html.EscapeString(string(text)))
+	}
 	out.Write(text)
 }
 
@@ -473,9 +522,20 @@ func (options *Html) TripleEmphasis(out *bytes.Buffer, text []byte) {
 }
 
 func (options *Html) StrikeThrough(out *bytes.Buffer, text []byte) {
-	out.WriteString("<del>")
+	out.WriteString("<s>")
 	out.Write(text)
-	out.WriteString("</del>")
+	out.WriteString("</s>")
+}
+
+func (options *Html) FootnoteRef(out *bytes.Buffer, ref []byte, id int) {
+	slug := slugify(ref)
+	out.WriteString(`<sup class="footnote-ref" id="fnref:`)
+	out.Write(slug)
+	out.WriteString(`"><a rel="footnote" href="#fn:`)
+	out.Write(slug)
+	out.WriteString(`">`)
+	out.WriteString(strconv.Itoa(id))
+	out.WriteString(`</a></sup>`)
 }
 
 func (options *Html) Entity(out *bytes.Buffer, entity []byte) {
@@ -531,8 +591,7 @@ func (options *Html) DocumentHeader(out *bytes.Buffer) {
 		out.WriteString("<html xmlns=\"http://www.w3.org/1999/xhtml\">\n")
 		ending = " /"
 	} else {
-		out.WriteString("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" ")
-		out.WriteString("\"http://www.w3.org/TR/html4/strict.dtd\">\n")
+		out.WriteString("<!DOCTYPE html>\n")
 		out.WriteString("<html>\n")
 	}
 	out.WriteString("<head>\n")
@@ -544,7 +603,7 @@ func (options *Html) DocumentHeader(out *bytes.Buffer) {
 	out.WriteString("\"")
 	out.WriteString(ending)
 	out.WriteString(">\n")
-	out.WriteString("  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"")
+	out.WriteString("  <meta charset=\"utf-8\"")
 	out.WriteString(ending)
 	out.WriteString(">\n")
 	if options.css != "" {
@@ -580,7 +639,9 @@ func (options *Html) DocumentFooter(out *bytes.Buffer) {
 		}
 
 		// insert the table of contents
+		out.WriteString("<nav>\n")
 		out.Write(options.toc.Bytes())
+		out.WriteString("</nav>\n")
 
 		// corner case spacing issue
 		if options.flags&HTML_COMPLETE_PAGE == 0 && options.flags&HTML_OMIT_CONTENTS == 0 {
@@ -648,39 +709,65 @@ func (options *Html) TocFinalize() {
 }
 
 func isHtmlTag(tag []byte, tagname string) bool {
+	found, _ := findHtmlTagPos(tag, tagname)
+	return found
+}
+
+func findHtmlTagPos(tag []byte, tagname string) (bool, int) {
 	i := 0
 	if i < len(tag) && tag[0] != '<' {
-		return false
+		return false, -1
 	}
 	i++
-	for i < len(tag) && isspace(tag[i]) {
-		i++
-	}
+	i = skipSpace(tag, i)
 
 	if i < len(tag) && tag[i] == '/' {
 		i++
 	}
 
-	for i < len(tag) && isspace(tag[i]) {
-		i++
-	}
-
-	j := i
+	i = skipSpace(tag, i)
+	j := 0
 	for ; i < len(tag); i, j = i+1, j+1 {
 		if j >= len(tagname) {
 			break
 		}
 
-		if tag[i] != tagname[j] {
-			return false
+		if strings.ToLower(string(tag[i]))[0] != tagname[j] {
+			return false, -1
 		}
 	}
 
 	if i == len(tag) {
-		return false
+		return false, -1
 	}
 
-	return isspace(tag[i]) || tag[i] == '>'
+	// Now look for closing '>', but ignore it when it's in any kind of quotes,
+	// it might be JavaScript
+	inSingleQuote := false
+	inDoubleQuote := false
+	inGraveQuote := false
+	for i < len(tag) {
+		switch {
+		case tag[i] == '>' && !inSingleQuote && !inDoubleQuote && !inGraveQuote:
+			return true, i
+		case tag[i] == '\'':
+			inSingleQuote = !inSingleQuote
+		case tag[i] == '"':
+			inDoubleQuote = !inDoubleQuote
+		case tag[i] == '`':
+			inGraveQuote = !inGraveQuote
+		}
+		i++
+	}
+
+	return false, -1
+}
+
+func skipSpace(tag []byte, i int) int {
+	for i < len(tag) && isspace(tag[i]) {
+		i++
+	}
+	return i
 }
 
 func doubleSpace(out *bytes.Buffer) {

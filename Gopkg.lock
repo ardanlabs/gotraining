@@ -527,10 +527,10 @@
   version = "v1.3.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/theplant/blackfriday"
   packages = ["."]
-  revision = "583b3c5e1dcb22f284b040675c11024081a4a66c"
-  version = "v1.1"
+  revision = "979429e1c46cdf38ac4556e1f28ee60720e80c33"
 
 [[projects]]
   name = "github.com/urfave/negroni"
@@ -832,6 +832,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "750dd3628dbb22bf804c96bc5f17255f7ba04c919dd4ccd9323fef761e91520f"
+  inputs-digest = "9fee9ac5baa0cdb213267548368decb6169c806e474194e827bdfe6a80dbcb2a"
   solver-name = "gps-cdcl"
   solver-version = 1

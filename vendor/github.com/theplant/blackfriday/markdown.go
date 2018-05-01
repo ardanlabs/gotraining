@@ -20,23 +20,29 @@ package blackfriday
 
 import (
 	"bytes"
-	"utf8"
+	"unicode/utf8"
 )
 
-const VERSION = "1.0"
+const VERSION = "1.1"
 
 // These are the supported markdown parsing extensions.
 // OR these values together to select multiple extensions.
 const (
-	EXTENSION_NO_INTRA_EMPHASIS = 1 << iota // ignore emphasis markers inside words
-	EXTENSION_TABLES                        // render tables
-	EXTENSION_FENCED_CODE                   // render fenced code blocks
-	EXTENSION_AUTOLINK                      // detect embedded URLs that are not explicitly marked
-	EXTENSION_STRIKETHROUGH                 // strikethrough text using ~~test~~
-	EXTENSION_LAX_HTML_BLOCKS               // loosen up HTML block parsing rules
-	EXTENSION_SPACE_HEADERS                 // be strict about prefix header rules
-	EXTENSION_HARD_LINE_BREAK               // translate newlines into line breaks
-	EXTENSION_TAB_SIZE_EIGHT                // expand tabs to eight spaces instead of four
+	EXTENSION_NO_INTRA_EMPHASIS          = 1 << iota // ignore emphasis markers inside words
+	EXTENSION_TABLES                                 // render tables
+	EXTENSION_FENCED_CODE                            // render fenced code blocks
+	EXTENSION_AUTOLINK                               // detect embedded URLs that are not explicitly marked
+	EXTENSION_STRIKETHROUGH                          // strikethrough text using ~~test~~
+	EXTENSION_LAX_HTML_BLOCKS                        // loosen up HTML block parsing rules
+	EXTENSION_SPACE_HEADERS                          // be strict about prefix header rules
+	EXTENSION_HARD_LINE_BREAK                        // translate newlines into line breaks
+	EXTENSION_TAB_SIZE_EIGHT                         // expand tabs to eight spaces instead of four
+	EXTENSION_FOOTNOTES                              // Pandoc-style footnotes
+	EXTENSION_NO_EMPTY_LINE_BEFORE_BLOCK             // no need to insert an empty line to start a (code, quote, order list, unorder list)block
+	EXTENSION_NO_SPACE_LISTS                         // no need to put a space to start a list
+	EXTENSION_ONE_SPACE_INDENT                       // allow indent for list item when there is 1 or spaces
+	EXTENSION_UNICODE_LIST_ITEM                      // allow unicode as list item marker
+	EXTENSION_NO_LIST_ITEM_BLOCK                     // don't render blocks elements like p in list item
 )
 
 // These are the possible flag values for the link renderer.
@@ -98,7 +104,24 @@ var blockTags = map[string]bool{
 	"fieldset":   true,
 	"noscript":   true,
 	"blockquote": true,
+
+	// HTML5
+	"video":      true,
+	"aside":      true,
+	"canvas":     true,
+	"figure":     true,
+	"footer":     true,
+	"header":     true,
+	"hgroup":     true,
+	"output":     true,
+	"article":    true,
+	"section":    true,
+	"progress":   true,
+	"figcaption": true,
 }
+
+// The default indent is 4 spaces
+var ListIndentSpacesCount = 4
 
 // Renderer is the rendering interface.
 // This is mostly of interest if you are implementing a new rendering format.
@@ -125,6 +148,8 @@ type Renderer interface {
 	Table(out *bytes.Buffer, header []byte, body []byte, columnData []int)
 	TableRow(out *bytes.Buffer, text []byte)
 	TableCell(out *bytes.Buffer, text []byte, flags int)
+	Footnotes(out *bytes.Buffer, text func() bool)
+	FootnoteItem(out *bytes.Buffer, name, text []byte, flags int)
 
 	// Span-level callbacks
 	AutoLink(out *bytes.Buffer, link []byte, kind int)
@@ -137,6 +162,7 @@ type Renderer interface {
 	RawHtmlTag(out *bytes.Buffer, tag []byte)
 	TripleEmphasis(out *bytes.Buffer, text []byte)
 	StrikeThrough(out *bytes.Buffer, text []byte)
+	FootnoteRef(out *bytes.Buffer, ref []byte, id int)
 
 	// Low-level callbacks
 	Entity(out *bytes.Buffer, entity []byte)
@@ -161,8 +187,12 @@ type parser struct {
 	nesting        int
 	maxNesting     int
 	insideLink     bool
-}
 
+	// Footnotes need to be ordered as well as available to quickly check for
+	// presence. If a ref is also a footnote, it's stored both in refs and here
+	// in notes. Slice is nil if footnotes not enabled.
+	notes []*reference
+}
 
 //
 //
@@ -189,7 +219,7 @@ func MarkdownBasic(input []byte) []byte {
 //
 // * Smartypants processing with smart fractions and LaTeX dashes
 //
-// * Intra-word emphasis supression
+// * Intra-word emphasis suppression
 //
 // * Tables
 //
@@ -207,6 +237,7 @@ func MarkdownCommon(input []byte) []byte {
 	htmlFlags |= HTML_USE_SMARTYPANTS
 	htmlFlags |= HTML_SMARTYPANTS_FRACTIONS
 	htmlFlags |= HTML_SMARTYPANTS_LATEX_DASHES
+	htmlFlags |= HTML_SKIP_SCRIPT
 	renderer := HtmlRenderer(htmlFlags, "", "")
 
 	// set up the parser
@@ -234,6 +265,10 @@ func Markdown(input []byte, renderer Renderer, extensions int) []byte {
 		return nil
 	}
 
+	if extensions&EXTENSION_ONE_SPACE_INDENT != 0 {
+		ListIndentSpacesCount = 1
+	}
+
 	// fill in the render structure
 	p := new(parser)
 	p.r = renderer
@@ -259,6 +294,10 @@ func Markdown(input []byte, renderer Renderer, extensions int) []byte {
 		p.inlineCallback[':'] = autoLink
 	}
 
+	if extensions&EXTENSION_FOOTNOTES != 0 {
+		p.notes = make([]*reference, 0)
+	}
+
 	first := firstPass(p, input)
 	second := secondPass(p, first)
 
@@ -278,7 +317,7 @@ func firstPass(p *parser, input []byte) []byte {
 	}
 	beg, end := 0, 0
 	for beg < len(input) { // iterate over lines
-		if end = isReference(p, input[beg:]); end > 0 {
+		if end = isReference(p, input[beg:], tabSize); end > 0 {
 			beg += end
 		} else { // skip to the next line
 			end = beg
@@ -317,6 +356,26 @@ func secondPass(p *parser, input []byte) []byte {
 
 	p.r.DocumentHeader(&output)
 	p.block(&output, input)
+
+	if p.flags&EXTENSION_FOOTNOTES != 0 && len(p.notes) > 0 {
+		p.r.Footnotes(&output, func() bool {
+			flags := LIST_ITEM_BEGINNING_OF_LIST
+			for _, ref := range p.notes {
+				var buf bytes.Buffer
+				if ref.hasBlock {
+					flags |= LIST_ITEM_CONTAINS_BLOCK
+					p.block(&buf, ref.title)
+				} else {
+					p.inline(&buf, ref.title)
+				}
+				p.r.FootnoteItem(&output, ref.link, buf.Bytes(), flags)
+				flags &^= LIST_ITEM_BEGINNING_OF_LIST | LIST_ITEM_CONTAINS_BLOCK
+			}
+
+			return true
+		})
+	}
+
 	p.r.DocumentFooter(&output)
 
 	if p.nesting != 0 {
@@ -325,7 +384,6 @@ func secondPass(p *parser, input []byte) []byte {
 
 	return output.Bytes()
 }
-
 
 //
 // Link references
@@ -341,11 +399,27 @@ func secondPass(p *parser, input []byte) []byte {
 // label, i.e., 1 and 2 in this example, as in:
 //
 //    This library is hosted on [Github][2], a git hosting site.
+//
+// Actual footnotes as specified in Pandoc and supported by some other Markdown
+// libraries such as php-markdown are also taken care of. They look like this:
+//
+//    This sentence needs a bit of further explanation.[^note]
+//
+//    [^note]: This is the explanation.
+//
+// Footnotes should be placed at the end of the document in an ordered list.
+// Inline footnotes such as:
+//
+//    Inline footnotes^[Not supported.] also exist.
+//
+// are not yet supported.
 
 // References are parsed and stored in this struct.
 type reference struct {
-	link  []byte
-	title []byte
+	link     []byte
+	title    []byte
+	noteId   int // 0 if not a footnote ref
+	hasBlock bool
 }
 
 // Check whether or not data starts with a reference link.
@@ -353,7 +427,7 @@ type reference struct {
 // (in the render struct).
 // Returns the number of bytes to skip to move past it,
 // or zero if the first line is not a reference.
-func isReference(p *parser, data []byte) int {
+func isReference(p *parser, data []byte, tabSize int) int {
 	// up to 3 optional leading spaces
 	if len(data) < 4 {
 		return 0
@@ -363,11 +437,21 @@ func isReference(p *parser, data []byte) int {
 		i++
 	}
 
+	noteId := 0
+
 	// id part: anything but a newline between brackets
 	if data[i] != '[' {
 		return 0
 	}
 	i++
+	if p.flags&EXTENSION_FOOTNOTES != 0 {
+		if data[i] == '^' {
+			// we can set it to anything here because the proper noteIds will
+			// be assigned later during the second pass. It just has to be != 0
+			noteId = 1
+			i++
+		}
+	}
 	idOffset := i
 	for i < len(data) && data[i] != '\n' && data[i] != '\r' && data[i] != ']' {
 		i++
@@ -399,15 +483,59 @@ func isReference(p *parser, data []byte) int {
 		return 0
 	}
 
+	var (
+		linkOffset, linkEnd   int
+		titleOffset, titleEnd int
+		lineEnd               int
+		raw                   []byte
+		hasBlock              bool
+	)
+
+	if p.flags&EXTENSION_FOOTNOTES != 0 && noteId != 0 {
+		linkOffset, linkEnd, raw, hasBlock = scanFootnote(p, data, i, tabSize)
+		lineEnd = linkEnd
+	} else {
+		linkOffset, linkEnd, titleOffset, titleEnd, lineEnd = scanLinkRef(p, data, i)
+	}
+	if lineEnd == 0 {
+		return 0
+	}
+
+	// a valid ref has been found
+
+	ref := &reference{
+		noteId:   noteId,
+		hasBlock: hasBlock,
+	}
+
+	if noteId > 0 {
+		// reusing the link field for the id since footnotes don't have links
+		ref.link = data[idOffset:idEnd]
+		// if footnote, it's not really a title, it's the contained text
+		ref.title = raw
+	} else {
+		ref.link = data[linkOffset:linkEnd]
+		ref.title = data[titleOffset:titleEnd]
+	}
+
+	// id matches are case-insensitive
+	id := string(bytes.ToLower(data[idOffset:idEnd]))
+
+	p.refs[id] = ref
+
+	return lineEnd
+}
+
+func scanLinkRef(p *parser, data []byte, i int) (linkOffset, linkEnd, titleOffset, titleEnd, lineEnd int) {
 	// link: whitespace-free sequence, optionally between angle brackets
 	if data[i] == '<' {
 		i++
 	}
-	linkOffset := i
+	linkOffset = i
 	for i < len(data) && data[i] != ' ' && data[i] != '\t' && data[i] != '\n' && data[i] != '\r' {
 		i++
 	}
-	linkEnd := i
+	linkEnd = i
 	if data[linkOffset] == '<' && data[linkEnd-1] == '>' {
 		linkOffset++
 		linkEnd--
@@ -418,11 +546,10 @@ func isReference(p *parser, data []byte) int {
 		i++
 	}
 	if i < len(data) && data[i] != '\n' && data[i] != '\r' && data[i] != '\'' && data[i] != '"' && data[i] != '(' {
-		return 0
+		return
 	}
 
 	// compute end-of-line
-	lineEnd := 0
 	if i >= len(data) || data[i] == '\r' || data[i] == '\n' {
 		lineEnd = i
 	}
@@ -439,7 +566,6 @@ func isReference(p *parser, data []byte) int {
 	}
 
 	// optional title: any non-newline sequence enclosed in '"() alone on its line
-	titleOffset, titleEnd := 0, 0
 	if i+1 < len(data) && (data[i] == '\'' || data[i] == '"' || data[i] == '(') {
 		i++
 		titleOffset = i
@@ -464,29 +590,95 @@ func isReference(p *parser, data []byte) int {
 			titleEnd = i
 		}
 	}
-	if lineEnd == 0 { // garbage after the link
-		return 0
-	}
 
-	// a valid ref has been found
-
-	// id matches are case-insensitive
-	id := string(bytes.ToLower(data[idOffset:idEnd]))
-	p.refs[id] = &reference{
-		link:  data[linkOffset:linkEnd],
-		title: data[titleOffset:titleEnd],
-	}
-
-	return lineEnd
+	return
 }
 
+// The first bit of this logic is the same as (*parser).listItem, but the rest
+// is much simpler. This function simply finds the entire block and shifts it
+// over by one tab if it is indeed a block (just returns the line if it's not).
+// blockEnd is the end of the section in the input buffer, and contents is the
+// extracted text that was shifted over one tab. It will need to be rendered at
+// the end of the document.
+func scanFootnote(p *parser, data []byte, i, indentSize int) (blockStart, blockEnd int, contents []byte, hasBlock bool) {
+	if i == 0 || len(data) == 0 {
+		return
+	}
+
+	// skip leading whitespace on first line
+	for i < len(data) && data[i] == ' ' {
+		i++
+	}
+
+	blockStart = i
+
+	// find the end of the line
+	blockEnd = i
+	for i < len(data) && data[i-1] != '\n' {
+		i++
+	}
+
+	// get working buffer
+	var raw bytes.Buffer
+
+	// put the first line into the working buffer
+	raw.Write(data[blockEnd:i])
+	blockEnd = i
+
+	// process the following lines
+	containsBlankLine := false
+
+gatherLines:
+	for blockEnd < len(data) {
+		i++
+
+		// find the end of this line
+		for i < len(data) && data[i-1] != '\n' {
+			i++
+		}
+
+		// if it is an empty line, guess that it is part of this item
+		// and move on to the next line
+		if p.isEmpty(data[blockEnd:i]) > 0 {
+			containsBlankLine = true
+			blockEnd = i
+			continue
+		}
+
+		n := 0
+		if n = isIndented(data[blockEnd:i], indentSize); n == 0 {
+			// this is the end of the block.
+			// we don't want to include this last line in the index.
+			break gatherLines
+		}
+
+		// if there were blank lines before this one, insert a new one now
+		if containsBlankLine {
+			raw.WriteByte('\n')
+			containsBlankLine = false
+		}
+
+		// get rid of that first tab, write to buffer
+		raw.Write(data[blockEnd+n : i])
+		hasBlock = true
+
+		blockEnd = i
+	}
+
+	if data[blockEnd-1] != '\n' {
+		raw.WriteByte('\n')
+	}
+
+	contents = raw.Bytes()
+
+	return
+}
 
 //
 //
 // Miscellaneous helper functions
 //
 //
-
 
 // Test if a character is a punctuation symbol.
 // Taken from a private function in regexp in the stdlib.
@@ -504,10 +696,15 @@ func isspace(c byte) bool {
 	return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v'
 }
 
+// Test if a character is letter.
+func isletter(c byte) bool {
+	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+}
+
 // Test if a character is a letter or a digit.
 // TODO: check when this is looking for ASCII alnum and when it should use unicode
 func isalnum(c byte) bool {
-	return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+	return (c >= '0' && c <= '9') || isletter(c)
 }
 
 // Replace tab characters with spaces, aligning to the next TAB_SIZE column.
@@ -566,4 +763,58 @@ func expandTabs(out *bytes.Buffer, line []byte, tabSize int) {
 
 		i++
 	}
+}
+
+// Find if a line counts as indented or not.
+// Returns number of characters the indent is (0 = not indented).
+func isIndented(data []byte, indentSize int) int {
+	if len(data) == 0 {
+		return 0
+	}
+	if data[0] == '\t' {
+		return 1
+	}
+	if len(data) < indentSize {
+		return 0
+	}
+	for i := 0; i < indentSize; i++ {
+		if data[i] != ' ' {
+			return 0
+		}
+	}
+	return indentSize
+}
+
+// Create a url-safe slug for fragments
+func slugify(in []byte) []byte {
+	if len(in) == 0 {
+		return in
+	}
+	out := make([]byte, 0, len(in))
+	sym := false
+
+	for _, ch := range in {
+		if isalnum(ch) {
+			sym = false
+			out = append(out, ch)
+		} else if sym {
+			continue
+		} else {
+			out = append(out, '-')
+			sym = true
+		}
+	}
+	var a, b int
+	var ch byte
+	for a, ch = range out {
+		if ch != '-' {
+			break
+		}
+	}
+	for b = len(out) - 1; b > 0; b-- {
+		if out[b] != '-' {
+			break
+		}
+	}
+	return out[a : b+1]
 }

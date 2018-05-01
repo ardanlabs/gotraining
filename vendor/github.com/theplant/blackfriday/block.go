@@ -15,6 +15,7 @@ package blackfriday
 
 import (
 	"bytes"
+	"unicode/utf8"
 )
 
 // Parse block-level data.
@@ -192,13 +193,17 @@ func (p *parser) prefixHeader(out *bytes.Buffer, data []byte) int {
 	for end > 0 && data[end-1] == ' ' {
 		end--
 	}
+	content := []byte{}
 	if end > i {
-		work := func() bool {
-			p.inline(out, data[i:end])
-			return true
-		}
-		p.r.Header(out, work, level)
+		content = data[i:end]
 	}
+
+	work := func() bool {
+		p.inline(out, content)
+		return true
+	}
+	p.r.Header(out, work, level)
+
 	return skip
 }
 
@@ -458,8 +463,8 @@ func (p *parser) isEmpty(data []byte) int {
 	}
 
 	var i int
-	for i = 0; data[i] != '\n'; i++ {
-		if data[i] != ' ' {
+	for i = 0; i < len(data) && data[i] != '\n'; i++ {
+		if data[i] != ' ' && data[i] != '\t' {
 			return 0
 		}
 	}
@@ -662,11 +667,20 @@ func (p *parser) table(out *bytes.Buffer, data []byte) int {
 	return i
 }
 
+// check if the specified position is preceeded by an odd number of backslashes
+func isBackslashEscaped(data []byte, i int) bool {
+	backslashes := 0
+	for i-backslashes-1 >= 0 && data[i-backslashes-1] == '\\' {
+		backslashes++
+	}
+	return backslashes&1 == 1
+}
+
 func (p *parser) tableHeader(out *bytes.Buffer, data []byte) (size int, columns []int) {
 	i := 0
 	colCount := 1
 	for i = 0; data[i] != '\n'; i++ {
-		if data[i] == '|' {
+		if data[i] == '|' && !isBackslashEscaped(data, i) {
 			colCount++
 		}
 	}
@@ -683,7 +697,7 @@ func (p *parser) tableHeader(out *bytes.Buffer, data []byte) (size int, columns 
 	if data[0] == '|' {
 		colCount--
 	}
-	if i > 2 && data[i-1] == '|' {
+	if i > 2 && data[i-1] == '|' && !isBackslashEscaped(data, i-1) {
 		colCount--
 	}
 
@@ -695,7 +709,7 @@ func (p *parser) tableHeader(out *bytes.Buffer, data []byte) (size int, columns 
 		return
 	}
 
-	if data[i] == '|' {
+	if data[i] == '|' && !isBackslashEscaped(data, i) {
 		i++
 	}
 	for data[i] == ' ' {
@@ -732,7 +746,7 @@ func (p *parser) tableHeader(out *bytes.Buffer, data []byte) (size int, columns 
 			// not a valid column
 			return
 
-		case data[i] == '|':
+		case data[i] == '|' && !isBackslashEscaped(data, i):
 			// marker found, now skip past trailing whitespace
 			col++
 			i++
@@ -745,7 +759,7 @@ func (p *parser) tableHeader(out *bytes.Buffer, data []byte) (size int, columns 
 				return
 			}
 
-		case data[i] != '|' && col+1 < colCount:
+		case (data[i] != '|' || isBackslashEscaped(data, i)) && col+1 < colCount:
 			// something else found where marker was required
 			return
 
@@ -771,7 +785,7 @@ func (p *parser) tableRow(out *bytes.Buffer, data []byte, columns []int) {
 	i, col := 0, 0
 	var rowWork bytes.Buffer
 
-	if data[i] == '|' {
+	if data[i] == '|' && !isBackslashEscaped(data, i) {
 		i++
 	}
 
@@ -782,7 +796,7 @@ func (p *parser) tableRow(out *bytes.Buffer, data []byte, columns []int) {
 
 		cellStart := i
 
-		for data[i] != '|' && data[i] != '\n' {
+		for (data[i] != '|' || isBackslashEscaped(data, i)) && data[i] != '\n' {
 			i++
 		}
 
@@ -920,10 +934,45 @@ func (p *parser) uliPrefix(data []byte) int {
 		i++
 	}
 
-	// need a *, +, or - followed by a space
-	if (data[i] != '*' && data[i] != '+' && data[i] != '-') ||
-		data[i+1] != ' ' {
+	hitUnicodeListItemMarker := false
+	r, sz := utf8.DecodeRune(data[i:])
+	if p.flags&EXTENSION_UNICODE_LIST_ITEM != 0 {
+		if r == '–' || r == '＊' || r == '﹡' || r == '·' || r == '•' || r == '★' {
+			hitUnicodeListItemMarker = true
+		}
+	}
+
+	// need a *, +, or -
+	if data[i] != '*' && data[i] != '+' && data[i] != '-' && !hitUnicodeListItemMarker {
 		return 0
+	}
+	if hitUnicodeListItemMarker {
+		i += sz - 1
+	}
+
+	if data[i+1] != ' ' {
+		// need a *, +, or - followed by a space
+		if p.flags&EXTENSION_NO_SPACE_LISTS == 0 {
+			return 0
+		}
+
+		//not list
+		if data[i+1] == '\n' {
+			return 0
+		}
+
+		//avoid emphase
+		if data[i] == '*' {
+			j := i + 1
+			for data[j] != '\n' {
+				if data[j] == '*' {
+					return 0
+				}
+				j++
+			}
+		}
+
+		return i + 1
 	}
 	return i + 2
 }
@@ -943,10 +992,34 @@ func (p *parser) oliPrefix(data []byte) int {
 		i++
 	}
 
-	// we need >= 1 digits followed by a dot and a space
-	if start == i || data[i] != '.' || data[i+1] != ' ' {
+	// we need >= 1 digits followed by a dot
+	if start == i || data[i] != '.' {
 		return 0
 	}
+
+	if data[i+1] != ' ' {
+		//need >= 1 digits followed by a dot and a space
+		if p.flags&EXTENSION_NO_SPACE_LISTS == 0 {
+			return 0
+		}
+
+		//no list
+		if data[i+1] == '\n' {
+			return 0
+		}
+
+		//float number should not acount as list
+		j := i + 1
+		for data[j] >= '0' && data[j] <= '9' {
+			j++
+		}
+		if j > i+1 {
+			return 0
+		}
+
+		return i + 1
+	}
+
 	return i + 2
 }
 
@@ -1060,7 +1133,7 @@ gatherlines:
 		case p.isPrefixHeader(chunk):
 			// if the header is not indented, it is not nested in the list
 			// and thus ends the list
-			if containsBlankLine && indent < 4 {
+			if containsBlankLine && indent < ListIndentSpacesCount {
 				*flags |= LIST_ITEM_END_OF_LIST
 				break gatherlines
 			}
@@ -1069,7 +1142,7 @@ gatherlines:
 		// anything following an empty line is only part
 		// of this item if it is indented 4 spaces
 		// (regardless of the indentation of the beginning of the item)
-		case containsBlankLine && indent < 4:
+		case containsBlankLine && indent < ListIndentSpacesCount:
 			*flags |= LIST_ITEM_END_OF_LIST
 			break gatherlines
 
@@ -1092,10 +1165,11 @@ gatherlines:
 		line = i
 	}
 
-	// render the contents of the list item
 	rawBytes := raw.Bytes()
+
+	// render the contents of the list item
 	var cooked bytes.Buffer
-	if *flags&LIST_ITEM_CONTAINS_BLOCK != 0 {
+	if *flags&LIST_ITEM_CONTAINS_BLOCK != 0 && p.flags&EXTENSION_NO_LIST_ITEM_BLOCK == 0 {
 		// intermediate render of block li
 		if sublist > 0 {
 			p.block(&cooked, rawBytes[:sublist])
@@ -1218,6 +1292,17 @@ func (p *parser) paragraph(out *bytes.Buffer, data []byte) int {
 		if p.isPrefixHeader(current) || p.isHRule(current) {
 			p.renderParagraph(out, data[:i])
 			return i
+		}
+
+		// if there's a list after this, paragraph is over
+		if p.flags&EXTENSION_NO_EMPTY_LINE_BEFORE_BLOCK != 0 {
+			if p.uliPrefix(current) != 0 ||
+				p.oliPrefix(current) != 0 ||
+				p.quotePrefix(current) != 0 ||
+				p.codePrefix(current) != 0 {
+				p.renderParagraph(out, data[:i])
+				return i
+			}
 		}
 
 		// otherwise, scan to the beginning of the next line

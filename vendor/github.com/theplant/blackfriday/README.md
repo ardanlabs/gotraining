@@ -16,12 +16,23 @@ It started as a translation from C of [upskirt][3].
 Installation
 ------------
 
-Assuming you have recent version of Go installed, along with git:
+Blackfriday is compatible with Go 1. If you are using an older
+release of Go, consider using v1.1 of blackfriday, which was based
+on the last stable release of Go prior to Go 1. You can find it as a
+tagged commit on github.
 
-    goinstall github.com/russross/blackfriday
+With Go 1 and git installed:
 
-will download, compile, and install the package into
-`$GOROOT/src/pkg/github.com/russross/blackfriday`.
+    go get github.com/russross/blackfriday
+
+will download, compile, and install the package into your `$GOPATH`
+directory hierarchy. Alternatively, you can import it into a
+project:
+
+    import "github.com/russross/blackfriday"
+
+and when you build that project with `go build`, blackfriday will be
+downloaded and installed automatically.
 
 For basic usage, it is as simple as getting your input into a byte
 slice and calling:
@@ -39,16 +50,24 @@ call the more general `Markdown` function. For examples, see the
 implementations of `MarkdownBasic` and `MarkdownCommon` in
 `markdown.go`.
 
-You can also check out `example/main.go` for a more complete example
-of how to use it. Run `gomake` in that directory to build a simple
-command-line markdown tool:
+You can also check out `blackfriday-tool` for a more complete example
+of how to use it. Download and install it using:
 
-    cd $GOROOT/src/pkg/github.com/russross/blackfriday/example
-    gomake
+    go get github.com/russross/blackfriday-tool
 
-will build the binary `markdown` in the `example` directory. This is
-a statically-linked binary that can be copied to wherever you need
-it without worrying about dependencies and library versions.
+This is a simple command-line tool that allows you to process a
+markdown file using a standalone program.  You can also browse the
+source directly on github if you are just looking for some example
+code:
+
+* <http://github.com/russross/blackfriday-tool>
+
+Note that if you have not already done so, installing
+`blackfriday-tool` will be sufficient to download and install
+blackfriday in addition to the tool itself. The tool binary will be
+installed in `$GOPATH/bin`.  This is a statically-linked binary that
+can be copied to wherever you need it without worrying about
+dependencies and library versions.
 
 
 Features
@@ -73,7 +92,7 @@ All features of upskirt are supported, including:
 *   **Fast processing**. It is fast enough to render on-demand in
     most web applications without having to cache the output.
 
-*   **Thread safety**. You can run multiple parsers is different
+*   **Thread safety**. You can run multiple parsers in different
     goroutines without ill effect. There is no dependence on global
     shared state.
 
@@ -101,10 +120,12 @@ implements the following extensions:
 *   **Tables**. Tables can be created by drawing them in the input
     using a simple syntax:
 
-        Name    | Age
-        --------|------
-        Bob     | 27
-        Alice   | 23
+    ```
+    Name    | Age
+    --------|------
+    Bob     | 27
+    Alice   | 23
+    ```
 
 *   **Fenced code blocks**. In addition to the normal 4-space
     indentation to mark code blocks, you can explicitly mark them
@@ -176,31 +197,33 @@ License
 
 Blackfriday is distributed under the Simplified BSD License:
 
-> Copyright © 2011 Russ Ross. All rights reserved.
+> Copyright © 2011 Russ Ross
+> All rights reserved.
 > 
-> Redistribution and use in source and binary forms, with or without modification, are
-> permitted provided that the following conditions are met:
+> Redistribution and use in source and binary forms, with or without
+> modification, are permitted provided that the following conditions
+> are met:
 > 
->    1. Redistributions of source code must retain the above copyright notice, this list of
->       conditions and the following disclaimer.
+> 1.  Redistributions of source code must retain the above copyright
+>     notice, this list of conditions and the following disclaimer.
 > 
->    2. Redistributions in binary form must reproduce the above copyright notice, this list
->       of conditions and the following disclaimer in the documentation and/or other materials
->       provided with the distribution.
+> 2.  Redistributions in binary form must reproduce the above
+>     copyright notice, this list of conditions and the following
+>     disclaimer in the documentation and/or other materials provided with
+>     the distribution.
 > 
-> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER ``AS IS'' AND ANY EXPRESS OR IMPLIED
-> WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-> FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-> CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-> SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-> ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-> NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-> ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> 
-> The views and conclusions contained in the software and documentation are those of the
-> authors and should not be interpreted as representing official policies, either expressed
-> or implied, of the copyright holder.
+> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+> "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+> LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+> FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+> COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+> INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+> BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+> LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+> CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+> ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+> POSSIBILITY OF SUCH DAMAGE.
 
 
    [1]: http://daringfireball.net/projects/markdown/ "Markdown"
