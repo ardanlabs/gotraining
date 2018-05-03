@@ -24,13 +24,13 @@ http://www.catb.org/esr/structure-packing
 
 ## Code Review
 
-[Declare, create and initialize struct types](example1/example1.go) ([Go Playground](https://play.golang.org/p/TEmOrIxl_P))  
-[Anonymous struct types](example2/example2.go) ([Go Playground](https://play.golang.org/p/x-Dpp9Ts_U))  
-[Named vs Unnamed types](example3/example3.go) ([Go Playground](https://play.golang.org/p/QREkSIDAuW))
+[Declare, create and initialize struct types](example1/example1.go) ([Go Playground](https://play.golang.org/p/djzGT1JtSwy))  
+[Anonymous struct types](example2/example2.go) ([Go Playground](https://play.golang.org/p/09cxjnmfcdC))  
+[Named vs Unnamed types](example3/example3.go) ([Go Playground](https://play.golang.org/p/ky91roJDjir))
 
 ## Advanced Code Review
 
-[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/nwOX0grify))
+[Struct type alignments](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/rAvtS7cgD0z))
 
 ## Exercises
 
@@ -40,7 +40,7 @@ http://www.catb.org/esr/structure-packing
 
 **Part B:** Declare and initialize an anonymous struct type with the same three fields. Display the value.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/PvQKHgf9jZ)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/8CtSrnTp-1))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/h-7BEn2U3Rz)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/eT_gLZKeHk-))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

@@ -38,14 +38,15 @@ https://golang.org/doc/articles/race_detector.html
 
 ## Code Review
 
-[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/yXiOONCG-2))  
-[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/SbWFzQT1zu))  
-[Mutex](example3/example3.go) ([Go Playground](https://play.golang.org/p/_4TYRcZ2vP))  
-[Read/Write Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/uMU7Crx6ZY))
+[Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/zahCnOjS4Q1))  
+[Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/DkqwruQwS-N))  
+[Mutex](example3/example3.go) ([Go Playground](https://play.golang.org/p/T15uvr3SxHa))  
+[Read/Write Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/_n32wetlmSs))
+[Map Data Race](example5/example5.go) ([Go Playground](https://play.golang.org/p/ktWRjcJWNjw))
 
 ## Advanced Code Review
 
-[Interface Based Race Condition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/m08N8yYlpr))
+[Interface Based Race Condition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/fwRTeBQrZVW))
 
 ## Exercises
 
@@ -107,7 +108,7 @@ Given the following program, use the race detector to find and correct the data 
 		}
 	}
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/G7_rJAK8YR)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/GC12H2acgO))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/Mzt11_xe_ou)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/KAakUVF_1k-))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
