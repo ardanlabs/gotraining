@@ -153,6 +153,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
 [Our Human Condition "From Space"](http://www.vpri.org/pdf/m2003001_human_cond.pdf) - Alan Kay  
 [No Silver Bullet: Essence and Accidents of Software Engineering](http://www.cs.nott.ac.uk/~pszcah/G51ISS/Documents/NoSilverBullet.html) - Frederick P. Brooks, Jr.   
+[PRinty# C with ABC](http://www.cs.cmu.edu/~tom7/abc/paper.pdf) - Dr. Tom Murphy VII, Ph.D  
 
 ## Mechanical Sympathy
 

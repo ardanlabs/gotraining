@@ -29,7 +29,7 @@ Our classes are perfect for intermediate-level developers who have at least a fe
 ## Our Teachers
 
 ### William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
-_William Kennedy is a managing partner at Ardan Studio in Miami, Florida, a mobile, web, and systems development company. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
+_William Kennedy is a managing partner at Ardan Labs in Miami, Florida. Ardan Labs is a high-performance development and training firm working with startups and fortune 500 companies. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
 _**Video Training**_  
 [Ultimate Go Live Lessons](http://www.informit.com/store/ultimate-go-programming-livelessons-9780134757483)
@@ -156,7 +156,8 @@ February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3
 March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)       
 March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)     
 May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)         
-April(03-05)        Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
+April(03-05)        Santa Barbara, CA     Hallmark            Corporate    Go (3 day)    
+June(19-21)         Malasia               Chotot              Corporate    Go (3 day)          
 ```
 
 **Daniel Whitenack**  
