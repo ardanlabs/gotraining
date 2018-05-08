@@ -23,7 +23,8 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(2)
 
-	fmt.Println("Start Goroutines")
+	fmt.Println("\nStart Goroutines")
+	fmt.Println("*************************")
 
 	// Create a goroutine from the lowercase function.
 	go func() {
@@ -38,10 +39,12 @@ func main() {
 	}()
 
 	// Wait for the goroutines to finish.
-	fmt.Println("Waiting To Finish")
+	fmt.Println("\nWaiting To Finish")
+	fmt.Println("*************************")
 	wg.Wait()
 
-	fmt.Println("\nTerminating Program")
+	fmt.Println("\n\nTerminating Program")
+	fmt.Println("*************************")
 }
 
 // lowercase displays the set of lowercase letters three times.

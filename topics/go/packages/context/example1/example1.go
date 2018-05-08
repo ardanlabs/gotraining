@@ -31,7 +31,7 @@ func main() {
 
 	// Retrieve that traceID value from the Context value bag.
 	if uuid, ok := ctx.Value(traceIDKey).(TraceID); ok {
-		fmt.Println("TraceID:", uuid)
+		fmt.Printf("TraceID[%v]\n", uuid)
 	}
 
 	// Retrieve that traceID value from the Context value bag not

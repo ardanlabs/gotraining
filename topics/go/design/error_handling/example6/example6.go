@@ -30,7 +30,7 @@ func main() {
 		case *AppError:
 
 			// We got our custom error type.
-			fmt.Println("Custom App Error:", v.State)
+			fmt.Printf("Custom App Error: %d\n", v.State)
 
 		default:
 
@@ -39,9 +39,11 @@ func main() {
 		}
 
 		// Display the stack trace for the error.
-		fmt.Println("\nStack Trace\n********************************")
+		fmt.Println("\nStack Trace")
+		fmt.Println("*************************")
 		fmt.Printf("%+v\n", err)
-		fmt.Println("\nNo Trace\n********************************")
+		fmt.Println("\nNo Trace")
+		fmt.Println("*************************")
 		fmt.Printf("%v\n", err)
 	}
 }

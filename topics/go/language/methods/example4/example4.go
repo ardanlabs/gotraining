@@ -8,7 +8,7 @@ import "fmt"
 
 // event displays global events.
 func event(message string) {
-	fmt.Println(message)
+	fmt.Printf("{global event} message[%s]\n", message)
 }
 
 // data is a struct to bind methods to.
@@ -19,7 +19,7 @@ type data struct {
 
 // event displays events for this data.
 func (d *data) event(message string) {
-	fmt.Println(d.name, message)
+	fmt.Printf("{data event} name[%s] message[%s]\n", d.name, message)
 }
 
 // =============================================================================

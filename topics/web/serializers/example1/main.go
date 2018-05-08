@@ -26,6 +26,7 @@ func useStreams() {
 		LastName:  "Walker",
 	}
 
+	fmt.Print("json output: ")
 	// Encode using an Encoder. The relevant signatures are
 	//	func NewEncoder(w io.Writer) *Encoder
 	//	func (enc *Encoder) Encode(v interface{}) error
@@ -62,7 +63,7 @@ func useBytes() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(b))
+	fmt.Printf("json output: %s\n", string(b))
 
 	// Prints to stdout
 	// {"FirstName":"Carter","LastName":"Walker"}

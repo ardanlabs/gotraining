@@ -11,12 +11,12 @@ func main() {
 
 	// Declare an anonymous function and call it.
 	func() {
-		fmt.Println("Direct:", n)
+		fmt.Printf("Direct[%d]\n", n)
 	}()
 
 	// Declare an anonymous function and assign it to a variable.
 	f := func() {
-		fmt.Println("Variable:", n)
+		fmt.Printf("Variable[%d]\n", n)
 	}
 
 	// Call the anonymous function through the variable.
@@ -24,7 +24,7 @@ func main() {
 
 	// Defer the call to the anonymous function till after main returns.
 	defer func() {
-		fmt.Println("Defer 1:", n)
+		fmt.Printf("Defer 1[%d]\n", n)
 	}()
 
 	// Set the value of n to 3 before the return.
@@ -35,6 +35,6 @@ func main() {
 
 	// Defer the call to the anonymous function till after main returns.
 	defer func() {
-		fmt.Println("Defer 2:", n)
+		fmt.Printf("Defer 2[%d]\n", n)
 	}()
 }

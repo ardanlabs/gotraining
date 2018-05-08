@@ -33,5 +33,5 @@ func main() {
 	}
 
 	// Output the contents to standard out.
-	fmt.Println(b.String())
+	fmt.Printf("contents:\n%s\n", b.String())
 }

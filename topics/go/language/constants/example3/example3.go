@@ -14,7 +14,7 @@ func main() {
 		C1 = iota // 2 : Increment by 1
 	)
 
-	fmt.Println("1:", A1, B1, C1)
+	fmt.Printf("1: %d %d %d\n", A1, B1, C1)
 
 	const (
 		A2 = iota // 0 : Start at 0
@@ -22,7 +22,7 @@ func main() {
 		C2        // 2 : Increment by 1
 	)
 
-	fmt.Println("2:", A2, B2, C2)
+	fmt.Printf("2: %d %d %d\n", A2, B2, C2)
 
 	const (
 		A3 = iota + 1 // 1 : Start at 0 + 1
@@ -30,7 +30,7 @@ func main() {
 		C3            // 3 : Increment by 1
 	)
 
-	fmt.Println("3:", A3, B3, C3)
+	fmt.Printf("3: %d %d %d\n", A3, B3, C3)
 
 	const (
 		Ldate         = 1 << iota //  1 : Shift 1 to the left 0.  0000 0001
@@ -41,5 +41,13 @@ func main() {
 		LUTC                      // 32 : Shift 1 to the left 5.  0010 0000
 	)
 
-	fmt.Println("Log:", Ldate, Ltime, Lmicroseconds, Llongfile, Lshortfile, LUTC)
+	fmt.Printf(
+		"Log: %d %d %d %d %d %d\n",
+		Ldate,
+		Ltime,
+		Lmicroseconds,
+		Llongfile,
+		Lshortfile,
+		LUTC,
+	)
 }

@@ -28,5 +28,5 @@ func main() {
 
 	// Display the value that the pointer points to and the
 	// second element of the slice.
-	fmt.Println("Pointer:", *twohundred, "Element", x[1])
+	fmt.Printf("Pointer[%d] Element[%d]\n", *twohundred, x[1])
 }

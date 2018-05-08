@@ -56,5 +56,5 @@ func main() {
 	}
 
 	// Print the maxium value
-	fmt.Println(intMax)
+	fmt.Printf("intMax[%d]\n", intMax)
 }

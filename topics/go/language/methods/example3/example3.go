@@ -14,13 +14,13 @@ type data struct {
 
 // displayName provides a pretty print view of the name.
 func (d data) displayName() {
-	fmt.Println("My Name Is", d.name)
+	fmt.Printf("My name is: %s\n", d.name)
 }
 
 // setAge sets the age and displays the value.
 func (d *data) setAge(age int) {
 	d.age = age
-	fmt.Println(d.name, "Is Age", d.age)
+	fmt.Printf("%s's is age: %d\n", d.name, d.age)
 }
 
 func main() {
@@ -30,13 +30,15 @@ func main() {
 		name: "Bill",
 	}
 
-	fmt.Println("Proper Calls to Methods:")
+	fmt.Println("\nProper calls to methods")
+	fmt.Println("*************************")
 
 	// How we actually call methods in Go.
 	d.displayName()
 	d.setAge(45)
 
-	fmt.Println("\nWhat the Compiler is Doing:")
+	fmt.Println("\nWhat the compiler is doing")
+	fmt.Println("*************************")
 
 	// This is what Go is doing underneath.
 	data.displayName(d)
@@ -44,7 +46,8 @@ func main() {
 
 	// =========================================================================
 
-	fmt.Println("\nCall Value Receiver Methods with Variable:")
+	fmt.Println("\nCall Value Receiver Methods with Variable")
+	fmt.Println("*************************")
 
 	// Declare a function variable for the method bound to the d variable.
 	// The function variable will get its own copy of d because the method
@@ -62,7 +65,8 @@ func main() {
 
 	// =========================================================================
 
-	fmt.Println("\nCall Pointer Receiver Method with Variable:")
+	fmt.Println("\nCall Pointer Receiver Method with Variable")
+	fmt.Println("*************************")
 
 	// Declare a function variable for the method bound to the d variable.
 	// The function variable will get the address of d because the method

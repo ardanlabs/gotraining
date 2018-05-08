@@ -28,8 +28,8 @@ func main() {
 	t.UpdateSold(2)
 
 	// Display each field separately.
-	fmt.Println("Name", t.Name)
-	fmt.Println("Weight", t.Weight)
-	fmt.Println("OnHand", t.OnHand())
-	fmt.Println("Sold", t.Sold())
+	fmt.Printf("name[%s]\n", t.Name)
+	fmt.Printf("Weight[%d]\n", t.Weight)
+	fmt.Printf("OnHand[%d]\n", t.OnHand())
+	fmt.Printf("Sold[%d]\n", t.Sold())
 }

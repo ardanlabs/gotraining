@@ -40,7 +40,7 @@ func main() {
 	// Wait for the work to finish. If it takes too long move on.
 	select {
 	case d := <-ch:
-		fmt.Println("work complete", d)
+		fmt.Printf("work complete data[%+v]\n", d)
 
 	case <-ctx.Done():
 		fmt.Println("work cancelled")

@@ -39,6 +39,6 @@ func main() {
 
 	// As a sanity check, display the records to stdout.
 	for _, each := range rawCSVData {
-		fmt.Println(each)
+		fmt.Printf("row: %s\n", each)
 	}
 }

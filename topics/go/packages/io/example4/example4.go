@@ -45,8 +45,8 @@ var size = len(find)
 
 func main() {
 	var output bytes.Buffer
-
-	fmt.Println("=======================================\nRunning Algorithm One")
+	fmt.Println("\nRunning Algorithm One")
+	fmt.Println("*************************")
 	for _, d := range data {
 		input := bytes.NewReader(d.input)
 		output.Reset()
@@ -56,7 +56,8 @@ func main() {
 		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
 	}
 
-	fmt.Println("=======================================\nRunning Algorithm Two")
+	fmt.Println("\nRunning Algorithm Two")
+	fmt.Println("*************************")
 	for _, d := range data {
 		input := bytes.NewReader(d.input)
 		output.Reset()
@@ -66,7 +67,8 @@ func main() {
 		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
 	}
 
-	fmt.Println("=======================================\nRunning Algorithm Three")
+	fmt.Println("\nRunning Algorithm Three")
+	fmt.Println("*************************")
 	for _, d := range data {
 		input := bytes.NewReader(d.input)
 		output.Reset()
@@ -76,7 +78,8 @@ func main() {
 		fmt.Printf("Matched: %v Inp: [%s] Exp: [%s] Got: [%s]\n", matched == 0, d.input, d.output, output.Bytes())
 	}
 
-	fmt.Println("=======================================\nRunning Algorithm Four")
+	fmt.Println("\nRunning Algorithm Four")
+	fmt.Println("*************************")
 	for _, d := range data {
 		output.Reset()
 		output.ReadFrom(NewReplaceReader(bytes.NewReader(d.input), find, repl))

@@ -19,10 +19,9 @@ const (
 func main() {
 
 	// Display the server information.
-	fmt.Println(server)
-	fmt.Println(port)
+	fmt.Printf("server[%s] port[%d]\n", server, port)
 
 	// Calculate the number of minutes in 5320 seconds.
 	minutes := 5320 / 60.0
-	fmt.Println(minutes)
+	fmt.Printf("minutes[%.2f]\n", minutes)
 }

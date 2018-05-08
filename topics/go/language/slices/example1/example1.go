@@ -22,5 +22,5 @@ func main() {
 
 	// Error: panic: runtime error: index out of range
 
-	fmt.Println(slice)
+	fmt.Printf("%#v\n", slice)
 }

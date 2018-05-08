@@ -11,7 +11,7 @@ type duration int
 
 // notify implements the notifier interface.
 func (d *duration) notify() {
-	fmt.Println("Sending Notification in", *d)
+	fmt.Printf("Sending Notification in %d\n", *d)
 }
 
 func main() {

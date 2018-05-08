@@ -55,7 +55,7 @@ func main() {
 	// resp here is a response, and resp.Body is an io.Reader.
 	resp, err := http.Get(url)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("error GETting URL: %s\n", err)
 		return
 	}
 	defer resp.Body.Close()
@@ -85,7 +85,7 @@ func main() {
 		var writer io.WriteCloser
 		writer, err := os.Create(Config.DestFile)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Printf("error creating configuration file: %s\n", err)
 			return
 		}
 
@@ -105,7 +105,7 @@ func main() {
 	// Write to dest the same way as before, copying from the Body.
 	_, err = io.Copy(dest, resp.Body)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("error copying body: %s\n", err)
 		return
 	}
 

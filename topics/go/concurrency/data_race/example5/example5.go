@@ -32,5 +32,5 @@ func main() {
 	}()
 
 	wg.Wait()
-	fmt.Println("Final scores:", scores)
+	fmt.Printf("Final scores:\n%+v\n", scores)
 }

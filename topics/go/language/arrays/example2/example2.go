@@ -22,6 +22,6 @@ func main() {
 
 	// ./example2.go:21: cannot use four (type [4]int) as type [5]int in assignment
 
-	fmt.Println(four)
-	fmt.Println(five)
+	fmt.Printf("four: %v\n", four)
+	fmt.Printf("five: %v\n", five)
 }

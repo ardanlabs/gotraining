@@ -30,7 +30,7 @@ func main() {
 		return
 	}
 
-	fmt.Println(u)
+	fmt.Printf("%+v\n", u)
 
 	// The short variable declaration operator will
 	// redeclare u and declare err2.
@@ -39,7 +39,7 @@ func main() {
 		return
 	}
 
-	fmt.Println(u)
+	fmt.Printf("%+v\n", u)
 }
 
 // getUser returns a pointer of type user.

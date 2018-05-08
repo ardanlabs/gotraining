@@ -41,7 +41,12 @@ func printContributors(repo string, c contributors) int {
 	}
 
 	for i, con := range cons {
-		fmt.Println(i, con.Login, con.Contributions)
+		fmt.Printf(
+			"index[%d] login[%s] contributions[%d]\n",
+			i,
+			con.Login,
+			con.Contributions,
+		)
 	}
 
 	return 0

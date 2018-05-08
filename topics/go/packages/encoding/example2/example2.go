@@ -38,9 +38,9 @@ type (
 func main() {
 
 	// Open the file.
-	file, err := os.Open("./topics/go/packages/encoding/example2/data.json")
+	file, err := os.Open("data.json")
 	if err != nil {
-		fmt.Println("Open File", err)
+		fmt.Printf("could not open file: %s\n", err)
 		return
 	}
 
@@ -52,7 +52,7 @@ func main() {
 	var stations []buoyStation
 	err = json.NewDecoder(file).Decode(&stations)
 	if err != nil {
-		fmt.Println("Decode File", err)
+		fmt.Printf("could not decode file: %s\n", err)
 		return
 	}
 

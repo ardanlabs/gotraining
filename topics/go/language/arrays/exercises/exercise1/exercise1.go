@@ -23,6 +23,6 @@ func main() {
 
 	// Display each string value and address index in names.
 	for i, name := range names {
-		fmt.Println(name, &names[i])
+		fmt.Printf("name[%s] address[%p]\n", name, &names[i])
 	}
 }

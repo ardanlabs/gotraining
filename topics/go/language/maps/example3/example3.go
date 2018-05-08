@@ -25,6 +25,6 @@ func main() {
 
 	// Iterate over the map.
 	for key, value := range u {
-		fmt.Println(key, value)
+		fmt.Printf("key[%+v] value[%+v]\n", key, value)
 	}
 }

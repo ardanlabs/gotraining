@@ -49,6 +49,6 @@ func main() {
 
 	// Iterate over the slice via reflection.
 	for i := 0; i < v.Len(); i++ {
-		fmt.Println(v.Index(i))
+		fmt.Printf("%+v\n", v.Index(i))
 	}
 }

@@ -23,9 +23,9 @@ type user struct {
 func main() {
 
 	// Open the file.
-	file, err := os.Open("./topics/go/packages/encoding/exercises/exercise1/data.json")
+	file, err := os.Open("data.json")
 	if err != nil {
-		fmt.Println("Open File", err)
+		fmt.Printf("could not open file: %s\n", err)
 		return
 	}
 
@@ -37,22 +37,22 @@ func main() {
 	var users []user
 	err = json.NewDecoder(file).Decode(&users)
 	if err != nil {
-		fmt.Println("Decode File", err)
+		fmt.Printf("could not decode file: %s\n", err)
 		return
 	}
 
 	// Iterate over the slice and display
 	// each user.
 	for _, u := range users {
-		fmt.Printf("%+v\n", u)
+		fmt.Printf("user: %+v\n", u)
 	}
 
 	uData, err := json.MarshalIndent(&users, "", "    ")
 	if err != nil {
-		fmt.Println("MarshalIndent", err)
+		fmt.Printf("could not MarshalIndent struct: %s\n", err)
 		return
 	}
 
 	// Convert the byte slice to a string and display.
-	fmt.Println(string(uData))
+	fmt.Printf("json:\n%s\n", string(uData))
 }

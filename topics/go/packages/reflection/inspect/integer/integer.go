@@ -15,12 +15,12 @@ func main() {
 	// Decode the string into the integer variable.
 	var number int
 	decodeInt("10", &number)
-	fmt.Println("number:", number)
+	fmt.Printf("number[%d]\n", number)
 
 	// Decode the integer into the integer variable.
 	var age int
 	decodeInt(45, &age)
-	fmt.Println("age:", age)
+	fmt.Printf("age[%d]\n", age)
 }
 
 // decodeInt accepts a value of any type and will decode

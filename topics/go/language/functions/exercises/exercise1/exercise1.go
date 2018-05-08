@@ -27,17 +27,17 @@ func main() {
 	// Create a value of type user.
 	u, err := newUser()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("newUser error: %s\n", err)
 		return
 	}
 
 	// Display the value.
-	fmt.Println(*u)
+	fmt.Printf("%+v\n", *u)
 
 	// Call the function and just check the error on the return.
 	_, err = newUser()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("newUser error: %s\n", err)
 		return
 	}
 }

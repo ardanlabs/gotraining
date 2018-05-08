@@ -19,9 +19,12 @@ func main() {
 	var legal bool
 
 	// Display the value of those variables.
-	fmt.Println(age)
-	fmt.Println(name)
-	fmt.Println(legal)
+	fmt.Printf(
+		"age[%d] name[%s] legal[%t]\n",
+		age,
+		name,
+		legal,
+	)
 
 	// Declare variables and initialize.
 	// Using the short variable declaration operator.
@@ -30,13 +33,16 @@ func main() {
 	happy := true
 
 	// Display the value of those variables.
-	fmt.Println(month)
-	fmt.Println(dayOfWeek)
-	fmt.Println(happy)
+	fmt.Printf(
+		"month[%d] dayOfWeek[%s] happy[%t]\n",
+		month,
+		dayOfWeek,
+		happy,
+	)
 
 	// Perform a type conversion.
 	pi := float32(3.14)
 
 	// Display the value of that variable.
-	fmt.Printf("%T [%v]\n", pi, pi)
+	fmt.Printf("Pi type[%T] value[%v]\n", pi, pi)
 }

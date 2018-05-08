@@ -21,9 +21,9 @@ import (
 func main() {
 
 	// Open the file for reading.
-	file, err := os.Open("./topics/go/packages/io/advanced/example1/data.json")
+	file, err := os.Open("data.json")
 	if err != nil {
-		fmt.Println("Open File", err)
+		fmt.Printf("could not open data file: %s\n", err)
 		return
 	}
 
@@ -54,7 +54,7 @@ func main() {
 	// and the multipart Writer at the same time.
 	_, err = io.Copy(fileWriter, hashReader)
 	if err != nil {
-		fmt.Println("Write File", err)
+		fmt.Printf("could not copy file: %s\n", err)
 		return
 	}
 

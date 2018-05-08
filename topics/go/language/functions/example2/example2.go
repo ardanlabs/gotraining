@@ -35,12 +35,12 @@ func main() {
 
 	// Update the user Name. Don't care about the update stats.
 	if _, err := updateUser(&u); err != nil {
-		fmt.Println(err)
+		fmt.Printf("updateUser had an error: %s\n", err)
 		return
 	}
 
 	// Display the update was Successful.
-	fmt.Println("Updated user record for ID", u.ID)
+	fmt.Printf("Updated user record for ID[%d]\n", u.ID)
 }
 
 // updateUser updates the specified user document.

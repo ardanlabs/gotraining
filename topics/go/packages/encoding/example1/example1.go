@@ -63,7 +63,7 @@ func main() {
 
 	// Unmarshal the JSON document into the variable.
 	if err := json.Unmarshal([]byte(document), &uc); err != nil {
-		fmt.Println(err)
+		fmt.Printf("could not unmarshal: %s\n", err)
 		return
 	}
 
@@ -74,7 +74,7 @@ func main() {
 
 	// Unmarshal the JSON document into the nil pointer.
 	if err := json.Unmarshal([]byte(document), &ucp); err != nil {
-		fmt.Println(err)
+		fmt.Printf("could not unmarshal: %s\n", err)
 		return
 	}
 

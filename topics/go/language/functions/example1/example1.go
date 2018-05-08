@@ -21,7 +21,7 @@ func main() {
 	// Retrieve the user profile.
 	u, err := retrieveUser("sally")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("retrieveUser had an error: %s\n", err)
 		return
 	}
 
