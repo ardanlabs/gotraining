@@ -246,16 +246,17 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
-[Go 1.9 Release Notes](https://golang.org/doc/go1.9) - 2017/08/24  
-[Go 1.8 Release Notes](https://golang.org/doc/go1.8) - 2017/02/16  
-[Go 1.7 Release Notes](https://golang.org/doc/go1.7) - 2016/08/15  
-[Go 1.6 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
-[Go 1.5 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19  
-[Go 1.4 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10  
-[Go 1.3 Release Notes](https://golang.org/doc/go1.3) - 2014/06/18  
-[Go 1.2 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01  
-[Go 1.1 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13  
-[Go 1.0 Release Notes](https://golang.org/doc/go1.0) - 2012/03/28
+[Go 1.10 Release Notes](https://golang.org/doc/go1.10) - 2018/02/16  
+[Go 1.09 Release Notes](https://golang.org/doc/go1.9) - 2017/08/24  
+[Go 1.08 Release Notes](https://golang.org/doc/go1.8) - 2017/02/16  
+[Go 1.07 Release Notes](https://golang.org/doc/go1.7) - 2016/08/15  
+[Go 1.06 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
+[Go 1.05 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19  
+[Go 1.04 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10  
+[Go 1.03 Release Notes](https://golang.org/doc/go1.3) - 2014/06/18  
+[Go 1.02 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01  
+[Go 1.01 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13  
+[Go 1.00 Release Notes](https://golang.org/doc/go1.0) - 2012/03/28
 
 ## Research Papers
 
@@ -263,3 +264,4 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [“Balls into Bins” — A Simple and Tight Analysis](http://wwwmayr.informatik.tu-muenchen.de/personen/raab/publ/balls.pdf)  
 [Thoughts and links about programming](https://research.swtch.com) - Russ Cox  
 [Rules of Machine Learning](http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf?imm_mid=0ec4d7&cmp=em-na-na-na-newsltr_four_short_links_20170117) - Martin Zinkevich  
+[Algorithm Engineering: Concepts and Practice](http://tcs.informatik.uos.de/_media/pubs/ae_chapter_preprint.pdf) - Markus Chimani and Karsten Klein  

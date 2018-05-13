@@ -171,6 +171,8 @@ _"Mistakes are an inevitable consequence of doing something new and, as such, sh
 
 _"It takes considerable knowledge just to realize the extent of your own ignorance." - Thomas Sowell_
 
+_"If you don’t make mistakes, you’re not working on hard enough problems." - Frank Wilczek_
+
 ---
 
 ### Code Reviews
