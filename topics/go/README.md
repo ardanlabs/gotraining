@@ -83,6 +83,8 @@ _"The hardest bugs are those where your mental model of the situation is just wr
 
 _"Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?" - Brian Kernighan_
 
+_"Debuggers don't remove bugs. They only show them in slow motion." - Unknown_
+
 **Resources:**
 
 [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
