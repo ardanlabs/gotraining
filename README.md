@@ -154,12 +154,15 @@ November(08-09)     San Franisco, CA      QCON                Conference   Adv G
 ```
 Date                Location              Venue               Type         Type             Url
 ================================================================================================================================================
-February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)       
-March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)       
-March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)     
-May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)         
-April(03-05)        Santa Barbara, CA     Hallmark            Corporate    Go (3 day)    
-June(19-21)         Malasia               Chotot              Corporate    Go (3 day)          
+February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)
+March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)
+March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)
+April(03-05)        Santa Barbara, CA     Hallmark Labs       Corporate    Go (3 day)
+April(09-11)        St. Louis, MO         Centene             Corporate    Go (3 day)
+April(12-13)        St. Louis, MO         Centene             Corporate    Go (2 day)
+May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)
+May(29-31)          Portland, OR          Intel               Corporate    Go (3 day)
+June(19-21)         Malaysia              Chotot              Corporate    Go (3 day)
 ```
 
 **Daniel Whitenack**  
