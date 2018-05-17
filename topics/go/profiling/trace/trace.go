@@ -1,6 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
+// RUN: ulimit -n 20000
+
 // Sample program that performs a series of I/O related tasks to
 // better understand tracing in Go.
 package main
@@ -11,7 +13,6 @@ import (
 	"log"
 	"os"
 	"runtime"
-	"runtime/trace"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -39,19 +40,20 @@ func main() {
 	// pprof.StartCPUProfile(os.Stdout)
 	// defer pprof.StopCPUProfile()
 
-	trace.Start(os.Stdout)
-	defer trace.Stop()
+	// trace.Start(os.Stdout)
+	// defer trace.Stop()
 
-	docs := make([]string, 100)
+	docs := make([]string, 20000)
 	for i := range docs {
 		docs[i] = "newsfeed.xml"
 	}
 
 	topic := "president"
 	n := find(topic, docs)
-	// n := findActor(topic, docs)
 	// n := findConcurrent(topic, docs)
+	// n := findConcurrentSem(topic, docs)
 	// n := findNumCPU(topic, docs)
+	// n := findActor(topic, docs)
 
 	log.Printf("Found %s %d times.", topic, n)
 }
@@ -65,13 +67,14 @@ func find(topic string, docs []string) int {
 			log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 			return 0
 		}
-		defer f.Close()
 
 		data, err := ioutil.ReadAll(f)
 		if err != nil {
+			f.Close()
 			log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 			return 0
 		}
+		f.Close()
 
 		var d document
 		if err := xml.Unmarshal(data, &d); err != nil {
@@ -92,6 +95,176 @@ func find(topic string, docs []string) int {
 	}
 
 	return found
+}
+
+func findConcurrent(topic string, docs []string) int {
+	var found int32
+
+	g := len(docs)
+	var wg sync.WaitGroup
+	wg.Add(g)
+
+	for _, doc := range docs {
+		go func(doc string) {
+			var lFound int32
+			defer func() {
+				atomic.AddInt32(&found, lFound)
+				wg.Done()
+			}()
+
+			f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+			if err != nil {
+				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
+				return
+			}
+
+			data, err := ioutil.ReadAll(f)
+			if err != nil {
+				f.Close()
+				log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
+				return
+			}
+			f.Close()
+
+			var d document
+			if err := xml.Unmarshal(data, &d); err != nil {
+				log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
+				return
+			}
+
+			for _, item := range d.Channel.Items {
+				if strings.Contains(item.Title, topic) {
+					lFound++
+					continue
+				}
+
+				if strings.Contains(item.Description, topic) {
+					lFound++
+				}
+			}
+		}(doc)
+	}
+
+	wg.Wait()
+	return int(found)
+}
+
+func findConcurrentSem(topic string, docs []string) int {
+	var found int32
+
+	g := len(docs)
+	var wg sync.WaitGroup
+	wg.Add(g)
+
+	ch := make(chan bool, runtime.NumCPU())
+
+	for _, doc := range docs {
+		go func(doc string) {
+			ch <- true
+			{
+				var lFound int32
+				defer func() {
+					atomic.AddInt32(&found, lFound)
+					wg.Done()
+				}()
+
+				f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+				if err != nil {
+					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
+					return
+				}
+
+				data, err := ioutil.ReadAll(f)
+				if err != nil {
+					f.Close()
+					log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
+					return
+				}
+				f.Close()
+
+				var d document
+				if err := xml.Unmarshal(data, &d); err != nil {
+					log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
+					return
+				}
+
+				for _, item := range d.Channel.Items {
+					if strings.Contains(item.Title, topic) {
+						lFound++
+						continue
+					}
+
+					if strings.Contains(item.Description, topic) {
+						lFound++
+					}
+				}
+			}
+			<-ch
+		}(doc)
+	}
+
+	wg.Wait()
+	return int(found)
+}
+
+func findNumCPU(topic string, docs []string) int {
+	var found int32
+
+	g := runtime.NumCPU()
+	var wg sync.WaitGroup
+	wg.Add(g)
+
+	ch := make(chan string, len(docs))
+	for _, doc := range docs {
+		ch <- doc
+	}
+	close(ch)
+
+	for i := 0; i < g; i++ {
+		go func() {
+			var lFound int32
+			defer func() {
+				atomic.AddInt32(&found, lFound)
+				wg.Done()
+			}()
+
+			for doc := range ch {
+				f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+				if err != nil {
+					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
+					return
+				}
+
+				data, err := ioutil.ReadAll(f)
+				if err != nil {
+					f.Close()
+					log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
+					return
+				}
+				f.Close()
+
+				var d document
+				if err := xml.Unmarshal(data, &d); err != nil {
+					log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
+					return
+				}
+
+				for _, item := range d.Channel.Items {
+					if strings.Contains(item.Title, topic) {
+						lFound++
+						continue
+					}
+
+					if strings.Contains(item.Description, topic) {
+						lFound++
+					}
+				}
+			}
+		}()
+	}
+
+	wg.Wait()
+	return int(found)
 }
 
 func findActor(topic string, docs []string) int {
@@ -156,111 +329,4 @@ func findActor(topic string, docs []string) int {
 
 	wg.Wait()
 	return found
-}
-
-func findConcurrent(topic string, docs []string) int {
-	var found int32
-
-	var wg sync.WaitGroup
-	wg.Add(len(docs))
-
-	for _, doc := range docs {
-		go func(doc string) {
-			defer wg.Done()
-
-			f, err := os.OpenFile(doc, os.O_RDONLY, 0)
-			if err != nil {
-				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
-				return
-			}
-			defer f.Close()
-
-			data, err := ioutil.ReadAll(f)
-			if err != nil {
-				log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
-				return
-			}
-
-			var d document
-			if err := xml.Unmarshal(data, &d); err != nil {
-				log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
-				return
-			}
-
-			var localFound int32
-			for _, item := range d.Channel.Items {
-				if strings.Contains(item.Title, topic) {
-					localFound++
-					continue
-				}
-
-				if strings.Contains(item.Description, topic) {
-					localFound++
-				}
-			}
-
-			atomic.AddInt32(&found, localFound)
-		}(doc)
-	}
-
-	wg.Wait()
-	return int(found)
-}
-
-func findNumCPU(topic string, docs []string) int {
-	var found int32
-
-	ch := make(chan string, len(docs))
-	for _, doc := range docs {
-		ch <- doc
-	}
-	close(ch)
-
-	var wg sync.WaitGroup
-	wg.Add(runtime.NumCPU())
-
-	for i := 0; i < runtime.NumCPU(); i++ {
-		go func() {
-			defer wg.Done()
-
-			var localFound int32
-
-			for doc := range ch {
-				f, err := os.OpenFile(doc, os.O_RDONLY, 0)
-				if err != nil {
-					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
-					return
-				}
-				defer f.Close()
-
-				data, err := ioutil.ReadAll(f)
-				if err != nil {
-					log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
-					return
-				}
-
-				var d document
-				if err := xml.Unmarshal(data, &d); err != nil {
-					log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
-					return
-				}
-
-				for _, item := range d.Channel.Items {
-					if strings.Contains(item.Title, topic) {
-						localFound++
-						continue
-					}
-
-					if strings.Contains(item.Description, topic) {
-						localFound++
-					}
-				}
-			}
-
-			atomic.AddInt32(&found, localFound)
-		}()
-	}
-
-	wg.Wait()
-	return int(found)
 }
