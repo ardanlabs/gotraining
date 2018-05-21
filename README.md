@@ -163,6 +163,7 @@ April(09-11)        St. Louis, MO         Centene             Corporate    Go (3
 April(12-13)        St. Louis, MO         Centene             Corporate    Go (2 day)
 May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)
 May(29-31)          Portland, OR          Intel               Corporate    Go (3 day)
+June(12-14)         Sunnyvale, CA         Juniper             Corporate    Go (3 day)
 June(19-21)         Malaysia              Chotot              Corporate    Go (3 day)
 ```
 
