@@ -26,6 +26,5 @@ func main() {
 	}
 
 	// Display the values.
-	fmt.Println(u)
-	fmt.Println(&u)
+	fmt.Printf("value[%+v], address[%p]\n", u, &u)
 }

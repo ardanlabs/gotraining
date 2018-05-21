@@ -95,7 +95,7 @@ Given the following program, use the race detector to find and correct the data 
 
 		// Display the set of random numbers.
 		for i, number := range numbers {
-			fmt.Println(i, number)
+			fmt.Printf("index[%d] number[%d]\n", i, number)
 		}
 	}
 

@@ -25,14 +25,14 @@ func main() {
 	}
 
 	// Display the value of the accessLevel field.
-	fmt.Println("access:", bill.accessLevel)
+	fmt.Printf("bill's access[%d]\n", bill.accessLevel)
 
 	// Share the bill variable with the accessLevel function
 	// along with a value to update the accessLevel field with.
 	accessLevel(&bill, 10)
 
 	// Display the value of the accessLevel field again.
-	fmt.Println("access:", bill.accessLevel)
+	fmt.Printf("bill's access[%d]\n", bill.accessLevel)
 }
 
 // accessLevel changes the value of the users access level.

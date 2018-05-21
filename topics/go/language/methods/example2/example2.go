@@ -43,5 +43,5 @@ func main() {
 	dur.setHours(5)
 
 	// Display the new value of dur.
-	fmt.Println("Hours:", dur.hours())
+	fmt.Printf("Hours[%.2f]\n", dur.hours())
 }

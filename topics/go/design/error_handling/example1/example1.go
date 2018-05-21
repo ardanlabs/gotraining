@@ -29,7 +29,7 @@ func New(text string) error {
 
 func main() {
 	if err := webCall(); err != nil {
-		fmt.Println(err)
+		fmt.Printf("failed to make webCall: %s\n", err)
 		return
 	}
 

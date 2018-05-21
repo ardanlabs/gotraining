@@ -43,7 +43,7 @@ func (t *NullableTime) UnmarshalJSON(b []byte) error {
 func main() {
 	var n NullableTime
 	if err := json.Unmarshal([]byte("null"), &n); err != nil {
-		fmt.Println(err)
+		fmt.Printf("could not unmarshal: %s\n", err)
 		return
 	}
 

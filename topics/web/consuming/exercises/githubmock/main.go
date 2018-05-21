@@ -54,6 +54,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Mock GitHub server listening on", listener.Addr().String())
+	fmt.Printf("Mock GitHub server listening on: %s\n", listener.Addr().String())
 	log.Fatal(http.Serve(listener, http.HandlerFunc(handle)))
 }

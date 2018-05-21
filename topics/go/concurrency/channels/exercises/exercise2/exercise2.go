@@ -45,7 +45,7 @@ func main() {
 
 	// Iterate receiving each value until they are all received.
 	for wait > 0 {
-		fmt.Println(wait, <-values)
+		fmt.Printf("remaining[%d] value[%d]\n", wait, <-values)
 		wait--
 	}
 }

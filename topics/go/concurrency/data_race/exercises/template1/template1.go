@@ -41,7 +41,7 @@ func main() {
 
 	// Display the set of random numbers.
 	for i, number := range numbers {
-		fmt.Println(i, number)
+		fmt.Printf("index[%d] number[%d]\n", i, number)
 	}
 }
 

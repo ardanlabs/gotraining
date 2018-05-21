@@ -35,15 +35,16 @@ func waitForTask() {
 
 	go func() {
 		p := <-ch
-		fmt.Println("employee : recv'd signal :", p)
+		fmt.Printf("employee : recv'd signal[%s]\n", p)
 	}()
 
 	time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-	ch <- "paper"
-	fmt.Println("manager : sent signal")
+	msg := "paper-0"
+	ch <- msg
+	fmt.Printf("manager : sent signal[%s]\n", msg)
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }
 
 // waitForResult: Think about being a manager and hiring a new employee. In
@@ -55,15 +56,16 @@ func waitForResult() {
 
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-		ch <- "paper"
-		fmt.Println("employee : sent signal")
+		msg := "paper-0"
+		ch <- msg
+		fmt.Printf("employee : sent signal[%s]\n", msg)
 	}()
 
 	p := <-ch
-	fmt.Println("manager : recv'd signal :", p)
+	fmt.Printf("manager : recv'd signal[%s]\n", p)
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }
 
 // waitForFinished: Think about being a manager and hiring a new employee. In
@@ -81,10 +83,10 @@ func waitForFinished() {
 	}()
 
 	_, wd := <-ch
-	fmt.Println("manager : recv'd signal :", wd)
+	fmt.Printf("manager : recv'd signal[%t]\n", wd)
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }
 
 // pooling: Think about being a manager and hiring a team of employees. In
@@ -98,23 +100,24 @@ func pooling() {
 	for e := 0; e < emps; e++ {
 		go func(emp int) {
 			for p := range ch {
-				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
+				fmt.Printf("employee[%d] : recv'd signal[%s]\n", emp, p)
 			}
-			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
+			fmt.Printf("employee[%d] : recv'd shutdown signal\n", emp)
 		}(e)
 	}
 
 	const work = 10
 	for w := 0; w < work; w++ {
-		ch <- "paper"
-		fmt.Println("manager : sent signal :", w)
+		msg := fmt.Sprintf("paper-%d", w)
+		ch <- msg
+		fmt.Printf("manager : sent signal[%s]\n", msg)
 	}
 
 	close(ch)
 	fmt.Println("manager : sent shutdown signal")
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }
 
 // fanOut: Think about being a manager and hiring a team of employees. In
@@ -129,20 +132,20 @@ func fanOut() {
 	for e := 0; e < emps; e++ {
 		go func(emp int) {
 			time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-			ch <- "paper"
-			fmt.Println("employee : sent signal :", emp)
+			msg := fmt.Sprintf("paper-%d", emp)
+			ch <- msg
+			fmt.Printf("employee[%d] : sent signal[%s]\n", emp, msg)
 		}(e)
 	}
 
 	for emps > 0 {
 		p := <-ch
-		fmt.Println(p)
-		fmt.Println("manager : recv'd signal :", emps)
+		fmt.Printf("manager : recv'd signal[%s] emps remaining[%d]\n", p, emps)
 		emps--
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }
 
 // fanOutSem: Think about being a manager and hiring a team of employees. In
@@ -162,8 +165,9 @@ func fanOutSem() {
 			sem <- true
 			{
 				time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-				ch <- "paper"
-				fmt.Println("employee : sent signal :", emp)
+				msg := fmt.Sprintf("paper-%d", emp)
+				ch <- msg
+				fmt.Printf("employee[%d] : sent signal[%s]\n", emp, msg)
 			}
 			<-sem
 		}(e)
@@ -171,13 +175,12 @@ func fanOutSem() {
 
 	for emps > 0 {
 		p := <-ch
-		fmt.Println(p)
-		fmt.Println("manager : recv'd signal :", emps)
+		fmt.Printf("manager : recv'd signal[%s] emps remaining[%d]\n", p, emps)
 		emps--
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }
 
 // drop: Think about being a manager and hiring a new employee. In
@@ -193,17 +196,18 @@ func drop() {
 
 	go func() {
 		for p := range ch {
-			fmt.Println("employee : recv'd signal :", p)
+			fmt.Printf("employee[0] : recv'd signal[%s]\n", p)
 		}
 	}()
 
 	const work = 20
 	for w := 0; w < work; w++ {
+		msg := fmt.Sprintf("paper-%d", w)
 		select {
-		case ch <- "paper":
-			fmt.Println("manager : sent signal :", w)
+		case ch <- msg:
+			fmt.Printf("manager : sent signal[%s] work[%d]\n", msg, w)
 		default:
-			fmt.Println("manager : dropped data :", w)
+			fmt.Printf("manager : dropped data work[%d]\n", w)
 		}
 	}
 
@@ -211,7 +215,7 @@ func drop() {
 	fmt.Println("manager : sent shutdown signal")
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }
 
 // cancellation: Think about being a manager and hiring a new employee. In
@@ -225,19 +229,20 @@ func cancellation() {
 
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-		ch <- "paper"
-		fmt.Println("employee : sent signal")
+		msg := "paper-0"
+		ch <- msg
+		fmt.Printf("employee : sent signal[%s]\n", msg)
 	}()
 
 	tc := time.After(100 * time.Millisecond)
 
 	select {
 	case p := <-ch:
-		fmt.Println("manager : recv'd signal :", p)
-	case t := <-tc:
-		fmt.Println("manager : timedout :", t)
+		fmt.Printf("manager : recv'd signal[%s]\n", p)
+	case <-tc:
+		fmt.Println("manager : recv'd timeout")
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("*************************")
 }

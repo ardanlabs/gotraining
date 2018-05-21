@@ -25,16 +25,19 @@ func main() {
 	users["Mouse"] = user{"Mickey", "Mouse"}
 	users["Jackson"] = user{"Michael", "Jackson"}
 
+	fmt.Println("\nPrint map")
+	fmt.Println("*************************")
 	// Iterate over the map.
 	for key, value := range users {
-		fmt.Println(key, value)
+		fmt.Printf("key[%s] value[%+v]\n", key, value)
 	}
 
-	fmt.Println()
+	fmt.Println("\nPrint map keys")
+	fmt.Println("*************************")
 
 	// Iterate over the map and notice the
 	// results are different.
 	for key := range users {
-		fmt.Println(key)
+		fmt.Printf("key[%s]\n", key)
 	}
 }

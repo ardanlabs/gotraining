@@ -30,7 +30,7 @@ func main() {
 			return
 
 		default:
-			fmt.Println(err)
+			fmt.Printf("unknown error occurred: %s\n", err)
 			return
 		}
 	}

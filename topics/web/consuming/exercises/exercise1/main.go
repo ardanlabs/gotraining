@@ -70,6 +70,11 @@ func main() {
 
 	// Loop through the []contributor and print values
 	for i, c := range c {
-		fmt.Println(i, c.Login, c.Contributions)
+		fmt.Printf(
+			"index[%d] login[%s] contributions[%d]\n",
+			i,
+			c.Login,
+			c.Contributions,
+		)
 	}
 }

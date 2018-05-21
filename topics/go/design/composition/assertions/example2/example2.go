@@ -47,7 +47,7 @@ func main() {
 		// Perform a type assertion that we have a concrete type
 		// of cloud in the interface value we randomly chose.
 		if v, is := mvs[rn].(cloud); is {
-			fmt.Println("Got Lucky:", v)
+			fmt.Printf("Got Lucky[%+v]\n", v)
 			continue
 		}
 

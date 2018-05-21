@@ -17,7 +17,7 @@ func main() {
 	value := 20
 
 	// Display the address of and value of the variable.
-	fmt.Println("Address Of:", &value, "Value Of:", value)
+	fmt.Printf("Address[%p] Value[%v]\n", &value, value)
 
 	// Declare a pointer variable of type int. Assign the
 	// address of the integer variable above.
@@ -25,5 +25,5 @@ func main() {
 
 	// Display the address of, value of and the value the pointer
 	// points to.
-	fmt.Println("Address Of:", &p, "Value Of:", p, "Points To:", *p)
+	fmt.Printf("Address[%p] Value[%v] Points To[%v]\n", &p, p, *p)
 }

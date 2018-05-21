@@ -17,7 +17,7 @@ func main() {
 	// Retrieve the RSS feed for the blog.
 	resp, err := http.Get("http://www.goinggo.net/feeds/posts/default")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("error GETting goinggo rss feed: %s\n", err)
 		return
 	}
 
@@ -33,7 +33,7 @@ func main() {
 	// Send the document to a file.
 	file, err := os.Create("goinggo.rss")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("error creating rss file: %s\n", err)
 		return
 	}
 	defer file.Close()
@@ -48,6 +48,6 @@ func main() {
 	// Write to dest the same way as before, copying from the Body.
 	_, err = io.Copy(dest, resp.Body)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("error copying body: %s\n", err)
 	}
 }

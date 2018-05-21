@@ -20,7 +20,11 @@ func main() {
 
 	// Iterate over the array of strings.
 	for i, fruit := range strings {
-		fmt.Println(i, fruit)
+		fmt.Printf(
+			"index[%d] fruit[%s]\n",
+			i,
+			fruit,
+		)
 	}
 
 	// Declare an array of 4 integers that is initialized
@@ -29,6 +33,6 @@ func main() {
 
 	// Iterate over the array of numbers.
 	for i := 0; i < len(numbers); i++ {
-		fmt.Println(i, numbers[i])
+		fmt.Printf("index[%d] number[%d]\n", i, numbers[i])
 	}
 }

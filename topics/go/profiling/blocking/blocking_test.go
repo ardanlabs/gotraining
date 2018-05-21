@@ -38,7 +38,7 @@ func init() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Bytes", len(data))
+	fmt.Printf("Bytes[%d]\n", len(data))
 }
 
 // TestLatency runs a single stream so we can look at
@@ -46,7 +46,7 @@ func init() {
 func TestLatency(t *testing.T) {
 	bufSize := 100
 
-	fmt.Println("BufSize:", bufSize)
+	fmt.Printf("BufSize[%d]\n", bufSize)
 	stream(bufSize)
 }
 

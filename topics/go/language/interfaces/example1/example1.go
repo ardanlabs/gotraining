@@ -55,6 +55,6 @@ func retrieve(r reader) error {
 		return err
 	}
 
-	fmt.Println(string(data[:len]))
+	fmt.Printf("data: %s\n", string(data[:len]))
 	return nil
 }

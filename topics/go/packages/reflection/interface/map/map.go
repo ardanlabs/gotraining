@@ -44,10 +44,10 @@ func main() {
 
 	// Display the information about the map of users values.
 	v := reflect.ValueOf(i)
-	fmt.Printf("Kind: %v\tType: %v\n", v.Kind(), v.Type())
+	fmt.Printf("Kind[%v] Type[%v]\n", v.Kind(), v.Type())
 
 	// Iterate over the map via reflection.
 	for i, key := range v.MapKeys() {
-		fmt.Println(i, ":", v.MapIndex(key))
+		fmt.Printf("%d : %+v\n", i, v.MapIndex(key))
 	}
 }

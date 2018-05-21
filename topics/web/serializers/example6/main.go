@@ -25,19 +25,22 @@ type User struct {
 
 func main() {
 
+	fmt.Println("\nEncoding Empty User Struct:")
+	fmt.Println("*************************")
 	// Encode a zero valued version of a user and write to stdout.
 	err := xml.NewEncoder(os.Stdout).Encode(&User{})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println()
-
 	// Create a user value for Mary Jane.
 	u := User{
 		FirstName: "Mary",
 		LastName:  "Jane",
 	}
+
+	fmt.Println("\n\nEncoding Mary:")
+	fmt.Println("*************************")
 
 	// Encode the user value and write to stdout.
 	err = xml.NewEncoder(os.Stdout).Encode(&u)

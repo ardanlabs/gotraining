@@ -23,19 +23,22 @@ func main() {
 		"Jackson": {"Michael", "Jackson"},
 	}
 
+	fmt.Println("\nPrint map")
+	fmt.Println("*************************")
 	// Iterate over the map.
 	for key, value := range users {
-		fmt.Println(key, value)
+		fmt.Printf("key[%s] value[%+v]\n", key, value)
 	}
 
 	// Delete the Roy key.
 	delete(users, "Roy")
 
-	fmt.Println("=================")
+	fmt.Println("\nLookup Roy after deleting Roy from users")
+	fmt.Println("*************************")
 
 	// Find the Roy key.
 	u, found := users["Roy"]
 
 	// Display the value and found flag.
-	fmt.Println("Roy", found, u)
+	fmt.Printf("Roy found[%t] value[%+v]\n", found, u)
 }

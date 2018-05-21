@@ -31,7 +31,10 @@ func main() {
 	}
 
 	// Display the field values.
-	fmt.Println("Flag", e2.flag)
-	fmt.Println("Counter", e2.counter)
-	fmt.Println("Pi", e2.pi)
+	fmt.Printf(
+		"Flag[%t] Counter[%d] Pi[%.6f]\n",
+		e2.flag,
+		e2.counter,
+		e2.pi,
+	)
 }

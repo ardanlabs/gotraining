@@ -36,6 +36,6 @@ func main() {
 
 	// Walk through the keys and pull each value from the map.
 	for _, key := range keys {
-		fmt.Println(key, users[key])
+		fmt.Printf("key[%s] user[%+v]\n", key, users[key])
 	}
 }

@@ -42,12 +42,12 @@ func main() {
 	if err := checkFlag(false); err != nil {
 		switch e := err.(type) {
 		case temporary:
-			fmt.Println(err)
+			fmt.Printf("Error: %s\n", err)
 			if !e.Temporary() {
 				fmt.Println("Critical Error!")
 			}
 		default:
-			fmt.Println(err)
+			fmt.Printf("unknown error occurred: %s\n", err)
 		}
 	}
 }

@@ -38,5 +38,5 @@ func main() {
 	wg.Wait()
 
 	// Display the final value.
-	fmt.Println("Final Counter:", counter)
+	fmt.Printf("Final Counter[%d]\n", counter)
 }

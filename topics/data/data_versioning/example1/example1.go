@@ -34,5 +34,5 @@ func main() {
 	}
 
 	// Output the number of repos to standard out.
-	fmt.Println(len(repos))
+	fmt.Printf("number of repos[%d]\n", len(repos))
 }

@@ -63,13 +63,15 @@ func main() {
 	find := []byte("elvis")
 	repl := []byte("Elvis")
 
-	fmt.Println("=======================================\nRunning Algorithm One")
+	fmt.Println("\nRunning Algorithm One")
+	fmt.Println("*************************")
 	output.Reset()
 	algOne(in, find, repl, &output)
 	matched := bytes.Compare(out, output.Bytes())
 	fmt.Printf("Matched: %v\nInp: [%s]\nExp: [%s]\nGot: [%s]\n", matched == 0, in, out, output.Bytes())
 
-	fmt.Println("=======================================\nRunning Algorithm Two")
+	fmt.Println("\nRunning Algorithm Two")
+	fmt.Println("*************************")
 	output.Reset()
 	algTwo(in, find, repl, &output)
 	matched = bytes.Compare(out, output.Bytes())

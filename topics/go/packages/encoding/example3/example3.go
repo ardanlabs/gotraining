@@ -56,21 +56,21 @@ func main() {
 	// string representation.
 	r1, err := json.Marshal(&station)
 	if err != nil {
-		fmt.Println("Marshal", err)
+		fmt.Printf("could not marshal json: %s\n", err)
 		return
 	}
 
 	// Convert the byte slice to a string and display.
-	fmt.Printf("%s\n\n", r1)
+	fmt.Printf("raw json:\n%s\n\n", r1)
 
 	// Marshal the buoyStation value into a pretty-print
 	// JSON string representation.
 	r2, err := json.MarshalIndent(&station, "", "    ")
 	if err != nil {
-		fmt.Println("MarshalIndent", err)
+		fmt.Printf("could not MarshalIndent json: %s\n", err)
 		return
 	}
 
 	// Convert the byte slice to a string and display.
-	fmt.Println(string(r2))
+	fmt.Printf("indented json:\n%s\n", string(r2))
 }

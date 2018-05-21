@@ -55,7 +55,7 @@ func main() {
 
 	}
 
-	fmt.Println("Listening on port", port)
+	fmt.Printf("Listening on port %s\n", port)
 	http.ListenAndServe(":"+port, http.HandlerFunc(handler))
 }
 

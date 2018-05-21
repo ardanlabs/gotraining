@@ -41,7 +41,7 @@ func main() {
 
 		// Handle the default error.
 		default:
-			fmt.Println(err)
+			fmt.Printf("unknown error occurred: %s\n", err)
 			return
 		}
 	}

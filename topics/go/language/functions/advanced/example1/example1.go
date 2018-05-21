@@ -13,7 +13,7 @@ func main() {
 
 	// Call the testPanic function to run the test.
 	if err := testPanic(); err != nil {
-		fmt.Println("Error:", err)
+		fmt.Printf("testPanic had an error: %s\n", err)
 	}
 }
 
@@ -49,7 +49,7 @@ func catchPanic(err *error) {
 		// Capture the stack trace.
 		buf := make([]byte, 10000)
 		runtime.Stack(buf, false)
-		fmt.Println("Stack Trace:", string(buf))
+		fmt.Printf("Stack Trace:\n%s\n", string(buf))
 
 		// If the caller wants the error back provide it.
 		if err != nil {
@@ -61,5 +61,5 @@ func catchPanic(err *error) {
 // mimicError is a function that simulates an error for
 // testing the code.
 func mimicError(key string) error {
-	return fmt.Errorf("Mimic Error : %s", key)
+	return fmt.Errorf("mimic error: %s", key)
 }

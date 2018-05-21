@@ -22,13 +22,13 @@ type user struct {
 
 // notify implements the notifier interface.
 func (u user) notify() {
-	fmt.Println("Alert", u.name)
+	fmt.Printf("Alert %s\n", u.name)
 }
 
 func inspect(n *notifier, u *user) {
 	word := uintptr(unsafe.Pointer(n)) + uintptr(unsafe.Sizeof(&u))
 	value := (**user)(unsafe.Pointer(word))
-	fmt.Printf("Addr User: %p  Word Value: %p  Ptr Value: %v\n", u, *value, **value)
+	fmt.Printf("Addr User[%p]  Word Value[%p]  Ptr Value[%v]\n", u, *value, **value)
 }
 
 func main() {

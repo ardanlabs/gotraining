@@ -39,7 +39,10 @@ func main() {
 	// Display the values.
 	fmt.Printf("%+v\n", ex)
 	fmt.Printf("%+v\n", e)
-	fmt.Println("Flag", e.flag)
-	fmt.Println("Counter", e.counter)
-	fmt.Println("Pi", e.pi)
+	fmt.Printf(
+		"Flag[%t] Counter[%d] Pi[%.6f]\n",
+		e.flag,
+		e.counter,
+		e.pi,
+	)
 }

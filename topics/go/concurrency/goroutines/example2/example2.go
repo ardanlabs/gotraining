@@ -23,7 +23,8 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(2)
 
-	fmt.Println("Create Goroutines")
+	fmt.Println("\nCreate Goroutines")
+	fmt.Println("*************************")
 
 	// Create the first goroutine and manage its lifecycle here.
 	go func() {
@@ -38,10 +39,12 @@ func main() {
 	}()
 
 	// Wait for the goroutines to finish.
-	fmt.Println("Waiting To Finish")
+	fmt.Println("\nWaiting To Finish")
+	fmt.Println("*************************")
 	wg.Wait()
 
-	fmt.Println("Terminating Program")
+	fmt.Println("\nTerminating Program")
+	fmt.Println("*************************")
 }
 
 // printPrime displays prime numbers for the first 5000 numbers.
@@ -57,5 +60,6 @@ next:
 		fmt.Printf("%s:%d\n", prefix, outer)
 	}
 
-	fmt.Println("Completed", prefix)
+	fmt.Printf("\nCompleted %s\n", prefix)
+	fmt.Println("*************************")
 }

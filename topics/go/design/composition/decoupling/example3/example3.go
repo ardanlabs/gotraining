@@ -60,7 +60,7 @@ func (*Xenia) Pull(d *Data) error {
 
 	default:
 		d.Line = "Data"
-		fmt.Println("In:", d.Line)
+		fmt.Printf("In[%s]\n", d.Line)
 		return nil
 	}
 }
@@ -73,7 +73,7 @@ type Pillar struct {
 
 // Store knows how to store data into Pillar.
 func (*Pillar) Store(d *Data) error {
-	fmt.Println("Out:", d.Line)
+	fmt.Printf("Out[%s]\n", d.Line)
 	return nil
 }
 
@@ -142,6 +142,6 @@ func main() {
 	}
 
 	if err := Copy(&sys, 3); err != io.EOF {
-		fmt.Println(err)
+		fmt.Printf("could not copy: %s\n", err)
 	}
 }

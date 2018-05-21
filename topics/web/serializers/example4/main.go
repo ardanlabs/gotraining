@@ -26,8 +26,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	print("Zero value User", b)
-	print("Note 'roles' is null", nil)
+	printMsgData("Zero value User", b)
+	printMsgData("Note 'roles' is null", nil)
 
 	// Initialize roles for an otherwise zeroed User
 	u := User{
@@ -39,8 +39,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	print("User with empty roles slice", b)
-	print("Note 'roles' is [] not null", nil)
+	printMsgData("User with empty roles slice", b)
+	printMsgData("Note 'roles' is [] not null", nil)
 
 	// Fill in data for user
 	u = User{
@@ -54,11 +54,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	print("User with data", b)
+	printMsgData("User with data", b)
 
 	fmt.Println("\nNote in all examples 'email' is missing.")
 }
 
-func print(msg string, data []byte) {
+func printMsgData(msg string, data []byte) {
 	fmt.Printf("%30s | %s\n", msg, string(data))
 }

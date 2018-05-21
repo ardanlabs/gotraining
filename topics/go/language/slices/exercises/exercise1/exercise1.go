@@ -23,7 +23,7 @@ func main() {
 
 	// Display each value.
 	for _, number := range numbers {
-		fmt.Println(number)
+		fmt.Printf("number[%d]\n", number)
 	}
 
 	// Declare a slice of strings.
@@ -31,7 +31,7 @@ func main() {
 
 	// Display each index position and name.
 	for i, name := range names {
-		fmt.Printf("Index: %d  Name: %s\n", i, name)
+		fmt.Printf("Index[%d]  Name[%s]\n", i, name)
 	}
 
 	// Take a slice of index 1 and 2.
@@ -39,6 +39,6 @@ func main() {
 
 	// Display the value of the new slice.
 	for i, name := range slice {
-		fmt.Printf("Index: %d  Name: %s\n", i, name)
+		fmt.Printf("Index[%d]  Name[%s]\n", i, name)
 	}
 }

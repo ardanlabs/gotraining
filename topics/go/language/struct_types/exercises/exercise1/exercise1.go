@@ -26,9 +26,12 @@ func main() {
 	}
 
 	// Display the field values.
-	fmt.Println("Name", bill.name)
-	fmt.Println("Email", bill.email)
-	fmt.Println("Age", bill.age)
+	fmt.Printf(
+		"Name[%s] Email[%s] Age[%d]\n",
+		bill.name,
+		bill.email,
+		bill.age,
+	)
 
 	// Declare a variable using an anonymous struct.
 	ed := struct {
@@ -42,7 +45,10 @@ func main() {
 	}
 
 	// Display the field values.
-	fmt.Println("Name", ed.name)
-	fmt.Println("Email", ed.email)
-	fmt.Println("Age", ed.age)
+	fmt.Printf(
+		"Name[%s] Email[%s] Age[%d]\n",
+		ed.name,
+		ed.email,
+		ed.age,
+	)
 }

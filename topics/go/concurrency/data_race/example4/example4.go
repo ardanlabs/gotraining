@@ -53,7 +53,8 @@ func main() {
 
 	// Wait for the write goroutine to finish.
 	wg.Wait()
-	fmt.Println("Program Complete")
+	fmt.Println("\nProgram Complete")
+	fmt.Println("*************************")
 }
 
 // writer adds a new string to the slice in random intervals.

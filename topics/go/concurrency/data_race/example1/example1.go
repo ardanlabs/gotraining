@@ -45,7 +45,7 @@ func main() {
 
 	// Wait for the goroutines to finish.
 	wg.Wait()
-	fmt.Println("Final Counter:", counter)
+	fmt.Printf("Final Counter[%d]\n", counter)
 }
 
 /*

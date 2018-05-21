@@ -29,7 +29,7 @@ func main() {
 	// resp here is a response, and resp.Body is an io.Reader.
 	resp, err := http.Get(os.Args[1])
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("error GETting URL: %s\n", err)
 		return
 	}
 
@@ -42,6 +42,6 @@ func main() {
 	// Copies from the Body to Stdout, returning any Read or Write error.
 	_, err = io.Copy(os.Stdout, resp.Body)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("error copying body: %s\n", err)
 	}
 }

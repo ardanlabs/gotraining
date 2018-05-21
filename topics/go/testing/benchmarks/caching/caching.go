@@ -59,8 +59,8 @@ func init() {
 		d = d.p
 	}
 
-	fmt.Println("Elements in the link list", ctr)
-	fmt.Println("Elements in the matrix", rows*cols)
+	fmt.Printf("Elements in the link list: %d\n", ctr)
+	fmt.Printf("Elements in the matrix: %d\n", rows*cols)
 }
 
 // LinkedListTraverse traverses the linked list linearly.

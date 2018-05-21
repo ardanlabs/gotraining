@@ -20,7 +20,11 @@ type UnmarshalTypeError struct {
 
 // Error implements the error interface.
 func (e *UnmarshalTypeError) Error() string {
-	return "json: cannot unmarshal " + e.Value + " into Go value of type " + e.Type.String()
+	return fmt.Sprintf(
+		"json: cannot unmarshal %s into Go value of type %s",
+		e.Value,
+		e.Type.String(),
+	)
 }
 
 // An InvalidUnmarshalError describes an invalid argument passed to Unmarshal.
@@ -36,9 +40,9 @@ func (e *InvalidUnmarshalError) Error() string {
 	}
 
 	if e.Type.Kind() != reflect.Ptr {
-		return "json: Unmarshal(non-pointer " + e.Type.String() + ")"
+		return fmt.Sprintf("json: Unmarshal(non-pointer %s)", e.Type.String())
 	}
-	return "json: Unmarshal(nil " + e.Type.String() + ")"
+	return fmt.Sprintf("json: Unmarshal(nil %s)", e.Type.String())
 }
 
 // user is a type for use in the Unmarshal call.
@@ -52,16 +56,20 @@ func main() {
 	if err != nil {
 		switch e := err.(type) {
 		case *UnmarshalTypeError:
-			fmt.Printf("UnmarshalTypeError: Value[%s] Type[%v]\n", e.Value, e.Type)
+			fmt.Printf(
+				"UnmarshalTypeError: Value[%s] Type[%v]\n",
+				e.Value,
+				e.Type,
+			)
 		case *InvalidUnmarshalError:
 			fmt.Printf("InvalidUnmarshalError: Type[%v]\n", e.Type)
 		default:
-			fmt.Println(err)
+			fmt.Printf("unknown error occurred: %s\n", err)
 		}
 		return
 	}
 
-	fmt.Println("Name:", u.Name)
+	fmt.Printf("Name: %d\n", u.Name)
 }
 
 // Unmarshal simulates an unmarshal call that always fails.

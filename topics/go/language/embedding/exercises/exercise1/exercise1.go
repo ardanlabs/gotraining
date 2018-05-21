@@ -53,12 +53,12 @@ func main() {
 	}
 
 	// Display what we are trying to find.
-	fmt.Println("Searching For:", needle)
+	fmt.Printf("Searching For: %s\n", needle)
 
 	// Range of each haystack value and check the term.
 	for _, hs := range haystack {
 		if hs.find(needle) {
-			fmt.Printf("FOUND: %+v", hs)
+			fmt.Printf("FOUND: %+v\n", hs)
 		}
 	}
 }
