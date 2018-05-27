@@ -19,10 +19,11 @@ type Animal struct {
 // Speak provides generic behavior for all animals and
 // how they speak.
 func (a *Animal) Speak() {
-	fmt.Println("UGH!",
-		"My name is", a.Name,
-		", it is", a.IsMammal,
-		"I am a mammal")
+	fmt.Printf(
+		"UGH! My name is %s, it is %t I am a mammal\n",
+		a.Name,
+		a.IsMammal,
+	)
 }
 
 // Dog contains everything an Animal is but specific
@@ -34,10 +35,12 @@ type Dog struct {
 
 // Speak knows how to speak like a dog.
 func (d *Dog) Speak() {
-	fmt.Println("Woof!",
-		"My name is", d.Name,
-		", it is", d.IsMammal,
-		"I am a mammal with a pack factor of", d.PackFactor)
+	fmt.Printf(
+		"Woof! My name is %s, it is %t I am a mammal with a pack factor of %d.\n",
+		d.Name,
+		d.IsMammal,
+		d.PackFactor,
+	)
 }
 
 // Cat contains everything an Animal is but specific
@@ -49,10 +52,12 @@ type Cat struct {
 
 // Speak knows how to speak like a cat.
 func (c *Cat) Speak() {
-	fmt.Println("Meow!",
-		"My name is", c.Name,
-		", it is", c.IsMammal,
-		"I am a mammal with a climb factor of", c.ClimbFactor)
+	fmt.Printf(
+		"Meow! My name is %s, it is %t I am a mammal with a climb factor of %d.\n",
+		c.Name,
+		c.IsMammal,
+		c.ClimbFactor,
+	)
 }
 
 func main() {
