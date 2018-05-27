@@ -38,7 +38,7 @@ type (
 func main() {
 
 	// Open the file.
-	file, err := os.Open("./topics/go/packages/encoding/example2/data.json")
+	file, err := os.Open("data.json")
 	if err != nil {
 		fmt.Println("Open File", err)
 		return
