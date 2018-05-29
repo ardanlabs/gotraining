@@ -19,10 +19,10 @@ func main() {
 
 	// Print something to welcome users and tell them what they can ask about.
 	fmt.Println(`Welcome to my chatbot! Exit with ctrl-c or type "exit" or "quit".`)
-	fmt.Println(`You can ask me about:`)
-	fmt.Println(`	The weather.`)
-	fmt.Println(`	How I'm feeling.`)
-	fmt.Println(`	The game last night.`)
+	fmt.Println("You can ask me about:")
+	fmt.Println("\tThe weather.")
+	fmt.Println("\tHow I'm feeling.")
+	fmt.Println("\tThe game last night.")
 
 	// Print a > to prompt the user to type something. Don't use Println for this.
 	fmt.Print("> ")

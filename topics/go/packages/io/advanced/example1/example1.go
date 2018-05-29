@@ -21,7 +21,7 @@ import (
 func main() {
 
 	// Open the file for reading.
-	file, err := os.Open("./topics/go/packages/io/advanced/example1/data.json")
+	file, err := os.Open("data.json")
 	if err != nil {
 		fmt.Println("Open File", err)
 		return

@@ -23,7 +23,7 @@ type user struct {
 func main() {
 
 	// Open the file.
-	file, err := os.Open("./topics/go/packages/encoding/exercises/exercise1/data.json")
+	file, err := os.Open("data.json")
 	if err != nil {
 		fmt.Println("Open File", err)
 		return

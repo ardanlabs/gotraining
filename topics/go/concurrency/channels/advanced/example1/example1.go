@@ -6,6 +6,8 @@
 // https://golang.org/ref/mem#tmp_7
 package main
 
+import "fmt"
+
 func main() {
 	unBuffered()
 	buffered()
@@ -27,7 +29,7 @@ func unBuffered() {
 	c <- 0
 
 	// We are guaranteed to print "hello, world".
-	println(a)
+	fmt.Println(a)
 }
 
 // With buffered channels, the send happens before the corresponding receive.
@@ -45,7 +47,7 @@ func buffered() {
 	<-c
 
 	// We are guaranteed to print "hello, world".
-	println(a)
+	fmt.Println(a)
 }
 
 // With both types of channels, a close happens before the corresponding receive.
@@ -63,5 +65,5 @@ func closed() {
 	<-c
 
 	// We are guaranteed to print "hello, world".
-	println(a)
+	fmt.Println(a)
 }
