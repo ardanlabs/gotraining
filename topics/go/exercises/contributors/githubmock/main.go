@@ -9,8 +9,8 @@ import (
 	"regexp"
 )
 
-var pathRE = regexp.MustCompile("^/repos/[^/]+/[^/]+/contributors$")
-var authRE = regexp.MustCompile("^token [A-Za-z0-9]+$")
+var pathRE = regexp.MustCompile("^/repos/([^/]+/[^/]+)/contributors$")
+var authRE = regexp.MustCompile("^token .+$")
 
 func handle(w http.ResponseWriter, r *http.Request) {
 	log.Println("serving", r.Method, r.URL.Path)
@@ -28,13 +28,28 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Path should be for the contributors endpoint.
-	if !pathRE.MatchString(r.URL.Path) {
+	pathMatches := pathRE.FindStringSubmatch(r.URL.Path)
+	if len(pathMatches) == 0 {
 		http.Error(w, "url path should be /repos/{org}/{repo}/contributors", http.StatusNotFound)
 		return
 	}
 
+	// Look up contributors based on the path they specified
+	var resp string
+	switch pathMatches[1] {
+	case "ardanlabs/gotraining":
+		resp = ardanContributors
+	case "golang/go":
+		resp = goContributors
+	default:
+		http.Error(w, "unknown repo "+pathMatches[1], http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+
 	// Write json data to response.
-	io.WriteString(w, contributors)
+	io.WriteString(w, resp)
 }
 
 func main() {
@@ -47,6 +62,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Mock GitHub server listening on", listener.Addr().String())
+	fmt.Println("Mock GitHub server running at this url")
+	fmt.Println("http://" + listener.Addr().String() + "/repos/golang/go/contributors")
 	log.Fatal(http.Serve(listener, http.HandlerFunc(handle)))
 }
