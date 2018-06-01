@@ -13,10 +13,10 @@ http://www.goinggo.net/2014/01/decode-json-documents-in-go.html
 
 ## Code Review
 
-[Unmarshal JSON documents](example1/example1.go) ([Go Playground](http://play.golang.org/p/nwUGs8q2S6))  
-[Unmarshal JSON files](example2/example2.go) ([Go Playground](http://play.golang.org/p/WfDYLZ5KeH))  
-[Marshal a user defined type](example3/example3.go) ([Go Playground](http://play.golang.org/p/miSv1mPnK5))  
-[Custom Marshaler and Unmarshler](example4/example4.go) ([Go Playground](http://play.golang.org/p/tOriq1dE0N))
+[Unmarshal JSON documents](example1/example1.go) ([Go Playground](https://play.golang.org/p/Wvfx1eIBDT0))  
+[Unmarshal JSON files](example2/example2.go) ([Go Playground](https://play.golang.org/p/g5-AUzfbcUS))  
+[Marshal a user defined type](example3/example3.go) ([Go Playground](https://play.golang.org/p/B01KAwC-rpX))  
+[Custom Marshaler and Unmarshler](example4/example4.go) ([Go Playground](https://play.golang.org/p/SolgBvtnBUr))
 
 ## Exercises
 
@@ -26,7 +26,7 @@ http://www.goinggo.net/2014/01/decode-json-documents-in-go.html
 
 **Part B** Marshal the slice into pretty print strings and display each element.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/5NNPJhIQDT)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/IyNucru7hi))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/aprvkRJ50js)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/i15FjSc4F2T))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

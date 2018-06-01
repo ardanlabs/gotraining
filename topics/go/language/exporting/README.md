@@ -15,20 +15,20 @@ http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html
 
 ## Code Review
 
-[Declare and access exported identifiers - Pkg](example1/counters/counters.go) ([Go Playground](https://play.golang.org/p/Sb_G1kcn_7))  
-[Declare and access exported identifiers - Main](example1/example1.go) ([Go Playground](https://play.golang.org/p/LkIRp4J93P))  
+[Declare and access exported identifiers - Pkg](example1/counters/counters.go) ([Go Playground](https://play.golang.org/p/8Xzq-m9ez-I))  
+[Declare and access exported identifiers - Main](example1/example1.go) ([Go Playground](https://play.golang.org/p/KrpX0CyIyYO))  
 
-[Declare unexported identifiers and restrictions - Pkg](example2/counters/counters.go) ([Go Playground](https://play.golang.org/p/bb4TcZNXwl))  
-[Declare unexported identifiers and restrictions - Main](example2/example2.go) ([Go Playground](https://play.golang.org/p/eeH_xXlbwB))  
+[Declare unexported identifiers and restrictions - Pkg](example2/counters/counters.go) ([Go Playground](https://play.golang.org/p/9u1IQexx5gk))  
+[Declare unexported identifiers and restrictions - Main](example2/example2.go) ([Go Playground](https://play.golang.org/p/A5FpmRpuOWJ))  
 
-[Access values of unexported identifiers - Pkg](example3/counters/counters.go) ([Go Playground](https://play.golang.org/p/9cjS2FESNH))  
-[Access values of unexported identifiers - Main](example3/example3.go) ([Go Playground](https://play.golang.org/p/eEEBo_qlrt))  
+[Access values of unexported identifiers - Pkg](example3/counters/counters.go) ([Go Playground](https://play.golang.org/p/NroO30yoNvh))  
+[Access values of unexported identifiers - Main](example3/example3.go) ([Go Playground](https://play.golang.org/p/e5fg0uOEkkn))  
 
-[Unexported struct type fields - Pkg](example4/users/users.go) ([Go Playground](https://play.golang.org/p/O9hleQ18dT))  
-[Unexported struct type fields - Main](example4/example4.go) ([Go Playground](https://play.golang.org/p/GRC2z6VvxN))  
+[Unexported struct type fields - Pkg](example4/users/users.go) ([Go Playground](https://play.golang.org/p/KQ6x5z7E1pN))  
+[Unexported struct type fields - Main](example4/example4.go) ([Go Playground](https://play.golang.org/p/6MznWaiGwr-))  
 
-[Unexported embedded types - Pkg](example5/users/users.go) ([Go Playground](https://play.golang.org/p/RWpldbVNJe))  
-[Unexported embedded types - Main](example5/example5.go) ([Go Playground](https://play.golang.org/p/yts2fe36ay))  
+[Unexported embedded types - Pkg](example5/users/users.go) ([Go Playground](https://play.golang.org/p/br-2rVc1VF1))  
+[Unexported embedded types - Main](example5/example5.go) ([Go Playground](https://play.golang.org/p/p9pQo5gCB42))  
 
 ## Exercises
 

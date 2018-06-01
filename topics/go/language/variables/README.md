@@ -22,7 +22,7 @@ http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 
 ## Code Review
 
-[Declare and initialize variables](example1/example1.go) ([Go Playground](https://play.golang.org/p/B5mjJKPYLh))
+[Declare and initialize variables](example1/example1.go) ([Go Playground](https://play.golang.org/p/xD_6ghgB7wm))
 
 ## Exercises
 
@@ -32,7 +32,7 @@ http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html
 
 **Part B:** Declare a new variable of type float32 and initialize the variable by converting the literal value of Pi (3.14).
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/JIgjb3Ty3e)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/wNjayRMEcM))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/wpR65L-ZVF2)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/Ygxt9kW_WAV))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

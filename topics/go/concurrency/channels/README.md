@@ -51,28 +51,28 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 
 ## Code Review
 
-[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/n5N9pviByX))  
-[Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/wlM-cY000f))  
-[Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OsyUwckOie))  
-[Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/kT0F-_fCob))  
-[Monitor running time](example5/example5.go) ([Go Playground](https://play.golang.org/p/TsJSagQawy))  
+[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/BUzXVoBOvaA))  
+[Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/PvFKD_tNwir))  
+[Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OLdBCGUvzbx))  
+[Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/zxzHAHIr3Xj))  
+[Monitor running time](example5/example5.go) ([Go Playground](https://play.golang.org/p/NAX2nn9HCRy))  
 
 ## Advanced Code Review
 
-[Channel communication ordering](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/b3pPHMYZbX))
+[Channel communication ordering](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/YwKFJPkB4gC))
 
 ## Exercises
 
 ### Exercise 1
 Write a program where two goroutines pass an integer back and forth ten times. Display when each goroutine receives the integer. Increment the integer with each pass. Once the integer equals ten, terminate the program cleanly.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/BUNf38ZLka)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/SNJsv1p5B5))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/gv9lxA3qhH-)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/8S685ND54dW))
 
 ### Exercise 2
 Write a program that uses a fan out pattern to generate 100 random numbers concurrently. Have each goroutine generate a single random number and return that number to the main goroutine over a buffered channel. Set the size of the buffer channel so no send ever blocks. Don't allocate more buffers than you need. Have the main goroutine display each random number it receives and then terminate the program.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/CpsDFNmazH)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/Li7hl3pOSu))
+[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/PBRSAYos8x8)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/iOk9VDlGiYC))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

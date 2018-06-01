@@ -17,10 +17,10 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Declaring Fields](example1/example1.go) ([Go Playground](https://play.golang.org/p/VlB7DYptWo))  
-[Embedding types](example2/example2.go) ([Go Playground](https://play.golang.org/p/7Ei_9niqPQ))  
-[Embedded types and interfaces](example3/example3.go) ([Go Playground](https://play.golang.org/p/zD8RFvJ3m5))  
-[Outer and inner type interface implementations](example4/example4.go) ([Go Playground](https://play.golang.org/p/5NyvAgU__u))
+[Declaring Fields](example1/example1.go) ([Go Playground](https://play.golang.org/p/mT4iWg10YEp))  
+[Embedding types](example2/example2.go) ([Go Playground](https://play.golang.org/p/avo8I21N-qq))  
+[Embedded types and interfaces](example3/example3.go) ([Go Playground](https://play.golang.org/p/pdwB9dxD1MR))  
+[Outer and inner type interface implementations](example4/example4.go) ([Go Playground](https://play.golang.org/p/soB4QujV4Sj))
 
 ## Exercises
 
@@ -28,7 +28,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 Copy the code from the template. Declare a new type called hockey which embeds the sports type. Implement the matcher interface for hockey. When implementing the match method for hockey, call into the match method for the embedded sport type to check the embedded fields first. Then create two hockey values inside the slice of matchers and perform the search.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/dK0FnSnnRz)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/ZeOIYmIw-r))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/FTU2-pstCZj)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/DevsptjMhuY))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

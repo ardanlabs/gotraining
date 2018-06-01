@@ -137,10 +137,10 @@ Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 
 ## Code Review
 
-[Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/wUzREuHhLY))  
-[Different type arrays](example2/example2.go) ([Go Playground](https://play.golang.org/p/tyOZ5_zBUN))  
-[Contiguous memory allocations](example3/example3.go) ([Go Playground](https://play.golang.org/p/DyZ7spMgZ3))  
-[Range mechanics](example4/example4.go) ([Go Playground](https://play.golang.org/p/Hym5wBsEMO))  
+[Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/1KLhI3EZ7Id))  
+[Different type arrays](example2/example2.go) ([Go Playground](https://play.golang.org/p/KmXH8Z9F3Rh))  
+[Contiguous memory allocations](example3/example3.go) ([Go Playground](https://play.golang.org/p/QxnU1fO_f1e))  
+[Range mechanics](example4/example4.go) ([Go Playground](https://play.golang.org/p/5n3bjld-Y0T))  
 
 ## Exercises
 
@@ -148,7 +148,7 @@ Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 
 Declare an array of 5 strings with each element initialized to its zero value. Declare a second array of 5 strings and initialize this array with literal string values. Assign the second array to the first and display the results of the first array. Display the string value and address of each element.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/H1jTYxk7o6)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/i_2oDZ1ZSg))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/yURUYyZ5_hA)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/VtuGj8S-K2l))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

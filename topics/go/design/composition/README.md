@@ -34,33 +34,33 @@ http://golang.org/doc/effective_go.html#embedding
 
 #### Grouping Types
 
-[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/r6to0aMm6I))  
-[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/yOj1zJCRlj))  
+[Grouping By State](grouping/example1/example1.go) ([Go Playground](https://play.golang.org/p/Dh_cCEz3o0N))  
+[Grouping By Behavior](grouping/example2/example2.go) ([Go Playground](https://play.golang.org/p/wRpHBoPu79K))  
 
 #### Decoupling
 
-[Struct Composition](decoupling/example1/example1.go) ([Go Playground](https://play.golang.org/p/5kJ_R7bhxC))  
-[Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/Ceo2f2sWLx))  
-[Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/s7B4mmIvtj))  
-[Decoupling With Interface Composition](decoupling/example4/example4.go) ([Go Playground](https://play.golang.org/p/pRyZ5UQ_L0))  
-[Remove Interface Pollution](decoupling/example5/example5.go) ([Go Playground](https://play.golang.org/p/K5bbsDnlIM))  
-[More Precise API](decoupling/example6/example6.go) ([Go Playground](https://play.golang.org/p/yX_ioKxY9J))
+[Struct Composition](decoupling/example1/example1.go) ([Go Playground](https://play.golang.org/p/7nsTaKtlMWc))  
+[Decoupling With Interface](decoupling/example2/example2.go) ([Go Playground](https://play.golang.org/p/HjP8V6ScpKi))  
+[Interface Composition](decoupling/example3/example3.go) ([Go Playground](https://play.golang.org/p/EDbjyjjpxAi))  
+[Decoupling With Interface Composition](decoupling/example4/example4.go) ([Go Playground](https://play.golang.org/p/zeO2cJLP46B))  
+[Remove Interface Pollution](decoupling/example5/example5.go) ([Go Playground](https://play.golang.org/p/Kg4JKGwJGGy))  
+[More Precise API](decoupling/example6/example6.go) ([Go Playground](https://play.golang.org/p/cdvbrsgclGX))
 
 #### Conversion and Assertions
 
-[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/GVLf2sZcA1))  
-[Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/awq1LSTwXV))  
-[Behavior Changes](assertions/example3/example3.go) ([Go Playground](https://play.golang.org/p/OrFNjhTrxv))  
+[Interface Conversions](assertions/example1/example1.go) ([Go Playground](https://play.golang.org/p/sNP3bMR1kc-))  
+[Runtime Type Assertions](assertions/example2/example2.go) ([Go Playground](https://play.golang.org/p/PtdQOc9xZ7S))  
+[Behavior Changes](assertions/example3/example3.go) ([Go Playground](https://play.golang.org/p/AYhH8yXDcuy))  
 
 #### Interface Pollution
 
-[Create Interface Pollution](pollution/example1/example1.go) ([Go Playground](https://play.golang.org/p/wHDLvxe8hC))  
-[Remove Interface Pollution](pollution/example2/example2.go) ([Go Playground](https://play.golang.org/p/s6HAmeT6oT))
+[Create Interface Pollution](pollution/example1/example1.go) ([Go Playground](https://play.golang.org/p/DCqTbY14loz))  
+[Remove Interface Pollution](pollution/example2/example2.go) ([Go Playground](https://play.golang.org/p/K3w2eX7V1j2))
 
 #### Mocking
 
-[Package To Mock](mocking/example1/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/3a_zYeR8M7))  
-[Client](mocking/example1/example1.go) ([Go Playground](https://play.golang.org/p/guvjysMjgb))
+[Package To Mock](mocking/example1/pubsub/pubsub.go) ([Go Playground](https://play.golang.org/p/299EFra4b4z))  
+[Client](mocking/example1/example1.go) ([Go Playground](https://play.golang.org/p/-_laMS2yxZB))
 
 ## Exercises
 
@@ -68,7 +68,7 @@ http://golang.org/doc/effective_go.html#embedding
 
 Using the template, declare a set of concrete types that implement the set of predefined interface types. Then create values of these types and use them to complete a set of predefined tasks.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/uY6KMprfMR)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/nbd3gnLlih))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/6Kp_E3Wim0G)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/hwUADsRfnax))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
