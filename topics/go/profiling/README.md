@@ -35,7 +35,7 @@ Block profiling is quite unique. A block profile is similar to a CPU profile, bu
 
 Blocking includes:
 
-* Sending or receiving on a unbuffered channel.
+* Sending or receiving on an unbuffered channel.
 * Sending to a full channel, receiving from an empty one.
 * Trying to Lock a sync.Mutex that is locked by another goroutine.
 * Block profiling is a very specialised tool, it should not be used until you believe you have eliminated all your CPU and memory usage bottlenecks.
