@@ -24,6 +24,6 @@ Review the TestMutexProfile function.
 
 ## Code Review
 
-[Mutex Trace](mutex_test.go) ([Go Playground](https://play.golang.org/p/P1eOVX6D7u)) 
+[Mutex Trace](mutex_test.go) ([Go Playground](https://play.golang.org/p/EW34Ml5ZMWs)) 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

@@ -19,15 +19,15 @@ http://golang.org/pkg/io/
 
 ## Code Review
 
-[Standard Library Working Together](example1/example1.go) ([Go Playground](https://play.golang.org/p/Ikm0s6vjoi))  
-[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](https://play.golang.org/p/b_BxHFATti))  
-[MultiWriters with curl example](example3/example3.go) ([Go Playground](https://play.golang.org/p/3UeN6iAE-k))  
-[Stream processing](example4/example4.go) ([Go Playground](https://play.golang.org/p/9h53-8jZUW))  
+[Standard Library Working Together](example1/example1.go) ([Go Playground](https://play.golang.org/p/n-Pz_ZEW8CJ))  
+[Simple curl with io.Reader and io.Writer](example2/example2.go) ([Go Playground](https://play.golang.org/p/O28tQtijcCQ))  
+[MultiWriters with curl example](example3/example3.go) ([Go Playground](https://play.golang.org/p/XAZf-VYl9I3))  
+[Stream processing](example4/example4.go) ([Go Playground](https://play.golang.org/p/jc4mBb-A1wZ))  
 
 ## Advanced Code Review
 
-[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/9QSXbjtPxe))  
-[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](https://play.golang.org/p/kN97kdqRGy))
+[TeeReader and io composition](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/oR6fRusVHl_m))  
+[Gzip and Md5 support with curl example](advanced/example2/example2.go) ([Go Playground](https://play.golang.org/p/VPpLpE_ccll))
 
 ## Exercises
 
@@ -35,7 +35,7 @@ http://golang.org/pkg/io/
 
 Download any document from the web and display the content in the terminal and write it to a file at the same time.
 
-[Template](exercises/template1/template1.go) ([Go Playground](http://play.golang.org/p/ZCqK8ek58U)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](http://play.golang.org/p/bogTavYBEx))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/lORHKHse--q)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/wPjVlm7QinK))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

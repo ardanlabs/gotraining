@@ -110,11 +110,11 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 ## Code Review
 
-[Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/JJMHWiZ9h9))  
-[Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/y_FHIdUbAw))  
-[Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/KRKrUCcTYe))  
+[Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/9kxh18hd_BT))  
+[Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/cbdMiy7TsQ0))  
+[Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/kwU2jR54c13))  
 [Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/qNOw5gEtYhI))  
-[Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/tpDOwBCvqW))  
+[Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/0WXccTOJLAz))  
 
 ### Escape Analysis Flaws
 
@@ -132,14 +132,14 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 **Part B** Declare and initialize a pointer variable of type int that points to the last variable you just created. Display the _address of_ , _value of_ and the _value that the pointer points to_.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/ZiVZzVkMqk)) |
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/ARXt9Ddawc))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/6QYTKWzF8s8)) |
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/qq5P9gRDHKc))
 
 ### Exercise 2
 
 Declare a struct type and create a value of this type. Declare a function that can change the value of some field in this struct type. Display the value before and after the call to your function.
 
-[Template](exercises/template2/template2.go) ([Go Playground](http://play.golang.org/p/qT4JMQDzpD)) |
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](http://play.golang.org/p/DS8DZnEg6i))
+[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/nolKjrgBX-X)) |
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/i6utWhgDUH4))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

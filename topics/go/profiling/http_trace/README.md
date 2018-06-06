@@ -18,8 +18,8 @@ The httptrace package provides a number of hooks to gather information during an
 
 ## Code Review
 
-[Tracing events](example1/example1.go) ([Go Playground](https://play.golang.org/p/du_s3LRX1s))  
-[Tracing with http.Client](example2/example2.go) ([Go Playground](https://play.golang.org/p/CNPz8tjnYj))  
+[Tracing events](example1/example1.go) ([Go Playground](https://play.golang.org/p/HEqZ02R3hI-))  
+[Tracing with http.Client](example2/example2.go) ([Go Playground](https://play.golang.org/p/Qh6DD-VCnHJ))  
 
 ## Exercises
 

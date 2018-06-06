@@ -26,14 +26,14 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ## Code Review
 
-[Polymorphism](example1/example1.go) ([Go Playground](https://play.golang.org/p/Uag9qj7Pu5))  
-[Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/4R3_QVKNli))  
-[Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/hJtuUbNICG))  
-[Storage By Value](example4/example4.go) ([Go Playground](https://play.golang.org/p/9yHyRQUEkW))  
+[Polymorphism](example1/example1.go) ([Go Playground](https://play.golang.org/p/J7OWzPzV40w))  
+[Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/N50ocjUekf3))  
+[Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/w981JSUcVZ2))  
+[Storage By Value](example4/example4.go) ([Go Playground](https://play.golang.org/p/6U232Ue_BY0))  
 
 ## Advanced Code Review
 
-[Storing Values](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/KXvtpd9_29))
+[Storing Values](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/yDK5lUiPPHW))
 
 ## Exercises
 
@@ -43,7 +43,7 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 **Part B** Add a new function named sayHello that accepts a value of type speaker. Implement that function to call the speak method on the interface value. Then create new values of each type and use the function.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/adkJ3OvYpr)) |
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/06fecJbfE4))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/hfC2-yPI9y6)) |
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/mN8Fitr8Wts))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

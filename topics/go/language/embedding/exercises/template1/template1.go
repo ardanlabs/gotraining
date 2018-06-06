@@ -49,5 +49,5 @@ func main() {
 
 	// Display what we are trying to find.
 
-	// Range of each finder value and check the term.
+	// Range over each finder value and check the term.
 }

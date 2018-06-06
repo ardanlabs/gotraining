@@ -27,8 +27,8 @@ First thing is to install the Go fuzz tooling:
 
 Review the code we want to find problems with and the existing test:
 
-[Code To Fuzz](example1/example1.go) ([Go Playground](http://play.golang.org/p/6al_yc8YtO))  
-[Test For The Code](example1/example1_test.go) ([Go Playground](http://play.golang.org/p/-6QXYkTNm6)) 
+[Code To Fuzz](example1/example1.go) ([Go Playground](https://play.golang.org/p/zaapCBXYHZD))  
+[Test For The Code](example1/example1_test.go) ([Go Playground](https://play.golang.org/p/Dq-A-amdnG5)) 
 
 Create a corpus file with the initial input data to use and that will be mutated.
 

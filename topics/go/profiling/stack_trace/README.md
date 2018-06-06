@@ -70,8 +70,8 @@ Review the stack trace.
 
 ### Code Review
 
-[Review Stack Trace](example1/example1.go) ([Go Playground](https://play.golang.org/p/9gkLGCdbNe))  
-[Packing](example2/example2.go) ([Go Playground](https://play.golang.org/p/SIiN6Y2jTR))  
+[Review Stack Trace](example1/example1.go) ([Go Playground](https://play.golang.org/p/bS5NUszad4m))  
+[Packing](example2/example2.go) ([Go Playground](https://play.golang.org/p/vn95A6oXxHB))  
 
 ### Links
 
@@ -146,6 +146,6 @@ Use Delve to review the dump.
 
 ### Code Review
 
-[Core Dumps](example3/example3.go) ([Go Playground](https://play.golang.org/p/2fma3AXMmZ))  
+[Core Dumps](example3/example3.go) ([Go Playground](https://play.golang.org/p/rPVBbcQhFeX))  
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

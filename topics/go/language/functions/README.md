@@ -16,14 +16,14 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 ## Code Review
 
-[Return multiple values](example1/example1.go) ([Go Playground](https://play.golang.org/p/rJMtATFqPi))  
-[Blank identifier](example2/example2.go) ([Go Playground](https://play.golang.org/p/ziCWrNaGWO))  
-[Redeclarations](example3/example3.go) ([Go Playground](https://play.golang.org/p/CofPHyVpne))  
-[Anonymous Functions/Closures](example4/example4.go) ([Go Playground](https://play.golang.org/p/AhT35gu2fE))
+[Return multiple values](example1/example1.go) ([Go Playground](https://play.golang.org/p/-7A-lGLv2TK))  
+[Blank identifier](example2/example2.go) ([Go Playground](https://play.golang.org/p/L2wINTedeAf))  
+[Redeclarations](example3/example3.go) ([Go Playground](https://play.golang.org/p/EDRhDh2r1Mj))  
+[Anonymous Functions/Closures](example4/example4.go) ([Go Playground](https://play.golang.org/p/h8Yi_2Sxsmu))
 
 ## Advanced Code Review
 
-[Recover panics](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/UuT3FNWd7x))
+[Recover panics](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/Wcd3CLbQZBH))
 
 ## Exercises
 
@@ -33,7 +33,7 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 
 **Part B** Make a second call to your function but this time ignore the value and just test the error value.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/i5wI736jpN)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/fabhfnqJ0C))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/5vEQxEzq3i_D)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/P8wC324WWuh))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
