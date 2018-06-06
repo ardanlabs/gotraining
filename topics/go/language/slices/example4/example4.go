@@ -16,7 +16,7 @@ func main() {
 	lastCap := cap(data)
 
 	// Append ~100k strings to the slice.
-	for record := 1; record <= 102400; record++ {
+	for record := 1; record <= 1e5; record++ {
 
 		// Use the built-in function append to add to the slice.
 		data = append(data, fmt.Sprintf("Rec: %d", record))

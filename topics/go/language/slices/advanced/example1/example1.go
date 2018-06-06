@@ -29,10 +29,10 @@ func main() {
 // inspectSlice exposes the slice header for review.
 func inspectSlice(slice []string) {
 	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
-	for index, value := range slice {
+	for i, s := range slice {
 		fmt.Printf("[%d] %p %s\n",
-			index,
-			&slice[index],
-			value)
+			i,
+			&slice[i],
+			s)
 	}
 }

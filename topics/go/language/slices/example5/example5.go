@@ -7,26 +7,37 @@ package main
 
 import "fmt"
 
+type user struct {
+	likes int
+}
+
 func main() {
 
-	// Declare a slice of integers with 7 values.
-	x := make([]int, 7)
+	// Declare a slice of 3 users.
+	users := make([]user, 3)
 
-	// Random starting counters.
-	for i := 0; i < 7; i++ {
-		x[i] = i * 100
+	// Share the user at index 1.
+	shareUser := &users[1]
+
+	// Add a like for the user that was shared.
+	shareUser.likes++
+
+	// Display the number of likes for all users.
+	for i := range users {
+		fmt.Printf("User: %d Likes: %d\n", i, users[i].likes)
 	}
 
-	// Set a pointer to the second element of the slice.
-	twohundred := &x[1]
+	// Add a new user.
+	users = append(users, user{})
 
-	// Append a new value to the slice.
-	x = append(x, 800)
+	// Add another like for the user that was shared.
+	shareUser.likes++
 
-	// Change the value of the second element of the slice.
-	x[1]++
+	// Display the number of likes for all users.
+	fmt.Println("*************************")
+	for i := range users {
+		fmt.Printf("User: %d Likes: %d\n", i, users[i].likes)
+	}
 
-	// Display the value that the pointer points to and the
-	// second element of the slice.
-	fmt.Println("Pointer:", *twohundred, "Element", x[1])
+	// Notice the last like has not been recorded.
 }

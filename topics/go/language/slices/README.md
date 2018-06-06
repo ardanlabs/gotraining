@@ -24,17 +24,17 @@ https://github.com/golang/go/wiki/SliceTricks
 ## Code Review
 
 [Declare and Length](example1/example1.go) ([Go Playground](https://play.golang.org/p/v73cYn6uHLI))  
-[Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/g19Hn9LW-2-))  
-[Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/UVrqIPScg15))  
-[Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/Z1CYb5AkZ3j))  
-[Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/8LPjSmnKQFk))  
+[Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/PQM9IDUBONw))  
+[Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/LkSfEQnwR5d))  
+[Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/rUP9grCot8J))  
+[Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/D88zzGYanvX)  
 [Strings and slices](example6/example6.go) ([Go Playground](https://play.golang.org/p/1RntHk6UPA5))  
 [Variadic functions](example7/example7.go) ([Go Playground](https://play.golang.org/p/rUjWVBMmxgP))  
 [Range mechanics](example8/example8.go) ([Go Playground](https://play.golang.org/p/QUf-bNnT37F))  
 
 ## Advanced Code Review
 
-[Three index slicing](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/70Sp1QotYSm))
+[Three index slicing](advanced/example1/example1.go) ([Go Playground](https://play.golang.org/p/2CM_LPBnfIR))
 
 ## Exercises
 
