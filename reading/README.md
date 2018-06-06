@@ -77,6 +77,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Profiling, Debugging and Optimization
 
+[Want to Debug Latency?](https://medium.com/observability/want-to-debug-latency-7aa48ecbe8f7) - JBD  
+[Language Mechanics On Escape Analysis](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html) - William Kennedy  
 [Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
 [Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
 [Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
@@ -95,8 +97,15 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go’s hidden #pragmas](https://dave.cheney.net/2018/01/08/gos-hidden-pragmas) - Dave Cheney  
 [Post-mortem debugging of Go Programs](https://fntlnz.wtf/post/gopostmortem/) - Lorenzo Fontana  
 
+### API Design
+
+[You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
+[Focus On Being Precise](https://www.ardanlabs.com/blog/2018/02/focus-on-being-precise.html) - William Kennedy  
+
 ### Interfaces and Composition
 
+[Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy  
+[Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy  
 [Design Guidelines](design_guidelines.md)  
 [Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
 [Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful) - Brave New Geek  
@@ -104,6 +113,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Composition In Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
 [Reducing Type Hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy  
 [Avoid Interface Pollution](https://www.goinggo.net/2016/10/avoid-interface-pollution.html) - William Kennedy  
+
+### Concurrency
+
+[The Behavior Of Channels](https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html) - William Kennedy
 
 ### Buffer Bloat - 2011
 
@@ -143,19 +156,25 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Queueing Theory](https://speakerdeck.com/emfree/queueing-theory) - Eben Freeman  
 [Designing Cluster Schedulers for Internet-Scale Services](https://queue.acm.org/detail.cfm?id=3199609) - Diptanu Gon Choudhury and Timothy Perrett  
 
+### Go Assembly
+
+[Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
+[Quick intro to Go assembly](https://blog.hackercat.ninja/post/quick_intro_to_go_assembly/)  
+
 ### Misc
 
 [Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
 [USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)  
-[You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
 [Latency Tip Of The Day](http://latencytipoftheday.blogspot.com/) -- Gil Tene  
 [Proposal: Monotonic Elapsed Time Measurements in Go](https://github.com/golang/proposal/blob/master/design/12914-monotonic.md) - Russ Cox  
 [Exploring shared objects in Go](https://blog.ksub.org/bytes/2017/02/12/exploring-shared-objects-in-go/) - Marcelo Bytes  
 [Evaluation of read-only slices](https://docs.google.com/document/d/1-NzIYu0qnnsshMBpMPmuO21qd8unlimHgKjRD9qwp2A/edit) - Russ Cox  
-[Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
 [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
 [Our Human Condition "From Space"](http://www.vpri.org/pdf/m2003001_human_cond.pdf) - Alan Kay  
 [No Silver Bullet: Essence and Accidents of Software Engineering](http://www.cs.nott.ac.uk/~pszcah/G51ISS/Documents/NoSilverBullet.html) - Frederick P. Brooks, Jr.   
+
+### Must Read
+
 [PRinty# C with ABC](http://www.cs.cmu.edu/~tom7/abc/paper.pdf) - Dr. Tom Murphy VII, Ph.D  
 
 ## Mechanical Sympathy
@@ -166,6 +185,8 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 
 [CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE) - Scott Meyers  
 [CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf) - Scott Meyers  
+[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman  
+
 [Mythbusting Modern Hardware to Gain 'Mechanical Sympathy`](https://www.youtube.com/watch?v=MC1EKLQ2Wmg) - Martin Thompson  
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf) - Ulrich Drepper  
 [How CPU Caches Work and Why](http://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips) - Joel Hruska  
@@ -175,7 +196,6 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 [Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter    
-[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman  
 [The Myth Of Ram](http://www.ilikebigbits.com/blog/2014/4/21/the-myth-of-ram-part-i) - Emil Ernerfeldt  
 [Understanding Transaction Hardware Memory](https://www.infoq.com/presentations/hardware-transactional-memory) - Gil Gene  
 [Want fast C++? Know your hardware!](https://www.youtube.com/watch?v=BP6NxVxDQIs) - Timur Doumler  
@@ -211,6 +231,7 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 #### Escape Analysis and Inlining
 
 [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw) - Dmitry Vyukov  
+[Escape-Analysis Flaws Updated](https://www.ardanlabs.com/blog/2018/01/escape-analysis-flaws.html) - William Kennedy  
 [Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)
 
 #### Garbage Collection

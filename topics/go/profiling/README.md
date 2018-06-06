@@ -85,6 +85,7 @@ http://go-talks.appspot.com/github.com/davecheney/presentations/seven.slide#1
 
 Here is more reading and videos to also help get you started.
 
+[Language Mechanics On Escape Analysis](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html) - William Kennedy  
 [Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
 [Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick  
 [Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
