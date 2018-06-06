@@ -112,13 +112,6 @@ John is a consultant and software developer based in Montreal, Canada. He works 
 _**Video**_  
 [GopherCon Brazil - Go Scratch That Itch](https://www.youtube.com/watch?v=EIUvUBS-3ZE)  
 
-### Ernesto Jimenez ([@ernesto_jimenez](https://twitter.com/ernesto_jimenez))  
-Ernesto is a combination of engineer and product manager who has worked on different kinds of products, from webapps to APIs and games in both startups and big corporations. He sees technology as a tool to build great products that solve real problems for customers. Based in London, Ernesto spends spare time contributing to open source projects, building small hacks and rock climbing. He is originally from Spain and studied Computer Science in Spain and Finland.
-
-_**Writing**_  
-[Reducing boilerplate with go generate](https://blog.gopheracademy.com/advent-2015/reducing-boilerplate-with-go-generate)  
-[Writing good unit tests for SOLID Go](https://blog.gopheracademy.com/advent-2016/how-to-write-good-tests-for-solid-code)  
-
 ## Current Schedule
 
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
@@ -141,12 +134,18 @@ April(02-04)        NYC, NY               Tumblr              Corporate    Go (3
 April(09-11)        Singapore             NCS                 Corporate    Go (3 day)       
 April(14-15)        Shanghai, China       Garden Hotel        Conference   Adv Go (1 day)   http://gopherchina.org/
 May(02-04)          Singapore             Google              Conference   Adv Go (1 day)   https://2018.gophercon.sg/
-May(08-10)          Santa Barbara, CA     Hallmark            Corporate    Go (3 day)       
+May(08-10)          Santa Monica, CA      Hallmark            Corporate    Go (3 day)       
 May(16-18)          Belgrade, Serbia      Fincore             Corporate    Go (3 day)       
 May(31-02)          Reykjavík, Iceland    Harpa               Conference   Adv Go (1 day)   https://gophercon.is/
 June(06-08)         Singapore             SP Digital          Corporate    Go (3 day)       
 June(25-26)         NYC, NY               QCON                Conference   Adv Go (1 day)   https://qconnewyork.com/
-June(30-01)         Providence, RI        Intercity Geeks     GoBridge     Go (2 day)       TBD
+June(30-01)         Providence, RI        Intercity Geeks     GoBridge     Go (2 day)       http://careerdevs.com/goprovidence/
+July(02-06)         San Francisco, CA     Pearson             Video        Go (4 day)
+July(31-02)         Los Angles, CA        Tradesy             Corporate    Go (3 day)
+August(18-19)       Berlin, Germany       TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin
+August(27)          Denver, CO            Gophercon USA       Conference   Adv Go (1 day)   https://www.gophercon.com/
+September(01-02)    San Franisco, CA      TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go/
+September(15-16)    Kenya, Africa         TBD                 GoBridge     Go (2 day)       TBD
 October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
 ```
@@ -158,13 +157,15 @@ Date                Location              Venue               Type         Type 
 February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)
 March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)
 March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)
-April(03-05)        Santa Barbara, CA     Hallmark Labs       Corporate    Go (3 day)
+April(03-05)        Santa Monica, CA      Hallmark Labs       Corporate    Go (3 day)
 April(09-11)        St. Louis, MO         Centene             Corporate    Go (3 day)
 April(12-13)        St. Louis, MO         Centene             Corporate    Go (2 day)
 May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)
 May(29-31)          Portland, OR          Intel               Corporate    Go (3 day)
 June(12-14)         Sunnyvale, CA         Juniper             Corporate    Go (3 day)
 June(19-21)         Malaysia              Chotot              Corporate    Go (3 day)
+July(10-12)         Chicago, IL           Soft Block          Corporate    Go (3 day)
+July(24-26)         St. Louis, MO         Centene             Corporate    Go (3 day)
 ```
 
 **Daniel Whitenack**  
@@ -174,12 +175,22 @@ Date                Location              Venue               Type         Type 
 April(10)           San Francisco, CA     QCON                Conference   AI (1 day)       https://qconsf.com/
 ```
 
+### Past Events
+
+Look at how busy we have been training thousands of developers in Go over the past four years.
+
+		2017 : 40 Events 
+		2016 : 37 Events  
+		2015 : 33 Events  
+		2014 :  3 Events  
+
 ## More About Go
 
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. Although it borrows ideas from existing languages, it has a unique and simple nature that make Go programs different in character from programs written in other languages. It balances the capabilities of a low-level systems language with some high-level features you see in modern languages today. This creates a programming environment that allows you to be incredibly productive, performant and fully in control; in Go, you can write less code and do so much more.
 
 Go is the fusion of performance and productivity wrapped in a language that software developers can learn, use and understand. Go is not C, yet we have many of the benefits of C with the benefits of higher level programming languages.
 
+[The Why of Go](https://www.infoq.com/presentations/go-concurrency-gc) - Carmen Andoh  
 [Go Ten Years and Climbing](https://commandcenter.blogspot.com/2017/09/go-ten-years-and-climbing.html) - Rob Pike  
 [The eigenvector of "Why we moved from language X to language Y"](https://erikbern.com/2017/03/15/the-eigenvector-of-why-we-moved-from-language-x-to-language-y.html) - Erik Bernhardsson  
 [Learn More](https://talks.golang.org/2012/splash.article) - Go Team  
@@ -336,14 +347,6 @@ _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is ext
 Georgi Knox ([@GeorgiCodes](https://twitter.com/georgicodes))  
 _"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
 
-## Past Events
-
-Look at how busy we have been training thousands of developers in Go over the past four years.
-
-		2017 : 35 Events and counting  
-		2016 : 37 Events  
-		2015 : 33 Events  
-		2014 :  3 Events  
 ___
 
 ## Running Docker

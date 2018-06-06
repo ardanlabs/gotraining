@@ -46,6 +46,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [What Have We Learned from the PDP-11?](https://dave.cheney.net/2017/12/04/what-have-we-learned-from-the-pdp-11) - C. Gordon Bell  
 [4 lessons for modern software developers from 1970s mainframe programming](https://www.hpe.com/us/en/insights/articles/4-lessons-for-modern-software-developers-from-1970s-mainframe-programming-1709.html) - Alan Zeichick  
 [Notes on Programming in C](http://doc.cat-v.org/bell_labs/pikestyle) - Rob Pike  
+[The Why of Go](https://www.infoq.com/presentations/go-concurrency-gc) - Carmen Andoh  
 
 ### Contribute to Go
 
@@ -140,6 +141,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Basic Queuing Theory](http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main_Angol.pdf) - Dr. János Sztrik  
 [Queueing Theory](https://speakerdeck.com/emfree/queueing-theory) - Eben Freeman  
+[Designing Cluster Schedulers for Internet-Scale Services](https://queue.acm.org/detail.cfm?id=3199609) - Diptanu Gon Choudhury and Timothy Perrett  
 
 ### Misc
 
