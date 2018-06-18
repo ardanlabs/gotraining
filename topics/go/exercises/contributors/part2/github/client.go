@@ -42,8 +42,8 @@ func NewClient(token string) (*Client, error) {
 func (c *Client) Contributors(repo string) ([]Contributor, error) {
 
 	// Make a request and set the auth token in the header.
-	u := fmt.Sprintf("https://api.github.com/repos/%s/contributors", repo)
-	req, err := http.NewRequest(http.MethodGet, u, nil)
+	url := fmt.Sprintf("https://api.github.com/repos/%s/contributors", repo)
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		return nil, err
 	}

@@ -30,29 +30,24 @@ func (mock) Contributors(repo string) ([]github.Contributor, error) {
 	return nil, errors.New("could not reach API")
 }
 
-func TestPrintContributors(t *testing.T) {
+func TestProcess(t *testing.T) {
 
 	tests := []struct {
-		name   string
-		repo   string
-		status int
-		want   string
+		name      string
+		repo      string
+		want      string
+		shouldErr bool
 	}{
 		{
-			name:   "failure",
-			repo:   "should/fail",
-			status: 1,
-			want:   `Error fetching contributors: could not reach API`,
+			name:      "failure",
+			repo:      "should/fail",
+			shouldErr: true,
 		},
 		{
-			name:   "success",
-			repo:   "golang/go",
-			status: 0,
-			want: `0 anna 27
-1 jacob 18
-2 kell 9
-3 carter 6
-4 rory 1`,
+			name:      "success",
+			repo:      "golang/go",
+			want:      "0 anna 27\n1 jacob 18\n2 kell 9\n3 carter 6\n4 rory 1",
+			shouldErr: false,
 		},
 	}
 
@@ -66,19 +61,23 @@ func TestPrintContributors(t *testing.T) {
 			var buf bytes.Buffer
 
 			// Call the function under test.
-			status := printContributors(&buf, test.repo, c)
+			err := process(&buf, test.repo, c)
 
 			// Assert on our results.
 			got := strings.TrimSpace(buf.String())
+
+			if test.shouldErr && err == nil {
+				t.Fatal("process should error but did not")
+			}
+
+			if !test.shouldErr && err != nil {
+				t.Fatalf("process should not error but did: %v", err)
+			}
 
 			if got != test.want {
 				t.Errorf("Printed report did not match expectation")
 				t.Logf("Got:\n%s", got)
 				t.Logf("Want:\n%s", test.want)
-			}
-
-			if status != test.status {
-				t.Errorf("printContributors should return status code %d, got %d", test.status, status)
 			}
 		}
 		t.Run(test.name, fn)
