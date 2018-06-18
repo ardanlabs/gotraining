@@ -44,8 +44,13 @@ func main() {
 	wait := goroutines
 
 	// Iterate receiving each value until they are all received.
+	// Store them in a slice of ints.
+	var nums []int
 	for wait > 0 {
-		fmt.Println(wait, <-values)
+		nums = append(nums, <-values)
 		wait--
 	}
+
+	// Print the values in our slice.
+	fmt.Println(nums)
 }

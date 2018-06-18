@@ -33,4 +33,7 @@ func main() {
 	// Set the value to the number of goroutines created.
 
 	// Iterate receiving each value until they are all received.
+	// Store them in a slice of ints
+
+	// Print the values in our slice
 }
