@@ -23,27 +23,26 @@ func main() {
 		log.Fatal(err)
 	}
 
-	result := printContributors(os.Stdout, "ardanlabs/gotraining", c)
-
-	os.Exit(result)
+	if err := process(os.Stdout, "ardanlabs/gotraining", c); err != nil {
+		log.Fatal(err)
+	}
 }
 
 // contributors is the interface that this package looks for when
-// calling printContributors.
+// calling process.
 type contributors interface {
 	Contributors(string) ([]github.Contributor, error)
 }
 
-func printContributors(w io.Writer, repo string, c contributors) int {
+func process(w io.Writer, repo string, c contributors) error {
 	cons, err := c.Contributors(repo)
 	if err != nil {
-		fmt.Fprintf(w, "Error fetching contributors: %v\n", err)
-		return 1
+		return err
 	}
 
 	for i, con := range cons {
 		fmt.Fprintln(w, i, con.Login, con.Contributions)
 	}
 
-	return 0
+	return nil
 }

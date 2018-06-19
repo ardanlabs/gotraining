@@ -14,8 +14,8 @@ import (
 	"time"
 )
 
-// contributor is a type where we can decode contributor json values.
-type contributor struct {
+// Contributor is a type where we can decode contributor json values.
+type Contributor struct {
 	Login         string `json:"login"`
 	Contributions int    `json:"contributions"`
 }
@@ -32,7 +32,8 @@ func main() {
 	}
 
 	// Create a request for the contributors api endpoint.
-	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/ardanlabs/gotraining/contributors", nil)
+	url := "https://api.github.com/repos/ardanlabs/gotraining/contributors"
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -42,11 +43,11 @@ func main() {
 	req.Header.Set("Authorization", "token "+tkn)
 
 	// Create an http.Client and make the request.
-	client := http.Client{
+	cl := http.Client{
 		Timeout: 5 * time.Second,
 	}
 
-	res, err := client.Do(req)
+	res, err := cl.Do(req)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -61,13 +62,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Decode the results into a []contributor.
-	var cons []contributor
+	// Decode the results into a []Contributor.
+	var cons []Contributor
 	if err := json.NewDecoder(res.Body).Decode(&cons); err != nil {
 		log.Fatal(err)
 	}
 
-	// Loop through the []contributor and print the values.
+	// Loop through the []Contributor and print the values.
 	for i, con := range cons {
 		fmt.Println(i, con.Login, con.Contributions)
 	}

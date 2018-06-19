@@ -72,7 +72,7 @@ Write a program where two goroutines pass an integer back and forth ten times. D
 ### Exercise 2
 Write a program that uses a fan out pattern to generate 100 random numbers concurrently. Have each goroutine generate a single random number and return that number to the main goroutine over a buffered channel. Set the size of the buffer channel so no send ever blocks. Don't allocate more buffers than you need. Have the main goroutine display each random number it receives and then terminate the program.
 
-[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/PBRSAYos8x8)) | 
-[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/iOk9VDlGiYC))
+[Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/URexjvkP_Sg)) | 
+[Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/cEUYThI5etc))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
