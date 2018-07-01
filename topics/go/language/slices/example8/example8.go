@@ -9,16 +9,16 @@ import "fmt"
 func main() {
 
 	// Using the value semantic form of the for range.
-	five := []string{"Annie", "Betty", "Charley", "Doug", "Edward"}
-	for _, v := range five {
-		five = five[:2]
+	friends := []string{"Annie", "Betty", "Charley", "Doug", "Edward"}
+	for _, v := range friends {
+		friends = friends[:2]
 		fmt.Printf("v[%s]\n", v)
 	}
 
 	// Using the pointer semantic form of the for range.
-	five = []string{"Annie", "Betty", "Charley", "Doug", "Edward"}
-	for i := range five {
-		five = five[:2]
-		fmt.Printf("v[%s]\n", five[i])
+	friends = []string{"Annie", "Betty", "Charley", "Doug", "Edward"}
+	for i := range friends {
+		friends = friends[:2]
+		fmt.Printf("v[%s]\n", friends[i])
 	}
 }
