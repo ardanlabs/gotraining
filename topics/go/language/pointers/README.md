@@ -111,8 +111,8 @@ https://godoc.org/golang.org/x/tools/go/ssa
 ## Code Review
 
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/9kxh18hd_BT))  
-[Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/cbdMiy7TsQ0))  
-[Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/kwU2jR54c13))  
+[Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/mJz5RINaimn))  
+[Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/GpmPICMGMre))  
 [Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/qNOw5gEtYhI))  
 [Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/BgIKcFcZ4PO))  
 
