@@ -10,17 +10,17 @@ import "fmt"
 func main() {
 
 	// Create a slice with a length of 5 elements.
-	slice := make([]string, 5)
-	slice[0] = "Apple"
-	slice[1] = "Orange"
-	slice[2] = "Banana"
-	slice[3] = "Grape"
-	slice[4] = "Plum"
+	fruits := make([]string, 5)
+	fruits[0] = "Apple"
+	fruits[1] = "Orange"
+	fruits[2] = "Banana"
+	fruits[3] = "Grape"
+	fruits[4] = "Plum"
 
 	// You can't access an index of a slice beyond its length.
-	slice[5] = "Runtime error"
+	fruits[5] = "Runtime error"
 
 	// Error: panic: runtime error: index out of range
 
-	fmt.Println(slice)
+	fmt.Println(fruits)
 }

@@ -137,10 +137,10 @@ Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 
 ## Code Review
 
-[Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/1KLhI3EZ7Id))  
+[Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/OIh-XVdDSZb))  
 [Different type arrays](example2/example2.go) ([Go Playground](https://play.golang.org/p/KmXH8Z9F3Rh))  
-[Contiguous memory allocations](example3/example3.go) ([Go Playground](https://play.golang.org/p/QxnU1fO_f1e))  
-[Range mechanics](example4/example4.go) ([Go Playground](https://play.golang.org/p/5n3bjld-Y0T))  
+[Contiguous memory allocations](example3/example3.go) ([Go Playground](https://play.golang.org/p/guj-ZvSF0qS))  
+[Range mechanics](example4/example4.go) ([Go Playground](https://play.golang.org/p/cx4GEViWjC7))  
 
 ## Exercises
 
