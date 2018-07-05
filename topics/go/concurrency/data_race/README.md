@@ -41,7 +41,7 @@ https://golang.org/doc/articles/race_detector.html
 [Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/zahCnOjS4Q1))  
 [Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/DkqwruQwS-N))  
 [Mutex](example3/example3.go) ([Go Playground](https://play.golang.org/p/T15uvr3SxHa))  
-[Read/Write Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/_n32wetlmSs))
+[Read/Write Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/_n32wetlmSs))  
 [Map Data Race](example5/example5.go) ([Go Playground](https://play.golang.org/p/ktWRjcJWNjw))
 
 ## Advanced Code Review
