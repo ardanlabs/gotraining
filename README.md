@@ -142,13 +142,17 @@ June(06-08)         Singapore             SP Digital          Corporate    Go (3
 June(25-26)         NYC, NY               QCON                Conference   Adv Go (1 day)   https://qconnewyork.com/
 June(30-01)         Providence, RI        Intercity Geeks     GoBridge     Go (2 day)       http://careerdevs.com/goprovidence/
 July(02-06)         San Francisco, CA     Pearson             Video        Go (4 day)
+July(09-16)         San Diego, CA         TBD                 Meetup       Go (talk)
+July(25-30)         Indianapolis, IN      NFL Experience      Vaca         Available
 July(31-02)         Los Angles, CA        Tradesy             Corporate    Go (3 day)
+August(13-15)       Atlanta, GA           Turner              Corporate    Go (3 day)
 August(18-19)       Berlin, Germany       TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin
 August(27)          Denver, CO            Gophercon USA       Conference   Adv Go (1 day)   https://www.gophercon.com/
 September(01-02)    San Franisco, CA      TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go/
-September(15-16)    Kenya, Africa         TBD                 GoBridge     Go (2 day)       TBD
+September(27-01)    Huntsville, AL        Wine Festival       Vaca         Available
 October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
+December(04-05)     TBD                   Zip Recruiter       Corporate    Go (3 day)
 ```
 
 **Jacob Walker**  
@@ -167,6 +171,7 @@ June(12-14)         Sunnyvale, CA         Juniper             Corporate    Go (3
 June(19-21)         Malaysia              Chotot              Corporate    Go (3 day)
 July(10-12)         Chicago, IL           Soft Block          Corporate    Go (3 day)
 July(24-26)         St. Louis, MO         Centene             Corporate    Go (3 day)
+September(11-13)    TBD                   Zip Recruiter       Corporate    Go (3 day)
 ```
 
 **Daniel Whitenack**  
