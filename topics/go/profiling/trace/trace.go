@@ -1,8 +1,6 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// RUN: ulimit -n 20000
-
 // Sample program that performs a series of I/O related tasks to
 // better understand tracing in Go.
 package main
@@ -43,7 +41,7 @@ func main() {
 	// trace.Start(os.Stdout)
 	// defer trace.Stop()
 
-	docs := make([]string, 20000)
+	docs := make([]string, 1000)
 	for i := range docs {
 		docs[i] = "newsfeed.xml"
 	}
