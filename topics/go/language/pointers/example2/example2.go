@@ -26,5 +26,6 @@ func increment(inc *int) {
 
 	// Increment the "value of" count that the "pointer points to".
 	*inc++
+
 	println("inc:\tValue Of[", inc, "]\tAddr Of[", &inc, "]\tValue Points To[", *inc, "]")
 }

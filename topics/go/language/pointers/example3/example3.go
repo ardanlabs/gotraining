@@ -39,11 +39,12 @@ func main() {
 // always an address and points to values of type int.
 func increment(logins *int) {
 	*logins++
-	fmt.Printf("&logins[%p] logins[%p] *logins[%d]\n", &logins, logins, *logins)
+	fmt.Printf("&logins[%p] logins[%p] *logins[%d]\n\n", &logins, logins, *logins)
 }
 
 // display declares u as user pointer variable whose value is always an address
 // and points to values of type user.
 func display(u *user) {
 	fmt.Printf("%p\t%+v\n", u, *u)
+	fmt.Printf("Name: %q Email: %q Logins: %d\n\n", u.name, u.email, u.logins)
 }
