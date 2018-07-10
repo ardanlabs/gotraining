@@ -6,11 +6,14 @@
 package main
 
 import (
+	"context"
 	"encoding/xml"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"runtime"
+	"runtime/trace"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -47,11 +50,14 @@ func main() {
 	}
 
 	topic := "president"
+
 	n := find(topic, docs)
 	// n := findConcurrent(topic, docs)
 	// n := findConcurrentSem(topic, docs)
 	// n := findNumCPU(topic, docs)
 	// n := findActor(topic, docs)
+
+	// n := findNumCPUTasks(topic, docs)
 
 	log.Printf("Found %s %d times.", topic, n)
 }
@@ -257,6 +263,84 @@ func findNumCPU(topic string, docs []string) int {
 						lFound++
 					}
 				}
+			}
+		}()
+	}
+
+	wg.Wait()
+	return int(found)
+}
+
+func findNumCPUTasks(topic string, docs []string) int {
+	var found int32
+
+	g := runtime.NumCPU()
+	var wg sync.WaitGroup
+	wg.Add(g)
+
+	type task struct {
+		name string
+		doc  string
+	}
+
+	ch := make(chan task, len(docs))
+	for i, doc := range docs {
+		ch <- task{fmt.Sprintf("%s-%d", doc, i), doc}
+	}
+	close(ch)
+
+	for i := 0; i < g; i++ {
+		go func() {
+			var lFound int32
+			defer func() {
+				atomic.AddInt32(&found, lFound)
+				wg.Done()
+			}()
+
+			for task := range ch {
+				func() {
+					ctx, tt := trace.NewTask(context.Background(), task.name)
+					defer tt.End()
+
+					reg := trace.StartRegion(ctx, "OpenFile")
+					f, err := os.OpenFile(task.doc, os.O_RDONLY, 0)
+					if err != nil {
+						log.Printf("Opening Document [%s] : ERROR : %v", task.name, err)
+						return
+					}
+					reg.End()
+
+					reg = trace.StartRegion(ctx, "ReadAll")
+					data, err := ioutil.ReadAll(f)
+					if err != nil {
+						f.Close()
+						log.Printf("Reading Document [%s] : ERROR : %v", task.name, err)
+						return
+					}
+					f.Close()
+					reg.End()
+
+					reg = trace.StartRegion(ctx, "Unmarshal")
+					var d document
+					if err := xml.Unmarshal(data, &d); err != nil {
+						log.Printf("Decoding Document [%s] : ERROR : %v", task.name, err)
+						return
+					}
+					reg.End()
+
+					reg = trace.StartRegion(ctx, "Search")
+					for _, item := range d.Channel.Items {
+						if strings.Contains(item.Title, topic) {
+							lFound++
+							continue
+						}
+
+						if strings.Contains(item.Description, topic) {
+							lFound++
+						}
+					}
+					reg.End()
+				}()
 			}
 		}()
 	}
