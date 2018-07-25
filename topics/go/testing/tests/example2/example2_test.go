@@ -19,7 +19,7 @@ func TestDownload(t *testing.T) {
 		url        string
 		statusCode int
 	}{
-		{"https://www.goinggo.net/post/index.xml", http.StatusOK},
+		{"https://www.ardanlabs.com/blog/index.xml", http.StatusOK},
 		{"http://rss.cnn.com/rss/cnn_topstorie.rss", http.StatusNotFound},
 	}
 
