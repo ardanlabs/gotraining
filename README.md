@@ -146,12 +146,14 @@ July(09-16)         San Diego, CA         TBD                 Meetup       Go (t
 July(25-30)         Indianapolis, IN      NFL Experience      Vaca         Available
 July(31-02)         Los Angles, CA        Tradesy             Corporate    Go (3 day)
 August(13-15)       Atlanta, GA           Turner              Corporate    Go (3 day)
-August(18-19)       Berlin, Germany       TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin
 August(27)          Denver, CO            Gophercon USA       Conference   Adv Go (1 day)   https://www.gophercon.com/
 September(01-02)    San Franisco, CA      TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go/
+September(24-26)    Reston, VA            Comcast             Corporate    Go (3 day)
 September(27-01)    Huntsville, AL        Wine Festival       Vaca         Available
+October(16-17)      Miami, FL             Ardan Office        Public       Adv Go (2 day)   https://www.eventbrite.com/e/ultimate-go-training-miami-oct-2018-tickets-48207094718
 October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
+December(01)        HCMC, Vietnam         TBD                 Conference   Go (1 day)       http://gophercon.vn/
 December(04-05)     TBD                   Zip Recruiter       Corporate    Go (3 day)
 ```
 
