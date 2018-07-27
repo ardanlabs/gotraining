@@ -109,6 +109,8 @@ Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 #### CPU Caches / Memory
 
 [CPU Caches and Why You Care - Video](https://www.youtube.com/watch?v=WDIkqP4JbkE) - Scott Meyers  
+[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
+
 [CPU Caches and Why You Care - Deck](http://www.aristeia.com/TalkNotes/codedive-CPUCachesHandouts.pdf) - Scott Meyers  
 [Mythbusting Modern Hardware to Gain 'Mechanical Sympathy'](https://www.youtube.com/watch?v=MC1EKLQ2Wmg) - Martin Thompson  
 [What Every Programmer Should Know About Memory](http://www.akkadia.org/drepper/cpumemory.pdf) - Ulrich Drepper  
@@ -119,7 +121,6 @@ Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 [Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter  
-[NUMA Deep Dive Series](http://frankdenneman.nl/2016/07/06/introduction-2016-numa-deep-dive-series/) - Frank Denneman    
 [The Myth Of Ram](http://www.ilikebigbits.com/blog/2014/4/21/the-myth-of-ram-part-i) - Emil Ernerfeldt  
 [Understanding Transaction Hardware Memory](https://www.infoq.com/presentations/hardware-transactional-memory) - Gil Gene  
 [Performance Through Cache-Friendliness (4:25-5:48)](https://youtu.be/jEG4Qyo_4Bc?t=266) - Damian Gryski  
@@ -134,6 +135,7 @@ Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 [Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf) - Tony Albrecht  
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo) - Bjarne Stroustrup  
 [Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)](http://gamesfromwithin.com/data-oriented-design) - Noel    
+[Was object-oriented programming a failure?](https://www.quora.com/Was-object-oriented-programming-a-failure) - Quora  
 
 ## Code Review
 

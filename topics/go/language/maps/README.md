@@ -12,7 +12,8 @@ Maps provide a data structure that allow for the storage and management of key/v
 
 http://blog.golang.org/go-maps-in-action  
 http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html  
-[Keith Randall - Inside the Map Implementation](https://www.youtube.com/watch?v=Tl7mi9QmLns)
+[Keith Randall - Inside the Map Implementation](https://www.youtube.com/watch?v=Tl7mi9QmLns)  
+[How the Go runtime implements maps efficiently (without generics)](https://dave.cheney.net/2018/05/29/how-the-go-runtime-implements-maps-efficiently-without-generics) - Dave Cheney  
 
 ## Code Review
 
@@ -20,7 +21,6 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 [Map literals and delete](example2/example2.go) ([Go Playground](https://play.golang.org/p/exyL4z8STLt))  
 [Map key restrictions](example3/example3.go) ([Go Playground](https://play.golang.org/p/j7Rrqn4XiBR))  
 [Sorting maps by key](example4/example4.go) ([Go Playground](https://play.golang.org/p/fkr0722d-eg))  
-
 
 ## Exercises
 

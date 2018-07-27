@@ -88,6 +88,7 @@ _"Debuggers don't remove bugs. They only show them in slow motion." - Unknown_
 **Resources:**
 
 [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
+[Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
 
 ---
 

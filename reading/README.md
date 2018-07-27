@@ -155,6 +155,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Basic Queuing Theory](http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main_Angol.pdf) - Dr. János Sztrik  
 [Queueing Theory](https://speakerdeck.com/emfree/queueing-theory) - Eben Freeman  
 [Designing Cluster Schedulers for Internet-Scale Services](https://queue.acm.org/detail.cfm?id=3199609) - Diptanu Gon Choudhury and Timothy Perrett  
+[Observations on Buffering](https://grimoire.ca/dev/buffers) - Owen Grimoire  
 
 ### Go Assembly
 
@@ -172,6 +173,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
 [Our Human Condition "From Space"](http://www.vpri.org/pdf/m2003001_human_cond.pdf) - Alan Kay  
 [No Silver Bullet: Essence and Accidents of Software Engineering](http://www.cs.nott.ac.uk/~pszcah/G51ISS/Documents/NoSilverBullet.html) - Frederick P. Brooks, Jr.   
+[Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
 
 ### Must Read
 
@@ -212,6 +214,7 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 [Pitfalls of OOP](http://harmful.cat-v.org/software/OO_programming/_pdf/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf) - Tony Albrecht  
 [Why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo) - Bjarne Stroustrup  
 [Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)](http://gamesfromwithin.com/data-oriented-design) - Noel  
+[Was object-oriented programming a failure?](https://www.quora.com/Was-object-oriented-programming-a-failure) - Quora  
 
 #### Operating Systems and Virtualization
 
@@ -256,6 +259,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Runtime Hacking](https://github.com/golang/go/blob/master/src/runtime/HACKING.md)  
 [How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
+[Timer implementation](https://github.com/golang/go/issues/25471#issuecomment-391906366) - Ian Lance Taylor  
 
 ## Hardware
 
