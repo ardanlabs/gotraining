@@ -2,7 +2,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Declare a struct that represents a baseball player. Include name, atBats and hits.
-// Declare a method that calculates a players batting average. The formula is Hits / AtBats.
+// Declare a method that calculates a players batting average. The formula is hits / atBats.
 // Declare a slice of this type and initialize the slice with several players. Iterate over
 // the slice displaying the players name and batting average.
 package main

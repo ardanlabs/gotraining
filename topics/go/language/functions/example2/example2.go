@@ -17,7 +17,7 @@ type user struct {
 	Name string
 }
 
-// updateStats provIDes update stats.
+// updateStats provides update stats.
 type updateStats struct {
 	Modified int
 	Duration float64

@@ -17,7 +17,7 @@ http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
 ## Code Review
 
 [Return multiple values](example1/example1.go) ([Go Playground](https://play.golang.org/p/-7A-lGLv2TK))  
-[Blank identifier](example2/example2.go) ([Go Playground](https://play.golang.org/p/L2wINTedeAf))  
+[Blank identifier](example2/example2.go) ([Go Playground](https://play.golang.org/p/ID54tVxM5B0))  
 [Redeclarations](example3/example3.go) ([Go Playground](https://play.golang.org/p/EDRhDh2r1Mj))  
 [Anonymous Functions/Closures](example4/example4.go) ([Go Playground](https://play.golang.org/p/h8Yi_2Sxsmu))
 
