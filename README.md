@@ -172,11 +172,12 @@ April(09-11)        St. Louis, MO         Centene             Corporate    Go (3
 April(12-13)        St. Louis, MO         Centene             Corporate    Go (2 day)
 May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)
 May(29-31)          Portland, OR          Intel               Corporate    Go (3 day)
-June(12-14)         Sunnyvale, CA         Juniper             Corporate    Go (3 day)
-June(19-21)         Malaysia              Chotot              Corporate    Go (3 day)
-July(10-12)         Chicago, IL           Soft Block          Corporate    Go (3 day)
+June(12-14)         Sunnyvale, CA         Juniper             Corporate    Adv Go (3 day)
+June(19-21)         Malaysia              Chotot              Corporate    Adv Go (3 day)
+July(10-12)         Chicago, IL           Enova               Corporate    Adv Go (3 day)
 July(24-26)         St. Louis, MO         Centene             Corporate    Go (3 day)
-September(11-13)    TBD                   Zip Recruiter       Corporate    Go (3 day)
+September(11-13)    Santa Monica, CA      ZipRecruiter        Corporate    Go (3 day)
+October(15)         Miami, FL             Ardan Office        Public       Go (1 day)       https://www.eventbrite.com/e/go-fundamentals-training-miami-oct-2018-tickets-48407630526
 ```
 
 **Daniel Whitenack**  
