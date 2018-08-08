@@ -8,36 +8,40 @@ func main() {
 	example(true, false, true, 25)
 }
 
+//go:noinline
 func example(b1, b2, b3 bool, i uint8) {
 	panic("Want stack trace")
 }
 
 /*
-panic: Want stack trace
+	panic: Want stack trace
 
-goroutine 1 [running]:
-panic(0x569e0, 0xc82000a110)
-	/usr/local/go/src/runtime/panic.go:464 +0x3e6
-main.example(0xc819010001)
-	/Users/bill/.../stack_trace/example2/example2.go:12 +0x65
-main.main()
-	/Users/bill/.../stack_trace/example2/example2.go:8 +0x2b
+	goroutine 1 [running]:
+	main.example(0xc019010001)
+		stack_trace/example2/example2.go:13 +0x39
+	main.main()
+		stack_trace/example2/example2.go:8 +0x29
 
 --------------------------------------------------------------------------------
 
-// Parameter values
-true, false, true, 25
+	// Declaration
+	main.example(b1, b2, b3 bool, i uint8)
 
-// Word value (0x819010001)
-Bits    Binary      Hex   Value
-00-07   0000 0001   01    true
-08-15   0000 0000   00    false
-16-23   0000 0001   01    true
-24-31   0001 1001   19    25
+	// Call
+	main.example(true, false, true, 25)
 
-// Declaration
-main.Example(b1, b2, b3 bool, i uint8)
+	// Stack trace
+	main.example(0xc019010001)
 
-// Stack trace
-main.Example(0x819010001)
+	// Word value (0xc019010001)
+	Bits    Binary      Hex   Value
+	00-07   0000 0001   01    true
+	08-15   0000 0000   00    false
+	16-23   0000 0001   01    true
+	24-31   0001 1001   19    25
+
+	Use `go build -gcflags -S` to map the PC offset values, +0x39 and +0x29 for
+	each function call.
 */
+
+// Note: https://go-review.googlesource.com/c/go/+/109918

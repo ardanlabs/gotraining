@@ -25,20 +25,24 @@ Review the stack trace.
 
     // Stack Trace
     goroutine 1 [running]:
-    panic(0x56a60, 0xc82000a110)
-        /usr/local/go/src/runtime/panic.go:464 +0x3e6
-    main.example(0xc82003bf08, 0x2, 0x4, 0x708a8, 0x5, 0xa)
-        /Users/bill/.../stack_trace/example1/example1.go:13 +0x65
+    main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
+        stack_trace/example1/example1.go:13 +0x39
     main.main()
-        /Users/bill/.../stack_trace/example1/example1.go:9 +0xa5
+        stack_trace/example1/example1.go:8 +0x72
 
-    // Parameters
+    // Declaration
+    main.example(slice []string, str string, i int)
+
+    // Call
     make([]string, 2, 4), "hello", 10
 
-    // main.example(0xc82003bf08, 0x2, 0x4, 0x708a8, 0x5, 0xa)
-    Slice Value:   0xc82003bf08, 0x2, 0x4
-    String Value:  0x708a8, 0x5
+    // Values (0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
+    Slice Value:   0xc000042748, 0x2, 0x4
+    String Value:  0x106abae, 0x5
     Integer Value: 0xa
+
+Use `go build -gcflags -S` to map the PC offset values, +0x39 and +0x72 for
+each function call.
 
 ### Example 2
 
@@ -51,27 +55,31 @@ Review the stack trace.
 
     // Stack Trace
     goroutine 1 [running]:
-    panic(0x569e0, 0xc82000a110)
-        /usr/local/go/src/runtime/panic.go:464 +0x3e6
-    main.example(0xc819010001)
-        /Users/bill/.../stack_trace/example2/example2.go:12 +0x65
+    main.example(0xc019010001)
+        stack_trace/example2/example2.go:13 +0x39
     main.main()
-        /Users/bill/.../stack_trace/example2/example2.go:8 +0x2b
+        stack_trace/example2/example2.go:8 +0x29
 
-    // Parameters
-    true, false, true, 25
+    // Declaration
+    main.example(b1, b2, b3 bool, i uint8)
 
-    // main.example(0xc819010001)
+    // Call
+    main.example(true, false, true, 25)
+
+    // Word value (0xc019010001)
     Bits    Binary      Hex   Value
     00-07   0000 0001   01    true
     08-15   0000 0000   00    false
     16-23   0000 0001   01    true
     24-31   0001 1001   19    25
 
+Use `go build -gcflags -S` to map the PC offset values, +0x39 and +0x29 for
+each function call.
+
 ### Code Review
 
-[Review Stack Trace](example1/example1.go) ([Go Playground](https://play.golang.org/p/bS5NUszad4m))  
-[Packing](example2/example2.go) ([Go Playground](https://play.golang.org/p/vn95A6oXxHB))  
+[Review Stack Trace](example1/example1.go) ([Go Playground](https://play.golang.org/p/k18FqfsuHdU))  
+[Packing](example2/example2.go) ([Go Playground](https://play.golang.org/p/WhGxuICFhLu))  
 
 ### Links
 

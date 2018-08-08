@@ -8,18 +8,35 @@ func main() {
 	example(make([]string, 2, 4), "hello", 10)
 }
 
+//go:noinline
 func example(slice []string, str string, i int) {
 	panic("Want stack trace")
 }
 
 /*
-panic: Want stack trace
+	panic: Want stack trace
 
-goroutine 1 [running]:
-panic(0x56a60, 0xc82000a110)
-	/usr/local/go/src/runtime/panic.go:464 +0x3e6
-main.example(0xc82003bf08, 0x2, 0x4, 0x708a8, 0x5, 0xa)
-	/Users/bill/.../stack_trace/example1/example1.go:12 +0x65
-main.main()
-	/Users/bill/.../stack_trace/example1/example1.go:8 +0xa5
+	goroutine 1 [running]:
+	main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
+		stack_trace/example1/example1.go:13 +0x39
+	main.main()
+		stack_trace/example1/example1.go:8 +0x72
+
+	--------------------------------------------------------------------------------
+
+	// Declaration
+	main.example(slice []string, str string, i int)
+
+	// Call
+	main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
+
+	// Stack trace
+	main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
+
+	// Values
+	Slice Value:   0xc000042748, 0x2, 0x4
+	String Value:  0x106abae, 0x5
+	Integer Value: 0xa
 */
+
+// Note: https://go-review.googlesource.com/c/go/+/109918
