@@ -148,7 +148,7 @@ July(31-02)         Los Angles, CA        Tradesy             Corporate    Go (3
 August(13-15)       Atlanta, GA           Turner              Corporate    Go (3 day)
 August(18-19)       Berlin, Germany       Cosmos              WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin/events/253303548
 August(27)          Denver, CO            Gophercon USA       Conference   Adv Go (1 day)   https://www.gophercon.com/
-September(01-02)    San Franisco, CA      TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go/
+September(01-02)    San Franisco, CA      TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go/events/253734992/
 September(11-13)    Silicon Valey, CA     Paypal              Corporate    Go (3 day)
 September(24-26)    Reston, VA            Comcast             Corporate    Go (3 day)
 September(27-30)    Minsk, Belarus        GoWayFest           Conference   Adv Go (1 day)   https://goway.io/
