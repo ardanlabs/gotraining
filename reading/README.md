@@ -161,6 +161,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
 [Quick intro to Go assembly](https://blog.hackercat.ninja/post/quick_intro_to_go_assembly/)  
+[The Go low-level calling convention on x86-64](http://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
 
 ### Misc
 
