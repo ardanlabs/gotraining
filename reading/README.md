@@ -54,6 +54,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Contribution Guidelines](https://golang.org/doc/contribute.html) - Go Documentation  
 [CONTRIBUTING: The Talk!](https://github.com/matloob/contributing/blob/master/contributing.md) - Michael Matloob  
 
+### Go Modules
+
+[Go Wiki on Modules](https://github.com/golang/go/wiki/Modules) - Community  
+[Go Modules](https://systemdump.io/posts/2018-07-22-go-modules) - systemdump  
+
 ### Standard Library
 
 [io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#) - Ben Johnson  
