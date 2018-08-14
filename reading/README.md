@@ -121,7 +121,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Concurrency
 
-[The Behavior Of Channels](https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html) - William Kennedy
+[The Behavior Of Channels](https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html) - William Kennedy  
+[Scheduling In Go - Part I](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html) - William Kennedy
 
 ### Buffer Bloat - 2011
 
@@ -167,6 +168,16 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
 [Quick intro to Go assembly](https://blog.hackercat.ninja/post/quick_intro_to_go_assembly/)  
 [The Go low-level calling convention on x86-64](http://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
+
+### Site Reliability Engineering
+
+[Site Reliability Engineering](https://landing.google.com/sre/book.html) - Google  
+[SLI, SLO, SLA](https://landing.google.com/sre/book/chapters/service-level-objectives.html) - Google  
+[SLIs, SLOs, SLAs, oh my!](https://www.youtube.com/watch?v=tEylFyxbDLE) - Liz Fong-Jones and Seth Vargo  
+
+### Monitoring and Observability
+
+[Health and availability in computer systems](https://medium.com/observability/health-and-availability-b2f32ce28716) - José Carlos Chávez  
 
 ### Misc
 
@@ -236,6 +247,11 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
 [Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
+#### Scheduler
+
+[How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
+[Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
+[proposal: runtime: non-cooperative goroutine preemption](https://github.com/golang/go/issues/24543) - Austin Clements  
 
 #### Escape Analysis and Inlining
 
@@ -264,7 +280,6 @@ https://godoc.org/golang.org/x/tools/go/ssa
 #### Misc
 
 [Runtime Hacking](https://github.com/golang/go/blob/master/src/runtime/HACKING.md)  
-[How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
 [Timer implementation](https://github.com/golang/go/issues/25471#issuecomment-391906366) - Ian Lance Taylor  
 
 ## Hardware
