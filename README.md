@@ -150,9 +150,11 @@ August(18-19)       Berlin, Germany       Cosmos              WWG          Go (2
 August(27)          Denver, CO            Gophercon USA       Conference   Adv Go (1 day)   https://www.gophercon.com/
 September(01-02)    San Franisco, CA      TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go/events/253734992/
 September(11-13)    Silicon Valey, CA     Paypal              Corporate    Go (3 day)
+September(15-16)    Portland, OR          Puppet              GoBridge     Go (2 day)
 September(24-26)    Reston, VA            Comcast             Corporate    Go (3 day)
 September(27-30)    Minsk, Belarus        GoWayFest           Conference   Adv Go (1 day)   https://goway.io/
 October(08-10)      Portugal              OLX                 Corporate    Go (3 day)   
+October(12)         San Franisco, CA      Grand Theater       Conference   Go (1 day)       http://gopherpalooza.com/
 October(16-17)      Miami, FL             Ardan Office        Public       Adv Go (2 day)   https://www.eventbrite.com/e/ultimate-go-training-miami-oct-2018-tickets-48207094718
 October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
