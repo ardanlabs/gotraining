@@ -47,7 +47,7 @@ func createUserV2() *user {
 }
 
 /*
-// See escape analysis and inling decisions.
+// See escape analysis and inlining decisions.
 
 $ go build -gcflags "-m -m"
 # github.com/ardanlabs/gotraining/topics/go/language/pointers/example4
