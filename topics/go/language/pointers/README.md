@@ -114,7 +114,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/9kxh18hd_BT))  
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/mJz5RINaimn))  
 [Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/GpmPICMGMre))  
-[Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/qNOw5gEtYhI))  
+[Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/EpDUu873YXc))  
 [Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/BgIKcFcZ4PO))  
 
 ### Escape Analysis Flaws
