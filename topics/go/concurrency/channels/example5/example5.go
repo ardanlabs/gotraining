@@ -17,21 +17,20 @@ import (
 // Give the program 3 seconds to complete the work.
 const timeoutSeconds = 3 * time.Second
 
-var (
+func main() {
+
 	// sigChan receives os signals.
-	sigChan = make(chan os.Signal, 1)
+	sigChan := make(chan os.Signal, 1)
 
 	// timeout limits the amount of time the program has.
-	timeout = time.After(timeoutSeconds)
+	timeout := time.After(timeoutSeconds)
 
 	// complete is used to report processing is done.
-	complete = make(chan error)
+	complete := make(chan error)
 
 	// shutdown provides system wide notification.
-	shutdown = make(chan struct{})
-)
+	shutdown := make(chan struct{})
 
-func main() {
 	log.Println("Starting Process")
 
 	// We want to receive all interrupt based signals.
@@ -39,7 +38,7 @@ func main() {
 
 	// Launch the process.
 	log.Println("Launching Processors")
-	go processor(complete)
+	go processor(complete, shutdown)
 
 ControlLoop:
 	for {
@@ -76,7 +75,7 @@ ControlLoop:
 }
 
 // processor provides the main program logic for the program.
-func processor(complete chan<- error) {
+func processor(complete chan<- error, shutdown <-chan struct{}) {
 	log.Println("Processor - Starting")
 
 	// Variable to store any error that occurs.
@@ -97,24 +96,24 @@ func processor(complete chan<- error) {
 	}()
 
 	// Perform the work.
-	err = doWork()
+	err = doWork(shutdown)
 
 	log.Println("Processor - Completed")
 }
 
 // doWork simulates task work.
-func doWork() error {
+func doWork(shutdown <-chan struct{}) error {
 	log.Println("Processor - Task 1")
 	time.Sleep(2 * time.Second)
 
-	if checkShutdown() {
+	if checkShutdown(shutdown) {
 		return errors.New("Early Shutdown")
 	}
 
 	log.Println("Processor - Task 2")
 	time.Sleep(1 * time.Second)
 
-	if checkShutdown() {
+	if checkShutdown(shutdown) {
 		return errors.New("Early Shutdown")
 	}
 
@@ -126,7 +125,7 @@ func doWork() error {
 
 // checkShutdown checks the shutdown flag to determine
 // if we have been asked to interrupt processing.
-func checkShutdown() bool {
+func checkShutdown(shutdown <-chan struct{}) bool {
 	select {
 	case <-shutdown:
 

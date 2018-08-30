@@ -55,7 +55,7 @@ http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html
 [Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/PvFKD_tNwir))  
 [Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OLdBCGUvzbx))  
 [Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/zxzHAHIr3Xj))  
-[Monitor running time](example5/example5.go) ([Go Playground](https://play.golang.org/p/NAX2nn9HCRy))  
+[Monitor running time](example5/example5.go) ([Go Playground](https://play.golang.org/p/vZ95XZuYVPF))  
 
 ## Advanced Code Review
 
