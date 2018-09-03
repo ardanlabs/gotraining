@@ -153,6 +153,7 @@ September(11-13)    Silicon Valey, CA     Paypal              Corporate    Go (3
 September(15-16)    Portland, OR          Puppet              GoBridge     Go (2 day)
 September(24-26)    Reston, VA            Comcast             Corporate    Go (3 day)
 September(27-30)    Minsk, Belarus        GoWayFest           Conference   Adv Go (1 day)   https://goway.io/
+October(04-06)      Stockholm             TBD                 Conference   Go (talk)   
 October(08-10)      Portugal              OLX                 Corporate    Go (3 day)   
 October(12)         San Franisco, CA      Grand Theater       Conference   Go (1 day)       http://gopherpalooza.com/
 October(16-17)      Miami, FL             Ardan Office        Public       Adv Go (2 day)   https://www.eventbrite.com/e/ultimate-go-training-miami-oct-2018-tickets-48207094718
