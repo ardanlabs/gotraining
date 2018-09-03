@@ -127,7 +127,7 @@ func algOne(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 }
 
 // algTwo is a second way to solve the problem.
-// Provided by Tyler Bunnell https://twitter.com/TylerJBunnell
+// Provided by Tyler Stillwater https://twitter.com/TylerStillwater
 func algTwo(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 
 	// Use the bytes Reader to provide a stream to process.
