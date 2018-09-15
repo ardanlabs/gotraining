@@ -35,10 +35,9 @@ This is material for anyone looking to learn more about or use NATS to building 
 
 ### Todd McLeod's Go Training
 
-[Go Fundamentals](https://github.com/GoesToEleven/GolangTraining)
-[Go Web Development](https://github.com/GoesToEleven/golang-web-dev)
-[You Tube](https://www.youtube.com/user/toddmcleod)
-[Udemy - Fee](https://www.udemy.com/learn-how-to-code/?couponCode=learngo)
+[Go Fundamentals](https://greatercommons.com/learn/golang?coupon=kennedy)
+[Go Web Development](https://greatercommons.com/learn/go-language?coupon=kennedy)
+[You Tube](http://www.youtube.com/c/ToddMcLeod-learn-to-code)
 
 ### Go Challenges
 
