@@ -58,6 +58,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Go Wiki on Modules](https://github.com/golang/go/wiki/Modules) - Community  
 [Go Modules](https://systemdump.io/posts/2018-07-22-go-modules) - systemdump  
+[A Gentle Introduction To Go Modules](https://ukiahsmith.com/blog/a-gentle-introduction-to-golang-modules/) - Ukiah Smith  
 
 ### Standard Library
 
