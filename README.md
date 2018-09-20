@@ -160,7 +160,7 @@ October(16-17)      Miami, FL             Ardan Office        Public       Adv G
 October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
 December(01)        HCMC, Vietnam         TBD                 Conference   Go (1 day)       http://gophercon.vn/
-December(04-05)     TBD                   Zip Recruiter       Corporate    Go (3 day)
+December(04-05)     Santa Monica, CA      ZipRecruiter        Corporate    Go (3 day)
 ```
 
 **Jacob Walker**  
@@ -180,7 +180,9 @@ June(19-21)         Malaysia              Chotot              Corporate    Adv G
 July(10-12)         Chicago, IL           Enova               Corporate    Adv Go (3 day)
 July(24-26)         St. Louis, MO         Centene             Corporate    Go (3 day)
 September(11-13)    Santa Monica, CA      ZipRecruiter        Corporate    Go (3 day)
-October(15)         Miami, FL             Ardan Office        Public       Go (1 day)       https://www.eventbrite.com/e/go-fundamentals-training-miami-oct-2018-tickets-48407630526
+October(09-11)      San Jose, CA          Oracle              Corporate    Adv Go (3 day)
+October(23-25)      St. Louis, MO         Centene             Corporate    Go (3 day)
+November(07-09)     Portland, OR          New Relic           Corporate    Go (3 day)
 ```
 
 **Daniel Whitenack**  
