@@ -23,12 +23,12 @@ https://github.com/golang/go/wiki/SliceTricks
 
 ## Code Review
 
-[Declare and Length](example1/example1.go) ([Go Playground](https://play.golang.org/p/ydOJ1GHgR_Y))  
+[Declare and Length](example1/example1.go) ([Go Playground](https://play.golang.org/p/Tsl18KXn0MZ))  
 [Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/WqDnss06_9E))  
 [Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/E-NTGM6daAA))  
-[Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/rUP9grCot8J))  
+[Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/oHOt41Qhsmo))  
 [Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/D88zzGYanvX)  
-[Strings and slices](example6/example6.go) ([Go Playground](https://play.golang.org/p/1RntHk6UPA5))  
+[Strings and slices](example6/example6.go) ([Go Playground](https://play.golang.org/p/RlXuqtXyV8i))  
 [Variadic functions](example7/example7.go) ([Go Playground](https://play.golang.org/p/rUjWVBMmxgP))  
 [Range mechanics](example8/example8.go) ([Go Playground](https://play.golang.org/p/d1wToBg6oUu))  
 
@@ -44,7 +44,7 @@ https://github.com/golang/go/wiki/SliceTricks
 
 **Part B** Declare a slice of five strings and initialize the slice with string literal values. Display all the elements. Take a slice of index one and two and display the index position and value of each element in the new slice.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/t8I3xz2jWCl)) | 
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/7GfB3NOwu_c)) | 
 [Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/0xv7GTHHIR_K))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
