@@ -187,6 +187,7 @@ July(10-12)         Chicago, IL           Enova               Corporate    Adv G
 July(24-26)         St. Louis, MO         Centene             Corporate    Go (3 day)
 September(11-13)    Santa Monica, CA      ZipRecruiter        Corporate    Go (3 day)
 October(09-11)      San Jose, CA          Oracle              Corporate    Adv Go (3 day)
+October(16-18)      Torrance, CA          Dollar Shave Club   Corporate    Go (3 day)
 October(23-25)      St. Louis, MO         Centene             Corporate    Go (3 day)
 November(07-09)     Portland, OR          New Relic           Corporate    Go (3 day)
 ```
