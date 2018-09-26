@@ -41,23 +41,23 @@ func main() {
 	// pprof.StartCPUProfile(os.Stdout)
 	// defer pprof.StopCPUProfile()
 
-	// trace.Start(os.Stdout)
-	// defer trace.Stop()
+	trace.Start(os.Stdout)
+	defer trace.Stop()
 
 	docs := make([]string, 1000)
 	for i := range docs {
-		docs[i] = "newsfeed.xml"
+		docs[i] = fmt.Sprintf("newsfeed-%.4d.xml", i)
 	}
 
 	topic := "president"
 
-	n := find(topic, docs)
+	// n := find(topic, docs)
 	// n := findConcurrent(topic, docs)
 	// n := findConcurrentSem(topic, docs)
 	// n := findNumCPU(topic, docs)
 	// n := findActor(topic, docs)
 
-	// n := findNumCPUTasks(topic, docs)
+	n := findNumCPUTasks(topic, docs)
 
 	log.Printf("Found %s %d times.", topic, n)
 }
@@ -66,7 +66,8 @@ func find(topic string, docs []string) int {
 	var found int
 
 	for _, doc := range docs {
-		f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+		file := fmt.Sprintf("%s.xml", doc[:8])
+		f, err := os.OpenFile(file, os.O_RDONLY, 0)
 		if err != nil {
 			log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 			return 0
@@ -116,7 +117,8 @@ func findConcurrent(topic string, docs []string) int {
 				wg.Done()
 			}()
 
-			f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+			file := fmt.Sprintf("%s.xml", doc[:8])
+			f, err := os.OpenFile(file, os.O_RDONLY, 0)
 			if err != nil {
 				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 				return
@@ -172,7 +174,8 @@ func findConcurrentSem(topic string, docs []string) int {
 					wg.Done()
 				}()
 
-				f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+				file := fmt.Sprintf("%s.xml", doc[:8])
+				f, err := os.OpenFile(file, os.O_RDONLY, 0)
 				if err != nil {
 					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 					return
@@ -233,7 +236,8 @@ func findNumCPU(topic string, docs []string) int {
 			}()
 
 			for doc := range ch {
-				f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+				file := fmt.Sprintf("%s.xml", doc[:8])
+				f, err := os.OpenFile(file, os.O_RDONLY, 0)
 				if err != nil {
 					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 					return
@@ -278,14 +282,9 @@ func findNumCPUTasks(topic string, docs []string) int {
 	var wg sync.WaitGroup
 	wg.Add(g)
 
-	type task struct {
-		name string
-		doc  string
-	}
-
-	ch := make(chan task, len(docs))
-	for i, doc := range docs {
-		ch <- task{fmt.Sprintf("%s-%d", doc, i), doc}
+	ch := make(chan string, len(docs))
+	for _, doc := range docs {
+		ch <- doc
 	}
 	close(ch)
 
@@ -297,15 +296,17 @@ func findNumCPUTasks(topic string, docs []string) int {
 				wg.Done()
 			}()
 
-			for task := range ch {
+			for doc := range ch {
 				func() {
-					ctx, tt := trace.NewTask(context.Background(), task.name)
+					file := fmt.Sprintf("%s.xml", doc[:8])
+					ctx, tt := trace.NewTask(context.Background(), doc)
 					defer tt.End()
 
 					reg := trace.StartRegion(ctx, "OpenFile")
-					f, err := os.OpenFile(task.doc, os.O_RDONLY, 0)
+
+					f, err := os.OpenFile(file, os.O_RDONLY, 0)
 					if err != nil {
-						log.Printf("Opening Document [%s] : ERROR : %v", task.name, err)
+						log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 						return
 					}
 					reg.End()
@@ -314,7 +315,7 @@ func findNumCPUTasks(topic string, docs []string) int {
 					data, err := ioutil.ReadAll(f)
 					if err != nil {
 						f.Close()
-						log.Printf("Reading Document [%s] : ERROR : %v", task.name, err)
+						log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 						return
 					}
 					f.Close()
@@ -323,7 +324,7 @@ func findNumCPUTasks(topic string, docs []string) int {
 					reg = trace.StartRegion(ctx, "Unmarshal")
 					var d document
 					if err := xml.Unmarshal(data, &d); err != nil {
-						log.Printf("Decoding Document [%s] : ERROR : %v", task.name, err)
+						log.Printf("Decoding Document [%s] : ERROR : %v", doc, err)
 						return
 					}
 					reg.End()
@@ -353,7 +354,8 @@ func findActor(topic string, docs []string) int {
 	files := make(chan *os.File, 100)
 	go func() {
 		for _, doc := range docs {
-			f, err := os.OpenFile(doc, os.O_RDONLY, 0)
+			file := fmt.Sprintf("%s.xml", doc[:8])
+			f, err := os.OpenFile(file, os.O_RDONLY, 0)
 			if err != nil {
 				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 				break
