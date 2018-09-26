@@ -41,8 +41,8 @@ func main() {
 	// pprof.StartCPUProfile(os.Stdout)
 	// defer pprof.StopCPUProfile()
 
-	trace.Start(os.Stdout)
-	defer trace.Stop()
+	// trace.Start(os.Stdout)
+	// defer trace.Stop()
 
 	docs := make([]string, 1000)
 	for i := range docs {
@@ -51,13 +51,12 @@ func main() {
 
 	topic := "president"
 
-	// n := find(topic, docs)
+	n := find(topic, docs)
 	// n := findConcurrent(topic, docs)
 	// n := findConcurrentSem(topic, docs)
 	// n := findNumCPU(topic, docs)
 	// n := findActor(topic, docs)
-
-	n := findNumCPUTasks(topic, docs)
+	// n := findNumCPUTasks(topic, docs)
 
 	log.Printf("Found %s %d times.", topic, n)
 }
@@ -303,7 +302,6 @@ func findNumCPUTasks(topic string, docs []string) int {
 					defer tt.End()
 
 					reg := trace.StartRegion(ctx, "OpenFile")
-
 					f, err := os.OpenFile(file, os.O_RDONLY, 0)
 					if err != nil {
 						log.Printf("Opening Document [%s] : ERROR : %v", doc, err)

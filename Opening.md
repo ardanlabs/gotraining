@@ -1,3 +1,8 @@
+  PLEASE DO THIS AS SOON AS YOU CAN
+  go get -u github.com/ardanlabs/gotraining
+  cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/trace
+
+
 ## Info  
 Name:     William Kennedy (Bill)  bill@ardanlabs.com  
 Twitter:  @goinggodotnet #golang  
