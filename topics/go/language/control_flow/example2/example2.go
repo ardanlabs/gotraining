@@ -10,7 +10,7 @@ func main() {
 
 	name := "Jon"
 
-	// Switch statements can have multiple cases and do not require breaks.
+	// Switch cases can have multiple values and do not require breaks.
 	switch name {
 	case "Cersei", "Jaime", "Tyrion":
 		fmt.Println("A Lannister always pays their debts.")

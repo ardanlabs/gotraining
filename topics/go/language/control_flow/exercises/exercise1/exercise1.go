@@ -21,7 +21,7 @@ func main() {
 		fmt.Println("What's up, Walker family?")
 
 	case "Seth", "Julia", "Tanner", "Kenton", "Britten":
-		fmt.Println("Welcome, friend!")
+		fmt.Println("Welcome, my friend!")
 
 	default:
 		fmt.Println("It's nice to meet you!")
