@@ -1,6 +1,9 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
+// You are going to want to copy and paste this line later.
+// "github.com/ardanlabs/gotraining/topics/go/exercises/contributors/template/github"
+
 // Call the GitHub API to get a list of repository contributors.
 package main
 
