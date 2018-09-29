@@ -13,3 +13,9 @@ Slack:    [Slack](https://invite.slack.golangbridge.org)
 ## Extra Links  
  [Installing](https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html)
 [Video](http://www.informit.com/store/ultimate-go-programming-livelessons-9780134757483)
+
+## Tooling Installs
+Graphviz: https://www.graphviz.org/
+go get -u github.com/rakyll/hey   : ab
+go get -u github.com/ardanlabs/gotraining
+Latest Version of Go: 1.11
