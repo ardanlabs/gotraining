@@ -22,8 +22,8 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Only allow GET requests.
-	if r.Method != http.MethodGet {
-		http.Error(w, "request method must be "+http.MethodGet, http.StatusMethodNotAllowed)
+	if r.Method != "GET" {
+		http.Error(w, "request method must be GET", http.StatusMethodNotAllowed)
 		return
 	}
 

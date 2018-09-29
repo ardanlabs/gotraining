@@ -15,7 +15,7 @@ func main() {
 
 	// Declare a nil slice of integers.
 
-	// Appends numbers to the slice.
+	// Append numbers to the slice.
 
 	// Display each value in the slice.
 
