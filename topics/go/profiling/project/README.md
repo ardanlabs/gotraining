@@ -66,9 +66,9 @@ Capture cpu profile:
 
 #### Interactive Profiling
 
-Run the Go pprof tool in another window or tab to review heap information.
+Run the Go pprof tool in another window or tab to review alloc space heap information.
 
-	$ go tool pprof -alloc_space http://localhost:5000/debug/pprof/heap
+	$ go tool pprof http://localhost:5000/debug/pprof/allocs
 
 Documentation of memory profile options.
 
@@ -88,9 +88,11 @@ Run the Go pprof tool in another window or tab to review cpu information.
 
 	$ go tool pprof http://localhost:5000/debug/pprof/profile
 
-_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile). Note that goroutines in "IO wait" state also do not consume threads, they are parked on non-blocking network poller (which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
+_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile)._
 
-Explore using the **top**, **list**, **web** and **web list** commands.
+_Note that goroutines in "IO wait" state do NOT consume an OS thread. They are parked on the non-blocking network poller._
+
+Explore using the **top**, **list**, **web** and **weblist** commands.
 
 #### Comparing Profiles
 
@@ -122,12 +124,12 @@ Run the benchmarks and produce a cpu and memory profile.
 
 	$ cd $GOPATH/src/github.com/ardanlabs/gotraining/topics/go/profiling/project/search
 	
-	$ go test -run none -bench . -benchtime 3s -benchmem -cpuprofile cpu.out
-	$ go tool pprof cpu.out
+	$ go test -run none -bench . -benchtime 3s -benchmem -cpuprofile p.out
+	$ go tool pprof p.out
 	(pprof) web list rssSearch
 
-	$ go test -run none -bench . -benchtime 3s -benchmem -memprofile mem.out
-	$ go tool pprof -inuse_space mem.out
+	$ go test -run none -bench . -benchtime 3s -benchmem -memprofile p.out
+	$ go tool pprof -inuse_space p.out
 	(pprof) web list rssSearch
 
 ### Trace Profiles

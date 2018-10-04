@@ -107,6 +107,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
 [Focus On Being Precise](https://www.ardanlabs.com/blog/2018/02/focus-on-being-precise.html) - William Kennedy  
+[Design, Composition and Performance](https://www.infoq.com/presentations/Design-Composition-Performance) - Rich Hickey  
 
 ### Interfaces and Composition
 

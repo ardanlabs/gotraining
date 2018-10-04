@@ -100,13 +100,13 @@ Run the pprof tool.
 
 Documentation of memory profile options.
 
-    // Useful to see current status of heap.
-	-inuse_space  : Allocations live at the time of profile  	** default
-	-inuse_objects: Number of bytes allocated at the time of profile
-
 	// Useful to see pressure on heap over time.
-	-alloc_space  : All allocations happened since program start
+	-alloc_space  : All allocations happened since program start  	** default
 	-alloc_objects: Number of object allocated at the time of profile
+
+    // Useful to see current status of heap.
+	-inuse_space  : Allocations live at the time of profile
+	-inuse_objects: Number of bytes allocated at the time of profile
 
 If you want to reduce memory consumption, look at the `-inuse_space` profile collected during normal program operation.
 	
@@ -116,11 +116,17 @@ If you want to improve execution speed, look at the `-alloc_objects` profile col
 
 Run the Go pprof tool in another window or tab to review cpu information.
 
-	$ go tool pprof ./pprof http://localhost:4000/debug/pprof/profile
+	$ go tool pprof http://localhost:4000/debug/pprof/profile
 
-_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile). Note that goroutines in "IO wait" state also do not consume threads, they are parked on non-blocking network poller (which uses epoll/kqueue/GetQueuedCompletionStatus to unpark goroutines later)._
+If you include the binary when using the browser tooling, you can get informatio down to the assembly.
 
-Explore using the **top**, **list**, **web** and **web list** commands.
+	$ go tool pprof -http :3000 ./pprof http://localhost:4000/debug/pprof/profile
+
+_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile)._
+
+_Note that goroutines in "IO wait" state do NOT consume an OS thread. They are parked on the non-blocking network poller._
+
+Explore using the **top**, **list**, **web** and **weblist** commands from the command line. If you are using the browser based UI, these items on in the navigation.
 
 ### Comparing Profiles
 

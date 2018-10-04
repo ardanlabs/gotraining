@@ -1,6 +1,6 @@
 ## GODEBUG
 
-We can get specific information about the heap, gc and scheduler using the GODEBUG environmental variable. The variable will cause the schedule to emit information about the health of the logical processors.
+We can get specific trace information about the garbage collection and scheduler using the GODEBUG environmental variable. The variable will cause the runtime to emit tracing information.
 
 ## Schedule Tracing
 
@@ -59,7 +59,7 @@ Let's run with two logical processors now:
 
 	$ GOMAXPROCS=2 GODEBUG=schedtrace=1000 ./godebug
 
-## Memory Tracing
+## GC Tracing
 
 There is no way to identify specifically in the code where a leak is occurring. We can validate if a memory leak is present and which functions or methods are producing the most allocations.
 

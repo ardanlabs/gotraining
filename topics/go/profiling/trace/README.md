@@ -6,28 +6,52 @@ The tracing can help identify not only what is happening but also what is not ha
 
 Review this post to gain basic skills.
 
-[go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell
+[go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
+[Debugging Latency in Go 1.11](https://medium.com/observability/debugging-latency-in-go-1-11-9f97a7910d68) - JBD
 
 ## Trace Command
 
-Run the program to download a file. Use the `LoadWrite()` function first and then try the `StreamWrite` function.
+You have two options with this code. First uncomment the CPU profile lines to generate a CPU profile.
 
-Build and run the program.
+    pprof.StartCPUProfile(os.Stdout)
+	defer pprof.StopCPUProfile()
 
-    $ go build
-    $ time ./trace > p.trace
+	// trace.Start(os.Stdout)
+	// defer trace.Stop()
 
-Run run the trace tool and inspect the trace.
+This will let you run a profile first. Leverage the lessons learned in the other sections.
 
-    $ go tool trace trace.out
+    $ ./trace > p.out
+    $ go tool pprof p.out
 
-Generate a CPU profile.
+Then run a trace by uncommenting the other lines of code.
 
-    $ go tool trace -pprof=[net,syscall,sync,sched] trace.out > cpu.out
-    
-View the profile.
+    // pprof.StartCPUProfile(os.Stdout)
+	// defer pprof.StopCPUProfile()
 
-    $ go tool pprof cpu.out  
+	trace.Start(os.Stdout)
+	defer trace.Stop()
+
+Once you run the program.
+
+    $ ./trace > t.out
+    $ go tool trace t.out
+
+Then explore the trace tooling by building the program with these different find functions.
+
+    n := find(topic, docs)
+	// n := findConcurrent(topic, docs)
+	// n := findConcurrentSem(topic, docs)
+	// n := findNumCPU(topic, docs)
+	// n := findActor(topic, docs)
+
+Using this function allows you to see how to add custom tasks and regions. This requires Go version 1.11.
+
+	// n := findNumCPUTasks(topic, docs)
+
+_Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile)._
+
+_Note that goroutines in "IO wait" state do NOT consume an OS thread. They are parked on the non-blocking network poller._ 
 
 ## Code Review
  
