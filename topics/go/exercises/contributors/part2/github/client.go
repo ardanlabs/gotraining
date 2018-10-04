@@ -8,13 +8,6 @@ import (
 	"time"
 )
 
-// Contributor summarizes one person's contributions to a particular
-// GitHub repository.
-type Contributor struct {
-	Login         string `json:"login"`
-	Contributions int    `json:"contributions"`
-}
-
 // Client knows how to call the GitHub API to get contributor information.
 type Client struct {
 	token  string
@@ -36,10 +29,10 @@ func NewClient(token string) (*Client, error) {
 	}, nil
 }
 
-// Contributors gives a list of the top 30 contributors. It returns an error
+// ContributorList gives a list of the top 30 contributors. It returns an error
 // for network problems reaching the API or for application problems such as a
 // 404 or 403 response from GitHub.
-func (c *Client) Contributors(repo string) ([]Contributor, error) {
+func (c *Client) ContributorList(repo string) ([]Contributor, error) {
 
 	// Make a request and set the auth token in the header.
 	url := fmt.Sprintf("https://api.github.com/repos/%s/contributors", repo)

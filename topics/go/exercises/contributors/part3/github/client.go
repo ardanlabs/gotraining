@@ -12,13 +12,6 @@ import (
 // API is the root URL for the github.com api. Use this with NewClient.
 const API = "https://api.github.com"
 
-// Contributor summarizes one person's contributions to a particular
-// GitHub repository.
-type Contributor struct {
-	Login         string `json:"login"`
-	Contributions int    `json:"contributions"`
-}
-
 // Client knows how to call the GitHub API to get contributor information.
 type Client struct {
 	token   string
@@ -57,10 +50,10 @@ func NewClient(root, token string) (*Client, error) {
 // we know it will always work.
 var repoRE = regexp.MustCompile(`[a-zA-Z0-9]+/[a-zA-Z0-9]+`)
 
-// Contributors gives a list of the top 30 contributors. It returns an error
+// ContributorList gives a list of the top 30 contributors. It returns an error
 // for network problems reaching the API or for application problems such as a
 // 404 or 403 response from GitHub.
-func (c *Client) Contributors(repo string) ([]Contributor, error) {
+func (c *Client) ContributorList(repo string) ([]Contributor, error) {
 	if repo == "" {
 		return nil, errors.New("repo is required")
 	}

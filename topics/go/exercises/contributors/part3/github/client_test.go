@@ -79,7 +79,7 @@ func TestContributorsSuccess(t *testing.T) {
 	}
 
 	// Call the method under test.
-	got, err := c.Contributors("golang/go")
+	got, err := c.ContributorList("golang/go")
 
 	if err != nil {
 		t.Fatalf("Client should not error. Got %v", err)
@@ -115,7 +115,7 @@ func TestContributorsAPIFailure(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err := c.Contributors("golang/go"); err == nil {
+	if _, err := c.ContributorList("golang/go"); err == nil {
 		t.Fatal("Client should error but did not")
 	}
 }

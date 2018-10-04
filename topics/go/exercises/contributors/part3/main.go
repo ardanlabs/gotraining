@@ -28,14 +28,14 @@ func main() {
 	}
 }
 
-// contributors is the interface that this package looks for when
+// contributorLister is the interface that this package looks for when
 // calling process.
-type contributors interface {
-	Contributors(string) ([]github.Contributor, error)
+type contributorLister interface {
+	ContributorList(string) ([]github.Contributor, error)
 }
 
-func process(w io.Writer, repo string, c contributors) error {
-	cons, err := c.Contributors(repo)
+func process(w io.Writer, repo string, c contributorLister) error {
+	cons, err := c.ContributorList(repo)
 	if err != nil {
 		return err
 	}

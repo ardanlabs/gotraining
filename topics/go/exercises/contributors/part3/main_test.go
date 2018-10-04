@@ -9,13 +9,13 @@ import (
 	"github.com/ardanlabs/gotraining/topics/go/exercises/contributors/part3/github"
 )
 
-// mock implements the "contributors" interface without requiring us to
+// mock implements the "contributorLister" interface without requiring us to
 // actually call the GitHub API.
 type mock struct{}
 
-// Contributors satisfies the main package's "contributors" interface. It
-// returns predefined result sets for different repo values.
-func (mock) Contributors(repo string) ([]github.Contributor, error) {
+// ContributorList satisfies the main package's "contributorLister" interface.
+// It returns predefined result sets for different repo values.
+func (mock) ContributorList(repo string) ([]github.Contributor, error) {
 	switch repo {
 	case "golang/go":
 		return []github.Contributor{
