@@ -29,7 +29,6 @@ func (f *Feed) Count() int {
 
 // Fetch simulates looking up the document specified by key. It is slow.
 func (f *Feed) Fetch(key string) (Document, error) {
-
 	time.Sleep(1000 * time.Millisecond)
 
 	doc := Document{
@@ -51,11 +50,10 @@ type CachingFeed struct {
 
 // NewCachingFeed initalizes a CachingFeed for use.
 func NewCachingFeed(f *Feed) *CachingFeed {
-	fc := CachingFeed{
+	return &CachingFeed{
 		docs: make(map[string]Document),
 		Feed: f,
 	}
-	return &fc
 }
 
 // Fetch calls the embedded type's Fetch method if the key is not cached.

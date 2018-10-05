@@ -32,7 +32,6 @@ func (f *Feed) Count() int {
 
 // Fetch simulates looking up the document specified by key. It is slow.
 func (f *Feed) Fetch(key string) (Document, error) {
-
 	time.Sleep(1000 * time.Millisecond)
 
 	doc := Document{
