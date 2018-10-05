@@ -94,7 +94,7 @@ _"Debuggers don't remove bugs. They only show them in slow motion." - Unknown_
 
 ### Productivity vs Performance
 
-Productivity and performance both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is out pacing the hardware’s ability to make them faster.
+Productivity and performance both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is outpacing the hardware’s ability to make them faster.
 
 By following Go’s idioms and a few guidelines, we can write code that can be reasoned about by anyone who looks at it. We can write software that simplifies, minimizes and reduces the amount of code we need to solve the problems we are working on. We don’t have to choose productivity over performance or performance over productivity anymore. We can have both.
 
@@ -128,7 +128,7 @@ _"Make it correct, make it clear, make it concise, make it fast. In that order."
 
 _"Good engineering is less about finding the "perfect" solution and more about understanding the tradeoffs and being able to explain them." - JBD_
 
-_"Choosing the right limitations for a certain problem domain is often much more powerful that allowing anything." - Jason Moiron_
+_"Choosing the right limitations for a certain problem domain is often much more powerful than allowing anything." - Jason Moiron_
 
 _"The correctness of the implementation is the most important concern, but there is no royal road to correctness. It involves diverse tasks such as thinking of invariants, testing and code reviews. Optimization should be done, but not prematurely." - Al Aho (inventor of AWK)_
 
@@ -262,7 +262,7 @@ _"This is a cardinal sin amongst programmers. If code looks like it’s doing on
 
 **Average Developer**
 
-You must be aware of who you are on your team. When hiring new people, you must be aware of where they fall. The code must be written for the average developer to comprehend. If you are below average, you have the responsibility to come up to speed. If you are the expert, you have the responsbility to reduce being clever.
+You must be aware of who you are on your team. When hiring new people, you must be aware of where they fall. The code must be written for the average developer to comprehend. If you are below average, you have the responsibility to come up to speed. If you are the expert, you have the responsibility to reduce being clever.
 
 **Quotes**
 
@@ -321,7 +321,7 @@ This is about not wasting effort and achieving execution efficiency. Writing cod
 
 **Quotes**
 
-_"Programmers waste enormous amounts of time thinking about, or worrying about, the speed of non-critical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%." — Donald E. Knuth_
+_"Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%." — Donald E. Knuth_
 
 _"I don't trust anything until it runs... In fact, I don't trust anything until it runs twice." - Andrew Gelman (one of the greatest living statisticians at Columbia University)._
 
@@ -500,7 +500,7 @@ Channels allow goroutines to communicate with each other through the use of sign
 * NIL channels:
     * Send and Receive block.
     * Turn off signaling
-    * Perfect for rate limiting or short term stoppages.
+    * Perfect for rate limiting or short-term stoppages.
 
 **Design Philosophy:**
 
