@@ -26,9 +26,9 @@ http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 
 ### Exercise 1
 
-Copy the code from the template. Declare a new type called hockey which embeds the sports type. Implement the matcher interface for hockey. When implementing the match method for hockey, call into the match method for the embedded sport type to check the embedded fields first. Then create two hockey values inside the slice of matchers and perform the search.
+Copy the code from the template. Add a new type CachingFeed which embeds Feed and overrides the Fetch method.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/FTU2-pstCZj)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/DevsptjMhuY))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/Xln816BRdHy)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/IbxwQaOY9rL))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
