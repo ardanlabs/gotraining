@@ -26,7 +26,7 @@ type Pareto struct {
 	// Alpha must be greater than 0.
 	Alpha float64
 
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -94,7 +94,7 @@ func (p Pareto) Rand() float64 {
 	if p.Src == nil {
 		rnd = rand.ExpFloat64()
 	} else {
-		rnd = p.Src.ExpFloat64()
+		rnd = rand.New(p.Src).ExpFloat64()
 	}
 	return math.Exp(math.Log(p.Xm) + 1/p.Alpha*rnd)
 }

@@ -118,7 +118,7 @@ var (
 	ErrRowAccess           = Error{"matrix: row index out of range"}
 	ErrColAccess           = Error{"matrix: column index out of range"}
 	ErrVectorAccess        = Error{"matrix: vector index out of range"}
-	ErrZeroLength          = Error{"matrix: zero length in matrix definition"}
+	ErrZeroLength          = Error{"matrix: zero length in matrix dimension"}
 	ErrRowLength           = Error{"matrix: row length mismatch"}
 	ErrColLength           = Error{"matrix: col length mismatch"}
 	ErrSquare              = Error{"matrix: expect square matrix"}
@@ -130,6 +130,7 @@ var (
 	ErrTriangle            = Error{"matrix: triangular storage mismatch"}
 	ErrTriangleSet         = Error{"matrix: triangular set out of bounds"}
 	ErrBandSet             = Error{"matrix: band set out of bounds"}
+	ErrDiagSet             = Error{"matrix: diagonal set out of bounds"}
 	ErrSliceLengthMismatch = Error{"matrix: input slice length mismatch"}
 	ErrNotPSD              = Error{"matrix: input not positive symmetric definite"}
 	ErrFailedEigen         = Error{"matrix: eigendecomposition not successful"}

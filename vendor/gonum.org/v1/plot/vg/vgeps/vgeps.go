@@ -23,12 +23,12 @@ import (
 const DPI = 72
 
 type Canvas struct {
-	stk  []ctx
-	w, h vg.Length
-	buf  *bytes.Buffer
+	stack []context
+	w, h  vg.Length
+	buf   *bytes.Buffer
 }
 
-type ctx struct {
+type context struct {
 	color  color.Color
 	width  vg.Length
 	dashes []vg.Length
@@ -48,10 +48,10 @@ func New(w, h vg.Length) *Canvas {
 // NewTitle returns a new Canvas with the given title string.
 func NewTitle(w, h vg.Length, title string) *Canvas {
 	c := &Canvas{
-		stk: []ctx{ctx{}},
-		w:   w,
-		h:   h,
-		buf: new(bytes.Buffer),
+		stack: []context{{}},
+		w:     w,
+		h:     h,
+		buf:   new(bytes.Buffer),
 	}
 	c.buf.WriteString("%%!PS-Adobe-3.0 EPSF-3.0\n")
 	c.buf.WriteString("%%Creator gonum.org/v1/plot/vg/vgeps\n")
@@ -71,29 +71,29 @@ func (c *Canvas) Size() (w, h vg.Length) {
 	return c.w, c.h
 }
 
-// cur returns the top context on the stack.
-func (e *Canvas) cur() *ctx {
-	return &e.stk[len(e.stk)-1]
+// context returns the top context on the stack.
+func (e *Canvas) context() *context {
+	return &e.stack[len(e.stack)-1]
 }
 
 func (e *Canvas) SetLineWidth(w vg.Length) {
-	if e.cur().width != w {
-		e.cur().width = w
+	if e.context().width != w {
+		e.context().width = w
 		fmt.Fprintf(e.buf, "%.*g setlinewidth\n", pr, w.Dots(DPI))
 	}
 }
 
 func (e *Canvas) SetLineDash(dashes []vg.Length, o vg.Length) {
-	cur := e.cur().dashes
+	cur := e.context().dashes
 	dashEq := len(dashes) == len(cur)
 	for i := 0; dashEq && i < len(dashes); i++ {
 		if dashes[i] != cur[i] {
 			dashEq = false
 		}
 	}
-	if !dashEq || e.cur().offs != o {
-		e.cur().dashes = dashes
-		e.cur().offs = o
+	if !dashEq || e.context().offs != o {
+		e.context().dashes = dashes
+		e.context().offs = o
 		e.buf.WriteString("[")
 		for _, d := range dashes {
 			fmt.Fprintf(e.buf, " %.*g", pr, d.Dots(DPI))
@@ -107,8 +107,8 @@ func (e *Canvas) SetColor(c color.Color) {
 	if c == nil {
 		c = color.Black
 	}
-	if e.cur().color != c {
-		e.cur().color = c
+	if e.context().color != c {
+		e.context().color = c
 		r, g, b, _ := c.RGBA()
 		mx := float64(math.MaxUint16)
 		fmt.Fprintf(e.buf, "%.*g %.*g %.*g setrgbcolor\n", pr, float64(r)/mx,
@@ -130,17 +130,17 @@ func (e *Canvas) Scale(x, y float64) {
 }
 
 func (e *Canvas) Push() {
-	e.stk = append(e.stk, *e.cur())
+	e.stack = append(e.stack, *e.context())
 	e.buf.WriteString("gsave\n")
 }
 
 func (e *Canvas) Pop() {
-	e.stk = e.stk[:len(e.stk)-1]
+	e.stack = e.stack[:len(e.stack)-1]
 	e.buf.WriteString("grestore\n")
 }
 
 func (e *Canvas) Stroke(path vg.Path) {
-	if e.cur().width <= 0 {
+	if e.context().width <= 0 {
 		return
 	}
 	e.trace(path)
@@ -178,9 +178,9 @@ func (e *Canvas) trace(path vg.Path) {
 }
 
 func (e *Canvas) FillString(fnt vg.Font, pt vg.Point, str string) {
-	if e.cur().font != fnt.Name() || e.cur().fsize != fnt.Size {
-		e.cur().font = fnt.Name()
-		e.cur().fsize = fnt.Size
+	if e.context().font != fnt.Name() || e.context().fsize != fnt.Size {
+		e.context().font = fnt.Name()
+		e.context().fsize = fnt.Size
 		fmt.Fprintf(e.buf, "/%s findfont %.*g scalefont setfont\n",
 			fnt.Name(), pr, fnt.Size)
 	}

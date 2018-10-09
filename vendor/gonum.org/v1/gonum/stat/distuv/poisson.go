@@ -1,4 +1,4 @@
-// Copyright ©2017 The gonum Authors. All rights reserved.
+// Copyright ©2017 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -23,7 +23,7 @@ type Poisson struct {
 	// Lambda must be greater than 0.
 	Lambda float64
 
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative distribution function at x.
@@ -71,8 +71,10 @@ func (p Poisson) Rand() float64 {
 	// <http://www.aip.de/groups/soe/local/numres/bookcpdf/c7-3.pdf>
 
 	rnd := rand.ExpFloat64
+	var rng *rand.Rand
 	if p.Src != nil {
-		rnd = p.Src.ExpFloat64
+		rng = rand.New(p.Src)
+		rnd = rng.ExpFloat64
 	}
 
 	if p.Lambda < 10.0 {
@@ -90,8 +92,8 @@ func (p Poisson) Rand() float64 {
 	}
 	// Use rejection method.
 	rnd = rand.Float64
-	if p.Src != nil {
-		rnd = p.Src.Float64
+	if rng != nil {
+		rnd = rng.Float64
 	}
 	sq := math.Sqrt(2.0 * p.Lambda)
 	alxm := math.Log(p.Lambda)

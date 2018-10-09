@@ -40,7 +40,7 @@ type StudentsT struct {
 	// from a Normal distribution.
 	Nu float64
 
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative distribution function at x.

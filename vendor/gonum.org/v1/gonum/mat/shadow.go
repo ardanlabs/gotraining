@@ -70,8 +70,44 @@ func (m *Dense) checkOverlap(a blas64.General) bool {
 	return checkOverlap(m.RawMatrix(), a)
 }
 
+func (m *Dense) checkOverlapMatrix(a Matrix) bool {
+	if m == a {
+		return false
+	}
+	var amat blas64.General
+	switch a := a.(type) {
+	default:
+		return false
+	case RawMatrixer:
+		amat = a.RawMatrix()
+	case RawSymmetricer:
+		amat = generalFromSymmetric(a.RawSymmetric())
+	case RawTriangular:
+		amat = generalFromTriangular(a.RawTriangular())
+	}
+	return m.checkOverlap(amat)
+}
+
 func (s *SymDense) checkOverlap(a blas64.General) bool {
 	return checkOverlap(generalFromSymmetric(s.RawSymmetric()), a)
+}
+
+func (s *SymDense) checkOverlapMatrix(a Matrix) bool {
+	if s == a {
+		return false
+	}
+	var amat blas64.General
+	switch a := a.(type) {
+	default:
+		return false
+	case RawMatrixer:
+		amat = a.RawMatrix()
+	case RawSymmetricer:
+		amat = generalFromSymmetric(a.RawSymmetric())
+	case RawTriangular:
+		amat = generalFromTriangular(a.RawTriangular())
+	}
+	return s.checkOverlap(amat)
 }
 
 // generalFromSymmetric returns a blas64.General with the backing
@@ -87,6 +123,24 @@ func generalFromSymmetric(a blas64.Symmetric) blas64.General {
 
 func (t *TriDense) checkOverlap(a blas64.General) bool {
 	return checkOverlap(generalFromTriangular(t.RawTriangular()), a)
+}
+
+func (t *TriDense) checkOverlapMatrix(a Matrix) bool {
+	if t == a {
+		return false
+	}
+	var amat blas64.General
+	switch a := a.(type) {
+	default:
+		return false
+	case RawMatrixer:
+		amat = a.RawMatrix()
+	case RawSymmetricer:
+		amat = generalFromSymmetric(a.RawSymmetric())
+	case RawTriangular:
+		amat = generalFromTriangular(a.RawTriangular())
+	}
+	return t.checkOverlap(amat)
 }
 
 // generalFromTriangular returns a blas64.General with the backing

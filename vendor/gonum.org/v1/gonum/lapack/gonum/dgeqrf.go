@@ -27,8 +27,7 @@ func (impl Implementation) Dgeqrf(m, n int, a []float64, lda int, tau, work []fl
 	}
 	// nb is the optimal blocksize, i.e. the number of columns transformed at a time.
 	nb := impl.Ilaenv(1, "DGEQRF", " ", m, n, -1, -1)
-	lworkopt := n * max(nb, 1)
-	lworkopt = max(n, lworkopt)
+	lworkopt := max(1, n*nb)
 	if lwork == -1 {
 		work[0] = float64(lworkopt)
 		return
@@ -42,7 +41,7 @@ func (impl Implementation) Dgeqrf(m, n int, a []float64, lda int, tau, work []fl
 		panic(badTau)
 	}
 	if k == 0 {
-		work[0] = float64(lworkopt)
+		work[0] = 1
 		return
 	}
 	nbmin := 2 // Minimal block size.

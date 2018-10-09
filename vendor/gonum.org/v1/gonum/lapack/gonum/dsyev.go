@@ -19,9 +19,9 @@ import (
 // at least n, and Dsyev will panic otherwise.
 //
 // On entry, a contains the elements of the symmetric matrix A in the triangular
-// portion specified by uplo. If jobz == lapack.ComputeEV a contains the
-// orthonormal eigenvectors of A on exit, otherwise on exit the specified
-// triangular region is overwritten.
+// portion specified by uplo. If jobz == lapack.EVCompute, a contains the
+// orthonormal eigenvectors of A on exit, otherwise jobz must be lapack.EVNone
+// and on exit the specified triangular region is overwritten.
 //
 // work is temporary storage, and lwork specifies the usable memory length. At minimum,
 // lwork >= 3*n-1, and Dsyev will panic otherwise. The amount of blocking is
@@ -30,7 +30,14 @@ import (
 func (impl Implementation) Dsyev(jobz lapack.EVJob, uplo blas.Uplo, n int, a []float64, lda int, w, work []float64, lwork int) (ok bool) {
 	checkMatrix(n, n, a, lda)
 	upper := uplo == blas.Upper
-	wantz := jobz == lapack.ComputeEV
+	var wantz bool
+	switch jobz {
+	default:
+		panic(badEVJob)
+	case lapack.EVCompute:
+		wantz = true
+	case lapack.EVNone:
+	}
 	var opts string
 	if upper {
 		opts = "U"

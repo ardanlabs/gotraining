@@ -25,14 +25,14 @@ func (Implementation) Sdsdot(n int, alpha float32, x []float32, incX int, y []fl
 		if n == 0 {
 			return 0
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if incX == 1 && incY == 1 {
 		if len(x) < n {
-			panic(badLenX)
+			panic(badX)
 		}
 		if len(y) < n {
-			panic(badLenY)
+			panic(badY)
 		}
 		return alpha + float32(f32.DdotUnitary(x[:n], y))
 	}
@@ -44,10 +44,10 @@ func (Implementation) Sdsdot(n int, alpha float32, x []float32, incX int, y []fl
 		iy = (-n + 1) * incY
 	}
 	if ix >= len(x) || ix+(n-1)*incX >= len(x) {
-		panic(badLenX)
+		panic(badX)
 	}
 	if iy >= len(y) || iy+(n-1)*incY >= len(y) {
-		panic(badLenY)
+		panic(badY)
 	}
 	return alpha + float32(f32.DdotInc(x, y, uintptr(n), uintptr(incX), uintptr(incY), uintptr(ix), uintptr(iy)))
 }

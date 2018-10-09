@@ -86,13 +86,13 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 	wantus := jobU == lapack.SVDInPlace
 	wantuas := wantua || wantus
 	wantuo := jobU == lapack.SVDOverwrite
-	wantun := jobU == lapack.None
+	wantun := jobU == lapack.SVDNone
 
 	wantva := jobVT == lapack.SVDAll
 	wantvs := jobVT == lapack.SVDInPlace
 	wantvas := wantva || wantvs
 	wantvo := jobVT == lapack.SVDOverwrite
-	wantvn := jobVT == lapack.None
+	wantvn := jobVT == lapack.SVDNone
 
 	bi := blas64.Implementation()
 	var mnthr int
@@ -112,9 +112,9 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 		lwork_dorgqr_m := int(work[0])
 		impl.Dgebrd(n, n, a, lda, s, nil, nil, nil, work, -1)
 		lwork_dgebrd := int(work[0])
-		impl.Dorgbr(lapack.ApplyP, n, n, n, a, lda, nil, work, -1)
+		impl.Dorgbr(lapack.GeneratePT, n, n, n, a, lda, nil, work, -1)
 		lwork_dorgbr_p := int(work[0])
-		impl.Dorgbr(lapack.ApplyQ, n, n, n, a, lda, nil, work, -1)
+		impl.Dorgbr(lapack.GenerateQ, n, n, n, a, lda, nil, work, -1)
 		lwork_dorgbr_q := int(work[0])
 
 		if m >= mnthr {
@@ -203,12 +203,12 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 			lwork_dgebrd := int(work[0])
 			maxwrk = 3*n + lwork_dgebrd
 			if wantus || wantuo {
-				impl.Dorgbr(lapack.ApplyQ, m, n, n, a, lda, nil, work, -1)
+				impl.Dorgbr(lapack.GenerateQ, m, n, n, a, lda, nil, work, -1)
 				lwork_dorgbr_q = int(work[0])
 				maxwrk = max(maxwrk, 3*n+lwork_dorgbr_q)
 			}
 			if wantua {
-				impl.Dorgbr(lapack.ApplyQ, m, m, n, a, lda, nil, work, -1)
+				impl.Dorgbr(lapack.GenerateQ, m, m, n, a, lda, nil, work, -1)
 				lwork_dorgbr_q := int(work[0])
 				maxwrk = max(maxwrk, 3*n+lwork_dorgbr_q)
 			}
@@ -229,9 +229,9 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 		lwork_dorglq_m := int(work[0])
 		impl.Dgebrd(m, m, a, lda, s, nil, nil, nil, work, -1)
 		lwork_dgebrd := int(work[0])
-		impl.Dorgbr(lapack.ApplyP, m, m, m, a, n, nil, work, -1)
+		impl.Dorgbr(lapack.GeneratePT, m, m, m, a, n, nil, work, -1)
 		lwork_dorgbr_p := int(work[0])
-		impl.Dorgbr(lapack.ApplyQ, m, m, m, a, n, nil, work, -1)
+		impl.Dorgbr(lapack.GenerateQ, m, m, m, a, n, nil, work, -1)
 		lwork_dorgbr_q := int(work[0])
 		if n >= mnthr {
 			// n >> m
@@ -319,12 +319,12 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 			lwork_dgebrd = int(work[0])
 			maxwrk = 3*m + lwork_dgebrd
 			if wantvs || wantvo {
-				impl.Dorgbr(lapack.ApplyP, m, n, m, a, n, nil, work, -1)
+				impl.Dorgbr(lapack.GeneratePT, m, n, m, a, n, nil, work, -1)
 				lwork_dorgbr_p = int(work[0])
 				maxwrk = max(maxwrk, 3*m+lwork_dorgbr_p)
 			}
 			if wantva {
-				impl.Dorgbr(lapack.ApplyP, n, n, m, a, n, nil, work, -1)
+				impl.Dorgbr(lapack.GeneratePT, n, n, m, a, n, nil, work, -1)
 				lwork_dorgbr_p = int(work[0])
 				maxwrk = max(maxwrk, 3*m+lwork_dorgbr_p)
 			}
@@ -398,8 +398,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 					work[itaup:], work[iwork:], lwork-iwork)
 				ncvt := 0
 				if wantvo || wantvas {
-					// Generate P^T.
-					impl.Dorgbr(lapack.ApplyP, n, n, n, a, lda, work[itaup:],
+					impl.Dorgbr(lapack.GeneratePT, n, n, n, a, lda, work[itaup:],
 						work[iwork:], lwork-iwork)
 					ncvt = n
 				}
@@ -453,7 +452,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							work[itauq:], work[itaup:], work[iwork:], lwork-iwork)
 
 						// Generate left vectors bidiagonalizing R in work[ir:].
-						impl.Dorgbr(lapack.ApplyQ, n, n, n, work[ir:], ldworkr,
+						impl.Dorgbr(lapack.GenerateQ, n, n, n, work[ir:], ldworkr,
 							work[itauq:], work[iwork:], lwork-iwork)
 						iwork = ie + n
 
@@ -536,11 +535,11 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 						impl.Dlacpy(blas.Upper, n, n, work[iu:], ldworku, vt, ldvt)
 
 						// Generate left bidiagonalizing vectors in work[iu:].
-						impl.Dorgbr(lapack.ApplyQ, n, n, n, work[iu:], ldworku,
+						impl.Dorgbr(lapack.GenerateQ, n, n, n, work[iu:], ldworku,
 							work[itauq:], work[iwork:], lwork-iwork)
 
 						// Generate right bidiagonalizing vectors in VT.
-						impl.Dorgbr(lapack.ApplyP, n, n, n, vt, ldvt,
+						impl.Dorgbr(lapack.GeneratePT, n, n, n, vt, ldvt,
 							work[itaup:], work[iwork:], lwork-iwork)
 						iwork = ie + n
 
@@ -584,7 +583,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							vt, ldvt, work[itauq:], u, ldu, work[iwork:], lwork-iwork)
 
 						// Generate right bidiagonalizing vectors in VT.
-						impl.Dorgbr(lapack.ApplyP, n, n, n, vt, ldvt,
+						impl.Dorgbr(lapack.GeneratePT, n, n, n, vt, ldvt,
 							work[itaup:], work[iwork:], lwork-iwork)
 						iwork = ie + n
 
@@ -630,7 +629,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							work[itauq:], work[itaup:], work[iwork:], lwork-iwork)
 
 						// Generate left bidiagonalizing vectors in work[ir:].
-						impl.Dorgbr(lapack.ApplyQ, n, n, n, work[ir:], ldworkr,
+						impl.Dorgbr(lapack.GenerateQ, n, n, n, work[ir:], ldworkr,
 							work[itauq:], work[iwork:], lwork-iwork)
 						iwork = ie + n
 
@@ -718,11 +717,11 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 						impl.Dlacpy(blas.Upper, n, n, work[iu:], ldworku, vt, ldvt)
 
 						// Generate left bidiagonalizing vectors in work[iu:].
-						impl.Dorgbr(lapack.ApplyQ, n, n, n, work[iu:], ldworku,
+						impl.Dorgbr(lapack.GenerateQ, n, n, n, work[iu:], ldworku,
 							work[itauq:], work[iwork:], lwork-iwork)
 
 						// Generate right bidiagonalizing vectors in VT.
-						impl.Dorgbr(lapack.ApplyP, n, n, n, vt, ldvt,
+						impl.Dorgbr(lapack.GeneratePT, n, n, n, vt, ldvt,
 							work[itaup:], work[iwork:], lwork-iwork)
 						iwork = ie + n
 
@@ -750,7 +749,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 								m, n, n, vt, ldvt, work[itauq:], u, ldu, work[iwork:], lwork-iwork)
 
 							// Generate right bidiagonalizing vectors in VT.
-							impl.Dorgbr(lapack.ApplyP, n, n, n, vt, ldvt,
+							impl.Dorgbr(lapack.GeneratePT, n, n, n, vt, ldvt,
 								work[itaup:], work[iwork:], lwork-iwork)
 							iwork = ie + n
 
@@ -790,7 +789,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							m, n, n, vt, ldvt, work[itauq:], u, ldu, work[iwork:], lwork-iwork)
 
 						// Generate right bidiagonizing vectors in VT.
-						impl.Dorgbr(lapack.ApplyP, n, n, n, vt, ldvt,
+						impl.Dorgbr(lapack.GeneratePT, n, n, n, vt, ldvt,
 							work[itaup:], work[iwork:], lwork-iwork)
 						iwork = ie + n
 
@@ -824,13 +823,13 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 				if wantua {
 					ncu = m
 				}
-				impl.Dorgbr(lapack.ApplyQ, m, ncu, n, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+				impl.Dorgbr(lapack.GenerateQ, m, ncu, n, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
 			}
 			if wantvas {
 				// Right singular vectors are desired in VT. Copy result to VT and
 				// generate left biadiagonalizing vectors in VT.
 				impl.Dlacpy(blas.Upper, n, n, a, lda, vt, ldvt)
-				impl.Dorgbr(lapack.ApplyP, n, n, n, vt, ldvt, work[itaup:], work[iwork:], lwork-iwork)
+				impl.Dorgbr(lapack.GeneratePT, n, n, n, vt, ldvt, work[itaup:], work[iwork:], lwork-iwork)
 			}
 			if wantuo {
 				panic(noSVDO)
@@ -886,7 +885,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 				impl.Dgebrd(m, m, a, lda, s, work[ie:itauq],
 					work[itauq:itaup], work[itaup:iwork], work[iwork:], lwork-iwork)
 				if wantuo || wantuas {
-					impl.Dorgbr(lapack.ApplyQ, m, m, m, a, lda,
+					impl.Dorgbr(lapack.GenerateQ, m, m, m, a, lda,
 						work[itauq:], work[iwork:], lwork-iwork)
 				}
 				iwork = ie + m
@@ -944,7 +943,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							work[itauq:], work[itaup:], work[iwork:], lwork-iwork)
 
 						// Generate right vectors bidiagonalizing L in work[ir:].
-						impl.Dorgbr(lapack.ApplyP, m, m, m, work[ir:], ldworkr,
+						impl.Dorgbr(lapack.GeneratePT, m, m, m, work[ir:], ldworkr,
 							work[itaup:], work[iwork:], lwork-iwork)
 						iwork = ie + m
 
@@ -1029,11 +1028,11 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 						impl.Dlacpy(blas.Lower, m, m, work[iu:], ldworku, u, ldu)
 
 						// Generate right bidiagionalizing vectors in work[iu:].
-						impl.Dorgbr(lapack.ApplyP, m, m, m, work[iu:], ldworku,
+						impl.Dorgbr(lapack.GeneratePT, m, m, m, work[iu:], ldworku,
 							work[itaup:], work[iwork:], lwork-iwork)
 
 						// Generate left bidiagonalizing vectors in U.
-						impl.Dorgbr(lapack.ApplyQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+						impl.Dorgbr(lapack.GenerateQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
 						iwork = ie + m
 
 						// Perform bidiagonal QR iteration, computing left singular
@@ -1076,7 +1075,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							u, ldu, work[itaup:], vt, ldvt, work[iwork:], lwork-iwork)
 
 						// Generate left bidiagonalizing vectors in U.
-						impl.Dorgbr(lapack.ApplyQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+						impl.Dorgbr(lapack.GenerateQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
 						iwork = ie + m
 
 						// Perform bidiagonal QR iteration, computing left singular
@@ -1122,7 +1121,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							work[itauq:], work[itaup:], work[iwork:], lwork-iwork)
 
 						// Generate right bidiagonalizing vectors in work[ir:].
-						impl.Dorgbr(lapack.ApplyP, m, m, m, work[ir:], ldworkr,
+						impl.Dorgbr(lapack.GeneratePT, m, m, m, work[ir:], ldworkr,
 							work[itaup:], work[iwork:], lwork-iwork)
 						iwork = ie + m
 
@@ -1209,11 +1208,11 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 						impl.Dlacpy(blas.Lower, m, m, work[iu:], ldworku, u, ldu)
 
 						// Generate right bidiagonalizing vectors in work[iu:].
-						impl.Dorgbr(lapack.ApplyP, m, m, m, work[iu:], ldworku,
+						impl.Dorgbr(lapack.GeneratePT, m, m, m, work[iu:], ldworku,
 							work[itaup:], work[iwork:], lwork-iwork)
 
 						// Generate left bidiagonalizing vectors in U.
-						impl.Dorgbr(lapack.ApplyQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+						impl.Dorgbr(lapack.GenerateQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
 						iwork = ie + m
 
 						// Perform bidiagonal QR iteration, computing left singular
@@ -1259,7 +1258,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 							u, ldu, work[itaup:], vt, ldvt, work[iwork:], lwork-iwork)
 
 						// Generate left bidiagonalizing vectors in U.
-						impl.Dorgbr(lapack.ApplyQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+						impl.Dorgbr(lapack.GenerateQ, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
 						iwork = ie + m
 
 						// Perform bidiagonal QR iteration, computing left singular
@@ -1284,7 +1283,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 				// If left singular vectors desired in U, copy result to U and
 				// generate left bidiagonalizing vectors in U.
 				impl.Dlacpy(blas.Lower, m, m, a, lda, u, ldu)
-				impl.Dorgbr(lapack.ApplyQ, m, m, n, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+				impl.Dorgbr(lapack.GenerateQ, m, m, n, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
 			}
 			if wantvas {
 				// If right singular vectors desired in VT, copy result to VT
@@ -1296,7 +1295,7 @@ func (impl Implementation) Dgesvd(jobU, jobVT lapack.SVDJob, m, n int, a []float
 				} else {
 					nrvt = m
 				}
-				impl.Dorgbr(lapack.ApplyP, nrvt, n, m, vt, ldvt, work[itaup:], work[iwork:], lwork-iwork)
+				impl.Dorgbr(lapack.GeneratePT, nrvt, n, m, vt, ldvt, work[itaup:], work[iwork:], lwork-iwork)
 			}
 			if wantuo {
 				panic(noSVDO)

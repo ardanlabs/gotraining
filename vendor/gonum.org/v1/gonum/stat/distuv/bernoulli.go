@@ -15,7 +15,7 @@ import (
 // More information at https://en.wikipedia.org/wiki/Bernoulli_distribution.
 type Bernoulli struct {
 	P   float64
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -103,7 +103,7 @@ func (b Bernoulli) Rand() float64 {
 	if b.Src == nil {
 		rnd = rand.Float64()
 	} else {
-		rnd = b.Src.Float64()
+		rnd = rand.New(b.Src).Float64()
 	}
 	if rnd < b.P {
 		return 1

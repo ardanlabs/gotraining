@@ -14,10 +14,10 @@ import (
 // CumulantKind specifies the behavior for calculating the empirical CDF or Quantile
 type CumulantKind int
 
+// List of supported CumulantKind values for the Quantile function.
+// Constant values should match the R nomenclature. See
+// https://en.wikipedia.org/wiki/Quantile#Estimating_the_quantiles_of_a_population
 const (
-	// Constant values should match the R nomenclature. See
-	// https://en.wikipedia.org/wiki/Quantile#Estimating_the_quantiles_of_a_population
-
 	// Empirical treats the distribution as the actual empirical distribution.
 	Empirical CumulantKind = 1
 )
@@ -284,6 +284,13 @@ func Covariance(x, y, weights []float64) float64 {
 	}
 	xu := Mean(x, weights)
 	yu := Mean(y, weights)
+	return covarianceMeans(x, y, weights, xu, yu)
+}
+
+// covarianceMeans returns the weighted covariance between x and y with the mean
+// of x and y already specified. See the documentation of Covariance for more
+// information.
+func covarianceMeans(x, y, weights []float64, xu, yu float64) float64 {
 	var (
 		ss            float64
 		xcompensation float64
@@ -500,8 +507,8 @@ func Histogram(count, dividers, x, weights []float64) []float64 {
 	if x[0] < dividers[0] {
 		panic("histogram: minimum x value is less than lowest divider")
 	}
-	if x[len(x)-1] >= dividers[len(dividers)-1] {
-		panic("histogram: minimum x value is greater than highest divider")
+	if dividers[len(dividers)-1] <= x[len(x)-1] {
+		panic("histogram: maximum x value is greater than or equal to highest divider")
 	}
 
 	idx := 0
@@ -761,8 +768,11 @@ func LinearRegression(x, y, weights []float64, origin bool) (alpha, beta float64
 		return 0, beta
 	}
 
-	beta = Covariance(x, y, weights) / Variance(x, weights)
-	alpha = Mean(y, weights) - beta*Mean(x, weights)
+	xu, xv := MeanVariance(x, weights)
+	yu := Mean(y, weights)
+	cov := covarianceMeans(x, y, weights, xu, yu)
+	beta = cov / xv
+	alpha = yu - beta*xu
 	return alpha, beta
 }
 
@@ -1041,27 +1051,32 @@ func Quantile(p float64, c CumulantKind, x, weights []float64) float64 {
 	}
 	switch c {
 	case Empirical:
-		var cumsum float64
-		fidx := p * sumWeights
-		for i := range x {
-			if weights == nil {
-				cumsum++
-			} else {
-				cumsum += weights[i]
-			}
-			if cumsum >= fidx {
-				return x[i]
-			}
-		}
-		panic("impossible")
+		return empiricalQuantile(p, x, weights, sumWeights)
 	default:
 		panic("stat: bad cumulant kind")
 	}
 }
 
+func empiricalQuantile(p float64, x, weights []float64, sumWeights float64) float64 {
+	var cumsum float64
+	fidx := p * sumWeights
+	for i := range x {
+		if weights == nil {
+			cumsum++
+		} else {
+			cumsum += weights[i]
+		}
+		if cumsum >= fidx {
+			return x[i]
+		}
+	}
+	panic("impossible")
+}
+
 // Skew computes the skewness of the sample data.
 // If weights is nil then all of the weights are 1. If weights is not nil, then
 // len(x) must equal len(weights).
+// When weights sum to 1 or less, a biased variance estimator should be used.
 func Skew(x, weights []float64) float64 {
 
 	mean, std := MeanStdDev(x, weights)
@@ -1181,7 +1196,8 @@ func StdDev(x, weights []float64) float64 {
 	return std
 }
 
-// MeanStdDev returns the sample mean and standard deviation
+// MeanStdDev returns the sample mean and unbiased standard deviation
+// When weights sum to 1 or less, a biased variance estimator should be used.
 func MeanStdDev(x, weights []float64) (mean, std float64) {
 	mean, variance := MeanVariance(x, weights)
 	return mean, math.Sqrt(variance)
@@ -1199,21 +1215,23 @@ func StdScore(x, mean, std float64) float64 {
 	return (x - mean) / std
 }
 
-// Variance computes the weighted sample variance:
+// Variance computes the unbiased weighted sample variance:
 //  \sum_i w_i (x_i - mean)^2 / (sum_i w_i - 1)
 // If weights is nil then all of the weights are 1. If weights is not nil, then
 // len(x) must equal len(weights).
+// When weights sum to 1 or less, a biased variance estimator should be used.
 func Variance(x, weights []float64) float64 {
 	_, variance := MeanVariance(x, weights)
 	return variance
 }
 
-// MeanVariance computes the sample mean and variance, where the mean and variance are
+// MeanVariance computes the sample mean and unbiased variance, where the mean and variance are
 //  \sum_i w_i * x_i / (sum_i w_i)
 //  \sum_i w_i (x_i - mean)^2 / (sum_i w_i - 1)
 // respectively.
 // If weights is nil then all of the weights are 1. If weights is not nil, then
 // len(x) must equal len(weights).
+// When weights sum to 1 or less, a biased variance estimator should be used.
 func MeanVariance(x, weights []float64) (mean, variance float64) {
 	// This uses the corrected two-pass algorithm (1.7), from "Algorithms for computing
 	// the sample variance: Analysis and recommendations" by Chan, Tony F., Gene H. Golub,

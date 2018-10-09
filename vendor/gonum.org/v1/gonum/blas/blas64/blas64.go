@@ -12,7 +12,8 @@ import (
 var blas64 blas.Float64 = gonum.Implementation{}
 
 // Use sets the BLAS float64 implementation to be used by subsequent BLAS calls.
-// The default implementation is native.Implementation.
+// The default implementation is
+// gonum.org/v1/gonum/blas/gonum.Implementation.
 func Use(b blas.Float64) {
 	blas64 = b
 }
@@ -27,72 +28,72 @@ func Implementation() blas.Float64 {
 
 // Vector represents a vector with an associated element increment.
 type Vector struct {
-	Inc  int
 	Data []float64
+	Inc  int
 }
 
 // General represents a matrix using the conventional storage scheme.
 type General struct {
 	Rows, Cols int
-	Stride     int
 	Data       []float64
+	Stride     int
 }
 
 // Band represents a band matrix using the band storage scheme.
 type Band struct {
 	Rows, Cols int
 	KL, KU     int
-	Stride     int
 	Data       []float64
+	Stride     int
 }
 
 // Triangular represents a triangular matrix using the conventional storage scheme.
 type Triangular struct {
-	N      int
-	Stride int
-	Data   []float64
 	Uplo   blas.Uplo
 	Diag   blas.Diag
+	N      int
+	Data   []float64
+	Stride int
 }
 
 // TriangularBand represents a triangular matrix using the band storage scheme.
 type TriangularBand struct {
-	N, K   int
-	Stride int
-	Data   []float64
 	Uplo   blas.Uplo
 	Diag   blas.Diag
+	N, K   int
+	Data   []float64
+	Stride int
 }
 
 // TriangularPacked represents a triangular matrix using the packed storage scheme.
 type TriangularPacked struct {
-	N    int
-	Data []float64
 	Uplo blas.Uplo
 	Diag blas.Diag
+	N    int
+	Data []float64
 }
 
 // Symmetric represents a symmetric matrix using the conventional storage scheme.
 type Symmetric struct {
-	N      int
-	Stride int
-	Data   []float64
 	Uplo   blas.Uplo
+	N      int
+	Data   []float64
+	Stride int
 }
 
 // SymmetricBand represents a symmetric matrix using the band storage scheme.
 type SymmetricBand struct {
-	N, K   int
-	Stride int
-	Data   []float64
 	Uplo   blas.Uplo
+	N, K   int
+	Data   []float64
+	Stride int
 }
 
 // SymmetricPacked represents a symmetric matrix using the packed storage scheme.
 type SymmetricPacked struct {
+	Uplo blas.Uplo
 	N    int
 	Data []float64
-	Uplo blas.Uplo
 }
 
 // Level 1

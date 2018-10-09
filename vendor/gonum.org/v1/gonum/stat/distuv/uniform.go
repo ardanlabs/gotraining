@@ -18,7 +18,7 @@ var UnitUniform = Uniform{Min: 0, Max: 1}
 type Uniform struct {
 	Min float64
 	Max float64
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -111,7 +111,7 @@ func (u Uniform) Rand() float64 {
 	if u.Src == nil {
 		rnd = rand.Float64()
 	} else {
-		rnd = u.Src.Float64()
+		rnd = rand.New(u.Src).Float64()
 	}
 	return rnd*(u.Max-u.Min) + u.Min
 }

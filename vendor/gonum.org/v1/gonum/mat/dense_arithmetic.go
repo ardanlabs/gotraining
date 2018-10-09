@@ -43,6 +43,8 @@ func (m *Dense) Add(a, b Matrix) {
 		}
 	}
 
+	m.checkOverlapMatrix(aU)
+	m.checkOverlapMatrix(bU)
 	var restore func()
 	if m == aU {
 		m, restore = m.isolatedWorkspace(aU)
@@ -90,6 +92,8 @@ func (m *Dense) Sub(a, b Matrix) {
 		}
 	}
 
+	m.checkOverlapMatrix(aU)
+	m.checkOverlapMatrix(bU)
 	var restore func()
 	if m == aU {
 		m, restore = m.isolatedWorkspace(aU)
@@ -138,6 +142,8 @@ func (m *Dense) MulElem(a, b Matrix) {
 		}
 	}
 
+	m.checkOverlapMatrix(aU)
+	m.checkOverlapMatrix(bU)
 	var restore func()
 	if m == aU {
 		m, restore = m.isolatedWorkspace(aU)
@@ -186,6 +192,8 @@ func (m *Dense) DivElem(a, b Matrix) {
 		}
 	}
 
+	m.checkOverlapMatrix(aU)
+	m.checkOverlapMatrix(bU)
 	var restore func()
 	if m == aU {
 		m, restore = m.isolatedWorkspace(aU)
@@ -429,6 +437,8 @@ func (m *Dense) Mul(a, b Matrix) {
 		}
 	}
 
+	m.checkOverlapMatrix(aU)
+	m.checkOverlapMatrix(bU)
 	row := getFloats(ac, false)
 	defer putFloats(row)
 	for r := 0; r < ar; r++ {
@@ -699,6 +709,7 @@ func (m *Dense) Scale(f float64, a Matrix) {
 		return
 	}
 
+	m.checkOverlapMatrix(a)
 	for r := 0; r < ar; r++ {
 		for c := 0; c < ac; c++ {
 			m.set(r, c, f*a.At(r, c))
@@ -738,6 +749,7 @@ func (m *Dense) Apply(fn func(i, j int, v float64) float64, a Matrix) {
 		return
 	}
 
+	m.checkOverlapMatrix(a)
 	for r := 0; r < ar; r++ {
 		for c := 0; c < ac; c++ {
 			m.set(r, c, fn(r, c, a.At(r, c)))
@@ -845,6 +857,7 @@ func (m *Dense) Outer(alpha float64, x, y Vector) {
 	if rv, ok := xU.(RawVectorer); ok {
 		xmat = rv.RawVector()
 		m.checkOverlap((&VecDense{mat: xmat, n: x.Len()}).asGeneral())
+
 	} else {
 		fast = false
 	}

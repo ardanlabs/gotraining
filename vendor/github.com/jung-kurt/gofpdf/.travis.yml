@@ -1,0 +1,15 @@
+language: go
+
+sudo: false
+
+go:
+  - 1.6.2
+
+os:
+  - linux
+  - osx
+            
+script: go test -v
+
+notifications:
+  email: false

@@ -1,4 +1,4 @@
-// Copyright 2013 The Gonum Authors. All rights reserved.
+// Copyright ©2013 The Gonum Authors. All rights reserved.
 // Use of this code is governed by a BSD-style
 // license that can be found in the LICENSE file
 
@@ -37,9 +37,7 @@ func AddTo(dst, s, t []float64) []float64 {
 
 // AddConst adds the scalar c to all of the values in dst.
 func AddConst(c float64, dst []float64) {
-	for i := range dst {
-		dst[i] += c
-	}
+	f64.AddConst(c, dst)
 }
 
 // AddScaled performs dst = dst + alpha * s.

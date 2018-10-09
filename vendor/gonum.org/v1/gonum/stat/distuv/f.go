@@ -23,7 +23,7 @@ import (
 type F struct {
 	D1  float64 // Degrees of freedom for the numerator
 	D2  float64 // Degrees of freedom for the denominator
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative density function at x.

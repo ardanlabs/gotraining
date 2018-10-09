@@ -5,7 +5,7 @@
 // Ensure changes made to blas/native are reflected in blas/cgo where relevant.
 
 /*
-Package native is a Go implementation of the BLAS API. This implementation
+Package gonum is a Go implementation of the BLAS API. This implementation
 panics when the input arguments are invalid as per the standard, for example
 if a vector increment is zero. Note that the treatment of NaN values
 is not specified, and differs among the BLAS implementations.

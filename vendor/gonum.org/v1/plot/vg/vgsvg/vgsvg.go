@@ -31,11 +31,11 @@ const DPI = 90
 const pr = 5
 
 type Canvas struct {
-	svg  *svgo.SVG
-	w, h vg.Length
-	buf  *bytes.Buffer
-	ht   float64
-	stk  []context
+	svg   *svgo.SVG
+	w, h  vg.Length
+	buf   *bytes.Buffer
+	ht    float64
+	stack []context
 }
 
 type context struct {
@@ -49,12 +49,12 @@ type context struct {
 func New(w, h vg.Length) *Canvas {
 	buf := new(bytes.Buffer)
 	c := &Canvas{
-		svg: svgo.New(buf),
-		w:   w,
-		h:   h,
-		buf: buf,
-		ht:  w.Points(),
-		stk: []context{context{}},
+		svg:   svgo.New(buf),
+		w:     w,
+		h:     h,
+		buf:   buf,
+		ht:    w.Points(),
+		stack: []context{{}},
 	}
 
 	// This is like svg.Start, except it uses floats
@@ -81,69 +81,69 @@ func (c *Canvas) Size() (w, h vg.Length) {
 	return c.w, c.h
 }
 
-func (c *Canvas) cur() *context {
-	return &c.stk[len(c.stk)-1]
+func (c *Canvas) context() *context {
+	return &c.stack[len(c.stack)-1]
 }
 
 func (c *Canvas) SetLineWidth(w vg.Length) {
-	c.cur().lineWidth = w
+	c.context().lineWidth = w
 }
 
 func (c *Canvas) SetLineDash(dashes []vg.Length, offs vg.Length) {
-	c.cur().dashArray = dashes
-	c.cur().dashOffset = offs
+	c.context().dashArray = dashes
+	c.context().dashOffset = offs
 }
 
 func (c *Canvas) SetColor(clr color.Color) {
-	c.cur().color = clr
+	c.context().color = clr
 }
 
 func (c *Canvas) Rotate(rot float64) {
 	rot = rot * 180 / math.Pi
 	c.svg.Rotate(rot)
-	c.cur().gEnds++
+	c.context().gEnds++
 }
 
 func (c *Canvas) Translate(pt vg.Point) {
 	c.svg.Gtransform(fmt.Sprintf("translate(%.*g, %.*g)", pr, pt.X.Dots(DPI), pr, pt.Y.Dots(DPI)))
-	c.cur().gEnds++
+	c.context().gEnds++
 }
 
 func (c *Canvas) Scale(x, y float64) {
 	c.svg.ScaleXY(x, y)
-	c.cur().gEnds++
+	c.context().gEnds++
 }
 
 func (c *Canvas) Push() {
-	top := *c.cur()
+	top := *c.context()
 	top.gEnds = 0
-	c.stk = append(c.stk, top)
+	c.stack = append(c.stack, top)
 }
 
 func (c *Canvas) Pop() {
-	for i := 0; i < c.cur().gEnds; i++ {
+	for i := 0; i < c.context().gEnds; i++ {
 		c.svg.Gend()
 	}
-	c.stk = c.stk[:len(c.stk)-1]
+	c.stack = c.stack[:len(c.stack)-1]
 }
 
 func (c *Canvas) Stroke(path vg.Path) {
-	if c.cur().lineWidth.Dots(DPI) <= 0 {
+	if c.context().lineWidth.Dots(DPI) <= 0 {
 		return
 	}
 	c.svg.Path(c.pathData(path),
 		style(elm("fill", "#000000", "none"),
-			elm("stroke", "none", colorString(c.cur().color)),
-			elm("stroke-opacity", "1", opacityString(c.cur().color)),
-			elm("stroke-width", "1", "%.*g", pr, c.cur().lineWidth.Dots(DPI)),
+			elm("stroke", "none", colorString(c.context().color)),
+			elm("stroke-opacity", "1", opacityString(c.context().color)),
+			elm("stroke-width", "1", "%.*g", pr, c.context().lineWidth.Dots(DPI)),
 			elm("stroke-dasharray", "none", dashArrayString(c)),
-			elm("stroke-dashoffset", "0", "%.*g", pr, c.cur().dashOffset.Dots(DPI))))
+			elm("stroke-dashoffset", "0", "%.*g", pr, c.context().dashOffset.Dots(DPI))))
 }
 
 func (c *Canvas) Fill(path vg.Path) {
 	c.svg.Path(c.pathData(path),
-		style(elm("fill", "#000000", colorString(c.cur().color)),
-			elm("fill-opacity", "1", opacityString(c.cur().color))))
+		style(elm("fill", "#000000", colorString(c.context().color)),
+			elm("fill-opacity", "1", opacityString(c.context().color))))
 }
 
 func (c *Canvas) pathData(path vg.Path) string {
@@ -253,7 +253,7 @@ func (c *Canvas) FillString(font vg.Font, pt vg.Point, str string) {
 	}
 	sty := style(fontStr,
 		elm("font-size", "medium", "%.*gpt", pr, font.Size.Points()),
-		elm("fill", "#000000", colorString(c.cur().color)))
+		elm("fill", "#000000", colorString(c.context().color)))
 	if sty != "" {
 		sty = "\n\t" + sty
 	}
@@ -341,7 +341,7 @@ func (c *Canvas) WriteTo(w io.Writer) (int64, error) {
 // needed before the SVG is saved.
 func (c *Canvas) nEnds() int {
 	n := 1 // close the transform that moves the origin
-	for _, ctx := range c.stk {
+	for _, ctx := range c.stack {
 		n += ctx.gEnds
 	}
 	return n
@@ -383,9 +383,9 @@ func elm(key, def, f string, vls ...interface{}) string {
 // dash array specification.
 func dashArrayString(c *Canvas) string {
 	str := ""
-	for i, d := range c.cur().dashArray {
+	for i, d := range c.context().dashArray {
 		str += fmt.Sprintf("%.*g", pr, d.Dots(DPI))
-		if i < len(c.cur().dashArray)-1 {
+		if i < len(c.context().dashArray)-1 {
 			str += ","
 		}
 	}

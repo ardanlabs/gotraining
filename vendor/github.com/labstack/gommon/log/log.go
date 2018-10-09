@@ -22,6 +22,7 @@ type (
 	Logger struct {
 		prefix     string
 		level      Lvl
+		skip       int
 		output     io.Writer
 		template   *fasttemplate.Template
 		levels     []string
@@ -41,6 +42,8 @@ const (
 	WARN
 	ERROR
 	OFF
+	panicLevel
+	fatalLevel
 )
 
 var (
@@ -49,9 +52,14 @@ var (
 		`"file":"${short_file}","line":"${line}"}`
 )
 
+func init() {
+	global.skip = 3
+}
+
 func New(prefix string) (l *Logger) {
 	l = &Logger{
 		level:    INFO,
+		skip:     2,
 		prefix:   prefix,
 		template: l.newTemplate(defaultHeader),
 		color:    color.New(),
@@ -73,6 +81,9 @@ func (l *Logger) initLevels() {
 		l.color.Green("INFO"),
 		l.color.Yellow("WARN"),
 		l.color.Red("ERROR"),
+		"",
+		l.color.Yellow("PANIC", color.U),
+		l.color.Red("FATAL", color.U),
 	}
 }
 
@@ -187,32 +198,32 @@ func (l *Logger) Errorj(j JSON) {
 }
 
 func (l *Logger) Fatal(i ...interface{}) {
-	l.Print(i...)
+	l.log(fatalLevel, "", i...)
 	os.Exit(1)
 }
 
 func (l *Logger) Fatalf(format string, args ...interface{}) {
-	l.Printf(format, args...)
+	l.log(fatalLevel, format, args...)
 	os.Exit(1)
 }
 
 func (l *Logger) Fatalj(j JSON) {
-	l.Printj(j)
+	l.log(fatalLevel, "json", j)
 	os.Exit(1)
 }
 
 func (l *Logger) Panic(i ...interface{}) {
-	l.Print(i...)
+	l.log(panicLevel, "", i...)
 	panic(fmt.Sprint(i...))
 }
 
 func (l *Logger) Panicf(format string, args ...interface{}) {
-	l.Printf(format, args...)
+	l.log(panicLevel, format, args...)
 	panic(fmt.Sprintf(format, args))
 }
 
 func (l *Logger) Panicj(j JSON) {
-	l.Printj(j)
+	l.log(panicLevel, "json", j)
 	panic(j)
 }
 
@@ -342,7 +353,7 @@ func (l *Logger) log(v Lvl, format string, args ...interface{}) {
 	buf := l.bufferPool.Get().(*bytes.Buffer)
 	buf.Reset()
 	defer l.bufferPool.Put(buf)
-	_, file, line, _ := runtime.Caller(2)
+	_, file, line, _ := runtime.Caller(l.skip)
 
 	if v >= l.level || v == 0 {
 		message := ""

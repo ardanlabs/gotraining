@@ -12,11 +12,8 @@ type Implementation struct{}
 
 // The following are panic strings used during parameter checks.
 const (
-	negativeN = "blas: n < 0"
-	zeroIncX  = "blas: zero x index increment"
-	zeroIncY  = "blas: zero y index increment"
-	badLenX   = "blas: x index out of range"
-	badLenY   = "blas: y index out of range"
+	zeroIncX = "blas: zero x index increment"
+	zeroIncY = "blas: zero y index increment"
 
 	mLT0  = "blas: m < 0"
 	nLT0  = "blas: n < 0"
@@ -29,12 +26,12 @@ const (
 	badDiag      = "blas: illegal diagonal"
 	badSide      = "blas: illegal side"
 
-	badLdA = "blas: index of a out of range"
-	badLdB = "blas: index of b out of range"
-	badLdC = "blas: index of c out of range"
+	badLdA = "blas: bad leading dimension of A"
+	badLdB = "blas: bad leading dimension of B"
+	badLdC = "blas: bad leading dimension of C"
 
-	badX = "blas: x index out of range"
-	badY = "blas: y index out of range"
+	badX = "blas: bad length of x"
+	badY = "blas: bad length of y"
 )
 
 // [SD]gemm behavior constants. These are kept here to keep them out of the
@@ -143,6 +140,21 @@ func checkZhbMatrix(name byte, n, k int, ab []complex128, ldab int) {
 	}
 	if len(ab) < (n-1)*ldab+k+1 {
 		panic("blas: insufficient " + string(name) + " Hermitian band matrix slice length")
+	}
+}
+
+func checkZtbMatrix(name byte, n, k int, ab []complex128, ldab int) {
+	if n < 0 {
+		panic(nLT0)
+	}
+	if k < 0 {
+		panic(kLT0)
+	}
+	if ldab < k+1 {
+		panic("blas: illegal stride of triangular band matrix " + string(name))
+	}
+	if len(ab) < (n-1)*ldab+k+1 {
+		panic("blas: insufficient " + string(name) + " triangular band matrix slice length")
 	}
 }
 

@@ -20,7 +20,7 @@ type Weibull struct {
 	// Scale parameter of the distribution. Valid range is (0,+∞).
 	Lambda float64
 	// Source of random numbers
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -133,7 +133,7 @@ func (w Weibull) Rand() float64 {
 	if w.Src == nil {
 		rnd = rand.Float64()
 	} else {
-		rnd = w.Src.Float64()
+		rnd = rand.New(w.Src).Float64()
 	}
 	return w.Quantile(rnd)
 }

@@ -33,9 +33,7 @@ func (Implementation) Dnrm2(n int, x []float64, incX int) float64 {
 		if n == 0 {
 			return 0
 		}
-		if n < 1 {
-			panic(negativeN)
-		}
+		panic(nLT0)
 	}
 	var (
 		scale      float64 = 0
@@ -91,7 +89,7 @@ func (Implementation) Dnrm2(n int, x []float64, incX int) float64 {
 func (Implementation) Dasum(n int, x []float64, incX int) float64 {
 	var sum float64
 	if n < 0 {
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if incX < 1 {
 		if incX == 0 {
@@ -135,9 +133,7 @@ func (Implementation) Idamax(n int, x []float64, incX int) int {
 		if n == 0 {
 			return -1 // Netlib returns invalid index when n == 0
 		}
-		if n < 1 {
-			panic(negativeN)
-		}
+		panic(nLT0)
 	}
 	idx := 0
 	max := math.Abs(x[0])
@@ -177,7 +173,7 @@ func (Implementation) Dswap(n int, x []float64, incX int, y []float64, incY int)
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -219,7 +215,7 @@ func (Implementation) Dcopy(n int, x []float64, incX int, y []float64, incY int)
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -258,7 +254,7 @@ func (Implementation) Daxpy(n int, alpha float64, x []float64, incX int, y []flo
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -446,7 +442,7 @@ func (Implementation) Drot(n int, x []float64, incX int, y []float64, incY int, 
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -490,7 +486,7 @@ func (Implementation) Drotm(n int, x []float64, incX int, y []float64, incY int,
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -601,7 +597,7 @@ func (Implementation) Dscal(n int, alpha float64, x []float64, incX int) {
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if alpha == 0 {
 		if incX == 1 {

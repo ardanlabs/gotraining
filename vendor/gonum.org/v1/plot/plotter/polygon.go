@@ -67,6 +67,9 @@ func (pts *Polygon) Plot(c draw.Canvas, plt *plot.Plot) {
 		c.SetColor(pts.Color)
 		var pa vg.Path
 		for _, ring := range ps {
+			if len(ring) == 0 {
+				continue
+			}
 			pa.Move(ring[0])
 			for _, p := range ring {
 				pa.Line(p)

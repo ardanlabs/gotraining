@@ -37,9 +37,7 @@ func (Implementation) Snrm2(n int, x []float32, incX int) float32 {
 		if n == 0 {
 			return 0
 		}
-		if n < 1 {
-			panic(negativeN)
-		}
+		panic(nLT0)
 	}
 	var (
 		scale      float32 = 0
@@ -97,7 +95,7 @@ func (Implementation) Snrm2(n int, x []float32, incX int) float32 {
 func (Implementation) Sasum(n int, x []float32, incX int) float32 {
 	var sum float32
 	if n < 0 {
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if incX < 1 {
 		if incX == 0 {
@@ -143,9 +141,7 @@ func (Implementation) Isamax(n int, x []float32, incX int) int {
 		if n == 0 {
 			return -1 // Netlib returns invalid index when n == 0
 		}
-		if n < 1 {
-			panic(negativeN)
-		}
+		panic(nLT0)
 	}
 	idx := 0
 	max := math.Abs(x[0])
@@ -187,7 +183,7 @@ func (Implementation) Sswap(n int, x []float32, incX int, y []float32, incY int)
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -231,7 +227,7 @@ func (Implementation) Scopy(n int, x []float32, incX int, y []float32, incY int)
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -272,7 +268,7 @@ func (Implementation) Saxpy(n int, alpha float32, x []float32, incX int, y []flo
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -466,7 +462,7 @@ func (Implementation) Srot(n int, x []float32, incX int, y []float32, incY int, 
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -512,7 +508,7 @@ func (Implementation) Srotm(n int, x []float32, incX int, y []float32, incY int,
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -625,7 +621,7 @@ func (Implementation) Sscal(n int, alpha float32, x []float32, incX int) {
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if alpha == 0 {
 		if incX == 1 {

@@ -27,7 +27,7 @@ type Beta struct {
 	// than 0.
 	Beta float64
 
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative distribution function at x.
@@ -39,6 +39,15 @@ func (b Beta) CDF(x float64) float64 {
 		return 1
 	}
 	return mathext.RegIncBeta(b.Alpha, b.Beta, x)
+}
+
+// Entropy returns the differential entropy of the distribution.
+func (b Beta) Entropy() float64 {
+	if b.Alpha <= 0 || b.Beta <= 0 {
+		panic("beta: negative parameters")
+	}
+	return mathext.Lbeta(b.Alpha, b.Beta) - (b.Alpha-1)*mathext.Digamma(b.Alpha) -
+		(b.Beta-1)*mathext.Digamma(b.Beta) + (b.Alpha+b.Beta-2)*mathext.Digamma(b.Alpha+b.Beta)
 }
 
 // ExKurtosis returns the excess kurtosis of the distribution.
