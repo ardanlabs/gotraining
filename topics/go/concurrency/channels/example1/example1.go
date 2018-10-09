@@ -135,8 +135,8 @@ func fanOut() {
 	}
 
 	for emps > 0 {
-		emps--
 		p := <-ch
+		emps--
 		fmt.Println(p)
 		fmt.Println("manager : recv'd signal :", emps)
 	}
@@ -170,8 +170,8 @@ func fanOutSem() {
 	}
 
 	for emps > 0 {
-		emps--
 		p := <-ch
+		emps--
 		fmt.Println(p)
 		fmt.Println("manager : recv'd signal :", emps)
 	}
