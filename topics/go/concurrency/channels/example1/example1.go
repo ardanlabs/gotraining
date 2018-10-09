@@ -135,10 +135,10 @@ func fanOut() {
 	}
 
 	for emps > 0 {
+		emps--
 		p := <-ch
 		fmt.Println(p)
 		fmt.Println("manager : recv'd signal :", emps)
-		emps--
 	}
 
 	time.Sleep(time.Second)
@@ -170,10 +170,10 @@ func fanOutSem() {
 	}
 
 	for emps > 0 {
+		emps--
 		p := <-ch
 		fmt.Println(p)
 		fmt.Println("manager : recv'd signal :", emps)
-		emps--
 	}
 
 	time.Sleep(time.Second)
