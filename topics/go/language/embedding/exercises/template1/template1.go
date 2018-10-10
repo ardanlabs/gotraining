@@ -32,7 +32,7 @@ func (f *Feed) Count() int {
 
 // Fetch simulates looking up the document specified by key. It is slow.
 func (f *Feed) Fetch(key string) (Document, error) {
-	time.Sleep(1000 * time.Millisecond)
+	time.Sleep(time.Second)
 
 	doc := Document{
 		Key:   key,
@@ -76,13 +76,9 @@ func process(fc FetchCounter) {
 // ==================================================
 
 func main() {
-
 	fmt.Println("Using Feed directly")
-	var f Feed
-	process(&f)
-
-	fmt.Println("Using CachingFeed")
+	process(&Feed{})
 
 	// Call process again with your CachingFeed.
-
+	fmt.Println("Using CachingFeed")
 }
