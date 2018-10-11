@@ -32,9 +32,9 @@ The behavior of a channel is directly influenced by its current `State`. The sta
 ## Links
 
 [Channel Communication](https://golang.org/ref/mem#tmp_7)  
-http://blog.golang.org/share-memory-by-communicating  
-http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html  
-[A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh  
+[Share Memory By Communicating](http://blog.golang.org/share-memory-by-communicating) - Andrew Gerrand  
+[The Nature Of Channels In Go](http://www.goinggo.net/2014/02/the-nature-of-channels-in-go.html) - William Kennedy  
+[A Retrospective on SEDA](http://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html) - Matt Welsh      
 
 ## Buffer Bloat - 2011
 
