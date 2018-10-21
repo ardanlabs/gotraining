@@ -47,6 +47,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [4 lessons for modern software developers from 1970s mainframe programming](https://www.hpe.com/us/en/insights/articles/4-lessons-for-modern-software-developers-from-1970s-mainframe-programming-1709.html) - Alan Zeichick  
 [Notes on Programming in C](http://doc.cat-v.org/bell_labs/pikestyle) - Rob Pike  
 [The Why of Go](https://www.infoq.com/presentations/go-concurrency-gc) - Carmen Andoh  
+[The Transistor, Part 3: Endless Reinvention](https://technicshistory.wordpress.com/2018/03/31/the-transistor-part-3-endless-reinvention/amp) - technicshistory  
 
 ### Contribute to Go
 
@@ -193,6 +194,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Our Human Condition "From Space"](http://www.vpri.org/pdf/m2003001_human_cond.pdf) - Alan Kay  
 [No Silver Bullet: Essence and Accidents of Software Engineering](http://www.cs.nott.ac.uk/~pszcah/G51ISS/Documents/NoSilverBullet.html) - Frederick P. Brooks, Jr.   
 [Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
+[Divide By Zero](https://www.hillelwayne.com/post/divide-by-zero/) - Hillel Wayne  
 
 ### Must Read
 
@@ -217,7 +219,7 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 [Data Center Computers: Modern Challenges in CPU Design](https://m.youtube.com/watch?feature=youtu.be&v=QBu2Ae8-8LM) - Dick Sites  
 [Wirth's Law](https://en.wikipedia.org/wiki/Wirth%27s_law) - Wikipedia  
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter    
-[The Myth Of Ram](http://www.ilikebigbits.com/blog/2014/4/21/the-myth-of-ram-part-i) - Emil Ernerfeldt  
+[The Myth Of Ram](http://www.ilikebigbits.com/2014_04_21_myth_of_ram_1.html) - Emil Ernerfeldt  
 [Understanding Transaction Hardware Memory](https://www.infoq.com/presentations/hardware-transactional-memory) - Gil Gene  
 [Want fast C++? Know your hardware!](https://www.youtube.com/watch?v=BP6NxVxDQIs) - Timur Doumler  
 [Performance Through Cache-Friendliness (4:25-5:48)](https://youtu.be/jEG4Qyo_4Bc?t=266) - Damian Gryski  
@@ -269,7 +271,8 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm) - Rick Hudson  
 [Concurrent garbage collection](http://rubinius.com/2013/06/22/concurrent-garbage-collection)  
 [Go 1.5 concurrent garbage collector pacing](https://docs.google.com/document/d/1wmjrocXIWTr1JxU-3EQBI6BK6KgtiFArkG47XK73xIQ/edit)  
-[Eliminating Stack Re-Scanning](https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md)  
+[Eliminating Stack Re-Scanning](https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md) - Austin Clements  
+[Simplify mark termination and eliminate mark 2](https://go.googlesource.com/proposal/+/6baae2869cc86164b2aee513446bfb4940966e65/design/26903-simplify-mark-termination.md) - Austin Clements  
 [Why golang garbage-collector not implement Generational and Compact gc?](https://groups.google.com/forum/m/#!topic/golang-nuts/KJiyv2mV2pU) - Ian Lance Taylor  
 [Getting to Go: The Journey of Go's Garbage Collector](https://blog.golang.org/ismmkeynote) - Rick Hudson  
 
@@ -284,6 +287,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Runtime Hacking](https://github.com/golang/go/blob/master/src/runtime/HACKING.md)  
 [Timer implementation](https://github.com/golang/go/issues/25471#issuecomment-391906366) - Ian Lance Taylor  
+[The Go low-level calling convention on x86-64](https://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
 
 ## Hardware
 
