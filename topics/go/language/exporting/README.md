@@ -4,14 +4,14 @@ Packages contain the basic unit of compiled code. They define a scope for the id
 
 ## Notes
 
-* Code in go is complied into packages and then linked together.
+* Code in go is compiled into packages and then linked together.
 * Identifiers are exported (or remain unexported) based on letter-case.
 * We import packages to access exported identifiers.
 * Any package can use a value of an unexported type, but this is annoying to use.
 
 ## Links
 
-http://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html  
+[Exported/Unexported Identifiers In Go](https://www.ardanlabs.com/blog/2014/03/exportedunexported-identifiers-in-go.html) - William Kennedy    
 
 ## Code Review
 
