@@ -18,14 +18,12 @@ Goroutines are functions that are created and scheduled to be run independently 
 
 ### How the scheduler works.
 
-![Ardan Labs](scheduler.png)
-
-### Difference between concurrency and parallelism.
-
-![Ardan Labs](parallel.png)
+![Ardan Labs](scheduler.png?v=2)
 
 ## Links
 
+[Scheduling In Go - Part I](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html) - William Kennedy    
+[Scheduling In Go - Part II](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) - William Kennedy    
 [Advanced Go Concurrency Patterns](https://blog.golang.org/advanced-go-concurrency-patterns) - Sameer Ajmani    
 [Go Concurrency Patterns: Context](https://blog.golang.org/context) - Sameer Ajmani    
 [Concurrency is not parallelism](https://blog.golang.org/concurrency-is-not-parallelism) - Rob Pike    
@@ -36,8 +34,6 @@ Goroutines are functions that are created and scheduled to be run independently 
 [Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)    
 [15 Years of Concurrency](http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/) - Joe Duffy    
 [How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor    
-[Scheduling In Go - Part I](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html) - William Kennedy    
-[Scheduling In Go - Part II](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) - William Kennedy    
 
 ## Code Review
 
