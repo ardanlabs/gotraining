@@ -18,6 +18,8 @@ _"A good API is not just easy to use but also hard to misuse." - JBD_
 
 _"You can always embed, but you cannot decompose big interfaces once they are out there. Keep interfaces small." - JBD_
 
+_"Don't design with interfaces, discover them." - Rob Pike_
+
 ## Design Guidelines
 
 * Learn about the [design guidelines](../../#interface-and-composition-design) for composition.

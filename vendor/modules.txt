@@ -1,0 +1,386 @@
+# github.com/GeertJohan/go.rice v0.0.0-20170420135705-c02ca9a983da
+github.com/GeertJohan/go.rice
+github.com/GeertJohan/go.rice/embedded
+# github.com/ajstarks/svgo v0.0.0-20180226025133-644b8db467af
+github.com/ajstarks/svgo
+# github.com/boltdb/bolt v1.3.1
+github.com/boltdb/bolt
+# github.com/braintree/manners v0.0.0-20150503212558-0b5e6b2c2843
+github.com/braintree/manners
+# github.com/cznic/b v0.0.0-20180115125044-35e9bbe41f07
+github.com/cznic/b
+# github.com/cznic/fileutil v0.0.0-20180108211300-6a051e75936f
+github.com/cznic/fileutil
+# github.com/cznic/internal v0.0.0-20160905094039-cef02a853c3a
+github.com/cznic/internal/buffer
+github.com/cznic/internal/file
+github.com/cznic/internal/slice
+# github.com/cznic/lldb v1.1.0
+github.com/cznic/lldb
+# github.com/cznic/mathutil v0.0.0-20180221133535-7764e6a2216a
+github.com/cznic/mathutil
+# github.com/cznic/ql v1.1.0
+github.com/cznic/ql/driver
+github.com/cznic/ql
+github.com/cznic/ql/vendored/github.com/camlistore/go4/lock
+# github.com/cznic/sortutil v0.0.0-20150617083342-4c7342852e65
+github.com/cznic/sortutil
+# github.com/cznic/strutil v0.0.0-20171016134553-529a34b1c186
+github.com/cznic/strutil
+# github.com/cznic/zappy v0.0.0-20160723133515-2533cb5b45cc
+github.com/cznic/zappy
+# github.com/daaku/go.zipexe v0.0.0-20150329023125-a5fe2436ffcb
+github.com/daaku/go.zipexe
+# github.com/dgrijalva/jwt-go v3.2.0+incompatible
+github.com/dgrijalva/jwt-go
+# github.com/dvsekhvalnov/jose2go v0.0.0-20170216131308-f21a8cedbbae
+github.com/dvsekhvalnov/jose2go
+github.com/dvsekhvalnov/jose2go/aes
+github.com/dvsekhvalnov/jose2go/arrays
+github.com/dvsekhvalnov/jose2go/base64url
+github.com/dvsekhvalnov/jose2go/compact
+github.com/dvsekhvalnov/jose2go/kdf
+github.com/dvsekhvalnov/jose2go/keys/ecc
+github.com/dvsekhvalnov/jose2go/padding
+# github.com/edsrzf/mmap-go v0.0.0-20170320065105-0bce6a688712
+github.com/edsrzf/mmap-go
+# github.com/emirpasic/gods v1.9.0
+github.com/emirpasic/gods/trees/binaryheap
+github.com/emirpasic/gods/containers
+github.com/emirpasic/gods/lists/arraylist
+github.com/emirpasic/gods/trees
+github.com/emirpasic/gods/utils
+github.com/emirpasic/gods/lists
+# github.com/gogo/protobuf v1.0.0
+github.com/gogo/protobuf/types
+github.com/gogo/protobuf/proto
+github.com/gogo/protobuf/sortkeys
+github.com/gogo/protobuf/gogoproto
+github.com/gogo/protobuf/protoc-gen-gogo/descriptor
+# github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
+github.com/golang/freetype
+github.com/golang/freetype/truetype
+github.com/golang/freetype/raster
+# github.com/golang/protobuf v1.2.0
+github.com/golang/protobuf/proto
+github.com/golang/protobuf/ptypes
+github.com/golang/protobuf/ptypes/any
+github.com/golang/protobuf/ptypes/duration
+github.com/golang/protobuf/ptypes/timestamp
+# github.com/gonum/blas v0.0.0-20180125090452-e7c5890b24cf
+github.com/gonum/blas
+github.com/gonum/blas/blas64
+github.com/gonum/blas/native
+github.com/gonum/blas/native/internal/math32
+# github.com/gonum/floats v0.0.0-20180125090339-7de1f4ea7ab5
+github.com/gonum/floats
+# github.com/gonum/internal v0.0.0-20180125090855-fda53f8d2571
+github.com/gonum/internal/asm/f64
+github.com/gonum/internal/asm/f32
+# github.com/gonum/lapack v0.0.0-20180125091020-f0b8b25edece
+github.com/gonum/lapack
+github.com/gonum/lapack/lapack64
+github.com/gonum/lapack/native
+# github.com/gonum/matrix v0.0.0-20180124231301-a41cc49d4c29
+github.com/gonum/matrix/mat64
+github.com/gonum/matrix
+# github.com/gonum/stat v0.0.0-20180125090729-ec9c8a1062f4
+github.com/gonum/stat
+# github.com/google/go-cmp v0.2.0
+github.com/google/go-cmp/cmp
+github.com/google/go-cmp/cmp/internal/diff
+github.com/google/go-cmp/cmp/internal/function
+github.com/google/go-cmp/cmp/internal/value
+# github.com/gorilla/context v0.0.0-20160226214623-1ea25387ff6f
+github.com/gorilla/context
+# github.com/gorilla/handlers v1.3.0
+github.com/gorilla/handlers
+# github.com/gorilla/mux v1.6.1
+github.com/gorilla/mux
+# github.com/gorilla/pat v0.0.0-20180118221401-71e7b868be7b
+github.com/gorilla/pat
+# github.com/gorilla/schema v1.0.2
+github.com/gorilla/schema
+# github.com/gorilla/securecookie v1.1.1
+github.com/gorilla/securecookie
+# github.com/gorilla/sessions v0.0.0-20160922145804-ca9ada445741
+github.com/gorilla/sessions
+# github.com/gorilla/websocket v1.2.0
+github.com/gorilla/websocket
+# github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99
+github.com/jbenet/go-context/io
+# github.com/julienschmidt/httprouter v0.0.0-20150421170007-8c199fb6259f
+github.com/julienschmidt/httprouter
+# github.com/jung-kurt/gofpdf v1.0.0
+github.com/jung-kurt/gofpdf
+# github.com/justinas/alice v0.0.0-20171023064455-03f45bd4b7da
+github.com/justinas/alice
+# github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1
+github.com/kardianos/osext
+# github.com/kevinburke/ssh_config v0.0.0-20180317175531-9fc7bb800b55
+github.com/kevinburke/ssh_config
+# github.com/kniren/gota v0.9.0
+github.com/kniren/gota/dataframe
+github.com/kniren/gota/series
+# github.com/labstack/echo v0.0.0-20180316170059-a5d81b8d4a62
+github.com/labstack/echo
+github.com/labstack/echo/middleware
+# github.com/labstack/gommon v0.2.7
+github.com/labstack/gommon/color
+github.com/labstack/gommon/log
+github.com/labstack/gommon/bytes
+github.com/labstack/gommon/random
+# github.com/lib/pq v0.0.0-20180327071824-d34b9ff171c2
+github.com/lib/pq
+github.com/lib/pq/oid
+# github.com/llgcode/draw2d v0.0.0-20180817132918-587a55234ca2
+github.com/llgcode/draw2d
+github.com/llgcode/draw2d/draw2dimg
+github.com/llgcode/draw2d/draw2dbase
+# github.com/markbates/goth v1.45.4
+github.com/markbates/goth
+github.com/markbates/goth/gothic
+github.com/markbates/goth/providers/github
+github.com/markbates/goth/providers/faux
+# github.com/mattn/go-colorable v0.0.9
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.4
+github.com/mattn/go-isatty
+# github.com/mattn/go-runewidth v0.0.2
+github.com/mattn/go-runewidth
+# github.com/mitchellh/go-homedir v0.0.0-20161203194507-b8bc1bf76747
+github.com/mitchellh/go-homedir
+# github.com/montanaflynn/stats v0.0.0-20151014174947-eeaced052adb
+github.com/montanaflynn/stats
+# github.com/nats-io/go-nats v1.5.0
+github.com/nats-io/go-nats
+github.com/nats-io/go-nats/encoders/builtin
+github.com/nats-io/go-nats/util
+# github.com/nats-io/nats v1.5.0
+github.com/nats-io/nats
+# github.com/nats-io/nuid v1.0.0
+github.com/nats-io/nuid
+# github.com/nsf/termbox-go v0.0.0-20180303152453-e2050e41c884
+github.com/nsf/termbox-go
+# github.com/pachyderm/pachyderm v1.7.0
+github.com/pachyderm/pachyderm/src/client
+github.com/pachyderm/pachyderm/src/client/admin
+github.com/pachyderm/pachyderm/src/client/auth
+github.com/pachyderm/pachyderm/src/client/deploy
+github.com/pachyderm/pachyderm/src/client/enterprise
+github.com/pachyderm/pachyderm/src/client/health
+github.com/pachyderm/pachyderm/src/client/pfs
+github.com/pachyderm/pachyderm/src/client/pkg/config
+github.com/pachyderm/pachyderm/src/client/pkg/grpcutil
+github.com/pachyderm/pachyderm/src/client/pkg/pbutil
+github.com/pachyderm/pachyderm/src/client/pps
+github.com/pachyderm/pachyderm/src/client/version
+github.com/pachyderm/pachyderm/src/client/version/versionpb
+# github.com/patrickmn/go-cache v0.0.0-20170722040110-a3647f8e31d7
+github.com/patrickmn/go-cache
+# github.com/pborman/uuid v0.0.0-20170612153648-e790cca94e6c
+github.com/pborman/uuid
+# github.com/pelletier/go-buffruneio v0.2.0
+github.com/pelletier/go-buffruneio
+# github.com/pkg/errors v0.8.0
+github.com/pkg/errors
+# github.com/sajari/regression v0.0.0-20180404065841-95df9ccf5f47
+github.com/sajari/regression
+# github.com/satori/go.uuid v1.2.0
+github.com/satori/go.uuid
+# github.com/sergi/go-diff v1.0.0
+github.com/sergi/go-diff/diffmatchpatch
+# github.com/sirupsen/logrus v1.0.5
+github.com/sirupsen/logrus
+# github.com/sjwhitworth/golearn v0.0.0-20180324003246-623af6126539
+github.com/sjwhitworth/golearn/base
+github.com/sjwhitworth/golearn/evaluation
+github.com/sjwhitworth/golearn/knn
+github.com/sjwhitworth/golearn/trees
+github.com/sjwhitworth/golearn/kdtree
+github.com/sjwhitworth/golearn/metrics/pairwise
+github.com/sjwhitworth/golearn/utilities
+# github.com/src-d/gcfg v1.3.0
+github.com/src-d/gcfg
+github.com/src-d/gcfg/scanner
+github.com/src-d/gcfg/token
+github.com/src-d/gcfg/types
+# github.com/theplant/blackfriday v0.0.0-20150310024546-979429e1c46c
+github.com/theplant/blackfriday
+# github.com/urfave/negroni v0.3.0
+github.com/urfave/negroni
+# github.com/valyala/bytebufferpool v1.0.0
+github.com/valyala/bytebufferpool
+# github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4
+github.com/valyala/fasttemplate
+# github.com/xanzy/ssh-agent v0.0.0-20151215153451-ba9c9e33906f
+github.com/xanzy/ssh-agent
+# go-hep.org/x/hep v0.0.0-20180405131904-bae7827c6c1e
+go-hep.org/x/hep/csvutil
+go-hep.org/x/hep/csvutil/csvdriver
+# golang.org/x/crypto v0.0.0-20180403160946-b2aa35443fbc
+golang.org/x/crypto/acme/autocert
+golang.org/x/crypto/acme
+golang.org/x/crypto/ssh/terminal
+golang.org/x/crypto/openpgp
+golang.org/x/crypto/openpgp/armor
+golang.org/x/crypto/openpgp/errors
+golang.org/x/crypto/openpgp/packet
+golang.org/x/crypto/openpgp/s2k
+golang.org/x/crypto/ssh
+golang.org/x/crypto/ssh/knownhosts
+golang.org/x/crypto/cast5
+golang.org/x/crypto/openpgp/elgamal
+golang.org/x/crypto/ssh/agent
+golang.org/x/crypto/curve25519
+golang.org/x/crypto/ed25519
+golang.org/x/crypto/internal/chacha20
+golang.org/x/crypto/poly1305
+golang.org/x/crypto/ed25519/internal/edwards25519
+# golang.org/x/exp v0.0.0-20180807140117-3d87b88a115f
+golang.org/x/exp/rand
+# golang.org/x/image v0.0.0-20180708004352-c73c2afc3b81
+golang.org/x/image/math/fixed
+golang.org/x/image/font
+golang.org/x/image/tiff
+golang.org/x/image/draw
+golang.org/x/image/math/f64
+golang.org/x/image/tiff/lzw
+# golang.org/x/net v0.0.0-20180906233101-161cd47e91fd
+golang.org/x/net/websocket
+golang.org/x/net/context
+golang.org/x/net/http2
+golang.org/x/net/trace
+golang.org/x/net/http/httpguts
+golang.org/x/net/http2/hpack
+golang.org/x/net/idna
+golang.org/x/net/internal/timeseries
+golang.org/x/net/context/ctxhttp
+# golang.org/x/oauth2 v0.0.0-20180402223937-921ae394b943
+golang.org/x/oauth2
+golang.org/x/oauth2/internal
+# golang.org/x/sys v0.0.0-20180909124046-d0be0721c37e
+golang.org/x/sys/unix
+golang.org/x/sys/windows
+# golang.org/x/text v0.3.0
+golang.org/x/text/unicode/norm
+golang.org/x/text/secure/bidirule
+golang.org/x/text/unicode/bidi
+golang.org/x/text/transform
+# gonum.org/v1/gonum v0.0.0-20181006214343-513db5a0a3aa
+gonum.org/v1/gonum/floats
+gonum.org/v1/gonum/stat
+gonum.org/v1/gonum/mat
+gonum.org/v1/gonum/stat/distuv
+gonum.org/v1/gonum/internal/asm/f64
+gonum.org/v1/gonum/blas
+gonum.org/v1/gonum/blas/blas64
+gonum.org/v1/gonum/lapack
+gonum.org/v1/gonum/lapack/lapack64
+gonum.org/v1/gonum/mathext
+gonum.org/v1/gonum/blas/gonum
+gonum.org/v1/gonum/lapack/gonum
+gonum.org/v1/gonum/mathext/internal/amos
+gonum.org/v1/gonum/mathext/internal/cephes
+gonum.org/v1/gonum/mathext/internal/gonum
+gonum.org/v1/gonum/internal/asm/c128
+gonum.org/v1/gonum/internal/asm/f32
+gonum.org/v1/gonum/internal/math32
+# gonum.org/v1/plot v0.0.0-20180905080458-5f3c436ce602
+gonum.org/v1/plot
+gonum.org/v1/plot/plotter
+gonum.org/v1/plot/vg
+gonum.org/v1/plot/plotutil
+gonum.org/v1/plot/vg/draw
+gonum.org/v1/plot/palette
+gonum.org/v1/plot/tools/bezier
+gonum.org/v1/plot/vg/fonts
+gonum.org/v1/plot/vg/vgeps
+gonum.org/v1/plot/vg/vgimg
+gonum.org/v1/plot/vg/vgpdf
+gonum.org/v1/plot/vg/vgsvg
+# google.golang.org/appengine v1.0.0
+google.golang.org/appengine/urlfetch
+google.golang.org/appengine/internal
+google.golang.org/appengine/internal/urlfetch
+google.golang.org/appengine/internal/base
+google.golang.org/appengine/internal/datastore
+google.golang.org/appengine/internal/log
+google.golang.org/appengine/internal/remote_api
+# google.golang.org/genproto v0.0.0-20180406231819-ce8404429849
+google.golang.org/genproto/googleapis/rpc/status
+# google.golang.org/grpc v1.11.2
+google.golang.org/grpc
+google.golang.org/grpc/keepalive
+google.golang.org/grpc/metadata
+google.golang.org/grpc/status
+google.golang.org/grpc/balancer
+google.golang.org/grpc/balancer/roundrobin
+google.golang.org/grpc/codes
+google.golang.org/grpc/connectivity
+google.golang.org/grpc/credentials
+google.golang.org/grpc/encoding
+google.golang.org/grpc/encoding/proto
+google.golang.org/grpc/grpclb/grpc_lb_v1/messages
+google.golang.org/grpc/grpclog
+google.golang.org/grpc/internal
+google.golang.org/grpc/naming
+google.golang.org/grpc/peer
+google.golang.org/grpc/resolver
+google.golang.org/grpc/resolver/dns
+google.golang.org/grpc/resolver/passthrough
+google.golang.org/grpc/stats
+google.golang.org/grpc/tap
+google.golang.org/grpc/transport
+google.golang.org/grpc/balancer/base
+# gopkg.in/src-d/go-billy.v4 v4.1.1
+gopkg.in/src-d/go-billy.v4
+gopkg.in/src-d/go-billy.v4/osfs
+gopkg.in/src-d/go-billy.v4/util
+gopkg.in/src-d/go-billy.v4/helper/chroot
+gopkg.in/src-d/go-billy.v4/helper/polyfill
+# gopkg.in/src-d/go-git.v4 v4.2.1
+gopkg.in/src-d/go-git.v4
+gopkg.in/src-d/go-git.v4/config
+gopkg.in/src-d/go-git.v4/internal/revision
+gopkg.in/src-d/go-git.v4/plumbing
+gopkg.in/src-d/go-git.v4/plumbing/filemode
+gopkg.in/src-d/go-git.v4/plumbing/format/gitignore
+gopkg.in/src-d/go-git.v4/plumbing/format/index
+gopkg.in/src-d/go-git.v4/plumbing/format/packfile
+gopkg.in/src-d/go-git.v4/plumbing/object
+gopkg.in/src-d/go-git.v4/plumbing/protocol/packp
+gopkg.in/src-d/go-git.v4/plumbing/protocol/packp/capability
+gopkg.in/src-d/go-git.v4/plumbing/protocol/packp/sideband
+gopkg.in/src-d/go-git.v4/plumbing/revlist
+gopkg.in/src-d/go-git.v4/plumbing/storer
+gopkg.in/src-d/go-git.v4/plumbing/transport
+gopkg.in/src-d/go-git.v4/plumbing/transport/client
+gopkg.in/src-d/go-git.v4/storage
+gopkg.in/src-d/go-git.v4/storage/filesystem
+gopkg.in/src-d/go-git.v4/storage/memory
+gopkg.in/src-d/go-git.v4/utils/diff
+gopkg.in/src-d/go-git.v4/utils/ioutil
+gopkg.in/src-d/go-git.v4/utils/merkletrie
+gopkg.in/src-d/go-git.v4/utils/merkletrie/filesystem
+gopkg.in/src-d/go-git.v4/utils/merkletrie/index
+gopkg.in/src-d/go-git.v4/utils/merkletrie/noder
+gopkg.in/src-d/go-git.v4/plumbing/format/config
+gopkg.in/src-d/go-git.v4/utils/binary
+gopkg.in/src-d/go-git.v4/plumbing/cache
+gopkg.in/src-d/go-git.v4/plumbing/format/idxfile
+gopkg.in/src-d/go-git.v4/plumbing/format/diff
+gopkg.in/src-d/go-git.v4/plumbing/format/pktline
+gopkg.in/src-d/go-git.v4/plumbing/transport/file
+gopkg.in/src-d/go-git.v4/plumbing/transport/git
+gopkg.in/src-d/go-git.v4/plumbing/transport/http
+gopkg.in/src-d/go-git.v4/plumbing/transport/ssh
+gopkg.in/src-d/go-git.v4/plumbing/format/objfile
+gopkg.in/src-d/go-git.v4/storage/filesystem/internal/dotgit
+gopkg.in/src-d/go-git.v4/utils/merkletrie/internal/frame
+gopkg.in/src-d/go-git.v4/plumbing/transport/internal/common
+gopkg.in/src-d/go-git.v4/plumbing/transport/server
+# gopkg.in/unrolled/render.v1 v1.0.0-20171102162132-65450fb6b2d3
+gopkg.in/unrolled/render.v1
+# gopkg.in/warnings.v0 v0.1.2
+gopkg.in/warnings.v0

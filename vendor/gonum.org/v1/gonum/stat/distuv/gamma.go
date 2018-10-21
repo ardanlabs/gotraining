@@ -27,7 +27,7 @@ type Gamma struct {
 	// If Beta == 2, this is equivalent to a Chi-Squared distribution.
 	Beta float64
 
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative distribution function at x.
@@ -101,9 +101,10 @@ func (g Gamma) Rand() float64 {
 	exprnd := rand.ExpFloat64
 	normrnd := rand.NormFloat64
 	if g.Src != nil {
-		unifrnd = g.Src.Float64
-		exprnd = g.Src.ExpFloat64
-		normrnd = g.Src.NormFloat64
+		rnd := rand.New(g.Src)
+		unifrnd = rnd.Float64
+		exprnd = rnd.ExpFloat64
+		normrnd = rnd.NormFloat64
 	}
 
 	a := g.Alpha

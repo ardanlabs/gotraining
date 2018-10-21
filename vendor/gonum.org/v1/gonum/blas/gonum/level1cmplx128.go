@@ -15,7 +15,7 @@ import (
 // Dzasum returns 0 if incX is negative.
 func (Implementation) Dzasum(n int, x []complex128, incX int) float64 {
 	if n < 0 {
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if incX < 1 {
 		if incX == 0 {
@@ -57,7 +57,7 @@ func (Implementation) Dznrm2(n int, x []complex128, incX int) float64 {
 		if n == 0 {
 			return 0
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (n-1)*incX >= len(x) {
 		panic(badX)
@@ -131,7 +131,7 @@ func (Implementation) Izamax(n int, x []complex128, incX int) int {
 			// Return invalid index.
 			return -1
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if len(x) <= (n-1)*incX {
 		panic(badX)
@@ -173,7 +173,7 @@ func (Implementation) Zaxpy(n int, alpha complex128, x []complex128, incX int, y
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -210,7 +210,7 @@ func (Implementation) Zcopy(n int, x []complex128, incX int, y []complex128, inc
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)
@@ -250,7 +250,7 @@ func (Implementation) Zdotc(n int, x []complex128, incX int, y []complex128, inc
 		if n == 0 {
 			return 0
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if incX == 1 && incY == 1 {
 		if len(x) < n {
@@ -291,7 +291,7 @@ func (Implementation) Zdotu(n int, x []complex128, incX int, y []complex128, inc
 		if n == 0 {
 			return 0
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if incX == 1 && incY == 1 {
 		if len(x) < n {
@@ -334,7 +334,7 @@ func (Implementation) Zdscal(n int, alpha float64, x []complex128, incX int) {
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if alpha == 0 {
 		if incX == 1 {
@@ -378,7 +378,7 @@ func (Implementation) Zscal(n int, alpha complex128, x []complex128, incX int) {
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if alpha == 0 {
 		if incX == 1 {
@@ -412,7 +412,7 @@ func (Implementation) Zswap(n int, x []complex128, incX int, y []complex128, inc
 		if n == 0 {
 			return
 		}
-		panic(negativeN)
+		panic(nLT0)
 	}
 	if (incX > 0 && (n-1)*incX >= len(x)) || (incX < 0 && (1-n)*incX >= len(x)) {
 		panic(badX)

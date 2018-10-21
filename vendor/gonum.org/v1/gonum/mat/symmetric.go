@@ -138,6 +138,9 @@ func (s *SymDense) IsZero() bool {
 // reuseAs resizes an empty matrix to a n×n matrix,
 // or checks that a non-empty matrix is n×n.
 func (s *SymDense) reuseAs(n int) {
+	if n == 0 {
+		panic(ErrZeroLength)
+	}
 	if s.mat.N > s.cap {
 		panic(badSymCap)
 	}
@@ -161,6 +164,9 @@ func (s *SymDense) reuseAs(n int) {
 
 func (s *SymDense) isolatedWorkspace(a Symmetric) (w *SymDense, restore func()) {
 	n := a.Symmetric()
+	if n == 0 {
+		panic(ErrZeroLength)
+	}
 	w = getWorkspaceSym(n, false)
 	return w, func() {
 		s.CopySym(w)
@@ -195,6 +201,8 @@ func (s *SymDense) AddSym(a, b Symmetric) {
 		}
 	}
 
+	s.checkOverlapMatrix(a)
+	s.checkOverlapMatrix(b)
 	for i := 0; i < n; i++ {
 		stmp := s.mat.Data[i*s.mat.Stride : i*s.mat.Stride+n]
 		for j := i; j < n; j++ {

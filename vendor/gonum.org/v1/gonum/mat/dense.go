@@ -42,6 +42,9 @@ type Dense struct {
 // The data must be arranged in row-major order, i.e. the (i*c + j)-th
 // element in the data slice is the {i, j}-th element in the matrix.
 func NewDense(r, c int, data []float64) *Dense {
+	if r < 0 || c < 0 {
+		panic("mat: negative dimension")
+	}
 	if data != nil && r*c != len(data) {
 		panic(ErrShape)
 	}
@@ -69,6 +72,9 @@ func (m *Dense) reuseAs(r, c int) {
 		// Panic as a string, not a mat.Error.
 		panic("mat: caps not correctly set")
 	}
+	if r == 0 || c == 0 {
+		panic(ErrZeroLength)
+	}
 	if m.IsZero() {
 		m.mat = blas64.General{
 			Rows:   r,
@@ -94,6 +100,9 @@ func (m *Dense) reuseAsZeroed(r, c int) {
 	if m.mat.Rows > m.capRows || m.mat.Cols > m.capCols {
 		// Panic as a string, not a mat.Error.
 		panic("mat: caps not correctly set")
+	}
+	if r == 0 || c == 0 {
+		panic(ErrZeroLength)
 	}
 	if m.IsZero() {
 		m.mat = blas64.General{
@@ -129,6 +138,9 @@ func untranspose(a Matrix) (Matrix, bool) {
 // This should be used when a method receiver is the same pointer as an input argument.
 func (m *Dense) isolatedWorkspace(a Matrix) (w *Dense, restore func()) {
 	r, c := a.Dims()
+	if r == 0 || c == 0 {
+		panic(ErrZeroLength)
+	}
 	w = getWorkspace(r, c, false)
 	return w, func() {
 		m.Copy(w)
@@ -270,7 +282,10 @@ func (m *Dense) rawRowView(i int) []float64 {
 // of the receiver.
 func (m *Dense) Slice(i, k, j, l int) Matrix {
 	mr, mc := m.Caps()
-	if i < 0 || mr <= i || j < 0 || mc <= j || k <= i || mr < k || l <= j || mc < l {
+	if i < 0 || mr <= i || j < 0 || mc <= j || k < i || mr < k || l < j || mc < l {
+		if i == k || j == l {
+			panic(ErrZeroLength)
+		}
 		panic(ErrIndexOutOfRange)
 	}
 	t := *m
@@ -473,6 +488,7 @@ func (m *Dense) Copy(a Matrix) (r, c int) {
 			// Nothing to do.
 		}
 	default:
+		m.checkOverlapMatrix(aU)
 		for i := 0; i < r; i++ {
 			for j := 0; j < c; j++ {
 				m.set(i, j, a.At(i, j))

@@ -23,7 +23,7 @@ import (
 type GumbelRight struct {
 	Mu   float64
 	Beta float64
-	Src  *rand.Rand
+	Src  rand.Source
 }
 
 func (g GumbelRight) z(x float64) float64 {
@@ -91,7 +91,7 @@ func (g GumbelRight) Rand() float64 {
 	if g.Src == nil {
 		rnd = rand.ExpFloat64()
 	} else {
-		rnd = g.Src.ExpFloat64()
+		rnd = rand.New(g.Src).ExpFloat64()
 	}
 	return g.Mu - g.Beta*math.Log(rnd)
 }

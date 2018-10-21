@@ -1,0 +1,3 @@
+golint .
+go tool vet -all .
+gofmt -s -l .

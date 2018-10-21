@@ -9,12 +9,12 @@ There are lots of different patterns we can create with goroutines and channels.
 
 ## Links
 
-https://github.com/gobridge/concurrency-patterns  
-http://blog.golang.org/pipelines  
-https://talks.golang.org/2012/concurrency.slide#1  
-https://blog.golang.org/context  
-http://blog.golang.org/advanced-go-concurrency-patterns  
-http://talks.golang.org/2012/chat.slide  
+[Concurrency patterns](https://github.com/gobridge/concurrency-patterns)    
+[Go Concurrency Patterns: Pipelines and cancellation](https://blog.golang.org/pipelines) - Sameer Ajmani    
+[Go Concurrency Patterns](https://talks.golang.org/2012/concurrency.slide#1) - Rob Pike    
+[Go Concurrency Patterns: Context](https://blog.golang.org/context) - Sameer Ajmani    
+[Advanced Go Concurrency Patterns](https://blog.golang.org/advanced-go-concurrency-patterns) - Sameer Ajmani    
+[Go: code that grows with grace](https://talks.golang.org/2012/chat.slide) - Andrew Gerrand    
 
 Functional Options : type DialOption func(*dialOptions)  
 https://github.com/grpc/grpc-go/blob/master/clientconn.go

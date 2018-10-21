@@ -25,7 +25,7 @@ type ChiSquared struct {
 	// be greater than 0.
 	K float64
 
-	Src *rand.Rand
+	Src rand.Source
 }
 
 // CDF computes the value of the cumulative density function at x.

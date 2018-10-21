@@ -27,11 +27,11 @@ import (
 // be computed.
 // For other values of job Dhseqr will panic.
 //
-// If compz == lapack.None, no Schur vectors will be computed and Z will not be
+// If compz == lapack.SchurNone, no Schur vectors will be computed and Z will not be
 // referenced.
-// If compz == lapack.HessEV, on return Z will contain the matrix of Schur
+// If compz == lapack.SchurHess, on return Z will contain the matrix of Schur
 // vectors of H.
-// If compz == lapack.OriginalEV, on entry z is assumed to contain the orthogonal
+// If compz == lapack.SchurOrig, on entry z is assumed to contain the orthogonal
 // matrix Q that is the identity except for the submatrix
 // Q[ilo:ihi+1,ilo:ihi+1]. On return z will be updated to the product Q*Z.
 //
@@ -96,11 +96,11 @@ import (
 // where U is an orthogonal matrix. The final H is upper Hessenberg and
 // H[unconverged:ihi+1,unconverged:ihi+1] is upper quasi-triangular.
 //
-// If unconverged > 0 and compz == lapack.OriginalEV, then on return
+// If unconverged > 0 and compz == lapack.SchurOrig, then on return
 //  (final Z) = (initial Z) U,
 // where U is the orthogonal matrix in (*) regardless of the value of job.
 //
-// If unconverged > 0 and compz == lapack.HessEV, then on return
+// If unconverged > 0 and compz == lapack.SchurHess, then on return
 //  (final Z) = U,
 // where U is the orthogonal matrix in (*) regardless of the value of job.
 //
@@ -118,11 +118,11 @@ import (
 //      URL: http://dx.doi.org/10.1137/S0895479801384585
 //
 // Dhseqr is an internal routine. It is exported for testing purposes.
-func (impl Implementation) Dhseqr(job lapack.EVJob, compz lapack.EVComp, n, ilo, ihi int, h []float64, ldh int, wr, wi []float64, z []float64, ldz int, work []float64, lwork int) (unconverged int) {
+func (impl Implementation) Dhseqr(job lapack.SchurJob, compz lapack.SchurComp, n, ilo, ihi int, h []float64, ldh int, wr, wi []float64, z []float64, ldz int, work []float64, lwork int) (unconverged int) {
 	var wantt bool
 	switch job {
 	default:
-		panic(badEVJob)
+		panic(badSchurJob)
 	case lapack.EigenvaluesOnly:
 	case lapack.EigenvaluesAndSchur:
 		wantt = true
@@ -130,9 +130,9 @@ func (impl Implementation) Dhseqr(job lapack.EVJob, compz lapack.EVComp, n, ilo,
 	var wantz bool
 	switch compz {
 	default:
-		panic(badEVComp)
-	case lapack.None:
-	case lapack.HessEV, lapack.OriginalEV:
+		panic(badSchurComp)
+	case lapack.SchurNone:
+	case lapack.SchurHess, lapack.SchurOrig:
 		wantz = true
 	}
 	switch {
@@ -197,7 +197,7 @@ func (impl Implementation) Dhseqr(job lapack.EVJob, compz lapack.EVComp, n, ilo,
 	}
 
 	// Initialize Z to identity matrix if requested.
-	if compz == lapack.HessEV {
+	if compz == lapack.SchurHess {
 		impl.Dlaset(blas.All, n, n, 0, 1, z, ldz)
 	}
 

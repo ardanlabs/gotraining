@@ -12,10 +12,14 @@ import (
 	"gonum.org/v1/gonum/internal/asm/f64"
 )
 
-// Dgemm computes
-//  C = beta * C + alpha * A * B,
-// where A, B, and C are dense matrices, and alpha and beta are scalars.
-// tA and tB specify whether A or B are transposed.
+// Dgemm performs one of the matrix-matrix operations
+//  C = alpha * A * B + beta * C
+//  C = alpha * A^T * B + beta * C
+//  C = alpha * A * B^T + beta * C
+//  C = alpha * A^T * B^T + beta * C
+// where A is an m×k or k×m dense matrix, B is an n×k or k×n dense matrix, C is
+// an m×n matrix, and alpha and beta are scalars. tA and tB specify whether A or
+// B are transposed.
 func (Implementation) Dgemm(tA, tB blas.Transpose, m, n, k int, alpha float64, a []float64, lda int, b []float64, ldb int, beta float64, c []float64, ldc int) {
 	if tA != blas.NoTrans && tA != blas.Trans && tA != blas.ConjTrans {
 		panic(badTranspose)

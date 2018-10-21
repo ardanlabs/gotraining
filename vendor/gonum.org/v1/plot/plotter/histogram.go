@@ -150,7 +150,7 @@ func (h *Histogram) Thumbnail(c *draw.Canvas) {
 // then a reasonable default is used.  The
 // default is the square root of the sum of
 // the y values.
-func binPoints(xys XYer, n int) ([]HistogramBin, float64) {
+func binPoints(xys XYer, n int) (bins []HistogramBin, width float64) {
 	xmin, xmax := Range(XValues{xys})
 	if n <= 0 {
 		m := 0.0
@@ -164,9 +164,12 @@ func binPoints(xys XYer, n int) ([]HistogramBin, float64) {
 		n = 1
 	}
 
-	bins := make([]HistogramBin, n)
+	bins = make([]HistogramBin, n)
 
 	w := (xmax - xmin) / float64(n)
+	if w == 0 {
+		w = 1
+	}
 	for i := range bins {
 		bins[i].Min = xmin + float64(i)*w
 		bins[i].Max = xmin + float64(i+1)*w

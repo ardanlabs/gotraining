@@ -7,7 +7,7 @@
 package main
 
 import (
-	"math/rand"
+	"golang.org/x/exp/rand"
 
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
@@ -138,13 +138,13 @@ func Example_stackedAreaChart() *plot.Plot {
 	p.Legend.Left = true
 
 	vals := []plotter.Values{
-		plotter.Values{0.02, 0.015, 0, 0, 0, 0, 0},
-		plotter.Values{0, 0.48, 0.36, 0.34, 0.32, 0.32, 0.28},
-		plotter.Values{0, 0, 0.87, 1.4, 0.64, 0.32, 0.28},
-		plotter.Values{0, 0, 0, 1.26, 0.34, 0.12, 0.09},
-		plotter.Values{0, 0, 0, 0, 2.48, 2.68, 2.13},
-		plotter.Values{0, 0, 0, 0, 0, 1.32, 0.54},
-		plotter.Values{0, 0, 0, 0, 0, 0.68, 5.67},
+		{0.02, 0.015, 0, 0, 0, 0, 0},
+		{0, 0.48, 0.36, 0.34, 0.32, 0.32, 0.28},
+		{0, 0, 0.87, 1.4, 0.64, 0.32, 0.28},
+		{0, 0, 0, 1.26, 0.34, 0.12, 0.09},
+		{0, 0, 0, 0, 2.48, 2.68, 2.13},
+		{0, 0, 0, 0, 0, 1.32, 0.54},
+		{0, 0, 0, 0, 0, 0.68, 5.67},
 	}
 
 	err = plotutil.AddStackedAreaPlots(p, plotter.Values{2007, 2008, 2009, 2010, 2011, 2012, 2013},

@@ -63,10 +63,12 @@ func Align(plots [][]*Plot, t draw.Tiles, dc draw.Canvas) [][]draw.Canvas {
 	for _, s := range xSpacing {
 		xTotalSpace += s.n + s.p
 	}
+	xTotalSpace += float64(t.PadX)*float64(len(xSpacing)-1) + float64(t.PadLeft+t.PadRight)
 	var yTotalSpace float64
 	for _, s := range ySpacing {
 		yTotalSpace += s.n + s.p
 	}
+	yTotalSpace += float64(t.PadY)*float64(len(ySpacing)-1) + float64(t.PadTop+t.PadBottom)
 
 	avgWidth := vg.Length((float64(dc.Max.X-dc.Min.X) - xTotalSpace) / float64(t.Cols))
 	avgHeight := vg.Length((float64(dc.Max.Y-dc.Min.Y) - yTotalSpace) / float64(t.Rows))

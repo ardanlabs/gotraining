@@ -1,53 +1,84 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Copy the code from the template. Declare a new type called hockey
-// which embeds the sports type. Implement the finder interface for hockey.
-// When implementing the find method for hockey, call into the find method
-// for the embedded sport type to check the embedded fields first. Then create
-// two hockey values inside the slice of haystacks and perform the search.
+// This program defines a type Feed with two methods: Count and Fetch. Create a
+// new type CachingFeed that embeds *Feed but overrides the Fetch method.
+//
+// The CachingFeed type should have a map of Documents to limit the number of
+// calls to Feed.Fetch.
 package main
 
-import "strings"
+import (
+	"fmt"
+	"log"
+	"time"
+)
 
-// finder defines the behavior required for performing matching.
-type finder interface {
-	find(needle string) bool
+// Document is the core data model we are working with.
+type Document struct {
+	Key   string
+	Title string
 }
 
-// sport represents a sports team.
-type sport struct {
-	team string
-	city string
+// ==================================================
+
+// Feed is a type that knows how to fetch Documents.
+type Feed struct{}
+
+// Count tells how many documents are in the feed.
+func (f *Feed) Count() int {
+	return 42
 }
 
-// find checks the value for the specified term.
-func (s *sport) find(needle string) bool {
-	return strings.Contains(s.team, needle) || strings.Contains(s.city, needle)
+// Fetch simulates looking up the document specified by key. It is slow.
+func (f *Feed) Fetch(key string) (Document, error) {
+	time.Sleep(time.Second)
+
+	doc := Document{
+		Key:   key,
+		Title: "Title for " + key,
+	}
+	return doc, nil
 }
 
-// Declare a struct type named hockey that represents specific
-// hockey information:
-// - Have it embed the sport type first.
-// - Have it include a field with the country of the team.
+// ==================================================
 
-// find checks the value for the specified term.
-func ( /* receiver type */ ) find(needle string) bool {
-
-	// Make sure you call into find method for the embedded sport type.
-
-	// Implement the search for the new fields.
-	return false
+// FetchCounter is the behavior we depend on for our process function.
+type FetchCounter interface {
+	Fetch(key string) (Document, error)
+	Count() int
 }
+
+func process(fc FetchCounter) {
+	fmt.Printf("There are %d documents\n", fc.Count())
+
+	keys := []string{"a", "a", "a", "b", "b", "b"}
+
+	for _, key := range keys {
+		doc, err := fc.Fetch(key)
+		if err != nil {
+			log.Printf("Could not fetch %s : %v", key, err)
+			return
+		}
+
+		fmt.Printf("%s : %v\n", key, doc)
+	}
+}
+
+// ==================================================
+
+// Define a new type CachingFeed that embeds *Feed and has a map[string]Document.
+
+// Define a function NewCachingFeed which initializes a *CachingFeed for use.
+
+// Override the Fetch method with a new method that consults the map.
+
+// ==================================================
 
 func main() {
+	fmt.Println("Using Feed directly")
+	process(&Feed{})
 
-	// Define the term to find.
-
-	// Create a slice of finder values and assign values
-	// of the concrete hockey type.
-
-	// Display what we are trying to find.
-
-	// Range over each finder value and check the term.
+	// Call process again with your CachingFeed.
+	fmt.Println("Using CachingFeed")
 }

@@ -5,6 +5,8 @@
 package plot
 
 import (
+	"math"
+
 	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/draw"
 )
@@ -67,9 +69,9 @@ type Thumbnailer interface {
 	Thumbnail(c *draw.Canvas)
 }
 
-// makeLegend returns a legend with the default
+// NewLegend returns a legend with the default
 // parameter settings.
-func makeLegend() (Legend, error) {
+func NewLegend() (Legend, error) {
 	font, err := vg.MakeFont(DefaultFont, vg.Points(12))
 	if err != nil {
 		return Legend{}, err
@@ -80,8 +82,8 @@ func makeLegend() (Legend, error) {
 	}, nil
 }
 
-// draw draws the legend to the given draw.Canvas.
-func (l *Legend) draw(c draw.Canvas) {
+// Draw draws the legend to the given draw.Canvas.
+func (l *Legend) Draw(c draw.Canvas) {
 	iconx := c.Min.X
 	sty := l.TextStyle
 	textx := iconx + l.ThumbnailWidth + sty.Rectangle(" ").Max.X
@@ -116,6 +118,36 @@ func (l *Legend) draw(c draw.Canvas) {
 		icon.Min.Y -= enth + l.Padding
 		icon.Max.Y -= enth + l.Padding
 	}
+}
+
+// Rectangle returns the extent of the Legend.
+func (l *Legend) Rectangle(c draw.Canvas) vg.Rectangle {
+	var width, height vg.Length
+	sty := l.TextStyle
+	entryHeight := l.entryHeight()
+	for i, e := range l.entries {
+		width = vg.Length(math.Max(float64(width), float64(l.ThumbnailWidth+sty.Rectangle(" "+e.text).Max.X)))
+		height += entryHeight
+		if i != 0 {
+			height += l.Padding
+		}
+	}
+	var r vg.Rectangle
+	if l.Left {
+		r.Max.X = c.Max.X
+		r.Min.X = c.Max.X - width
+	} else {
+		r.Max.X = c.Min.X + width
+		r.Min.X = c.Min.X
+	}
+	if l.Top {
+		r.Max.Y = c.Max.Y
+		r.Min.Y = c.Max.Y - height
+	} else {
+		r.Max.Y = c.Min.Y + height
+		r.Min.Y = c.Min.Y
+	}
+	return r
 }
 
 // entryHeight returns the height of the tallest legend

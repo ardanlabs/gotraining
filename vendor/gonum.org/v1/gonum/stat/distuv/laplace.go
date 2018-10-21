@@ -18,7 +18,7 @@ import (
 type Laplace struct {
 	Mu    float64 // Mean of the Laplace distribution
 	Scale float64 // Scale of the Laplace distribution
-	Src   *rand.Rand
+	Src   rand.Source
 }
 
 // CDF computes the value of the cumulative density function at x.
@@ -150,7 +150,7 @@ func (l Laplace) Rand() float64 {
 	if l.Src == nil {
 		rnd = rand.Float64()
 	} else {
-		rnd = l.Src.Float64()
+		rnd = rand.New(l.Src).Float64()
 	}
 	u := rnd - 0.5
 	if u < 0 {

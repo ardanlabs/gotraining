@@ -89,7 +89,7 @@ func New() (*Plot, error) {
 	if err != nil {
 		return nil, err
 	}
-	legend, err := makeLegend()
+	legend, err := NewLegend()
 	if err != nil {
 		return nil, err
 	}
@@ -165,7 +165,7 @@ func (p *Plot) Draw(c draw.Canvas) {
 		data.Plot(dataC, p)
 	}
 
-	p.Legend.draw(draw.Crop(c, ywidth, 0, xheight, 0))
+	p.Legend.Draw(draw.Crop(c, ywidth, 0, xheight, 0))
 }
 
 // DataCanvas returns a new draw.Canvas that

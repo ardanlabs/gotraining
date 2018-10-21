@@ -2,15 +2,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package lapack // import "gonum.org/v1/gonum/lapack"
+package lapack
 
 import "gonum.org/v1/gonum/blas"
-
-const None = 'N'
-
-type Job byte
-
-type Comp byte
 
 // Complex128 defines the public complex128 LAPACK API supported by gonum/lapack.
 type Complex128 interface{}
@@ -35,6 +29,7 @@ type Float64 interface {
 	Dormlq(side blas.Side, trans blas.Transpose, m, n, k int, a []float64, lda int, tau, c []float64, ldc int, work []float64, lwork int)
 	Dpocon(uplo blas.Uplo, n int, a []float64, lda int, anorm float64, work []float64, iwork []int) float64
 	Dpotrf(ul blas.Uplo, n int, a []float64, lda int) (ok bool)
+	Dpotrs(ul blas.Uplo, n, nrhs int, a []float64, lda int, b []float64, ldb int)
 	Dsyev(jobz EVJob, uplo blas.Uplo, n int, a []float64, lda int, w, work []float64, lwork int) (ok bool)
 	Dtrcon(norm MatrixNorm, uplo blas.Uplo, diag blas.Diag, n int, a []float64, lda int, work []float64, iwork []int) float64
 	Dtrtri(uplo blas.Uplo, diag blas.Diag, n int, a []float64, lda int) (ok bool)
@@ -93,11 +88,20 @@ const (
 	Bottom   Pivot = 'B'
 )
 
-type DecompUpdate byte
+// ApplyOrtho specifies which orthogonal matrix is applied in Dormbr.
+type ApplyOrtho byte
 
 const (
-	ApplyP DecompUpdate = 'P'
-	ApplyQ DecompUpdate = 'Q'
+	ApplyP ApplyOrtho = 'P' // Apply P or P^T.
+	ApplyQ ApplyOrtho = 'Q' // Apply Q or Q^T.
+)
+
+// GenOrtho specifies which orthogonal matrix is generated in Dorgbr.
+type GenOrtho byte
+
+const (
+	GeneratePT GenOrtho = 'P' // Generate P^T.
+	GenerateQ  GenOrtho = 'Q' // Generate Q.
 )
 
 // SVDJob specifies the singular vector computation type for SVD.
@@ -121,68 +125,88 @@ const (
 	GSVDNone GSVDJob = 'N' // Do not compute orthogonal matrix
 )
 
-// EVComp specifies how eigenvectors are computed.
+// EVComp specifies how eigenvectors are computed in Dsteqr.
 type EVComp byte
 
 const (
-	// OriginalEV specifies to compute the eigenvectors of the original
-	// matrix.
-	OriginalEV EVComp = 'V'
-	// TridiagEV specifies to compute both the eigenvectors of the input
-	// tridiagonal matrix.
-	TridiagEV EVComp = 'I'
-	// HessEV specifies to compute both the eigenvectors of the input upper
-	// Hessenberg matrix.
-	HessEV EVComp = 'I'
-
-	// UpdateSchur specifies that the matrix of Schur vectors will be
-	// updated by Dtrexc.
-	UpdateSchur EVComp = 'V'
+	EVOrig     EVComp = 'V' // Compute eigenvectors of the original symmetric matrix.
+	EVTridiag  EVComp = 'I' // Compute eigenvectors of the tridiagonal matrix.
+	EVCompNone EVComp = 'N' // Do not compute eigenvectors.
 )
 
-// Job types for computation of eigenvectors.
-type (
-	EVJob      byte
-	LeftEVJob  byte
-	RightEVJob byte
-)
+// EVJob specifies whether eigenvectors are computed in Dsyev.
+type EVJob byte
 
-// Job constants for computation of eigenvectors.
 const (
-	ComputeEV      EVJob      = 'V' // Compute eigenvectors in Dsyev.
-	ComputeLeftEV  LeftEVJob  = 'V' // Compute left eigenvectors.
-	ComputeRightEV RightEVJob = 'V' // Compute right eigenvectors.
+	EVCompute EVJob = 'V' // Eigenvectors are computed.
+	EVNone    EVJob = 'N' // Eigenvectors are not computed.
 )
 
-// Jobs for Dgebal.
+// LeftEVJob specifies whether left eigenvectors are computed in Dgeev.
+type LeftEVJob byte
+
 const (
-	Permute      Job = 'P'
-	Scale        Job = 'S'
-	PermuteScale Job = 'B'
+	LeftEVCompute LeftEVJob = 'V' // Left eigenvectors are computed.
+	LeftEVNone    LeftEVJob = 'N' // Left eigenvectors are not computed.
 )
 
-// Job constants for Dhseqr.
+// RightEVJob specifies whether right eigenvectors are computed in Dgeev.
+type RightEVJob byte
+
 const (
-	EigenvaluesOnly     EVJob = 'E'
-	EigenvaluesAndSchur EVJob = 'S'
+	RightEVCompute RightEVJob = 'V' // Right eigenvectors are computed.
+	RightEVNone    RightEVJob = 'N' // Right eigenvectors are not computed.
 )
 
-// EVSide specifies what eigenvectors will be computed.
+// BalanceJob specifies matrix balancing operation.
+type BalanceJob byte
+
+const (
+	Permute      BalanceJob = 'P'
+	Scale        BalanceJob = 'S'
+	PermuteScale BalanceJob = 'B'
+	BalanceNone  BalanceJob = 'N'
+)
+
+// SchurJob specifies whether the Schur form is computed in Dhseqr.
+type SchurJob byte
+
+const (
+	EigenvaluesOnly     SchurJob = 'E'
+	EigenvaluesAndSchur SchurJob = 'S'
+)
+
+// SchurComp specifies whether and how the Schur vectors are computed in Dhseqr.
+type SchurComp byte
+
+const (
+	SchurNone SchurComp = 'N' // Schur vectors are not computed.
+	SchurHess SchurComp = 'I' // Schur vectors of the upper Hessenberg marix are computed.
+	SchurOrig SchurComp = 'V' // Schur vectors of the original matrix are computed.
+)
+
+// UpdateSchurComp specifies whether the matrix of Schur vectors is updated in Dtrexc.
+type UpdateSchurComp byte
+
+const (
+	UpdateSchur     UpdateSchurComp = 'V' // The matrix of Schur vectors is updated.
+	UpdateSchurNone UpdateSchurComp = 'N' // The matrix of Schur vectors is not updated.
+)
+
+// EVSide specifies what eigenvectors are computed in Dtrevc3.
 type EVSide byte
 
-// EVSide constants for Dtrevc3.
 const (
-	RightEV     EVSide = 'R' // Compute right eigenvectors only.
-	LeftEV      EVSide = 'L' // Compute left eigenvectors only.
-	RightLeftEV EVSide = 'B' // Compute both right and left eigenvectors.
+	EVRight     EVSide = 'R' // Only right eigenvectors are computed.
+	EVLeft      EVSide = 'L' // Only left eigenvectors are computed.
+	EVRightLeft EVSide = 'B' // Both right and left eigenvectors are computed.
 )
 
-// HowMany specifies which eigenvectors will be computed.
-type HowMany byte
+// EVHowMany specifies which eigenvectors are computed in Dtrevc3 and how.
+type EVHowMany byte
 
-// HowMany constants for Dhseqr.
 const (
-	AllEV      HowMany = 'A' // Compute all right and/or left eigenvectors.
-	AllEVMulQ  HowMany = 'B' // Compute all right and/or left eigenvectors multiplied by an input matrix.
-	SelectedEV HowMany = 'S' // Compute selected right and/or left eigenvectors.
+	EVAll      EVHowMany = 'A' // Compute all right and/or left eigenvectors.
+	EVAllMulQ  EVHowMany = 'B' // Compute all right and/or left eigenvectors multiplied by an input matrix.
+	EVSelected EVHowMany = 'S' // Compute selected right and/or left eigenvectors.
 )

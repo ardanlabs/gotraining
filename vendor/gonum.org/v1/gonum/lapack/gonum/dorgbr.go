@@ -10,18 +10,25 @@ import "gonum.org/v1/gonum/lapack"
 // computed from the decomposition Dgebrd. See Dgebd2 for the description of
 // Q and P^T.
 //
-// If vect == lapack.ApplyQ, then a is assumed to have been an m×k matrix and
+// If vect == lapack.GenerateQ, then a is assumed to have been an m×k matrix and
 // Q is of order m. If m >= k, then Dorgbr returns the first n columns of Q
 // where m >= n >= k. If m < k, then Dorgbr returns Q as an m×m matrix.
 //
-// If vect == lapack.ApplyP, then A is assumed to have been a k×n matrix, and
+// If vect == lapack.GeneratePT, then A is assumed to have been a k×n matrix, and
 // P^T is of order n. If k < n, then Dorgbr returns the first m rows of P^T,
 // where n >= m >= k. If k >= n, then Dorgbr returns P^T as an n×n matrix.
 //
 // Dorgbr is an internal routine. It is exported for testing purposes.
-func (impl Implementation) Dorgbr(vect lapack.DecompUpdate, m, n, k int, a []float64, lda int, tau, work []float64, lwork int) {
+func (impl Implementation) Dorgbr(vect lapack.GenOrtho, m, n, k int, a []float64, lda int, tau, work []float64, lwork int) {
 	mn := min(m, n)
-	wantq := vect == lapack.ApplyQ
+	var wantq bool
+	switch vect {
+	case lapack.GenerateQ:
+		wantq = true
+	case lapack.GeneratePT:
+	default:
+		panic(badGenOrtho)
+	}
 	if wantq {
 		if m < n || n < min(m, k) || m < min(m, k) {
 			panic(badDims)

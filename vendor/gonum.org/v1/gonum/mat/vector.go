@@ -87,6 +87,9 @@ type VecDense struct {
 // used as the backing slice, and changes to the elements of the returned VecDense
 // will be reflected in data. If neither of these is true, NewVecDense will panic.
 func NewVecDense(n int, data []float64) *VecDense {
+	if n < 0 {
+		panic("mat: negative dimension")
+	}
 	if len(data) != n && data != nil {
 		panic(ErrShape)
 	}
@@ -633,6 +636,9 @@ func (v *VecDense) MulVec(a Matrix, b Vector) {
 // reuseAs resizes an empty vector to a r×1 vector,
 // or checks that a non-empty matrix is r×1.
 func (v *VecDense) reuseAs(r int) {
+	if r == 0 {
+		panic(ErrZeroLength)
+	}
 	if v.IsZero() {
 		v.mat = blas64.Vector{
 			Inc:  1,
@@ -656,6 +662,9 @@ func (v *VecDense) IsZero() bool {
 
 func (v *VecDense) isolatedWorkspace(a Vector) (n *VecDense, restore func()) {
 	l := a.Len()
+	if l == 0 {
+		panic(ErrZeroLength)
+	}
 	n = getWorkspaceVec(l, false)
 	return n, func() {
 		v.CopyVec(n)

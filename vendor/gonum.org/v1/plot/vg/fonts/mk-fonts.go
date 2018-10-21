@@ -53,10 +53,19 @@ func main() {
 		log.Fatalf("error untarring: %v\n", err)
 	}
 
-	fontsDir := getFontsDir()
 	err = exec.Command("go", "get", "github.com/jteeuwen/go-bindata/...").Run()
 	if err != nil {
 		log.Fatalf("error go-getting go-bindata: %v\n", err)
+	}
+
+	fontsDir := getFontsDir()
+	enc, err := ioutil.ReadFile(filepath.Join(fontsDir, "cp1252.map"))
+	if err != nil {
+		log.Fatalf("could not read encoding map: %v", err)
+	}
+	err = ioutil.WriteFile(filepath.Join(tmpdir, fontsName, "cp1252.map"), enc, 0644)
+	if err != nil {
+		log.Fatalf("could not write encoding map: %v", err)
 	}
 
 	fname := filepath.Join(fontsDir, "liberation_fonts_generated.go")
