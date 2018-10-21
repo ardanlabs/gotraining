@@ -9,11 +9,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Blogs
 
-[Going Go](http://www.goinggo.net) - William Kennedy  
-[The acme of foolishness](http://dave.cheney.net) - Dave Cheney  
+[Ardan Labs Blog](https://www.ardanlabs.com/blog/) - William Kennedy  
+[The acme of foolishness](https://dave.cheney.net) - Dave Cheney  
 [The Go Blog](https://blog.golang.org) - Language Team  
 [Ukiah Smith](https://ukiahsmith.com) - Ukiah Smith  
-[Mechanical Sympathy](http://mechanical-sympathy.blogspot.com) - Martin Thompson  
+[Mechanical Sympathy](https://mechanical-sympathy.blogspot.com) - Martin Thompson  
 [Go Documentation References](https://golang.org/doc/#references) - Language Team
 
 ### Interviews
