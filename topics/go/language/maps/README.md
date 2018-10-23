@@ -5,8 +5,11 @@ Maps provide a data structure that allow for the storage and management of key/v
 ## Notes
 
 * Maps provide a way to store and retrieve key/value pairs.
-* The map key must be a value that can be used in an assignment statement.
+* Reading an absent key returns the zero value for the map's value type.
 * Iterating over a map is always random.
+* The map key must be a value that is comparable.
+* Elements in a map are not addressable.
+* Maps are a reference type.
 
 ## Links
 
@@ -17,10 +20,14 @@ http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html
 
 ## Code Review
 
-[Declare, initialize and iterate](example1/example1.go) ([Go Playground](https://play.golang.org/p/xMpg8hv_1pD))  
-[Map literals and delete](example2/example2.go) ([Go Playground](https://play.golang.org/p/exyL4z8STLt))  
-[Map key restrictions](example3/example3.go) ([Go Playground](https://play.golang.org/p/j7Rrqn4XiBR))  
-[Sorting maps by key](example4/example4.go) ([Go Playground](https://play.golang.org/p/fkr0722d-eg))  
+TODO renumber
+[Declare, write, read, and delete](example1/example1.go) ([Go Playground](https://play.golang.org/p/3w6zgywPD3w))  
+[Absent keys](example2/example2.go) ([Go Playground](https://play.golang.org/p/5KHMfmL2SyA))  
+[Map key restrictions](example3/example3.go) ([Go Playground](https://play.golang.org/p/lfl967ocaKv))  
+[Map literals and range](example4/example4.go) ([Go Playground](https://play.golang.org/p/0KFlxby2a0z))  
+[Sorting maps by key](example5/example5.go) ([Go Playground](https://play.golang.org/p/XADXCQqn2pJ))  
+[Taking an element's address](example6/example6.go) ([Go Playground](https://play.golang.org/p/4phv1S1wZWh))  
+[Maps are Reference Types](example7/example7.go) ([Go Playground](https://play.golang.org/p/7jEDn1yhg5v))  
 
 ## Exercises
 

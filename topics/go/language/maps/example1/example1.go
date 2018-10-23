@@ -1,13 +1,13 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show how to declare, initialize and iterate
-// over a map. Shows how iterating over a map is random.
+// Sample program to show how to initialize a map, write to
+// it, then read and delete from it.
 package main
 
 import "fmt"
 
-// user defines a user in the program.
+// user represents someone using the program.
 type user struct {
 	name    string
 	surname string
@@ -25,16 +25,25 @@ func main() {
 	users["Mouse"] = user{"Mickey", "Mouse"}
 	users["Jackson"] = user{"Michael", "Jackson"}
 
-	// Iterate over the map.
-	for key, value := range users {
-		fmt.Println(key, value)
-	}
+	// Read the value at a specific key.
+	mouse := users["Mouse"]
 
-	fmt.Println()
+	fmt.Printf("%+v\n", mouse)
 
-	// Iterate over the map and notice the
-	// results are different.
-	for key := range users {
-		fmt.Println(key)
-	}
+	// Replace the value at the Mouse key.
+	users["Mouse"] = user{"Jerry", "Mouse"}
+
+	// Read the Mouse key again.
+	fmt.Printf("%+v\n", users["Mouse"])
+
+	// Delete the value at a specific key.
+	delete(users, "Roy")
+
+	// Check the length of the map. There are only 3 elements.
+	fmt.Println(len(users))
+
+	// It is safe to delete an absent key.
+	delete(users, "Roy")
+
+	fmt.Println("Goodbye.")
 }

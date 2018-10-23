@@ -7,18 +7,18 @@ package main
 
 import "fmt"
 
-// user defines a user in the program.
+// user represents someone using the program.
 type user struct {
 	name    string
 	surname string
 }
 
-// users define a set of users.
+// users defines a set of users.
 type users []user
 
 func main() {
 
-	// Declare and make a map uses a slice of users as the key.
+	// Declare and make a map that uses a slice as the key.
 	u := make(map[users]int)
 
 	// ./example3.go:22: invalid map key type users
