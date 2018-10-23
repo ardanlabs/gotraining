@@ -26,7 +26,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 [Eliminate False Sharing](http://www.drdobbs.com/parallel/eliminate-false-sharing/217500206) - Herb Sutter    
 [The Go Memory Model](https://golang.org/ref/mem)    
 [Introducing the Go Race Detector](http://blog.golang.org/race-detector) - Dmitry Vyukov and Andrew Gerrand    
-[Detecting Race Conditions With Go](http://www.goinggo.net/2013/09/detecting-race-conditions-with-go.html) - William Kennedy    
+[Detecting Race Conditions With Go](https://www.ardanlabs.com/blog/2013/09/detecting-race-conditions-with-go.html) - William Kennedy    
 [Data Race Detector](https://golang.org/doc/articles/race_detector.html)    
 
 ## Diagram

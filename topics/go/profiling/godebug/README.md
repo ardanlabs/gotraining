@@ -146,7 +146,7 @@ Review the gc trace.
 
 [Tour of Go's env variables](http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables)   
 [Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs)  
-[Scheduler tracing in Go](http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html)  
+[Scheduler tracing in Go](https://www.ardanlabs.com/blog/2015/02/scheduler-tracing-in-go.html)  
 
 [Go runtime package](http://golang.org/pkg/runtime/)  
 [GC Runtime Source Code](https://golang.org/src/runtime/mgc.go)  

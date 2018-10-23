@@ -74,9 +74,9 @@ If the GC begins to believe that it can’t finish the collection within the dec
 ### Pointer Mechanics
 
 https://golang.org/doc/effective_go.html#pointers_vs_values  
-https://www.goinggo.net/2017/05/language-mechanics-on-stacks-and-pointers.html  
-http://www.goinggo.net/2014/12/using-pointers-in-go.html  
-http://www.goinggo.net/2013/07/understanding-pointers-and-memory.html  
+https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html  
+https://www.ardanlabs.com/blog/2014/12/using-pointers-in-go.html  
+https://www.ardanlabs.com/blog/2013/07/understanding-pointers-and-memory.html  
 
 ### Stacks
 

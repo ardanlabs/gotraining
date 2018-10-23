@@ -9,7 +9,7 @@ Logging is an important part of every program. Logs are our eyes and history to 
 
 ## Links
 
-http://www.goinggo.net/2013/11/using-log-package-in-go.html
+https://www.ardanlabs.com/blog/2013/11/using-log-package-in-go.html
 
 ## Code Review
 

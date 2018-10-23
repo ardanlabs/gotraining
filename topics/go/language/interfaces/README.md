@@ -20,7 +20,7 @@ _"Polymorphism means that you write a certain program and it behaves differently
 
 https://golang.org/doc/effective_go.html#interfaces  
 http://blog.golang.org/laws-of-reflection  
-http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html  
+https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html  
 [Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)  
 [Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful)  
 [Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy  
