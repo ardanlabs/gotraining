@@ -6,17 +6,18 @@ package strings
 
 // Reverse gives the reversed form of s.
 //
-// This is the first correct implementation. It may not behave how you want for
-// things like unicode combining characters. If you can break it let me know :)
+// This is the first (mostly) correct implementation. It breaks for strings
+// with combining characters; "noël" becomes "l̈eon" instead of "lëon". The
+// point of this section is learning testing not reversing strings. For a truly
+// correct version see: http://rosettacode.org/wiki/Reverse_a_string#Go
 //
 // It is still not very efficient but maybe it's good enough?
 func Reverse(s string) string {
-	in := []rune(s)
-	var r string
+	var out string
 
-	for i := len(in) - 1; i >= 0; i-- {
-		r = r + string(in[i])
+	for _, r := range s {
+		out = string(r) + out
 	}
 
-	return r
+	return out
 }
