@@ -191,6 +191,7 @@ October(16-18)      Torrance, CA          Dollar Shave Club   Corporate    Go (3
 October(23-25)      St. Louis, MO         Centene             Corporate    Go (3 day)
 November(07-09)     Guadalajara, Mexico   Intel               Corporate    Adv Go (3 day)
 November(27-29)     Portland, OR          New Relic           Corporate    Go (3 day)
+December(11-13)     San Francisco, CA     Shipt               Corporate    Adv Go (3 day)
 ```
 
 **Daniel Whitenack**  
