@@ -15,7 +15,7 @@ The ability to stream and pass data around is incredibility important. Data is c
 ## Links
 
 [io package](https://golang.org/pkg/io/)     
-[Go Walkthrough: io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#.d2ebstv0q) - Ben Johnson  
+[Go Walkthrough: io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#.d2ebstv0q) - Ben Johnson    
 
 ## Code Review
 

@@ -23,7 +23,7 @@ _Systems cannot be developed assuming that human beings will be able to write mi
 [Inspecting errors](https://dave.cheney.net/2014/12/24/inspecting-errors) - Dave Cheney    
 [Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully) - Dave Cheney    
 [Stack traces and the errors package](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package) - Dave Cheney    
-[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox     
+[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
 [Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
 
 ## Code Review

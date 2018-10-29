@@ -9,7 +9,7 @@ Encoding is the process or marshaling or unmarshaling data into different forms.
 
 ## Links
 
-[Decode JSON Documents In Go](https://www.ardanlabs.com/blog/2014/01/decode-json-documents-in-go.html) - William Kennedy      
+[Decode JSON Documents In Go](https://www.ardanlabs.com/blog/2014/01/decode-json-documents-in-go.html) - William Kennedy    
 
 ## Code Review
 

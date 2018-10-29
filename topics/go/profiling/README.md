@@ -79,7 +79,7 @@ hey is a modern HTTP benchmarking tool capable of generating the load you need t
 
 Much of what I have learned comes from Dave and working on solving problems. This slide deck is a great place to start. Much of this material can be found in the material below.
 
-[Seven ways to profile a Go program](http://go-talks.appspot.com/github.com/davecheney/presentations/seven.slide#1)
+[Seven ways to profile a Go program](http://go-talks.appspot.com/github.com/davecheney/presentations/seven.slide#1)    
 
 ## Profiling, Debugging and Optimization Reading
 
