@@ -26,7 +26,7 @@ _"Don't design with interfaces, discover them." - Rob Pike_
 
 ## Links
 
-http://golang.org/doc/effective_go.html#embedding  
+[Embedding](https://golang.org/doc/effective_go.html#embedding)    
 [Methods, Interfaces and Embedding](http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
 [Composition In Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
 [Reducing Type Hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy  

@@ -19,7 +19,7 @@ The package context defines the Context type, which carries deadlines, cancelati
 [Package context](https://golang.org/pkg/context)  
 [Go Concurrency Patterns: Context](https://blog.golang.org/context) - Sameer Ajmani  
 [Cancellation, Context, and Plumbing](https://vimeo.com/115309491) - Sameer Ajmani  
-[Using contexts to avoid leaking goroutines](https://rakyll.org/leakingctx/) -- Jaana Burcu Dogan  
+[Using contexts to avoid leaking goroutines](https://rakyll.org/leakingctx/) - JBD  
 
 ## Code Review
 

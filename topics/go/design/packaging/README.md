@@ -4,8 +4,8 @@ _Package Oriented Design allows a developer to identify where a package belongs 
 
 ## Links
 
-https://www.goinggo.net/2017/02/design-philosophy-on-packaging.html  
-https://www.goinggo.net/2017/02/package-oriented-design.html  
+[Design Philosophy On Packaging](https://www.ardanlabs.com/blog/2017/02/design-philosophy-on-packaging.html) - William Kennedy    
+[Package Oriented Design](https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html) - William Kennedy    
 
 ## History
 

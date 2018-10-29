@@ -13,10 +13,10 @@ Maps provide a data structure that allow for the storage and management of key/v
 
 ## Links
 
-http://blog.golang.org/go-maps-in-action  
-http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html  
-[Keith Randall - Inside the Map Implementation](https://www.youtube.com/watch?v=Tl7mi9QmLns)  
-[How the Go runtime implements maps efficiently (without generics)](https://dave.cheney.net/2018/05/29/how-the-go-runtime-implements-maps-efficiently-without-generics) - Dave Cheney  
+[Go maps in action](https://blog.golang.org/go-maps-in-action) - Andrew Gerrand    
+[Macro View of Map Internals In Go](https://www.ardanlabs.com/blog/2013/12/macro-view-of-map-internals-in-go.html) - William Kennedy    
+[Inside the Map Implementation](https://www.youtube.com/watch?v=Tl7mi9QmLns) - Keith Randall    
+[How the Go runtime implements maps efficiently (without generics)](https://dave.cheney.net/2018/05/29/how-the-go-runtime-implements-maps-efficiently-without-generics) - Dave Cheney    
 
 ## Code Review
 
