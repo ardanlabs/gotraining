@@ -48,6 +48,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Notes on Programming in C](http://doc.cat-v.org/bell_labs/pikestyle) - Rob Pike  
 [The Why of Go](https://www.infoq.com/presentations/go-concurrency-gc) - Carmen Andoh  
 [The Transistor, Part 3: Endless Reinvention](https://technicshistory.wordpress.com/2018/03/31/the-transistor-part-3-endless-reinvention/amp) - technicshistory  
+[Reflections on Trusting Trust](https://www.archive.ece.cmu.edu/~ganger/712.fall02/papers/p761-thompson.pdf) - Ken Thompson  
 
 ### Contribute to Go
 

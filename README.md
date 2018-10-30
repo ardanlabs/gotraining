@@ -123,6 +123,18 @@ _**Video**_
 
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
 
+### 2019
+
+**Bill Kennedy**  
+```
+Date                Location              Venue               Type         Type             Url
+================================================================================================================================================
+January(18-19)      Goa, India            GopherCon India     Conference   Adv Go (1 day)   https://gopherconindia.com/go-workshop1/
+January(28-30)      Fort Mill, SC         Red Ventures        Corporate    Go (3 day)       
+February(13-15)     Copenhagen, Denmark   Maersk              Corporate    Go (3 day)       
+February(25-26)     Birmingham, AL        Shipt               Corporate    Go Perf (2 day)       
+```
+
 ### 2018
 
 **Bill Kennedy**  
@@ -167,6 +179,7 @@ November(05-06)     Silicon Valey, CA     Paypal              Corporate    Go (3
 November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
 December(01)        HCMC, Vietnam         TBD                 Conference   Go (1 day)       http://gophercon.vn/
 December(04-05)     Santa Monica, CA      ZipRecruiter        Corporate    Go (3 day)
+December(18-20)     Hoboken, NJ           Jet                 Corporate    Go (3 day)
 ```
 
 **Jacob Walker**  
