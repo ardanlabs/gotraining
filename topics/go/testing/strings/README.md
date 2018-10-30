@@ -15,7 +15,7 @@ _Look at the profiling topic to learn more about using benchmarks to [profile](.
 
 ## Links
 
-[Table Driven Tests / Dave Cheney](https://dave.cheney.net/2013/06/09/writing-table-driven-tests-in-go).
+[Table Driven Tests](https://dave.cheney.net/2013/06/09/writing-table-driven-tests-in-go) - Dave Cheney    
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

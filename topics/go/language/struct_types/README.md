@@ -16,11 +16,11 @@ _"Implicit conversion of types is the Halloween special of coding. Whoever thoug
 
 ## Links
 
-http://www.goinggo.net/2013/07/understanding-type-in-go.html  
-http://www.goinggo.net/2013/07/object-oriented-programming-in-go.html  
-http://dave.cheney.net/2015/10/09/padding-is-hard  
-http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing  
-http://www.catb.org/esr/structure-packing
+[Understanding Type in Go](https://www.ardanlabs.com/blog/2013/07/understanding-type-in-go.html) - William Kennedy    
+[Object Oriented Programming in Go](https://www.ardanlabs.com/blog/2013/07/object-oriented-programming-in-go.html) - William Kennedy    
+[Padding is hard](https://dave.cheney.net/2015/10/09/padding-is-hard) - Dave Cheney    
+[Structure Member Alignment, Padding and Data Packing](https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/)    
+[The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing) - Eric S. Raymond    
 
 ## Code Review
 

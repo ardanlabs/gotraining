@@ -144,17 +144,17 @@ Review the gc trace.
 
 ## Links
 
-[Tour of Go's env variables](http://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables)   
-[Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs)  
-[Scheduler tracing in Go](http://www.goinggo.net/2015/02/scheduler-tracing-in-go.html)  
+[Tour of Go's env variables](https://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables) - Dave Cheney    
+[Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov    
+[Scheduler Tracing In Go](https://www.ardanlabs.com/blog/2015/02/scheduler-tracing-in-go.html) - William Kennedy    
 
-[Go runtime package](http://golang.org/pkg/runtime/)  
-[GC Runtime Source Code](https://golang.org/src/runtime/mgc.go)  
+[Go runtime package](http://golang.org/pkg/runtime/)    
+[GC Runtime Source Code](https://golang.org/src/runtime/mgc.go)    
 
-[Finding memory leaks in Go](https://www.hakkalabs.co/articles/finding-memory-leaks-go-programs)  
-[Visualising the Go garbage collector](http://dave.cheney.net/2014/07/11/visualising-the-go-garbage-collector)  
-[Understanding Go memory usage](https://deferpanic.com/blog/understanding-golang-memory-usage)  
-[Visualising garbage collection algorithms](https://spin.atomicobject.com/2014/09/03/visualizing-garbage-collection-algorithms/)
+[Finding memory leaks in Go](https://www.hakkalabs.co/articles/finding-memory-leaks-go-programs) - Oleg Shaldybin    
+[Visualising the Go garbage collector](https://dave.cheney.net/2014/07/11/visualising-the-go-garbage-collector) - Dave Cheney    
+[Understanding Go memory usage](https://web.archive.org/web/20170925060611/https://deferpanic.com/blog/understanding-golang-memory-usage/)    
+[Visualising garbage collection algorithms](https://spin.atomicobject.com/2014/09/03/visualizing-garbage-collection-algorithms/) - Ken Fox    
 
 ## Code Review
 

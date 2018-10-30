@@ -14,21 +14,21 @@ Testing is built right into the go tools and the standard library. Testing needs
 
 ## Quotes
 
-_"A unit test is a test of behavior whose success or failure is wholly determined by the correctness of the test and the correctness of the unit under test." - Kevin Henney
+_"A unit test is a test of behavior whose success or failure is wholly determined by the correctness of the test and the correctness of the unit under test." - Kevin Henney_
 
 ## Links
 
-http://golang.org/pkg/testing/  
-http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go  
-http://saml.rilspace.org/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof  
-http://golang.org/pkg/net/http/pprof/  
-https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs  
+[testing package](http://golang.org/pkg/testing/)    
+[How to write benchmarks in Go](https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go) - Dave Cheney    
+[Profiling and creating call graphs for Go programs with "go tool pprof"](http://saml.rilspace.com/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof) - Samuel Lampa    
+[pprof package](https://golang.org/pkg/net/http/pprof/)    
+[Debugging performance issues in Go programs](https://software.intel.com/en-us/blogs/2014/05/10/debugging-performance-issues-in-go-programs) - Dmitry Vyukov    
 https://github.com/dvyukov/go-fuzz  
-https://talks.golang.org/2015/dynamic-tools.slide#1  
-https://vimeo.com/141698770  
+[Go Dynamic Tools](https://talks.golang.org/2015/dynamic-tools.slide#1) - Dmitry Vyukov    
+[Automated Testing with go-fuzz](https://vimeo.com/141698770) - Filippo Valsorda    
 [Structuring Tests in Go](https://medium.com/@benbjohnson/structuring-tests-in-go-46ddee7a25c#.b2m3nziyb) - Ben Johnson  
 [Advanced Testing Concepts for Go 1.7](https://speakerdeck.com/mpvl/advanced-testing-concepts-for-go-1-dot-7) - Marcel van Lohuizen  
-[Parallelize your table-driven tests](http://golang.rakyll.org/parallelize-test-tables/) - rakyll  
+[Parallelize your table-driven tests](https://rakyll.org/parallelize-test-tables/) - JBD     
 [Advanced Testing with Go - Video](https://www.youtube.com/shared?ci=LARb45o5TpA) - Mitchell Hashimoto  
 [Advanced Testing with Go - Deck](https://speakerdeck.com/mitchellh/advanced-testing-with-go) - Mitchell Hashimoto  
 [The tragedy of 100% code coverage](http://labs.ig.com/code-coverage-100-percent-tragedy) - Daniel Lebrero's  

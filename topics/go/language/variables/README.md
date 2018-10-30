@@ -14,11 +14,11 @@ Variables are at the heart of the language and provide the ability to read from 
 
 ## Links
 
-[Built-In Types](http://golang.org/ref/spec#Boolean_types)  
-https://golang.org/doc/effective_go.html#variables  
-http://www.goinggo.net/2013/08/gustavos-ieee-754-brain-teaser.html  
-[What's in a name](https://www.youtube.com/watch?v=sFUSP8Au_PE)  
-[A brief history of “type”](http://arcanesentiment.blogspot.com/2015/01/a-brief-history-of-type.html)  
+[Built-In Types](http://golang.org/ref/spec#Boolean_types)    
+[Variables](https://golang.org/doc/effective_go.html#variables)    
+[Gustavo's IEEE-754 Brain Teaser](https://www.ardanlabs.com/blog/2013/08/gustavos-ieee-754-brain-teaser.html) - William Kennedy    
+[What's in a name](https://www.youtube.com/watch?v=sFUSP8Au_PE)    
+[A brief history of “type”](http://arcanesentiment.blogspot.com/2015/01/a-brief-history-of-type.html) - Arcane Sentiment    
 
 ## Code Review
 

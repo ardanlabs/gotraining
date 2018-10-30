@@ -18,13 +18,13 @@ _"Polymorphism means that you write a certain program and it behaves differently
 
 ## Links
 
-https://golang.org/doc/effective_go.html#interfaces  
-http://blog.golang.org/laws-of-reflection  
-http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html  
-[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275)  
-[Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful)  
-[Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy  
-[Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy  
+[Interfaces](https://golang.org/doc/effective_go.html#interfaces)    
+[The Laws of Reflection](https://blog.golang.org/laws-of-reflection) - Rob Pike    
+[Methods, Interfaces and Embedded Types in Go](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy    
+[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - JBD    
+[Abstraction Considered Harmful](https://bravenewgeek.com/abstraction-considered-harmful/) - Tyler Treat    
+[Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy    
+[Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy    
 
 ## Code Review
 

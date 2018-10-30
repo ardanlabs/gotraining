@@ -150,7 +150,7 @@ Use Delve to review the dump.
 
 ### Links
 
-[Debugging Go core dumps](https://rakyll.org/coredumps/?utm_source=golangweekly&utm_medium=email)  
+[Debugging Go core dumps](https://rakyll.org/coredumps/) - JBD    
 
 ### Code Review
 
