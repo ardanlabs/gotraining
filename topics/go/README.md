@@ -235,7 +235,7 @@ _"Product excellence is the difference between something that only works under c
 [Normalization of Deviance in Software](http://danluu.com/wat/) - danluu.com  
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 [Technical Debt Quadrant](https://martinfowler.com/bliki/TechnicalDebtQuadrant.html) - Martin Fowler  
-[Design Philosophy On Integrity](https://www.goinggo.net/2017/02/design-philosophy-on-integrity.html) - William Kennedy  
+[Design Philosophy On Integrity](https://www.ardanlabs.com/blog/2017/02/design-philosophy-on-integrity.html) - William Kennedy  
 [Ratio of bugs per line of code](https://www.mayerdan.com/ruby/2012/11/11/bugs-per-line-of-code-ratio) - Dan Mayer  
 [Masterminds of Programming](http://dl.acm.org/citation.cfm?id=1592983) - Federico Biancuzzi and Shane Warden  
 [Developing Software The Right Way, with Intent and Carefulness](http://ipengineer.net/2017/04/developing-software-the-right-way-with-intent-and-carefulness) - David Gee  
@@ -410,12 +410,12 @@ Don't use an interface:
 
 **Resources:**
 
-[Methods, interfaces and Embedding](https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
-[Composition with Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
-[Reducing type hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy  
+[Methods, interfaces and Embedding](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
+[Composition with Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  
+[Reducing type hierarchies](https://www.ardanlabs.com/blog/2016/10/reducing-type-hierarchies.html) - William Kennedy  
 [Interface pollution in Go](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
-[Application Focused API Design](https://www.goinggo.net/2016/11/application-focused-api-design.html) - William Kennedy  
-[Avoid interface pollution](https://www.goinggo.net/2016/10/avoid-interface-pollution.html) - William Kennedy  
+[Application Focused API Design](https://www.ardanlabs.com/blog/2016/11/application-focused-api-design.html) - William Kennedy  
+[Avoid interface pollution](https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html) - William Kennedy  
 
 ---
 

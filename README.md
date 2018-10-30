@@ -257,7 +257,7 @@ We use a slack channel to share links, code, and examples during the training.  
 
 #### Local Installation
 
-https://www.goinggo.net/2016/05/installing-go-and-your-workspace.html
+https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html
 
 #### Using Docker
 Installing Go may not be needed if you choose to use [Docker](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
@@ -313,7 +313,7 @@ git clone https://github.com/ardanlabs/gotraining.git
   
 http://golang.org/  
 https://tour.golang.org/welcome/1  
-http://www.goinggo.net/
+https://www.ardanlabs.com/blog/
 
 ## Go Get The Training Material
 

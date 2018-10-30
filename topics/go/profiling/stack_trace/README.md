@@ -83,7 +83,7 @@ each function call.
 
 ### Links
 
-[Stack traces in Go](http://www.goinggo.net/2015/01/stack-traces-in-go.html)  
+[Stack traces in Go](https://www.ardanlabs.com/blog/2015/01/stack-traces-in-go.html)  
 
 ## Core Dumps
 

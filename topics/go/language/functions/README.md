@@ -11,8 +11,8 @@ Functions are at the core of the language. They provide a mechanism to group and
 ## Links
 
 https://golang.org/doc/effective_go.html#functions  
-http://www.goinggo.net/2013/10/functions-and-naked-returns-in-go.html  
-http://www.goinggo.net/2013/06/understanding-defer-panic-and-recover.html
+https://www.ardanlabs.com/blog/2013/10/functions-and-naked-returns-in-go.html  
+https://www.ardanlabs.com/blog/2013/06/understanding-defer-panic-and-recover.html
 
 ## Code Review
 

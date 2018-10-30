@@ -117,10 +117,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Design Guidelines](design_guidelines.md)  
 [Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
 [Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful) - Brave New Geek  
-[Methods, Interfaces and Embedding](http://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
-[Composition In Go](https://www.goinggo.net/2015/09/composition-with-go.html) - William Kennedy  
-[Reducing Type Hierarchies](https://www.goinggo.net/2016/10/reducing-type-hierarchies.html) - William Kennedy  
-[Avoid Interface Pollution](https://www.goinggo.net/2016/10/avoid-interface-pollution.html) - William Kennedy  
+[Methods, Interfaces and Embedding](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
+[Composition In Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  
+[Reducing Type Hierarchies](https://www.ardanlabs.com/blog/2016/10/reducing-type-hierarchies.html) - William Kennedy  
+[Avoid Interface Pollution](https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html) - William Kennedy  
 
 ### Concurrency
 

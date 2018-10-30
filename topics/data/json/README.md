@@ -9,7 +9,7 @@ Typically JSON is used when ease-of-use is the primary goal of data interchange.
 
 ## Links
 
-[Decode JSON documents in Go](http://www.goinggo.net/2014/01/decode-json-documents-in-go.html)  
+[Decode JSON documents in Go](https://www.ardanlabs.com/blog/2014/01/decode-json-documents-in-go.html)  
 [Go walkthrough encoding/json](https://medium.com/@benbjohnson/go-walkthrough-encoding-json-package-9681d1d37a8f#.22rr9e3w4)
 
 ## Code Review
