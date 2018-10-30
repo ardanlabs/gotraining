@@ -15,10 +15,10 @@ _Look at the profiling topic to learn more about using benchmarks to [profile](.
 
 ## Links
 
-http://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go  
-[Profiling & Optimizing in Go / Brad Fitzpatrick](https://www.youtube.com/watch?v=xxDZuPEgbBU)  
-[Benchstat computes and compares statistics about benchmarks](https://github.com/rsc/benchstat)  
-[Advanced Testing Concepts for Go 1.7](https://speakerdeck.com/mpvl/advanced-testing-concepts-for-go-1-dot-7) - Marcel van Lohuizen  
+[How to write benchmarks in Go](https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go) - Dave Cheney    
+[Profiling & Optimizing in Go](https://www.youtube.com/watch?v=xxDZuPEgbBU) - Brad Fitzpatrick    
+[Benchstat computes and compares statistics about benchmarks](https://godoc.org/golang.org/x/perf/cmd/benchstat)    
+[Advanced Testing Concepts for Go 1.7](https://speakerdeck.com/mpvl/advanced-testing-concepts-for-go-1-dot-7) - Marcel van Lohuizen    
 
 ## Exercises
 

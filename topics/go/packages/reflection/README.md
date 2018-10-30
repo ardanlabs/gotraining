@@ -10,7 +10,7 @@ Reflection is the ability to inspect a value to derive type or other meta-data. 
 
 ## Links
 
-http://blog.golang.org/laws-of-reflection
+[The Laws of Reflection](https://blog.golang.org/laws-of-reflection) - Rob Pike    
 
 ## Code Review
 

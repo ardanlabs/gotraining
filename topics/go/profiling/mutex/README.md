@@ -20,7 +20,7 @@ Review the TestMutexProfile function.
 
 ## Links
 
-[Mutex profile](https://rakyll.org/mutexprofile) - Burcu Dogan  
+[Mutex profile](https://rakyll.org/mutexprofile) - JBD    
 
 ## Code Review
 

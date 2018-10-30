@@ -15,16 +15,16 @@ _Systems cannot be developed assuming that human beings will be able to write mi
 
 ## Links
 
-http://blog.golang.org/error-handling-and-go  
-https://www.ardanlabs.com/blog/2014/10/error-handling-in-go-part-i.html  
-https://www.ardanlabs.com/blog/2014/11/error-handling-in-go-part-ii.html  
-https://www.ardanlabs.com/blog/2017/05/design-philosophy-on-logging.html  
-http://clipperhouse.com/2015/02/07/bugs-are-a-failure-of-prediction/  
-http://dave.cheney.net/2014/12/24/inspecting-errors  
-http://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully  
-https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package  
-[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce)  
-[Error handling in Upspin](https://commandcenter.blogspot.com.au/2017/12/error-handling-in-upspin.html)
+[Error handling and Go](https://blog.golang.org/error-handling-and-go)    
+[Error Handling In Go, Part I](https://www.ardanlabs.com/blog/2014/10/error-handling-in-go-part-i.html) - William Kennedy    
+[Error Handling In Go, Part II](https://www.ardanlabs.com/blog/2014/11/error-handling-in-go-part-ii.html) - William Kennedy    
+[Design Philosophy On Logging](https://www.ardanlabs.com/blog/2017/05/design-philosophy-on-logging.html) - William Kennedy    
+[Bugs are a failure of prediction](https://clipperhouse.com/bugs-are-a-failure-of-prediction/) - Matt Sherman    
+[Inspecting errors](https://dave.cheney.net/2014/12/24/inspecting-errors) - Dave Cheney    
+[Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully) - Dave Cheney    
+[Stack traces and the errors package](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package) - Dave Cheney    
+[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
+[Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
 
 ## Code Review
 

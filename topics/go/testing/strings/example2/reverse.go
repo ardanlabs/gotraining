@@ -6,14 +6,13 @@ package strings
 
 // Reverse gives the reversed form of s.
 //
-// This is the first real implementation.
-// It is not very efficient and it will fail on multibyte input.
+// This is the first real attempt. It fails on multibyte input.
 func Reverse(s string) string {
-	var r string
+	var out string
 
-	for i := len(s) - 1; i >= 0; i-- {
-		r = r + string(s[i])
+	for i := 0; i < len(s); i++ {
+		out = string(s[i]) + out
 	}
 
-	return r
+	return out
 }

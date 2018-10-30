@@ -73,10 +73,10 @@ If the GC begins to believe that it can’t finish the collection within the dec
 
 ### Pointer Mechanics
 
-https://golang.org/doc/effective_go.html#pointers_vs_values  
-https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html  
-https://www.ardanlabs.com/blog/2014/12/using-pointers-in-go.html  
-https://www.ardanlabs.com/blog/2013/07/understanding-pointers-and-memory.html  
+[Pointers vs. Values](https://golang.org/doc/effective_go.html#pointers_vs_values)    
+[Language Mechanics On Stacks And Pointers](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html) - William Kennedy    
+[Using Pointers In Go](https://www.ardanlabs.com/blog/2014/12/using-pointers-in-go.html) - William Kennedy    
+[Understanding Pointers and Memory Allocation](https://www.ardanlabs.com/blog/2013/07/understanding-pointers-and-memory.html) - William Kennedy    
 
 ### Stacks
 
@@ -102,12 +102,12 @@ https://www.ardanlabs.com/blog/2013/07/understanding-pointers-and-memory.html
 ### Static Single Assignment Optimizations
 
 [GopherCon 2015: Ben Johnson - Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY)  
-https://godoc.org/golang.org/x/tools/go/ssa  
+[package ssa](https://godoc.org/golang.org/x/tools/go/ssa)    
 [Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU)
 
 ### Debugging code generation
 
-[Debugging code generation in Go](http://golang.rakyll.org/codegen/)
+[Debugging code generation in Go](https://rakyll.org/codegen/) - JBD    
 
 ## Code Review
 

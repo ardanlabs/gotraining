@@ -79,7 +79,7 @@ hey is a modern HTTP benchmarking tool capable of generating the load you need t
 
 Much of what I have learned comes from Dave and working on solving problems. This slide deck is a great place to start. Much of this material can be found in the material below.
 
-http://go-talks.appspot.com/github.com/davecheney/presentations/seven.slide#1
+[Seven ways to profile a Go program](http://go-talks.appspot.com/github.com/davecheney/presentations/seven.slide#1)    
 
 ## Profiling, Debugging and Optimization Reading
 
@@ -98,7 +98,7 @@ Here is more reading and videos to also help get you started.
 [Seven ways to profile a Go program](https://www.bigmarker.com/remote-meetup-go/Seven-ways-to-profile-a-Go-program) - Dave Cheney   
 [runtime: goroutine execution stalled during GC](https://github.com/golang/go/issues/16293) - Caleb Spare  
 [Go's execution tracer](http://www.thedotpost.com/2016/10/rhys-hiltner-go-execution-tracer) - Rhys Hiltner  
-[Using Instruments to profile Go programs](https://rakyll.org/instruments) - rakyll  
+[Using Instruments to profile Go programs](https://rakyll.org/instruments) - JBD    
 [Fighting latency: the CPU profiler is not your ally](https://www.youtube.com/watch?v=nsM_m4hZ-bA&t=973s) - Filippo Valsorda  
 [go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
 

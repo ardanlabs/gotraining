@@ -10,11 +10,11 @@ Go-fuzz is a coverage-guided fuzzing solution for testing of Go packages. Fuzzin
 
 ## Links
 
-https://github.com/dvyukov/go-fuzz  
-[go-fuzz github.com/arolek/ase](https://medium.com/@dgryski/go-fuzz-github-com-arolek-ase-3c74d5a3150c#.xvq0ol2zj) - Damian Gryski  
-[Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov  
-[DNS parser, meet Go fuzzer](https://blog.cloudflare.com/dns-parser-meet-go-fuzzer) - Filippo Valsorda  
-[Fuzzing Beyond Security: Automated Testing with go-fuzz](https://www.youtube.com/watch?v=kOZbFSM7PuI) - Filippo Valsorda  
+https://github.com/dvyukov/go-fuzz    
+[go-fuzz github.com/arolek/ase](https://medium.com/@dgryski/go-fuzz-github-com-arolek-ase-3c74d5a3150c#.xvq0ol2zj) - Damian Gryski    
+[Go Dynamic Tools](https://www.youtube.com/watch?v=a9xrxRsIbSU) - Dmitry Vyukov    
+[DNS parser, meet Go fuzzer](https://blog.cloudflare.com/dns-parser-meet-go-fuzzer) - Filippo Valsorda    
+[Fuzzing Beyond Security: Automated Testing with go-fuzz](https://www.youtube.com/watch?v=kOZbFSM7PuI) - Filippo Valsorda    
 
 ## Code Review
 
