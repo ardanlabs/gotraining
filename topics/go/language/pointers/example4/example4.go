@@ -49,7 +49,7 @@ func createUserV2() *user {
 /*
 // See escape analysis and inlining decisions.
 
-$ go build -gcflags "-m -m"
+$ go build -gcflags -m=2
 # github.com/ardanlabs/gotraining/topics/go/language/pointers/example4
 ./example4.go:24:6: cannot inline createUserV1: marked go:noinline
 ./example4.go:38:6: cannot inline createUserV2: marked go:noinline
