@@ -15,7 +15,7 @@ func main() {
 	u1 := createUserV1()
 	u2 := createUserV2()
 
-	println("u1", &u1, "u2", &u2)
+	println("u1", &u1, "u2", u2)
 }
 
 // createUserV1 creates a user value and passed

@@ -114,7 +114,7 @@ If the GC begins to believe that it can’t finish the collection within the dec
 [Pass by Value](example1/example1.go) ([Go Playground](https://play.golang.org/p/9kxh18hd_BT))  
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/mJz5RINaimn))  
 [Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/GpmPICMGMre))  
-[Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/nUa8sQeB2Pi))  
+[Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/iJwjVswzs3c))  
 [Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/BgIKcFcZ4PO))  
 
 ### Escape Analysis Flaws
