@@ -34,6 +34,7 @@ Goroutines are functions that are created and scheduled to be run independently 
 [Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)    
 [15 Years of Concurrency](http://joeduffyblog.com/2016/11/30/15-years-of-concurrency/) - Joe Duffy    
 [How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor    
+[The Scheduler Saga](https://www.youtube.com/watch?v=YHRO5WQGh0k) - Kavya Joshi    
 
 ## Code Review
 
