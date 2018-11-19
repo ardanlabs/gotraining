@@ -27,7 +27,7 @@ Slices are an incredibly important data structure in Go. They form the basis for
 [Reference Types](example2/example2.go) ([Go Playground](https://play.golang.org/p/WqDnss06_9E))  
 [Appending slices](example4/example4.go) ([Go Playground](https://play.golang.org/p/E-NTGM6daAA))  
 [Taking slices of slices](example3/example3.go) ([Go Playground](https://play.golang.org/p/rUP9grCot8J))  
-[Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/D88zzGYanvX)  
+[Slices and References](example5/example5.go) ([Go Playground](https://play.golang.org/p/D88zzGYanvX))
 [Strings and slices](example6/example6.go) ([Go Playground](https://play.golang.org/p/1RntHk6UPA5))  
 [Variadic functions](example7/example7.go) ([Go Playground](https://play.golang.org/p/rUjWVBMmxgP))  
 [Range mechanics](example8/example8.go) ([Go Playground](https://play.golang.org/p/d1wToBg6oUu))  
