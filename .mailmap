@@ -1,0 +1,23 @@
+# This file defines the "canonical" name and email form for committers
+
+# People with multiple names or missing names.
+Adam Parker <nikaios@gmail.com>
+Nick Parker <nikaios@gmail.com>
+Bharath Bhushan Sreeravindra <bsreera@gmail.com>
+Mark Markaryan <markmark206@gmail.com>
+Janna Brockmeyer <janna_brockmeyer@acl.com>
+Ramin Keene <raminkeene@gmail.com>
+Scott Skender <sjskender@gmail.com>
+
+# People with multiple emails in our history.
+Ernesto Jiménez <me@ernesto-jimenez.com> <erjica@gmail.com>
+Daniela Petruzalek <daniela.petruzalek@gmail.com> <daniela.petruzalek@corp.globo.com>
+Ryan Faerman <ryan_faerman@ultimatesoftware.com> <ryan@faerman.net>
+Justyn Temme <justyn@nextwavesolutions.io> <justyntemme@users.noreply.github.com>
+
+William Kennedy <bill@ardanlabs.com> <bill@ardanstudios.com>
+William Kennedy <bill@ardanlabs.com> <bill@ardanlans.com>
+Jacob Walker <jacob@ardanlabs.com> <jacob@ardanstudios.com>
+Jacob Walker <jacob@ardanlabs.com> <jacobwalker0814@gmail.com>
+Ed Gonzalez <ed@ardanlabs.com> <ed@ardanstudios.com>
+John Dopazo <john@ardanlabs.com> <john@ardanstudios.com>

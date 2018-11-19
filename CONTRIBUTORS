@@ -1,31 +1,21 @@
-# This is the official list of people who can contribute
-# (and typically have contributed) code to the gotraining repository.
-#
-# Names should be added to this file only after verifying that
-# the individual or the individual's organization has agreed to
-# the appropriate Contributor License Agreement, found here:
-#
-#     http://code.google.com/legal/individual-cla-v1.0.html
-#     http://code.google.com/legal/corporate-cla-v1.0.html
-#
-# The agreement for individuals can be filled out on the web.
+# This is a list of people have contributed to the gotraining
+# repository. It is maintained on a best-effort basis. If you
+# have made a contribution but do not appear on this list
+# please open a pull request.
 
 # Names should be added to this file like so:
 #     Name <email address>
-#
-# An entry with two email addresses specifies that the
-# first address should be used in the submit logs and
-# that the second address should be recognized as the
-# same person when interacting with Rietveld.
 
 # Please keep the list sorted.
 
 Aaron Greenlee <agreenlee@powerchordsystem.com>
+Adam <advincze@gmail.com>
 Adam Lieskovský <adamliesko@gmail.com>
 Adam Scharf <scharfat@gmail.com>
 Al Thompson <alm4x1mu5@gmail.com>
-Alexey Palazhchenko <alexey.palazhchenko@gmail.com>
 Alan Scherger <alan.scherger@gmail.com>
+Alexey Kupershtokh <alexey.kupershtokh@gmail.com>
+Alexey Palazhchenko <alexey.palazhchenko@gmail.com>
 Aman Kapoor <aman.sk95@gmail.com>
 Andrew Cole <aocole@oui.st>
 Andy Williams <>
@@ -36,7 +26,6 @@ Austin J. Alexander <austinjalexander@gmail.com>
 Barbara Miller <galgeek@users.noreply.github.com>
 Bharath Bhushan Sreeravindra <bsreera@gmail.com>
 Bill Hathaway <bill.hathaway@gmail.com>
-bsreera <bsreera@gmail.com>
 Budh Ram Gurung <budhrg@users.noreply.github.com>
 Carlos Marin <ing.cma@gmail.com>
 Carol St.Louis <stlouis_c@yahoo.com>
@@ -49,43 +38,51 @@ Dallas Despain <dallas.despain@gmail.com>
 Damian Gryski <damian@gryski.com>
 Dan Rowe <draco2003@gmail.com>
 Daniel Metz <danielmmetz@users.noreply.github.com>
+Daniel Whitenack <whitenack.daniel@gmail.com>
 Daniela Petruzalek <daniela.petruzalek@gmail.com>
 Davor Kapsa <davor.kapsa@gmail.com>
 DFenniak <donald@getjobber.com>
-Diwant Vaidya <diwant@users.noreply.github.com>
+Diwant Vaidya <diwant@gmail.com>
 dtlaycock <dtlaycock@users.noreply.github.com>
 Ed Gonzalez <ed@ardanlabs.com>
 elfgoh <elfgoh@yahoo.com>
 Emily Gu <77.ears@gmail.com>
 Eric Dunham <eric.dunham@rackspace.com>
 Eric Ernst <eric.ernst@intel.com>
-Ernesto Jimenez <me@ernesto-jimenez.com>
+Ernesto Jiménez <me@ernesto-jimenez.com>
 fonglh <fonglh@users.noreply.github.com>
-Forevermatt <forevermatt@users.noreply.github.com>
+forevermatt <forevermatt@users.noreply.github.com>
+Ge "David" Feng <david.feng.ge@gmail.com>
 Georgia <Greh@users.noreply.github.com>
+ginabythebay <ginabythebay@users.noreply.github.com>
 gingersnapz <falycia1@gmail.com>
 Hans-Jurgen Jacobs <hjj@hjj-macbookpro-2015.local>
-Kyle Banks <banksky1@gmail.com>
+Ian Molee <ian@tune.com>
 Jack <dj.jack90@gmail.com>
 Jackie Kazil <jackiekazil@users.noreply.github.com>
-Jacob Walker <jacobwalker0814@gmail.com>
+Jacob Walker <jacob@ardanlabs.com>
 James Brown <j@mesbrown.com>
 James Huston <jhuston@redventures.com>
+Janna Brockmeyer <janna_brockmeyer@acl.com>
 Jason Zhu <jason.zhuyx@gmail.com>
-Jbrockmeyer <janna_brockmeyer@acl.com>
 Jeremy Saenz <jeremy.saenz@gmail.com>
 Joey Geiger <jgeiger@users.noreply.github.com>
 John Adams <johnadams@jqatampa.com>
 John Dopazo <john@ardanlabs.com>
+John Gosset <john.gosset@gmail.com>
 Joseph Cheng <joseph.cheng@salesforce.com>
 Justin Zimmerman <zimmy130@gmail.com>
+Justyn Temme <justyn@nextwavesolutions.io>
 Kevin Gillette <extemporalgenome@gmail.com>
+Kevin Marquardsen <mr.kmarq@gmail.com>
 Khoa Nguyen <khoa.nguyen@nordstrom.com>
+Kyle Banks <banksky1@gmail.com>
 Kyle Kelley <rgbkrk@gmail.com>
 Landon Jones <lbj@landonjones.com>
 Levi Corcoran <allgeek@gmail.com>
 Luke Kysow <lkysow@gmail.com>
-Mark <markmark206@gmail.com>
+Mark Bates <mark@markbates.com>
+Mark Markaryan <markmark206@gmail.com>
 Mark van Holsteijn <mvanholsteijn@xebia.com>
 Markus Braasch <markus.braasch@gmail.com>
 Matthias Stone <matthias@clockworkendeavors.com>
@@ -94,29 +91,36 @@ Michelle Tilley <binarymuse@github.com>
 Mike Nakhimovich <digitalbuddha@users.noreply.github.com>
 Nathan Youngman <git@nathany.com>
 Nicholas Duffy <duffn@outlook.com>
-Nick <nikaios@gmail.com>
+Nick Parker <nikaios@gmail.com>
 Niel McLaren <dan@danielmclaren.com>
 Patrick D'appollonio <patrickdappollonio@users.noreply.github.com>
 Payam Moghaddam <pmoghaddam@gmail.com>
 Pinglei Guo <at15@outlook.com>
 Ramin Keene <raminkeene@gmail.com>
 Rao Li <lirao@users.noreply.github.com>
+RaviTeja Pothana <ravi-teja@live.com>
+Robert Anthony Bellamy <rabellamy@gmail.com>
+Roberto Nygaard <topikito@gmail.com>
 Ryan Faerman <ryan_faerman@ultimatesoftware.com>
 Saddam H <thedevsaddam@gmail.com>
 Scott Feinberg <feinberg.scott@gmail.com>
+Scott Skender <sjskender@gmail.com>
 Sean Lavine <lavis88@gmail.com>
-Sebastian Borza <sebito91@gmail.com>
 Sebastiaan van Steenis <mail@superseb.nl>
+Sebastian Borza <sebito91@gmail.com>
+Sebastien Binet <binet@cern.ch>
 Simon van der Veldt <simon.vanderveldt@gmail.com>
 Stanislav Afanasev <superstas@users.noreply.github.com>
 Steven Burgart <Steven_Burgart@ultimatesoftware.com>
 T3[rm]1T <roman.shuhov@gmail.com>
 Thomas Hopkins <hopkinsth@gmail.com>
 Tim Heaney <oylenshpeegul@gmail.com>
+Tim Heckman <t@heckman.io>
 Tim Pepper <timothy.c.pepper@linux.intel.com>
+Todd McLeod <tuddleymc@gmail.com>
 Todd Rafferty <webRat@gmail.com>
 Travis Yoder <trayoda@gmail.com>
-Vandosant <sjskender@gmail.com>
+Tyler Bunnell <tylerb@users.noreply.github.com>
 Vasko Zdravevski <vaskoz@users.noreply.github.com>
 Werner Buck <wernerbuck@gmail.com>
 Wes Freeman <wes@skeweredrook.com>
