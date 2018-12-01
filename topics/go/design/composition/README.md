@@ -18,7 +18,9 @@ _"A good API is not just easy to use but also hard to misuse." - JBD_
 
 _"You can always embed, but you cannot decompose big interfaces once they are out there. Keep interfaces small." - JBD_
 
-_"Don't design with interfaces, discover them." - Rob Pike_
+_"Don't design with interfaces, discover them." - Rob Pike_  
+
+_"Dduplication is far cheaper than the wrong abstraction. - Sandi Metz_  
 
 ## Design Guidelines
 
@@ -26,6 +28,7 @@ _"Don't design with interfaces, discover them." - Rob Pike_
 
 ## Links
 
+[Repeat yourself, do more than one thing, and rewrite everything](https://programmingisterrible.com/post/176657481103/repeat-yourself-do-more-than-one-thing-and) - tef  
 [Embedding](https://golang.org/doc/effective_go.html#embedding)   
 [Methods, Interfaces and Embedding](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
 [Composition In Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  

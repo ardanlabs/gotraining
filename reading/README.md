@@ -113,6 +113,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Interfaces and Composition
 
+[Repeat yourself, do more than one thing, and rewrite everything](https://programmingisterrible.com/post/176657481103/repeat-yourself-do-more-than-one-thing-and) - tef  
 [Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy  
 [Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy  
 [Design Guidelines](design_guidelines.md)  
