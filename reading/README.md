@@ -85,6 +85,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Profiling, Debugging and Optimization
 
+[The past and future of Microprocessor performance](https://github.com/davecheney/gophercon2018-performance-tuning-workshop/blob/master/1-welcome/introduction.md) - Dave Cheney  
 [Want to Debug Latency?](https://medium.com/observability/want-to-debug-latency-7aa48ecbe8f7) - JBD  
 [Language Mechanics On Escape Analysis](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html) - William Kennedy  
 [Profiling Go Programs](http://golang.org/blog/profiling-go-programs) - Go Team  
