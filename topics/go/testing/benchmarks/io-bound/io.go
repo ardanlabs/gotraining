@@ -66,26 +66,26 @@ func findConcurrent(goroutines int, topic string, docs []string) int {
 
 	var wg sync.WaitGroup
 	wg.Add(goroutines)
-	{
-		for g := 0; g < goroutines; g++ {
-			go func() {
-				var lFound int64
-				for doc := range ch {
-					items, err := read(doc)
-					if err != nil {
-						continue
-					}
-					for _, item := range items {
-						if strings.Contains(item.Description, topic) {
-							lFound++
-						}
+
+	for g := 0; g < goroutines; g++ {
+		go func() {
+			var lFound int64
+			for doc := range ch {
+				items, err := read(doc)
+				if err != nil {
+					continue
+				}
+				for _, item := range items {
+					if strings.Contains(item.Description, topic) {
+						lFound++
 					}
 				}
-				atomic.AddInt64(&found, lFound)
-				wg.Done()
-			}()
-		}
+			}
+			atomic.AddInt64(&found, lFound)
+			wg.Done()
+		}()
 	}
+
 	wg.Wait()
 
 	return int(found)
