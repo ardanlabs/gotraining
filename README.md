@@ -324,7 +324,7 @@ For a full list of editors, see the wiki: https://github.com/golang/go/wiki/IDEs
 While many of the examples can be done using the online playground (http://play.golang.org), some may find it easier to complete them with their local editor.  To do so, you will want to load the training material locally to your machine.  From a command prompt, issue the following commands:
 
 ```sh
-mkdir -p $GOPATH/src/github.com/ardanlabs && cd $_
+mkdir -p $(go env GOPATH)/src/github.com/ardanlabs && cd $_
 git clone https://github.com/ardanlabs/gotraining.git
 ```
 
@@ -410,7 +410,7 @@ docker build -t ardanlabs/gotraining:latest .
 
 **Start Docker container**
 ```
-cd $GOPATH/src/github.com/ardanlabs/gotraining
+cd $(go env GOPATH)/src/github.com/ardanlabs/gotraining
 docker run -i -t -p 8080:8080 -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs/gotraining:latest
 ```
 
