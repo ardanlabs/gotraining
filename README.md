@@ -131,14 +131,17 @@ If you are interested in holding an event in your area please let me know. We wi
 Date                Location              Venue               Type         Type             Url
 ================================================================================================================================================
 January(16-19)      Goa, India            GopherCon India     Conference   Adv Go (1 day)   https://gopherconindia.com/go-workshop1/
+January(21-23)      Bangalore, India      Paypal              Corporate    Go (3 day)       
 January(28-30)      Fort Mill, SC         Red Ventures        Corporate    Go (3 day)       
 February(02-03)     Troy, NY              TBA                 GoBridge     Go (2 day)       https://www.eventbrite.com/e/capital-district-gobridge-ultimate-go-tickets-52406438067
-February(08-09)     Orlando, FL           TBA                 Gobridge     Go (2 day)
+February(08-09)     Orlando, FL           TBA                 Gobridge     Go (2 day)       https://www.eventbrite.com/e/ultimate-gogo-bridge-w-bill-kennedy-orlando-tickets-50361134509
 February(13-15)     Copenhagen, Denmark   Maersk              Corporate    Go (3 day)       
 February(25-26)     Birmingham, AL        Shipt               Corporate    Go Perf (2 day)       
+March(04-06)        Portugal              OLX                 Corporate    Go (3 day)   
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
 March(18-20)        Miami, FL             OpenGo              Conference   Ardan Conference
+April(06-07)        Beijing, China        TBA                 Conference   Adv Go (1 day)   http://gopherchina.org/
 April(12-13)        Moscow, Russia        GopherCon Russia    Conference   Adv Go (1 day)   https://www.gophercon-russia.ru/
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (1 day)   https://www.gophercon.com
 August(21-23)       London, England       GopherCon UK        Conference   TDA              https://www.gophercon.co.uk/
