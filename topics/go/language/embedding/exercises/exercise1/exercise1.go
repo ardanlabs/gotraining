@@ -57,17 +57,17 @@ func NewCachingFeed(f *Feed) *CachingFeed {
 }
 
 // Fetch calls the embedded type's Fetch method if the key is not cached.
-func (r *CachingFeed) Fetch(key string) (Document, error) {
-	if doc, ok := r.docs[key]; ok {
+func (cf *CachingFeed) Fetch(key string) (Document, error) {
+	if doc, ok := cf.docs[key]; ok {
 		return doc, nil
 	}
 
-	doc, err := r.Feed.Fetch(key)
+	doc, err := cf.Feed.Fetch(key)
 	if err != nil {
 		return Document{}, err
 	}
 
-	r.docs[key] = doc
+	cf.docs[key] = doc
 	return doc, nil
 }
 
