@@ -16,6 +16,8 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 
 _"Polymorphism means that you write a certain program and it behaves differently depending on the data that it operates on." - Tom Kurtz (inventor of BASIC)_
 
+_"The empty interface says nothing." - Rob Pike
+
 ## Links
 
 [Interfaces](https://golang.org/doc/effective_go.html#interfaces)    
@@ -33,6 +35,9 @@ _"Polymorphism means that you write a certain program and it behaves differently
 [Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/N50ocjUekf3))  
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/w981JSUcVZ2))  
 [Storage By Value](example4/example4.go) ([Go Playground](https://play.golang.org/p/6U232Ue_BY0))  
+[Type Assertions](example5/example5.go) ([Go Playground](https://play.golang.org/p/_TDPLAp-GGw))  
+[Conditional Type Assertions](example6/example6.go) ([Go Playground](https://play.golang.org/p/xkt2xfD4Iyj))  
+[The Empty Interface and Type Switches](example7/example7.go) ([Go Playground](https://play.golang.org/p/7UNA-6-DZ1w))  
 
 ## Advanced Code Review
 
