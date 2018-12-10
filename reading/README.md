@@ -49,6 +49,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Why of Go](https://www.infoq.com/presentations/go-concurrency-gc) - Carmen Andoh  
 [The Transistor, Part 3: Endless Reinvention](https://technicshistory.wordpress.com/2018/03/31/the-transistor-part-3-endless-reinvention/amp) - technicshistory  
 [Reflections on Trusting Trust](https://www.archive.ece.cmu.edu/~ganger/712.fall02/papers/p761-thompson.pdf) - Ken Thompson  
+[Null References: The Billion Dollar Mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare) - Tony Hoare  
 
 ### Contribute to Go
 
@@ -77,6 +78,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Advanced Testing with Go - Deck](https://speakerdeck.com/mitchellh/advanced-testing-with-go) - Mitchell Hashimoto  
 [The tragedy of 100% code coverage](http://labs.ig.com/code-coverage-100-percent-tragedy) - Daniel Lebrero's  
 [Logs and Metrics](https://medium.com/@cindysridharan/logs-and-metrics-6d34d3026e38) - Cindy Sridharan  
+[The deep synergy between testability and good design](https://www.youtube.com/watch?reload=9&feature=share&v=4cVZvoFGJTU&app=desktop) - Michael Feathers  
 
 ### Vendoring / Versioning
 
@@ -139,6 +141,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Linux
 
+[Linux Performance](http://www.brendangregg.com/linuxperf.html) - Brendan Gregg  
 [The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
 [Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz    

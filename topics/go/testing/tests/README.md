@@ -18,6 +18,7 @@ _"A unit test is a test of behavior whose success or failure is wholly determine
 
 ## Links
 
+[The deep synergy between testability and good design](https://www.youtube.com/watch?reload=9&feature=share&v=4cVZvoFGJTU&app=desktop) - Michael Feathers  
 [testing package](http://golang.org/pkg/testing/)    
 [How to write benchmarks in Go](https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go) - Dave Cheney    
 [Profiling and creating call graphs for Go programs with "go tool pprof"](http://saml.rilspace.com/profiling-and-creating-call-graphs-for-go-programs-with-go-tool-pprof) - Samuel Lampa    
