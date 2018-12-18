@@ -52,7 +52,7 @@ The behavior of a channel is directly influenced by its current `State`. The sta
 
 ## Code Review
 
-[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/j_s0Ch4hDi5))  
+[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/cH63BvQYqb5))  
 [Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/PvFKD_tNwir))  
 [Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OLdBCGUvzbx))  
 [Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/zxzHAHIr3Xj))  
@@ -75,5 +75,17 @@ Write a program that uses a fan out pattern to generate 100 random numbers concu
 
 [Template](exercises/template2/template2.go) ([Go Playground](https://play.golang.org/p/9_b6YcBuSOR)) | 
 [Answer](exercises/exercise2/exercise2.go) ([Go Playground](https://play.golang.org/p/cEUYThI5etc))
+
+### Exercise 3
+Write a program that generates up to 100 random numbers concurrently. Do not send all 100 values so the number of sends/receives is unknown.
+
+[Template](exercises/template3/template3.go) ([Go Playground](https://play.golang.org/p/TQMIiAelw5L)) | 
+[Answer](exercises/exercise3/exercise3.go) ([Go Playground](https://play.golang.org/p/Caa-1NmRUcp))
+
+### Exercise 4
+Write a program that creates a goroutine to generate a series of numbers. Use multiple channels and select blocks to communicate between the goroutine and main.
+
+[Template](exercises/template4/template4.go) ([Go Playground](https://play.golang.org/p/1wq_Omduf5b)) | 
+[Answer](exercises/exercise4/exercise4.go) ([Go Playground](https://play.golang.org/p/t_f84Cm992y))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

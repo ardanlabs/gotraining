@@ -18,13 +18,15 @@ func init() {
 func main() {
 	// waitForTask()
 	// waitForResult()
+	// fanOut()
+	// fanOutSem()
+
 	// waitForFinished()
 	// poolingUnlimited()
 	// poolingLimited()
-	// fanOut()
-	// fanOutSem()
-	// drop()
+
 	// cancellation()
+	// drop()
 }
 
 // waitForTask: Think about being a manager and hiring a new employee. In
