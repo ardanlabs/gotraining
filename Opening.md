@@ -15,7 +15,7 @@ Slack:    [Slack](https://invite.slack.golangbridge.org)
 [Video](http://www.informit.com/store/ultimate-go-programming-livelessons-9780134757483)
 
 ## Tooling Installs
-Graphviz: https://www.graphviz.org/
-go get -u github.com/rakyll/hey   : ab
-go get -u github.com/ardanlabs/gotraining
-Latest Version of Go: 1.11
+Graphviz: https://www.graphviz.org/  
+go get -u github.com/rakyll/hey   : Or use ab  
+go get -u github.com/ardanlabs/gotraining  
+Latest Version of Go: 1.11  
