@@ -16,37 +16,27 @@ func init() {
 }
 
 func main() {
-	// waitForTask()
+
+	// = Part 1 ==================================================================
+	// Receiving from one or more goroutines, buffered vs unbuffered channels.
+	// ===========================================================================
 	// waitForResult()
 	// fanOut()
-	// fanOutSem()
 
+	// = Part 2 ==================================================================
+	// Closing channels, sending to one or more goroutines, receiving with range.
+	// ===========================================================================
 	// waitForFinished()
-	// poolingUnlimited()
-	// poolingLimited()
+	// waitForTask()
+	// poolingUnknown()
 
-	// cancellation()
+	// = Part 3 ==================================================================
+	// Advanced patterns.
+	// ===========================================================================
+	// fanOutSem()
+	// poolingKnown()
 	// drop()
-}
-
-// waitForTask: Think about being a manager and hiring a new employee. In
-// this scenario, you want your new employee to perform a task but they need
-// to wait until you are ready. This is because you need to hand them a piece
-// of paper before they start.
-func waitForTask() {
-	ch := make(chan string)
-
-	go func() {
-		p := <-ch
-		fmt.Println("employee : recv'd signal :", p)
-	}()
-
-	time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-	ch <- "paper"
-	fmt.Println("manager : sent signal")
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	// cancellation()
 }
 
 // waitForResult: Think about being a manager and hiring a new employee. In
@@ -64,86 +54,6 @@ func waitForResult() {
 
 	p := <-ch
 	fmt.Println("manager : recv'd signal :", p)
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
-}
-
-// waitForFinished: Think about being a manager and hiring a new employee. In
-// this scenario, you want your new employee to perform a task immediately when
-// they are hired, and you need to wait for the result of their work. You need
-// to wait because you can't move on until you know they are but you don't need
-// anything from them.
-func waitForFinished() {
-	ch := make(chan struct{})
-
-	go func() {
-		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-		close(ch)
-		fmt.Println("employee : sent signal")
-	}()
-
-	_, wd := <-ch
-	fmt.Println("manager : recv'd signal :", wd)
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
-}
-
-// poolingUnlimited: Think about being a manager and hiring a team of employees.
-// In this scenario, you want your new employees to perform tasks but they need
-// to wait until you are ready. This is because you need to hand them a piece
-// of paper before they start.
-func poolingUnlimited() {
-	ch := make(chan string)
-
-	const emps = 2
-	for e := 0; e < emps; e++ {
-		go func(emp int) {
-			for p := range ch {
-				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
-			}
-			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
-		}(e)
-	}
-
-	const work = 10
-	for w := 0; w < work; w++ {
-		ch <- "paper"
-		fmt.Println("manager : sent signal :", w)
-	}
-
-	close(ch)
-	fmt.Println("manager : sent shutdown signal")
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
-}
-
-// poolingLimited: Think about being a manager and hiring a team of employees.
-// In this scenario, you want your new employees to perform tasks but they need
-// to wait until you are ready. This is because you need to hand them a piece
-// of paper before they start. You know exactly all the work that needs to get
-// done before it is started.
-func poolingLimited() {
-	work := []string{"paper", "paper", "paper", "paper", "paper"}
-	ch := make(chan string, len(work))
-	for _, wrk := range work {
-		ch <- wrk
-	}
-
-	fmt.Println("manager : sent shutdown signal but finish all work first")
-	close(ch)
-
-	const emps = 2
-	for e := 0; e < emps; e++ {
-		go func(emp int) {
-			for p := range ch {
-				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
-			}
-			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
-		}(e)
-	}
 
 	time.Sleep(time.Second)
 	fmt.Println("-------------------------------------------------------------")
@@ -171,6 +81,107 @@ func fanOut() {
 		emps--
 		fmt.Println(p)
 		fmt.Println("manager : recv'd signal :", emps)
+	}
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
+}
+
+// waitForFinished: Think about being a manager and hiring a new employee. In
+// this scenario, you want your new employee to perform a task immediately when
+// they are hired, and you need to wait for the result of their work. You need
+// to wait because you can't move on until you know they are but you don't need
+// anything from them.
+func waitForFinished() {
+	ch := make(chan struct{})
+
+	go func() {
+		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
+		close(ch)
+		fmt.Println("employee : sent signal")
+	}()
+
+	_, wd := <-ch
+	fmt.Println("manager : recv'd signal :", wd)
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
+}
+
+// waitForTask: Think about being a manager and hiring a new employee. In
+// this scenario, you want your new employee to perform a task but they need
+// to wait until you are ready. This is because you need to hand them a piece
+// of paper before they start.
+func waitForTask() {
+	ch := make(chan string)
+
+	go func() {
+		p := <-ch
+		fmt.Println("employee : recv'd signal :", p)
+	}()
+
+	time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
+	ch <- "paper"
+	fmt.Println("manager : sent signal")
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
+}
+
+// poolingUnknown: Think about being a manager and hiring a team of employees.
+// In this scenario, you want your new employees to perform tasks but they need
+// to wait until you are ready. This is because you need to hand them a piece
+// of paper before they start. You do not know how much work must be performed
+// before you start.
+func poolingUnknown() {
+	ch := make(chan string)
+
+	const emps = 2
+	for e := 0; e < emps; e++ {
+		go func(emp int) {
+			for p := range ch {
+				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
+			}
+			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
+		}(e)
+	}
+
+	const work = 10
+	for w := 0; w < work; w++ {
+		ch <- "paper"
+		fmt.Println("manager : sent signal :", w)
+	}
+
+	close(ch)
+	fmt.Println("manager : sent shutdown signal")
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
+}
+
+// poolingKnown: Think about being a manager and hiring a team of employees.
+// In this scenario, you want your new employees to perform tasks but they need
+// to wait until you are ready. This is because you need to hand them a piece
+// of paper before they start. You know exactly all the work that needs to get
+// done before it is started.
+func poolingKnown() {
+	work := []string{"paper", "paper", "paper", "paper", "paper"}
+	ch := make(chan string, len(work))
+	for _, wrk := range work {
+		ch <- wrk
+	}
+
+	fmt.Println("manager : sent shutdown signal but finish all work first")
+	close(ch)
+
+	const emps = 2
+	for e := 0; e < emps; e++ {
+		go func(emp int) {
+			for p := range ch {
+				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
+			}
+			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
+		}(e)
 	}
 
 	time.Sleep(time.Second)
