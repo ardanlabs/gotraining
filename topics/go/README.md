@@ -40,14 +40,31 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 * We can throw more hardware at the problem.
 * We can throw more developers at the problem.
 
+**Open Your Mind**  
+* Technology changes quickly but people's minds change slowly.
+* Easy to adopt new technology but hard to adopt new ways of thinking.
+
+**Interesting Questions - What do they mean to you?**  
+* Is it a good program?
+* Is it an efficient program?
+* Is it correct?
+* Was it done on time?
+* What did it cost?
+
 **Aspire To**  
 * Be a champion for quality, efficiency and simplicity.
 * Have a point of view.
 * Value introspection and self-review.
 
-**Open Your Mind**  
-* Technology changes quickly but people's minds change slowly.
-* Easy to adopt new technology but hard to adopt new ways of thinking.
+---
+
+### Reading Code
+
+_“If most computer people lack understanding and knowledge, then what they will select will also be lacking.” - Alan Kay_
+
+_"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love (inventor of Objective C)_
+
+_"Programming is, among other things, a kind of writing. One way to learn writing is to write, but in all other forms of writing, one also reads. We read examples both good and bad to facilitate learning. But how many programmers learn to write programs by reading programs?" - Gerald M. Weinberg_
 
 ---
 
@@ -61,7 +78,11 @@ _"There are two kinds of software projects: those that fail, and those that turn
 
 _"Legacy software is an unappreciated but serious problem. Legacy code may be the downfall of our civilization." - Chuck Moore (inventor of Forth)_
 
+_"Few programmers of any experience would contradict the assertion that most programs are modified in their lifetime. Why then do we rarely find a program that contains any evidence of having been written with an eye to subsequent modification. - Gerald M. Weinberg"
+
 _"We think awful code is written by awful devs. But in reality, it's written by reasonable devs in awful circumstances." - Sarah Mei_
+
+_"There are many reasons why programs are built the way they are, although we may fail to recognize the multiplicity of reasons because we usually look at code from the outside rather than by reading it. When we do read code, we find that some of it gets written because of machine limitations, some because of language limitations, some because of programmer limitations, some because of historical accidents, and some because of specifications—both essential and inessential. - Gerald M. Weinberg"
 
 ---
 
@@ -181,12 +202,6 @@ _"If you don’t make mistakes, you’re not working on hard enough problems." -
 ### Code Reviews
 
 You can't look at a piece of code, function or algorithm and determine if it smells good or bad without a design philosophy. These four major categories are the basis for code reviews and should be prioritized in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
-
-**Quotes**
-
-_"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love (inventor of Objective C)_
-
-_"Design depends largely on constraint." - Charles Eames"_
 
 ---
 
@@ -416,6 +431,8 @@ Don't use an interface:
 [Interface pollution in Go](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
 [Application Focused API Design](https://www.ardanlabs.com/blog/2016/11/application-focused-api-design.html) - William Kennedy  
 [Avoid interface pollution](https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html) - William Kennedy  
+[Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy    
+[Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy    
 
 ---
 
@@ -429,7 +446,9 @@ _Package Oriented Design allows a developer to identify where a package belongs 
 
 ### Concurrent Software Design
 
-Concurrency is about managing multiple things at once. Like one person washing the dishes while they are also cooking dinner. You're making progress on both but you're only ever doing one of those things at the same time. Parallelism is about doing multiple things at once. Like one person cooking and placing dirty dishes in the sink, while another washes the dishes. They are happening at the same time.
+Concurrency means “out of order” execution. Taking a set of instructions that would otherwise be executed in sequence and finding a way to execute them out of order and still produce the same result. For the problem in front of you, it has to be obvious that out of order execution would add value. When I say value, I mean add enough of a performance gain for the complexity cost. Depending on your problem, out of order execution may not be possible or even make sense.
+
+It’s also important to understand that [concurrency is not the same as parallelism](https://blog.golang.org/concurrency-is-not-parallelism). Parallelism means executing two or more instructions at the same time. This is a different concept from concurrency. Parallelism is only possible when you have at least 2 operating system (OS) and hardware threads available to you and you have at least 2 Goroutines, each executing instructions independently on each OS/hardware thread.
 
 Both you and the runtime have a responsibility in managing the concurrency of the application. You are responsible for managing these three things when writing concurrent software:
 
@@ -470,6 +489,11 @@ Both you and the runtime have a responsibility in managing the concurrency of th
     * Stop the bleeding.
     * Return the system back to a normal state.
 
+Index of the three part series:  
+1) [Scheduling In Go : Part I - OS Scheduler](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html)  
+2) [Scheduling In Go : Part II - Go Scheduler](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html)  
+3) [Scheduling In Go : Part III - Concurrency](https://www.ardanlabs.com/blog/2018/12/scheduling-in-go-part3.html)
+
 ---
 
 ### Channel Design
@@ -485,12 +509,12 @@ Channels allow goroutines to communicate with each other through the use of sign
         * _There are cases where channels can be simpler for this but initially question._
 * Unbuffered channels:
     * Receive happens before the Send.
-    * Benefit: 100% guarantee the signal has been received.
+    * Benefit: 100% guarantee the signal being sent has been received.
     * Cost: Unknown latency on when the signal will be received.
 * Buffered channels:
     * Send happens before the Receive.
     * Benefit: Reduce blocking latency between signaling.
-    * Cost: No guarantee when the signal has been received.
+    * Cost: No guarantee when the signal being sent has been received.
         * The larger the buffer, the less guarantee.
         * Buffer of 1 can give you one delayed send of guarantee.
 * Closing channels:
@@ -507,7 +531,7 @@ Channels allow goroutines to communicate with each other through the use of sign
 Depending on the problem you are solving, you may require different channel semantics. Depending on the semantics you need, different architectural choices must be taken.
 
 * If any given Send on a channel `CAN` cause the sending goroutine to block:
-    * Not allowed to use a Buffered channel larger than 1.
+    * Be careful with Buffered channels larger than 1.
         * Buffers larger than 1 must have reason/measurements.
     * Must know what happens when the sending goroutine blocks.
 * If any given Send on a channel `WON'T` cause the sending goroutine to block:

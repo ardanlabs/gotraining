@@ -5,7 +5,9 @@
 // compiler supports them.
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // user defines a user in the program.
 type user struct {
@@ -49,5 +51,12 @@ func main() {
 	// semantics. Not Good!
 	for _, u := range users {
 		u.changeEmail("it@wontmatter.com")
+	}
+
+	// Exception example: Using pointer semantics
+	// for a collectoin of strings.
+	keys := make([]string, 10)
+	for i := range keys {
+		keys[i] = func() string { return "key-gen" }()
 	}
 }
