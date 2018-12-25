@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	lists "github.com/ardanlabs/gotraining/topics/go/algorithms/data/lists/implementation"
+	"github.com/ardanlabs/gotraining/topics/go/algorithms/data/list"
 )
 
 const succeed = "\u2713"
@@ -17,7 +17,7 @@ func TestAdd(t *testing.T) {
 		const nodes = 5
 		t.Logf("\tTest 0:\tWhen adding %d nodes", nodes)
 		{
-			var l lists.List
+			var l list.List
 
 			var orgNodeData string
 			for i := 0; i < nodes; i++ {
@@ -33,7 +33,7 @@ func TestAdd(t *testing.T) {
 			t.Logf("\t%s\tShould be able to add %d nodes.", succeed, nodes)
 
 			var nodeData string
-			f := func(n *lists.Node) error {
+			f := func(n *list.Node) error {
 				nodeData += n.Data
 				return nil
 			}
@@ -58,7 +58,7 @@ func TestAddFront(t *testing.T) {
 		const nodes = 5
 		t.Logf("\tTest 0:\tWhen adding %d nodes", nodes)
 		{
-			var l lists.List
+			var l list.List
 
 			var orgNodeData string
 			for i := 0; i < nodes; i++ {
@@ -74,7 +74,7 @@ func TestAddFront(t *testing.T) {
 			t.Logf("\t%s\tShould be able to add %d nodes.", succeed, nodes)
 
 			var nodeData string
-			f := func(n *lists.Node) error {
+			f := func(n *list.Node) error {
 				nodeData += n.Data
 				return nil
 			}
@@ -99,7 +99,7 @@ func TestFind(t *testing.T) {
 		const nodes = 5
 		t.Logf("\tTest 0:\tWhen adding %d nodes", nodes)
 		{
-			var l lists.List
+			var l list.List
 
 			var orgNodeData string
 			for i := 0; i < nodes; i++ {
@@ -131,7 +131,7 @@ func TestFindReverse(t *testing.T) {
 		const nodes = 5
 		t.Logf("\tTest 0:\tWhen adding %d nodes", nodes)
 		{
-			var l lists.List
+			var l list.List
 
 			var orgNodeData string
 			for i := 0; i < nodes; i++ {
@@ -163,7 +163,7 @@ func TestRemove(t *testing.T) {
 		const nodes = 5
 		t.Logf("\tTest 0:\tWhen adding %d nodes", nodes)
 		{
-			var l lists.List
+			var l list.List
 
 			var orgNodeData string
 			for i := 0; i < nodes; i++ {
@@ -201,7 +201,7 @@ func TestAddSort(t *testing.T) {
 		orgNodeData := []string{"grape", "apple", "plum", "mango", "kiwi"}
 		t.Logf("\tTest 0:\tWhen adding %d nodes", len(orgNodeData))
 		{
-			var l lists.List
+			var l list.List
 
 			for _, data := range orgNodeData {
 				l.AddSort(data)
@@ -214,7 +214,7 @@ func TestAddSort(t *testing.T) {
 			t.Logf("\t%s\tShould be able to add %d nodes.", succeed, len(orgNodeData))
 
 			var nodeData string
-			f := func(n *lists.Node) error {
+			f := func(n *list.Node) error {
 				nodeData += n.Data
 				return nil
 			}
@@ -231,7 +231,7 @@ func TestAddSort(t *testing.T) {
 			t.Logf("\t%s\tShould be able to traverse over %d nodes in sort order.", succeed, len(orgNodeData))
 
 			nodeData = ""
-			f = func(n *lists.Node) error {
+			f = func(n *list.Node) error {
 				nodeData += n.Data
 				return nil
 			}
