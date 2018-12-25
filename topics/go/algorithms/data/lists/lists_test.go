@@ -228,7 +228,24 @@ func TestAddSort(t *testing.T) {
 				t.Logf("\t%s\tShould be able to traverse over %d nodes in sort order.", failed, len(orgNodeData))
 				t.Fatalf("\t\tGot %s, Expected %s.", nodeData, sortedNodeData)
 			}
-			t.Logf("\t%s\tShould be able to traverse over %d nodes in order.", succeed, len(orgNodeData))
+			t.Logf("\t%s\tShould be able to traverse over %d nodes in sort order.", succeed, len(orgNodeData))
+
+			nodeData = ""
+			f = func(n *lists.Node) error {
+				nodeData += n.Data
+				return nil
+			}
+			if err := l.OperateReverse(f); err != nil {
+				t.Fatalf("\t%s\tShould be able to operate reverse on the list : %v", failed, err)
+			}
+			t.Logf("\t%s\tShould be able to operate reverse on the list.", succeed)
+
+			sortedNodeData = "plummangokiwigrapeapple"
+			if sortedNodeData != nodeData {
+				t.Logf("\t%s\tShould be able to traverse over %d nodes in reverse sort order.", failed, len(orgNodeData))
+				t.Fatalf("\t\tGot %s, Expected %s.", nodeData, sortedNodeData)
+			}
+			t.Logf("\t%s\tShould be able to traverse over %d nodes in reverse sort order.", succeed, len(orgNodeData))
 		}
 	}
 }
