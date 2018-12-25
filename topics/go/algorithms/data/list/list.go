@@ -1,8 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Package lists asks the student to implement a double link list in Go.
-package lists
+// Package list asks the student to implement a double link list in Go.
+package list
 
 // Node represents the data being stored.
 type Node struct {

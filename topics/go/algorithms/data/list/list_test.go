@@ -1,10 +1,10 @@
-package lists_test
+package list_test
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/ardanlabs/gotraining/topics/go/algorithms/data/lists"
+	lists "github.com/ardanlabs/gotraining/topics/go/algorithms/data/lists/implementation"
 )
 
 const succeed = "\u2713"
