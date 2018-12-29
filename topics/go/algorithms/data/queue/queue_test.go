@@ -19,14 +19,14 @@ func TestNew(t *testing.T) {
 			var cap int
 			_, err := queue.New(cap)
 			if err == nil {
-				t.Fatalf("\t%s\tShould not be able to create a queue for %d items : %v", succeed, cap, err)
+				t.Fatalf("\t%s\tShould not be able to create a queue for %d items : %v", failed, cap, err)
 			}
 			t.Logf("\t%s\tShould not be able to create a queue for %d items.", succeed, cap)
 
 			cap = -1
 			_, err = queue.New(cap)
 			if err == nil {
-				t.Fatalf("\t%s\tShould not be able to create a queue for %d items : %v", succeed, cap, err)
+				t.Fatalf("\t%s\tShould not be able to create a queue for %d items : %v", failed, cap, err)
 			}
 			t.Logf("\t%s\tShould not be able to create a queue for %d items.", succeed, cap)
 		}
@@ -42,7 +42,7 @@ func TestEnqueue(t *testing.T) {
 		{
 			q, err := queue.New(items)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", succeed, items, err)
+				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", failed, items, err)
 			}
 			t.Logf("\t%s\tShould be able to create a queue for %d items.", succeed, items)
 
@@ -89,7 +89,7 @@ func TestDequeue(t *testing.T) {
 		{
 			q, err := queue.New(items)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", succeed, items, err)
+				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", failed, items, err)
 			}
 			t.Logf("\t%s\tShould be able to create a queue for %d items.", succeed, items)
 
@@ -135,7 +135,7 @@ func TestEnqueueFull(t *testing.T) {
 		{
 			q, err := queue.New(items)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", succeed, items, err)
+				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", failed, items, err)
 			}
 			t.Logf("\t%s\tShould be able to create a queue for %d items.", succeed, items)
 
@@ -194,7 +194,7 @@ func TestDequeueEmpty(t *testing.T) {
 		{
 			q, err := queue.New(items)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", succeed, items, err)
+				t.Fatalf("\t%s\tShould be able to create a queue for %d items : %v", failed, items, err)
 			}
 			t.Logf("\t%s\tShould be able to create a queue for %d items.", succeed, items)
 
