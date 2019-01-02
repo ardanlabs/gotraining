@@ -135,8 +135,8 @@ March(04-06)        Portugal              OLX                 Corporate    Go (3
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
 March(18-20)        Miami, FL             OpenGo              Conference   Ardan Conference
-April(06-07)        Beijing, China        TBA                 Conference   Adv Go (1 day)   http://gopherchina.org/
 April(12-13)        Moscow, Russia        GopherCon Russia    Conference   Adv Go (1 day)   https://www.gophercon-russia.ru/
+April(26-28)        Beijing, China        TBA                 Conference   Adv Go (1 day)   http://gopherchina.org/
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (1 day)   https://www.gophercon.com
 August(21-23)       London, England       GopherCon UK        Conference   TDA              https://www.gophercon.co.uk/
 ```
