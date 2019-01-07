@@ -137,6 +137,7 @@ March(12-14)        Boise, ID             Kount               Corporate    Go (3
 March(18-20)        Miami, FL             OpenGo              Conference   Ardan Conference
 April(12-13)        Moscow, Russia        GopherCon Russia    Conference   Adv Go (1 day)   https://www.gophercon-russia.ru/
 April(26-28)        Beijing, China        TBA                 Conference   Adv Go (1 day)   http://gopherchina.org/
+May(01-03)          Singapore             Google              Conference   Adv Go (1 day)   https://2019.gophercon.sg/
 May(07-08)          Budapest, Hungary     TBA                 Conference   Adv Go (1 day)   https://craft-conf.com/
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
