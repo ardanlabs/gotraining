@@ -9,6 +9,12 @@ Pointers provide a way to share data across function boundaries. Having the abil
 * "Value of", what's in the box. "Address of" ( **&** ), where is the box.
 * The (*) operator declares a pointer variable and the "Value that the pointer points to".
 
+## Escape Analysis
+
+* When a value could be referenced after the function that constructs the value returns.
+* When the compiler determines a value is too large to fit on the stack.
+* When the compiler doesn’t know the size of a value at compile time.
+
 ## Garbage Collection
 
 The design of the Go GC has changed over the years:

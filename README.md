@@ -131,7 +131,7 @@ February(02-03)     Troy, NY              Rensselaer Poly In  GoBridge     Go (2
 February(08-09)     Orlando, FL           TBA                 Gobridge     Go (2 day)       https://www.eventbrite.com/e/ultimate-gogo-bridge-w-bill-kennedy-orlando-tickets-50361134509
 February(13-15)     Copenhagen, Denmark   Maersk              Corporate    Go (3 day)       
 February(25-26)     Birmingham, AL        Shipt               Corporate    Go Perf (2 day)       
-March(04-06)        Portugal              OLX                 Corporate    Go (3 day)   
+March(04-06)        Poznan, Poland        OLX                 Corporate    Go (3 day)   
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
 March(18-20)        Miami, FL             OpenGo              Conference   Ardan Conference
