@@ -83,7 +83,7 @@ He started his career creating web applications in PHP, Ruby, and Node.js. When 
 
 Coming from the thriving metropolis of Wichita, Kansas Jacob is the president of the [devICT](https://devict.org) community whose mission is to "Educate, Empower, and Connect software developers in the Wichita area". He also works closely with [Women Who Code Wichita](https://www.meetup.com/WWCWichita/), [Open Wichita](http://openwichita.com/), [MakeICT](http://makeict.org/), and [Kansas Linux Fest](http://kansaslinuxfest.org/).
 
-When he isn't working or organizing Jacob is traveling the country with his wife Anna and their three kids Kell, Carter, and Rory. Comfortably packed into the Winnebago they call home the Walker family travels from city to city seeking adventure.
+When he isn't working or organizing, Jacob is with his wife Anna and their three kids Kell, Carter, and Rory.
 
 _**Writing**_  
 [Jacob Walker's blog](http://www.jacob-walker.com/)  
