@@ -1,5 +1,5 @@
 /*
-Package varint implements VLQ encoding/decoding.
+Package vlq implements VLQ encoding/decoding.
 
 In short, the goal of this encoding is to save encode integer values in
 a way that would save bytes. Only the first 7 bits of each byte is significant
@@ -67,4 +67,4 @@ Finally we concatenate them, most significant octet first, into
 
 Encoded: 10011010 01101011  ToHex: 0x9A 0x6B
 */
-package varint
+package vlq
