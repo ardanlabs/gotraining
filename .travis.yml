@@ -12,6 +12,6 @@ install: true
 
 # Get a list of all non-vendor directories with test files and test them.
 # We could just do `go test ./...` but we have some packages that aren't
-# intended to compile
+# intended to compile and some tests that aren't intended to pass yet.
 script:
-  - find . -name "*_test.go" -not -wholename "*vendor*" -exec dirname {} \; | uniq | xargs go test
+  - find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -exec dirname {} \; | uniq | xargs go test
