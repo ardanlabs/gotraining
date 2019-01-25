@@ -1,74 +1,88 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Write a program that uses select to read and write from multiple channels.
+// Write a program that creates a fixed set of workers to generate random
+// numbers. Discard any number divisible by 2. Continue receiving until 100
+// numbers are received. Tell the workers to shut down before terminating.
 package main
 
 import (
 	"fmt"
-	"time"
+	"math/rand"
+	"runtime"
+	"sync"
 )
 
 func main() {
 
-	// Create a channel for sending int values.
-	data := make(chan int)
+	// Create the channel for sharing results.
+	values := make(chan int)
 
-	// Create a channel "shutdown" to tell the goroutine when to terminate.
+	// Create a channel "shutdown" to tell goroutines when to terminate.
 	shutdown := make(chan struct{})
 
-	// Create a channel "complete" for the goroutine to tell main when it's done.
-	complete := make(chan struct{})
+	// Define the size of the worker pool. Use runtime.NumCPU to size the pool based on number of processors.
+	poolSize := runtime.NumCPU()
 
-	// Launch a goroutine to generate data through the channel.
-	go func() {
+	// Create a sync.WaitGroup to monitor the Goroutine pool. Add the count.
+	var wg sync.WaitGroup
+	wg.Add(poolSize)
 
-		// Create an int variable i.
-		var i int
+	// Create a fixed size pool of goroutines to generate random numbers.
+	for i := 0; i < poolSize; i++ {
+		go func(id int) {
 
-		// Run an infinite loop that uses select to perform channel operations.
-		for {
-			select {
+			// Start an infinite loop.
+			for {
 
-			// In one case send the value of i.
-			case data <- i:
-				fmt.Println("Sent", i)             // Print the number sent.
-				i++                                // Increment i for the next iteration.
-				time.Sleep(100 * time.Millisecond) // Sleep for 100ms to simulate some latency.
+				// Generate a random number up to 1000.
+				n := rand.Intn(1000)
 
-			// In another case receive from the shutdown channel.
-			case <-shutdown:
-				fmt.Println("Sender shutting down") // Print a shutdown message
-				close(complete)                     // Close the "complete" channel so main knows we're done.
-				return                              // Return from the anonymous function.
+				// Use a select to either send the number or receive the shutdown signal.
+				select {
+
+				// In one case send the random number.
+				case values <- n:
+					fmt.Printf("Worker %d sent %d\n", id, n)
+
+				// In another case receive from the shutdown channel.
+				case <-shutdown:
+					fmt.Printf("Worker %d shutting down\n", id)
+					wg.Done()
+					return
+				}
 			}
+		}(i)
+	}
+
+	// Create a slice to hold the random numbers.
+	var nums []int
+	for i := range values {
+
+		// continue the loop if the value was even.
+		if i%2 == 0 {
+			fmt.Println("Discarding", i)
+			continue
 		}
 
-	}()
+		// Store the odd number.
+		fmt.Println("Keeping", i)
+		nums = append(nums, i)
 
-	// Use time.After to make a channel which will send in 1 second.
-	tc := time.After(1 * time.Second)
-
-	// Run an infinite loop that uses a label like "loop:"
-loop:
-	for {
-		select {
-
-		// In one case receive the value of i.
-		case i := <-data:
-			fmt.Println("Received", i) // Print the value received.
-
-		// In another case receive from the timeout channel.
-		case <-tc:
-			fmt.Println("Initiating shutdown") // Print a message that main is initiating the shutdown sequence.
-			close(shutdown)                    // Close the "shutdown" channel so the goroutine knows to terminate.
-			break loop                         // Break the main loop.
+		// break the loop once we have 100 results.
+		if len(nums) == 100 {
+			break
 		}
 	}
 
-	// Block waiting to receive from the "complete" channel.
-	<-complete
+	// Send the shutdown signal by closing the channel.
+	fmt.Println("Receiver sending shutdown signal")
+	close(shutdown)
 
-	// Print a message that the program shut down cleanly.
-	fmt.Println("Terminating program")
+	// Wait for the Goroutines to finish.
+	wg.Wait()
+
+	// Print the values in our slice.
+	fmt.Printf("Result count: %d\n", len(nums))
+	fmt.Println(nums)
 }

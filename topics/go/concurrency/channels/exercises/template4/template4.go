@@ -1,63 +1,59 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Write a program that uses select to read and write from multiple channels.
+// Write a program that creates a fixed set of workers to generate random
+// numbers. Discard any number divisible by 2. Continue receiving until 100
+// numbers are received. Tell the workers to shut down before terminating.
 package main
 
 // Add imports.
 
 func main() {
 
-	// Create a channel for sending int values.
+	// Create the channel for sharing results.
 
-	// Create a channel "shutdown" to tell the goroutine when to terminate.
+	// Create a channel "shutdown" to tell goroutines when to terminate.
 
-	// Create a channel "complete" for the goroutine to tell main when it's done.
+	// Define the size of the worker pool. Use runtime.NumCPU to size the pool based on number of processors.
 
-	// Launch a goroutine to generate data through the channel.
+	// Create a sync.WaitGroup to monitor the Goroutine pool. Add the count.
+
+	// Create a fixed size pool of goroutines to generate random numbers.
 	{
-
-		// Create an int variable i.
-
-		// Run an infinite loop that uses select to perform channel operations.
 		{
+
+			// Start an infinite loop.
 			{
 
-				// In one case send the value of i.
+				// Generate a random number up to 1000.
 
-				// Print the number sent.
-				// Increment i for the next iteration.
-				// Sleep for 100ms to simulate some latency.
+				// Use a select to either send the number or receive the shutdown signal.
+				{
 
-				// In another case receive from the shutdown channel.
+					// In one case send the random number.
 
-				// Print a shutdown message
-				// Close the "complete" channel so main knows we're done.
-				// Return from the anonymous function.
+					// In another case receive from the shutdown channel.
+
+				}
 			}
 		}
-
 	}
 
-	// Use time.After to make a channel which will send in 1 second.
+	// Create a slice to hold the random numbers.
 
-	// Run an infinite loop that uses a label like "loop:"
+	// Receive from the values channel with range.
 	{
-		{
 
-			// In one case receive the value of i.
+		// continue the loop if the value was even.
 
-			// Print the value received.
+		// Store the odd number.
 
-			// In another case receive from the timeout channel.
-
-			// Print a message that main is initiating the shutdown sequence.
-			// Close the "shutdown" channel so the goroutine knows to terminate.
-			// Break the main loop.
-		}
+		// break the loop once we have 100 results.
 	}
 
-	// Block waiting to receive from the "complete" channel.
+	// Send the shutdown signal by closing the shutdown channel.
 
-	// Print a message that the program shut down cleanly.
+	// Wait for the Goroutines to finish.
+
+	// Print the values in our slice.
 }
