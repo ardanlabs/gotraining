@@ -17,24 +17,17 @@ func init() {
 
 func main() {
 
-	// = Part 1 ==================================================================
-	// Receiving from one or more goroutines, buffered vs unbuffered channels.
-	// ===========================================================================
+	// Part 1
 	// waitForResult()
 	// fanOut()
 
-	// = Part 2 ==================================================================
-	// Closing channels, sending to one or more goroutines, receiving with range.
-	// ===========================================================================
-	// waitForFinished()
+	// Part 2
 	// waitForTask()
-	// poolingUnknown()
+	// pooling()
 
-	// = Part 3 ==================================================================
-	// Advanced patterns.
-	// ===========================================================================
+	// Part 3: Advanced patterns.
 	// fanOutSem()
-	// poolingKnown()
+	// fanOutLimited()
 	// drop()
 	// cancellation()
 }
@@ -87,27 +80,6 @@ func fanOut() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// waitForFinished: Think about being a manager and hiring a new employee. In
-// this scenario, you want your new employee to perform a task immediately when
-// they are hired, and you need to wait for the result of their work. You need
-// to wait because you can't move on until you know they are but you don't need
-// anything from them.
-func waitForFinished() {
-	ch := make(chan struct{})
-
-	go func() {
-		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-		close(ch)
-		fmt.Println("employee : sent signal")
-	}()
-
-	_, wd := <-ch
-	fmt.Println("manager : recv'd signal :", wd)
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
-}
-
 // waitForTask: Think about being a manager and hiring a new employee. In
 // this scenario, you want your new employee to perform a task but they need
 // to wait until you are ready. This is because you need to hand them a piece
@@ -128,12 +100,12 @@ func waitForTask() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// poolingUnknown: Think about being a manager and hiring a team of employees.
+// pooling: Think about being a manager and hiring a team of employees.
 // In this scenario, you want your new employees to perform tasks but they need
 // to wait until you are ready. This is because you need to hand them a piece
 // of paper before they start. You do not know how much work must be performed
 // before you start.
-func poolingUnknown() {
+func pooling() {
 	ch := make(chan string)
 
 	const emps = 2
@@ -159,12 +131,12 @@ func poolingUnknown() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// poolingKnown: Think about being a manager and hiring a team of employees.
+// fanOutLimited: Think about being a manager and hiring a team of employees.
 // In this scenario, you want your new employees to perform tasks but they need
 // to wait until you are ready. This is because you need to hand them a piece
 // of paper before they start. You know exactly all the work that needs to get
 // done before it is started.
-func poolingKnown() {
+func fanOutLimited() {
 	work := []string{"paper", "paper", "paper", "paper", "paper"}
 	ch := make(chan string, len(work))
 	for _, wrk := range work {
