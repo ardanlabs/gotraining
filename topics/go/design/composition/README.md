@@ -20,7 +20,7 @@ _"You can always embed, but you cannot decompose big interfaces once they are ou
 
 _"Don't design with interfaces, discover them." - Rob Pike_  
 
-_"Dduplication is far cheaper than the wrong abstraction. - Sandi Metz_  
+_"Duplication is far cheaper than the wrong abstraction. - Sandi Metz_
 
 ## Design Guidelines
 
