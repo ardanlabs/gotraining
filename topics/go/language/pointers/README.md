@@ -1,6 +1,6 @@
 ## Pointers
 
-Pointers provide a way to share data across function boundaries. Having the ability to share and reference data with a pointer provides flexbility. It also helps our programs minimize the amount of memory they need and can add some extra performance.
+Pointers provide a way to share data across program boundaries. Having the ability to share and reference data with a pointer provides the benefit of efficiency. There is only one copy of the data and everyone can see it changing. The cost is that anyone can change the data which can cause side effects in running programs.
 
 ## Notes
 
@@ -14,8 +14,9 @@ Pointers provide a way to share data across function boundaries. Having the abil
 * When a value could be referenced after the function that constructs the value returns.
 * When the compiler determines a value is too large to fit on the stack.
 * When the compiler doesn’t know the size of a value at compile time.
+* When a value is decoupled through the use of function or interface values.
 
-## Garbage Collection
+## Garbage Collection History
 
 The design of the Go GC has changed over the years:
 * Go 1.0, Stop the world mark sweep collector based heavily on tcmalloc.
@@ -27,53 +28,17 @@ The design of the Go GC has changed over the years:
 * Go 1.7, GC improvements, handling larger number of idle goroutines, substantial stack size fluctuation, or large package-level variables.
 * Go 1.8, GC improvements, collection pauses should be significantly shorter than they were in Go 1.7, usually under 100 microseconds and often as low as 10 microseconds.
 
-![figure1](GC_Algorithm.png?v=4)
+## Garbage Collection Semantics
 
-**STW : Stop The World Phase**
+The GC has a pacing algorithm which is used to determine when a garbage collection is to start. The algorithm depends on a feedback loop that the Pacer uses to collect information about the running application and the stress the application is putting on the heap. Stress can be defined as how fast the application is allocating all available memory on the heap within a given amount of time. Once the Pacer decides to start a collection, the amount of time to finish the collection is predetermined. This predetermined time is based on the current size of the heap, the live heap, and timing calculations about future heap usage while the collection is running.
 
-Turn the Write Barrier on. The Write Barrier is a little function that inspects the write of pointers when the GC is running. Each goroutine must know this flag is set. This STW pause should be sub-millisecond.
+During garbage collection there will be times when the Pacer must stop all application goroutines from running. This is called a Stop The World (STW) and there are many reasons for this. There is an initial STW that occurs at the beginning of a collection to turn the Write Barrier on. The purpose of the Write Barrier is to allow the Pacer to maintain data integrity on the heap during a collection since both GC and application goroutines will be running concurrently. In order to turn the Write Barrier on, every application goroutine running must be stopped. This STW is usually very quick, within a very small number of microseconds.
 
-**Mark Phase**
+Once the write barrier is turned on, the GC goroutines begin to perform their Mark work. The Mark work consists of identifying values on the heap that are still in use. This work requires the application goroutines to share the existing CPU capacity with the GC goroutines. This is the part of the GC that makes it concurrent. The idea is to allow application work to get done at the same time GC work is getting done so the impact of the GC is minimal. During this time, the Pacer will do its best to minimize the amount of CPU the GC goroutines need to get the collection work done. There are lots of factors that go into determining how much CPU capacity the GC will use during any given collection.
 
-Find all the objects that can be reclaimed.
+During the Mark phase of the GC, there may be times when the Pacer decides to stop all the application goroutines and take all of the CPU capacity for itself. This constitutes more STW time during the collection. Reasons why the Pacer might do this could be because the application goroutines want to allocate memory on the heap at a time where the Pacer determines its not the best thing to do at that moment. Maybe too much allocation is going on and it needs to be slowed down. In these cases, the Pacer might context switch a different application goroutine to run that doesn't need the heap. It may also ask that application goroutine that wants to allocate to momentarily help with the processing of the Mark work to get it done faster.
 
-* All objects on the heap are turned WHITE.
-* **Scan Stacks :** Find all the root objects and place them in the queue.
-    * Pause the goroutine while scanning its stack.
-    * All root objects found on the stack are turned GREY.
-    * The stack is marked BLACK.
-* **Mark Phase I :** Pop a GREY object from the queue and scan it.
-    * Turn the object BLACK.
-    * If this BLACK object points to a WHITE object, the WHITE object is turned GREY and added to the queue.
-    * The GC and the application are running concurrently.
-    * Goroutines executing at this time will find their stack reverted back to GREY.
-* **Mark Phase II - STW :** Re-scan GREY stacks.
-    * Re-scan all GREY stacks and root objects again.
-    * Should be quick but large numbers of active goroutines can cause milliseconds of latency. 
-    * Call any finalizers on BLACK objects.
-
-**Sweep Phase**
-
-Sweep phase reclaims memory.
-
-* Left with either WHITE or BLACK objects. No more GREY objects.
-* WHITE objects are reclaimed while BLACK objects stay.
-
-**Write Barrier**
-
-The Write Barrier is a little function that inspects the write of pointers when the GC is running.
-
-The Write Barrier is in place to prevent a situation where a BLACK object (one that is processed) suddenly finds itself pointing to a WHITE object after the Mark Phases are complete. This could happen if a goroutine changes (writes) a pointer inside a BLACK object to point to a WHITE object while both the program and the GC is running after that BLACK object has been processed. So the Write Barrier will make sure this write changes the object to BLACK so it's not swept away.
-
-Pointers to the heap that exist on a stack can also be changed by goroutines when the GC is running. So stacks are also marked as BLACK once they are scanned and can revert back to GREY during Mark Phase I. A BLACK stack reverts back to GREY when its goroutine executes again. During Mark Phase II, the GC must re-scan GREY stacks to BLACKen them and finish marking any remaining heap pointers. Since it must ensure the stacks don't continue to change during this scan, the whole re-scan process happens *with the world stopped*.
-
-**Pacing**
-
-The GC starts a scan based on a feedback loop of information about the running program and the stress on the heap. It is the pacers job to make this decision. Once the decision is made to run, the amount of time the GC has to finish the scan is pre-determined. This time is based on the current size of the heap, the current live heap, and timing calculations about future heap usage while the GC is running.
-
-The GC has a set of goroutines to perform the task of Mark and Sweep. The scheduler will provide these goroutines 25% of the available logical processor time. If your program is using 4 logical processors, that 1 entire logical processor will be given to the GC goroutines for exclusive use.
-
-If the GC begins to believe that it can’t finish the collection within the decided amount of time, it will begin to recruit program goroutines to help. Those goroutines that are causing the slow down will be recruited to help.
+In the end, the Pacer’s job is to start and finish a collection within the predetermined amount of time and with the least amount of STW time possible. The Pacer is constrained by the size of the heap, the size of the live heap and the number of values on the heap at the time the collection starts and the concurrent work being performed by the application goroutines. These factors play a big role in the Pacer’s ability to minimize its impact on the running program. You have to be sympathetic with these factors to help the Pacer do its job effectively.
 
 ## Links
 
