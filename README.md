@@ -134,12 +134,23 @@ February(25-26)     Birmingham, AL        Shipt               Corporate    Go Pe
 March(04-06)        Poznan, Poland        OLX                 Corporate    Go (3 day)   
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
-March(18-20)        Miami, FL             OpenGo              Conference   Ardan Conference
 May(07-08)          Budapest, Hungary     TBA                 Conference   Adv Go (1 day)   https://craft-conf.com/
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
 June(22-23)         Anchorage, AK         TBA                 Gobridge     Go (2 day)       
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
-August(21-23)       London, England       GopherCon UK        Conference   TDA              https://www.gophercon.co.uk/
+August(21-23)       London, England       GopherCon UK        Conference   TBA              https://www.gophercon.co.uk/
+September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
+```
+
+**Jacob Walker**  
+```
+Date                Location              Venue               Type         Type             Url
+================================================================================================================================================
+February(12-14)     Rockville, MD         Bethesda            Corporate    Go (3 day)
+February(26-28)     San Francisco, CA     Lob                 Corporate    Go (3 day)
+March(23-24)        Boston, MA            TBA                 GoBridge     Service (2 day)  TBA
+April(29-30)        Singapore             TBA                 Conference   Adv Go (2 day)   https://www.papercall.io/gopherconsg2019
+September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
 ```
 
 ### 2018
