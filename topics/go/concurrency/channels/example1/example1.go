@@ -131,35 +131,6 @@ func pooling() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// fanOutLimited: Think about being a manager and hiring a team of employees.
-// In this scenario, you want your new employees to perform tasks but they need
-// to wait until you are ready. This is because you need to hand them a piece
-// of paper before they start. You know exactly all the work that needs to get
-// done before it is started.
-func fanOutLimited() {
-	work := []string{"paper", "paper", "paper", "paper", "paper"}
-	ch := make(chan string, len(work))
-	for _, wrk := range work {
-		ch <- wrk
-	}
-
-	fmt.Println("manager : sent shutdown signal but finish all work first")
-	close(ch)
-
-	const emps = 2
-	for e := 0; e < emps; e++ {
-		go func(emp int) {
-			for p := range ch {
-				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
-			}
-			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
-		}(e)
-	}
-
-	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
-}
-
 // fanOutSem: Think about being a manager and hiring a team of employees. In
 // this scenario, you want only some of the new employees performing a task
 // immediately when they are hired. The rest wait until other employees finish.
@@ -189,6 +160,35 @@ func fanOutSem() {
 		emps--
 		fmt.Println(p)
 		fmt.Println("manager : recv'd signal :", emps)
+	}
+
+	time.Sleep(time.Second)
+	fmt.Println("-------------------------------------------------------------")
+}
+
+// fanOutLimited: Think about being a manager and hiring a team of employees.
+// In this scenario, you want your new employees to perform tasks but they need
+// to wait until you are ready. This is because you need to hand them a piece
+// of paper before they start. You know exactly all the work that needs to get
+// done before it is started.
+func fanOutLimited() {
+	work := []string{"paper", "paper", "paper", "paper", "paper"}
+	ch := make(chan string, len(work))
+	for _, wrk := range work {
+		ch <- wrk
+	}
+
+	fmt.Println("manager : sent shutdown signal but finish all work first")
+	close(ch)
+
+	const emps = 2
+	for e := 0; e < emps; e++ {
+		go func(emp int) {
+			for p := range ch {
+				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
+			}
+			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
+		}(e)
 	}
 
 	time.Sleep(time.Second)
