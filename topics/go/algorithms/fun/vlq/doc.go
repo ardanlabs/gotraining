@@ -66,5 +66,9 @@ Octet	8	7	6	5	4	3	2	1
 Finally we concatenate them, most significant octet first, into
 
 Encoded: 10011010 01101011  ToHex: 0x9A 0x6B
+
+For an excellent implementation of this algorithm look here:
+
+https://github.com/go-audio/midi/blob/master/varint.go
 */
 package vlq
