@@ -8,6 +8,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -17,25 +18,24 @@ func init() {
 
 func main() {
 
-	// Part 1
 	// waitForResult()
 	// fanOut()
 
-	// Part 2
 	// waitForTask()
 	// pooling()
 
-	// Part 3: Advanced patterns.
+	// Advanced patterns
 	// fanOutSem()
-	// fanOutLimited()
+	// fanOutBounded()
 	// drop()
 	// cancellation()
 }
 
-// waitForResult: Think about being a manager and hiring a new employee. In
-// this scenario, you want your new employee to perform a task immediately when
-// they are hired, and you need to wait for the result of their work. You need
-// to wait because you need the paper from them before you can continue.
+// waitForResult: You are a manager and you hire a new employee. Your new
+// employee knows immediately what they are expected to do and starts their
+// work. You sit waiting for the result of the employee's work. The amount
+// of time you wait on the employee is unknown because you need a
+// guarantee that the result sent by the employee is received by you.
 func waitForResult() {
 	ch := make(chan string)
 
@@ -52,11 +52,13 @@ func waitForResult() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// fanOut: Think about being a manager and hiring a team of employees. In
-// this scenario, you want your new employees to perform a task immediately when
-// they are hired, and you need to wait for all the results of their work.
-// You need to wait because you need the paper from each of them before you
-// can continue.
+// fanOut: You are a manager and you hire one new employee for the exact amount
+// of work you have to get done. Each new employee knows immediately what they
+// are expected to do and starts their work. You sit waiting for all the results
+// of the employees work. The amount of time you wait on the employees is
+// unknown because you need a guarantee that all the results sent by employees
+// are received by you. No given employee needs an immediate guarantee that you
+// received their result.
 func fanOut() {
 	emps := 20
 	ch := make(chan string, emps)
@@ -80,10 +82,11 @@ func fanOut() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// waitForTask: Think about being a manager and hiring a new employee. In
-// this scenario, you want your new employee to perform a task but they need
-// to wait until you are ready. This is because you need to hand them a piece
-// of paper before they start.
+// waitForTask: You are a manager and you hire a new employee. Your new
+// employee doesn't know immediately what they are expected to do and waits for
+// you to tell them what to do. You prepare the work and send it to them. The
+// amount of time they wait is unknown because you need a guarantee that the
+// work your sending is received by the employee.
 func waitForTask() {
 	ch := make(chan string)
 
@@ -100,11 +103,12 @@ func waitForTask() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// pooling: Think about being a manager and hiring a team of employees.
-// In this scenario, you want your new employees to perform tasks but they need
-// to wait until you are ready. This is because you need to hand them a piece
-// of paper before they start. You do not know how much work must be performed
-// before you start.
+// pooling: You are a manager and you hire a team of employees. None of the new
+// employees know what they are expected to do and wait for you to provide work.
+// When work is provided to the group, any given employee can take it and you
+// don't care who it is. The amount of time you wait for any given employee to
+// take your work is unknown because you need a guarantee that the work your
+// sending is received by an employee.
 func pooling() {
 	ch := make(chan string)
 
@@ -131,11 +135,14 @@ func pooling() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// fanOutSem: Think about being a manager and hiring a team of employees. In
-// this scenario, you want only some of the new employees performing a task
-// immediately when they are hired. The rest wait until other employees finish.
-// You need to wait for all the results of their work. You need to wait because
-// you need the paper from each of them before you can continue.
+// fanOutSem: You are a manager and you hire one new employee for the exact amount
+// of work you have to get done. Each new employee knows immediately what they
+// are expected to do and starts their work. However, you don't want all the
+// employees working at once. You want to limit how many of them are working at
+// any given time. You sit waiting for all the results of the employees work.
+// The amount of time you wait on the employees is unknown because you need a
+// guarantee that all the results sent by employees are received by you. No
+// given employee needs an immediate guarantee that you received their result.
 func fanOutSem() {
 	emps := 20
 	ch := make(chan string, emps)
@@ -166,24 +173,28 @@ func fanOutSem() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// fanOutLimited: Think about being a manager and hiring a team of employees.
-// In this scenario, you want your new employees to perform tasks but they need
-// to wait until you are ready. This is because you need to hand them a piece
-// of paper before they start. You know exactly all the work that needs to get
-// done before it is started.
-func fanOutLimited() {
+// fanOutBounded: You are a manager and you hire a team of employees. None of
+// the new employees know what they are expected to do and wait for you to
+// provide work. The amount of work that needs to get done is fixed and staged
+// ahead of time. Any given employee can take work and you don't care who it is
+// or what they take. The amount of time you wait on the employees to finish
+// all the work is unknown because you need a guarantee that all the work is
+// finished.
+func fanOutBounded() {
 	work := []string{"paper", "paper", "paper", "paper", "paper"}
 	ch := make(chan string, len(work))
 	for _, wrk := range work {
 		ch <- wrk
 	}
-
-	fmt.Println("manager : sent shutdown signal but finish all work first")
 	close(ch)
 
 	const emps = 2
+	var wg sync.WaitGroup
+	wg.Add(emps)
+
 	for e := 0; e < emps; e++ {
 		go func(emp int) {
+			defer wg.Done()
 			for p := range ch {
 				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
 			}
@@ -191,17 +202,19 @@ func fanOutLimited() {
 		}(e)
 	}
 
+	wg.Wait()
+
 	time.Sleep(time.Second)
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// drop: Think about being a manager and hiring a new employee. In
-// this scenario, you want your new employee to perform a task but they need
-// to wait until you are ready. As the employee finishes their task you don’t
-// care to know they are done. All that’s important is whether you can or can’t
-// send new work. If you can’t perform the send, then you know your employee is
-// at capacity. At this point the new work needs to be discarded so things can
-// keep moving.
+// drop: You are a manager and you hire a new employee. Your new employee
+// doesn't know immediately what they are expected to do and waits for
+// you to tell them what to do. You prepare the work and send it to them. The
+// amount of time they wait is unknown because you need a guarantee that the
+// work your sending is received by the employee. You won't wait for the
+// employee to take the work if they are not ready to receive it. In that case
+// you drop the work on the floor and try again with the next piece of work.
 func drop() {
 	const cap = 5
 	ch := make(chan string, cap)
@@ -229,12 +242,14 @@ func drop() {
 	fmt.Println("-------------------------------------------------------------")
 }
 
-// cancellation: Think about being a manager and hiring a new employee. In
-// this scenario, you want your new employee to perform a task immediately when
-// they are hired, and you need to wait for the result of their work. This time
-// you are not willing to wait for some unknown amount of time for the employee
-// to finish. You are on a discrete deadline and if the employee doesn’t finish
-// in time, you are not willing to wait.
+// cancellation: You are a manager and you hire a new employee. Your new
+// employee knows immediately what they are expected to do and starts their
+// work. You sit waiting for the result of the employee's work. The amount
+// of time you wait on the employee is unknown because you need a
+// guarantee that the result sent by the employee is received by you. Except
+// you are not willing to wait forever for the employee to finish their work.
+// They have a specified amount of time and if they are not done, you don't
+// wait and walk away.
 func cancellation() {
 	ch := make(chan string, 1)
 
