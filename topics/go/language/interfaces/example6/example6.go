@@ -34,7 +34,7 @@ func (db *userDB) find(id int) (*user, error) {
 type mockDB struct{}
 
 // find implements the finder interface using pointer semantics.
-func (db mockDB) find(id int) (*user, error) {
+func (db *mockDB) find(id int) (*user, error) {
 	return &user{id: id, name: "Jacob Walker"}, nil
 }
 
