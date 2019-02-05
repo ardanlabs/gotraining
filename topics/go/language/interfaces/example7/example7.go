@@ -9,7 +9,7 @@ import "fmt"
 
 func main() {
 
-	// fmt.Println can be called with values of any type
+	// fmt.Println can be called with values of any type.
 	fmt.Println("Hello, world")
 	fmt.Println(12345)
 	fmt.Println(3.14159)
@@ -21,40 +21,28 @@ func main() {
 	myPrintln(3.14159)
 	myPrintln(true)
 
-	// - An interface is satisfied by any type with certain methods.
-	// - The empty interface has no methods.
-	// - All types have AT LEAST no methods.
-	// Therefore all types satisfy the empty interface.
+	// - An interface is satisfied by any piece of data when the data exhibits
+	// the full method set of behavior defined by the interface.
+	// - The empty interface defines no method set of behavior and therefor
+	// requires no methods set of behavior by the data being stored.
 
-	// - The empty interface says nothing useful for the compiler.
-	// Checks must be performed at runtime to inspect the data
-	// stored in the interface variable.
-	// - Abstracting around the shape of data is costly both in
-	// terms of performance and complexity.
-	// - Abstract around behavior when possible.
+	// - The empty interface says nothing about the data stored inside
+	// the interface.
+	// - Checks would need to be performed at runtime to know anything about
+	// the data stored in the empty interface.
+	// - Decouple around well defined behavior and only use the empty
+	// interface as an exception when it is reasonable and practical to do so.
 }
 
 func myPrintln(a interface{}) {
-
-	switch a.(type) {
-	case string:
-		fmt.Println("Passed a string")
-	case int:
-		fmt.Println("Passed an int")
-	case float64:
-		fmt.Println("Passed a float64")
-	default:
-		fmt.Println("Passed something else")
-	}
-
 	switch v := a.(type) {
 	case string:
-		fmt.Println("[string ]: ", v)
+		fmt.Printf("Is string  : type(%T) : value(%s)\n", v, v)
 	case int:
-		fmt.Println("[int    ]:", v)
+		fmt.Printf("Is int     : type(%T) : value(%d)\n", v, v)
 	case float64:
-		fmt.Println("[float64]:", v)
+		fmt.Printf("Is float64 : type(%T) : value(%f)\n", v, v)
 	default:
-		fmt.Println("[???????]:,", v)
+		fmt.Printf("Is unknown : type(%T) : value(%v)\n", v, v)
 	}
 }
