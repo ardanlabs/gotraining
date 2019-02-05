@@ -23,7 +23,7 @@ func main() {
 
 	// - An interface is satisfied by any piece of data when the data exhibits
 	// the full method set of behavior defined by the interface.
-	// - The empty interface defines no method set of behavior and therefor
+	// - The empty interface defines no method set of behavior and therefore
 	// requires no methods set of behavior by the data being stored.
 
 	// - The empty interface says nothing about the data stored inside
