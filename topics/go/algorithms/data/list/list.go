@@ -133,6 +133,7 @@ func (l *List) Remove(data string) (*Node, error) {
 	// Detach the node by linking the previous node's next
 	// pointer to the node in front of the one being removed.
 	n.prev.next = n.next
+	n.next.prev = n.prev
 	l.Count--
 
 	return n, nil
@@ -184,8 +185,6 @@ func (l *List) AddSort(data string) *Node {
 			continue
 		}
 
-		l.Count++
-
 		// Create the new node and place it before the
 		// current node.
 		new := Node{
@@ -193,6 +192,8 @@ func (l *List) AddSort(data string) *Node {
 			next: n,
 			prev: n.prev,
 		}
+
+		l.Count++
 
 		// If this node is now to be the first,
 		// fix the first pointer.
