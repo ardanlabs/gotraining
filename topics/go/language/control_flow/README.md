@@ -13,11 +13,13 @@ There are no ternary operators.
 * `switch` statements do not require `break`s and will not fall through by default.
 * `switch` statements can have multiple values per case.
 * Use the `||` "or" and `&&` "and" operators for complex conditions.
+* Use shorter variable names that still provide context for the value they represent.
 
 ## Code Review
 
 [if statements](example1/example1.go) ([Go Playground](https://play.golang.org/p/YuENxHd7llH))  
-[switch statements](example2/example2.go) ([Go Playground](https://play.golang.org/p/Ixx0rjkZFdp))
+[switch statements](example2/example2.go) ([Go Playground](https://play.golang.org/p/Ixx0rjkZFdp))  
+[variable names](example3/example3.go) ([Go Playground](https://play.golang.org/p/KME1LmWQ4NM))
 
 ## Exercises
 
