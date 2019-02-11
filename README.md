@@ -131,15 +131,18 @@ February(02-03)     Troy, NY              Rensselaer Poly In  GoBridge     Go (2
 February(08-09)     Orlando, FL           TBA                 Gobridge     Go (2 day)       https://www.eventbrite.com/e/ultimate-gogo-bridge-w-bill-kennedy-orlando-tickets-50361134509
 February(13-15)     Copenhagen, Denmark   Maersk              Corporate    Go (3 day)       
 February(25-26)     Birmingham, AL        Shipt               Corporate    Go Perf (2 day)       
-March(04-06)        Poznan, Poland        OLX                 Corporate    Go (3 day)   
+March(04-06)        Lisbon, Portugal      OLX                 Corporate    Go (3 day)   
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
-May(07-08)          Budapest, Hungary     TBA                 Conference   Adv Go (1 day)   https://craft-conf.com/
+April(14-15)        Beijing, China        Langley West        Conference   Adv Go (1 day)   http://gopherchina.org/
+May(07-08)          Budapest, Hungary     Magyar Vasúttörtén  Conference   Adv Go (1 day)   https://craft-conf.com/
+May(30-01)          Canary Islands        GopherCon EU        Conference   Adv Go (1 day)   https://www.eventbrite.co.uk/e/gophercon-eu-2019-canary-islands-tickets-55633196388
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
 June(22-23)         Anchorage, AK         TBA                 Gobridge     Go (2 day)       
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
 August(21-23)       London, England       GopherCon UK        Conference   TBA              https://www.gophercon.co.uk/
 September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
+October(21-22)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 ```
 
 **Jacob Walker**  
@@ -189,7 +192,7 @@ September(15-16)    Portland, OR          Puppet              GoBridge     Go (2
 September(24-26)    Reston, VA            Comcast             Corporate    Go (3 day)
 September(27-30)    Minsk, Belarus        GoWayFest           Conference   Adv Go (1 day)   https://goway.io/
 October(04-06)      Stockholm             TBD                 Conference   Go (talk)   
-October(08-10)      Portugal              OLX                 Corporate    Go (3 day)   
+October(08-10)      Lisbon, Portugal      OLX                 Corporate    Go (3 day)   
 October(12)         San Franisco, CA      Grand Theater       Conference   Go (1 day)       http://gopherpalooza.com/
 October(16-17)      Miami, FL             Ardan Office        Public       Adv Go (2 day)   https://www.eventbrite.com/e/ultimate-go-training-miami-oct-2018-tickets-48207094718
 October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
