@@ -55,8 +55,8 @@ func main() {
 	// n := findConcurrent(topic, docs)
 	// n := findConcurrentSem(topic, docs)
 	// n := findNumCPU(topic, docs)
-	// n := findActor(topic, docs)
 	// n := findNumCPUTasks(topic, docs)
+	// n := findActor(topic, docs)
 
 	log.Printf("Found %s %d times.", topic, n)
 }
@@ -221,10 +221,6 @@ func findNumCPU(topic string, docs []string) int {
 	wg.Add(g)
 
 	ch := make(chan string, len(docs))
-	for _, doc := range docs {
-		ch <- doc
-	}
-	close(ch)
 
 	for i := 0; i < g; i++ {
 		go func() {
@@ -270,6 +266,11 @@ func findNumCPU(topic string, docs []string) int {
 		}()
 	}
 
+	for _, doc := range docs {
+		ch <- doc
+	}
+	close(ch)
+
 	wg.Wait()
 	return int(found)
 }
@@ -282,10 +283,6 @@ func findNumCPUTasks(topic string, docs []string) int {
 	wg.Add(g)
 
 	ch := make(chan string, len(docs))
-	for _, doc := range docs {
-		ch <- doc
-	}
-	close(ch)
 
 	for i := 0; i < g; i++ {
 		go func() {
@@ -343,6 +340,11 @@ func findNumCPUTasks(topic string, docs []string) int {
 			}
 		}()
 	}
+
+	for _, doc := range docs {
+		ch <- doc
+	}
+	close(ch)
 
 	wg.Wait()
 	return int(found)

@@ -3,7 +3,7 @@ package freq_test
 import (
 	"testing"
 
-	"github.com/ardanlabs/gotraining/topics/go/algorithms/fun/freq"
+	freq "github.com/ardanlabs/gotraining/topics/go/algorithms/fun/freq/student"
 )
 
 // go test -run none -bench . -benchtime 3s
@@ -50,7 +50,6 @@ func TestCount(t *testing.T) {
 		}{
 			{"Sequential", freq.Sequential},
 			{"Concurrent", freq.Concurrent},
-			{"ConcurrentChannel", freq.ConcurrentChannel},
 		}
 
 		for i, tt := range tests {

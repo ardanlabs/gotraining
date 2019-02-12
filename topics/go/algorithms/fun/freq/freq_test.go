@@ -49,15 +49,21 @@ func BenchmarkSequential(b *testing.B) {
 	}
 }
 
-func BenchmarkConcurrent(b *testing.B) {
+func BenchmarkConcurrentBounded(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		m = freq.Concurrent(inp)
+		m = freq.ConcurrentBounded(inp)
 	}
 }
 
-func BenchmarkConcurrentChannel(b *testing.B) {
+func BenchmarkConcurrentBoundedChannel(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		m = freq.ConcurrentChannel(inp)
+		m = freq.ConcurrentBoundedChannel(inp)
+	}
+}
+
+func BenchmarkConcurrentUnlimited(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		m = freq.ConcurrentUnlimited(inp)
 	}
 }
 
@@ -69,8 +75,9 @@ func TestCount(t *testing.T) {
 			count func(text []string) map[rune]int
 		}{
 			{"Sequential", freq.Sequential},
-			{"Concurrent", freq.Concurrent},
-			{"ConcurrentChannel", freq.ConcurrentChannel},
+			{"ConcurrentBounded", freq.ConcurrentBounded},
+			{"ConcurrentBoundedChannel", freq.ConcurrentBoundedChannel},
+			{"ConcurrentUnlimited", freq.ConcurrentUnlimited},
 		}
 
 		for i, tt := range tests {

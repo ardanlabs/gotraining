@@ -18,8 +18,34 @@ func Sequential(text []string) map[rune]int {
 	return m
 }
 
-// Concurrent uses a concurrent algorithm.
-func Concurrent(text []string) map[rune]int {
+// ConcurrentUnlimited uses a concurrent algorithm based on an
+// unlimited fan out pattern.
+func ConcurrentUnlimited(text []string) map[rune]int {
+	ch := make(chan map[rune]int, len(text))
+	for _, words := range text {
+		go func(words string) {
+			lm := make(map[rune]int)
+			for _, r := range words {
+				lm[r]++
+			}
+			ch <- lm
+		}(words)
+	}
+
+	all := make(map[rune]int)
+	for range text {
+		lm := <-ch
+		for r, c := range lm {
+			all[r] += c
+		}
+	}
+
+	return all
+}
+
+// ConcurrentBounded uses a concurrent algorithm based on a bounded
+// fan out and no channels.
+func ConcurrentBounded(text []string) map[rune]int {
 	m := make(map[rune]int)
 
 	goroutines := runtime.NumCPU()
@@ -61,8 +87,9 @@ func Concurrent(text []string) map[rune]int {
 	return m
 }
 
-// ConcurrentChannel uses a concurrent algorithm with channels.
-func ConcurrentChannel(text []string) map[rune]int {
+// ConcurrentBoundedChannel uses a concurrent algorithm based on a bounded
+// fan out using a channel.
+func ConcurrentBoundedChannel(text []string) map[rune]int {
 	m := make(map[rune]int)
 
 	g := runtime.NumCPU()
