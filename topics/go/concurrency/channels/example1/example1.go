@@ -18,7 +18,7 @@ func init() {
 
 func main() {
 
-	// waitForResult()
+	waitForResult()
 	// fanOut()
 
 	// waitForTask()
@@ -183,10 +183,6 @@ func fanOutSem() {
 func fanOutBounded() {
 	work := []string{"paper", "paper", "paper", "paper", "paper"}
 	ch := make(chan string, len(work))
-	for _, wrk := range work {
-		ch <- wrk
-	}
-	close(ch)
 
 	const emps = 2
 	var wg sync.WaitGroup
@@ -201,6 +197,11 @@ func fanOutBounded() {
 			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
 		}(e)
 	}
+
+	for _, wrk := range work {
+		ch <- wrk
+	}
+	close(ch)
 
 	wg.Wait()
 
