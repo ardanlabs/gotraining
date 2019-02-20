@@ -134,6 +134,7 @@ February(25-26)     Birmingham, AL        Shipt               Corporate    Go Pe
 March(04-06)        Lisbon, Portugal      OLX                 Corporate    Go (3 day)   
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
+March(25-27)        Berlin, Germany       OLX                 Corporate    Go (3 day)  
 April(14-15)        Beijing, China        Langley West        Conference   Adv Go (1 day)   http://gopherchina.org/
 May(07-08)          Budapest, Hungary     Magyar Vasúttörtén  Conference   Adv Go (1 day)   https://craft-conf.com/
 May(30-01)          Canary Islands        GopherCon EU        Conference   Adv Go (1 day)   https://www.eventbrite.co.uk/e/gophercon-eu-2019-canary-islands-tickets-55633196388
@@ -156,88 +157,11 @@ April(29-30)        Singapore             TBA                 Conference   Adv G
 September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
 ```
 
-### 2018
-
-**Bill Kennedy**  
-```
-Date                Location              Venue               Type         Type             Url
-================================================================================================================================================
-January(23-25)      St. Louis, MO         Centene             Corporate    Go (3 day)       
-January(29-31)      Toronto, Canada       Index Exchange      Corporate    Go (3 day)       
-February(06-08)     Paris, France         Oxiane              Corporate    Go (3 day)       
-February(15)        Chicago, IL           Loyola University   Meetup       Go (talk)        
-February(20-21)     Belgrade, Serbia      Fincore             Corporate    Go (2 day)       
-February(24-25)     Berlin, Germany       Hello Fresh         WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin/events/247056137/
-March(07-10)        Pune, India           GopherCon India     Conference   Adv Go (1 day)   http://www.gophercon.in/go-workshop1/
-March(20-22)        Lanham, MD            McMurdo Group       Corporate    Go (3 day)       
-April(02-04)        NYC, NY               Tumblr              Corporate    Go (3 day)       
-April(09-11)        Singapore             NCS                 Corporate    Go (3 day)       
-April(14-15)        Shanghai, China       Garden Hotel        Conference   Adv Go (1 day)   http://gopherchina.org/
-May(02-04)          Singapore             Google              Conference   Adv Go (1 day)   https://2018.gophercon.sg/
-May(08-10)          Santa Monica, CA      Hallmark            Corporate    Go (3 day)       
-May(16-18)          Belgrade, Serbia      Fincore             Corporate    Go (3 day)       
-May(31-02)          Reykjavík, Iceland    Harpa               Conference   Adv Go (1 day)   https://gophercon.is/
-June(06-08)         Singapore             SP Digital          Corporate    Go (3 day)       
-June(25-26)         NYC, NY               QCON                Conference   Adv Go (1 day)   https://qconnewyork.com/
-June(30-01)         Providence, RI        Intercity Geeks     GoBridge     Go (2 day)       http://careerdevs.com/goprovidence/
-July(02-06)         San Francisco, CA     Pearson             Video        Go (4 day)
-July(09-16)         San Diego, CA         TBD                 Meetup       Go (talk)
-July(25-30)         Indianapolis, IN      NFL Experience      Vaca         Available
-July(31-02)         Los Angles, CA        Tradesy             Corporate    Go (3 day)
-August(13-15)       Atlanta, GA           Turner              Corporate    Go (3 day)
-August(18-19)       Berlin, Germany       Cosmos              WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go-Berlin/events/253303548
-August(27)          Denver, CO            Gophercon USA       Conference   Adv Go (1 day)   https://www.gophercon.com/
-September(01-02)    San Franisco, CA      TBD                 WWG          Go (2 day)       https://www.meetup.com/Women-Who-Go/events/253734992/
-September(15-16)    Portland, OR          Puppet              GoBridge     Go (2 day)
-September(24-26)    Reston, VA            Comcast             Corporate    Go (3 day)
-September(27-30)    Minsk, Belarus        GoWayFest           Conference   Adv Go (1 day)   https://goway.io/
-October(04-06)      Stockholm             TBD                 Conference   Go (talk)   
-October(08-10)      Lisbon, Portugal      OLX                 Corporate    Go (3 day)   
-October(12)         San Franisco, CA      Grand Theater       Conference   Go (1 day)       http://gopherpalooza.com/
-October(16-17)      Miami, FL             Ardan Office        Public       Adv Go (2 day)   https://www.eventbrite.com/e/ultimate-go-training-miami-oct-2018-tickets-48207094718
-October(22-23)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
-November(05-06)     Silicon Valey, CA     Paypal              Corporate    Go (3 day)
-November(08-09)     San Franisco, CA      QCON                Conference   Adv Go (1 day)   https://qconsf.com/
-December(04-05)     Santa Monica, CA      ZipRecruiter        Corporate    Go (3 day)
-December(18-20)     Hoboken, NJ           Jet                 Corporate    Go (3 day)
-```
-
-**Jacob Walker**  
-```
-Date                Location              Venue               Type         Type             Url
-================================================================================================================================================
-February(28-29)     San Jose, CA          Nutanix             Corporate    Go (3 day)
-March(06-08)        St. Louis, MO         Centene             Corporate    Go (3 day)
-March(13-15)        Boulder, CO           Spectra Logic       Corporate    Go (3 day)
-April(03-05)        Santa Monica, CA      Hallmark Labs       Corporate    Go (3 day)
-April(09-11)        St. Louis, MO         Centene             Corporate    Go (3 day)
-April(12-13)        St. Louis, MO         Centene             Corporate    Go (2 day)
-May(22-24)          St. Louis, MO         Centene             Corporate    Go (3 day)
-May(29-31)          Portland, OR          Intel               Corporate    Go (3 day)
-June(12-14)         Sunnyvale, CA         Juniper             Corporate    Adv Go (3 day)
-June(19-21)         Malaysia              Chotot              Corporate    Adv Go (3 day)
-July(10-12)         Chicago, IL           Enova               Corporate    Adv Go (3 day)
-July(24-26)         St. Louis, MO         Centene             Corporate    Go (3 day)
-September(11-13)    Santa Monica, CA      ZipRecruiter        Corporate    Go (3 day)
-October(09-11)      San Jose, CA          Oracle              Corporate    Adv Go (3 day)
-October(16-18)      Torrance, CA          Dollar Shave Club   Corporate    Go (3 day)
-October(23-25)      St. Louis, MO         Centene             Corporate    Go (3 day)
-November(07-09)     Guadalajara, Mexico   Intel               Corporate    Adv Go (3 day)
-November(27-29)     Portland, OR          New Relic           Corporate    Go (3 day)
-December(11-13)     San Francisco, CA     Shipt               Corporate    Adv Go (3 day)
-```
-
-**Daniel Whitenack**  
-```
-Date                Location              Venue               Type         Type             Url
-================================================================================================================================================
-April(10)           San Francisco, CA     QCON                Conference   AI (1 day)       https://qconsf.com/
-```
-
 ### Past Events
 
-Look at how busy we have been training thousands of developers in Go over the past four years.
+Look at how busy we have been training thousands of developers in Go over the past five years.
 
+		2018 : 60 Events
 		2017 : 40 Events 
 		2016 : 37 Events  
 		2015 : 33 Events  
