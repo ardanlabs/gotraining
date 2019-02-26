@@ -310,6 +310,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
+[Go 1.12 Release Notes](https://golang.org/doc/go1.12) - 2019/02/25
 [Go 1.11 Release Notes](https://golang.org/doc/go1.11) - 2018/08/24  
 [Go 1.10 Release Notes](https://golang.org/doc/go1.10) - 2018/02/16  
 [Go 1.09 Release Notes](https://golang.org/doc/go1.9) - 2017/08/24  
