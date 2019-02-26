@@ -25,6 +25,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### History
 
+[The Go Programming Language - Official Announcement](https://www.youtube.com/watch?v=rKnDgT73v8s#t=8m53) - Rob Pike  
 [The Evolution of Go](https://www.youtube.com/watch?v=0ReKdcpNyQg) - Robert Griesmer  
 [Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article) - Rob Pike  
 [A Very Brief History of Computing, 1948-2015](http://www.gresham.ac.uk/lectures-and-events/a-very-brief-history-of-computing-1948-2015) - Martyn Thomas  
