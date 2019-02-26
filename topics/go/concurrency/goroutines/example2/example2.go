@@ -7,6 +7,8 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"os"
 	"runtime"
 	"sync"
 )
@@ -44,17 +46,25 @@ func main() {
 	fmt.Println("Terminating Program")
 }
 
-// printPrime displays prime numbers for the first 5000 numbers.
+// printPrime logs and displays prime numbers for the first 10 numbers.
 func printPrime(prefix string) {
+	file, err := os.Create(prefix)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer func() { file.Close(); os.Remove(prefix) }()
+	mw := io.MultiWriter(os.Stdout, file)
+
 next:
-	for outer := 2; outer < 5000; outer++ {
+	for outer := 2; outer < 10; outer++ {
 		for inner := 2; inner < outer; inner++ {
 			if outer%inner == 0 {
 				continue next
 			}
 		}
 
-		fmt.Printf("%s:%d\n", prefix, outer)
+		fmt.Fprintf(mw, "%s:%d\n", prefix, outer)
 	}
 
 	fmt.Println("Completed", prefix)
