@@ -152,7 +152,9 @@ Date                Location              Venue               Type         Type 
 ================================================================================================================================================
 February(12-14)     Rockville, MD         Bethesda            Corporate    Go (3 day)
 February(26-28)     San Francisco, CA     Lob                 Corporate    Go (3 day)
-March(23-24)        Boston, MA            TBA                 GoBridge     Service (2 day)  TBA
+March(12-14)        San Jose, CA          eBay                Corporate    Go (3 day)
+March(23-24)        Boston, MA            Vivint              GoBridge     Service (2 day)  https://www.meetup.com/gobridge/events/258872479/
+April(24-26)        Singapore             Singapore Power     Corporate    Go (3 day)
 April(29-30)        Singapore             TBA                 Conference   Adv Go (2 day)   https://www.papercall.io/gopherconsg2019
 September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
 ```
