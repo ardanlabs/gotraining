@@ -142,6 +142,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Linux
 
+[Measuring context switching and memory overheads for Linux threads](https://eli.thegreenplace.net/2018/measuring-context-switching-and-memory-overheads-for-linux-threads/) - Eli Bendersky's  
 [Linux Performance](http://www.brendangregg.com/linuxperf.html) - Brendan Gregg  
 [The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
 [Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
