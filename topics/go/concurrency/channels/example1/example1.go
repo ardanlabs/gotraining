@@ -6,8 +6,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"math/rand"
+	"runtime"
 	"sync"
 	"time"
 )
@@ -112,8 +114,8 @@ func waitForTask() {
 func pooling() {
 	ch := make(chan string)
 
-	const emps = 2
-	for e := 0; e < emps; e++ {
+	g := runtime.NumCPU()
+	for e := 0; e < g; e++ {
 		go func(emp int) {
 			for p := range ch {
 				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
@@ -122,7 +124,7 @@ func pooling() {
 		}(e)
 	}
 
-	const work = 10
+	const work = 100
 	for w := 0; w < work; w++ {
 		ch <- "paper"
 		fmt.Println("manager : sent signal :", w)
@@ -147,8 +149,8 @@ func fanOutSem() {
 	emps := 20
 	ch := make(chan string, emps)
 
-	const cap = 5
-	sem := make(chan bool, cap)
+	g := runtime.NumCPU()
+	sem := make(chan bool, g)
 
 	for e := 0; e < emps; e++ {
 		go func(emp int) {
@@ -184,11 +186,11 @@ func fanOutBounded() {
 	work := []string{"paper", "paper", "paper", "paper", "paper"}
 	ch := make(chan string, len(work))
 
-	const emps = 2
+	g := runtime.NumCPU()
 	var wg sync.WaitGroup
-	wg.Add(emps)
+	wg.Add(g)
 
-	for e := 0; e < emps; e++ {
+	for e := 0; e < g; e++ {
 		go func(emp int) {
 			defer wg.Done()
 			for p := range ch {
@@ -252,21 +254,23 @@ func drop() {
 // They have a specified amount of time and if they are not done, you don't
 // wait and walk away.
 func cancellation() {
+	duration := 150 * time.Millisecond
+	ctx, cancel := context.WithTimeout(context.Background(), duration)
+	defer cancel()
+
 	ch := make(chan string, 1)
 
 	go func() {
-		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
+		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
 		ch <- "paper"
-		fmt.Println("employee : sent signal")
 	}()
 
-	tc := time.After(100 * time.Millisecond)
-
 	select {
-	case p := <-ch:
-		fmt.Println("manager : recv'd signal :", p)
-	case t := <-tc:
-		fmt.Println("manager : timedout :", t)
+	case d := <-ch:
+		fmt.Println("work complete", d)
+
+	case <-ctx.Done():
+		fmt.Println("work cancelled")
 	}
 
 	time.Sleep(time.Second)
