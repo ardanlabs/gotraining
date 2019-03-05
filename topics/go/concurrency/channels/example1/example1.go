@@ -62,7 +62,7 @@ func waitForResult() {
 // are received by you. No given employee needs an immediate guarantee that you
 // received their result.
 func fanOut() {
-	emps := 20
+	emps := 2000
 	ch := make(chan string, emps)
 
 	for e := 0; e < emps; e++ {
@@ -146,7 +146,7 @@ func pooling() {
 // guarantee that all the results sent by employees are received by you. No
 // given employee needs an immediate guarantee that you received their result.
 func fanOutSem() {
-	emps := 20
+	emps := 2000
 	ch := make(chan string, emps)
 
 	g := runtime.NumCPU()
@@ -183,7 +183,7 @@ func fanOutSem() {
 // all the work is unknown because you need a guarantee that all the work is
 // finished.
 func fanOutBounded() {
-	work := []string{"paper", "paper", "paper", "paper", "paper"}
+	work := []string{"paper", "paper", "paper", "paper", "paper", 2000: "paper"}
 	ch := make(chan string, len(work))
 
 	g := runtime.NumCPU()
@@ -219,7 +219,7 @@ func fanOutBounded() {
 // employee to take the work if they are not ready to receive it. In that case
 // you drop the work on the floor and try again with the next piece of work.
 func drop() {
-	const cap = 5
+	const cap = 100
 	ch := make(chan string, cap)
 
 	go func() {
@@ -228,7 +228,7 @@ func drop() {
 		}
 	}()
 
-	const work = 20
+	const work = 2000
 	for w := 0; w < work; w++ {
 		select {
 		case ch <- "paper":

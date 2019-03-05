@@ -28,7 +28,7 @@ func init() {
 
 // Run binds the service to a port and starts listening for requests.
 func Run() {
-	host := "localhost:5000"
+	host := "0.0.0.0:5000"
 	readTimeout := 10 * time.Second
 	writeTimeout := 31 * time.Second
 
