@@ -39,7 +39,7 @@ Goroutines are functions that are created and scheduled to be run independently 
 ## Code Review
 
 [Goroutines and concurrency](example1/example1.go) ([Go Playground](https://play.golang.org/p/4n6G3uRDc83))  
-[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/9lkgTwlbX28))  
+[Goroutine time slicing](example2/example2.go) ([Go Playground](https://play.golang.org/p/QtNVo1nb4uQ))  
 [Goroutines and parallelism](example3/example3.go) ([Go Playground](https://play.golang.org/p/ybZ84UcLW81))  
 
 ## Exercises
