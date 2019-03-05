@@ -6,10 +6,10 @@
 package main
 
 import (
+	"crypto/sha1"
 	"fmt"
-	"io"
-	"os"
 	"runtime"
+	"strconv"
 	"sync"
 )
 
@@ -29,13 +29,13 @@ func main() {
 
 	// Create the first goroutine and manage its lifecycle here.
 	go func() {
-		printPrime("A")
+		printHashes("A")
 		wg.Done()
 	}()
 
 	// Create the second goroutine and manage its lifecycle here.
 	go func() {
-		printPrime("B")
+		printHashes("B")
 		wg.Done()
 	}()
 
@@ -46,25 +46,22 @@ func main() {
 	fmt.Println("Terminating Program")
 }
 
-// printPrime logs and displays prime numbers for the first 10 numbers.
-func printPrime(prefix string) {
-	file, err := os.Create(prefix)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer func() { file.Close(); os.Remove(prefix) }()
-	mw := io.MultiWriter(os.Stdout, file)
+// printHashes calculates the sha1 hash for a range of
+// numbers and prints each in hex encoding.
+func printHashes(prefix string) {
 
-next:
-	for outer := 2; outer < 10; outer++ {
-		for inner := 2; inner < outer; inner++ {
-			if outer%inner == 0 {
-				continue next
-			}
-		}
+	// print each has from 1 to 10. Change this to 50000 and
+	// see how the scheduler behaves.
+	for i := 1; i <= 10; i++ {
 
-		fmt.Fprintf(mw, "%s:%d\n", prefix, outer)
+		// Convert i to a string.
+		num := strconv.Itoa(i)
+
+		// Calculate hash for string num.
+		sum := sha1.Sum([]byte(num))
+
+		// Print prefix: 5-digit-number: hex encoded hash
+		fmt.Printf("%s: %05d: %x\n", prefix, i, sum)
 	}
 
 	fmt.Println("Completed", prefix)
