@@ -141,7 +141,6 @@ May(30-01)          Canary Islands        GopherCon EU        Conference   Adv G
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
 June(22-23)         Anchorage, AK         TBA                 Gobridge     Go (2 day)       
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
-August(21-23)       London, England       GopherCon UK        Conference   TBA              https://www.gophercon.co.uk/
 September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
 October(21-22)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 ```
