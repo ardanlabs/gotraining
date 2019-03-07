@@ -131,18 +131,22 @@ February(02-03)     Troy, NY              Rensselaer Poly In  GoBridge     Go (2
 February(08-09)     Orlando, FL           TBA                 Gobridge     Go (2 day)       https://www.eventbrite.com/e/ultimate-gogo-bridge-w-bill-kennedy-orlando-tickets-50361134509
 February(13-15)     Copenhagen, Denmark   Maersk              Corporate    Go (3 day)       
 February(25-26)     Birmingham, AL        Shipt               Corporate    Go Perf (2 day)       
-March(04-06)        Lisbon, Portugal      OLX                 Corporate    Go (3 day)   
+March(04-06)        Lisbon, Portugal      OLX                 Corporate    Go (3 day)
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
 March(25-27)        Berlin, Germany       OLX                 Corporate    Go (3 day)  
+April(08-10)        Barcelona, Spain      New Relic           Corporate    Go (3 day)       - PENDING
 April(14-15)        Beijing, China        Langley West        Conference   Adv Go (1 day)   http://gopherchina.org/
 May(07-08)          Budapest, Hungary     Magyar Vasúttörtén  Conference   Adv Go (1 day)   https://craft-conf.com/
+May(20-26)          Africa, Kenya/Nigeria TBD                 GoBridge     Go (2 day)
 May(30-01)          Canary Islands        GopherCon EU        Conference   Adv Go (1 day)   https://www.eventbrite.co.uk/e/gophercon-eu-2019-canary-islands-tickets-55633196388
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
+June(18-20)         Singapore             SP Group            Corporate    Go (3 day)       - PENDING
 June(22-23)         Anchorage, AK         TBA                 Gobridge     Go (2 day)       
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
 September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
 October(21-22)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
+October(25-27)      Sydney, Australia     GopherCon AU        Conference   Adv Go (1 day)
 ```
 
 **Jacob Walker**  
