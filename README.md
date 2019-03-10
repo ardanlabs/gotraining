@@ -141,7 +141,7 @@ May(07-08)          Budapest, Hungary     Magyar Vasúttörtén  Conference   Ad
 May(20-26)          Africa, Kenya/Nigeria TBD                 GoBridge     Go (2 day)
 May(30-01)          Canary Islands        GopherCon EU        Conference   Adv Go (1 day)   https://www.eventbrite.co.uk/e/gophercon-eu-2019-canary-islands-tickets-55633196388
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
-June(18-20)         Singapore             SP Group            Corporate    Go (3 day)       - PENDING
+June(18-20)         Singapore             SP Group            Corporate    Go (3 day)
 June(22-23)         Anchorage, AK         TBA                 Gobridge     Go (2 day)       
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
 September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
