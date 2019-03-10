@@ -1,0 +1,8 @@
+# github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
+github.com/braintree/manners
+# github.com/google/uuid v1.0.0
+github.com/google/uuid
+# github.com/patrickmn/go-cache v2.1.0+incompatible
+github.com/patrickmn/go-cache
+# github.com/pborman/uuid v1.2.0
+github.com/pborman/uuid

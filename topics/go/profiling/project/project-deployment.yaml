@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: project
+  name: project
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: project
+    spec:
+      containers:
+      - image: gcr.io/got-project/got-project-amd64:1.0
+        name: got-project
+        ports:
+        - containerPort: 5000
+        resources: {}
+      restartPolicy: Always
+status: {}
