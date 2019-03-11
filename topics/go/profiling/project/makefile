@@ -1,21 +1,28 @@
 # https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 
-PROJECT_ID=$(PROJECT)-b
+PROJECT_NAME=project
+PROJECT_ID=got-project-c
 
-init:
-	@echo $(PROJECT_ID)
+config:
+	@echo Setting environment for $(PROJECT_ID)
 	gcloud config set project $(PROJECT_ID)
 	gcloud config set compute/zone us-east1-b
+	@echo ======================================================================
 
-project: init	
-	gcloud projects create $(PROJECT_ID) --enable-cloud-apis
-	@echo You must enable the GKE API and set billing: https://console.cloud.google.com/apis/library/container.googleapis.com?q=Kubernetes%20Engine&project=$(PROJECT_ID)&folder&organizationId
+project:
+	gcloud projects create $(PROJECT_ID)
+	gcloud service enable container.googleapis.com
+	gcloud beta billing projects link $(PROJECT_ID)
+	@echo ======================================================================
+	@echo INFO: You must enable the GKE API and set billing
+	@echo INFO: https://console.cloud.google.com/apis/library/container.googleapis.com?q=Kubernetes%20Engine&project=$(PROJECT_ID)&folder&organizationId
 
-cluster: init
+cluster:
 	gcloud container clusters create $(PROJECT_ID)-cluster
 	gcloud compute instances list
+	@echo ======================================================================
 
-build: init
+build:
 	docker build \
 		-t gcr.io/$(PROJECT_ID)/$(PROJECT_ID)-amd64:1.0 \
 		--build-arg TITLE=$(PROJECT_ID) \
@@ -24,36 +31,54 @@ build: init
 		.
 	docker system prune -f
 	docker images
+	@echo ======================================================================
 
-upload: init
-	# gcloud container clusters get-credentials $(PROJECT)-cluster
+upload:
 	gcloud auth configure-docker
 	docker push gcr.io/$(PROJECT_ID)/$(PROJECT_ID)-amd64:1.0
+	@echo ======================================================================
 
 kompose:
-	export PROJECT_ID=$(PROJECT_ID)
 	kompose convert
+	mv $(PROJECT_NAME)-deployment.yaml $(PROJECT_ID)-deployment.yaml
+	mv $(PROJECT_NAME)-service.yaml $(PROJECT_ID)-service.yaml
+	sed -i '' 's/: $(PROJECT_NAME)/: $(PROJECT_ID)/g' $(PROJECT_ID)-deployment.yaml
+	sed -i '' 's/: $(PROJECT_NAME)/: $(PROJECT_ID)/g' $(PROJECT_ID)-service.yaml
+	@echo ======================================================================
 
 deploy:
 	kubectl create -f $(PROJECT_ID)-deployment.yaml
 	kubectl get pods
+	@echo ======================================================================
+
+getpods:
+	kubectl get pods
+	@echo ======================================================================
 
 expose:
 	kubectl expose -f $(PROJECT_ID)-service.yaml --type=LoadBalancer
 	kubectl get services $(PROJECT_ID)
 	kubectl describe services $(PROJECT_ID)
+	@echo ======================================================================
+
+getservices:
+	kubectl get services $(PROJECT_ID)
+	kubectl describe services $(PROJECT_ID)
+	@echo ======================================================================
 
 up:
-	export PROJECT_ID=$(PROJECT_ID)
 	docker-compose up
+	@echo ======================================================================
 
 down:
 	docker-compose down
+	@echo ======================================================================
 
 delete:
 	kubectl delete services $(PROJECT_ID)
-	kubectl delete deployment $(PROJECT_ID)
+	kubectl delete deployment $(PROJECT_ID)	
 	gcloud container clusters delete $(PROJECT_ID)-cluster
 	gcloud projects delete $(PROJECT_ID)
+	@echo ======================================================================
 
 
