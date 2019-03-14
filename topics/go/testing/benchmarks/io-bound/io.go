@@ -58,14 +58,10 @@ func find(topic string, docs []string) int {
 func findConcurrent(goroutines int, topic string, docs []string) int {
 	var found int64
 
-	ch := make(chan string, len(docs))
-	for _, doc := range docs {
-		ch <- doc
-	}
-	close(ch)
-
 	var wg sync.WaitGroup
 	wg.Add(goroutines)
+
+	ch := make(chan string, len(docs))
 
 	for g := 0; g < goroutines; g++ {
 		go func() {
@@ -86,8 +82,12 @@ func findConcurrent(goroutines int, topic string, docs []string) int {
 		}()
 	}
 
-	wg.Wait()
+	for _, doc := range docs {
+		ch <- doc
+	}
+	close(ch)
 
+	wg.Wait()
 	return int(found)
 }
 
