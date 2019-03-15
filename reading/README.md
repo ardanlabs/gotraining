@@ -81,10 +81,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Logs and Metrics](https://medium.com/@cindysridharan/logs-and-metrics-6d34d3026e38) - Cindy Sridharan  
 [The deep synergy between testability and good design](https://www.youtube.com/watch?reload=9&feature=share&v=4cVZvoFGJTU&app=desktop) - Michael Feathers  
 
-### Vendoring / Versioning
+### Vendoring / Versioning / Modules
 
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)  
 [The End of Software Versions](http://hintjens.com/blog:85) - Pieter Hintjens  
+[Transparent Logs for Skeptical Clients](https://research.swtch.com/tlog) - Russ Cox  
 
 ### Profiling, Debugging and Optimization
 
@@ -176,6 +177,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Designing Cluster Schedulers for Internet-Scale Services](https://queue.acm.org/detail.cfm?id=3199609) - Diptanu Gon Choudhury and Timothy Perrett  
 [Observations on Buffering](https://grimoire.ca/dev/buffers) - Owen Grimoire  
 
+### Specter
+
+[An analysis of side-channels and speculative execution](https://arxiv.org/pdf/1902.05178.pdf) - White Paper  
+[ Hiding Malware in Speculative Execution](https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_02B-5_Wampler_paper.pdf) - White Paper  
+
 ### Go Assembly
 
 [Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
@@ -205,6 +211,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [No Silver Bullet: Essence and Accidents of Software Engineering](http://www.cs.nott.ac.uk/~pszcah/G51ISS/Documents/NoSilverBullet.html) - Frederick P. Brooks, Jr.   
 [Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
 [Divide By Zero](https://www.hillelwayne.com/post/divide-by-zero/) - Hillel Wayne  
+[Secrecy, Authentication, and Public Key Systems](http://www.merkle.com/papers/Thesis1979.pdf) - Ralph Merkle  
 
 ### Must Read
 
@@ -261,6 +268,7 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
 [Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
+
 #### Scheduler
 
 [How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
