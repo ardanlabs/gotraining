@@ -1,6 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
+// $ ./example2 | cut -c1 | grep '[AB]' | uniq
+
 // Sample program to show how the goroutine scheduler
 // will time slice goroutines on a single thread.
 package main
@@ -52,7 +54,7 @@ func printHashes(prefix string) {
 
 	// print each has from 1 to 10. Change this to 50000 and
 	// see how the scheduler behaves.
-	for i := 1; i <= 10; i++ {
+	for i := 1; i <= 50000; i++ {
 
 		// Convert i to a string.
 		num := strconv.Itoa(i)
