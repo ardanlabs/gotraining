@@ -220,7 +220,7 @@ func findNumCPU(topic string, docs []string) int {
 	var wg sync.WaitGroup
 	wg.Add(g)
 
-	ch := make(chan string, len(docs))
+	ch := make(chan string, g)
 
 	for i := 0; i < g; i++ {
 		go func() {
@@ -282,7 +282,7 @@ func findNumCPUTasks(topic string, docs []string) int {
 	var wg sync.WaitGroup
 	wg.Add(g)
 
-	ch := make(chan string, len(docs))
+	ch := make(chan string, g)
 
 	for i := 0; i < g; i++ {
 		go func() {

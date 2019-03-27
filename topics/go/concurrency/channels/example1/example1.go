@@ -184,11 +184,12 @@ func fanOutSem() {
 // finished.
 func fanOutBounded() {
 	work := []string{"paper", "paper", "paper", "paper", "paper", 2000: "paper"}
-	ch := make(chan string, len(work))
 
 	g := runtime.NumCPU()
 	var wg sync.WaitGroup
 	wg.Add(g)
+
+	ch := make(chan string, g)
 
 	for e := 0; e < g; e++ {
 		go func(emp int) {
