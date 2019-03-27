@@ -58,50 +58,50 @@ This is a diagram showing the relationship of the cache hierarchy for the 4 Core
 
 This is subject to be different in different processors. For this content, the following is the multi-levels of cache associated with the Intel 4 Core i7-9xx processor:
 
-	3GHz(3 clock cycles/ns) * 4 instructions per cycle = 12 instructions per ns!
-
-	L1 - 64KB Cache (Per Core)
-		32KB I-Cache
-		32KB D-Cache
-		2 HW Threads
-		4 cycles of latency
-		Stalls for 16 instructions or 1.3 ns
-
-	L2 - 256KB Cache (Per Core)
-		Holds both Instructions and Data
-		2 HW Threads
-		11 cycles of latency
-		Stalls for 44 instructions or 3.6 ns
-
-	L3 - 8MB Cache
-		Holds both Instructions and Data
-		Shared across all 4 cores
-		8 HW Threads
-		39 cycles of latency
-		Stalls for 156 instructions or 13 ns
-
-	Main Memory
-		107 cycle of latency
-		Stalled for 428 instructions or 35.6 ns
-		27 times slower!
-
-### Latencies
+### Intel i7 CPU Latencies From Video
 
 ```
-L1 cache reference ......................... 0.5 ns
-Branch mispredict ............................ 5 ns
-L2 cache reference ........................... 7 ns
-Mutex lock/unlock ........................... 25 ns
-Main memory reference ...................... 100 ns             
-Compress 1K bytes with Zippy ............. 3,000 ns  =   3 µs
-Send 2K bytes over 1 Gbps network ....... 20,000 ns  =  20 µs
-SSD random read ........................ 150,000 ns  = 150 µs
-Read 1 MB sequentially from memory ..... 250,000 ns  = 250 µs
-Round trip within same datacenter ...... 500,000 ns  = 0.5 ms
-Read 1 MB sequentially from SSD* ..... 1,000,000 ns  =   1 ms
-Disk seek ........................... 10,000,000 ns  =  10 ms
-Read 1 MB sequentially from disk .... 20,000,000 ns  =  20 ms
-Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
+3GHz(3 clock cycles/ns) * 4 instructions per cycle = 12 instructions per ns!
+
+1 ns ............. 1 ns .............. 12 instructions  (one) 
+1 µs .......... 1000 ns ........... 1,200 instructions  (thousand)
+1 ms ..... 1,000,000 ns ...... 12,000,000 instructions  (million)
+1 s .. 1,000,000,000 ns .. 12,000,000,000 instructions  (billion)
+
+L1 - 64KB Cache (Per Core)
+	4 cycles of latency at 1.3 ns
+	Stalls for 16 instructions
+
+L2 - 256KB Cache (Per Core)
+	12 cycles of latency at 4 ns
+	Stalls for 48 instructions
+
+L3 - 8MB Cache
+	40 cycles of latency at 13.3 ns
+	Stalls for 160 instructions
+
+Main Memory
+	100 cycle of latency at 33.3 ns
+	Stalled for 400 instructions
+```
+
+### Industry Defined Latencies
+
+```
+L1 cache reference ......................... 0.5 ns ...................  6 ins
+Branch mispredict ............................ 5 ns ................... 60 ins
+L2 cache reference ........................... 7 ns ................... 84 ins
+Mutex lock/unlock ........................... 25 ns .................. 300 ins
+Main memory reference ...................... 100 ns ................. 1200 ins           
+Compress 1K bytes with Zippy ............. 3,000 ns (3 µs) ........... 36k ins
+Send 2K bytes over 1 Gbps network ....... 20,000 ns (20 µs) ........  240k ins
+SSD random read ........................ 150,000 ns (150 µs) ........ 1.8M ins
+Read 1 MB sequentially from memory ..... 250,000 ns (250 µs) .......... 3M ins
+Round trip within same datacenter ...... 500,000 ns (0.5 ms) .......... 6M ins
+Read 1 MB sequentially from SSD* ..... 1,000,000 ns (1 ms) ........... 12M ins
+Disk seek ........................... 10,000,000 ns (10 ms) ......... 120M ins
+Read 1 MB sequentially from disk .... 20,000,000 ns (20 ms) ......... 240M ins
+Send packet CA->Netherlands->CA .... 150,000,000 ns (150 ms) ........ 1.8B ins
 ```
 
 ![Cache Latencies Image](cache_latencies_graph.png)
