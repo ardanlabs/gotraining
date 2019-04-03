@@ -135,11 +135,11 @@ March(04-06)        Lisbon, Portugal      OLX                 Corporate    Go (3
 March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
 March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
 March(25-27)        Berlin, Germany       OLX                 Corporate    Go (3 day)  
-April(08-10)        Barcelona, Spain      New Relic           Corporate    Go (3 day)       - PENDING
-April(14-15)        Beijing, China        Langley West        Conference   Adv Go (1 day)   http://gopherchina.org/
+April(24-27)        Malaysia              Intel               Corporate    Go (3 day)  
+April(29-03)        Singapore             GopherCon Signapore Conference
 May(07-08)          Budapest, Hungary     Magyar Vasúttörtén  Conference   Adv Go (1 day)   https://craft-conf.com/
-May(20-26)          Africa, Kenya/Nigeria TBD                 GoBridge     Go (2 day)
-May(30-01)          Canary Islands        GopherCon EU        Conference   Adv Go (1 day)   https://www.eventbrite.co.uk/e/gophercon-eu-2019-canary-islands-tickets-55633196388
+May(25)             Africa, Kenya         TBD                 GoBridge     Go (2 day)
+May(27-01)          Canary Islands        GopherCon EU        Conference   Adv Go (1 day)   https://www.eventbrite.co.uk/e/gophercon-eu-2019-canary-islands-tickets-55633196388
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
 June(18-20)         Singapore             SP Group            Corporate    Go (3 day)
 June(22-23)         Anchorage, AK         TBA                 Gobridge     Go (2 day)       
