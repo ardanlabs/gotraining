@@ -89,6 +89,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Profiling, Debugging and Optimization
 
+[Precise timing of machine code with Linux perf.](https://dendibakh.github.io/blog/2019/04/03/Precise-timing-of-machine-code-with-Linux-perf) - Denis Bakhvalov  
 [The past and future of Microprocessor performance](https://github.com/davecheney/gophercon2018-performance-tuning-workshop/blob/master/1-welcome/introduction.md) - Dave Cheney  
 [Want to Debug Latency?](https://medium.com/observability/want-to-debug-latency-7aa48ecbe8f7) - JBD  
 [Language Mechanics On Escape Analysis](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html) - William Kennedy  
@@ -200,6 +201,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Misc
 
+[Why We Can't Divide By Zero](http://digg.com/video/why-cant-you-divide-by-zero) - Eddie Woo  
 [Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
 [USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)  
 [Latency Tip Of The Day](http://latencytipoftheday.blogspot.com/) -- Gil Tene  
