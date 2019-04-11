@@ -20,7 +20,6 @@ Maps provide a data structure that allow for the storage and management of key/v
 
 ## Code Review
 
-TODO renumber
 [Declare, write, read, and delete](example1/example1.go) ([Go Playground](https://play.golang.org/p/3w6zgywPD3w))  
 [Absent keys](example2/example2.go) ([Go Playground](https://play.golang.org/p/5KHMfmL2SyA))  
 [Map key restrictions](example3/example3.go) ([Go Playground](https://play.golang.org/p/lfl967ocaKv))  
