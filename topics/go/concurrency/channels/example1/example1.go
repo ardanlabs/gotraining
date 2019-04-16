@@ -205,7 +205,6 @@ func fanOutBounded() {
 		ch <- wrk
 	}
 	close(ch)
-
 	wg.Wait()
 
 	time.Sleep(time.Second)
