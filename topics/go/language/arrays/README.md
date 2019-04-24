@@ -64,7 +64,7 @@ This is subject to be different in different processors. For this content, the f
 3GHz(3 clock cycles/ns) * 4 instructions per cycle = 12 instructions per ns!
 
 1 ns ............. 1 ns .............. 12 instructions  (one) 
-1 µs .......... 1000 ns ........... 1,200 instructions  (thousand)
+1 µs .......... 1000 ns ........... 1,200 instructions  (hundred)
 1 ms ..... 1,000,000 ns ...... 12,000,000 instructions  (million)
 1 s .. 1,000,000,000 ns .. 12,000,000,000 instructions  (billion)
 
