@@ -44,7 +44,7 @@ func main() {
 	// trace.Start(os.Stdout)
 	// defer trace.Stop()
 
-	docs := make([]string, 1000)
+	docs := make([]string, 4000)
 	for i := range docs {
 		docs[i] = fmt.Sprintf("newsfeed-%.4d.xml", i)
 	}
