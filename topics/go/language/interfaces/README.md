@@ -35,8 +35,8 @@ _"The empty interface says nothing." - Rob Pike
 [Method Sets](example2/example2.go) ([Go Playground](https://play.golang.org/p/N50ocjUekf3))  
 [Address Of Value](example3/example3.go) ([Go Playground](https://play.golang.org/p/w981JSUcVZ2))  
 [Storage By Value](example4/example4.go) ([Go Playground](https://play.golang.org/p/6U232Ue_BY0))  
-[Type Assertions](example5/example5.go) ([Go Playground](https://play.golang.org/p/YPBuhSxK6Ia))  
-[Conditional Type Assertions](example6/example6.go) ([Go Playground](https://play.golang.org/p/Wwyg9dNYkj_l))  
+[Type Assertions](example5/example5.go) ([Go Playground](https://play.golang.org/p/f47JMTj2eId))  
+[Conditional Type Assertions](example6/example6.go) ([Go Playground](https://play.golang.org/p/9fYc5RyyvVG))  
 [The Empty Interface and Type Switches](example7/example7.go) ([Go Playground](https://play.golang.org/p/iyDfKCIQ4S9))  
 
 ## Advanced Code Review
