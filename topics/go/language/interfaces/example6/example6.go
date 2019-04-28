@@ -20,28 +20,28 @@ type finder interface {
 	find(id int) (*user, error)
 }
 
-// userDB defines a database we will access.
-type userDB struct {
+// userSVC is a service for dealing with users.
+type userSVC struct {
 	host string
 }
 
 // find implements the finder interface using pointer semantics.
-func (db *userDB) find(id int) (*user, error) {
+func (*userSVC) find(id int) (*user, error) {
 	return &user{id: id, name: "Anna Walker"}, nil
 }
 
-// mockDB defines a mock database we will access.
-type mockDB struct{}
+// mockSVC defines a mock service we will access.
+type mockSVC struct{}
 
 // find implements the finder interface using pointer semantics.
-func (db *mockDB) find(id int) (*user, error) {
+func (*mockSVC) find(id int) (*user, error) {
 	return &user{id: id, name: "Jacob Walker"}, nil
 }
 
 func main() {
-	var db mockDB
+	var svc mockSVC
 
-	if err := run(&db); err != nil {
+	if err := run(&svc); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -54,10 +54,10 @@ func run(f finder) error {
 	fmt.Printf("Found user %+v\n", u)
 
 	// If the concrete type value stored inside the interface value is of the
-	// type *userDB, then "ok" will be true and "db" will be a copy of the
+	// type *userSVC, then "ok" will be true and "svc" will be a copy of the
 	// pointer stored inside the interface.
-	if db, ok := f.(*userDB); ok {
-		log.Println("queried", db.host)
+	if svc, ok := f.(*userSVC); ok {
+		log.Println("queried", svc.host)
 	}
 
 	return nil
