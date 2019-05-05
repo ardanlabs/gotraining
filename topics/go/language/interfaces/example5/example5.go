@@ -20,22 +20,22 @@ type finder interface {
 	find(id int) (*user, error)
 }
 
-// userDB defines a database we will access.
-type userDB struct {
+// userSVC is a service for dealing with users.
+type userSVC struct {
 	host string
 }
 
 // find implements the finder interface using pointer semantics.
-func (db *userDB) find(id int) (*user, error) {
+func (*userSVC) find(id int) (*user, error) {
 	return &user{id: id, name: "Anna Walker"}, nil
 }
 
 func main() {
-	db := userDB{
+	svc := userSVC{
 		host: "localhost:3434",
 	}
 
-	if err := run(&db); err != nil {
+	if err := run(&svc); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -54,16 +54,16 @@ func run(f finder) error {
 	// you really need to get to the concrete value stored inside
 	// the interface?
 
-	// Can you access the "host" field from the concrete userDB type pointer
+	// Can you access the "host" field from the concrete userSVC type pointer
 	// that is stored inside this interface variable? No, not directly.
 	// All you know is the data has a method named "find".
 	// ./example5.go:61:26: f.host undefined (type finder has no field or method host)
 	log.Println("queried", f.host)
 
-	// You can use a type assertion to get a copy of the userDB pointer
+	// You can use a type assertion to get a copy of the userSVC pointer
 	// that is stored inside the interface.
-	db := f.(*userDB)
-	log.Println("queried", db.host)
+	svc := f.(*userSVC)
+	log.Println("queried", svc.host)
 
 	return nil
 }
