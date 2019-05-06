@@ -62,9 +62,13 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 
 _“If most computer people lack understanding and knowledge, then what they will select will also be lacking.” - Alan Kay_
 
-_"The software business is one of the few places we teach people to write before we teach them to read". - Tom Love (inventor of Objective C)_
+_"The software business is one of the few places we teach people to write before we teach them to read." - Tom Love (inventor of Objective C)_
+
+_"Code is read many more times than it is written." - Dave Cheney_
 
 _"Programming is, among other things, a kind of writing. One way to learn writing is to write, but in all other forms of writing, one also reads. We read examples both good and bad to facilitate learning. But how many programmers learn to write programs by reading programs?" - Gerald M. Weinberg_
+
+_"Skill develops when we produce, not consume." - Katrina Owen_
 
 ---
 
@@ -308,6 +312,8 @@ Focus on encapsulation and validate that you're not generalizing or even being t
 _"Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better." - Edsger W. Dijkstra_
 
 _"Everything should be made as simple as possible, but not simpler." - Albert Einstein_
+
+_"You wake up and say, I will be productive, not simple, today." - Dave Cheney_
 
 **Encapsulation**
 

@@ -27,18 +27,12 @@ The design of the Go GC has changed over the years:
 * Go 1.6, GC improvements, handling larger heaps with lower latency.
 * Go 1.7, GC improvements, handling larger number of idle goroutines, substantial stack size fluctuation, or large package-level variables.
 * Go 1.8, GC improvements, collection pauses should be significantly shorter than they were in Go 1.7, usually under 100 microseconds and often as low as 10 microseconds.
+* Go 1.9, Large object allocation performance is significantly improved in applications using large (>50GB) heaps containing many large objects.
+* Go 1.10, Many applications should experience significantly lower allocation latency and overall performance overhead when the garbage collector is active.
 
 ## Garbage Collection Semantics
 
-The GC has a pacing algorithm which is used to determine when a garbage collection is to start. The algorithm depends on a feedback loop that the Pacer uses to collect information about the running application and the stress the application is putting on the heap. Stress can be defined as how fast the application is allocating all available memory on the heap within a given amount of time. Once the Pacer decides to start a collection, the amount of time to finish the collection is predetermined. This predetermined time is based on the current size of the heap, the live heap, and timing calculations about future heap usage while the collection is running.
-
-During garbage collection there will be times when the Pacer must stop all application goroutines from running. This is called a Stop The World (STW) and there are many reasons for this. There is an initial STW that occurs at the beginning of a collection to turn the Write Barrier on. The purpose of the Write Barrier is to allow the Pacer to maintain data integrity on the heap during a collection since both GC and application goroutines will be running concurrently. In order to turn the Write Barrier on, every application goroutine running must be stopped. This STW is usually very quick, within a very small number of microseconds.
-
-Once the write barrier is turned on, the GC goroutines begin to perform their Mark work. The Mark work consists of identifying values on the heap that are still in use. This work requires the application goroutines to share the existing CPU capacity with the GC goroutines. This is the part of the GC that makes it concurrent. The idea is to allow application work to get done at the same time GC work is getting done so the impact of the GC is minimal. During this time, the Pacer will do its best to minimize the amount of CPU the GC goroutines need to get the collection work done. There are lots of factors that go into determining how much CPU capacity the GC will use during any given collection.
-
-During the Mark phase of the GC, there may be times when the Pacer decides to stop all the application goroutines and take all of the CPU capacity for itself. This constitutes more STW time during the collection. Reasons why the Pacer might do this could be because the application goroutines want to allocate memory on the heap at a time where the Pacer determines its not the best thing to do at that moment. Maybe too much allocation is going on and it needs to be slowed down. In these cases, the Pacer might context switch a different application goroutine to run that doesn't need the heap. It may also ask that application goroutine that wants to allocate to momentarily help with the processing of the Mark work to get it done faster.
-
-In the end, the Pacer’s job is to start and finish a collection within the predetermined amount of time and with the least amount of STW time possible. The Pacer is constrained by the size of the heap, the size of the live heap and the number of values on the heap at the time the collection starts and the concurrent work being performed by the application goroutines. These factors play a big role in the Pacer’s ability to minimize its impact on the running program. You have to be sympathetic with these factors to help the Pacer do its job effectively.
+[Garbage Collection Semantics Part I](https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html) - William Kennedy
 
 ## Links
 

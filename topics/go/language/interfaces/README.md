@@ -16,7 +16,9 @@ Interfaces provide a way to declare types that define only behavior. This behavi
 
 _"Polymorphism means that you write a certain program and it behaves differently depending on the data that it operates on." - Tom Kurtz (inventor of BASIC)_
 
-_"The empty interface says nothing." - Rob Pike
+_"The empty interface says nothing." - Rob Pike_
+
+_"Design is the art of arranging code to work today, and be changeable forever." - Sandi Metz_
 
 ## Links
 
