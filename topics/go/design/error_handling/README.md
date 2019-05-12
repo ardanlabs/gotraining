@@ -25,6 +25,7 @@ _Systems cannot be developed assuming that human beings will be able to write mi
 [Stack traces and the errors package](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package) - Dave Cheney    
 [Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
 [Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
+[Go 1.13: xerrors](https://crawshaw.io/blog/xerrors) - David Crawshaw  
 
 ## Code Review
 

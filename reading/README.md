@@ -111,12 +111,27 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go’s hidden #pragmas](https://dave.cheney.net/2018/01/08/gos-hidden-pragmas) - Dave Cheney  
 [Post-mortem debugging of Go Programs](https://fntlnz.wtf/post/gopostmortem/) - Lorenzo Fontana   
 [A Crash Course in Modern Hardware](https://www.youtube.com/watch?v=OFgxAFdxYAQ) - Cliff Click  
+[How I investigated memory leaks in Go using pprof on a large codebase](https://medium.freecodecamp.org/how-i-investigated-memory-leaks-in-go-using-pprof-on-a-large-codebase-4bec4325e192) - Jonathan Levison   
 
 ### API Design
 
 [You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
 [Focus On Being Precise](https://www.ardanlabs.com/blog/2018/02/focus-on-being-precise.html) - William Kennedy  
 [Design, Composition and Performance](https://www.infoq.com/presentations/Design-Composition-Performance) - Rich Hickey  
+
+### Error Handling
+
+[Go 1.13: xerrors](https://crawshaw.io/blog/xerrors) - David Crawshaw  
+[Error handling and Go](https://blog.golang.org/error-handling-and-go)    
+[Error Handling In Go, Part I](https://www.ardanlabs.com/blog/2014/10/error-handling-in-go-part-i.html) - William Kennedy    
+[Error Handling In Go, Part II](https://www.ardanlabs.com/blog/2014/11/error-handling-in-go-part-ii.html) - William Kennedy    
+[Design Philosophy On Logging](https://www.ardanlabs.com/blog/2017/05/design-philosophy-on-logging.html) - William Kennedy    
+[Bugs are a failure of prediction](https://clipperhouse.com/bugs-are-a-failure-of-prediction/) - Matt Sherman    
+[Inspecting errors](https://dave.cheney.net/2014/12/24/inspecting-errors) - Dave Cheney    
+[Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully) - Dave Cheney    
+[Stack traces and the errors package](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package) - Dave Cheney    
+[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
+[Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
 
 ### Interfaces and Composition
 

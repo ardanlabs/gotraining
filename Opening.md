@@ -17,4 +17,4 @@ Slack:    [Slack](https://invite.slack.golangbridge.org)
 Graphviz: https://www.graphviz.org/  
 go get -u github.com/rakyll/hey   : Or use ab  
 go get -u github.com/ardanlabs/gotraining  
-Latest Version of Go: 1.11  
+Latest Version of Go: 1.12   
