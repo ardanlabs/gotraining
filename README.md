@@ -143,6 +143,7 @@ May(27-01)          Canary Islands        GopherCon EU        Conference   Adv G
 June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
 June(18-20)         Singapore             SP Group            Corporate    Go (3 day)
 July(02-07)         Minsk, Belarus        Go Way Fest         Conference   Adv Go (1 day)   https://goway.io/
+July(02-07)         Texas                 Reward Style        Corporate    Go (3 day)
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
 August(13-15)       Bellevue, WA          T-Mobile            Corporate    Go (3 day)       
 September(14-15)    Anchorage, AK         TBA                 Gobridge     Go (2 day)       
