@@ -34,6 +34,10 @@ The design of the Go GC has changed over the years:
 
 [Garbage Collection Semantics Part I](https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html) - William Kennedy
 
+## Stack vs Heap
+
+_"The stack is for data that needs to persist only for the lifetime of the function that constructs it, and is reclaimed without any cost when the function exits. The heap is for data that needs to persist after the function that constructs it exits, and is reclaimed by a sometimes costly garbage collection." - Ayan George
+
 ## Links
 
 ### Pointer Mechanics

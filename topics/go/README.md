@@ -110,6 +110,8 @@ _"Everyone knows that debugging is twice as hard as writing a program in the fir
 
 _"Debuggers don't remove bugs. They only show them in slow motion." - Unknown_
 
+_"Fixing bugs is just a side effect. Debuggers are for exploration." - @Deech (Twitter)_
+
 **Resources:**
 
 [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
@@ -247,6 +249,8 @@ When error handling is treated as an exception and not part of the main code, yo
 _"Failure is expected, failure is not an odd case. Design systems that help you identify failure. Design systems that can recover from failure." - JBD_
 
 _"Product excellence is the difference between something that only works under certain conditions, and something that only breaks under certain conditions". - Kelsey Hightower_
+
+_"Instability is a drag on innovation." - Yehudah Katz_
 
 **Resources:**
 

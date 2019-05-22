@@ -10,6 +10,8 @@ Goroutines are functions that are created and scheduled to be run independently 
 	* Concurrency is about dealing with lots of things at once.
 	* Parallelism is about doing lots of things at once.
 
+_"Parallelism is TRYING to do two things at the same time. Concurrency is arranging it so you can do two things at the same time." - Dave Cheney_
+
 ## Design Guidelines
 
 * Learn about the [design guidelines](../../#concurrent-software-design) for concurrency.
