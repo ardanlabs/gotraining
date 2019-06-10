@@ -16,7 +16,7 @@ import (
 // gc time will be every hour.
 
 const (
-	expiration = time.Second * 15
+	expiration = time.Minute * 15
 	cleanup    = time.Hour
 )
 
