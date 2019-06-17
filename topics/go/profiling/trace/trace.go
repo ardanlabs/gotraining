@@ -50,7 +50,6 @@ func main() {
 	}
 
 	topic := "president"
-
 	n := find(topic, docs)
 	// n := findConcurrent(topic, docs)
 	// n := findConcurrentSem(topic, docs)
@@ -58,7 +57,7 @@ func main() {
 	// n := findNumCPUTasks(topic, docs)
 	// n := findActor(topic, docs)
 
-	log.Printf("Found %s %d times.", topic, n)
+	log.Printf("Searching %d files, found %s %d times.", len(docs), topic, n)
 }
 
 func find(topic string, docs []string) int {
