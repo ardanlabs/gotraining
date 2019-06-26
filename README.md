@@ -229,18 +229,6 @@ We use a slack channel to share links, code, and examples during the training.  
 
 https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html
 
-#### Using Docker
-Installing Go may not be needed if you choose to use [Docker](#docker). With running a gotraining container, you can download the training material at any location on your disk without having to set ```$GOPATH```. And you can still access (e.g. for editing) the training materials locally.
-
-```
-git clone https://github.com/ardanlabs/gotraining.git
-cd gotraining
-```
-
-*NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
-
-To build and run docker container to start your training right away, see [here](#docker).
-
 ### Editors
 
 **Visual Studio Code**  
@@ -343,29 +331,5 @@ _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is ext
 Georgi Knox ([@GeorgiCodes](https://twitter.com/georgicodes))  
 _"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
 
-___
-
-## Running Docker
-<a name="docker" />
-
-**Install Docker Toolbox**  
-https://www.docker.com/products/docker-toolbox
-
-**Build Docker image**
-```
-# current path is the source root where Dockerfile exists
-docker build -t ardanlabs/gotraining:latest .
-```
-
-**Start Docker container**
-```
-cd $(go env GOPATH)/src/github.com/ardanlabs/gotraining
-docker run -i -t -p 8080:8080 -v "$PWD":/go/src/github.com/ardanlabs/gotraining ardanlabs/gotraining:latest
-```
-
-**What is running**
-```
-docker ps -a
-```
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
