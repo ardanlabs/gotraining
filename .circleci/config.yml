@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: circleci/golang:latest
 
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/ardanlabs/gotraining
     steps:
       - checkout
       - run: go version
