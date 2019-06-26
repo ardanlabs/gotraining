@@ -23,8 +23,6 @@ github.com/patrickmn/go-cache
 github.com/pborman/uuid
 # github.com/pkg/errors v0.8.0
 github.com/pkg/errors
-# github.com/theplant/blackfriday v0.0.0-20150310024546-979429e1c46c
-github.com/theplant/blackfriday
 # golang.org/x/image v0.0.0-20180708004352-c73c2afc3b81
 golang.org/x/image/math/fixed
 golang.org/x/image/font
@@ -45,5 +43,3 @@ gonum.org/v1/plot/vg/vgeps
 gonum.org/v1/plot/vg/vgimg
 gonum.org/v1/plot/vg/vgpdf
 gonum.org/v1/plot/vg/vgsvg
-# gopkg.in/unrolled/render.v1 v1.0.0-20171102162132-65450fb6b2d3
-gopkg.in/unrolled/render.v1
