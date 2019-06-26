@@ -1,4 +1,4 @@
-## Go Training [![Build Status](https://travis-ci.org/ardanlabs/gotraining.svg?branch=master)](https://travis-ci.org/ardanlabs/gotraining)
+## Go Training [![CircleCI](https://circleci.com/gh/ardanlabs/gotraining.svg?style=svg)](https://circleci.com/gh/ardanlabs/gotraining)
 
 [Review our different courses and material](topics/README.md)  
 
