@@ -11,30 +11,12 @@ github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/gorilla/context v0.0.0-20160226214623-1ea25387ff6f
-github.com/gorilla/context
-# github.com/gorilla/mux v1.6.1
-github.com/gorilla/mux
-# github.com/gorilla/pat v0.0.0-20180118221401-71e7b868be7b
-github.com/gorilla/pat
 # github.com/jung-kurt/gofpdf v1.0.0
 github.com/jung-kurt/gofpdf
 # github.com/llgcode/draw2d v0.0.0-20180817132918-587a55234ca2
 github.com/llgcode/draw2d
 github.com/llgcode/draw2d/draw2dimg
 github.com/llgcode/draw2d/draw2dbase
-# github.com/mattn/go-runewidth v0.0.2
-github.com/mattn/go-runewidth
-# github.com/nats-io/go-nats v1.5.0
-github.com/nats-io/go-nats
-github.com/nats-io/go-nats/encoders/builtin
-github.com/nats-io/go-nats/util
-# github.com/nats-io/nats v1.5.0
-github.com/nats-io/nats
-# github.com/nats-io/nuid v1.0.0
-github.com/nats-io/nuid
-# github.com/nsf/termbox-go v0.0.0-20180303152453-e2050e41c884
-github.com/nsf/termbox-go
 # github.com/patrickmn/go-cache v0.0.0-20170722040110-a3647f8e31d7
 github.com/patrickmn/go-cache
 # github.com/pborman/uuid v0.0.0-20170612153648-e790cca94e6c
@@ -50,8 +32,6 @@ golang.org/x/image/tiff
 golang.org/x/image/draw
 golang.org/x/image/math/f64
 golang.org/x/image/tiff/lzw
-# golang.org/x/net v0.0.0-20180906233101-161cd47e91fd
-golang.org/x/net/websocket
 # gonum.org/v1/plot v0.0.0-20180905080458-5f3c436ce602
 gonum.org/v1/plot
 gonum.org/v1/plot/plotter

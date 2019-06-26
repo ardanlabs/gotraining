@@ -25,12 +25,6 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 
 [Ultimate AI / Machine Learning](https://github.com/ardanlabs/training-ai)
 
-### NATS
-
-This is material for anyone looking to learn more about or use NATS to building highly scalable and distributed systems. NATS acts as a central nervous system for distributed systems such as mobile devices, IoT networks, enterprise microservices and cloud native infrastructure. Unlike traditional enterprise messaging systems, NATS provides an always on ‘dial-tone’.
-
-[NATS](nats/README.md)
-
 ## External Courses
 
 ### Go 102 by Tim Blair
