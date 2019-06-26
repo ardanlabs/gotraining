@@ -4,21 +4,26 @@
 
 ### Ultimate Go
 
-This is material for any intermediate-level developer who has some experience with other programming languages and wants to learn Go. We believe these classes are perfect for anyone who wants a jump start in learning Go or who wants a more thorough understanding of the language and its internals.
+The Advanced Ultimate Go class is designed to focus on digging deep into the language to understand the internals that matter and the semantics. The course is about if performance matters then these things matter. This is presented from focusing on code readability at a micro level to full application architecture and development.
+
+We will talk about semantics, guidelines, mechanical sympathy and data oriented design. We are going to talk about package oriented design and how to structure your Go projects for the long term.
 
 [Ultimate Go](courses/go/README.md)
 
-### Ultimate Web
+### Ultimate Service
 
-This is material for any Go developer who wishes to learn how to build robust and well tested HTTP based applications in Go. This class provides an intensive, comprehensive and idiomatic view build Web, SOA, and API applications using Go.
+The Ultimate Service is a 3 day class for any Go developer who wishes to learn how to build production ready and well tested web services in Go. This class provides an intensive, comprehensive and idiomatic view of building web services using community accepted idioms and practices.
 
-[Ultimate Web](courses/web/README.md)
+The class goes beyond just the use of the http package and focuses on building CRUD based services with logging, observability and debugging. The class also teaches POD architectures, Docker and cloud deployment. We believe this class is perfect for anyone wishing to build production ready, scalable, fast, and highly concurrent web services in Go.
 
-### Ultimate Data
+[Service Training](https://github.com/ardanlabs/service-training)  
+[Service Starter Kit](https://github.com/ardanlabs/service)
 
-This is material for any Go developer, data scientist, analyst, or statistician who wishes to learn how to build robust data science applications in Go. This class provides an intensive, comprehensive and idiomatic view on building predictive models, analytics engines, components of data pipelines, and more using Go. We believe this class is perfect for anyone wishing to build data-driven applications that produce valuable insights, have reproducible behavior, and can be deployed within modern architectures.
+### Ultimate AI / Machine Learning
 
-[Ultimate Data](courses/data/README.md)
+This is material for any Go developer, data scientist, analyst, or statistician who wishes to learn how to build robust machine learning applications in Go. This class provides an intensive, comprehensive and idiomatic view on training, utilizing, evaluating, and deploying machine learning models using Go. We believe this class is perfect for anyone wishing to build data-driven applications that produce valuable insights, have reproducible behavior, and can be deployed within modern architectures.
+
+[Ultimate AI / Machine Learning](https://github.com/ardanlabs/training-ai)
 
 ### NATS
 
