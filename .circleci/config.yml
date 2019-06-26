@@ -16,5 +16,5 @@ jobs:
       # We could just do `go test ./...` but we have some packages that aren't
       # intended to compile and some tests that aren't intended to pass yet.
       - run:
-        name: Run tests
-        command: find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -exec dirname {} \; | uniq | xargs go test
+          name: Run tests
+          command: find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -exec dirname {} \; | uniq | xargs go test
