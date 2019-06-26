@@ -45,6 +45,10 @@ _**Articles**_
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
+[Training Within The Go Community (2019)](https://www.youtube.com/watch?v=PSR1twjzzAM&feature=youtu.be)  
+
+[GopherCon Singapore (2019) - Garbage Collection Semantics](https://www.youtube.com/watch?v=q4HoWwdZUHs)  
+[GopherCon India (2019) - Channel Semantics](https://www.youtube.com/watch?v=AHAf1Xfr_HE)  
 [GoWayFest Minsk (2018) - Profiling Web Apps](https://www.youtube.com/watch?v=-GBMFPegqgw)  
 [GopherChina (2018) - Composition In Go William](https://www.youtube.com/watch?v=pvLUO9ZManM&feature=youtu.be)  
 [GopherCon Singapore (2018) - Optimizing For Correctness](https://engineers.sg/video/optimize-for-correctness-gopherconsg-2018--2610)  
@@ -144,7 +148,7 @@ June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2
 June(18-20)         Singapore             SP Group            Corporate    Go (3 day)
 June(26-28)         Copenhagen, Denmark   Maersk              Corporate    Go Service (3 day)       
 July(02-07)         Minsk, Belarus        Go Way Fest         Conference   Adv Go (1 day)   https://goway.io/
-July(02-07)         Texas                 Reward Style        Corporate    Go (3 day)
+July(10-12)         Texas                 Reward Style        Corporate    Go (3 day)
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
 September(14-15)    Anchorage, AK         TBA                 Gobridge     Go (2 day)       
 September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
