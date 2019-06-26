@@ -94,6 +94,7 @@ _**Writing**_
 
 _**Video**_  
 [Better Allies in Tech](https://www.youtube.com/watch?v=PWheG9CyUAY)  
+[GopherCon Singapore (2019) - Understanding Allocations: the Stack and the Heap](https://www.youtube.com/watch?v=ZMZpH4yT7M0)  
 [An Informal Intro to Docker](https://www.youtube.com/watch?v=xYNJ_IAj35Q)  
 [Women Who Code Intro To Go Workshop](https://www.youtube.com/watch?v=gDxSiKNk0Pw)  
 [Getting Started with Go](https://www.youtube.com/watch?v=zVvjpLu6iIo)  
