@@ -1,4 +1,6 @@
-## Go Training [![CircleCI](https://circleci.com/gh/ardanlabs/gotraining.svg?style=svg)](https://circleci.com/gh/ardanlabs/gotraining)
+## Go Training
+
+[![CircleCI](https://circleci.com/gh/ardanlabs/gotraining.svg?style=svg)](https://circleci.com/gh/ardanlabs/gotraining)
 
 [Review our different courses and material](topics/README.md)  
 
