@@ -169,8 +169,8 @@ March(12-14)        San Jose, CA          eBay                Corporate    Go (3
 March(23-24)        Boston, MA            Vivint              GoBridge     Service (2 day)  https://www.meetup.com/gobridge/events/258872479/
 March(26-28)        Rockville, MD         Bethesda            Corporate    Service (3 day)
 April(24-26)        Singapore             Singapore Power     Corporate    Go (3 day)
-April(29-30)        Singapore             TBA                 Conference   Adv Go (2 day)   https://2019.gophercon.sg/
-September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
+April(29-30)        Singapore             GopherCon Singapore Conference   Adv Go (2 day)   https://2019.gophercon.sg/
+May(14-16)          Boston, MA            Wayfair             Corporate    Service (3 day)
 ```
 
 ### Past Events
