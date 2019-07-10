@@ -236,6 +236,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [PRinty# C with ABC](http://www.cs.cmu.edu/~tom7/abc/paper.pdf) - Dr. Tom Murphy VII, Ph.D  
 
+
+### Go 2
+
+[Sydney Golang Meetup - Rob Pike - Go 2 Draft Specifications](https://www.youtube.com/watch?v=RIvL2ONhFBI) - Rob Pike  
+
 ## Mechanical Sympathy
 
 Much of this content can be found under [arrays](../topics/go/language/arrays) and [data races](../topics/concurrency/data_race). We feel this content is so important it has been moved out to this general materials page.
