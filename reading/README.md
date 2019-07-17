@@ -231,6 +231,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
 [Divide By Zero](https://www.hillelwayne.com/post/divide-by-zero/) - Hillel Wayne  
 [Secrecy, Authentication, and Public Key Systems](http://www.merkle.com/papers/Thesis1979.pdf) - Ralph Merkle  
+[Tales From The Lunar Module Guidance Computer](https://www.doneyles.com/LM/Tales.html) -- Don Eyles  
 
 ### Must Read
 
