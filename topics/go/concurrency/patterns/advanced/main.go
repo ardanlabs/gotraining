@@ -9,18 +9,22 @@ import (
 	"log"
 	"os"
 	"os/signal"
-	"sync/atomic"
+	"sync"
 	"time"
 )
 
 // device allows us to mock a device we write logs to.
 type device struct {
-	problem int32
+	mu      sync.RWMutex
+	problem bool
 }
 
 // Write implements the io.Writer interface.
 func (d *device) Write(p []byte) (n int, err error) {
-	for atomic.LoadInt32(&d.problem) == 1 {
+	for {
+		if !d.isProblem() {
+			break
+		}
 
 		// Simulate disk problems.
 		time.Sleep(time.Second)
@@ -28,6 +32,20 @@ func (d *device) Write(p []byte) (n int, err error) {
 
 	fmt.Print(string(p))
 	return len(p), nil
+}
+
+// isProblem checks in a safe way if there is a problem.
+func (d *device) isProblem() bool {
+	d.mu.RLock()
+	defer d.mu.RUnlock()
+	return d.problem
+}
+
+// flipProblem reverses the problem flag to the opposite value.
+func (d *device) flipProblem() {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	d.problem = !d.problem
 }
 
 func main() {
@@ -59,6 +77,6 @@ func main() {
 
 	for {
 		<-sigChan
-		atomic.StoreInt32(&d.problem, 1-atomic.LoadInt32(&d.problem))
+		d.flipProblem()
 	}
 }
