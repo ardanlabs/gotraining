@@ -59,9 +59,6 @@ func main() {
 
 	for {
 		<-sigChan
-
-		if !atomic.CompareAndSwapInt32(&d.problem, 0, 1) {
-			atomic.CompareAndSwapInt32(&d.problem, 1, 0)
-		}
+		atomic.StoreInt32(&d.problem, 1-atomic.LoadInt32(&d.problem))
 	}
 }
