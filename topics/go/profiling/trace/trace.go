@@ -70,14 +70,13 @@ func freq(topic string, docs []string) int {
 			log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 			return 0
 		}
+		defer f.Close()
 
 		data, err := ioutil.ReadAll(f)
 		if err != nil {
-			f.Close()
 			log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 			return 0
 		}
-		f.Close()
 
 		var d document
 		if err := xml.Unmarshal(data, &d); err != nil {
@@ -121,14 +120,13 @@ func freqConcurrent(topic string, docs []string) int {
 				log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 				return
 			}
+			defer f.Close()
 
 			data, err := ioutil.ReadAll(f)
 			if err != nil {
-				f.Close()
 				log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 				return
 			}
-			f.Close()
 
 			var d document
 			if err := xml.Unmarshal(data, &d); err != nil {
@@ -178,14 +176,13 @@ func freqConcurrentSem(topic string, docs []string) int {
 					log.Printf("Opening Document [%s] : ERROR : %v", doc, err)
 					return
 				}
+				defer f.Close()
 
 				data, err := ioutil.ReadAll(f)
 				if err != nil {
-					f.Close()
 					log.Printf("Reading Document [%s] : ERROR : %v", doc, err)
 					return
 				}
-				f.Close()
 
 				var d document
 				if err := xml.Unmarshal(data, &d); err != nil {
