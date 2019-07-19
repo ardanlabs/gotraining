@@ -21,12 +21,9 @@ type device struct {
 
 // Write implements the io.Writer interface.
 func (d *device) Write(p []byte) (n int, err error) {
-	for {
-		if !d.isProblem() {
-			break
-		}
 
-		// Simulate disk problems.
+	// Simulate disk problems.
+	for d.isProblem() {
 		time.Sleep(time.Second)
 	}
 
@@ -75,8 +72,7 @@ func main() {
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt)
 
-	for {
-		<-sigChan
+	for range sigChan {
 		d.flipProblem()
 	}
 }
