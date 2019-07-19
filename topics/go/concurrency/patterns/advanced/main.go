@@ -72,7 +72,8 @@ func main() {
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt)
 
-	for range sigChan {
+	for {
+		<-sigChan
 		d.flipProblem()
 	}
 }
