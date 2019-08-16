@@ -5,8 +5,8 @@
 package main
 
 // Number of elements to grow each stack frame.
-// Run with 10 and then with 1024
-const size = 10
+// Run with 1 and then with 1024
+const size = 1
 
 // main is the entry point for the application.
 func main() {
@@ -16,6 +16,7 @@ func main() {
 
 // stackCopy recursively runs increasing the size
 // of the stack.
+//go:noinline
 func stackCopy(s *string, c int, a [size]int) {
 	println(c, s, *s)
 

@@ -84,7 +84,7 @@ _"The stack is for data that needs to persist only for the lifetime of the funct
 [Sharing data I](example2/example2.go) ([Go Playground](https://play.golang.org/p/mJz5RINaimn))  
 [Sharing data II](example3/example3.go) ([Go Playground](https://play.golang.org/p/GpmPICMGMre))  
 [Escape Analysis](example4/example4.go) ([Go Playground](https://play.golang.org/p/n9HijcdZ3pT))  
-[Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/BgIKcFcZ4PO))  
+[Stack grow](example5/example5.go) ([Go Playground](https://play.golang.org/p/vBKF2hXvKBb))  
 
 ### Escape Analysis Flaws
 
