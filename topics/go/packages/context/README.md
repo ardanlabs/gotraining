@@ -29,7 +29,7 @@ The package context defines the Context type, which carries deadlines, cancelati
 [WithCancel](example2/example2.go) ([Go Playground](https://play.golang.org/p/ubUSuXtsldm))  
 [WithDeadline](example3/example3.go) ([Go Playground](https://play.golang.org/p/o55vCa8cjIt))  
 [WithTimeout](example4/example4.go) ([Go Playground](https://play.golang.org/p/8RdBXtfDv1w))  
-[Request/Response](example5/example5.go) ([Go Playground](https://play.golang.org/p/wt0mbJewT5w))  
+[Request/Response](example5/example5.go) ([Go Playground](https://play.golang.org/p/9x4kBKO-Y6q)  
 
 ## Exercises
 
