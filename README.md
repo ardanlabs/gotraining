@@ -153,7 +153,7 @@ June(26-28)         Copenhagen, Denmark   Maersk              Corporate    Go Se
 July(02-07)         Minsk, Belarus        Go Way Fest         Conference   Adv Go (1 day)   https://goway.io/
 July(10-12)         Texas                 Reward Style        Corporate    Go (3 day)
 July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
-September(09-11)    Portland, OR          Intel               Corporate    Go (3 day)
+September(10-11)    Portland, OR          Intel               Corporate    Go (2 day)
 September(13-15)    Anchorage, AK         TBA                 Gobridge     Go (3 day)       
 September(23-25)    Miami, FL             Ardan Labs          Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-advanced-ultimate-go-training-miami-september-2019-tickets-64610339264
 September(28-29)    Albany, NY            GDG Capital Region  Conference   Adv Go (1 day)   https://sites.google.com/view/devfest-gdg-capitalregion
