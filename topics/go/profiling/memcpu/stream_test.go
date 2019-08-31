@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// go test -run none -bench . -benchtime 3s -benchmem
+// go test -bench . -benchmem -memprofile p.out -gcflags "-newescape=false -m=2"
 
 // Tests to see how each algorithm compare.
 package main
