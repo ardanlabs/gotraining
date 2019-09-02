@@ -35,7 +35,7 @@ func main() {
 
 			// Derive a new Context for this goroutine from the Context
 			// owned by the main function.
-			ctx = context.WithValue(ctx, key, id)
+			ctx := context.WithValue(ctx, key, id)
 
 			// Wait until the Context is cancelled.
 			<-ctx.Done()
