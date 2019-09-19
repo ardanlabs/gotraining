@@ -3,12 +3,10 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
 
-    "go.formatOnSave": true,
     "go.buildOnSave": "package",
     "go.lintOnSave": "package",
     "go.lintTool": "golint",
     "go.vetOnSave": "package",
-    "go.buildFlags": [],
     "go.lintFlags": [],
     "go.vetFlags": [],
     "go.coverOnSave": false,
@@ -39,9 +37,11 @@
 
     "window.zoomLevel": 1,
     "editor.wordWrap": "off",
-    "workbench.colorTheme": "Zenburn",
     "workbench.colorCustomizations": {
         "editorLineNumber.foreground": "#9F9F9F"
     },
-    "extensions.ignoreRecommendations": false
+    "extensions.ignoreRecommendations": false,
+    "liveshare.featureSet": "insiders",
+    "workbench.colorTheme": "Zenburn",
+    "C_Cpp.updateChannel": "Insiders"
 }
