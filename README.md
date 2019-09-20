@@ -162,23 +162,11 @@ October(10-12)      Berlin, Germany       Rocket Tower        Open Class   Go (3
 October(21-22)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
 October(28-29)      Melbourne, Australia  Zendesk             Corporate    Go (3 day)
 October(30-01)      Sydney, Australia     GopherCon AU        Conference   Adv Go (1 day)
-November(05-07)     San Jose, CA          KLA                 Corporate    Go (3 day)
-November(11-13)     San Francisco, CA     Keep Truckin        Corporate    Go (2 day)
+November(05-07)     Santa Monica, CA      Hallmark Labs       Corporate    Go (3 day)
+November(14)        San Francisco, CA     Keep Truckin        Corporate    Go (1 day)
 November(15)        San Francisco, CA     QCON                Conference   Service (1 day)  https://qconsf.com//
-```
-
-**Jacob Walker**  
-```
-Date                Location              Venue               Type         Type             Url
-================================================================================================================================================
-February(12-14)     Rockville, MD         Bethesda            Corporate    Go (3 day)
-February(26-28)     San Francisco, CA     Lob                 Corporate    Go (3 day)
-March(12-14)        San Jose, CA          eBay                Corporate    Go (3 day)
-March(23-24)        Boston, MA            Vivint              GoBridge     Service (2 day)  https://www.meetup.com/gobridge/events/258872479/
-March(26-28)        Rockville, MD         Bethesda            Corporate    Service (3 day)
-April(24-26)        Singapore             Singapore Power     Corporate    Go (3 day)
-April(29-30)        Singapore             TBA                 Conference   Adv Go (2 day)   https://2019.gophercon.sg/
-September(23-25)    Miami, FL             OpenGo              Conference   Ardan Conference https://opengo.io/
+November(18-20)     London, England       Flyt                Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-advanced-ultimate-go-training-london-november-2019-tickets-72938134925
+December(03-05)     San Jose, CA          KLA                 Corporate    Go (3 day)
 ```
 
 ### Past Events
