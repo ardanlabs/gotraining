@@ -1,5 +1,8 @@
 // This program provides a sample web service that uses concurrency
 // and channels to perform a coordinated set of asynchronous searches.
+//
+// GODEBUG=gctrace=1 ./project 2> >(grep -v 'scvg') > /dev/null
+//
 package main
 
 import (
