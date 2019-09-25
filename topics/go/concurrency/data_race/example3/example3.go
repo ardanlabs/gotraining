@@ -26,9 +26,9 @@ func main() {
 	wg.Add(grs)
 
 	// Create two goroutines.
-	for i := 0; i < grs; i++ {
+	for g := 0; g < grs; g++ {
 		go func() {
-			for count := 0; count < 2; count++ {
+			for i := 0; i < 2; i++ {
 
 				// Only allow one goroutine through this critical section at a time.
 				mutex.Lock()
