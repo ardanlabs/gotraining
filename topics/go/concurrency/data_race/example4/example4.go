@@ -44,11 +44,11 @@ func main() {
 
 	// Create eight reader goroutines.
 	for i := 0; i < 8; i++ {
-		go func() {
+		go func(id int) {
 			for {
-				reader(i)
+				reader(id)
 			}
-		}()
+		}(i)
 	}
 
 	// Wait for the write goroutine to finish.
