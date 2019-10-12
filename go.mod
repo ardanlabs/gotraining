@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 	github.com/google/go-cmp v0.3.1
+	github.com/google/uuid v1.1.1 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.0
 	github.com/pkg/errors v0.8.1
