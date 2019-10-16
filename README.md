@@ -10,6 +10,7 @@ William Kennedy
 ArdanLabs (www.ardanlabs.com)  
 bill@ardanlabs.com  
 
+* [Purchase Video](https://github.com/ardanlabs/gotraining#purchase-video)
 * [Experience](https://github.com/ardanlabs/gotraining#our-experience)
 * [Teachers](https://github.com/ardanlabs/gotraining#our-teachers)
 * [Current Schedule](https://github.com/ardanlabs/gotraining#current-schedule)
@@ -19,6 +20,12 @@ bill@ardanlabs.com
 * [Before You Come To Class](https://github.com/ardanlabs/gotraining#before-you-come-to-class)
 * [Starter Material](https://github.com/ardanlabs/gotraining#starter-material)
 * [Get The Training Material](https://github.com/ardanlabs/gotraining#go-get-the-training-material)
+
+## Purchase Video
+
+The entire training class has been recorded to be made available to those who can't have the class taught at their company or who can't attend a conference. This is the entire class material.
+
+[education.ardanlabs.com](https://education.ardanlabs.com)
 
 ## Our Experience
 
@@ -34,7 +41,7 @@ Our classes are perfect for intermediate-level developers who have at least a fe
 _William Kennedy is a managing partner at Ardan Labs in Miami, Florida. Ardan Labs is a high-performance development and training firm working with startups and fortune 500 companies. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
 _**Video Training**_  
-[Ultimate Go Live Lessons](http://www.informit.com/store/ultimate-go-programming-livelessons-9780134757483)
+[Ultimate Go Video](https://education.ardanlabs.com)
 
 _**Blog**_  
 [Going Go](https://www.ardanlabs.com/blog/)    
