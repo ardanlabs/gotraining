@@ -378,6 +378,8 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 ### Data-Oriented Design
 
+"Data dominates. If you've chosen the right data structures and organized things well, the algorithms will almost always be self-evident. Data structures, not algorthims, are central to programming." - Rob Pike
+
 **Design Philosophy:**
 
 * If you don't understand the data, you don't understand the problem.
