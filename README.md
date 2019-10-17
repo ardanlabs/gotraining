@@ -170,10 +170,12 @@ October(21-22)      Florence, Italy       GoLab               Conference   Adv G
 October(28-29)      Melbourne, Australia  Zendesk             Corporate    Go (3 day)
 October(30-01)      Sydney, Australia     GopherCon AU        Conference   Adv Go (1 day)
 November(05-07)     Santa Monica, CA      Hallmark Labs       Corporate    Go (3 day)
-November(14)        San Francisco, CA     Keep Truckin        Corporate    Go (1 day)
+November(11-13)     Seattle, WA           Outreach            Corporate    Go (3 day)
 November(15)        San Francisco, CA     QCON                Conference   Service (1 day)  https://qconsf.com//
 November(18-20)     London, England       Flyt                Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-advanced-ultimate-go-training-london-november-2019-tickets-72938134925
 December(03-05)     San Jose, CA          KLA                 Corporate    Go (3 day)
+December(10-12)     San Jose, CA          Paypal              Corporate    Go (3 day)
+December(16-18)     San Francisco, CA     Procore             Corporate    Go (3 day)
 ```
 
 ### Past Events
