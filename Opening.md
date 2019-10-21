@@ -12,8 +12,8 @@ well, the algorithms will almost always be self-evident. Data structures, not
 algorthims, are central to programming." - Rob Pike
 
 ## Extra Links  
- [Installing](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html)
-[Video](http://www.informit.com/store/ultimate-go-programming-livelessons-9780134757483)
+[Installing](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html)  
+[Video](http://education.ardanlabs.com)
 
 ## Tooling Installs
 Graphviz: https://www.graphviz.org/  
