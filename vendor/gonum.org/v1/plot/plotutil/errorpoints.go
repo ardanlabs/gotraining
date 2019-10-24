@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -96,7 +96,7 @@ func MeanAndConf95(vls []float64) (mean, lowerr, higherr float64) {
 func MedianAndMinMax(vls []float64) (med, lowerr, higherr float64) {
 	n := len(vls)
 	if n == 0 {
-		panic("MedianAndMinMax: No values")
+		panic("plotutil: MedianAndMinMax: No values")
 	}
 	if n == 1 {
 		return vls[0], 0, 0

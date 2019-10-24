@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -94,7 +94,7 @@ func makeAxis(orientation bool) (Axis, error) {
 	}
 
 	a := Axis{
-		Min: math.Inf(1),
+		Min: math.Inf(+1),
 		Max: math.Inf(-1),
 		LineStyle: draw.LineStyle{
 			Color: color.Black,
@@ -167,8 +167,22 @@ var _ Normalizer = LogScale{}
 // Normalize returns the fractional logarithmic distance of
 // x between min and max.
 func (LogScale) Normalize(min, max, x float64) float64 {
-	logMin := log(min)
-	return (log(x) - logMin) / (log(max) - logMin)
+	if min <= 0 || max <= 0 || x <= 0 {
+		panic("Values must be greater than 0 for a log scale.")
+	}
+	logMin := math.Log(min)
+	return (math.Log(x) - logMin) / (math.Log(max) - logMin)
+}
+
+// InvertedScale can be used as the value of an Axis.Scale function to
+// invert the axis using any Normalizer.
+type InvertedScale struct{ Normalizer }
+
+var _ Normalizer = InvertedScale{}
+
+// Normalize returns a normalized [0, 1] value for the position of x.
+func (is InvertedScale) Normalize(min, max, x float64) float64 {
+	return is.Normalizer.Normalize(max, min, x)
 }
 
 // Norm returns the value of x, given in the data coordinate
@@ -458,7 +472,7 @@ var _ Ticker = LogTicks{}
 
 // Ticks returns Ticks in a specified range
 func (LogTicks) Ticks(min, max float64) []Tick {
-	if min <= 0 {
+	if min <= 0 || max <= 0 {
 		panic("Values must be greater than 0 for a log scale.")
 	}
 
@@ -599,15 +613,19 @@ func tickLabelWidth(sty draw.TextStyle, ticks []Tick) vg.Length {
 	return maxWidth
 }
 
-func log(x float64) float64 {
-	if x <= 0 {
-		panic("Values must be greater than 0 for a log scale.")
-	}
-	return math.Log(x)
-}
-
 // formatFloatTick returns a g-formated string representation of v
 // to the specified precision.
 func formatFloatTick(v float64, prec int) string {
 	return strconv.FormatFloat(v, 'g', prec, 64)
+}
+
+// TickerFunc is suitable for the Tick.Marker field of an Axis.
+// It is an adapter which allows to quickly setup a Ticker using a function with an appropriate signature.
+type TickerFunc func(min, max float64) []Tick
+
+var _ Ticker = TickerFunc(nil)
+
+// Ticks implements plot.Ticker.
+func (f TickerFunc) Ticks(min, max float64) []Tick {
+	return f(min, max)
 }

@@ -96,11 +96,12 @@ func (f *Fpdf) parsepngstream(buf *bytes.Buffer, readdpi bool) (info *ImageInfoT
 			// dbg("tRNS")
 			// Read transparency info
 			t := buf.Next(n)
-			if ct == 0 {
+			switch ct {
+			case 0:
 				trns = []int{int(t[1])} // ord(substr($t,1,1)));
-			} else if ct == 2 {
+			case 2:
 				trns = []int{int(t[1]), int(t[3]), int(t[5])} // array(ord(substr($t,1,1)), ord(substr($t,3,1)), ord(substr($t,5,1)));
-			} else {
+			default:
 				pos := strings.Index(string(t), "\x00")
 				if pos >= 0 {
 					trns = []int{pos} // array($pos);

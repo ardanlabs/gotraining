@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -32,6 +32,14 @@ type Histogram struct {
 	// LineStyle is the style of the outline of each
 	// bar of the histogram.
 	draw.LineStyle
+
+	// LogY allows rendering with a log-scaled Y axis.
+	// When enabled, histogram bins with no entries will be discarded from
+	// the histogram's DataRange.
+	// The lowest Y value for the DataRange will be corrected to leave an
+	// arbitrary amount of height for the smallest bin entry so it is visible
+	// on the final plot.
+	LogY bool
 }
 
 // NewHistogram returns a new histogram
@@ -77,25 +85,34 @@ func (h *Histogram) Plot(c draw.Canvas, p *plot.Plot) {
 	trX, trY := p.Transforms(&c)
 
 	for _, bin := range h.Bins {
+		ymin := c.Min.Y
+		ymax := c.Min.Y
+		if 0 != bin.Weight {
+			ymax = trY(bin.Weight)
+		}
+		xmin := trX(bin.Min)
+		xmax := trX(bin.Max)
 		pts := []vg.Point{
-			{trX(bin.Min), trY(0)},
-			{trX(bin.Max), trY(0)},
-			{trX(bin.Max), trY(bin.Weight)},
-			{trX(bin.Min), trY(bin.Weight)},
+			{xmin, ymin},
+			{xmax, ymin},
+			{xmax, ymax},
+			{xmin, ymax},
 		}
 		if h.FillColor != nil {
 			c.FillPolygon(h.FillColor, c.ClipPolygonXY(pts))
 		}
-		pts = append(pts, vg.Point{X: trX(bin.Min), Y: trY(0)})
+		pts = append(pts, vg.Point{X: xmin, Y: ymin})
 		c.StrokeLines(h.LineStyle, c.ClipLinesXY(pts)...)
 	}
 }
 
 // DataRange returns the minimum and maximum X and Y values
 func (h *Histogram) DataRange() (xmin, xmax, ymin, ymax float64) {
-	xmin = math.Inf(1)
+	xmin = math.Inf(+1)
 	xmax = math.Inf(-1)
+	ymin = math.Inf(+1)
 	ymax = math.Inf(-1)
+	ylow := math.Inf(+1) // ylow will hold the smallest non-zero y value.
 	for _, bin := range h.Bins {
 		if bin.Max > xmax {
 			xmax = bin.Max
@@ -106,6 +123,21 @@ func (h *Histogram) DataRange() (xmin, xmax, ymin, ymax float64) {
 		if bin.Weight > ymax {
 			ymax = bin.Weight
 		}
+		if bin.Weight < ymin {
+			ymin = bin.Weight
+		}
+		if bin.Weight != 0 && bin.Weight < ylow {
+			ylow = bin.Weight
+		}
+	}
+	switch h.LogY {
+	case true:
+		if ymin == 0 && !math.IsInf(ylow, +1) {
+			// Reserve a bit of space for the smallest bin to be displayed still.
+			ymin = ylow * 0.5
+		}
+	default:
+		ymin = 0
 	}
 	return
 }

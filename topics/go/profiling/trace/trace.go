@@ -41,8 +41,8 @@ func main() {
 	// pprof.StartCPUProfile(os.Stdout)
 	// defer pprof.StopCPUProfile()
 
-	// trace.Start(os.Stdout)
-	// defer trace.Stop()
+	trace.Start(os.Stdout)
+	defer trace.Stop()
 
 	docs := make([]string, 4000)
 	for i := range docs {
@@ -50,10 +50,10 @@ func main() {
 	}
 
 	topic := "president"
-	n := freq(topic, docs)
+	// n := freq(topic, docs)
 	// n := freqConcurrent(topic, docs)
 	// n := freqConcurrentSem(topic, docs)
-	// n := freqNumCPU(topic, docs)
+	n := freqNumCPU(topic, docs)
 	// n := freqNumCPUTasks(topic, docs)
 	// n := freqActor(topic, docs)
 

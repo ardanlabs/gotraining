@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -61,7 +61,7 @@ func AddStackedAreaPlots(plt *plot.Plot, xs plotter.Valuer, vs ...interface{}) e
 			l.LineStyle.Width = vg.Points(0)
 			color := Color(i)
 			i++
-			l.ShadeColor = &color
+			l.FillColor = color
 
 			ps = append(ps, l)
 
@@ -71,7 +71,7 @@ func AddStackedAreaPlots(plt *plot.Plot, xs plotter.Valuer, vs ...interface{}) e
 			}
 
 		default:
-			panic(fmt.Sprintf("AddStackedAreaPlots handles strings and plotter.Valuers, got %T", t))
+			panic(fmt.Sprintf("plotutil: AddStackedAreaPlots handles strings and plotter.Valuers, got %T", t))
 		}
 	}
 
@@ -114,7 +114,7 @@ func AddBoxPlots(plt *plot.Plot, width vg.Length, vs ...interface{}) error {
 			name = ""
 
 		default:
-			panic(fmt.Sprintf("AddBoxPlots handles strings and plotter.Valuers, got %T", t))
+			panic(fmt.Sprintf("plotutil: AddBoxPlots handles strings and plotter.Valuers, got %T", t))
 		}
 	}
 	plt.Add(ps...)
@@ -158,7 +158,7 @@ func AddScatters(plt *plot.Plot, vs ...interface{}) error {
 			}
 
 		default:
-			panic(fmt.Sprintf("AddScatters handles strings and plotter.XYers, got %T", t))
+			panic(fmt.Sprintf("plotutil: AddScatters handles strings and plotter.XYers, got %T", t))
 		}
 	}
 	plt.Add(ps...)
@@ -169,11 +169,12 @@ func AddScatters(plt *plot.Plot, vs ...interface{}) error {
 }
 
 // AddLines adds Line plotters to a plot.
-// The variadic arguments must be either strings
-// or plotter.XYers.  Each plotter.XYer is added to
+// The variadic arguments must be a string
+// or one of a plotting type, plotter.XYers or *plotter.Function.
+// Each plotting type is added to
 // the plot using the next color and dashes
 // shape via the Color and Dashes functions.
-// If a plotter.XYer is immediately preceeded by
+// If a plotting type is immediately preceeded by
 // a string then a legend entry is added to the plot
 // using the string as the name.
 //
@@ -203,8 +204,18 @@ func AddLines(plt *plot.Plot, vs ...interface{}) error {
 				name = ""
 			}
 
+		case *plotter.Function:
+			t.Color = Color(i)
+			t.Dashes = Dashes(i)
+			i++
+			ps = append(ps, t)
+			if name != "" {
+				items = append(items, item{name: name, value: t})
+				name = ""
+			}
+
 		default:
-			panic(fmt.Sprintf("AddLines handles strings and plotter.XYers, got %T", t))
+			panic(fmt.Sprintf("plotutil: AddLines handles strings, plotter.XYers and *plotter.Function, got %T", t))
 		}
 	}
 	plt.Add(ps...)
@@ -256,7 +267,7 @@ func AddLinePoints(plt *plot.Plot, vs ...interface{}) error {
 			}
 
 		default:
-			panic(fmt.Sprintf("AddLinePoints handles strings and plotter.XYers, got %T", t))
+			panic(fmt.Sprintf("plotutil: AddLinePoints handles strings and plotter.XYers, got %T", t))
 		}
 	}
 	plt.Add(ps...)
@@ -311,7 +322,7 @@ func AddErrorBars(plt *plot.Plot, vs ...interface{}) error {
 		if added {
 			continue
 		}
-		panic(fmt.Sprintf("AddErrorBars expects plotter.XErrorer or plotter.YErrorer, got %T", v))
+		panic(fmt.Sprintf("plotutil: AddErrorBars expects plotter.XErrorer or plotter.YErrorer, got %T", v))
 	}
 	plt.Add(ps...)
 	return nil

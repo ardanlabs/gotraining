@@ -3,11 +3,10 @@ language: go
 sudo: false
 
 go:
-  - 1.6.2
+  - master
 
 os:
   - linux
-  - osx
             
 script: go test -v
 

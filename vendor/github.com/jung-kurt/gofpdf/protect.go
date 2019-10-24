@@ -68,8 +68,8 @@ func oValueGen(userPass, ownerPass []byte) (v []byte) {
 	var c *rc4.Cipher
 	tmp := md5.Sum(ownerPass)
 	c, _ = rc4.NewCipher(tmp[0:5])
-	cap := len(userPass)
-	v = make([]byte, cap, cap)
+	size := len(userPass)
+	v = make([]byte, size, size)
 	c.XORKeyStream(v, userPass)
 	return
 }
@@ -77,8 +77,8 @@ func oValueGen(userPass, ownerPass []byte) (v []byte) {
 func (p *protectType) uValueGen() (v []byte) {
 	var c *rc4.Cipher
 	c, _ = rc4.NewCipher(p.encryptionKey)
-	cap := len(p.padding)
-	v = make([]byte, cap, cap)
+	size := len(p.padding)
+	v = make([]byte, size, size)
 	c.XORKeyStream(v, p.padding)
 	return
 }

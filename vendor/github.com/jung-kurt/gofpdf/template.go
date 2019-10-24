@@ -18,22 +18,39 @@ package gofpdf
  */
 
 import (
+	"encoding/gob"
 	"sort"
 )
 
 // CreateTemplate defines a new template using the current page size.
 func (f *Fpdf) CreateTemplate(fn func(*Tpl)) Template {
-	return newTpl(PointType{0, 0}, f.curPageSize, f.unitStr, f.fontDirStr, fn, f)
+	return newTpl(PointType{0, 0}, f.curPageSize, f.defOrientation, f.unitStr, f.fontDirStr, fn, f)
 }
 
 // CreateTemplateCustom starts a template, using the given bounds.
 func (f *Fpdf) CreateTemplateCustom(corner PointType, size SizeType, fn func(*Tpl)) Template {
-	return newTpl(corner, size, f.unitStr, f.fontDirStr, fn, f)
+	return newTpl(corner, size, f.defOrientation, f.unitStr, f.fontDirStr, fn, f)
 }
 
-// CreateTemplate creates a template not attached to any document
+// CreateTemplate creates a template that is not attached to any document.
+//
+// This function is deprecated; it incorrectly assumes that a page with a width
+// smaller than its height is oriented in portrait mode, otherwise it assumes
+// landscape mode. This causes problems when placing the template in a master
+// document where this condition does not apply. CreateTpl() is a similar
+// function that lets you specify the orientation to avoid this problem.
 func CreateTemplate(corner PointType, size SizeType, unitStr, fontDirStr string, fn func(*Tpl)) Template {
-	return newTpl(corner, size, unitStr, fontDirStr, fn, nil)
+	orientationStr := "p"
+	if size.Wd > size.Ht {
+		orientationStr = "l"
+	}
+
+	return CreateTpl(corner, size, orientationStr, unitStr, fontDirStr, fn)
+}
+
+// CreateTpl creates a template not attached to any document
+func CreateTpl(corner PointType, size SizeType, orientationStr, unitStr, fontDirStr string, fn func(*Tpl)) Template {
+	return newTpl(corner, size, orientationStr, unitStr, fontDirStr, fn, nil)
 }
 
 // UseTemplate adds a template to the current page or another template,
@@ -68,7 +85,7 @@ func (f *Fpdf) UseTemplateScaled(t Template, corner PointType, size SizeType) {
 		f.templates[tt.ID()] = tt
 	}
 	for name, ti := range t.Images() {
-		name = sprintf("t%d-%s", t.ID(), name)
+		name = sprintf("t%s-%s", t.ID(), name)
 		f.images[name] = ti
 	}
 
@@ -80,33 +97,22 @@ func (f *Fpdf) UseTemplateScaled(t Template, corner PointType, size SizeType) {
 	ty := (f.curPageSize.Ht - corner.Y - size.Ht) * f.k
 
 	f.outf("q %.4f 0 0 %.4f %.4f %.4f cm", scaleX, scaleY, tx, ty) // Translate
-	f.outf("/TPL%d Do Q", t.ID())
-}
-
-var nextTemplateIDChannel = func() chan int64 {
-	ch := make(chan int64)
-	go func() {
-		var nextID int64 = 1
-		for {
-			ch <- nextID
-			nextID++
-		}
-	}()
-	return ch
-}()
-
-// GenerateTemplateID gives the next template ID. These numbers are global so that they can never clash.
-func GenerateTemplateID() int64 {
-	return <-nextTemplateIDChannel
+	f.outf("/TPL%s Do Q", t.ID())
 }
 
 // Template is an object that can be written to, then used and re-used any number of times within a document.
 type Template interface {
-	ID() int64
+	ID() string
 	Size() (PointType, SizeType)
 	Bytes() []byte
 	Images() map[string]*ImageInfoType
 	Templates() []Template
+	NumPages() int
+	FromPage(int) (Template, error)
+	FromPages() []Template
+	Serialize() ([]byte, error)
+	gob.GobDecoder
+	gob.GobEncoder
 }
 
 func (f *Fpdf) templateFontCatalog() {
@@ -122,7 +128,7 @@ func (f *Fpdf) templateFontCatalog() {
 	}
 	for _, key = range keyList {
 		font = f.fonts[key]
-		f.outf("/F%d %d 0 R", font.I, font.N)
+		f.outf("/F%s %d 0 R", font.i, font.N)
 	}
 	f.out(">>")
 }
@@ -172,13 +178,13 @@ func (f *Fpdf) putTemplates() {
 				for _, key = range keyList {
 					// for _, ti := range tImages {
 					ti = tImages[key]
-					f.outf("/I%d %d 0 R", ti.i, ti.n)
+					f.outf("/I%s %d 0 R", ti.i, ti.n)
 				}
 			}
 			for _, tt := range tTemplates {
 				id := tt.ID()
 				if objID, ok := f.templateObjects[id]; ok {
-					f.outf("/TPL%d %d 0 R", id, objID)
+					f.outf("/TPL%s %d 0 R", id, objID)
 				}
 			}
 			f.out(">>")
@@ -198,8 +204,8 @@ func (f *Fpdf) putTemplates() {
 	}
 }
 
-func templateKeyList(mp map[int64]Template, sort bool) (keyList []int64) {
-	var key int64
+func templateKeyList(mp map[string]Template, sort bool) (keyList []string) {
+	var key string
 	for key = range mp {
 		keyList = append(keyList, key)
 	}
@@ -216,12 +222,12 @@ func templateKeyList(mp map[int64]Template, sort bool) (keyList []int64) {
 }
 
 // sortTemplates puts templates in a suitable order based on dependices
-func sortTemplates(templates map[int64]Template, catalogSort bool) []Template {
+func sortTemplates(templates map[string]Template, catalogSort bool) []Template {
 	chain := make([]Template, 0, len(templates)*2)
 
 	// build a full set of dependency chains
-	var keyList []int64
-	var key int64
+	var keyList []string
+	var key string
 	var t Template
 	keyList = templateKeyList(templates, catalogSort)
 	for _, key = range keyList {
@@ -254,9 +260,7 @@ func templateChainDependencies(template Template) []Template {
 	requires := template.Templates()
 	chain := make([]Template, len(requires)*2)
 	for _, req := range requires {
-		for _, sub := range templateChainDependencies(req) {
-			chain = append(chain, sub)
-		}
+		chain = append(chain, templateChainDependencies(req)...)
 	}
 	chain = append(chain, template)
 	return chain

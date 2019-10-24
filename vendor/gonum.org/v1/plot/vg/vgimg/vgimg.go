@@ -1,10 +1,9 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 // Package vgimg implements the vg.Canvas interface using
-// draw2d (github.com/llgcode/draw2d)
-// as a backend to output raster images.
+// github.com/fogleman/gg as a backend to output raster images.
 package vgimg // import "gonum.org/v1/plot/vg/vgimg"
 
 import (
@@ -16,12 +15,9 @@ import (
 	"image/jpeg"
 	"image/png"
 	"io"
-	"sync"
 
+	"github.com/fogleman/gg"
 	"golang.org/x/image/tiff"
-
-	"github.com/llgcode/draw2d"
-	"github.com/llgcode/draw2d/draw2dimg"
 
 	"gonum.org/v1/plot/vg"
 )
@@ -29,7 +25,7 @@ import (
 // Canvas implements the vg.Canvas interface,
 // drawing to an image.Image using draw2d.
 type Canvas struct {
-	gc    draw2d.GraphicContext
+	ctx   *gg.Context
 	img   draw.Image
 	w, h  vg.Length
 	color []color.Color
@@ -39,6 +35,10 @@ type Canvas struct {
 
 	// width is the current line width.
 	width vg.Length
+
+	// backgroundColor is the background color, set by
+	// UseBackgroundColor.
+	backgroundColor color.Color
 }
 
 const (
@@ -54,7 +54,7 @@ const (
 
 // New returns a new image canvas.
 func New(w, h vg.Length) *Canvas {
-	return NewWith(UseWH(w, h))
+	return NewWith(UseWH(w, h), UseBackgroundColor(color.White))
 }
 
 // NewWith returns a new image canvas created according to the specified
@@ -67,6 +67,7 @@ func New(w, h vg.Length) *Canvas {
 // passed).
 func NewWith(o ...option) *Canvas {
 	c := new(Canvas)
+	c.backgroundColor = color.White
 	var g uint32
 	for _, opt := range o {
 		f := opt(c)
@@ -94,14 +95,13 @@ func NewWith(o ...option) *Canvas {
 		h := c.h / vg.Inch * vg.Length(c.dpi)
 		c.img = draw.Image(image.NewRGBA(image.Rect(0, 0, int(w+0.5), int(h+0.5))))
 	}
-	if c.gc == nil {
-		h := float64(c.img.Bounds().Max.Y - c.img.Bounds().Min.Y)
-		c.gc = draw2dimg.NewGraphicContext(c.img)
-		c.gc.SetDPI(c.dpi)
-		c.gc.Scale(1, -1)
-		c.gc.Translate(0, -h)
+	if c.ctx == nil {
+		c.ctx = gg.NewContextForImage(c.img)
+		c.ctx.SetLineCapButt()
+		c.img = c.ctx.Image().(draw.Image)
+		c.ctx.InvertY()
 	}
-	draw.Draw(c.img, c.img.Bounds(), image.White, image.ZP, draw.Src)
+	draw.Draw(c.img, c.img.Bounds(), &image.Uniform{c.backgroundColor}, image.ZP, draw.Src)
 	c.color = []color.Color{color.Black}
 	vg.Initialize(c)
 	return c
@@ -111,8 +111,9 @@ func NewWith(o ...option) *Canvas {
 // used when initializing a canvas are compatible with
 // each other.
 const (
-	setsDPI = 1 << iota
+	setsDPI uint32 = 1 << iota
 	setsSize
+	setsBackground
 )
 
 type option func(*Canvas) uint32
@@ -148,7 +149,7 @@ func UseDPI(dpi int) option {
 func UseImage(img draw.Image) option {
 	return func(c *Canvas) uint32 {
 		c.img = img
-		return setsSize
+		return setsSize | setsBackground
 	}
 }
 
@@ -156,12 +157,20 @@ func UseImage(img draw.Image) option {
 // and a graphic context to create the canvas from.
 // The minimum point of the given image
 // should probably be 0,0.
-func UseImageWithContext(img draw.Image, gc draw2d.GraphicContext) option {
+func UseImageWithContext(img draw.Image, ctx *gg.Context) option {
 	return func(c *Canvas) uint32 {
 		c.img = img
-		c.gc = gc
-		c.dpi = gc.GetDPI()
-		return setsDPI | setsSize
+		c.ctx = ctx
+		return setsSize | setsBackground
+	}
+}
+
+// UseBackgroundColor specifies the image background color.
+// Without UseBackgroundColor, the default color is white.
+func UseBackgroundColor(c color.Color) option {
+	return func(canvas *Canvas) uint32 {
+		canvas.backgroundColor = c
+		return setsBackground
 	}
 }
 
@@ -178,7 +187,7 @@ func (c *Canvas) Size() (w, h vg.Length) {
 
 func (c *Canvas) SetLineWidth(w vg.Length) {
 	c.width = w
-	c.gc.SetLineWidth(w.Dots(c.DPI()))
+	c.ctx.SetLineWidth(w.Dots(c.DPI()))
 }
 
 func (c *Canvas) SetLineDash(ds []vg.Length, offs vg.Length) {
@@ -186,38 +195,38 @@ func (c *Canvas) SetLineDash(ds []vg.Length, offs vg.Length) {
 	for i, d := range ds {
 		dashes[i] = d.Dots(c.DPI())
 	}
-	c.gc.SetLineDash(dashes, offs.Dots(c.DPI()))
+	c.ctx.SetDashOffset(offs.Dots(c.DPI()))
+	c.ctx.SetDash(dashes...)
 }
 
 func (c *Canvas) SetColor(clr color.Color) {
 	if clr == nil {
 		clr = color.Black
 	}
-	c.gc.SetFillColor(clr)
-	c.gc.SetStrokeColor(clr)
+	c.ctx.SetColor(clr)
 	c.color[len(c.color)-1] = clr
 }
 
 func (c *Canvas) Rotate(t float64) {
-	c.gc.Rotate(t)
+	c.ctx.Rotate(t)
 }
 
 func (c *Canvas) Translate(pt vg.Point) {
-	c.gc.Translate(pt.X.Dots(c.DPI()), pt.Y.Dots(c.DPI()))
+	c.ctx.Translate(pt.X.Dots(c.DPI()), pt.Y.Dots(c.DPI()))
 }
 
 func (c *Canvas) Scale(x, y float64) {
-	c.gc.Scale(x, y)
+	c.ctx.Scale(x, y)
 }
 
 func (c *Canvas) Push() {
 	c.color = append(c.color, c.color[len(c.color)-1])
-	c.gc.Save()
+	c.ctx.Push()
 }
 
 func (c *Canvas) Pop() {
 	c.color = c.color[:len(c.color)-1]
-	c.gc.Restore()
+	c.ctx.Pop()
 }
 
 func (c *Canvas) Stroke(p vg.Path) {
@@ -225,31 +234,48 @@ func (c *Canvas) Stroke(p vg.Path) {
 		return
 	}
 	c.outline(p)
-	c.gc.Stroke()
+	c.ctx.Stroke()
 }
 
 func (c *Canvas) Fill(p vg.Path) {
 	c.outline(p)
-	c.gc.Fill()
+	c.ctx.Fill()
 }
 
 func (c *Canvas) outline(p vg.Path) {
-	c.gc.BeginPath()
 	for _, comp := range p {
 		switch comp.Type {
 		case vg.MoveComp:
-			c.gc.MoveTo(comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()))
+			c.ctx.MoveTo(comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()))
 
 		case vg.LineComp:
-			c.gc.LineTo(comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()))
+			c.ctx.LineTo(comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()))
 
 		case vg.ArcComp:
-			c.gc.ArcTo(comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()),
-				comp.Radius.Dots(c.DPI()), comp.Radius.Dots(c.DPI()),
-				comp.Start, comp.Angle)
+			c.ctx.DrawArc(comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()),
+				comp.Radius.Dots(c.DPI()),
+				comp.Start, comp.Start+comp.Angle,
+			)
+
+		case vg.CurveComp:
+			switch len(comp.Control) {
+			case 1:
+				c.ctx.QuadraticTo(
+					comp.Control[0].X.Dots(c.DPI()), comp.Control[0].Y.Dots(c.DPI()),
+					comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()),
+				)
+			case 2:
+				c.ctx.CubicTo(
+					comp.Control[0].X.Dots(c.DPI()), comp.Control[0].Y.Dots(c.DPI()),
+					comp.Control[1].X.Dots(c.DPI()), comp.Control[1].Y.Dots(c.DPI()),
+					comp.Pos.X.Dots(c.DPI()), comp.Pos.Y.Dots(c.DPI()),
+				)
+			default:
+				panic("vgimg: invalid number of control points")
+			}
 
 		case vg.CloseComp:
-			c.gc.Close()
+			c.ctx.ClosePath()
 
 		default:
 			panic(fmt.Sprintf("Unknown path component: %d", comp.Type))
@@ -257,26 +283,27 @@ func (c *Canvas) outline(p vg.Path) {
 	}
 }
 
+// DPI returns the resolution of the receiver in pixels per inch.
 func (c *Canvas) DPI() float64 {
-	return float64(c.gc.GetDPI())
+	return float64(c.dpi)
 }
 
 func (c *Canvas) FillString(font vg.Font, pt vg.Point, str string) {
-	c.gc.Save()
-	defer c.gc.Restore()
-
-	data := draw2d.FontData{Name: font.Name()}
-	registeredFont.Lock()
-	if !registeredFont.m[font.Name()] {
-		draw2d.RegisterFont(data, font.Font())
-		registeredFont.m[font.Name()] = true
+	if font.Size == 0 {
+		return
 	}
-	registeredFont.Unlock()
-	c.gc.SetFontData(data)
-	c.gc.SetFontSize(font.Size.Points())
-	c.gc.Translate(pt.X.Dots(c.DPI()), pt.Y.Dots(c.DPI()))
-	c.gc.Scale(1, -1)
-	c.gc.FillString(str)
+
+	c.ctx.Push()
+	defer c.ctx.Pop()
+
+	c.ctx.SetFontFace(font.FontFace(c.DPI()))
+
+	x := pt.X.Dots(c.DPI())
+	y := pt.Y.Dots(c.DPI())
+	h := c.h.Dots(c.DPI())
+
+	c.ctx.InvertY()
+	c.ctx.DrawString(str, x, h-y)
 }
 
 // DrawImage implements the vg.Canvas.DrawImage method.
@@ -292,20 +319,13 @@ func (c *Canvas) DrawImage(rect vg.Rectangle, img image.Image) {
 		dx     = float64(img.Bounds().Dx())
 		dy     = float64(img.Bounds().Dy())
 	)
-	c.gc.Save()
-	c.gc.Scale(1, -1)
-	c.gc.Translate(xmin, -ymin-height)
-	c.gc.Scale(width/dx, height/dy)
-	c.gc.DrawImage(img)
-	c.gc.Restore()
+	c.ctx.Push()
+	c.ctx.Scale(1, -1)
+	c.ctx.Translate(xmin, -ymin-height)
+	c.ctx.Scale(width/dx, height/dy)
+	c.ctx.DrawImage(img, 0, 0)
+	c.ctx.Pop()
 }
-
-// registeredFont contains the set of font names
-// that have already been registered with draw2d.
-var registeredFont = struct {
-	sync.Mutex
-	m map[string]bool
-}{m: map[string]bool{}}
 
 // WriterCounter implements the io.Writer interface, and counts
 // the total number of bytes written.

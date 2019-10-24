@@ -5,9 +5,9 @@ go_import_path: gonum.org/v1/plot
 
 # Versions of go that are explicitly supported by gonum.
 go:
- - 1.9.x
- - 1.10.x
+ - 1.12.x
  - 1.11.x
+ - 1.10.x
  - master
 matrix:
   fast_finish: true
@@ -16,7 +16,7 @@ matrix:
 
 env:
   global:
-   - DISPLAY: ":99.0"
+   - GO111MODULE: "on"
 
 # Get coverage tools, and start the virtual framebuffer.
 before_install:
@@ -24,14 +24,16 @@ before_install:
  - go get golang.org/x/tools/cmd/goimports
  # Required for imports check.
  - go get gonum.org/v1/tools/cmd/check-imports
+ # Required for copyright header check.
+ - go get gonum.org/v1/tools/cmd/check-copyright
  # Required for coverage.
  - go get golang.org/x/tools/cmd/cover
  - go get github.com/mattn/goveralls
- - sh -e /etc/init.d/xvfb start
 
 # Get deps, build, test, and ensure the code is gofmt'ed.
 # If we are building as gonum, then we have access to the coveralls api key, so we can run coverage as well.
 script:
+ - ${TRAVIS_BUILD_DIR}/.travis/check-copyright.sh
  - ${TRAVIS_BUILD_DIR}/.travis/check-formatting.sh
  - go get -d -t -v ./...
  - go build -v ./...

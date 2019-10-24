@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -67,13 +67,8 @@ func New(w, h vg.Length) *Canvas {
 		fonts: make(map[vg.Font]struct{}),
 		embed: true,
 	}
+	c.NextPage()
 	vg.Initialize(c)
-	c.doc.SetMargins(0, 0, 0)
-	c.doc.AddPage()
-	c.Push()
-	c.Translate(vg.Point{0, h})
-	c.Scale(1, -1)
-
 	return c
 }
 
@@ -159,6 +154,10 @@ func (c *Canvas) Fill(p vg.Path) {
 }
 
 func (c *Canvas) FillString(fnt vg.Font, pt vg.Point, str string) {
+	if fnt.Size == 0 {
+		return
+	}
+
 	c.font(fnt, pt)
 	c.doc.SetFont(fnt.Name(), "", c.unit(fnt.Size))
 
@@ -249,6 +248,19 @@ func (c *Canvas) pdfPath(path vg.Path, style string) {
 			c.doc.LineTo(c.pdfPoint(comp.Pos))
 		case vg.ArcComp:
 			c.arc(comp, style)
+		case vg.CurveComp:
+			px, py := c.pdfPoint(comp.Pos)
+			switch len(comp.Control) {
+			case 1:
+				cx, cy := c.pdfPoint(comp.Control[0])
+				c.doc.CurveTo(cx, cy, px, py)
+			case 2:
+				cx, cy := c.pdfPoint(comp.Control[0])
+				dx, dy := c.pdfPoint(comp.Control[1])
+				c.doc.CurveBezierCubicTo(cx, cy, dx, dy, px, py)
+			default:
+				panic("vgpdf: invalid number of control points")
+			}
 		case vg.CloseComp:
 			c.doc.LineTo(xp, yp)
 			c.doc.ClosePath()
@@ -379,4 +391,18 @@ func makeFont(font, encoding []byte, embed bool) (z, j []byte, err error) {
 	j, err = ioutil.ReadFile(filepath.Join(outdir, "font.json"))
 
 	return z, j, err
+}
+
+// NextPage creates a new page in the final PDF document.
+// The new page is the new current page.
+// Modifications applied to the canvas will only be applied to that new page.
+func (c *Canvas) NextPage() {
+	if c.doc.PageNo() > 0 {
+		c.Pop()
+	}
+	c.doc.SetMargins(0, 0, 0)
+	c.doc.AddPage()
+	c.Push()
+	c.Translate(vg.Point{0, c.h})
+	c.Scale(1, -1)
 }

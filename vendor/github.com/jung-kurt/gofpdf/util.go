@@ -17,11 +17,10 @@
 package gofpdf
 
 import (
+	"bufio"
 	"bytes"
 	"compress/zlib"
 	"fmt"
-	// "github.com/davecgh/go-spew/spew"
-	"bufio"
 	"io"
 	"math"
 	"os"
@@ -40,7 +39,7 @@ func sprintf(fmtStr string, args ...interface{}) string {
 	return fmt.Sprintf(fmtStr, args...)
 }
 
-// Returns true if the specified normal file exists
+// fileExist returns true if the specified normal file exists
 func fileExist(filename string) (ok bool) {
 	info, err := os.Stat(filename)
 	if err == nil {
@@ -51,7 +50,7 @@ func fileExist(filename string) (ok bool) {
 	return ok
 }
 
-// Returns the size of the specified file; ok will be false
+// fileSize returns the size of the specified file; ok will be false
 // if the file does not exist or is not an ordinary file
 func fileSize(filename string) (size int64, ok bool) {
 	info, err := os.Stat(filename)
@@ -62,14 +61,14 @@ func fileSize(filename string) (size int64, ok bool) {
 	return
 }
 
-// Returns a new buffer populated with the contents of the specified Reader
+// bufferFromReader returns a new buffer populated with the contents of the specified Reader
 func bufferFromReader(r io.Reader) (b *bytes.Buffer, err error) {
 	b = new(bytes.Buffer)
 	_, err = b.ReadFrom(r)
 	return
 }
 
-// Returns true if the two specified float slices are equal
+// slicesEqual returns true if the two specified float slices are equal
 func slicesEqual(a, b []float64) bool {
 	if len(a) != len(b) {
 		return false
@@ -82,7 +81,7 @@ func slicesEqual(a, b []float64) bool {
 	return true
 }
 
-// Returns a zlib-compressed copy of the specified byte array
+// sliceCompress returns a zlib-compressed copy of the specified byte array
 func sliceCompress(data []byte) []byte {
 	var buf bytes.Buffer
 	cmp, _ := zlib.NewWriterLevel(&buf, zlib.BestSpeed)
@@ -91,7 +90,7 @@ func sliceCompress(data []byte) []byte {
 	return buf.Bytes()
 }
 
-// Returns an uncompressed copy of the specified zlib-compressed byte array
+// sliceUncompress returns an uncompressed copy of the specified zlib-compressed byte array
 func sliceUncompress(data []byte) (outData []byte, err error) {
 	inBuf := bytes.NewReader(data)
 	r, err := zlib.NewReader(inBuf)
@@ -106,7 +105,7 @@ func sliceUncompress(data []byte) (outData []byte, err error) {
 	return
 }
 
-// Convert UTF-8 to UTF-16BE with BOM; from http://www.fpdf.org/
+// utf8toutf16 converts UTF-8 to UTF-16BE with BOM; from http://www.fpdf.org/
 func utf8toutf16(s string) string {
 	res := make([]byte, 0, 8)
 	res = append(res, 0xFE, 0xFF)
@@ -115,7 +114,8 @@ func utf8toutf16(s string) string {
 	for i < nb {
 		c1 := byte(s[i])
 		i++
-		if c1 >= 224 {
+		switch {
+		case c1 >= 224:
 			// 3-byte character
 			c2 := byte(s[i])
 			i++
@@ -123,13 +123,13 @@ func utf8toutf16(s string) string {
 			i++
 			res = append(res, ((c1&0x0F)<<4)+((c2&0x3C)>>2),
 				((c2&0x03)<<6)+(c3&0x3F))
-		} else if c1 >= 192 {
+		case c1 >= 192:
 			// 2-byte character
 			c2 := byte(s[i])
 			i++
 			res = append(res, ((c1 & 0x1C) >> 2),
 				((c1&0x03)<<6)+(c2&0x3F))
-		} else {
+		default:
 			// Single-byte character
 			res = append(res, 0, c1)
 		}
@@ -137,7 +137,7 @@ func utf8toutf16(s string) string {
 	return string(res)
 }
 
-// Return a if cnd is true, otherwise b
+// intIf returns a if cnd is true, otherwise b
 func intIf(cnd bool, a, b int) int {
 	if cnd {
 		return a
@@ -145,12 +145,17 @@ func intIf(cnd bool, a, b int) int {
 	return b
 }
 
-// Return aStr if cnd is true, otherwise bStr
+// strIf returns aStr if cnd is true, otherwise bStr
 func strIf(cnd bool, aStr, bStr string) string {
 	if cnd {
 		return aStr
 	}
 	return bStr
+}
+
+// doNothing returns the passed string with no translation.
+func doNothing(s string) string {
+	return s
 }
 
 // Dump the internals of the specified values
@@ -219,9 +224,7 @@ func UnicodeTranslator(r io.Reader) (f func(string) string, err error) {
 	if err == nil {
 		f = repClosure(m)
 	} else {
-		f = func(s string) string {
-			return s
-		}
+		f = doNothing
 	}
 	return
 }
@@ -241,9 +244,7 @@ func UnicodeTranslatorFromFile(fileStr string) (f func(string) string, err error
 		f, err = UnicodeTranslator(fl)
 		fl.Close()
 	} else {
-		f = func(s string) string {
-			return s
-		}
+		f = doNothing
 	}
 	return
 }
@@ -260,21 +261,22 @@ func UnicodeTranslatorFromFile(fileStr string) (f func(string) string, err error
 // If an error occurs reading the descriptor, the returned function is valid
 // but does not perform any rune translation.
 //
-// The CellFormat (4) example demonstrates this method.
+// The CellFormat_codepage example demonstrates this method.
 func (f *Fpdf) UnicodeTranslatorFromDescriptor(cpStr string) (rep func(string) string) {
 	var str string
 	var ok bool
-	if f.err != nil {
-		return
-	}
-	if len(cpStr) == 0 {
-		cpStr = "cp1252"
-	}
-	str, ok = embeddedMapList[cpStr]
-	if ok {
-		rep, f.err = UnicodeTranslator(strings.NewReader(str))
+	if f.err == nil {
+		if len(cpStr) == 0 {
+			cpStr = "cp1252"
+		}
+		str, ok = embeddedMapList[cpStr]
+		if ok {
+			rep, f.err = UnicodeTranslator(strings.NewReader(str))
+		} else {
+			rep, f.err = UnicodeTranslatorFromFile(filepath.Join(f.fontpath, cpStr) + ".map")
+		}
 	} else {
-		rep, f.err = UnicodeTranslatorFromFile(filepath.Join(f.fontpath, cpStr) + ".map")
+		rep = doNothing
 	}
 	return
 }

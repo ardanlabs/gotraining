@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -12,17 +12,39 @@ import (
 	"gonum.org/v1/plot/vg/draw"
 )
 
+// StepKind specifies a form of a connection of two consecutive points.
+type StepKind int
+
+const (
+	// NoStep connects two points by simple line
+	NoStep StepKind = iota
+
+	// PreStep connects two points by following lines: vertical, horizontal.
+	PreStep
+
+	// MidStep connects two points by following lines: horizontal, vertical, horizontal.
+	// Vertical line is placed in the middle of the interval.
+	MidStep
+
+	// PostStep connects two points by following lines: horizontal, vertical.
+	PostStep
+)
+
 // Line implements the Plotter interface, drawing a line.
 type Line struct {
 	// XYs is a copy of the points for this line.
 	XYs
 
-	// LineStyle is the style of the line connecting
-	// the points.
+	// StepStyle is the kind of the step line.
+	StepStyle StepKind
+
+	// LineStyle is the style of the line connecting the points.
+	// Use zero width to disable lines.
 	draw.LineStyle
 
-	// ShadeColor is the color of the shaded area.
-	ShadeColor *color.Color
+	// FillColor is the color to fill the area below the plot.
+	// Use nil to disable the filling. This is the default.
+	FillColor color.Color
 }
 
 // NewLine returns a Line that uses the default line style and
@@ -38,8 +60,7 @@ func NewLine(xys XYer) (*Line, error) {
 	}, nil
 }
 
-// Plot draws the Line, implementing the plot.Plotter
-// interface.
+// Plot draws the Line, implementing the plot.Plotter interface.
 func (pts *Line) Plot(c draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&c)
 	ps := make([]vg.Point, len(pts.XYs))
@@ -49,44 +70,100 @@ func (pts *Line) Plot(c draw.Canvas, plt *plot.Plot) {
 		ps[i].Y = trY(p.Y)
 	}
 
-	if pts.ShadeColor != nil && len(ps) > 0 {
-		c.SetColor(*pts.ShadeColor)
+	if pts.FillColor != nil && len(ps) > 0 {
 		minY := trY(plt.Y.Min)
-		var pa vg.Path
-		pa.Move(vg.Point{X: ps[0].X, Y: minY})
-		for i := range pts.XYs {
-			pa.Line(ps[i])
+		fillPoly := []vg.Point{{X: ps[0].X, Y: minY}}
+		switch pts.StepStyle {
+		case PreStep:
+			fillPoly = append(fillPoly, ps[1:]...)
+		case PostStep:
+			fillPoly = append(fillPoly, ps[:len(ps)-1]...)
+		default:
+			fillPoly = append(fillPoly, ps...)
 		}
-		pa.Line(vg.Point{X: ps[len(pts.XYs)-1].X, Y: minY})
-		pa.Close()
-		c.Fill(pa)
+		fillPoly = append(fillPoly, vg.Point{X: ps[len(ps)-1].X, Y: minY})
+		fillPoly = c.ClipPolygonXY(fillPoly)
+		if len(fillPoly) > 0 {
+			c.SetColor(pts.FillColor)
+			var pa vg.Path
+			prev := fillPoly[0]
+			pa.Move(prev)
+			for _, pt := range fillPoly[1:] {
+				switch pts.StepStyle {
+				case NoStep:
+					pa.Line(pt)
+				case PreStep:
+					pa.Line(vg.Point{X: prev.X, Y: pt.Y})
+					pa.Line(pt)
+				case MidStep:
+					pa.Line(vg.Point{X: (prev.X + pt.X) / 2, Y: prev.Y})
+					pa.Line(vg.Point{X: (prev.X + pt.X) / 2, Y: pt.Y})
+					pa.Line(pt)
+				case PostStep:
+					pa.Line(vg.Point{X: pt.X, Y: prev.Y})
+					pa.Line(pt)
+				}
+				prev = pt
+			}
+			pa.Close()
+			c.Fill(pa)
+		}
 	}
 
-	c.StrokeLines(pts.LineStyle, c.ClipLinesXY(ps)...)
+	lines := c.ClipLinesXY(ps)
+	if pts.LineStyle.Width != 0 && len(lines) != 0 {
+		c.SetLineStyle(pts.LineStyle)
+		for _, l := range lines {
+			if len(l) == 0 {
+				continue
+			}
+			var p vg.Path
+			prev := l[0]
+			p.Move(prev)
+			for _, pt := range l[1:] {
+				switch pts.StepStyle {
+				case PreStep:
+					p.Line(vg.Point{X: prev.X, Y: pt.Y})
+				case MidStep:
+					p.Line(vg.Point{X: (prev.X + pt.X) / 2, Y: prev.Y})
+					p.Line(vg.Point{X: (prev.X + pt.X) / 2, Y: pt.Y})
+				case PostStep:
+					p.Line(vg.Point{X: pt.X, Y: prev.Y})
+				}
+				p.Line(pt)
+				prev = pt
+			}
+			c.Stroke(p)
+		}
+	}
 }
 
 // DataRange returns the minimum and maximum
-// x and y values, implementing the plot.DataRanger
-// interface.
+// x and y values, implementing the plot.DataRanger interface.
 func (pts *Line) DataRange() (xmin, xmax, ymin, ymax float64) {
 	return XYRange(pts)
 }
 
-// Thumbnail the thumbnail for the Line,
-// implementing the plot.Thumbnailer interface.
+// Thumbnail returns the thumbnail for the Line, implementing the plot.Thumbnailer interface.
 func (pts *Line) Thumbnail(c *draw.Canvas) {
-	if pts.ShadeColor != nil {
+	if pts.FillColor != nil {
+		var topY vg.Length
+		if pts.LineStyle.Width == 0 {
+			topY = c.Max.Y
+		} else {
+			topY = (c.Min.Y + c.Max.Y) / 2
+		}
 		points := []vg.Point{
-			{c.Min.X, c.Min.Y},
-			{c.Min.X, c.Max.Y},
-			{c.Max.X, c.Max.Y},
-			{c.Max.X, c.Min.Y},
+			{X: c.Min.X, Y: c.Min.Y},
+			{X: c.Min.X, Y: topY},
+			{X: c.Max.X, Y: topY},
+			{X: c.Max.X, Y: c.Min.Y},
 		}
 		poly := c.ClipPolygonY(points)
-		c.FillPolygon(*pts.ShadeColor, poly)
+		c.FillPolygon(pts.FillColor, poly)
+	}
 
-		points = append(points, vg.Point{X: c.Min.X, Y: c.Min.Y})
-	} else {
+	if pts.LineStyle.Width != 0 {
 		y := c.Center().Y
 		c.StrokeLine2(pts.LineStyle, c.Min.X, y, c.Max.X, y)
 	}

@@ -27,6 +27,7 @@ text, drawing and images.
 * Layers
 * Templates
 * Barcodes
+* Charting facility
 
 gofpdf has no dependencies other than the Go standard library. All tests pass
 on Linux, Mac and Windows platforms.
@@ -116,15 +117,17 @@ some helper routines, for example exampleFilename() and summary().
 Example PDFs can be compared with reference copies in order to verify that they
 have been generated as expected. This comparison will be performed if a PDF
 with the same name as the example PDF is placed in the gofpdf/pdf/reference
-directory. The routine that summarizes an example will look for this file and,
-if found, will call ComparePDFFiles() to check the example PDF for equality
-with its reference PDF. If differences exist between the two files they will be
-printed to standard output and the test will fail. If the reference file is
-missing, the comparison is considered to succeed. In order to successfully
-compare two PDFs, the placement of internal resources must be consistent and
-the internal creation timestamps must be the same. To do this, the methods
-SetCatalogSort() and SetCreationDate() need to be called for both files. This
-is done automatically for all examples.
+directory and if the third argument to ComparePDFFiles() in
+internal/example/example.go is true. (By default it is false.) The routine that
+summarizes an example will look for this file and, if found, will call
+ComparePDFFiles() to check the example PDF for equality with its reference PDF.
+If differences exist between the two files they will be printed to standard
+output and the test will fail. If the reference file is missing, the comparison
+is considered to succeed. In order to successfully compare two PDFs, the
+placement of internal resources must be consistent and the internal creation
+timestamps must be the same. To do this, the methods SetCatalogSort() and
+SetCreationDate() need to be called for both files. This is done automatically
+for all examples.
 
 ## Nonstandard Fonts
 
@@ -189,33 +192,40 @@ the contributors acknowledged below.
 
 
 This package's code and documentation are closely derived from the [FPDF](http://www.fpdf.org/) library created by Olivier Plathey, and a number of font and
-image resources are copied directly from it. Drawing support is adapted from
-the FPDF geometric figures script by David Hernández Sanz. Transparency
-support is adapted from the FPDF transparency script by Martin Hall-May.
-Support for gradients and clipping is adapted from FPDF scripts by Andreas
-Würmser. Support for outline bookmarks is adapted from Olivier Plathey by
-Manuel Cornes. Layer support is adapted from Olivier Plathey. Support for
-transformations is adapted from the FPDF transformation script by Moritz Wagner
-and Andreas Würmser. PDF protection is adapted from the work of Klemen
-Vodopivec for the FPDF product. Lawrence Kesteloot provided code to allow an
-image's extent to be determined prior to placement. Support for vertical
-alignment within a cell was provided by Stefan Schroeder. Ivan Daniluk
-generalized the font and image loading code to use the Reader interface while
-maintaining backward compatibility. Anthony Starks provided code for the
-Polygon function. Robert Lillack provided the Beziergon function and corrected
-some naming issues with the internal curve function. Claudio Felber provided
-implementations for dashed line drawing and generalized font loading. Stani
-Michiels provided support for multi-segment path drawing with smooth line
-joins, line join styles, enhanced fill modes, and has helped greatly with
-package presentation and tests. Templating is adapted by Marcus Downing from
-the FPDF_Tpl library created by Jan Slabon and Setasign. Jelmer Snoeck
-contributed packages that generate a variety of barcodes and help with
-registering images on the web. Jelmer Snoek and Guillermo Pascual augmented the
-basic HTML functionality with aligned text. Kent Quirk implemented
-backwards-compatible support for reading DPI from images that support it, and
-for setting DPI manually and then having it properly taken into account when
-calculating image size. Paulo Coutinho provided support for static embedded
-fonts. Bruno Michel has provided valuable assistance with the code.
+image resources are copied directly from it. Bruno Michel has provided valuable
+assistance with the code. Drawing support is adapted from the FPDF geometric
+figures script by David Hernández Sanz. Transparency support is adapted from
+the FPDF transparency script by Martin Hall-May. Support for gradients and
+clipping is adapted from FPDF scripts by Andreas Würmser. Support for outline
+bookmarks is adapted from Olivier Plathey by Manuel Cornes. Layer support is
+adapted from Olivier Plathey. Support for transformations is adapted from the
+FPDF transformation script by Moritz Wagner and Andreas Würmser. PDF
+protection is adapted from the work of Klemen Vodopivec for the FPDF product.
+Lawrence Kesteloot provided code to allow an image's extent to be determined
+prior to placement. Support for vertical alignment within a cell was provided
+by Stefan Schroeder. Ivan Daniluk generalized the font and image loading code
+to use the Reader interface while maintaining backward compatibility. Anthony
+Starks provided code for the Polygon function. Robert Lillack provided the
+Beziergon function and corrected some naming issues with the internal curve
+function. Claudio Felber provided implementations for dashed line drawing and
+generalized font loading. Stani Michiels provided support for multi-segment
+path drawing with smooth line joins, line join styles, enhanced fill modes, and
+has helped greatly with package presentation and tests. Templating is adapted
+by Marcus Downing from the FPDF_Tpl library created by Jan Slabon and Setasign.
+Jelmer Snoeck contributed packages that generate a variety of barcodes and help
+with registering images on the web. Jelmer Snoek and Guillermo Pascual
+augmented the basic HTML functionality with aligned text. Kent Quirk
+implemented backwards-compatible support for reading DPI from images that
+support it, and for setting DPI manually and then having it properly taken into
+account when calculating image size. Paulo Coutinho provided support for static
+embedded fonts. Dan Meyers added support for embedded JavaScript. David Fish
+added a generic alias-replacement function to enable, among other things, table
+of contents functionality. Andy Bakun identified and corrected a problem in
+which the internal catalogs were not sorted stably. Paul Montag added encoding
+and decoding functionality for templates, including images that are embedded in
+templates; this allows templates to be stored independently of gofpdf. Paul
+also added support for page boxes used in printing PDF documents. Wojciech
+Matusiak added supported for word spacing.
 
 ## Roadmap
 

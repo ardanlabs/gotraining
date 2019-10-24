@@ -1,4 +1,4 @@
-// Copyright ©2017 The gonum Authors. All rights reserved.
+// Copyright ©2017 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -123,7 +123,7 @@ outer:
 
 					minStart := (math.Floor(dMax/step) - float64(have-1)) * float64(skip)
 					maxStart := math.Ceil(dMax/step) * float64(skip)
-					for start := minStart; start <= maxStart; start++ {
+					for start := minStart; start <= maxStart && start != start-1; start++ {
 						lMin := start * fracStep
 						lMax := lMin + kStep
 

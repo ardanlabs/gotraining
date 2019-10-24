@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -18,9 +18,9 @@ import (
 
 	"gonum.org/v1/plot/vg/fonts"
 
+	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
 
-	"github.com/golang/freetype"
 	"github.com/golang/freetype/truetype"
 )
 
@@ -110,6 +110,13 @@ func (f *Font) Font() *truetype.Font {
 	return f.font
 }
 
+func (f *Font) FontFace(dpi float64) font.Face {
+	return truetype.NewFace(f.font, &truetype.Options{
+		Size: f.Size.Points(),
+		DPI:  dpi,
+	})
+}
+
 // SetName sets the name of the font, effectively
 // changing the font.  If an error is returned then
 // the font is left unchanged.
@@ -190,7 +197,7 @@ func getFont(name string) (*truetype.Font, error) {
 		return nil, err
 	}
 
-	font, err := freetype.ParseFont(bytes)
+	font, err := truetype.Parse(bytes)
 	if err == nil {
 		fontLock.Lock()
 		loadedFonts[name] = font

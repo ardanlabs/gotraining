@@ -1,4 +1,4 @@
-// Copyright ©2015 The gonum Authors. All rights reserved.
+// Copyright ©2015 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -24,7 +24,7 @@ type GridXYZ interface {
 	// It will panic if c or r are out of bounds for the grid.
 	Z(c, r int) float64
 
-	// X returns the coordinate for the column at the index x.
+	// X returns the coordinate for the column at the index c.
 	// It will panic if c is out of bounds for the grid.
 	X(c int) float64
 
@@ -116,7 +116,11 @@ func (h *HeatMap) Plot(c draw.Canvas, plt *plot.Plot) {
 		var right, left float64
 		switch i {
 		case 0:
-			right = (h.GridXYZ.X(1) - h.GridXYZ.X(0)) / 2
+			if cols == 1 {
+				right = 0.5
+			} else {
+				right = (h.GridXYZ.X(1) - h.GridXYZ.X(0)) / 2
+			}
 			left = -right
 		case cols - 1:
 			right = (h.GridXYZ.X(cols-1) - h.GridXYZ.X(cols-2)) / 2
@@ -130,7 +134,11 @@ func (h *HeatMap) Plot(c draw.Canvas, plt *plot.Plot) {
 			var up, down float64
 			switch j {
 			case 0:
-				up = (h.GridXYZ.Y(1) - h.GridXYZ.Y(0)) / 2
+				if rows == 1 {
+					up = 0.5
+				} else {
+					up = (h.GridXYZ.Y(1) - h.GridXYZ.Y(0)) / 2
+				}
 				down = -up
 			case rows - 1:
 				up = (h.GridXYZ.Y(rows-1) - h.GridXYZ.Y(rows-2)) / 2
@@ -179,16 +187,16 @@ func (h *HeatMap) DataRange() (xmin, xmax, ymin, ymax float64) {
 	c, r := h.GridXYZ.Dims()
 	switch c {
 	case 1: // Make a unit length when there is no neighbour.
-		xmax = 0.5
-		xmin = -0.5
+		xmax = h.GridXYZ.X(0) + 0.5
+		xmin = h.GridXYZ.X(0) - 0.5
 	default:
 		xmax = h.GridXYZ.X(c-1) + (h.GridXYZ.X(c-1)-h.GridXYZ.X(c-2))/2
 		xmin = h.GridXYZ.X(0) - (h.GridXYZ.X(1)-h.GridXYZ.X(0))/2
 	}
 	switch r {
 	case 1: // Make a unit length when there is no neighbour.
-		ymax = 0.5
-		ymin = -0.5
+		ymax = h.GridXYZ.Y(0) + 0.5
+		ymin = h.GridXYZ.Y(0) - 0.5
 	default:
 		ymax = h.GridXYZ.Y(r-1) + (h.GridXYZ.Y(r-1)-h.GridXYZ.Y(r-2))/2
 		ymin = h.GridXYZ.Y(0) - (h.GridXYZ.Y(1)-h.GridXYZ.Y(0))/2

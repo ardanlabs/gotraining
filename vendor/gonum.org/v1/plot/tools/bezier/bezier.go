@@ -1,4 +1,4 @@
-// Copyright ©2013 The gonum Authors. All rights reserved.
+// Copyright ©2013 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -28,11 +28,12 @@ func New(cp ...vg.Point) Curve {
 
 	var w vg.Length
 	for i, p := range c {
-		if i == 0 {
+		switch i {
+		case 0:
 			w = 1
-		} else if i == 1 {
+		case 1:
 			w = vg.Length(len(c)) - 1
-		} else {
+		default:
 			w *= vg.Length(len(c)-i) / vg.Length(i)
 		}
 		c[i].Control.X = p.Point.X * w

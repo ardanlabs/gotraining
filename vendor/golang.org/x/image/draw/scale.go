@@ -46,8 +46,8 @@ type Scaler interface {
 //
 // For example, if m is the matrix
 //
-// m00 m01 m02
-// m10 m11 m12
+// 	m00 m01 m02
+// 	m10 m11 m12
 //
 // then the src-space point (sx, sy) maps to the dst-space point
 // (m00*sx + m01*sy + m02, m10*sx + m11*sy + m12).
@@ -65,7 +65,7 @@ type Options struct {
 	// the src image are drawn from.
 	//
 	// A dst or src mask image having a zero alpha (transparent) pixel value in
-	// the respective coordinate space means that that dst pixel is entirely
+	// the respective coordinate space means that dst pixel is entirely
 	// unaffected or that src pixel is considered transparent black. A full
 	// alpha (opaque) value means that the dst pixel is maximally affected or
 	// the src pixel contributes maximally. The default values, nil, are
@@ -408,11 +408,9 @@ func clipAffectedDestRect(adr image.Rectangle, dstMask image.Image, dstMaskP ima
 	if dstMask == nil {
 		return adr, nil
 	}
-	// TODO: enable this fast path once Go 1.5 is released, where an
-	// image.Rectangle implements image.Image.
-	// if r, ok := dstMask.(image.Rectangle); ok {
-	// 	return adr.Intersect(r.Sub(dstMaskP)), nil
-	// }
+	if r, ok := dstMask.(image.Rectangle); ok {
+		return adr.Intersect(r.Sub(dstMaskP)), nil
+	}
 	// TODO: clip to dstMask.Bounds() if the color model implies that out-of-bounds means 0 alpha?
 	return adr, dstMask
 }

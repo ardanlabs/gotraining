@@ -50,6 +50,8 @@ func (f *Fpdf) SVGBasicWrite(sb *SVGBasicType, scale float64) {
 				newX, newY = val(4)
 				f.CurveCubic(x, y, cx0, cy0, newX, newY, cx1, cy1, "D")
 				x, y = newX, newY
+			case 'Z':
+				f.Line(x, y, originX, originY)
 			default:
 				f.SetErrorf("Unexpected path command '%c'", seg.Cmd)
 			}

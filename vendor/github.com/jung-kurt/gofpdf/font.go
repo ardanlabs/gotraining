@@ -81,7 +81,7 @@ func loadMap(encodingFileStr string) (encList encListType, err error) {
 	return
 }
 
-// Return informations from a TrueType font
+// getInfoFromTrueType returns information from a TrueType font
 func getInfoFromTrueType(fileStr string, msgWriter io.Writer, embed bool, encList encListType) (info fontInfoType, err error) {
 	var ttf TtfType
 	ttf, err = TtfParse(fileStr)
@@ -166,7 +166,7 @@ func segmentRead(r io.Reader) (s segmentType, err error) {
 // -rw-r--r-- 1 root root  9532 2010-04-22 11:27 /usr/share/fonts/type1/mathml/Symbol.afm
 // -rw-r--r-- 1 root root 37744 2010-04-22 11:27 /usr/share/fonts/type1/mathml/Symbol.pfb
 
-// Return informations from a Type1 font
+// getInfoFromType1 return information from a Type1 font
 func getInfoFromType1(fileStr string, msgWriter io.Writer, embed bool, encList encListType) (info fontInfoType, err error) {
 	if embed {
 		var f *os.File
@@ -310,7 +310,7 @@ func makeFontDescriptor(info *fontInfoType) {
 	// dump(info.Desc.FontBBox)
 }
 
-// Build differences from reference encoding
+// makeFontEncoding builds differences from reference encoding
 func makeFontEncoding(encList encListType, refEncFileStr string) (diffStr string, err error) {
 	var refList encListType
 	if refList, err = loadMap(refEncFileStr); err != nil {
@@ -331,7 +331,8 @@ func makeFontEncoding(encList encListType, refEncFileStr string) (diffStr string
 	return
 }
 
-func makeDefinitionFile(fileStr, tpStr, encodingFileStr string, embed bool, encList encListType, info fontInfoType) (err error) {
+func makeDefinitionFile(fileStr, tpStr, encodingFileStr string, embed bool, encList encListType, info fontInfoType) error {
+	var err error
 	var def fontDefType
 	def.Tp = tpStr
 	def.Name = info.FontName
@@ -347,7 +348,7 @@ func makeDefinitionFile(fileStr, tpStr, encodingFileStr string, embed bool, encL
 	// fmt.Printf("reference [%s]\n", filepath.Join(filepath.Dir(encodingFileStr), "cp1252.map"))
 	def.Diff, err = makeFontEncoding(encList, filepath.Join(filepath.Dir(encodingFileStr), "cp1252.map"))
 	if err != nil {
-		return
+		return err
 	}
 	def.File = info.File
 	def.Size1 = int(info.Size1)
@@ -357,16 +358,24 @@ func makeDefinitionFile(fileStr, tpStr, encodingFileStr string, embed bool, encL
 	var buf []byte
 	buf, err = json.Marshal(def)
 	if err != nil {
-		return
+		return err
 	}
 	var f *os.File
 	f, err = os.Create(fileStr)
 	if err != nil {
-		return
+		return err
 	}
 	defer f.Close()
-	f.Write(buf)
-	return
+	_, err = f.Write(buf)
+	if err != nil {
+		return err
+	}
+	err = f.Close()
+	if err != nil {
+		return err
+	}
+
+	return err
 }
 
 // MakeFont generates a font definition file in JSON format. A definition file
@@ -392,42 +401,43 @@ func makeDefinitionFile(fileStr, tpStr, encodingFileStr string, embed bool, encL
 // process. Use nil to turn off messages.
 //
 // embed is true if the font is to be embedded in the PDF files.
-func MakeFont(fontFileStr, encodingFileStr, dstDirStr string, msgWriter io.Writer, embed bool) (err error) {
+func MakeFont(fontFileStr, encodingFileStr, dstDirStr string, msgWriter io.Writer, embed bool) error {
 	if msgWriter == nil {
 		msgWriter = ioutil.Discard
 	}
 	if !fileExist(fontFileStr) {
-		err = fmt.Errorf("font file not found: %s", fontFileStr)
-		return
+		return fmt.Errorf("font file not found: %s", fontFileStr)
 	}
 	extStr := strings.ToLower(fontFileStr[len(fontFileStr)-3:])
 	// printf("Font file extension [%s]\n", extStr)
 	var tpStr string
-	if extStr == "ttf" || extStr == "otf" {
+	switch extStr {
+	case "ttf":
+		fallthrough
+	case "otf":
 		tpStr = "TrueType"
-	} else if extStr == "pfb" {
+	case "pfb":
 		tpStr = "Type1"
-	} else {
-		err = fmt.Errorf("unrecognized font file extension: %s", extStr)
-		return
+	default:
+		return fmt.Errorf("unrecognized font file extension: %s", extStr)
 	}
-	var encList encListType
+
 	var info fontInfoType
-	encList, err = loadMap(encodingFileStr)
+	encList, err := loadMap(encodingFileStr)
 	if err != nil {
-		return
+		return err
 	}
 	// printf("Encoding table\n")
 	// dump(encList)
 	if tpStr == "TrueType" {
 		info, err = getInfoFromTrueType(fontFileStr, msgWriter, embed, encList)
 		if err != nil {
-			return
+			return err
 		}
 	} else {
 		info, err = getInfoFromType1(fontFileStr, msgWriter, embed, encList)
 		if err != nil {
-			return
+			return err
 		}
 	}
 	baseStr := baseNoExt(fontFileStr)
@@ -438,19 +448,25 @@ func MakeFont(fontFileStr, encodingFileStr, dstDirStr string, msgWriter io.Write
 		zFileStr := filepath.Join(dstDirStr, info.File)
 		f, err = os.Create(zFileStr)
 		if err != nil {
-			return
+			return err
 		}
 		defer f.Close()
 		cmp := zlib.NewWriter(f)
-		cmp.Write(info.Data)
-		cmp.Close()
+		_, err = cmp.Write(info.Data)
+		if err != nil {
+			return err
+		}
+		err = cmp.Close()
+		if err != nil {
+			return err
+		}
 		fmt.Fprintf(msgWriter, "Font file compressed: %s\n", zFileStr)
 	}
 	defFileStr := filepath.Join(dstDirStr, baseStr+".json")
 	err = makeDefinitionFile(defFileStr, tpStr, encodingFileStr, embed, encList, info)
 	if err != nil {
-		return
+		return err
 	}
 	fmt.Fprintf(msgWriter, "Font definition file successfully generated: %s\n", defFileStr)
-	return
+	return nil
 }
