@@ -43,7 +43,7 @@ func routes() {
 // findUser makes a database call to find a user.
 func findUser(rw http.ResponseWriter, r *http.Request) {
 
-	// Create a context that timesout in fifty milliseconds.
+	// Create a context that timeouts in fifty milliseconds.
 	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
 	defer cancel()
 
@@ -57,7 +57,7 @@ func findUser(rw http.ResponseWriter, r *http.Request) {
 	ch := make(chan *User, 1)
 	go func() {
 
-		// Get the ip adress from the context for logging.
+		// Get the ip address from the context for logging.
 		if ip, ok := ctx.Value(userIPKey).(string); ok {
 			log.Println("Start DB for IP", ip)
 		}
@@ -72,7 +72,7 @@ func findUser(rw http.ResponseWriter, r *http.Request) {
 	select {
 	case u := <-ch:
 
-		// Repond with the user.
+		// Respond with the user.
 		sendResponse(rw, &u, http.StatusOK)
 		log.Println("Sent StatusOK")
 		return

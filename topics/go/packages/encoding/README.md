@@ -4,7 +4,7 @@ Encoding is the process or marshaling or unmarshaling data into different forms.
 
 ## Notes
 
-* Support for Decoding and Encoding JSON and XML are provided by the standard libary.
+* Support for Decoding and Encoding JSON and XML are provided by the standard library.
 * This package gets better and better with every release.
 
 ## Links

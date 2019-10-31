@@ -48,7 +48,7 @@ func main() {
 	// Bind to the request context this new context for tracing.
 	req = req.WithContext(httptrace.WithClientTrace(req.Context(), &trace))
 
-	// Make the request call and get the tracing informaion.
+	// Make the request call and get the tracing information.
 	if _, err := http.DefaultTransport.RoundTrip(req); err != nil {
 		log.Fatal(err)
 	}

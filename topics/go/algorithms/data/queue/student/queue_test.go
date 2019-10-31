@@ -10,7 +10,7 @@ import (
 const succeed = "\u2713"
 const failed = "\u2717"
 
-// TestNew vaidates the New functionality.
+// TestNew validates the New functionality.
 func TestNew(t *testing.T) {
 	t.Log("Given the need to test New functionality.")
 	{
@@ -33,12 +33,12 @@ func TestNew(t *testing.T) {
 	}
 }
 
-// TestEnqueue vaidates the Enqueue functionality.
+// TestEnqueue validates the Enqueue functionality.
 func TestEnqueue(t *testing.T) {
 	t.Log("Given the need to test Enqueue functionality.")
 	{
 		const items = 5
-		t.Logf("\tTest 0:\tWhen enqueing %d items", items)
+		t.Logf("\tTest 0:\tWhen enqueuing %d items", items)
 		{
 			q, err := queue.New(items)
 			if err != nil {
@@ -80,12 +80,12 @@ func TestEnqueue(t *testing.T) {
 	}
 }
 
-// TestDequeue vaidates the Dequeue functionality.
+// TestDequeue validates the Dequeue functionality.
 func TestDequeue(t *testing.T) {
 	t.Log("Given the need to test Dequeue functionality.")
 	{
 		const items = 5
-		t.Logf("\tTest 0:\tWhen dequeing %d items", items)
+		t.Logf("\tTest 0:\tWhen dequeuing %d items", items)
 		{
 			q, err := queue.New(items)
 			if err != nil {
@@ -126,12 +126,12 @@ func TestDequeue(t *testing.T) {
 	}
 }
 
-// TestEnqueueFull vaidates the Enqueue functionality when full.
+// TestEnqueueFull validates the Enqueue functionality when full.
 func TestEnqueueFull(t *testing.T) {
 	t.Log("Given the need to test Enqueue functionality for being full.")
 	{
 		const items = 5
-		t.Logf("\tTest 0:\tWhen enqueing %d items", items)
+		t.Logf("\tTest 0:\tWhen enqueuing %d items", items)
 		{
 			q, err := queue.New(items)
 			if err != nil {
@@ -185,12 +185,12 @@ func TestEnqueueFull(t *testing.T) {
 	}
 }
 
-// TestDequeueEmpty vaidates the Dequeue functionality when empty.
+// TestDequeueEmpty validates the Dequeue functionality when empty.
 func TestDequeueEmpty(t *testing.T) {
 	t.Log("Given the need to test Dequeue functionality for being empty.")
 	{
 		const items = 5
-		t.Logf("\tTest 0:\tWhen enqueing %d items", items)
+		t.Logf("\tTest 0:\tWhen enqueuing %d items", items)
 		{
 			q, err := queue.New(items)
 			if err != nil {

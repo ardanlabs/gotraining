@@ -54,7 +54,7 @@ func main() {
 	}
 
 	// Exception example: Using pointer semantics
-	// for a collectoin of strings.
+	// for a collection of strings.
 	keys := make([]string, 10)
 	for i := range keys {
 		keys[i] = func() string { return "key-gen" }()

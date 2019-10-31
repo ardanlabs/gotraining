@@ -87,7 +87,7 @@ func process(mdFile string) error {
 			log.Fatalf("ERROR: Generating Link Title[%s] ScrFile[%s] : %v", title, srcFile, err)
 		}
 
-		// Generate the link information to replace the existing link infomation
+		// Generate the link information to replace the existing link information
 		// in the markdown file.
 		l := fmt.Sprintf("[%s](%s) ([Go Playground](%s))", title, srcFile, playLink)
 		log.Println("UPDATE:", l)

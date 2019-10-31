@@ -74,7 +74,7 @@ type CachingFeed struct {
 	// TODO embed *Feed and add a field for a map[string]Document.
 }
 
-// NewCachingFeed initalizes a CachingFeed for use.
+// NewCachingFeed initializes a CachingFeed for use.
 func NewCachingFeed(f *Feed) *CachingFeed {
 
 	// TODO create a CachingFeed with an initialized map and embedded feed.

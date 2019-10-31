@@ -38,7 +38,7 @@ type (
 		CurrencyCode string `json:"currency_code"`
 		TimeZone     string `json:"time_zone"`
 		NumberFormat struct {
-			DecimalSaparator  string `json:"decimal_separator"`
+			DecimalSeparator  string `json:"decimal_separator"`
 			GroupingSeparator string `json:"grouping_separator"`
 			GroupPattern      string `json:"group_pattern"`
 		} `json:"number_format"`

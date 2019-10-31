@@ -55,7 +55,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	// Start listening for local traffic on port 0 which tells the OS to pick a
-	// random open port. We start the listener seperately from the server so we
+	// random open port. We start the listener separately from the server so we
 	// can report the listener's address.
 	listener, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
