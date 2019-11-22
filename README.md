@@ -56,6 +56,8 @@ _**Articles**_
 _**Video**_  
 [Training Within The Go Community (2019)](https://www.youtube.com/watch?v=PSR1twjzzAM&feature=youtu.be)  
 
+[GopherCon Australia (2019) - Modules](https://www.youtube.com/watch?v=MVxbVR_6Tac)  
+[Golab (2019) - You Want To Build a Web Service?](https://www.youtube.com/watch?v=IV0wrVb31Pg)  
 [GopherCon Singapore (2019) - Garbage Collection Semantics](https://www.youtube.com/watch?v=q4HoWwdZUHs)  
 [GopherCon India (2019) - Channel Semantics](https://www.youtube.com/watch?v=AHAf1Xfr_HE)  
 [GoWayFest Minsk (2018) - Profiling Web Apps](https://www.youtube.com/watch?v=-GBMFPegqgw)  
