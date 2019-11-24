@@ -46,7 +46,7 @@ Example shows how to use reflection to decode an integer.
 ### Exercise 1
 Declare a struct type that represents a request for a customer invoice. Include a CustomerID and InvoiceID field. Define tags that can be used to validate the request. Define tags that specify both the length and range for the ID to be valid. Declare a function named validate that accepts values of any type and processes the tags. Display the results of the validation.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/3kcRgtNZe9Q)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/kD9nQMYjPI5))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/yUhGiGNC23V)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/ZgxnHRIe2M8))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

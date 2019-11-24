@@ -28,7 +28,7 @@ Embedding types provide the final piece of sharing and reusing state and behavio
 
 Copy the code from the template. Add a new type CachingFeed which embeds Feed and overrides the Fetch method.
 
-[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/kdHgALCIPIs)) | 
-[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/FbvPJoQc4In))
+[Template](exercises/template1/template1.go) ([Go Playground](https://play.golang.org/p/_SnIBh3H-0O)) | 
+[Answer](exercises/exercise1/exercise1.go) ([Go Playground](https://play.golang.org/p/yHFpf7QYtnc))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
