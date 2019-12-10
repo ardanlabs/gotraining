@@ -5,7 +5,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### Books
 
 [Go In Action](https://www.manning.com/books/go-in-action) - Kennedy, Ketelsen, St. Martin  
-[Learn Go](https://www.manning.com/books/learn-go) - Nathan Youngman
+[Get Programming with Go](https://www.manning.com/books/get-programming-with-go) - Nathan Youngman, Roger Peppé   
+[The Go Programming Language](https://www.gopl.io/) - Alan Donovan, Brian Kernighan  
+[Go Programming Blueprints](https://github.com/matryer/goblueprints) - Mat Ryer  
+[Mastering Go](https://www.packtpub.com/eu/programming/mastering-go-second-edition) - Mihalis Tsoukalos  
 
 ### Blogs
 
@@ -231,7 +234,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
 [Divide By Zero](https://www.hillelwayne.com/post/divide-by-zero/) - Hillel Wayne  
 [Secrecy, Authentication, and Public Key Systems](http://www.merkle.com/papers/Thesis1979.pdf) - Ralph Merkle  
-[Tales From The Lunar Module Guidance Computer](https://www.doneyles.com/LM/Tales.html) -- Don Eyles  
+[Tales From The Lunar Module Guidance Computer](https://www.doneyles.com/LM/Tales.html) - Don Eyles  
+[Is Self-Orientation Killing Your Trustworthiness](https://trustedadvisor.com/trustmatters/is-self-orientation-killing-your-trustworthiness) - Charles H. Green  
 
 ### Must Read
 
@@ -346,7 +350,8 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
-[Go 1.12 Release Notes](https://golang.org/doc/go1.12) - 2019/02/25
+[Go 1.13 Release Notes](https://golang.org/doc/go1.13) - 2019/09/03  
+[Go 1.12 Release Notes](https://golang.org/doc/go1.12) - 2019/02/25  
 [Go 1.11 Release Notes](https://golang.org/doc/go1.11) - 2018/08/24  
 [Go 1.10 Release Notes](https://golang.org/doc/go1.10) - 2018/02/16  
 [Go 1.09 Release Notes](https://golang.org/doc/go1.9) - 2017/08/24  
