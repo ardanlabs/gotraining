@@ -134,6 +134,19 @@ _**Podcasts**_
 
 If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
 
+### 2020
+
+**Bill Kennedy**  
+```
+Date                Location              Venue               Type         Type             Url
+================================================================================================================================================
+January(14-16)      Carpinteria, CA       Procore             Corporate    Go (3 day)
+January(21-23)      San Jose, CA          Paypal              Corporate    Go (3 day)
+January(27-29)      Charlotte, NC         Red Ventures        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-charlotte-nc-usa-january-2020-tickets-80562000111
+April(22-26)        Berlin, Germany       GopherCon EU        Conference   Service (1 day)  https://gophercon.berlin/
+June(22-25)         Orlando, FL           GopherCon USA       Conference   Service (1 day)  https://www.gophercon.com/
+```
+
 ### 2019
 
 **Bill Kennedy**  
@@ -176,14 +189,14 @@ November(11-13)     Seattle, WA           Outreach            Corporate    Go (3
 November(15)        San Francisco, CA     QCON                Conference   Service (1 day)  https://qconsf.com//
 November(18-20)     London, England       Flyt                Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-advanced-ultimate-go-training-london-november-2019-tickets-72938134925
 December(03-05)     San Jose, CA          KLA                 Corporate    Go (3 day)
-December(10-12)     San Jose, CA          Paypal              Corporate    Go (3 day)
-December(16-18)     San Francisco, CA     Procore             Corporate    Go (3 day)
+December(9-10)      Mountain View, CA     Khan Academy        Corporate    Go (3 day)
 ```
 
 ### Past Events
 
 Look at how busy we have been training thousands of developers in Go over the past five years.
 
+		2019 : 65 Events
 		2018 : 60 Events
 		2017 : 40 Events 
 		2016 : 37 Events  
@@ -224,6 +237,16 @@ Please check out this page of [important reading](reading/README.md). You will f
 
 The following is a set of tasks that can be done prior to showing up for class.  We will also do this in class if anyone has not completed it.  However, the more attendees that complete this ahead of time the more time we have to cover additional training material.
 
+### Prep Work
+
+**Reading Material**  
+http://go.dev/   
+https://www.ardanlabs.com/blog/
+
+**Exercises**  
+https://tour.golang.org/welcome/1  
+https://gophercises.com/
+
 ### Joining the Go Slack Community
 
 We use a slack channel to share links, code, and examples during the training.  This is free.  This is also the same slack community you will use after training to ask for help and interact with may Go experts around the world in the community.
@@ -245,26 +268,12 @@ https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html
 https://code.visualstudio.com/Updates  
 https://github.com/microsoft/vscode-go
 
-**Sublime**  
-http://www.sublimetext.com/  
-https://github.com/DisposaBoy/GoSublime  
-http://www.wolfe.id.au/2015/03/05/using-sublime-text-for-go-development/
-
 **VIM**  
 http://www.vim.org/download.php  
 http://farazdagi.com/blog/2015/vim-as-golang-ide/
 
-**Atom**  
-https://atom.io/  
-https://github.com/joefitzgerald/go-plus
-
-**LiteIDE**  
-http://sourceforge.net/projects/liteide/files/
-
-**Emacs**  
-https://github.com/creack/dotfiles
-
-For a full list of editors, see the wiki: https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins
+**Goland**  
+https://www.jetbrains.com/go/
 
 ### Installing the Training Material
 
@@ -276,16 +285,6 @@ git clone https://github.com/ardanlabs/gotraining.git
 ```
 
 *NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
-
-## Starter Material
-  
-http://golang.org/  
-https://tour.golang.org/welcome/1  
-https://www.ardanlabs.com/blog/
-
-## Go Get The Training Material
-
-    go get github.com/ardanlabs/gotraining
 
 ## Twitter
 
