@@ -202,6 +202,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Different CPU attack](https://cpu.fail)  
 [An analysis of side-channels and speculative execution](https://arxiv.org/pdf/1902.05178.pdf) - White Paper  
 [ Hiding Malware in Speculative Execution](https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_02B-5_Wampler_paper.pdf) - White Paper  
+[Speculation & leakage: Timing side channels & multi-tenant computing (SEC355)](https://www.youtube.com/watch?v=kQ4H6XO-iao) - Eric Brandwine  
 
 ### Go Assembly
 
