@@ -143,7 +143,8 @@ Date                Location              Venue               Type         Type 
 January(14-16)      Carpinteria, CA       Procore             Corporate    Go (3 day)
 January(21-23)      San Jose, CA          Paypal              Corporate    Go (3 day)
 January(27-29)      Charlotte, NC         Red Ventures        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-charlotte-nc-usa-january-2020-tickets-80562000111
-April(22-26)        Berlin, Germany       GopherCon EU        Conference   Service (1 day)  https://gophercon.berlin/
+March(06)           San Francisco, CA     QCON                Conference   Service (1 day)  https://qconsf.com
+April(22-26)        Berlin, Germany       GopherCon EU        Conference   Service (1 day)  https://gophercon.berlin
 ```
 
 ### 2019

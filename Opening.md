@@ -12,7 +12,8 @@ Slack:    [Slack](https://invite.slack.golangbridge.org)
 
 ## Extra Links  
 [Installing](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html)  
-[Video](http://education.ardanlabs.com)
+[Video](http://education.ardanlabs.com)  
+[Design Philosophy](https://github.com/ardanlabs/gotraining/tree/master/topics/go#design-guidelines)
 
 ## Tooling Installs
 Graphviz: https://www.graphviz.org/  
