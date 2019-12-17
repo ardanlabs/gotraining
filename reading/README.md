@@ -62,12 +62,6 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Contribution Guidelines](https://golang.org/doc/contribute.html) - Go Documentation  
 [CONTRIBUTING: The Talk!](https://github.com/matloob/contributing/blob/master/contributing.md) - Michael Matloob  
 
-### Go Modules
-
-[Go Wiki on Modules](https://github.com/golang/go/wiki/Modules) - Community  
-[Go Modules](https://systemdump.io/posts/2018-07-22-go-modules) - systemdump  
-[A Gentle Introduction To Go Modules](https://ukiahsmith.com/blog/a-gentle-introduction-to-golang-modules/) - Ukiah Smith  
-
 ### Standard Library
 
 [io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#) - Ben Johnson  
@@ -85,8 +79,17 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Logs and Metrics](https://medium.com/@cindysridharan/logs-and-metrics-6d34d3026e38) - Cindy Sridharan  
 [The deep synergy between testability and good design](https://www.youtube.com/watch?reload=9&feature=share&v=4cVZvoFGJTU&app=desktop) - Michael Feathers  
 
-### Vendoring / Versioning / Modules
+### Modules
 
+[Go & Versioning](https://research.swtch.com/vgo) - Russ Cox  
+[Using Go Modules](https://blog.golang.org/using-go-modules) - Go Team  
+[Modules Part 01: Why And What](https://www.ardanlabs.com/blog/2019/10/modules-01-why-and-what.html) - William Kennedy  
+[Modules Part 02: Projects, Dependencies and Gopls](https://www.ardanlabs.com/blog/2019/12/modules-02-projects-dependencies-gopls.html) - William Kennedy  
+[Go Wiki on Modules](https://github.com/golang/go/wiki/Modules) - Community  
+[Go Modules](https://systemdump.io/posts/2018-07-22-go-modules) - systemdump  
+[A Gentle Introduction To Go Modules](https://ukiahsmith.com/blog/a-gentle-introduction-to-golang-modules/) - Ukiah Smith  
+
+### Vendoring / Versioning
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)  
 [The End of Software Versions](http://hintjens.com/blog:85) - Pieter Hintjens  
 [Transparent Logs for Skeptical Clients](https://research.swtch.com/tlog) - Russ Cox  
