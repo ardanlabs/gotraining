@@ -18,5 +18,4 @@ Slack:    [Slack](https://invite.slack.golangbridge.org)
 ## Tooling Installs
 Graphviz: https://www.graphviz.org/  
 go get -u github.com/rakyll/hey   : Or use ab  
-go get -u github.com/ardanlabs/gotraining  
 Latest Version of Go: 1.13   
