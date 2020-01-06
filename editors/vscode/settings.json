@@ -3,19 +3,28 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
 
-    "go.buildOnSave": "package",
-    "go.lintOnSave": "package",
     "go.lintTool": "golint",
-    "go.vetOnSave": "package",
-    "go.lintFlags": [],
-    "go.vetFlags": [],
-    "go.coverOnSave": false,
-    "go.useCodeSnippetsOnFunctionSuggest": false,
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/bill/code/go",
-    "go.formatTool": "goimports",
-    "go.gocodeAutoBuild": true,
     "go.enableCodeLens": {"references": false, "runtest": false},
+
+    "go.useLanguageServer": true,
+    "[go]": {
+        "editor.snippetSuggestions": "none",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },
+    "gopls": {
+        "usePlaceholders": true, // add parameter placeholders when completing a function
+        "completeUnimported": true, // autocomplete unimported packages
+        // "watchChangedFiles": false,  // watch file changes outside of the editor
+        "deepCompletion": true,     // enable deep completion
+    },
+    "go.languageServerFlags": [
+        "-rpc.trace", // for more detailed debug logging
+    ],
 
     "editor.fontSize": 14,
     "editor.formatOnType": true,
@@ -43,5 +52,7 @@
     "extensions.ignoreRecommendations": false,
     "liveshare.featureSet": "insiders",
     "workbench.colorTheme": "Zenburn",
-    "C_Cpp.updateChannel": "Insiders"
+    "C_Cpp.updateChannel": "Insiders",
+    "go.coverOnTestPackage": false,
+    "liveshare.anonymousGuestApproval": "accept"
 }
