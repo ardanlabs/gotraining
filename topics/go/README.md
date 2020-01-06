@@ -261,7 +261,8 @@ _"Instability is a drag on innovation." - Yehudah Katz_
 [Design Philosophy On Integrity](https://www.ardanlabs.com/blog/2017/02/design-philosophy-on-integrity.html) - William Kennedy  
 [Ratio of bugs per line of code](https://www.mayerdan.com/ruby/2012/11/11/bugs-per-line-of-code-ratio) - Dan Mayer  
 [Masterminds of Programming](http://dl.acm.org/citation.cfm?id=1592983) - Federico Biancuzzi and Shane Warden  
-[Developing Software The Right Way, with Intent and Carefulness](http://ipengineer.net/2017/04/developing-software-the-right-way-with-intent-and-carefulness) - David Gee  
+[Developing Software The Right Way, with Intent and Carefulness](http://ipengineer.net/2017/04/developing-software-the-right-way-with-intent-and-carefulness) - David Gee   
+[What bugs live in the Cloud](https://www.usenix.org/system/files/login/articles/login_aug15_08_gunawi.pdf) - usenix.org
 
 ---
 
