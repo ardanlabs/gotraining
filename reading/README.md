@@ -17,7 +17,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Go Blog](https://blog.golang.org) - Language Team  
 [Ukiah Smith](https://ukiahsmith.com) - Ukiah Smith  
 [Mechanical Sympathy](https://mechanical-sympathy.blogspot.com) - Martin Thompson  
-[Go Documentation References](https://golang.org/doc/#references) - Language Team
+[Go Documentation References](https://golang.org/doc/#references) - Language Team  
+[Vincent Blanchon](https://medium.com/@blanchon.vincent) - Vincent Blanchon  
 
 ### Interviews
 
@@ -158,6 +159,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Behavior Of Channels](https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html) - William Kennedy  
 [Scheduling In Go - Part I](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html) - William Kennedy  
 [Scheduling In Go - Part II](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) - William Kennedy  
+[Go advanced concurrency patterns: part 3 (channels)](https://blogtitle.github.io/go-advanced-concurrency-patterns-part-3-channels/) - Roberto Clapis  
 
 ### Buffer Bloat - 2011
 
@@ -244,7 +246,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### Must Read
 
 [PRinty# C with ABC](http://www.cs.cmu.edu/~tom7/abc/paper.pdf) - Dr. Tom Murphy VII, Ph.D  
-
+[I coached 101 CEOs, founders, VCs and other executives in 2019: These are the biggest takeaways](https://leowid.com/2019-2) - Leo Widrich  
 
 ### Go 2
 
@@ -308,6 +310,7 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 [Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
 [proposal: runtime: non-cooperative goroutine preemption](https://github.com/golang/go/issues/24543) - Austin Clements  
 [Go scheduler: Implementing language with lightweight concurrency](https://www.youtube.com/watch?v=-K11rY57K7k&app=desktop) - Dmitry Vyukov  
+[Work-Stealing in Go Scheduler](https://medium.com/a-journey-with-go/go-work-stealing-in-go-scheduler-d439231be64d?) - Vincent Blanchon  
 
 #### Escape Analysis and Inlining
 
@@ -340,6 +343,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Runtime Hacking](https://github.com/golang/go/blob/master/src/runtime/HACKING.md)  
 [Timer implementation](https://github.com/golang/go/issues/25471#issuecomment-391906366) - Ian Lance Taylor  
 [The Go low-level calling convention on x86-64](https://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
+[Memory Management](http://virtuallyrandom.com/memory-management-an-introduction/) - Unknown  
 
 ## Hardware
 
