@@ -190,6 +190,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Queen Does Not Rule](https://aeon.co/essays/how-ant-societies-point-to-radical-possibilities-for-humans) - Deborah M Gordon  
 [Load Balancing is Impossible](https://www.youtube.com/watch?v=kpvbOzHUakA) - Tyler McMullen  
 [Dapper: Distributed Tracing](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf) - Google  
+[Authentication in Distributed Systems: Theory and Practice](https://www.microsoft.com/en-us/research/publication/authentication-in-distributed-systems-theory-and-practice/) - Microsoft  
 
 ### HTTP and Timeouts
 
@@ -303,6 +304,7 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
 [Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
+[Defer Proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/34481-opencoded-defers.md) - Go Team  
 
 #### Scheduler
 
