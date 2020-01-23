@@ -141,10 +141,15 @@ If you are interested in holding an event in your area please let me know. We wi
 Date                Location              Venue               Type         Type             Url
 ================================================================================================================================================
 January(14-16)      Carpinteria, CA       Procore             Corporate    Go (3 day)
-January(21-23)      San Jose, CA          Paypal              Corporate    Go (3 day)
 January(27-29)      Charlotte, NC         Red Ventures        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-charlotte-nc-usa-january-2020-tickets-80562000111
+February(11-13)     San Jose, CA          Paypal              Corporate    Go (3 day)
+February(25-27)     Tel Aviv, Israel      Zip Recruiter       Corporate    Go (3 day)
+March(03-05)        Athens, Greece        Inaccess            Corporate    Go (3 day)
 March(06)           London, England       QCON                Conference   Service (1 day)  https://qconlondon.com/
+March(10-12)        Tampa, FL             Connect Wise        Corporate    Go (3 day)       - Pending
+March(17-19)        Miami, FL             GE Digital          Corporate    Go (3 day)       - Pending
 April(22-26)        Berlin, Germany       GopherCon EU        Conference   Service (1 day)  https://gophercon.berlin
+May(05-07)          Seattle, WA           Outreach            Corporate    Go (3 day)
 ```
 
 ### 2019
