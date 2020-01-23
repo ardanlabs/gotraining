@@ -126,6 +126,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
 [Focus On Being Precise](https://www.ardanlabs.com/blog/2018/02/focus-on-being-precise.html) - William Kennedy  
 [Design, Composition and Performance](https://www.infoq.com/presentations/Design-Composition-Performance) - Rich Hickey  
+[Things That Matter](https://www.youtube.com/watch?v=RT46MpK39rQ) - Scott Meyers  
 
 ### Error Handling
 
@@ -308,6 +309,7 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 
 #### Scheduler
 
+[Go scheduler: Implementing language with lightweight concurrency](https://www.youtube.com/watch?v=-K11rY57K7k) - Dmitry Vyukov  
 [How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
 [Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
 [proposal: runtime: non-cooperative goroutine preemption](https://github.com/golang/go/issues/24543) - Austin Clements  
