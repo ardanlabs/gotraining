@@ -244,6 +244,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Secrecy, Authentication, and Public Key Systems](http://www.merkle.com/papers/Thesis1979.pdf) - Ralph Merkle  
 [Tales From The Lunar Module Guidance Computer](https://www.doneyles.com/LM/Tales.html) - Don Eyles  
 [Is Self-Orientation Killing Your Trustworthiness](https://trustedadvisor.com/trustmatters/is-self-orientation-killing-your-trustworthiness) - Charles H. Green  
+[Speed Is Found In The Minds of People](https://www.youtube.com/watch?v=FJJTYQYB1JQ) - Andrei Alexandrescu  
 
 ### Must Read
 
