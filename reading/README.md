@@ -302,6 +302,9 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 
 This content can be found under [pointers](../topics/go/language/pointers). We feel this content is so important it has been moved out to this general materials page.
 
+#### Linker
+[Building a better Go linker](https://docs.google.com/document/d/1D13QhciikbdLtaI67U6Ble5d_1nsI4befEd6_k1z91U/edit) - Austin Clements  
+
 #### Stacks
 
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
