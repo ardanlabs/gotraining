@@ -9,6 +9,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Go Programming Language](https://www.gopl.io/) - Alan Donovan, Brian Kernighan  
 [Go Programming Blueprints](https://github.com/matryer/goblueprints) - Mat Ryer  
 [Mastering Go](https://www.packtpub.com/eu/programming/mastering-go-second-edition) - Mihalis Tsoukalos  
+[Head First Go](http://shop.oreilly.com/product/0636920054931.do) - Jay McGavren  
 
 ### Blogs
 
