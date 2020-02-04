@@ -21,7 +21,7 @@ type user struct {
 
 func main() {
 
-	// Create a value of the conrete type user.
+	// Create a value of the concrete type user.
 	u := user{
 		name:     "Cindy",
 		age:      27,

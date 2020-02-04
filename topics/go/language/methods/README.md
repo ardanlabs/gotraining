@@ -21,7 +21,7 @@ _"Methods are valid when it is practical or reasonable for a piece of data to ex
 
 ## Code Review
 
-[Declare and receiver behavior](example1/example1.go) ([Go Playground](https://play.golang.org/p/9ZBYDPHs_pT))  
+[Declare and receiver behavior](example1/example1.go) ([Go Playground](https://play.golang.org/p/-rK206XfGaV))  
 [Value and Pointer semantics](example5/example5.go) ([Go Playground](https://play.golang.org/p/QmKfZAnZ6FQ))  
 [Named typed methods](example2/example2.go) ([Go Playground](https://play.golang.org/p/9g1PIjyA2YQ))  
 [Function/Method variables](example3/example3.go) ([Go Playground](https://play.golang.org/p/iRkiczvcHiH))  

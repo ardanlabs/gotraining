@@ -1,7 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Understanding your workload is critically important in undserstanding
+// Understanding your workload is critically important in understanding
 // if something can be made concurrent and how complex it is to perform.
 package main
 

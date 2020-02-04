@@ -2,7 +2,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Sample program to show a more complicated race condition using
-// an interface value. This produces a read to an inteface value after
+// an interface value. This produces a read to an interface value after
 // a partial write.
 package main
 

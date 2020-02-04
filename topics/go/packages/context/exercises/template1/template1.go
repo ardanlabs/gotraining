@@ -32,7 +32,7 @@ func routes() {
 // both timeouts and state.
 func findUser(rw http.ResponseWriter, r *http.Request) {
 
-	// Create a context that timesout in fifty milliseconds.
+	// Create a context that timeouts in fifty milliseconds.
 
 	// Defer the call to cancel.
 

@@ -4,7 +4,7 @@ Encoding is the process or marshaling or unmarshaling data into different forms.
 
 ## Notes
 
-* Support for Decoding and Encoding JSON and XML are provided by the standard libary.
+* Support for Decoding and Encoding JSON and XML are provided by the standard library.
 * This package gets better and better with every release.
 
 ## Links
@@ -13,7 +13,7 @@ Encoding is the process or marshaling or unmarshaling data into different forms.
 
 ## Code Review
 
-[Unmarshal JSON documents](example1/example1.go) ([Go Playground](https://play.golang.org/p/Wvfx1eIBDT0))  
+[Unmarshal JSON documents](example1/example1.go) ([Go Playground](https://play.golang.org/p/hCWu2AbC9KP))  
 [Unmarshal JSON files](example2/example2.go) ([Go Playground](https://play.golang.org/p/g5-AUzfbcUS))  
 [Marshal a user defined type](example3/example3.go) ([Go Playground](https://play.golang.org/p/B01KAwC-rpX))  
 [Custom Marshaler and Unmarshler](example4/example4.go) ([Go Playground](https://play.golang.org/p/SolgBvtnBUr))

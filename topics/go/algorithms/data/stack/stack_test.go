@@ -10,7 +10,7 @@ import (
 const succeed = "\u2713"
 const failed = "\u2717"
 
-// TestPush vaidates the Push functionality.
+// TestPush validates the Push functionality.
 func TestPush(t *testing.T) {
 	t.Log("Given the need to test Push functionality.")
 	{
@@ -51,7 +51,7 @@ func TestPush(t *testing.T) {
 	}
 }
 
-// TestPop vaidates the Pop functionality.
+// TestPop validates the Pop functionality.
 func TestPop(t *testing.T) {
 	t.Log("Given the need to test Pop functionality.")
 	{
@@ -101,7 +101,7 @@ func TestPop(t *testing.T) {
 	}
 }
 
-// TestPeek vaidates the Peek functionality.
+// TestPeek validates the Peek functionality.
 func TestPeek(t *testing.T) {
 	t.Log("Given the need to test Peek functionality.")
 	{

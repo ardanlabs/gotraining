@@ -48,7 +48,7 @@ type CachingFeed struct {
 	*Feed
 }
 
-// NewCachingFeed initalizes a CachingFeed for use.
+// NewCachingFeed initializes a CachingFeed for use.
 func NewCachingFeed(f *Feed) *CachingFeed {
 	return &CachingFeed{
 		docs: make(map[string]Document),

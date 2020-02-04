@@ -13,7 +13,7 @@ import (
 	"sync"
 )
 
-// temporary is declared to test for the existance of the method coming
+// temporary is declared to test for the existence of the method coming
 // from the net package.
 type temporary interface {
 	Temporary() bool
@@ -35,7 +35,7 @@ type client struct {
 	conn   net.Conn
 }
 
-// read waits for message and sends it to the chatroom for procesing.
+// read waits for message and sends it to the chatroom for processing.
 func (c *client) read() {
 	for {
 

@@ -5,7 +5,7 @@ import (
 	"math/bits"
 )
 
-// DecodeVarint takes a varaible length VLQ based integer and
+// DecodeVarint takes a variable length VLQ based integer and
 // decodes it into a 32 bit integer.
 func DecodeVarint(input []byte) (uint32, error) {
 	const lastBitSet = 0x80 // 1000 0000

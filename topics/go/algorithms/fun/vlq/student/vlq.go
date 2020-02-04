@@ -1,6 +1,6 @@
 package vlq
 
-// DecodeVarint takes a varaible length VLQ based integer and
+// DecodeVarint takes a variable length VLQ based integer and
 // decodes it into a 32 bit integer.
 func DecodeVarint(input []byte) (uint32, error) {
 	return 0, nil
