@@ -284,6 +284,7 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 
 #### Data-Oriented Design
 
+[Building a Data-Oriented Future](https://www.youtube.com/watch?v=u8B3j8rqYMw) - Mike Acton  
 [Data-Oriented Design and C++](https://www.youtube.com/watch?v=rX0ItVEVjHc) - Mike Acton  
 [Efficiency with Algorithms, Performance with Data Structures](https://www.youtube.com/watch?v=fHNmRkzxHWs) - Chandler Carruth  
 [Taming the performance Beast](https://www.youtube.com/watch?v=LrVi9LHP8Bk) - Klaus Iglberger  
