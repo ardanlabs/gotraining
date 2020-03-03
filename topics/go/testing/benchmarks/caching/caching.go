@@ -9,8 +9,8 @@ import "fmt"
 
 // Create a square matrix of 2 meg by 2 meg.
 const (
-	rows = 2 * 1024
-	cols = 2 * 1024
+	rows = 4 * 1024
+	cols = 4 * 1024
 )
 
 // matrix represents a matrix with a large number of
