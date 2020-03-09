@@ -1,7 +1,10 @@
 package main
 
-func main() {
+import "fmt"
 
+func main() {
+	// Run ReverseString
+	fmt.Println(ReverseString("Hello World"))
 }
 
 func ReverseString(str string) string {
