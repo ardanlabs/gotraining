@@ -55,6 +55,6 @@ _Note that goroutines in "IO wait" state do NOT consume an OS thread. They are p
 
 ## Code Review
  
-[Profiling Test](trace.go) ([Go Playground](https://play.golang.org/p/AbAfYByFys0))
+[Profiling Test](trace.go) ([Go Playground](https://play.golang.org/p/nAiHEEbhrwo))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
