@@ -6,7 +6,6 @@ import (
 
 func main() {
 
-	// Run the reverse string function.
 	fmt.Println(ReverseString("Hello World"))
 }
 
@@ -19,9 +18,9 @@ func ReverseString(str string) string {
 	frontIndex := 0
 
 	// Here  we create int that will be a pointer to the end of the str_table.
-	 BackIndex := len(str_table) - 1
+	BackIndex := len(str_table) - 1
 
-	 // While frontIndex is less than BackIndex.
+	// While frontIndex is less than BackIndex.
 	for frontIndex < BackIndex {
 
 		// Here we swap the values of the slice at the str_table[frontIndex] and str_table[BackIndex].
