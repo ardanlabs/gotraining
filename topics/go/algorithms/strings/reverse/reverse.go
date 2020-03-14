@@ -3,7 +3,7 @@ package strings
 func ReverseString(str string) string {
 
 	// Convert the input string into slice of runes for processing.
-	// A rune is a unicode code-points.
+	// A rune represent a code point in the UTF-8 character set.
 	runes := []rune(str)
 
 	// Create an index that will traverse the collection of
@@ -17,7 +17,7 @@ func ReverseString(str string) string {
 	// Keep swapping runes until the two indexes meet in the middle.
 	for beg < end {
 
-		// Swap the rune.
+		// Swap the position of these two rune’s
 		r := runes[beg]
 		runes[beg] = runes[end]
 		runes[end] = r
