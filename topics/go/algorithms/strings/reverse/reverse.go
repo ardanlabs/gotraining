@@ -2,34 +2,29 @@ package strings
 
 func ReverseString(str string) string {
 
-	// Here we create a slice of codePoints.
-	codePoints := []rune(str)
+	// Here we create a slice of r.
+	r := []rune(str)
 
-	// Here we create int that will be a pointer to the front of the codePoints.
+	// Here we create int that will be a pointer to the front of the r.
 	var beg int
 
-	// Here  we create int that will be a pointer to the end of the codePoints.
-	end := len(codePoints) - 1
+	// Here  we create int that will be a pointer to the end of the r.
+	end := len(r) - 1
 
 	// While there are still code points to check.
 	for beg < end {
 
-		// Swap the code points by:
+		// Swap the code point.
+		c := r[beg]
 
-		// 1. Create a code point with the value at index beg.
-		c := codePoints[beg]
+		r[beg] = r[end]
 
-		// 2. Swap the code point at index beg with the code point at index end.
-		codePoints[beg] = codePoints[end]
+		r[end] = c
 
-		// 3. Swap the code point at index end with c.
-		codePoints[end] = c
+		beg, end = beg+1, end-1
 
-		beg = beg + 1
-
-		end = end - 1
 	}
 
 	// Here we return a new string in reverse order.
-	return string(codePoints)
+	return string(r)
 }
