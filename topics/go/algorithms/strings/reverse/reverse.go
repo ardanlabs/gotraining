@@ -1,13 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
-
-func main() {
-
-	fmt.Println(ReverseString("Hello World"))
-}
+package strings
 
 func ReverseString(str string) string {
 
@@ -15,25 +6,32 @@ func ReverseString(str string) string {
 	codePoints := []rune(str)
 
 	// Here we create int that will be a pointer to the front of the codePoints.
-	var fontCodePoint int
+	var beg int
 
 	// Here  we create int that will be a pointer to the end of the codePoints.
-	backCodePoint := len(codePoints) - 1
+	end := len(codePoints) - 1
 
-	// While fontCodePoint is less than backCodePoint.
-	for fontCodePoint < backCodePoint {
+	// While there are still code points to check.
+	for beg < end {
 
-		// Here we swap the values of the slice at the codePoints[fontCodePoint] and codePoints[backCodePoint].
-		codePoints[fontCodePoint], codePoints[backCodePoint] = codePoints[backCodePoint], codePoints[fontCodePoint]
+		// Swap the code points by:
 
-		// Here we increase the value of fontCodePoint by 1.
-		fontCodePoint = fontCodePoint + 1
+		// 1. Create a code point with the value at index beg.
+		c := codePoints[beg]
 
-		// Here we decrease the value of backCodePoint by 1.
-		backCodePoint = backCodePoint - 1
+		// 2. Swap the code point at index beg with the code point at index end.
+		codePoints[beg] = codePoints[end]
+
+		// 3. Swap the code point at index end with c.
+		codePoints[end] = c
+
+		// Here we increase the value of beg by 1.
+		beg = beg + 1
+
+		// Here we decrease the value of end by 1.
+		end = end - 1
 	}
 
 	// Here we return a new string in reverse order.
 	return string(codePoints)
 }
-
