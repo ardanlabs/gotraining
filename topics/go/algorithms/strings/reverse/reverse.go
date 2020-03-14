@@ -17,7 +17,7 @@ func ReverseString(str string) string {
 	// Keep swapping runes until the two indexes meet in the middle.
 	for beg < end {
 
-		// Swap the position of these two rune’s
+		// Swap the position of these two rune’s.
 		r := runes[beg]
 		runes[beg] = runes[end]
 		runes[end] = r
