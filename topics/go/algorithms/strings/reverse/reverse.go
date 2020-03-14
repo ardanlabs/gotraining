@@ -21,7 +21,7 @@ func ReverseString(str string) string {
 
 		// Move the indexes closer to each other working towards the middle of the collection.
 		beg = beg + 1
-		end = end + 1
+		end = end - 1
 
 	}
 
