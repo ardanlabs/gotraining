@@ -2,7 +2,7 @@ package strings
 
 func ReverseString(str string) string {
 
-	// Here we create a slice of r.
+	// Here we create a slice of runes.
 	r := []rune(str)
 
 	// Here we create int that will be a pointer to the front of the r.
