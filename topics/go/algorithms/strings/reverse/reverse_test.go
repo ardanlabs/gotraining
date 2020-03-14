@@ -18,6 +18,7 @@ func TestReverseString(t *testing.T) {
 		{"odd-string-length", "Hello World", "dlroW olleH"},
 		{"even-string-length", "go", "og"},
 		{"chinese", "汉字", "字汉"},
+		{"two-runes", "é́́", "é́́"},
 	}
 
 	for _, tt := range revTests {
