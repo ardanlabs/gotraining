@@ -1,7 +1,7 @@
 package strings_test
 
 import (
-	"github.com/ardanlabs/gotraining/topics/go/algorithms/strings/reverse"
+	strings "github.com/ardanlabs/gotraining/topics/go/algorithms/strings/reverse"
 	"testing"
 )
 
@@ -10,18 +10,20 @@ const failed = "\u2717"
 
 func TestReverseString(t *testing.T) {
 
-	// Create string for testing.
-	str := "Hello World"
-
-	// Expected value of reverse string.
-	exp := "dlroW olleH"
-
-	res := strings.ReverseString(str)
-
-	// Test if result equals expected value.
-	if res != exp {
-		t.Logf("\t%s\tShould be able to reverse string.", failed)
-		t.Fatalf("\t\tGot %s, Expected %s.", res, exp)
+	revTests := []struct {
+		name   string
+		input  string
+		output string
+	}{
+		{"basic", "Hello World", "dlroW olleH"},
 	}
-	t.Logf("\t%s\tShould be able to reverse string.", succeed)
+
+	for _, tt := range revTests {
+		actual := strings.ReverseString(tt.input)
+		if actual != tt.output {
+			t.Logf("\t%s\tShould be able to reverse string: %s\n.", failed, tt.input)
+			t.Fatalf("\t\tGot %s, Expected %s.", actual, tt.output)
+		}
+		t.Logf("\t%s\tShould be able to reverse string.", succeed)
+	}
 }
