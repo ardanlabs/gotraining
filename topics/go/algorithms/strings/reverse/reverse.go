@@ -25,10 +25,8 @@ func ReverseString(str string) string {
 		// 3. Swap the code point at index end with c.
 		codePoints[end] = c
 
-		// Here we increase the value of beg by 1.
 		beg = beg + 1
 
-		// Here we decrease the value of end by 1.
 		end = end - 1
 	}
 
