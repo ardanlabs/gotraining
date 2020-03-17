@@ -1,3 +1,0 @@
-golint .
-go vet -all .
-gofmt -s -l .

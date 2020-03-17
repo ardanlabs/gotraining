@@ -69,9 +69,12 @@ type DataRanger interface {
 	DataRange() (xmin, xmax, ymin, ymax float64)
 }
 
+// orientation describes whether an axis is horizontal or vertical.
+type orientation byte
+
 const (
-	vertical   = true
-	horizontal = false
+	horizontal orientation = iota
+	vertical
 )
 
 // New returns a new plot with some reasonable

@@ -83,6 +83,7 @@ func loadMap(encodingFileStr string) (encList encListType, err error) {
 
 // getInfoFromTrueType returns information from a TrueType font
 func getInfoFromTrueType(fileStr string, msgWriter io.Writer, embed bool, encList encListType) (info fontInfoType, err error) {
+	info.Widths = make([]int, 256)
 	var ttf TtfType
 	ttf, err = TtfParse(fileStr)
 	if err != nil {
@@ -168,6 +169,7 @@ func segmentRead(r io.Reader) (s segmentType, err error) {
 
 // getInfoFromType1 return information from a Type1 font
 func getInfoFromType1(fileStr string, msgWriter io.Writer, embed bool, encList encListType) (info fontInfoType, err error) {
+	info.Widths = make([]int, 256)
 	if embed {
 		var f *os.File
 		f, err = os.Open(fileStr)

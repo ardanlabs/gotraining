@@ -20,6 +20,9 @@ Output goes to the specified io.Writer.
 ### Transforms ###
  
  translate, rotate, scale, skewX, skewY
+
+ ### Animation ###
+ animate, animateMotion, animateTranslate, animateRotate, animateScale, animateSkewX, animateSkewY
  
 ### Filter Effects 
  
@@ -138,6 +141,9 @@ A video describing how to use the package can be seen on YouTube at <http://www.
 * svg.go:		Library
 * newsvg:		Coding template command
 * svgdef:	Creates a SVG representation of the API
+* animate:  Animation demo
+* am: Animate motion demo
+* amt: Animate transformation demo
 * android:	The Android logo
 * bubtrail: Bubble trails
 * bulletgraph:	Bullet Graphs (via Stephen Few)
@@ -516,6 +522,44 @@ is used to specify inputs and results for filter effects
   <http://www.w3.org/TR/SVG11/pservers.html#RadialGradients>
   
   ![RadialGradient](http://farm2.static.flickr.com/1302/5187954065_7ddba7b819.jpg)
+
+### Animation ###
+
+	Animate(link, attr string, from, to int, duration float64, repeat int, s ...string)
+Animate animates the item referenced by the link, using the specified attribute
+The animation starts at coordinate from, terminates at to, and repeats as specified.
+Addtional attributes may be added as needed.
+<https://www.w3.org/TR/SVG11/animate.html#AnimateElement>
+
+	AnimateMotion(link, path string, duration float64, repeat int, s ...string) 
+AnimateMotion animates the referenced object ```link``` along the specified ```path```
+<https://www.w3.org/TR/SVG11/animate.html#AnimateMotionElement>
+
+	
+	AnimateTranslate(link string, fx, fy, tx, ty int, duration float64, repeat int, s ...string)
+AnimateTranslate animates the translation transformation (link refers to the object to animate, fx, fy are from coordinates, tx, ty are the to coordinates)
+<https://www.w3.org/TR/SVG11/animate.html#AnimateTransformElement>
+	
+	AnimateRotate(link string, fs, fc, fe, ts, tc, te int, duration float64, repeat int, s ...string)
+AnimateRotate animates the rotation transformation (link refers to the object to animate, f[s,c,e] are the from start, center, and end angles, t[s,c,e] are the 
+start, center, and end angles)
+<https://www.w3.org/TR/SVG11/animate.html#AnimateTransformElement>
+
+	
+	AnimateScale(link string, from, to, duration float64, repeat int, s ...string)
+AnimateScale animates the scale transformation (link refers to the object to animate, from and to specify the scaling factor)
+<https://www.w3.org/TR/SVG11/animate.html#AnimateTransformElement>
+
+	
+	AnimateSkewX(link string, from, to, duration float64, repeat int, s ...string)
+AnimateSkewX animates the skewX transformation ((link refers to the object to animate, from and to specify the skew angle)
+<https://www.w3.org/TR/SVG11/animate.html#AnimateTransformElement>
+
+	
+	AnimateSkewY(link string, from, to, duration float64, repeat int, s ...string)
+AnimateSkewY animates the skewY transformation (link refers to the object to animate, and from and to specify the skew angle)
+<https://www.w3.org/TR/SVG11/animate.html#AnimateTransformElement>
+
   
 ### Filter Effects ###
 
@@ -560,7 +604,7 @@ Standard reference: <http://www.w3.org/TR/SVG11/filters.html#feCompositeElement>
 
  	FeConvolveMatrix(fs Filterspec, matrix [9]int, s ...string)
 FeConvolveMatrix specifies a feConvolveMatrix filter primitive
-Standard referencd: <http://www.w3.org/TR/SVG11/filters.html#feConvolveMatrixElement>
+Standard reference: <http://www.w3.org/TR/SVG11/filters.html#feConvolveMatrixElement>
 
 
 	 FeDiffuseLighting(fs Filterspec, scale, constant float64, s ...string) 

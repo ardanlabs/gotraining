@@ -84,7 +84,18 @@ func (f *Fpdf) UseTemplateScaled(t Template, corner PointType, size SizeType) {
 	for _, tt := range t.Templates() {
 		f.templates[tt.ID()] = tt
 	}
+
+	// Create a list of existing image SHA-1 hashes.
+	existingImages := map[string]bool{}
+	for _, image := range f.images {
+		existingImages[image.i] = true
+	}
+
+	// Add each template image to $f, unless already present.
 	for name, ti := range t.Images() {
+		if _, found := existingImages[ti.i]; found {
+			continue
+		}
 		name = sprintf("t%s-%s", t.ID(), name)
 		f.images[name] = ti
 	}

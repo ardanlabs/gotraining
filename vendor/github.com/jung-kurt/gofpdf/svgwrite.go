@@ -29,8 +29,18 @@ func (f *Fpdf) SVGBasicWrite(sb *SVGBasicType, scale float64) {
 	var cx0, cy0, cx1, cy1 float64
 	var path []SVGBasicSegmentType
 	var seg SVGBasicSegmentType
+	var startX, startY float64
+	sval := func(origin float64, arg int) float64 {
+		return origin + scale*seg.Arg[arg]
+	}
+	xval := func(arg int) float64 {
+		return sval(originX, arg)
+	}
+	yval := func(arg int) float64 {
+		return sval(originY, arg)
+	}
 	val := func(arg int) (float64, float64) {
-		return originX + scale*seg.Arg[arg], originY + scale*seg.Arg[arg+1]
+		return xval(arg), yval(arg + 1)
 	}
 	for j := 0; j < len(sb.Segments) && f.Ok(); j++ {
 		path = sb.Segments[j]
@@ -39,6 +49,7 @@ func (f *Fpdf) SVGBasicWrite(sb *SVGBasicType, scale float64) {
 			switch seg.Cmd {
 			case 'M':
 				x, y = val(0)
+				startX, startY = x, y
 				f.SetXY(x, y)
 			case 'L':
 				newX, newY = val(0)
@@ -50,8 +61,22 @@ func (f *Fpdf) SVGBasicWrite(sb *SVGBasicType, scale float64) {
 				newX, newY = val(4)
 				f.CurveCubic(x, y, cx0, cy0, newX, newY, cx1, cy1, "D")
 				x, y = newX, newY
+			case 'Q':
+				cx0, cy0 = val(0)
+				newX, newY = val(2)
+				f.Curve(x, y, cx0, cy0, newX, newY, "D")
+				x, y = newX, newY
+			case 'H':
+				newX = xval(0)
+				f.Line(x, y, newX, y)
+				x = newX
+			case 'V':
+				newY = yval(0)
+				f.Line(x, y, x, newY)
+				y = newY
 			case 'Z':
-				f.Line(x, y, originX, originY)
+				f.Line(x, y, startX, startY)
+				x, y = startX, startY
 			default:
 				f.SetErrorf("Unexpected path command '%c'", seg.Cmd)
 			}

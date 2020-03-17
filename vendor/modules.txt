@@ -1,13 +1,13 @@
-# github.com/ajstarks/svgo v0.0.0-20180226025133-644b8db467af
+# github.com/ajstarks/svgo v0.0.0-20200204031535-0cbcf57ea1d8
 github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 github.com/braintree/manners
-# github.com/fogleman/gg v1.2.1-0.20190220221249-0403632d5b90
+# github.com/fogleman/gg v1.3.0
 github.com/fogleman/gg
 # github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 github.com/golang/freetype/raster
 github.com/golang/freetype/truetype
-# github.com/google/go-cmp v0.3.1
+# github.com/google/go-cmp v0.4.0
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
@@ -15,15 +15,16 @@ github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
 # github.com/google/uuid v1.1.1
 github.com/google/uuid
-# github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5
+# github.com/jung-kurt/gofpdf v1.16.2
 github.com/jung-kurt/gofpdf
 # github.com/patrickmn/go-cache v2.1.0+incompatible
 github.com/patrickmn/go-cache
 # github.com/pborman/uuid v1.2.0
 github.com/pborman/uuid
-# github.com/pkg/errors v0.8.1
+# github.com/pkg/errors v0.9.1
 github.com/pkg/errors
-# golang.org/x/image v0.0.0-20190227222117-0694c2d4d067
+# golang.org/x/image v0.0.0-20200119044424-58c23975cae1
+golang.org/x/image/ccitt
 golang.org/x/image/draw
 golang.org/x/image/font
 golang.org/x/image/font/basicfont
@@ -31,7 +32,7 @@ golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
-# gonum.org/v1/plot v0.0.0-20190615073203-9aa86143727f
+# gonum.org/v1/plot v0.7.0
 gonum.org/v1/plot
 gonum.org/v1/plot/palette
 gonum.org/v1/plot/plotter

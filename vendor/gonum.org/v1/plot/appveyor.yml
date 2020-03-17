@@ -13,9 +13,8 @@ environment:
   # Do not move these lines; they are referred to by README.md.
   # Versions of go that are explicitly supported by gonum.
   matrix:
-    - GOROOT: 'c:\go110'
-    - GOROOT: 'c:\go111'
-#    - GOROOT: 'c:\go112'
+    - GOROOT: 'c:\go113'
+    #- GOROOT: 'c:\go114'
   GOPATH: c:\gopath
   GOTOOLDIR: '%GOROOT%\pkg\tool\windows_amd64'
   PATH: '%GOPATH%\bin;%GOROOT%\bin;%PATH%'

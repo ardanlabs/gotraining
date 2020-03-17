@@ -5,9 +5,8 @@ go_import_path: gonum.org/v1/plot
 
 # Versions of go that are explicitly supported by gonum.
 go:
- - 1.12.x
- - 1.11.x
- - 1.10.x
+ - 1.14.x
+ - 1.13.x
  - master
 matrix:
   fast_finish: true

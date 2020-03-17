@@ -113,6 +113,7 @@ func (svg *SVG) Startview(w, h, minx, miny, vw, vh int) {
 	svg.Start(w, h, fmt.Sprintf(vbfmt, minx, miny, vw, vh))
 }
 
+// StartviewUnit begins the SVG document with the specified width, height, and unit
 func (svg *SVG) StartviewUnit(w, h int, unit string, minx, miny, vw, vh int) {
 	svg.Startunit(w, h, unit, fmt.Sprintf(vbfmt, minx, miny, vw, vh))
 }
@@ -240,7 +241,7 @@ func (svg *SVG) Marker(id string, x, y, width, height int, s ...string) {
 		id, x, y, width, height, endstyle(s, ">\n"))
 }
 
-// MarkEnd ends a marker
+// MarkerEnd ends a marker
 func (svg *SVG) MarkerEnd() { svg.println(`</marker>`) }
 
 // Pattern defines a pattern with the specified dimensions.
@@ -813,6 +814,52 @@ func (svg *SVG) Sepia() {
 	svg.FeColorMatrix(Filterspec{}, sepiamatrix)
 }
 
+// Animation
+
+// Animate animates the specified link, using the specified attribute
+// The animation starts at coordinate from, terminates at to, and repeats as specified
+func (svg *SVG) Animate(link, attr string, from, to int, duration float64, repeat int, s ...string) {
+	svg.printf(`<animate %s attributeName="%s" from="%d" to="%d" dur="%gs" repeatCount="%s" %s`,
+		href(link), attr, from, to, duration, repeatString(repeat), endstyle(s, emptyclose))
+}
+
+// AnimateMotion animates the referenced object along the specified path
+func (svg *SVG) AnimateMotion(link, path string, duration float64, repeat int, s ...string) {
+	svg.printf(`<animateMotion %s dur="%gs" repeatCount="%s" %s<mpath %s/></animateMotion>
+`, href(link), duration, repeatString(repeat), endstyle(s, ">"), href(path))
+}
+
+// AnimateTransform animates in the context of SVG transformations
+func (svg *SVG) AnimateTransform(link, ttype, from, to string, duration float64, repeat int, s ...string) {
+	svg.printf(`<animateTransform %s attributeName="transform" type="%s" from="%s" to="%s" dur="%gs" repeatCount="%s" %s`,
+		href(link), ttype, from, to, duration, repeatString(repeat), endstyle(s, emptyclose))
+}
+
+// AnimateTranslate animates the translation transformation
+func (svg *SVG) AnimateTranslate(link string, fx, fy, tx, ty int, duration float64, repeat int, s ...string) {
+	svg.AnimateTransform(link, "translate", coordpair(fx, fy), coordpair(tx, ty), duration, repeat, s...)
+}
+
+// AnimateRotate animates the rotation transformation
+func (svg *SVG) AnimateRotate(link string, fs, fc, fe, ts, tc, te int, duration float64, repeat int, s ...string) {
+	svg.AnimateTransform(link, "rotate", sce(fs, fc, fe), sce(ts, tc, te), duration, repeat, s...)
+}
+
+// AnimateScale animates the scale transformation
+func (svg *SVG) AnimateScale(link string, from, to, duration float64, repeat int, s ...string) {
+	svg.AnimateTransform(link, "scale", fmt.Sprintf("%g", from), fmt.Sprintf("%g", to), duration, repeat, s...)
+}
+
+// AnimateSkewX animates the skewX transformation
+func (svg *SVG) AnimateSkewX(link string, from, to, duration float64, repeat int, s ...string) {
+	svg.AnimateTransform(link, "skewX", fmt.Sprintf("%g", from), fmt.Sprintf("%g", to), duration, repeat, s...)
+}
+
+// AnimateSkewY animates the skewY transformation
+func (svg *SVG) AnimateSkewY(link string, from, to, duration float64, repeat int, s ...string) {
+	svg.AnimateTransform(link, "skewY", fmt.Sprintf("%g", from), fmt.Sprintf("%g", to), duration, repeat, s...)
+}
+
 // Utility
 
 // Grid draws a grid at the specified coordinate, dimensions, and spacing, with optional style.
@@ -835,6 +882,25 @@ func (svg *SVG) Grid(x int, y int, w int, h int, n int, s ...string) {
 }
 
 // Support functions
+
+// coordpair returns a coordinate pair as a string
+func coordpair(x, y int) string {
+	return fmt.Sprintf("%d %d", x, y)
+}
+
+// sce makes start, center, end coordinates string for animate transformations
+func sce(start, center, end int) string {
+	return fmt.Sprintf("%d %d %d", start, center, end)
+}
+
+// repeatString computes the repeat string for animation methods
+// repeat <= 0 --> "indefinite", otherwise the integer string
+func repeatString(n int) string {
+	if n > 0 {
+		return fmt.Sprintf("%d", n)
+	}
+	return "indefinite"
+}
 
 // style returns a style name,attribute string
 func style(s string) string {

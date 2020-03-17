@@ -165,20 +165,20 @@ func (p PointType) XY() (float64, float64) {
 // Changes to this structure should be reflected in its GobEncode and GobDecode
 // methods.
 type ImageInfoType struct {
-	data  []byte
-	smask []byte
-	n     int
-	w     float64
-	h     float64
-	cs    string
-	pal   []byte
-	bpc   int
-	f     string
-	dp    string
-	trns  []int
-	scale float64 // document scaling factor
-	dpi   float64
-	i     string
+	data  []byte  // Raw image data
+	smask []byte  // Soft Mask, an 8bit per-pixel transparency mask
+	n     int     // Image object number
+	w     float64 // Width
+	h     float64 // Height
+	cs    string  // Color space
+	pal   []byte  // Image color palette
+	bpc   int     // Bits Per Component
+	f     string  // Image filter
+	dp    string  // DecodeParms
+	trns  []int   // Transparency mask
+	scale float64 // Document scale factor
+	dpi   float64 // Dots-per-inch found from image file (png only)
+	i     string  // SHA-1 checksum of the above values.
 }
 
 func generateImageID(info *ImageInfoType) (string, error) {
@@ -266,6 +266,7 @@ type fontFileType struct {
 	n                int
 	embedded         bool
 	content          []byte
+	fontType         string
 }
 
 type linkType struct {
@@ -321,14 +322,14 @@ type Pdf interface {
 	AddPageFormat(orientationStr string, size SizeType)
 	AddSpotColor(nameStr string, c, m, y, k byte)
 	AliasNbPages(aliasStr string)
-	Arc(x, y, rx, ry, degRotate, degStart, degEnd float64, styleStr string)
 	ArcTo(x, y, rx, ry, degRotate, degStart, degEnd float64)
+	Arc(x, y, rx, ry, degRotate, degStart, degEnd float64, styleStr string)
 	BeginLayer(id int)
 	Beziergon(points []PointType, styleStr string)
 	Bookmark(txtStr string, level int, y float64)
-	Cell(w, h float64, txtStr string)
 	CellFormat(w, h float64, txtStr, borderStr string, ln int, alignStr string, fill bool, link int, linkStr string)
 	Cellf(w, h float64, fmtStr string, args ...interface{})
+	Cell(w, h float64, txtStr string)
 	Circle(x, y, r float64, styleStr string)
 	ClearError()
 	ClipCircle(x, y, r float64, outline bool)
@@ -340,13 +341,13 @@ type Pdf interface {
 	ClipText(x, y float64, txtStr string, outline bool)
 	Close()
 	ClosePath()
-	CreateTemplate(fn func(*Tpl)) Template
 	CreateTemplateCustom(corner PointType, size SizeType, fn func(*Tpl)) Template
-	Curve(x0, y0, cx, cy, x1, y1 float64, styleStr string)
-	CurveBezierCubic(x0, y0, cx0, cy0, cx1, cy1, x1, y1 float64, styleStr string)
+	CreateTemplate(fn func(*Tpl)) Template
 	CurveBezierCubicTo(cx0, cy0, cx1, cy1, x, y float64)
+	CurveBezierCubic(x0, y0, cx0, cy0, cx1, cy1, x1, y1 float64, styleStr string)
 	CurveCubic(x0, y0, cx0, cy0, x1, y1, cx1, cy1 float64, styleStr string)
 	CurveTo(cx, cy, x, y float64)
+	Curve(x0, y0, cx, cy, x1, y1 float64, styleStr string)
 	DrawPath(styleStr string)
 	Ellipse(x, y, rx, ry, degRotate float64, styleStr string)
 	EndLayer()
@@ -365,8 +366,8 @@ type Pdf interface {
 	GetImageInfo(imageStr string) (info *ImageInfoType)
 	GetLineWidth() float64
 	GetMargins() (left, top, right, bottom float64)
-	GetPageSize() (width, height float64)
 	GetPageSizeStr(sizeStr string) (size SizeType)
+	GetPageSize() (width, height float64)
 	GetStringWidth(s string) float64
 	GetTextColor() (int, int, int)
 	GetTextSpotColor() (name string, c, m, y, k byte)
@@ -377,19 +378,20 @@ type Pdf interface {
 	Image(imageNameStr string, x, y, w, h float64, flow bool, tp string, link int, linkStr string)
 	ImageOptions(imageNameStr string, x, y, w, h float64, flow bool, options ImageOptions, link int, linkStr string)
 	ImageTypeFromMime(mimeStr string) (tp string)
-	Line(x1, y1, x2, y2 float64)
-	LineTo(x, y float64)
 	LinearGradient(x, y, w, h float64, r1, g1, b1, r2, g2, b2 int, x1, y1, x2, y2 float64)
-	Link(x, y, w, h float64, link int)
+	LineTo(x, y float64)
+	Line(x1, y1, x2, y2 float64)
 	LinkString(x, y, w, h float64, linkStr string)
+	Link(x, y, w, h float64, link int)
 	Ln(h float64)
 	MoveTo(x, y float64)
 	MultiCell(w, h float64, txtStr, borderStr, alignStr string, fill bool)
 	Ok() bool
 	OpenLayerPane()
-	Output(w io.Writer) error
 	OutputAndClose(w io.WriteCloser) error
 	OutputFileAndClose(fileStr string) error
+	Output(w io.Writer) error
+	PageCount() int
 	PageNo() int
 	PageSize(pageNum int) (wd, ht float64, unitStr string)
 	PointConvert(pt float64) (u float64)
@@ -404,7 +406,6 @@ type Pdf interface {
 	RegisterImageOptions(fileStr string, options ImageOptions) (info *ImageInfoType)
 	RegisterImageOptionsReader(imgName string, options ImageOptions, r io.Reader) (info *ImageInfoType)
 	RegisterImageReader(imgName, tp string, r io.Reader) (info *ImageInfoType)
-	SVGBasicWrite(sb *SVGBasicType, scale float64)
 	SetAcceptPageBreakFunc(fnc func() bool)
 	SetAlpha(alpha float64, blendModeStr string)
 	SetAuthor(authorStr string, isUTF8 bool)
@@ -426,6 +427,7 @@ type Pdf interface {
 	SetFontLoader(loader FontLoader)
 	SetFontLocation(fontDirStr string)
 	SetFontSize(size float64)
+	SetFontStyle(styleStr string)
 	SetFontUnitSize(size float64)
 	SetFooterFunc(fnc func())
 	SetFooterFuncLpi(fnc func(lastPage bool))
@@ -450,14 +452,15 @@ type Pdf interface {
 	SetTextSpotColor(nameStr string, tint byte)
 	SetTitle(titleStr string, isUTF8 bool)
 	SetTopMargin(margin float64)
+	SetUnderlineThickness(thickness float64)
+	SetXmpMetadata(xmpStream []byte)
 	SetX(x float64)
 	SetXY(x, y float64)
-	SetXmpMetadata(xmpStream []byte)
 	SetY(y float64)
 	SplitLines(txt []byte, w float64) [][]byte
 	String() string
+	SVGBasicWrite(sb *SVGBasicType, scale float64)
 	Text(x, y float64, txtStr string)
-	Transform(tm TransformMatrix)
 	TransformBegin()
 	TransformEnd()
 	TransformMirrorHorizontal(x float64)
@@ -472,18 +475,19 @@ type Pdf interface {
 	TransformSkew(angleX, angleY, x, y float64)
 	TransformSkewX(angleX, x, y float64)
 	TransformSkewY(angleY, x, y float64)
+	Transform(tm TransformMatrix)
 	TransformTranslate(tx, ty float64)
 	TransformTranslateX(tx float64)
 	TransformTranslateY(ty float64)
 	UnicodeTranslatorFromDescriptor(cpStr string) (rep func(string) string)
 	UnitToPointConvert(u float64) (pt float64)
-	UseTemplate(t Template)
 	UseTemplateScaled(t Template, corner PointType, size SizeType)
-	Write(h float64, txtStr string)
+	UseTemplate(t Template)
 	WriteAligned(width, lineHeight float64, textStr, alignStr string)
+	Writef(h float64, fmtStr string, args ...interface{})
+	Write(h float64, txtStr string)
 	WriteLinkID(h float64, displayStr string, linkID int)
 	WriteLinkString(h float64, displayStr, targetStr string)
-	Writef(h float64, fmtStr string, args ...interface{})
 }
 
 // PageBox defines the coordinates and extent of the various page box types
@@ -494,11 +498,17 @@ type PageBox struct {
 
 // Fpdf is the principal structure for creating a single PDF document
 type Fpdf struct {
+	isCurrentUTF8    bool                       // is current font used in utf-8 mode
+	isRTL            bool                       // is is right to left mode enabled
 	page             int                        // current page number
 	n                int                        // current object number
 	offsets          []int                      // array of object offsets
 	templates        map[string]Template        // templates used in this document
 	templateObjects  map[string]int             // template object IDs within this document
+	importedObjs     map[string][]byte          // imported template objects (gofpdi)
+	importedObjPos   map[string]map[int]string  // imported template objects hashes and their positions (gofpdi)
+	importedTplObjs  map[string]string          // imported template names and IDs (hashed) (gofpdi)
+	importedTplIDs   map[string]int             // imported template ids hash to object id int (gofpdi)
 	buffer           fmtBuffer                  // buffer holding in-memory PDF
 	pages            []*bytes.Buffer            // slice[page] of page content; 1-based
 	state            int                        // current document state
@@ -532,6 +542,7 @@ type Fpdf struct {
 	fontFamily       string                     // current font family
 	fontStyle        string                     // current font style
 	underline        bool                       // underlining flag
+	strikeout        bool                       // strike out flag
 	currentFont      fontDefType                // current font info
 	fontSizePt       float64                    // current font size in points
 	fontSize         float64                    // current font size in user unit
@@ -540,6 +551,8 @@ type Fpdf struct {
 	aliasMap         map[string]string          // map of alias->replacement
 	pageLinks        [][]linkType               // pageLinks[page][link], both 1-based
 	links            []intLinkType              // array of internal links
+	attachments      []Attachment               // slice of content to embed globally
+	pageAttachments  [][]annotationAttach       // 1-based array of annotation for file attachments (per page)
 	outlines         []outlineType              // array of outlines
 	outlineRoot      int                        // root of outlines
 	autoPageBreak    bool                       // automatic page breaking
@@ -554,12 +567,14 @@ type Fpdf struct {
 	zoomMode         string                     // zoom display mode
 	layoutMode       string                     // layout display mode
 	xmp              []byte                     // XMP metadata
+	producer         string                     // producer
 	title            string                     // title
 	subject          string                     // subject
 	author           string                     // author
 	keywords         string                     // keywords
 	creator          string                     // creator
-	creationDate     time.Time                  // override for dcoument CreationDate value
+	creationDate     time.Time                  // override for document CreationDate value
+	modDate          time.Time                  // override for document ModDate value
 	aliasNbPagesStr  string                     // alias for total number of pages
 	pdfVersion       string                     // PDF version number
 	fontDirStr       string                     // location of font definition files
@@ -585,7 +600,8 @@ type Fpdf struct {
 		// Composite values of colors
 		draw, fill, text colorType
 	}
-	spotColorMap map[string]spotColorType // Map of named ink-based colors
+	spotColorMap           map[string]spotColorType // Map of named ink-based colors
+	userUnderlineThickness float64                  // A custom user underline thickness multiplier.
 }
 
 type encType struct {
@@ -681,20 +697,22 @@ type FontDescType struct {
 }
 
 type fontDefType struct {
-	Tp           string       // "Core", "TrueType", ...
-	Name         string       // "Courier-Bold", ...
-	Desc         FontDescType // Font descriptor
-	Up           int          // Underline position
-	Ut           int          // Underline thickness
-	Cw           [256]int     // Character width by ordinal
-	Enc          string       // "cp1252", ...
-	Diff         string       // Differences from reference encoding
-	File         string       // "Redressed.z"
-	Size1, Size2 int          // Type1 values
-	OriginalSize int          // Size of uncompressed font file
-	N            int          // Set by font loader
-	DiffN        int          // Position of diff in app array, set by font loader
-	i            string       // 1-based position in font list, set by font loader, not this program
+	Tp           string        // "Core", "TrueType", ...
+	Name         string        // "Courier-Bold", ...
+	Desc         FontDescType  // Font descriptor
+	Up           int           // Underline position
+	Ut           int           // Underline thickness
+	Cw           []int         // Character width by ordinal
+	Enc          string        // "cp1252", ...
+	Diff         string        // Differences from reference encoding
+	File         string        // "Redressed.z"
+	Size1, Size2 int           // Type1 values
+	OriginalSize int           // Size of uncompressed font file
+	N            int           // Set by font loader
+	DiffN        int           // Position of diff in app array, set by font loader
+	i            string        // 1-based position in font list, set by font loader, not this program
+	utf8File     *utf8FontFile // UTF-8 font
+	usedRunes    map[int]int   // Array of used runes
 }
 
 // generateFontID generates a font Id from the font definition
@@ -714,7 +732,7 @@ type fontInfoType struct {
 	IsFixedPitch       bool
 	UnderlineThickness int
 	UnderlinePosition  int
-	Widths             [256]int
+	Widths             []int
 	Size1, Size2       uint32
 	Desc               FontDescType
 }

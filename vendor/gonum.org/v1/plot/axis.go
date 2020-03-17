@@ -82,7 +82,7 @@ type Axis struct {
 //
 // The default range is (∞, ­∞), and thus any finite
 // value is less than Min and greater than Max.
-func makeAxis(orientation bool) (Axis, error) {
+func makeAxis(o orientation) (Axis, error) {
 	labelFont, err := vg.MakeFont(DefaultFont, vg.Points(12))
 	if err != nil {
 		return Axis{}, err
@@ -109,10 +109,20 @@ func makeAxis(orientation bool) (Axis, error) {
 		XAlign: draw.XCenter,
 		YAlign: draw.YBottom,
 	}
-	var xalign, yalign = draw.XCenter, draw.YTop
-	if orientation == vertical {
-		xalign, yalign = draw.XRight, draw.YCenter
+
+	var (
+		xalign draw.XAlignment
+		yalign draw.YAlignment
+	)
+	switch o {
+	case vertical:
+		xalign = draw.XRight
+		yalign = draw.YCenter
+	case horizontal:
+		xalign = draw.XCenter
+		yalign = draw.YTop
 	}
+
 	a.Tick.Label = draw.TextStyle{
 		Color:  color.Black,
 		Font:   tickFont,
