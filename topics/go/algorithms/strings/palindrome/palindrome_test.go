@@ -20,16 +20,16 @@ func TestIsPalindrome(t *testing.T) {
 		{"string with odd length", "bob", true},
 		{"string with even length", "otto", true},
 		{"chinese", "汉字汉", true},
-		{"failed test", "test", false},
+		{"failed test", "test", true},
 	}
 
 	for _, tt := range revTests {
 		got := strings.IsPalindrome(tt.input)
-		if got {
-			t.Logf("\t%s\tString is a palindrome.", succeed)
-		} else {
+		if got != tt.expected {
 			t.Logf("\t%s\tString is a palindrome: %s\n.", failed, tt.input)
 			t.Fatalf("\t\tGot %v, Expected %v.", got, tt.expected)
 		}
+		t.Logf("\t%s\tString %s is a palindrome.", succeed, tt.input)
+
 	}
 }
