@@ -138,27 +138,33 @@ If you are interested in holding an event in your area please let me know. We wi
 
 **Bill Kennedy**  
 ```
-Date                Location              Venue               Type         Type             Url
+Date                Location              Company             Type         Type             Url
 ================================================================================================================================================
 January(14-16)      Carpinteria, CA       Procore             Corporate    Go (3 day)
 January(27-29)      Charlotte, NC         Red Ventures        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-charlotte-nc-usa-january-2020-tickets-80562000111
 February(11-13)     San Jose, CA          Paypal              Corporate    Go (3 day)
 February(25-27)     Tel Aviv, Israel      Zip Recruiter       Corporate    Go (3 day)
 March(03-05)        Athens, Greece        Inaccess            Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-athens-greece-march-3-4-5-2020-tickets-91179960717
-March(09-12)        Boulder, CO           Hello Fresh         Corporate    Go (3 day)
-March(17-19)        Miami, FL             GE Digital          Corporate    Go (3 day)
-April(07-09)        NYC, NY               New York Times      Corporate    Go (3 day)
-April(22-26)        Berlin, Germany       GopherCon EU        Conference   Service (1 day)  https://gophercon.berlin
-May(05-07)          Seattle, WA           Outreach            Corporate    Go (3 day)
-June(22)            Orlando, FL           TBD / GopherCon     Open Class   Service (1 day)  Link Comming Soon
+March(09-12)        REMOTE                Hello Fresh         Corporate    Go (3 day)
+April(07-09)        REMOTE                New York Times      Corporate    Go (3 day)
+April(30-02)        REMOTE                Zoom                Open Class   Go (3 day)       https://www.eventbrite.com/e/ardan-labs-live-worldwide-march-30-april-3-2020-tickets-100331129108
+May(05-07)          REMOTE                Outreach            Corporate    Go (3 day)
 June(30-02)         Amsterdam, NL         Message Bird        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
+```
+**Postponed**  
+```
+Date                Location              Company             Type         Type             Url
+================================================================================================================================================
+March(17-19)        Miami, FL             GE Digital          Corporate    Go (3 day)
+April(22-26)        Berlin, Germany       GopherCon EU        Conference   Service (1 day)  https://gophercon.berlin
+June(22)            Orlando, FL           TBD / GopherCon     Open Class   Service (1 day)  Link Comming Soon
 ```
 
 ### 2019
 
 **Bill Kennedy**  
 ```
-Date                Location              Venue               Type         Type             Url
+Date                Location              Company             Type         Type             Url
 ================================================================================================================================================
 January(16-19)      Goa, India            GopherCon India     Conference   Adv Go (1 day)   https://gopherconindia.com/go-workshop1/
 January(21-23)      Bangalore, India      Paypal              Corporate    Go (3 day)       
