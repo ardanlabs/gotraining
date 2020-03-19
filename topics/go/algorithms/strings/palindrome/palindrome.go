@@ -2,6 +2,7 @@ package strings
 
 import strings "github.com/ardanlabs/gotraining/topics/go/algorithms/strings/reverse"
 
+// Check if a string is a Palindrome.
 func IsPalindrome(input string) bool {
 
 	// If the input string is empty or as a length of 1 return true.
