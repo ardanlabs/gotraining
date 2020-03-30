@@ -24,7 +24,7 @@ func (u user) print() {
 
 func main() {
 
-	// Create values of type user and admin.
+	// Create a value of type user.
 	u := user{"Bill"}
 
 	// Add the values and pointers to the slice of
