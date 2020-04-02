@@ -3,7 +3,7 @@ module github.com/ardanlabs/gotraining
 go 1.13
 
 require (
-	github.com/ajstarks/svgo v0.0.0-20200204031535-0cbcf57ea1d8 // indirect
+	github.com/ajstarks/svgo v0.0.0-20200320125537-f189e35d30ca // indirect
 	github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 	github.com/google/go-cmp v0.4.0
 	github.com/google/uuid v1.1.1 // indirect
