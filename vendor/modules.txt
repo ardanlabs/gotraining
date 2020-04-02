@@ -1,6 +1,8 @@
 # github.com/ajstarks/svgo v0.0.0-20200320125537-f189e35d30ca
+## explicit
 github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
+## explicit
 github.com/braintree/manners
 # github.com/fogleman/gg v1.3.0
 github.com/fogleman/gg
@@ -8,22 +10,29 @@ github.com/fogleman/gg
 github.com/golang/freetype/raster
 github.com/golang/freetype/truetype
 # github.com/google/go-cmp v0.4.0
+## explicit
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
 # github.com/google/uuid v1.1.1
+## explicit
 github.com/google/uuid
 # github.com/jung-kurt/gofpdf v1.16.2
+## explicit
 github.com/jung-kurt/gofpdf
 # github.com/patrickmn/go-cache v2.1.0+incompatible
+## explicit
 github.com/patrickmn/go-cache
 # github.com/pborman/uuid v1.2.0
+## explicit
 github.com/pborman/uuid
 # github.com/pkg/errors v0.9.1
+## explicit
 github.com/pkg/errors
 # golang.org/x/image v0.0.0-20200119044424-58c23975cae1
+## explicit
 golang.org/x/image/ccitt
 golang.org/x/image/draw
 golang.org/x/image/font
@@ -32,7 +41,10 @@ golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
+# gonum.org/v1/netlib v0.0.0-20190926062253-2d6e29b73a19
+## explicit
 # gonum.org/v1/plot v0.7.0
+## explicit
 gonum.org/v1/plot
 gonum.org/v1/plot/palette
 gonum.org/v1/plot/plotter
