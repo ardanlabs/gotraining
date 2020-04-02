@@ -1,4 +1,4 @@
-# github.com/ajstarks/svgo v0.0.0-20200204031535-0cbcf57ea1d8
+# github.com/ajstarks/svgo v0.0.0-20200320125537-f189e35d30ca
 github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 github.com/braintree/manners
