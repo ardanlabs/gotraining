@@ -142,24 +142,32 @@ If you are interested in holding an event in your area please let me know. We wi
 ```
 Date              Location           Company          Type         Type          Length          
 =================================================================================================
-January(27-29)    Charlotte, NC      Red Ventures     Open Class   Go Advanced   3 Days 8 Hour
+
 https://www.eventbrite.com/e/3-day-ultimate-go-training-charlotte-nc-usa-january-2020-tickets-80562000111
+----------------------------------------------------------------------------------------------------------------
+January(27-29)    Charlotte, NC      Red Ventures     Open Class   Go Advanced   3 Days 8 Hour
 
-March(03-05)      Athens, Greece     Inaccess         Open Class   Go Advanced   3 Days 8 Hour
 https://www.eventbrite.com/e/3-day-ultimate-go-training-athens-greece-march-3-4-5-2020-tickets-91179960717
+----------------------------------------------------------------------------------------------------------------
+March(03-05)      Athens, Greece     Inaccess         Open Class   Go Advanced   3 Days 8 Hour
 
-March(30-02)      Virtual            Ardan Labs       Open Class   Go Advanced   4 Half 4 Hour
 https://www.eventbrite.com/e/ardan-labs-live-worldwide-march-30-april-3-2020-tickets-100331129108
+----------------------------------------------------------------------------------------------------------------
+March(30-02)      Virtual            Ardan Labs       Open Class   Go Advanced   4 Half 4 Hour
 
+Link Coming Soon
+----------------------------------------------------------------------------------------------------------------
 April(20-24)      Virtual            Ardan Labs       Open Class   Go Syntax     5 Half 4 Hour
-Link Coming Soon
 
+Link Coming Soon
+----------------------------------------------------------------------------------------------------------------
 May(11-14)        Virtual            Ardan Labs       Open Class   Go Service    4 Half 4 Hour
-Link Coming Soon
 
-June(30-02)       Amsterdam, NL      Message Bird     Open Class   Go Advanced   3 Days 8 Hour
+
 https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
-=======
+----------------------------------------------------------------------------------------------------------------
+June(30-02)       Amsterdam, NL      Message Bird     Open Class   Go Advanced   3 Days 8 Hour
+
 ```
 
 **Corporate Classes**  
@@ -171,7 +179,6 @@ February(11-13)   San Jose, CA       Paypal           Corporate    Go Advanced  
 February(25-27)   Tel Aviv, Israel   Zip Recruiter    Corporate    Go Advanced   3 Days 8 Hour
 March(09-12)      Virtual            Hello Fresh      Corporate    Go Advanced   3 Days 8 Hour
 April(07-09)      Virtual            New York Times   Corporate    Go Advanced   3 Days 8 Hour
-=======
 ```
 
 ### 2019
