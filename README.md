@@ -159,6 +159,7 @@ Link Coming Soon
 
 June(30-02)       Amsterdam, NL      Message Bird     Open Class   Go Advanced   3 Days 8 Hour
 https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
+=======
 ```
 
 **Corporate Classes**  
@@ -170,6 +171,7 @@ February(11-13)   San Jose, CA       Paypal           Corporate    Go Advanced  
 February(25-27)   Tel Aviv, Israel   Zip Recruiter    Corporate    Go Advanced   3 Days 8 Hour
 March(09-12)      Virtual            Hello Fresh      Corporate    Go Advanced   3 Days 8 Hour
 April(07-09)      Virtual            New York Times   Corporate    Go Advanced   3 Days 8 Hour
+=======
 ```
 
 ### 2019
