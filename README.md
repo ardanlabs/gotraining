@@ -167,7 +167,6 @@ May(11-14)        Virtual            Ardan Labs       Open Class   Go Service   
 https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
 ----------------------------------------------------------------------------------------------------------------
 June(30-02)       Amsterdam, NL      Message Bird     Open Class   Go Advanced   3 Days 8 Hour
-
 ```
 
 **Corporate Classes**  
