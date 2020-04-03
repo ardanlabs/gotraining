@@ -137,27 +137,28 @@ If you are interested in holding an event in your area please let me know. We wi
 ### 2020
 
 **Bill Kennedy**  
+
+**Open Classes**  
 ```
-Date                Location              Company             Type         Type             Url
+Date                Location              Company             Type         Type                     Url
 ================================================================================================================================================
-January(14-16)      Carpinteria, CA       Procore             Corporate    Go (3 day)
-January(27-29)      Charlotte, NC         Red Ventures        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-charlotte-nc-usa-january-2020-tickets-80562000111
-February(11-13)     San Jose, CA          Paypal              Corporate    Go (3 day)
-February(25-27)     Tel Aviv, Israel      Zip Recruiter       Corporate    Go (3 day)
-March(03-05)        Athens, Greece        Inaccess            Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-athens-greece-march-3-4-5-2020-tickets-91179960717
-March(09-12)        REMOTE                Hello Fresh         Corporate    Go (3 day)
-April(07-09)        REMOTE                New York Times      Corporate    Go (3 day)
-April(30-02)        REMOTE                Zoom                Open Class   Go (3 day)       https://www.eventbrite.com/e/ardan-labs-live-worldwide-march-30-april-3-2020-tickets-100331129108
-May(05-07)          REMOTE                Outreach            Corporate    Go (3 day)
-June(30-02)         Amsterdam, NL         Message Bird        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
+January(27-29)      Charlotte, NC         Red Ventures        Open Class   Go Adv (Full Days)       https://www.eventbrite.com/e/3-day-ultimate-go-training-charlotte-nc-usa-january-2020-tickets-80562000111
+March(03-05)        Athens, Greece        Inaccess            Open Class   Go Adv (Full Days)       https://www.eventbrite.com/e/3-day-ultimate-go-training-athens-greece-march-3-4-5-2020-tickets-91179960717
+March(30-02)        Virtual               Ardan Labs          Open Class   Go Adv (Half Days)       https://www.eventbrite.com/e/ardan-labs-live-worldwide-march-30-april-3-2020-tickets-100331129108
+April(20-24)        Virtual               Ardan Labs          Open Class   Go Syntax (Half Days)    Link Coming Soon
+May(11-14)          Virtual               Ardan Labs          Open Class   Go Service (Half Days)   Link Coming Soon
+June(30-02)         Amsterdam, NL         Message Bird        Open Class   Go Adv (Full Days)       https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
 ```
-**Postponed**  
+
+**Corporate Classes**  
 ```
-Date                Location              Company             Type         Type             Url
+Date                Location              Company             Type         Type                     Url
 ================================================================================================================================================
-March(17-19)        Miami, FL             GE Digital          Corporate    Go (3 day)
-April(22-26)        Berlin, Germany       GopherCon EU        Conference   Service (1 day)  https://gophercon.berlin
-June(22)            Orlando, FL           TBD / GopherCon     Open Class   Service (1 day)  Link Comming Soon
+January(14-16)      Carpinteria, CA       Procore             Corporate    Go Adv (Full Days)
+February(11-13)     San Jose, CA          Paypal              Corporate    Go Adv (Full Days)
+February(25-27)     Tel Aviv, Israel      Zip Recruiter       Corporate    Go Adv (Full Days)
+March(09-12)        Virtual               Hello Fresh         Corporate    Go Adv (Full Days)
+April(07-09)        Virtual               New York Times      Corporate    Go Adv (Full Days)
 ```
 
 ### 2019
