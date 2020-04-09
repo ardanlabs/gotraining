@@ -142,8 +142,9 @@ If you are interested in holding an event in your area please let me know. We wi
 ```
 Date              Location           Company          Type         Type          Length             URL
 =========================================================================================================================================================================================================================
-April(20-24)      Virtual            Ardan Labs       Open Class   Go Syntax     5 Days(20 Hours)   Link Coming Soon
-May(11-14)        Virtual            Ardan Labs       Open Class   Go Service    4 Days(16 Hours)   Link Coming Soon
+April(20-24)      Virtual            Ardan Labs       Open Class   Go Syntax     5 Days(20 Hours)   https://www.eventbrite.com/e/ardan-labs-livestream-ultimate-go-syntax-april-20-april-24-2020-tickets-101808788828
+May(09)           Virtual            Ardan Labs       Open Class   Go Workshop   1 Days(8 Hours)    Link Coming Soon
+May(11-14)        Virtual            Ardan Labs       Open Class   Go Service    4 Days(16 Hours)   https://www.eventbrite.com/e/ardan-labs-livestream-ultimate-go-service-may-11-may-14-2020-tickets-102102256598
 June(30-02)       Amsterdam, NL      Message Bird     Open Class   Go Advanced   3 Days(24 Hours)   https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
 ```
 
@@ -151,7 +152,7 @@ June(30-02)       Amsterdam, NL      Message Bird     Open Class   Go Advanced  
 ```
 Date              Location           Company          Type         Type          Length       
 ====================================================================================================
-April(07-09)      Virtual            New York Times   Corporate    Go Advanced   3 Days(24 Hours)
+April(27-01)      Virtual            Derivco          Corporate    Go Advanced   5 Days(20 Hours)
 ```
 
 **Completed Classes** 
@@ -165,6 +166,7 @@ February(25-27)   Tel Aviv, Israel   Zip Recruiter    Corporate    Go Advanced  
 March(03-05)      Athens, Greece     Inaccess         Open Class   Go Advanced   3 Days(24 Hours)
 March(09-12)      Virtual            Hello Fresh      Corporate    Go Advanced   3 Days(24 Hours)
 March(30-02)      Virtual            Ardan Labs       Open Class   Go Advanced   3 Days(24 Hours)
+April(07-09)      Virtual            New York Times   Corporate    Go Advanced   3 Days(24 Hours)
 ```
 
 ### 2019
