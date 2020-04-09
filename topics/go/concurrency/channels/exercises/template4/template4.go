@@ -14,7 +14,7 @@ func main() {
 
 	// Create a channel "shutdown" to tell goroutines when to terminate.
 
-	// Define the size of the worker pool. Use runtime.NumCPU to size the pool based on number of processors.
+	// Define the size of the worker pool. Use runtime.GOMAXPROCS(0) to size the pool based on number of processors.
 
 	// Create a sync.WaitGroup to monitor the Goroutine pool. Add the count.
 

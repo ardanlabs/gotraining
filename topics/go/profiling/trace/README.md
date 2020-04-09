@@ -42,12 +42,12 @@ Then explore the trace tooling by building the program with these different find
     n := find(topic, docs)
 	// n := findConcurrent(topic, docs)
 	// n := findConcurrentSem(topic, docs)
-	// n := findNumCPU(topic, docs)
+	// n := findProcessors(topic, docs)
 	// n := findActor(topic, docs)
 
 Using this function allows you to see how to add custom tasks and regions. This requires Go version 1.11.
 
-	// n := findNumCPUTasks(topic, docs)
+	// n := findProcessorsTasks(topic, docs)
 
 _Note that goroutines in "syscall" state consume an OS thread, other goroutines do not (except for goroutines that called runtime.LockOSThread, which is, unfortunately, not visible in the profile)._
 
@@ -55,6 +55,6 @@ _Note that goroutines in "IO wait" state do NOT consume an OS thread. They are p
 
 ## Code Review
  
-[Profiling Test](trace.go) ([Go Playground](https://play.golang.org/p/nAiHEEbhrwo))
+[Profiling Test](trace.go) ([Go Playground](https://play.golang.org/p/shsD0xiwjhA))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

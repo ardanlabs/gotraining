@@ -48,7 +48,7 @@ func ConcurrentUnlimited(text []string) map[rune]int {
 func ConcurrentBounded(text []string) map[rune]int {
 	m := make(map[rune]int)
 
-	goroutines := runtime.NumCPU()
+	goroutines := runtime.GOMAXPROCS(0)
 	totalNumbers := len(text)
 	lastGoroutine := goroutines - 1
 	stride := totalNumbers / goroutines
@@ -92,7 +92,7 @@ func ConcurrentBounded(text []string) map[rune]int {
 func ConcurrentBoundedChannel(text []string) map[rune]int {
 	m := make(map[rune]int)
 
-	g := runtime.NumCPU()
+	g := runtime.GOMAXPROCS(0)
 	var wg sync.WaitGroup
 	wg.Add(g)
 

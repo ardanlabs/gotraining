@@ -114,7 +114,7 @@ func waitForTask() {
 func pooling() {
 	ch := make(chan string)
 
-	g := runtime.NumCPU()
+	g := runtime.GOMAXPROCS(0)
 	for e := 0; e < g; e++ {
 		go func(emp int) {
 			for p := range ch {
@@ -149,7 +149,7 @@ func fanOutSem() {
 	emps := 2000
 	ch := make(chan string, emps)
 
-	g := runtime.NumCPU()
+	g := runtime.GOMAXPROCS(0)
 	sem := make(chan bool, g)
 
 	for e := 0; e < emps; e++ {
@@ -185,7 +185,7 @@ func fanOutSem() {
 func boundedWorkPooling() {
 	work := []string{"paper", "paper", "paper", "paper", "paper", 2000: "paper"}
 
-	g := runtime.NumCPU()
+	g := runtime.GOMAXPROCS(0)
 	var wg sync.WaitGroup
 	wg.Add(g)
 

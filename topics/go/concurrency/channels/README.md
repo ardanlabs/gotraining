@@ -52,7 +52,7 @@ The behavior of a channel is directly influenced by its current `State`. The sta
 
 ## Code Review
 
-[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/UY5gai9Ojsm))  
+[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/nnjcNJ3bzQB))  
 [Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/PvFKD_tNwir))  
 [Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OLdBCGUvzbx))  
 [Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/zxzHAHIr3Xj))  
@@ -85,7 +85,7 @@ Write a program that generates up to 100 random numbers concurrently. Do not sen
 ### Exercise 4
 Write a program that generates up to 100 random numbers concurrently using a worker pool. Reject even values. Instruct the workers to shutdown with 100 odd numbers have been collected.
 
-[Template](exercises/template4/template4.go) ([Go Playground](https://play.golang.org/p/2EShivwAWlq)) | 
-[Answer](exercises/exercise4/exercise4.go) ([Go Playground](https://play.golang.org/p/jUnB-6OpV1Q))
+[Template](exercises/template4/template4.go) ([Go Playground](https://play.golang.org/p/VGU2rHhmBVd)) | 
+[Answer](exercises/exercise4/exercise4.go) ([Go Playground](https://play.golang.org/p/9nZ8YgmsAIX))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

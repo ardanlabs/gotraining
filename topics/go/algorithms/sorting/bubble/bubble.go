@@ -19,7 +19,7 @@ func main() {
 
 	numbers = generateList(1e2)
 	fmt.Println("Before:", numbers)
-	bubbleSortConcurrent(runtime.NumCPU(), numbers)
+	bubbleSortConcurrent(runtime.GOMAXPROCS(0), numbers)
 	fmt.Println("Concurrent:", numbers)
 }
 
