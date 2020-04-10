@@ -8,7 +8,7 @@ import (
 const succeed = "\u2713"
 const failed = "\u2717"
 
-func TestMax(t *testing.T) {
+func TestMin(t *testing.T) {
 
 	minTests := []struct {
 		name     string
