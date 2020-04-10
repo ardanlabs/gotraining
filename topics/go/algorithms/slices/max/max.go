@@ -19,5 +19,6 @@ func Max(n []int) int {
 			max = num
 		}
 	}
+
 	return max
 }
