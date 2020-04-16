@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// IsPermutation check is two strings are permutations.
+// IsPermutation check if two strings are permutations.
 func IsPermutation(str1, str2 string) bool {
 
 	// If the length are not equal they cannot be permutation.
@@ -13,11 +13,11 @@ func IsPermutation(str1, str2 string) bool {
 		return false
 	}
 
-	// Create slices for each input string.
+	// Create a slice for each input string that is split on every character of the string.
 	s1 := strings.Split(str1, "")
 	s2 := strings.Split(str2, "")
 
-	// Sort the runes
+	// Sort the the two slices.
 	sort.Strings(s1)
 	sort.Strings(s2)
 

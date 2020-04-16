@@ -29,6 +29,5 @@ func TestIsPermutation(t *testing.T) {
 			t.Fatalf("\t\tGot %v, Expected %v.", got, tt.expected)
 		}
 		t.Logf("\t%s\tString %s is a palindrome.", succeed, tt.input)
-
 	}
 }
