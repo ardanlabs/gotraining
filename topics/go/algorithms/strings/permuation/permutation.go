@@ -4,7 +4,7 @@ import (
 	"sort"
 )
 
-// RuneSlice a custom type of a slice runes.
+// RuneSlice a custom type of a slice of runes.
 type RuneSlice []rune
 
 // For sorting an RuneSlice.
