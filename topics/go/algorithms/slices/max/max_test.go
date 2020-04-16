@@ -7,7 +7,7 @@ import (
 )
 
 func TestMax(t *testing.T) {
-	maxTests := map[string]struct {
+	tests := map[string]struct {
 		input       []int
 		expected    int
 		shouldError bool
@@ -20,18 +20,21 @@ func TestMax(t *testing.T) {
 	}
 
 	t.Parallel()
-	for name, tt := range maxTests {
-		name, tt = name, tt
+	for name, test := range tests {
+		name, test := name, test
 		t.Run(name, func(t *testing.T) {
-			got, err := slices.Max(tt.input)
+			got, err := slices.Max(test.input)
+			if err == nil && test.shouldError {
+				t.Fatalf("slices.Max(%#v) returned a nil error; expected a non-nil error value", test.input)
+			}
 			if err != nil {
-				if tt.shouldError == false {
-					t.Fatalf("slices.Max(%#v) returned error %v", tt.input, err)
+				if test.shouldError == false {
+					t.Fatalf("slices.Max(%#v) returned error %v", test.input, err)
 				}
 				return
 			}
-			if got != tt.expected {
-				t.Fatalf("slices.Max(%#v) returned %d; expected %d.", tt.input, got, tt.expected)
+			if got != test.expected {
+				t.Fatalf("slices.Max(%#v) returned %d; expected %d.", test.input, got, test.expected)
 			}
 		})
 	}
