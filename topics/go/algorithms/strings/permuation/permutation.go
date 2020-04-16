@@ -4,9 +4,10 @@ import (
 	"sort"
 )
 
+// RuneSlice a custom type of a slice runes.
 type RuneSlice []rune
 
-// For sorting an RuneSlice
+// For sorting an RuneSlice.
 func (p RuneSlice) Len() int           { return len(p) }
 func (p RuneSlice) Less(i, j int) bool { return p[i] < p[j] }
 func (p RuneSlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
@@ -19,13 +20,15 @@ func IsPermutation(str1, str2 string) bool {
 		return false
 	}
 
-	// Create a rune for each input string.
+	// Convert each string into a collection of runes.
 	s1 := []rune(str1)
 	s2 := []rune(str2)
 
-	// Sort the the two runes.
+	// Sort each collection of runes.
 	sort.Sort(RuneSlice(s1))
 	sort.Sort(RuneSlice(s2))
 
+	// Convert the collection of runes back to a string
+	// and compare.
 	return string(s1) == string(s2)
 }
