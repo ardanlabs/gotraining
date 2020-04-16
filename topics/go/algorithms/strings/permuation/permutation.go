@@ -5,7 +5,8 @@ import (
 	"strings"
 )
 
-// IsPermutation check if two strings are permutations.
+// IsPermutation check if two
+// strings are permutations.
 func IsPermutation(str1, str2 string) bool {
 
 	// If the length are not equal they cannot be permutation.
