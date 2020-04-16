@@ -13,7 +13,8 @@ func IsPermutation(str1, str2 string) bool {
 		return false
 	}
 
-	// Create a slice for each input string that is split on every character of the string.
+	// Create a slice for each input string that
+	//is split on every character of the string.
 	s1 := strings.Split(str1, "")
 	s2 := strings.Split(str2, "")
 
