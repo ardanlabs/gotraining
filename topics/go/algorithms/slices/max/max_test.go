@@ -1,31 +1,38 @@
 package slices_test
 
 import (
-	slices "github.com/ardanlabs/gotraining/topics/go/algorithms/slices/max"
 	"testing"
+
+	slices "github.com/ardanlabs/gotraining/topics/go/algorithms/slices/max"
 )
 
-const succeed = "\u2713"
-const failed = "\u2717"
-
 func TestMax(t *testing.T) {
-
-	maxTests := []struct {
-		name     string
-		input    []int
-		expected int
+	maxTests := map[string]struct {
+		input       []int
+		expected    int
+		shouldError bool
 	}{
-		{"Slice with one element", []int{10}, 10},
-		{"Slice with even number of elements", []int{10, 30}, 30},
-		{"Slice with odd number of elements", []int{10, 50, 30}, 50},
+		"Empty Slice":                        {[]int{}, 0, true},
+		"nil Slice":                          {[]int(nil), 0, true},
+		"Slice with one element":             {[]int{10}, 10, false},
+		"Slice with even number of elements": {[]int{10, 30}, 30, false},
+		"Slice with odd number of elements":  {[]int{10, 50, 30}, 50, false},
 	}
 
-	for _, tt := range maxTests {
-		got := slices.Max(tt.input)
-		if got != tt.expected {
-			t.Logf("\t%s\t Incorrect value returned: %d\n.", failed, tt.input)
-			t.Fatalf("\t\tGot %d, Expected %d.", got, tt.expected)
-		}
-		t.Logf("\t%s\tCorrect value returend.", succeed)
+	t.Parallel()
+	for name, tt := range maxTests {
+		name, tt = name, tt
+		t.Run(name, func(t *testing.T) {
+			got, err := slices.Max(tt.input)
+			if err != nil {
+				if tt.shouldError == false {
+					t.Fatalf("slices.Max(%#v) returned error %v", tt.input, err)
+				}
+				return
+			}
+			if got != tt.expected {
+				t.Fatalf("slices.Max(%#v) returned %d; expected %d.", tt.input, got, tt.expected)
+			}
+		})
 	}
 }
