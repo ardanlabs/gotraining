@@ -10,7 +10,7 @@ const (
 	numBuckets = 256 // Number of buckets in hash
 )
 
-// entry in the hash table
+// An entry where we store key and value in the hash
 type entry struct {
 	key   string
 	value int
@@ -19,7 +19,7 @@ type entry struct {
 // Hash is a simple Hash table
 type Hash struct {
 	buckets [][]*entry
-	h       maphash.Hash
+	hash    maphash.Hash
 }
 
 // NewHash returns a new hash table
@@ -32,7 +32,8 @@ func NewHash() *Hash {
 // Set sets the key to value in the hash
 func (h *Hash) Set(key string, value int) {
 	b := h.hashKey(key)
-	// Look for existing key
+
+	// Iterate over the entries for the specified bucket.
 	for _, e := range h.buckets[b] {
 		if e.key == key {
 			e.value = value
@@ -61,14 +62,7 @@ func (h *Hash) Delete(key string) error {
 	bucket := h.buckets[b]
 	for i, e := range bucket {
 		if e.key == key {
-			copy(bucket[i:], bucket[i+1:])
-			bucket = bucket[:len(bucket)-1]
-			// Free memory when bucket shrinks a lot
-			if cap(bucket) > 2*len(bucket) {
-				nb := make([]*entry, len(bucket))
-				copy(nb, bucket)
-				bucket = nb
-			}
+			bucket = removeEntry(bucket, i)
 			h.buckets[b] = bucket
 			return nil
 		}
@@ -100,8 +94,27 @@ func (h *Hash) Do(fn func(key string, value int) bool) {
 
 // hashKey returns the bucket index for key
 func (h *Hash) hashKey(key string) int {
-	h.h.Reset()
-	h.h.WriteString(key)
-	n := h.h.Sum64()
+	h.hash.Reset()
+	h.hash.WriteString(key)
+	n := h.hash.Sum64()
+
+	// Return a value in [0:(len(buckets)-1]
 	return int(n % uint64(len(h.buckets)))
+}
+
+// Remve an entry from a bucket
+func removeEntry(bucket []*entry, i int) []*entry {
+	copy(bucket[i:], bucket[i+1:])
+	bucket = bucket[:len(bucket)-1]
+
+	if cap(bucket) < 2*len(bucket) {
+		return bucket
+	}
+
+	// Free memory when the bucket shrinks a lot. If we don't do that,
+	// the underlying bucket array will stay in memory and will be in
+	// the biggest size the bucket ever was
+	newBucket := make([]*entry, len(bucket))
+	copy(newBucket, bucket)
+	return newBucket
 }
