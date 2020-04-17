@@ -11,3 +11,39 @@ type Node struct {
 type BST struct {
 	root *Node
 }
+
+func (bst *BST) Insert(value int) {
+
+	// Create a new node.
+	n := &Node{
+		Data:  value,
+		left:  nil,
+		right: nil,
+	}
+
+	if bst.root == nil {
+		bst.root = n
+	} else {
+		insertNode(bst.root, n)
+	}
+}
+
+func insertNode(root, newNode *Node) {
+
+	// Insert into the left side of the tree.
+	if newNode.Data < root.Data {
+		if root.left == nil {
+			root.left = newNode
+		} else {
+			insertNode(root.left, newNode)
+		}
+
+		// Insert into the right side of the tree.
+	} else {
+		if root.right == nil {
+			root.right = newNode
+		} else {
+			insertNode(root.right, newNode)
+		}
+	}
+}
