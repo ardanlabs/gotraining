@@ -22,10 +22,29 @@ func (bst *BST) Insert(value int) {
 		right: nil,
 	}
 
+	// If the root node is nil set the root node
+	// to n
 	if bst.root == nil {
 		bst.root = n
 	} else {
 		insertNode(bst.root, n)
+	}
+}
+
+// Max returns the max int
+func (bst *BST) Max() int {
+
+	currentNode := bst.root
+
+	if currentNode == nil {
+		return -1
+	}
+
+	for {
+		if currentNode.right == nil {
+			return currentNode.Data
+		}
+		currentNode = currentNode.right
 	}
 }
 
