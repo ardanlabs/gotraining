@@ -48,6 +48,23 @@ func (bst *BST) Max() int {
 	}
 }
 
+// Min returns the min int
+func (bst *BST) Min() int {
+
+	currentNode := bst.root
+
+	if currentNode == nil {
+		return -1
+	}
+
+	for {
+		if currentNode.left == nil {
+			return currentNode.Data
+		}
+		currentNode = currentNode.left
+	}
+}
+
 func insertNode(root, newNode *Node) {
 
 	// Insert into the left side of the tree.

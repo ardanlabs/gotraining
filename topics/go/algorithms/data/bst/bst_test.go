@@ -30,3 +30,9 @@ func TestMax(t *testing.T) {
 		t.Errorf("Max should be 10 but, got %d\n", tree.Max())
 	}
 }
+
+func TestMin(t *testing.T) {
+	if tree.Min() != 1 {
+		t.Errorf("Min should be 1 but, got %d\n", tree.Min())
+	}
+}
