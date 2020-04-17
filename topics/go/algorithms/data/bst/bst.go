@@ -1,5 +1,7 @@
 package bst
 
+// TODO This is currently a draft...
+
 // Node represents the data being stored.
 type Node struct {
 	Data  int
