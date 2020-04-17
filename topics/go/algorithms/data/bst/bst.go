@@ -12,6 +12,7 @@ type BST struct {
 	root *Node
 }
 
+// Insert an integer into the BST.
 func (bst *BST) Insert(value int) {
 
 	// Create a new node.
