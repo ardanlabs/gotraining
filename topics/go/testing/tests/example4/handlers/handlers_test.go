@@ -36,9 +36,9 @@ func TestSendJSON(t *testing.T) {
 		t.Logf("\tTest 0:\tWhen checking %q for status code %d", url, statusCode)
 		{
 			if w.Code != 200 {
-				t.Fatalf("\t%s\tShould receive a status code of %d for the response. Received[%d].", failed, statusCode, w.Code)
+				t.Fatalf("\t%s\tTest 0:\tShould receive a status code of %d for the response. Received[%d].", failed, statusCode, w.Code)
 			}
-			t.Logf("\t%s\tShould receive a status code of %d for the response.", succeed, statusCode)
+			t.Logf("\t%s\tTest 0:\tShould receive a status code of %d for the response.", succeed, statusCode)
 
 			var u struct {
 				Name  string
@@ -46,20 +46,20 @@ func TestSendJSON(t *testing.T) {
 			}
 
 			if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
-				t.Fatalf("\t%s\tShould be able to decode the response.", failed)
+				t.Fatalf("\t%s\tTest 0:\tShould be able to decode the response.", failed)
 			}
-			t.Logf("\t%s\tShould be able to decode the response.", succeed)
+			t.Logf("\t%s\tTest 0:\tShould be able to decode the response.", succeed)
 
 			if u.Name == "Bill" {
-				t.Logf("\t%s\tShould have \"Bill\" for Name in the response.", succeed)
+				t.Logf("\t%s\tTest 0:\tShould have \"Bill\" for Name in the response.", succeed)
 			} else {
-				t.Errorf("\t%s\tShould have \"Bill\" for Name in the response : %q", failed, u.Name)
+				t.Errorf("\t%s\tTest 0:\tShould have \"Bill\" for Name in the response : %q", failed, u.Name)
 			}
 
 			if u.Email == "bill@ardanlabs.com" {
-				t.Logf("\t%s\tShould have \"bill@ardanlabs.com\" for Email in the response.", succeed)
+				t.Logf("\t%s\tTest 0:\tShould have \"bill@ardanlabs.com\" for Email in the response.", succeed)
 			} else {
-				t.Errorf("\t%s\tShould have \"bill@ardanlabs.com\" for Email in the response : %q", failed, u.Email)
+				t.Errorf("\t%s\tTest 0:\tShould have \"bill@ardanlabs.com\" for Email in the response : %q", failed, u.Email)
 			}
 		}
 	}

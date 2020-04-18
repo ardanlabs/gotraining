@@ -22,21 +22,21 @@ func TestReverseString(t *testing.T) {
 		{"tworunes", "é́́", "é́́"},
 	}
 
-	for _, test := range tt {
-		tf := func(t *testing.T) {
-			t.Log("Given the need to test reverse string functionality.")
-			{
-				t.Logf("\tWhen checking the word %q.", test.input)
+	t.Log("Given the need to test reverse string functionality.")
+	{
+		for testID, test := range tt {
+			tf := func(t *testing.T) {
+				t.Logf("\tTest: %d\tWhen checking the word %q.", testID, test.input)
 				{
 					got := strings.ReverseString(test.input)
 					if got != test.expected {
-						t.Logf("\t%s\tShould have gotten back the string reversed.", failed)
-						t.Fatalf("\t\tGot %q, Expected %q", got, test.expected)
+						t.Logf("\t%s\tTest: %d\tShould have gotten back the string reversed.", failed, testID)
+						t.Fatalf("\t\tTest: %d\tGot %q, Expected %q", testID, got, test.expected)
 					}
-					t.Logf("\t%s\tShould have gotten back the string reversed.", succeed)
+					t.Logf("\t%s\tTest: %d\tShould have gotten back the string reversed.", succeed, testID)
 				}
 			}
+			t.Run(test.name, tf)
 		}
-		t.Run(test.name, tf)
 	}
 }

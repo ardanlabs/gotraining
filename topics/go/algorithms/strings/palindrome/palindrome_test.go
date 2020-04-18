@@ -23,28 +23,28 @@ func TestIsPalindrome(t *testing.T) {
 		{"not", "test", false},
 	}
 
-	for _, test := range tt {
-		tf := func(t *testing.T) {
-			t.Log("Given the need to test palindrome functionality.")
-			{
-				t.Logf("\tWhen checking the word %q.", test.input)
+	t.Log("Given the need to test palindrome functionality.")
+	{
+		for testID, test := range tt {
+			tf := func(t *testing.T) {
+				t.Logf("\tTest: %d\tWhen checking the word %q.", testID, test.input)
 				{
 					got := strings.IsPalindrome(test.input)
 					switch test.success {
 					case true:
 						if !got {
-							t.Fatalf("\t%s\tShould have seen the string was a palindrome.", failed)
+							t.Fatalf("\t%s\tTest: %d\tShould have seen the string was a palindrome.", failed, testID)
 						}
-						t.Logf("\t%s\tShould have seen the string was a palindrome.", succeed)
+						t.Logf("\t%s\tTest: %d\tShould have seen the string was a palindrome.", succeed, testID)
 					case false:
 						if got {
-							t.Fatalf("\t%s\tShould have seen the string was not a palindrome.", failed)
+							t.Fatalf("\t%s\tTest: %d\tShould have seen the string was not a palindrome.", failed, testID)
 						}
-						t.Logf("\t%s\tShould have seen the string was not a palindrome.", succeed)
+						t.Logf("\t%s\tTest: %d\tShould have seen the string was not a palindrome.", succeed, testID)
 					}
 				}
 			}
+			t.Run(test.name, tf)
 		}
-		t.Run(test.name, tf)
 	}
 }

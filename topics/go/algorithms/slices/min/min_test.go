@@ -23,35 +23,35 @@ func TestMax(t *testing.T) {
 		{"odd", []int{30, 50, 10}, 10, true},
 	}
 
-	for _, test := range tt {
-		tf := func(t *testing.T) {
-			t.Log("Given the need to test Min functionality.")
-			{
-				t.Logf("\tWhen checking the %q state.", test.name)
+	t.Log("Given the need to test Min functionality.")
+	{
+		for testID, test := range tt {
+			tf := func(t *testing.T) {
+				t.Logf("\tTest: %d\tWhen checking the %q state.", testID, test.name)
 				{
 					got, err := slices.Min(test.input)
 					switch test.success {
 					case true:
 						if err != nil {
-							t.Fatalf("\t%s\tShould be able to run Min without an error : %v", failed, err)
+							t.Fatalf("\t%s\tTest: %d\tShould be able to run Min without an error : %v", failed, testID, err)
 						}
-						t.Logf("\t%s\tShould be able to run Min without an error.", succeed)
+						t.Logf("\t%s\tTest: %d\tShould be able to run Min without an error.", succeed, testID)
 
 					case false:
 						if err == nil {
-							t.Fatalf("\t%s\tShould have seen an error for Min.", failed)
+							t.Fatalf("\t%s\tTest: %d\tShould have seen an error for Min.", failed, testID)
 						}
-						t.Logf("\t%s\tShould have seen an error for Min.", succeed)
+						t.Logf("\t%s\tTest: %d\tShould have seen an error for Min.", succeed, testID)
 					}
 
 					if got != test.expected {
-						t.Logf("\t%s\tShould have gotten back the right min value.", failed)
-						t.Fatalf("\t\tGot %v, Expected %v", got, test.expected)
+						t.Logf("\t%s\tTest: %d\tShould have gotten back the right min value.", failed, testID)
+						t.Fatalf("\t\tTest: %d\tGot %v, Expected %v", testID, got, test.expected)
 					}
-					t.Logf("\t%s\tShould have gotten back the right min value.", succeed)
+					t.Logf("\t%s\tTest: %d\tShould have gotten back the right min value.", succeed, testID)
 				}
 			}
+			t.Run(test.name, tf)
 		}
-		t.Run(test.name, tf)
 	}
 }

@@ -22,28 +22,28 @@ func TestIsPermutation(t *testing.T) {
 		{"binary", "1001", "0110", true},
 	}
 
-	for _, test := range tt {
-		tf := func(t *testing.T) {
-			t.Log("Given the need to test permutation functionality.")
-			{
-				t.Logf("\tWhen checking the words %q and %q.", test.input, test.input2)
+	t.Log("Given the need to test permutation functionality.")
+	{
+		for testID, test := range tt {
+			tf := func(t *testing.T) {
+				t.Logf("\tTest: %d\tWhen checking the words %q and %q.", testID, test.input, test.input2)
 				{
 					got := strings.IsPermutation(test.input, test.input2)
 					switch test.success {
 					case true:
 						if !got {
-							t.Fatalf("\t%s\tShould have seen the string was a permutation.", failed)
+							t.Fatalf("\t%s\tTest: %d\tShould have seen the string was a permutation.", failed, testID)
 						}
-						t.Logf("\t%s\tShould have seen the string was a permutation.", succeed)
+						t.Logf("\t%s\tTest: %d\tShould have seen the string was a permutation.", succeed, testID)
 					case false:
 						if got {
-							t.Fatalf("\t%s\tShould have seen the string was not a permutation.", failed)
+							t.Fatalf("\t%s\tTest: %d\tShould have seen the string was not a permutation.", failed, testID)
 						}
-						t.Logf("\t%s\tShould have seen the string was not a permutation.", succeed)
+						t.Logf("\t%s\tTest: %d\tShould have seen the string was not a permutation.", succeed, testID)
 					}
 				}
 			}
+			t.Run(test.name, tf)
 		}
-		t.Run(test.name, tf)
 	}
 }

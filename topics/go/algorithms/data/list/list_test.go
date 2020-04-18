@@ -27,10 +27,10 @@ func TestAdd(t *testing.T) {
 			}
 
 			if l.Count != nodes {
-				t.Logf("\t%s\tShould be able to add %d nodes.", failed, nodes)
-				t.Fatalf("\t\tGot %d, Expected %d.", l.Count, nodes)
+				t.Logf("\t%s\tTest: 0\tShould be able to add %d nodes.", failed, nodes)
+				t.Fatalf("\t\tTest: 0\tGot %d, Expected %d.", l.Count, nodes)
 			}
-			t.Logf("\t%s\tShould be able to add %d nodes.", succeed, nodes)
+			t.Logf("\t%s\tTest: 0\tShould be able to add %d nodes.", succeed, nodes)
 
 			var nodeData string
 			f := func(n *list.Node) error {
@@ -38,15 +38,15 @@ func TestAdd(t *testing.T) {
 				return nil
 			}
 			if err := l.Operate(f); err != nil {
-				t.Fatalf("\t%s\tShould be able to operate on the list : %v", failed, err)
+				t.Fatalf("\t%s\tTest: 0\tShould be able to operate on the list : %v", failed, err)
 			}
-			t.Logf("\t%s\tShould be able to operate on the list.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould be able to operate on the list.", succeed)
 
 			if nodeData != orgNodeData {
-				t.Logf("\t%s\tShould be able to traverse over %d nodes in order.", failed, nodes)
-				t.Fatalf("\t\tGot %s, Expected %s.", nodeData, orgNodeData)
+				t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in order.", failed, nodes)
+				t.Fatalf("\t\tTest: 0\tGot %s, Expected %s.", nodeData, orgNodeData)
 			}
-			t.Logf("\t%s\tShould be able to traverse over %d nodes in order.", succeed, nodes)
+			t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in order.", succeed, nodes)
 		}
 	}
 }
@@ -68,10 +68,10 @@ func TestAddFront(t *testing.T) {
 			}
 
 			if l.Count != nodes {
-				t.Logf("\t%s\tShould be able to add %d nodes.", failed, nodes)
-				t.Fatalf("\t\tGot %d, Expected %d.", l.Count, nodes)
+				t.Logf("\t%s\tTest: 0\tShould be able to add %d nodes.", failed, nodes)
+				t.Fatalf("\t\tTest: 0\tGot %d, Expected %d.", l.Count, nodes)
 			}
-			t.Logf("\t%s\tShould be able to add %d nodes.", succeed, nodes)
+			t.Logf("\t%s\tTest: 0\tShould be able to add %d nodes.", succeed, nodes)
 
 			var nodeData string
 			f := func(n *list.Node) error {
@@ -79,15 +79,15 @@ func TestAddFront(t *testing.T) {
 				return nil
 			}
 			if err := l.OperateReverse(f); err != nil {
-				t.Fatalf("\t%s\tShould be able to operate on the list : %v", failed, err)
+				t.Fatalf("\t%s\tTest: 0\tShould be able to operate on the list : %v", failed, err)
 			}
-			t.Logf("\t%s\tShould be able to operate on the list.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould be able to operate on the list.", succeed)
 
 			if nodeData != orgNodeData {
-				t.Logf("\t%s\tShould be able to traverse over %d nodes in reverse order.", failed, nodes)
-				t.Fatalf("\t\tGot %s, Expected %s.", nodeData, orgNodeData)
+				t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in reverse order.", failed, nodes)
+				t.Fatalf("\t\tTest: 0\tGot %s, Expected %s.", nodeData, orgNodeData)
 			}
-			t.Logf("\t%s\tShould be able to traverse over %d nodes in reverse order.", succeed, nodes)
+			t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in reverse order.", succeed, nodes)
 		}
 	}
 }
@@ -111,15 +111,15 @@ func TestFind(t *testing.T) {
 			data := "Node3"
 			n, err := l.Find(data)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to call Find with no error : %v", failed, err)
+				t.Fatalf("\t%s\tTest: 0\tShould be able to call Find with no error : %v", failed, err)
 			}
-			t.Logf("\t%s\tShould be able to call Find with no error.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould be able to call Find with no error.", succeed)
 
 			if n.Data != data {
-				t.Logf("\t%s\tShould be able to find %q : %v", failed, data, err)
-				t.Fatalf("\t\tGot %s, Expected %s.", n.Data, data)
+				t.Logf("\t%s\tTest: 0\tShould be able to find %q : %v", failed, data, err)
+				t.Fatalf("\t\tTest: 0\tGot %s, Expected %s.", n.Data, data)
 			}
-			t.Logf("\t%s\tShould be able to find %q.", succeed, data)
+			t.Logf("\t%s\tTest: 0\tShould be able to find %q.", succeed, data)
 		}
 	}
 }
@@ -143,15 +143,15 @@ func TestFindReverse(t *testing.T) {
 			data := "Node3"
 			n, err := l.FindReverse(data)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to call FindReverse with no error : %v", failed, err)
+				t.Fatalf("\t%s\tTest: 0\tShould be able to call FindReverse with no error : %v", failed, err)
 			}
-			t.Logf("\t%s\tShould be able to call FindReverse with no error.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould be able to call FindReverse with no error.", succeed)
 
 			if n.Data != data {
-				t.Logf("\t%s\tShould be able to find %q : %v", failed, data, err)
-				t.Fatalf("\t\tGot %s, Expected %s.", n.Data, data)
+				t.Logf("\t%s\tTest: 0\tShould be able to find %q : %v", failed, data, err)
+				t.Fatalf("\t\tTest: 0\tGot %s, Expected %s.", n.Data, data)
 			}
-			t.Logf("\t%s\tShould be able to find %q.", succeed, data)
+			t.Logf("\t%s\tTest: 0\tShould be able to find %q.", succeed, data)
 		}
 	}
 }
@@ -175,21 +175,21 @@ func TestRemove(t *testing.T) {
 			data := "Node3"
 			n, err := l.Remove(data)
 			if err != nil {
-				t.Fatalf("\t%s\tShould be able to call Remove with no error : %v", failed, err)
+				t.Fatalf("\t%s\tTest: 0\tShould be able to call Remove with no error : %v", failed, err)
 			}
-			t.Logf("\t%s\tShould be able to call Remove with no error.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould be able to call Remove with no error.", succeed)
 
 			if n.Data != data {
-				t.Logf("\t%s\tShould be able to remove %q : %v", failed, data, err)
-				t.Fatalf("\t\tGot %s, Expected %s.", n.Data, data)
+				t.Logf("\t%s\tTest: 0\tShould be able to remove %q : %v", failed, data, err)
+				t.Fatalf("\t\tTest: 0\tGot %s, Expected %s.", n.Data, data)
 			}
-			t.Logf("\t%s\tShould be able to remove %q.", succeed, data)
+			t.Logf("\t%s\tTest: 0\tShould be able to remove %q.", succeed, data)
 
 			n, err = l.Find(data)
 			if err == nil {
-				t.Fatalf("\t%s\tShould not be able to call Find without an error.", failed)
+				t.Fatalf("\t%s\tTest: 0\tShould not be able to call Find without an error.", failed)
 			}
-			t.Logf("\t%s\tShould not be able to call Find without an error.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould not be able to call Find without an error.", succeed)
 		}
 	}
 }
@@ -208,10 +208,10 @@ func TestAddSort(t *testing.T) {
 			}
 
 			if l.Count != len(orgNodeData) {
-				t.Logf("\t%s\tShould be able to add %d nodes.", failed, len(orgNodeData))
-				t.Fatalf("\t\tGot %d, Expected %d.", l.Count, len(orgNodeData))
+				t.Logf("\t%s\tTest: 0\tShould be able to add %d nodes.", failed, len(orgNodeData))
+				t.Fatalf("\t\tTest: 0\tGot %d, Expected %d.", l.Count, len(orgNodeData))
 			}
-			t.Logf("\t%s\tShould be able to add %d nodes.", succeed, len(orgNodeData))
+			t.Logf("\t%s\tTest: 0\tShould be able to add %d nodes.", succeed, len(orgNodeData))
 
 			var nodeData string
 			f := func(n *list.Node) error {
@@ -219,16 +219,16 @@ func TestAddSort(t *testing.T) {
 				return nil
 			}
 			if err := l.Operate(f); err != nil {
-				t.Fatalf("\t%s\tShould be able to operate on the list : %v", failed, err)
+				t.Fatalf("\t%s\tTest: 0\tShould be able to operate on the list : %v", failed, err)
 			}
-			t.Logf("\t%s\tShould be able to operate on the list.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould be able to operate on the list.", succeed)
 
 			sortedNodeData := "applegrapekiwimangoplum"
 			if sortedNodeData != nodeData {
-				t.Logf("\t%s\tShould be able to traverse over %d nodes in sort order.", failed, len(orgNodeData))
-				t.Fatalf("\t\tGot %s, Expected %s.", nodeData, sortedNodeData)
+				t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in sort order.", failed, len(orgNodeData))
+				t.Fatalf("\t\tTest: 0\tGot %s, Expected %s.", nodeData, sortedNodeData)
 			}
-			t.Logf("\t%s\tShould be able to traverse over %d nodes in sort order.", succeed, len(orgNodeData))
+			t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in sort order.", succeed, len(orgNodeData))
 
 			nodeData = ""
 			f = func(n *list.Node) error {
@@ -236,16 +236,16 @@ func TestAddSort(t *testing.T) {
 				return nil
 			}
 			if err := l.OperateReverse(f); err != nil {
-				t.Fatalf("\t%s\tShould be able to operate reverse on the list : %v", failed, err)
+				t.Fatalf("\t%s\tTest: 0\tShould be able to operate reverse on the list : %v", failed, err)
 			}
-			t.Logf("\t%s\tShould be able to operate reverse on the list.", succeed)
+			t.Logf("\t%s\tTest: 0\tShould be able to operate reverse on the list.", succeed)
 
 			sortedNodeData = "plummangokiwigrapeapple"
 			if sortedNodeData != nodeData {
-				t.Logf("\t%s\tShould be able to traverse over %d nodes in reverse sort order.", failed, len(orgNodeData))
-				t.Fatalf("\t\tGot %s, Expected %s.", nodeData, sortedNodeData)
+				t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in reverse sort order.", failed, len(orgNodeData))
+				t.Fatalf("\t\tTest: 0\tGot %s, Expected %s.", nodeData, sortedNodeData)
 			}
-			t.Logf("\t%s\tShould be able to traverse over %d nodes in reverse sort order.", succeed, len(orgNodeData))
+			t.Logf("\t%s\tTest: 0\tShould be able to traverse over %d nodes in reverse sort order.", succeed, len(orgNodeData))
 		}
 	}
 }

@@ -20,7 +20,7 @@ const failed = "\u2717"
 // TestDownload validates the http Get function can download content and
 // handles different status conditions properly.
 func TestDownload(t *testing.T) {
-	tests := []struct {
+	tt := []struct {
 		name       string
 		url        string
 		statusCode int
@@ -31,27 +31,27 @@ func TestDownload(t *testing.T) {
 
 	t.Log("Given the need to test downloading different content.")
 	{
-		for i, tt := range tests {
+		for i, test := range tt {
 			tf := func(t *testing.T) {
-				t.Logf("\tTest: %d\tWhen checking %q for status code %d", i, tt.url, tt.statusCode)
+				t.Logf("\tTest: %d\tWhen checking %q for status code %d", i, test.url, test.statusCode)
 				{
-					resp, err := http.Get(tt.url)
+					resp, err := http.Get(test.url)
 					if err != nil {
-						t.Fatalf("\t%s\tShould be able to make the Get call : %v", failed, err)
+						t.Fatalf("\t%s\tTest: %d\tShould be able to make the Get call : %v", failed, i, err)
 					}
-					t.Logf("\t%s\tShould be able to make the Get call.", succeed)
+					t.Logf("\t%s\tTest: %d\tShould be able to make the Get call.", succeed, i)
 
 					defer resp.Body.Close()
 
-					if resp.StatusCode == tt.statusCode {
-						t.Logf("\t%s\tShould receive a %d status code.", succeed, tt.statusCode)
+					if resp.StatusCode == test.statusCode {
+						t.Logf("\t%s\tTest: %d\tShould receive a %d status code.", succeed, i, test.statusCode)
 					} else {
-						t.Errorf("\t%s\tShould receive a %d status code : %v", failed, tt.statusCode, resp.StatusCode)
+						t.Errorf("\t%s\tTest: %d\tShould receive a %d status code : %v", failed, i, test.statusCode, resp.StatusCode)
 					}
 				}
 			}
 
-			t.Run(tt.name, tf)
+			t.Run(test.name, tf)
 		}
 	}
 }
@@ -59,40 +59,44 @@ func TestDownload(t *testing.T) {
 // TestParallelize validates the http Get function can download content and
 // handles different status conditions properly but runs the tests in parallel.
 func TestParallelize(t *testing.T) {
-	tests := []struct {
+	type tableTest struct {
 		name       string
 		url        string
 		statusCode int
-	}{
-		{"statusok", "https://www.goinggo.net/post/index.xml", http.StatusOK},
+	}
+
+	tt := []tableTest{
+		{"statusok", "https://www.ardanlabs.com/blog/index.xml", http.StatusOK},
 		{"statusnotfound", "http://rss.cnn.com/rss/cnn_topstorie.rss", http.StatusNotFound},
 	}
 
 	t.Log("Given the need to test downloading different content.")
 	{
-		for i, tt := range tests {
-			tf := func(t *testing.T) {
-				t.Parallel()
+		for testID, test := range tt {
+			tf := func(testID int, test tableTest) func(t *testing.T) {
+				return func(t *testing.T) {
+					t.Parallel()
 
-				t.Logf("\tTest: %d\tWhen checking %q for status code %d", i, tt.url, tt.statusCode)
-				{
-					resp, err := http.Get(tt.url)
-					if err != nil {
-						t.Fatalf("\t%s\tShould be able to make the Get call : %v", failed, err)
-					}
-					t.Logf("\t%s\tShould be able to make the Get call.", succeed)
+					t.Logf("\tTest: %d\tWhen checking %q for status code %d", testID, test.url, test.statusCode)
+					{
+						resp, err := http.Get(test.url)
+						if err != nil {
+							t.Fatalf("\t%s\tTest: %d\tShould be able to make the Get call : %v", failed, testID, err)
+						}
+						t.Logf("\t%s\tTest: %d\tShould be able to make the Get call.", succeed, testID)
 
-					defer resp.Body.Close()
+						defer resp.Body.Close()
 
-					if resp.StatusCode == tt.statusCode {
-						t.Logf("\t%s\tShould receive a %d status code.", succeed, tt.statusCode)
-					} else {
-						t.Errorf("\t%s\tShould receive a %d status code : %v", failed, tt.statusCode, resp.StatusCode)
+						if resp.StatusCode == test.statusCode {
+							t.Logf("\t%s\tTest: %d\tShould receive a %d status code.", succeed, testID, test.statusCode)
+						} else {
+							t.Errorf("\t%s\tTest: %d\tShould receive a %d status code : %v", failed, testID, test.statusCode, resp.StatusCode)
+						}
 					}
 				}
 			}
 
-			t.Run(tt.name, tf)
+			t.Run(test.name, tf(testID, test))
 		}
 	}
 }
