@@ -18,14 +18,14 @@ type entry struct {
 
 // Hash is a simple Hash table
 type Hash struct {
-	buckets [][]*entry
+	buckets [][]entry
 	hash    maphash.Hash
 }
 
 // NewHash returns a new hash table
 func NewHash() *Hash {
 	return &Hash{
-		buckets: make([][]*entry, numBuckets),
+		buckets: make([][]entry, numBuckets),
 	}
 }
 
@@ -34,14 +34,17 @@ func (h *Hash) Set(key string, value int) {
 	b := h.hashKey(key)
 
 	// Iterate over the entries for the specified bucket.
-	for _, e := range h.buckets[b] {
-		if e.key == key {
-			e.value = value
+	bucket := h.buckets[b]
+	for i := range bucket {
+		if bucket[i].key == key {
+
+			// TODO: Comment about why we can't do e.value = value
+			bucket[i] = entry{key, value}
 			return
 		}
 	}
 
-	h.buckets[b] = append(h.buckets[b], &entry{key, value})
+	h.buckets[b] = append(h.buckets[b], entry{key, value})
 }
 
 // Get gets the value associated with key, return a error is key not found
@@ -73,6 +76,8 @@ func (h *Hash) Delete(key string) error {
 
 // Len return the number of elements in the hash
 func (h *Hash) Len() int {
+	// TODO: As speed optimization we can keen a `size` field and update it on
+	// every Set & Delete
 	size := 0
 	for _, b := range h.buckets {
 		size += len(b)
@@ -103,7 +108,7 @@ func (h *Hash) hashKey(key string) int {
 }
 
 // Remve an entry from a bucket
-func removeEntry(bucket []*entry, i int) []*entry {
+func removeEntry(bucket []entry, i int) []entry {
 	copy(bucket[i:], bucket[i+1:])
 	bucket = bucket[:len(bucket)-1]
 
@@ -114,7 +119,7 @@ func removeEntry(bucket []*entry, i int) []*entry {
 	// Free memory when the bucket shrinks a lot. If we don't do that,
 	// the underlying bucket array will stay in memory and will be in
 	// the biggest size the bucket ever was
-	newBucket := make([]*entry, len(bucket))
+	newBucket := make([]entry, len(bucket))
 	copy(newBucket, bucket)
 	return newBucket
 }
