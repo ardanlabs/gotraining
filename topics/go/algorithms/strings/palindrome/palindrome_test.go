@@ -1,35 +1,50 @@
 package strings_test
 
 import (
-	strings "github.com/ardanlabs/gotraining/topics/go/algorithms/strings/palindrome"
 	"testing"
+
+	strings "github.com/ardanlabs/gotraining/topics/go/algorithms/strings/palindrome"
 )
 
 const succeed = "\u2713"
 const failed = "\u2717"
 
 func TestIsPalindrome(t *testing.T) {
-
-	revTests := []struct {
-		name     string
-		input    string
-		expected bool
+	tt := []struct {
+		name    string
+		input   string
+		success bool
 	}{
-		{"empty string", "", true},
-		{"string with length of 1", "G", true},
-		{"string with odd length", "bob", true},
-		{"string with even length", "otto", true},
+		{"empty", "", true},
+		{"one", "G", true},
+		{"odd", "bob", true},
+		{"even", "otto", true},
 		{"chinese", "汉字汉", true},
-		{"failed test", "test", true},
+		{"not", "test", false},
 	}
 
-	for _, tt := range revTests {
-		got := strings.IsPalindrome(tt.input)
-		if got != tt.expected {
-			t.Logf("\t%s\tString is a palindrome: %s\n.", failed, tt.input)
-			t.Fatalf("\t\tGot %v, Expected %v.", got, tt.expected)
+	for _, test := range tt {
+		tf := func(t *testing.T) {
+			t.Log("Given the need to test palindrome functionality.")
+			{
+				t.Logf("\tWhen checking the word %q.", test.input)
+				{
+					got := strings.IsPalindrome(test.input)
+					switch test.success {
+					case true:
+						if !got {
+							t.Fatalf("\t%s\tShould have seen the string was a palindrome.", failed)
+						}
+						t.Logf("\t%s\tShould have seen the string was a palindrome.", succeed)
+					case false:
+						if got {
+							t.Fatalf("\t%s\tShould have seen the string was not a palindrome.", failed)
+						}
+						t.Logf("\t%s\tShould have seen the string was not a palindrome.", succeed)
+					}
+				}
+			}
 		}
-		t.Logf("\t%s\tString %s is a palindrome.", succeed, tt.input)
-
+		t.Run(test.name, tf)
 	}
 }

@@ -1,5 +1,6 @@
 package strings
 
+// ReverseString takes the specified string and reverses it.
 func ReverseString(str string) string {
 
 	// Convert the input string into slice of runes for processing.
@@ -26,7 +27,6 @@ func ReverseString(str string) string {
 		// working towards the middle of the collection.
 		beg = beg + 1
 		end = end - 1
-
 	}
 
 	return string(runes)

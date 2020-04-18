@@ -1,18 +1,25 @@
 package slices
 
-// Min returns the minimum integer in the slice.
-func Min(n []int) int {
+import "fmt"
 
-	// If the length of the slice is 1 then return the integer at index 0.
-	if len(n) == 1 {
-		return n[0]
+// Min returns the minimum integer in the slice.
+func Min(n []int) (int, error) {
+
+	// First check there are numbers in the collection.
+	if len(n) == 0 {
+		return 0, fmt.Errorf("slice %#v has no elements", n)
 	}
 
-	// Create an integer and assign it to the first index of the slice.
-	min := n[0]
+	// If the length of the slice is 1 then return the
+	// integer at index 0.
+	if len(n) == 1 {
+		return n[0], nil
+	}
 
-	// Loop over the slice of integers.
-	for _, num := range n {
+	// Save the first value as current min and then loop over
+	// the slice of integers looking for a smaller number.
+	min := n[0]
+	for _, num := range n[1:] {
 
 		// If num is less than min. Assign min to num.
 		if num < min {
@@ -20,5 +27,5 @@ func Min(n []int) int {
 		}
 	}
 
-	return min
+	return min, nil
 }
