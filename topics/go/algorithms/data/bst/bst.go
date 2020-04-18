@@ -67,6 +67,22 @@ func (bst *BST) Min() int {
 	}
 }
 
+// Search return a bool.
+func (bst *BST) Search(value int) bool {
+
+	currentNode := bst.root
+
+	if currentNode == nil {
+		return false
+	}
+
+	if value == currentNode.Data {
+		return true
+	}
+
+	return false
+}
+
 func insertNode(root, newNode *Node) {
 
 	// Insert into the left side of the tree.
