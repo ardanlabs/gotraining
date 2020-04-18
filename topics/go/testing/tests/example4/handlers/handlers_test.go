@@ -33,12 +33,13 @@ func TestSendJSON(t *testing.T) {
 		w := httptest.NewRecorder()
 		http.DefaultServeMux.ServeHTTP(w, r)
 
-		t.Logf("\tTest 0:\tWhen checking %q for status code %d", url, statusCode)
+		testID := 0
+		t.Logf("\tTest %d:\tWhen checking %q for status code %d", testID, url, statusCode)
 		{
 			if w.Code != 200 {
-				t.Fatalf("\t%s\tTest 0:\tShould receive a status code of %d for the response. Received[%d].", failed, statusCode, w.Code)
+				t.Fatalf("\t%s\tTest %d:\tShould receive a status code of %d for the response. Received[%d].", failed, testID, statusCode, w.Code)
 			}
-			t.Logf("\t%s\tTest 0:\tShould receive a status code of %d for the response.", succeed, statusCode)
+			t.Logf("\t%s\tTest %d:\tShould receive a status code of %d for the response.", succeed, testID, statusCode)
 
 			var u struct {
 				Name  string
@@ -46,20 +47,20 @@ func TestSendJSON(t *testing.T) {
 			}
 
 			if err := json.NewDecoder(w.Body).Decode(&u); err != nil {
-				t.Fatalf("\t%s\tTest 0:\tShould be able to decode the response.", failed)
+				t.Fatalf("\t%s\tTest %d:\tShould be able to decode the response.", failed, testID)
 			}
-			t.Logf("\t%s\tTest 0:\tShould be able to decode the response.", succeed)
+			t.Logf("\t%s\tTest %d:\tShould be able to decode the response.", succeed, testID)
 
 			if u.Name == "Bill" {
-				t.Logf("\t%s\tTest 0:\tShould have \"Bill\" for Name in the response.", succeed)
+				t.Logf("\t%s\tTest %d:\tShould have \"Bill\" for Name in the response.", succeed, testID)
 			} else {
-				t.Errorf("\t%s\tTest 0:\tShould have \"Bill\" for Name in the response : %q", failed, u.Name)
+				t.Errorf("\t%s\tTest %d:\tShould have \"Bill\" for Name in the response : %q", failed, testID, u.Name)
 			}
 
 			if u.Email == "bill@ardanlabs.com" {
-				t.Logf("\t%s\tTest 0:\tShould have \"bill@ardanlabs.com\" for Email in the response.", succeed)
+				t.Logf("\t%s\tTest %d:\tShould have \"bill@ardanlabs.com\" for Email in the response.", succeed, testID)
 			} else {
-				t.Errorf("\t%s\tTest 0:\tShould have \"bill@ardanlabs.com\" for Email in the response : %q", failed, u.Email)
+				t.Errorf("\t%s\tTest %d:\tShould have \"bill@ardanlabs.com\" for Email in the response : %q", failed, testID, u.Email)
 			}
 		}
 	}

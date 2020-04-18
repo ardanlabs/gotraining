@@ -26,14 +26,14 @@ func TestReverseString(t *testing.T) {
 	{
 		for testID, test := range tt {
 			tf := func(t *testing.T) {
-				t.Logf("\tTest: %d\tWhen checking the word %q.", testID, test.input)
+				t.Logf("\tTest %d:\tWhen checking the word %q.", testID, test.input)
 				{
 					got := strings.ReverseString(test.input)
 					if got != test.expected {
-						t.Logf("\t%s\tTest: %d\tShould have gotten back the string reversed.", failed, testID)
-						t.Fatalf("\t\tTest: %d\tGot %q, Expected %q", testID, got, test.expected)
+						t.Logf("\t%s\tTest %d:\tShould have gotten back the string reversed.", failed, testID)
+						t.Fatalf("\t\tTest %d:\tGot %q, Expected %q", testID, got, test.expected)
 					}
-					t.Logf("\t%s\tTest: %d\tShould have gotten back the string reversed.", succeed, testID)
+					t.Logf("\t%s\tTest %d:\tShould have gotten back the string reversed.", succeed, testID)
 				}
 			}
 			t.Run(test.name, tf)

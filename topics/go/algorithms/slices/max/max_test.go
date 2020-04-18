@@ -27,28 +27,28 @@ func TestMax(t *testing.T) {
 	{
 		for testID, test := range tt {
 			tf := func(t *testing.T) {
-				t.Logf("\tTest: %d\tWhen checking the %q state.", testID, test.name)
+				t.Logf("\tTest %d:\tWhen checking the %q state.", testID, test.name)
 				{
 					got, err := slices.Max(test.input)
 					switch test.success {
 					case true:
 						if err != nil {
-							t.Fatalf("\t%s\tTest: %d\tShould be able to run Max without an error : %v", failed, testID, err)
+							t.Fatalf("\t%s\tTest %d:\tShould be able to run Max without an error : %v", failed, testID, err)
 						}
-						t.Logf("\t%s\tTest: %d\tShould be able to run Max without an error.", succeed, testID)
+						t.Logf("\t%s\tTest %d:\tShould be able to run Max without an error.", succeed, testID)
 
 					case false:
 						if err == nil {
-							t.Fatalf("\t%s\tTest: %d\tShould have seen an error for Max.", failed, testID)
+							t.Fatalf("\t%s\tTest %d:\tShould have seen an error for Max.", failed, testID)
 						}
-						t.Logf("\t%s\tTest: %d\tShould have seen an error for Max.", succeed, testID)
+						t.Logf("\t%s\tTest %d:\tShould have seen an error for Max.", succeed, testID)
 					}
 
 					if got != test.expected {
-						t.Logf("\t%s\tTest: %d\tShould have gotten back the right max value.", failed, testID)
-						t.Fatalf("\t\tTest: %d\tGot %v, Expected %v", testID, got, test.expected)
+						t.Logf("\t%s\tTest %d:\tShould have gotten back the right max value.", failed, testID)
+						t.Fatalf("\t\tTest %d:\tGot %v, Expected %v", testID, got, test.expected)
 					}
-					t.Logf("\t%s\tTest: %d\tShould have gotten back the right max value.", succeed, testID)
+					t.Logf("\t%s\tTest %d:\tShould have gotten back the right max value.", succeed, testID)
 				}
 			}
 			t.Run(test.name, tf)

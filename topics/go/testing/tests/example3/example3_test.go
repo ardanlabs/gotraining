@@ -79,31 +79,32 @@ func TestDownload(t *testing.T) {
 
 	t.Log("Given the need to test downloading content.")
 	{
-		t.Logf("\tTest 0:\tWhen checking %q for status code %d", server.URL, statusCode)
+		testID := 0
+		t.Logf("\tTest %d:\tWhen checking %q for status code %d", testID, server.URL, statusCode)
 		{
 			resp, err := http.Get(server.URL)
 			if err != nil {
-				t.Fatalf("\t%s\tTest 0:\tShould be able to make the Get call : %v", failed, err)
+				t.Fatalf("\t%s\tTest %d:\tShould be able to make the Get call : %v", failed, testID, err)
 			}
-			t.Logf("\t%s\tTest 0:\tShould be able to make the Get call.", succeed)
+			t.Logf("\t%s\tTest %d:\tShould be able to make the Get call.", succeed, testID)
 
 			defer resp.Body.Close()
 
 			if resp.StatusCode != statusCode {
-				t.Fatalf("\t%s\tTest 0:\tShould receive a %d status code : %v", failed, statusCode, resp.StatusCode)
+				t.Fatalf("\t%s\tTest %d:\tShould receive a %d status code : %v", failed, testID, statusCode, resp.StatusCode)
 			}
-			t.Logf("\t%s\tTest 0:\tShould receive a %d status code.", succeed, statusCode)
+			t.Logf("\t%s\tTest %d:\tShould receive a %d status code.", succeed, testID, statusCode)
 
 			var d Document
 			if err := xml.NewDecoder(resp.Body).Decode(&d); err != nil {
-				t.Fatalf("\t%s\tTest 0:\tShould be able to unmarshal the response : %v", failed, err)
+				t.Fatalf("\t%s\tTest %d:\tShould be able to unmarshal the response : %v", failed, testID, err)
 			}
-			t.Logf("\t%s\tTest 0:\tShould be able to unmarshal the response.", succeed)
+			t.Logf("\t%s\tTest %d:\tShould be able to unmarshal the response.", succeed, testID)
 
 			if len(d.Channel.Items) == 1 {
-				t.Logf("\t%s\tTest 0:\tShould have 1 item in the feed.", succeed)
+				t.Logf("\t%s\tTest %d:\tShould have 1 item in the feed.", succeed, testID)
 			} else {
-				t.Errorf("\t%s\tTest 0:\tShould have 1 item in the feed : %d", failed, len(d.Channel.Items))
+				t.Errorf("\t%s\tTest %d:\tShould have 1 item in the feed : %d", failed, testID, len(d.Channel.Items))
 			}
 		}
 	}

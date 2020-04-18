@@ -26,20 +26,20 @@ func TestIsPermutation(t *testing.T) {
 	{
 		for testID, test := range tt {
 			tf := func(t *testing.T) {
-				t.Logf("\tTest: %d\tWhen checking the words %q and %q.", testID, test.input, test.input2)
+				t.Logf("\tTest %d:\tWhen checking the words %q and %q.", testID, test.input, test.input2)
 				{
 					got := strings.IsPermutation(test.input, test.input2)
 					switch test.success {
 					case true:
 						if !got {
-							t.Fatalf("\t%s\tTest: %d\tShould have seen the string was a permutation.", failed, testID)
+							t.Fatalf("\t%s\tTest %d:\tShould have seen the string was a permutation.", failed, testID)
 						}
-						t.Logf("\t%s\tTest: %d\tShould have seen the string was a permutation.", succeed, testID)
+						t.Logf("\t%s\tTest %d:\tShould have seen the string was a permutation.", succeed, testID)
 					case false:
 						if got {
-							t.Fatalf("\t%s\tTest: %d\tShould have seen the string was not a permutation.", failed, testID)
+							t.Fatalf("\t%s\tTest %d:\tShould have seen the string was not a permutation.", failed, testID)
 						}
-						t.Logf("\t%s\tTest: %d\tShould have seen the string was not a permutation.", succeed, testID)
+						t.Logf("\t%s\tTest %d:\tShould have seen the string was not a permutation.", succeed, testID)
 					}
 				}
 			}

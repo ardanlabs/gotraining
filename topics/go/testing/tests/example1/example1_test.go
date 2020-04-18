@@ -19,20 +19,21 @@ func TestDownload(t *testing.T) {
 
 	t.Log("Given the need to test downloading content.")
 	{
-		t.Logf("\tTest 0:\tWhen checking %q for status code %d", url, statusCode)
+		testID := 0
+		t.Logf("\tTest %d:\tWhen checking %q for status code %d", testID, url, statusCode)
 		{
 			resp, err := http.Get(url)
 			if err != nil {
-				t.Fatalf("\t%s\tTest 0:\tShould be able to make the Get call : %v", failed, err)
+				t.Fatalf("\t%s\tTest %d:\tShould be able to make the Get call : %v", failed, testID, err)
 			}
-			t.Logf("\t%s\tTest 0:\tShould be able to make the Get call.", succeed)
+			t.Logf("\t%s\tTest %d:\tShould be able to make the Get call.", succeed, testID)
 
 			defer resp.Body.Close()
 
 			if resp.StatusCode == statusCode {
-				t.Logf("\t%s\tTest 0:\tShould receive a %d status code.", succeed, statusCode)
+				t.Logf("\t%s\tTest %d:\tShould receive a %d status code.", succeed, testID, statusCode)
 			} else {
-				t.Errorf("\t%s\tTest 0:\tShould receive a %d status code : %d", failed, statusCode, resp.StatusCode)
+				t.Errorf("\t%s\tTest %d:\tShould receive a %d status code : %d", failed, testID, statusCode, resp.StatusCode)
 			}
 		}
 	}
