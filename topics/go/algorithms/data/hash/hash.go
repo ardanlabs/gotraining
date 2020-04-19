@@ -20,8 +20,8 @@ type Hash struct {
 	hash    maphash.Hash
 }
 
-// NewHash returns a new hash table.
-func NewHash() *Hash {
+// New returns a new hash table.
+func New() *Hash {
 	return &Hash{
 		buckets: make([][]entry, numBuckets),
 	}
