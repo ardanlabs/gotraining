@@ -8,14 +8,14 @@ func TestFunction(t *testing.T) {
 	h := NewHash()
 	k1, v1 := "key1", 1
 	k2, v2 := "key2", 2
-	h.Set(k1, v1)
-	h.Set(k2, v2)
+	h.Store(k1, v1)
+	h.Store(k2, v2)
 
 	if h.Len() != 2 {
 		t.Fatalf("len, expected 2, got %d", h.Len())
 	}
 
-	v, err := h.Get(k1)
+	v, err := h.Retrieve(k1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -25,9 +25,9 @@ func TestFunction(t *testing.T) {
 	}
 
 	v1a := 11
-	h.Set(k1, v1a)
+	h.Store(k1, v1a)
 
-	v, err = h.Get(k1)
+	v, err = h.Retrieve(k1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -40,13 +40,13 @@ func TestFunction(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	_, err = h.Get(k1)
+	_, err = h.Retrieve(k1)
 	if err == nil {
 		t.Fatalf("found %q after delete", k1)
 	}
 
 	k3 := "key3"
-	_, err = h.Get(k3)
+	_, err = h.Retrieve(k3)
 	if err == nil {
 		t.Fatalf("found non existing key")
 	}
