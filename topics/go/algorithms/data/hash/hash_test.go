@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestFunction(t *testing.T) {
+func TestHash(t *testing.T) {
 	h := NewHash()
 	k1, v1 := "key1", 1
 	k2, v2 := "key2", 2
