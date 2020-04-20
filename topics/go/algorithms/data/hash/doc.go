@@ -1,4 +1,6 @@
 /*
+Package hash implements a hash table.
+
 Hash table
 
         hashKey(key) ────────┐

@@ -133,7 +133,8 @@ func (h *Hash) hashKey(key string) int {
 	h.hash.Reset()
 
 	// Write the key to the maphash to update the current state.
-	h.hash.WriteString(key)
+	// We don't check error value since WriteString never fails
+	h.hash.WriteString(key) // nolint:errcheck
 
 	// Ask the maphash for its current state which we will
 	// use to calculate the final bucket index.
