@@ -1,5 +1,3 @@
-package hash
-
 /*
 Hash table
 
@@ -29,3 +27,4 @@ Hash table
   are hashed to the same bucket
 - See more at https://en.wikipedia.org/wiki/Hash_table
 */
+package hash
