@@ -16,6 +16,7 @@ type BST struct {
 	root *Node
 }
 
+// New creates a new BST.
 func New() *BST {
 	return &BST{
 		root: nil,
@@ -59,17 +60,17 @@ func (bst *BST) Max() (int, error) {
 }
 
 // Min returns the min int
-func (bst *BST) Min() int {
+func (bst *BST) Min() (int, error) {
 
 	currentNode := bst.root
 
 	if currentNode == nil {
-		return -1
+		return 0, fmt.Errorf("root node is nil")
 	}
 
 	for {
 		if currentNode.left == nil {
-			return currentNode.Data
+			return currentNode.Data, nil
 		}
 		currentNode = currentNode.left
 	}
