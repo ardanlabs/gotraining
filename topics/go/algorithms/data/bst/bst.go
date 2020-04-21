@@ -1,5 +1,7 @@
 package bst
 
+import "fmt"
+
 // TODO This is currently a draft...
 
 // Node represents the data being stored.
@@ -34,17 +36,17 @@ func (bst *BST) Insert(value int) {
 }
 
 // Max returns the max int
-func (bst *BST) Max() int {
+func (bst *BST) Max() (int, error) {
 
 	currentNode := bst.root
 
 	if currentNode == nil {
-		return -1
+		return 0, fmt.Errorf("root node is nil")
 	}
 
 	for {
 		if currentNode.right == nil {
-			return currentNode.Data
+			return currentNode.Data, nil
 		}
 		currentNode = currentNode.right
 	}

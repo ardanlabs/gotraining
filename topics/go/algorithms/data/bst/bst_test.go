@@ -1,11 +1,15 @@
 package bst_test
 
 import (
+	"fmt"
 	"github.com/ardanlabs/gotraining/topics/go/algorithms/data/bst"
 	"testing"
 )
 
 var tree bst.BST
+
+const succeed = "\u2713"
+const failed = "\u2717"
 
 func createTree(bst *bst.BST) {
 	bst.Insert(8)
@@ -20,19 +24,50 @@ func createTree(bst *bst.BST) {
 	bst.Insert(9)
 }
 
-func TestInsert(t *testing.T) {
-	createTree(&tree)
-	tree.Insert(20)
-}
+func TestMaxEmptyTree(t *testing.T) {
 
-func TestMax(t *testing.T) {
-	if tree.Max() != 20 {
-		t.Errorf("Max should be 10 but, got %d\n", tree.Max())
+	// create empty tree.
+	var emptyTree bst.BST
+
+	maxTests := []struct {
+		name     string
+		input    bst.BST
+		expected int
+		err      error
+	}{
+		{"test empty tree", emptyTree, 0, fmt.Errorf("root node is nil")},
+	}
+
+	for _, tt := range maxTests {
+		_, err := tt.input.Max()
+		if err != tt.err {
+			t.Logf("\t%s\tShould be able return error %s", failed, err)
+			t.Fatalf("\t\tGot %v, Expected %v.", err, tt.err)
+		}
+		t.Logf("\t%s\tShould be able return error %s", succeed, err)
 	}
 }
 
-func TestMin(t *testing.T) {
-	if tree.Min() != 1 {
-		t.Errorf("Min should be 1 but, got %d\n", tree.Min())
+func TestMax(t *testing.T) {
+
+	// create tree with nodes.
+	createTree(&tree)
+
+	maxTests := []struct {
+		name     string
+		input    bst.BST
+		expected int
+		err      error
+	}{
+		{"non-empty tree", tree, 10, nil},
+	}
+
+	for _, tt := range maxTests {
+		got, err := tt.input.Max()
+		if got != tt.expected && err == nil {
+			t.Logf("\t%s\tShould be able return max int: %d", failed, got)
+			t.Fatalf("\t\tGot %v, Expected %v.", got, tt.expected)
+		}
+		t.Logf("\t%s\tShould be able return max int: %d", succeed, got)
 	}
 }
