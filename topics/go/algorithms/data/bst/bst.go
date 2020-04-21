@@ -16,6 +16,12 @@ type BST struct {
 	root *Node
 }
 
+func New() *BST {
+	return &BST{
+		root: nil,
+	}
+}
+
 // Insert an integer into the BST.
 func (bst *BST) Insert(value int) {
 
