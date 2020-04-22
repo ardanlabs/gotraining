@@ -6,6 +6,7 @@ Blog:     [GoingGo.net](https://www.ardanlabs.com/blog)
 Training: [Go](http://github.com/ardanlabs/gotraining)  
           [Service](http://github.com/ardanlabs/service)  
 Slack:    [Slack](https://invite.slack.golangbridge.org) 
+Repl:     [Playground](https://repl.it/languages/go)
 Channel:  #ultimatego 
 
 ## Quote  
