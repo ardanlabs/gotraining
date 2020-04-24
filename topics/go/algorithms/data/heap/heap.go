@@ -8,7 +8,7 @@ import (
 
 var ErrEmptyHeap = errors.New("heap is empty")
 
-// Data represents what is being stored on the queue.
+// Data represents what is being stored on the heap.
 type Data struct {
 	Value int
 	Index int
@@ -23,8 +23,9 @@ type Heap struct {
 
 // New returns a new Heap with given capacity in which we will store our data.
 func New(cap int) (*Heap, error) {
+
 	if cap <= 0 {
-		return  nil, errors.New("invalid capacity")
+		return nil, errors.New("invalid capacity")
 	}
 
 	h := Heap{
@@ -38,6 +39,7 @@ func New(cap int) (*Heap, error) {
 
 // Store is storing the element of type Data in the heap.
 func (h *Heap) Store(data *Data) error {
+
 	// If we try to add data to full Heap, we will return an error.
 	if h.size >= h.capacity {
 		return errors.New("getting out of heap capacity")
@@ -132,6 +134,6 @@ func (dh *dataHeap) Push(x interface{}) {
 
 func (dh *dataHeap) Pop() interface{} {
 	item := (*dh)[len(*dh)-1]
-	*dh = (*dh)[0:len(*dh)-1]
+	*dh = (*dh)[0 : len(*dh)-1]
 	return item
 }
