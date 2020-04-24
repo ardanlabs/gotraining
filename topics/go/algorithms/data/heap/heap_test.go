@@ -46,7 +46,7 @@ func TestStore(t *testing.T) {
 			t.Logf("\t%s\tTest 0:\tShould be able to create a heap for %d items.", succeed, maxSize)
 
 			for i := 0; i < maxSize; i++ {
-				if err := h.Store(&heap.Data{Value:i}); err != nil {
+				if err := h.Store(&heap.Data{Value: i}); err != nil {
 					t.Fatalf("\t%s\tTest 0:\tShould be able to store data %d in the heap : %v", failed, i, err)
 				}
 			}
@@ -74,10 +74,10 @@ func TestExtract(t *testing.T) {
 			t.Logf("\t%s\tTest 0:\tShould be able to create a heap for %d items.", succeed, maxSize)
 
 			for i := 0; i < maxSize; i++ {
-				if err := h.Store(&heap.Data{Value:i}); err != nil {
+				if err := h.Store(&heap.Data{Value: i}); err != nil {
 					t.Fatalf("\t%s\tTest 0:\tShould be able to store data %d in heap : %v", failed, i, err)
 				}
-				data , err := h.Extract()
+				data, err := h.Extract()
 				if err != nil {
 					t.Fatalf("\t%s\tTest 0:\tShould be able to extract data %d from heap : %v", failed, i, err)
 				}

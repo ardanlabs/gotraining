@@ -1,4 +1,4 @@
-// Package heap implements a heap interface.
+// Package heap implements a heap interface, and add ability to store values of type Data in the minimum Heap.
 package heap
 
 import (
@@ -6,6 +6,7 @@ import (
 	"errors"
 )
 
+// ErrEmptyHeap returned if heap is empty
 var ErrEmptyHeap = errors.New("heap is empty")
 
 // Data represents what is being stored on the heap.
@@ -14,7 +15,7 @@ type Data struct {
 	Index int
 }
 
-// Queue represents a list of data.
+// Heap represents a list of data.
 type Heap struct {
 	size     int
 	capacity int
