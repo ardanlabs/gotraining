@@ -5,17 +5,17 @@ import "github.com/ardanlabs/gotraining/topics/go/algorithms/numbers/reverse"
 // Is checks if a integer is a Palindrome.
 func Is(input int) bool {
 
-	// Integer below zero cannot be palindrome.
+	// An negative integer is not a palindrome.
 	if input < 0 {
 		return false
 	}
 
-	// A integer is a palindrome if it has the value between 0 and 9.
+	// An integer that is only one digit in length is a palindrome.
 	if input >= 0 && input < 10 {
 		return true
 	}
 
-	// Get the reverse integer.
+	// Reverse the digits in the integer.
 	rev := reverse.Reverse(input)
 
 	return input == rev
