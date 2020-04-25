@@ -1,22 +1,26 @@
 package numbers
 
-// Reverse takes in a integer and returns a the integer in reverse order.
+// Reverse takes the specified integer and reverses it.
 func Reverse(num int) int {
 
-	// Set result to zero.
+	// Construct result to its zero value.
 	var result int
 
-	// Loop until num is not zero.
+	// Loop until num is zero.
 	for num != 0 {
 
-		// Get the last digit from num.
-		// Example: 125 % 10 = 5.
+		//cPerform a modulus operation to get the last digit from the value set in num.
+		// https://www.geeksforgeeks.org/find-first-last-digits-number/
 		last := num % 10
 
-		// Move result one place to the left and add last.
-		result = result*10 + last
+		// Multiple the current result by 10 to shit the digits in
+		// the current result to the left.
+		result = result * 10
 
-		// Remove the right most digit from num.
+		// Add the digit we took from the end of num to the result.
+		result += last
+
+		// // Remove the digit we just reversed from num.
 		// Example: 125 / 10 = 12.
 		num = num / 10
 	}
