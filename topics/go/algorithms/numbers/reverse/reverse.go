@@ -9,7 +9,7 @@ func Reverse(num int) int {
 	// Loop until num is zero.
 	for num != 0 {
 
-		//cPerform a modulus operation to get the last digit from the value set in num.
+		// Perform a modulus operation to get the last digit from the value set in num.
 		// https://www.geeksforgeeks.org/find-first-last-digits-number/
 		last := num % 10
 
@@ -21,7 +21,6 @@ func Reverse(num int) int {
 		result += last
 
 		// // Remove the digit we just reversed from num.
-		// Example: 125 / 10 = 12.
 		num = num / 10
 	}
 	return result
