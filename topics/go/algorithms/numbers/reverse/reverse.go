@@ -20,7 +20,7 @@ func Reverse(num int) int {
 		// Add the digit we took from the end of num to the result.
 		result += last
 
-		// // Remove the digit we just reversed from num.
+		// Remove the digit we just reversed from num.
 		num = num / 10
 	}
 	return result
