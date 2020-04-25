@@ -2,18 +2,18 @@
 	// This is the API you need to build for these tests. You will need to
 	// change the import path in this test to point to your code.
 
-	package strings
+	package permutation
 
-	// IsPermutation check if two strings are permutations.
-	func IsPermutation(str1, str2 string) bool
+	// Is check if two strings are permutations.
+	func Is(str1, str2 string) bool
 */
 
-package strings_test
+package permutation_test
 
 import (
 	"testing"
 
-	strings "github.com/ardanlabs/gotraining/topics/go/algorithms/strings/permuation"
+	"github.com/ardanlabs/gotraining/topics/go/algorithms/strings/permutation"
 )
 
 const succeed = "\u2713"
@@ -38,7 +38,7 @@ func TestIsPermutation(t *testing.T) {
 			tf := func(t *testing.T) {
 				t.Logf("\tTest %d:\tWhen checking the words %q and %q.", testID, test.input, test.input2)
 				{
-					got := strings.IsPermutation(test.input, test.input2)
+					got := permutation.Is(test.input, test.input2)
 					switch test.success {
 					case true:
 						if !got {

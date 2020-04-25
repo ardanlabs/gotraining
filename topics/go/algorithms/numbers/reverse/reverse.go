@@ -1,4 +1,4 @@
-package numbers
+package reverse
 
 // Reverse takes the specified integer and reverses it.
 func Reverse(num int) int {

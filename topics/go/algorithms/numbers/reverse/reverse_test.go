@@ -1,9 +1,19 @@
-package numbers_test
+/*
+	// This is the API you need to build for these tests. You will need to
+	// change the import path in this test to point to your code.
+
+	package reverse
+
+	// Reverse takes the specified integer and reverses it.
+	func Reverse(num int) int
+*/
+
+package reverse_test
 
 import (
 	"testing"
 
-	numbers "github.com/ardanlabs/gotraining/topics/go/algorithms/numbers/reverse"
+	"github.com/ardanlabs/gotraining/topics/go/algorithms/numbers/reverse"
 )
 
 const succeed = "\u2713"
@@ -26,7 +36,7 @@ func TestReverse(t *testing.T) {
 		for testID, test := range tt {
 			t.Logf("\tTest %d:\tWhen checking the value %d.", testID, test.input)
 			{
-				got := numbers.Reverse(test.input)
+				got := reverse.Reverse(test.input)
 
 				if got != test.expected {
 					t.Logf("\t%s\tTest %d:\tShould have gotten back reverse integer.", failed, testID)

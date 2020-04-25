@@ -1,4 +1,4 @@
-package strings
+package permutation
 
 import (
 	"sort"
@@ -12,8 +12,8 @@ func (p RuneSlice) Len() int           { return len(p) }
 func (p RuneSlice) Less(i, j int) bool { return p[i] < p[j] }
 func (p RuneSlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
-// IsPermutation check if two strings are permutations.
-func IsPermutation(str1, str2 string) bool {
+// Is check if two strings are permutations.
+func Is(str1, str2 string) bool {
 
 	// If the length are not equal they cannot be permutation.
 	if len(str1) != len(str2) {
