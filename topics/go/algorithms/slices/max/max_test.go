@@ -1,3 +1,13 @@
+/*
+	// This is the API you need to build for these tests. You will need to
+	// change the import path in this test to point to your code.
+
+	package slices
+
+	// Max returns the maximum integer in the slice.
+	func Max(n []int) (int, error)
+*/
+
 package slices_test
 
 import (
