@@ -1,8 +1,9 @@
 package numbers_test
 
 import (
-	numbers "github.com/ardanlabs/gotraining/topics/go/algorithms/numbers/reverse"
 	"testing"
+
+	numbers "github.com/ardanlabs/gotraining/topics/go/algorithms/numbers/reverse"
 )
 
 const succeed = "\u2713"
@@ -14,20 +15,25 @@ func TestReverse(t *testing.T) {
 		input    int
 		expected int
 	}{
-		{"one digit", 1, 1},
-		{"even number of digits", 5025, 5205},
-		{"even number of digits", 125, 521},
-		{"negative digits", -502, -205},
+		{"one", 1, 1},
+		{"even", 5025, 5205},
+		{"odd", 125, 521},
+		{"negative", -502, -205},
 	}
 
-	for testID, test := range tt {
+	t.Log("Given the need to test reverse functionality.")
+	{
+		for testID, test := range tt {
+			t.Logf("\tTest %d:\tWhen checking the value %d.", testID, test.input)
+			{
+				got := numbers.Reverse(test.input)
 
-		got := numbers.Reverse(test.input)
-
-		if got != test.expected {
-			t.Logf("\t%s\tTest %d:\tShould have gotten back reverse integer.", failed, testID)
-			t.Fatalf("\t\tTest %d:\tGot %v, Expected %v", testID, got, test.expected)
+				if got != test.expected {
+					t.Logf("\t%s\tTest %d:\tShould have gotten back reverse integer.", failed, testID)
+					t.Fatalf("\t\tTest %d:\tGot %v, Expected %v", testID, got, test.expected)
+				}
+				t.Logf("\t%s\tTest %d:\tShould have gotten back reverse integer.", succeed, testID)
+			}
 		}
-		t.Logf("\t%s\tTest %d:\tShould have gotten back reverse integer.", succeed, testID)
 	}
 }
