@@ -1,13 +1,11 @@
-// Package heap implements a heap interface, and add ability to store values of type Data in the minimum Heap.
+// Package heap implements a heap interface, and add the ability to store values
+// of type Data in the minimum Heap.
 package heap
 
 import (
 	"container/heap"
 	"errors"
 )
-
-// ErrEmptyHeap returned if heap is empty
-var ErrEmptyHeap = errors.New("heap is empty")
 
 // Data represents what is being stored on the heap.
 type Data struct {
@@ -22,15 +20,13 @@ type Heap struct {
 	dataHeap *dataHeap
 }
 
-// New returns a new Heap with given capacity in which we will store our data.
+// New returns a new Heap with a given capacity in which we will store our data.
 func New(cap int) (*Heap, error) {
-
 	if cap <= 0 {
 		return nil, errors.New("invalid capacity")
 	}
 
 	h := Heap{
-		size:     0,
 		capacity: cap,
 		dataHeap: &dataHeap{},
 	}
@@ -43,43 +39,47 @@ func (h *Heap) Store(data *Data) error {
 
 	// If we try to add data to full Heap, we will return an error.
 	if h.size >= h.capacity {
-		return errors.New("getting out of heap capacity")
+		return errors.New("out of heap capacity")
 	}
 
-	// The complexity of the heap.Push operation is O(log n) where n = h.dataHeap.Len().
-	// The element which we will be store in the heap will be added closely to the end of the heap and after what it
-	// will be sift up, until it not get in the right position in the heap according it's value.
+	// The element which we will be store in the heap will be added closely to
+	// the end of the heap and after what it will be sift up, until it not get
+	// in the right position in the heap according it's value.
 	heap.Push(h.dataHeap, data)
 	h.size++
 	return nil
 }
 
-// Extract returns the minimum element of type Data from the heap or error error heap is empty.
-// Since we have minimum heap implementation. The size of the heap will be decreased.
+// Extract returns the minimum element of type Data from the heap or error then
+// heap is empty. Since we have minimum heap implementation.
+// The size of the heap will be decreased.
 func (h *Heap) Extract() (*Data, error) {
 
 	// Check that heap is not empty
 	if len(*h.dataHeap) == 0 {
-		return nil, ErrEmptyHeap
+		return nil, errors.New("heap is empty")
 	}
 
-	// heap.Pop return the element from the heap. the type of element is empty interface.
+	// Pop Return the element from the heap.
 	element := heap.Pop(h.dataHeap)
 	h.size--
 
-	// Since the returned value we got has an empty interface type, let's convert it to our Data type.
-	data := element.(*Data)
-
+	// Since the returned value we got has an empty interface type, let's
+	// convert it to our Data type.
+	data, ok := element.(*Data)
+	if !ok {
+		return nil, errors.New("wrong data type")
+	}
 	return data, nil
 }
 
-// Remove removes given element of type Data from the heap. The size value of the Heap will be decreased.
-// Returns error when heap is empty.
+// Remove removes given element of type Data from the heap or return error when
+// heap is empty. The size value of the Heap will be decreased.
 func (h *Heap) Remove(data *Data) error {
 
 	// Check that heap is not empty
 	if len(*h.dataHeap) == 0 {
-		return ErrEmptyHeap
+		return errors.New("heap is empty")
 	}
 
 	// Remove given data from the heap
@@ -89,16 +89,16 @@ func (h *Heap) Remove(data *Data) error {
 	return nil
 }
 
-// GetRoot returns the element which is stored in the root of the heap and does not change the heap.
-// Returns error if heap is empty.
+// GetRoot returns the element which is stored in the root of the heap and does
+// not change the heap. Returns error if heap is empty.
 func (h *Heap) GetRoot() (data *Data, err error) {
 
 	// Check that heap is not empty
 	if len(*h.dataHeap) == 0 {
-		return nil, ErrEmptyHeap
+		return nil, errors.New("heap is empty")
 	}
-
-	return (*h.dataHeap)[0], nil
+	d := (*h.dataHeap)[0]
+	return d, nil
 }
 
 // Size return the current size of the Heap
@@ -106,8 +106,9 @@ func (h *Heap) Size() int {
 	return h.size
 }
 
-// dataHeap is a type which implements a minimum heap interface from the container/heap package which means that data
-// with minimum values will be stored at the top of the heap.
+// dataHeap is a type which implements a minimum heap interface from the
+// container/heap package which means that data with minimum values will be
+// stored at the top of the heap.
 type dataHeap []*Data
 
 func (dh *dataHeap) Len() int {
@@ -124,11 +125,12 @@ func (dh *dataHeap) Swap(i, j int) {
 	(*dh)[j].Index = i
 }
 
-func (dh *dataHeap) Push(x interface{}) {
-	item, ok := x.(*Data)
+func (dh *dataHeap) Push(v interface{}) {
+	item, ok := v.(*Data)
 	if !ok {
 		return
 	}
+
 	item.Index = len(*dh)
 	*dh = append(*dh, item)
 }

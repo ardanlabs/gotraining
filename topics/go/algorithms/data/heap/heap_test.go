@@ -18,16 +18,16 @@ func TestNew(t *testing.T) {
 			var cap int
 			_, err := heap.New(cap)
 			if err == nil {
-				t.Fatalf("\t%s\tTest 0:\tShould not be able to create a heap for %d items : %v", failed, cap, err)
+				t.Fatalf("\t%sTest 0:\tShould not be able to create a heap for %d items : %v", failed, cap, err)
 			}
-			t.Logf("\t%s\tTest 0:\tShould not be able to create a heap for %d items.", succeed, cap)
+			t.Logf("\t%sTest 0:\tShould not be able to create a heap for %d items.", succeed, cap)
 
 			cap = -1
 			_, err = heap.New(cap)
 			if err == nil {
-				t.Fatalf("\t%s\tTest 0:\tShould not be able to create a heap for %d items : %v", failed, cap, err)
+				t.Fatalf("\t%sTest 0:\tShould not be able to create a heap for %d items : %v", failed, cap, err)
 			}
-			t.Logf("\t%s\tTest 0:\tShould not be able to create a heap for %d items.", succeed, cap)
+			t.Logf("\t%sTest 0:\tShould not be able to create a heap for %d items.", succeed, cap)
 		}
 	}
 }
@@ -41,9 +41,9 @@ func TestStore(t *testing.T) {
 		{
 			h, err := heap.New(maxSize)
 			if err != nil {
-				t.Fatalf("\t%s\tTest 0:\tShould be able to create a heap for %d items : %v", failed, maxSize, err)
+				t.Fatalf("\t%sTest 0:\tShould be able to create a heap for %d items : %v", failed, maxSize, err)
 			}
-			t.Logf("\t%s\tTest 0:\tShould be able to create a heap for %d items.", succeed, maxSize)
+			t.Logf("\t%sTest 0:\tShould be able to create a heap for %d items.", succeed, maxSize)
 
 			for i := 0; i < maxSize; i++ {
 				if err := h.Store(&heap.Data{Value: i}); err != nil {
@@ -51,8 +51,8 @@ func TestStore(t *testing.T) {
 				}
 			}
 			if h.Size() != maxSize {
-				t.Logf("\t%s\tTest 0:\tShould be able to store %d items.", failed, maxSize)
-				t.Fatalf("\t\tTest 0:\tGot %d, Expected %d.", h.Size(), maxSize)
+				t.Logf("\t%sTest 0:\tShould be able to store %d items.", failed, maxSize)
+				t.Fatalf("\tTest 0:\tGot %d, Expected %d.", h.Size(), maxSize)
 			}
 
 			t.Logf("\t%s\tTest 0:\tShould be able to store %d items.", succeed, maxSize)
@@ -71,7 +71,7 @@ func TestExtract(t *testing.T) {
 			if err != nil {
 				t.Fatalf("\t%s\tTest 0:\tShould be able to create a heap for %d items : %v", failed, maxSize, err)
 			}
-			t.Logf("\t%s\tTest 0:\tShould be able to create a heap for %d items.", succeed, maxSize)
+			t.Logf("\t%sTest 0:\tShould be able to create a heap for %d items.", succeed, maxSize)
 
 			for i := 0; i < maxSize; i++ {
 				if err := h.Store(&heap.Data{Value: i}); err != nil {
@@ -79,10 +79,10 @@ func TestExtract(t *testing.T) {
 				}
 				data, err := h.Extract()
 				if err != nil {
-					t.Fatalf("\t%s\tTest 0:\tShould be able to extract data %d from heap : %v", failed, i, err)
+					t.Fatalf("\t%sTest 0:\tShould be able to extract data %d from heap : %v", failed, i, err)
 				}
 				if data.Value != i {
-					t.Fatalf("\t%s\tTest 0:\tShould return minimum value from heap.", failed)
+					t.Fatalf("\t%sTest 0:\tShould return minimum value from heap.", failed)
 				}
 			}
 			t.Logf("\t%s\tTest 0:\tShould return minimum value from heap.", succeed)
@@ -119,7 +119,7 @@ func TestRemove(t *testing.T) {
 				t.Fatalf("\t%s\tTest 0:\tShould decrease size after removing the data %v from heap : %v", failed, &d, err)
 			}
 
-			if data, err := h.Extract(); err != heap.ErrEmptyHeap && data == nil {
+			if data, err := h.Extract(); err == nil && data == nil {
 				t.Fatalf("\t%s\tTest 0:\tShould have empty heap after removing the data %v from it.", failed, err)
 			}
 			t.Logf("\t%s\tTest 0:\tShould have empty heap after removing the data from it.", succeed)
@@ -186,7 +186,7 @@ func TestGetRootEmpty(t *testing.T) {
 			}
 			t.Logf("\t%s\tTest 0:\tShould be able to create a heap.", succeed)
 
-			if _, err := h.GetRoot(); err != heap.ErrEmptyHeap {
+			if _, err := h.GetRoot(); err == nil {
 				t.Fatalf("\t%s\tTest 0:\tShould get empty heap error when trying to get root from empty heap.", failed)
 			}
 			t.Logf("\t%s\tTest 0:\tShould get empty heap error when trying to get root from empty heap.", succeed)
@@ -207,7 +207,7 @@ func TestRemoveEmpty(t *testing.T) {
 			}
 			t.Logf("\t%s\tTest 0:\tShould be able to create a heap.", succeed)
 
-			if err := h.Remove(&heap.Data{Value: 1}); err != heap.ErrEmptyHeap {
+			if err := h.Remove(&heap.Data{Value: 1}); err == nil {
 				t.Fatalf("\t%s\tTest 0:\tShould get empty heap error when trying to remove from empty heap.", failed)
 			}
 			t.Logf("\t%s\tTest 0:\tShould get empty heap error when trying to remove from empty heap.", succeed)
@@ -228,7 +228,7 @@ func TestExtractEmpty(t *testing.T) {
 			}
 			t.Logf("\t%s\tTest 0:\tShould be able to create a heap.", succeed)
 
-			if data, err := h.Extract(); err != heap.ErrEmptyHeap && data != nil {
+			if data, err := h.Extract(); err == nil  && data != nil {
 				t.Fatalf("\t%s\tTest 0:\tShould get empty heap error when trying to extract from empty heap.", failed)
 			}
 			t.Logf("\t%s\tTest 0:\tShould get empty heap error when trying to extract from empty heap.", succeed)
