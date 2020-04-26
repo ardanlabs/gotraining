@@ -1,8 +1,9 @@
 package palindrome_test
 
 import (
-	"github.com/ardanlabs/gotraining/topics/go/algorithms/numbers/palindrome"
 	"testing"
+
+	"github.com/ardanlabs/gotraining/topics/go/algorithms/numbers/palindrome"
 )
 
 const succeed = "\u2713"
@@ -14,10 +15,10 @@ func TestIsPalindrome(t *testing.T) {
 		input   int
 		success bool
 	}{
-		{"negative one", -1, false},
-		{"the # one", 1, true},
-		{"the # nine", 9, true},
-		{"the # ten", 10, false},
+		{"negative", -1, false},
+		{"one", 1, true},
+		{"nine", 9, true},
+		{"ten", 10, false},
 		{"even", 1001, true},
 		{"odd", 151, true},
 	}
