@@ -1,7 +1,7 @@
 package iseven_test
 
 import (
-	"github.com/ardanlabs/gotraining/topics/go/algorithms/fun/bits/iseven"
+	"github.com/ardanlabs/gotraining/topics/go/algorithms/bits/iseven"
 	"testing"
 )
 
