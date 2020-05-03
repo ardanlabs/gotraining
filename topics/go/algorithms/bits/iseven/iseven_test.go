@@ -1,8 +1,9 @@
 package iseven_test
 
 import (
-	"github.com/ardanlabs/gotraining/topics/go/algorithms/bits/iseven"
 	"testing"
+
+	"github.com/ardanlabs/gotraining/topics/go/algorithms/bits/iseven"
 )
 
 const succeed = "\u2713"
@@ -15,10 +16,10 @@ func TestIsEven(t *testing.T) {
 		input    int
 		expected bool
 	}{
-		{"one digit even number", 4, true},
-		{"double digits even number", 14, true},
-		{"one digit odd number", 5, false},
-		{"double digit odd number", 15, false},
+		{"one-even", 4, true},
+		{"double-even", 14, true},
+		{"one-odd", 5, false},
+		{"double-odd", 15, false},
 	}
 
 	t.Log("Given the need to test IsEven functionality.")
@@ -35,5 +36,4 @@ func TestIsEven(t *testing.T) {
 			t.Logf("\t%s\tTest %d:\tShould have gotten back if int was even", succeed, testID)
 		}
 	}
-
 }
