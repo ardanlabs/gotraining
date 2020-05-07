@@ -140,33 +140,36 @@ If you are interested in holding an event in your area please let me know. We wi
 
 **Open Classes**  
 ```
-Date              Location           Company          Type         Type          Length             URL
-=========================================================================================================================================================================================================================
-April(20-24)      Virtual            Ardan Labs       Open Class   Go Syntax     5 Days(20 Hours)   https://www.eventbrite.com/e/ardan-labs-livestream-ultimate-go-syntax-april-20-april-24-2020-tickets-101808788828
-May(09)           Virtual            Ardan Labs       Open Class   Go Workshop   1 Days(8 Hours)    Link Coming Soon
-May(11-14)        Virtual            Ardan Labs       Open Class   Go Service    4 Days(16 Hours)   https://www.eventbrite.com/e/ardan-labs-livestream-ultimate-go-service-may-11-may-14-2020-tickets-102102256598
-June(30-02)       Amsterdam, NL      Message Bird     Open Class   Go Advanced   3 Days(24 Hours)   https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
+Date              Location           Company          Type         Class                 Length             URL
+============================================================================================================================================================================================================================
+May(11-14)        Virtual            Ardan Labs       Open Class   Ultimate Service      4 Days(16 Hours)   https://www.eventbrite.com/e/ardan-labs-livestream-ultimate-go-service-may-11-may-14-2020-tickets-102102256598
+May(30)           Virtual            Ardan Labs       Open Class   Ultimate Workshop     1 Day(8 Hours)     https://www.eventbrite.com/e/livestream-ultimate-go-1-day-workshop-tickets-102582344554
+June(08-12)       Virtual            Ardan Labs       Open Class   Ultimate Code Review  1 Day(5 Hours)     Link Coming Soon
+June(30-02)       Amsterdam, NL      Message Bird     Open Class   Ultimate Go           3 Days(24 Hours)   https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
 ```
 
 **Corporate Classes**  
 ```
-Date              Location           Company          Type         Type          Length       
-====================================================================================================
-April(27-01)      Virtual            Derivco          Corporate    Go Advanced   5 Days(20 Hours)
+Date              Location           Company          Type         Class                 Length       
+===========================================================================================================
+May(18-21)        Virtual            New York Times   Corporate    Ultimate Go           4 Days(20 Hours)
+May(26-29)        Virtual            New York Times   Corporate    Ultimate Go           4 Days(20 Hours)
 ```
 
 **Completed Classes** 
 ```
-Date              Location           Company          Type         Type          Length          
-====================================================================================================
-January(14-16)    Carpinteria, CA    Procore          Corporate    Go Advanced   3 Days(24 Hours)
-January(27-29)    Charlotte, NC      Red Ventures     Open Class   Go Advanced   3 Days(24 Hours)
-February(11-13)   San Jose, CA       Paypal           Corporate    Go Advanced   3 Days(24 Hours)
-February(25-27)   Tel Aviv, Israel   Zip Recruiter    Corporate    Go Advanced   3 Days(24 Hours)
-March(03-05)      Athens, Greece     Inaccess         Open Class   Go Advanced   3 Days(24 Hours)
-March(09-12)      Virtual            Hello Fresh      Corporate    Go Advanced   3 Days(24 Hours)
-March(30-02)      Virtual            Ardan Labs       Open Class   Go Advanced   3 Days(24 Hours)
-April(07-09)      Virtual            New York Times   Corporate    Go Advanced   3 Days(24 Hours)
+Date              Location           Company          Type         Class                 Length       
+===========================================================================================================
+January(14-16)    Carpinteria, CA    Procore          Corporate    Ultimate Go           3 Days(24 Hours)
+January(27-29)    Charlotte, NC      Red Ventures     Open Class   Ultimate Go           3 Days(24 Hours)
+February(11-13)   San Jose, CA       Paypal           Corporate    Ultimate Go           3 Days(24 Hours)
+February(25-27)   Tel Aviv, Israel   Zip Recruiter    Corporate    Ultimate Go           3 Days(24 Hours)
+March(03-05)      Athens, Greece     Inaccess         Open Class   Ultimate Go           3 Days(24 Hours)
+March(09-12)      Virtual            Hello Fresh      Corporate    Ultimate Go           3 Days(24 Hours)
+March(30-02)      Virtual            Ardan Labs       Open Class   Ultimate Go           3 Days(24 Hours)
+April(07-09)      Virtual            New York Times   Corporate    Ultimate Go           3 Days(24 Hours)
+April(20-24)      Virtual            Ardan Labs       Open Class   Ultimate Syntax       5 Days(20 Hours)
+April(27-01)      Virtual            Derivco          Corporate    Ultimate Go           5 Days(20 Hours)
 ```
 
 ### 2019
