@@ -3,11 +3,11 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
 
-    "go.lintTool": "golint",
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/bill/code/go",
     "go.enableCodeLens": {"references": false, "runtest": false},
-
+    "go.addTags": {},
+    "go.alternateTools": {},
     "go.useLanguageServer": true,
     "[go]": {
         "editor.snippetSuggestions": "none",
@@ -17,13 +17,18 @@
         }
     },
     "gopls": {
-        "usePlaceholders": true, // add parameter placeholders when completing a function
+        "staticcheck": true,
+        "analyses": {
+            "ST1000": false
+        },
+        "usePlaceholders": true,    // add parameter placeholders when completing a function
         "completeUnimported": true, // autocomplete unimported packages
-        // "watchChangedFiles": false,  // watch file changes outside of the editor
-        "deepCompletion": true,     // enable deep completion
+        "deepCompletion": true      // enable deep completion
     },
     "go.languageServerFlags": [
+        "serve",
         "-rpc.trace", // for more detailed debug logging
+        "--debug=localhost:6060",
     ],
 
     "editor.fontSize": 14,
@@ -44,7 +49,7 @@
     },
     "files.trimTrailingWhitespace": false,
 
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 2,
     "editor.wordWrap": "off",
     "workbench.colorCustomizations": {
         "editorLineNumber.foreground": "#9F9F9F"
@@ -54,5 +59,7 @@
     "workbench.colorTheme": "Zenburn",
     "C_Cpp.updateChannel": "Insiders",
     "go.coverOnTestPackage": false,
-    "liveshare.anonymousGuestApproval": "accept"
+    "liveshare.anonymousGuestApproval": "accept",
+    "editor.folding": false,
+    "explorer.compactFolders": false,
 }
