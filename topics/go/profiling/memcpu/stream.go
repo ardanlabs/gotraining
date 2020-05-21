@@ -106,7 +106,7 @@ func algOne(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 		}
 
 		// If we have a match, replace the bytes.
-		if bytes.Compare(buf, find) == 0 {
+		if bytes.Equal(buf, find) {
 			output.Write(repl)
 
 			// Read a new initial number of bytes.
