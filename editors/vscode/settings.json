@@ -18,18 +18,10 @@
     },
     "gopls": {
         "staticcheck": true,
-        "analyses": {
-            "ST1000": false
-        },
         "usePlaceholders": true,    // add parameter placeholders when completing a function
         "completeUnimported": true, // autocomplete unimported packages
         "deepCompletion": true      // enable deep completion
     },
-    "go.languageServerFlags": [
-        "serve",
-        "-rpc.trace", // for more detailed debug logging
-        "--debug=localhost:6060",
-    ],
 
     "editor.fontSize": 14,
     "editor.formatOnType": true,
@@ -49,7 +41,7 @@
     },
     "files.trimTrailingWhitespace": false,
 
-    "window.zoomLevel": 2,
+    "window.zoomLevel": 3,
     "editor.wordWrap": "off",
     "workbench.colorCustomizations": {
         "editorLineNumber.foreground": "#9F9F9F"
@@ -62,4 +54,7 @@
     "liveshare.anonymousGuestApproval": "accept",
     "editor.folding": false,
     "explorer.compactFolders": false,
+    "files.associations": {
+        "*.go2": "go"
+    }
 }
