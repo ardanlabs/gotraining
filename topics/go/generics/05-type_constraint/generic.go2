@@ -1,0 +1,45 @@
+package main
+
+import "fmt"
+
+// stringOnly defines a set of types (a constraint) that concrete
+// data must represent to satisfy the interface. It also defines a
+// method set of behavior (a constraint) that concrete data must exhibit
+// to satisfy the interface.
+type stringOnly interface {
+	type string
+	string() string
+}
+
+// user represents an entity in this example.
+type user string
+
+// user implements the full method set of behavior (the constraint) defined
+// by the stringer interface.
+func (u user) string() string {
+    return fmt.Sprintf("{name: %q}", u)
+}
+
+// stringify only accepts slices of concrete data types that have an underlying
+// data type of string and that implement the full method set of behavior
+// defined by the stringer interface.
+func stringify(type T stringOnly)(s []T) []string {
+    ret := make([]string, 0, len(s))
+    for _, v := range s {
+        ret = append(ret, v.string())
+    }
+    return ret
+}
+
+func main() {
+	users := []user {
+        "Bill",
+        "Ale",
+    }
+
+    // At compile time, construct a version of stringify that accepts
+    // a slice of user.
+    s := stringify(users)
+
+    fmt.Println(s)
+}

@@ -1,0 +1,34 @@
+package main
+
+import "fmt"
+
+type stringer interface {
+	string() string
+}
+
+type user struct {
+	name  string
+	email string
+}
+
+func (u *user) string() string {
+	return fmt.Sprintf("{name: %q email: %q}", u.name, u.email)
+}
+
+func stringify(s []stringer) []string {
+	ret := make([]string, 0, len(s))
+	for _, v := range s {
+		ret = append(ret, v.string())
+	}
+	return ret
+}
+
+func main() {
+	users := []stringer{
+		&user{name: "Bill", email: "bill@ardanlabs.com"},
+		&user{name: "Ale", email: "ale@whatever.com"},
+	}
+
+	s := stringify(users)
+	fmt.Println(s)
+}

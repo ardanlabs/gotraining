@@ -1,0 +1,17 @@
+package main
+
+import "fmt"
+
+type vector []interface{}
+
+func (v vector) push(x interface{}) vector {
+	v = append(v, x)
+	return v
+}
+
+func main() {
+	var v vector
+	v = v.push(10)
+	v = v.push(20)
+	fmt.Println(v)
+}

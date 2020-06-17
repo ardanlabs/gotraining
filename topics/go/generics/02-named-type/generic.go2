@@ -1,0 +1,24 @@
+package main
+
+import "fmt"
+
+// type vector is based on a slice of type T (to be determined at compile time).
+type vector(type T) []T
+
+// push appends a value of type T (to be determined at compile) time into
+// the vector used to make the call and returns a new vector.
+func (v vector(T)) push(x T) vector(T) {
+	v = append(v, x)
+	return v
+}
+
+func main() {
+
+	// At compile time, construct a version of type vector that's based on
+    // a slice of integer values.
+	var v vector(int)
+
+	v = v.push(10)
+	v = v.push(20)
+	fmt.Println(v)
+}

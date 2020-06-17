@@ -1,0 +1,67 @@
+package main
+
+import "fmt"
+
+// stringer defines a method set of behavior (a constraint) that concrete
+// data must exhibit to satisfy the interface.
+type stringer interface {
+    string() string
+}
+
+// pluser defines a method set of behavior (a constraint) that concrete
+// data must exhibit to satisfy the interface.
+type pluser interface {
+    plus(string) string
+}
+
+// user represents an entity in this example.
+type user struct {
+    name  string
+    email string
+}
+
+// user implements the full method set of behavior (the constraint) defined
+// by the stringer interface.
+func (u *user) string() string {
+    return fmt.Sprintf("{name: %q email: %q}", u.name, u.email)
+}
+
+// customer represents a second entity in this example.
+type customer struct {
+    name  string
+    email string
+}
+
+// customer implements the full method set of behavior (the constraint) defined
+// by the pluser interface.
+func (c *customer) plus(v string) string {
+    return fmt.Sprintf("{name: %q email: %q plus: %q}", c.name, c.email, v)
+}
+
+// concatTo only accepts slices of concrete data types that implement
+// the full method set of behavior defined by the stringer and pluser
+// interfaces respectively.
+func concatTo(type S stringer, P pluser)(s []S, p []P) []string {
+    r := make([]string, len(s))
+    for i, v := range s {
+        r[i] = p[i].plus(v.string())
+    }
+    return r
+}
+
+func main() {
+	users := []*user {
+        &user{name: "Bill", email: "bill@ardanlabs.com"},
+        &user{name: "Ale", email: "ale@whatever.com"},
+    }
+    customers := []*customer {
+        &customer{name: "Google", email: "google@gmail.com"},
+        &customer{name: "Apple", email: "apple@gmail.com"},
+    }
+
+    // At compile time, construct a version of concatTo that accepts
+    // a slice of user and slice of customer.
+    s := concatTo(users, customers)
+
+    fmt.Println(s)
+}

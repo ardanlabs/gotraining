@@ -1,0 +1,14 @@
+package main
+
+import "fmt"
+
+func print(s []int) {
+	for _, v := range s {
+		fmt.Println(v)
+	}
+}
+
+func main() {
+	n := []int{1, 2, 3}
+	print(n)
+}

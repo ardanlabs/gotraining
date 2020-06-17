@@ -1,0 +1,81 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"time"
+)
+
+type user struct {
+	name  string
+	email string
+}
+
+type Worker func(ctx context.Context) (interface{}, error)
+
+type Error struct {
+	errWork error
+	since   time.Duration
+}
+
+func (err *Error) Error() string {
+	if err.errWork != nil {
+		return fmt.Sprintf("context cancelled after %v : %s", err.since, err.errWork)
+	}
+	return fmt.Sprintf("context cancelled after %v", err.since)
+}
+
+func Func(ctx context.Context, retryInterval time.Duration, worker Worker) (interface{}, error) {
+	var retry *time.Timer
+	start := time.Now()
+
+	if ctx.Err() != nil {
+		return nil, &Error{errWork: nil, since: time.Since(start)}
+	}
+
+	for {
+		value, err := worker(ctx)
+		if err == nil {
+			return value, nil
+		}
+
+		if ctx.Err() != nil {
+			return nil, &Error{errWork: err, since: time.Since(start)}
+		}
+
+		if retry == nil {
+			retry = time.NewTimer(retryInterval)
+		}
+
+		select {
+		case <-ctx.Done():
+			retry.Stop()
+			return nil, &Error{errWork: err, since: time.Since(start)}
+		case <-retry.C:
+			retry.Reset(retryInterval)
+		}
+	}
+}
+
+func main() {
+	worker1 := func(ctx context.Context) (interface{}, error) {
+		time.Sleep(time.Millisecond)
+		return "test string", nil
+	}
+	v1, err := Func(context.Background(), time.Second, worker1)
+	fmt.Println(v1.(string), err)
+
+	worker2 := func(ctx context.Context) (interface{}, error) {
+		time.Sleep(time.Millisecond)
+		return 9999999, nil
+	}
+	v2, err := Func(context.Background(), time.Second, worker2)
+	fmt.Println(v2.(int), err)
+
+	worker3 := func(ctx context.Context) (interface{}, error) {
+		time.Sleep(time.Millisecond)
+		return &user{"bill", "b@email.com"}, nil
+	}
+	v3, err := Func(context.Background(), time.Second, worker3)
+	fmt.Println(v3.(*user), err)
+}
