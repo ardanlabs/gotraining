@@ -2,18 +2,19 @@ package main
 
 import "fmt"
 
-// print accepts a slice of type T to be determined at compile time.
-func print(type T)(s []T) {
-	for _, v := range s {
-		fmt.Println(v)
-	}
-}
-
 func main() {
-	n := []int{1, 2, 3}
+	numbers := []int{1, 2, 3}
+	print(numbers)
 
-	// At compile time, construct a version of print that accepts
-	// a slice of int.
-	print(n)
+	strings := []string{"A", "B", "C"}
+	print(strings)
 }
 
+// =============================================================================
+
+func print(type T)(list []T) {
+	for _, v := range list {
+		fmt.Print(v, " ")
+	}
+	fmt.Print("\n")
+}

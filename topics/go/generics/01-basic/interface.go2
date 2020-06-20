@@ -2,16 +2,26 @@ package main
 
 import "fmt"
 
-func print(s interface{}) {
-	switch list := s.(type) {
-	case []int:
-		for _, v := range list {
-			fmt.Println(v)
-		}
-	}
+func main() {
+	numbers := []int{1, 2, 3}
+	print(numbers)
+
+	strings := []string{"A", "B", "C"}
+	print(strings)
 }
 
-func main() {
-	n := []int{1, 2, 3}
-	print(n)
+// =============================================================================
+
+func print(v interface{}) {
+	switch list := v.(type) {
+	case []int:
+		for _, num := range list {
+			fmt.Print(num, " ")
+		}
+	case []string:
+		for _, str := range list {
+			fmt.Print(str, " ")
+		}
+	}
+	fmt.Print("\n")
 }

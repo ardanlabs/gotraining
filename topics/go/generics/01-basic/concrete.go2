@@ -2,13 +2,26 @@ package main
 
 import "fmt"
 
-func print(s []int) {
-	for _, v := range s {
-		fmt.Println(v)
-	}
+func main() {
+	numbers := []int{1, 2, 3}
+	printNumbers(numbers)
+
+	strings := []string{"A", "B", "C"}
+	printStrings(strings)
 }
 
-func main() {
-	n := []int{1, 2, 3}
-	print(n)
+// =============================================================================
+
+func printNumbers(numbers []int) {
+	for _, num := range numbers {
+		fmt.Print(num, " ")
+	}
+	fmt.Print("\n")
+}
+
+func printStrings(strings []string) {
+	for _, str := range strings {
+		fmt.Print(str, " ")
+	}
+	fmt.Print("\n")
 }

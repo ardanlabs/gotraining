@@ -2,16 +2,32 @@ package main
 
 import "fmt"
 
-type vector []int
+func main() {
+	var vi vectorInt
+	vi = vi.push(10)
+	vi = vi.push(20)
+	fmt.Println(vi)
 
-func (v vector) push(x int) vector {
-	v = append(v, x)
+	var vs vectorString
+	vs = vs.push("A")
+	vs = vs.push("B")
+	fmt.Println(vs)
+}
+
+// =============================================================================
+
+type vectorInt []int
+
+func (v vectorInt) push(value int) vectorInt {
+	v = append(v, value)
 	return v
 }
 
-func main() {
-	var v vector
-	v = v.push(10)
-	v = v.push(20)
-	fmt.Println(v)
+// =============================================================================
+
+type vectorString []string
+
+func (v vectorString) push(value string) vectorString {
+	v = append(v, value)
+	return v
 }

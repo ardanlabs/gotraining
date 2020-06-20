@@ -2,43 +2,48 @@ package main
 
 import "fmt"
 
-// stringer defines a method set of behavior (a constraint) that concrete
-// data must exhibit to satisfy the interface.
-type stringer interface {
-    string() string
+func main() {
+	users := []user{
+		{name: "Bill", email: "bill@ardanlabs.com"},
+		{name: "Ale", email: "ale@whatever.com"},
+	}
+	s := stringify(users)
+	fmt.Println(s)
+
+	customers := []customer{
+		{name: "Google", email: "you@google.com"},
+		{name: "MSFT", email: "you@msft.com"},
+	}
+	s = stringify(customers)
+	fmt.Println(s)
 }
 
-// user represents an entity in this example.
-type user struct {
-    name  string
-    email string
-}
+// =============================================================================
 
-// user implements the full method set of behavior (the constraint) defined
-// by the stringer interface.
-func (u *user) string() string {
-    return fmt.Sprintf("{name: %q email: %q}", u.name, u.email)
-}
-
-// stringify only accepts slices of concrete data types that implement
-// the full method set of behavior defined by the stringer interface.
-func stringify(type T stringer)(s []T) []string {
-    ret := make([]string, 0, len(s))
-    for _, v := range s {
-        ret = append(ret, v.string())
+func stringify(type T fmt.Stringer)(list []T) []string {
+    ret := make([]string, 0, len(list))
+    for _, value := range list {
+        ret = append(ret, value.String())
     }
     return ret
 }
 
-func main() {
-	users := []*user {
-        &user{name: "Bill", email: "bill@ardanlabs.com"},
-        &user{name: "Ale", email: "ale@whatever.com"},
-    }
+// =============================================================================
 
-    // At compile time, construct a version of stringify that accepts
-    // a slice of user.
-    s := stringify(users)
+type user struct {
+	name  string
+	email string
+}
 
-    fmt.Println(s)
+func (u user) String() string {
+	return fmt.Sprintf("{type: \"user\", name: %q, email: %q}", u.name, u.email)
+}
+
+type customer struct {
+	name  string
+	email string
+}
+
+func (u customer) String() string {
+	return fmt.Sprintf("{type: \"customer\", name: %q, email: %q}", u.name, u.email)
 }
