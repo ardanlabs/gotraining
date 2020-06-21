@@ -4,6 +4,36 @@ This is inital code to showcase the current implementation of the Go spec for ge
 
 There is a [go2go](https://go2goplay.golang.org/) playground that will allow you to experiment with the current proposal. `go2go` is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) that converts generics syntax into regular Go code. This is the tooling you need to experiment with the draft.
 
+## Very High Level Overview
+
+This comes from the draft document and provides a nice overview of what generics support is being worked on for the first potential release.
+
+* Functions can have an additional type parameter list introduced by the keyword type: func F(type T)(p T) { ... }.
+* These type parameters can be used by the regular parameters and in the function body.
+* Types can also have a type parameter list: type M(type T) []T.
+* Each type parameter can have an optional type constraint: func F(type T Constraint)(p T) { ... }
+* Type constraints are interface types.
+* Interface types used as type constraints can have a list of predeclared types; only types whose underlying type is one of those types can implement the interface.
+* Using a generic function or type requires passing type arguments.
+* Type inference permits omitting the type arguments in common cases.
+* If a type parameter has a type constraint its type argument must implement the interface.
+* Generic functions may only use operations permitted by the type constraint.
+
+## Omissions
+
+This comes from the draft document and provides a nice overview of what generics support is NOT being worked on for the first potential release.
+
+* No specialization. There is no way to write multiple versions of a generic function that are designed to work with specific type arguments.
+* No metaprogramming. There is no way to write code that is executed at compile time to generate code to be executed at run time.
+* No higher level abstraction. There is no way to speak about a function with type arguments other than to call it or instantiate it. There is no way to speak about a generic type other than to instantiate it.
+* No general type description. In order to use operators in a generic function, constraints list specific types, rather than describing the characteristics that a type must have. This is easy to understand but may be limiting at times.
+* No covariance or contravariance of function parameters.
+* No operator methods. You can write a generic container that is compile-time type-safe, but you can only access it with ordinary methods, not with syntax like c[k].
+* No currying. There is no way to specify only some of the type arguments, other than by using a helper function or a wrapper type.
+* No variadic type parameters. There is no support for variadic type parameters, which would permit writing a single generic function that takes different numbers of both type parameters and regular parameters.
+* No adaptors. There is no way for a constraint to define adaptors that could be used to support type arguments that do not already implement the constraint, such as, for example, defining an == operator in terms of an Equal method, or vice-versa.
+* No parameterization on non-type values such as constants. This arises most obviously for arrays, where it might sometimes be convenient to write type Matrix(type n int) [n][n]float64. It might also sometimes be useful to specify significant values for a container type, such as a default value for elements.
+
 ## Extra Reading
 
 Here are blog posts to help you get started learning more about the current design draft.
