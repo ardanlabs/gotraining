@@ -2,7 +2,14 @@
 
 This is inital code to showcase the current implementation of the Go spec for generics that can be found [here](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md). This code is subject to break and change as the proposal and its implementation is flushed out.
 
-There is a [go2go](https://go2goplay.golang.org/) playground that will allow you to experiment with the current proposal. `go2go` is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) that converts generics syntax into regular Go code. This is the tooling you need today to experiment with the draft.
+There is a [go2go](https://go2goplay.golang.org/) playground that will allow you to experiment with the current proposal. `go2go` is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) that converts generics syntax into regular Go code. This is the tooling you need to experiment with the draft.
+
+## Extra Reading
+
+Here are blog posts to help you get started learning more about the current design draft.
+
+[The Next Step for Generics](https://blog.golang.org/generics-next-step) - Go Team  
+[Early notes on the generics proposal](https://rakyll.org/generics-proposal/) - JBD  
 
 ## Installing Locally
 
