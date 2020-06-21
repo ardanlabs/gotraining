@@ -28,7 +28,7 @@ func Add(type T addOnly)(v1 T, v2 T) T {
 
 type matcher(type T) interface {
     type int, int8, int16, int32, int64, float32, float64
-    match(T) bool
+    match(find T) bool
 }
 
 func match(type T matcher)(list []T, find T) int {
