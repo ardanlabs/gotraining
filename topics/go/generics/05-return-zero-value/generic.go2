@@ -35,10 +35,11 @@ func main() {
 type Worker(type T) func(ctx context.Context) (T, error)
 
 func retry(type T)(ctx context.Context, retryInterval time.Duration, worker Worker(T)) (T, error) {
+	var zero T 
 	var retry *time.Timer
 
 	if ctx.Err() != nil {
-		return *new(T), errors.New("error")
+		return zero, errors.New("error")
 	}
 
 	for {
@@ -47,7 +48,7 @@ func retry(type T)(ctx context.Context, retryInterval time.Duration, worker Work
 		}
 
 		if ctx.Err() != nil {
-			return *new(T), errors.New("error")
+			return zero, errors.New("error")
 		}
 
 		if retry == nil {
@@ -57,7 +58,7 @@ func retry(type T)(ctx context.Context, retryInterval time.Duration, worker Work
 		select {
 		case <-ctx.Done():
 			retry.Stop()
-			return *new(T), errors.New("error")
+			return zero, errors.New("error")
 		case <-retry.C:
 			retry.Reset(retryInterval)
 		}
