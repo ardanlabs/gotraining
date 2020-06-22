@@ -40,9 +40,9 @@ func main() {
 
 // =============================================================================
 
-type hashFunc(type K comparable) func(key K, buckets int) int
+type hashFunc(type K) func(key K, buckets int) int
 
-type keyValuePair(type K comparable, V interface{}) struct {
+type keyValuePair(type K, V interface{}) struct {
 	Key   K
 	Value V
 }
