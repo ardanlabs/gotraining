@@ -16,7 +16,7 @@ func main() {
 		h.Write([]byte(key))
 		return int(h.Sum32()) % buckets
 	}
-	table1 := New(string, int)(buckets, hashFunc1)
+	table1 := New(/*key*/ string, /*value*/ int)(buckets, hashFunc1)
 	
 	hashFunc2 := func(key int, buckets int) int {
 		return key % buckets
