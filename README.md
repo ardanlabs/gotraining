@@ -13,7 +13,6 @@ bill@ardanlabs.com
 * [Purchase Video](https://github.com/ardanlabs/gotraining#purchase-video)
 * [Experience](https://github.com/ardanlabs/gotraining#our-experience)
 * [Teachers](https://github.com/ardanlabs/gotraining#our-teachers)
-* [Current Schedule](https://github.com/ardanlabs/gotraining#current-schedule)
 * [More About Go](https://github.com/ardanlabs/gotraining#more-about-go)
 * [Minimal Qualified Student](https://github.com/ardanlabs/gotraining#minimal-qualified-student)
 * [Important Reading](https://github.com/ardanlabs/gotraining#important-reading)
@@ -32,8 +31,6 @@ The entire training class has been recorded to be made available to those who ca
 We have taught Go to thousands of developers all around the world since 2014. There is no other company that has been doing it longer and our material has proven to help jump-start developers 6 to 12 months ahead of their knowledge of Go. We know what knowledge developers need in order to be productive and efficient when writing software in Go.
 
 Our classes are perfect for intermediate-level developers who have at least a few months to years of experience writing code in Go. Our classes provide a very deep knowledge of the programming langauge with a big push on language mechanics, design philosophies and guidelines. We focus on teaching how to write code with a priority on consistency, integrity, readability and simplicity. We cover a lot about “if performance matters” with a focus on mechanical sympathy, data oriented design, decoupling and writing/debugging production software.
-
-[Look at our current schedule](https://github.com/ardanlabs/gotraining#current-schedule)  
 
 ## Our Teachers
 
@@ -90,143 +87,6 @@ _**Podcasts**_
 [GoTime: Discussing Imposter Syndrome](https://changelog.com/gotime/30)  
 [HelloTechPros: Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
 [HelloTechPros: The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
-
-### Jacob Walker ([@jcbwlkr](https://twitter.com/jcbwlkr))  
-Jacob is a software developer, community organizer, and has really nice hair. Like ridiculously nice hair.
-
-He started his career creating web applications in PHP, Ruby, and Node.js. When he discovered Go he dove in deep and hasn't regretted it for a minute. He is now a Community Engineer with Ardan Labs where he is focused on helping members of the Go community.
-
-Coming from the thriving metropolis of Wichita, Kansas Jacob is the president of the [devICT](https://devict.org) community whose mission is to "Educate, Empower, and Connect software developers in the Wichita area". He also works closely with [Women Who Code Wichita](https://www.meetup.com/WWCWichita/), [Open Wichita](http://openwichita.com/), [MakeICT](http://makeict.org/), and [Kansas Linux Fest](http://kansaslinuxfest.org/).
-
-When he isn't working or organizing, Jacob is with his wife Anna and their three kids Kell, Carter, and Rory.
-
-_**Writing**_  
-[Jacob Walker's blog](http://www.jacob-walker.com/)  
-
-_**Video**_  
-[Better Allies in Tech](https://www.youtube.com/watch?v=PWheG9CyUAY)  
-[GopherCon Singapore (2019) - Understanding Allocations: the Stack and the Heap](https://www.youtube.com/watch?v=ZMZpH4yT7M0)  
-[An Informal Intro to Docker](https://www.youtube.com/watch?v=xYNJ_IAj35Q)  
-[Women Who Code Intro To Go Workshop](https://www.youtube.com/watch?v=gDxSiKNk0Pw)  
-[Getting Started with Go](https://www.youtube.com/watch?v=zVvjpLu6iIo)  
-[Vim and Emacs Chat: Part 1: Vim](https://www.youtube.com/watch?v=SaGgc8xnO1U)  
-[Regular Expressions 101](https://www.youtube.com/watch?v=4LnyHF8dnIk)  
-[Implementing OOP (Ruby and PHP)](https://www.youtube.com/watch?v=7QoEfPYULXM)  
-[Templating In PHP With Twig](https://www.youtube.com/watch?v=deqGYV8P0Nc)  
-
-### Daniel Whitenack ([@dwhitena](https://twitter.com/dwhitena))  
-Daniel Whitenack is a PhD trained data scientist/engineer with industry experience developing data science applications for large and small companies, including predictive models, dashboards, recommendation engines, and more. Daniel has spoken at conferences around the world (Gopherfest, GopherCon, and more), maintains the Go kernel for Jupyter, and is actively helping to organize contributions to various open source data science projects.
-
-_**Writing**_  
-[Data Dan](https://www.datadan.io/)    
-[Elephantine Analytics](https://medium.com/pachyderm-data)
-
-_**Articles**_  
-[O'Reilly Data Blog](https://www.oreilly.com/ideas/data-science-gophers)
-
-_**Video**_  
-[GopherCon 2016 - Go for Data Science](https://www.youtube.com/watch?v=D5tDubyXLrQ)  
-
-_**Podcasts**_  
-[Go Time - Episode 4](https://changelog.com/gotime/4)    
-
-## Current Schedule
-
-If you are interested in holding an event in your area please let me know. We will work with you and your organization to help make it happen.
-
-### 2020
-
-**Bill Kennedy**  
-
-**Open Classes**  
-```
-Date              Location           Company          Type         Class                 Length             URL
-============================================================================================================================================================================================================================
-May(11-14)        Virtual            Ardan Labs       Open Class   Ultimate Service      4 Days(16 Hours)   https://www.eventbrite.com/e/ardan-labs-livestream-ultimate-go-service-may-11-may-14-2020-tickets-102102256598
-May(30)           Virtual            Ardan Labs       Open Class   Ultimate Workshop     1 Day(8 Hours)     https://www.eventbrite.com/e/livestream-ultimate-go-1-day-workshop-tickets-102582344554
-June(08-12)       Virtual            Ardan Labs       Open Class   Ultimate Code Review  1 Day(5 Hours)     Link Coming Soon
-June(30-02)       Amsterdam, NL      Message Bird     Open Class   Ultimate Go           3 Days(24 Hours)   https://www.eventbrite.com/e/3-day-ultimate-go-training-amsterdam-june-30-2020-july-2-2020-tickets-93954782283
-```
-
-**Corporate Classes**  
-```
-Date              Location           Company          Type         Class                 Length       
-===========================================================================================================
-May(18-21)        Virtual            New York Times   Corporate    Ultimate Go           4 Days(20 Hours)
-May(26-29)        Virtual            New York Times   Corporate    Ultimate Go           4 Days(20 Hours)
-```
-
-**Completed Classes** 
-```
-Date              Location           Company          Type         Class                 Length       
-===========================================================================================================
-January(14-16)    Carpinteria, CA    Procore          Corporate    Ultimate Go           3 Days(24 Hours)
-January(27-29)    Charlotte, NC      Red Ventures     Open Class   Ultimate Go           3 Days(24 Hours)
-February(11-13)   San Jose, CA       Paypal           Corporate    Ultimate Go           3 Days(24 Hours)
-February(25-27)   Tel Aviv, Israel   Zip Recruiter    Corporate    Ultimate Go           3 Days(24 Hours)
-March(03-05)      Athens, Greece     Inaccess         Open Class   Ultimate Go           3 Days(24 Hours)
-March(09-12)      Virtual            Hello Fresh      Corporate    Ultimate Go           3 Days(24 Hours)
-March(30-02)      Virtual            Ardan Labs       Open Class   Ultimate Go           3 Days(24 Hours)
-April(07-09)      Virtual            New York Times   Corporate    Ultimate Go           3 Days(24 Hours)
-April(20-24)      Virtual            Ardan Labs       Open Class   Ultimate Syntax       5 Days(20 Hours)
-April(27-01)      Virtual            Derivco          Corporate    Ultimate Go           5 Days(20 Hours)
-```
-
-### 2019
-
-**Bill Kennedy**  
-```
-Date                Location              Company             Type         Type             Url
-================================================================================================================================================
-January(16-19)      Goa, India            GopherCon India     Conference   Adv Go (1 day)   https://gopherconindia.com/go-workshop1/
-January(21-23)      Bangalore, India      Paypal              Corporate    Go (3 day)       
-January(28-30)      Fort Mill, SC         Red Ventures        Corporate    Go (3 day)       
-February(02-03)     Troy, NY              Rensselaer Poly In  GoBridge     Go (2 day)       https://www.eventbrite.com/e/capital-district-gobridge-ultimate-go-tickets-52406438067
-February(08-09)     Orlando, FL           TBA                 Gobridge     Go (2 day)       https://www.eventbrite.com/e/ultimate-gogo-bridge-w-bill-kennedy-orlando-tickets-50361134509
-February(13-15)     Copenhagen, Denmark   Maersk              Corporate    Go (3 day)       
-February(25-26)     Birmingham, AL        Shipt               Corporate    Go Perf (2 day)       
-March(04-06)        Lisbon, Portugal      OLX                 Corporate    Go (3 day)
-March(07-08)        London, England       QCON                Conference   Adv Go (1 day)   https://qconlondon.com/
-March(12-14)        Boise, ID             Kount               Corporate    Go (3 day)       
-March(25-27)        Berlin, Germany       OLX                 Corporate    Go (3 day)  
-April(24-27)        Malaysia              Intel               Corporate    Go (3 day)  
-April(29-03)        Singapore             GopherCon Signapore Conference
-May(07-08)          Budapest, Hungary     Magyar Vasúttörtén  Conference   Adv Go (1 day)   https://craft-conf.com/
-May(25)             Africa, Kenya         Andela Kenya        GoBridge     Go (1 day)
-May(27-01)          Canary Islands        GopherCon EU        Conference   Adv Go (1 day)   https://www.eventbrite.co.uk/e/gophercon-eu-2019-canary-islands-tickets-55633196388
-June(08-09)         Seattle, WA           TBA                 Gobridge     Go (2 day)       
-June(18-20)         Singapore             SP Group            Corporate    Go (3 day)
-June(26-28)         Copenhagen, Denmark   Maersk              Corporate    Go Service (3 day)       
-July(02-07)         Minsk, Belarus        Go Way Fest         Conference   Adv Go (1 day)   https://goway.io/
-July(10-12)         Texas                 Reward Style        Corporate    Go (3 day)
-July(24-27)         San Diego, CA         GopherCon USA       Conference   Adv Go (2 day)   https://www.gophercon.com
-September(10-11)    Portland, OR          Intel               Corporate    Go (2 day)
-September(13-15)    Anchorage, AK         TBA                 Gobridge     Go (3 day)       
-September(23-25)    Miami, FL             Ardan Labs          Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-advanced-ultimate-go-training-miami-september-2019-tickets-64610339264
-September(28-29)    Albany, NY            GDG Capital Region  Conference   Adv Go (1 day)   https://sites.google.com/view/devfest-gdg-capitalregion
-October(07-09)      Copenhagen, Denmark   Maersk              Corporate    Service (3 day)       
-October(10-12)      Berlin, Germany       Rocket Tower        Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-advanced-ultimate-go-training-berlin-october-2019-tickets-68184368281
-October(21-22)      Florence, Italy       GoLab               Conference   Adv Go (1 day)   https://www.golab.io/
-October(28-29)      Melbourne, Australia  Zendesk             Corporate    Go (3 day)
-October(30-01)      Sydney, Australia     GopherCon AU        Conference   Adv Go (1 day)
-November(05-07)     Santa Monica, CA      Hallmark Labs       Corporate    Go (3 day)
-November(11-13)     Seattle, WA           Outreach            Corporate    Go (3 day)
-November(15)        San Francisco, CA     QCON                Conference   Service (1 day)  https://qconsf.com//
-November(18-20)     London, England       Flyt                Open Class   Go (3 day)       https://www.eventbrite.com/e/3-day-advanced-ultimate-go-training-london-november-2019-tickets-72938134925
-December(03-05)     San Jose, CA          KLA                 Corporate    Go (3 day)
-December(9-10)      Mountain View, CA     Khan Academy        Corporate    Go (3 day)
-```
-
-### Past Events
-
-Look at how busy we have been training thousands of developers in Go over the past five years.
-
-		2019 : 65 Events
-		2018 : 60 Events
-		2017 : 40 Events 
-		2016 : 37 Events  
-		2015 : 33 Events  
-		2014 :  3 Events  
 
 ## More About Go
 
