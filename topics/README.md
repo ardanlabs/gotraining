@@ -4,17 +4,13 @@
 
 ### Ultimate Go
 
-The Advanced Ultimate Go class is designed to focus on digging deep into the language to understand the internals that matter and the semantics. The course is about if performance matters then these things matter. This is presented from focusing on code readability at a micro level to full application architecture and development.
-
-We will talk about semantics, guidelines, mechanical sympathy and data oriented design. We are going to talk about package oriented design and how to structure your Go projects for the long term.
+This class teaches how to write better, more idiomatic and performant code in Go with a focus on micro-level engineering decisions  At the very beginning of class, the instructor will focus on Go internals that are critical to understanding the core tradeoffs the language makes on readability, simplicity and performance. The class builds layers of foundational knowledge that will give you a deeper understanding into data semantics, decoupling, concurrency and tooling. Perfect for developers just starting out or developers with years of Go experience. Everyone will be writing better code after this class.
 
 [Ultimate Go](courses/go/README.md)
 
 ### Ultimate Service
 
-The Ultimate Service is a 3 day class for any Go developer who wishes to learn how to build production ready and well tested web services in Go. This class provides an intensive, comprehensive and idiomatic view of building web services using community accepted idioms and practices.
-
-The class goes beyond just the use of the http package and focuses on building CRUD based services with logging, observability and debugging. The class also teaches POD architectures, Docker and cloud deployment. We believe this class is perfect for anyone wishing to build production ready, scalable, fast, and highly concurrent web services in Go.
+This class teaches how to build production-level services in Go with a focus on macro-level engineering decisions. From the beginning you will pair program with the instructor, walking through the design philosophies and guidelines used to engineer the code. With each new feature, you will learn more about the transition from programming to engineering and the points of refactoring required to write production level applications. Throughout the class, Go modules and Kubernetes will be a focus. Everyone will be making better engineering decisions after this class.
 
 [Service Training](https://github.com/ardanlabs/service-training)  
 [Service Starter Kit](https://github.com/ardanlabs/service)
