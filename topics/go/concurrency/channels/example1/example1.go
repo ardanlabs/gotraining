@@ -9,6 +9,7 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
+	"net/http"
 	"runtime"
 	"sync"
 	"time"
@@ -27,17 +28,21 @@ func main() {
 	// pooling()
 
 	// Advanced patterns
-	// fanOutSem()
-	// boundedWorkPooling()
-	// drop()
+	// 		fanOutSem()
+	// 		boundedWorkPooling()
+	// 		drop()
 
 	// Cancellation Pattern
-	// cancellation()
+	// 		cancellation()
 
 	// Retry Pattern
-	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	// defer cancel()
-	// retryTimeout(ctx, time.Second, func(ctx context.Context) error { return errors.New("always fail") })
+	// 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	// 		defer cancel()
+	// 		retryTimeout(ctx, time.Second, func(ctx context.Context) error { return errors.New("always fail") })
+
+	// Channel Cancellation
+	// 		stop := make(chan struct{})
+	// 		channelCancellation(stop)
 }
 
 // waitForResult: You are a manager and you hire a new employee. Your new
@@ -314,4 +319,39 @@ func retryTimeout(ctx context.Context, retryInterval time.Duration, check func(c
 			fmt.Println("retry again")
 		}
 	}
+}
+
+// channelCancellation shows how you can take an existing channel being
+// used for cancellation and convert that into using a context where
+// a context is needed.
+func channelCancellation(stop <-chan struct{}) {
+
+	// Create a cancel context for handling the stop signal.
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// If a signal is received on the stop channel, cancel the
+	// context. This will propagate the cancel into the p.Run
+	// function below.
+	go func() {
+		select {
+		case <-stop:
+			cancel()
+		case <-ctx.Done():
+		}
+	}()
+
+	// Imagine a function that is performing an I/O operation that is
+	// cancellable.
+	func(ctx context.Context) error {
+		req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://www.ardanlabs.com/blog/index.xml", nil)
+		if err != nil {
+			return err
+		}
+		_, err = http.DefaultClient.Do(req)
+		if err != nil {
+			return err
+		}
+		return nil
+	}(ctx)
 }
