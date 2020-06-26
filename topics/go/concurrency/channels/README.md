@@ -31,6 +31,7 @@ The behavior of a channel is directly influenced by its current `State`. The sta
 
 ## Links
 
+[The Behavior Of Channels](https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html) - William Kennedy  
 [Channel Communication](https://golang.org/ref/mem#tmp_7)    
 [Share Memory By Communicating](http://blog.golang.org/share-memory-by-communicating) - Andrew Gerrand    
 [The Nature Of Channels In Go](https://www.ardanlabs.com/blog/2014/02/the-nature-of-channels-in-go.html) - William Kennedy    

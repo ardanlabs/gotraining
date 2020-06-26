@@ -87,11 +87,17 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Using Go Modules](https://blog.golang.org/using-go-modules) - Go Team  
 [Modules Part 01: Why And What](https://www.ardanlabs.com/blog/2019/10/modules-01-why-and-what.html) - William Kennedy  
 [Modules Part 02: Projects, Dependencies and Gopls](https://www.ardanlabs.com/blog/2019/12/modules-02-projects-dependencies-gopls.html) - William Kennedy  
+[Modules Part 03: Minimal Version Selection](https://www.ardanlabs.com/blog/2019/12/modules-03-minimal-version-selection.html) - William Kennedy  
+[Modules Part 04: Mirrors, Checksums and Athens](https://www.ardanlabs.com/blog/2020/02/modules-04-mirros-checksums-athens.html) - William Kennedy  
+[Modules Part 04: Mirrors, Checksums and Athens](https://www.ardanlabs.com/blog/2020/02/modules-04-mirros-checksums-athens.html) - Rohan Challa  
+[Modules Part 05: Gopls Improvements](hhttps://www.ardanlabs.com/blog/2020/04/modules-05-gopls-improvements.html) - William Kennedy  
+[Modules Part 06: Vendoring](https://www.ardanlabs.com/blog/2020/04/modules-06-vendoring.html) - William Kennedy  
 [Go Wiki on Modules](https://github.com/golang/go/wiki/Modules) - Community  
 [Go Modules](https://systemdump.io/posts/2018-07-22-go-modules) - systemdump  
 [A Gentle Introduction To Go Modules](https://ukiahsmith.com/blog/a-gentle-introduction-to-golang-modules/) - Ukiah Smith  
 
 ### Vendoring / Versioning
+
 [How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)  
 [The End of Software Versions](http://hintjens.com/blog:85) - Pieter Hintjens  
 [Transparent Logs for Skeptical Clients](https://research.swtch.com/tlog) - Russ Cox  
@@ -179,12 +185,14 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
 [Path: add BBR congestion control](https://patchwork.ozlabs.org/patch/671069/)  
 
-### Container and Orchestration
+### Container, Orchestration and Kubernetes
 
 [How To Deploy a Go Web Application with Docker](https://semaphoreci.com/community/tutorials/how-to-deploy-a-go-web-application-with-docker) - Kulshekhar Kabra  
 [An introduction to Clear Containers](https://lwn.net/Articles/644675) - LWN.net  
 [Getting Started with Docker](https://docs.docker.com/engine/getstarted/) - Docker  
 [Kubernetes Bootcamp](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/) - Google  
+[Kubernetes Liveness and Readiness Probes](https://blog.colinbreck.com/kubernetes-liveness-and-readiness-probes-how-to-avoid-shooting-yourself-in-the-foot/) - Colin Breck   
+[What happens when ... Kubernetes edition!](https://github.com/jamiehannaford/what-happens-when-k8s/blob/master/README.md) - Jamie Hannaford  
 
 ### Distributed Systems
 
@@ -255,6 +263,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Go 2
 
+[Type Parameters - Draft Design : June 2020](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md) - Go Team  
 [Sydney Golang Meetup - Rob Pike - Go 2 Draft Specifications](https://www.youtube.com/watch?v=RIvL2ONhFBI) - Rob Pike  
 
 ## Mechanical Sympathy
@@ -306,6 +315,7 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 This content can be found under [pointers](../topics/go/language/pointers). We feel this content is so important it has been moved out to this general materials page.
 
 #### Linker
+
 [Building a better Go linker](https://docs.google.com/document/d/1D13QhciikbdLtaI67U6Ble5d_1nsI4befEd6_k1z91U/edit) - Austin Clements  
 
 #### Stacks
@@ -360,10 +370,6 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Learn how to build a processor](https://www.youtube.com/playlist?list=PLNmCdcvSgJj5bllQx5E3A6OsbMq2luA9J)  
 [Reading Silicon: How to Reverse Engineer Integrated Circuits](https://www.youtube.com/watch?feature=youtu.be&v=aHx-XUA6f9g&app=desktop) - Ken Shirriff  
-
-## Kubernetes
-
-[What happens when ... Kubernetes edition!](https://github.com/jamiehannaford/what-happens-when-k8s/blob/master/README.md) - Jamie Hannaford  
 
 ## Release Notes
 
