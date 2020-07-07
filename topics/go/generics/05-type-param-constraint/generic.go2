@@ -14,7 +14,7 @@ func main() {
 
 // =============================================================================
 
-type operateFunc(type V) func(v V) V
+type operateFunc(type T) func(t T) T
 
 type SliceConstraint(type T) interface {
 	type []T
@@ -22,8 +22,8 @@ type SliceConstraint(type T) interface {
 
 // The interesting code here is how V is used to satisfy type T
 // for the SliceConstraint interface.
-func operate(type T SliceConstraint(V), V interface{})(slice T, fn operateFunc(V)) T {
-	ret := make(T, len(slice))
+func operate(type S SliceConstraint(T), T interface{})(slice S, fn operateFunc(T)) S {
+	ret := make(S, len(slice))
 	for i, v := range slice {
 		ret[i] = fn(v)
 	}
@@ -35,13 +35,13 @@ func operate(type T SliceConstraint(V), V interface{})(slice T, fn operateFunc(V
 type Numbers []int
 
 func Double(n Numbers) Numbers {
-	fn := func(v int) int {
-		return 2 * v
+	fn := func(n int) int {
+		return 2 * n
 	}
 
-	// The compiler can infer from n that V in the declaration of the
+	// The compiler can infer from n that T in the declaration of the
 	// operate function will represent an integer when constructing the
 	// operate function.
-	v := operate(n, fn)
-	return v
+	numbers := operate(n, fn)
+	return numbers
 }
