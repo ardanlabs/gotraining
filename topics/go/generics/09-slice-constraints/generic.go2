@@ -24,6 +24,17 @@ func operate(type S SliceConstraint(T), T interface{})(slice S, fn operateFunc(T
 
 // =============================================================================
 
+// This also provides a slice constraint and is more readable.
+func operate2(type T)(slice []T, fn operateFunc(T)) []T {
+	ret := make([]T, len(slice))
+	for i, v := range slice {
+		ret[i] = fn(v)
+	}
+	return ret
+}
+
+// =============================================================================
+
 type Numbers []int
 
 func Double(n Numbers) Numbers {
