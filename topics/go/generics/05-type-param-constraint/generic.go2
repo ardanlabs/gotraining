@@ -4,14 +4,6 @@ import (
 	"fmt"
 )
 
-func main() {
-	n := Numbers{10, 20, 30, 40, 50}
-	fmt.Println(n)
-
-	n = Double(n)
-	fmt.Println(n)
-}
-
 // =============================================================================
 
 type operateFunc(type T) func(t T) T
@@ -20,8 +12,8 @@ type SliceConstraint(type T) interface {
 	type []T
 }
 
-// The interesting code here is how V is used to satisfy type T
-// for the SliceConstraint interface.
+// The interesting code here is how T is used to satisfy the type
+// of slice S will represent for the SliceConstraint interface.
 func operate(type S SliceConstraint(T), T interface{})(slice S, fn operateFunc(T)) S {
 	ret := make(S, len(slice))
 	for i, v := range slice {
@@ -39,9 +31,17 @@ func Double(n Numbers) Numbers {
 		return 2 * n
 	}
 
-	// The compiler can infer from n that T in the declaration of the
-	// operate function will represent an integer when constructing the
-	// operate function.
+	// numbers := operate([]int, int)(n, fn)
 	numbers := operate(n, fn)
 	return numbers
+}
+
+// =============================================================================
+
+func main() {
+	n := Numbers{10, 20, 30, 40, 50}
+	fmt.Println(n)
+
+	n = Double(n)
+	fmt.Println(n)
 }

@@ -2,23 +2,68 @@ package main
 
 import "fmt"
 
-func main() {
-	var vi vector(int)
-	vi = vi.push(10)
-	vi = vi.push(20)
-	fmt.Println(vi)
+// =============================================================================
 
-	var vs vector(string)
-	vs = vs.push("A")
-	vs = vs.push("B")
-	fmt.Println(vs)
+type vectorInt []int
+
+func (v vectorInt) push(value int) vectorInt {
+	v = append(v, value)
+	return v
+}
+
+type vectorString []string
+
+func (v vectorString) push(value string) vectorString {
+	v = append(v, value)
+	return v
 }
 
 // =============================================================================
 
-type vector(type T) []T
+type vectorInterface []interface{}
 
-func (v vector(T)) push(value T) vector(T) {
+func (v vectorInterface) push(value interface{}) vectorInterface {
 	v = append(v, value)
 	return v
 }
+
+// =============================================================================
+
+type vectorGeneric(type T) []T
+
+func (v vectorGeneric(T)) push(value T) vectorGeneric(T) {
+	v = append(v, value)
+	return v
+}
+
+// =============================================================================
+
+func main() {
+	var vInt vectorInt
+	vInt = vInt.push(10)
+	vInt = vInt.push(20)
+	fmt.Println("vectorInt:", vInt)
+
+	var vStr vectorString
+	vStr = vStr.push("A")
+	vStr = vStr.push("B")
+	fmt.Println("vectorString:", vStr)
+
+	var vItf vectorInterface
+	vItf = vItf.push(10)
+	vItf = vItf.push(20)
+	vItf = vItf.push("A")
+	vItf = vItf.push("B")
+	fmt.Println("vectorInterface:", vItf)
+
+	var vGenInt vectorGeneric(int)
+	vGenInt = vGenInt.push(10)
+	vGenInt = vGenInt.push(20)
+	fmt.Println("vectorGeneric:", vGenInt)
+
+	var vGenStr vectorGeneric(string)
+	vGenStr = vGenStr.push("A")
+	vGenStr = vGenStr.push("B")
+	fmt.Println("vectorGeneric:", vGenStr)
+}
+

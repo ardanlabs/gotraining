@@ -2,32 +2,6 @@ package main
 
 import "fmt"
 
-func main() {
-	users := []user{
-		{name: "Bill", email: "bill@ardanlabs.com"},
-		{name: "Ale", email: "ale@whatever.com"},
-	}
-	s := stringify(users)
-	fmt.Println(s)
-
-	customers := []customer{
-		{name: "Google", email: "you@google.com"},
-		{name: "MSFT", email: "you@msft.com"},
-	}
-	s = stringify(customers)
-	fmt.Println(s)
-}
-
-// =============================================================================
-
-func stringify(type T fmt.Stringer)(list []T) []string {
-    ret := make([]string, 0, len(list))
-    for _, value := range list {
-        ret = append(ret, value.String())
-    }
-    return ret
-}
-
 // =============================================================================
 
 type user struct {
@@ -46,4 +20,79 @@ type customer struct {
 
 func (u customer) String() string {
 	return fmt.Sprintf("{type: \"customer\", name: %q, email: %q}", u.name, u.email)
+}
+
+// =============================================================================
+
+func stringifyUsers(users []user) []string {
+	ret := make([]string, 0, len(users))
+	for _, user := range users {
+		ret = append(ret, user.String())
+	}
+	return ret
+}
+
+func stringifyCustomers(customers []customer) []string {
+	ret := make([]string, 0, len(customers))
+	for _, customer := range customers {
+		ret = append(ret, customer.String())
+	}
+	return ret
+}
+
+// =============================================================================
+
+func stringifyInterface(v interface{}) []string {
+	switch list := v.(type) {
+	case []user:
+		ret := make([]string, 0, len(list))
+		for _, value := range list {
+			ret = append(ret, value.String())
+		}
+		return ret
+	case []customer:
+		ret := make([]string, 0, len(list))
+		for _, value := range list {
+			ret = append(ret, value.String())
+		}
+		return ret
+	}
+	return nil
+}
+
+// =============================================================================
+
+func stringifyGeneric(type T fmt.Stringer)(list []T) []string {
+    ret := make([]string, 0, len(list))
+    for _, value := range list {
+        ret = append(ret, value.String())
+    }
+    return ret
+}
+
+// =============================================================================
+
+func main() {
+	users := []user{
+		{name: "Bill", email: "bill@ardanlabs.com"},
+		{name: "Ale", email: "ale@whatever.com"},
+	}
+	s1 := stringifyUsers(users)
+	s2 := stringifyInterface(users)
+	s3 := stringifyGeneric(users)
+
+	customers := []customer{
+		{name: "Google", email: "you@google.com"},
+		{name: "MSFT", email: "you@msft.com"},
+	}
+	s4 := stringifyCustomers(customers)
+	s5 := stringifyInterface(customers)
+	s6 := stringifyGeneric(customers)
+
+	fmt.Println("users Con:", s1)
+	fmt.Println("users Int:", s2)
+	fmt.Println("users Gen:", s3)
+	fmt.Println("cust Con:", s4)
+	fmt.Println("cust Int:", s5)
+	fmt.Println("cust Gen:", s6)
 }
