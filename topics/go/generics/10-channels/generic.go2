@@ -1,0 +1,73 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+// =============================================================================
+
+// Define a type that implements a work function that simulates time it takes
+// to perform work and then returns a string with the value of "work complete".
+
+type job struct{}
+
+func (job) work() string {
+	time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+	return "work complete"
+}
+
+// =============================================================================
+
+// This concurrent code can only work directly with value of type job.
+
+func startJob(j job) chan string {
+	ch := make(chan string)
+
+	go func() {
+		ch <- j.work()
+		fmt.Println("sender : signal sent")
+	}()
+
+	return ch
+}
+
+// =============================================================================
+
+// This is the generic version of the startJob function from above. We
+// need to provide two piece of type information. The type for the result (R)
+// that will be sent/recv'd and the type for the worker value (W) that will
+// return values of the result (R) type to be signaled.
+//
+// We must define a worker interface to provide the compiler the information
+// that worker values (W) will have a work function.
+
+type worker(type R) interface {
+	work() R
+}
+
+func startWork(type R interface{}, W worker(R))(w W) chan R {
+	ch := make(chan R)
+
+	go func() {
+		ch <- w.work()
+		fmt.Println("sender : signal sent")
+	}()
+
+	return ch
+}
+
+// =============================================================================
+
+func main() {
+	var j job
+
+	v1 := <-startJob(j)
+	fmt.Println("receiver:", v1)
+
+	fmt.Println("-------------------------------------------------------------")
+
+	v2 := <-startWork(string, job)(j)
+	fmt.Println("receiver:", v2)
+}
