@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // =============================================================================
 
@@ -60,6 +63,19 @@ func stringifyInterface(v interface{}) []string {
 	return nil
 }
 
+func stringifyReflect(v interface{}) []string {
+	val := reflect.ValueOf(v)
+	if val.Kind() != reflect.Slice {
+		return nil
+	}
+	ret := make([]string, 0, val.Len())
+	for i := 0; i < val.Len(); i++ {
+		v2 := val.Index(i).MethodByName("String").Call(nil)
+		ret = append(ret, v2[0].String())
+	}
+	return ret
+}
+
 // =============================================================================
 
 func stringifyGeneric(type T fmt.Stringer)(list []T) []string {
@@ -79,20 +95,24 @@ func main() {
 	}
 	s1 := stringifyUsers(users)
 	s2 := stringifyInterface(users)
-	s3 := stringifyGeneric(users)
+	s3 := stringifyReflect(users)
+	s4 := stringifyGeneric(users)
 
 	customers := []customer{
 		{name: "Google", email: "you@google.com"},
 		{name: "MSFT", email: "you@msft.com"},
 	}
-	s4 := stringifyCustomers(customers)
-	s5 := stringifyInterface(customers)
-	s6 := stringifyGeneric(customers)
+	s5 := stringifyCustomers(customers)
+	s6 := stringifyInterface(customers)
+	s7 := stringifyReflect(customers)
+	s8 := stringifyGeneric(customers)
 
 	fmt.Println("users Con:", s1)
 	fmt.Println("users Int:", s2)
-	fmt.Println("users Gen:", s3)
-	fmt.Println("cust Con:", s4)
-	fmt.Println("cust Int:", s5)
-	fmt.Println("cust Gen:", s6)
+	fmt.Println("users Ref:", s3)
+	fmt.Println("users Gen:", s4)
+	fmt.Println("cust Con:", s5)
+	fmt.Println("cust Int:", s6)
+	fmt.Println("cust Ref:", s7)
+	fmt.Println("cust Gen:", s8)
 }

@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // =============================================================================
 
@@ -37,6 +40,18 @@ func printInterface(v interface{}) {
 	fmt.Print("\n")
 }
 
+func printReflect(v interface{}) {
+	fmt.Print("Reflect: ")
+	val := reflect.ValueOf(v)
+	if val.Kind() != reflect.Slice {
+		return
+	}
+	for i := 0; i < val.Len(); i++ {
+		fmt.Print(val.Index(i).Interface(), " ")
+	}
+	fmt.Print("\n")
+}
+
 // =============================================================================
 
 func printGeneric(type T)(list []T) {
@@ -53,10 +68,12 @@ func main() {
 	numbers := []int{1, 2, 3}
 	printNumbers(numbers)
 	printInterface(numbers)
+	printReflect(numbers)
 	printGeneric(numbers)
 
 	strings := []string{"A", "B", "C"}
 	printStrings(strings)
 	printInterface(strings)
+	printReflect(strings)
 	printGeneric(strings)
 }
