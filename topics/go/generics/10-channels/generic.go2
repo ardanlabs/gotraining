@@ -1,33 +1,30 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"math/rand"
+	"sync"
 	"time"
 )
 
 // =============================================================================
 
-// Define a type that implements a work function that simulates time it takes
-// to perform work and then returns a string with the value of "work complete".
+// doWorker defines a function that takes a context and returns some value of
+// type R to be determined at compile time.
 
-type job struct{}
+type doWorker(type R) func(ctx context.Context) R
 
-func (job) work() string {
-	time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-	return "work complete"
-}
+// doWork will execute any function of type doWorker defined above. The
+// function executes the work function in a goroutine and returns a channel
+// of type R back to the caller.
 
-// =============================================================================
-
-// This concurrent code can only work directly with value of type job.
-
-func startJob(j job) chan string {
-	ch := make(chan string)
+func doWork(type R)(ctx context.Context, work doWorker(R)) chan R {
+	ch := make(chan R, 1)
 
 	go func() {
-		ch <- j.work()
-		fmt.Println("sender : signal sent")
+		ch <- work(ctx)
+		fmt.Println("doWork : work complete")
 	}()
 
 	return ch
@@ -35,25 +32,29 @@ func startJob(j job) chan string {
 
 // =============================================================================
 
-// This is the generic version of the startJob function from above. We
-// need to provide two piece of type information. The type for the result (R)
-// that will be sent/recv'd and the type for the worker value (W) that will
-// return values of the result (R) type to be signaled.
-//
-// We must define a worker interface to provide the compiler the information
-// that worker values (W) will have a work function.
+// poolWorker defines a function that takes an input of type I and returns some
+// value of type R both to be determined at compile time.
 
-type worker(type R) interface {
-	work() R
-}
+type poolWorker(type I, R) func(input I) R
 
-func startWork(type R interface{}, W worker(R))(w W) chan R {
-	ch := make(chan R)
+// poolWork will execute any function of type poolWorker defined above. The
+// function creates a pool of goroutines waiting to receive input for the work
+// function. Once received, the work function is executed with the received
+// input and the result is displayed.
 
-	go func() {
-		ch <- w.work()
-		fmt.Println("sender : signal sent")
-	}()
+func poolWork(type I, R)(wg *sync.WaitGroup, size int, work poolWorker(I, R)) chan I {
+	ch := make(chan I)
+
+	wg.Add(size)
+	for i := 0; i < size; i++ {
+		go func() {
+			defer wg.Done()
+			for input := range ch {
+				r := work(input)
+				fmt.Println("pollWork :", r)
+			}
+		}()
+	}
 
 	return ch
 }
@@ -61,13 +62,47 @@ func startWork(type R interface{}, W worker(R))(w W) chan R {
 // =============================================================================
 
 func main() {
-	var j job
+	ctx, cancel := context.WithTimeout(context.Background(), 100 * time.Millisecond)
+	defer cancel()
 
-	v1 := <-startJob(j)
-	fmt.Println("receiver:", v1)
+	dwf := func(ctx context.Context) string {
+		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+		return "work complete"
+	}
+
+	select {
+	case v := <-doWork(ctx, dwf):
+		fmt.Println("main:", v)
+	case <-ctx.Done():
+		fmt.Println("main: timeout")
+	}
 
 	fmt.Println("-------------------------------------------------------------")
+	
+	pwf := func(input int) string {
+		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+		return fmt.Sprintf("%d : received", input)
+	}
 
-	v2 := <-startWork(string, job)(j)
-	fmt.Println("receiver:", v2)
+	t := time.NewTimer(50 * time.Millisecond)
+	const size = 2
+	var wg sync.WaitGroup
+
+	ch := poolWork(&wg, size, pwf)
+	{
+		for i := 0; i < 10; i++ {
+			select {
+			case ch <- i:
+				t.Stop()
+				fmt.Printf("pollWork : %d : sent\n", i)
+			case <-t.C:
+				fmt.Printf("pollWork : %d : <timeout>\n", i)
+			}
+			t.Reset(20 * time.Millisecond)
+		}
+	}
+	close(ch)
+
+	wg.Wait()
+	t.Stop()
 }
