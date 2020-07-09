@@ -7,6 +7,9 @@ import (
 
 // =============================================================================
 
+// These functions are concrete implementations of print functions that can
+// only work with slices of the specified type.
+
 func printNumbers(numbers []int) {
 	fmt.Print("Numbers: ")
 	for _, num := range numbers {
@@ -25,6 +28,10 @@ func printStrings(strings []string) {
 
 // =============================================================================
 
+// This function provides an empty interface solution which uses type assertions
+// for the different concrete slices to be supported. We've basically moved the
+// functions from above into case statements.
+
 func printInterface(v interface{}) {
 	fmt.Print("Interface: ")
 	switch list := v.(type) {
@@ -40,6 +47,12 @@ func printInterface(v interface{}) {
 	fmt.Print("\n")
 }
 
+// =============================================================================
+
+// This function provides a reflection solution which allows a slice of any
+// type to be provided and printed. This is a generic function thanks to the
+// reflect package.
+
 func printReflect(v interface{}) {
 	fmt.Print("Reflect: ")
 	val := reflect.ValueOf(v)
@@ -53,6 +66,11 @@ func printReflect(v interface{}) {
 }
 
 // =============================================================================
+
+// This function provides a generics solution which allows a slice of any type
+// to be provided and printed. This code more closely resembles the concrete
+// implementations that we started with and is easier to read than the reflect
+// implementation. 
 
 func printGeneric(type T)(list []T) {
 	fmt.Print("Generic: ")

@@ -4,6 +4,11 @@ import "fmt"
 
 // =============================================================================
 
+// This interface defines a contraint not based on behavior but based on the
+// type of data that is acceptable. This type of constrain is important when
+// functions (like Add) need to perform operations (like +) that are not 
+// supported by all types.
+
 type addOnly interface {
 	type string, int, int8, int16, int32, int64
 }
@@ -13,6 +18,10 @@ func Add(type T addOnly)(v1 T, v2 T) T {
 }
 
 // =============================================================================
+
+// This code defines two user defined types, duration based on an int64 and
+// fruit based on a string. Each type defines a method named match that accepts
+// a value of the specified type to match against the receiver.
 
 type duration int64
 
@@ -27,6 +36,15 @@ func (f fruit) match(find fruit) bool {
 }
 
 // =============================================================================
+
+// The matcher interface defines two constraints. First, it constrains the data
+// to what type is acceptable. Second, it constrains the behavior of the data. 
+// The match method requires that a value of type T (to be determined at
+// compile time) will be the input of the method.
+//
+// The match function declares that the value of type T must implement the
+// matcher interface and is used for the slice and value arguments to the
+// function.
 
 type matcher(type T) interface {
     type int, int8, int16, int32, int64, float32, float64

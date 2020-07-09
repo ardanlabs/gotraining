@@ -9,12 +9,22 @@ import (
 
 // =============================================================================
 
+// This code defined a concrete type named user with a name and email field.
+
 type user struct {
 	name  string
 	email string
 }
 
 // =============================================================================
+
+// WorkerInterface defines a function signature that takes a context value as 
+// input and returns any value (via the empty interface) and an error.
+//
+// The retryInterface function provides functionality to execute a worker
+// function and if it fails, calls it again until the context times out. The
+// function returns back to the caller the values returned from the worker
+// function.
 
 type WorkerInterface func(ctx context.Context) (interface{}, error)
 
@@ -45,6 +55,22 @@ func retryInterface(ctx context.Context, interval time.Duration, worker WorkerIn
 }
 
 // =============================================================================
+
+// This is a generics version of the last example.
+//
+// WorkerGeneric defines a function signature that takes a context value as 
+// input and returns any value of type T (to be determined at compile time)
+// and an error.
+//
+// The retryGeneric function provides functionality to execute a worker
+// function and if it fails, calls it again until the context times out. The
+// function returns back to the caller the values returned from the worker
+// function. In this case, the returned values are based on type T and not the
+// empty interface.
+//
+// Returning zero value is an interesting aspect of this code. A variable
+// named zero of type T is constructed at the return site and used for the
+// return statement.
 
 type WorkerGeneric(type T) func(ctx context.Context) (T, error)
 

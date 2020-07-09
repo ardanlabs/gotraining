@@ -7,6 +7,9 @@ import (
 
 // =============================================================================
 
+// Defining two types that implement the fmt.Stringer interface. Each
+// implementation creates a stringified version of the concrete type.
+
 type user struct {
 	name  string
 	email string
@@ -27,6 +30,11 @@ func (u customer) String() string {
 
 // =============================================================================
 
+// These functions implement a stringify function that is specific to each of
+// the concrete types implemented above. In each case, the stringify function
+// returns a slice of strings. These function use the String method against
+// the individual user or customer value.
+
 func stringifyUsers(users []user) []string {
 	ret := make([]string, 0, len(users))
 	for _, user := range users {
@@ -44,6 +52,11 @@ func stringifyCustomers(customers []customer) []string {
 }
 
 // =============================================================================
+
+// This function provides an empty interface solution which uses type assertions
+// for the different concrete slices to be supported. We've basically moved the
+// functions from above into case statements. This function uses the String
+// method against the value.
 
 func stringifyInterface(v interface{}) []string {
 	switch list := v.(type) {
@@ -63,6 +76,12 @@ func stringifyInterface(v interface{}) []string {
 	return nil
 }
 
+// =============================================================================
+
+// This function provides a reflection solution which allows a slice of any
+// type to be provided and stringified. This is a generic function thanks to the
+// reflect package. Notice the call to the String method via relfection.
+
 func stringifyReflect(v interface{}) []string {
 	val := reflect.ValueOf(v)
 	if val.Kind() != reflect.Slice {
@@ -77,6 +96,13 @@ func stringifyReflect(v interface{}) []string {
 }
 
 // =============================================================================
+
+// This function provides a generics solution which allows a slice of any type
+// to be provided and stringified. This code more closely resembles the concrete
+// implementations that we started with and is easier to read than the reflect
+// implementation. However, an interface constraint of type fmt.Stringer is
+// applied to allow the compiler to know the value of type T passed will have
+// a String method.
 
 func stringifyGeneric(type T fmt.Stringer)(list []T) []string {
     ret := make([]string, 0, len(list))

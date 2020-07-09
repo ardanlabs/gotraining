@@ -4,6 +4,10 @@ import "fmt"
 
 // =============================================================================
 
+// This code defines two named types based on a concrete type specified
+// at the point of declaration. Each type implements a method named push
+// that can append values of the specified concrete type into the slice.
+
 type vectorInt []int
 
 func (v vectorInt) push(value int) vectorInt {
@@ -20,6 +24,11 @@ func (v vectorString) push(value string) vectorString {
 
 // =============================================================================
 
+// This named type is based on the empty interface so any value can be pushed
+// into the collection. Since the append function is a generic function, this
+// code works well. However, users will need to perform type assertions to get
+// back to the concrete value being stored inside the interface.
+
 type vectorInterface []interface{}
 
 func (v vectorInterface) push(value interface{}) vectorInterface {
@@ -28,6 +37,11 @@ func (v vectorInterface) push(value interface{}) vectorInterface {
 }
 
 // =============================================================================
+
+// This is a generics version of the named type. It can become a slice of any
+// concrete type provided at the point of construction. The push method also
+// accepts any value of type T determined at compile time. This value needs to
+// match the type used in the construction of the generics type.
 
 type vectorGeneric(type T) []T
 

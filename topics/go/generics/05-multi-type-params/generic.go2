@@ -6,6 +6,11 @@ import (
 
 // =============================================================================
 
+// Print is a function that accepts a slice of some type L and a slice of some
+// type T to be determined at compile time. Each index of type L will be
+// merged with the same index position of type T into a single string. This code
+// shows how the type list can contain more than just one generic type.
+
 func Print(type L interface{}, T fmt.Stringer)(labels []L, vals []T) {
 	for i, v := range vals {
 		fmt.Println(labels[i], v.String())
@@ -13,6 +18,9 @@ func Print(type L interface{}, T fmt.Stringer)(labels []L, vals []T) {
 }
 
 // =============================================================================
+
+// This code defined a concrete type named user that implements the fmt.Stringer
+// interface. The String method just returns the name field from the user type.
 
 type user struct {
 	name string

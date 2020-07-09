@@ -6,15 +6,23 @@ import (
 
 // =============================================================================
 
+// operateFunc defines a function type that takes a value of some type T and
+// returns a value of some type T to be determined at compile time.
+//
+// Slice defines a constraint that the data is a slice of some type T to be
+// determined at compile time.
+
 type operateFunc(type T) func(t T) T
 
-type SliceConstraint(type T) interface {
+type Slice(type T) interface {
 	type []T
 }
 
-// The interesting code here is how T is used to satisfy the type
-// of slice S will represent for the SliceConstraint interface.
-func operate(type S SliceConstraint(T), T interface{})(slice S, fn operateFunc(T)) S {
+// When it is important that the slice being passed in is exactly the same
+// as the slice being returned, a slice contraints is important. This ensures
+// that the result slice (S) is the same as the incoming slice (S).
+
+func operate(type S Slice(T), T interface{})(slice S, fn operateFunc(T)) S {
 	ret := make(S, len(slice))
 	for i, v := range slice {
 		ret[i] = fn(v)
@@ -22,9 +30,18 @@ func operate(type S SliceConstraint(T), T interface{})(slice S, fn operateFunc(T
 	return ret
 }
 
-// =============================================================================
+// If you don't care about the constraint defined above, then operate2 provides
+// a simpler form. Operate2 still works because you can assign a slice of some
+// type T to the input and output arguments. However, the concrete types of the
+// input and output arguments will be based on the underlying types. In this
+// case (based on the main program) not a slice of Numbers but a slice of
+// integers. This is not the case with operate.
+//
+// I suspect most of the time operate2 is what you want: it's simpler, and more
+// flexible: You can always assign a []int back to a Numbers variable and vice
+// versa. But if you need to preserve that incoming type in the result for some
+// reason, you will need to use operate.
 
-// This also provides a slice constraint and is more readable.
 func operate2(type T)(slice []T, fn operateFunc(T)) []T {
 	ret := make([]T, len(slice))
 	for i, v := range slice {
@@ -34,6 +51,17 @@ func operate2(type T)(slice []T, fn operateFunc(T)) []T {
 }
 
 // =============================================================================
+
+// This code defines a named type that is based on a slice of integers. An
+// integer is the underlying type.
+//
+// Double is a function that takes a value of type Numbers, multiplies each
+// value in the underlying integer slice and returns that new Numbers value.
+//
+// Line 73 is commented out because the compiler is smart enough to infer the
+// types for S and T. The commented code shows the types being infered.
+//
+// operate2 is not used in the example.
 
 type Numbers []int
 
