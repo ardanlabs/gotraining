@@ -45,7 +45,6 @@ type poolWorker(type I, R) func(input I) R
 func poolWork(type I, R)(wg *sync.WaitGroup, size int, work poolWorker(I, R)) chan I {
 	ch := make(chan I)
 
-	wg.Add(size)
 	for i := 0; i < size; i++ {
 		go func() {
 			defer wg.Done()
@@ -84,11 +83,14 @@ func main() {
 		return fmt.Sprintf("%d : received", input)
 	}
 
-	t := time.NewTimer(50 * time.Millisecond)
-	const size = 2
+	const wait = 20 * time.Millisecond
+	t := time.NewTimer(wait)
+	
+	const poolSize = 2
 	var wg sync.WaitGroup
+	wg.Add(poolSize)
 
-	ch := poolWork(&wg, size, pwf)
+	ch := poolWork(&wg, poolSize, pwf)
 	{
 		for i := 0; i < 10; i++ {
 			select {
@@ -98,7 +100,7 @@ func main() {
 			case <-t.C:
 				fmt.Printf("pollWork : %d : <timeout>\n", i)
 			}
-			t.Reset(20 * time.Millisecond)
+			t.Reset(wait)
 		}
 	}
 	close(ch)
