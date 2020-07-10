@@ -77,19 +77,17 @@ func main() {
 	const poolSize = 2
 	var wg sync.WaitGroup
 	wg.Add(poolSize)
-
+	
 	ch := poolWork(&wg, poolSize, pwf)
-	{
-		for i := 0; i < 10; i++ {
-			select {
-			case ch <- i:
-				t.Stop()
-				fmt.Printf("pollWork : %d : sent\n", i)
-			case <-t.C:
-				fmt.Printf("pollWork : %d : <timeout>\n", i)
-			}
-			t.Reset(wait)
+	for i := 0; i < 10; i++ {
+		select {
+		case ch <- i:
+			t.Stop()
+			fmt.Printf("pollWork : %d : sent\n", i)
+		case <-t.C:
+			fmt.Printf("pollWork : %d : <timeout>\n", i)
 		}
+		t.Reset(wait)
 	}
 	close(ch)
 
