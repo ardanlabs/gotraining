@@ -2,11 +2,11 @@ package main
 
 // Compiler Error:  methods cannot have type parameters
 
-type user struct {
-	name string
+type value struct {
+	s string
 }
 
-func (u user) SomeMethods(type Input, Result)(i Input) Result {
+func (v value) Method(type Input, Result)(i Input) Result {
 	
 	// Write some code here.
 }
