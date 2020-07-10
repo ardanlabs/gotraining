@@ -19,8 +19,8 @@ type Slice(type T) interface {
 }
 
 // When it is important that the slice being passed in is exactly the same
-// as the slice being returned, a slice contraints is important. This ensures
-// that the result slice (S) is the same as the incoming slice (S).
+// as the slice being returned, use a slice contraint. This ensures that the
+// result slice S is the same as the incoming slice S.
 
 func operate(type S Slice(T), T interface{})(slice S, fn operateFunc(T)) S {
 	ret := make(S, len(slice))
@@ -34,13 +34,8 @@ func operate(type S Slice(T), T interface{})(slice S, fn operateFunc(T)) S {
 // a simpler form. Operate2 still works because you can assign a slice of some
 // type T to the input and output arguments. However, the concrete types of the
 // input and output arguments will be based on the underlying types. In this
-// case (based on the main program) not a slice of Numbers but a slice of
-// integers. This is not the case with operate.
-//
-// I suspect most of the time operate2 is what you want: it's simpler, and more
-// flexible: You can always assign a []int back to a Numbers variable and vice
-// versa. But if you need to preserve that incoming type in the result for some
-// reason, you will need to use operate.
+// case not a slice of Numbers, but a slice of integers. This is not the case
+// with operate function above.
 
 func operate2(type T)(slice []T, fn operateFunc(T)) []T {
 	ret := make([]T, len(slice))
@@ -49,6 +44,11 @@ func operate2(type T)(slice []T, fn operateFunc(T)) []T {
 	}
 	return ret
 }
+
+// I suspect most of the time operate2 is what you want: it's simpler, and more
+// flexible: You can always assign a []int back to a Numbers variable and vice
+// versa. But if you need to preserve that incoming type in the result for some
+// reason, you will need to use operate.
 
 // =============================================================================
 
