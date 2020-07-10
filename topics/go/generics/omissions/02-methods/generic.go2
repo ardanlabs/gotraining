@@ -1,0 +1,16 @@
+package main
+
+// Compiler Error:  methods cannot have type parameters
+
+type user struct {
+	name string
+}
+
+func (u user) SomeMethods(type Input, Result)(i Input) Result {
+	
+	// Write some code here.
+}
+
+// The design draft does not permit methods to declare type parameters that
+// are specific to the method. The receiver may have type parameters, but the
+// method not add any type parameters.
