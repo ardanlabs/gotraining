@@ -26,9 +26,9 @@ func doWork(type Result)(ctx context.Context, work func(context.Context) Result)
 
 // =============================================================================
 
-// poolWork will execute a work via a pool of goroutines waiting to receive
-// input. Once input is received on any given goroutine, the work function is
-// executed and the Result is displayed.
+// poolWork will execute a work function via a pool of goroutines and return a
+// channel of type Input back to the caller. Once input is received by any
+// given goroutine, the work function is executed and the Result is displayed.
 
 func poolWork(type Input, Result)(wg *sync.WaitGroup, size int, work func(input Input) Result) chan Input {
 	ch := make(chan Input)
