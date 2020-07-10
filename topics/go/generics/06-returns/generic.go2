@@ -59,24 +59,24 @@ func retryInterface(ctx context.Context, interval time.Duration, worker WorkerIn
 // This is a generics version of the last example.
 //
 // WorkerGeneric defines a function signature that takes a context value as 
-// input and returns any value of type T (to be determined at compile time)
+// input and returns any value of type Result (to be determined at compile time)
 // and an error.
 //
 // The retryGeneric function provides functionality to execute a worker
 // function and if it fails, calls it again until the context times out. The
 // function returns back to the caller the values returned from the worker
-// function. In this case, the returned values are based on type T and not the
-// empty interface.
+// function. In this case, the returned values are based on type Result and not
+// the empty interface.
 //
 // Returning zero value is an interesting aspect of this code. A variable
-// named zero of type T is constructed at the return site and used for the
+// named zero of type Result is constructed at the return site and used for the
 // return statement.
 
-type WorkerGeneric(type T) func(ctx context.Context) (T, error)
+type WorkerGeneric(type Result) func(ctx context.Context) (Result, error)
 
-func retryGeneric(type T)(ctx context.Context, interval time.Duration, worker WorkerGeneric(T)) (T, error) {
+func retryGeneric(type Result)(ctx context.Context, interval time.Duration, worker WorkerGeneric(Result)) (Result, error) {
 	if ctx.Err() != nil {
-		var zero T 
+		var zero Result 
 		return zero, errors.New("error")
 	}
 
@@ -94,7 +94,7 @@ func retryGeneric(type T)(ctx context.Context, interval time.Duration, worker Wo
 		select {
 		case <-ctx.Done():
 			retry.Stop()
-			var zero T 
+			var zero Result 
 			return zero, errors.New("error")
 		case <-retry.C:
 			retry.Reset(interval)
