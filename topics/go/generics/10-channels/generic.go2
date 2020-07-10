@@ -10,17 +10,11 @@ import (
 
 // =============================================================================
 
-// doWorker defines a function that takes a context and returns some value of
-// type R to be determined at compile time.
+// doWork will execute a work function of the specified type in a goroutine and
+// return a channel of type Result back to the caller.
 
-type doWorker(type R) func(ctx context.Context) R
-
-// doWork will execute any function of type doWorker defined above. The
-// function executes the work function in a goroutine and returns a channel
-// of type R back to the caller.
-
-func doWork(type R)(ctx context.Context, work doWorker(R)) chan R {
-	ch := make(chan R, 1)
+func doWork(type Result)(ctx context.Context, work func(context.Context) Result) chan Result {
+	ch := make(chan Result, 1)
 
 	go func() {
 		ch <- work(ctx)
@@ -32,25 +26,19 @@ func doWork(type R)(ctx context.Context, work doWorker(R)) chan R {
 
 // =============================================================================
 
-// poolWorker defines a function that takes an input of type I and returns some
-// value of type R both to be determined at compile time.
+// poolWork will execute a work function of the specified type via a pool of
+// goroutines waiting to receive input. Once input is received on any given
+// goroutine, the work function is executed and the result is displayed.
 
-type poolWorker(type I, R) func(input I) R
-
-// poolWork will execute any function of type poolWorker defined above. The
-// function creates a pool of goroutines waiting to receive input for the work
-// function. Once received, the work function is executed with the received
-// input and the result is displayed.
-
-func poolWork(type I, R)(wg *sync.WaitGroup, size int, work poolWorker(I, R)) chan I {
-	ch := make(chan I)
+func poolWork(type Input, Result)(wg *sync.WaitGroup, size int, work func(input Input) Result) chan Input {
+	ch := make(chan Input)
 
 	for i := 0; i < size; i++ {
 		go func() {
 			defer wg.Done()
 			for input := range ch {
-				r := work(input)
-				fmt.Println("pollWork :", r)
+				result := work(input)
+				fmt.Println("pollWork :", result)
 			}
 		}()
 	}
