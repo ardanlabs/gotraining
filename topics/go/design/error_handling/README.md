@@ -26,6 +26,7 @@ _Systems cannot be developed assuming that human beings will be able to write mi
 [Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
 [Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
 [Go 1.13: xerrors](https://crawshaw.io/blog/xerrors) - David Crawshaw  
+[Why Go's Error Handling is Awesome](https://rauljordan.com/2020/07/06/why-go-error-handling-is-awesome.html) - Raul Jordan  
 
 ## Code Review
 

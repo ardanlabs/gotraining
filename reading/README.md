@@ -57,6 +57,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Transistor, Part 3: Endless Reinvention](https://technicshistory.wordpress.com/2018/03/31/the-transistor-part-3-endless-reinvention/amp) - technicshistory  
 [Reflections on Trusting Trust](https://www.archive.ece.cmu.edu/~ganger/712.fall02/papers/p761-thompson.pdf) - Ken Thompson  
 [Null References: The Billion Dollar Mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare) - Tony Hoare  
+[Go’s History in Code](https://seh.dev/go-legacy/) - Sean Hinchee  
 
 ### Contribute to Go
 
@@ -148,6 +149,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Stack traces and the errors package](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package) - Dave Cheney    
 [Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
 [Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
+[Why Go's Error Handling is Awesome](https://rauljordan.com/2020/07/06/why-go-error-handling-is-awesome.html) - Raul Jordan  
 
 ### Interfaces and Composition
 
