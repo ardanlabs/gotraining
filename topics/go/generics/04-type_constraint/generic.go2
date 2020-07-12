@@ -10,8 +10,9 @@ import "fmt"
 // supported by all types.
 
 type addOnly interface {
-	type string, int, int8, int16, int32, int64
+	type string, int, int8, int16, int32, int64, float64
 }
+
 
 func Add(type T addOnly)(v1 T, v2 T) T {
     return v1 + v2
@@ -35,6 +36,14 @@ func (f fruit) match(find fruit) bool {
     return f == find
 }
 
+type bill struct{
+    name string
+}
+
+func (b bill) match(find bill) bool {
+    return b == find
+}
+
 // =============================================================================
 
 // The matcher interface defines two constraints. First, it constrains the data
@@ -47,7 +56,7 @@ func (f fruit) match(find fruit) bool {
 // function.
 
 type matcher(type T) interface {
-    type int, int8, int16, int32, int64, float32, float64
+    type bill, fruit, int, int8, int16, int32, int64, float32, float64
     match(find T) bool
 }
 
@@ -65,11 +74,14 @@ func match(type T matcher)(list []T, find T) int {
 func main() {
     fmt.Println(Add(10, 20))
     fmt.Println(Add("A", "B"))
-    // fmt.Println(Add(3.14159, 2.96))
+    fmt.Println(Add(3.14159, 2.96))
 
     d := []duration{5000, 10, 40}
     fmt.Println("Matched at index: ", match(d, 10))
 
-    // f := []fruit{"apple", "orange", "banna"}
-    // fmt.Println("Matched at index: ", match(f, "banna"))
+    f := []fruit{"apple", "orange", "banna"}
+    fmt.Println("Matched at index: ", match(f, "banna"))
+
+    b := []bill{{name:"bill"}, {name:"jill"}, {name:"joan"}}
+    fmt.Println("Matched at index: ", match(b, bill{name:"jill"}))
 }
