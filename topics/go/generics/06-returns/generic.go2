@@ -1,123 +1,108 @@
 package main
 
 import (
-	"context"
-	"errors"
-	"fmt"
-	"time"
+	"database/sql"
+	"log"
 )
 
 // =============================================================================
 
-// This code defined a concrete type named user with a name and email field.
+type User struct {
+	ID    int64
+	Name  string
+	Email string
+}
 
-type user struct {
-	name  string
-	email string
+func InsertUser(db *sql.DB, u User) (User, error) {
+	const query = "insert into users (name, email) values ($1, $2)"
+	result, err := ExecuteQuery(query, u.Name, u.Email)
+	if err != nil {
+		return User{}, err
+	}
+
+	id, err := result.LastInsertId()
+	if err != nil {
+		return User{}, err
+	}
+
+	u.ID = id
+	return u, nil
+}
+
+type Customer struct {
+	ID    int64
+	Name  string
+	Email string
+}
+
+func InsertCustomer(db *sql.DB, c Customer) (Customer, error) {
+	const query = "insert into customers (name, email) values ($1, $2)"
+	result, err := ExecuteQuery(query, c.Name, c.Email)
+	if err != nil {
+		return Customer{}, err
+	}
+
+	id, err := result.LastInsertId()
+	if err != nil {
+		return Customer{}, err
+	}
+
+	c.ID = id
+	return c, nil
 }
 
 // =============================================================================
 
-// WorkerInterface defines a function signature that takes a context value as 
-// input and returns any value (via the empty interface) and an error.
-//
-// The retryInterface function provides functionality to execute a worker
-// function and if it fails, calls it again until the context times out. The
-// function returns back to the caller the values returned from the worker
-// function.
+type inserter interface {
+	type User, Customer
+}
 
-type WorkerInterface func(ctx context.Context) (interface{}, error)
+func Insert(type T inserter)(db *sql.DB, entity T, query string, args ...interface{}) (T, error) {
+	var zero T
 
-func retryInterface(ctx context.Context, interval time.Duration, worker WorkerInterface) (interface{}, error) {
-	if ctx.Err() != nil {
-		return nil, errors.New("error")
+	result, err := ExecuteQuery(query, args...)
+	if err != nil {
+		return zero, err
 	}
 
-	var retry *time.Timer
-
-	for {
-		if value, err := worker(ctx); err == nil {
-			return value, nil
-		}
-
-		if retry == nil {
-			retry = time.NewTimer(interval)
-		}
-
-		select {
-		case <-ctx.Done():
-			retry.Stop()
-			return nil, errors.New("error")
-		case <-retry.C:
-			retry.Reset(interval)
-		}
+	id, err := result.LastInsertId()
+	if err != nil {
+		return zero, err
 	}
+
+	entity.ID = id
+	return entity, nil
 }
 
 // =============================================================================
 
-// This is a generics version of the last example.
-//
-// WorkerGeneric defines a function signature that takes a context value as 
-// input and returns any value of type Result (to be determined at compile time)
-// and an error.
-//
-// The retryGeneric function provides functionality to execute a worker
-// function and if it fails, calls it again until the context times out. The
-// function returns back to the caller the values returned from the worker
-// function. In this case, the returned values are based on type Result and not
-// the empty interface.
-//
-// Returning zero value is an interesting aspect of this code. A variable
-// named zero of type Result is constructed at the return site and used for the
-// return statement.
+type Result struct{}
 
-type WorkerGeneric(type Result) func(ctx context.Context) (Result, error)
+func (r Result) LastInsertId() (int64, error) { return 1, nil }
+func (r Result) RowsAffected() (int64, error) { return 1, nil }
 
-func retryGeneric(type Result)(ctx context.Context, interval time.Duration, worker WorkerGeneric(Result)) (Result, error) {
-	if ctx.Err() != nil {
-		var zero Result 
-		return zero, errors.New("error")
-	}
-
-	var retry *time.Timer
-
-	for {
-		if value, err := worker(ctx); err == nil {
-			return value, nil
-		}
-
-		if retry == nil {
-			retry = time.NewTimer(interval)
-		}
-
-		select {
-		case <-ctx.Done():
-			retry.Stop()
-			var zero Result 
-			return zero, errors.New("error")
-		case <-retry.C:
-			retry.Reset(interval)
-		}
-	}
+func ExecuteQuery(query string, args ...interface{}) (sql.Result, error) {
+	return Result{}, nil
 }
 
 // =============================================================================
 
 func main() {
-	ctx := context.Background()
+	var db *sql.DB
 
-	workerInt := func(ctx context.Context) (interface{}, error) {
-		time.Sleep(time.Millisecond)
-		return &user{"bill", "b@email.com"}, nil
+	var u User
+	query := "insert into users (name, email) values ($1, $2)"
+	u, err := Insert(db, u, query, u.Name, u.Email)
+	if err != nil {
+		log.Fatal(err)
 	}
-	intf, err := retryInterface(ctx, time.Second, workerInt)
-	fmt.Println(intf.(*user), err)
+	log.Println(u)
 
-	workerGen := func(ctx context.Context) (*user, error) {
-		time.Sleep(time.Millisecond)
-		return &user{"bill", "b@email.com"}, nil
+	var c Customer
+	query := "insert into customers (name, email) values ($1, $2)"
+	c, err := Insert(db, c, query, u.Name, u.Email)
+	if err != nil {
+		log.Fatal(err)
 	}
-	user, err := retryGeneric(*user)(ctx, time.Second, workerGen)
-	fmt.Println(user, err)
+	log.Println(c)
 }
