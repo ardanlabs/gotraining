@@ -13,75 +13,42 @@ type addOnly interface {
 	type string, int, int8, int16, int32, int64, float64
 }
 
-
 func Add(type T addOnly)(v1 T, v2 T) T {
     return v1 + v2
 }
 
 // =============================================================================
 
-// This code defines two user defined types, duration based on an int64 and
-// fruit based on a string. Each type defines a method named match that accepts
-// a value of the specified type to match against the receiver.
+// The index function declares that the value of type T must be compliant with
+// the new predeclared type constraint "comparable". A type parameter with the
+// comparable constraint accepts as a type argument any comparable type. It
+// permits the use of == and != with values of that type parameter.
 
-type duration int64
-
-func (e duration) match(find duration) bool {
-    return e == find
+func index(type T comparable)(list []T, find T) int {
+	for i, v := range list {
+		if v == find {
+            return i
+		}
+    }
+    return -1
 }
 
-type fruit string
+// =============================================================================
 
-func (f fruit) match(find fruit) bool {
-    return f == find
-}
-
-type bill struct{
+type person struct{
     name string
 }
-
-func (b bill) match(find bill) bool {
-    return b == find
-}
-
-// =============================================================================
-
-// The matcher interface defines two constraints. First, it constrains the data
-// to what type is acceptable. Second, it constrains the behavior of the data. 
-// The match method requires that a value of type T (to be determined at
-// compile time) will be the input of the method.
-//
-// The match function declares that the value of type T must implement the
-// matcher interface and is used for the slice and value arguments to the
-// function.
-
-type matcher(type T) interface {
-    type bill, fruit, int, int8, int16, int32, int64, float32, float64
-    match(find T) bool
-}
-
-func match(type T matcher)(list []T, find T) int {
-	for i, v := range list {
-		if find.match(v) {
-			return i
-		}
-	}
-	return -1
-}
-
-// =============================================================================
 
 func main() {
     fmt.Println(Add(10, 20))
     fmt.Println(Add("A", "B"))
     fmt.Println(Add(3.14159, 2.96))
 
-    d := []duration{5000, 10, 40}
-    fmt.Println("Matched at index: ", match(d, 10))
+    durations := []int{5000, 10, 40}
+    findDur := 10
+    fmt.Printf("found duration %d in %v at index %d\n", findDur, durations, index(durations, findDur))
 
-    f := []fruit{"apple", "orange", "banna"}
-    fmt.Println("Matched at index: ", match(f, "banna"))
-
-    b := []bill{{name:"bill"}, {name:"jill"}, {name:"joan"}}
-    fmt.Println("Matched at index: ", match(b, bill{name:"jill"}))
+    people := []person{{name:"bill"}, {name:"jill"}, {name:"joan"}}
+    findPerson := person{name:"joan"}
+    fmt.Printf("found person %s in %v at index %d\n", findPerson.name, people, index(people, findPerson))
 }

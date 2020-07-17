@@ -32,7 +32,7 @@ func printStrings(strings []string) {
 // for the different concrete slices to be supported. We've basically moved the
 // functions from above into case statements.
 
-func printInterface(v interface{}) {
+func printAssert(v interface{}) {
 	fmt.Print("Interface: ")
 	switch list := v.(type) {
 	case []int:
@@ -85,13 +85,13 @@ func printGeneric(type T)(list []T) {
 func main() {
 	numbers := []int{1, 2, 3}
 	printNumbers(numbers)
-	printInterface(numbers)
+	printAssert(numbers)
 	printReflect(numbers)
 	printGeneric(numbers)
 
 	strings := []string{"A", "B", "C"}
 	printStrings(strings)
-	printInterface(strings)
+	printAssert(strings)
 	printReflect(strings)
 	printGeneric(strings)
 }

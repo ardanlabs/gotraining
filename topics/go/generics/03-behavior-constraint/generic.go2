@@ -58,7 +58,7 @@ func stringifyCustomers(customers []customer) []string {
 // functions from above into case statements. This function uses the String
 // method against the value.
 
-func stringifyInterface(v interface{}) []string {
+func stringifyAssert(v interface{}) []string {
 	switch list := v.(type) {
 	case []user:
 		ret := make([]string, 0, len(list))
@@ -120,7 +120,7 @@ func main() {
 		{name: "Ale", email: "ale@whatever.com"},
 	}
 	s1 := stringifyUsers(users)
-	s2 := stringifyInterface(users)
+	s2 := stringifyAssert(users)
 	s3 := stringifyReflect(users)
 	s4 := stringifyGeneric(users)
 
@@ -129,7 +129,7 @@ func main() {
 		{name: "MSFT", email: "you@msft.com"},
 	}
 	s5 := stringifyCustomers(customers)
-	s6 := stringifyInterface(customers)
+	s6 := stringifyAssert(customers)
 	s7 := stringifyReflect(customers)
 	s8 := stringifyGeneric(customers)
 
