@@ -7,6 +7,11 @@ import (
 
 // =============================================================================
 
+// The User and Customer types each have a specialized insert function. These
+// functions use value semantic mutation by accepting a value of the specific
+// type and returning a new value of the type modified with the id for the newly
+// inserted data. The query and arguments required are bound inside the function.
+
 type User struct {
 	ID    int64
 	Name  string
@@ -53,16 +58,60 @@ func InsertCustomer(db *sql.DB, c Customer) (Customer, error) {
 
 // =============================================================================
 
-type inserter interface {
+// This is code that I never want to see written in Go. The code is defining
+// an interface with the method set required to access the different data
+// points required to make the insert operation generic. The use of the
+// setter will never allow me to sleep at night.
+//
+// The function doesn't use value semantic mutation and if pointer semantics
+// are not used by the caller, the setter won't work. This is riddled with
+// fraud and misuse.
+
+type DontDoThis interface {
+	Query() string
+	Args() []interface{}
+	SetID(int64)
+}
+
+func InsertInterface(db *sql.DB, entity DontDoThis) error {
+	result, err := ExecuteQuery(entity.Query(), entity.Args()...)
+	if err != nil {
+		return err
+	}
+
+	id, err := result.LastInsertId()
+	if err != nil {
+		return err
+	}
+
+	entity.SetID(id)
+	return nil
+}
+
+// =============================================================================
+
+// This version of a generic insert function is cleaner. It accepts the query
+// and args as parameters and still implements the value semantic mutation like
+// the concrete version. There is no setter needed since the type list provides
+// the compiler with the information that values of type T will contain an ID
+// field.
+//
+// The code also shows the two ways to handle zero value returns when the
+// return type is based on a generic type.
+//
+// NOTE: I am not sure I want anyone writing code like this.
+//       This is an experiment.
+
+type entities interface {
 	type User, Customer
 }
 
-func Insert(type T inserter)(db *sql.DB, entity T, query string, args ...interface{}) (T, error) {
+func Insert(type T entities)(db *sql.DB, entity T, query string, args ...interface{}) (T, error) {
 	var zero T
 
 	result, err := ExecuteQuery(query, args...)
 	if err != nil {
-		return zero, err
+		return *new(T), err
 	}
 
 	id, err := result.LastInsertId()
@@ -70,8 +119,18 @@ func Insert(type T inserter)(db *sql.DB, entity T, query string, args ...interfa
 		return zero, err
 	}
 
+	// The entities interface provides this support.
 	entity.ID = id
 	return entity, nil
+}
+
+func InsertUser2(db *sql.DB, u User) (User, error) {
+	const query = "insert into users (name, email) values ($1, $2)"	
+	u, err := Insert(db, u, query, u.Name, u.Email)
+	if err != nil {
+		return User{}, err
+	}
+	return u, nil
 }
 
 // =============================================================================
@@ -99,8 +158,8 @@ func main() {
 	log.Println(u)
 
 	var c Customer
-	query := "insert into customers (name, email) values ($1, $2)"
-	c, err := Insert(db, c, query, u.Name, u.Email)
+	query = "insert into customers (name, email) values ($1, $2)"
+	c, err = Insert(db, c, query, u.Name, u.Email)
 	if err != nil {
 		log.Fatal(err)
 	}

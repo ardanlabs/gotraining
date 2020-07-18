@@ -10,7 +10,7 @@ import "fmt"
 // supported by all types.
 
 type addOnly interface {
-	type string, int, int8, int16, int32, int64, float64
+    type string, int, int8, int16, int32, int64, float64
 }
 
 func Add(type T addOnly)(v1 T, v2 T) T {
@@ -36,8 +36,52 @@ func index(type T comparable)(list []T, find T) int {
 // =============================================================================
 
 type person struct{
-    name string
+    name  string
+    email string
 }
+
+func (p person) match(v person) bool {
+    return p.name == v.name
+}
+
+type food struct{
+    name     string
+    category string
+}
+
+func (f food) match(v food) bool {
+    return f.name == v.name
+}
+
+// =============================================================================
+
+// The matcher interface defines two constraints. First, it constrains the data
+// to what type is acceptable. Second, it constrains the behavior of the data. 
+// The match method requires that a value of type T (to be determined at
+// compile time) will be the input of the method.
+//
+// The match function declares that the value of type T must implement the
+// matcher interface and is used for the slice and value arguments to the
+// function.
+//
+// Note: The type list inside the interface is not needed for match to work.
+//       I'm trying to show how the type list and behavior can be combined.
+
+type matcher(type T) interface {
+    type person, food
+    match(v T) bool
+}
+
+func match(type T matcher)(list []T, find T) int {
+	for i, v := range list {
+		if v.match(find) {
+            return i
+		}
+    }
+    return -1
+}
+
+// =============================================================================
 
 func main() {
     fmt.Println(Add(10, 20))
@@ -46,9 +90,29 @@ func main() {
 
     durations := []int{5000, 10, 40}
     findDur := 10
-    fmt.Printf("found duration %d in %v at index %d\n", findDur, durations, index(durations, findDur))
+    i := index(durations, findDur)
+    fmt.Printf("Index: %d for %d\n", i, findDur)
 
-    people := []person{{name:"bill"}, {name:"jill"}, {name:"joan"}}
-    findPerson := person{name:"joan"}
-    fmt.Printf("found person %s in %v at index %d\n", findPerson.name, people, index(people, findPerson))
+    people := []person{
+        {name:"bill", email:"bill@email.com"},
+        {name:"jill", email:"jill@email.com"},
+        {name:"tony", email:"tony@email.com"},
+    }
+    findPerson := person{name:"tony"}
+
+    i = index(people, findPerson)
+    fmt.Printf("Index: %d for %s\n", i, findPerson.name)
+
+    i = match(people, findPerson)
+    fmt.Printf("Match: %d for %s\n", i, findPerson.name)
+
+    foods := []food{
+        {name:"apple", category: "fruit"},
+        {name:"carrot", category: "veg"},
+        {name:"chicken", category: "meat"},
+    }
+    findFood := food{name:"apple"}
+
+    i = match(foods, findFood)
+    fmt.Printf("Match: %d for %s\n", i, findFood.name)
 }

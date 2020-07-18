@@ -89,8 +89,12 @@ func stringifyReflect(v interface{}) []string {
 	}
 	ret := make([]string, 0, val.Len())
 	for i := 0; i < val.Len(); i++ {
-		v2 := val.Index(i).MethodByName("String").Call(nil)
-		ret = append(ret, v2[0].String())
+		m := val.Index(i).MethodByName("String")
+		if !m.IsValid() {
+			return nil
+		}
+		data := m.Call(nil)
+		ret = append(ret, data[0].String())
 	}
 	return ret
 }
