@@ -33,7 +33,7 @@ func printStrings(strings []string) {
 // functions from above into case statements.
 
 func printAssert(v interface{}) {
-	fmt.Print("Interface: ")
+	fmt.Print("Assert: ")
 	switch list := v.(type) {
 	case []int:
 		for _, num := range list {
