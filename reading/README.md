@@ -239,6 +239,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [Health and availability in computer systems](https://medium.com/observability/health-and-availability-b2f32ce28716) - José Carlos Chávez  
 
+### Performance
+
+[Learn How To Optimize Code In Go](https://dave.cheney.net/high-performance-json.html) - Dave Cheney  
+
 ### Misc
 
 [Why We Can't Divide By Zero](http://digg.com/video/why-cant-you-divide-by-zero) - Eddie Woo  
