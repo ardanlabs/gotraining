@@ -163,6 +163,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Composition In Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  
 [Reducing Type Hierarchies](https://www.ardanlabs.com/blog/2016/10/reducing-type-hierarchies.html) - William Kennedy  
 [Avoid Interface Pollution](https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html) - William Kennedy  
+[Hyrum's Law](https://www.hyrumslaw.com/) - Hyrum  
 
 ### Concurrency
 

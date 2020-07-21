@@ -29,6 +29,7 @@ _"Design is the art of arranging code to work today, and be changeable forever."
 [Abstraction Considered Harmful](https://bravenewgeek.com/abstraction-considered-harmful/) - Tyler Treat    
 [Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy    
 [Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy    
+[Hyrum's Law](https://www.hyrumslaw.com/) - Hyrum  
 
 ## Code Review
 
