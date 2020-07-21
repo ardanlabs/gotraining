@@ -108,9 +108,9 @@ func stringifyReflect(v interface{}) []string {
 // applied to allow the compiler to know the value of type T passed will have
 // a String method.
 
-func stringifyGeneric(type T fmt.Stringer)(list []T) []string {
-    ret := make([]string, 0, len(list))
-    for _, value := range list {
+func stringifyGeneric[type T fmt.Stringer](slice []T) []string {
+    ret := make([]string, 0, len(slice))
+    for _, value := range slice {
         ret = append(ret, value.String())
     }
     return ret

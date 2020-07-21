@@ -21,7 +21,7 @@ func main() {
 	hashFunc2 := func(key int, buckets int) int {
 		return key % buckets
 	}
-	table2 := New(int, string)(buckets, hashFunc2)
+	table2 := New(/*key*/ int, /*value*/ string)(buckets, hashFunc2)
 
 	words := []string{"foo", "bar", "baz"}
 	for i, word := range words {
@@ -40,28 +40,28 @@ func main() {
 
 // =============================================================================
 
-type hashFunc(type K) func(key K, buckets int) int
+type hashFunc[type K] func(key K, buckets int) int
 
-type keyValuePair(type K, V interface{}) struct {
+type keyValuePair[type K, V interface{}] struct {
 	Key   K
 	Value V
 }
 
-type Table(type K comparable, V interface{}) struct {
-    hashFunc hashFunc(K)
+type Table[type K comparable, V interface{}] struct {
+    hashFunc hashFunc[K]
 	buckets  int
-	table    [][]keyValuePair(K, V)
+	table    [][]keyValuePair[K, V]
 }
 
-func New(type K comparable, V interface{})(buckets int, hf hashFunc(K)) *Table(K, V) {
-	return &Table(K, V){
+func New[type K comparable, V interface{}](buckets int, hf hashFunc[K]) *Table[K, V] {
+	return &Table[K, V]{
 		hashFunc: hf,
         buckets:  buckets,
-		table:    make([][](keyValuePair(K, V)), buckets),
+		table:    make([][](keyValuePair[K, V]), buckets),
 	}
 }
 
-func (t *Table(K, V)) Insert(key K, value V) {
+func (t *Table[K, V]) Insert(key K, value V) {
 	bucket := t.hashFunc(key, t.buckets)
 	for idx, kvp := range t.table[bucket] {
 		if key == kvp.Key {
@@ -70,14 +70,14 @@ func (t *Table(K, V)) Insert(key K, value V) {
 		}
 	}
 
-	kvp := keyValuePair(K, V){
+	kvp := keyValuePair[K, V]{
 		Key:   key,
 		Value: value,
 	}
 	t.table[bucket] = append(t.table[bucket], kvp)
 }
 
-func (t *Table(K, V)) Get(key K) (V, bool) {
+func (t *Table[K, V]) Get(key K) (V, bool) {
     bucket := t.hashFunc(key, t.buckets)
     for idx, kvp := range t.table[bucket] {
         if key == kvp.Key {

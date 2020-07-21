@@ -13,7 +13,7 @@ import (
 // doWork will execute a work function in a goroutine and return a channel of
 // type Result back to the caller.
 
-func doWork(type Result)(ctx context.Context, work func(context.Context) Result) chan Result {
+func doWork[type Result](ctx context.Context, work func(context.Context) Result) chan Result {
 	ch := make(chan Result, 1)
 
 	go func() {
@@ -30,7 +30,7 @@ func doWork(type Result)(ctx context.Context, work func(context.Context) Result)
 // channel of type Input back to the caller. Once input is received by any
 // given goroutine, the work function is executed and the Result is displayed.
 
-func poolWork(type Input, Result)(wg *sync.WaitGroup, size int, work func(input Input) Result) chan Input {
+func poolWork[type Input, Result](wg *sync.WaitGroup, size int, work func(input Input) Result) chan Input {
 	ch := make(chan Input)
 
 	for i := 0; i < size; i++ {

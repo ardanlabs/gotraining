@@ -13,7 +13,7 @@ type addOnly interface {
     type string, int, int8, int16, int32, int64, float64
 }
 
-func Add(type T addOnly)(v1 T, v2 T) T {
+func Add[type T addOnly](v1 T, v2 T) T {
     return v1 + v2
 }
 
@@ -24,7 +24,7 @@ func Add(type T addOnly)(v1 T, v2 T) T {
 // comparable constraint accepts as a type argument any comparable type. It
 // permits the use of == and != with values of that type parameter.
 
-func index(type T comparable)(list []T, find T) int {
+func index[type T comparable](list []T, find T) int {
 	for i, v := range list {
 		if v == find {
             return i
@@ -67,12 +67,12 @@ func (f food) match(v food) bool {
 // Note: The type list inside the interface is not needed for match to work.
 //       I'm trying to show how the type list and behavior can be combined.
 
-type matcher(type T) interface {
+type matcher[type T] interface {
     type person, food
     match(v T) bool
 }
 
-func match(type T matcher)(list []T, find T) int {
+func match[type T matcher](list []T, find T) int {
 	for i, v := range list {
 		if v.match(find) {
             return i

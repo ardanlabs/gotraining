@@ -12,9 +12,9 @@ import (
 // Slice defines a constraint that the data is a slice of some type T to be
 // determined at compile time.
 
-type operateFunc(type T) func(t T) T
+type operateFunc[type T] func(t T) T
 
-type Slice(type T) interface {
+type Slice[type T] interface {
 	type []T
 }
 
@@ -22,7 +22,7 @@ type Slice(type T) interface {
 // as the slice being returned, use a slice contraint. This ensures that the
 // result slice S is the same as the incoming slice S.
 
-func operate(type S Slice(T), T interface{})(slice S, fn operateFunc(T)) S {
+func operate[type S Slice[T], T interface{}](slice S, fn operateFunc[T]) S {
 	ret := make(S, len(slice))
 	for i, v := range slice {
 		ret[i] = fn(v)
@@ -37,7 +37,7 @@ func operate(type S Slice(T), T interface{})(slice S, fn operateFunc(T)) S {
 // case not a slice of Numbers, but a slice of integers. This is not the case
 // with operate function above.
 
-func operate2(type T)(slice []T, fn operateFunc(T)) []T {
+func operate2[type T](slice []T, fn operateFunc[T]) []T {
 	ret := make([]T, len(slice))
 	for i, v := range slice {
 		ret[i] = fn(v)

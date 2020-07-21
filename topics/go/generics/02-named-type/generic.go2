@@ -43,9 +43,9 @@ func (v vectorInterface) push(value interface{}) vectorInterface {
 // accepts any value of type T determined at compile time. This value needs to
 // match the type used in the construction of the generics type.
 
-type vectorGeneric(type T) []T
+type vectorGeneric[type T] []T
 
-func (v vectorGeneric(T)) push(value T) vectorGeneric(T) {
+func (v vectorGeneric[T]) push(value T) vectorGeneric[T] {
 	v = append(v, value)
 	return v
 }
@@ -70,12 +70,12 @@ func main() {
 	vItf = vItf.push("B")
 	fmt.Println("vectorInterface:", vItf)
 
-	var vGenInt vectorGeneric(int)
+	var vGenInt vectorGeneric[int]
 	vGenInt = vGenInt.push(10)
 	vGenInt = vGenInt.push(20)
 	fmt.Println("vectorGeneric:", vGenInt)
 
-	var vGenStr vectorGeneric(string)
+	var vGenStr vectorGeneric[string]
 	vGenStr = vGenStr.push("A")
 	vGenStr = vGenStr.push("B")
 	fmt.Println("vectorGeneric:", vGenStr)
