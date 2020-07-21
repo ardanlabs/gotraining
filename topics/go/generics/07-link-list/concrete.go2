@@ -2,19 +2,6 @@ package main
 
 import "fmt"
 
-func main() {
-	var l list
-
-	l.add("bill")
-	l.add("ale")
-
-	f := func(n *node) error {
-		fmt.Println(n.Data)
-		return nil
-	}
-	l.operate(f)
-}
-
 // =============================================================================
 
 type node struct {
@@ -22,6 +9,8 @@ type node struct {
 	next *node
 	prev *node
 }
+
+type op func(n *node) error
 
 type list struct {
 	Count int
@@ -45,10 +34,6 @@ func (l *list) add(data string) *node {
 	return &n
 }
 
-// =============================================================================
-
-type op func(n *node) error
-
 func (l *list) operate(f op) error {
 	n := l.first
 	for n != nil {
@@ -58,4 +43,19 @@ func (l *list) operate(f op) error {
 		n = n.next
 	}
 	return nil
+}
+
+// =============================================================================
+
+func main() {
+	var l list
+
+	l.add("bill")
+	l.add("ale")
+
+	f := func(n *node) error {
+		fmt.Println(n.Data)
+		return nil
+	}
+	l.operate(f)
 }

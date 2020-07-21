@@ -8,36 +8,6 @@ import (
 	"hash/fnv"
 )
 
-func main() {
-	const buckets = 8
-
-	hashFunc1 := func(key string, buckets int) int {
-		h := fnv.New32()
-		h.Write([]byte(key))
-		return int(h.Sum32()) % buckets
-	}
-	table1 := New(/*key*/ string, /*value*/ int)(buckets, hashFunc1)
-	
-	hashFunc2 := func(key int, buckets int) int {
-		return key % buckets
-	}
-	table2 := New(/*key*/ int, /*value*/ string)(buckets, hashFunc2)
-
-	words := []string{"foo", "bar", "baz"}
-	for i, word := range words {
-		table1.Insert(word, i)
-		table2.Insert(i, word)
-	}
-
-	for i, s := range append(words, "nope!") {
-		v1, ok1 := table1.Get(s)
-		fmt.Printf("t1.Get(%v) = (%v, %v)\n", s, v1, ok1)
-	
-		v2, ok2 := table2.Get(i)
-		fmt.Printf("t2.Get(%v) = (%v, %v)\n", i, v2, ok2)
-	}
-}
-
 // =============================================================================
 
 type hashFunc[type K] func(key K, buckets int) int
@@ -87,4 +57,36 @@ func (t *Table[K, V]) Get(key K) (V, bool) {
 
     var zero V
     return zero, false
+}
+
+// =============================================================================
+
+func main() {
+	const buckets = 8
+
+	hashFunc1 := func(key string, buckets int) int {
+		h := fnv.New32()
+		h.Write([]byte(key))
+		return int(h.Sum32()) % buckets
+	}
+	table1 := New[/*key*/ string, /*value*/ int](buckets, hashFunc1)
+	
+	hashFunc2 := func(key int, buckets int) int {
+		return key % buckets
+	}
+	table2 := New[/*key*/ int, /*value*/ string](buckets, hashFunc2)
+
+	words := []string{"foo", "bar", "baz"}
+	for i, word := range words {
+		table1.Insert(word, i)
+		table2.Insert(i, word)
+	}
+
+	for i, s := range append(words, "nope!") {
+		v1, ok1 := table1.Get(s)
+		fmt.Printf("t1.Get(%v) = (%v, %v)\n", s, v1, ok1)
+	
+		v2, ok2 := table2.Get(i)
+		fmt.Printf("t2.Get(%v) = (%v, %v)\n", i, v2, ok2)
+	}
 }

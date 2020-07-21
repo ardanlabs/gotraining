@@ -2,19 +2,6 @@ package main
 
 import "fmt"
 
-func main() {
-	var l list(string)
-
-	l.add("bill")
-	l.add("ale")
-
-	f := func(n *node(string)) error {
-		fmt.Println(n.Data)
-		return nil
-	}
-	l.operate(f)
-}
-
 // =============================================================================
 
 type scalarOnly interface {
@@ -26,6 +13,8 @@ type node[type T scalarOnly] struct {
 	next *node[T]
 	prev *node[T]
 }
+
+type op[type T scalarOnly] func(n *node[T]) error
 
 type list[type T scalarOnly] struct {
 	Count int
@@ -49,10 +38,6 @@ func (l *list[T]) add(data T) *node[T] {
 	return &n
 }
 
-// =============================================================================
-
-type op[type T scalarOnly] func(n *node[T]) error
-
 func (l *list[T]) operate(f op[T]) error {
 	n := l.first
 	for n != nil {
@@ -62,4 +47,19 @@ func (l *list[T]) operate(f op[T]) error {
 		n = n.next
 	}
 	return nil
+}
+
+// =============================================================================
+
+func main() {
+	var l list[string]
+
+	l.add("bill")
+	l.add("ale")
+
+	f := func(n *node[string]) error {
+		fmt.Println(n.Data)
+		return nil
+	}
+	l.operate(f)
 }
