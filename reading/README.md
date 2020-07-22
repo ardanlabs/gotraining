@@ -188,7 +188,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Modules Part 03: Minimal Version Selection](https://www.ardanlabs.com/blog/2019/12/modules-03-minimal-version-selection.html) - William Kennedy  
 [Modules Part 04: Mirrors, Checksums and Athens](https://www.ardanlabs.com/blog/2020/02/modules-04-mirros-checksums-athens.html) - William Kennedy  
 [Modules Part 04: Mirrors, Checksums and Athens](https://www.ardanlabs.com/blog/2020/02/modules-04-mirros-checksums-athens.html) - Rohan Challa  
-[Modules Part 05: Gopls Improvements](hhttps://www.ardanlabs.com/blog/2020/04/modules-05-gopls-improvements.html) - William Kennedy  
+[Modules Part 05: Gopls Improvements](https://www.ardanlabs.com/blog/2020/04/modules-05-gopls-improvements.html) - William Kennedy  
 [Modules Part 06: Vendoring](https://www.ardanlabs.com/blog/2020/04/modules-06-vendoring.html) - William Kennedy  
 [Go Wiki on Modules](https://github.com/golang/go/wiki/Modules) - Community  
 [Go Modules](https://systemdump.io/posts/2018-07-22-go-modules) - systemdump  
@@ -335,6 +335,8 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 [Why golang garbage-collector not implement Generational and Compact gc?](https://groups.google.com/forum/m/#!topic/golang-nuts/KJiyv2mV2pU) - Ian Lance Taylor  
 [Getting to Go: The Journey of Go's Garbage Collector](https://blog.golang.org/ismmkeynote) - Rick Hudson   
 [Garbage Collection In Go : Part I - Semantics](https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html) - William Kennedy  
+[Garbage Collection In Go : Part II - GC Traces](https://www.ardanlabs.com/blog/2019/05/garbage-collection-in-go-part2-gctraces.html) - William Kennedy  
+[Garbage Collection In Go : Part III - GC Pacing](https://www.ardanlabs.com/blog/2019/07/garbage-collection-in-go-part3-gcpacing.html) - William Kennedy  
 
 #### Escape Analysis and Inlining
 
