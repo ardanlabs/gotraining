@@ -49,7 +49,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Systems Past: the only 8 software innovations we actually use](http://davidad.github.io/blog/2014/03/12/the-operating-system-is-out-of-date/) - davidad  
 [Lessons learned from reading postmortems](http://danluu.com/postmortem-lessons/) - danluu.com  
 [Early days of Unix and design of sh](https://www.youtube.com/watch?feature=youtu.be&v=2kEJoWfobpA&app=desktop) - Stephen Bourne  
-[What did Alan Kay mean by, "Lisp is the greatest single programming language ever designed"?](https://www.quora.com/What-did-Alan-Kay-meandqwcdwcswqw-by-Lisp-is-the-greatest-single-programming-language-ever-designed/answer/Alan-Kay-11) - Alan Kay  
+[What did Alan Kay mean by, "Lisp is the greatest single programming language ever designed"?](https://www.quora.com/What-did-Alan-Kay-mean-by-Lisp-is-the-greatest-single-programming-language-ever-designed/answer/Alan-Kay-11) - Alan Kay  
 [What Have We Learned from the PDP-11?](https://dave.cheney.net/2017/12/04/what-have-we-learned-from-the-pdp-11) - C. Gordon Bell  
 [4 lessons for modern software developers from 1970s mainframe programming](https://www.hpe.com/us/en/insights/articles/4-lessons-for-modern-software-developers-from-1970s-mainframe-programming-1709.html) - Alan Zeichick  
 [Notes on Programming in C](http://doc.cat-v.org/bell_labs/pikestyle) - Rob Pike  
