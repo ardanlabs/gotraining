@@ -65,23 +65,120 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Contribution Guidelines](https://golang.org/doc/contribute.html) - Go Documentation  
 [CONTRIBUTING: The Talk!](https://github.com/matloob/contributing/blob/master/contributing.md) - Michael Matloob  
 
-### Standard Library
+### API Design
 
-[io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#) - Ben Johnson  
-[bytes + strings packages](https://medium.com/@benbjohnson/go-walkthrough-bytes-strings-packages-499be9f4b5bd#) - Ben Johnson  
-[encoding package](https://medium.com/@benbjohnson/go-walkthrough-encoding-package-bc5e912232d#)  - Ben Johnson  
-[strconv package](https://medium.com/@benbjohnson/go-walkthrough-strconv-7a24632a9e73#) - Ben Johnson  
+[You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
+[Focus On Being Precise](https://www.ardanlabs.com/blog/2018/02/focus-on-being-precise.html) - William Kennedy  
+[Design, Composition and Performance](https://www.infoq.com/presentations/Design-Composition-Performance) - Rich Hickey  
+[Things That Matter](https://www.youtube.com/watch?v=RT46MpK39rQ) - Scott Meyers  
 
-### Testing and Structure
+### Assembly
 
-[Structuring Tests in Go](https://medium.com/@benbjohnson/structuring-tests-in-go-46ddee7a25c#.b2m3nziyb) - Ben Johnson  
-[Structuring Applications in Go](https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091#.xc85lg2kf) - Ben Johnson  
-[Advanced Testing with Go - Video](https://www.youtube.com/shared?ci=LARb45o5TpA) - Mitchell Hashimoto  
-[Advanced Testing with Go - Deck](https://speakerdeck.com/mitchellh/advanced-testing-with-go) - Mitchell Hashimoto  
-[The tragedy of 100% code coverage](http://labs.ig.com/code-coverage-100-percent-tragedy) - Daniel Lebrero's  
-[Logs and Metrics](https://medium.com/@cindysridharan/logs-and-metrics-6d34d3026e38) - Cindy Sridharan  
-[The deep synergy between testability and good design](https://www.youtube.com/watch?reload=9&feature=share&v=4cVZvoFGJTU&app=desktop) - Michael Feathers  
+[Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
+[Quick intro to Go assembly](https://blog.hackercat.ninja/post/quick_intro_to_go_assembly/)  
+[The Go low-level calling convention on x86-64](http://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
 
+### Buffer Bloat - 2011
+
+[Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g) - Jim Gettys  
+[Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
+
+### Concurrency
+
+[The Behavior Of Channels](https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html) - William Kennedy  
+[Scheduling In Go - Part I](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html) - William Kennedy  
+[Scheduling In Go - Part II](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) - William Kennedy  
+[Go advanced concurrency patterns: part 3 (channels)](https://blogtitle.github.io/go-advanced-concurrency-patterns-part-3-channels/) - Roberto Clapis  
+
+### Distributed Systems
+
+[Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods) - Jeff Hodges  
+[The Queen Does Not Rule](https://aeon.co/essays/how-ant-societies-point-to-radical-possibilities-for-humans) - Deborah M Gordon  
+[Load Balancing is Impossible](https://www.youtube.com/watch?v=kpvbOzHUakA) - Tyler McMullen  
+[Dapper: Distributed Tracing](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf) - Google  
+[Authentication in Distributed Systems: Theory and Practice](https://www.microsoft.com/en-us/research/publication/authentication-in-distributed-systems-theory-and-practice/) - Microsoft  
+
+### Error Handling
+
+[Go 1.13: xerrors](https://crawshaw.io/blog/xerrors) - David Crawshaw  
+[Error handling and Go](https://blog.golang.org/error-handling-and-go)    
+[Error Handling In Go, Part I](https://www.ardanlabs.com/blog/2014/10/error-handling-in-go-part-i.html) - William Kennedy    
+[Error Handling In Go, Part II](https://www.ardanlabs.com/blog/2014/11/error-handling-in-go-part-ii.html) - William Kennedy    
+[Design Philosophy On Logging](https://www.ardanlabs.com/blog/2017/05/design-philosophy-on-logging.html) - William Kennedy    
+[Bugs are a failure of prediction](https://clipperhouse.com/bugs-are-a-failure-of-prediction/) - Matt Sherman    
+[Inspecting errors](https://dave.cheney.net/2014/12/24/inspecting-errors) - Dave Cheney    
+[Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully) - Dave Cheney    
+[Stack traces and the errors package](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package) - Dave Cheney    
+[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
+[Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
+[Why Go's Error Handling is Awesome](https://rauljordan.com/2020/07/06/why-go-error-handling-is-awesome.html) - Raul Jordan  
+
+### Generics and Go2
+
+[Sydney Golang Meetup - Rob Pike - Go 2 Draft Specifications](https://www.youtube.com/watch?v=RIvL2ONhFBI) - Rob Pike  
+[Current Design Draft](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters) - Go Team  
+[The Next Step for Generics](https://blog.golang.org/generics-next-step) - Go Team  
+[Early notes on the generics proposal](https://rakyll.org/generics-proposal/) - JBD  
+[Generics in Go](https://bitfieldconsulting.com/golang/generics) - John Arundel  
+
+### HTTP
+
+[Complete Guide To Go Net HTTP Timeouts](https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts) - Filippo Valsorda  
+
+### Interfaces and Composition
+
+[Repeat yourself, do more than one thing, and rewrite everything](https://programmingisterrible.com/post/176657481103/repeat-yourself-do-more-than-one-thing-and) - tef  
+[Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy  
+[Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy  
+[Design Guidelines](design_guidelines.md)  
+[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
+[Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful) - Brave New Geek  
+[Methods, Interfaces and Embedding](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
+[Composition In Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  
+[Reducing Type Hierarchies](https://www.ardanlabs.com/blog/2016/10/reducing-type-hierarchies.html) - William Kennedy  
+[Avoid Interface Pollution](https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html) - William Kennedy  
+[Hyrum's Law](https://www.hyrumslaw.com/) - Hyrum  
+
+### Kubernetes, Container and Orchestration
+
+[How To Deploy a Go Web Application with Docker](https://semaphoreci.com/community/tutorials/how-to-deploy-a-go-web-application-with-docker) - Kulshekhar Kabra  
+[An introduction to Clear Containers](https://lwn.net/Articles/644675) - LWN.net  
+[Getting Started with Docker](https://docs.docker.com/engine/getstarted/) - Docker  
+[Kubernetes Bootcamp](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/) - Google  
+[Kubernetes Liveness and Readiness Probes](https://blog.colinbreck.com/kubernetes-liveness-and-readiness-probes-how-to-avoid-shooting-yourself-in-the-foot/) - Colin Breck   
+[What happens when ... Kubernetes edition!](https://github.com/jamiehannaford/what-happens-when-k8s/blob/master/README.md) - Jamie Hannaford  
+
+### Linux
+
+[Measuring context switching and memory overheads for Linux threads](https://eli.thegreenplace.net/2018/measuring-context-switching-and-memory-overheads-for-linux-threads/) - Eli Bendersky's  
+[Linux Performance](http://www.brendangregg.com/linuxperf.html) - Brendan Gregg  
+[The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
+[Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
+[Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz    
+[Monitoring and Tuning the Linux Networking Stack: Receiving Data](http://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/) - packagecloud  
+[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
+[Path: add BBR congestion control](https://patchwork.ozlabs.org/patch/671069/)  
+
+### Misc
+
+[Why We Can't Divide By Zero](http://digg.com/video/why-cant-you-divide-by-zero) - Eddie Woo  
+[Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
+[USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)  
+[Latency Tip Of The Day](http://latencytipoftheday.blogspot.com/) -- Gil Tene  
+[Proposal: Monotonic Elapsed Time Measurements in Go](https://github.com/golang/proposal/blob/master/design/12914-monotonic.md) - Russ Cox  
+[Exploring shared objects in Go](https://blog.ksub.org/bytes/2017/02/12/exploring-shared-objects-in-go/) - Marcelo Bytes  
+[Evaluation of read-only slices](https://docs.google.com/document/d/1-NzIYu0qnnsshMBpMPmuO21qd8unlimHgKjRD9qwp2A/edit) - Russ Cox  
+[The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
+[Our Human Condition "From Space"](http://www.vpri.org/pdf/m2003001_human_cond.pdf) - Alan Kay  
+[No Silver Bullet: Essence and Accidents of Software Engineering](http://www.cs.nott.ac.uk/~pszcah/G51ISS/Documents/NoSilverBullet.html) - Frederick P. Brooks, Jr.   
+[Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
+[Divide By Zero](https://www.hillelwayne.com/post/divide-by-zero/) - Hillel Wayne  
+[Secrecy, Authentication, and Public Key Systems](http://www.merkle.com/papers/Thesis1979.pdf) - Ralph Merkle  
+[Tales From The Lunar Module Guidance Computer](https://www.doneyles.com/LM/Tales.html) - Don Eyles  
+[Is Self-Orientation Killing Your Trustworthiness](https://trustedadvisor.com/trustmatters/is-self-orientation-killing-your-trustworthiness) - Charles H. Green  
+[Speed Is Found In The Minds of People](https://www.youtube.com/watch?v=FJJTYQYB1JQ) - Andrei Alexandrescu  
+[The Soul of Erlang and Elixir](https://www.youtube.com/watch?v=JvBT4XBdoUE) - Saša Jurić  
+ 
 ### Modules
 
 [Go & Versioning](https://research.swtch.com/vgo) - Russ Cox  
@@ -97,14 +194,18 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go Modules](https://systemdump.io/posts/2018-07-22-go-modules) - systemdump  
 [A Gentle Introduction To Go Modules](https://ukiahsmith.com/blog/a-gentle-introduction-to-golang-modules/) - Ukiah Smith  
 
-### Vendoring / Versioning
+### Monitoring and Observability
 
-[How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)  
-[The End of Software Versions](http://hintjens.com/blog:85) - Pieter Hintjens  
-[Transparent Logs for Skeptical Clients](https://research.swtch.com/tlog) - Russ Cox  
+[Health and availability in computer systems](https://medium.com/observability/health-and-availability-b2f32ce28716) - José Carlos Chávez  
+
+### Must Read
+
+[PRinty# C with ABC](http://www.cs.cmu.edu/~tom7/abc/paper.pdf) - Dr. Tom Murphy VII, Ph.D  
+[I coached 101 CEOs, founders, VCs and other executives in 2019: These are the biggest takeaways](https://leowid.com/2019-2) - Leo Widrich  
 
 ### Profiling, Debugging and Optimization
 
+[Learn How To Optimize Code In Go](https://dave.cheney.net/high-performance-json.html) - Dave Cheney  
 [Precise timing of machine code with Linux perf.](https://dendibakh.github.io/blog/2019/04/03/Precise-timing-of-machine-code-with-Linux-perf) - Denis Bakhvalov  
 [The past and future of Microprocessor performance](https://github.com/davecheney/gophercon2018-performance-tuning-workshop/blob/master/1-welcome/introduction.md) - Dave Cheney  
 [Want to Debug Latency?](https://medium.com/observability/want-to-debug-latency-7aa48ecbe8f7) - JBD  
@@ -129,92 +230,18 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [A Crash Course in Modern Hardware](https://www.youtube.com/watch?v=OFgxAFdxYAQ) - Cliff Click  
 [How I investigated memory leaks in Go using pprof on a large codebase](https://medium.freecodecamp.org/how-i-investigated-memory-leaks-in-go-using-pprof-on-a-large-codebase-4bec4325e192) - Jonathan Levison   
 
-### API Design
-
-[You wanted a banana but you got a gorilla holding the banana](http://www.johndcook.com/blog/2011/07/19/you-wanted-banana) - John D. Cook  
-[Focus On Being Precise](https://www.ardanlabs.com/blog/2018/02/focus-on-being-precise.html) - William Kennedy  
-[Design, Composition and Performance](https://www.infoq.com/presentations/Design-Composition-Performance) - Rich Hickey  
-[Things That Matter](https://www.youtube.com/watch?v=RT46MpK39rQ) - Scott Meyers  
-
-### Error Handling
-
-[Go 1.13: xerrors](https://crawshaw.io/blog/xerrors) - David Crawshaw  
-[Error handling and Go](https://blog.golang.org/error-handling-and-go)    
-[Error Handling In Go, Part I](https://www.ardanlabs.com/blog/2014/10/error-handling-in-go-part-i.html) - William Kennedy    
-[Error Handling In Go, Part II](https://www.ardanlabs.com/blog/2014/11/error-handling-in-go-part-ii.html) - William Kennedy    
-[Design Philosophy On Logging](https://www.ardanlabs.com/blog/2017/05/design-philosophy-on-logging.html) - William Kennedy    
-[Bugs are a failure of prediction](https://clipperhouse.com/bugs-are-a-failure-of-prediction/) - Matt Sherman    
-[Inspecting errors](https://dave.cheney.net/2014/12/24/inspecting-errors) - Dave Cheney    
-[Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully) - Dave Cheney    
-[Stack traces and the errors package](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package) - Dave Cheney    
-[Errors are handled in return values](https://plus.google.com/+RussCox-rsc/posts/iqAiKAwP6Ce) - Russ Cox    
-[Error handling in Upspin](https://commandcenter.blogspot.com/2017/12/error-handling-in-upspin.html) - Rob Pike    
-[Why Go's Error Handling is Awesome](https://rauljordan.com/2020/07/06/why-go-error-handling-is-awesome.html) - Raul Jordan  
-
-### Interfaces and Composition
-
-[Repeat yourself, do more than one thing, and rewrite everything](https://programmingisterrible.com/post/176657481103/repeat-yourself-do-more-than-one-thing-and) - tef  
-[Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy  
-[Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy  
-[Design Guidelines](design_guidelines.md)  
-[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
-[Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful) - Brave New Geek  
-[Methods, Interfaces and Embedding](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
-[Composition In Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  
-[Reducing Type Hierarchies](https://www.ardanlabs.com/blog/2016/10/reducing-type-hierarchies.html) - William Kennedy  
-[Avoid Interface Pollution](https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html) - William Kennedy  
-[Hyrum's Law](https://www.hyrumslaw.com/) - Hyrum  
-
-### Concurrency
-
-[The Behavior Of Channels](https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html) - William Kennedy  
-[Scheduling In Go - Part I](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html) - William Kennedy  
-[Scheduling In Go - Part II](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) - William Kennedy  
-[Go advanced concurrency patterns: part 3 (channels)](https://blogtitle.github.io/go-advanced-concurrency-patterns-part-3-channels/) - Roberto Clapis  
-
-### Buffer Bloat - 2011
-
-[Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g) - Jim Gettys  
-[Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
-
-### Linux
-
-[Measuring context switching and memory overheads for Linux threads](https://eli.thegreenplace.net/2018/measuring-context-switching-and-memory-overheads-for-linux-threads/) - Eli Bendersky's  
-[Linux Performance](http://www.brendangregg.com/linuxperf.html) - Brendan Gregg  
-[The Definitive Guide to Linux System Calls](http://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/#hardware-and-software)  
-[Linux Performance Analysis in 60,000 Milliseconds](http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html) - Netflix  
-[Tenets of the UNIX Philosophy](http://www.ru.j-npcs.org/usoft/WWW/LJ/Articles/unixtenets.html) - Mike Gancarz    
-[Monitoring and Tuning the Linux Networking Stack: Receiving Data](http://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/) - packagecloud  
-[The Linux Scheduler: a Decade of Wasted Cores](http://www.ece.ubc.ca/~sasha/papers/eurosys16-final29.pdf)  
-[Path: add BBR congestion control](https://patchwork.ozlabs.org/patch/671069/)  
-
-### Container, Orchestration and Kubernetes
-
-[How To Deploy a Go Web Application with Docker](https://semaphoreci.com/community/tutorials/how-to-deploy-a-go-web-application-with-docker) - Kulshekhar Kabra  
-[An introduction to Clear Containers](https://lwn.net/Articles/644675) - LWN.net  
-[Getting Started with Docker](https://docs.docker.com/engine/getstarted/) - Docker  
-[Kubernetes Bootcamp](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/) - Google  
-[Kubernetes Liveness and Readiness Probes](https://blog.colinbreck.com/kubernetes-liveness-and-readiness-probes-how-to-avoid-shooting-yourself-in-the-foot/) - Colin Breck   
-[What happens when ... Kubernetes edition!](https://github.com/jamiehannaford/what-happens-when-k8s/blob/master/README.md) - Jamie Hannaford  
-
-### Distributed Systems
-
-[Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods) - Jeff Hodges  
-[The Queen Does Not Rule](https://aeon.co/essays/how-ant-societies-point-to-radical-possibilities-for-humans) - Deborah M Gordon  
-[Load Balancing is Impossible](https://www.youtube.com/watch?v=kpvbOzHUakA) - Tyler McMullen  
-[Dapper: Distributed Tracing](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf) - Google  
-[Authentication in Distributed Systems: Theory and Practice](https://www.microsoft.com/en-us/research/publication/authentication-in-distributed-systems-theory-and-practice/) - Microsoft  
-
-### HTTP and Timeouts
-
-[Complete Guide To Go Net HTTP Timeouts](https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts) - Filippo Valsorda  
-
 ### Queuing Theory
 
 [Basic Queuing Theory](http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main_Angol.pdf) - Dr. János Sztrik  
 [Queueing Theory](https://speakerdeck.com/emfree/queueing-theory) - Eben Freeman  
 [Designing Cluster Schedulers for Internet-Scale Services](https://queue.acm.org/detail.cfm?id=3199609) - Diptanu Gon Choudhury and Timothy Perrett  
 [Observations on Buffering](https://grimoire.ca/dev/buffers) - Owen Grimoire  
+
+### Site Reliability Engineering
+
+[Site Reliability Engineering](https://landing.google.com/sre/book.html) - Google  
+[SLI, SLO, SLA](https://landing.google.com/sre/book/chapters/service-level-objectives.html) - Google  
+[SLIs, SLOs, SLAs, oh my!](https://www.youtube.com/watch?v=tEylFyxbDLE) - Liz Fong-Jones and Seth Vargo  
 
 ### Specter And Other CPU Attacks
 
@@ -223,55 +250,29 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [ Hiding Malware in Speculative Execution](https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_02B-5_Wampler_paper.pdf) - White Paper  
 [Speculation & leakage: Timing side channels & multi-tenant computing (SEC355)](https://www.youtube.com/watch?v=kQ4H6XO-iao) - Eric Brandwine  
 
-### Go Assembly
+### Standard Library
 
-[Go Assembly by Example](http://davidwong.fr/goasm/) - David Wong  
-[Quick intro to Go assembly](https://blog.hackercat.ninja/post/quick_intro_to_go_assembly/)  
-[The Go low-level calling convention on x86-64](http://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
+[io package](https://medium.com/@benbjohnson/go-walkthrough-io-package-8ac5e95a9fbd#) - Ben Johnson  
+[bytes + strings packages](https://medium.com/@benbjohnson/go-walkthrough-bytes-strings-packages-499be9f4b5bd#) - Ben Johnson  
+[encoding package](https://medium.com/@benbjohnson/go-walkthrough-encoding-package-bc5e912232d#)  - Ben Johnson  
+[strconv package](https://medium.com/@benbjohnson/go-walkthrough-strconv-7a24632a9e73#) - Ben Johnson  
 
-### Site Reliability Engineering
+### Testing and Structure
 
-[Site Reliability Engineering](https://landing.google.com/sre/book.html) - Google  
-[SLI, SLO, SLA](https://landing.google.com/sre/book/chapters/service-level-objectives.html) - Google  
-[SLIs, SLOs, SLAs, oh my!](https://www.youtube.com/watch?v=tEylFyxbDLE) - Liz Fong-Jones and Seth Vargo  
+[Structuring Tests in Go](https://medium.com/@benbjohnson/structuring-tests-in-go-46ddee7a25c#.b2m3nziyb) - Ben Johnson  
+[Structuring Applications in Go](https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091#.xc85lg2kf) - Ben Johnson  
+[Advanced Testing with Go - Video](https://www.youtube.com/shared?ci=LARb45o5TpA) - Mitchell Hashimoto  
+[Advanced Testing with Go - Deck](https://speakerdeck.com/mitchellh/advanced-testing-with-go) - Mitchell Hashimoto  
+[The tragedy of 100% code coverage](http://labs.ig.com/code-coverage-100-percent-tragedy) - Daniel Lebrero's  
+[Logs and Metrics](https://medium.com/@cindysridharan/logs-and-metrics-6d34d3026e38) - Cindy Sridharan  
+[The deep synergy between testability and good design](https://www.youtube.com/watch?reload=9&feature=share&v=4cVZvoFGJTU&app=desktop) - Michael Feathers  
 
-### Monitoring and Observability
+### Vendoring / Versioning
 
-[Health and availability in computer systems](https://medium.com/observability/health-and-availability-b2f32ce28716) - José Carlos Chávez  
+[How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos)  
+[The End of Software Versions](http://hintjens.com/blog:85) - Pieter Hintjens  
+[Transparent Logs for Skeptical Clients](https://research.swtch.com/tlog) - Russ Cox  
 
-### Performance
-
-[Learn How To Optimize Code In Go](https://dave.cheney.net/high-performance-json.html) - Dave Cheney  
-
-### Misc
-
-[Why We Can't Divide By Zero](http://digg.com/video/why-cant-you-divide-by-zero) - Eddie Woo  
-[Shrink Your Go Binaries With This One Weird Trick](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick) - Filippo Valsorda  
-[USENIX Association Videos](https://www.youtube.com/user/USENIXAssociation)  
-[Latency Tip Of The Day](http://latencytipoftheday.blogspot.com/) -- Gil Tene  
-[Proposal: Monotonic Elapsed Time Measurements in Go](https://github.com/golang/proposal/blob/master/design/12914-monotonic.md) - Russ Cox  
-[Exploring shared objects in Go](https://blog.ksub.org/bytes/2017/02/12/exploring-shared-objects-in-go/) - Marcelo Bytes  
-[Evaluation of read-only slices](https://docs.google.com/document/d/1-NzIYu0qnnsshMBpMPmuO21qd8unlimHgKjRD9qwp2A/edit) - Russ Cox  
-[The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) - Wikipedia  
-[Our Human Condition "From Space"](http://www.vpri.org/pdf/m2003001_human_cond.pdf) - Alan Kay  
-[No Silver Bullet: Essence and Accidents of Software Engineering](http://www.cs.nott.ac.uk/~pszcah/G51ISS/Documents/NoSilverBullet.html) - Frederick P. Brooks, Jr.   
-[Psychology of Code Readability](https://medium.com/@egonelbre/psychology-of-code-readability-d23b1ff1258a) - Egon Elbre  
-[Divide By Zero](https://www.hillelwayne.com/post/divide-by-zero/) - Hillel Wayne  
-[Secrecy, Authentication, and Public Key Systems](http://www.merkle.com/papers/Thesis1979.pdf) - Ralph Merkle  
-[Tales From The Lunar Module Guidance Computer](https://www.doneyles.com/LM/Tales.html) - Don Eyles  
-[Is Self-Orientation Killing Your Trustworthiness](https://trustedadvisor.com/trustmatters/is-self-orientation-killing-your-trustworthiness) - Charles H. Green  
-[Speed Is Found In The Minds of People](https://www.youtube.com/watch?v=FJJTYQYB1JQ) - Andrei Alexandrescu  
-[The Soul of Erlang and Elixir](https://www.youtube.com/watch?v=JvBT4XBdoUE) - Saša Jurić  
- 
-### Must Read
-
-[PRinty# C with ABC](http://www.cs.cmu.edu/~tom7/abc/paper.pdf) - Dr. Tom Murphy VII, Ph.D  
-[I coached 101 CEOs, founders, VCs and other executives in 2019: These are the biggest takeaways](https://leowid.com/2019-2) - Leo Widrich  
-
-### Go 2
-
-[Type Parameters - Draft Design : June 2020](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md) - Go Team  
-[Sydney Golang Meetup - Rob Pike - Go 2 Draft Specifications](https://www.youtube.com/watch?v=RIvL2ONhFBI) - Rob Pike  
 
 ## Mechanical Sympathy
 
@@ -321,31 +322,6 @@ Much of this content can be found under [arrays](../topics/go/language/arrays) a
 
 This content can be found under [pointers](../topics/go/language/pointers). We feel this content is so important it has been moved out to this general materials page.
 
-#### Linker
-
-[Building a better Go linker](https://docs.google.com/document/d/1D13QhciikbdLtaI67U6Ble5d_1nsI4befEd6_k1z91U/edit) - Austin Clements  
-
-#### Stacks
-
-[Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
-[Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
-[Defer Proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/34481-opencoded-defers.md) - Go Team  
-
-#### Scheduler
-
-[Go scheduler: Implementing language with lightweight concurrency](https://www.youtube.com/watch?v=-K11rY57K7k) - Dmitry Vyukov  
-[How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
-[Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
-[proposal: runtime: non-cooperative goroutine preemption](https://github.com/golang/go/issues/24543) - Austin Clements  
-[Go scheduler: Implementing language with lightweight concurrency](https://www.youtube.com/watch?v=-K11rY57K7k&app=desktop) - Dmitry Vyukov  
-[Work-Stealing in Go Scheduler](https://medium.com/a-journey-with-go/go-work-stealing-in-go-scheduler-d439231be64d?) - Vincent Blanchon  
-
-#### Escape Analysis and Inlining
-
-[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw) - Dmitry Vyukov  
-[Escape-Analysis Flaws Updated](https://www.ardanlabs.com/blog/2018/01/escape-analysis-flaws.html) - William Kennedy  
-[Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)
-
 #### Garbage Collection
 
 [The Garbage Collection Handbook](http://gchandbook.org/)  
@@ -357,14 +333,18 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 [Eliminating Stack Re-Scanning](https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md) - Austin Clements  
 [Simplify mark termination and eliminate mark 2](https://go.googlesource.com/proposal/+/6baae2869cc86164b2aee513446bfb4940966e65/design/26903-simplify-mark-termination.md) - Austin Clements  
 [Why golang garbage-collector not implement Generational and Compact gc?](https://groups.google.com/forum/m/#!topic/golang-nuts/KJiyv2mV2pU) - Ian Lance Taylor  
-[Getting to Go: The Journey of Go's Garbage Collector](https://blog.golang.org/ismmkeynote) - Rick Hudson  
+[Getting to Go: The Journey of Go's Garbage Collector](https://blog.golang.org/ismmkeynote) - Rick Hudson   
+[Garbage Collection In Go : Part I - Semantics](https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html) - William Kennedy  
 
-#### Single Static Assignment Optimizations
+#### Escape Analysis and Inlining
 
-[GopherCon 2015: Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY) - Ben Johnson  
-https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83  
-https://godoc.org/golang.org/x/tools/go/ssa  
-[Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU) - Chandler Carruth  
+[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw) - Dmitry Vyukov  
+[Escape-Analysis Flaws Updated](https://www.ardanlabs.com/blog/2018/01/escape-analysis-flaws.html) - William Kennedy  
+[Compiler Optimizations](https://github.com/golang/go/wiki/CompilerOptimizations)
+
+#### Linker
+
+[Building a better Go linker](https://docs.google.com/document/d/1D13QhciikbdLtaI67U6Ble5d_1nsI4befEd6_k1z91U/edit) - Austin Clements  
 
 #### Misc
 
@@ -373,10 +353,34 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [The Go low-level calling convention on x86-64](https://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
 [Memory Management](http://virtuallyrandom.com/memory-management-an-introduction/) - Unknown  
 
+#### Scheduler
+
+[Go scheduler: Implementing language with lightweight concurrency](https://www.youtube.com/watch?v=-K11rY57K7k) - Dmitry Vyukov  
+[How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
+[Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
+[proposal: runtime: non-cooperative goroutine preemption](https://github.com/golang/go/issues/24543) - Austin Clements  
+[Go scheduler: Implementing language with lightweight concurrency](https://www.youtube.com/watch?v=-K11rY57K7k&app=desktop) - Dmitry Vyukov  
+[Work-Stealing in Go Scheduler](https://medium.com/a-journey-with-go/go-work-stealing-in-go-scheduler-d439231be64d?) - Vincent Blanchon  
+
+#### Single Static Assignment Optimizations
+
+[GopherCon 2015: Static Code Analysis Using SSA](https://www.youtube.com/watch?v=D2-gaMvWfQY) - Ben Johnson  
+https://github.com/golang/go/blob/dev.ssa/src/cmd/compile/internal/ssa/compile.go#L83  
+https://godoc.org/golang.org/x/tools/go/ssa  
+[Understanding Compiler Optimization](https://www.youtube.com/watch?v=FnGCDLhaxKU) - Chandler Carruth  
+
+#### Stacks
+
+[Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
+[Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
+[Defer Proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/34481-opencoded-defers.md) - Go Team  
+
+
 ## Hardware
 
 [Learn how to build a processor](https://www.youtube.com/playlist?list=PLNmCdcvSgJj5bllQx5E3A6OsbMq2luA9J)  
 [Reading Silicon: How to Reverse Engineer Integrated Circuits](https://www.youtube.com/watch?feature=youtu.be&v=aHx-XUA6f9g&app=desktop) - Ken Shirriff  
+
 
 ## Release Notes
 
@@ -397,6 +401,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Go 1.02 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01  
 [Go 1.01 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13  
 [Go 1.00 Release Notes](https://golang.org/doc/go1.0) - 2012/03/28
+
 
 ## Research Papers
 
