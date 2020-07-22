@@ -48,5 +48,11 @@ Level up your programming skills by solving small practice problems. Then submit
 
 [Dave Cheney Puzzles - 2016](http://talks.godoc.org/github.com/davecheney/presentations/gopher-puzzlers.slide#1)
 
+### John Arundel's Fundamentals
+
+This is a set of introductory exercises in Go programming, suitable for complete beginners. If you don't know anything about Go yet, or programming, but would like to learn, this is the right place!
+
+[For the Love of Go: Fundamentals](https://github.com/bitfield/ftl-fundamentals)
+
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
