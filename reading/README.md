@@ -58,6 +58,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Reflections on Trusting Trust](https://www.archive.ece.cmu.edu/~ganger/712.fall02/papers/p761-thompson.pdf) - Ken Thompson  
 [Null References: The Billion Dollar Mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare) - Tony Hoare  
 [Go’s History in Code](https://seh.dev/go-legacy/) - Sean Hinchee  
+[A Plea For Lean Software](https://cr.yp.to/bib/1995/wirth.pdf) - Niklaus Wirth  
 
 ### Contribute to Go
 
