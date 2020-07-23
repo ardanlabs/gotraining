@@ -132,7 +132,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy  
 [Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy  
 [Design Guidelines](design_guidelines.md)  
-[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
+[Interface Pollution](https://rakyll.org/interface-pollution/) - Burcu Dogan  
 [Abstraction Considered Harmful](http://bravenewgeek.com/abstraction-considered-harmful) - Brave New Geek  
 [Methods, Interfaces and Embedding](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
 [Composition In Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  
