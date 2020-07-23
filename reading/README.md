@@ -121,6 +121,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The Next Step for Generics](https://blog.golang.org/generics-next-step) - Go Team  
 [Early notes on the generics proposal](https://rakyll.org/generics-proposal/) - JBD  
 [Generics in Go](https://bitfieldconsulting.com/golang/generics) - John Arundel  
+[Generics Part 01: Basic Syntax](https://www.ardanlabs.com/blog/2020/07/generics-01-basic-syntax.html) - William Kennedy  
 
 ### HTTP
 
