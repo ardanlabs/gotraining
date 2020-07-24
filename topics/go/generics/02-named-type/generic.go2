@@ -54,26 +54,21 @@ func (v vectorGeneric[T]) push(value T) vectorGeneric[T] {
 
 func main() {
 	var vInt vectorInt
-	vInt = vInt.push(10)
-	vInt = vInt.push(20)
+	vInt = vInt.push(10).push(20)
 	for _, d := range vInt {
 		fmt.Printf("Int[%d] ", d)
 	}
 	fmt.Print("\n")
 
 	var vStr vectorString
-	vStr = vStr.push("A")
-	vStr = vStr.push("B")
+	vStr = vStr.push("A").push("B")
 	for _, s := range vStr {
 		fmt.Printf("Str[%s] ", s)
 	}
 	fmt.Print("\n")
 
 	var vItf vectorInterface
-	vItf = vItf.push(10)
-	vItf = vItf.push(20)
-	vItf = vItf.push("A")
-	vItf = vItf.push("B")
+	vItf = vItf.push(10).push("A").push(20).push("B")
 	for _, i := range vItf {
 		switch v := i.(type) {
 		case int:
@@ -85,16 +80,14 @@ func main() {
 	fmt.Print("\n")
 
 	var vGenInt vectorGeneric[int]
-	vGenInt = vGenInt.push(10)
-	vGenInt = vGenInt.push(20)
+	vGenInt = vGenInt.push(10).push(20)
 	for _, d := range vGenInt {
 		fmt.Printf("Int[%d] ", d)
 	}
 	fmt.Print("\n")
 
 	var vGenStr vectorGeneric[string]
-	vGenStr = vGenStr.push("A")
-	vGenStr = vGenStr.push("B")
+	vGenStr = vGenStr.push("A").push("B")
 	for _, s := range vGenStr {
 		fmt.Printf("Str[%s] ", s)
 	}
