@@ -116,8 +116,8 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Generics and Go2
 
-[Sydney Golang Meetup - Rob Pike - Go 2 Draft Specifications](https://www.youtube.com/watch?v=RIvL2ONhFBI) - Rob Pike  
-[Current Design Draft](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters) - Go Team  
+[Sydney Golang Meetup - Rob Pike - Go 2 Draft Specifications](https://www.youtube.com/watch?v=RIvL2ONhFBI) - Rob Pike
+[Current Design Draft](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md) - Go Team  
 [The Next Step for Generics](https://blog.golang.org/generics-next-step) - Go Team  
 [Early notes on the generics proposal](https://rakyll.org/generics-proposal/) - JBD  
 [Generics in Go](https://bitfieldconsulting.com/golang/generics) - John Arundel  
