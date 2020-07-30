@@ -14,4 +14,11 @@ func main() {
 		tree.Insert(value)
 	}
 	bst.PrettyPrint(&tree)
+
+	in := bst.InOrder(&tree)
+	fmt.Println("In-order  :", in)
+	pre := bst.PreOrder(&tree)
+	fmt.Println("Pre-order :", pre)
+	post := bst.PostOrder(&tree)
+	fmt.Println("Post-order:", post)
 }
