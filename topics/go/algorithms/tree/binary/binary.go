@@ -1,52 +1,41 @@
-package main
+package binary
 
 // Tree represents all values in the tree.
 type Tree struct {
-	root *Node
+	Root *Node
 }
 
 // Insert adds a value into the tree.
 func (t *Tree) Insert(value int) {
-	if t.root == nil {
-		t.root = &Node{value: value}
+	if t.Root == nil {
+		t.Root = &Node{Value: value}
 		return
 	}
 
-	t.root.insert(value)
+	t.Root.Insert(value)
 }
 
 // Node represents a value in the tree.
 type Node struct {
-	value int
-	left  *Node
-	right *Node
+	Value int
+	Left  *Node
+	Right *Node
 }
 
 // insert adds the value into the tree.
-func (n *Node) insert(value int) {
+func (n *Node) Insert(value int) {
 	switch {
-	case value <= n.value:
-		if n.left == nil {
-			n.left = &Node{value: value}
+	case value <= n.Value:
+		if n.Left == nil {
+			n.Left = &Node{Value: value}
 			return
 		}
-		n.left.insert(value)
-	case value > n.value:
-		if n.right == nil {
-			n.right = &Node{value: value}
+		n.Left.Insert(value)
+	case value > n.Value:
+		if n.Right == nil {
+			n.Right = &Node{Value: value}
 			return
 		}
-		n.right.insert(value)
+		n.Right.Insert(value)
 	}
-}
-
-func main() {
-	values := []int{40, 5, 10, 80, 62, 2, 45, 12, 23, 77, 3, 2}
-
-	var t Tree
-	for _, value := range values {
-		t.Insert(value)
-	}
-
-	PrettyPrint(&t)
 }
