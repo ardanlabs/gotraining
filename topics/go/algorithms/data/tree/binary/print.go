@@ -11,7 +11,7 @@ func PrettyPrint(t *Tree) {
 
 	// Build an index map of positions for print layout.
 	values := make(map[int]int)
-	maxIdx := buildIndexMap(values, 0, 0, t.Root)
+	maxIdx := buildIndexMap(values, 0, 0, t.root)
 
 	// Calculate the total number of levels based on
 	// the max index provided.
@@ -113,7 +113,7 @@ const maxInt = int(^uint(0) >> 1)
 //     /  \    /  \
 //    02  25  65  98
 // values{0:40, 1:05, 2:80, 3:02, 4:25, 5:65, 6:98}
-func buildIndexMap(values map[int]int, idx int, maxIdx int, n *Node) int {
+func buildIndexMap(values map[int]int, idx int, maxIdx int, n *node) int {
 
 	// We need to keep track of the highest index position used
 	// to help calculate tree depth.
@@ -130,19 +130,19 @@ func buildIndexMap(values map[int]int, idx int, maxIdx int, n *Node) int {
 
 	// Save the value of this node in the map at the
 	// calculated index position.
-	values[idx] = n.Value
+	values[idx] = n.value
 
 	// Check if there are still nodes to check down the left
 	// branch. When we move down the tree, the next index doubles.
-	if n.Left != nil {
+	if n.left != nil {
 		nextidx := 2*idx + 1
-		maxIdx = buildIndexMap(values, nextidx, maxIdx, n.Left)
+		maxIdx = buildIndexMap(values, nextidx, maxIdx, n.left)
 	}
 
 	// Check if there are still nodes to check down the right
 	// branch. When we move down the tree, the next index doubles.
 	nextidx := 2*idx + 2
-	maxIdx = buildIndexMap(values, nextidx, maxIdx, n.Right)
+	maxIdx = buildIndexMap(values, nextidx, maxIdx, n.right)
 
 	// We need to set missing indexes in the map to maxInt.
 	// So they are ignored in the printing of the map.

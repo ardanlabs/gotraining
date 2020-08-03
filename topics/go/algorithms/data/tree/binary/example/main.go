@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	bst "github.com/ardanlabs/gotraining/topics/go/algorithms/tree/binary"
+	bst "github.com/ardanlabs/gotraining/topics/go/algorithms/data/tree/binary"
 )
 
 func main() {
@@ -13,12 +13,16 @@ func main() {
 	for _, value := range values {
 		tree.Insert(value)
 	}
-	bst.PrettyPrint(&tree)
 
 	in := bst.InOrder(&tree)
 	fmt.Println("In-order  :", in)
+	bst.PrettyPrint(&tree)
+
 	pre := bst.PreOrder(&tree)
 	fmt.Println("Pre-order :", pre)
+	bst.PrettyPrint(&tree)
+
 	post := bst.PostOrder(&tree)
 	fmt.Println("Post-order:", post)
+	bst.PrettyPrint(&tree)
 }
