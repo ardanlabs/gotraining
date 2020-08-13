@@ -34,6 +34,12 @@ This comes from the draft document and provides a nice overview of what generics
 * No adaptors. There is no way for a constraint to define adaptors that could be used to support type arguments that do not already implement the constraint, such as, for example, defining an == operator in terms of an Equal method, or vice-versa.
 * No parameterization on non-type values such as constants. This arises most obviously for arrays, where it might sometimes be convenient to write type Matrix(type n int) [n][n]float64. It might also sometimes be useful to specify significant values for a container type, such as a default value for elements.
 
+## Posts About This Code
+
+Here are blog posts about this code to help you understand the code better.
+
+[Generics Part 01: Basic Syntax](https://www.ardanlabs.com/blog/2020/07/generics-01-basic-syntax.html) - William Kennedy  
+
 ## Extra Reading
 
 Here are blog posts to help you get started learning more about the current design draft.
