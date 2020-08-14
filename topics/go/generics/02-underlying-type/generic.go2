@@ -72,39 +72,44 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("vectorInt[%d]\n", lastInt)
+	fmt.Println("last integer value =", lastInt)
 
 	vStr := vectorString{"A", "B"}
 	lastStr, err := vStr.last()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("vectorString[%s]\n", lastStr)
+	fmt.Println("last string value =", lastStr)
 
-	vItf := vectorInterface{10, "A", 20, "B"}
+	// =========================================================================
+
+	vItf := vectorInterface{10, "A", 20, "B", 3.14}
 	lastItf, err := vItf.last()
 	if err != nil {
 		log.Fatal(err)
 	}
 	switch v := lastItf.(type) {
 	case int:
-		fmt.Printf("vectorInterface[%d]\n", v)
+		fmt.Println("last integer value =", v)
 	case string:
-		fmt.Printf("vectorInterface[%s]\n", v)
+		fmt.Println("last string value =", v)
+	default:
+		fmt.Println("last (unknow type) value =", v)
 	}
+
+	// =========================================================================
 
 	vGenInt := vectorGeneric[int]{10, 20}
 	lastInt, err = vGenInt.last()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("vectorGeneric[%d]\n", lastInt)
+	fmt.Println("last integer value =", lastInt)
 
 	vGenStr := vectorGeneric[string]{"A", "B"}
 	lastStr, err = vGenStr.last()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("vectorGeneric[%s]\n", lastStr)
+	fmt.Println("last string value =", lastInt)
 }
-
