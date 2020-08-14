@@ -1,96 +1,110 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"log"
+)
 
 // =============================================================================
 
 // This code defines two named types based on a concrete type specified
-// at the point of declaration. Each type implements a method named push
-// that can append values of the specified concrete type into the slice.
+// at the point of declaration. Each type implements a method named last
+// that returns the last value in the vector or an error if there are no
+// values.
 
 type vectorInt []int
 
-func (v vectorInt) push(value int) vectorInt {
-	v = append(v, value)
-	return v
+func (v vectorInt) last() (int, error) {
+	if len(v) == 0 {
+		return 0, errors.New("empty")
+	}
+	return v[len(v)-1], nil
 }
 
 type vectorString []string
 
-func (v vectorString) push(value string) vectorString {
-	v = append(v, value)
-	return v
+func (v vectorString) last() (string, error) {
+	if len(v) == 0 {
+		return "", errors.New("empty")
+	}
+	return v[len(v)-1], nil
 }
 
 // =============================================================================
 
-// This named type is based on the empty interface so any value can be pushed
-// into the collection. Since the append function is a generic function, this
-// code works well. However, users will need to perform type assertions to get
+// This named type is based on the empty interface so any value can be added
+// into the vector. Since the last function is using the empty interface
+// for the return, users will need to perform type assertions to get
 // back to the concrete value being stored inside the interface.
 
 type vectorInterface []interface{}
 
-func (v vectorInterface) push(value interface{}) vectorInterface {
-	v = append(v, value)
-	return v
+func (v vectorInterface) last() (interface{}, error) {
+	if len(v) == 0 {
+		return nil, errors.New("empty")
+	}
+	return v[len(v)-1], nil
 }
 
 // =============================================================================
 
 // This is a generics version of the named type. It can become a slice of any
-// concrete type provided at the point of construction. The push method also
-// accepts any value of type T determined at compile time. This value needs to
+// concrete type provided at the point of construction. The last method also
+// returns a value of type T determined at compile time. This value needs to
 // match the type used in the construction of the generics type.
 
 type vectorGeneric[type T] []T
 
-func (v vectorGeneric[T]) push(value T) vectorGeneric[T] {
-	v = append(v, value)
-	return v
+func (v vectorGeneric[T]) last() (T, error) {
+	var zero T
+	if len(v) == 0 {
+		return zero, errors.New("empty")
+	}
+	return v[len(v)-1], nil
 }
 
 // =============================================================================
 
 func main() {
-	var vInt vectorInt
-	vInt = vInt.push(10).push(20)
-	for _, d := range vInt {
-		fmt.Printf("Int[%d] ", d)
+	vInt := vectorInt{10, 20}
+	lastInt, err := vInt.last()
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Print("\n")
+	fmt.Printf("vectorInt[%d]\n", lastInt)
 
-	var vStr vectorString
-	vStr = vStr.push("A").push("B")
-	for _, s := range vStr {
-		fmt.Printf("Str[%s] ", s)
+	vStr := vectorString{"A", "B"}
+	lastStr, err := vStr.last()
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Print("\n")
+	fmt.Printf("vectorString[%s]\n", lastStr)
 
-	var vItf vectorInterface
-	vItf = vItf.push(10).push("A").push(20).push("B")
-	for _, i := range vItf {
-		switch v := i.(type) {
-		case int:
-			fmt.Printf("Int[%d] ", v)
-		case string:
-			fmt.Printf("Str[%s] ", v)
-		}
+	vItf := vectorInterface{10, "A", 20, "B"}
+	lastItf, err := vItf.last()
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Print("\n")
+	switch v := lastItf.(type) {
+	case int:
+		fmt.Printf("vectorInterface[%d]\n", v)
+	case string:
+		fmt.Printf("vectorInterface[%s]\n", v)
+	}
 
-	var vGenInt vectorGeneric[int]
-	vGenInt = vGenInt.push(10).push(20)
-	for _, d := range vGenInt {
-		fmt.Printf("Int[%d] ", d)
+	vGenInt := vectorGeneric[int]{10, 20}
+	lastInt, err = vGenInt.last()
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Print("\n")
+	fmt.Printf("vectorGeneric[%d]\n", lastInt)
 
-	var vGenStr vectorGeneric[string]
-	vGenStr = vGenStr.push("A").push("B")
-	for _, s := range vGenStr {
-		fmt.Printf("Str[%s] ", s)
+	vGenStr := vectorGeneric[string]{"A", "B"}
+	lastStr, err = vGenStr.last()
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Print("\n")
+	fmt.Printf("vectorGeneric[%s]\n", lastStr)
 }
 

@@ -58,46 +58,11 @@ func InsertCustomer(db *sql.DB, c Customer) (Customer, error) {
 
 // =============================================================================
 
-// This is code that I never want to see written in Go. The code is defining
-// an interface with the method set required to access the different data
-// points required to make the insert operation generic. The use of the
-// setter will never allow me to sleep at night.
-//
-// The function doesn't use value semantic mutation and if pointer semantics
-// are not used by the caller, the setter won't work. This is riddled with
-// fraud and misuse.
-
-type DontDoThis interface {
-	Query() string
-	Args() []interface{}
-	SetID(int64)
-}
-
-func InsertInterface(db *sql.DB, entity DontDoThis) error {
-	result, err := ExecuteQuery(entity.Query(), entity.Args()...)
-	if err != nil {
-		return err
-	}
-
-	id, err := result.LastInsertId()
-	if err != nil {
-		return err
-	}
-
-	entity.SetID(id)
-	return nil
-}
-
-// =============================================================================
-
 // This version of a generic insert function is cleaner. It accepts the query
 // and args as parameters and still implements the value semantic mutation like
 // the concrete version. There is no setter needed since the type list provides
 // the compiler with the information that values of type T will contain an ID
 // field.
-//
-// The code also shows the two ways to handle zero value returns when the
-// return type is based on a generic type.
 //
 // NOTE: I am not sure I want anyone writing code like this.
 //       This is an experiment.
@@ -111,7 +76,7 @@ func Insert[type T entities](db *sql.DB, entity T, query string, args ...interfa
 
 	result, err := ExecuteQuery(query, args...)
 	if err != nil {
-		return *new(T), err
+		return zero, err
 	}
 
 	id, err := result.LastInsertId()
