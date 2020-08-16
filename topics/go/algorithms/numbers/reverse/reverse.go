@@ -14,7 +14,7 @@ func Reverse(num int) int {
 		// Ex. For num = 125, last = 5
 		last := num % 10
 
-		// Multiple the current result by 10 to shit the digits in
+		// Multiple the current result by 10 to shift the digits in
 		// the current result to the left.
 		// Ex. For result = 5, result = 50
 		result = result * 10
