@@ -20,7 +20,7 @@ func main() {
 	const maxChairs = 10
 	s := shop.Open(maxChairs)
 
-	// Create a goroutine than is constantly, but inconsistently, generating
+	// Create a goroutine that is constantly, but inconsistently, generating
 	// customers who are entering the shop.
 	go func() {
 		var id int64
