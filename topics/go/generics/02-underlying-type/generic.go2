@@ -8,8 +8,8 @@ import (
 
 // This code defines two named types based on a concrete type specified
 // at the point of declaration. Each type implements a method named last
-// that returns the last value in the vector or the zero value for the
-// vector's type.
+// that returns the value stored at the highest index position in
+// the vector or the zero value for the vector's type.
 
 type vectorInt []int
 
