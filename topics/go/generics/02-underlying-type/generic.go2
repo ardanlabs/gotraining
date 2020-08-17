@@ -65,19 +65,19 @@ func (v vectorGeneric[T]) last() T {
 // =============================================================================
 
 func main() {
-	vInt := vectorInt{10, 20}
+	vInt := vectorInt{10, 201}
 	i := vInt.last()
-	if i == 0 {
-		fmt.Print("zero value detected: ")
+	if i <= 0 || i > 100 {
+		fmt.Print("value out of range: ")
 	}
 	fmt.Println("last vectorInt value:", i)
 
-	vStr := vectorString{"A", "B"}
+	vStr := vectorString{"A", "B", ""}
 	s := vStr.last()
 	if s == "" {
-		fmt.Print("zero value detected: ")
+		fmt.Print("invalid string: ")
 	}
-	fmt.Println("last vectorString value:", s)
+	fmt.Printf("last vectorString value: %q\n", s)
 
 	// =========================================================================
 
@@ -85,12 +85,12 @@ func main() {
 	itf := vItf.last()
 	switch v := itf.(type) {
 	case int:
-		if v == 0 {
-			fmt.Print("zero value detected: ")
+		if v <= 0 || v > 100 {
+			fmt.Print("value out of range: ")
 		}
 	case string:
 		if v == "" {
-			fmt.Print("zero value detected: ")
+			fmt.Print("invalid string: ")
 		}
 	default:
 		fmt.Printf("unknow type %T: ", v)
@@ -99,17 +99,17 @@ func main() {
 
 	// =========================================================================
 
-	vGenInt := vectorGeneric[int]{10, 20}
+	vGenInt := vectorGeneric[int]{10, 201}
 	i = vGenInt.last()
-	if i == 0 {
-		fmt.Print("zero value detected: ")
+	if i <= 0 || i > 100 {
+		fmt.Print("value out of range: ")
 	}
 	fmt.Println("last vectorGeneric[int] value:", i)
 
-	vGenStr := vectorGeneric[string]{"A", "B"}
+	vGenStr := vectorGeneric[string]{"A", "B", ""}
 	s = vGenStr.last()
 	if s == "" {
-		fmt.Print("zero value detected: ")
+		fmt.Print("invalid string: ")
 	}
-	fmt.Println("last vectorGeneric[string] value:", s)
+	fmt.Printf("last vectorGeneric[string] value: %q\n", s)
 }
