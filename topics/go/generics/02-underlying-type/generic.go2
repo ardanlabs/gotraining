@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"unicode/utf8"
 )
 
 // =============================================================================
@@ -75,10 +76,10 @@ func main() {
 	fmt.Printf("value: %d error: %v\n", i, err)
 
 	fmt.Print("vectorString : ")
-	vStr := vectorString{"A", "B", ""}
+	vStr := vectorString{"A", "B", string([]byte{0xff})}
 	s, err := vStr.last()
-	if s == "" {
-		fmt.Print("empty string: ")
+	if !utf8.ValidString(s) {
+		fmt.Print("non-valid string: ")
 	}
 	fmt.Printf("value: %q error: %v\n", s, err)
 
@@ -93,8 +94,8 @@ func main() {
 			fmt.Print("negative value: ")
 		}
 	case string:
-		if v == "" {
-			fmt.Print("empty string: ")
+		if !utf8.ValidString(v) {
+			fmt.Print("non-valid string: ")
 		}
 	default:
 		fmt.Printf("unknown type %T: ", v)
@@ -112,10 +113,10 @@ func main() {
 	fmt.Printf("value: %d error: %v\n", i, err)
 
 	fmt.Print("vectorGeneric[string] : ")
-	vGenStr := vectorGeneric[string]{"A", "B", ""}
+	vGenStr := vectorGeneric[string]{"A", "B", string([]byte{0xff})}
 	s, err = vGenStr.last()
-	if s == "" {
-		fmt.Print("empty string: ")
+	if !utf8.ValidString(s) {
+		fmt.Print("non-valid string: ")
 	}
 	fmt.Printf("value: %q error: %v\n", s, err)
 }
