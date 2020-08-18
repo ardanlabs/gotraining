@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -9,24 +10,24 @@ import (
 // This code defines two named types based on a concrete type specified
 // at the point of declaration. Each type implements a method named last
 // that returns the value stored at the highest index position in
-// the vector or the zero value for the vector's type.
+// the vector or an error that the vector is empty.
 
 type vectorInt []int
 
-func (v vectorInt) last() int {
+func (v vectorInt) last() (int, error) {
 	if len(v) == 0 {
-		return 0
+		return 0, errors.New("empty")
 	}
-	return v[len(v)-1]
+	return v[len(v)-1], nil
 }
 
 type vectorString []string
 
-func (v vectorString) last() string {
+func (v vectorString) last() (string, error) {
 	if len(v) == 0 {
-		return ""
+		return "", errors.New("empty")
 	}
-	return v[len(v)-1]
+	return v[len(v)-1], nil
 }
 
 // =============================================================================
@@ -38,11 +39,11 @@ func (v vectorString) last() string {
 
 type vectorInterface []interface{}
 
-func (v vectorInterface) last() interface{} {
+func (v vectorInterface) last() (interface{}, error) {
 	if len(v) == 0 {
-		return nil
+		return nil, errors.New("empty")
 	}
-	return v[len(v)-1]
+	return v[len(v)-1], nil
 }
 
 // =============================================================================
@@ -54,35 +55,38 @@ func (v vectorInterface) last() interface{} {
 
 type vectorGeneric[type T] []T
 
-func (v vectorGeneric[T]) last() T {
+func (v vectorGeneric[T]) last() (T, error) {
 	var zero T
 	if len(v) == 0 {
-		return zero
+		return zero, errors.New("empty")
 	}
-	return v[len(v)-1]
+	return v[len(v)-1], nil
 }
 
 // =============================================================================
 
 func main() {
+	fmt.Print("vectorInt : ")
 	vInt := vectorInt{10, 201}
-	i := vInt.last()
+	i, err := vInt.last()
 	if i <= 0 || i > 100 {
 		fmt.Print("value out of range: ")
 	}
-	fmt.Println("last vectorInt value:", i)
+	fmt.Printf("value: %d error: %v\n", i, err)
 
+	fmt.Print("vectorString : ")
 	vStr := vectorString{"A", "B", ""}
-	s := vStr.last()
+	s, err := vStr.last()
 	if s == "" {
 		fmt.Print("invalid string: ")
 	}
-	fmt.Printf("last vectorString value: %q\n", s)
+	fmt.Printf("value: %q error: %v\n", s, err)
 
 	// =========================================================================
 
+	fmt.Print("vectorInterface : ")
 	vItf := vectorInterface{10, "A", 20, "B", 3.14}
-	itf := vItf.last()
+	itf, err := vItf.last()
 	switch v := itf.(type) {
 	case int:
 		if v <= 0 || v > 100 {
@@ -95,21 +99,23 @@ func main() {
 	default:
 		fmt.Printf("unknow type %T: ", v)
 	}
-	fmt.Println("last vectorInterface value:", itf)
+	fmt.Printf("value: %v error: %v\n", i, err)
 
 	// =========================================================================
 
+	fmt.Print("vectorGeneric[int] : ")
 	vGenInt := vectorGeneric[int]{10, 201}
-	i = vGenInt.last()
+	i, err = vGenInt.last()
 	if i <= 0 || i > 100 {
 		fmt.Print("value out of range: ")
 	}
-	fmt.Println("last vectorGeneric[int] value:", i)
+	fmt.Printf("value: %d error: %v\n", i, err)
 
+	fmt.Print("vectorGeneric[string] : ")
 	vGenStr := vectorGeneric[string]{"A", "B", ""}
-	s = vGenStr.last()
+	s, err = vGenStr.last()
 	if s == "" {
 		fmt.Print("invalid string: ")
 	}
-	fmt.Printf("last vectorGeneric[string] value: %q\n", s)
+	fmt.Printf("value: %q error: %v\n", s, err)
 }
