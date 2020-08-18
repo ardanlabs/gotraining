@@ -67,10 +67,10 @@ func (v vectorGeneric[T]) last() (T, error) {
 
 func main() {
 	fmt.Print("vectorInt : ")
-	vInt := vectorInt{10, 201}
+	vInt := vectorInt{10, -201}
 	i, err := vInt.last()
-	if i <= 0 || i > 100 {
-		fmt.Print("value out of range: ")
+	if i < 0 {
+		fmt.Print("negative value: ")
 	}
 	fmt.Printf("value: %d error: %v\n", i, err)
 
@@ -89,8 +89,8 @@ func main() {
 	itf, err := vItf.last()
 	switch v := itf.(type) {
 	case int:
-		if v <= 0 || v > 100 {
-			fmt.Print("value out of range: ")
+		if v < 0 {
+			fmt.Print("negative value: ")
 		}
 	case string:
 		if v == "" {
@@ -104,10 +104,10 @@ func main() {
 	// =========================================================================
 
 	fmt.Print("vectorGeneric[int] : ")
-	vGenInt := vectorGeneric[int]{10, 201}
+	vGenInt := vectorGeneric[int]{10, -201}
 	i, err = vGenInt.last()
-	if i <= 0 || i > 100 {
-		fmt.Print("value out of range: ")
+	if i < 0 {
+		fmt.Print("negative value: ")
 	}
 	fmt.Printf("value: %d error: %v\n", i, err)
 
