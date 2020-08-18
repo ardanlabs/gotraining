@@ -68,7 +68,7 @@ func (v vectorGeneric[T]) last() (T, error) {
 
 func main() {
 	fmt.Print("vectorInt : ")
-	vInt := vectorInt{10, -201}
+	vInt := vectorInt{10, -1}
 	i, err := vInt.last()
 	if i < 0 {
 		fmt.Print("negative integer: ")
@@ -105,7 +105,7 @@ func main() {
 	// =========================================================================
 
 	fmt.Print("vectorGeneric[int] : ")
-	vGenInt := vectorGeneric[int]{10, -201}
+	vGenInt := vectorGeneric[int]{10, -1}
 	i, err = vGenInt.last()
 	if i < 0 {
 		fmt.Print("negative integer: ")
