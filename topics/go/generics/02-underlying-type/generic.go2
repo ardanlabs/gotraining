@@ -71,7 +71,7 @@ func main() {
 	vInt := vectorInt{10, -201}
 	i, err := vInt.last()
 	if i < 0 {
-		fmt.Print("negative value: ")
+		fmt.Print("negative integer: ")
 	}
 	fmt.Printf("value: %d error: %v\n", i, err)
 
@@ -91,7 +91,7 @@ func main() {
 	switch v := itf.(type) {
 	case int:
 		if v < 0 {
-			fmt.Print("negative value: ")
+			fmt.Print("negative integer: ")
 		}
 	case string:
 		if !utf8.ValidString(v) {
@@ -108,7 +108,7 @@ func main() {
 	vGenInt := vectorGeneric[int]{10, -201}
 	i, err = vGenInt.last()
 	if i < 0 {
-		fmt.Print("negative value: ")
+		fmt.Print("negative integer: ")
 	}
 	fmt.Printf("value: %d error: %v\n", i, err)
 
