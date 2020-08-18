@@ -78,7 +78,7 @@ func main() {
 	vStr := vectorString{"A", "B", ""}
 	s, err := vStr.last()
 	if s == "" {
-		fmt.Print("invalid string: ")
+		fmt.Print("empty string: ")
 	}
 	fmt.Printf("value: %q error: %v\n", s, err)
 
@@ -94,10 +94,10 @@ func main() {
 		}
 	case string:
 		if v == "" {
-			fmt.Print("invalid string: ")
+			fmt.Print("empty string: ")
 		}
 	default:
-		fmt.Printf("unknow type %T: ", v)
+		fmt.Printf("unknown type %T: ", v)
 	}
 	fmt.Printf("value: %v error: %v\n", i, err)
 
@@ -115,7 +115,7 @@ func main() {
 	vGenStr := vectorGeneric[string]{"A", "B", ""}
 	s, err = vGenStr.last()
 	if s == "" {
-		fmt.Print("invalid string: ")
+		fmt.Print("empty string: ")
 	}
 	fmt.Printf("value: %q error: %v\n", s, err)
 }
