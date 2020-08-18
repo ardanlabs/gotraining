@@ -99,7 +99,7 @@ func main() {
 	default:
 		fmt.Printf("unknown type %T: ", v)
 	}
-	fmt.Printf("value: %v error: %v\n", i, err)
+	fmt.Printf("value: %v error: %v\n", itf, err)
 
 	// =========================================================================
 
