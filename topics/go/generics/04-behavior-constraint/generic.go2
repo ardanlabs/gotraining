@@ -108,7 +108,7 @@ func stringifyReflect(v interface{}) []string {
 // applied to allow the compiler to know the value of type T passed will have
 // a String method.
 
-func stringifyGeneric[type T fmt.Stringer](slice []T) []string {
+func stringify[type T fmt.Stringer](slice []T) []string {
     ret := make([]string, 0, len(slice))
     for _, value := range slice {
         ret = append(ret, value.String())
@@ -126,7 +126,7 @@ func main() {
 	s1 := stringifyUsers(users)
 	s2 := stringifyAssert(users)
 	s3 := stringifyReflect(users)
-	s4 := stringifyGeneric(users)
+	s4 := stringify(users)
 
 	customers := []customer{
 		{name: "Google", email: "you@google.com"},
@@ -135,7 +135,7 @@ func main() {
 	s5 := stringifyCustomers(customers)
 	s6 := stringifyAssert(customers)
 	s7 := stringifyReflect(customers)
-	s8 := stringifyGeneric(customers)
+	s8 := stringify(customers)
 
 	fmt.Println("users Con:", s1)
 	fmt.Println("users Int:", s2)

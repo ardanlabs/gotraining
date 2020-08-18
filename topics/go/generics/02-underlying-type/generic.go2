@@ -54,9 +54,9 @@ func (v vectorInterface) last() (interface{}, error) {
 // returns a value of type T determined at compile time. This value needs to
 // match the type used in the construction of the generics type.
 
-type vectorGeneric[type T] []T
+type vector[type T] []T
 
-func (v vectorGeneric[T]) last() (T, error) {
+func (v vector[T]) last() (T, error) {
 	var zero T
 	if len(v) == 0 {
 		return zero, errors.New("empty")
@@ -104,16 +104,16 @@ func main() {
 
 	// =========================================================================
 
-	fmt.Print("vectorGeneric[int] : ")
-	vGenInt := vectorGeneric[int]{10, -1}
+	fmt.Print("vector[int] : ")
+	vGenInt := vector[int]{10, -1}
 	i, err = vGenInt.last()
 	if i < 0 {
 		fmt.Print("negative integer: ")
 	}
 	fmt.Printf("value: %d error: %v\n", i, err)
 
-	fmt.Print("vectorGeneric[string] : ")
-	vGenStr := vectorGeneric[string]{"A", "B", string([]byte{0xff})}
+	fmt.Print("vector[string] : ")
+	vGenStr := vector[string]{"A", "B", string([]byte{0xff})}
 	s, err = vGenStr.last()
 	if !utf8.ValidString(s) {
 		fmt.Print("non-valid string: ")

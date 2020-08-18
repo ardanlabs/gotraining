@@ -72,7 +72,7 @@ func printReflect(v interface{}) {
 // implementations that we started with and is easier to read than the reflect
 // implementation. 
 
-func printGeneric[type T](slice []T) {
+func print[type T](slice []T) {
 	fmt.Print("Generic: ")
 	for _, v := range slice {
 		fmt.Print(v, " ")
@@ -87,11 +87,11 @@ func main() {
 	printNumbers(numbers)
 	printAssert(numbers)
 	printReflect(numbers)
-	printGeneric(numbers)
+	print(numbers)
 
 	strings := []string{"A", "B", "C"}
 	printStrings(strings)
 	printAssert(strings)
 	printReflect(strings)
-	printGeneric(strings)
+	print(strings)
 }
