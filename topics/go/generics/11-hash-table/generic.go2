@@ -12,7 +12,7 @@ import (
 
 type hashFunc[K any] func(key K, buckets int) int
 
-type keyValuePair[K any, V any] struct {
+type keyValuePair[K, V any] struct {
 	Key   K
 	Value V
 }
