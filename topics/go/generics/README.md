@@ -39,6 +39,7 @@ This comes from the draft document and provides a nice overview of what generics
 Here are blog posts about this code to help you understand the code better.
 
 [Generics Part 01: Basic Syntax](https://www.ardanlabs.com/blog/2020/07/generics-01-basic-syntax.html) - William Kennedy  
+[Generics Part 02: Underlying Types](https://www.ardanlabs.com/blog/2020/08/generics-02-underlying-types.html) - William Kennedy  
 
 ## Extra Reading
 
