@@ -11,13 +11,13 @@ import (
 // list type contains pointers to the beginning and end of the list. A method
 // named add using a pointer receiver is implemented to add nodes to the list.
 
-type node[type T] struct {
+type node[T any] struct {
 	Data T
 	next *node[T]
 	prev *node[T]
 }
 
-type list[type T] struct {
+type list[T any] struct {
 	first *node[T]
 	last  *node[T]
 }

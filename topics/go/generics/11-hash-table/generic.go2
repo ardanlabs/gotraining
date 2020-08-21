@@ -10,20 +10,20 @@ import (
 
 // =============================================================================
 
-type hashFunc[type K] func(key K, buckets int) int
+type hashFunc[K any] func(key K, buckets int) int
 
-type keyValuePair[type K, V interface{}] struct {
+type keyValuePair[K any, V any] struct {
 	Key   K
 	Value V
 }
 
-type Table[type K comparable, V interface{}] struct {
+type Table[K comparable, V any] struct {
     hashFunc hashFunc[K]
 	buckets  int
 	table    [][]keyValuePair[K, V]
 }
 
-func New[type K comparable, V interface{}](buckets int, hf hashFunc[K]) *Table[K, V] {
+func New[K comparable, V any](buckets int, hf hashFunc[K]) *Table[K, V] {
 	return &Table[K, V]{
 		hashFunc: hf,
         buckets:  buckets,

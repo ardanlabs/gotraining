@@ -5,7 +5,7 @@ import "context"
 // Compiler Error: function type must have no type parameters
 
 func example1() {
-	go func[type T](v T) {
+	go func[T any](v T) {
 		
 		// Write some code here.
 
@@ -17,7 +17,7 @@ func example1() {
 // There's no need to make this literal function generic.
 
 func example2() {
-	f := func[type Result](ctx context.Context) Result {
+	f := func[Result any](ctx context.Context) Result {
 		
 		// Write some code here.
 

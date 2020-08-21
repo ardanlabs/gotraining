@@ -54,7 +54,7 @@ func (v vectorInterface) last() (interface{}, error) {
 // returns a value of type T determined at compile time. This value needs to
 // match the type used in the construction of the generics type.
 
-type vector[type T] []T
+type vector[T any] []T
 
 func (v vector[T]) last() (T, error) {
 	var zero T

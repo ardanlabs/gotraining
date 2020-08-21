@@ -13,7 +13,7 @@ type addOnly interface {
     type string, int, int8, int16, int32, int64, float64
 }
 
-func Add[type T addOnly](v1 T, v2 T) T {
+func Add[T addOnly](v1 T, v2 T) T {
     return v1 + v2
 }
 
@@ -67,12 +67,12 @@ func (f food) match(v food) bool {
 // Note: The type list inside the interface is not needed for match to work.
 //       I'm trying to show how the type list and behavior can be combined.
 
-type matcher[type T] interface {
+type matcher[T any] interface {
     type person, food
     match(v T) bool
 }
 
-func match[type T matcher](list []T, find T) int {
+func match[T matcher](list []T, find T) int {
 	for i, v := range list {
 		if v.match(find) {
             return i

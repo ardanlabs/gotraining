@@ -6,7 +6,7 @@ type value struct {
 	s string
 }
 
-func (v value) Method[type Input, Result](i Input) Result {
+func (v value) Method[Input any, Result any](i Input) Result {
 	
 	// Write some code here.
 }

@@ -68,11 +68,16 @@ func printReflect(v interface{}) {
 // =============================================================================
 
 // This function provides a generics solution which allows a slice of any type
-// to be provided and printed. This code more closely resembles the concrete
-// implementations that we started with and is easier to read than the reflect
-// implementation. 
+// `T` to be provided and printed.
+//
+// To avoid the ambiguity with array declarations, type parameters require a
+// constraint to be applied. The `any` constraint states there is no constraint
+// on type `T`. The predeclared identifier "any" is an alias for "interface{}".
+//
+// This code more closely resembles the concrete implementations that we started
+// with and is easier to read than the reflect implementation. 
 
-func print[type T](slice []T) {
+func print[T any](slice []T) {
 	fmt.Print("Generic: ")
 	for _, v := range slice {
 		fmt.Print(v, " ")

@@ -36,7 +36,7 @@ func swapInterface(v1 interface{}, v2 interface{}) (interface{}, interface{}) {
 // implementation has the advanatge that concrete types are being used and only
 // data of the same type can be swapped. The caller doesn't require type assertions.
 
-func swap[type T](v1 T, v2 T) (T, T) {
+func swap[T any](v1 T, v2 T) (T, T) {
 	v2, v1 = v1, v2
 	return v1, v2
 }

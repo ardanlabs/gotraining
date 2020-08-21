@@ -71,7 +71,7 @@ type entities interface {
 	type User, Customer
 }
 
-func Insert[type T entities](db *sql.DB, entity T, query string, args ...interface{}) (T, error) {
+func Insert[T entities](db *sql.DB, entity T, query string, args ...interface{}) (T, error) {
 	var zero T
 
 	result, err := ExecuteQuery(query, args...)
@@ -84,7 +84,8 @@ func Insert[type T entities](db *sql.DB, entity T, query string, args ...interfa
 		return zero, err
 	}
 
-	// The entities interface provides this support.
+	// The entities interface provides this support. This has not be implemented
+	// by the tooling though it is supported by the draft.
 	entity.ID = id
 	return entity, nil
 }
