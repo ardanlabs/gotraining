@@ -122,6 +122,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Early notes on the generics proposal](https://rakyll.org/generics-proposal/) - JBD  
 [Generics in Go](https://bitfieldconsulting.com/golang/generics) - John Arundel  
 [Generics Part 01: Basic Syntax](https://www.ardanlabs.com/blog/2020/07/generics-01-basic-syntax.html) - William Kennedy  
+[Generics Part 02: Underlying Types](https://www.ardanlabs.com/blog/2020/08/generics-02-underlying-types.html) - William Kennedy  
 
 ### HTTP
 
@@ -180,6 +181,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Is Self-Orientation Killing Your Trustworthiness](https://trustedadvisor.com/trustmatters/is-self-orientation-killing-your-trustworthiness) - Charles H. Green  
 [Speed Is Found In The Minds of People](https://www.youtube.com/watch?v=FJJTYQYB1JQ) - Andrei Alexandrescu  
 [The Soul of Erlang and Elixir](https://www.youtube.com/watch?v=JvBT4XBdoUE) - Saša Jurić  
+[What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) - David Goldberg  
  
 ### Modules
 
