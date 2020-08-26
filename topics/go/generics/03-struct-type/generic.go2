@@ -23,7 +23,7 @@ type list[T any] struct {
 }
 
 func (l *list[T]) add(data T) *node[T] {
-	n := node[T]{
+	n := node[T] {
 		Data: data,
 		prev: l.last,
 	}
