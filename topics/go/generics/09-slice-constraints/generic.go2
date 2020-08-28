@@ -22,7 +22,7 @@ type Slice[T any] interface {
 // as the slice being returned, use a slice contraint. This ensures that the
 // result slice S is the same as the incoming slice S.
 
-func operate[type S Slice[T], T interface{}](slice S, fn operateFunc[T]) S {
+func operate[S Slice[T], T interface{}](slice S, fn operateFunc[T]) S {
 	ret := make(S, len(slice))
 	for i, v := range slice {
 		ret[i] = fn(v)
