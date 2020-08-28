@@ -24,7 +24,7 @@ func Add[T addOnly](v1 T, v2 T) T {
 // comparable constraint accepts as a type argument any comparable type. It
 // permits the use of == and != with values of that type parameter.
 
-func index[type T comparable](list []T, find T) int {
+func index[T comparable](list []T, find T) int {
 	for i, v := range list {
 		if v == find {
             return i
