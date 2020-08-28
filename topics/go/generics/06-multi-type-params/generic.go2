@@ -11,7 +11,7 @@ import (
 // merged with the same index position of type V into a single string. This code
 // shows how the type list can contain more than just one generic type.
 
-func Print[type L any, V fmt.Stringer](labels []L, vals []V) {
+func Print[L any, V fmt.Stringer](labels []L, vals []V) {
 	for i, v := range vals {
 		fmt.Println(labels[i], v.String())
 	}
