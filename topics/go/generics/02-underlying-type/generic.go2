@@ -8,10 +8,9 @@ import (
 
 // =============================================================================
 
-// This code defines two named types based on a concrete type specified
-// at the point of declaration. Each type implements a method named last
-// that returns the value stored at the highest index position in
-// the vector or an error that the vector is empty.
+// This code defines two user defined types based on an underlying concrete type.
+// Each type implements a method named last that returns the value stored at the
+// highest index position in the vector or an error when the vector is empty.
 
 type vectorInt []int
 
@@ -33,8 +32,8 @@ func (v vectorString) last() (string, error) {
 
 // =============================================================================
 
-// This named type is based on the empty interface so any value can be added
-// into the vector. Since the last function is using the empty interface
+// This user defined type is based on the empty interface so any value can be
+// added into the vector. Since the last function is using the empty interface
 // for the return, users will need to perform type assertions to get
 // back to the concrete value being stored inside the interface.
 
@@ -49,10 +48,10 @@ func (v vectorInterface) last() (interface{}, error) {
 
 // =============================================================================
 
-// This is a generics version of the named type. It can become a slice of any
-// concrete type provided at the point of construction. The last method also
-// returns a value of type T determined at compile time. This value needs to
-// match the type used in the construction of the generics type.
+// This is a generics version of the user defined type. It represents a slice of
+// some type T (to be determined later). The last method is declared with a 
+// value receiver based on a vector of the same type T and returns a value
+// of that same type T as well.
 
 type vector[T any] []T
 

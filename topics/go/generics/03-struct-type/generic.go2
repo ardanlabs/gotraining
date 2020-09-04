@@ -6,10 +6,12 @@ import (
 
 // =============================================================================
 
-// This code defines two named types that implement the beginnings of a linked
-// list. The node type contains the data of type T to be stored and managed. The
-// list type contains pointers to the beginning and end of the list. A method
-// named add using a pointer receiver is implemented to add nodes to the list.
+// This code defines two user defined types that implement a linked list. The
+// node type contains data of some type T (to be determined later) and points
+// to other nodes of the same type T. The list type contains pointers to the
+// first and last nodes of some type T. The add method is declared with a
+// pointer receiver based on a list of some type T and is implemented to add
+// nodes to the list of the same type T.
 
 type node[T any] struct {
 	Data T

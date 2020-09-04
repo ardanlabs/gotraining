@@ -7,10 +7,10 @@ import (
 // =============================================================================
 
 // operateFunc defines a function type that takes a value of some type T and
-// returns a value of some type T to be determined at compile time.
+// returns a value of the same type T (to be determined later).
 //
-// Slice defines a constraint that the data is a slice of some type T to be
-// determined at compile time.
+// Slice defines a constraint that the data is a slice of some type T (to be
+// determined later).
 
 type operateFunc[T any] func(t T) T
 
@@ -18,7 +18,7 @@ type Slice[T any] interface {
 	type []T
 }
 
-// When it is important that the slice being passed in is exactly the same
+// When it's important that the slice being passed in is exactly the same
 // as the slice being returned, use a slice contraint. This ensures that the
 // result slice S is the same as the incoming slice S.
 

@@ -60,9 +60,9 @@ func InsertCustomer(db *sql.DB, c Customer) (Customer, error) {
 
 // This version of a generic insert function is cleaner. It accepts the query
 // and args as parameters and still implements the value semantic mutation like
-// the concrete version. There is no setter needed since the type list provides
-// the compiler with the information that values of type T will contain an ID
-// field.
+// the concrete version. There is no setter needed since the entities interface
+// provides the compiler with the information that values of type T will contain
+// an ID field. This is because both these types share this common field.
 //
 // NOTE: I am not sure I want anyone writing code like this.
 //       This is an experiment.

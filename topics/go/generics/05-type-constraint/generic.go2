@@ -57,8 +57,8 @@ func (f food) match(v food) bool {
 
 // The matcher interface defines two constraints. First, it constrains the data
 // to what type is acceptable. Second, it constrains the behavior of the data. 
-// The match method requires that a value of type T (to be determined at
-// compile time) will be the input of the method.
+// The match method requires that a value of type T (to be determined later)
+// will be the input of the method.
 //
 // The match function declares that the value of type T must implement the
 // matcher interface and is used for the slice and value arguments to the

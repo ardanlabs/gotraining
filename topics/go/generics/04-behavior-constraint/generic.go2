@@ -101,12 +101,12 @@ func stringifyReflect(v interface{}) []string {
 
 // =============================================================================
 
-// This function provides a generics solution which allows a slice of any type
-// to be provided and stringified. This code more closely resembles the concrete
-// implementations that we started with and is easier to read than the reflect
-// implementation. However, an interface constraint of type fmt.Stringer is
-// applied to allow the compiler to know the value of type T passed will have
-// a String method.
+// This function provides a generics solution which allows a slice of some type
+// T (to be determined later) to be passed and stringified. This code more
+// closely resembles the concrete implementations that we started with and is
+// easier to read than the reflect implementation. However, an interface
+// constraint of type fmt.Stringer is applied to allow the compiler to know the
+// value of type T passed requires a String method.
 
 func stringify[T fmt.Stringer](slice []T) []string {
     ret := make([]string, 0, len(slice))
