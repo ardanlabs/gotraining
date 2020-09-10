@@ -25,10 +25,10 @@ func Add[T addOnly](v1 T, v2 T) T {
 // permits the use of == and != with values of that type parameter.
 
 func index[T comparable](list []T, find T) int {
-	for i, v := range list {
-		if v == find {
+    for i, v := range list {
+        if v == find {
             return i
-		}
+        }
     }
     return -1
 }
@@ -73,10 +73,10 @@ type matcher[T any] interface {
 }
 
 func match[T matcher](list []T, find T) int {
-	for i, v := range list {
-		if v.match(find) {
+    for i, v := range list {
+        if v.match(find) {
             return i
-		}
+        }
     }
     return -1
 }
