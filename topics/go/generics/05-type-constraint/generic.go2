@@ -6,7 +6,7 @@ import "fmt"
 
 // This interface defines a contraint not based on behavior but based on the
 // type of data that is acceptable. This type of constrain is important when
-// functions (like Add) need to perform operations (like +) that are not 
+// functions (like Add) need to perform operations (like +) that are not
 // supported by all types.
 
 type addOnly interface {
@@ -26,11 +26,11 @@ func Add[T addOnly](v1 T, v2 T) T {
 
 func index[T comparable](list []T, find T) int {
 	for i, v := range list {
-		if v == find {
-            return i
-		}
+	  if v == find {
+	    return i
     }
-    return -1
+	}
+  return -1
 }
 
 // =============================================================================
@@ -56,7 +56,7 @@ func (f food) match(v food) bool {
 // =============================================================================
 
 // The matcher interface defines two constraints. First, it constrains the data
-// to what type is acceptable. Second, it constrains the behavior of the data. 
+// to what type is acceptable. Second, it constrains the behavior of the data.
 // The match method requires that a value of type T (to be determined later)
 // will be the input of the method.
 //
