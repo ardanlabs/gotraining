@@ -203,6 +203,8 @@ _"It takes considerable knowledge just to realize the extent of your own ignoran
 
 _"If you don’t make mistakes, you’re not working on hard enough problems." - Frank Wilczek_
 
+_"Don’t cling to a mistake because you spent so much time making it." - Aubrey de Grey_
+
 ---
 
 ### Code Reviews
