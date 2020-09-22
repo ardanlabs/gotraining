@@ -132,6 +132,10 @@ https://www.ardanlabs.com/blog/
 https://tour.golang.org/welcome/1  
 https://gophercises.com/
 
+**Books**  
+https://www.manning.com/books/go-in-action  
+https://bitfieldconsulting.com/books/fundamentals  
+
 ### Joining the Go Slack Community
 
 We use a slack channel to share links, code, and examples during the training.  This is free.  This is also the same slack community you will use after training to ask for help and interact with may Go experts around the world in the community.
