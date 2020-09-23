@@ -29,7 +29,7 @@ func (l *list[T]) add(data T) *node[T] {
 		Data: data,
 		prev: l.last,
 	}
-	if l.first == nil && l.last == nil {
+	if l.first == nil {
 		l.first = &n
 		l.last = &n
 		return &n
