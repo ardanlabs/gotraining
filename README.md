@@ -50,7 +50,12 @@ _**Writing**_
 _**Articles**_  
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
+_**YouTube**_  
+[Ardan Labs YouTube Channel](http://youtube.ardanlabs.com/)
+
 _**Video**_  
+[Go Generics Draft Proposal (2020)](https://www.youtube.com/watch?v=gIEPspmbMHM&t=2069s)
+
 [Training Within The Go Community (2019)](https://www.youtube.com/watch?v=PSR1twjzzAM&feature=youtu.be)  
 
 [GopherCon Australia (2019) - Modules](https://www.youtube.com/watch?v=MVxbVR_6Tac)  
