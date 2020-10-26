@@ -20,4 +20,4 @@ Channel:  #ultimatego
 ## Tooling Installs
 Graphviz: https://www.graphviz.org/  
 go get -u github.com/rakyll/hey   : Or use ab, netcat  
-Latest Version of Go: 1.14   
+Latest Version of Go: 1.15  
