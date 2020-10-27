@@ -67,9 +67,9 @@ func Range(vs Valuer) (min, max float64) {
 type Values []float64
 
 var (
-	ErrInfinity = errors.New("Infinite data point")
-	ErrNaN      = errors.New("NaN data point")
-	ErrNoData   = errors.New("No data points")
+	ErrInfinity = errors.New("plotter: infinite data point")
+	ErrNaN      = errors.New("plotter: NaN data point")
+	ErrNoData   = errors.New("plotter: no data points")
 )
 
 // CheckFloats returns an error if any of the arguments are NaN or Infinity.

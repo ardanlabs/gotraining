@@ -14,7 +14,6 @@ environment:
   # Versions of go that are explicitly supported by gonum.
   matrix:
     - GOROOT: 'c:\go113'
-    #- GOROOT: 'c:\go114'
   GOPATH: c:\gopath
   GOTOOLDIR: '%GOROOT%\pkg\tool\windows_amd64'
   PATH: '%GOPATH%\bin;%GOROOT%\bin;%PATH%'

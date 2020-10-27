@@ -8,13 +8,13 @@ import (
 	"fmt"
 	"image/color"
 	"math"
-	"strings"
 
 	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/vgeps"
 	"gonum.org/v1/plot/vg/vgimg"
 	"gonum.org/v1/plot/vg/vgpdf"
 	"gonum.org/v1/plot/vg/vgsvg"
+	"gonum.org/v1/plot/vg/vgtex"
 )
 
 // A Canvas is a vector graphics canvas along with
@@ -23,23 +23,6 @@ import (
 type Canvas struct {
 	vg.Canvas
 	vg.Rectangle
-}
-
-// TextStyle describes what text will look like.
-type TextStyle struct {
-	// Color is the text color.
-	Color color.Color
-
-	// Font is the font description.
-	Font vg.Font
-
-	// Rotation is the text rotation in radians, performed around the axis
-	// defined by XAlign and YAlign.
-	Rotation float64
-
-	// XAlign and YAlign specify the alignment of the text.
-	XAlign XAlignment
-	YAlign YAlignment
 }
 
 // XAlignment specifies text alignment in the X direction. Three preset
@@ -68,6 +51,15 @@ const (
 	YCenter YAlignment = -0.5
 	// YBottom aligns the bottom of the text with the specified location.
 	YBottom YAlignment = 0
+)
+
+// Position specifies the text position.
+const (
+	PosLeft   = -1
+	PosBottom = -1
+	PosCenter = 0
+	PosTop    = +1
+	PosRight  = +1
 )
 
 // LineStyle describes what a line will look like.
@@ -137,7 +129,7 @@ type CircleGlyph struct{}
 
 // DrawGlyph implements the GlyphDrawer interface.
 func (CircleGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
-	var p vg.Path
+	p := make(vg.Path, 0, 3)
 	p.Move(vg.Point{X: pt.X + sty.Radius, Y: pt.Y})
 	p.Arc(pt, sty.Radius, 0, 2*math.Pi)
 	p.Close()
@@ -150,7 +142,7 @@ type RingGlyph struct{}
 // DrawGlyph implements the Glyph interface.
 func (RingGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
 	c.SetLineStyle(LineStyle{Color: sty.Color, Width: vg.Points(0.5)})
-	var p vg.Path
+	p := make(vg.Path, 0, 3)
 	p.Move(vg.Point{X: pt.X + sty.Radius, Y: pt.Y})
 	p.Arc(pt, sty.Radius, 0, 2*math.Pi)
 	p.Close()
@@ -170,7 +162,7 @@ type SquareGlyph struct{}
 func (SquareGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
 	c.SetLineStyle(LineStyle{Color: sty.Color, Width: vg.Points(0.5)})
 	x := (sty.Radius-sty.Radius*cosπover4)/2 + sty.Radius*cosπover4
-	var p vg.Path
+	p := make(vg.Path, 0, 5)
 	p.Move(vg.Point{X: pt.X - x, Y: pt.Y - x})
 	p.Line(vg.Point{X: pt.X + x, Y: pt.Y - x})
 	p.Line(vg.Point{X: pt.X + x, Y: pt.Y + x})
@@ -185,7 +177,7 @@ type BoxGlyph struct{}
 // DrawGlyph implements the Glyph interface.
 func (BoxGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
 	x := (sty.Radius-sty.Radius*cosπover4)/2 + sty.Radius*cosπover4
-	var p vg.Path
+	p := make(vg.Path, 0, 5)
 	p.Move(vg.Point{X: pt.X - x, Y: pt.Y - x})
 	p.Line(vg.Point{X: pt.X + x, Y: pt.Y - x})
 	p.Line(vg.Point{X: pt.X + x, Y: pt.Y + x})
@@ -201,7 +193,7 @@ type TriangleGlyph struct{}
 func (TriangleGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
 	c.SetLineStyle(LineStyle{Color: sty.Color, Width: vg.Points(0.5)})
 	r := sty.Radius + (sty.Radius-sty.Radius*sinπover6)/2
-	var p vg.Path
+	p := make(vg.Path, 0, 4)
 	p.Move(vg.Point{X: pt.X, Y: pt.Y + r})
 	p.Line(vg.Point{X: pt.X - r*cosπover6, Y: pt.Y - r*sinπover6})
 	p.Line(vg.Point{X: pt.X + r*cosπover6, Y: pt.Y - r*sinπover6})
@@ -215,7 +207,7 @@ type PyramidGlyph struct{}
 // DrawGlyph implements the Glyph interface.
 func (PyramidGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
 	r := sty.Radius + (sty.Radius-sty.Radius*sinπover6)/2
-	var p vg.Path
+	p := make(vg.Path, 0, 4)
 	p.Move(vg.Point{X: pt.X, Y: pt.Y + r})
 	p.Line(vg.Point{X: pt.X - r*cosπover6, Y: pt.Y - r*sinπover6})
 	p.Line(vg.Point{X: pt.X + r*cosπover6, Y: pt.Y - r*sinπover6})
@@ -230,11 +222,11 @@ type PlusGlyph struct{}
 func (PlusGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
 	c.SetLineStyle(LineStyle{Color: sty.Color, Width: vg.Points(0.5)})
 	r := sty.Radius
-	var p vg.Path
+	p := make(vg.Path, 0, 2)
 	p.Move(vg.Point{X: pt.X, Y: pt.Y + r})
 	p.Line(vg.Point{X: pt.X, Y: pt.Y - r})
 	c.Stroke(p)
-	p = vg.Path{}
+	p = p[:0]
 	p.Move(vg.Point{X: pt.X - r, Y: pt.Y})
 	p.Line(vg.Point{X: pt.X + r, Y: pt.Y})
 	c.Stroke(p)
@@ -247,11 +239,11 @@ type CrossGlyph struct{}
 func (CrossGlyph) DrawGlyph(c *Canvas, sty GlyphStyle, pt vg.Point) {
 	c.SetLineStyle(LineStyle{Color: sty.Color, Width: vg.Points(0.5)})
 	r := sty.Radius * cosπover4
-	var p vg.Path
+	p := make(vg.Path, 0, 2)
 	p.Move(vg.Point{X: pt.X - r, Y: pt.Y - r})
 	p.Line(vg.Point{X: pt.X + r, Y: pt.Y + r})
 	c.Stroke(p)
-	p = vg.Path{}
+	p = p[:0]
 	p.Move(vg.Point{X: pt.X - r, Y: pt.Y + r})
 	p.Line(vg.Point{X: pt.X + r, Y: pt.Y - r})
 	c.Stroke(p)
@@ -268,7 +260,7 @@ func New(c vg.CanvasSizer) Canvas {
 //
 // Supported formats are:
 //
-//  eps, jpg|jpeg, pdf, png, svg, and tif|tiff.
+//  eps, jpg|jpeg, pdf, png, svg, tex and tif|tiff.
 func NewFormattedCanvas(w, h vg.Length, format string) (vg.CanvasWriterTo, error) {
 	var c vg.CanvasWriterTo
 	switch format {
@@ -286,6 +278,9 @@ func NewFormattedCanvas(w, h vg.Length, format string) (vg.CanvasWriterTo, error
 
 	case "svg":
 		c = vgsvg.New(w, h)
+
+	case "tex":
+		c = vgtex.NewDocument(w, h)
 
 	case "tif", "tiff":
 		c = vgimg.TiffCanvas{Canvas: vgimg.New(w, h)}
@@ -408,11 +403,7 @@ func (ts Tiles) At(c Canvas, x, y int) Canvas {
 func (c *Canvas) SetLineStyle(sty LineStyle) {
 	c.SetColor(sty.Color)
 	c.SetLineWidth(sty.Width)
-	var dashDots []vg.Length
-	for _, dash := range sty.Dashes {
-		dashDots = append(dashDots, dash)
-	}
-	c.SetLineDash(dashDots, sty.DashOffs)
+	c.SetLineDash(sty.Dashes, sty.DashOffs)
 }
 
 // StrokeLines draws a line connecting a set of points
@@ -428,7 +419,7 @@ func (c *Canvas) StrokeLines(sty LineStyle, lines ...[]vg.Point) {
 		if len(l) == 0 {
 			continue
 		}
-		var p vg.Path
+		p := make(vg.Path, 0, len(l))
 		p.Move(l[0])
 		for _, pt := range l[1:] {
 			p.Line(pt)
@@ -440,7 +431,7 @@ func (c *Canvas) StrokeLines(sty LineStyle, lines ...[]vg.Point) {
 // StrokeLine2 draws a line between two points in the given
 // Canvas.
 func (c *Canvas) StrokeLine2(sty LineStyle, x0, y0, x1, y1 vg.Length) {
-	c.StrokeLines(sty, []vg.Point{{x0, y0}, {x1, y1}})
+	c.StrokeLines(sty, []vg.Point{{X: x0, Y: y0}, {X: x1, Y: y1}})
 }
 
 // ClipLinesXY returns a slice of lines that
@@ -454,11 +445,12 @@ func (c *Canvas) ClipLinesXY(lines ...[]vg.Point) [][]vg.Point {
 // represent the given line clipped in the
 // X direction.
 func (c *Canvas) ClipLinesX(lines ...[]vg.Point) (clipped [][]vg.Point) {
-	var lines1 [][]vg.Point
+	lines1 := make([][]vg.Point, 0, len(lines))
 	for _, line := range lines {
 		ls := clipLine(isLeft, vg.Point{X: c.Max.X, Y: c.Min.Y}, vg.Point{X: -1, Y: 0}, line)
 		lines1 = append(lines1, ls...)
 	}
+	clipped = make([][]vg.Point, 0, len(lines1))
 	for _, line := range lines1 {
 		ls := clipLine(isRight, vg.Point{X: c.Min.X, Y: c.Min.Y}, vg.Point{X: 1, Y: 0}, line)
 		clipped = append(clipped, ls...)
@@ -470,11 +462,12 @@ func (c *Canvas) ClipLinesX(lines ...[]vg.Point) (clipped [][]vg.Point) {
 // represent the given line clipped in the
 // Y direction.
 func (c *Canvas) ClipLinesY(lines ...[]vg.Point) (clipped [][]vg.Point) {
-	var lines1 [][]vg.Point
+	lines1 := make([][]vg.Point, 0, len(lines))
 	for _, line := range lines {
 		ls := clipLine(isAbove, vg.Point{X: c.Min.X, Y: c.Min.Y}, vg.Point{X: 0, Y: -1}, line)
 		lines1 = append(lines1, ls...)
 	}
+	clipped = make([][]vg.Point, 0, len(lines1))
 	for _, line := range lines1 {
 		ls := clipLine(isBelow, vg.Point{X: c.Min.X, Y: c.Max.Y}, vg.Point{X: 0, Y: 1}, line)
 		clipped = append(clipped, ls...)
@@ -486,7 +479,7 @@ func (c *Canvas) ClipLinesY(lines ...[]vg.Point) (clipped [][]vg.Point) {
 // clipping line specified by the norm, clip point,
 // and in function.
 func clipLine(in func(vg.Point, vg.Point) bool, clip, norm vg.Point, pts []vg.Point) (lines [][]vg.Point) {
-	var l []vg.Point
+	l := make([]vg.Point, 0, len(pts))
 	for i := 1; i < len(pts); i++ {
 		cur, next := pts[i-1], pts[i]
 		curIn, nextIn := in(cur, clip), in(next, clip)
@@ -522,7 +515,7 @@ func (c *Canvas) FillPolygon(clr color.Color, pts []vg.Point) {
 	}
 
 	c.SetColor(clr)
-	var p vg.Path
+	p := make(vg.Path, 0, len(pts)+1)
 	p.Move(pts[0])
 	for _, pt := range pts[1:] {
 		p.Line(pt)
@@ -558,6 +551,7 @@ func (c *Canvas) ClipPolygonY(pts []vg.Point) []vg.Point {
 // clipping line specified by the norm, clip point,
 // and in function.
 func clipPoly(in func(vg.Point, vg.Point) bool, clip, norm vg.Point, pts []vg.Point) (clipped []vg.Point) {
+	clipped = make([]vg.Point, 0, len(pts))
 	for i := 0; i < len(pts); i++ {
 		j := i + 1
 		if i == len(pts)-1 {
@@ -579,7 +573,8 @@ func clipPoly(in func(vg.Point, vg.Point) bool, clip, norm vg.Point, pts []vg.Po
 			clipped = append(clipped, isect(cur, next, clip, norm))
 		}
 	}
-	return
+	n := len(clipped)
+	return clipped[:n:n]
 }
 
 // slop is some slop for floating point equality
@@ -614,99 +609,7 @@ func isect(p0, p1, clip, norm vg.Point) vg.Point {
 // FillText fills lines of text in the draw area.
 // pt specifies the location where the text is to be drawn.
 func (c *Canvas) FillText(sty TextStyle, pt vg.Point, txt string) {
-	txt = strings.TrimRight(txt, "\n")
-	if len(txt) == 0 {
-		return
-	}
-
-	c.SetColor(sty.Color)
-
-	if sty.Rotation != 0 {
-		c.Push()
-		c.Rotate(sty.Rotation)
-	}
-
-	cos := vg.Length(math.Cos(sty.Rotation))
-	sin := vg.Length(math.Sin(sty.Rotation))
-	pt.X, pt.Y = pt.Y*sin+pt.X*cos, pt.Y*cos-pt.X*sin
-
-	nl := textNLines(txt)
-	ht := sty.Height(txt)
-	pt.Y += ht*vg.Length(sty.YAlign) - sty.Font.Extents().Ascent
-	for i, line := range strings.Split(txt, "\n") {
-		xoffs := vg.Length(sty.XAlign) * sty.Font.Width(line)
-		n := vg.Length(nl - i)
-		c.FillString(sty.Font, pt.Add(vg.Point{X: xoffs, Y: n * sty.Font.Size}), line)
-	}
-
-	if sty.Rotation != 0 {
-		c.Pop()
-	}
-}
-
-// rotatePoint applies rotation theta (in radians) about the origin to point p.
-func rotatePoint(theta float64, p vg.Point) vg.Point {
-	if theta == 0 {
-		return p
-	}
-	x := float64(p.X)
-	y := float64(p.Y)
-
-	return vg.Point{
-		X: vg.Length(x*math.Cos(theta) - y*math.Sin(theta)),
-		Y: vg.Length(y*math.Cos(theta) + x*math.Sin(theta)),
-	}
-}
-
-// Width returns the width of lines of text
-// when using the given font before any text rotation is applied.
-func (sty TextStyle) Width(txt string) (max vg.Length) {
-	txt = strings.TrimRight(txt, "\n")
-	for _, line := range strings.Split(txt, "\n") {
-		if w := sty.Font.Width(line); w > max {
-			max = w
-		}
-	}
-	return
-}
-
-// Height returns the height of the text when using
-// the given font before any text rotation is applied.
-func (sty TextStyle) Height(txt string) vg.Length {
-	nl := textNLines(txt)
-	if nl == 0 {
-		return vg.Length(0)
-	}
-	e := sty.Font.Extents()
-	return e.Height*vg.Length(nl-1) + e.Ascent
-}
-
-// Rectangle returns a rectangle giving the bounds of
-// this text assuming that it is drawn at (0, 0).
-func (sty TextStyle) Rectangle(txt string) vg.Rectangle {
-	w := sty.Width(txt)
-	h := sty.Height(txt)
-	xoff := vg.Length(sty.XAlign) * w
-	yoff := vg.Length(sty.YAlign) * h
-	// lower left corner
-	p1 := rotatePoint(sty.Rotation, vg.Point{X: xoff, Y: yoff})
-	// upper left corner
-	p2 := rotatePoint(sty.Rotation, vg.Point{X: xoff, Y: h + yoff})
-	// lower right corner
-	p3 := rotatePoint(sty.Rotation, vg.Point{X: w + xoff, Y: yoff})
-	// upper right corner
-	p4 := rotatePoint(sty.Rotation, vg.Point{X: w + xoff, Y: h + yoff})
-
-	return vg.Rectangle{
-		Max: vg.Point{
-			X: max(p1.X, p2.X, p3.X, p4.X),
-			Y: max(p1.Y, p2.Y, p3.Y, p4.Y),
-		},
-		Min: vg.Point{
-			X: min(p1.X, p2.X, p3.X, p4.X),
-			Y: min(p1.Y, p2.Y, p3.Y, p4.Y),
-		},
-	}
+	sty.handler().Draw(c, txt, sty, pt)
 }
 
 func max(d ...vg.Length) vg.Length {
@@ -727,19 +630,4 @@ func min(d ...vg.Length) vg.Length {
 		}
 	}
 	return o
-}
-
-// textNLines returns the number of lines in the text.
-func textNLines(txt string) int {
-	txt = strings.TrimRight(txt, "\n")
-	if len(txt) == 0 {
-		return 0
-	}
-	n := 1
-	for _, r := range txt {
-		if r == '\n' {
-			n++
-		}
-	}
-	return n
 }

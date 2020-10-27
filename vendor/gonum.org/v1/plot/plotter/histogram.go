@@ -87,16 +87,16 @@ func (h *Histogram) Plot(c draw.Canvas, p *plot.Plot) {
 	for _, bin := range h.Bins {
 		ymin := c.Min.Y
 		ymax := c.Min.Y
-		if 0 != bin.Weight {
+		if bin.Weight != 0 {
 			ymax = trY(bin.Weight)
 		}
 		xmin := trX(bin.Min)
 		xmax := trX(bin.Max)
 		pts := []vg.Point{
-			{xmin, ymin},
-			{xmax, ymin},
-			{xmax, ymax},
-			{xmin, ymax},
+			{X: xmin, Y: ymin},
+			{X: xmax, Y: ymin},
+			{X: xmax, Y: ymax},
+			{X: xmin, Y: ymax},
 		}
 		if h.FillColor != nil {
 			c.FillPolygon(h.FillColor, c.ClipPolygonXY(pts))
@@ -162,10 +162,10 @@ func (h *Histogram) Thumbnail(c *draw.Canvas) {
 	xmax := c.Max.X
 
 	pts := []vg.Point{
-		{xmin, ymin},
-		{xmax, ymin},
-		{xmax, ymax},
-		{xmin, ymax},
+		{X: xmin, Y: ymin},
+		{X: xmax, Y: ymin},
+		{X: xmax, Y: ymax},
+		{X: xmin, Y: ymax},
 	}
 	if h.FillColor != nil {
 		c.FillPolygon(h.FillColor, c.ClipPolygonXY(pts))

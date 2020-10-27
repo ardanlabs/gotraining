@@ -1,4 +1,4 @@
-# github.com/ajstarks/svgo v0.0.0-20200320125537-f189e35d30ca
+# github.com/ajstarks/svgo v0.0.0-20200725142600-7a3c8b57fecb
 ## explicit
 github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
@@ -6,17 +6,28 @@ github.com/ajstarks/svgo
 github.com/braintree/manners
 # github.com/fogleman/gg v1.3.0
 github.com/fogleman/gg
+# github.com/go-latex/latex v0.0.0-20200518072620-0806b477ea35
+github.com/go-latex/latex
+github.com/go-latex/latex/ast
+github.com/go-latex/latex/drawtex
+github.com/go-latex/latex/font
+github.com/go-latex/latex/font/ttf
+github.com/go-latex/latex/internal/tex2unicode
+github.com/go-latex/latex/mtex
+github.com/go-latex/latex/mtex/symbols
+github.com/go-latex/latex/tex
+github.com/go-latex/latex/token
 # github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 github.com/golang/freetype/raster
 github.com/golang/freetype/truetype
-# github.com/google/go-cmp v0.4.0
+# github.com/google/go-cmp v0.5.2
 ## explicit
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/uuid v1.1.1
+# github.com/google/uuid v1.1.2
 ## explicit
 github.com/google/uuid
 # github.com/jung-kurt/gofpdf v1.16.2
@@ -25,30 +36,35 @@ github.com/jung-kurt/gofpdf
 # github.com/patrickmn/go-cache v2.1.0+incompatible
 ## explicit
 github.com/patrickmn/go-cache
-# github.com/pborman/uuid v1.2.0
+# github.com/pborman/uuid v1.2.1
 ## explicit
 github.com/pborman/uuid
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# golang.org/x/image v0.0.0-20200119044424-58c23975cae1
+# golang.org/x/image v0.0.0-20200927104501-e162460cd6b5
 ## explicit
 golang.org/x/image/ccitt
 golang.org/x/image/draw
 golang.org/x/image/font
 golang.org/x/image/font/basicfont
+golang.org/x/image/font/gofont/gobold
+golang.org/x/image/font/gofont/gobolditalic
+golang.org/x/image/font/gofont/goitalic
+golang.org/x/image/font/gofont/goregular
 golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
 # gonum.org/v1/netlib v0.0.0-20190926062253-2d6e29b73a19
 ## explicit
-# gonum.org/v1/plot v0.7.0
+# gonum.org/v1/plot v0.8.0
 ## explicit
 gonum.org/v1/plot
 gonum.org/v1/plot/palette
 gonum.org/v1/plot/plotter
 gonum.org/v1/plot/plotutil
+gonum.org/v1/plot/text
 gonum.org/v1/plot/tools/bezier
 gonum.org/v1/plot/vg
 gonum.org/v1/plot/vg/draw
@@ -57,3 +73,4 @@ gonum.org/v1/plot/vg/vgeps
 gonum.org/v1/plot/vg/vgimg
 gonum.org/v1/plot/vg/vgpdf
 gonum.org/v1/plot/vg/vgsvg
+gonum.org/v1/plot/vg/vgtex

@@ -1,12 +1,12 @@
-sudo: false
+sudo: true
 
 language: go
 go_import_path: gonum.org/v1/plot
 
 # Versions of go that are explicitly supported by gonum.
 go:
+ - 1.15.x
  - 1.14.x
- - 1.13.x
  - master
 matrix:
   fast_finish: true
@@ -28,6 +28,9 @@ before_install:
  # Required for coverage.
  - go get golang.org/x/tools/cmd/cover
  - go get github.com/mattn/goveralls
+
+before_script:
+ - sudo apt-get install -qq pkg-config libgles2-mesa-dev libxkbcommon-dev libxkbcommon-x11-dev
 
 # Get deps, build, test, and ensure the code is gofmt'ed.
 # If we are building as gonum, then we have access to the coveralls api key, so we can run coverage as well.

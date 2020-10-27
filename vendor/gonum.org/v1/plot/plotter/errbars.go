@@ -70,7 +70,7 @@ func (e *YErrorBars) Plot(c draw.Canvas, p *plot.Plot) {
 		ylow := trY(e.XYs[i].Y - math.Abs(err.Low))
 		yhigh := trY(e.XYs[i].Y + math.Abs(err.High))
 
-		bar := c.ClipLinesY([]vg.Point{{x, ylow}, {x, yhigh}})
+		bar := c.ClipLinesY([]vg.Point{{X: x, Y: ylow}, {X: x, Y: yhigh}})
 		c.StrokeLines(e.LineStyle, bar...)
 		e.drawCap(&c, x, ylow)
 		e.drawCap(&c, x, yhigh)
@@ -178,7 +178,7 @@ func (e *XErrorBars) Plot(c draw.Canvas, p *plot.Plot) {
 		xlow := trX(e.XYs[i].X - math.Abs(err.Low))
 		xhigh := trX(e.XYs[i].X + math.Abs(err.High))
 
-		bar := c.ClipLinesX([]vg.Point{{xlow, y}, {xhigh, y}})
+		bar := c.ClipLinesX([]vg.Point{{X: xlow, Y: y}, {X: xhigh, Y: y}})
 		c.StrokeLines(e.LineStyle, bar...)
 		e.drawCap(&c, xlow, y)
 		e.drawCap(&c, xhigh, y)

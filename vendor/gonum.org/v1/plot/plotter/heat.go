@@ -5,6 +5,7 @@
 package plotter
 
 import (
+	"image"
 	"image/color"
 	"math"
 
@@ -57,6 +58,10 @@ type HeatMap struct {
 	// Min and Max define the dynamic range of the
 	// heat map.
 	Min, Max float64
+
+	// Rasterized indicates whether the heatmap
+	// should be produced using raster-based drawing.
+	Rasterized bool
 }
 
 // NewHeatMap creates as new heat map plotter for the given data,
@@ -98,6 +103,50 @@ func NewHeatMap(g GridXYZ, p palette.Palette) *HeatMap {
 
 // Plot implements the Plot method of the plot.Plotter interface.
 func (h *HeatMap) Plot(c draw.Canvas, plt *plot.Plot) {
+	if h.Rasterized {
+		h.plotRasterized(c, plt)
+	} else {
+		h.plotVectorized(c, plt)
+	}
+}
+
+// plotRasterized plots the heatmap using raster-based drawing.
+func (h *HeatMap) plotRasterized(c draw.Canvas, plt *plot.Plot) {
+	cols, rows := h.GridXYZ.Dims()
+	img := image.NewRGBA64(image.Rectangle{
+		Min: image.Point{X: 0, Y: 0},
+		Max: image.Point{X: cols, Y: rows},
+	})
+
+	pal := h.Palette.Colors()
+	ps := float64(len(pal)-1) / (h.Max - h.Min)
+	for i := 0; i < cols; i++ {
+		for j := 0; j < rows; j++ {
+			var col color.Color
+			switch v := h.GridXYZ.Z(i, j); {
+			case v < h.Min:
+				col = h.Underflow
+			case v > h.Max:
+				col = h.Overflow
+			case math.IsNaN(v), math.IsInf(ps, 0):
+				col = h.NaN
+			default:
+				col = pal[int((v-h.Min)*ps+0.5)] // Apply palette scaling.
+			}
+
+			if col != nil {
+				img.Set(i, rows-j-1, col)
+			}
+		}
+	}
+
+	xmin, xmax, ymin, ymax := h.DataRange()
+	pImg := NewImage(img, xmin, ymin, xmax, ymax)
+	pImg.Plot(c, plt)
+}
+
+//  plotVectorized plots the heatmap using vector-based drawing.
+func (h *HeatMap) plotVectorized(c draw.Canvas, plt *plot.Plot) {
 	if h.Min > h.Max {
 		panic("contour: invalid Z range: min greater than max")
 	}

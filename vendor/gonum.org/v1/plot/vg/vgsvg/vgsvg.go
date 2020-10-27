@@ -219,7 +219,7 @@ func (c *Canvas) pathData(path vg.Path) string {
 		case vg.CloseComp:
 			buf.WriteString("Z")
 		default:
-			panic(fmt.Sprintf("Unknown path component type: %d\n", comp.Type))
+			panic(fmt.Sprintf("vgsvg: unknown path component type: %d", comp.Type))
 		}
 	}
 	return buf.String()
@@ -313,7 +313,7 @@ func (c *Canvas) DrawImage(rect vg.Rectangle, img image.Image) {
 	buf := new(bytes.Buffer)
 	err := png.Encode(buf, img)
 	if err != nil {
-		panic(fmt.Errorf("vgsvg: error encoding image to PNG: %v\n", err))
+		panic(fmt.Errorf("vgsvg: error encoding image to PNG: %+v", err))
 	}
 	str := "data:image/jpg;base64," + base64.StdEncoding.EncodeToString(buf.Bytes())
 	rsz := rect.Size()

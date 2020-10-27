@@ -269,7 +269,6 @@ func (c *Canvas) pdfPath(path vg.Path, style string) {
 		}
 	}
 	c.doc.DrawPath(style)
-	return
 }
 
 func (c *Canvas) arc(comp vg.PathComp, style string) {
@@ -403,6 +402,6 @@ func (c *Canvas) NextPage() {
 	c.doc.SetMargins(0, 0, 0)
 	c.doc.AddPage()
 	c.Push()
-	c.Translate(vg.Point{0, c.h})
+	c.Translate(vg.Point{X: 0, Y: c.h})
 	c.Scale(1, -1)
 }

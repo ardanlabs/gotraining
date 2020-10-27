@@ -55,7 +55,7 @@ type BarChart struct {
 // to the index of their value in the Valuer.
 func NewBarChart(vs Valuer, width vg.Length) (*BarChart, error) {
 	if width <= 0 {
-		return nil, errors.New("Width parameter was not positive")
+		return nil, errors.New("plotter: width parameter was not positive")
 	}
 	values, err := CopyValues(vs)
 	if err != nil {
@@ -124,18 +124,18 @@ func (b *BarChart) Plot(c draw.Canvas, plt *plot.Plot) {
 		var poly []vg.Point
 		if !b.Horizontal {
 			pts = []vg.Point{
-				{catMin, valMin},
-				{catMin, valMax},
-				{catMax, valMax},
-				{catMax, valMin},
+				{X: catMin, Y: valMin},
+				{X: catMin, Y: valMax},
+				{X: catMax, Y: valMax},
+				{X: catMax, Y: valMin},
 			}
 			poly = c.ClipPolygonY(pts)
 		} else {
 			pts = []vg.Point{
-				{valMin, catMin},
-				{valMin, catMax},
-				{valMax, catMax},
-				{valMax, catMin},
+				{X: valMin, Y: catMin},
+				{X: valMin, Y: catMax},
+				{X: valMax, Y: catMax},
+				{X: valMax, Y: catMin},
 			}
 			poly = c.ClipPolygonX(pts)
 		}
@@ -197,10 +197,10 @@ func (b *BarChart) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 // Thumbnail fulfills the plot.Thumbnailer interface.
 func (b *BarChart) Thumbnail(c *draw.Canvas) {
 	pts := []vg.Point{
-		{c.Min.X, c.Min.Y},
-		{c.Min.X, c.Max.Y},
-		{c.Max.X, c.Max.Y},
-		{c.Max.X, c.Min.Y},
+		{X: c.Min.X, Y: c.Min.Y},
+		{X: c.Min.X, Y: c.Max.Y},
+		{X: c.Max.X, Y: c.Max.Y},
+		{X: c.Max.X, Y: c.Min.Y},
 	}
 	poly := c.ClipPolygonY(pts)
 	c.FillPolygon(b.Color, poly)

@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"gonum.org/v1/plot/text"
 	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/draw"
 )
@@ -19,6 +20,9 @@ import (
 var (
 	// DefaultFont is the name of the default font for plot text.
 	DefaultFont = "Times-Roman"
+
+	// DefaultTextHandler is the default text handler used for text processing.
+	DefaultTextHandler draw.TextHandler = text.Plain{}
 )
 
 // Plot is the basic type representing a plot.
@@ -103,10 +107,11 @@ func New() (*Plot, error) {
 		Legend:          legend,
 	}
 	p.Title.TextStyle = draw.TextStyle{
-		Color:  color.Black,
-		Font:   titleFont,
-		XAlign: draw.XCenter,
-		YAlign: draw.YTop,
+		Color:   color.Black,
+		Font:    titleFont,
+		XAlign:  draw.XCenter,
+		YAlign:  draw.YTop,
+		Handler: DefaultTextHandler,
 	}
 	return p, nil
 }
@@ -148,7 +153,8 @@ func (p *Plot) Draw(c draw.Canvas) {
 	}
 	if p.Title.Text != "" {
 		c.FillText(p.Title.TextStyle, vg.Point{X: c.Center().X, Y: c.Max.Y}, p.Title.Text)
-		c.Max.Y -= p.Title.Height(p.Title.Text) - p.Title.Font.Extents().Descent
+		_, h, d := p.Title.Handler.Box(p.Title.Text, p.Title.Font)
+		c.Max.Y -= h + d
 		c.Max.Y -= p.Title.Padding
 	}
 
@@ -439,7 +445,7 @@ func (p *Plot) NominalY(names ...string) {
 //
 // Supported formats are:
 //
-//  eps, jpg|jpeg, pdf, png, svg, and tif|tiff.
+//  eps, jpg|jpeg, pdf, png, svg, tex and tif|tiff.
 func (p *Plot) WriterTo(w, h vg.Length, format string) (io.WriterTo, error) {
 	c, err := draw.NewFormattedCanvas(w, h, format)
 	if err != nil {
@@ -454,7 +460,7 @@ func (p *Plot) WriterTo(w, h vg.Length, format string) (io.WriterTo, error) {
 //
 // Supported extensions are:
 //
-//  .eps, .jpg, .jpeg, .pdf, .png, .svg, .tif and .tiff.
+//  .eps, .jpg, .jpeg, .pdf, .png, .svg, .tex, .tif and .tiff.
 func (p *Plot) Save(w, h vg.Length, file string) (err error) {
 	f, err := os.Create(file)
 	if err != nil {

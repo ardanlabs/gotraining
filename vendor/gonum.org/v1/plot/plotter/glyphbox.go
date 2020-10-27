@@ -31,11 +31,11 @@ func (g GlyphBoxes) Plot(c draw.Canvas, plt *plot.Plot) {
 		x := c.X(b.X) + b.Rectangle.Min.X
 		y := c.Y(b.Y) + b.Rectangle.Min.Y
 		c.StrokeLines(g.LineStyle, []vg.Point{
-			{x, y},
-			{x + b.Rectangle.Size().X, y},
-			{x + b.Rectangle.Size().X, y + b.Rectangle.Size().Y},
-			{x, y + b.Rectangle.Size().Y},
-			{x, y},
+			{X: x, Y: y},
+			{X: x + b.Rectangle.Size().X, Y: y},
+			{X: x + b.Rectangle.Size().X, Y: y + b.Rectangle.Size().Y},
+			{X: x, Y: y + b.Rectangle.Size().Y},
+			{X: x, Y: y},
 		})
 	}
 }
