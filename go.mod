@@ -7,11 +7,10 @@ require (
 	github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 	github.com/google/go-cmp v0.5.2
 	github.com/google/uuid v1.1.2 // indirect
-	github.com/jung-kurt/gofpdf v1.16.2 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.1
 	github.com/pkg/errors v0.9.1
 	golang.org/x/image v0.0.0-20200927104501-e162460cd6b5 // indirect
-	gonum.org/v1/netlib v0.0.0-20190926062253-2d6e29b73a19 // indirect
+	gonum.org/v1/netlib v0.0.0-20201012070519-2390d26c3658 // indirect
 	gonum.org/v1/plot v0.8.0
 )

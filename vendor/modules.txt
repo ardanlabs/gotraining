@@ -31,7 +31,6 @@ github.com/google/go-cmp/cmp/internal/value
 ## explicit
 github.com/google/uuid
 # github.com/jung-kurt/gofpdf v1.16.2
-## explicit
 github.com/jung-kurt/gofpdf
 # github.com/patrickmn/go-cache v2.1.0+incompatible
 ## explicit
@@ -56,7 +55,7 @@ golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
-# gonum.org/v1/netlib v0.0.0-20190926062253-2d6e29b73a19
+# gonum.org/v1/netlib v0.0.0-20201012070519-2390d26c3658
 ## explicit
 # gonum.org/v1/plot v0.8.0
 ## explicit
