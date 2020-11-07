@@ -46,7 +46,7 @@ Here are blog posts about this code to help you understand the code better.
 
 Here are blog posts to help you get started learning more about the current design draft.
 
-[Current Design Draft](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters) - Go Team  
+[Current Design Draft](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md) - Go Team  
 [The Next Step for Generics](https://blog.golang.org/generics-next-step) - Go Team  
 [Early notes on the generics proposal](https://rakyll.org/generics-proposal/) - JBD  
 [Generics in Go](https://bitfieldconsulting.com/golang/generics) - John Arundel  
