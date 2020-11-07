@@ -18,7 +18,7 @@ type keyValuePair[K, V any] struct {
 }
 
 type Table[K comparable, V any] struct {
-    hashFunc hashFunc[K]
+	hashFunc hashFunc[K]
 	buckets  int
 	table    [][]keyValuePair[K, V]
 }
@@ -26,7 +26,7 @@ type Table[K comparable, V any] struct {
 func New[K comparable, V any](buckets int, hf hashFunc[K]) *Table[K, V] {
 	return &Table[K, V]{
 		hashFunc: hf,
-        buckets:  buckets,
+		buckets:  buckets,
 		table:    make([][](keyValuePair[K, V]), buckets),
 	}
 }
@@ -48,15 +48,15 @@ func (t *Table[K, V]) Insert(key K, value V) {
 }
 
 func (t *Table[K, V]) Get(key K) (V, bool) {
-    bucket := t.hashFunc(key, t.buckets)
-    for idx, kvp := range t.table[bucket] {
-        if key == kvp.Key {
-            return t.table[bucket][idx].Value, true
-        }
-    }
+	bucket := t.hashFunc(key, t.buckets)
+	for idx, kvp := range t.table[bucket] {
+		if key == kvp.Key {
+			return t.table[bucket][idx].Value, true
+		}
+	}
 
-    var zero V
-    return zero, false
+	var zero V
+	return zero, false
 }
 
 // =============================================================================
@@ -70,7 +70,7 @@ func main() {
 		return int(h.Sum32()) % buckets
 	}
 	table1 := New[/*key*/ string, /*value*/ int](buckets, hashFunc1)
-	
+
 	hashFunc2 := func(key int, buckets int) int {
 		return key % buckets
 	}
@@ -85,7 +85,7 @@ func main() {
 	for i, s := range append(words, "nope!") {
 		v1, ok1 := table1.Get(s)
 		fmt.Printf("t1.Get(%v) = (%v, %v)\n", s, v1, ok1)
-	
+
 		v2, ok2 := table2.Get(i)
 		fmt.Printf("t2.Get(%v) = (%v, %v)\n", i, v2, ok2)
 	}
