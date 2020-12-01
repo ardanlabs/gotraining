@@ -12,39 +12,51 @@ type printer interface {
 	print()
 }
 
-// user defines a user in the program.
-type user struct {
+// cannon defines a cannon printer.
+type cannon struct {
 	name string
 }
 
-// print displays the user's name.
-func (u user) print() {
-	fmt.Printf("User Name: %s\n", u.name)
+// print displays the printer's name.
+func (c cannon) print() {
+	fmt.Printf("Printer Name: %s\n", c.name)
+}
+
+// epson defines a epson printer.
+type epson struct {
+	name string
+}
+
+// print displays the printer's name.
+func (e *epson) print() {
+	fmt.Printf("Printer Name: %s\n", e.name)
 }
 
 func main() {
 
-	// Create a value of type user.
-	u := user{"Bill"}
+	// Create a cannon and epson printer.
+	c := cannon{"PIXMA TR4520"}
+	e := epson{"WorkForce Pro WF-3720"}
 
-	// Add the values and pointers to the slice of
-	// printer interface values.
-	entities := []printer{
+	// Add the printers to the collection using both
+	// value and pointer semantics.
+	printers := []printer{
 
-		// Store a copy of the user value in the interface value.
-		u,
+		// Store a copy of the cannon printer value.
+		c,
 
-		// Store a copy of the address of the user value in the interface value.
-		&u,
+		// Store a copy of the epson printer value's address.
+		&e,
 	}
 
-	// Change the name field on the user value.
-	u.name = "Bill_CHG"
+	// Change the name field for both printers.
+	c.name = "PROGRAF PRO-1000"
+	e.name = "Home XP-4100"
 
-	// Iterate over the slice of entities and call
+	// Iterate over the slice of printers and call
 	// print against the copied interface value.
-	for _, e := range entities {
-		e.print()
+	for _, p := range printers {
+		p.print()
 	}
 
 	// When we store a value, the interface value has its own
