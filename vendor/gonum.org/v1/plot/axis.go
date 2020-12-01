@@ -262,20 +262,21 @@ func (a horizontalAxis) draw(c draw.Canvas) {
 		x -= a.Label.Font.Width(a.Label.Text) / 2
 	}
 	if a.Label.Text != "" {
-		y -= a.Label.Font.Extents().Descent
-		c.FillText(a.Label.TextStyle, vg.Point{X: x, Y: y}, a.Label.Text)
+		descent := a.Label.Font.Extents().Descent
+		c.FillText(a.Label.TextStyle, vg.Point{X: x, Y: y - descent}, a.Label.Text)
 		y += a.Label.Height(a.Label.Text)
 		y += a.Label.Padding
 	}
 
 	marks := a.Tick.Marker.Ticks(a.Min, a.Max)
 	ticklabelheight := tickLabelHeight(a.Tick.Label, marks)
+	descent := a.Tick.Label.Font.Extents().Descent
 	for _, t := range marks {
 		x := c.X(a.Norm(t.Value))
 		if !c.ContainsX(x) || t.IsMinor() {
 			continue
 		}
-		c.FillText(a.Tick.Label, vg.Point{X: x, Y: y + ticklabelheight}, t.Label)
+		c.FillText(a.Tick.Label, vg.Point{X: x, Y: y + ticklabelheight - descent}, t.Label)
 	}
 
 	if len(marks) > 0 {
@@ -362,8 +363,9 @@ func (a verticalAxis) draw(c draw.Canvas) {
 			y = c.Max.Y
 			y -= a.Label.Font.Width(a.Label.Text) / 2
 		}
-		c.FillText(sty, vg.Point{X: x, Y: y}, a.Label.Text)
-		x += -a.Label.Font.Extents().Descent
+		descent := a.Label.Font.Extents().Descent
+		c.FillText(sty, vg.Point{X: x + descent, Y: y}, a.Label.Text)
+		x -= descent
 		x += a.Label.Padding
 	}
 	marks := a.Tick.Marker.Ticks(a.Min, a.Max)
@@ -372,12 +374,13 @@ func (a verticalAxis) draw(c draw.Canvas) {
 	}
 
 	major := false
+	descent := a.Tick.Label.Font.Extents().Descent
 	for _, t := range marks {
 		y := c.Y(a.Norm(t.Value))
 		if !c.ContainsY(y) || t.IsMinor() {
 			continue
 		}
-		c.FillText(a.Tick.Label, vg.Point{X: x, Y: y}, t.Label)
+		c.FillText(a.Tick.Label, vg.Point{X: x, Y: y - descent}, t.Label)
 		major = true
 	}
 	if major {

@@ -105,7 +105,8 @@ func (l *Legend) Draw(c draw.Canvas) {
 	textx += l.XOffs
 	iconx += l.XOffs
 
-	enth := l.entryHeight()
+	descent := sty.Font.Extents().Descent
+	enth := l.entryHeight() + descent
 	y := c.Max.Y - enth
 	if !l.Top {
 		y = c.Min.Y + (enth+l.Padding)*(vg.Length(len(l.entries))-1)
@@ -124,7 +125,7 @@ func (l *Legend) Draw(c draw.Canvas) {
 		panic("plot: invalid vertical offset for the legend's entries")
 	}
 	yoff := vg.Length(l.YPosition-draw.PosBottom) / 2
-	yoff *= -sty.Font.Extents().Descent
+	yoff -= descent
 
 	for _, e := range l.entries {
 		for _, t := range e.thumbs {

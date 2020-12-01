@@ -60,6 +60,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go’s History in Code](https://seh.dev/go-legacy/) - Sean Hinchee  
 [A Plea For Lean Software](https://cr.yp.to/bib/1995/wirth.pdf) - Niklaus Wirth  
 
+### Case Studies
+
+[Case Studies](https://go.dev/solutions#case-studies) - Go Team  
+[New Case Studies About Google’s Use of Go](https://opensource.googleblog.com/2020/08/new-case-studies-about-googles-use-of-go.html) - Rob Pike  
+
 ### Contribute to Go
 
 [Contributing to the Go project](https://blog.gopheracademy.com/advent-2016/contributing-to-the-go-project/) - Matt Layher  

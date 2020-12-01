@@ -74,7 +74,7 @@ func (sty TextStyle) Height(txt string) vg.Length {
 		return vg.Length(0)
 	}
 	e := sty.Font.Extents()
-	return e.Height*vg.Length(nl-1) + e.Ascent
+	return e.Height*vg.Length(nl-1) + e.Ascent - e.Descent
 }
 
 // Rectangle returns a rectangle giving the bounds of

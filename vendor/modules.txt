@@ -20,7 +20,7 @@ github.com/go-latex/latex/token
 # github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 github.com/golang/freetype/raster
 github.com/golang/freetype/truetype
-# github.com/google/go-cmp v0.5.2
+# github.com/google/go-cmp v0.5.4
 ## explicit
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
@@ -41,6 +41,8 @@ github.com/pborman/uuid
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
+# golang.org/x/exp v0.0.0-20201008143054-e3b2a7f2fdc7
+## explicit
 # golang.org/x/image v0.0.0-20200927104501-e162460cd6b5
 ## explicit
 golang.org/x/image/ccitt
@@ -55,9 +57,11 @@ golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
+# golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
+## explicit
 # gonum.org/v1/netlib v0.0.0-20201012070519-2390d26c3658
 ## explicit
-# gonum.org/v1/plot v0.8.0
+# gonum.org/v1/plot v0.8.1
 ## explicit
 gonum.org/v1/plot
 gonum.org/v1/plot/palette
