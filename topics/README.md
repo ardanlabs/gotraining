@@ -12,7 +12,6 @@ This class teaches how to write better, more idiomatic and performant code in Go
 
 This class teaches how to build production-level services in Go with a focus on macro-level engineering decisions. From the beginning you will pair program with the instructor, walking through the design philosophies and guidelines used to engineer the code. With each new feature, you will learn more about the transition from programming to engineering and the points of refactoring required to write production level applications. Throughout the class, Go modules and Kubernetes will be a focus. Everyone will be making better engineering decisions after this class.
 
-[Service Training](https://github.com/ardanlabs/service-training)  
 [Service Starter Kit](https://github.com/ardanlabs/service)
 
 ### Ultimate AI / Machine Learning
