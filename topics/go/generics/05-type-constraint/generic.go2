@@ -72,7 +72,7 @@ type matcher[T any] interface {
     match(v T) bool
 }
 
-func match[T matcher](list []T, find T) int {
+func match[T matcher[T]](list []T, find T) int {
     for i, v := range list {
         if v.match(find) {
             return i
