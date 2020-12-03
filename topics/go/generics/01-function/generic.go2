@@ -76,7 +76,7 @@ func printReflect(v interface{}) {
 // `interface{}`.
 //
 // This code more closely resembles the concrete implementations that we started
-// with and is easier to read than the reflect implementation. 
+// with and is easier to read than the reflect implementation.
 
 func print[T any](slice []T) {
 	fmt.Print("Generic: ")
@@ -93,7 +93,11 @@ func main() {
 	printNumbers(numbers)
 	printAssert(numbers)
 	printReflect(numbers)
-	print(numbers)
+	print[int](numbers)
+
+	floats := []float64{1.5, 2.2, 3.1}
+	printReflect(floats)
+	print[float64](floats)
 
 	strings := []string{"A", "B", "C"}
 	printStrings(strings)
