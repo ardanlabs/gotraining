@@ -6,15 +6,17 @@ import (
 	"math/rand"
 )
 
+// Bloom implements a bloom filter
 type Bloom struct {
-	m int // number of bits
-	k int // number of probes
+	m    int      // number of bits
+	k    int      // number of probes
+	mask *big.Int // underlying bitmask
 
-	hash maphash.Hash
-	r    *rand.Rand
-	mask *big.Int
+	hash maphash.Hash // used to generate seed for key
+	r    *rand.Rand   // use to generate "k" bit numbers
 }
 
+// New creates a new Bloom filter with "m" bits and "k" has functions
 func New(m, k int) *Bloom {
 	b := Bloom{
 		m:    m,

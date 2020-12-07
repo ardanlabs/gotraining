@@ -7,6 +7,7 @@ import (
 )
 
 // Hack to generate fixed seed
+// See https://github.com/golang/go/issues/43043
 func fixedSeed() maphash.Seed {
 	var s maphash.Seed
 	// s.s is unexported
