@@ -95,10 +95,6 @@ func main() {
 	printReflect(numbers)
 	print(numbers)
 
-	floats := []float64{1.4, 2.7, 3.1}
-	printReflect(floats)
-	print[float64](floats)
-
 	strings := []string{"A", "B", "C"}
 	printStrings(strings)
 	printAssert(strings)
