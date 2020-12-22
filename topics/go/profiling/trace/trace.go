@@ -53,7 +53,7 @@ func main() {
 	n := freq(topic, docs)
 	// n := freqConcurrent(topic, docs)
 	// n := freqConcurrentSem(topic, docs)
-	// n := freq(topic, docs)
+	// n := freqProcessors(topic, docs)
 	// n := freqProcessorsTasks(topic, docs)
 	// n := freqActor(topic, docs)
 
@@ -274,7 +274,7 @@ func freqProcessors(topic string, docs []string) int {
 	return int(found)
 }
 
-func freqTasks(topic string, docs []string) int {
+func freqProcessorsTasks(topic string, docs []string) int {
 	var found int32
 
 	g := runtime.GOMAXPROCS(0)
