@@ -56,7 +56,7 @@ func (*Xenia) Pull(d *Data) error {
 		return io.EOF
 
 	case 5:
-		return errors.New("Error reading data from Xenia")
+		return errors.New("error reading data from Xenia")
 
 	default:
 		d.Line = "Data"
