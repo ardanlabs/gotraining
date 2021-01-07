@@ -1,4 +1,4 @@
-/* Package bloom contains a simple implementation of a bloom filer
+/* Package bloom contains a simple implementation of a bloom filer.
 
 A Bloom filter is a space efficient probabilistic data structure.
 It supports two operations - adding a memeber and checking for membership.
