@@ -56,7 +56,7 @@ func assembleOutputStream() []byte {
 }
 
 func main() {
-	var output bytes.Buffer
+	var output1 bytes.Buffer
 	in := assembleInputStream()
 	out := assembleOutputStream()
 
@@ -64,16 +64,19 @@ func main() {
 	repl := []byte("Elvis")
 
 	fmt.Println("=======================================\nRunning Algorithm One")
-	output.Reset()
-	algOne(in, find, repl, &output)
-	matched := bytes.Compare(out, output.Bytes())
-	fmt.Printf("Matched: %v\nInp: [%s]\nExp: [%s]\nGot: [%s]\n", matched == 0, in, out, output.Bytes())
+	output1.Reset()
+	algOne(in, find, repl, &output1)
+	matched := bytes.Compare(out, output1.Bytes())
+	fmt.Printf("Matched: %v\nInp: [%s]\nExp: [%s]\nGot: [%s]\n", matched == 0, in, out, output1.Bytes())
 
 	fmt.Println("=======================================\nRunning Algorithm Two")
+	var output bytes.Buffer
 	output.Reset()
 	algTwo(in, find, repl, &output)
 	matched = bytes.Compare(out, output.Bytes())
 	fmt.Printf("Matched: %v\nInp: [%s]\nExp: [%s]\nGot: [%s]\n", matched == 0, in, out, output.Bytes())
+
+	fmt.Println("same output? ", bytes.Compare(output1.Bytes(), output.Bytes()))
 }
 
 // algOne is one way to solve the problem.
@@ -167,10 +170,12 @@ func algTwo(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 		if idx != 0 {
 
 			// Write what we've matched up to this point.
-			output.Write(find[:idx])
+			output.Write(find[:1])
 
 			// Unread the unmatched byte so it can be processed again.
-			input.UnreadByte()
+			for i := 0; i < idx; i++ {
+				input.UnreadByte()
+			}
 
 			// Reset the offset to start matching from the beginning.
 			idx = 0
@@ -182,4 +187,5 @@ func algTwo(data []byte, find []byte, repl []byte, output *bytes.Buffer) {
 		output.WriteByte(b)
 		idx = 0
 	}
+	output.Write(find[:idx])
 }
