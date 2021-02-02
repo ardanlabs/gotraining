@@ -36,7 +36,6 @@ func main() {
 	// Create a writer goroutine.
 	go func() {
 		for i := 0; i < 10; i++ {
-			time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
 			writer(i)
 		}
 		wg.Done()
@@ -67,6 +66,7 @@ func writer(i int) {
 		rc := atomic.LoadInt64(&readCount)
 
 		// Perform some work since we have a full lock.
+		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
 		fmt.Printf("****> : Performing Write : RCount[%d]\n", rc)
 		data = append(data, fmt.Sprintf("String: %d", i))
 	}

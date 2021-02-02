@@ -40,7 +40,7 @@ This content is provided by Scott Meyers from his talk in 2014 at Dive:
 [Data Race](example1/example1.go) ([Go Playground](https://play.golang.org/p/czqXM5wOspX))    
 [Atomic Increments](example2/example2.go) ([Go Playground](https://play.golang.org/p/5ZtLaX7zxt7))    
 [Mutex](example3/example3.go) ([Go Playground](https://play.golang.org/p/ZKE2v9H4oS-))    
-[Read/Write Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/Rv8Wf8hw6MK))    
+[Read/Write Mutex](example4/example4.go) ([Go Playground](https://play.golang.org/p/-iXzElPBnDM))    
 [Map Data Race](example5/example5.go) ([Go Playground](https://play.golang.org/p/ktWRjcJWNjw))    
 
 ## Advanced Code Review
