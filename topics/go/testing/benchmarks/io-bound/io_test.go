@@ -1,8 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// GOGC=off go test -cpu 1 -run none -bench . -benchtime 3s
-// GOGC=off go test -run none -bench . -benchtime 3s
+// GOGC=off GOMAXPROCS=1 go test -bench . -benchtime 3s
+// GOGC=off go test -bench . -benchtime 3s
 
 // Tests to show the different performance based on concurrency with
 // or without parallelism.
@@ -21,7 +21,7 @@ var docs []string
 func init() {
 	rand.Seed(time.Now().UnixNano())
 	docs = generateList(1e3)
-	fmt.Printf("Processing %d documents using %d goroutines\n", len(docs), runtime.NumCPU())
+	fmt.Printf("Processing %d documents using %d goroutines on %d thread(s)\n", len(docs), runtime.NumCPU(), runtime.GOMAXPROCS(0))
 }
 
 func BenchmarkSequential(b *testing.B) {
