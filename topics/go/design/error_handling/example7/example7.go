@@ -23,13 +23,13 @@ func main() {
 
 	// Make the function call and validate the error.
 	if err := firstCall(10); err != nil {
+		var ae *AppError
 
-		// Use type as context to determine cause.
-		switch v := errors.Unwrap(err).(type) {
-		case *AppError:
+		switch {
+		case errors.As(err, &ae):
 
 			// We got our custom error type.
-			fmt.Println("Custom App Error:", v.State)
+			fmt.Println("Custom App Error:", ae.State)
 
 		default:
 
