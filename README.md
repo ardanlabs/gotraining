@@ -52,9 +52,7 @@ _**Articles**_
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
-[Practical Understanding Of Scheduler Semantics (2021)](https://www.youtube.com/watch?v=p2Cjq3Dq2Q0)  
 [GDN Event #1 (2021) - GoBridge Needs Your Help](https://www.youtube.com/watch?v=Tst0oI97cvQ&t=2s)  
-[Go Generics Draft Proposal (2020)](https://www.youtube.com/watch?v=gIEPspmbMHM&t=2069s)  
 [Training Within The Go Community (2019)](https://www.youtube.com/watch?v=PSR1twjzzAM&feature=youtu.be)  
 [GopherCon Australia (2019) - Modules](https://www.youtube.com/watch?v=MVxbVR_6Tac)  
 [Golab (2019) - You Want To Build a Web Service?](https://www.youtube.com/watch?v=IV0wrVb31Pg)  
@@ -75,6 +73,8 @@ _**Video**_
 [GothamGo (2015) - Error Handling in Go](https://vimeo.com/115782573)  
 [GopherCon (2014) - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
 
+[Practical Understanding Of Scheduler Semantics (2021)](https://www.youtube.com/watch?v=p2Cjq3Dq2Q0)  
+[Go Generics Draft Proposal (2020)](https://www.youtube.com/watch?v=gIEPspmbMHM&t=2069s)  
 [Hack Potsdam (2017) - Tech Talk with William Kennedy](https://www.youtube.com/watch?v=sBzJ-sjhgs8)  
 [Chicago Meetup (2016) - An Evening](https://vimeo.com/199832344)  
 [Vancouver Meetup (2016) - Go Talk & Ask Me Anything With William Kennedy](https://www.youtube.com/watch?v=7YcLIbG1ekM&t=91s)  
