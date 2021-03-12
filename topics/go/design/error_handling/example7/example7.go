@@ -19,17 +19,29 @@ func (c *AppError) Error() string {
 	return fmt.Sprintf("App Error, State: %d", c.State)
 }
 
+// Cause iterates through all the wrapped errors
+// until the root error value is reached.
+func Cause(err error) error {
+	root := err
+	for {
+		if err = errors.Unwrap(root); err == nil {
+			return root
+		}
+		root = err
+	}
+}
+
 func main() {
 
 	// Make the function call and validate the error.
 	if err := firstCall(10); err != nil {
-		var ae *AppError
 
-		switch {
-		case errors.As(err, &ae):
+		// Use type as context to determine cause.
+		switch v := Cause(err).(type) {
+		case *AppError:
 
 			// We got our custom error type.
-			fmt.Println("Custom App Error:", ae.State)
+			fmt.Println("Custom App Error:", v.State)
 
 		default:
 
