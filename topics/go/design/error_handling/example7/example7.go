@@ -36,6 +36,12 @@ func main() {
 	// Make the function call and validate the error.
 	if err := firstCall(10); err != nil {
 
+		// How to use the As function.
+		var ap *AppError
+		if errors.As(err, &ap) {
+			fmt.Println("As says it is an AppError")
+		}
+
 		// Use type as context to determine cause.
 		switch v := Cause(err).(type) {
 		case *AppError:
