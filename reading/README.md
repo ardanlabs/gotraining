@@ -2,6 +2,8 @@
 
 There is a ton of links to extra reading and videos through out the material. Occasionally we run into material that we feel is important and don't have an exact place to put it. This is a section place for that material.
 
+[The Ecosystem of the Go Programming Language](https://henvic.dev/posts/go/) - Henrique Vicente  
+
 ### Books
 
 [Go In Action](https://www.manning.com/books/go-in-action) - Kennedy, Ketelsen, St. Martin  

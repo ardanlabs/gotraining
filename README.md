@@ -98,6 +98,7 @@ Go is an open source programming language that makes it easy to build simple, re
 
 Go is the fusion of performance and productivity wrapped in a language that software developers can learn, use and understand. Go is not C, yet we have many of the benefits of C with the benefits of higher level programming languages.
 
+[The Ecosystem of the Go Programming Language](https://henvic.dev/posts/go/) - Henrique Vicente  
 [The Why of Go](https://www.infoq.com/presentations/go-concurrency-gc) - Carmen Andoh  
 [Go Ten Years and Climbing](https://commandcenter.blogspot.com/2017/09/go-ten-years-and-climbing.html) - Rob Pike  
 [The eigenvector of "Why we moved from language X to language Y"](https://erikbern.com/2017/03/15/the-eigenvector-of-why-we-moved-from-language-x-to-language-y.html) - Erik Bernhardsson  
