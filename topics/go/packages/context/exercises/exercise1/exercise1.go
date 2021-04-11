@@ -73,7 +73,7 @@ func findUser(rw http.ResponseWriter, r *http.Request) {
 	case u := <-ch:
 
 		// Respond with the user.
-		sendResponse(rw, &u, http.StatusOK)
+		sendResponse(rw, u, http.StatusOK)
 		log.Println("Sent StatusOK")
 		return
 
