@@ -18,6 +18,7 @@ _"Methods are valid when it is practical or reasonable for a piece of data to ex
 
 [Methods](https://golang.org/doc/effective_go.html#methods)    
 [Methods, Interfaces and Embedded Types in Go](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy    
+[Escape-Analysis Flaws](https://www.ardanlabs.com/blog/2018/01/escape-analysis-flaws.html) - William Kennedy  
 
 ## Code Review
 
