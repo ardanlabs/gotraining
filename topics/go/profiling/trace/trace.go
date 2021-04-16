@@ -71,6 +71,8 @@ func freq(topic string, docs []string) int {
 			return 0
 		}
 
+		// https://tip.golang.org/doc/go1.16
+		// https://www.srcbeat.com/2021/01/golang-ioutil-deprecated/
 		data, err := ioutil.ReadAll(f)
 		if err != nil {
 			f.Close()
