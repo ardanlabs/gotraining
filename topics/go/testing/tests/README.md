@@ -41,7 +41,7 @@ https://github.com/dvyukov/go-fuzz
 [Mocking Web Server Response](example3/example3_test.go) ([Go Playground](https://play.golang.org/p/SILnu117hak))  
 [Testing Internal Endpoints](example4/handlers/handlers_test.go) ([Go Playground](https://play.golang.org/p/CSK7SZEeWf3))  
 [Example Test](example4/handlers/handlers_example_test.go) ([Go Playground](https://play.golang.org/p/rE0DRliZH9t))  
-[Sub Tests](example5/example5_test.go) ([Go Playground](https://play.golang.org/p/TmH1nMDsrvL))  
+[Sub Tests](example5/example5_test.go) ([Go Playground](https://play.golang.org/p/7PrkFU-qVdY))  
 
 _Look at the profiling topic to learn more about using test to [profile](../profiling) code._
 

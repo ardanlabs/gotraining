@@ -31,22 +31,23 @@ func TestDownload(t *testing.T) {
 
 	t.Log("Given the need to test downloading different content.")
 	{
-		for i, test := range tt {
+		for testID, test := range tt {
+			testID, test := testID, test
 			tf := func(t *testing.T) {
-				t.Logf("\tTest %d:\tWhen checking %q for status code %d", i, test.url, test.statusCode)
+				t.Logf("\tTest %d:\tWhen checking %q for status code %d", testID, test.url, test.statusCode)
 				{
 					resp, err := http.Get(test.url)
 					if err != nil {
-						t.Fatalf("\t%s\tTest %d:\tShould be able to make the Get call : %v", failed, i, err)
+						t.Fatalf("\t%s\tTest %d:\tShould be able to make the Get call : %v", failed, testID, err)
 					}
-					t.Logf("\t%s\tTest %d:\tShould be able to make the Get call.", succeed, i)
+					t.Logf("\t%s\tTest %d:\tShould be able to make the Get call.", succeed, testID)
 
 					defer resp.Body.Close()
 
 					if resp.StatusCode == test.statusCode {
-						t.Logf("\t%s\tTest %d:\tShould receive a %d status code.", succeed, i, test.statusCode)
+						t.Logf("\t%s\tTest %d:\tShould receive a %d status code.", succeed, testID, test.statusCode)
 					} else {
-						t.Errorf("\t%s\tTest %d:\tShould receive a %d status code : %v", failed, i, test.statusCode, resp.StatusCode)
+						t.Errorf("\t%s\tTest %d:\tShould receive a %d status code : %v", failed, testID, test.statusCode, resp.StatusCode)
 					}
 				}
 			}
@@ -73,10 +74,7 @@ func TestParallelize(t *testing.T) {
 	t.Log("Given the need to test downloading different content.")
 	{
 		for testID, test := range tt {
-
-			// Preventing closure bugs.
 			testID, test := testID, test
-
 			tf := func(t *testing.T) {
 				t.Parallel()
 
