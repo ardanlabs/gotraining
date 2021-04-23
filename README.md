@@ -52,6 +52,7 @@ _**Articles**_
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
+[Dgrpah Day (2021) - Getting Started With Dgraph and GraphQL](https://www.youtube.com/watch?v=5L4PUbDqSEo)  
 [GDN Event #1 (2021) - GoBridge Needs Your Help](https://www.youtube.com/watch?v=Tst0oI97cvQ&t=2s)  
 [Training Within The Go Community (2019)](https://www.youtube.com/watch?v=PSR1twjzzAM&feature=youtu.be)  
 [GopherCon Australia (2019) - Modules](https://www.youtube.com/watch?v=MVxbVR_6Tac)  
