@@ -16,7 +16,7 @@ var n []int
 
 // Generate the numbers to sort.
 func init() {
-	for i := 0; i < 1000000; i++ {
+	for i := 0; i < 1_000_000; i++ {
 		n = append(n, i)
 	}
 }
@@ -84,13 +84,13 @@ func unlimited(n []int) []int {
 		wg.Done()
 	}()
 
-	// Sort the right side concurrenyly.
+	// Sort the right side concurrently.
 	go func() {
 		r = unlimited(n[i:])
 		wg.Done()
 	}()
 
-	// Wait for the spliting to end.
+	// Wait for the splitting to end.
 	wg.Wait()
 
 	// Place things in order and merge ordered lists.
@@ -137,13 +137,13 @@ func numCPU(n []int, lvl int) []int {
 			wg.Done()
 		}()
 
-		// Sort the right side concurrenyly.
+		// Sort the right side concurrently.
 		go func() {
 			r = numCPU(n[i:], lvl)
 			wg.Done()
 		}()
 
-		// Wait for the spliting to end.
+		// Wait for the splitting to end.
 		wg.Wait()
 
 		// Place things in order and merge ordered lists.
