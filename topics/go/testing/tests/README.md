@@ -14,7 +14,7 @@ Testing is built right into the go tools and the standard library. Testing needs
 
 ## Quotes
 
-_"A unit test is a test of behavior whose success or failure is wholly determined by the correctness of the test and the correctness of the unit under test." - Kevin Henney_
+_"A unit test is a test of behavior whose success or failure is wholly determined by the correctness of the test and the correctness of the unit under test." - Kevlin Henney_
 
 ## Links
 
