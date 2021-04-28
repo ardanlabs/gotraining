@@ -332,6 +332,8 @@ _Paraphrasing: "Encapsulation and the separation of concerns are drivers for des
 
 _"The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise." - Edsger W. Dijkstra_
 
+_"A proper abstraction decouples the code so that every change doesn’t echo throughout the entire code base."_ - Ronna Steinburg
+
 _"A good API is not just easy to use but also hard to misuse." - JBD_
 
 _"Computing is all about abstractions. Those below yours are just details. Those above yours are limiting complicated crazy town." - Joe Beda_

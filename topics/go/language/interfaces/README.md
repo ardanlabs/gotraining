@@ -20,6 +20,8 @@ _"The empty interface says nothing." - Rob Pike_
 
 _"Design is the art of arranging code to work today, and be changeable forever." - Sandi Metz_
 
+_"A proper abstraction decouples the code so that every change doesn’t echo throughout the entire code base."_ - Ronna Steinburg
+
 ## Links
 
 [Interfaces](https://golang.org/doc/effective_go.html#interfaces)    
