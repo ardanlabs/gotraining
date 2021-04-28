@@ -75,6 +75,6 @@ If you want to improve execution speed, look at the `-alloc_objects` profile col
 ## Code Review
 
 [Profiling](stream.go) ([Go Playground](https://play.golang.org/p/Cm92cvurEnE)) | 
-[Profiling Test](stream_test.go) ([Go Playground](https://play.golang.org/p/n0pvooFGkcl))
+[Profiling Test](stream_test.go) ([Go Playground](https://play.golang.org/p/EpVT3tfVKUv))
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
