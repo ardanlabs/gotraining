@@ -9,7 +9,7 @@ func main() {
 }
 
 //go:noinline
-func example(slice []string, str string, i int) {
+func example(slice []string, str string, i int) error {
 	panic("Want stack trace")
 }
 
@@ -17,26 +17,24 @@ func example(slice []string, str string, i int) {
 	panic: Want stack trace
 
 	goroutine 1 [running]:
-	main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
+	main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa, 0x0, 0xc000054778)
 		stack_trace/example1/example1.go:13 +0x39
 	main.main()
-		stack_trace/example1/example1.go:8 +0x72
+		stack_trace/example1/example1.go:8 +0x85
 
 	--------------------------------------------------------------------------------
 
 	// Declaration
-	main.example(slice []string, str string, i int)
+	main.example(slice []string, str string, i int) error
 
-	// Call
-	main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
+    // Call
+    main.example(make([]string, 2, 4), "hello", 10)
 
-	// Stack trace
-	main.example(0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa)
-
-	// Values
-	Slice Value:   0xc000042748, 0x2, 0x4
-	String Value:  0x106abae, 0x5
-	Integer Value: 0xa
+    // Values (0xc000042748, 0x2, 0x4, 0x106abae, 0x5, 0xa, 0x0, 0xc000054778)
+    Slice Value:      0xc000042748, 0x2, 0x4
+    String Value:     0x106abae, 0x5
+    Integer Value:    0xa
+    Return Arguments: 0x0, 0xc000054778
 */
 
 // Note: https://go-review.googlesource.com/c/go/+/109918
