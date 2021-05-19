@@ -65,13 +65,23 @@ func operate2[T any](slice []T, fn operateFunc[T]) []T {
 
 type Numbers []int
 
-func Double(n Numbers) Numbers {
+func DoubleUnderlying(n Numbers) Numbers {
 	fn := func(n int) int {
 		return 2 * n
 	}
 
-	// numbers := operate([]int, int)(n, fn)
+	numbers := operate2(n, fn)
+	fmt.Printf("%T", numbers)
+	return numbers
+}
+
+func DoubleUserDefined(n Numbers) Numbers {
+	fn := func(n int) int {
+		return 2 * n
+	}
+
 	numbers := operate(n, fn)
+	fmt.Printf("%T", numbers)
 	return numbers
 }
 
@@ -81,6 +91,9 @@ func main() {
 	n := Numbers{10, 20, 30, 40, 50}
 	fmt.Println(n)
 
-	n = Double(n)
+	n = DoubleUnderlying(n)
+	fmt.Println(n)
+
+	n = DoubleUserDefined(n)
 	fmt.Println(n)
 }
