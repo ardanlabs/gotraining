@@ -50,12 +50,12 @@ func poolWork[Input any, Result any](size int, work poolWorkFn[Input, Result]) (
 		}()
 	}
 
-	shutdown := func() {
+	cancel := func() {
 		close(ch)
 		wg.Wait()
 	}
 
-	return ch, shutdown
+	return ch, cancel
 }
 
 // =============================================================================
@@ -84,11 +84,10 @@ func main() {
 		return fmt.Sprintf("%d : received", input)
 	}
 	
-	ch, shutdown := poolWork(size, pwf)
+	ch, cancel := poolWork(size, pwf)
+	defer cancel()
 	
 	for i := 0; i < 5; i++ {
 		ch <- i
 	}
-
-	shutdown()
 }
