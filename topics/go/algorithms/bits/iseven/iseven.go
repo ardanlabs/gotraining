@@ -7,9 +7,5 @@ func IsEven(num int) bool {
 	// Helpful source: https://catonmat.net/low-level-bit-hacks
 	// 0 & 1 = 0 (even number)
 	// 1 & 1 = 1 (odd number)
-	if num&1 == 0 {
-		return true
-	}
-
-	return false
+	return num&1 == 0
 }
