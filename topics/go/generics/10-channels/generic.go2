@@ -34,7 +34,10 @@ func doWork[Result any](ctx context.Context, work doworkFn[Result]) chan Result 
 // Result value is displayed.
 type poolWorkFn[Input any, Result any] func(input Input) Result
 
-func poolWork[Input any, Result any](wg *sync.WaitGroup, size int, work poolWorkFn[Input, Result]) chan Input {
+func poolWork[Input any, Result any](size int, work poolWorkFn[Input, Result]) (chan Input, func()) {
+	var wg sync.WaitGroup
+	wg.Add(size)
+
 	ch := make(chan Input)
 
 	for i := 0; i < size; i++ {
@@ -47,7 +50,12 @@ func poolWork[Input any, Result any](wg *sync.WaitGroup, size int, work poolWork
 		}()
 	}
 
-	return ch
+	shutdown := func() {
+		close(ch)
+		wg.Wait()
+	}
+
+	return ch, shutdown
 }
 
 // =============================================================================
@@ -70,20 +78,17 @@ func main() {
 
 	fmt.Println("-------------------------------------------------------------")
 
-	g := runtime.GOMAXPROCS(0)
-	var wg sync.WaitGroup
-	wg.Add(g)
-	
+	size := runtime.GOMAXPROCS(0)
 	pwf := func(input int) string {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
 		return fmt.Sprintf("%d : received", input)
 	}
-	ch := poolWork(&wg, g, pwf)
 	
-	for i := 0; i < 10; i++ {
+	ch, shutdown := poolWork(size, pwf)
+	
+	for i := 0; i < 5; i++ {
 		ch <- i
 	}
 
-	close(ch)
-	wg.Wait()
+	shutdown()
 }
