@@ -13,16 +13,14 @@ func main() {
 	for _, value := range values {
 		tree.Insert(value)
 	}
-
-	in := bst.InOrder(&tree)
-	fmt.Println("In-order  :", in)
 	bst.PrettyPrint(&tree)
 
 	pre := bst.PreOrder(&tree)
 	fmt.Println("Pre-order :", pre)
-	bst.PrettyPrint(&tree)
+
+	in := bst.InOrder(&tree)
+	fmt.Println("In-order  :", in)
 
 	post := bst.PostOrder(&tree)
 	fmt.Println("Post-order:", post)
-	bst.PrettyPrint(&tree)
 }
