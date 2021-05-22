@@ -10,9 +10,9 @@ import (
 
 // =============================================================================
 
-type hashFunc[K any] func(key K, buckets int) int
+type hashFunc[K comparable] func(key K, buckets int) int
 
-type keyValuePair[K, V any] struct {
+type keyValuePair[K comparable, V any] struct {
 	Key   K
 	Value V
 }
@@ -20,22 +20,23 @@ type keyValuePair[K, V any] struct {
 type Table[K comparable, V any] struct {
 	hashFunc hashFunc[K]
 	buckets  int
-	table    [][]keyValuePair[K, V]
+	data     [][]keyValuePair[K, V]
 }
 
 func New[K comparable, V any](buckets int, hf hashFunc[K]) *Table[K, V] {
 	return &Table[K, V]{
 		hashFunc: hf,
 		buckets:  buckets,
-		table:    make([][](keyValuePair[K, V]), buckets),
+		data:     make([][]keyValuePair[K, V], buckets),
 	}
 }
 
 func (t *Table[K, V]) Insert(key K, value V) {
 	bucket := t.hashFunc(key, t.buckets)
-	for idx, kvp := range t.table[bucket] {
+
+	for idx, kvp := range t.data[bucket] {
 		if key == kvp.Key {
-			t.table[bucket][idx].Value = value
+			t.data[bucket][idx].Value = value
 			return
 		}
 	}
@@ -44,14 +45,15 @@ func (t *Table[K, V]) Insert(key K, value V) {
 		Key:   key,
 		Value: value,
 	}
-	t.table[bucket] = append(t.table[bucket], kvp)
+	t.data[bucket] = append(t.data[bucket], kvp)
 }
 
-func (t *Table[K, V]) Get(key K) (V, bool) {
+func (t *Table[K, V]) Retrieve(key K) (V, bool) {
 	bucket := t.hashFunc(key, t.buckets)
-	for idx, kvp := range t.table[bucket] {
+
+	for idx, kvp := range t.data[bucket] {
 		if key == kvp.Key {
-			return t.table[bucket][idx].Value, true
+			return t.data[bucket][idx].Value, true
 		}
 	}
 
@@ -83,10 +85,10 @@ func main() {
 	}
 
 	for i, s := range append(words, "nope!") {
-		v1, ok1 := table1.Get(s)
-		fmt.Printf("t1.Get(%v) = (%v, %v)\n", s, v1, ok1)
+		v1, ok1 := table1.Retrieve(s)
+		fmt.Printf("t1.Rtr(%v) = (%v, %v)\n", s, v1, ok1)
 
-		v2, ok2 := table2.Get(i)
-		fmt.Printf("t2.Get(%v) = (%v, %v)\n", i, v2, ok2)
+		v2, ok2 := table2.Retrieve(i)
+		fmt.Printf("t2.Rtr(%v) = (%v, %v)\n", i, v2, ok2)
 	}
 }
