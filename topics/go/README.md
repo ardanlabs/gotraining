@@ -18,7 +18,7 @@ You must develop a design philosophy that establishes a set of guidelines. This 
     * [Correctness vs Performance](https://github.com/ardanlabs/gotraining/tree/master/topics/go#correctness-vs-performance)
     * [Rules](https://github.com/ardanlabs/gotraining/tree/master/topics/go#rules)
     * [Senior vs Junior Developers](https://github.com/ardanlabs/gotraining/tree/master/topics/go#senior-vs-junior-developers)
-    * [Code Reviews](https://github.com/ardanlabs/gotraining/tree/master/topics/go#code-reviews)
+    * [Design Philosophy](https://github.com/ardanlabs/gotraining/tree/master/topics/go#design-philosophy)
 * Guidelines
     * [Data Oriented Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#data-oriented-design)
     * [Interface And Composition Design](https://github.com/ardanlabs/gotraining/tree/master/topics/go#interface-and-composition-design)
@@ -60,6 +60,10 @@ You must develop a design philosophy that establishes a set of guidelines. This 
 
 ### Reading Code
 
+Go is a language that focuses on code being readable as a first principle.
+
+**Quotes**
+
 _“If most computer people lack understanding and knowledge, then what they will select will also be lacking.” - Alan Kay_
 
 _"The software business is one of the few places we teach people to write before we teach them to read." - Tom Love (inventor of Objective C)_
@@ -92,9 +96,9 @@ _"There are many reasons why programs are built the way they are, although we ma
 
 ### Mental Models
 
-You must constantly make sure your mental model of your projects are clear. When you can't remember where a piece of logic is or you can't remember how something works, you are losing your mental model of the code. This is a clear indication that refactoring is a must. Focus time on structuring code that provides the best mental model possible and code review for this as well.
+You must constantly make sure your mental model of the code you are writing and maintaining is clear. When you can't remember where a piece of logic is or you can't remember how something works, you’re losing your mental model of the code. This is a clear indication that you need to refactor the code. Focus time on structuring code that provides the best mental model possible and during code reviews validate your mental models are still intact.
 
-How much code in that box do you think you can maintain a mental model of in your head? I believe asking a single developer to maintain a mental model of more than one ream of paper in that box (~10k lines of code) is asking a lot. If you do the math, then it takes a team of 100 people to work on a code base that hits a million lines of code. That is 100 people that need to be coordinated, grouped, tracked and in a constant feedback loop of communication.
+How much code do you think you can maintain in your head? I believe asking a single developer to maintain a mental model of more than one ream of copy paper (~10k lines of code) is asking a lot. If you do the math, it takes a team of 100 people to work on a code base that hits a million lines of code. That’s 100 people that need to be coordinated, grouped, tracked and in a constant feedback loop of communication.
 
 **Quotes**
 
@@ -123,7 +127,7 @@ _"Fixing bugs is just a side effect. Debuggers are for exploration." - @Deech (T
 
 Productivity and performance both matter, but in the past you couldn’t have both. You needed to choose one over the other. We naturally gravitated to productivity, with the idea or hope that the hardware would resolve our performance problems for free. This movement towards productivity has resulted in the design of programming languages that produce sluggish software that is outpacing the hardware’s ability to make them faster.
 
-By following Go’s idioms and a few guidelines, we can write code that can be reasoned about by anyone who looks at it. We can write software that simplifies, minimizes and reduces the amount of code we need to solve the problems we are working on. We don’t have to choose productivity over performance or performance over productivity anymore. We can have both.
+By following Go’s idioms and a few guidelines, we can write code that can be reasoned about by average developers. We can write software that simplifies, minimizes and reduces the amount of code we need to write to solve the problems we are working on. We don’t have to choose productivity over performance or performance over productivity anymore. We can have both.
 
 **Quotes**
 
@@ -145,7 +149,7 @@ You want to write code that is optimized for correctness. Don't make coding deci
 
 Improvement comes from writing code and thinking about the code you write. Then refactoring the code to make it better. This requires the help of other people to also read the code you are writing. Prototype ideas first to validate them. Try different approaches or ask others to attempt a solution. Then compare what you have learned.
 
-Too many developers are not prototyping their ideas first before writing production code. It is through prototyping that you can validate your thoughts, ideas and designs. This is the time when you can break down walls and figure out how things work. Prototype in the concrete and consider contracts after you have a working prototype.
+Too many developers are not prototyping their ideas first before writing production code. It’s through prototyping that you can validate your thoughts, ideas and designs. This is the time when you can break down walls and figure out how things work. Prototype in the concrete and consider contracts after you have a working prototype.
 
 Refactoring must become part of the development cycle. Refactoring is the process of improving the code from the things that you learn on a daily basis. Without time to refactor, code will become impossible to manage and maintain over time. This creates the legacy issues we are seeing today.
 
@@ -207,13 +211,13 @@ _"Don’t cling to a mistake because you spent so much time making it." - Aubrey
 
 ---
 
-### Code Reviews
+### Design Philosophy
 
 You can't look at a piece of code, function or algorithm and determine if it smells good or bad without a design philosophy. These four major categories are the basis for code reviews and should be prioritized in this order: Integrity, Readability, Simplicity and then Performance. You must consciously and with great reason be able to explain the category you are choosing.
 
 ---
 
-### Integrity
+#### Integrity
 
 **_We need to become very serious about reliability._**
 
@@ -233,9 +237,10 @@ Bjarne Stroustrup stated that writing more code than you need results in `Ugly`,
 
 **Error Handling:**
 
-When error handling is treated as an exception and not part of the main code, you can expect the majority of your critical failures to be due to error handling.
+When error handling is treated as an exception and not part of the main code path, you can expect the majority of your critical failures to be due to error handling.
 
-48 critical failures were found in a study looking at a couple hundred bugs in Cassandra, HBase, HDFS, MapReduce, and Redis.  
+There was a study that looked at a couple hundred bugs in Cassandra, HBase, HDFS, MapReduce, and Redis. The study identified 48 critical failures that fell into these categories.
+
 * 92% : Failures from bad error handling
     * 35% : Incorrect handling
         * 25% : Simply ignoring an error
@@ -268,17 +273,17 @@ _"Instability is a drag on innovation." - Yehudah Katz_
 
 ---
 
-### Readability
+#### Readability
 
 **_We must structure our systems to be more comprehensible._**
 
-This is about writing simple code that is easy to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
+This is about writing simple code that is easier to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
 [Example Readability Issue](http://cpp.sh/6i7d)  
 
 **Code Must Never Lie**
 
-We have all been here if you have been programming long enough. At this point it doesn't matter how fast the code might be if no one can understand or maintain it moving forward.
+It doesn't matter how fast the code might be if no one can understand or maintain it moving forward.
 
 **Quotes**
 
@@ -288,7 +293,7 @@ _"This is a cardinal sin amongst programmers. If code looks like it’s doing on
 
 **Average Developer**
 
-You must be aware of who you are on your team. When hiring new people, you must be aware of where they fall. The code must be written for the average developer to comprehend. If you are below average, you have the responsibility to come up to speed. If you are the expert, you have the responsibility to reduce being clever.
+You must be aware of who you are on your team. When hiring new people, you must be aware of where the new person falls. Code must be written for the average developer to comprehend. If you are below average for your team, you have the responsibility to work to be average. If you are above average, you have the responsibility to reduce writing clever code and coach/mentor.
 
 **Quotes**
 
@@ -296,7 +301,7 @@ _"Can you explain it to the median user (developer)? as opposed to will the smar
 
 **Real Machine**
 
-In Go, the underlying machine is the real machine rather than a single abstract machine. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
+In Go, the underlying machine is a real machine, unlike what you would find in Java or C# with their virtual machine layer. The model of computation is that of the computer. Here is the key, Go gives you direct access to the machine while still providing abstraction mechanisms to allow higher-level ideas to be expressed.
 
 **Quotes**
 
@@ -304,7 +309,7 @@ _"Making things easy to do is a false economy. Focus on making things easy to un
 
 ---
 
-### Simplicity
+#### Simplicity
 
 **_We must understand that simplicity is hard to design and complicated to build._**
 
@@ -324,7 +329,7 @@ _"You wake up and say, I will be productive, not simple, today." - Dave Cheney_
 
 **Encapsulation**
 
-Encapsulation is what we have been trying to figure out as an industry for 40 years. Go is taking a slightly new approach with the package. Bringing encapsulation up a level and providing richer support at the language level.
+Encapsulation is what we have been trying to figure out as an industry for 40+ years. Go is taking a slightly new approach with the package. Bringing encapsulation up a level and providing richer support at the language level.
 
 **Quotes**
 
@@ -345,11 +350,11 @@ _"Computing is all about abstractions. Those below yours are just details. Those
 
 ---
 
-### Performance
+#### Performance
 
 **_We must compute less to get the results we need._**
 
-This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code but staying within the idioms and framework of the language.
+This is about not wasting effort and achieving execution efficiency. Writing code that is mechanically sympathetic with the runtime, operating system and hardware. Achieving performance by writing less and more efficient code, but staying within the idioms and framework of the language.
 
 **Quotes**
 
@@ -383,7 +388,7 @@ Micro-Optimizations are about squeezing every ounce of performance as possible. 
 
 ---
 
-### Data-Oriented Design
+#### Data-Oriented Design
 
 "Data dominates. If you've chosen the right data structures and organized things well, the algorithms will almost always be self-evident. Data structures, not algorithms, are central to programming." - Rob Pike
 
@@ -465,11 +470,13 @@ _Package Oriented Design allows a developer to identify where a package belongs 
 
 ### Concurrent Software Design
 
-Concurrency means “out of order” execution. Taking a set of instructions that would otherwise be executed in sequence and finding a way to execute them out of order and still produce the same result. For the problem in front of you, it has to be obvious that out of order execution would add value. When I say value, I mean add enough of a performance gain for the complexity cost. Depending on your problem, out of order execution may not be possible or even make sense.
+Concurrency means undefined “out of order” execution. Taking a set of instructions that would otherwise be executed in sequence and finding a way to execute them out of order and still produce the same result. For the problem in front of you, it has to be obvious that out of order execution would add value.
+
+When I say value, I mean add enough of a performance gain for the complexity cost. Depending on your problem, out of order execution may not be possible or even make sense.
 
 It’s also important to understand that [concurrency is not the same as parallelism](https://blog.golang.org/concurrency-is-not-parallelism). Parallelism means executing two or more instructions at the same time. This is a different concept from concurrency. Parallelism is only possible when you have at least 2 operating system (OS) and hardware threads available to you and you have at least 2 Goroutines, each executing instructions independently on each OS/hardware thread.
 
-Both you and the runtime have a responsibility in managing the concurrency of the application. You are responsible for managing these three things when writing concurrent software:
+Both you and the runtime have a responsibility of managing the concurrency of the application. You are responsible for managing these three things when writing concurrent software:
 
 **Design Philosophy:**
 
