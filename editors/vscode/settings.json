@@ -40,13 +40,11 @@
         "**/.vscode": true
     },
     "files.trimTrailingWhitespace": false,
-
-    "window.zoomLevel": 3,
     "editor.wordWrap": "off",
     "workbench.colorCustomizations": {
         "editorLineNumber.foreground": "#9F9F9F"
     },
-    "extensions.ignoreRecommendations": false,
+    "extensions.ignoreRecommendations": true,
     "liveshare.featureSet": "insiders",
     "workbench.colorTheme": "Zenburn",
     "C_Cpp.updateChannel": "Insiders",
@@ -56,5 +54,9 @@
     "explorer.compactFolders": false,
     "files.associations": {
         "*.go2": "go"
-    }
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "go.toolsManagement.autoUpdate": true,
+    "window.zoomLevel": 1,
+    "terminal.integrated.tabs.enabled": true
 }
