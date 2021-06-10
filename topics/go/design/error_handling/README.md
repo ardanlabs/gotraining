@@ -37,7 +37,7 @@ _Systems cannot be developed assuming that human beings will be able to write mi
 [Find The Bug](example5/example5.go) ([Go Playground](https://play.golang.org/p/CBL-ADH-nSv)) | 
 [The Reason](example5/reason/reason.go) ([Go Playground](https://play.golang.org/p/-f4PPcBGkDU))  
 [Wrapping Errors With pkg/errors](example6/example6.go) ([Go Playground](https://play.golang.org/p/Zt1Z5k4HbDG))  
-[Wrapping Errors With stdlib](example7/example7.go) ([Go Playground](https://play.golang.org/p/H3wyfHevf4U))  
+[Wrapping Errors With stdlib](example7/example7.go) ([Go Playground](https://play.golang.org/p/f5bw9G7OLog))  
 
 ## Exercises
 
