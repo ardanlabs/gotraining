@@ -8,6 +8,7 @@
     "go.enableCodeLens": {"references": false, "runtest": false},
     "go.addTags": {},
     "go.alternateTools": {},
+    "go.toolsManagement.autoUpdate": true,
     "go.useLanguageServer": true,
     "[go]": {
         "editor.snippetSuggestions": "none",
@@ -22,6 +23,9 @@
         "completeUnimported": true, // autocomplete unimported packages
         "deepCompletion": true      // enable deep completion
     },
+    "go.lintFlags": [
+        "-checks=all"
+    ],
 
     "editor.fontSize": 14,
     "editor.formatOnType": true,
@@ -56,7 +60,6 @@
         "*.go2": "go"
     },
     "diffEditor.ignoreTrimWhitespace": false,
-    "go.toolsManagement.autoUpdate": true,
-    "window.zoomLevel": 1,
-    "terminal.integrated.tabs.enabled": true
+    "window.zoomLevel": 2,
+    "terminal.integrated.tabs.enabled": true,
 }
