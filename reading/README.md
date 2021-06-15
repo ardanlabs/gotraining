@@ -386,6 +386,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 #### Stacks
 
+[Stack Traces in Go](https://github.com/DataDog/go-profiler-notes/blob/main/stack-traces.md) - DataDog  
 [Contiguous Stack Proposal](https://docs.google.com/document/d/1wAaf1rYoM4S4gtnPh0zOlGzWtrZFQ5suE8qr2sD8uWQ/pub)  
 [Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
 [Defer Proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/34481-opencoded-defers.md) - Go Team  
