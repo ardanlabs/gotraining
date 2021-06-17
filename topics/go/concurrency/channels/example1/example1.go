@@ -45,157 +45,135 @@ func main() {
 	// 		channelCancellation(stop)
 }
 
-// waitForResult: You are a manager and you hire a new employee. Your new
-// employee knows immediately what they are expected to do and starts their
-// work. You sit waiting for the result of the employee's work. The amount
-// of time you wait on the employee is unknown because you need a
-// guarantee that the result sent by the employee is received by you.
+// waitForResult: In this pattern, the parent goroutine waits for the child
+// goroutine to finish some work to signal the result.
 func waitForResult() {
 	ch := make(chan string)
 
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-		ch <- "paper"
-		fmt.Println("employee : sent signal")
+		ch <- "data"
+		fmt.Println("child : sent signal")
 	}()
 
-	p := <-ch
-	fmt.Println("manager : recv'd signal :", p)
+	d := <-ch
+	fmt.Println("parent : recv'd signal :", d)
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
-// fanOut: You are a manager and you hire one new employee for the exact amount
-// of work you have to get done. Each new employee knows immediately what they
-// are expected to do and starts their work. You sit waiting for all the results
-// of the employees work. The amount of time you wait on the employees is
-// unknown because you need a guarantee that all the results sent by employees
-// are received by you. No given employee needs an immediate guarantee that you
-// received their result.
+// fanOut: In this pattern, the parent goroutine creates 2000 child goroutines
+// and waits for them to signal their results.
 func fanOut() {
-	emps := 2000
-	ch := make(chan string, emps)
+	children := 2000
+	ch := make(chan string, children)
 
-	for e := 0; e < emps; e++ {
-		go func(emp int) {
+	for c := 0; c < children; c++ {
+		go func(child int) {
 			time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-			ch <- "paper"
-			fmt.Println("employee : sent signal :", emp)
-		}(e)
+			ch <- "data"
+			fmt.Println("child : sent signal :", child)
+		}(c)
 	}
 
-	for emps > 0 {
-		p := <-ch
-		emps--
-		fmt.Println(p)
-		fmt.Println("manager : recv'd signal :", emps)
+	for children > 0 {
+		d := <-ch
+		children--
+		fmt.Println(d)
+		fmt.Println("parent : recv'd signal :", children)
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
-// waitForTask: You are a manager and you hire a new employee. Your new
-// employee doesn't know immediately what they are expected to do and waits for
-// you to tell them what to do. You prepare the work and send it to them. The
-// amount of time they wait is unknown because you need a guarantee that the
-// work your sending is received by the employee.
+// waitForTask: In this pattern, the parent goroutine sends a signal to a
+// child goroutine waiting to be told what to do.
 func waitForTask() {
 	ch := make(chan string)
 
 	go func() {
-		p := <-ch
-		fmt.Println("employee : recv'd signal :", p)
+		d := <-ch
+		fmt.Println("child : recv'd signal :", d)
 	}()
 
 	time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-	ch <- "paper"
-	fmt.Println("manager : sent signal")
+	ch <- "data"
+	fmt.Println("parent : sent signal")
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
-// pooling: You are a manager and you hire a team of employees. None of the new
-// employees know what they are expected to do and wait for you to provide work.
-// When work is provided to the group, any given employee can take it and you
-// don't care who it is. The amount of time you wait for any given employee to
-// take your work is unknown because you need a guarantee that the work your
-// sending is received by an employee.
+// pooling: In this pattern, the parent goroutine signals 100 pieces of work
+// to a pool of child goroutines waiting for work to perform.
 func pooling() {
 	ch := make(chan string)
 
 	g := runtime.GOMAXPROCS(0)
-	for e := 0; e < g; e++ {
-		go func(emp int) {
-			for p := range ch {
-				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
+	for c := 0; c < g; c++ {
+		go func(child int) {
+			for d := range ch {
+				fmt.Printf("child %d : recv'd signal : %s\n", child, d)
 			}
-			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
-		}(e)
+			fmt.Printf("child %d : recv'd shutdown signal\n", child)
+		}(c)
 	}
 
 	const work = 100
 	for w := 0; w < work; w++ {
-		ch <- "paper"
-		fmt.Println("manager : sent signal :", w)
+		ch <- "data"
+		fmt.Println("parent : sent signal :", w)
 	}
 
 	close(ch)
-	fmt.Println("manager : sent shutdown signal")
+	fmt.Println("parent : sent shutdown signal")
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
-// fanOutSem: You are a manager and you hire one new employee for the exact amount
-// of work you have to get done. Each new employee knows immediately what they
-// are expected to do and starts their work. However, you don't want all the
-// employees working at once. You want to limit how many of them are working at
-// any given time. You sit waiting for all the results of the employees work.
-// The amount of time you wait on the employees is unknown because you need a
-// guarantee that all the results sent by employees are received by you. No
-// given employee needs an immediate guarantee that you received their result.
+// fanOutSem: In this pattern, a semaphore is added to the fan out pattern
+// to restrict the number of child goroutines that can be schedule to run.
 func fanOutSem() {
-	emps := 2000
-	ch := make(chan string, emps)
+	children := 2000
+	ch := make(chan string, children)
 
 	g := runtime.GOMAXPROCS(0)
 	sem := make(chan bool, g)
 
-	for e := 0; e < emps; e++ {
-		go func(emp int) {
+	for c := 0; c < children; c++ {
+		go func(child int) {
 			sem <- true
 			{
-				time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-				ch <- "paper"
-				fmt.Println("employee : sent signal :", emp)
+				t := time.Duration(rand.Intn(200)) * time.Millisecond
+				time.Sleep(t)
+				ch <- "data"
+				fmt.Println("child : sent signal :", child)
 			}
 			<-sem
-		}(e)
+		}(c)
 	}
 
-	for emps > 0 {
-		p := <-ch
-		emps--
-		fmt.Println(p)
-		fmt.Println("manager : recv'd signal :", emps)
+	for children > 0 {
+		d := <-ch
+		children--
+		fmt.Println(d)
+		fmt.Println("parent : recv'd signal :", children)
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
-// boundedWorkPooling: You are a manager and you hire a team of employees. None of
-// the new employees know what they are expected to do and wait for you to
-// provide work. The amount of work that needs to get done is fixed and staged
-// ahead of time. Any given employee can take work and you don't care who it is
-// or what they take. The amount of time you wait on the employees to finish
-// all the work is unknown because you need a guarantee that all the work is
-// finished.
+// boundedWorkPooling: In this pattern, a pool of child goroutines is created
+// to service a fixed amount of work. The parent goroutine iterates over all
+// work, signalling that into the pool. Once all the work has been signaled,
+// then the channel is closed, the channel is flushed, and the child
+// goroutines terminate.
 func boundedWorkPooling() {
-	work := []string{"paper", "paper", "paper", "paper", "paper", 2000: "paper"}
+	work := []string{"paper", "paper", "paper", "paper", 2000: "paper"}
 
 	g := runtime.GOMAXPROCS(0)
 	var wg sync.WaitGroup
@@ -203,14 +181,14 @@ func boundedWorkPooling() {
 
 	ch := make(chan string, g)
 
-	for e := 0; e < g; e++ {
-		go func(emp int) {
+	for c := 0; c < g; c++ {
+		go func(child int) {
 			defer wg.Done()
-			for p := range ch {
-				fmt.Printf("employee %d : recv'd signal : %s\n", emp, p)
+			for wrk := range ch {
+				fmt.Printf("child %d : recv'd signal : %s\n", child, wrk)
 			}
-			fmt.Printf("employee %d : recv'd shutdown signal\n", emp)
-		}(e)
+			fmt.Printf("child %d : recv'd shutdown signal\n", child)
+		}(c)
 	}
 
 	for _, wrk := range work {
@@ -220,51 +198,43 @@ func boundedWorkPooling() {
 	wg.Wait()
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
-// drop: You are a manager and you hire a new employee. Your new employee
-// doesn't know immediately what they are expected to do and waits for
-// you to tell them what to do. You prepare the work and send it to them. The
-// amount of time they wait is unknown because you need a guarantee that the
-// work your sending is received by the employee. You won't wait for the
-// employee to take the work if they are not ready to receive it. In that case
-// you drop the work on the floor and try again with the next piece of work.
+// drop: In this pattern, the parent goroutine signals 2000 pieces of work to
+// a single child goroutine that can't handle all the work. If the parent
+// performs a send and the child is not ready, that work is discarded and dropped.
 func drop() {
 	const cap = 100
 	ch := make(chan string, cap)
 
 	go func() {
 		for p := range ch {
-			fmt.Println("employee : recv'd signal :", p)
+			fmt.Println("child : recv'd signal :", p)
 		}
 	}()
 
 	const work = 2000
 	for w := 0; w < work; w++ {
 		select {
-		case ch <- "paper":
-			fmt.Println("manager : sent signal :", w)
+		case ch <- "data":
+			fmt.Println("parent : sent signal :", w)
 		default:
-			fmt.Println("manager : dropped data :", w)
+			fmt.Println("parent : dropped data :", w)
 		}
 	}
 
 	close(ch)
-	fmt.Println("manager : sent shutdown signal")
+	fmt.Println("parent : sent shutdown signal")
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
-// cancellation: You are a manager and you hire a new employee. Your new
-// employee knows immediately what they are expected to do and starts their
-// work. You sit waiting for the result of the employee's work. The amount
-// of time you wait on the employee is unknown because you need a
-// guarantee that the result sent by the employee is received by you. Except
-// you are not willing to wait forever for the employee to finish their work.
-// They have a specified amount of time and if they are not done, you don't
-// wait and walk away.
+// cancellation: In this pattern, the parent goroutine creates a child
+// goroutine to perform some work. The parent goroutine is only willing to
+// wait 150 milliseconds for that work to be completed. After 150 milliseconds
+// the parent goroutine walks away.
 func cancellation() {
 	duration := 150 * time.Millisecond
 	ctx, cancel := context.WithTimeout(context.Background(), duration)
@@ -274,7 +244,7 @@ func cancellation() {
 
 	go func() {
 		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
-		ch <- "paper"
+		ch <- "data"
 	}()
 
 	select {
@@ -286,7 +256,7 @@ func cancellation() {
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println("-------------------------------------------------------------")
+	fmt.Println("-------------------------------------------------")
 }
 
 // retryTimeout: You need to validate if something can be done with no error
