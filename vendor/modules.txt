@@ -41,8 +41,6 @@ github.com/pborman/uuid
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# golang.org/dl v0.0.0-20210610154546-0cc6883720ee
-## explicit
 # golang.org/x/exp v0.0.0-20201008143054-e3b2a7f2fdc7
 ## explicit
 # golang.org/x/image v0.0.0-20200927104501-e162460cd6b5
