@@ -53,7 +53,7 @@ The behavior of a channel is directly influenced by its current `State`. The sta
 
 ## Code Review
 
-[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/dLzlohXKwGx))  
+[Basic mechanics](example1/example1.go) ([Go Playground](https://play.golang.org/p/vG1rI7VteNH))  
 [Tennis game](example2/example2.go) ([Go Playground](https://play.golang.org/p/PvFKD_tNwir))  
 [Relay race](example3/example3.go) ([Go Playground](https://play.golang.org/p/OLdBCGUvzbx))  
 [Fan out pattern](example4/example4.go) ([Go Playground](https://play.golang.org/p/zxzHAHIr3Xj))  
