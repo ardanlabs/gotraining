@@ -12,6 +12,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go Programming Blueprints](https://github.com/matryer/goblueprints) - Mat Ryer  
 [Mastering Go](https://www.packtpub.com/eu/programming/mastering-go-second-edition) - Mihalis Tsoukalos  
 [Head First Go](http://shop.oreilly.com/product/0636920054931.do) - Jay McGavren  
+[Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) - Jon Bodner  
 
 ### Blogs
 
@@ -79,6 +80,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Focus On Being Precise](https://www.ardanlabs.com/blog/2018/02/focus-on-being-precise.html) - William Kennedy  
 [Design, Composition and Performance](https://www.infoq.com/presentations/Design-Composition-Performance) - Rich Hickey  
 [Things That Matter](https://www.youtube.com/watch?v=RT46MpK39rQ) - Scott Meyers  
+[Programming is terrible - Lessons learned from a life wasted](https://programmingisterrible.com/post/139222674273/how-to-write-disposable-code-in-large-systems) - tef  
 
 ### Assembly
 
