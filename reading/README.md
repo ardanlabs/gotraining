@@ -14,6 +14,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Head First Go](http://shop.oreilly.com/product/0636920054931.do) - Jay McGavren  
 [Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) - Jon Bodner  
 [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) - Katherine Cox-Buday  
+[Writing A Compiler In Go](https://www.amazon.com/Writing-Compiler-Go-Thorsten-Ball-ebook/dp/B07FZWWVQT) - Thorsten Ball  
 
 ### Blogs
 
