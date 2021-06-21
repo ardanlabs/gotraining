@@ -12,7 +12,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Go Programming Blueprints](https://github.com/matryer/goblueprints) - Mat Ryer  
 [Mastering Go](https://www.packtpub.com/eu/programming/mastering-go-second-edition) - Mihalis Tsoukalos  
 [Head First Go](http://shop.oreilly.com/product/0636920054931.do) - Jay McGavren  
-[Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) - Jon Bodner
+[Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) - Jon Bodner  
 [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) - Katherine Cox-Buday  
 
 ### Blogs
