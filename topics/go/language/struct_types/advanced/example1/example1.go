@@ -28,7 +28,7 @@ type sbp struct {
 	b int16 // 	2 bytes				sizeof 4 - Aligned on 2 bytes
 }
 
-// Two byte padding.
+// Three byte padding.
 type tbp struct {
 	a bool //	1 byte				size 1
 	//			3 bytes padding		size 4
