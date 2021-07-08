@@ -28,15 +28,15 @@ type sbp struct {
 	b int16 // 	2 bytes				sizeof 4 - Aligned on 2 bytes
 }
 
-// Two byte padding.
+// Three byte padding.
 type tbp struct {
 	a bool //	1 byte				size 1
 	//			3 bytes padding		size 4
 	b int32 //	4 bytes				size 8 - Aligned on 2 bytes
 }
 
-// Four byte padding.
-type fbp struct {
+// Seven byte padding.
+type svnbp struct {
 	a bool //	1 byte				size 1
 	//			7 bytes padding		size 8
 	b int64 //	8 bytes				size 16 - Aligned on 8 bytes
@@ -93,9 +93,9 @@ func main() {
 	// =========================================================================
 
 	// structlayout -json github.com/ardanlabs/gotraining/topics/go/language/struct_types/advanced/example1 fbp | structlayout-pretty
-	var fbp fbp
-	size = unsafe.Sizeof(fbp)
-	fmt.Printf("SizeOf[%d][%p %p]\n", size, &fbp.a, &fbp.b)
+	var svnbp svnbp
+	size = unsafe.Sizeof(svnbp)
+	fmt.Printf("SizeOf[%d][%p %p]\n", size, &svnbp.a, &svnbp.b)
 
 	// =========================================================================
 
