@@ -132,6 +132,9 @@ The following is a set of tasks that can be done prior to showing up for class. 
 
 ### Prep Work
 
+**Watch This**  
+[Prepare You Mind](https://www.youtube.com/watch?v=xzK0hYKHzC4)
+
 **Reading Material**  
 http://go.dev/   
 https://www.ardanlabs.com/blog/
