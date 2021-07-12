@@ -288,6 +288,10 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [The End of Software Versions](http://hintjens.com/blog:85) - Pieter Hintjens  
 [Transparent Logs for Skeptical Clients](https://research.swtch.com/tlog) - Russ Cox  
 
+### Go Memory Model
+[Hardware Memory Models](https://research.swtch.com/hwmm) - Russ Cox  
+[Programming Language Memory Models](https://research.swtch.com/plmm) - Russ Cox  
+[Updating the Go Memory Model](https://research.swtch.com/gomm) - Russ Cox  
 
 ## Mechanical Sympathy
 
