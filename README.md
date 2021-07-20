@@ -20,11 +20,15 @@ bill@ardanlabs.com
 * [Starter Material](https://github.com/ardanlabs/gotraining#starter-material)
 * [Get The Training Material](https://github.com/ardanlabs/gotraining#go-get-the-training-material)
 
-## Purchase Video
+## Purchase Video / Book
 
 The entire training class has been recorded to be made available to those who can't have the class taught at their company or who can't attend a conference. This is the entire class material.
 
-[education.ardanlabs.com](https://education.ardanlabs.com)
+[education.ardanlabs.com](https://education.ardanlabs.com)  
+
+There is a book for all of the material in the class.
+
+[Ultimate Go Notebook](https://education.ardanlabs.com/courses/ultimate-go-notebook)  
 
 ## Our Experience
 

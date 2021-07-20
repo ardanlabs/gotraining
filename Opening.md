@@ -3,6 +3,7 @@ Name:     William Kennedy (Bill)  bill@ardanlabs.com
 Twitter:  @goinggodotnet #golang  
 Company:  [ArdanLabs](https://www.ardanlabs.com)  
 Blog:     [GoingGo.net](https://www.ardanlabs.com/blog)  
+Book:     [Ultimate Go Notebook](https://education.ardanlabs.com/courses/ultimate-go-notebook)  
 Training: [Go](http://github.com/ardanlabs/gotraining)  
           [Service](http://github.com/ardanlabs/service)  
 Slack:    [Slack](https://invite.slack.golangbridge.org) 
