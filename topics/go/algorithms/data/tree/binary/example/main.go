@@ -8,19 +8,20 @@ import (
 
 func main() {
 	values := []int{40, 5, 80, 2, 25, 65, 98}
+	// values := []int{40, 35, 20, 16, 10, 8, 1}
 
 	var tree bst.Tree
 	for _, value := range values {
 		tree.Insert(value)
 	}
-	bst.PrettyPrint(&tree)
+	bst.PrettyPrint(tree)
 
-	pre := bst.PreOrder(&tree)
+	pre := bst.PreOrder(tree)
 	fmt.Println("Pre-order :", pre)
 
-	in := bst.InOrder(&tree)
+	in := bst.InOrder(tree)
 	fmt.Println("In-order  :", in)
 
-	post := bst.PostOrder(&tree)
+	post := bst.PostOrder(tree)
 	fmt.Println("Post-order:", post)
 }

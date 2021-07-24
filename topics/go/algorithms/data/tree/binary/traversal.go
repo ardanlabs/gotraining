@@ -10,7 +10,7 @@ package binary
 //     /  \    /  \
 //    #1  #3  #5  #7
 //
-func InOrder(tree *Tree) []int {
+func InOrder(tree Tree) []int {
 	order := []int{}
 	f := func(n *node) {
 		order = append(order, n.value)
@@ -36,7 +36,7 @@ func inOrder(node *node, f func(*node)) {
 //     /  \    /  \
 //    #3  #4  #6  #7
 //
-func PreOrder(tree *Tree) []int {
+func PreOrder(tree Tree) []int {
 	order := []int{}
 	preOrder(tree.root, func(n *node) { order = append(order, n.value) })
 	return order
@@ -61,7 +61,7 @@ func preOrder(node *node, f func(*node)) {
 //     /  \    /  \
 //    #1  #2  #4  #5
 //
-func PostOrder(tree *Tree) []int {
+func PostOrder(tree Tree) []int {
 	order := []int{}
 	postOrder(tree.root, func(n *node) { order = append(order, n.value) })
 	return order
