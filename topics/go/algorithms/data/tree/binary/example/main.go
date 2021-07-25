@@ -7,21 +7,18 @@ import (
 )
 
 func main() {
-	values := []int{40, 5, 80, 2, 25, 65, 98}
-	// values := []int{40, 35, 20, 16, 10, 8, 1}
+	values := []int{65, 45, 35, 75, 85, 78, 95}
 
 	var tree bst.Tree
 	for _, value := range values {
 		tree.Insert(value)
 	}
+
 	bst.PrettyPrint(tree)
-
-	pre := bst.PreOrder(tree)
+	pre := tree.PreOrder()
 	fmt.Println("Pre-order :", pre)
-
-	in := bst.InOrder(tree)
+	in := tree.InOrder()
 	fmt.Println("In-order  :", in)
-
-	post := bst.PostOrder(tree)
+	post := tree.PostOrder()
 	fmt.Println("Post-order:", post)
 }
