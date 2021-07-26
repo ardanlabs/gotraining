@@ -1,18 +1,33 @@
 // Package binary is an implementation of a balanced binary tree.
 package binary
 
+import (
+	"errors"
+)
+
+// Data represents the information being stored.
+type Data struct {
+	Key  int
+	Name string
+}
+
 // Tree represents all values in the tree.
 type Tree struct {
 	root *node
 }
 
 // Insert adds a value into the tree and keeps the tree balanced.
-func (t *Tree) Insert(value int) {
-	t.root = t.root.insert(t, value)
+func (t *Tree) Insert(data Data) {
+	t.root = t.root.insert(t, data)
 
 	if t.root.balRatio() < -1 || t.root.balRatio() > 1 {
 		t.root = t.root.rebalance()
 	}
+}
+
+// Find traverses the tree looking for the specified tree.
+func (t *Tree) Find(key int) (Data, error) {
+	return t.root.find(key)
 }
 
 // PreOrder traversal get the root node then traversing its child
@@ -23,10 +38,10 @@ func (t *Tree) Insert(value int) {
 //      #2      #5
 //     /  \    /  \
 //    #3  #4  #6  #7
-func (t *Tree) PreOrder() []int {
-	order := []int{}
+func (t *Tree) PreOrder() []Data {
+	order := []Data{}
 	f := func(n *node) {
-		order = append(order, n.Value)
+		order = append(order, n.data)
 	}
 	t.root.preOrder(f)
 	return order
@@ -41,10 +56,10 @@ func (t *Tree) PreOrder() []int {
 //      #2      #6
 //     /  \    /  \
 //    #1  #3  #5  #7
-func (t *Tree) InOrder() []int {
-	order := []int{}
+func (t *Tree) InOrder() []Data {
+	order := []Data{}
 	f := func(n *node) {
-		order = append(order, n.Value)
+		order = append(order, n.data)
 	}
 	t.root.inOrder(f)
 	return order
@@ -59,10 +74,10 @@ func (t *Tree) InOrder() []int {
 //      #3      #6
 //     /  \    /  \
 //    #1  #2  #4  #5
-func (t *Tree) PostOrder() []int {
-	order := []int{}
+func (t *Tree) PostOrder() []Data {
+	order := []Data{}
 	f := func(n *node) {
-		order = append(order, n.Value)
+		order = append(order, n.data)
 	}
 	t.root.postOrder(f)
 	return order
@@ -72,7 +87,7 @@ func (t *Tree) PostOrder() []int {
 
 // node represents the data stored in the tree.
 type node struct {
-	Value int
+	data  Data
 	level int
 	tree  *Tree
 	left  *node
@@ -96,22 +111,38 @@ func (n *node) height() int {
 
 // insert adds the node into the tree and makes sure the
 // tree stays balanced.
-func (n *node) insert(t *Tree, value int) *node {
+func (n *node) insert(t *Tree, data Data) *node {
 	if n == nil {
-		return &node{Value: value, level: 1, tree: t}
+		return &node{data: data, level: 1, tree: t}
 	}
 
 	switch {
-	case value < n.Value:
-		n.left = n.left.insert(t, value)
-	case value > n.Value:
-		n.right = n.right.insert(t, value)
+	case data.Key < n.data.Key:
+		n.left = n.left.insert(t, data)
+	case data.Key > n.data.Key:
+		n.right = n.right.insert(t, data)
 	default:
 		return n.rebalance()
 	}
 	n.level = max(n.left.height(), n.right.height()) + 1
 
 	return n.rebalance()
+}
+
+// find traverses the tree looking for the specified key.
+func (n *node) find(key int) (Data, error) {
+	if n == nil {
+		return Data{}, errors.New("key not found")
+	}
+
+	if n.data.Key == key {
+		return n.data, nil
+	}
+
+	if key < n.data.Key {
+		return n.left.find(key)
+	}
+	return n.right.find(key)
 }
 
 // balRatio provides information about the balance ratio

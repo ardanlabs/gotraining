@@ -130,7 +130,7 @@ func buildIndexMap(values map[int]int, idx int, maxIdx int, n *node) int {
 
 	// Save the value of this node in the map at the
 	// calculated index position.
-	values[idx] = n.Value
+	values[idx] = n.data.Key
 
 	// Check if there are still nodes to check down the left
 	// branch. When we move down the tree, the next index doubles.
