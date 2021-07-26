@@ -51,4 +51,11 @@ func main() {
 		return
 	}
 	fmt.Println("not-found: 3")
+
+	fmt.Print("\n")
+	tree.Delete(75)
+	bst.PrettyPrint(tree)
+
+	tree.Delete(85)
+	bst.PrettyPrint(tree)
 }

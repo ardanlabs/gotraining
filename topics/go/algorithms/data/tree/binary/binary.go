@@ -1,4 +1,7 @@
 // Package binary is an implementation of a balanced binary tree.
+// A majority of this code comes from appliedgo.
+// https://appliedgo.net/balancedtree/
+// https://appliedgo.net/bintree/
 package binary
 
 import (
@@ -27,7 +30,28 @@ func (t *Tree) Insert(data Data) {
 
 // Find traverses the tree looking for the specified tree.
 func (t *Tree) Find(key int) (Data, error) {
+	if t.root == nil {
+		return Data{}, errors.New("cannot find from an empty tree")
+	}
+
 	return t.root.find(key)
+}
+
+// Delete removes the key from the tree and keeps it balaned.
+func (t *Tree) Delete(key int) error {
+	if t.root == nil {
+		return errors.New("cannot delete from an empty tree")
+	}
+
+	fakeParent := &node{right: t.root}
+	if err := t.root.delete(key, fakeParent); err != nil {
+		return err
+	}
+
+	if fakeParent.right == nil {
+		t.root = nil
+	}
+	return nil
 }
 
 // PreOrder traversal get the root node then traversing its child
@@ -119,13 +143,15 @@ func (n *node) insert(t *Tree, data Data) *node {
 	switch {
 	case data.Key < n.data.Key:
 		n.left = n.left.insert(t, data)
+
 	case data.Key > n.data.Key:
 		n.right = n.right.insert(t, data)
+
 	default:
 		return n.rebalance()
 	}
-	n.level = max(n.left.height(), n.right.height()) + 1
 
+	n.level = max(n.left.height(), n.right.height()) + 1
 	return n.rebalance()
 }
 
@@ -135,14 +161,16 @@ func (n *node) find(key int) (Data, error) {
 		return Data{}, errors.New("key not found")
 	}
 
-	if n.data.Key == key {
+	switch {
+	case n.data.Key == key:
 		return n.data, nil
-	}
 
-	if key < n.data.Key {
+	case key < n.data.Key:
 		return n.left.find(key)
+
+	default:
+		return n.right.find(key)
 	}
-	return n.right.find(key)
 }
 
 // balRatio provides information about the balance ratio
@@ -216,14 +244,83 @@ func (n *node) rebalance() *node {
 	switch {
 	case n.balRatio() < -1 && n.left.balRatio() == -1:
 		return n.rotateRight()
+
 	case n.balRatio() > 1 && n.right.balRatio() == 1:
 		return n.rotateLeft()
+
 	case n.balRatio() < -1 && n.left.balRatio() == 1:
 		return n.rotateLeftRight()
+
 	case n.balRatio() > 1 && n.right.balRatio() == -1:
 		return n.rotateRightLeft()
 	}
 	return n
+}
+
+// findMax finds the maximum element in a (sub-)tree. Its value replaces
+// the value of the to-be-deleted node. Return values: the node itself and
+// its parent node.
+func (n *node) findMax(parent *node) (*node, *node) {
+	switch {
+	case n == nil:
+		return nil, parent
+
+	case n.right == nil:
+		return n, parent
+	}
+	return n.right.findMax(n)
+}
+
+// replaceNode replaces the parent’s child pointer to n with a pointer
+// to the replacement node. parent must not be nil.
+func (n *node) replaceNode(parent, replacement *node) error {
+	if n == nil {
+		return errors.New("replaceNode() not allowed on a nil node")
+	}
+
+	switch n {
+	case parent.left:
+		parent.left = replacement
+
+	default:
+		parent.right = replacement
+	}
+
+	return nil
+}
+
+// delete removes an element from the tree. It is an error to try
+// deleting an element that does not exist. In order to remove an
+// element properly, Delete needs to know the node’s parent node.
+// Parent must not be nil.
+func (n *node) delete(key int, parent *node) error {
+	if n == nil {
+		return errors.New("value to be deleted does not exist in the tree")
+	}
+
+	switch {
+	case key < n.data.Key:
+		return n.left.delete(key, n)
+
+	case key > n.data.Key:
+		return n.right.delete(key, n)
+
+	default:
+		switch {
+		case n.left == nil && n.right == nil:
+			n.replaceNode(parent, nil)
+			return nil
+		case n.left == nil:
+			n.replaceNode(parent, n.right)
+			return nil
+		case n.right == nil:
+			n.replaceNode(parent, n.left)
+			return nil
+		}
+		replacement, replParent := n.left.findMax(n)
+		n.data = replacement.data
+		return replacement.delete(replacement.data.Key, replParent)
+	}
 }
 
 // preOrder traverses the node by traversing the child nodes recursively.
