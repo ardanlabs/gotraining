@@ -104,8 +104,10 @@ func (n *node) insert(t *Tree, value int) *node {
 	switch {
 	case value < n.Value:
 		n.left = n.left.insert(t, value)
-	default:
+	case value > n.Value:
 		n.right = n.right.insert(t, value)
+	default:
+		return n.rebalance()
 	}
 	n.level = max(n.left.height(), n.right.height()) + 1
 
