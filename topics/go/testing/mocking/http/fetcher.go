@@ -40,7 +40,7 @@ func NewGetter(doer Doer) Fetcher {
 // get implements Fetcher
 // get fetch data from url using http.MethodGet
 type get struct {
-	doer        Doer
+	doer Doer
 }
 
 // Fetch fetches url result using http.MethodGet
