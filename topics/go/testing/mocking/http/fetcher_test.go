@@ -72,11 +72,6 @@ func TestGet_FetchTestTable(t *testing.T) {
 		}
 		resp, err := NewGetter(doer).Fetch(context.Background(), "mocked")
 
-		if test.ExpectedStatusCode == http.StatusOK && err != nil {
-			t.Fatalf("err is not expected: %v", err)
-		} else {
-		}
-
 		if test.ExpectedStatusCode == http.StatusOK {
 			if err != nil {
 				t.Fatalf("err is not expected: %v", err)
