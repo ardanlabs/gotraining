@@ -41,7 +41,6 @@ func NewGetter(doer Doer) Fetcher {
 // get fetch data from url using http.MethodGet
 type get struct {
 	doer        Doer
-	baseTimeout time.Duration
 }
 
 // Fetch fetches url result using http.MethodGet
