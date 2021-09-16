@@ -2,7 +2,7 @@ package jumpsearch
 
 import "testing"
 
-func TestJumpSearch(t *testing.T)  {
+func TestJumpSearch(t *testing.T) {
 	// generate list of 10000 numbers
 	listData := generateSortList(10000)
 
@@ -21,7 +21,7 @@ func TestJumpSearch(t *testing.T)  {
 	}
 
 	for i := range data {
-		index:= jumpSearch(data[i].list, data[i].find)
+		index := jumpSearch(data[i].list, data[i].find)
 
 		if index != data[i].expect {
 			t.Errorf("expected %d, but got %d", data[i].expect, index)

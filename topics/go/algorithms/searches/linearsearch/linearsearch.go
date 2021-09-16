@@ -5,7 +5,7 @@ package linearsearch
 // the best case of this algorithm is O(1)
 func linearSearchIterative(list []int, target int) int {
 
-	if len(list) <= 0{
+	if len(list) <= 0 {
 		return -1
 	}
 
@@ -48,7 +48,7 @@ func doubleLinearSearchIterative(list []int, target int) int {
 	var low int           // first index
 	high := len(list) - 1 // last index
 
-	if len(list) <= 0{
+	if len(list) <= 0 {
 		return -1
 	}
 
@@ -74,7 +74,7 @@ func doubleLinearSearchIterative(list []int, target int) int {
 // doubleLinearSearchRecursive is the algorithm that search the value inside the array in both side
 func doubleLinearSearchRecursive(list []int, target int, low int, high int) int {
 
-	if len(list) <= 0{
+	if len(list) <= 0 {
 		return -1
 	}
 

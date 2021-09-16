@@ -1,7 +1,7 @@
 package interpolationsearch
 
 import (
-"testing"
+	"testing"
 )
 
 //	generateSortList create a sort list numbers
@@ -34,7 +34,7 @@ func TestInterpolationSearch(t *testing.T) {
 		{listData, 500, 499},
 		{listData, 9999, 9998},
 		{[]int{2}, 2, 0},
-		{[]int{-1,2,0}, 3, -1},
+		{[]int{-1, 2, 0}, 3, -1},
 		{generateSortList(-1), -999, -1},
 	}
 
