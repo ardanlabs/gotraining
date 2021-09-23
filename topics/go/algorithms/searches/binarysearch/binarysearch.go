@@ -1,49 +1,50 @@
+// Package binarysearch provides an example of a binary search implementation.
 package binarysearch
 
 import "fmt"
 
-// 	binarySearchIterative it takes the list of the sorted numbers and check it with `iterative` process
-//	to find the value and return the index of array or return the error if the value not found
-//	the worst case of this algorithm is O(logn)
-//	the best case of this algorithm is O(1)
-//	this algorithm should be sorted
-func binarySearchIterative(List []int, Target int) (int, error) {
+// binarySearchIterative takes a sorted list of numbers and uses the
+// `iterative` process to find the target. The function returns the
+// index postion of where the target is found.
+// - the worst case of this algorithm is O(logn)
+// - the best case of this algorithm is O(1)
+func binarySearchIterative(sortedList []int, target int) (int, error) {
+	var leftIdx int
+	rightIdx := len(sortedList) - 1
 
-	var low int           // 0 is the first index of array
-	high := len(List) - 1 // to get last index of array
+	// Loop until we find the target or searched the list.
+	for leftIdx <= rightIdx {
 
-	// 	Check if low index is smaller or equal with high index
-	// 	than continue the for loop
-	for low <= high {
+		// Calculate the middle index of the list.
+		mid := (leftIdx + rightIdx) / 2
 
-		// 	find the middle index of array
-		mid := (low + high) / 2
+		// Capture the value to check.
+		value := sortedList[mid]
 
-		// 	check is List[mid] value equal with Target value than return the middle value
-		if List[mid] == Target {
+		switch {
+
+		// Check if we found the target.
+		case value == target:
 			return mid, nil
-		}
 
-		// 	If List[mid] is bigger than Target
-		//	the high value should change to middle value minus by one
-		if List[mid] > Target {
-			high = mid - 1
-		}
+		// If the value is greater than the target, cut the list
+		// by moving the rightIdx into the list.
+		case value > target:
+			rightIdx = mid - 1
 
-		// 	If List[mid] is smaller than Target
-		//	the low value should change to middle value plus by one
-		if List[mid] < Target {
-			low = mid + 1
+		// If the value is less than the target, cut the list
+		// by moving the leftIdx into the list.
+		case value < target:
+			leftIdx = mid + 1
 		}
 	}
 
-	// 	If the value not found in the array,
-	//	I returned -1 and an error to show user value not found
-	return -1, fmt.Errorf("sorry value not found")
+	return -1, fmt.Errorf("target not found")
 }
 
-// 	binarySearchRecursive it takes the list of the sorted numbers and check it with `recursive` process
-//	to find the value and return the index of array or return the error if the value not found
+// binarySearchRecursive takes the list of the sorted numbers and check it
+// with `recursive` process to find the value and return the index of array or
+// return the error if the value not found.
 func binarySearchRecursive(List []int, Target int, low int, high int) (int, error) {
 
 	// 	find the middle index of array
