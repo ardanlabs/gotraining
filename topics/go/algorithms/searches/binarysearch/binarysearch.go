@@ -45,34 +45,35 @@ func binarySearchIterative(sortedList []int, target int) (int, error) {
 // binarySearchRecursive takes the list of the sorted numbers and check it
 // with `recursive` process to find the value and return the index of array or
 // return the error if the value not found.
-func binarySearchRecursive(List []int, Target int, low int, high int) (int, error) {
+func binarySearchRecursive(sortedList []int, target int, leftIdx int, rightIdx int) (int, error) {
 
-	// 	find the middle index of array
-	mid := (low + high) / 2
+	// Calculate the middle index of the list.
+	midIdx := (leftIdx + rightIdx) / 2
 
-	// 	If low is greater than high it means the value not found,
-	//	I returned -1 and an error to show user value not found
-	for low > high {
-		return -1, fmt.Errorf("sorry value not found")
+	switch {
+
+	// check if the left index is greater than right index,
+	// it's means the target is not exist.
+	case leftIdx > rightIdx:
+		return -1, fmt.Errorf("target not found")
+
+	// Check if we found the target.
+	case sortedList[midIdx] == target:
+		return midIdx, nil
+
+	// If the value is greater than the target, cut the list
+	// by moving the rightIdx into the list.
+	// Then recall itself.
+	case sortedList[midIdx] > target:
+		return binarySearchRecursive(sortedList, target, leftIdx, midIdx-1)
+
+	// If the value is less than the target, cut the list
+	// by moving the leftIdx into the list.
+	// Then recall itself.
+	case sortedList[midIdx] < target:
+		return binarySearchRecursive(sortedList, target, midIdx+1, rightIdx)
 	}
 
-	// 	check is List[mid] value equal with Target value than return the middle value
-	if List[mid] == Target {
-		return mid, nil
-	}
 
-	// 	If List[mid] is bigger than Target
-	//	I returned the binarySearchRecursive function with changing the high value to mid minus by one
-	if List[mid] > Target {
-		return binarySearchRecursive(List, Target, low, mid-1)
-	}
-
-	// 	If List[mid] is bigger than Target
-	//	I returned the binarySearchRecursive function with changing the low value to mid plus by one
-	if List[mid] < Target {
-		return binarySearchRecursive(List, Target, mid+1, high)
-	}
-
-	// return -1 if user not found
-	return -1, fmt.Errorf("sorry value not found")
+	return -1, fmt.Errorf("target not found")
 }

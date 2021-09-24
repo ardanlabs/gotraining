@@ -4,7 +4,10 @@ import (
 	"testing"
 )
 
-//	generateSortList create a sort list numbers
+const succeed = "\u2713"
+const failed = "\u2717"
+
+// generateSortList create a sorted list of number.
 func generateSortList(value int) (list []int) {
 	if value <= 0 {
 		return list
@@ -17,12 +20,11 @@ func generateSortList(value int) (list []int) {
 	return list
 }
 
-// 	TestBinarySearch a function to test binarySearchIterative and binarySearchRecursive algorithms
+// TestBinarySearch a function to test binarySearchIterative and binarySearchRecursive algorithms.
 func TestBinarySearch(t *testing.T) {
-	// generate list of 10000 numbers
+	// generate a list of numbers between 1 and 10000.
 	listData := generateSortList(10000)
 
-	// 	list of data to check
 	data := []struct {
 		list   []int
 		find   int
@@ -37,21 +39,30 @@ func TestBinarySearch(t *testing.T) {
 	}
 
 	t.Run("Binary Search Iterative", func(t *testing.T) {
-		for i := range data {
-			index, _ := binarySearchIterative(data[i].list, data[i].find)
+		t.Log("Start the testing binary search in iterative way.")
+		{
+			for i := range data {
 
-			if index != data[i].expect {
-				t.Errorf("expected %d, but got %d", data[i].expect, index)
+				index, _ := binarySearchIterative(data[i].list, data[i].find)
+
+				if index != data[i].expect {
+					t.Fatalf("\t%s\tExpected %d, but got %d", failed, data[i].expect, index)
+				}
+				t.Logf("\t%s\tEverything is looks fine, test %d", succeed, i)
 			}
 		}
 	})
 
 	t.Run("Binary Search Recursive", func(t *testing.T) {
-		for i := range data {
-			index, _ := binarySearchRecursive(data[i].list, data[i].find, 0, len(data[i].list)-1)
+		t.Log("Start the testing binary search in recursive way.")
+		{
+			for i := range data {
+				index, _ := binarySearchRecursive(data[i].list, data[i].find, 0, len(data[i].list)-1)
 
-			if index != data[i].expect {
-				t.Errorf("expected %d, but got %d", data[i].expect, index)
+				if index != data[i].expect {
+					t.Fatalf("\t%s\tExpected %d, but got %d", failed, data[i].expect, index)
+				}
+				t.Logf("\t%s\tEverything is looks fine, test %d", succeed, i)
 			}
 		}
 	})
