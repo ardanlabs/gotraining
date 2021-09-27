@@ -1,8 +1,10 @@
+// Package linearsearch provides an example of a linear search implementation.
 package linearsearch
 
-// linearSearchIterative is the algorithm that search the value inside the array index by index
-// the worst case of this algorithm is O(n)
-// the best case of this algorithm is O(1)
+// linearSearchIterative takes a sorted/random list of numbers and uses the
+// `iterative` process to check index by index to find the target.
+// - the worst case of this algorithm is O(n).
+// - the best case of this algorithm is O(1).
 func linearSearchIterative(list []int, target int) int {
 
 	if len(list) <= 0 {
@@ -18,80 +20,75 @@ func linearSearchIterative(list []int, target int) int {
 	return -1
 }
 
-// linearSearchRecursive is the algorithm that search the value inside the array index by index with recall the function
+// linearSearchRecursive takes a sorted/random list of numbers and uses the
+// `recursive` process to check index by index to find the target.
 func linearSearchRecursive(list []int, target int, index int) int {
 
-	if len(list) <= index {
+	switch {
+
+	case len(list) <= index:
 		return -1
-	}
 
-	// check if the value of array is equal with target
-	// return the index
-	if list[index] == target {
+	case list[index] == target:
 		return index
-	}
 
-	if len(list) >= index {
-		index++ // increase by one
+	case len(list) >= index:
+		index++
 		return linearSearchRecursive(list, target, index)
 	}
 
-	// if value is not found I returned -1
 	return -1
 }
 
-// doubleLinearSearchIterative is the algorithm that search the value inside the array in both side
-// the worst case of this algorithm is O(n)
-// the best case of this algorithm is O(1)
+// doubleLinearSearchIterative takes a sorted/random list of numbers and uses the
+// `iterative` process to check index by index to find the target in both left and right index.
+// - the worst case of this algorithm is O(n).
+// - the best case of this algorithm is O(1).
 func doubleLinearSearchIterative(list []int, target int) int {
 
-	var low int           // first index
-	high := len(list) - 1 // last index
+	var leftIdx int
+	rightIdx := len(list) - 1
 
 	if len(list) <= 0 {
 		return -1
 	}
 
-	// continue loop until low is smaller or equal to high value
-	for low <= high {
+	// Continue loop until leftIdx is smaller or equal to rightIdx value.
+	for leftIdx <= rightIdx {
 
-		if list[low] == target {
-			return low
+		if list[leftIdx] == target {
+			return leftIdx
 		}
 
-		if list[high] == target {
-			return high
+		if list[rightIdx] == target {
+			return rightIdx
 		}
 
-		low++
-		high--
+		leftIdx++
+		rightIdx--
 	}
 
-	// if value is not found I returned -1
 	return -1
 }
 
-// doubleLinearSearchRecursive is the algorithm that search the value inside the array in both side
-func doubleLinearSearchRecursive(list []int, target int, low int, high int) int {
+// doubleLinearSearchRecursive takes a sorted/random list of numbers and uses the
+// `recursive` process to check index by index to find the target in both left and right index.
+func doubleLinearSearchRecursive(list []int, target int, leftIdx int, rightIdx int) int {
 
-	if len(list) <= 0 {
-		return -1
+	if len(list) > 0 {
+		switch {
+		case list[leftIdx] == target:
+			return leftIdx
+
+		case list[rightIdx] == target:
+			return rightIdx
+
+		case leftIdx <= rightIdx:
+			leftIdx++
+			rightIdx--
+			return doubleLinearSearchRecursive(list, target, leftIdx, rightIdx)
+		}
 	}
 
-	if list[low] == target {
-		return low
-	}
-
-	if list[high] == target {
-		return high
-	}
-
-	if low <= high {
-		low++
-		high--
-		return doubleLinearSearchRecursive(list, target, low, high)
-	}
-
-	// if value is not found I returned -1
 	return -1
 }

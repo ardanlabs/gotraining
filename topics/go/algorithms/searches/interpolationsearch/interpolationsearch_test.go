@@ -4,7 +4,10 @@ import (
 	"testing"
 )
 
-//	generateSortList create a sort list numbers
+const succeed = "\u2713"
+const failed = "\u2717"
+
+// generateSortList create a sorted list of number.
 func generateSortList(value int) (list []int) {
 	if value <= 0 {
 		return list
@@ -17,12 +20,12 @@ func generateSortList(value int) (list []int) {
 	return list
 }
 
-// 	TestInterpolationSearch
+// TestInterpolationSearch a function to test interpolationSearchIterative and interpolationSearchRecursive algorithms.
 func TestInterpolationSearch(t *testing.T) {
-	// generate list of 10000 numbers
+	// generate a list of numbers between 1 and 10000.
 	listData := generateSortList(10000)
 
-	// 	list of data to check
+	// list of data for testing.
 	data := []struct {
 		list   []int
 		find   int
@@ -39,21 +42,30 @@ func TestInterpolationSearch(t *testing.T) {
 	}
 
 	t.Run("Interpolation Search Iterative", func(t *testing.T) {
-		for i := range data {
-			index := interpolationSearchIterative(data[i].list, data[i].find)
+		t.Log("Start the testing interpolation search in iterative way.")
+		{
+			for i := range data {
 
-			if index != data[i].expect {
-				t.Errorf("expected %d, but got %d", data[i].expect, index)
+				index := interpolationSearchIterative(data[i].list, data[i].find)
+
+				if index != data[i].expect {
+					t.Fatalf("\t%s\tExpected %d, but got %d", failed, data[i].expect, index)
+				}
+				t.Logf("\t%s\tEverything is looks fine, test %d", succeed, i)
 			}
 		}
 	})
 
 	t.Run("Interpolation Search Recursive", func(t *testing.T) {
-		for i := range data {
-			index := interpolationSearchRecursive(data[i].list, data[i].find, 0, len(data[i].list)-1)
+		t.Log("Start the testing interpolation search in recursive way.")
+		{
+			for i := range data {
+				index := interpolationSearchRecursive(data[i].list, data[i].find, 0, len(data[i].list)-1)
 
-			if index != data[i].expect {
-				t.Errorf("expected %d, but got %d", data[i].expect, index)
+				if index != data[i].expect {
+					t.Fatalf("\t%s\tExpected %d, but got %d", failed, data[i].expect, index)
+				}
+				t.Logf("\t%s\tEverything is looks fine, test %d", succeed, i)
 			}
 		}
 	})

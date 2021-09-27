@@ -6,6 +6,23 @@ import (
 	"time"
 )
 
+const succeed = "\u2713"
+const failed = "\u2717"
+
+// generateRandomList create a random list of numbers.
+func generateRandomList(value int) (list []int, pick int) {
+
+	rand.Seed(time.Now().Unix())
+
+	// Generate list of the array numbers.
+	list = rand.Perm(value)
+
+	// Randomly select the index.
+	random := rand.Intn(value)
+
+	return list, list[random]
+}
+
 func TestLinearSearch(t *testing.T) {
 	l, p := generateRandomList(99)
 	data := struct {
@@ -22,13 +39,15 @@ func TestLinearSearch(t *testing.T) {
 			result := linearSearchIterative(data.list, data.pick)
 
 			if result == -1 {
-				t.Errorf("excepted %d, but got -1", result)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 
 			result2 := linearSearchIterative(data.list, -10)
 			if result2 != -1 {
-				t.Errorf("excepted -1 , but got %d", result2)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result2, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 
 		}
 	})
@@ -39,13 +58,15 @@ func TestLinearSearch(t *testing.T) {
 			result := linearSearchRecursive(data.list, data.pick, 0)
 
 			if result == -1 {
-				t.Errorf("excepted %d, but got -1", result)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 
 			result2 := linearSearchRecursive(data.list, -10, 0)
 			if result2 != -1 {
-				t.Errorf("excepted -1 , but got %d", result2)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result2, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 		}
 	})
 
@@ -55,13 +76,15 @@ func TestLinearSearch(t *testing.T) {
 			result := doubleLinearSearchIterative(data.list, data.pick)
 
 			if result == -1 {
-				t.Errorf("excepted %d, but got -1", result)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 
 			result2 := doubleLinearSearchIterative(data.list, -10)
 			if result2 != -1 {
-				t.Errorf("excepted -1 , but got %d", result2)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result2, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 
 		}
 	})
@@ -72,28 +95,16 @@ func TestLinearSearch(t *testing.T) {
 			result := doubleLinearSearchRecursive(data.list, data.pick, 0, len(data.list)-1)
 
 			if result == -1 {
-				t.Errorf("excepted %d, but got -1", result)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 
 			result2 := doubleLinearSearchRecursive(data.list, -10, 0, len(data.list)-1)
 			if result2 != -1 {
-				t.Errorf("excepted -1 , but got %d", result2)
+				t.Fatalf("\t%s\tExpected %d, but got %d", failed, result2, -1)
 			}
+			t.Logf("\t%s\tEverything is looks fine", succeed)
 		}
 	})
 
-}
-
-// generateRandomList it generates a random list of numbers
-func generateRandomList(value int) (list []int, pick int) {
-
-	rand.Seed(time.Now().Unix())
-
-	// generate the array numbers
-	list = rand.Perm(value)
-
-	//  random index
-	random := rand.Intn(value)
-
-	return list, list[random]
 }

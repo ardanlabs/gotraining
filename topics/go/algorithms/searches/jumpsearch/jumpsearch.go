@@ -1,64 +1,66 @@
+// Package jumpsearch provides an example of a jump search implementation.
 package jumpsearch
 
 import (
 	"math"
 )
 
-// jumpSearch is like binarysearch this algorithms need a sorted list
-// the worst cast time complexity of this algorithm is O(√n)
-// the best cast of this algorithm is O(1)
-func jumpSearch(list []int, target int) int {
-	var index int                              // index of array start from 0
-	jump := int(math.Sqrt(float64(len(list)))) // to calculate jump we take sqrt of the length of array
+// jumpSearch takes a sorted list of numbers and uses the
+// `binarysearch` and `linearsearch` algorithms to find the target.
+// the worst cast | O(√n)
+// the best cast  | O(1)
+func jumpSearch(sortedList []int, target int) int {
+	var index int
 
-	// if array is empty I returned -1
-	if len(list) <= 0 {
+	// Calculate jump value of the list length.
+	jump := int(math.Sqrt(float64(len(sortedList))))
+
+	// If list is empty it will return -1.
+	if len(sortedList) <= 0 {
 		return -1
 	}
 
-	// if index is smaller or equal with the length of array continue the loop
-	for index <= len(list)-1 {
+	// Loop until we find the target or break the loop if target is smaller than the sortedList value.
+	for index <= len(sortedList)-1 {
 
-		// if the value of list and target is equal,
-		// the index of array will be returned
-		if list[index] == target {
+		// Check if we found the target.
+		if sortedList[index] == target {
 			return index
 		}
 
-		// list value is greater than target I'll break the for loop
-		if list[index] > target {
+		// Break the loop if target is smaller than the sortedList value.
+		if sortedList[index] > target {
 			break
 		}
 
-		// add jump value to index
+		// Continue adding the jump value to the index until the target found or the loop breaking.
 		index = index + jump
 	}
 
-	// at this part if first loop is break we continue
-	// step back as linear search to see between the last index and previous index there is any value or not
+	// Add previous jump to the index value.
+	previous := index - jump
 
-	previous := index - jump // previous is for previous index
-	// 	if the index is greater the length of array
-	//	we set the index value to the length of array
-	if index > len(list)-1 {
-		index = len(list) - 1 // set length of array to the index
+	// Check the index is greater than the length of the list.
+	if index > len(sortedList)-1 {
+		index = len(sortedList) - 1
 	}
 
-	for list[index] >= target {
-		// check if target is found or not
-		if list[index] == target {
+	// Loop until we find the target or searched the list.
+	for sortedList[index] >= target {
+
+		switch {
+
+		// Check if we found the target.
+		case sortedList[index] == target:
 			return index
+
+		// Check the index with the previous index value.
+		case index == previous:
+			return -1
 		}
 
-		// if the index is equal to the previous jump index so it means value not found
-		if index == previous {
-			return -1 // if value not found return -1
-		}
-
-		// minus index value by one
 		index--
 	}
 
-	// if value not found return -1
 	return -1
 }
