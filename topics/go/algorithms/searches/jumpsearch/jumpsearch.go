@@ -58,9 +58,10 @@ loop:
 		// Check the index with the previous index value.
 		case index == previous:
 			return -1
-		}
 
-		index--
+		default:
+			index--
+		}
 	}
 
 	return -1
