@@ -21,20 +21,23 @@ func jumpSearch(sortedList []int, target int) int {
 	}
 
 	// Loop until we find the target or break the loop if target is smaller than the sortedList value.
+loop:
 	for index <= len(sortedList)-1 {
 
+		switch {
+
 		// Check if we found the target.
-		if sortedList[index] == target {
+		case sortedList[index] == target:
 			return index
-		}
 
 		// Break the loop if target is smaller than the sortedList value.
-		if sortedList[index] > target {
-			break
-		}
+		case sortedList[index] > target:
+			break loop
 
 		// Continue adding the jump value to the index until the target found or the loop breaking.
-		index = index + jump
+		default:
+			index = index + jump
+		}
 	}
 
 	// Add previous jump to the index value.
