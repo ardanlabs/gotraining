@@ -37,10 +37,10 @@ func jumpSearch(sortedList []int, target int) int {
 		index = index + jump
 	}
 
-	// add previous jump to the index value.
+	// Add previous jump to the index value.
 	previous := index - jump
 
-	// check the index is greater than the length of the list.
+	// Check the index is greater than the length of the list.
 	if index > len(sortedList)-1 {
 		index = len(sortedList) - 1
 	}
@@ -54,7 +54,7 @@ func jumpSearch(sortedList []int, target int) int {
 		case sortedList[index] == target:
 			return index
 
-		// check the index with the previous index value.
+		// Check the index with the previous index value.
 		case index == previous:
 			return -1
 		}
