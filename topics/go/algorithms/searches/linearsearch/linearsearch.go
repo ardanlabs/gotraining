@@ -64,10 +64,12 @@ func doubleLinearSearchIterative(list []int, target int) int {
 
 		case list[rightIdx] == target:
 			return rightIdx
+
+		default:
+			leftIdx++
+			rightIdx--
 		}
 
-		leftIdx++
-		rightIdx--
 	}
 
 	return -1
