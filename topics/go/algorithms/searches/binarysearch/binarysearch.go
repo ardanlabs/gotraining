@@ -50,30 +50,26 @@ func binarySearchRecursive(sortedList []int, target int, leftIdx int, rightIdx i
 	// Calculate the middle index of the list.
 	midIdx := (leftIdx + rightIdx) / 2
 
-	switch {
+	// Check until leftIdx is smaller or equal with rightIdx.
+	if leftIdx <= rightIdx {
 
-	// check if the left index is greater than right index,
-	// it's means the target is not exist.
-	case leftIdx > rightIdx:
-		return -1, fmt.Errorf("target not found")
+		switch {
 
-	// Check if we found the target.
-	case sortedList[midIdx] == target:
-		return midIdx, nil
+		// Check if we found the target.
+		case sortedList[midIdx] == target:
+			return midIdx, nil
 
-	// If the value is greater than the target, cut the list
-	// by moving the rightIdx into the list.
-	// Then recall itself.
-	case sortedList[midIdx] > target:
-		return binarySearchRecursive(sortedList, target, leftIdx, midIdx-1)
+		// If the value is greater than the target, cut the list
+		// by moving the rightIdx into the list.
+		case sortedList[midIdx] > target:
+			return binarySearchRecursive(sortedList, target, leftIdx, midIdx-1)
 
-	// If the value is less than the target, cut the list
-	// by moving the leftIdx into the list.
-	// Then recall itself.
-	case sortedList[midIdx] < target:
-		return binarySearchRecursive(sortedList, target, midIdx+1, rightIdx)
+		// If the value is less than the target, cut the list
+		// by moving the leftIdx into the list.
+		case sortedList[midIdx] < target:
+			return binarySearchRecursive(sortedList, target, midIdx+1, rightIdx)
+		}
 	}
-
 
 	return -1, fmt.Errorf("target not found")
 }
