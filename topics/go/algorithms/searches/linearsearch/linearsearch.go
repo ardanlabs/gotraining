@@ -1,11 +1,13 @@
 // Package linearsearch provides an example of a linear search implementation.
 package linearsearch
 
-// linearSearchIterative takes a sorted/random list of numbers and uses the
-// `iterative` process to check index by index to find the target.
+// linearSearchIterative takes a sorted/random list of numbers
+// and uses the `iterative` process to check index by index to
+// find the target.
 // - the worst case of this algorithm is O(n).
 // - the best case of this algorithm is O(1).
 func linearSearchIterative(list []int, target int) int {
+
 	if len(list) <= 0 {
 		return -1
 	}
@@ -19,10 +21,13 @@ func linearSearchIterative(list []int, target int) int {
 	return -1
 }
 
-// linearSearchRecursive takes a sorted/random list of numbers and uses the
-// `recursive` process to check index by index to find the target.
+// linearSearchRecursive takes a sorted/random list of numbers
+// and uses the `recursive` process to check index by index to
+// find the target.
 func linearSearchRecursive(list []int, target int, index int) int {
+
 	switch {
+
 	case len(list) <= index:
 		return -1
 
@@ -37,12 +42,11 @@ func linearSearchRecursive(list []int, target int, index int) int {
 	return -1
 }
 
-// doubleLinearSearchIterative takes a sorted/random list of numbers and uses
-// the `iterative` process to check index by index to find the target in both
-// left and right index.
-// - the worst case of this algorithm is O(n).
-// - the best case of this algorithm is O(1).
+// doubleLinearSearchIterative takes a sorted/random list of numbers
+// and uses the `iterative` process to check index by index to find
+// the target in both left and right index.
 func doubleLinearSearchIterative(list []int, target int) int {
+
 	var leftIdx int
 	rightIdx := len(list) - 1
 
@@ -52,11 +56,13 @@ func doubleLinearSearchIterative(list []int, target int) int {
 
 	// Continue loop until leftIdx is smaller or equal to rightIdx value.
 	for leftIdx <= rightIdx {
-		if list[leftIdx] == target {
-			return leftIdx
-		}
 
-		if list[rightIdx] == target {
+		switch {
+
+		case list[leftIdx] == target:
+			return leftIdx
+
+		case list[rightIdx] == target:
 			return rightIdx
 		}
 
@@ -67,12 +73,15 @@ func doubleLinearSearchIterative(list []int, target int) int {
 	return -1
 }
 
-// doubleLinearSearchRecursive takes a sorted/random list of numbers and uses
-// the `recursive` process to check index by index to find the target in both
-// left and right index.
+// doubleLinearSearchRecursive takes a sorted/random list of numbers
+// and uses the `recursive` process to check index by index to find
+// the target in both left and right index.
 func doubleLinearSearchRecursive(list []int, target int, leftIdx int, rightIdx int) int {
+
 	if len(list) > 0 {
+
 		switch {
+
 		case list[leftIdx] == target:
 			return leftIdx
 
