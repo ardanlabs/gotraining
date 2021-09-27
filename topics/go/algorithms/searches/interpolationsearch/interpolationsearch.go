@@ -1,61 +1,73 @@
+// Package interpolationsearch provides an example of an interpolation search implementation.
 package interpolationsearch
 
-// interpolationSearchIterative this algorithm is like binary search but it improved
-// the algorithm is not start from the middle of array it has own position
-// to calculate the position it use this => low + int(float64(high-low) / float64(list[high]-list[low])) * (target - list[low])
-// low is the first index of array
-// high is the last index of array
-func interpolationSearchIterative(list []int, target int) int {
-	var low int
-	high := len(list) - 1
+// interpolationSearchIterative this algorithm is improved the binarysearch with the `iterative` method,
+// for finding the middle index, it has another position.
+// It means we will not looking for the middle of the index anymore we calculate the index in another way.
+func interpolationSearchIterative(sortedList []int, target int) int {
+	var leftIdx int
+	rightIdx := len(sortedList) - 1
 
-	if len(list) <= 0 {
-		return -1
-	}
+	// Loop until we find the target or searched the list.
+	for leftIdx <= rightIdx && target >= sortedList[leftIdx] && target <= sortedList[rightIdx] && len(sortedList) > 0 {
 
-	for low <= high && target >= list[low] && target <= list[high] {
+		// Calculate the position index of the list.
+		positionIdx := leftIdx + int(float64(rightIdx-leftIdx)/float64(sortedList[rightIdx]-sortedList[leftIdx]))*(target-sortedList[leftIdx])
 
-		// calculate the position
-		position := low + int(float64(high-low)/float64(list[high]-list[low]))*(target-list[low])
+		// Capture the value to check.
+		value := sortedList[positionIdx]
 
-		if list[position] == target {
-			return position
-		}
+		switch {
 
-		if list[position] > target {
-			high = position - 1
-		}
+		// Check if we found the target.
+		case value == target:
+			return positionIdx
 
-		if list[position] < target {
-			low = position + 1
+		// If the value is greater than the target, cut the list
+		// by moving the rightIdx into the list.
+		case value > target:
+			rightIdx = positionIdx - 1
+
+		// If the value is less than the target, cut the list
+		// by moving the leftIdx into the list.
+		case value < target:
+			leftIdx = positionIdx - 1
 		}
 	}
 
 	return -1
 }
 
-// interpolationSearchRecursive the same as interpolationSearchIterative with the recursive method
-func interpolationSearchRecursive(list []int, target int, low int, high int) int {
+// interpolationSearchRecursive this algorithm is improved the binarysearch algorithm with the `recursive` method,
+// for finding the middle index, it has another position.
+// It means we will not looking for the middle of the index anymore. We calculate the index in another way.
+func interpolationSearchRecursive(sortedList []int, target int, leftIdx int, rightIdx int) int {
 
-	if len(list) <= 0 {
-		return -1
-	}
+	// Check until we find the target or searched the list.
+	if leftIdx <= rightIdx && target >= sortedList[leftIdx] && target <= sortedList[rightIdx] && len(sortedList) > 0 {
 
-	if low <= high && target >= list[low] && target <= list[high] {
+		positionIdx := leftIdx + int(float64(rightIdx-leftIdx)/float64(sortedList[rightIdx]-sortedList[leftIdx]))*(target-sortedList[leftIdx])
 
-		position := low + int(float64(high-low)/float64(list[high]-list[low]))*(target-list[low])
+		value := sortedList[positionIdx]
 
-		if list[position] == target {
-			return position
+		switch {
+		// Check if we found the target.
+		case value == target:
+			return positionIdx
+
+		// If the value is greater than the target, cut the list
+		// by moving the rightIdx into the list.
+		// Then recall itself.
+		case value > target:
+			return interpolationSearchRecursive(sortedList, target, leftIdx, positionIdx-1)
+
+		// If the value is greater than the target, cut the list
+		// by moving the rightIdx into the list.
+		// Then recall itself.
+		case value < target:
+			return interpolationSearchRecursive(sortedList, target, positionIdx+1, rightIdx)
 		}
 
-		if list[position] > target {
-			return interpolationSearchRecursive(list, target, low, position-1)
-		}
-
-		if list[position] < target {
-			return interpolationSearchRecursive(list, target, position+1, high)
-		}
 	}
 
 	return -1
