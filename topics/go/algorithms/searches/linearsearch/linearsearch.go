@@ -53,7 +53,6 @@ func doubleLinearSearchIterative(list []int, target int) int {
 
 	// Continue loop until leftIdx is smaller or equal to rightIdx value.
 	for leftIdx <= rightIdx {
-
 		switch {
 
 		case list[leftIdx] == target:
@@ -66,7 +65,6 @@ func doubleLinearSearchIterative(list []int, target int) int {
 			leftIdx++
 			rightIdx--
 		}
-
 	}
 
 	return -1
@@ -77,7 +75,6 @@ func doubleLinearSearchIterative(list []int, target int) int {
 // the target in both left and right index.
 func doubleLinearSearchRecursive(list []int, target int, leftIdx int, rightIdx int) int {
 	if len(list) > 0 {
-
 		switch {
 
 		case list[leftIdx] == target:
