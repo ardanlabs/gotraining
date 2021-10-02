@@ -58,7 +58,7 @@ func TestQuickSort(t *testing.T) {
 
 }
 
-// BenchmarkSelectionSort a simple benchmark for the quick sort algorithm.
+// BenchmarkQuickSort a simple benchmark for the quick sort algorithm.
 func BenchmarkQuickSort(b *testing.B) {
 
 	list := generateList(1000)
