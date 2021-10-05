@@ -5,33 +5,34 @@ package quicksort
 // and uses the `recursive` process to divides it into partitions then sorts those.
 // - Time complexity O(nlog n)
 // - Space complexity O(log n)
-func quickSort(randomList []int, leftIdx int, rightIdx int) {
+func quickSort(randomList []int, leftIdx, rightIdx int) []int {
 	switch {
-	case len(randomList) < 1:
-		return
+	case leftIdx > rightIdx:
+		return randomList
 
 	// Divides array into two partitions.
 	case leftIdx < rightIdx:
-		pivotIdx := partition(randomList, leftIdx, rightIdx)
+		randomList, pivotIdx := partition(randomList, leftIdx, rightIdx)
 
 		quickSort(randomList, leftIdx, pivotIdx-1)
-		quickSort(randomList, pivotIdx+1, leftIdx)
+		quickSort(randomList, pivotIdx+1, rightIdx)
 	}
+
+	return randomList
 }
 
 // partition it takes a portion of an array then sort it.
-func partition(randomList []int, leftIdx int, rightIdx int) int {
+func partition(randomList []int, leftIdx, rightIdx int) ([]int, int) {
 	pivot := randomList[rightIdx]
-	index := leftIdx - 1
 
 	for smallest := leftIdx; smallest < rightIdx; smallest++ {
 		if randomList[smallest] < pivot {
-			index++
-			randomList[index], randomList[rightIdx] = randomList[rightIdx], randomList[index]
+			randomList[smallest], randomList[leftIdx] = randomList[leftIdx], randomList[smallest]
+			leftIdx++
 		}
 	}
 
-	randomList[index+1], randomList[rightIdx] = randomList[rightIdx], randomList[index+1]
+	randomList[leftIdx], randomList[rightIdx] = randomList[rightIdx], randomList[leftIdx]
 
-	return index + 1
+	return randomList, leftIdx
 }

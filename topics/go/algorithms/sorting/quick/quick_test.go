@@ -2,13 +2,14 @@ package quicksort
 
 import (
 	"math/rand"
-	"reflect"
 	"sort"
 	"testing"
 )
 
 const succeed = "\u2713"
 const failed = "\u2717"
+
+var snum []int
 
 // generateList is for generate a random list of numbers.
 func generateList(totalNumbers int) []int {
@@ -40,31 +41,26 @@ func TestQuickSort(t *testing.T) {
 	t.Run("Quick Sort Random Numbers", func(t *testing.T) {
 		t.Log("Start the testing quick sort for random numbers.")
 		{
-			for x := range dataNumber {
-				result := dataNumber[x].randomList
-				quickSort(result, 1, len(result)-1)
+			for _, x := range dataNumber {
+				result := quickSort(x.randomList, 0, len(x.randomList)-1)
 
-				sorted := dataNumber[x].randomList
-				sort.Ints(sorted)
-
-				if !reflect.DeepEqual(result, sorted) {
-					t.Fatalf("\t%s\t\nExpected: \n\t %v \n Got: \n\t %v \n", failed, sorted, result)
+				if !sort.IntsAreSorted(result) {
+					t.Fatalf("\t%s\t\n Got: \n\t %v \n", failed, result)
 				}
 				t.Logf("\t%s\tEverything is looks fine", succeed)
-
 			}
 		}
 	})
-
 }
 
 // BenchmarkQuickSort a simple benchmark for the quick sort algorithm.
 func BenchmarkQuickSort(b *testing.B) {
-
+	var sn []int
 	list := generateList(1000)
 
 	for i := 0; i < b.N; i++ {
-		quickSort(list, 0, len(list)-1)
+		sn = quickSort(list, 0, len(list)-1)
 	}
 
+	snum = sn
 }
