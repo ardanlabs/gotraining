@@ -12,19 +12,13 @@ func selectionSortIterative(randomList []int) []int {
 		// Look for the smallest number in the list starting from leftIdx. If a
 		// number of located, capture the index position of that number.
 		for smallestIdx := leftIdx; smallestIdx < len(randomList); smallestIdx++ {
-			if randomList[smallestIdx] < randomList[leftIdx] {
+			if randomList[smallestIdx] < randomList[index] {
 				index = smallestIdx
 			}
 		}
 
-		switch {
-		case index == leftIdx:
-			return randomList
-
 		// Swap the number from the leftIdx with the smallest number found.
-		default:
-			randomList[leftIdx], randomList[index] = randomList[index], randomList[leftIdx]
-		}
+		randomList[leftIdx], randomList[index] = randomList[index], randomList[leftIdx]
 	}
 
 	return randomList

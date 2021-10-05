@@ -1,4 +1,4 @@
-package selectionsort
+package quicksort
 
 import (
 	"math/rand"
@@ -20,8 +20,8 @@ func generateList(totalNumbers int) []int {
 	return numbers
 }
 
-// TestSelectionSort to test our selection sort algorithm with different data.
-func TestSelectionSort(t *testing.T) {
+// TestQuickSort to test our quick sort algorithm with different data.
+func TestQuickSort(t *testing.T) {
 	dataNumber := []struct {
 		randomList []int
 	}{
@@ -34,16 +34,18 @@ func TestSelectionSort(t *testing.T) {
 		{randomList: []int{-1}},
 		{randomList: []int{}},
 		{randomList: []int{-1, 2, 2, 2, 2, 22, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000}},
+		{randomList: []int{99999999999, -1, 2, 2, 2, 2, 22, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000}},
+		{randomList: []int{-99999999999, -1, 2, 2, 2, 2, 22, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000}},
 	}
 
-	t.Run("Selection Sort Random Numbers", func(t *testing.T) {
-		t.Log("Start the testing selection sort for random numbers in iterative way.")
+	t.Run("Quick Sort Random Numbers", func(t *testing.T) {
+		t.Log("Start the testing quick sort for random numbers.")
 		{
-			for x := range dataNumber {
-				result := selectionSortIterative(dataNumber[x].randomList)
+			for _, x := range dataNumber {
+				result := quickSort(x.randomList, 0, len(x.randomList)-1)
 
 				if !sort.IntsAreSorted(result) {
-					t.Fatalf("\t%s\t \n Got: \n\t %v \n", failed, result)
+					t.Fatalf("\t%s\t\n Got: \n\t %v \n", failed, result)
 				}
 				t.Logf("\t%s\tEverything is looks fine", succeed)
 			}
@@ -51,13 +53,13 @@ func TestSelectionSort(t *testing.T) {
 	})
 }
 
-// BenchmarkSelectionSort a simple benchmark for the selection sort algorithm.
-func BenchmarkSelectionSort(b *testing.B) {
+// BenchmarkQuickSort a simple benchmark for the quick sort algorithm.
+func BenchmarkQuickSort(b *testing.B) {
 	var sn []int
 	list := generateList(1000)
 
 	for i := 0; i < b.N; i++ {
-		sn = selectionSortIterative(list)
+		sn = quickSort(list, 0, len(list)-1)
 	}
 
 	snum = sn
