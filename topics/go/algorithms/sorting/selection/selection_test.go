@@ -2,7 +2,6 @@ package selectionsort
 
 import (
 	"math/rand"
-	"reflect"
 	"sort"
 	"testing"
 )
@@ -42,18 +41,14 @@ func TestSelectionSort(t *testing.T) {
 		{
 			for x := range dataNumber {
 				result := selectionSortIterative(dataNumber[x].randomList)
-				sorted := dataNumber[x].randomList
-				sort.Ints(sorted)
 
-				if !reflect.DeepEqual(result, sorted) {
-					t.Fatalf("\t%s\t\nExpected: \n\t %v \n Got: \n\t %v \n", failed, sorted, result)
+				if !sort.IntsAreSorted(result) {
+					t.Fatalf("\t%s\t \n Got: \n\t %v \n", failed, result)
 				}
 				t.Logf("\t%s\tEverything is looks fine", succeed)
-
 			}
 		}
 	})
-
 }
 
 // BenchmarkSelectionSort a simple benchmark for the selection sort algorithm.
