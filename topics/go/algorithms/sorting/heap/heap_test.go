@@ -1,6 +1,7 @@
-package heapsort
+package heapsort_test
 
 import (
+	heapsort "github.com/ardanlabs/gotraining/topics/go/algorithms/sorting/heap"
 	"math/rand"
 	"sort"
 	"testing"
@@ -40,7 +41,7 @@ func TestHeapSort(t *testing.T) {
 		t.Log("Start the testing heap sort for random numbers.")
 		{
 			for x := range dataNumber {
-				result := heapSort(dataNumber[x].randomList)
+				result := heapsort.HeapSort(dataNumber[x].randomList)
 
 				if !sort.IntsAreSorted(result) {
 					t.Fatalf("\t%s\t \n Got: \n\t %v \n", failed, result)
@@ -57,7 +58,7 @@ func BenchmarkHeapSort(b *testing.B) {
 	list := generateList(1000)
 
 	for i := 0; i < b.N; i++ {
-		sn = heapSort(list)
+		sn = heapsort.HeapSort(list)
 	}
 
 	snum = sn

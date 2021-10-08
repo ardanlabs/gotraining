@@ -1,13 +1,13 @@
 // Package heapsort implement of Heap Sort algorithm in Go.
 package heapsort
 
-type HeapList struct {
+type heapList struct {
 	list []int
 	size int
 }
 
 // heapSort takes a random list of numbers and returns the sorted list.
-func heapSort(list []int) []int {
+func HeapSort(list []int) []int {
 	heap := initial(list)
 
 	// Loop through the list until it is sorted, after initial the list.
@@ -20,10 +20,10 @@ func heapSort(list []int) []int {
 	return heap.list
 }
 
-// initial is take a list of array, and it will add them to the HeapList,
+// initial is take a list of array, and it will add them to the heapList,
 // and pass the index to the heapify function.
-func initial(list []int) HeapList {
-	heap := HeapList{
+func initial(list []int) heapList {
+	heap := heapList{
 		list: list,
 		size: len(list),
 	}
@@ -36,7 +36,7 @@ func initial(list []int) HeapList {
 }
 
 // heapify take the index of array and base on it will sort the array.
-func (heap HeapList) heapify(index int) {
+func (heap heapList) heapify(index int) {
 
 	// leftIdx is for the left child index of heap.
 	// rightIdx is for the right child index of heap.
@@ -58,6 +58,6 @@ func (heap HeapList) heapify(index int) {
 }
 
 // length is return the length of the heap array.
-func (heap HeapList) length() int {
+func (heap heapList) length() int {
 	return heap.size
 }
