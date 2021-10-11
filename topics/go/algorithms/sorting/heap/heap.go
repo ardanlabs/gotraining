@@ -38,7 +38,7 @@ func HeapSort(list []int) []int {
 	//  swap: [<3> 1 1 1]             [4 6 7 7]
 	//  swap: [1 1 1]               [3 4 6 7 7]
 	//  swap: [1 1]               [1 3 4 6 7 7]
-	//  done: [1 1 1 3 4 6 7 7]
+	//  done:                 [1 1 1 3 4 6 7 7]
 	size := len(list)
 	for index := size - 1; index >= 1; index-- {
 		list[0], list[index] = list[index], list[0]
