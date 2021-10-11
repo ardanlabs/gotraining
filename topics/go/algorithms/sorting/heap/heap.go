@@ -13,7 +13,7 @@ func HeapSort(list []int) []int {
 
 	// NEED COMMENT HERE FOR WHAT THIS IS DOING.
 	for index := len(list) / 2; index >= 0; index-- {
-		list = heapify(list, len(list), index)
+		list = sort(list, len(list), index)
 	}
 
 	// NEED COMMENT HERE FOR WHAT THIS IS DOING.
@@ -21,16 +21,14 @@ func HeapSort(list []int) []int {
 	for index := len(list) - 1; index >= 1; index-- {
 		size--
 		list[0], list[index] = list[index], list[0]
-		list = heapify(list, size, 0)
+		list = sort(list, size, 0)
 	}
 
 	return list
 }
 
-// =============================================================================
-
-// heapify take a list, size, and index position to sort from.
-func heapify(list []int, size int, index int) []int {
+// sort take a list, size, and index position to sort from.
+func sort(list []int, size int, index int) []int {
 
 	// leftIdx is for the left child index of heap.
 	// rightIdx is for the right child index of heap.
@@ -47,7 +45,7 @@ func heapify(list []int, size int, index int) []int {
 
 	if largeIdx != index {
 		list[index], list[largeIdx] = list[largeIdx], list[index]
-		list = heapify(list, size, largeIdx)
+		list = sort(list, size, largeIdx)
 	}
 
 	return list
