@@ -27,7 +27,7 @@ func TestHeapSort(t *testing.T) {
 	dataNumber := []struct {
 		randomList []int
 	}{
-		{randomList: generateList(20)},
+		{randomList: generateList(8)},
 		// {randomList: generateList(985)},
 		// {randomList: generateList(852)},
 		// {randomList: generateList(1000)},
