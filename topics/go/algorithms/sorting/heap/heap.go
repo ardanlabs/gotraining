@@ -1,63 +1,54 @@
-// Package heapsort implement of Heap Sort algorithm in Go.
-package heapsort
+// Package heap implement the heapsort algorithm in Go. Heapsort can be thought
+// of as an improved selection sort: like selection sort, heapsort divides its
+// input into a sorted and an unsorted region, and it iteratively shrinks the
+// unsorted region by extracting the largest element from it and inserting it
+// into the sorted region. Unlike selection sort, heapsort does not waste time
+// with a linear-time scan of the unsorted region; rather, heap sort maintains
+// the unsorted region in a heap data structure to more quickly find the largest
+// element in each step.
+package heap
 
-type heapList struct {
-	list []int
-	size int
-}
-
-// heapSort takes a random list of numbers and returns the sorted list.
+// HeapSort takes a random list of numbers and returns the sorted list.
 func HeapSort(list []int) []int {
-	heap := initial(list)
 
-	// Loop through the list until it is sorted, after initial the list.
-	for index := len(heap.list) - 1; index >= 1; index-- {
-		heap.size--
-		heap.list[0], heap.list[index] = heap.list[index], heap.list[0]
-		heap.heapify(0)
-	}
-
-	return heap.list
-}
-
-// initial is take a list of array, and it will add them to the heapList,
-// and pass the index to the heapify function.
-func initial(list []int) heapList {
-	heap := heapList{
-		list: list,
-		size: len(list),
-	}
-
+	// NEED COMMENT HERE FOR WHAT THIS IS DOING.
 	for index := len(list) / 2; index >= 0; index-- {
-		heap.heapify(index)
+		list = heapify(list, len(list), index)
 	}
 
-	return heap
+	// NEED COMMENT HERE FOR WHAT THIS IS DOING.
+	size := len(list)
+	for index := len(list) - 1; index >= 1; index-- {
+		size--
+		list[0], list[index] = list[index], list[0]
+		list = heapify(list, size, 0)
+	}
+
+	return list
 }
 
-// heapify take the index of array and base on it will sort the array.
-func (heap heapList) heapify(index int) {
+// =============================================================================
+
+// heapify take a list, size, and index position to sort from.
+func heapify(list []int, size int, index int) []int {
 
 	// leftIdx is for the left child index of heap.
 	// rightIdx is for the right child index of heap.
 	leftIdx, rightIdx := 2*index+1, 2*index+2
 	largeIdx := index
 
-	if leftIdx < heap.length() && heap.list[leftIdx] > heap.list[largeIdx] {
+	if leftIdx < size && list[leftIdx] > list[largeIdx] {
 		largeIdx = leftIdx
 	}
 
-	if rightIdx < heap.length() && heap.list[rightIdx] > heap.list[largeIdx] {
+	if rightIdx < size && list[rightIdx] > list[largeIdx] {
 		largeIdx = rightIdx
 	}
 
 	if largeIdx != index {
-		heap.list[index], heap.list[largeIdx] = heap.list[largeIdx], heap.list[index]
-		heap.heapify(largeIdx)
+		list[index], list[largeIdx] = list[largeIdx], list[index]
+		list = heapify(list, size, largeIdx)
 	}
-}
 
-// length is return the length of the heap array.
-func (heap heapList) length() int {
-	return heap.size
+	return list
 }

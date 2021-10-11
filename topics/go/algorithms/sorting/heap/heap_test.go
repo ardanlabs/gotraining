@@ -1,10 +1,11 @@
-package heapsort_test
+package heap_test
 
 import (
-	heapsort "github.com/ardanlabs/gotraining/topics/go/algorithms/sorting/heap"
 	"math/rand"
 	"sort"
 	"testing"
+
+	heapsort "github.com/ardanlabs/gotraining/topics/go/algorithms/sorting/heap"
 )
 
 const succeed = "\u2713"
