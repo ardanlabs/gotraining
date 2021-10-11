@@ -26,18 +26,18 @@ func HeapSort(list []int) []int {
 		list = moveLargest(list, len(list), index)
 	}
 
-	// We swap the number from the left most index to the right and
-	// then cut the size of the list. After we swap a number from left
+	// We move the number from the left most index to the right and
+	// then cut the size of the list. After we move a number from left
 	// to right, we must move the largest number we find once again to the
 	// front of the list.
 	//
 	// start: [7 4 7 3     | 1 6 1 1]
-	//  swap: [7 4 <6> 3   | 1 <1> 1]       [7]
-	//  swap: [<6> 4 <1> 3 | 1 1]         [7 7]
-	//  swap: [<4> <3> 1 1 | 1]         [6 7 7]
-	//  swap: [<3> 1 1 1]             [4 6 7 7]
-	//  swap: [1 1 1]               [3 4 6 7 7]
-	//  swap: [1 1]               [1 3 4 6 7 7]
+	//  move: [7 4 <6> 3   | 1 <1> 1]       [7]
+	//  move: [<6> 4 <1> 3 | 1 1]         [7 7]
+	//  move: [<4> <3> 1 1 | 1]         [6 7 7]
+	//  move: [<3> 1 1 1]             [4 6 7 7]
+	//  move: [1 1 1]               [3 4 6 7 7]
+	//  move: [1 1]               [1 3 4 6 7 7]
 	//  done:                 [1 1 1 3 4 6 7 7]
 	size := len(list)
 	for index := size - 1; index >= 1; index-- {
