@@ -43,9 +43,7 @@ func HeapSort(list []int) []int {
 	for index := size - 1; index >= 1; index-- {
 		list[0], list[index] = list[index], list[0]
 		size--
-		if size > 1 {
-			list = moveLargest(list, size, 0)
-		}
+		list = moveLargest(list, size, 0)
 	}
 
 	return list
@@ -70,7 +68,7 @@ func moveLargest(list []int, size int, index int) []int {
 	// Check if the value at the first deviation index is greater than
 	// the value at the current largest index. If so, save that
 	// index position.
-	if list[cmpIdx1] > list[largestValueIdx] {
+	if cmpIdx1 < size && list[cmpIdx1] > list[largestValueIdx] {
 		largestValueIdx = cmpIdx1
 	}
 
@@ -86,12 +84,7 @@ func moveLargest(list []int, size int, index int) []int {
 	// point in the list.
 	if largestValueIdx != index {
 		list[index], list[largestValueIdx] = list[largestValueIdx], list[index]
-
-		// If the new deviation index will be larger than the list, there
-		// is no reason to recurse.
-		if 2*largestValueIdx+1 < size {
-			list = moveLargest(list, size, largestValueIdx)
-		}
+		list = moveLargest(list, size, largestValueIdx)
 	}
 
 	return list

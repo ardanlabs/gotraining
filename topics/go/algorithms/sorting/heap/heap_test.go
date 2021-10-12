@@ -28,14 +28,14 @@ func TestHeapSort(t *testing.T) {
 		randomList []int
 	}{
 		{randomList: generateList(8)},
-		// {randomList: generateList(985)},
-		// {randomList: generateList(852)},
-		// {randomList: generateList(1000)},
-		// {randomList: generateList(1)},
-		// {randomList: generateList(9999)},
-		// {randomList: []int{-1}},
-		// {randomList: []int{}},
-		// {randomList: []int{-1, 2, 2, 2, 2, 22, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000}},
+		{randomList: generateList(985)},
+		{randomList: generateList(852)},
+		{randomList: generateList(1000)},
+		{randomList: generateList(1)},
+		{randomList: generateList(9999)},
+		{randomList: []int{-1}},
+		{randomList: []int{}},
+		{randomList: []int{-1, 2, 2, 2, 2, 22, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000}},
 	}
 
 	t.Run("Heap Sort Random Numbers", func(t *testing.T) {
