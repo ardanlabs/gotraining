@@ -104,6 +104,9 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 ### Distributed Systems
 
+[On designing and deploying internet-scale services](https://blog.acolyer.org/2016/09/12/on-designing-and-deploying-internet-scale-services) - Adrian Colyer  
+[Internet Scale Services Checklist](https://gist.github.com/acolyer/95ef23802803cb8b4eb5) - Adrian Colyer  
+[Caches, Modes, and Unstable Systems](https://brooker.co.za/blog/2021/08/27/caches.html) - Marc Brooker  
 [Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods) - Jeff Hodges  
 [The Queen Does Not Rule](https://aeon.co/essays/how-ant-societies-point-to-radical-possibilities-for-humans) - Deborah M Gordon  
 [Load Balancing is Impossible](https://www.youtube.com/watch?v=kpvbOzHUakA) - Tyler McMullen  
@@ -410,6 +413,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
+[Go 1.17 Release Notes](https://golang.org/doc/go1.17) - 2021/08/16  
 [Go 1.16 Release Notes](https://golang.org/doc/go1.16) - 2021/02/16  
 [Go 1.15 Release Notes](https://golang.org/doc/go1.15) - 2020/08/11  
 [Go 1.14 Release Notes](https://golang.org/doc/go1.14) - 2020/02/25  
