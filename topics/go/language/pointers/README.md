@@ -59,6 +59,7 @@ _"The stack is for data that needs to persist only for the lifetime of the funct
 ### Garbage Collection
 
 [The Garbage Collection Handbook](http://gchandbook.org/)  
+[GC Pacer Redesign - 2021](https://github.com/golang/proposal/blob/master/design/44167-gc-pacer-redesign.md) - Michael Knyszek  
 [Tracing Garbage Collection](https://en.wikipedia.org/wiki/Tracing_garbage_collection)  
 [Go Blog - 1.5 GC](https://blog.golang.org/go15gc)  
 [Go GC: Solving the Latency Problem](https://www.youtube.com/watch?v=aiv1JOfMjm0&index=16&list=PL2ntRZ1ySWBf-_z-gHCOR2N156Nw930Hm)  
