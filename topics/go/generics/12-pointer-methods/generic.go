@@ -45,7 +45,7 @@ func (f *Float64) String() string {
 // to accepts the pointer semantic methods for type T.
 
 type Float[T any] interface {
-	type *T
+	*T
 	Add(*T, *T) *T
 	Mul(*T, *T) *T
 }

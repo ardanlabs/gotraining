@@ -10,7 +10,7 @@ import "fmt"
 // supported by all types.
 
 type addOnly interface {
-    type string, int, int8, int16, int32, int64, float64
+    string | int | int8 | int16 | int32 | int64 | float64
 }
 
 func Add[T addOnly](v1 T, v2 T) T {
@@ -68,7 +68,7 @@ func (f food) match(v food) bool {
 //       I'm trying to show how the type list and behavior can be combined.
 
 type matcher[T any] interface {
-    type person, food
+    person | food
     match(v T) bool
 }
 

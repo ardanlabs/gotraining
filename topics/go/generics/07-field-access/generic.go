@@ -68,7 +68,7 @@ func InsertCustomer(db *sql.DB, c Customer) (Customer, error) {
 //       This is an experiment.
 
 type entities interface {
-	type User, Customer
+	User | Customer
 }
 
 func Insert[T entities](db *sql.DB, entity T, query string, args ...interface{}) (T, error) {
