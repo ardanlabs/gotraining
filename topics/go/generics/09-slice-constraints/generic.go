@@ -15,7 +15,7 @@ import (
 type operateFunc[T any] func(t T) T
 
 type Slice[T any] interface {
-	[]T
+	~ []T
 }
 
 // When it's important that the slice being passed in is exactly the same
