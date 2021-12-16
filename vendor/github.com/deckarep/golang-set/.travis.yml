@@ -1,0 +1,11 @@
+language: go
+
+go:
+    - 1.8
+    - 1.9
+    - tip
+
+script:
+    - go test -race ./...
+    - go test -bench=.
+
