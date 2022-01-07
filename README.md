@@ -92,6 +92,8 @@ _**Video**_
 
 _**Podcasts**_  
 [Ardan Labs Podcast: On Going Series](https://ardanlabs.buzzsprout.com/)  
+[Coding with Holger: Go with Bill Kennedy](https://anchor.fm/coding-with-holger/episodes/Go-with-Bill-Kennedy-e1c9h2q)  
+[Craft of Code: From Programming to Teaching Code with Bill Kennedy](https://podcasts.apple.com/us/podcast/from-programming-to-teaching-code-with-bill-kennedy/id1537136353?i=1000545230339)  
 [GoTime: Design Philosophy](https://changelog.com/gotime/172)  
 [GoTime: Learning and Teaching Go](https://changelog.com/gotime/72)  
 [GoTime: Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime/6)  
