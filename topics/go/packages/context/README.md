@@ -16,7 +16,8 @@ The package context defines the Context type, which carries deadlines, cancellat
 
 ## Links
 
-[Package context](https://golang.org/pkg/context)  
+[Context Package Semantics In Go](https://www.ardanlabs.com/blog/2019/09/context-package-semantics-in-go.html) - William Kennedy  
+[Package context](https://golang.org/pkg/context) - Go Team    
 [Go Concurrency Patterns: Context](https://blog.golang.org/context) - Sameer Ajmani    
 [Cancellation, Context, and Plumbing](https://vimeo.com/115309491) - Sameer Ajmani    
 [Using contexts to avoid leaking goroutines](https://rakyll.org/leakingctx/) - JBD    
