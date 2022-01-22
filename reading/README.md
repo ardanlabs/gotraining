@@ -90,10 +90,11 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Quick intro to Go assembly](https://blog.hackercat.ninja/2018/quick_intro_to_go_assembly/)  
 [The Go low-level calling convention on x86-64](http://science.raphael.poss.name/go-calling-convention-x86-64.html) - Raphael ‘kena’ Poss  
 
-### Buffer Bloat - 2011
+### Buffer Bloat
 
 [Bufferbloat: Dark Buffers in the Internet](https://www.youtube.com/watch?v=qbIozKVz73g) - Jim Gettys  
-[Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)
+[Buffer Bloat Videos](http://www.bufferbloat.net/projects/cerowrt/wiki/Bloat-videos)  
+[Bufferbloat and Beyond](https://bufferbloat-and-beyond.net/static/bufferbloat-and-beyond.pdf)  Toke Hoiland-Jorgensen  
 
 ### Concurrency
 
