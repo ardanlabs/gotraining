@@ -157,10 +157,8 @@ https://bitfieldconsulting.com/books/fundamentals
 
 We use a slack channel to share links, code, and examples during the training.  This is free.  This is also the same slack community you will use after training to ask for help and interact with may Go experts around the world in the community.
 
-1. Using the following link, fill out your name and email address: https://gophersinvite.herokuapp.com/
-1. Check your email, and follow the link to the slack application.
-1. Join the training channel by clicking on this link: https://gophers.slack.com/messages/training/
-1. Click the “Join Channel” button at the bottom of the screen.
+* Using the following link, fill out your name and email address: https://invite.slack.gobridge.org/
+* Check your email, and follow the link to the slack application.
 
 ### Installing Go
 
