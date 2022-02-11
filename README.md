@@ -10,7 +10,7 @@ William Kennedy
 ArdanLabs (www.ardanlabs.com)  
 bill@ardanlabs.com  
 
-* [Purchase Video](https://github.com/ardanlabs/gotraining#purchase-video)
+* [Purchase Video](https://github.com/ardanlabs/gotraining#purchase-video--book)
 * [Experience](https://github.com/ardanlabs/gotraining#our-experience)
 * [Teachers](https://github.com/ardanlabs/gotraining#our-teachers)
 * [More About Go](https://github.com/ardanlabs/gotraining#more-about-go)
