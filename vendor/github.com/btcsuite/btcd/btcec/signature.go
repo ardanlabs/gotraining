@@ -284,6 +284,25 @@ func hashToInt(hash []byte, c elliptic.Curve) *big.Int {
 // format and thus we match bitcoind's behaviour here.
 func recoverKeyFromSignature(curve *KoblitzCurve, sig *Signature, msg []byte,
 	iter int, doChecks bool) (*PublicKey, error) {
+	// Parse and validate the R and S signature components.
+	//
+	// Fail if r and s are not in [1, N-1].
+	if sig.R.Cmp(curve.Params().N) != -1 {
+		return nil, errors.New("signature R is >= curve order")
+	}
+
+	if sig.R.Sign() == 0 {
+		return nil, errors.New("signature R is 0")
+	}
+
+	if sig.S.Cmp(curve.Params().N) != -1 {
+		return nil, errors.New("signature S is >= curve order")
+	}
+
+	if sig.S.Sign() == 0 {
+		return nil, errors.New("signature S is 0")
+	}
+
 	// 1.1 x = (n * i) + r
 	Rx := new(big.Int).Mul(curve.Params().N,
 		new(big.Int).SetInt64(int64(iter/2)))
@@ -393,7 +412,7 @@ func SignCompact(curve *KoblitzCurve, key *PrivateKey,
 
 // RecoverCompact verifies the compact signature "signature" of "hash" for the
 // Koblitz curve in "curve". If the signature matches then the recovered public
-// key will be returned as well as a boolen if the original key was compressed
+// key will be returned as well as a boolean if the original key was compressed
 // or not, else an error will be returned.
 func RecoverCompact(curve *KoblitzCurve, signature,
 	hash []byte) (*PublicKey, bool, error) {

@@ -1,4 +1,4 @@
-// Copyright 2018 Tobias Klauser
+// Copyright 2018-2022 Tobias Klauser
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package numcpus provides information about the number of CPU.
+// Package numcpus provides information about the number of CPUs in the system.
 //
 // It gets the number of CPUs (online, offline, present, possible or kernel
-// maximum) on a Linux, Darwin, FreeBSD, NetBSD, OpenBSD or DragonflyBSD
-// system.
+// maximum) on Linux, Darwin, FreeBSD, NetBSD, OpenBSD, DragonflyBSD,
+// Solaris/Illumos or Windows systems.
 //
 // On Linux, the information is retrieved by reading the corresponding CPU
 // topology files in /sys/devices/system/cpu.
 //
-// Not all functions are supported on Darwin, FreeBSD, NetBSD, OpenBSD and
-// DragonflyBSD.
+// On BSD systems, the information is retrieved using the hw.ncpu and
+// hw.ncpuonline sysctls, if supported.
+//
+// On Windows systems, the information is retrieved using the
+// GetActiveProcessorCount and GetMaximumProcessorCount functions, respectively.
+//
+// Not all functions are supported on Darwin, FreeBSD, NetBSD, OpenBSD,
+// DragonflyBSD, Solaris/Illumos and Windows. ErrNotSupported is returned in
+// case a function is not supported on a particular platform.
 package numcpus
 
 import "errors"
@@ -30,8 +37,15 @@ import "errors"
 // ErrNotSupported is the error returned when the function is not supported.
 var ErrNotSupported = errors.New("function not supported")
 
+// GetConfigured returns the number of CPUs configured on the system. This
+// function should return the same value as `getconf _SC_NPROCESSORS_CONF` on a
+// unix system.
+func GetConfigured() (int, error) {
+	return getConfigured()
+}
+
 // GetKernelMax returns the maximum number of CPUs allowed by the kernel
-// configuration. This function is only supported on Linux systems.
+// configuration. This function is only supported on Linux and Windows systems.
 func GetKernelMax() (int, error) {
 	return getKernelMax()
 }

@@ -12,10 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:build !darwin && !dragonfly && !freebsd && !linux && !netbsd && !openbsd && !solaris
-// +build !darwin,!dragonfly,!freebsd,!linux,!netbsd,!openbsd,!solaris
+//go:build !darwin && !dragonfly && !freebsd && !linux && !netbsd && !openbsd && !solaris && !windows
+// +build !darwin,!dragonfly,!freebsd,!linux,!netbsd,!openbsd,!solaris,!windows
 
 package numcpus
+
+func getConfigured() (int, error) {
+	return 0, ErrNotSupported
+}
 
 func getKernelMax() (int, error) {
 	return 0, ErrNotSupported

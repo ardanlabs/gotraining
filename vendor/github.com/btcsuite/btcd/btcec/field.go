@@ -226,20 +226,24 @@ func (f *fieldVal) SetBytes(b *[32]byte) *fieldVal {
 	return f
 }
 
-// SetByteSlice packs the passed big-endian value into the internal field value
-// representation.  Only the first 32-bytes are used.  As a result, it is up to
-// the caller to ensure numbers of the appropriate size are used or the value
-// will be truncated.
+// SetByteSlice interprets the provided slice as a 256-bit big-endian unsigned
+// integer (meaning it is truncated to the first 32 bytes), packs it into the
+// internal field value representation, and returns the updated field value.
+//
+// Note that since passing a slice with more than 32 bytes is truncated, it is
+// possible that the truncated value is less than the field prime.  It is up to
+// the caller to decide whether it needs to provide numbers of the appropriate
+// size or if it is acceptable to use this function with the described
+// truncation behavior.
 //
 // The field value is returned to support chaining.  This enables syntax like:
 // f := new(fieldVal).SetByteSlice(byteSlice)
 func (f *fieldVal) SetByteSlice(b []byte) *fieldVal {
 	var b32 [32]byte
-	for i := 0; i < len(b); i++ {
-		if i < 32 {
-			b32[i+(32-len(b))] = b[i]
-		}
+	if len(b) > 32 {
+		b = b[:32]
 	}
+	copy(b32[32-len(b):], b)
 	return f.SetBytes(&b32)
 }
 
