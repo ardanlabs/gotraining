@@ -138,6 +138,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Generics in Go](https://bitfieldconsulting.com/golang/generics) - John Arundel  
 [Generics Part 01: Basic Syntax](https://www.ardanlabs.com/blog/2020/07/generics-01-basic-syntax.html) - William Kennedy  
 [Generics Part 02: Underlying Types](https://www.ardanlabs.com/blog/2020/08/generics-02-underlying-types.html) - William Kennedy  
+[An Introduction To Generics](https://go.dev/blog/intro-generics) - Go Team  
 
 ### HTTP
 
