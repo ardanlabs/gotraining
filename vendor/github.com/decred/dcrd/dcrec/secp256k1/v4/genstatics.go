@@ -1,12 +1,14 @@
 // Copyright (c) 2014-2015 The btcsuite developers
+// Copyright (c) 2015-2021 The Decred developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
 // This file is ignored during the regular build due to the following build tag.
 // This build tag is set during go generate.
+//go:build gensecp256k1
 // +build gensecp256k1
 
-package btcec
+package secp256k1
 
 // References:
 //   [GECC]: Guide to Elliptic Curve Cryptography (Hankerson, Menezes, Vanstone)
@@ -16,60 +18,51 @@ import (
 	"math/big"
 )
 
-// secp256k1BytePoints are dummy points used so the code which generates the
+// compressedBytePoints are dummy points used so the code which generates the
 // real values can compile.
-var secp256k1BytePoints = ""
-
-// getDoublingPoints returns all the possible G^(2^i) for i in
-// 0..n-1 where n is the curve's bit size (256 in the case of secp256k1)
-// the coordinates are recorded as Jacobian coordinates.
-func (curve *KoblitzCurve) getDoublingPoints() [][3]fieldVal {
-	doublingPoints := make([][3]fieldVal, curve.BitSize)
-
-	// initialize px, py, pz to the Jacobian coordinates for the base point
-	px, py := curve.bigAffineToField(curve.Gx, curve.Gy)
-	pz := new(fieldVal).SetInt(1)
-	for i := 0; i < curve.BitSize; i++ {
-		doublingPoints[i] = [3]fieldVal{*px, *py, *pz}
-		// P = 2*P
-		curve.doubleJacobian(px, py, pz, px, py, pz)
-	}
-	return doublingPoints
-}
+var compressedBytePoints = ""
 
 // SerializedBytePoints returns a serialized byte slice which contains all of
 // the possible points per 8-bit window.  This is used to when generating
-// secp256k1.go.
-func (curve *KoblitzCurve) SerializedBytePoints() []byte {
-	doublingPoints := curve.getDoublingPoints()
+// compressedbytepoints.go.
+func SerializedBytePoints() []byte {
+	// Calculate G^(2^i) for i in 0..255.  These are used to avoid recomputing
+	// them for each digit of the 8-bit windows.
+	doublingPoints := make([]JacobianPoint, curveParams.BitSize)
+	var q JacobianPoint
+	bigAffineToJacobian(curveParams.Gx, curveParams.Gy, &q)
+	for i := 0; i < curveParams.BitSize; i++ {
+		// Q = 2*Q.
+		doublingPoints[i] = q
+		DoubleNonConst(&q, &q)
+	}
 
-	// Segregate the bits into byte-sized windows
-	serialized := make([]byte, curve.byteSize*256*3*10*4)
+	// Separate the bits into byte-sized windows.
+	curveByteSize := curveParams.BitSize / 8
+	serialized := make([]byte, curveByteSize*256*2*10*4)
 	offset := 0
-	for byteNum := 0; byteNum < curve.byteSize; byteNum++ {
-		// Grab the 8 bits that make up this byte from doublingPoints.
-		startingBit := 8 * (curve.byteSize - byteNum - 1)
-		computingPoints := doublingPoints[startingBit : startingBit+8]
+	for byteNum := 0; byteNum < curveByteSize; byteNum++ {
+		// Grab the 8 bits that make up this byte from doubling points.
+		startingBit := 8 * (curveByteSize - byteNum - 1)
+		windowPoints := doublingPoints[startingBit : startingBit+8]
 
-		// Compute all points in this window and serialize them.
+		// Compute all points in this window, convert them to affine, and
+		// serialize them.
 		for i := 0; i < 256; i++ {
-			px, py, pz := new(fieldVal), new(fieldVal), new(fieldVal)
-			for j := 0; j < 8; j++ {
-				if i>>uint(j)&1 == 1 {
-					curve.addJacobian(px, py, pz, &computingPoints[j][0],
-						&computingPoints[j][1], &computingPoints[j][2], px, py, pz)
+			var point JacobianPoint
+			for bit := 0; bit < 8; bit++ {
+				if i>>uint(bit)&1 == 1 {
+					AddNonConst(&point, &windowPoints[bit], &point)
 				}
 			}
-			for i := 0; i < 10; i++ {
-				binary.LittleEndian.PutUint32(serialized[offset:], px.n[i])
+			point.ToAffine()
+
+			for i := 0; i < len(point.X.n); i++ {
+				binary.LittleEndian.PutUint32(serialized[offset:], point.X.n[i])
 				offset += 4
 			}
-			for i := 0; i < 10; i++ {
-				binary.LittleEndian.PutUint32(serialized[offset:], py.n[i])
-				offset += 4
-			}
-			for i := 0; i < 10; i++ {
-				binary.LittleEndian.PutUint32(serialized[offset:], pz.n[i])
+			for i := 0; i < len(point.Y.n); i++ {
+				binary.LittleEndian.PutUint32(serialized[offset:], point.Y.n[i])
 				offset += 4
 			}
 		}
@@ -105,16 +98,16 @@ func sqrt(n *big.Int) *big.Int {
 // length-two representation of a multiplier such that k = k1 + k2λ (mod N) and
 // returns them.  Since the values will always be the same given the fact that N
 // and λ are fixed, the final results can be accelerated by storing the
-// precomputed values with the curve.
-func (curve *KoblitzCurve) EndomorphismVectors() (a1, b1, a2, b2 *big.Int) {
+// precomputed values.
+func EndomorphismVectors() (a1, b1, a2, b2 *big.Int) {
 	bigMinus1 := big.NewInt(-1)
 
 	// This section uses an extended Euclidean algorithm to generate a
 	// sequence of equations:
 	//  s[i] * N + t[i] * λ = r[i]
 
-	nSqrt := sqrt(curve.N)
-	u, v := new(big.Int).Set(curve.N), new(big.Int).Set(curve.lambda)
+	nSqrt := sqrt(curveParams.N)
+	u, v := new(big.Int).Set(curveParams.N), new(big.Int).Set(endomorphismLambda)
 	x1, y1 := big.NewInt(1), big.NewInt(0)
 	x2, y2 := big.NewInt(0), big.NewInt(1)
 	q, r := new(big.Int), new(big.Int)
