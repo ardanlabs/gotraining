@@ -416,6 +416,7 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
+[Go 1.18 Release Notes](https://golang.org/doc/go1.18) - 2022/03/15  
 [Go 1.17 Release Notes](https://golang.org/doc/go1.17) - 2021/08/16  
 [Go 1.16 Release Notes](https://golang.org/doc/go1.16) - 2021/02/16  
 [Go 1.15 Release Notes](https://golang.org/doc/go1.15) - 2020/08/11  
