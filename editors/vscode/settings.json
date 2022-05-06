@@ -1,13 +1,13 @@
-// Place your settings in this file to overwrite the default settings
 {
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
-
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/bill/code/go",
-    "go.enableCodeLens": {"references": false, "runtest": false},
+    "go.enableCodeLens": {
+        "references": false,
+        "runtest": false
+    },
     "go.addTags": {},
-    "go.alternateTools": {},
+    "go.alternateTools": {
+    },
     "go.toolsManagement.autoUpdate": true,
     "go.useLanguageServer": true,
     "[go]": {
@@ -33,6 +33,12 @@
     "editor.rulers": [80,120],
     "editor.trimAutoWhitespace": true,
     "editor.minimap.enabled": false,
+    "editor.defaultFormatter": null,
+    "editor.bracketPairColorization.enabled": false,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
 
     "files.exclude": {
         "**/.git": true,
@@ -50,7 +56,6 @@
     },
     "extensions.ignoreRecommendations": true,
     "liveshare.featureSet": "insiders",
-    "workbench.colorTheme": "Zenburn",
     "C_Cpp.updateChannel": "Insiders",
     "go.coverOnTestPackage": false,
     "liveshare.anonymousGuestApproval": "accept",
@@ -60,6 +65,11 @@
         "*.go2": "go"
     },
     "diffEditor.ignoreTrimWhitespace": false,
-    "window.zoomLevel": 2,
     "terminal.integrated.tabs.enabled": true,
+    "testing.gutterEnabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "window.newWindowDimensions": "maximized",
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Zenburn",
+    
 }
