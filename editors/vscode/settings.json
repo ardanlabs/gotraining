@@ -34,7 +34,47 @@
     "editor.trimAutoWhitespace": true,
     "editor.minimap.enabled": false,
     "editor.defaultFormatter": null,
-    "editor.bracketPairColorization.enabled": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.wordWrap": "off",
+    "editor.tokenColorCustomizations": {
+        "[Green]": {
+            "comments": "#61ed7fc9",
+            "variables": "#61ed7fc9",
+            "keywords":  "#61ed7fc9",
+            "functions": "#61ed7fc9",
+            "numbers": "#61ed7fc9",
+            "strings": "#61ed7fc9",
+            "types": "#61ed7fc9",
+            "textMateRules": [
+                {
+                    "scope": "keyword",
+                    "settings": {
+                        "foreground": "#61ed7fc9",
+                    }
+                },
+                {
+                    "scope": "constant",
+                    "settings": {
+                        "foreground": "#61ed7fc9",
+                    }
+                }
+            ]
+        }
+    },
+    "workbench.colorTheme": "Green",
+    "workbench.colorCustomizations": {
+        "[Green]": {
+            "editorLineNumber.foreground": "#9F9F9F",
+            "editor.foreground": "#61ed7fc9",
+            "editor.lineHighlightBackground": "#252e24",
+            "editorBracketHighlight.foreground1": "#61ed7fc9",
+            "editorBracketHighlight.foreground2": "#61ed7fc9",
+            "editorBracketHighlight.foreground3": "#61ed7fc9",
+            "editorBracketHighlight.foreground4": "#61ed7fc9",
+            "editorBracketHighlight.foreground5": "#61ed7fc9",
+            "editorBracketHighlight.foreground6": "#61ed7fc9"
+        }
+    },
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true
@@ -50,10 +90,7 @@
         "**/.vscode": true
     },
     "files.trimTrailingWhitespace": false,
-    "editor.wordWrap": "off",
-    "workbench.colorCustomizations": {
-        "editorLineNumber.foreground": "#9F9F9F"
-    },
+
     "extensions.ignoreRecommendations": true,
     "liveshare.featureSet": "insiders",
     "C_Cpp.updateChannel": "Insiders",
@@ -70,6 +107,4 @@
     "security.workspace.trust.untrustedFiles": "open",
     "window.newWindowDimensions": "maximized",
     "window.zoomLevel": 1,
-    "workbench.colorTheme": "Zenburn",
-    
 }
