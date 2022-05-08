@@ -36,26 +36,28 @@
     "editor.defaultFormatter": null,
     "editor.bracketPairColorization.enabled": true,
     "editor.wordWrap": "off",
+    "editor.guides.indentation": false,
+    "editor.renderWhitespace": "none",
     "editor.tokenColorCustomizations": {
         "[Green]": {
-            "comments": "#61ed7fc9",
-            "variables": "#61ed7fc9",
-            "keywords":  "#61ed7fc9",
-            "functions": "#61ed7fc9",
-            "numbers": "#61ed7fc9",
-            "strings": "#61ed7fc9",
-            "types": "#61ed7fc9",
+            "comments": "#8F8F8F",
+            "variables": "#89a887",
+            "keywords":  "#89a887",
+            "functions": "#89a887",
+            "numbers": "#89a887",
+            "strings": "#89a887",
+            "types": "#89a887",
             "textMateRules": [
                 {
                     "scope": "keyword",
                     "settings": {
-                        "foreground": "#61ed7fc9",
+                        "foreground": "#89a887",
                     }
                 },
                 {
                     "scope": "constant",
                     "settings": {
-                        "foreground": "#61ed7fc9",
+                        "foreground": "#89a887",
                     }
                 }
             ]
@@ -63,16 +65,26 @@
     },
     "workbench.colorTheme": "Green",
     "workbench.colorCustomizations": {
+        "[Zenburn]": {
+            "editorBracketHighlight.foreground1": "#f6f8f7c9",
+            "editorBracketHighlight.foreground2": "#f6f8f7c9",
+            "editorBracketHighlight.foreground3": "#f6f8f7c9",
+            "editorBracketHighlight.foreground4": "#f6f8f7c9",
+            "editorBracketHighlight.foreground5": "#f6f8f7c9",
+            "editorBracketHighlight.foreground6": "#f6f8f7c9"
+        },
         "[Green]": {
-            "editorLineNumber.foreground": "#9F9F9F",
-            "editor.foreground": "#61ed7fc9",
-            "editor.lineHighlightBackground": "#252e24",
-            "editorBracketHighlight.foreground1": "#61ed7fc9",
-            "editorBracketHighlight.foreground2": "#61ed7fc9",
-            "editorBracketHighlight.foreground3": "#61ed7fc9",
-            "editorBracketHighlight.foreground4": "#61ed7fc9",
-            "editorBracketHighlight.foreground5": "#61ed7fc9",
-            "editorBracketHighlight.foreground6": "#61ed7fc9"
+            "editorLineNumber.foreground": "#5F5F5F",
+            "editor.foreground": "#89a887",
+            "editor.background": "#302929",
+            "editor.selectionBackground": "#404040",
+            "editor.lineHighlightBackground": "#303030",
+            "editorBracketHighlight.foreground1": "#89a887",
+            "editorBracketHighlight.foreground2": "#89a887",
+            "editorBracketHighlight.foreground3": "#89a887",
+            "editorBracketHighlight.foreground4": "#89a887",
+            "editorBracketHighlight.foreground5": "#89a887",
+            "editorBracketHighlight.foreground6": "#89a887"
         }
     },
     "[javascript]": {
