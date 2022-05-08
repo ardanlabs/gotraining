@@ -39,31 +39,18 @@
     "editor.guides.indentation": false,
     "editor.renderWhitespace": "none",
     "editor.tokenColorCustomizations": {
-        "[Green]": {
-            "comments": "#8F8F8F",
-            "variables": "#89a887",
-            "keywords":  "#89a887",
-            "functions": "#89a887",
-            "numbers": "#89a887",
-            "strings": "#89a887",
-            "types": "#89a887",
+        "[Zenburn]": {
             "textMateRules": [
                 {
-                    "scope": "keyword",
+                    "scope": "variable.other",
                     "settings": {
-                        "foreground": "#89a887",
-                    }
-                },
-                {
-                    "scope": "constant",
-                    "settings": {
-                        "foreground": "#89a887",
+                        "foreground": "#DEDEDE",
                     }
                 }
             ]
         }
     },
-    "workbench.colorTheme": "Green",
+    "workbench.colorTheme": "Zenburn",
     "workbench.colorCustomizations": {
         "[Zenburn]": {
             "editorBracketHighlight.foreground1": "#f6f8f7c9",
@@ -71,25 +58,8 @@
             "editorBracketHighlight.foreground3": "#f6f8f7c9",
             "editorBracketHighlight.foreground4": "#f6f8f7c9",
             "editorBracketHighlight.foreground5": "#f6f8f7c9",
-            "editorBracketHighlight.foreground6": "#f6f8f7c9"
+            "editorBracketHighlight.foreground6": "#f6f8f7c9",
         },
-        "[Green]": {
-            "editorLineNumber.foreground": "#5F5F5F",
-            "editor.foreground": "#89a887",
-            "editor.background": "#302929",
-            "editor.selectionBackground": "#404040",
-            "editor.lineHighlightBackground": "#303030",
-            "editorBracketHighlight.foreground1": "#89a887",
-            "editorBracketHighlight.foreground2": "#89a887",
-            "editorBracketHighlight.foreground3": "#89a887",
-            "editorBracketHighlight.foreground4": "#89a887",
-            "editorBracketHighlight.foreground5": "#89a887",
-            "editorBracketHighlight.foreground6": "#89a887"
-        }
-    },
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true
     },
 
     "files.exclude": {
