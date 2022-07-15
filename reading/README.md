@@ -198,6 +198,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Speed Is Found In The Minds of People](https://www.youtube.com/watch?v=FJJTYQYB1JQ) - Andrei Alexandrescu  
 [The Soul of Erlang and Elixir](https://www.youtube.com/watch?v=JvBT4XBdoUE) - Saša Jurić  
 [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) - David Goldberg  
+[IBM's asshole test](https://johnpublic.mataroa.blog/blog/the-asshole-test/) - johnpublic  
  
 ### Modules
 
