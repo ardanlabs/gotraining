@@ -64,6 +64,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 [Null References: The Billion Dollar Mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare) - Tony Hoare  
 [Go’s History in Code](https://seh.dev/go-legacy/) - Sean Hinchee  
 [A Plea For Lean Software](https://cr.yp.to/bib/1995/wirth.pdf) - Niklaus Wirth  
+[VCF East 2019 -- Brian Kernighan interviews Ken Thompson](https://www.youtube.com/watch?app=desktop&v=EY6q5dv_B-o) - Vintage Computer Federation  
 
 ### Case Studies
 
