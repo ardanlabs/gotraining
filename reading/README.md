@@ -391,7 +391,6 @@ This content can be found under [pointers](../topics/go/language/pointers). We f
 [How does the golang scheduler work?](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor) - Ian Lance Taylor  
 [Explanation of the Scheduler](https://news.ycombinator.com/item?id=12460807)  
 [proposal: runtime: non-cooperative goroutine preemption](https://github.com/golang/go/issues/24543) - Austin Clements  
-[Go scheduler: Implementing language with lightweight concurrency](https://www.youtube.com/watch?v=-K11rY57K7k&app=desktop) - Dmitry Vyukov  
 [Work-Stealing in Go Scheduler](https://medium.com/a-journey-with-go/go-work-stealing-in-go-scheduler-d439231be64d?) - Vincent Blanchon  
 
 #### Single Static Assignment Optimizations
