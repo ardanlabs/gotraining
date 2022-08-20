@@ -17,8 +17,8 @@ bill@ardanlabs.com
 * [Minimal Qualified Student](https://github.com/ardanlabs/gotraining#minimal-qualified-student)
 * [Important Reading](https://github.com/ardanlabs/gotraining#important-reading)
 * [Before You Come To Class](https://github.com/ardanlabs/gotraining#before-you-come-to-class)
-* [Starter Material](https://github.com/ardanlabs/gotraining#starter-material)
-* [Get The Training Material](https://github.com/ardanlabs/gotraining#go-get-the-training-material)
+* [Twitter Reactions](https://github.com/ardanlabs/gotraining#twitter)
+* [Testimonials](https://github.com/ardanlabs/gotraining#testimonials)
 
 ## Purchase Video / Book
 
