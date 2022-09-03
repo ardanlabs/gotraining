@@ -23,4 +23,4 @@ Prototype Driven Development with Data Oriented Design
 ## Tooling Installs
 Graphviz: https://www.graphviz.org/  
 go get -u github.com/rakyll/hey   : Or use ab, netcat  
-Latest Version of Go: 1.15  
+Latest Version of Go: 1.19  
