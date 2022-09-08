@@ -4,11 +4,20 @@
 
 [Review our different courses and material](topics/README.md)  
 
-**To learn about Corporate training events, options and special pricing please contact:**
+Copyright 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, Ardan Labs  
+info@ardanlabs.com
 
-William Kennedy  
-ArdanLabs (www.ardanlabs.com)  
-bill@ardanlabs.com  
+## Learn More
+
+**Reach out about corporate training events, open enrollment live training sessions, and on-demand learning options.**
+
+Ardan Labs (www.ardanlabs.com)  
+hello@ardanlabs.com
+
+To attend any of our high-performance tranings check out this link:  
+https://www.ardanlabs.com/training  
+
+## Index
 
 * [Purchase Video](https://github.com/ardanlabs/gotraining#purchase-video--book)
 * [Experience](https://github.com/ardanlabs/gotraining#our-experience)
