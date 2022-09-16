@@ -27,6 +27,7 @@
         "-checks=all"
     ],
 
+    "editor.lightbulb.enabled": false,
     "editor.fontSize": 14,
     "editor.formatOnType": true,
     "editor.mouseWheelZoom": false,
@@ -59,6 +60,7 @@
             "editorBracketHighlight.foreground4": "#f6f8f7c9",
             "editorBracketHighlight.foreground5": "#f6f8f7c9",
             "editorBracketHighlight.foreground6": "#f6f8f7c9",
+            "editorBracketHighlight.unexpectedBracket.foreground": "#f6f8f7c9"
         },
     },
 
@@ -89,4 +91,5 @@
     "security.workspace.trust.untrustedFiles": "open",
     "window.newWindowDimensions": "maximized",
     "window.zoomLevel": 1,
+    "editor.detectIndentation": false,
 }
