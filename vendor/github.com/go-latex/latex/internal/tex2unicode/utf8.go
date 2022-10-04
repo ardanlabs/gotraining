@@ -600,6 +600,8 @@ var (
 		`to`:                       8594,
 		`succeq`:                   8829,
 		`emptyset`:                 8709,
+		`(`:                        40,
+		`)`:                        41,
 		`leftparen`:                40,
 		`rightparen`:               41,
 		`bigoplus`:                 10753,

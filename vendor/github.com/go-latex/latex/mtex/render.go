@@ -17,9 +17,19 @@ type Renderer interface {
 	Render(w, h, dpi float64, cnv *drawtex.Canvas) error
 }
 
-func Render(dst Renderer, expr string, size, dpi float64) error {
-	cnv := drawtex.New()
-	box, err := Parse(expr, size, 72, ttf.New(cnv))
+func Render(dst Renderer, expr string, size, dpi float64, fonts *ttf.Fonts) error {
+	var (
+		canvas  = drawtex.New()
+		backend *ttf.Backend
+	)
+	switch fonts {
+	case nil:
+		backend = ttf.New(canvas)
+	default:
+		backend = ttf.NewFrom(canvas, fonts)
+	}
+
+	box, err := Parse(expr, size, 72, backend)
 	if err != nil {
 		return fmt.Errorf("could not parse math expression: %w", err)
 	}
@@ -31,7 +41,7 @@ func Render(dst Renderer, expr string, size, dpi float64) error {
 	h := box.Height()
 	d := box.Depth()
 
-	err = dst.Render(w/72, math.Ceil(h+math.Max(d, 0))/72, dpi, cnv)
+	err = dst.Render(w/72, math.Ceil(h+math.Max(d, 0))/72, dpi, canvas)
 	if err != nil {
 		return fmt.Errorf("could not render math expression: %w", err)
 	}

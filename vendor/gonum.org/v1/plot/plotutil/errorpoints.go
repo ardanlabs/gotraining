@@ -103,7 +103,7 @@ func MedianAndMinMax(vls []float64) (med, lowerr, higherr float64) {
 	}
 	sort.Float64s(vls)
 	if n%2 == 0 {
-		med = (vls[n/2+1]-vls[n/2])/2 + vls[n/2]
+		med = (vls[n/2]-vls[n/2-1])/2 + vls[n/2-1]
 	} else {
 		med = vls[n/2]
 	}

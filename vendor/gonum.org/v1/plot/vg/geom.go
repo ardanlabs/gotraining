@@ -46,6 +46,14 @@ func (r Rectangle) Size() Point {
 	}
 }
 
+// Add returns the rectangle r translated by p.
+func (r Rectangle) Add(p Point) Rectangle {
+	return Rectangle{
+		Min: r.Min.Add(p),
+		Max: r.Max.Add(p),
+	}
+}
+
 // Path returns the path of a Rect specified by its
 // upper left corner, width and height.
 func (r Rectangle) Path() (p Path) {

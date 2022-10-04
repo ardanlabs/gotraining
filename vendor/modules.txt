@@ -1,12 +1,16 @@
-# github.com/ajstarks/svgo v0.0.0-20200725142600-7a3c8b57fecb
+# git.sr.ht/~sbinet/gg v0.3.1
+## explicit; go 1.16
+git.sr.ht/~sbinet/gg
+# github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6
 ## explicit
+github.com/StackExchange/wmi
+# github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b
+## explicit; go 1.15
 github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 ## explicit
 github.com/braintree/manners
-# github.com/btcsuite/btcd v0.22.0-beta
-## explicit; go 1.14
-# github.com/btcsuite/btcd/btcec/v2 v2.1.3
+# github.com/btcsuite/btcd/btcec/v2 v2.2.0
 ## explicit; go 1.17
 github.com/btcsuite/btcd/btcec/v2
 github.com/btcsuite/btcd/btcec/v2/ecdsa
@@ -17,8 +21,8 @@ github.com/deckarep/golang-set
 ## explicit; go 1.16
 github.com/decred/dcrd/dcrec/secp256k1/v4
 github.com/decred/dcrd/dcrec/secp256k1/v4/ecdsa
-# github.com/ethereum/go-ethereum v1.10.17
-## explicit; go 1.15
+# github.com/ethereum/go-ethereum v1.10.25
+## explicit; go 1.17
 github.com/ethereum/go-ethereum
 github.com/ethereum/go-ethereum/common
 github.com/ethereum/go-ethereum/common/hexutil
@@ -38,11 +42,22 @@ github.com/ethereum/go-ethereum/params
 github.com/ethereum/go-ethereum/rlp
 github.com/ethereum/go-ethereum/rlp/internal/rlpstruct
 github.com/ethereum/go-ethereum/rpc
-# github.com/fogleman/gg v1.3.0
-## explicit
-github.com/fogleman/gg
-# github.com/go-latex/latex v0.0.0-20200518072620-0806b477ea35
+# github.com/go-fonts/liberation v0.2.0
 ## explicit; go 1.13
+github.com/go-fonts/liberation/liberationmonobold
+github.com/go-fonts/liberation/liberationmonobolditalic
+github.com/go-fonts/liberation/liberationmonoitalic
+github.com/go-fonts/liberation/liberationmonoregular
+github.com/go-fonts/liberation/liberationsansbold
+github.com/go-fonts/liberation/liberationsansbolditalic
+github.com/go-fonts/liberation/liberationsansitalic
+github.com/go-fonts/liberation/liberationsansregular
+github.com/go-fonts/liberation/liberationserifbold
+github.com/go-fonts/liberation/liberationserifbolditalic
+github.com/go-fonts/liberation/liberationserifitalic
+github.com/go-fonts/liberation/liberationserifregular
+# github.com/go-latex/latex v0.0.0-20210823091927-c0d11ff05a81
+## explicit; go 1.16
 github.com/go-latex/latex
 github.com/go-latex/latex/ast
 github.com/go-latex/latex/drawtex
@@ -53,33 +68,33 @@ github.com/go-latex/latex/mtex
 github.com/go-latex/latex/mtex/symbols
 github.com/go-latex/latex/tex
 github.com/go-latex/latex/token
-# github.com/go-ole/go-ole v1.2.6
-## explicit; go 1.12
+# github.com/go-ole/go-ole v1.2.1
+## explicit
 github.com/go-ole/go-ole
 github.com/go-ole/go-ole/oleutil
-# github.com/go-stack/stack v1.8.1
-## explicit; go 1.17
+# github.com/go-pdf/fpdf v0.6.0
+## explicit; go 1.16
+github.com/go-pdf/fpdf
+# github.com/go-stack/stack v1.8.0
+## explicit
 github.com/go-stack/stack
 # github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 ## explicit
 github.com/golang/freetype/raster
 github.com/golang/freetype/truetype
-# github.com/google/go-cmp v0.5.4
-## explicit; go 1.8
+# github.com/google/go-cmp v0.5.9
+## explicit; go 1.13
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/uuid v1.3.0
+# github.com/google/uuid v1.2.0
 ## explicit
 github.com/google/uuid
-# github.com/gorilla/websocket v1.5.0
+# github.com/gorilla/websocket v1.4.2
 ## explicit; go 1.12
 github.com/gorilla/websocket
-# github.com/jung-kurt/gofpdf v1.16.2
-## explicit; go 1.12
-github.com/jung-kurt/gofpdf
 # github.com/patrickmn/go-cache v2.1.0+incompatible
 ## explicit
 github.com/patrickmn/go-cache
@@ -89,25 +104,20 @@ github.com/pborman/uuid
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# github.com/shirou/gopsutil v3.21.11+incompatible
+# github.com/shirou/gopsutil v3.21.4-0.20210419000835-c7a38de76ee5+incompatible
 ## explicit
 github.com/shirou/gopsutil/cpu
 github.com/shirou/gopsutil/internal/common
-# github.com/tklauser/go-sysconf v0.3.10
+# github.com/tklauser/go-sysconf v0.3.5
 ## explicit; go 1.13
 github.com/tklauser/go-sysconf
-# github.com/tklauser/numcpus v0.4.0
+# github.com/tklauser/numcpus v0.2.2
 ## explicit; go 1.11
 github.com/tklauser/numcpus
-# github.com/yusufpapurcu/wmi v1.2.2
-## explicit; go 1.16
-github.com/yusufpapurcu/wmi
-# golang.org/x/crypto v0.0.0-20220331220935-ae2d96664a29
+# golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 ## explicit; go 1.17
 golang.org/x/crypto/sha3
-# golang.org/x/exp v0.0.0-20201008143054-e3b2a7f2fdc7
-## explicit; go 1.12
-# golang.org/x/image v0.0.0-20200927104501-e162460cd6b5
+# golang.org/x/image v0.0.0-20220902085622-e7cb96979f69
 ## explicit; go 1.12
 golang.org/x/image/ccitt
 golang.org/x/image/draw
@@ -117,19 +127,31 @@ golang.org/x/image/font/gofont/gobold
 golang.org/x/image/font/gofont/gobolditalic
 golang.org/x/image/font/gofont/goitalic
 golang.org/x/image/font/gofont/goregular
+golang.org/x/image/font/opentype
+golang.org/x/image/font/sfnt
 golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
-# golang.org/x/sys v0.0.0-20220330033206-e17cdc41300f
+golang.org/x/image/vector
+# golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f
 ## explicit; go 1.17
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# gonum.org/v1/plot v0.8.1
-## explicit; go 1.13
+# golang.org/x/text v0.3.7
+## explicit; go 1.17
+golang.org/x/text/encoding
+golang.org/x/text/encoding/charmap
+golang.org/x/text/encoding/internal
+golang.org/x/text/encoding/internal/identifier
+golang.org/x/text/transform
+# gonum.org/v1/plot v0.12.0
+## explicit; go 1.18
 gonum.org/v1/plot
+gonum.org/v1/plot/font
+gonum.org/v1/plot/font/liberation
 gonum.org/v1/plot/palette
 gonum.org/v1/plot/plotter
 gonum.org/v1/plot/plotutil
@@ -137,7 +159,6 @@ gonum.org/v1/plot/text
 gonum.org/v1/plot/tools/bezier
 gonum.org/v1/plot/vg
 gonum.org/v1/plot/vg/draw
-gonum.org/v1/plot/vg/fonts
 gonum.org/v1/plot/vg/vgeps
 gonum.org/v1/plot/vg/vgimg
 gonum.org/v1/plot/vg/vgpdf

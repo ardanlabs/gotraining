@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build go1.12
 // +build go1.12
 
 package plot
@@ -18,7 +19,9 @@ const root = "gonum.org/v1/plot"
 //
 // If a replace directive exists in the Gonum/plot go.mod, the replace will
 // be reported in the version in the following format:
-//  "version=>[replace-path] [replace-version]"
+//
+//	"version=>[replace-path] [replace-version]"
+//
 // and the replace sum will be returned in place of the original sum.
 //
 // The exact version format returned by Version may change in future.

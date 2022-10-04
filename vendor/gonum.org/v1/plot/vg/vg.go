@@ -11,6 +11,8 @@ import (
 	"image"
 	"image/color"
 	"io"
+
+	"gonum.org/v1/plot/font"
 )
 
 // A Canvas is the main drawing interface for 2D vector
@@ -75,7 +77,7 @@ type Canvas interface {
 	// FillString fills in text at the specified
 	// location using the given font.
 	// If the font size is zero, the text is not drawn.
-	FillString(f Font, pt Point, text string)
+	FillString(f font.Face, pt Point, text string)
 
 	// DrawImage draws the image, scaled to fit
 	// the destination rectangle.

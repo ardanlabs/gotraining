@@ -140,7 +140,7 @@ func (p *parser) handler(name string) handler {
 	if _, ok := spaceWidth[name]; ok {
 		return handlerFunc(handleSpace)
 	}
-	if symbols.IsSpaced(name) {
+	if symbols.IsSpaced(name) || symbols.PunctuationSymbols.Has(name) {
 		return handlerFunc(handleSymbol)
 	}
 	if name == `\hspace` {
@@ -221,6 +221,19 @@ func handleSymbol(p *parser, node ast.Node, state tex.State, math bool) tex.Node
 		}
 
 	case symbols.PunctuationSymbols.Has(sym):
+		switch sym {
+		case ".":
+			pos := strings.Index(p.expr[pos:], sym)
+			if (pos > 0 && isdigit(p.expr[pos-1])) &&
+				(pos < len(p.expr)-1 && isdigit(p.expr[pos+1])) {
+				// do not space dots as decimal separators.
+				return ch
+			}
+			return tex.HListOf([]tex.Node{
+				ch,
+				p.makeSpace(state, 0.2),
+			}, true)
+		}
 		panic("not implemented")
 	}
 	return ch
@@ -538,8 +551,8 @@ type mathStyleKind int
 const (
 	displayStyle mathStyleKind = iota
 	textStyle
-	scriptStyle
-	scriptScriptStyle
+	//scriptStyle       // FIXME
+	//scriptScriptStyle // FIXME
 )
 
 func rcparams(k string) interface{} {
@@ -549,4 +562,12 @@ func rcparams(k string) interface{} {
 	default:
 		panic("unknown rc.params key [" + k + "]")
 	}
+}
+
+func isdigit(v byte) bool {
+	switch v {
+	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
+		return true
+	}
+	return false
 }

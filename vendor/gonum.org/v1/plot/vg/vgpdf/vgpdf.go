@@ -3,28 +3,49 @@
 // license that can be found in the LICENSE file.
 
 // Package vgpdf implements the vg.Canvas interface
-// using gofpdf (github.com/jung-kurt/gofpdf).
+// using gofpdf (github.com/phpdave11/gofpdf).
 package vgpdf // import "gonum.org/v1/plot/vg/vgpdf"
 
 import (
 	"bufio"
 	"bytes"
+	_ "embed"
 	"fmt"
 	"image"
 	"image/color"
 	"image/png"
 	"io"
-	"io/ioutil"
 	"log"
 	"math"
 	"os"
 	"path/filepath"
+	"sync"
 
-	pdf "github.com/jung-kurt/gofpdf"
+	pdf "github.com/go-pdf/fpdf"
+	stdfnt "golang.org/x/image/font"
 
+	"gonum.org/v1/plot/font"
 	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/fonts"
+	"gonum.org/v1/plot/vg/draw"
 )
+
+// codePageEncoding holds informations about the characters encoding of TrueType
+// font files, needed by gofpdf to embed fonts in a PDF document.
+// We use cp1252 (code page 1252, Windows Western) to encode characters.
+// See:
+//   - https://en.wikipedia.org/wiki/Windows-1252
+//
+// TODO: provide a Canvas-level func option to embed fonts with a user provided
+// code page schema?
+//
+//go:embed cp1252.map
+var codePageEncoding []byte
+
+func init() {
+	draw.RegisterFormat("pdf", func(w, h vg.Length) vg.CanvasWriterTo {
+		return New(w, h)
+	})
+}
 
 // DPI is the nominal resolution of drawing in PDF.
 const DPI = 72
@@ -38,7 +59,7 @@ type Canvas struct {
 	dpi       int
 	numImages int
 	stack     []context
-	fonts     map[vg.Font]struct{}
+	fonts     map[font.Font]struct{}
 
 	// Switch to embed fonts in PDF file.
 	// The default is to embed fonts.
@@ -64,7 +85,7 @@ func New(w, h vg.Length) *Canvas {
 		h:     h,
 		dpi:   DPI,
 		stack: make([]context, 1),
-		fonts: make(map[vg.Font]struct{}),
+		fonts: make(map[font.Font]struct{}),
 		embed: true,
 	}
 	c.NextPage()
@@ -153,13 +174,20 @@ func (c *Canvas) Fill(p vg.Path) {
 	c.pdfPath(p, "F")
 }
 
-func (c *Canvas) FillString(fnt vg.Font, pt vg.Point, str string) {
-	if fnt.Size == 0 {
+func (c *Canvas) FillString(fnt font.Face, pt vg.Point, str string) {
+	if fnt.Font.Size == 0 {
 		return
 	}
 
 	c.font(fnt, pt)
-	c.doc.SetFont(fnt.Name(), "", c.unit(fnt.Size))
+	style := ""
+	if fnt.Font.Weight == stdfnt.WeightBold {
+		style += "B"
+	}
+	if fnt.Font.Style == stdfnt.StyleItalic {
+		style += "I"
+	}
+	c.doc.SetFont(fnt.Name(), style, c.unit(fnt.Font.Size))
 
 	c.Push()
 	defer c.Pop()
@@ -175,9 +203,16 @@ func (c *Canvas) FillString(fnt vg.Font, pt vg.Point, str string) {
 	c.doc.CellFormat(w, h, str, "", 0, "BL", false, 0, "")
 }
 
-func (c *Canvas) sbounds(fnt vg.Font, txt string) (left, top, right, bottom float64) {
+func (c *Canvas) sbounds(fnt font.Face, txt string) (left, top, right, bottom float64) {
 	_, h := c.doc.GetFontSize()
-	d := c.doc.GetFontDesc("", "")
+	style := ""
+	if fnt.Font.Weight == stdfnt.WeightBold {
+		style += "B"
+	}
+	if fnt.Font.Style == stdfnt.StyleItalic {
+		style += "I"
+	}
+	d := c.doc.GetFontDesc(fnt.Name(), style)
 	if d.Ascent == 0 {
 		// not defined (standard font?), use average of 81%
 		top = 0.81 * h
@@ -206,31 +241,25 @@ func (c *Canvas) DrawImage(rect vg.Rectangle, img image.Image) {
 }
 
 // font registers a font and a size with the PDF canvas.
-func (c *Canvas) font(fnt vg.Font, pt vg.Point) {
-	if _, ok := c.fonts[fnt]; ok {
+func (c *Canvas) font(fnt font.Face, pt vg.Point) {
+	if _, ok := c.fonts[fnt.Font]; ok {
 		return
 	}
-	if n, ok := vg.FontMap[fnt.Name()]; ok {
-		raw, err := fonts.Asset(n + ".ttf")
-		if err != nil {
-			log.Panicf("vgpdf: could not load TTF data from asset for TTF font %q: %v", n+".ttf", err)
-		}
-
-		enc, err := fonts.Asset("cp1252.map")
-		if err != nil {
-			log.Panicf("vgpdf: could not load encoding map: %v", err)
-		}
-
-		zdata, jdata, err := makeFont(raw, enc, c.embed)
-		if err != nil {
-			log.Panicf("vgpdf: could not generate font data for PDF: %v", err)
-		}
-
-		c.fonts[fnt] = struct{}{}
-		c.doc.AddFontFromBytes(fnt.Name(), "", jdata, zdata)
-		return
+	name := fnt.Name()
+	key := fontKey{font: fnt, embed: c.embed}
+	raw := new(bytes.Buffer)
+	_, err := fnt.Face.WriteSourceTo(nil, raw)
+	if err != nil {
+		log.Panicf("vgpdf: could not generate font %q data for PDF: %+v", name, err)
 	}
-	log.Panicf("vgpdf: could not find font %q in the pre-registered fonts map", fnt.Name())
+
+	zdata, jdata, err := getFont(key, raw.Bytes(), codePageEncoding)
+	if err != nil {
+		log.Panicf("vgpdf: could not generate font data for PDF: %v", err)
+	}
+
+	c.fonts[fnt.Font] = struct{}{}
+	c.doc.AddFontFromBytes(name, "", jdata, zdata)
 }
 
 // pdfPath processes a vg.Path and applies it to the canvas.
@@ -344,52 +373,106 @@ func rgba(c color.Color) (int, int, int, float64) {
 	return int(r >> 8), int(g >> 8), int(b >> 8), float64(a) / math.MaxUint16
 }
 
-func makeFont(font, encoding []byte, embed bool) (z, j []byte, err error) {
-	tmpdir, err := ioutil.TempDir("", "gofpdf-makefont-")
+type fontsCache struct {
+	sync.RWMutex
+	cache map[fontKey]fontVal
+}
+
+// fontKey represents a PDF font request.
+// fontKey needs to know whether the font will be embedded or not,
+// as gofpdf.MakeFont will generate different informations.
+type fontKey struct {
+	font  font.Face
+	embed bool
+}
+
+type fontVal struct {
+	z, j []byte
+}
+
+func (c *fontsCache) get(key fontKey) (fontVal, bool) {
+	c.RLock()
+	defer c.RUnlock()
+	v, ok := c.cache[key]
+	return v, ok
+}
+
+func (c *fontsCache) add(k fontKey, v fontVal) {
+	c.Lock()
+	defer c.Unlock()
+	c.cache[k] = v
+}
+
+var pdfFonts = &fontsCache{
+	cache: make(map[fontKey]fontVal),
+}
+
+func getFont(key fontKey, font, encoding []byte) (z, j []byte, err error) {
+	if v, ok := pdfFonts.get(key); ok {
+		return v.z, v.j, nil
+	}
+
+	v, err := makeFont(key, font, encoding)
 	if err != nil {
-		return z, j, err
+		return nil, nil, err
+	}
+	return v.z, v.j, nil
+}
+
+func makeFont(key fontKey, font, encoding []byte) (val fontVal, err error) {
+	tmpdir, err := os.MkdirTemp("", "gofpdf-makefont-")
+	if err != nil {
+		return val, err
 	}
 	defer os.RemoveAll(tmpdir)
 
 	indir := filepath.Join(tmpdir, "input")
 	err = os.Mkdir(indir, 0755)
 	if err != nil {
-		return z, j, err
+		return val, err
 	}
 
 	outdir := filepath.Join(tmpdir, "output")
 	err = os.Mkdir(outdir, 0755)
 	if err != nil {
-		return z, j, err
+		return val, err
 	}
 
 	fname := filepath.Join(indir, "font.ttf")
 	encname := filepath.Join(indir, "cp1252.map")
 
-	err = ioutil.WriteFile(fname, font, 0644)
+	err = os.WriteFile(fname, font, 0644)
 	if err != nil {
-		return z, j, err
+		return val, err
 	}
 
-	err = ioutil.WriteFile(encname, encoding, 0644)
+	err = os.WriteFile(encname, encoding, 0644)
 	if err != nil {
-		return z, j, err
+		return val, err
 	}
 
-	err = pdf.MakeFont(fname, encname, outdir, ioutil.Discard, embed)
+	err = pdf.MakeFont(fname, encname, outdir, io.Discard, key.embed)
 	if err != nil {
-		return z, j, err
+		return val, err
 	}
 
-	if embed {
-		z, err = ioutil.ReadFile(filepath.Join(outdir, "font.z"))
+	if key.embed {
+		z, err := os.ReadFile(filepath.Join(outdir, "font.z"))
 		if err != nil {
-			return z, j, err
+			return val, err
 		}
+		val.z = z
 	}
-	j, err = ioutil.ReadFile(filepath.Join(outdir, "font.json"))
 
-	return z, j, err
+	j, err := os.ReadFile(filepath.Join(outdir, "font.json"))
+	if err != nil {
+		return val, err
+	}
+	val.j = j
+
+	pdfFonts.add(key, val)
+
+	return val, nil
 }
 
 // NextPage creates a new page in the final PDF document.

@@ -7,7 +7,7 @@ package drawtex // import "github.com/go-latex/latex/drawtex"
 
 import (
 	"github.com/go-latex/latex/font"
-	"github.com/golang/freetype/truetype"
+	"golang.org/x/image/font/sfnt"
 )
 
 type Canvas struct {
@@ -47,12 +47,12 @@ type RectOp struct {
 func (RectOp) isOp() {}
 
 type Glyph struct {
-	Font       *truetype.Font
+	Font       *sfnt.Font
 	Size       float64
 	Postscript string
 	Metrics    font.Metrics
 	Symbol     string
-	Num        truetype.Index
+	Num        sfnt.GlyphIndex
 	Offset     float64
 }
 

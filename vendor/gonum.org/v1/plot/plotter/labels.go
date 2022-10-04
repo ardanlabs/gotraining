@@ -8,6 +8,8 @@ import (
 	"errors"
 
 	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/font"
+	"gonum.org/v1/plot/text"
 	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/draw"
 )
@@ -31,11 +33,10 @@ type Labels struct {
 
 	// TextStyle is the style of the label text. Each label
 	// can have a different text style.
-	TextStyle []draw.TextStyle
+	TextStyle []text.Style
 
-	// XOffset and YOffset are added directly to the final
-	// label X and Y location respectively.
-	XOffset, YOffset vg.Length
+	// Offset is added directly to the final label location.
+	Offset vg.Point
 }
 
 // NewLabels returns a new Labels using the DefaultFont and
@@ -55,15 +56,10 @@ func NewLabels(d XYLabeller) (*Labels, error) {
 		strs[i] = d.Label(i)
 	}
 
-	fnt, err := vg.MakeFont(DefaultFont, DefaultFontSize)
-	if err != nil {
-		return nil, err
-	}
-
-	styles := make([]draw.TextStyle, d.Len())
+	styles := make([]text.Style, d.Len())
 	for i := range styles {
-		styles[i] = draw.TextStyle{
-			Font:    fnt,
+		styles[i] = text.Style{
+			Font:    font.From(DefaultFont, DefaultFontSize),
 			Handler: plot.DefaultTextHandler,
 		}
 	}
@@ -83,8 +79,7 @@ func (l *Labels) Plot(c draw.Canvas, p *plot.Plot) {
 		if !c.Contains(pt) {
 			continue
 		}
-		pt.X += l.XOffset
-		pt.Y += l.YOffset
+		pt = pt.Add(l.Offset)
 		c.FillText(l.TextStyle[i], pt, label)
 	}
 }
@@ -100,10 +95,11 @@ func (l *Labels) DataRange() (xmin, xmax, ymin, ymax float64) {
 func (l *Labels) GlyphBoxes(p *plot.Plot) []plot.GlyphBox {
 	bs := make([]plot.GlyphBox, len(l.Labels))
 	for i, label := range l.Labels {
-		bs[i].X = p.X.Norm(l.XYs[i].X)
-		bs[i].Y = p.Y.Norm(l.XYs[i].Y)
-		sty := l.TextStyle[i]
-		bs[i].Rectangle = sty.Rectangle(label)
+		bs[i] = plot.GlyphBox{
+			X:         p.X.Norm(l.XYs[i].X),
+			Y:         p.Y.Norm(l.XYs[i].Y),
+			Rectangle: l.TextStyle[i].Rectangle(label).Add(l.Offset),
+		}
 	}
 	return bs
 }

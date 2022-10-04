@@ -145,7 +145,7 @@ func (h *HeatMap) plotRasterized(c draw.Canvas, plt *plot.Plot) {
 	pImg.Plot(c, plt)
 }
 
-//  plotVectorized plots the heatmap using vector-based drawing.
+// plotVectorized plots the heatmap using vector-based drawing.
 func (h *HeatMap) plotVectorized(c draw.Canvas, plt *plot.Plot) {
 	if h.Min > h.Max {
 		panic("contour: invalid Z range: min greater than max")

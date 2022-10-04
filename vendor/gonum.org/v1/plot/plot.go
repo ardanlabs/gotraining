@@ -12,6 +12,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"gonum.org/v1/plot/font"
+	"gonum.org/v1/plot/font/liberation"
 	"gonum.org/v1/plot/text"
 	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/draw"
@@ -19,10 +21,13 @@ import (
 
 var (
 	// DefaultFont is the name of the default font for plot text.
-	DefaultFont = "Times-Roman"
+	DefaultFont = font.Font{
+		Typeface: "Liberation",
+		Variant:  "Serif",
+	}
 
 	// DefaultTextHandler is the default text handler used for text processing.
-	DefaultTextHandler draw.TextHandler = text.Plain{}
+	DefaultTextHandler text.Handler
 )
 
 // Plot is the basic type representing a plot.
@@ -38,7 +43,8 @@ type Plot struct {
 		// the top of the plot.
 		Padding vg.Length
 
-		draw.TextStyle
+		// TextStyle specifies how the plot title text should be displayed.
+		TextStyle text.Style
 	}
 
 	// BackgroundColor is the background color of the plot.
@@ -51,6 +57,11 @@ type Plot struct {
 
 	// Legend is the plot's legend.
 	Legend Legend
+
+	// TextHandler parses and formats text according to a given
+	// dialect (Markdown, LaTeX, plain, ...)
+	// The default is a plain text handler.
+	TextHandler text.Handler
 
 	// plotters are drawn by calling their Plot method
 	// after the axes are drawn.
@@ -81,39 +92,24 @@ const (
 	vertical
 )
 
-// New returns a new plot with some reasonable
-// default settings.
-func New() (*Plot, error) {
-	titleFont, err := vg.MakeFont(DefaultFont, 12)
-	if err != nil {
-		return nil, err
-	}
-	x, err := makeAxis(horizontal)
-	if err != nil {
-		return nil, err
-	}
-	y, err := makeAxis(vertical)
-	if err != nil {
-		return nil, err
-	}
-	legend, err := NewLegend()
-	if err != nil {
-		return nil, err
-	}
+// New returns a new plot with some reasonable default settings.
+func New() *Plot {
+	hdlr := DefaultTextHandler
 	p := &Plot{
 		BackgroundColor: color.White,
-		X:               x,
-		Y:               y,
-		Legend:          legend,
+		X:               makeAxis(horizontal),
+		Y:               makeAxis(vertical),
+		Legend:          newLegend(hdlr),
+		TextHandler:     hdlr,
 	}
-	p.Title.TextStyle = draw.TextStyle{
+	p.Title.TextStyle = text.Style{
 		Color:   color.Black,
-		Font:    titleFont,
+		Font:    font.From(DefaultFont, 12),
 		XAlign:  draw.XCenter,
 		YAlign:  draw.YTop,
-		Handler: DefaultTextHandler,
+		Handler: hdlr,
 	}
-	return p, nil
+	return p
 }
 
 // Add adds a Plotters to the plot.
@@ -151,11 +147,13 @@ func (p *Plot) Draw(c draw.Canvas) {
 		c.SetColor(p.BackgroundColor)
 		c.Fill(c.Rectangle.Path())
 	}
+
 	if p.Title.Text != "" {
-		descent := p.Title.TextStyle.Font.Extents().Descent
-		c.FillText(p.Title.TextStyle, vg.Point{X: c.Center().X, Y: c.Max.Y - descent}, p.Title.Text)
-		_, h, d := p.Title.Handler.Box(p.Title.Text, p.Title.Font)
-		c.Max.Y -= h + d
+		descent := p.Title.TextStyle.FontExtents().Descent
+		c.FillText(p.Title.TextStyle, vg.Point{X: c.Center().X, Y: c.Max.Y + descent}, p.Title.Text)
+
+		rect := p.Title.TextStyle.Rectangle(p.Title.Text)
+		c.Max.Y -= rect.Size().Y
 		c.Max.Y -= p.Title.Padding
 	}
 
@@ -183,7 +181,8 @@ func (p *Plot) Draw(c draw.Canvas) {
 // the plot data will be drawn.
 func (p *Plot) DataCanvas(da draw.Canvas) draw.Canvas {
 	if p.Title.Text != "" {
-		da.Max.Y -= p.Title.Height(p.Title.Text) - p.Title.Font.Extents().Descent
+		rect := p.Title.TextStyle.Rectangle(p.Title.Text)
+		da.Max.Y -= rect.Size().Y
 		da.Max.Y -= p.Title.Padding
 	}
 	p.X.sanitizeRange()
@@ -195,12 +194,61 @@ func (p *Plot) DataCanvas(da draw.Canvas) draw.Canvas {
 
 // DrawGlyphBoxes draws red outlines around the plot's
 // GlyphBoxes.  This is intended for debugging.
-func (p *Plot) DrawGlyphBoxes(c *draw.Canvas) {
-	c.SetColor(color.RGBA{R: 255, A: 255})
+func (p *Plot) DrawGlyphBoxes(c draw.Canvas) {
+	dac := p.DataCanvas(c)
+	sty := draw.LineStyle{
+		Color: color.RGBA{R: 255, A: 255},
+		Width: vg.Points(0.5),
+	}
+
+	drawBox := func(c draw.Canvas, b GlyphBox) {
+		x := c.X(b.X) + b.Rectangle.Min.X
+		y := c.Y(b.Y) + b.Rectangle.Min.Y
+		c.StrokeLines(sty, []vg.Point{
+			{X: x, Y: y},
+			{X: x + b.Rectangle.Size().X, Y: y},
+			{X: x + b.Rectangle.Size().X, Y: y + b.Rectangle.Size().Y},
+			{X: x, Y: y + b.Rectangle.Size().Y},
+			{X: x, Y: y},
+		})
+	}
+
+	var title vg.Length
+	if p.Title.Text != "" {
+		rect := p.Title.TextStyle.Rectangle(p.Title.Text)
+		title += rect.Size().Y
+		title += p.Title.Padding
+		box := GlyphBox{
+			Rectangle: rect.Add(vg.Point{
+				X: c.Center().X,
+				Y: c.Max.Y,
+			}),
+		}
+		drawBox(c, box)
+	}
+
 	for _, b := range p.GlyphBoxes(p) {
-		b.Rectangle.Min.X += c.X(b.X)
-		b.Rectangle.Min.Y += c.Y(b.Y)
-		c.Stroke(b.Rectangle.Path())
+		drawBox(dac, b)
+	}
+
+	p.X.sanitizeRange()
+	p.Y.sanitizeRange()
+
+	x := horizontalAxis{p.X}
+	y := verticalAxis{p.Y}
+
+	ywidth := y.size()
+	xheight := x.size()
+
+	cx := padX(p, draw.Crop(c, ywidth, 0, 0, 0))
+	for _, b := range x.GlyphBoxes(p) {
+		drawBox(cx, b)
+	}
+
+	cy := padY(p, draw.Crop(c, 0, 0, xheight, 0))
+	cy.Max.Y -= title
+	for _, b := range y.GlyphBoxes(p) {
+		drawBox(cy, b)
 	}
 }
 
@@ -446,7 +494,13 @@ func (p *Plot) NominalY(names ...string) {
 //
 // Supported formats are:
 //
-//  eps, jpg|jpeg, pdf, png, svg, tex and tif|tiff.
+//   - .eps
+//   - .jpg|.jpeg
+//   - .pdf
+//   - .png
+//   - .svg
+//   - .tex
+//   - .tif|.tiff
 func (p *Plot) WriterTo(w, h vg.Length, format string) (io.WriterTo, error) {
 	c, err := draw.NewFormattedCanvas(w, h, format)
 	if err != nil {
@@ -461,7 +515,13 @@ func (p *Plot) WriterTo(w, h vg.Length, format string) (io.WriterTo, error) {
 //
 // Supported extensions are:
 //
-//  .eps, .jpg, .jpeg, .pdf, .png, .svg, .tex, .tif and .tiff.
+//   - .eps
+//   - .jpg|.jpeg
+//   - .pdf
+//   - .png
+//   - .svg
+//   - .tex
+//   - .tif|.tiff
 func (p *Plot) Save(w, h vg.Length, file string) (err error) {
 	f, err := os.Create(file)
 	if err != nil {
@@ -485,4 +545,11 @@ func (p *Plot) Save(w, h vg.Length, file string) (err error) {
 
 	_, err = c.WriteTo(f)
 	return err
+}
+
+func init() {
+	font.DefaultCache.Add(liberation.Collection())
+	DefaultTextHandler = text.Plain{
+		Fonts: font.DefaultCache,
+	}
 }

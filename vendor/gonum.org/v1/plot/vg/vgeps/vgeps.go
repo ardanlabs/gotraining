@@ -16,8 +16,16 @@ import (
 	"math"
 	"time"
 
+	"gonum.org/v1/plot/font"
 	"gonum.org/v1/plot/vg"
+	"gonum.org/v1/plot/vg/draw"
 )
+
+func init() {
+	draw.RegisterFormat("eps", func(w, h vg.Length) vg.CanvasWriterTo {
+		return New(w, h)
+	})
+}
 
 // DPI is the nominal resolution of drawing in EPS.
 const DPI = 72
@@ -191,12 +199,12 @@ func (e *Canvas) trace(path vg.Path) {
 	}
 }
 
-func (e *Canvas) FillString(fnt vg.Font, pt vg.Point, str string) {
-	if e.context().font != fnt.Name() || e.context().fsize != fnt.Size {
+func (e *Canvas) FillString(fnt font.Face, pt vg.Point, str string) {
+	if e.context().font != fnt.Name() || e.context().fsize != fnt.Font.Size {
 		e.context().font = fnt.Name()
-		e.context().fsize = fnt.Size
+		e.context().fsize = fnt.Font.Size
 		fmt.Fprintf(e.buf, "/%s findfont %.*g scalefont setfont\n",
-			fnt.Name(), pr, fnt.Size)
+			fnt.Name(), pr, fnt.Font.Size)
 	}
 	fmt.Fprintf(e.buf, "%.*g %.*g moveto\n", pr, pt.X.Dots(DPI), pr, pt.Y.Dots(DPI))
 	fmt.Fprintf(e.buf, "(%s) show\n", str)

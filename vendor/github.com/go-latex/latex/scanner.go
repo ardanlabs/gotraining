@@ -45,10 +45,7 @@ func (s *texScanner) Token() token.Token {
 // It returns false once it reaches token.EOF.
 func (s *texScanner) Next() bool {
 	s.tok = s.scan()
-	if s.tok.Kind == token.EOF {
-		return false
-	}
-	return true
+	return s.tok.Kind != token.EOF
 }
 
 func (s *texScanner) scan() token.Token {
@@ -90,7 +87,7 @@ func (s *texScanner) scan() token.Token {
 		}
 
 	case '$', '_', '=', '<', '>', '^', '/', '*', '-', '+',
-		'!', '?', '\'', ':':
+		'!', '?', '\'', ':', ',', ';', '.':
 		return token.Token{
 			Kind: token.Symbol,
 			Pos:  pos,
@@ -196,12 +193,12 @@ func (s *texScanner) scanComment() string {
 	return comment.String()
 }
 
-func (s *texScanner) expect(want rune) {
-	s.next()
-	if s.r != want {
-		panic(fmt.Errorf("invalid rune: got=%q, want=%q", s.r, want))
-	}
-}
+// func (s *texScanner) expect(want rune) {
+// 	s.next()
+// 	if s.r != want {
+// 		panic(fmt.Errorf("invalid rune: got=%q, want=%q", s.r, want))
+// 	}
+// }
 
 func (s *texScanner) pos() token.Pos {
 	return token.Pos(s.sc.Position.Offset)

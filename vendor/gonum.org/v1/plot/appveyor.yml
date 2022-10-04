@@ -1,5 +1,9 @@
 build: off
 
+image: Visual Studio 2019
+
+stack: go 1.18
+
 clone_folder: c:\gopath\src\gonum.org\v1\plot
 
 cache:
@@ -10,18 +14,11 @@ branches:
     - master
 
 environment:
-  # Do not move these lines; they are referred to by README.md.
-  # Versions of go that are explicitly supported by gonum.
-  matrix:
-    - GOROOT: 'c:\go113'
-  GOPATH: c:\gopath
-  GOTOOLDIR: '%GOROOT%\pkg\tool\windows_amd64'
-  PATH: '%GOPATH%\bin;%GOROOT%\bin;%PATH%'
   GO111MODULE: 'on'
 
 build_script:
-  - "%GOROOT%\\bin\\go version"
-  - "%GOROOT%\\bin\\go get -v -t ./..."
+  - go version
+  - go get -v -t ./...
 
 test_script:
-  - "%GOROOT%\\bin\\go test ./..."
+  - go test ./...

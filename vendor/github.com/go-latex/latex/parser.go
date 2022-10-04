@@ -34,7 +34,8 @@ type parser struct {
 
 func newParser(x string) *parser {
 	p := &parser{
-		s: newScanner(strings.NewReader(x)),
+		s:     newScanner(strings.NewReader(x)),
+		state: normalState,
 	}
 	p.addBuiltinMacros()
 	return p

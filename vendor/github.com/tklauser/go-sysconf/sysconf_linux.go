@@ -17,11 +17,9 @@ import (
 )
 
 const (
-	// CLK_TCK is a constant on Linux for all architectures except alpha and ia64.
-	// See e.g.
-	// https://git.musl-libc.org/cgit/musl/tree/src/conf/sysconf.c#n30
+	// CLK_TCK is a constant on Linux, see e.g.
+	// https://git.musl-libc.org/cgit/musl/tree/src/conf/sysconf.c#n30 and
 	// https://github.com/containerd/cgroups/pull/12
-	// https://lore.kernel.org/lkml/agtlq6$iht$1@penguin.transmeta.com/
 	_SYSTEM_CLK_TCK = 100
 )
 
@@ -117,9 +115,23 @@ func getNprocs() int64 {
 }
 
 func getNprocsConf() int64 {
-	count, err := numcpus.GetConfigured()
+	// TODO(tk): read /sys/devices/system/cpu/present instead?
+	d, err := os.Open("/sys/devices/system/cpu")
 	if err == nil {
-		return int64(count)
+		defer d.Close()
+		fis, err := d.Readdir(-1)
+		if err == nil {
+			count := int64(0)
+			for _, fi := range fis {
+				if name := fi.Name(); fi.IsDir() && strings.HasPrefix(name, "cpu") {
+					_, err := strconv.ParseInt(name[3:], 10, 64)
+					if err == nil {
+						count++
+					}
+				}
+			}
+			return count
+		}
 	}
 
 	// TODO(tk): fall back to reading /proc/cpuinfo on legacy systems

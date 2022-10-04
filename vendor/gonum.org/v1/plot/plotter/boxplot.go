@@ -6,6 +6,7 @@ package plotter
 
 import (
 	"errors"
+	"image/color"
 	"math"
 	"sort"
 
@@ -64,6 +65,10 @@ type BoxPlot struct {
 	// GlyphStyle is the style of the outside point glyphs.
 	GlyphStyle draw.GlyphStyle
 
+	// FillColor is the color used to fill the box.
+	// The default is no fill.
+	FillColor color.Color
+
 	// BoxStyle is the line style for the box.
 	BoxStyle draw.LineStyle
 
@@ -82,7 +87,7 @@ type BoxPlot struct {
 // NewBoxPlot returns a new BoxPlot that represents
 // the distribution of the given values.  The style of
 // the box plot is that used for Tukey's schematic
-// plots is ``Exploratory Data Analysis.''
+// plots in “Exploratory Data Analysis.”
 //
 // An error is returned if the boxplot is created with
 // no values.
@@ -206,13 +211,17 @@ func (b *BoxPlot) Plot(c draw.Canvas, plt *plot.Plot) {
 	aLow := trY(b.AdjLow)
 	aHigh := trY(b.AdjHigh)
 
-	box := c.ClipLinesY([]vg.Point{
+	pts := []vg.Point{
 		{X: x - b.Width/2, Y: q1},
 		{X: x - b.Width/2, Y: q3},
 		{X: x + b.Width/2, Y: q3},
 		{X: x + b.Width/2, Y: q1},
 		{X: x - b.Width/2 - b.BoxStyle.Width/2, Y: q1},
-	})
+	}
+	box := c.ClipLinesY(pts)
+	if b.FillColor != nil {
+		c.FillPolygon(b.FillColor, c.ClipPolygonY(pts))
+	}
 	c.StrokeLines(b.BoxStyle, box...)
 
 	medLine := c.ClipLinesY([]vg.Point{
@@ -292,8 +301,8 @@ func (b *BoxPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	if err != nil {
 		return nil, err
 	}
-	ls.XOffset += b.GlyphStyle.Radius / 2
-	ls.YOffset += b.GlyphStyle.Radius / 2
+	off := 0.5 * b.GlyphStyle.Radius
+	ls.Offset = ls.Offset.Add(vg.Point{X: off, Y: off})
 	return ls, nil
 }
 
@@ -334,13 +343,17 @@ func (b horizBoxPlot) Plot(c draw.Canvas, plt *plot.Plot) {
 	aLow := trX(b.AdjLow)
 	aHigh := trX(b.AdjHigh)
 
-	box := c.ClipLinesX([]vg.Point{
+	pts := []vg.Point{
 		{X: q1, Y: y - b.Width/2},
 		{X: q3, Y: y - b.Width/2},
 		{X: q3, Y: y + b.Width/2},
 		{X: q1, Y: y + b.Width/2},
 		{X: q1, Y: y - b.Width/2 - b.BoxStyle.Width/2},
-	})
+	}
+	box := c.ClipLinesX(pts)
+	if b.FillColor != nil {
+		c.FillPolygon(b.FillColor, c.ClipPolygonX(pts))
+	}
 	c.StrokeLines(b.BoxStyle, box...)
 
 	medLine := c.ClipLinesX([]vg.Point{
@@ -408,8 +421,8 @@ func (b *horizBoxPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	if err != nil {
 		return nil, err
 	}
-	ls.XOffset += b.GlyphStyle.Radius / 2
-	ls.YOffset += b.GlyphStyle.Radius / 2
+	off := 0.5 * b.GlyphStyle.Radius
+	ls.Offset = ls.Offset.Add(vg.Point{X: off, Y: off})
 	return ls, nil
 }
 

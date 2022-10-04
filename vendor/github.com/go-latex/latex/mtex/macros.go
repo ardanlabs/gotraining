@@ -225,6 +225,7 @@ var (
 		// left delim
 		`\{`:      builtinMacro(""),
 		`\(`:      builtinMacro(""),
+		`(`:       builtinMacro(""),
 		`\langle`: builtinMacro(""),
 		`\lceil`:  builtinMacro(""),
 		`\lfloor`: builtinMacro(""),
@@ -232,6 +233,7 @@ var (
 		// right delim
 		`\}`:      builtinMacro(""),
 		`\)`:      builtinMacro(""),
+		`)`:       builtinMacro(""),
 		`\rangle`: builtinMacro(""),
 		`\rceil`:  builtinMacro(""),
 		`\rfloor`: builtinMacro(""),

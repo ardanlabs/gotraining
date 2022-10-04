@@ -7,6 +7,8 @@ package vg
 import (
 	"image"
 	"image/color"
+
+	"gonum.org/v1/plot/font"
 )
 
 // MultiCanvas creates a canvas that duplicates its drawing operations to all
@@ -110,7 +112,7 @@ func (tee teeCanvas) Fill(p Path) {
 // FillString fills in text at the specified
 // location using the given font.
 // If the font size is zero, the text is not drawn.
-func (tee teeCanvas) FillString(f Font, pt Point, text string) {
+func (tee teeCanvas) FillString(f font.Face, pt Point, text string) {
 	for _, c := range tee.cs {
 		c.FillString(f, pt, text)
 	}

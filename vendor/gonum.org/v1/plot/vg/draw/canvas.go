@@ -8,14 +8,48 @@ import (
 	"fmt"
 	"image/color"
 	"math"
+	"sort"
+	"sync"
 
+	"gonum.org/v1/plot/text"
 	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/vgeps"
-	"gonum.org/v1/plot/vg/vgimg"
-	"gonum.org/v1/plot/vg/vgpdf"
-	"gonum.org/v1/plot/vg/vgsvg"
-	"gonum.org/v1/plot/vg/vgtex"
 )
+
+// formats holds the registered canvas image formats
+var formats = struct {
+	sync.RWMutex
+	m map[string]func(w, h vg.Length) vg.CanvasWriterTo
+}{
+	m: make(map[string]func(w, h vg.Length) vg.CanvasWriterTo),
+}
+
+// Formats returns the sorted list of registered vg formats.
+func Formats() []string {
+	formats.RLock()
+	defer formats.RUnlock()
+
+	list := make([]string, 0, len(formats.m))
+	for name := range formats.m {
+		list = append(list, name)
+	}
+	sort.Strings(list)
+	return list
+}
+
+// RegisterFormat registers an image format for use by NewFormattedCanvas.
+// name is the name of the format, like "jpeg" or "png".
+// fn is the construction function to call for the format.
+//
+// RegisterFormat panics if fn is nil.
+func RegisterFormat(name string, fn func(w, h vg.Length) vg.CanvasWriterTo) {
+	formats.Lock()
+	defer formats.Unlock()
+
+	if fn == nil {
+		panic("draw: RegisterFormat with nil function")
+	}
+	formats.m[name] = fn
+}
 
 // A Canvas is a vector graphics canvas along with
 // an associated Rectangle defining a section of the canvas
@@ -28,38 +62,38 @@ type Canvas struct {
 // XAlignment specifies text alignment in the X direction. Three preset
 // options are available, but an arbitrary alignment
 // can also be specified using XAlignment(desired number).
-type XAlignment float64
+type XAlignment = text.XAlignment
 
 const (
 	// XLeft aligns the left edge of the text with the specified location.
-	XLeft XAlignment = 0
+	XLeft = text.XLeft
 	// XCenter aligns the horizontal center of the text with the specified location.
-	XCenter XAlignment = -0.5
+	XCenter = text.XCenter
 	// XRight aligns the right edge of the text with the specified location.
-	XRight XAlignment = -1
+	XRight = text.XRight
 )
 
 // YAlignment specifies text alignment in the Y direction. Three preset
 // options are available, but an arbitrary alignment
 // can also be specified using YAlignment(desired number).
-type YAlignment float64
+type YAlignment = text.YAlignment
 
 const (
 	// YTop aligns the top of of the text with the specified location.
-	YTop YAlignment = -1
+	YTop = text.YTop
 	// YCenter aligns the vertical center of the text with the specified location.
-	YCenter YAlignment = -0.5
+	YCenter = text.YCenter
 	// YBottom aligns the bottom of the text with the specified location.
-	YBottom YAlignment = 0
+	YBottom = text.YBottom
 )
 
 // Position specifies the text position.
 const (
-	PosLeft   = -1
-	PosBottom = -1
-	PosCenter = 0
-	PosTop    = +1
-	PosRight  = +1
+	PosLeft   = text.PosLeft
+	PosBottom = text.PosBottom
+	PosCenter = text.PosCenter
+	PosTop    = text.PosTop
+	PosRight  = text.PosRight
 )
 
 // LineStyle describes what a line will look like.
@@ -256,39 +290,25 @@ func New(c vg.CanvasSizer) Canvas {
 }
 
 // NewFormattedCanvas creates a new vg.CanvasWriterTo with the specified
-// image format.
+// image format. Supported formats need to be registered by importing one or
+// more of the following packages:
 //
-// Supported formats are:
-//
-//  eps, jpg|jpeg, pdf, png, svg, tex and tif|tiff.
+//   - gonum.org/v1/plot/vg/vgeps: provides eps
+//   - gonum.org/v1/plot/vg/vgimg: provides png, jpg|jpeg, tif|tiff
+//   - gonum.org/v1/plot/vg/vgpdf: provides pdf
+//   - gonum.org/v1/plot/vg/vgsvg: provides svg
+//   - gonum.org/v1/plot/vg/vgtex: provides tex
 func NewFormattedCanvas(w, h vg.Length, format string) (vg.CanvasWriterTo, error) {
-	var c vg.CanvasWriterTo
-	switch format {
-	case "eps":
-		c = vgeps.New(w, h)
+	formats.RLock()
+	defer formats.RUnlock()
 
-	case "jpg", "jpeg":
-		c = vgimg.JpegCanvas{Canvas: vgimg.New(w, h)}
-
-	case "pdf":
-		c = vgpdf.New(w, h)
-
-	case "png":
-		c = vgimg.PngCanvas{Canvas: vgimg.New(w, h)}
-
-	case "svg":
-		c = vgsvg.New(w, h)
-
-	case "tex":
-		c = vgtex.NewDocument(w, h)
-
-	case "tif", "tiff":
-		c = vgimg.TiffCanvas{Canvas: vgimg.New(w, h)}
-
-	default:
-		return nil, fmt.Errorf("unsupported format: %q", format)
+	for name, fn := range formats.m {
+		if format != name {
+			continue
+		}
+		return fn(w, h), nil
 	}
-	return c, nil
+	return nil, fmt.Errorf("unsupported format: %q", format)
 }
 
 // NewCanvas returns a new (bounded) draw.Canvas of the given size.
@@ -609,25 +629,5 @@ func isect(p0, p1, clip, norm vg.Point) vg.Point {
 // FillText fills lines of text in the draw area.
 // pt specifies the location where the text is to be drawn.
 func (c *Canvas) FillText(sty TextStyle, pt vg.Point, txt string) {
-	sty.handler().Draw(c, txt, sty, pt)
-}
-
-func max(d ...vg.Length) vg.Length {
-	o := vg.Length(math.Inf(-1))
-	for _, dd := range d {
-		if dd > o {
-			o = dd
-		}
-	}
-	return o
-}
-
-func min(d ...vg.Length) vg.Length {
-	o := vg.Length(math.Inf(1))
-	for _, dd := range d {
-		if dd < o {
-			o = dd
-		}
-	}
-	return o
+	sty.Handler.Draw(c, txt, sty, pt)
 }

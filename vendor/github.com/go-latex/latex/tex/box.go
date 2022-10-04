@@ -905,9 +905,9 @@ func (k *Kern) vpackDims(width, height, depth *float64, stretch, shrink []float6
 
 type SubSuperCluster struct {
 	*HList
-	nucleus interface{} // FIXME
-	sub     interface{} // FIXME
-	super   interface{} // FIXME
+	//	nucleus interface{} // FIXME
+	//	sub     interface{} // FIXME
+	//	super   interface{} // FIXME
 }
 
 // AutoHeightChar creats a character as close to the given height and depth
@@ -1168,10 +1168,6 @@ func (ship *Ship) vlistOut(box Tree) {
 	}
 	ship.cur.s--
 }
-
-var (
-	ship = (&Ship{}).Call
-)
 
 type hpacker interface {
 	hpackDims(width, height, depth *float64, stretch, shrink []float64)

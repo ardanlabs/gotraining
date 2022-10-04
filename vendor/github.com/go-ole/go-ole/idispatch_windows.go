@@ -3,7 +3,6 @@
 package ole
 
 import (
-	"math/big"
 	"syscall"
 	"time"
 	"unsafe"
@@ -133,8 +132,6 @@ func invoke(disp *IDispatch, dispid int32, dispatch int16, params ...interface{}
 				vargs[n] = NewVariant(VT_R8, *(*int64)(unsafe.Pointer(&vv)))
 			case *float64:
 				vargs[n] = NewVariant(VT_R8|VT_BYREF, int64(uintptr(unsafe.Pointer(v.(*float64)))))
-			case *big.Int:
-				vargs[n] = NewVariant(VT_DECIMAL, v.(*big.Int).Int64())
 			case string:
 				vargs[n] = NewVariant(VT_BSTR, int64(uintptr(unsafe.Pointer(SysAllocStringLen(v.(string))))))
 			case *string:
@@ -185,9 +182,7 @@ func invoke(disp *IDispatch, dispid int32, dispatch int16, params ...interface{}
 		uintptr(unsafe.Pointer(&excepInfo)),
 		0)
 	if hr != 0 {
-		excepInfo.renderStrings()
-		excepInfo.Clear()
-		err = NewErrorWithSubError(hr, excepInfo.description, excepInfo)
+		err = NewErrorWithSubError(hr, BstrToString(excepInfo.bstrDescription), excepInfo)
 	}
 	for i, varg := range vargs {
 		n := len(params) - i - 1

@@ -170,8 +170,8 @@ func (b *QuartPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	if err != nil {
 		return nil, err
 	}
-	ls.XOffset += b.MedianStyle.Radius / 2
-	ls.YOffset += b.MedianStyle.Radius / 2
+	off := 0.5 * b.MedianStyle.Radius
+	ls.Offset = ls.Offset.Add(vg.Point{X: off, Y: off})
 	return ls, nil
 }
 
@@ -269,8 +269,8 @@ func (b *horizQuartPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	if err != nil {
 		return nil, err
 	}
-	ls.XOffset += b.MedianStyle.Radius / 2
-	ls.YOffset += b.MedianStyle.Radius / 2
+	off := 0.5 * b.MedianStyle.Radius
+	ls.Offset = ls.Offset.Add(vg.Point{X: off, Y: off})
 	return ls, nil
 }
 

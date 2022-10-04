@@ -41,7 +41,8 @@ func CallLsofWithContext(ctx context.Context, invoke Invoker, pid int32, args ..
 }
 
 func CallPgrepWithContext(ctx context.Context, invoke Invoker, pid int32) ([]int32, error) {
-	cmd := []string{"-P", strconv.Itoa(int(pid))}
+	var cmd []string
+	cmd = []string{"-P", strconv.Itoa(int(pid))}
 	pgrep, err := exec.LookPath("pgrep")
 	if err != nil {
 		return []int32{}, err
