@@ -75,7 +75,6 @@ _**Video**_
 [GopherCon Singapore (2019) - Garbage Collection Semantics](https://www.youtube.com/watch?v=q4HoWwdZUHs)  
 [GopherCon India (2019) - Channel Semantics](https://www.youtube.com/watch?v=AHAf1Xfr_HE)  
 [GoWayFest Minsk (2018) - Profiling Web Apps](https://www.youtube.com/watch?v=-GBMFPegqgw)  
-[GopherChina (2018) - Composition In Go William](https://www.youtube.com/watch?v=pvLUO9ZManM&feature=youtu.be)  
 [GopherCon Singapore (2018) - Optimizing For Correctness](https://engineers.sg/video/optimize-for-correctness-gopherconsg-2018--2610)  
 [GopherCon India (2018) - What is the Legacy You Are Leaving Behind](https://www.youtube.com/watch?v=j3zCUc06OXo&t=0s&index=11&list=PLhJxE57Cki63cElK2kmt3_vi8j2eIHTqZ)  
 [Code::Dive (2017) - Optimizing For Correctness](https://www.youtube.com/watch?v=OTLjN8NQDyo)  
