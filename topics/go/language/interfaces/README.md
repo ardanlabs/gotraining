@@ -27,7 +27,7 @@ _"A proper abstraction decouples the code so that every change doesn’t echo th
 [Interfaces](https://golang.org/doc/effective_go.html#interfaces)    
 [The Laws of Reflection](https://blog.golang.org/laws-of-reflection) - Rob Pike    
 [Methods, Interfaces and Embedded Types in Go](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy    
-[Interface Pollution](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - JBD    
+[Interface Pollution](https://rakyll.org/interface-pollution/) - JBD    
 [Abstraction Considered Harmful](https://bravenewgeek.com/abstraction-considered-harmful/) - Tyler Treat    
 [Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy    
 [Interface Semantics](https://www.ardanlabs.com/blog/2017/07/interface-semantics.html) - William Kennedy    
