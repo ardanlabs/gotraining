@@ -307,6 +307,8 @@ In Go, the underlying machine is a real machine, unlike what you would find in J
 
 _"Making things easy to do is a false economy. Focus on making things easy to understand and the rest will follow." - Peter Bourgon_
 
+_"Reducing complexity is more powerful than hiding it." - Chris Hines_
+
 ---
 
 #### Simplicity
