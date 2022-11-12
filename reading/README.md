@@ -408,7 +408,6 @@ https://godoc.org/golang.org/x/tools/go/ssa
 [Fix corruption crash/race between select and stack growth](https://github.com/golang/go/commit/b902a63ade47cf69218c9b38c9a783fc8cfc3041) - Russ Cox  
 [Defer Proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/34481-opencoded-defers.md) - Go Team  
 
-
 ## Hardware
 
 [Learn how to build a processor](https://www.youtube.com/playlist?list=PLNmCdcvSgJj5bllQx5E3A6OsbMq2luA9J)  

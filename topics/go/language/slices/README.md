@@ -20,6 +20,7 @@ Slices are an incredibly important data structure in Go. They form the basis for
 [Slices of Slices of Slices in Go](https://www.ardanlabs.com/blog/2013/09/slices-of-slices-of-slices-in-go.html) - William Kennedy    
 [Three-Index Slices in Go 1.2](https://www.ardanlabs.com/blog/2013/12/three-index-slices-in-go-12.html) - William Kennedy    
 [SliceTricks](https://github.com/golang/go/wiki/SliceTricks)    
+[runtime: Make slice growth formula a bit smoother](https://go-review.googlesource.com/c/go/+/347917) - Go Team 
 
 ## Code Review
 
