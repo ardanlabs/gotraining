@@ -36,6 +36,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 ### History
 
 [The Go Programming Language - Official Announcement](https://www.youtube.com/watch?v=rKnDgT73v8s#t=8m53) - Rob Pike  
+[The Go Programming Language and Environment](https://m-cacm.acm.org/magazines/2022/5/260357-the-go-programming-language-and-environment/fulltext) - Go Team 
 [The Evolution of Go](https://www.youtube.com/watch?v=0ReKdcpNyQg) - Robert Griesmer  
 [Less Is Exponentially More (2012)](https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html) - Rob Pike  
 [Language Design in the Service of Software Engineering](https://talks.golang.org/2012/splash.article) - Rob Pike  
