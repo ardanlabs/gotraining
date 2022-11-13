@@ -1,0 +1,17 @@
+# This is Git's per-user configuration file.
+[user]
+	name = William Kennedy
+	email = bill@ardanlabs.com
+	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJdw2JMOT31tVWfvU3bkTEah8coMFgyZhMWVqjLbvLnk bill@ardanlabs.com
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[tag]
+	gpgsign = true
+[core]
+	editor = nano
+[pager]
+	branch = false
+    tag = false
+	stash = false

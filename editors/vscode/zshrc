@@ -1,0 +1,26 @@
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="amuse"
+
+ulimit -n 200000
+
+export GOPATH=$HOME/code/go
+export PATH=$PATH:$GOPATH/bin
+
+alias gitlog="git log --oneline --graph --all"
+alias cdgot="cd $GOPATH/src/github.com/ardanlabs/gotraining"
+alias cdser="cd $GOPATH/src/github.com/ardanlabs/service"
+alias cdcon="cd $GOPATH/src/github.com/ardanlabs/conf"
+alias cdgra="cd $GOPATH/src/github.com/ardanlabs/graphql"
+alias cddar="cd $GOPATH/src/github.com/ardanlabs/darwin"
+alias cdblk="cd $GOPATH/src/github.com/ardanlabs/blockchain"
+alias cdsmart="cd $GOPATH/src/github.com/ardanlabs/smartcontract"
+alias cdliar="cd $GOPATH/src/github.com/ardanlabs/liarsdice"
+alias cdeth="cd $GOPATH/src/github.com/ardanlabs/ethereum"
+alias cdbets="cd $GOPATH/src/github.com/ardanlabs/bets"
+alias cdtp="cd $GOPATH/src/gitlab.com/totalprocessing/crm-rewrite-api"
+alias python=/opt/homebrew/bin/python3
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh

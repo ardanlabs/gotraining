@@ -21,7 +21,10 @@
         "staticcheck": true,
         "usePlaceholders": true,    // add parameter placeholders when completing a function
         "completeUnimported": true, // autocomplete unimported packages
-        "deepCompletion": true      // enable deep completion
+        "deepCompletion": true,     // enable deep completion
+        "codelenses": {
+            "gc_details": true,
+        }
     },
     "go.lintFlags": [
         "-checks=all"
@@ -90,6 +93,6 @@
     "testing.gutterEnabled": false,
     "security.workspace.trust.untrustedFiles": "open",
     "window.newWindowDimensions": "maximized",
-    "window.zoomLevel": 1,
     "editor.detectIndentation": false,
+    "window.zoomLevel": 1,
 }
