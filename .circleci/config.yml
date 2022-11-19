@@ -3,7 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
-  build:\machine:
+  build:
+    machine:
       image: ubuntu-2004:202010-01
     steps:
       - checkout
