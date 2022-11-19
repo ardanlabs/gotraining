@@ -163,10 +163,7 @@ func send(r io.Reader, ch chan int) {
 func makePlot(xys plotter.XYs) error {
 
 	// Create a new plot.
-	p, err := plot.New()
-	if err != nil {
-		return err
-	}
+	p := plot.New()
 
 	// Label the new plot.
 	p.Title.Text = "Latencies (differenced from the unbuffered channel)"
@@ -174,7 +171,7 @@ func makePlot(xys plotter.XYs) error {
 	p.Y.Label.Text = "Latency"
 
 	// Add the prepared points to the plot.
-	if err = plotutil.AddLinePoints(p, "Latencies", xys); err != nil {
+	if err := plotutil.AddLinePoints(p, "Latencies", xys); err != nil {
 		return err
 	}
 
