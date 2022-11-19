@@ -3,18 +3,23 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/golang:latest
-
-    working_directory: /go/src/github.com/ardanlabs/gotraining
+  build:\machine:
+      image: ubuntu-2004:202010-01
     steps:
       - checkout
-      - run: go version
+      - run:
+          name: Install Go 1.19
+          command: |
+              sudo rm -rf /usr/local/go
+              wget -O go.tgz https://dl.google.com/go/go1.19.linux-amd64.tar.gz
+              sudo tar -C /usr/local -xzf go.tgz
+              which go
+              go version
+      - run:
+          name: Run tests
+          command: |
+              find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -exec dirname {} \; | uniq | xargs go test
 
       # Get a list of all non-vendor directories with test files and test them.
       # We could just do `go test ./...` but we have some packages that aren't
       # intended to compile and some tests that aren't intended to pass yet.
-      - run:
-          name: Run tests
-          command: find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -exec dirname {} \; | uniq | xargs go test
