@@ -19,7 +19,6 @@ import (
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/plotutil"
-	"gonum.org/v1/plot/vg"
 )
 
 // data represents a set of bytes to process.
@@ -176,5 +175,6 @@ func makePlot(xys plotter.XYs) error {
 	}
 
 	// Save the plot to a PNG file.
-	return p.Save(10*vg.Inch, 5*vg.Inch, "latencies.png")
+	//return p.Save(10*vg.Inch, 5*vg.Inch, "latencies.png")
+	return nil
 }
