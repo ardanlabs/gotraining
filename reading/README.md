@@ -225,7 +225,7 @@ There is a ton of links to extra reading and videos through out the material. Oc
 
 [PRinty# C with ABC](http://www.cs.cmu.edu/~tom7/abc/paper.pdf) - Dr. Tom Murphy VII, Ph.D  
 [I coached 101 CEOs, founders, VCs and other executives in 2019: These are the biggest takeaways](https://leowid.com/2019-2) - Leo Widrich  
-[Rob Pike's 5 Rules of Programming](https://users.ece.utexas.edu) - Rob Pike  
+[Rob Pike's 6 Rules of Programming](https://twitter.com/rob_pike/status/998681790037442561) - Rob Pike  
 
 ### Profiling, Debugging and Optimization
 
