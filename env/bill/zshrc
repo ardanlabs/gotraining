@@ -7,7 +7,7 @@ ulimit -n 200000
 export GOPATH=$HOME/code/go
 export PATH=$PATH:$GOPATH/bin
 
-alias gitlog="git log --oneline --graph --all"
+alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias cdgot="cd $GOPATH/src/github.com/ardanlabs/gotraining"
 alias cdser="cd $GOPATH/src/github.com/ardanlabs/service"
 alias cdcon="cd $GOPATH/src/github.com/ardanlabs/conf"
