@@ -1,47 +1,12 @@
 # git.sr.ht/~sbinet/gg v0.3.1
 ## explicit; go 1.16
 git.sr.ht/~sbinet/gg
-# github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6
-## explicit
-github.com/StackExchange/wmi
 # github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b
 ## explicit; go 1.15
 github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 ## explicit
 github.com/braintree/manners
-# github.com/btcsuite/btcd/btcec/v2 v2.2.0
-## explicit; go 1.17
-github.com/btcsuite/btcd/btcec/v2
-github.com/btcsuite/btcd/btcec/v2/ecdsa
-# github.com/deckarep/golang-set v1.8.0
-## explicit; go 1.17
-github.com/deckarep/golang-set
-# github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1
-## explicit; go 1.16
-github.com/decred/dcrd/dcrec/secp256k1/v4
-github.com/decred/dcrd/dcrec/secp256k1/v4/ecdsa
-# github.com/ethereum/go-ethereum v1.10.25
-## explicit; go 1.17
-github.com/ethereum/go-ethereum
-github.com/ethereum/go-ethereum/common
-github.com/ethereum/go-ethereum/common/hexutil
-github.com/ethereum/go-ethereum/common/math
-github.com/ethereum/go-ethereum/common/mclock
-github.com/ethereum/go-ethereum/core/types
-github.com/ethereum/go-ethereum/crypto
-github.com/ethereum/go-ethereum/crypto/secp256k1
-github.com/ethereum/go-ethereum/crypto/secp256k1/libsecp256k1/include
-github.com/ethereum/go-ethereum/crypto/secp256k1/libsecp256k1/src
-github.com/ethereum/go-ethereum/crypto/secp256k1/libsecp256k1/src/modules/recovery
-github.com/ethereum/go-ethereum/ethclient
-github.com/ethereum/go-ethereum/log
-github.com/ethereum/go-ethereum/metrics
-github.com/ethereum/go-ethereum/p2p/netutil
-github.com/ethereum/go-ethereum/params
-github.com/ethereum/go-ethereum/rlp
-github.com/ethereum/go-ethereum/rlp/internal/rlpstruct
-github.com/ethereum/go-ethereum/rpc
 # github.com/go-fonts/liberation v0.2.0
 ## explicit; go 1.13
 github.com/go-fonts/liberation/liberationmonobold
@@ -68,16 +33,9 @@ github.com/go-latex/latex/mtex
 github.com/go-latex/latex/mtex/symbols
 github.com/go-latex/latex/tex
 github.com/go-latex/latex/token
-# github.com/go-ole/go-ole v1.2.1
-## explicit
-github.com/go-ole/go-ole
-github.com/go-ole/go-ole/oleutil
 # github.com/go-pdf/fpdf v0.6.0
 ## explicit; go 1.16
 github.com/go-pdf/fpdf
-# github.com/go-stack/stack v1.8.0
-## explicit
-github.com/go-stack/stack
 # github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 ## explicit
 github.com/golang/freetype/raster
@@ -92,9 +50,6 @@ github.com/google/go-cmp/cmp/internal/value
 # github.com/google/uuid v1.2.0
 ## explicit
 github.com/google/uuid
-# github.com/gorilla/websocket v1.4.2
-## explicit; go 1.12
-github.com/gorilla/websocket
 # github.com/patrickmn/go-cache v2.1.0+incompatible
 ## explicit
 github.com/patrickmn/go-cache
@@ -104,19 +59,6 @@ github.com/pborman/uuid
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# github.com/shirou/gopsutil v3.21.4-0.20210419000835-c7a38de76ee5+incompatible
-## explicit
-github.com/shirou/gopsutil/cpu
-github.com/shirou/gopsutil/internal/common
-# github.com/tklauser/go-sysconf v0.3.5
-## explicit; go 1.13
-github.com/tklauser/go-sysconf
-# github.com/tklauser/numcpus v0.2.2
-## explicit; go 1.11
-github.com/tklauser/numcpus
-# golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
-## explicit; go 1.17
-golang.org/x/crypto/sha3
 # golang.org/x/image v0.0.0-20220902085622-e7cb96979f69
 ## explicit; go 1.12
 golang.org/x/image/ccitt
@@ -134,12 +76,6 @@ golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
 golang.org/x/image/vector
-# golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f
-## explicit; go 1.17
-golang.org/x/sys/cpu
-golang.org/x/sys/internal/unsafeheader
-golang.org/x/sys/unix
-golang.org/x/sys/windows
 # golang.org/x/text v0.3.7
 ## explicit; go 1.17
 golang.org/x/text/encoding
@@ -164,6 +100,3 @@ gonum.org/v1/plot/vg/vgimg
 gonum.org/v1/plot/vg/vgpdf
 gonum.org/v1/plot/vg/vgsvg
 gonum.org/v1/plot/vg/vgtex
-# gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce
-## explicit
-gopkg.in/natefinch/npipe.v2
