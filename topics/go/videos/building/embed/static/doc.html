@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Metrics Docs</title>
+		<link rel="stylesheet" href="/static/bootstrap.min.css" />
+		<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col">
+					<h2 class="alert alert-primary d-flex justify-content-center" role="alert">
+						Metrics Documentation
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<p>
+					Currently the API has a single end point:
+					</p>
+
+					<pre>
+GET /metrics?start=2022-02-17T15:30:00&amp;end=2022-02-17T17:00:00
+
+[
+	{
+			"time": "2022-02-20T09:34:44.350354589+02:00",
+			"name": "cpu",
+			"value": 13.9
+	},
+	...
+]
+				</pre>
+				</div>
+			</div>
+		</div>
+	</body>
+

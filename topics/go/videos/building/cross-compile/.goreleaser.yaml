@@ -1,0 +1,10 @@
+project_name: quotes
+builds:
+  - env:
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
