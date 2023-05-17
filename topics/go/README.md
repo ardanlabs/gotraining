@@ -279,7 +279,7 @@ _"Instability is a drag on innovation." - Yehudah Katz_
 
 This is about writing simple code that is easier to read and understand without the need of mental exhaustion. Just as important, it's about not hiding the cost/impact of the code per line, function, package and the overall ecosystem it runs in.
 
-[Example Readability Issue](http://cpp.sh/6i7d)  
+[Example Readability Issue](https://cpp.sh/?source=%2F%2F+Example+program+to+show+how+copy+elision+can+make+it+hard+to%0A%2F%2F+read+code+and+understand+its+cost.%0A%0A%23include+%3Ciostream%3E%0A%23include+%3Cstring%3E%0A%0Astruct+Foo+%7B%0A++++Foo()+%7B+std%3A%3Acout+%3C%3C+%22Constructed%22+%3C%3C+std%3A%3Aendl%3B+%7D%0A++++Foo(const+Foo+%26)+%7B+std%3A%3Acout+%3C%3C+%22Copy-constructed%22+%3C%3C+std%3A%3Aendl%3B+%7D%0A++++Foo(Foo+%26%26)+%7B+std%3A%3Acout+%3C%3C+%22Move-constructed%22+%3C%3C+std%3A%3Aendl%3B+%7D%0A++++~Foo()+%7B+std%3A%3Acout+%3C%3C+%22Destructed%22+%3C%3C+std%3A%3Aendl%3B+%7D%0A++%0A++++Foo+operator%3D(const+Foo%26)+%7B+std%3A%3Acout+%3C%3C+%22Assignment-overload%22+%3C%3C+std%3A%3Aendl%3B+return+*this%3B+%7D%0A%7D%3B%0A+%0AFoo+f1()+%7B%0A++++return+Foo()%3B%0A%7D%0A+%0Aint+main()+%7B++%0A%0A++++%2F%2F+How+many+objects+are+created+for+this+construction%3F%0A++++Foo+foo1+%3D+f1()%3B%0A++++std%3A%3Acout+%3C%3C+%22**************************%5Cn%22%3B%0A%0A++++%2F%2F+How+many+objects+are+created+for+this+assignment%3F%0A++++foo1+%3D+f1()%3B%0A++++std%3A%3Acout+%3C%3C+%22**************************%5Cn%22%3B%0A%7D)  
 
 **Code Must Never Lie**
 
