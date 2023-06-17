@@ -133,8 +133,8 @@ func (f *Face) Metrics() font.Metrics {
 
 // Kern satisfies the font.Face interface.
 func (f *Face) Kern(r0, r1 rune) fixed.Int26_6 {
-	x0 := f.index(r0)
-	x1 := f.index(r1)
+	x0, _ := f.f.GlyphIndex(&f.buf, r0)
+	x1, _ := f.f.GlyphIndex(&f.buf, r1)
 	k, err := f.f.Kern(&f.buf, x0, x1, fixed.Int26_6(f.f.UnitsPerEm()), f.hinting)
 	if err != nil {
 		return 0
@@ -251,22 +251,19 @@ func (f *Face) Glyph(dot fixed.Point26_6, r rune) (dr image.Rectangle, mask imag
 	}
 	f.rast.Draw(&f.mask, f.mask.Bounds(), image.Opaque, image.Point{})
 
-	return dr, &f.mask, f.mask.Rect.Min, advance, true
+	return dr, &f.mask, f.mask.Rect.Min, advance, x != 0
 }
 
 // GlyphBounds satisfies the font.Face interface.
 func (f *Face) GlyphBounds(r rune) (bounds fixed.Rectangle26_6, advance fixed.Int26_6, ok bool) {
-	bounds, advance, err := f.f.GlyphBounds(&f.buf, f.index(r), f.scale, f.hinting)
-	return bounds, advance, err == nil
+	x, _ := f.f.GlyphIndex(&f.buf, r)
+	bounds, advance, err := f.f.GlyphBounds(&f.buf, x, f.scale, f.hinting)
+	return bounds, advance, (err == nil) && (x != 0)
 }
 
 // GlyphAdvance satisfies the font.Face interface.
 func (f *Face) GlyphAdvance(r rune) (advance fixed.Int26_6, ok bool) {
-	advance, err := f.f.GlyphAdvance(&f.buf, f.index(r), f.scale, f.hinting)
-	return advance, err == nil
-}
-
-func (f *Face) index(r rune) sfnt.GlyphIndex {
 	x, _ := f.f.GlyphIndex(&f.buf, r)
-	return x
+	advance, err := f.f.GlyphAdvance(&f.buf, x, f.scale, f.hinting)
+	return advance, (err == nil) && (x != 0)
 }

@@ -153,30 +153,30 @@ type NameID uint16
 
 const (
 	NameIDCopyright                  NameID = 0
-	NameIDFamily                            = 1
-	NameIDSubfamily                         = 2
-	NameIDUniqueIdentifier                  = 3
-	NameIDFull                              = 4
-	NameIDVersion                           = 5
-	NameIDPostScript                        = 6
-	NameIDTrademark                         = 7
-	NameIDManufacturer                      = 8
-	NameIDDesigner                          = 9
-	NameIDDescription                       = 10
-	NameIDVendorURL                         = 11
-	NameIDDesignerURL                       = 12
-	NameIDLicense                           = 13
-	NameIDLicenseURL                        = 14
-	NameIDTypographicFamily                 = 16
-	NameIDTypographicSubfamily              = 17
-	NameIDCompatibleFull                    = 18
-	NameIDSampleText                        = 19
-	NameIDPostScriptCID                     = 20
-	NameIDWWSFamily                         = 21
-	NameIDWWSSubfamily                      = 22
-	NameIDLightBackgroundPalette            = 23
-	NameIDDarkBackgroundPalette             = 24
-	NameIDVariationsPostScriptPrefix        = 25
+	NameIDFamily                     NameID = 1
+	NameIDSubfamily                  NameID = 2
+	NameIDUniqueIdentifier           NameID = 3
+	NameIDFull                       NameID = 4
+	NameIDVersion                    NameID = 5
+	NameIDPostScript                 NameID = 6
+	NameIDTrademark                  NameID = 7
+	NameIDManufacturer               NameID = 8
+	NameIDDesigner                   NameID = 9
+	NameIDDescription                NameID = 10
+	NameIDVendorURL                  NameID = 11
+	NameIDDesignerURL                NameID = 12
+	NameIDLicense                    NameID = 13
+	NameIDLicenseURL                 NameID = 14
+	NameIDTypographicFamily          NameID = 16
+	NameIDTypographicSubfamily       NameID = 17
+	NameIDCompatibleFull             NameID = 18
+	NameIDSampleText                 NameID = 19
+	NameIDPostScriptCID              NameID = 20
+	NameIDWWSFamily                  NameID = 21
+	NameIDWWSSubfamily               NameID = 22
+	NameIDLightBackgroundPalette     NameID = 23
+	NameIDDarkBackgroundPalette      NameID = 24
+	NameIDVariationsPostScriptPrefix NameID = 25
 )
 
 // Units are an integral number of abstract, scalable "font units". The em

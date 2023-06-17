@@ -144,6 +144,32 @@ func (pts *Line) DataRange() (xmin, xmax, ymin, ymax float64) {
 	return XYRange(pts)
 }
 
+// GlyphBoxes implements the plot.GlyphBoxer interface.
+func (pts *Line) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+	r := 0.5 * pts.LineStyle.Width
+	rect := vg.Rectangle{
+		Min: vg.Point{
+			X: -r,
+			Y: -r,
+		},
+		Max: vg.Point{
+			X: +r,
+			Y: +r,
+		},
+	}
+
+	bs := make([]plot.GlyphBox, pts.XYs.Len())
+	for i := range bs {
+		x, y := pts.XY(i)
+		bs[i] = plot.GlyphBox{
+			X:         plt.X.Norm(x),
+			Y:         plt.Y.Norm(y),
+			Rectangle: rect,
+		}
+	}
+	return bs
+}
+
 // Thumbnail returns the thumbnail for the Line, implementing the plot.Thumbnailer interface.
 func (pts *Line) Thumbnail(c *draw.Canvas) {
 	if pts.FillColor != nil {

@@ -1,5 +1,5 @@
-# git.sr.ht/~sbinet/gg v0.3.1
-## explicit; go 1.16
+# git.sr.ht/~sbinet/gg v0.5.0
+## explicit; go 1.19
 git.sr.ht/~sbinet/gg
 # github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b
 ## explicit; go 1.15
@@ -7,8 +7,12 @@ github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 ## explicit
 github.com/braintree/manners
-# github.com/go-fonts/liberation v0.2.0
-## explicit; go 1.13
+# github.com/campoy/embedmd v1.0.0
+## explicit
+github.com/campoy/embedmd
+github.com/campoy/embedmd/embedmd
+# github.com/go-fonts/liberation v0.3.1
+## explicit; go 1.19
 github.com/go-fonts/liberation/liberationmonobold
 github.com/go-fonts/liberation/liberationmonobolditalic
 github.com/go-fonts/liberation/liberationmonoitalic
@@ -21,8 +25,8 @@ github.com/go-fonts/liberation/liberationserifbold
 github.com/go-fonts/liberation/liberationserifbolditalic
 github.com/go-fonts/liberation/liberationserifitalic
 github.com/go-fonts/liberation/liberationserifregular
-# github.com/go-latex/latex v0.0.0-20210823091927-c0d11ff05a81
-## explicit; go 1.16
+# github.com/go-latex/latex v0.0.0-20230307184459-12ec69307ad9
+## explicit; go 1.19
 github.com/go-latex/latex
 github.com/go-latex/latex/ast
 github.com/go-latex/latex/drawtex
@@ -33,13 +37,12 @@ github.com/go-latex/latex/mtex
 github.com/go-latex/latex/mtex/symbols
 github.com/go-latex/latex/tex
 github.com/go-latex/latex/token
-# github.com/go-pdf/fpdf v0.6.0
-## explicit; go 1.16
+# github.com/go-pdf/fpdf v0.8.0
+## explicit; go 1.19
 github.com/go-pdf/fpdf
 # github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 ## explicit
 github.com/golang/freetype/raster
-github.com/golang/freetype/truetype
 # github.com/google/go-cmp v0.5.9
 ## explicit; go 1.13
 github.com/google/go-cmp/cmp
@@ -47,7 +50,7 @@ github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/uuid v1.2.0
+# github.com/google/uuid v1.3.0
 ## explicit
 github.com/google/uuid
 # github.com/patrickmn/go-cache v2.1.0+incompatible
@@ -59,7 +62,10 @@ github.com/pborman/uuid
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# golang.org/x/image v0.0.0-20220902085622-e7cb96979f69
+# github.com/pmezard/go-difflib v1.0.0
+## explicit
+github.com/pmezard/go-difflib/difflib
+# golang.org/x/image v0.8.0
 ## explicit; go 1.12
 golang.org/x/image/ccitt
 golang.org/x/image/draw
@@ -76,15 +82,15 @@ golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
 golang.org/x/image/vector
-# golang.org/x/text v0.3.7
+# golang.org/x/text v0.10.0
 ## explicit; go 1.17
 golang.org/x/text/encoding
 golang.org/x/text/encoding/charmap
 golang.org/x/text/encoding/internal
 golang.org/x/text/encoding/internal/identifier
 golang.org/x/text/transform
-# gonum.org/v1/plot v0.12.0
-## explicit; go 1.18
+# gonum.org/v1/plot v0.13.0
+## explicit; go 1.19
 gonum.org/v1/plot
 gonum.org/v1/plot/font
 gonum.org/v1/plot/font/liberation

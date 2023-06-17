@@ -9,8 +9,8 @@ import (
 
 // Attachment defines a content to be included in the pdf, in one
 // of the following ways :
-// 	- associated with the document as a whole : see SetAttachments()
-//	- accessible via a link localized on a page : see AddAttachmentAnnotation()
+//   - associated with the document as a whole : see SetAttachments()
+//   - accessible via a link localized on a page : see AddAttachmentAnnotation()
 type Attachment struct {
 	Content []byte
 
@@ -26,15 +26,11 @@ type Attachment struct {
 
 // return the hex encoded checksum of `data`
 func checksum(data []byte) string {
-	tmp := md5.Sum(data)
-	sl := make([]byte, len(tmp))
-	for i, v := range tmp {
-		sl[i] = v
-	}
-	return hex.EncodeToString(sl)
+	sl := md5.Sum(data)
+	return hex.EncodeToString(sl[:])
 }
 
-// Writes a compressed file like object as ``/EmbeddedFile``. Compressing is
+// Writes a compressed file like object as "/EmbeddedFile". Compressing is
 // done with deflate. Includes length, compressed length and MD5 checksum.
 func (f *Fpdf) writeCompressedFileObject(content []byte) {
 	lenUncompressed := len(content)

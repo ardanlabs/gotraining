@@ -271,7 +271,7 @@ chain:
 	return sorted
 }
 
-//  templateChainDependencies is a recursive function for determining the full chain of template dependencies
+// templateChainDependencies is a recursive function for determining the full chain of template dependencies
 func templateChainDependencies(template Template) []Template {
 	requires := template.Templates()
 	chain := make([]Template, len(requires)*2)

@@ -189,7 +189,7 @@ func (utf *utf8FontFile) skip(delta int) {
 	_, _ = utf.fileReader.seek(int64(delta), 1)
 }
 
-//SeekTable position
+// SeekTable position
 func (utf *utf8FontFile) SeekTable(name string) int {
 	return utf.seekTable(name, 0)
 }
@@ -631,7 +631,7 @@ func (utf *utf8FontFile) generateCMAPTable(cidSymbolPairCollection map[int]int, 
 	return cmapstr
 }
 
-//GenerateCutFont fill utf8FontFile from .utf file, only with runes from usedRunes
+// GenerateCutFont fill utf8FontFile from .utf file, only with runes from usedRunes
 func (utf *utf8FontFile) GenerateCutFont(usedRunes map[int]int) []byte {
 	utf.fileReader.readerPosition = 0
 	utf.symbolPosition = make([]int, 0)
@@ -992,7 +992,11 @@ func (utf *utf8FontFile) assembleTables() []byte {
 
 	answer = append(answer, packHeader(0x00010000, tablesCount, findSize, writer, rOffset)...)
 
-	tables := utf.outTablesData
+	tables := make(map[string][]byte, len(utf.outTablesData))
+	for k, v := range utf.outTablesData {
+		tables[k] = make([]byte, len(v))
+		copy(tables[k], v)
+	}
 	tablesNames := keySortStrings(tables)
 
 	offset := 12 + tablesCount*16
