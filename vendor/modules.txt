@@ -11,6 +11,9 @@ github.com/braintree/manners
 ## explicit
 github.com/campoy/embedmd
 github.com/campoy/embedmd/embedmd
+# github.com/davecgh/go-spew v1.1.1
+## explicit
+github.com/davecgh/go-spew/spew
 # github.com/go-fonts/liberation v0.3.1
 ## explicit; go 1.19
 github.com/go-fonts/liberation/liberationmonobold
@@ -65,6 +68,13 @@ github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
 ## explicit
 github.com/pmezard/go-difflib/difflib
+# github.com/stretchr/testify v1.8.4
+## explicit; go 1.20
+github.com/stretchr/testify/assert
+github.com/stretchr/testify/require
+# golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea
+## explicit; go 1.20
+golang.org/x/exp/constraints
 # golang.org/x/image v0.8.0
 ## explicit; go 1.12
 golang.org/x/image/ccitt
@@ -88,7 +98,20 @@ golang.org/x/text/encoding
 golang.org/x/text/encoding/charmap
 golang.org/x/text/encoding/internal
 golang.org/x/text/encoding/internal/identifier
+golang.org/x/text/feature/plural
+golang.org/x/text/internal
+golang.org/x/text/internal/catmsg
+golang.org/x/text/internal/format
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
+golang.org/x/text/internal/number
+golang.org/x/text/internal/stringset
+golang.org/x/text/internal/tag
+golang.org/x/text/language
+golang.org/x/text/message
+golang.org/x/text/message/catalog
 golang.org/x/text/transform
+golang.org/x/text/unicode/norm
 # gonum.org/v1/plot v0.13.0
 ## explicit; go 1.19
 gonum.org/v1/plot
@@ -106,3 +129,6 @@ gonum.org/v1/plot/vg/vgimg
 gonum.org/v1/plot/vg/vgpdf
 gonum.org/v1/plot/vg/vgsvg
 gonum.org/v1/plot/vg/vgtex
+# gopkg.in/yaml.v3 v3.0.1
+## explicit
+gopkg.in/yaml.v3
