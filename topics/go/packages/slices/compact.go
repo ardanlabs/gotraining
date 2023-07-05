@@ -13,22 +13,11 @@ import (
 func main() {
 
 	a := []int{
-		1, 2, 1, 1, 3, 4, 5,
+		1, 2, 2, 1, 1, 3, 3, 4, 5,
 	}
 
 	fmt.Println("Original", a)
-	cache := map[int]bool{}
-	a = slices.CompactFunc(a, func(e1 int, e2 int) bool {
 
-		_, ok := cache[e1]
-
-		if ok {
-			return true
-		}
-
-		cache[e1] = true
-
-		return false
-	})
+	a = slices.Compact(a)
 	fmt.Println("Compact", a)
 }
