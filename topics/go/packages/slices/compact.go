@@ -19,5 +19,5 @@ func main() {
 	fmt.Println("Original", a)
 
 	a = slices.Compact(a)
-	fmt.Println("Compact", a)
+	fmt.Println("Compacted", a)
 }

@@ -26,6 +26,6 @@ func main() {
 	isSortedA := slices.IsSorted(a)
 	isSortedB := slices.IsSorted(b)
 
-	fmt.Println("Is in ascending order:", isSortedA)
-	fmt.Println("Is in ascending order:", isSortedB)
+	fmt.Println("Is Array A in ascending order:", isSortedA)
+	fmt.Println("Is Array B in ascending order:", isSortedB)
 }
