@@ -13,7 +13,7 @@ import (
 func main() {
 
 	a := []int{
-		1, 2, 2, 1, 1, 3, 3, 4, 5,
+		1, 1, 2, 2, 1, 1, 3, 3, 4, 5,
 	}
 
 	fmt.Println("Original", a)
