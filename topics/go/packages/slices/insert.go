@@ -2,7 +2,7 @@
 // the `slices` package's insert function.
 // The aim of this test is determine
 // the behavior the package's insert function
-// and how it modifies an array.
+// and how it modifies a slice.
 // This program requires Go 1.21rc1
 package main
 
