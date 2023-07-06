@@ -29,13 +29,13 @@ func main() {
 	// is unable to increase capacity. A great
 	// pre-emptive measure prior to increasing a
 	// slices capacity.
-	// if the supplied size is less than the
-	// current no change is observed
+	// if the supplied size is 1 then
+	// no change is observed
 	a = slices.Grow(a, 1)
 
 	// After growing the cap will be
 	// 5.
-	fmt.Println("Grow", a, cap(a))
+	fmt.Println("Grow 1", a, cap(a))
 
 	// Growing with value 8 will change the cap to 10 due
 	// to the pre-existing elemnts in the slice.
@@ -43,5 +43,5 @@ func main() {
 
 	// After growing the cap will be reduced
 	// to 10.
-	fmt.Println("Grow", a, cap(a))
+	fmt.Println("Grow 8", a, cap(a))
 }
