@@ -4,6 +4,7 @@
 // and use it to sort a slice of integers in ascending
 // order.
 // This program requires Go 1.21rc1
+// This code is still not running
 package main
 
 import (
