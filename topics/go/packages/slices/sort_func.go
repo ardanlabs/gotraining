@@ -49,6 +49,8 @@ func main() {
 		},
 	}
 
+	// code is unsafe, in the case
+	// of the date difference exceeding the max `int` size
 	slices.SortFunc(orders, func(a, b Order) int { return int(a.Date.Unix() - b.Date.Unix()) })
 
 	fmt.Println("Sorted slices of orders:", orders)

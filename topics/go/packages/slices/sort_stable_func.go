@@ -9,19 +9,12 @@ package main
 import (
 	"fmt"
 	"slices"
-	"time"
 )
-
-type Order struct {
-	Date     time.Time
-	Name     string
-	Complete bool
-}
 
 func main() {
 
 	// This example demonstrates
-	// how sort func can be used
+	// how sort stable func can be used
 	// with a slice of numbers.
 	ints := []int{
 		2, 4, 6, 7, 8, 9, 1, 0,
