@@ -4,7 +4,6 @@
 // and use it to sort a slice of integers in ascending
 // order.
 // This program requires Go 1.21rc1
-// This code is still not running
 package main
 
 import (
@@ -26,9 +25,10 @@ func main() {
 	// with a slice of numbers.
 	ints := []int{
 		2, 4, 6, 7, 8, 9, 1, 0,
-	}
+	}[:]
 
-	slices.SortFunc(ints, func(a, b int) bool { return a < b })
+	var less = func(a, b int) int { return a - b }
+	slices.SortFunc(ints, less)
 
 	fmt.Println("Is slice int sorted", slices.IsSorted(ints))
 	fmt.Println("Resulting slice after sort", ints)
@@ -49,7 +49,7 @@ func main() {
 		},
 	}
 
-	slices.SortFunc(orders, func(a, b Order) bool { return a.Date.Unix() < b.Date.Unix() })
+	slices.SortFunc(orders, func(a, b Order) int { return int(a.Date.Unix() - b.Date.Unix()) })
 
 	fmt.Println("Sorted slices of orders:", orders)
 }
