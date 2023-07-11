@@ -22,6 +22,8 @@ func main() {
 		return a - b
 	}
 
+	fmt.Println("Slice ints", ints)
+
 	_, found := slices.BinarySearchFunc(
 		ints,
 		3,

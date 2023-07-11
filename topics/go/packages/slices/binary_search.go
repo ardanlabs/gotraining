@@ -18,6 +18,8 @@ func main() {
 		1, 2, 4, 5, 6,
 	}
 
+	fmt.Println("Slice a", a)
+
 	_, found := slices.BinarySearch(
 		a,
 		3,
