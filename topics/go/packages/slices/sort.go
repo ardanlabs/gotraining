@@ -20,7 +20,8 @@ func main() {
 	}
 
 	fmt.Println("Original", ints)
-	ints = slices.Sort(ints)
+
+	slices.Sort(ints)
 
 	fmt.Println("Sorted", ints)
 
