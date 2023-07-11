@@ -1,11 +1,11 @@
 #!/bin/bash
-declare -i counter=0
+counter=0
 
 for filename in ./*.go; do
     echo
     echo
     echo "Executing $filename"
-    go1.21rc2 run $filename
+    $GO_COMMAND run $filename
     counter=`expr $counter + 1`
 done
 
