@@ -1,7 +1,8 @@
 // This program showcases
-// the `slices` package's compact function.
+// the `slices` package's contains function.
 // The aim of this test is to determine
-// if a slice contains an element
+// if a slice contains a player with the
+// specified username.
 // This program requires Go 1.21rc1
 package main
 
@@ -33,7 +34,6 @@ func main() {
 	}
 
 	compareFunc := func(
-		arr []Player,
 		name string,
 	) func(Player) bool {
 		return func(p Player) bool {
@@ -49,11 +49,11 @@ func main() {
 
 	containEron := slices.ContainsFunc[[]Player](
 		a,
-		compareFunc(a, "Eron"),
+		compareFunc("Eron"),
 	)
 	containZack := slices.ContainsFunc[[]Player](
 		a,
-		compareFunc(a, "Zack"),
+		compareFunc("Zack"),
 	)
 
 	fmt.Println("Does the array contain Eron:", containEron)

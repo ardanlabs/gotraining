@@ -1,5 +1,5 @@
 // This program showcases
-// the `slices` package's compact function.
+// the `slices` package's contain function.
 // The aim of this test is to determine
 // if a slice contains an element
 // This program requires Go 1.21rc1
