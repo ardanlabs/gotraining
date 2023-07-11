@@ -1,6 +1,6 @@
 // This program showcases
 // the `slices` package's compact func function.
-// The aim of this test is to remove duplicate
+// The aim of this test is to remove consecutive duplicate
 // elements within a slice
 // This program requires Go 1.21rc1
 package main
