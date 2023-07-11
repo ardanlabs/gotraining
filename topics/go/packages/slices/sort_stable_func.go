@@ -18,7 +18,9 @@ func main() {
 	// with a slice of numbers.
 	ints := []int{
 		2, 4, 6, 7, 8, 9, 1, 0,
-	}[:]
+	}
+
+	fmt.Println("Slice a", ints)
 
 	var less = func(a, b int) int { return a - b }
 	slices.SortStableFunc(ints, less)

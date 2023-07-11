@@ -24,6 +24,10 @@ func main() {
 		6, 6, 6, 6, 6,
 	}
 
+	fmt.Println("Slice a", a)
+	fmt.Println("Slice b", b)
+	fmt.Println("Slice c", c)
+
 	fmt.Println(
 		"Is slice a and b equal",
 		slices.Equal(a, b),

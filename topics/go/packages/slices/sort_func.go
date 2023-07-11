@@ -27,6 +27,8 @@ func main() {
 		2, 4, 6, 7, 8, 9, 1, 0,
 	}
 
+	fmt.Println("Slice ints", ints)
+
 	var less = func(a, b int) int { return a - b }
 	slices.SortFunc(ints, less)
 

@@ -22,6 +22,9 @@ func main() {
 		"Good", "morning", "Gopher",
 	}
 
+	fmt.Println("Slice a", a)
+	fmt.Println("Slice b", b)
+
 	// The following op will
 	// add 'are' to the sentence fragments
 	// to do this, I'll replace the slice at [0:1]

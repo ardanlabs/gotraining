@@ -20,6 +20,9 @@ func main() {
 		6, 6, 6, 6, 6,
 	}
 
+	fmt.Println("Slice a", a)
+	fmt.Println("Slice c", c)
+
 	fmt.Println(
 		"Index of 4 in slice a",
 		slices.Index(a, 4),
