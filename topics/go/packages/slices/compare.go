@@ -29,6 +29,11 @@ func main() {
 		1, 2, 3, 4,
 	}
 
+	fmt.Println("Slice a", a)
+	fmt.Println("Slice b", b)
+	fmt.Println("Slice c", c)
+	fmt.Println("Slice d", d)
+
 	// d is short for
 	// dictionary and translates
 	// the output from the compare
