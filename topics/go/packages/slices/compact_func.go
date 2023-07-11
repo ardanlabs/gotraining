@@ -19,6 +19,7 @@ func main() {
 	fmt.Println("Original", a, len(a))
 
 	comp := func(a, b int) bool {
+		// preserve subsequent 1's
 		if a == 1 && b == 1 {
 			return false
 		}
