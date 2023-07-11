@@ -22,7 +22,7 @@ func main() {
 	}
 
 	fmt.Println("Slice a", a)
-	fmt.Println("Slice b", b))
+	fmt.Println("Slice b", b)
 
 	// Adding 2,3 at index 1 in array a
 	a = slices.Insert(a, 1, 2, 3)
