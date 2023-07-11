@@ -13,7 +13,7 @@ import (
 func main() {
 
 	// This example demonstrates
-	// how sort func can be used
+	// how the sort function can be used
 	// with a slice of numbers.
 	ints := []int{
 		2, 4, 6, 7, 8, 9, 1, 0,
