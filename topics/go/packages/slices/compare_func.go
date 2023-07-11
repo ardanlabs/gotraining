@@ -36,9 +36,9 @@ func main() {
 			Level:    3,
 		},
 	}
-	a := slices.Clone(seed)[0:3]
+	a := slices.Clone(seed)[:3]
 
-	b := slices.Clone(seed)[0:2]
+	b := slices.Clone(seed)[:2]
 
 	c := slices.Clone(seed)
 
