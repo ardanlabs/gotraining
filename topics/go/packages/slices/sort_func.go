@@ -1,8 +1,8 @@
 // This program showcases
-// the `slices` package's SortFunc function.
+// the `slices` package's sort cunc function.
 // The aim of this test is to define a sort function
 // and use it to sort a slice of integers in ascending
-// order and another to sort  a complex type.
+// order and another to sort a user defined type.
 // This program requires Go 1.21rc1
 package main
 
@@ -37,7 +37,7 @@ func main() {
 
 	// This example showcases how the
 	// sort function can be leveraged
-	// to sort complex types.
+	// to sort user defined types.
 	orders := []Order{
 		Order{
 			Date:     time.Now().AddDate(0, 0, 2),

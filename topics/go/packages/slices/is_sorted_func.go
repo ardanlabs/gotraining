@@ -48,7 +48,7 @@ func main() {
 	}
 
 	// if a's level is greater than b,
-	// the array is not sorted in ascending order/
+	// the array is not sorted in ascending order.
 	cmp := func(a, b Player) int {
 		return a.Level - b.Level
 	}

@@ -1,5 +1,5 @@
 // This program showcases
-// the `slices` package's SortStableFunc function.
+// the `slices` package's sort stable func function.
 // The aim of this test is to define a sort function
 // and use it to sort a slice of integers in ascending
 // order.
@@ -20,7 +20,7 @@ func main() {
 		2, 4, 6, 7, 8, 9, 1, 0,
 	}
 
-	fmt.Println("Slice a", ints)
+	fmt.Println("Slice ints", ints)
 
 	var less = func(a, b int) int { return a - b }
 	slices.SortStableFunc(ints, less)

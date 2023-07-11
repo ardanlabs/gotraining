@@ -1,5 +1,5 @@
 // This program showcases
-// the `slices` package's binarySearchFunc function
+// the `slices` package's binary search func function
 // The aim of this program is to perform
 // a binary search,
 // a search on an array that is already
