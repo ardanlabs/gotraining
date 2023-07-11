@@ -1,7 +1,7 @@
 // This program showcases
-// the `slices` package's contains func function.
+// the `slices` package's index func function.
 // The aim of this test is to determine
-// if a slice contains a player with the
+// the index of the
 // specified username.
 // This program requires Go 1.21rc1
 package main
@@ -33,13 +33,14 @@ func main() {
 		},
 	}
 
-	compareFunc := func(
+	indexOf := func(
 		name string,
 	) func(Player) bool {
 		return func(p Player) bool {
 
 			// return true if the name to look for
-			// passed is found.
+			// passed is found. this index will be
+			// returned to the user.
 			if name == p.Username {
 				return true
 			}
@@ -47,15 +48,16 @@ func main() {
 		}
 	}
 
-	containEron := slices.ContainsFunc[[]Player](
+	indexEron := slices.IndexFunc[[]Player](
 		a,
-		compareFunc("Eron"),
-	)
-	containZack := slices.ContainsFunc[[]Player](
-		a,
-		compareFunc("Zack"),
+		indexOf("Eron"),
 	)
 
-	fmt.Println("Does the array contain Eron:", containEron)
-	fmt.Println("Does the array contain Zack:", containZack)
+	indexBill := slices.IndexFunc[[]Player](
+		a,
+		indexOf("Bill"),
+	)
+
+	fmt.Println("Eron is at index:", indexEron)
+	fmt.Println("Bill is at index:", indexBill)
 }
