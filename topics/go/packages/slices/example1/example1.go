@@ -2,7 +2,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0
 
 // Sample program to show the `slices` package's binarySearch function
-// and search an array, that is already sorted in ascending order, to find the specified element.
+// and search an array, that is already sorted in ascending order, to find the specified element and it's index.
 package main
 
 import (

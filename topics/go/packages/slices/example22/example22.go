@@ -1,3 +1,6 @@
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
 // This program showcases
 // the `slices` package's sort cunc function.
 // The aim of this test is to define a sort function
@@ -8,8 +11,10 @@ package main
 
 import (
 	"fmt"
-	"slices"
+
 	"time"
+
+	"golang.org/x/exp/slices"
 )
 
 type Order struct {
