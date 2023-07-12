@@ -1,10 +1,8 @@
-// This program showcases
-// the `slices` package's binarySearch function
-// The aim of this program is to perform
-// a binary search,
-// a search on an array that is already
-// sorted in ascending order.
-// This program requires Go 1.21rc1
+// All material is licensed under the Apache License Version 2.0, January 2004
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Sample program to show the `slices` package's binarySearch function
+// and search an array, that is already sorted in ascending order, to find the specified element.
 package main
 
 import (
