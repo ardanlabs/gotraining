@@ -75,6 +75,7 @@ github.com/stretchr/testify/require
 # golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea
 ## explicit; go 1.20
 golang.org/x/exp/constraints
+golang.org/x/exp/slices
 # golang.org/x/image v0.8.0
 ## explicit; go 1.12
 golang.org/x/image/ccitt
