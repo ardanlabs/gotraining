@@ -13,7 +13,7 @@ import (
 // Contains reports whether a specified value is present in slice.
 
 func main() {
-	list := []int{1, 2, 4, 5, 6}
+	list := []int{1, 2, 3, 4, 5, 6}
 	fmt.Println("Slice", list)
 
 	// -------------------------------------------------------------------------

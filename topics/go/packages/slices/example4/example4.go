@@ -21,8 +21,8 @@ func main() {
 	list := []int{1, 1, 2, 2, 1, 1, 3, 3, 4, 5}
 	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 
-	compact := slices.Compact(list)
-	fmt.Printf("List: Addr(%x), %v\n", &compact[0], compact)
+	list = slices.Compact(list)
+	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 
 	// -------------------------------------------------------------------------
 	// CompactFunc
@@ -30,8 +30,8 @@ func main() {
 	list = []int{1, 1, 2, 2, 1, 1, 3, 3, 4, 5}
 	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 
-	compact = slices.CompactFunc(list, compare)
-	fmt.Printf("List: Addr(%x), %v\n", &compact[0], compact)
+	list = slices.CompactFunc(list, compare)
+	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 }
 
 // compare needs to return true if the two values are the same.

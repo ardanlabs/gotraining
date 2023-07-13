@@ -14,12 +14,12 @@ import (
 // copy of the elements.
 
 func main() {
-	list := []int{1, 2, 4, 5, 6}
+	list := []int{1, 2, 3, 4, 5, 6}
 	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 
 	// -------------------------------------------------------------------------
 	// Clone
 
-	clone := slices.Clone(list)
-	fmt.Printf("Copy: Addr(%x), %v\n", &clone[0], clone)
+	list = slices.Clone(list)
+	fmt.Printf("Copy: Addr(%x), %v\n", &list[0], list)
 }

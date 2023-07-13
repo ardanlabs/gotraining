@@ -16,14 +16,14 @@ import (
 // appear in the sort order.
 
 func main() {
-	list := []int{1, 2, 4, 5, 6}
+	list := []int{1, 2, 3, 4, 5, 6}
 	fmt.Println("Slice", list)
 
 	// -------------------------------------------------------------------------
 	// BinarySearch
 
-	index, found := slices.BinarySearch(list, 3)
-	fmt.Printf("Looking for 3, idx[%d], found[%v]\n", index, found)
+	index, found := slices.BinarySearch(list, 9)
+	fmt.Printf("Looking for 9, idx[%d], found[%v]\n", index, found)
 
 	index, found = slices.BinarySearch(list, 5)
 	fmt.Printf("Looking for 5, idx[%d], found[%v]\n", index, found)
