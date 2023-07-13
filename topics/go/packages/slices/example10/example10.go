@@ -22,4 +22,17 @@ func main() {
 	fmt.Printf("Looking for 5, idx[%d]\n", slices.Index(list, 5))
 	fmt.Printf("Looking for 0, idx[%d]\n", slices.Index(list, 0))
 	fmt.Printf("Looking for 2, idx[%d]\n", slices.Index(list, 2))
+
+	// -------------------------------------------------------------------------
+	// IndexFunc
+
+	fmt.Printf("Looking for 5, idx[%d]\n", slices.IndexFunc(list, compare(5)))
+	fmt.Printf("Looking for 0, idx[%d]\n", slices.IndexFunc(list, compare(0)))
+	fmt.Printf("Looking for 2, idx[%d]\n", slices.IndexFunc(list, compare(2)))
+}
+
+func compare(a int) func(int) bool {
+	return func(b int) bool {
+		return a == b
+	}
 }
