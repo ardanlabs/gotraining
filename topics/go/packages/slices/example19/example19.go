@@ -53,8 +53,8 @@ func main() {
 
 	// if a's level is greater than b,
 	// the array is not sorted in ascending order.
-	cmp := func(a, b Player) int {
-		return a.Level - b.Level
+	cmp := func(a, b Player) bool {
+		return a.Level < b.Level
 	}
 
 	isSortedA := slices.IsSortedFunc(a, cmp)

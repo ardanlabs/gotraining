@@ -34,7 +34,7 @@ func main() {
 
 	fmt.Println("Slice ints", ints)
 
-	var less = func(a, b int) int { return a - b }
+	var less = func(a, b int) bool { return a < b }
 	slices.SortFunc(ints, less)
 
 	fmt.Println("Is slice int sorted", slices.IsSorted(ints))
@@ -58,7 +58,7 @@ func main() {
 
 	// code is unsafe, in the case
 	// of the date difference exceeding the max `int` size
-	slices.SortFunc(orders, func(a, b Order) int { return int(a.Date.Unix() - b.Date.Unix()) })
+	slices.SortFunc(orders, func(a, b Order) bool { return a.Date.Unix() < b.Date.Unix() })
 
 	fmt.Println("Sorted slices of orders:", orders)
 }

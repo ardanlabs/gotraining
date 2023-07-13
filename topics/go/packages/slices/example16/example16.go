@@ -52,12 +52,12 @@ func main() {
 		}
 	}
 
-	indexEron := slices.IndexFunc[[]Player](
+	indexEron := slices.IndexFunc(
 		a,
 		indexOf("Eron"),
 	)
 
-	indexBill := slices.IndexFunc[[]Player](
+	indexBill := slices.IndexFunc(
 		a,
 		indexOf("Bill"),
 	)

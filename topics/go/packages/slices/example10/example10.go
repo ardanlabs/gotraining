@@ -51,11 +51,11 @@ func main() {
 		}
 	}
 
-	containEron := slices.ContainsFunc[[]Player](
+	containEron := slices.ContainsFunc(
 		a,
 		compareFunc("Eron"),
 	)
-	containZack := slices.ContainsFunc[[]Player](
+	containZack := slices.ContainsFunc(
 		a,
 		compareFunc("Zack"),
 	)

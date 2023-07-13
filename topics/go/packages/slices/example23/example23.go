@@ -26,7 +26,7 @@ func main() {
 
 	fmt.Println("Slice ints", ints)
 
-	var less = func(a, b int) int { return a - b }
+	var less = func(a, b int) bool { return a < b }
 	slices.SortStableFunc(ints, less)
 
 	fmt.Println("Is slice int sorted", slices.IsSorted(ints))
