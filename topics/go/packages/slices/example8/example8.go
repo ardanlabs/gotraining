@@ -1,12 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// This program showcases
-// the `slices` package's compare func function.
-// The aim of this test is to leverage
-// the compare function to determine
-// which array's length is greater
-// This program requires Go 1.21rc1
+// Sample program shows how to use the Equal API from the slices package.
 package main
 
 import (
@@ -15,73 +10,33 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-type Player struct {
-	Username string
-	Level    int
-}
+// Equal reports whether two slices are equal by comparing the length of
+// each slice and testing that all elements are equal.
 
 func main() {
+	list1 := []int{1, 2, 3, 4, 5}
+	list2 := []int{1, 2, 6, 4, 5, 6}
+	list3 := []int{1, 2, 3, 4}
+	list4 := []int{1, 2, 3, 4}
 
-	seed := []Player{
-		Player{
-			Username: "Bill",
-			Level:    2,
-		},
-		Player{
-			Username: "Alice",
-			Level:    2,
-		},
-		Player{
-			Username: "Zack",
-			Level:    4,
-		},
-		Player{
-			Username: "Eron",
-			Level:    3,
-		},
-	}
-	a := slices.Clone(seed)[:3]
+	fmt.Println("Slice1", list1)
+	fmt.Println("Slice2", list2)
+	fmt.Println("Slice3", list3)
+	fmt.Println("Slice4", list4)
 
-	b := slices.Clone(seed)[:2]
+	// -------------------------------------------------------------------------
+	// Equal
 
-	c := slices.Clone(seed)
+	fmt.Println("list1 == list2", slices.Equal(list1, list2))
+	fmt.Println("list3 == list4", slices.Equal(list3, list4))
 
-	d := slices.Clone(seed)
+	// -------------------------------------------------------------------------
+	// EqualFunc
 
-	comp := func(a, b Player) int {
-		if a.Username == "" {
-			return -1
-		}
+	fmt.Println("list1 == list2", slices.EqualFunc(list1, list2, compare))
+	fmt.Println("list3 == list4", slices.EqualFunc(list3, list4, compare))
+}
 
-		if b.Username == "" {
-			return 1
-		}
-
-		return 0
-	}
-
-	// d is short for
-	// dictionary and translates
-	// the output from the compare
-	// function into something that is
-	// human readable.
-	dict := map[int]string{
-		-1: "First slice is shorter",
-		0:  "Both slices are equal",
-		1:  "Second slice is shorter",
-	}
-	fmt.Println(
-		"Compare Slice a and b",
-		dict[slices.CompareFunc(a, b, comp)],
-	)
-
-	fmt.Println(
-		"Compare Slice a and c",
-		dict[slices.CompareFunc(a, c, comp)],
-	)
-
-	fmt.Println(
-		"Compare Slice c and d",
-		dict[slices.CompareFunc(c, d, comp)],
-	)
+func compare(a, b int) bool {
+	return a == b
 }

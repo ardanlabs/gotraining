@@ -1,12 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// This program showcases
-// the `slices` package's contains func function.
-// The aim of this test is to determine
-// if a slice contains a player with the
-// specified username.
-// This program requires Go 1.21rc1
+// Sample program shows how to use the Index API from the slices package.
 package main
 
 import (
@@ -15,51 +10,16 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-type Player struct {
-	Username string
-	Level    int
-}
+// Index returns the index of the first occurrence or -1 if not present.
 
 func main() {
+	list := []int{1, 1, 2, 2, 1, 1, 3, 3, 4, 5}
+	fmt.Println("Slice", list)
 
-	a := []Player{
-		Player{
-			Username: "Bill",
-			Level:    2,
-		},
-		Player{
-			Username: "Alice",
-			Level:    2,
-		},
-		Player{
-			Username: "Eron",
-			Level:    3,
-		},
-	}
+	// -------------------------------------------------------------------------
+	// Index
 
-	compareFunc := func(
-		name string,
-	) func(Player) bool {
-		return func(p Player) bool {
-
-			// return true if the name to look for
-			// passed is found.
-			if name == p.Username {
-				return true
-			}
-			return false
-		}
-	}
-
-	containEron := slices.ContainsFunc(
-		a,
-		compareFunc("Eron"),
-	)
-	containZack := slices.ContainsFunc(
-		a,
-		compareFunc("Zack"),
-	)
-
-	fmt.Println("Does the array contain Eron:", containEron)
-	fmt.Println("Does the array contain Zack:", containZack)
+	fmt.Printf("Looking for 5, idx[%d]\n", slices.Index(list, 5))
+	fmt.Printf("Looking for 0, idx[%d]\n", slices.Index(list, 0))
+	fmt.Printf("Looking for 2, idx[%d]\n", slices.Index(list, 2))
 }

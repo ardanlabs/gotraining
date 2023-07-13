@@ -1,9 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// This program showcases
-// the `slices` package's clip function.
-// This program requires Go 1.21rc1
+// Sample program shows how to use the Clone API from the slices package.
 package main
 
 import (
@@ -12,22 +10,16 @@ import (
 	"golang.org/x/exp/slices"
 )
 
+// Clone creates a new slice value and underlying array with a shallow
+// copy of the elements.
+
 func main() {
+	list := []int{1, 2, 4, 5, 6}
+	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 
-	// Here an array with cap. 10
-	// is defined.
-	a := make([]string, 0, 10)
+	// -------------------------------------------------------------------------
+	// Clone
 
-	// Two elements are appended to the
-	// array.
-	a = append(a, "Hello", "World")
-
-	// THe output of the cap here will be
-	// 10.
-	fmt.Println("Original", a, cap(a))
-	a = slices.Clip(a)
-
-	// After clipping the cap will be reduced
-	// to 2.
-	fmt.Println("Clipped", a, cap(a))
+	clone := slices.Clone(list)
+	fmt.Printf("Copy: Addr(%x), %v\n", &clone[0], clone)
 }

@@ -1,8 +1,8 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// Sample program to show the `slices` package's binarySearch function
-// and search an array, that is already sorted in ascending order, to find the specified element and it's index.
+// Sample program shows how to use the BinarySearch APIs from the
+// slices package.
 package main
 
 import (
@@ -11,30 +11,35 @@ import (
 	"golang.org/x/exp/slices"
 )
 
+// BinarySearch searches for target in a sorted slice and returns the
+// position where target is found, or the position where target would
+// appear in the sort order.
+
 func main() {
+	list := []int{1, 2, 4, 5, 6}
+	fmt.Println("Slice", list)
 
-	a := []int{
-		1, 2, 4, 5, 6,
-	}
+	// -------------------------------------------------------------------------
+	// BinarySearch
 
-	fmt.Println("Slice a", a)
+	index, found := slices.BinarySearch(list, 3)
+	fmt.Printf("Looking for 3, idx[%d], found[%v]\n", index, found)
 
-	_, found := slices.BinarySearch(
-		a,
-		3,
-	)
+	index, found = slices.BinarySearch(list, 5)
+	fmt.Printf("Looking for 5, idx[%d], found[%v]\n", index, found)
 
-	if !found {
-		fmt.Println("3 not found in slice")
-	}
+	// -------------------------------------------------------------------------
+	// BinarySearchFunc
 
-	index, found := slices.BinarySearch(
-		a,
-		5,
-	)
+	index, found = slices.BinarySearchFunc(list, 7, compare)
+	fmt.Printf("Looking for 7, idx[%d], found[%v]\n", index, found)
 
-	if found {
-		fmt.Println("found element 5 at index:", index)
-	}
+	index, found = slices.BinarySearchFunc(list, 2, compare)
+	fmt.Printf("Looking for 2, idx[%d], found[%v]\n", index, found)
+}
 
+// Compare needs to return 0 if the two values are the same, a positive
+// number of a > b, and a negative number of a < b.
+func compare(a int, b int) int {
+	return a - b
 }

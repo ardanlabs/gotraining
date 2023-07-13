@@ -1,13 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// This program showcases
-// the `slices` package's binary search func function
-// The aim of this program is to perform
-// a binary search,
-// a search on an array that is already
-// sorted in ascending order.
-// This program requires Go 1.21rc1
+// Sample program shows how to use the Clip API from the slices package.
 package main
 
 import (
@@ -16,36 +10,21 @@ import (
 	"golang.org/x/exp/slices"
 )
 
+// Clip removes the unused capacity from the slice.
+
 func main() {
+	list := make([]string, 0, 10)
+	fmt.Printf("Len(%d), Cap(%d)\n", len(list), cap(list))
 
-	ints := []int{
-		1, 2, 4, 5, 6,
-	}
+	// -------------------------------------------------------------------------
+	// Append a string to the slice
 
-	cmp := func(a, b int) int {
-		return a - b
-	}
+	list = append(list, "A")
+	fmt.Printf("Len(%d), Cap(%d)\n", len(list), cap(list))
 
-	fmt.Println("Slice ints", ints)
+	// -------------------------------------------------------------------------
+	// Clip
 
-	_, found := slices.BinarySearchFunc(
-		ints,
-		3,
-		cmp,
-	)
-
-	if !found {
-		fmt.Println("3 not found in slice")
-	}
-
-	index, found := slices.BinarySearchFunc(
-		ints,
-		5,
-		cmp,
-	)
-
-	if found {
-		fmt.Println("found element 5 at index:", index)
-	}
-
+	list = slices.Clip(list)
+	fmt.Printf("Len(%d), Cap(%d)\n", len(list), cap(list))
 }

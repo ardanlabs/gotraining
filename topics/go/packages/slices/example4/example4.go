@@ -1,11 +1,7 @@
 // All material is licensed under the Apache License Version 2.0, January 2004
 // http://www.apache.org/licenses/LICENSE-2.0
 
-// This program showcases
-// the `slices` package's clone function.
-// The aim of this test is to understand
-// the effects of cloning a slice
-// This program requires Go 1.21rc1
+// Sample program shows how to use the Compact APIs from the slices package.
 package main
 
 import (
@@ -14,38 +10,31 @@ import (
 	"golang.org/x/exp/slices"
 )
 
+// Compact replaces consecutive runs of equal elements with a single copy.
+// Compact modifies the contents of the slice and does not create a new slice.
+
 func main() {
 
-	a := []int{
-		1, 2, 3, 4, 5,
-	}
+	// -------------------------------------------------------------------------
+	// Compact
 
-	c := slices.Clone(a)
+	list := []int{1, 1, 2, 2, 1, 1, 3, 3, 4, 5}
+	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 
-	fmt.Println(
-		"Array a",
-		a,
-	)
+	compact := slices.Compact(list)
+	fmt.Printf("List: Addr(%x), %v\n", &compact[0], compact)
 
-	fmt.Println(
-		"Array c",
-		c,
-	)
+	// -------------------------------------------------------------------------
+	// CompactFunc
 
-	// An example with pointers to demonstrate
-	// how the clone function outputs a shallow copy.
-	val1 := 2
-	val2 := 1
+	list = []int{1, 1, 2, 2, 1, 1, 3, 3, 4, 5}
+	fmt.Printf("List: Addr(%x), %v\n", &list[0], list)
 
-	pA := []*int{
-		&val1,
-		&val2,
-	}
+	compact = slices.CompactFunc(list, compare)
+	fmt.Printf("List: Addr(%x), %v\n", &compact[0], compact)
+}
 
-	pC := slices.Clone(pA)
-	*pC[0]++
-	*pC[1] = 20
-
-	fmt.Println("Value of element at index 0 of Array pA", *pA[0])
-	fmt.Println("Value of element at index 1 of Array pA", *pA[1])
+// compare needs to return true if the two values are the same.
+func compare(a int, b int) bool {
+	return a == b
 }
