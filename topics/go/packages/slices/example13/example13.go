@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
+	"slices"
 )
 
 // Replace replaces the elements specified for a given range and returns

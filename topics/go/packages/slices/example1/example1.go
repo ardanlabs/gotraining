@@ -8,7 +8,7 @@ package main
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
+	"slices"
 )
 
 // BinarySearch searches for target in a sorted slice and returns the

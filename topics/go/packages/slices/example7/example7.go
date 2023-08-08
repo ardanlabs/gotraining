@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
+	"slices"
 )
 
 // Delete removes a contiguous set of elements from the slice.

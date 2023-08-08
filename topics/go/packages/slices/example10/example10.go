@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
+	"slices"
 )
 
 // Index returns the index of the first occurrence or -1 if not present.

@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
+	"slices"
 )
 
 // result translates the result of the compare API.

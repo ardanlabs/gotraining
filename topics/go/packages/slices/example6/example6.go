@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
+	"slices"
 )
 
 // Contains reports whether a specified value is present in slice.

@@ -419,27 +419,28 @@ https://godoc.org/golang.org/x/tools/go/ssa
 
 [Open issues for the upcoming release](https://dev.golang.org/release)
 
-[Go 1.20 Release Notes](https://golang.org/doc/go1.20) - 2023/02/01  
-[Go 1.19 Release Notes](https://golang.org/doc/go1.19) - 2022/08/02  
-[Go 1.18 Release Notes](https://golang.org/doc/go1.18) - 2022/03/15  
-[Go 1.17 Release Notes](https://golang.org/doc/go1.17) - 2021/08/16  
-[Go 1.16 Release Notes](https://golang.org/doc/go1.16) - 2021/02/16  
-[Go 1.15 Release Notes](https://golang.org/doc/go1.15) - 2020/08/11  
-[Go 1.14 Release Notes](https://golang.org/doc/go1.14) - 2020/02/25  
-[Go 1.13 Release Notes](https://golang.org/doc/go1.13) - 2019/09/03  
-[Go 1.12 Release Notes](https://golang.org/doc/go1.12) - 2019/02/25  
-[Go 1.11 Release Notes](https://golang.org/doc/go1.11) - 2018/08/24  
-[Go 1.10 Release Notes](https://golang.org/doc/go1.10) - 2018/02/16  
-[Go 1.09 Release Notes](https://golang.org/doc/go1.9) - 2017/08/24  
-[Go 1.08 Release Notes](https://golang.org/doc/go1.8) - 2017/02/16  
-[Go 1.07 Release Notes](https://golang.org/doc/go1.7) - 2016/08/15  
-[Go 1.06 Release Notes](https://golang.org/doc/go1.6) - 2016/02/17  
-[Go 1.05 Release Notes](https://golang.org/doc/go1.5) - 2015/08/19  
-[Go 1.04 Release Notes](https://golang.org/doc/go1.4) - 2014/12/10  
-[Go 1.03 Release Notes](https://golang.org/doc/go1.3) - 2014/06/18  
-[Go 1.02 Release Notes](https://golang.org/doc/go1.2) - 2013/12/01  
-[Go 1.01 Release Notes](https://golang.org/doc/go1.1) - 2013/05/13  
-[Go 1.00 Release Notes](https://golang.org/doc/go1.0) - 2012/03/28
+[Go 1.21 Release Notes](https://go.dev/doc/go1.21) - 2023/08/08
+[Go 1.20 Release Notes](https://go.dev/doc/go1.20) - 2023/02/01  
+[Go 1.19 Release Notes](https://go.dev/doc/go1.19) - 2022/08/02  
+[Go 1.18 Release Notes](https://go.dev/doc/go1.18) - 2022/03/15  
+[Go 1.17 Release Notes](https://go.dev/doc/go1.17) - 2021/08/16  
+[Go 1.16 Release Notes](https://go.dev/doc/go1.16) - 2021/02/16  
+[Go 1.15 Release Notes](https://go.dev/doc/go1.15) - 2020/08/11  
+[Go 1.14 Release Notes](https://go.dev/doc/go1.14) - 2020/02/25  
+[Go 1.13 Release Notes](https://go.dev/doc/go1.13) - 2019/09/03  
+[Go 1.12 Release Notes](https://go.dev/doc/go1.12) - 2019/02/25  
+[Go 1.11 Release Notes](https://go.dev/doc/go1.11) - 2018/08/24  
+[Go 1.10 Release Notes](https://go.dev/doc/go1.10) - 2018/02/16  
+[Go 1.09 Release Notes](https://go.dev/doc/go1.9) - 2017/08/24  
+[Go 1.08 Release Notes](https://go.dev/doc/go1.8) - 2017/02/16  
+[Go 1.07 Release Notes](https://go.dev/doc/go1.7) - 2016/08/15  
+[Go 1.06 Release Notes](https://go.dev/doc/go1.6) - 2016/02/17  
+[Go 1.05 Release Notes](https://go.dev/doc/go1.5) - 2015/08/19  
+[Go 1.04 Release Notes](https://go.dev/doc/go1.4) - 2014/12/10  
+[Go 1.03 Release Notes](https://go.dev/doc/go1.3) - 2014/06/18  
+[Go 1.02 Release Notes](https://go.dev/doc/go1.2) - 2013/12/01  
+[Go 1.01 Release Notes](https://go.dev/doc/go1.1) - 2013/05/13  
+[Go 1.00 Release Notes](https://go.dev/doc/go1) - 2012/03/28
 
 
 ## Research Papers

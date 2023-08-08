@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
+	"slices"
 )
 
 // Sort sorts a slice of any ordered type in ascending order.
@@ -52,6 +52,8 @@ func main() {
 	fmt.Println("Is list sorted:", is)
 }
 
-func compare(a, b int) bool {
-	return a < b
+// Compare needs to return 0 if the two values are the same, a positive
+// number of a > b, and a negative number of a < b.
+func compare(a, b int) int {
+	return a - b
 }
