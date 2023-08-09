@@ -22,14 +22,12 @@ var result = map[int]string{
 
 func main() {
 	list1 := []int{1, 2, 3, 4, 5}
-	list2 := []int{1, 2, 6, 4, 5, 6}
-	list3 := []int{1, 2, 3, 4}
-	list4 := []int{1, 2, 3, 4}
+	list2 := []int{1, 2, 6, 4, 5}
+	list3 := []int{1, 2, 3, 4, 5}
 
 	fmt.Println("Slice1", list1)
 	fmt.Println("Slice2", list2)
 	fmt.Println("Slice3", list3)
-	fmt.Println("Slice4", list4)
 
 	// -------------------------------------------------------------------------
 	// Compare list1 and list2
@@ -40,19 +38,19 @@ func main() {
 	)
 
 	// -------------------------------------------------------------------------
+	// Compare list2 and list1
+
+	fmt.Printf("list2 vs list1: Compare(%s), Func(%s)\n",
+		result[slices.Compare(list2, list1)],
+		result[slices.CompareFunc(list2, list1, compare)],
+	)
+
+	// -------------------------------------------------------------------------
 	// Compare list1 and list3
 
 	fmt.Printf("list1 vs list3: Compare(%s), Func(%s)\n",
 		result[slices.Compare(list1, list3)],
 		result[slices.CompareFunc(list1, list3, compare)],
-	)
-
-	// -------------------------------------------------------------------------
-	// Compare list3 and list4
-
-	fmt.Printf("list3 vs list4: Compare(%s), Func(%s)\n",
-		result[slices.Compare(list3, list4)],
-		result[slices.CompareFunc(list3, list4, compare)],
 	)
 }
 
