@@ -27,26 +27,17 @@ type data struct {
 var list *data
 
 func init() {
-	var last *data
-
 	// Create a link list with the same number of elements.
 	for row := 0; row < rows; row++ {
 		for col := 0; col < cols; col++ {
 
-			// Create a new node and link it in.
-			var d data
-			if list == nil {
-				list = &d
-			}
-			if last != nil {
-				last.p = &d
-			}
-			last = &d
+			// Create a new node and link it backwards.
+			list = &data{p: list}
 
 			// Add a value to all even elements.
 			if row%2 == 0 {
 				matrix[row][col] = 0xFF
-				d.v = 0xFF
+				list.v = 0xFF
 			}
 		}
 	}
