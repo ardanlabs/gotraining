@@ -13,17 +13,17 @@ import (
 
 func main() {
 	list := make([]string, 0, 10)
-	fmt.Printf("Len(%d), Cap(%d)\n", len(list), cap(list))
+	fmt.Printf("Addr(%x), Len(%d), Cap(%d)\n", &list, len(list), cap(list))
 
 	// -------------------------------------------------------------------------
 	// Append a string to the slice
 
 	list = append(list, "A")
-	fmt.Printf("Len(%d), Cap(%d)\n", len(list), cap(list))
+	fmt.Printf("Addr(%x), Len(%d), Cap(%d)\n", &list[0], len(list), cap(list))
 
 	// -------------------------------------------------------------------------
 	// Clip
 
 	list = slices.Clip(list)
-	fmt.Printf("Len(%d), Cap(%d)\n", len(list), cap(list))
+	fmt.Printf("Addr(%x), Len(%d), Cap(%d)\n", &list[0], len(list), cap(list))
 }
