@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-              find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -exec dirname {} \; | uniq | xargs go test
+              find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -and -not -wholename "*miki*" -exec dirname {} \; | uniq | xargs go test
 
       # Get a list of all non-vendor directories with test files and test them.
       # We could just do `go test ./...` but we have some packages that aren't
