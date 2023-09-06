@@ -14,5 +14,5 @@ func main() {
 		log.Fatal(err)
 	}
 	ip := net.ParseIP("193.147.7.247")
-	fmt.Println(network.Contains(ip))
+	fmt.Println(network.Contains(ip)) // true
 }

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gems/trimpath/stats"
+	"shorts/trimpath/stats"
 )
 
 func main() {
