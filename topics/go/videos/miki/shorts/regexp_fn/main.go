@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-	re := regexp.MustCompile(`\$[A-Z_]+`)
 	urlTemplate := `https://$HOST:$PORT`
 
 	conf := map[string]string{
@@ -16,6 +15,7 @@ func main() {
 		"PORT": "443",
 	}
 
+	re := regexp.MustCompile(`\$[A-Z_]+`)
 	sub := func(match string) string {
 		key := match[1:] // Remove $ prefix
 		return conf[key]

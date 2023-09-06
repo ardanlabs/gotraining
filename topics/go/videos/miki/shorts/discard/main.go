@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"io/ioutil"
+	"io"
 	"log"
 )
 
@@ -14,7 +14,7 @@ func main() {
 	flag.Parse()
 
 	if !config.Verbose {
-		log.SetOutput(ioutil.Discard)
+		log.SetOutput(io.Discard)
 	}
 	log.Printf("Please reinstall universe and reboot")
 }

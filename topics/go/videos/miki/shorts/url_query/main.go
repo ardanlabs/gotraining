@@ -17,5 +17,5 @@ func main() {
 	q.Set("q", "golang")
 	u.RawQuery = q.Encode()
 	fmt.Println(u.String())
-	// https://google.com/search?q=rust&safe=active
+	// https://google.com/search?q=golang&safe=active
 }

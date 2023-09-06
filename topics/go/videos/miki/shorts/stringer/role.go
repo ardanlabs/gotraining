@@ -1,5 +1,8 @@
 // Use golang.org/x/tools/cmd/stringer to generate fmt.Stringer for your types.
 
+// go install golang.org/x/tools/cmd/stringer@latest
+// export PATH="$(go env GOPATH)/bin:${PATH}"
+
 package main
 
 import "fmt"

@@ -9,8 +9,8 @@ import (
 func main() {
 	cfg := `
 [httpd]
-use = ${USER}
-root = ${HOME}/.config/httpd
+user = ${USER}
+config_dir = ${HOME}/.config/httpd
 `
 	fmt.Println(os.ExpandEnv(cfg))
 }
