@@ -1,26 +1,44 @@
+# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="amuse"
-
+# Increase the number of open file limits.
 ulimit -n 200000
 
+# Go Stuff
 export GOPATH=$HOME/code/go
 export PATH=$PATH:$GOPATH/bin
 
+# Quick Stuff
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+
 alias cdgot="cd $GOPATH/src/github.com/ardanlabs/gotraining"
 alias cdser="cd $GOPATH/src/github.com/ardanlabs/service"
+alias cdblk="cd $GOPATH/src/github.com/ardanlabs/blockchain"
+alias cdsmart="cd $GOPATH/src/github.com/ardanlabs/smartcontract"
+alias cdtour="cd $GOPATH/src/github.com/ardanlabs/gotour"
+alias cdweb="cd $GOPATH/src/github.com/ardanlabs/web"
+
 alias cdcon="cd $GOPATH/src/github.com/ardanlabs/conf"
 alias cdgra="cd $GOPATH/src/github.com/ardanlabs/graphql"
 alias cddar="cd $GOPATH/src/github.com/ardanlabs/darwin"
-alias cdblk="cd $GOPATH/src/github.com/ardanlabs/blockchain"
-alias cdsmart="cd $GOPATH/src/github.com/ardanlabs/smartcontract"
-alias cdliar="cd $GOPATH/src/github.com/ardanlabs/liarsdice"
 alias cdeth="cd $GOPATH/src/github.com/ardanlabs/ethereum"
+
+alias cdliar="cd $GOPATH/src/github.com/ardanlabs/liarsdice"
 alias cdbets="cd $GOPATH/src/github.com/ardanlabs/bets"
+
 alias cdtp="cd $GOPATH/src/gitlab.com/totalprocessing/crm-rewrite-api"
+alias cdnetmux="cd $GOPATH/src/github.com/ardanlabs/netmux"
+
 alias python=/opt/homebrew/bin/python3
 
-plugins=(git)
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/bill/code/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bill/code/google-cloud-sdk/path.zsh.inc'; fi
 
-source $ZSH/oh-my-zsh.sh
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/bill/code/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bill/code/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="amuse"

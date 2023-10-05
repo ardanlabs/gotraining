@@ -1,10 +1,6 @@
 {
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/bill/code/go",
-    "go.enableCodeLens": {
-        "references": false,
-        "runtest": false
-    },
     "go.addTags": {},
     "go.alternateTools": {
     },
@@ -15,7 +11,8 @@
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
-        }
+        },
+        "editor.codeLens": false
     },
     "gopls": {
         "staticcheck": true,
@@ -23,7 +20,7 @@
         "completeUnimported": true, // autocomplete unimported packages
         "deepCompletion": true,     // enable deep completion
         "codelenses": {
-            "gc_details": true,
+            //"gc_details": true,
         }
     },
     "go.lintFlags": [
@@ -38,7 +35,6 @@
     "editor.trimAutoWhitespace": true,
     "editor.minimap.enabled": false,
     "editor.defaultFormatter": null,
-    "editor.bracketPairColorization.enabled": true,
     "editor.wordWrap": "off",
     "editor.guides.indentation": false,
     "editor.renderWhitespace": "none",
@@ -80,19 +76,51 @@
 
     "extensions.ignoreRecommendations": true,
     "liveshare.featureSet": "insiders",
-    "C_Cpp.updateChannel": "Insiders",
     "go.coverOnTestPackage": false,
     "liveshare.anonymousGuestApproval": "accept",
     "editor.folding": false,
     "explorer.compactFolders": false,
-    "files.associations": {
-        "*.go2": "go"
-    },
     "diffEditor.ignoreTrimWhitespace": false,
     "terminal.integrated.tabs.enabled": true,
     "testing.gutterEnabled": false,
     "security.workspace.trust.untrustedFiles": "open",
     "window.newWindowDimensions": "maximized",
     "editor.detectIndentation": false,
+
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.formatOnSave": true
+    },
+    
+    "rust-analyzer.highlightRelated.breakPoints.enable": false,
+    "rust-analyzer.highlightRelated.exitPoints.enable": false,
+    "rust-analyzer.highlightRelated.references.enable": false,
+    "rust-analyzer.highlightRelated.yieldPoints.enable": false,
+    "rust-analyzer.hover.actions.debug.enable": false,
+    "rust-analyzer.hover.actions.enable": false,
+    "rust-analyzer.hover.actions.gotoTypeDef.enable": false,
+    "rust-analyzer.hover.actions.implementations.enable": false,
+    "rust-analyzer.hover.actions.run.enable": false,
+    "rust-analyzer.hover.links.enable": false,
+    "rust-analyzer.imports.group.enable": false,
+    "rust-analyzer.inlayHints.chainingHints.enable": false,
+    "rust-analyzer.inlayHints.closingBraceHints.enable": false,
+    "rust-analyzer.inlayHints.parameterHints.enable": false,
+    "rust-analyzer.inlayHints.renderColons": false,
+    "rust-analyzer.inlayHints.typeHints.enable": false,
+    "rust-analyzer.joinLines.joinAssignments": false,
+    "rust-analyzer.joinLines.joinElseIf": false,
+    "rust-analyzer.joinLines.removeTrailingComma": false,
+    "rust-analyzer.joinLines.unwrapTrivialBlock": false,
+    "rust-analyzer.lens.debug.enable": false,
+    "rust-analyzer.lens.enable": false,
+    "rust-analyzer.lens.forceCustomCommands": false,
+    "rust-analyzer.lens.implementations.enable": false,
+    "rust-analyzer.lens.run.enable": false,
+    "rust-analyzer.semanticHighlighting.doc.comment.inject.enable": false,
+    "rust-analyzer.semanticHighlighting.operator.enable": false,
+    "rust-analyzer.semanticHighlighting.strings.enable": false,
+    "editor.inlineSuggest.enabled": true,
+    "explorer.confirmDragAndDrop": false,
     "window.zoomLevel": 1,
 }
