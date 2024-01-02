@@ -1,4 +1,6 @@
-package fpdf
+// Copyright ©2023 The go-pdf Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
 
 /*
  * Copyright (c) 2015 Kurt Jung (Gmail: kurt.w.jung),
@@ -16,6 +18,8 @@ package fpdf
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
+
+package fpdf
 
 import (
 	"encoding/gob"

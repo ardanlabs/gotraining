@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"shorts/trimpath/stats"
+	"github.com/ardanlabs/gotraining/topics/go/videos/miki/shorts/trimpath/stats"
 )
 
 func main() {

@@ -1,12 +1,6 @@
-package fpdf
-
-import (
-	"bytes"
-	"crypto/sha1"
-	"encoding/gob"
-	"errors"
-	"fmt"
-)
+// Copyright ©2023 The go-pdf Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
 
 /*
  * Copyright (c) 2015 Kurt Jung (Gmail: kurt.w.jung),
@@ -24,6 +18,16 @@ import (
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
+
+package fpdf
+
+import (
+	"bytes"
+	"crypto/sha1"
+	"encoding/gob"
+	"errors"
+	"fmt"
+)
 
 // newTpl creates a template, copying graphics settings from a template if one is given
 func newTpl(corner PointType, size SizeType, orientationStr, unitStr, fontDirStr string, fn func(*Tpl), copyFrom *Fpdf) Template {

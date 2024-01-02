@@ -745,7 +745,7 @@ func (f *Font) initialize(offset int, isDfont bool) error {
 	f.cached.xHeight = xHeight
 
 	if !hasXHeightCapHeight {
-		xh, ch, err := f.initOS2Version1()
+		xh, ch, err := f.initOS2VersionBelow2()
 		if err != nil {
 			return err
 		}
@@ -1201,7 +1201,7 @@ func (f *Font) glyphTopOS2(b *Buffer, ppem fixed.Int26_6, r rune) (int32, error)
 	return int32(min), nil
 }
 
-func (f *Font) initOS2Version1() (xHeight, capHeight int32, err error) {
+func (f *Font) initOS2VersionBelow2() (xHeight, capHeight int32, err error) {
 	ppem := fixed.Int26_6(f.UnitsPerEm())
 	var b Buffer
 
@@ -1235,12 +1235,14 @@ func (f *Font) parseOS2(buf []byte) (buf1 []byte, hasXHeightCapHeight bool, xHei
 	if err != nil {
 		return nil, false, 0, 0, err
 	}
-	if vers <= 1 {
-		const headerSize = 86
+	if vers < 2 {
+		// "The original TrueType specification had this table at 68 bytes long."
+		// https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6OS2.html
+		const headerSize = 68
 		if f.os2.length < headerSize {
 			return nil, false, 0, 0, errInvalidOS2Table
 		}
-		// Will resolve xHeight and capHeight later, see initOS2Version1.
+		// Will resolve xHeight and capHeight later, see initOS2VersionBelow2.
 		return buf, false, 0, 0, nil
 	}
 	const headerSize = 96

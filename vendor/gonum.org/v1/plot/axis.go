@@ -88,6 +88,10 @@ type Axis struct {
 	// to the normalized coordinate system of the axis—its distance
 	// along the axis as a fraction of the axis range.
 	Scale Normalizer
+
+	// AutoRescale enables an axis to automatically adapt its minimum
+	// and maximum boundaries, according to its underlying Ticker.
+	AutoRescale bool
 }
 
 // makeAxis returns a default Axis.
@@ -160,6 +164,14 @@ func (a *Axis) sanitizeRange() {
 	if a.Min == a.Max {
 		a.Min--
 		a.Max++
+	}
+
+	if a.AutoRescale {
+		marks := a.Tick.Marker.Ticks(a.Min, a.Max)
+		for _, t := range marks {
+			a.Min = math.Min(a.Min, t.Value)
+			a.Max = math.Max(a.Max, t.Value)
+		}
 	}
 }
 

@@ -1,3 +1,7 @@
+// Copyright ©2023 The go-pdf Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
 /*
  * Copyright (c) 2013-2016 Kurt Jung (Gmail: kurt.w.jung)
  *
@@ -54,7 +58,9 @@ func (f *Fpdf) parsepngstream(r *rbuffer, readdpi bool) (info *ImageInfoType) {
 	h := r.i32()
 	bpc := r.u8()
 	if bpc > 8 {
-		f.err = fmt.Errorf("16-bit depth not supported in PNG file")
+		if f.pdfVersion < pdfVers1_5 {
+			f.pdfVersion = pdfVers1_5
+		}
 	}
 	ct := r.u8()
 	var colspace string
@@ -229,8 +235,8 @@ func (f *Fpdf) parsepngstream(r *rbuffer, readdpi bool) (info *ImageInfoType) {
 		info.smask = xa.copy()
 		xa.release()
 
-		if f.pdfVersion < "1.4" {
-			f.pdfVersion = "1.4"
+		if f.pdfVersion < pdfVers1_4 {
+			f.pdfVersion = pdfVers1_4
 		}
 	}
 	info.data = data

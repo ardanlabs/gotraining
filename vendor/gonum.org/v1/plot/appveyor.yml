@@ -2,7 +2,7 @@ build: off
 
 image: Visual Studio 2019
 
-stack: go 1.19
+stack: go 1.20
 
 clone_folder: c:\gopath\src\gonum.org\v1\plot
 

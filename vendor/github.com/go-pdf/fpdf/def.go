@@ -1,3 +1,7 @@
+// Copyright ©2023 The go-pdf Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
 /*
  * Copyright (c) 2013-2014 Kurt Jung (Gmail: kurt.w.jung)
  *
@@ -25,6 +29,7 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"strconv"
 	"time"
 )
 
@@ -640,7 +645,7 @@ type Fpdf struct {
 	creationDate     time.Time                  // override for document CreationDate value
 	modDate          time.Time                  // override for document ModDate value
 	aliasNbPagesStr  string                     // alias for total number of pages
-	pdfVersion       string                     // PDF version number
+	pdfVersion       pdfVersion                 // PDF version number
 	fontDirStr       string                     // location of font definition files
 	capStyle         int                        // line cap style: butt 0, round 1, square 2
 	joinStyle        int                        // line segment join style: miter 0, round 1, bevel 2
@@ -671,6 +676,27 @@ type Fpdf struct {
 		buf []byte       // buffer used to format numbers.
 		col bytes.Buffer // buffer used to build color strings.
 	}
+}
+
+const (
+	pdfVers1_3 = pdfVersion(uint16(1)<<8 | uint16(3))
+	pdfVers1_4 = pdfVersion(uint16(1)<<8 | uint16(4))
+	pdfVers1_5 = pdfVersion(uint16(1)<<8 | uint16(5))
+)
+
+type pdfVersion uint16
+
+func pdfVersionFrom(maj, min uint) pdfVersion {
+	if min > 255 {
+		panic(fmt.Errorf("fpdf: invalid PDF version %d.%d", maj, min))
+	}
+	return pdfVersion(uint16(maj)<<8 | uint16(min))
+}
+
+func (v pdfVersion) String() string {
+	maj := int64(byte(v >> 8))
+	min := int64(byte(v))
+	return strconv.FormatInt(maj, 10) + "." + strconv.FormatInt(min, 10)
 }
 
 type encType struct {

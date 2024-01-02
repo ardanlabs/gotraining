@@ -47,6 +47,12 @@ func (floydSteinberg) Draw(dst Image, r image.Rectangle, src image.Image, sp ima
 // Image is an image.Image with a Set method to change a single pixel.
 type Image = draw.Image
 
+// RGBA64Image extends both the Image and image.RGBA64Image interfaces with a
+// SetRGBA64 method to change a single pixel. SetRGBA64 is equivalent to
+// calling Set, but it can avoid allocations from converting concrete color
+// types to the color.Color interface type.
+type RGBA64Image = draw.RGBA64Image
+
 // Op is a Porter-Duff compositing operator.
 type Op = draw.Op
 

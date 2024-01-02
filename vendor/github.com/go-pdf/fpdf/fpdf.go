@@ -1,3 +1,7 @@
+// Copyright ©2023 The go-pdf Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
 /*
  * Copyright (c) 2013-2014 Kurt Jung (Gmail: kurt.w.jung)
  *
@@ -199,7 +203,7 @@ func fpdfNew(orientationStr, unitStr, sizeStr, fontDirStr string, size SizeType)
 	f.gradientList = make([]gradientType, 0, 8)
 	f.gradientList = append(f.gradientList, gradientType{}) // gradientList[0] is unused
 	// Set default PDF version number
-	f.pdfVersion = "1.3"
+	f.pdfVersion = pdfVers1_3
 	f.SetProducer("FPDF "+cnFpdfVersion, true)
 	f.layerInit()
 	f.catalogSort = gl.catalogSort
@@ -1462,6 +1466,9 @@ func (f *Fpdf) SetAlpha(alpha float64, blendModeStr string) {
 		pos = len(f.blendList) // at least 1
 		f.blendList = append(f.blendList, blendModeType{alphaStr, alphaStr, blendModeStr, 0})
 		f.blendMap[keyStr] = pos
+	}
+	if len(f.blendMap) > 0 && f.pdfVersion < pdfVers1_4 {
+		f.pdfVersion = pdfVers1_4
 	}
 	f.outf("/GS%d gs", pos)
 }
@@ -4174,7 +4181,7 @@ func (f *Fpdf) putpages() {
 			annots.printf("]")
 			f.out(annots.String())
 		}
-		if f.pdfVersion > "1.3" {
+		if f.pdfVersion > pdfVers1_3 {
 			f.out("/Group <</Type /Group /S /Transparency /CS /DeviceRGB>>")
 		}
 		f.outf("/Contents %d 0 R>>", f.n+1)
@@ -4920,8 +4927,8 @@ func (f *Fpdf) putcatalog() {
 	case "TwoColumnRight":
 		f.out("/PageLayout /TwoColumnRight")
 	case "TwoPageLeft", "TwoPageRight":
-		if f.pdfVersion < "1.5" {
-			f.pdfVersion = "1.5"
+		if f.pdfVersion < pdfVers1_5 {
+			f.pdfVersion = pdfVers1_5
 		}
 		f.out("/PageLayout /" + f.layoutMode)
 	}
@@ -4946,9 +4953,6 @@ func (f *Fpdf) putcatalog() {
 }
 
 func (f *Fpdf) putheader() {
-	if len(f.blendMap) > 0 && f.pdfVersion < "1.4" {
-		f.pdfVersion = "1.4"
-	}
 	f.outf("%%PDF-%s", f.pdfVersion)
 }
 

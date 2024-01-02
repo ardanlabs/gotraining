@@ -1,3 +1,7 @@
+// Copyright ©2023 The go-pdf Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
 /*
  * Copyright (c) 2014 Kurt Jung (Gmail: kurt.w.jung)
  *
@@ -76,10 +80,11 @@ func (f *Fpdf) OpenLayerPane() {
 }
 
 func (f *Fpdf) layerEndDoc() {
-	if len(f.layer.list) > 0 {
-		if f.pdfVersion < "1.5" {
-			f.pdfVersion = "1.5"
-		}
+	if len(f.layer.list) == 0 {
+		return
+	}
+	if f.pdfVersion < pdfVers1_5 {
+		f.pdfVersion = pdfVers1_5
 	}
 }
 

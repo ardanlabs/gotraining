@@ -23,6 +23,9 @@ type Font struct {
 	// Typeface identifies the Font.
 	Typeface Typeface
 
+	// TODO(sbinet): Gio@v0.2.0 has dropped font.Font.Variant
+	// we should probably follow suit.
+
 	// Variant is the variant of a font, such as "Mono" or "Smallcaps".
 	Variant Variant
 
