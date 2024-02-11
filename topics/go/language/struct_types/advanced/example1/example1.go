@@ -32,7 +32,7 @@ type sbp struct {
 type tbp struct {
 	a bool //	1 byte				size 1
 	//			3 bytes padding		size 4
-	b int32 //	4 bytes				size 8 - Aligned on 2 bytes
+	b int32 //	4 bytes				size 8 - Aligned on 4 bytes
 }
 
 // Seven byte padding.
