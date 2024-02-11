@@ -50,8 +50,7 @@ func lowercase() {
 	// Display the alphabet three times
 	for count := 0; count < 3; count++ {
 		for r := 'a'; r <= 'z'; r++ {
-			// Blue
-			fmt.Printf("\033[32m%c\033[39m ", r)
+			fmt.Printf("%c ", r)
 		}
 	}
 }
@@ -62,8 +61,7 @@ func uppercase() {
 	// Display the alphabet three times
 	for count := 0; count < 3; count++ {
 		for r := 'A'; r <= 'Z'; r++ {
-			// Red
-			fmt.Printf("\033[31m%c\033[39m ", r)
+			fmt.Printf("%c ", r)
 		}
 	}
 }
