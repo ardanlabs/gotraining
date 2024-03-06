@@ -2,15 +2,18 @@
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/bill/code/go",
     "go.addTags": {},
-    "go.alternateTools": {
-    },
+    "go.alternateTools": {},
     "go.toolsManagement.autoUpdate": true,
     "go.useLanguageServer": true,
+    "go.coverOnTestPackage": false,
+    "go.lintFlags": [
+        "-checks=all"
+    ],
     "[go]": {
         "editor.snippetSuggestions": "none",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true
+            "source.organizeImports": "explicit"
         },
         "editor.codeLens": false
     },
@@ -23,11 +26,25 @@
             //"gc_details": true,
         }
     },
-    "go.lintFlags": [
-        "-checks=all"
-    ],
 
-    "editor.lightbulb.enabled": false,
+    "workbench.tree.enableStickyScroll": false,
+    "workbench.colorTheme": "Zenburn",
+    "workbench.editorAssociations": {
+        "*.a": "hexEditor.hexedit"
+    },
+    "workbench.colorCustomizations": {
+        "[Zenburn]": {
+            "editorBracketHighlight.foreground1": "#f6f8f7c9",
+            "editorBracketHighlight.foreground2": "#f6f8f7c9",
+            "editorBracketHighlight.foreground3": "#f6f8f7c9",
+            "editorBracketHighlight.foreground4": "#f6f8f7c9",
+            "editorBracketHighlight.foreground5": "#f6f8f7c9",
+            "editorBracketHighlight.foreground6": "#f6f8f7c9",
+            "editorBracketHighlight.unexpectedBracket.foreground": "#f6f8f7c9"
+        },
+    },
+
+    "editor.lightbulb.enabled": "off",
     "editor.fontSize": 14,
     "editor.formatOnType": true,
     "editor.mouseWheelZoom": false,
@@ -38,6 +55,10 @@
     "editor.wordWrap": "off",
     "editor.guides.indentation": false,
     "editor.renderWhitespace": "none",
+    "editor.stickyScroll.enabled": false,
+    "editor.folding": false,
+    "editor.detectIndentation": false,
+    "editor.inlineSuggest.enabled": true,
     "editor.tokenColorCustomizations": {
         "[Zenburn]": {
             "textMateRules": [
@@ -49,18 +70,6 @@
                 }
             ]
         }
-    },
-    "workbench.colorTheme": "Zenburn",
-    "workbench.colorCustomizations": {
-        "[Zenburn]": {
-            "editorBracketHighlight.foreground1": "#f6f8f7c9",
-            "editorBracketHighlight.foreground2": "#f6f8f7c9",
-            "editorBracketHighlight.foreground3": "#f6f8f7c9",
-            "editorBracketHighlight.foreground4": "#f6f8f7c9",
-            "editorBracketHighlight.foreground5": "#f6f8f7c9",
-            "editorBracketHighlight.foreground6": "#f6f8f7c9",
-            "editorBracketHighlight.unexpectedBracket.foreground": "#f6f8f7c9"
-        },
     },
 
     "files.exclude": {
@@ -74,53 +83,18 @@
     },
     "files.trimTrailingWhitespace": false,
 
-    "extensions.ignoreRecommendations": true,
-    "liveshare.featureSet": "insiders",
-    "go.coverOnTestPackage": false,
-    "liveshare.anonymousGuestApproval": "accept",
-    "editor.folding": false,
     "explorer.compactFolders": false,
+    "explorer.confirmDragAndDrop": false,
+
+    "window.newWindowDimensions": "maximized",
+    "window.zoomLevel": 1,
+
+    "liveshare.featureSet": "insiders",
+    "liveshare.anonymousGuestApproval": "accept",
+
+    "extensions.ignoreRecommendations": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "terminal.integrated.tabs.enabled": true,
     "testing.gutterEnabled": false,
     "security.workspace.trust.untrustedFiles": "open",
-    "window.newWindowDimensions": "maximized",
-    "editor.detectIndentation": false,
-
-    "[rust]": {
-        "editor.defaultFormatter": "rust-lang.rust-analyzer",
-        "editor.formatOnSave": true
-    },
-    
-    "rust-analyzer.highlightRelated.breakPoints.enable": false,
-    "rust-analyzer.highlightRelated.exitPoints.enable": false,
-    "rust-analyzer.highlightRelated.references.enable": false,
-    "rust-analyzer.highlightRelated.yieldPoints.enable": false,
-    "rust-analyzer.hover.actions.debug.enable": false,
-    "rust-analyzer.hover.actions.enable": false,
-    "rust-analyzer.hover.actions.gotoTypeDef.enable": false,
-    "rust-analyzer.hover.actions.implementations.enable": false,
-    "rust-analyzer.hover.actions.run.enable": false,
-    "rust-analyzer.hover.links.enable": false,
-    "rust-analyzer.imports.group.enable": false,
-    "rust-analyzer.inlayHints.chainingHints.enable": false,
-    "rust-analyzer.inlayHints.closingBraceHints.enable": false,
-    "rust-analyzer.inlayHints.parameterHints.enable": false,
-    "rust-analyzer.inlayHints.renderColons": false,
-    "rust-analyzer.inlayHints.typeHints.enable": false,
-    "rust-analyzer.joinLines.joinAssignments": false,
-    "rust-analyzer.joinLines.joinElseIf": false,
-    "rust-analyzer.joinLines.removeTrailingComma": false,
-    "rust-analyzer.joinLines.unwrapTrivialBlock": false,
-    "rust-analyzer.lens.debug.enable": false,
-    "rust-analyzer.lens.enable": false,
-    "rust-analyzer.lens.forceCustomCommands": false,
-    "rust-analyzer.lens.implementations.enable": false,
-    "rust-analyzer.lens.run.enable": false,
-    "rust-analyzer.semanticHighlighting.doc.comment.inject.enable": false,
-    "rust-analyzer.semanticHighlighting.operator.enable": false,
-    "rust-analyzer.semanticHighlighting.strings.enable": false,
-    "editor.inlineSuggest.enabled": true,
-    "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 1,
 }
