@@ -80,7 +80,7 @@ func Submit(uid string, options Options) []Result {
 			continue
 		}
 
-		// Wait to recieve results.
+		// Wait to receive results.
 		found := <-results
 
 		// Save the results to the final slice.

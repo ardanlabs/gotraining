@@ -5,7 +5,7 @@ import "fmt"
 
 // binarySearchIterative takes a sorted list of numbers and uses the
 // `iterative` process to find the target. The function returns the
-// index postion of where the target is found.
+// index position of where the target is found.
 // - the worst case of this algorithm is O(logn)
 // - the best case of this algorithm is O(1)
 func binarySearchIterative(sortedList []int, target int) (int, error) {
