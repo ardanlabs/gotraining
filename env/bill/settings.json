@@ -29,7 +29,7 @@
         "editor.codeLens": false
     },
 
-    "[javascript][html][css]": {
+    "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "prettier.tabWidth": 4,
@@ -37,6 +37,19 @@
         "prettier.singleQuote": true,
         "prettier.bracketSpacing": false,
         "prettier.trailingComma": "es5",
+        "editor.codeLens": false
+    },
+
+    "[html][css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "prettier.tabWidth": 4,
+        "prettier.printWidth": 120,
+        "prettier.singleQuote": false,
+        "prettier.bracketSpacing": false,
+        "prettier.bracketSameLine": true,
+        "prettier.trailingComma": "es5",
+        "prettier.proseWrap": "always",
         "editor.codeLens": false
     },
 
