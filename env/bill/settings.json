@@ -9,14 +9,7 @@
     "go.lintFlags": [
         "-checks=all"
     ],
-    "[go]": {
-        "editor.snippetSuggestions": "none",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-        },
-        "editor.codeLens": false
-    },
+
     "gopls": {
         "staticcheck": true,
         "usePlaceholders": true,    // add parameter placeholders when completing a function
@@ -25,6 +18,26 @@
         "codelenses": {
             //"gc_details": true,
         }
+    },
+
+    "[go]": {
+        "editor.snippetSuggestions": "none",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.codeLens": false
+    },
+
+    "[javascript][html][css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "prettier.tabWidth": 4,
+        "prettier.printWidth": 120,
+        "prettier.singleQuote": true,
+        "prettier.bracketSpacing": false,
+        "prettier.trailingComma": "es5",
+        "editor.codeLens": false
     },
 
     "workbench.tree.enableStickyScroll": false,
@@ -41,7 +54,7 @@
             "editorBracketHighlight.foreground5": "#f6f8f7c9",
             "editorBracketHighlight.foreground6": "#f6f8f7c9",
             "editorBracketHighlight.unexpectedBracket.foreground": "#f6f8f7c9"
-        },
+        }
     },
 
     "editor.lightbulb.enabled": "off",
@@ -65,7 +78,7 @@
                 {
                     "scope": "variable.other",
                     "settings": {
-                        "foreground": "#DEDEDE",
+                        "foreground": "#DEDEDE"
                     }
                 }
             ]
@@ -97,4 +110,10 @@
     "terminal.integrated.tabs.enabled": true,
     "testing.gutterEnabled": false,
     "security.workspace.trust.untrustedFiles": "open",
+    "VSCodeCounter.exclude": [
+        "**/.gitignore",
+        "**/.vscode/**",
+        "**/node_modules/**",
+        "**/vendor/**"
+    ]
 }
