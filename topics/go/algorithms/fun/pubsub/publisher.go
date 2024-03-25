@@ -11,7 +11,7 @@ type Publisher struct {
 	clients *Clients
 }
 
-// NewPublisher connects to the publisher can recieves messages.
+// NewPublisher connects to the publisher can receives messages.
 func NewPublisher(clients *Clients) *Publisher {
 	pub := Publisher{
 		clients: clients,

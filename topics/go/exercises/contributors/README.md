@@ -28,7 +28,7 @@ A [template file](template/main.go) is included to get you started.
 # Part 3: Testing
 
 - Add tests for `printContributors`. Create a mock version of the github client
-  and pass that in. To capture the ouput you can change the `printContributors`
+  and pass that in. To capture the output you can change the `printContributors`
   function to accept an `io.Writer` where it should print results.
 - Add tests for the `github` package using `net/http/httptest.NewServer`.
 

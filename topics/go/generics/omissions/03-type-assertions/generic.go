@@ -8,7 +8,7 @@ import (
 // ==============================================================================
 
 // The Min function needs to know what type `T` becomes so it can perform a
-// converstion if necessary. This operation is possible by manually placing
+// conversion if necessary. This operation is possible by manually placing
 // the value of type T in an interface. This syntax would be a convenience.
 // ex.  switch v := interface{}(a).(type)
 
