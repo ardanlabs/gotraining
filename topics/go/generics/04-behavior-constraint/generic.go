@@ -80,7 +80,7 @@ func stringifyAssert(v interface{}) []string {
 
 // This function provides a reflection solution which allows a slice of any
 // type to be provided and stringified. This is a generic function thanks to the
-// reflect package. Notice the call to the String method via relfection.
+// reflect package. Notice the call to the String method via reflection.
 
 func stringifyReflect(v interface{}) []string {
 	val := reflect.ValueOf(v)
