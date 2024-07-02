@@ -36,11 +36,14 @@ func (e UnsupportedError) Error() string {
 	return "tiff: unsupported feature: " + string(e)
 }
 
-var errNoPixels = FormatError("not enough pixel data")
+var (
+	errNoPixels          = FormatError("not enough pixel data")
+	errInvalidColorIndex = FormatError("invalid color index")
+)
 
 const maxChunkSize = 10 << 20 // 10M
 
-// safeReadtAt is a verbatim copy of internal/saferio.ReadDataAt from the
+// safeReadAt is a verbatim copy of internal/saferio.ReadDataAt from the
 // standard library, which is used to read data from a reader using a length
 // provided by untrusted data, without allocating the entire slice ahead of time
 // if it is large (>maxChunkSize). This allows us to avoid allocating giant
@@ -337,13 +340,18 @@ func (d *decoder) decode(dst image.Image, xmin, ymin, xmax, ymax int) error {
 		}
 	case mPaletted:
 		img := dst.(*image.Paletted)
+		pLen := len(d.palette)
 		for y := ymin; y < rMaxY; y++ {
 			for x := xmin; x < rMaxX; x++ {
 				v, ok := d.readBits(d.bpp)
 				if !ok {
 					return errNoPixels
 				}
-				img.SetColorIndex(x, y, uint8(v))
+				idx := uint8(v)
+				if int(idx) >= pLen {
+					return errInvalidColorIndex
+				}
+				img.SetColorIndex(x, y, idx)
 			}
 			d.flushBits()
 		}
