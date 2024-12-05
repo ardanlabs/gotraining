@@ -6,7 +6,7 @@ The tracing can help identify not only what is happening but also what is not ha
 
 Review this post to gain basic skills.
 
-[go tool trace](https://making.pusher.com/go-tool-trace/) - Will Sewell  
+[go tool trace]([https://making.pusher.com/go-tool-trace/](https://web.archive.org/web/20220826224706/https://making.pusher.com/go-tool-trace/) - Will Sewell  
 [Debugging Latency in Go 1.11](https://medium.com/observability/debugging-latency-in-go-1-11-9f97a7910d68) - JBD
 
 ## Trace Command
