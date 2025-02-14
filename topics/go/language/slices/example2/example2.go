@@ -17,16 +17,33 @@ func main() {
 	fruits[3] = "Grape"
 	fruits[4] = "Plum"
 
+	// ----- ruben
+	for i := range fruits {
+		fmt.Println(fruits[i], &fruits[i])
+	}
+
+	fmt.Printf("\n\n")
+	// ----- ruben
+
 	inspectSlice(fruits)
 }
 
 // inspectSlice exposes the slice header for review.
 func inspectSlice(slice []string) {
+	// ----- ruben
+	for i := range slice {
+		fmt.Println(slice[i], &slice[i])
+	}
+
+	fmt.Printf("\n\n")
+	// ----- ruben
+
 	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
 	for i, s := range slice {
-		fmt.Printf("[%d] %p %s\n",
+		fmt.Printf("[%d] %p %s %p\n",
 			i,
 			&slice[i],
-			s)
+			s,
+			&s) // I added this '&s'
 	}
 }

@@ -29,8 +29,11 @@ func main() {
 
 		if i == 1 {
 			fmt.Printf("v[%s]\n", v)
+			fmt.Printf(". Aft[%s]\n", friends[1]) // added by Ruben
 		}
 	}
+
+	fmt.Printf(".. Aft[%s]\n", friends[1]) // added by Ruben
 
 	// Using the value semantic form of the for range but with pointer
 	// semantic access. DON'T DO THIS.
