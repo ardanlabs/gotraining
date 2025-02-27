@@ -26,14 +26,14 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit"
         },
-        "editor.codeLens": false
+        "editor.codeLens": false,
     },
 
-    "[javascript]": {
+    "[javascript][typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "prettier.tabWidth": 4,
-        "prettier.printWidth": 120,
+        "prettier.printWidth": 300,
         "prettier.singleQuote": true,
         "prettier.bracketSpacing": false,
         "prettier.trailingComma": "es5",
@@ -44,7 +44,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "prettier.tabWidth": 4,
-        "prettier.printWidth": 120,
+        "prettier.printWidth": 200,
         "prettier.singleQuote": false,
         "prettier.bracketSpacing": false,
         "prettier.bracketSameLine": true,
@@ -69,6 +69,9 @@
             "editorBracketHighlight.unexpectedBracket.foreground": "#f6f8f7c9"
         }
     },
+    "workbench.settings.applyToAllProfiles": [
+        "html.format.wrapLineLength"
+    ],
 
     "editor.lightbulb.enabled": "off",
     "editor.fontSize": 14,
@@ -123,10 +126,20 @@
     "terminal.integrated.tabs.enabled": true,
     "testing.gutterEnabled": false,
     "security.workspace.trust.untrustedFiles": "open",
+    "debug.javascript.codelens.npmScripts": "never",
     "VSCodeCounter.exclude": [
         "**/.gitignore",
         "**/.vscode/**",
         "**/node_modules/**",
         "**/vendor/**"
-    ]
+    ],
+   
+
+    "github.copilot.chat.setupTests.enabled": false,
+    "github.copilot.chat.edits.suggestRelatedFilesForTests": false,
+    "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": false,
+   
+    "testing.showCoverageInExplorer": false,
+    "testing.saveBeforeTest": false,
+    "github.copilot.chat.fixTestFailure.enabled": false
 }
