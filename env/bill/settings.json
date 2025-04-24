@@ -133,7 +133,6 @@
         "**/node_modules/**",
         "**/vendor/**"
     ],
-   
 
     "github.copilot.chat.setupTests.enabled": false,
     "github.copilot.chat.edits.suggestRelatedFilesForTests": false,
@@ -141,5 +140,12 @@
    
     "testing.showCoverageInExplorer": false,
     "testing.saveBeforeTest": false,
-    "github.copilot.chat.fixTestFailure.enabled": false
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "go": true
+    }
 }
