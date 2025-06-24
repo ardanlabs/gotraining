@@ -15,6 +15,12 @@ ulimit -n 200000
 export GOPATH=$HOME/code/go
 export PATH=$PATH:$GOPATH/bin
 
+# Python Stuff
+export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/Current/bin
+alias python=/usr/local/bin/python3
+alias python3=/usr/local/bin/python3
+alias pip='python3 -m pip'
+
 # Quick Stuff
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
@@ -22,9 +28,6 @@ alias cdpg="cd $GOPATH/src/github.com/predictionguard"
 alias cdard="cd $GOPATH/src/github.com/ardanlabs"
 alias cdgb="cd $GOPATH/src/github.com/gobridge"
 alias cdsqlx="cd $GOPATH/src/github.com/jmoiron/sqlx"
-
-alias python=/opt/homebrew/bin/python3.13
-alias pip=/opt/homebrew/bin/pip3.13
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
