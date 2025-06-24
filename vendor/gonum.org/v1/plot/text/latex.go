@@ -10,10 +10,10 @@ import (
 	"math"
 	"strings"
 
-	"github.com/go-latex/latex/drawtex"
-	"github.com/go-latex/latex/font/ttf"
-	"github.com/go-latex/latex/mtex"
-	"github.com/go-latex/latex/tex"
+	"codeberg.org/go-latex/latex/drawtex"
+	"codeberg.org/go-latex/latex/font/ttf"
+	"codeberg.org/go-latex/latex/mtex"
+	"codeberg.org/go-latex/latex/tex"
 	stdfnt "golang.org/x/image/font"
 
 	"gonum.org/v1/plot/font"

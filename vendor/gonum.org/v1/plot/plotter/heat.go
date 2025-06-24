@@ -81,8 +81,8 @@ func NewHeatMap(g GridXYZ, p palette.Palette) *HeatMap {
 	default:
 		min, max = math.Inf(1), math.Inf(-1)
 		c, r := g.Dims()
-		for i := 0; i < c; i++ {
-			for j := 0; j < r; j++ {
+		for i := range c {
+			for j := range r {
 				v := g.Z(i, j)
 				if math.IsNaN(v) {
 					continue
@@ -120,8 +120,8 @@ func (h *HeatMap) plotRasterized(c draw.Canvas, plt *plot.Plot) {
 
 	pal := h.Palette.Colors()
 	ps := float64(len(pal)-1) / (h.Max - h.Min)
-	for i := 0; i < cols; i++ {
-		for j := 0; j < rows; j++ {
+	for i := range cols {
+		for j := range rows {
 			var col color.Color
 			switch v := h.GridXYZ.Z(i, j); {
 			case v < h.Min:
@@ -161,7 +161,7 @@ func (h *HeatMap) plotVectorized(c draw.Canvas, plt *plot.Plot) {
 
 	var pa vg.Path
 	cols, rows := h.GridXYZ.Dims()
-	for i := 0; i < cols; i++ {
+	for i := range cols {
 		var right, left float64
 		switch i {
 		case 0:
@@ -179,7 +179,7 @@ func (h *HeatMap) plotVectorized(c draw.Canvas, plt *plot.Plot) {
 			left = -(h.GridXYZ.X(i) - h.GridXYZ.X(i-1)) / 2
 		}
 
-		for j := 0; j < rows; j++ {
+		for j := range rows {
 			var up, down float64
 			switch j {
 			case 0:
@@ -258,8 +258,8 @@ func (h *HeatMap) DataRange() (xmin, xmax, ymin, ymax float64) {
 func (h *HeatMap) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	c, r := h.GridXYZ.Dims()
 	b := make([]plot.GlyphBox, 0, r*c)
-	for i := 0; i < c; i++ {
-		for j := 0; j < r; j++ {
+	for i := range c {
+		for j := range r {
 			b = append(b, plot.GlyphBox{
 				X: plt.X.Norm(h.GridXYZ.X(i)),
 				Y: plt.Y.Norm(h.GridXYZ.Y(j)),

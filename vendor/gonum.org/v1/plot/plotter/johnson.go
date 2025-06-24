@@ -114,13 +114,6 @@ func (j *johnson) unblock(u int) {
 	}
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
 // tarjan implements Tarjan's strongly connected component finding
 // algorithm. The implementation is from the pseudocode at
 //

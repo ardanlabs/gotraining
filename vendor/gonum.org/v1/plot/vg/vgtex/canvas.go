@@ -209,7 +209,7 @@ func (c *Canvas) indent(s string) string {
 	return strings.Repeat(s, len(c.stack))
 }
 
-func (c *Canvas) wtex(s string, args ...interface{}) {
+func (c *Canvas) wtex(s string, args ...any) {
 	fmt.Fprintf(c.buf, c.indent("  ")+s+"\n", args...)
 }
 

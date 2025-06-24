@@ -76,8 +76,8 @@ func conrec(g GridXYZ, heights []float64, fn conrecLine) {
 	)
 
 	c, r := g.Dims()
-	for i := 0; i < c-1; i++ {
-		for j := 0; j < r-1; j++ {
+	for i := range c - 1 {
+		for j := range r - 1 {
 			dmin := math.Min(
 				math.Min(g.Z(i, j), g.Z(i, j+1)),
 				math.Min(g.Z(i+1, j), g.Z(i+1, j+1)),
@@ -92,7 +92,7 @@ func conrec(g GridXYZ, heights []float64, fn conrecLine) {
 				continue
 			}
 
-			for k := 0; k < len(heights); k++ {
+			for k := range heights {
 				if heights[k] < dmin || dmax < heights[k] {
 					continue
 				}

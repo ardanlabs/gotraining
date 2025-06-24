@@ -235,7 +235,6 @@ type horizontalAxis struct {
 // size returns the height of the axis.
 func (a horizontalAxis) size() (h vg.Length) {
 	if a.Label.Text != "" { // We assume that the label isn't rotated.
-		h += a.Label.TextStyle.FontExtents().Descent
 		h += a.Label.TextStyle.Height(a.Label.Text)
 		h += a.Label.Padding
 	}
@@ -567,17 +566,11 @@ func (DefaultTicks) Ticks(min, max float64) []Tick {
 }
 
 func minInt(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
+	return min(a, b)
 }
 
 func maxInt(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+	return max(a, b)
 }
 
 // LogTicks is suitable for the Tick.Marker field of an Axis,

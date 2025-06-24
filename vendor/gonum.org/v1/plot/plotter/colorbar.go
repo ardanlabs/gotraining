@@ -62,7 +62,7 @@ func (l *ColorBar) Plot(c draw.Canvas, p *plot.Plot) {
 			Min: image.Point{X: 0, Y: 0},
 			Max: image.Point{X: 1, Y: colors},
 		})
-		for i := 0; i < colors; i++ {
+		for i := range colors {
 			color, err := l.ColorMap.At(l.ColorMap.Min() + delta*float64(i))
 			if err != nil {
 				panic(err)
@@ -75,7 +75,7 @@ func (l *ColorBar) Plot(c draw.Canvas, p *plot.Plot) {
 			Min: image.Point{X: 0, Y: 0},
 			Max: image.Point{X: colors, Y: 1},
 		})
-		for i := 0; i < colors; i++ {
+		for i := range colors {
 			color, err := l.ColorMap.At(l.ColorMap.Min() + delta*float64(i))
 			if err != nil {
 				panic(err)

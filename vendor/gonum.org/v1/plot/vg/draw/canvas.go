@@ -572,7 +572,7 @@ func (c *Canvas) ClipPolygonY(pts []vg.Point) []vg.Point {
 // and in function.
 func clipPoly(in func(vg.Point, vg.Point) bool, clip, norm vg.Point, pts []vg.Point) (clipped []vg.Point) {
 	clipped = make([]vg.Point, 0, len(pts))
-	for i := 0; i < len(pts); i++ {
+	for i := range pts {
 		j := i + 1
 		if i == len(pts)-1 {
 			j = 0

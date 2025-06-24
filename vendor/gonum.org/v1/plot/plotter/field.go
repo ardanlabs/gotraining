@@ -66,8 +66,8 @@ type Field struct {
 func NewField(f FieldXY) *Field {
 	max := math.Inf(-1)
 	c, r := f.Dims()
-	for i := 0; i < c; i++ {
-		for j := 0; j < r; j++ {
+	for i := range c {
+		for j := range r {
 			v := f.Vector(i, j)
 			d := math.Hypot(v.X, v.Y)
 			if math.IsNaN(d) {
@@ -93,7 +93,7 @@ func (f *Field) Plot(c draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&c)
 
 	cols, rows := f.FieldXY.Dims()
-	for i := 0; i < cols; i++ {
+	for i := range cols {
 		var right, left float64
 		switch i {
 		case 0:
@@ -111,7 +111,7 @@ func (f *Field) Plot(c draw.Canvas, plt *plot.Plot) {
 			left = -(f.FieldXY.X(i) - f.FieldXY.X(i-1)) / 2
 		}
 
-		for j := 0; j < rows; j++ {
+		for j := range rows {
 			var up, down float64
 			switch j {
 			case 0:
@@ -200,8 +200,8 @@ func (f *Field) DataRange() (xmin, xmax, ymin, ymax float64) {
 func (f *Field) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	c, r := f.FieldXY.Dims()
 	b := make([]plot.GlyphBox, 0, r*c)
-	for i := 0; i < c; i++ {
-		for j := 0; j < r; j++ {
+	for i := range c {
+		for j := range r {
 			b = append(b, plot.GlyphBox{
 				X: plt.X.Norm(f.FieldXY.X(i)),
 				Y: plt.Y.Norm(f.FieldXY.Y(j)),

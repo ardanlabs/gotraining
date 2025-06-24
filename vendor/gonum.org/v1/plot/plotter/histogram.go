@@ -186,7 +186,7 @@ func binPoints(xys XYer, n int) (bins []HistogramBin, width float64) {
 	xmin, xmax := Range(XValues{xys})
 	if n <= 0 {
 		m := 0.0
-		for i := 0; i < xys.Len(); i++ {
+		for i := range xys.Len() {
 			_, y := xys.XY(i)
 			m += math.Max(y, 1.0)
 		}
@@ -207,7 +207,7 @@ func binPoints(xys XYer, n int) (bins []HistogramBin, width float64) {
 		bins[i].Max = xmin + float64(i+1)*w
 	}
 
-	for i := 0; i < xys.Len(); i++ {
+	for i := range xys.Len() {
 		x, y := xys.XY(i)
 		bin := int((x - xmin) / w)
 		if x == xmax {

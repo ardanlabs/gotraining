@@ -36,7 +36,7 @@ type item struct {
 //
 // If an error occurs then none of the plotters are added
 // to the plot, and the error is returned.
-func AddStackedAreaPlots(plt *plot.Plot, xs plotter.Valuer, vs ...interface{}) error {
+func AddStackedAreaPlots(plt *plot.Plot, xs plotter.Valuer, vs ...any) error {
 	var ps []plot.Plotter
 	var names []item
 	name := ""
@@ -95,7 +95,7 @@ func AddStackedAreaPlots(plt *plot.Plot, xs plotter.Valuer, vs ...interface{}) e
 //
 // If an error occurs then none of the plotters are added
 // to the plot, and the error is returned.
-func AddBoxPlots(plt *plot.Plot, width vg.Length, vs ...interface{}) error {
+func AddBoxPlots(plt *plot.Plot, width vg.Length, vs ...any) error {
 	var ps []plot.Plotter
 	var names []string
 	name := ""
@@ -133,7 +133,7 @@ func AddBoxPlots(plt *plot.Plot, width vg.Length, vs ...interface{}) error {
 //
 // If an error occurs then none of the plotters are added
 // to the plot, and the error is returned.
-func AddScatters(plt *plot.Plot, vs ...interface{}) error {
+func AddScatters(plt *plot.Plot, vs ...any) error {
 	var ps []plot.Plotter
 	var items []item
 	name := ""
@@ -180,7 +180,7 @@ func AddScatters(plt *plot.Plot, vs ...interface{}) error {
 //
 // If an error occurs then none of the plotters are added
 // to the plot, and the error is returned.
-func AddLines(plt *plot.Plot, vs ...interface{}) error {
+func AddLines(plt *plot.Plot, vs ...any) error {
 	var ps []plot.Plotter
 	var items []item
 	name := ""
@@ -236,7 +236,7 @@ func AddLines(plt *plot.Plot, vs ...interface{}) error {
 //
 // If an error occurs then none of the plotters are added
 // to the plot, and the error is returned.
-func AddLinePoints(plt *plot.Plot, vs ...interface{}) error {
+func AddLinePoints(plt *plot.Plot, vs ...any) error {
 	var ps []plot.Plotter
 	type item struct {
 		name  string
@@ -288,7 +288,7 @@ func AddLinePoints(plt *plot.Plot, vs ...interface{}) error {
 //
 // If an error occurs then none of the plotters are added
 // to the plot, and the error is returned.
-func AddErrorBars(plt *plot.Plot, vs ...interface{}) error {
+func AddErrorBars(plt *plot.Plot, vs ...any) error {
 	var ps []plot.Plotter
 	for i, v := range vs {
 		added := false

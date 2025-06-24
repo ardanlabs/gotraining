@@ -182,9 +182,9 @@ var (
 	// Computer Graphics", Computer Graphics, Vol. 22, No. 4, pp. 221-228.
 	CatmullRom = &Kernel{2, func(t float64) float64 {
 		if t < 1 {
-			return (1.5*t-2.5)*t*t + 1
+			return float64((float64(1.5*t)-2.5)*t*t) + 1
 		}
-		return ((-0.5*t+2.5)*t-4)*t + 2
+		return float64((float64(float64(float64(-0.5*t)+2.5)*t)-4)*t) + 2
 	}}
 
 	// TODO: a Kaiser-Bessel kernel?
@@ -247,7 +247,7 @@ func newDistrib(q *Kernel, dw, sw int32) distrib {
 	// source column or row.
 	n, sources := int32(0), make([]source, dw)
 	for x := range sources {
-		center := (float64(x)+0.5)*scale - 0.5
+		center := float64((float64(x)+0.5)*scale) - 0.5
 		i := int32(math.Floor(center - halfWidth))
 		if i < 0 {
 			i = 0
@@ -302,7 +302,7 @@ func abs(f float64) float64 {
 
 // ftou converts the range [0.0, 1.0] to [0, 0xffff].
 func ftou(f float64) uint16 {
-	i := int32(0xffff*f + 0.5)
+	i := int32(float64(0xffff*f) + 0.5)
 	if i > 0xffff {
 		return 0xffff
 	}
@@ -332,12 +332,12 @@ func fffftou(f float64) uint16 {
 func invert(m *f64.Aff3) f64.Aff3 {
 	m00 := +m[3*1+1]
 	m01 := -m[3*0+1]
-	m02 := +m[3*1+2]*m[3*0+1] - m[3*1+1]*m[3*0+2]
+	m02 := +float64(m[3*1+2]*m[3*0+1]) - float64(m[3*1+1]*m[3*0+2])
 	m10 := -m[3*1+0]
 	m11 := +m[3*0+0]
-	m12 := +m[3*1+0]*m[3*0+2] - m[3*1+2]*m[3*0+0]
+	m12 := +float64(m[3*1+0]*m[3*0+2]) - float64(m[3*1+2]*m[3*0+0])
 
-	det := m00*m11 - m10*m01
+	det := float64(m00*m11) - float64(m10*m01)
 
 	return f64.Aff3{
 		m00 / det,
@@ -351,12 +351,12 @@ func invert(m *f64.Aff3) f64.Aff3 {
 
 func matMul(p, q *f64.Aff3) f64.Aff3 {
 	return f64.Aff3{
-		p[3*0+0]*q[3*0+0] + p[3*0+1]*q[3*1+0],
-		p[3*0+0]*q[3*0+1] + p[3*0+1]*q[3*1+1],
-		p[3*0+0]*q[3*0+2] + p[3*0+1]*q[3*1+2] + p[3*0+2],
-		p[3*1+0]*q[3*0+0] + p[3*1+1]*q[3*1+0],
-		p[3*1+0]*q[3*0+1] + p[3*1+1]*q[3*1+1],
-		p[3*1+0]*q[3*0+2] + p[3*1+1]*q[3*1+2] + p[3*1+2],
+		float64(p[3*0+0]*q[3*0+0]) + float64(p[3*0+1]*q[3*1+0]),
+		float64(p[3*0+0]*q[3*0+1]) + float64(p[3*0+1]*q[3*1+1]),
+		float64(p[3*0+0]*q[3*0+2]) + float64(p[3*0+1]*q[3*1+2]) + p[3*0+2],
+		float64(p[3*1+0]*q[3*0+0]) + float64(p[3*1+1]*q[3*1+0]),
+		float64(p[3*1+0]*q[3*0+1]) + float64(p[3*1+1]*q[3*1+1]),
+		float64(p[3*1+0]*q[3*0+2]) + float64(p[3*1+1]*q[3*1+2]) + p[3*1+2],
 	}
 }
 
@@ -371,8 +371,8 @@ func transformRect(s2d *f64.Aff3, sr *image.Rectangle) (dr image.Rectangle) {
 	for i, p := range ps {
 		sxf := float64(p.X)
 		syf := float64(p.Y)
-		dx := int(math.Floor(s2d[0]*sxf + s2d[1]*syf + s2d[2]))
-		dy := int(math.Floor(s2d[3]*sxf + s2d[4]*syf + s2d[5]))
+		dx := int(math.Floor(float64(s2d[0]*sxf) + float64(s2d[1]*syf) + s2d[2]))
+		dy := int(math.Floor(float64(s2d[3]*sxf) + float64(s2d[4]*syf) + s2d[5]))
 
 		// The +1 adjustments below are because an image.Rectangle is inclusive
 		// on the low end but exclusive on the high end.
@@ -428,8 +428,8 @@ func transform_Uniform(dst Image, dr, adr image.Rectangle, d2s *f64.Aff3, src *i
 				d := dst.PixOffset(dr.Min.X+adr.Min.X, dr.Min.Y+int(dy))
 				for dx := int32(adr.Min.X); dx < int32(adr.Max.X); dx, d = dx+1, d+4 {
 					dxf := float64(dr.Min.X+int(dx)) + 0.5
-					sx0 := int(d2s[0]*dxf+d2s[1]*dyf+d2s[2]) + bias.X
-					sy0 := int(d2s[3]*dxf+d2s[4]*dyf+d2s[5]) + bias.Y
+					sx0 := int(float64(d2s[0]*dxf)+float64(d2s[1]*dyf)+d2s[2]) + bias.X
+					sy0 := int(float64(d2s[3]*dxf)+float64(d2s[4]*dyf)+d2s[5]) + bias.Y
 					if !(image.Point{sx0, sy0}).In(sr) {
 						continue
 					}
@@ -450,8 +450,8 @@ func transform_Uniform(dst Image, dr, adr image.Rectangle, d2s *f64.Aff3, src *i
 				dyf := float64(dr.Min.Y+int(dy)) + 0.5
 				for dx := int32(adr.Min.X); dx < int32(adr.Max.X); dx++ {
 					dxf := float64(dr.Min.X+int(dx)) + 0.5
-					sx0 := int(d2s[0]*dxf+d2s[1]*dyf+d2s[2]) + bias.X
-					sy0 := int(d2s[3]*dxf+d2s[4]*dyf+d2s[5]) + bias.Y
+					sx0 := int(float64(d2s[0]*dxf)+float64(d2s[1]*dyf)+d2s[2]) + bias.X
+					sy0 := int(float64(d2s[3]*dxf)+float64(d2s[4]*dyf)+d2s[5]) + bias.Y
 					if !(image.Point{sx0, sy0}).In(sr) {
 						continue
 					}
@@ -479,8 +479,8 @@ func transform_Uniform(dst Image, dr, adr image.Rectangle, d2s *f64.Aff3, src *i
 				d := dst.PixOffset(dr.Min.X+adr.Min.X, dr.Min.Y+int(dy))
 				for dx := int32(adr.Min.X); dx < int32(adr.Max.X); dx, d = dx+1, d+4 {
 					dxf := float64(dr.Min.X+int(dx)) + 0.5
-					sx0 := int(d2s[0]*dxf+d2s[1]*dyf+d2s[2]) + bias.X
-					sy0 := int(d2s[3]*dxf+d2s[4]*dyf+d2s[5]) + bias.Y
+					sx0 := int(float64(d2s[0]*dxf)+float64(d2s[1]*dyf)+d2s[2]) + bias.X
+					sy0 := int(float64(d2s[3]*dxf)+float64(d2s[4]*dyf)+d2s[5]) + bias.Y
 					if !(image.Point{sx0, sy0}).In(sr) {
 						continue
 					}
@@ -505,8 +505,8 @@ func transform_Uniform(dst Image, dr, adr image.Rectangle, d2s *f64.Aff3, src *i
 				dyf := float64(dr.Min.Y+int(dy)) + 0.5
 				for dx := int32(adr.Min.X); dx < int32(adr.Max.X); dx++ {
 					dxf := float64(dr.Min.X+int(dx)) + 0.5
-					sx0 := int(d2s[0]*dxf+d2s[1]*dyf+d2s[2]) + bias.X
-					sy0 := int(d2s[3]*dxf+d2s[4]*dyf+d2s[5]) + bias.Y
+					sx0 := int(float64(d2s[0]*dxf)+float64(d2s[1]*dyf)+d2s[2]) + bias.X
+					sy0 := int(float64(d2s[3]*dxf)+float64(d2s[4]*dyf)+d2s[5]) + bias.Y
 					if !(image.Point{sx0, sy0}).In(sr) {
 						continue
 					}

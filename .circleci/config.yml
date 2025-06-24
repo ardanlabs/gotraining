@@ -10,17 +10,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Go 1.21
+          name: Install Go 1.24
           command: |
-              sudo rm -rf /usr/local/go
-              wget -O go.tgz https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
-              sudo tar -C /usr/local -xzf go.tgz
-              which go
-              go version
+            sudo rm -rf /usr/local/go
+            wget -O go.tgz https://go.dev/dl/go1.24.4.linux-amd64.tar.gz
+            sudo tar -C /usr/local -xzf go.tgz
+            which go
+            go version
       - run:
           name: Run tests
           command: |
-              find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -and -not -wholename "*miki*" -exec dirname {} \; | uniq | xargs go test
+            find . -name "*_test.go" -not -wholename "*vendor*" -and -not -wholename "*student*" -and -not -wholename "*miki*" -exec dirname {} \; | uniq | xargs go test
 
       # Get a list of all non-vendor directories with test files and test them.
       # We could just do `go test ./...` but we have some packages that aren't

@@ -25,13 +25,13 @@ func Align(plots [][]*Plot, t draw.Tiles, dc draw.Canvas) [][]draw.Canvas {
 	}
 
 	// Create the initial tiles.
-	for j := 0; j < t.Rows; j++ {
+	for j := range t.Rows {
 		if len(plots[j]) != t.Cols {
 			panic(fmt.Errorf("plot: plots row %d columns (%d) != tiles columns (%d)", j, len(plots[j]), t.Rows))
 		}
 
 		o[j] = make([]draw.Canvas, len(plots[j]))
-		for i := 0; i < t.Cols; i++ {
+		for i := range t.Cols {
 			o[j][i] = t.At(dc, i, j)
 		}
 	}

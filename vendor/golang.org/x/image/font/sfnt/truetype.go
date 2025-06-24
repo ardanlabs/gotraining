@@ -77,7 +77,7 @@ func parseLoca(src *source, loca table, glyfOffset uint32, indexToLocFormat bool
 			locations[i] = 2*uint32(u16(buf[2*i:])) + glyfOffset
 		}
 	}
-	return locations, err
+	return locations, nil
 }
 
 // https://www.microsoft.com/typography/OTSPEC/glyf.htm says that "Each

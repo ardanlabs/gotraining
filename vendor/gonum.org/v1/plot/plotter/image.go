@@ -86,18 +86,18 @@ func (img *Image) transformFor(p *plot.Plot) image.Image {
 	}
 	b := img.img.Bounds()
 	o := image.NewNRGBA64(b)
-	for c := 0; c < img.cols; c++ {
+	for c := range img.cols {
 		// Find the equivalent image column after applying axis transforms.
 		cTrans := int(p.X.Norm(img.x(c)) * float64(img.cols))
 		// Find the equivalent column of the previous image column after applying
 		// axis transforms.
-		cPrevTrans := int(p.X.Norm(img.x(maxInt(c-1, 0))) * float64(img.cols))
-		for r := 0; r < img.rows; r++ {
+		cPrevTrans := int(p.X.Norm(img.x(max(c-1, 0))) * float64(img.cols))
+		for r := range img.rows {
 			// Find the equivalent image row after applying axis transforms.
 			rTrans := int(p.Y.Norm(img.y(r)) * float64(img.rows))
 			// Find the equivalent row of the previous image row after applying
 			// axis transforms.
-			rPrevTrans := int(p.Y.Norm(img.y(maxInt(r-1, 0))) * float64(img.rows))
+			rPrevTrans := int(p.Y.Norm(img.y(max(r-1, 0))) * float64(img.rows))
 			crColor := img.img.At(c, img.rows-r-1)
 			// Set all the pixels in the new image between (cPrevTrans, rPrevTrans)
 			// and (cTrans, rTrans) to the color at (c,r) in the original image.
@@ -110,13 +110,6 @@ func (img *Image) transformFor(p *plot.Plot) image.Image {
 		}
 	}
 	return o
-}
-
-func maxInt(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
 
 func (img *Image) x(c int) float64 {

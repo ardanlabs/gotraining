@@ -7,6 +7,7 @@ package plotter
 import (
 	"image/color"
 	"math"
+	"slices"
 	"sort"
 
 	"gonum.org/v1/plot"
@@ -64,8 +65,8 @@ func NewContour(g GridXYZ, levels []float64, p palette.Palette) *Contour {
 	default:
 		min, max = math.Inf(1), math.Inf(-1)
 		c, r := g.Dims()
-		for i := 0; i < c; i++ {
-			for j := 0; j < r; j++ {
+		for i := range c {
+			for j := range r {
 				v := g.Z(i, j)
 				if math.IsNaN(v) {
 					continue
@@ -98,8 +99,8 @@ var defaultQuantiles = []float64{0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99}
 func quantilesR7(g GridXYZ, p []float64) []float64 {
 	c, r := g.Dims()
 	data := make([]float64, 0, c*r)
-	for i := 0; i < c; i++ {
-		for j := 0; j < r; j++ {
+	for i := range c {
+		for j := range r {
 			if v := g.Z(i, j); !math.IsNaN(v) {
 				data = append(data, v)
 			}
@@ -267,8 +268,8 @@ func (h *Contour) DataRange() (xmin, xmax, ymin, ymax float64) {
 func (h *Contour) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	c, r := h.GridXYZ.Dims()
 	b := make([]plot.GlyphBox, 0, r*c)
-	for i := 0; i < c; i++ {
-		for j := 0; j < r; j++ {
+	for i := range c {
+		for j := range r {
 			b = append(b, plot.GlyphBox{
 				X: plt.X.Norm(h.GridXYZ.X(i)),
 				Y: plt.Y.Norm(h.GridXYZ.Y(j)),
@@ -651,7 +652,7 @@ func (c *contour) exciseQuick(conts contourSet) {
 			conts[&contour{
 				z:        c.z,
 				backward: path{wp[i]},
-				forward:  append(path(nil), wp[i+1:j+1]...),
+				forward:  slices.Clone(wp[i+1 : j+1]),
 			}] = struct{}{}
 			wp = append(wp[:i], wp[j:]...)
 			j = i + 1

@@ -40,7 +40,7 @@ func NewErrorPoints(f func([]float64) (c, l, h float64), pts ...plotter.XYer) (*
 	for i, xy := range pts {
 		xs := make([]float64, xy.Len())
 		ys := make([]float64, xy.Len())
-		for j := 0; j < xy.Len(); j++ {
+		for j := range xy.Len() {
 			xs[j], ys[j] = xy.XY(j)
 			if err := plotter.CheckFloats(xs[j], ys[j]); err != nil {
 				return nil, err

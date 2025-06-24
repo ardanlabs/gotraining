@@ -55,7 +55,7 @@ type Valuer interface {
 func Range(vs Valuer) (min, max float64) {
 	min = math.Inf(1)
 	max = math.Inf(-1)
-	for i := 0; i < vs.Len(); i++ {
+	for i := range vs.Len() {
 		v := vs.Value(i)
 		min = math.Min(min, v)
 		max = math.Max(max, v)
@@ -93,7 +93,7 @@ func CopyValues(vs Valuer) (Values, error) {
 		return nil, ErrNoData
 	}
 	cpy := make(Values, vs.Len())
-	for i := 0; i < vs.Len(); i++ {
+	for i := range vs.Len() {
 		cpy[i] = vs.Value(i)
 		if err := CheckFloats(cpy[i]); err != nil {
 			return nil, err
