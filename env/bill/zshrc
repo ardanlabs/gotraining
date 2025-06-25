@@ -16,10 +16,13 @@ export GOPATH=$HOME/code/go
 export PATH=$PATH:$GOPATH/bin
 
 # Python Stuff
-export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/Current/bin
-alias python=/usr/local/bin/python3
-alias python3=/usr/local/bin/python3
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+export PATH=$PATH:$HOME/.venv/bin
+test -d $HOME/.venv || uv venv $HOME/.venv > /dev/null 2>&1
 alias pip='python3 -m pip'
+
+# Rust Stuff
+export PATH=$PATH:$HOME/.cargo/bin
 
 # Quick Stuff
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
