@@ -12,8 +12,8 @@ require (
 	github.com/pborman/uuid v1.2.1
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b
-	golang.org/x/text v0.26.0
+	golang.org/x/exp v0.0.0-20250811191247-51f88131bc50
+	golang.org/x/text v0.28.0
 	golang.org/x/time v0.12.0
 	gonum.org/v1/plot v0.16.0
 )
@@ -28,6 +28,6 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	golang.org/x/image v0.28.0 // indirect
+	golang.org/x/image v0.30.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
