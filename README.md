@@ -66,6 +66,7 @@ _**Articles**_
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
+[GopherCon UK (2025) - Building a coding agent from scratch](https://www.youtube.com/watch?v=ybBVOa572Tw&list=PLDWZ5uzn69ewrYyHTNrXlrWVDjLiOX0Yb&index=21)  
 [GopherCon UK (2025) - K8s CPU Limits Deconstructed - Bill Kennedy](https://www.youtube.com/watch?v=jECXV2BdsI8&list=PLDWZ5uzn69ewrYyHTNrXlrWVDjLiOX0Yb&index=13)  
 [Golang Charlotte (2024) - Domain Driven, Data Oriented Architecture](https://www.youtube.com/watch?v=bQgNYK1Z5ho)  
 [GopherCon SG (2023) - K8s CPU Limits and Go](https://www.youtube.com/watch?v=Dm7yuoYTx54&list=PLq2Nv-Sh8Eba2gEaId35K2aAUFdpbKx9D&index=6)  
