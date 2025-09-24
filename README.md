@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/ardanlabs/gotraining.svg?style=svg)](https://circleci.com/gh/ardanlabs/gotraining)
 
-[Review our different courses and material](topics/README.md)  
+[Review our different courses and material](topics/README.md)
 
 Copyright 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, Ardan Labs  
 hello@ardanlabs.com
@@ -15,29 +15,29 @@ Ardan Labs (www.ardanlabs.com)
 hello@ardanlabs.com
 
 To attend any of our high-performance tranings check out this link:  
-https://www.ardanlabs.com/training  
+https://www.ardanlabs.com/training
 
 ## Index
 
-* [Purchase Video](https://github.com/ardanlabs/gotraining#purchase-video--book)
-* [Experience](https://github.com/ardanlabs/gotraining#our-experience)
-* [Teachers](https://github.com/ardanlabs/gotraining#our-teachers)
-* [More About Go](https://github.com/ardanlabs/gotraining#more-about-go)
-* [Minimal Qualified Student](https://github.com/ardanlabs/gotraining#minimal-qualified-student)
-* [Important Reading](https://github.com/ardanlabs/gotraining#important-reading)
-* [Before You Come To Class](https://github.com/ardanlabs/gotraining#before-you-come-to-class)
-* [Twitter Reactions](https://github.com/ardanlabs/gotraining#twitter)
-* [Testimonials](https://github.com/ardanlabs/gotraining#testimonials)
+- [Purchase Video](https://github.com/ardanlabs/gotraining#purchase-video--book)
+- [Experience](https://github.com/ardanlabs/gotraining#our-experience)
+- [Teachers](https://github.com/ardanlabs/gotraining#our-teachers)
+- [More About Go](https://github.com/ardanlabs/gotraining#more-about-go)
+- [Minimal Qualified Student](https://github.com/ardanlabs/gotraining#minimal-qualified-student)
+- [Important Reading](https://github.com/ardanlabs/gotraining#important-reading)
+- [Before You Come To Class](https://github.com/ardanlabs/gotraining#before-you-come-to-class)
+- [Twitter Reactions](https://github.com/ardanlabs/gotraining#twitter)
+- [Testimonials](https://github.com/ardanlabs/gotraining#testimonials)
 
 ## Purchase Video / Book
 
 The entire training class has been recorded to be made available to those who can't have the class taught at their company or who can't attend a conference. This is the entire class material.
 
-[education.ardanlabs.com](https://education.ardanlabs.com)  
+[education.ardanlabs.com](https://education.ardanlabs.com)
 
 There is a book for all of the material in the class.
 
-[Ultimate Go Notebook](https://education.ardanlabs.com/courses/ultimate-go-notebook)  
+[Ultimate Go Notebook](https://education.ardanlabs.com/courses/ultimate-go-notebook)
 
 ## Our Experience
 
@@ -47,7 +47,8 @@ Our classes are perfect for intermediate-level developers who have at least a fe
 
 ## Our Teachers
 
-### William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))  
+### William Kennedy ([@goinggodotnet](https://twitter.com/goinggodotnet))
+
 _William Kennedy is a managing partner at Ardan Labs in Miami, Florida. Ardan Labs is a high-performance development and training firm working with startups and fortune 500 companies. He is also a co-author of the book Go in Action, the author of the blog GoingGo.Net, and a founding member of GoBridge which is working to increase Go adoption through diversity._
 
 _**Video Training**_  
@@ -55,16 +56,17 @@ _**Video Training**_
 [Ardan Labs YouTube Channel](http://youtube.ardanlabs.com/)
 
 _**Blog**_  
-[Going Go](https://www.ardanlabs.com/blog/)    
+[Going Go](https://www.ardanlabs.com/blog/)
 
 _**Writing**_  
-[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)    
-[Go In Action](https://www.manning.com/books/go-in-action)  
+[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)  
+[Go In Action](https://www.manning.com/books/go-in-action)
 
 _**Articles**_  
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
+[GopherCon UK (2025) - K8s CPU Limits Deconstructed - Bill Kennedy](https://www.youtube.com/watch?v=jECXV2BdsI8&list=PLDWZ5uzn69ewrYyHTNrXlrWVDjLiOX0Yb&index=13)  
 [Golang Charlotte (2024) - Domain Driven, Data Oriented Architecture](https://www.youtube.com/watch?v=bQgNYK1Z5ho)  
 [GopherCon SG (2023) - K8s CPU Limits and Go](https://www.youtube.com/watch?v=Dm7yuoYTx54&list=PLq2Nv-Sh8Eba2gEaId35K2aAUFdpbKx9D&index=6)  
 [P99 Talk (2022) - Evaluating Performance In Go](https://www.youtube.com/watch?v=PYMs-urosXs)  
@@ -88,7 +90,7 @@ _**Video**_
 [GopherCon India (2015) - Go In Action](https://www.youtube.com/watch?v=QkPw8-Pf0SM)  
 [GolangUK (2016) - Dependency Management](https://youtu.be/CdhucJShJU8)  
 [GothamGo (2015) - Error Handling in Go](https://vimeo.com/115782573)  
-[GopherCon (2014) - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)  
+[GopherCon (2014) - Building an analytics engine](https://www.youtube.com/watch?v=EfJRQ1lGkUk)
 
 [Golang Charlotte (2023) - Domain Driven, Data Oriented Architecture with Bill Kennedy](https://www.youtube.com/watch?v=bQgNYK1Z5ho)  
 [Prague Meetup (2021) - Go Module Engineering Decisions](https://youtu.be/m8lgcXv2lhI)  
@@ -99,9 +101,9 @@ _**Video**_
 [Vancouver Meetup (2016) - Go Talk & Ask Me Anything With William Kennedy](https://www.youtube.com/watch?v=7YcLIbG1ekM&t=91s)  
 [Vancouver Meetup (2015) - Compiler Optimizations in Go](https://www.youtube.com/watch?v=AQipeq39Aek)  
 [Bangalore Meetup (2015) - OOP in Go](https://youtu.be/gRpUfjTwSOo)  
-[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)    
-[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)    
-[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)  
+[GoSF Meetup - The Nature of Constants in Go](https://www.youtube.com/watch?v=ZUCHMAoOgUQ)  
+[London Meetup - Mechanical Sympathy](https://skillsmatter.com/skillscasts/8353-london-go-usergroup)  
+[Vancouver Meetup - Decoupling From Change](https://www.youtube.com/watch?v=7YcLIbG1ekM&feature=youtu.be)
 
 _**Podcasts**_  
 [Ardan Labs Podcast: On Going Series](https://ardanlabs.buzzsprout.com/)  
@@ -112,8 +114,8 @@ _**Podcasts**_
 [GoTime: Learning and Teaching Go](https://changelog.com/gotime/72)  
 [GoTime: Bill Kennedy on Mechanical Sympathy](https://changelog.com/gotime/6)  
 [GoTime: Discussing Imposter Syndrome](https://changelog.com/gotime/30)  
-[HelloTechPros: Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)    
-[HelloTechPros: The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)  
+[HelloTechPros: Your Tech Interviews are Scaring Away Brilliant People](http://hellotechpros.com/william-kennedy-people)  
+[HelloTechPros: The 4 Cornerstones of Writing Software](http://hellotechpros.com/bill-kennedy-productivity)
 
 ## More About Go
 
@@ -127,20 +129,20 @@ Go is the fusion of performance and productivity wrapped in a language that soft
 [The eigenvector of "Why we moved from language X to language Y"](https://erikbern.com/2017/03/15/the-eigenvector-of-why-we-moved-from-language-x-to-language-y.html) - Erik Bernhardsson  
 [Learn More](https://talks.golang.org/2012/splash.article) - Go Team  
 [Simplicity is Complicated](https://www.youtube.com/watch?v=rFejpH_tAHM) - Rob Pike  
-[Getting Started In Go](http://aarti.github.io/2016/08/13/getting-started-in-go) - Aarti Parikh  
+[Getting Started In Go](http://aarti.github.io/2016/08/13/getting-started-in-go) - Aarti Parikh
 
 ## Minimal Qualified Student
 
 The material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class. Students with the following minimal background will get the most out of the class.
 
-* Studied CS in school or has a minimum of two years of experience programming full time professionally.
-* Familiar with structural and object oriented programming styles.
-* Has worked with arrays, lists, queues and stacks.
-* Understands processes, threads and synchronization at a high level.
-* Operating Systems
-	* Has worked with a command shell.
-	* Knows how to maneuver around the file system.
-	* Understands what environment variables are.
+- Studied CS in school or has a minimum of two years of experience programming full time professionally.
+- Familiar with structural and object oriented programming styles.
+- Has worked with arrays, lists, queues and stacks.
+- Understands processes, threads and synchronization at a high level.
+- Operating Systems
+  - Has worked with a command shell.
+  - Knows how to maneuver around the file system.
+  - Understands what environment variables are.
 
 ## Important Reading
 
@@ -148,7 +150,7 @@ Please check out this page of [important reading](reading/README.md). You will f
 
 ## Before You Come To Class
 
-The following is a set of tasks that can be done prior to showing up for class.  We will also do this in class if anyone has not completed it.  However, the more attendees that complete this ahead of time the more time we have to cover additional training material.
+The following is a set of tasks that can be done prior to showing up for class. We will also do this in class if anyone has not completed it. However, the more attendees that complete this ahead of time the more time we have to cover additional training material.
 
 ### Prep Work
 
@@ -156,7 +158,7 @@ The following is a set of tasks that can be done prior to showing up for class. 
 [Prepare You Mind](https://www.youtube.com/watch?v=xzK0hYKHzC4)
 
 **Reading Material**  
-http://go.dev/   
+http://go.dev/  
 https://www.ardanlabs.com/blog/
 
 **Exercises**  
@@ -165,14 +167,14 @@ https://gophercises.com/
 
 **Books**  
 https://www.manning.com/books/go-in-action  
-https://bitfieldconsulting.com/books/fundamentals  
+https://bitfieldconsulting.com/books/fundamentals
 
 ### Joining the Go Slack Community
 
-We use a slack channel to share links, code, and examples during the training.  This is free.  This is also the same slack community you will use after training to ask for help and interact with may Go experts around the world in the community.
+We use a slack channel to share links, code, and examples during the training. This is free. This is also the same slack community you will use after training to ask for help and interact with may Go experts around the world in the community.
 
-* Using the following link, fill out your name and email address: https://invite.slack.gobridge.org/
-* Check your email, and follow the link to the slack application.
+- Using the following link, fill out your name and email address: https://invite.slack.gobridge.org/
+- Check your email, and follow the link to the slack application.
 
 ### Installing Go
 
@@ -195,14 +197,14 @@ https://www.jetbrains.com/go/
 
 ### Installing the Training Material
 
-While many of the examples can be done using the online playground (http://play.golang.org), some may find it easier to complete them with their local editor.  To do so, you will want to load the training material locally to your machine.  From a command prompt, issue the following commands:
+While many of the examples can be done using the online playground (http://play.golang.org), some may find it easier to complete them with their local editor. To do so, you will want to load the training material locally to your machine. From a command prompt, issue the following commands:
 
 ```sh
 mkdir -p $(go env GOPATH)/src/github.com/ardanlabs && cd $_
 git clone https://github.com/ardanlabs/gotraining.git
 ```
 
-*NOTE:* This assumes you have Git installed.  If you don’t, you can find the installation instructions here: https://git-scm.com/
+_NOTE:_ This assumes you have Git installed. If you don’t, you can find the installation instructions here: https://git-scm.com/
 
 ## Twitter
 
@@ -224,18 +226,18 @@ _"Should be mentioned that though I am no expert, I have been using Go for about
 ## Testimonials
 
 Paul Yeoh  
-_"Today’s workshop was just mind blowing! You kept us all on the edge all day long - it was the most exhilarating all day workshop I have attended, period. The content was inspiring, moving - caused me to think deeply and gave me a lot of meat to chew on about what it is we are really doing as programmers, what an awesome day!
+\_"Today’s workshop was just mind blowing! You kept us all on the edge all day long - it was the most exhilarating all day workshop I have attended, period. The content was inspiring, moving - caused me to think deeply and gave me a lot of meat to chew on about what it is we are really doing as programmers, what an awesome day!
 
-And most of all, I just got such a kick out of the energy which you were putting out - larger than life, it felt like you were turned up to 200%. I really took a lot from it at many levels. Thank you!!"_
+And most of all, I just got such a kick out of the energy which you were putting out - larger than life, it felt like you were turned up to 200%. I really took a lot from it at many levels. Thank you!!"\_
 
 Ana-Maria Lazar, Software Engineer at Sainsbury's  
-_"Intensive crash course in Go that literally takes you to a whole new level. Not only Bill provides lots of examples and exercises to familiarize yourself faster with the language but there is also a lot of  information that can be applied to other languages as well. Perfect combination!"_
+_"Intensive crash course in Go that literally takes you to a whole new level. Not only Bill provides lots of examples and exercises to familiarize yourself faster with the language but there is also a lot of information that can be applied to other languages as well. Perfect combination!"_
 
 Susan Dady, Software Engineer - GE Digital  
 _"Rarely will you come across a course as worthwhile as this one. I learned many things relevant and useful in my daily work and William's energy kept me engaged. I came back to work excited to get coding in Go."_
 
 Richard Stanley, Software Engineer - GE Digital  
-_"Not only does Bill deeply understands the technical details of Go, he also can explain them in an effective, enthusiastic manner that helped me retain somewhat dry material.  His passion for the language and its capabilities are obvious through out his training."_
+_"Not only does Bill deeply understands the technical details of Go, he also can explain them in an effective, enthusiastic manner that helped me retain somewhat dry material. His passion for the language and its capabilities are obvious through out his training."_
 
 Shalab Goel, Ph.D.  
 _"It was a pleasure taking this course — learning lot of "dry" stuff in such animated and enthusiastic environment. The exercises were spot on for building what you called as "memory muscle. I have good amount of background in conventional multithreaded and distributed environments, but I have not put that knowledge to use more recently; so it was good refresher from that point of view as well. From Yuck to completely Wow-ed is how I will like to describe my respect for Go within three days. I knew nothing about GO before the course."_
@@ -258,5 +260,6 @@ _"I highly recommend William Kennedy / Ardan Lab for Go Training. William is ext
 Georgi Knox ([@GeorgiCodes](https://twitter.com/georgicodes))  
 _"The Intro to Go Workshop enabled me to come into class with very little knowledge of Go and leave having a firm grasp of the key concepts of the language. Each topic was followed up with hands-on coding problems which helped to solidify what I was learning. My teacher Bill was not only approachable, but very excited about the language and his enthusiasm was contagious. I enjoyed that we talked about some of the lower level implementation details of Go which was something that I had found lacking from some books on the language. Overall I would highly recommend this workshop to anyone looking to learn Go quickly and effectively."_
 
-___
+---
+
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
