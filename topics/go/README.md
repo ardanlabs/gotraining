@@ -454,7 +454,7 @@ Don't use an interface:
 [Methods, interfaces and Embedding](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html) - William Kennedy  
 [Composition with Go](https://www.ardanlabs.com/blog/2015/09/composition-with-go.html) - William Kennedy  
 [Reducing type hierarchies](https://www.ardanlabs.com/blog/2016/10/reducing-type-hierarchies.html) - William Kennedy  
-[Interface pollution in Go](https://medium.com/@rakyll/interface-pollution-in-go-7d58bccec275) - Burcu Dogan  
+[Interface pollution in Go](https://rakyll.org/interface-pollution/) - Burcu Dogan  
 [Application Focused API Design](https://www.ardanlabs.com/blog/2016/11/application-focused-api-design.html) - William Kennedy  
 [Avoid interface pollution](https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html) - William Kennedy  
 [Interface Values Are Valueless](https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html) - William Kennedy    
