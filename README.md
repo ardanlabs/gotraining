@@ -66,6 +66,7 @@ _**Articles**_
 [IT World Canada](http://www.itworldcanada.com/article/nascent-google-development-language-shows-promise-for-more-productive-coding/387449)
 
 _**Video**_  
+[GopherCon USA (2025): Go’s Trace Tooling and Concurrency](https://www.youtube.com/watch?v=Gqo0oCfZSjg&list=PL2ntRZ1ySWBeBA1lEnmD3vUedkRDvgnmw&index=5)  
 [GopherCon UK (2025) - Building a coding agent from scratch](https://www.youtube.com/watch?v=ybBVOa572Tw&list=PLDWZ5uzn69ewrYyHTNrXlrWVDjLiOX0Yb&index=21)  
 [GopherCon UK (2025) - K8s CPU Limits Deconstructed - Bill Kennedy](https://www.youtube.com/watch?v=jECXV2BdsI8&list=PLDWZ5uzn69ewrYyHTNrXlrWVDjLiOX0Yb&index=13)  
 [Golang Charlotte (2024) - Domain Driven, Data Oriented Architecture](https://www.youtube.com/watch?v=bQgNYK1Z5ho)  
