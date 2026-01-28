@@ -21,7 +21,7 @@ func main() {
 	slog.Info("server starting", "address", addr)
 
 	if err := http.ListenAndServe(addr, nil); err != nil {
-		slog.Error("server run", "error", err)
+		slog.Error("server ", "error", err)
 		os.Exit(1)
 	}
 }
