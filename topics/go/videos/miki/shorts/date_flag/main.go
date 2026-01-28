@@ -34,5 +34,6 @@ func main() {
 	reportDate := time.Now()
 	flag.Var(DateFlag{&reportDate}, "date", "report date (YYYY-MM-DD)")
 	flag.Parse()
+	
 	fmt.Println(reportDate.Date())
 }
