@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -18,5 +19,9 @@ func main() {
 	http.HandleFunc("/", handler)
 	const addr = ":8080"
 	slog.Info("server starting", "address", addr)
-	http.ListenAndServe(addr, nil)
+
+	if err := http.ListenAndServe(addr, nil); err != nil {
+		slog.Error("server run", "error", err)
+		os.Exit(1)
+	}
 }
