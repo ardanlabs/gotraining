@@ -28,6 +28,6 @@ func main() {
 		Bucket: "ardanlabs",
 		Path:   "/videos",
 	}
-	fmt.Println(r)
 
+	fmt.Println(r)
 }

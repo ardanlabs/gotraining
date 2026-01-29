@@ -2,7 +2,8 @@ package vms_test
 
 import (
 	"fmt"
-	"shorts/vms"
+
+	vms "shorts/vms/after"
 )
 
 func ExampleClient_Start() {
