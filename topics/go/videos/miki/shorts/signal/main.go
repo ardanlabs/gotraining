@@ -53,6 +53,7 @@ func main() {
 	case err := <-errCh:
 		if err != nil {
 			slog.Error("run", "error", err)
+			os.Exit(1)
 		}
 	}
 }
