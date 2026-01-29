@@ -30,7 +30,7 @@ func main() {
 	}
 
 	sigCh := make(chan os.Signal, 1)
-	signal.Notify(sigCh, os.Interrupt, unix.SIGTERM)
+	signal.Notify(sigCh, unix.SIGINT, unix.SIGTERM)
 	errCh := make(chan error, 1)
 
 	slog.Info("server starting", "address", srv.Addr)
