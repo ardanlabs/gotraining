@@ -1,6 +1,6 @@
 module shorts
 
-go 1.25
+go 1.25.6
 
 require (
 	github.com/ardanlabs/gotraining v0.0.0-20260105151429-2a5acb8bb67e
