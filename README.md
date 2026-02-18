@@ -59,7 +59,7 @@ _**Blog**_
 [Going Go](https://www.ardanlabs.com/blog/)
 
 _**Writing**_  
-[Running MongoDB Queries Concurrently With Go](http://blog.mongodb.org/post/80579086742/running-mongodb-queries-concurrently-with-go)  
+[Running MongoDB Queries Concurrently With Go](https://www.ardanlabs.com/blog/2014/02/running-queries-concurrently-against.html)
 [Go In Action](https://www.manning.com/books/go-in-action)
 
 _**Articles**_  
