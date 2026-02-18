@@ -12,8 +12,8 @@ codeberg.org/go-fonts/liberation/liberationserifbold
 codeberg.org/go-fonts/liberation/liberationserifbolditalic
 codeberg.org/go-fonts/liberation/liberationserifitalic
 codeberg.org/go-fonts/liberation/liberationserifregular
-# codeberg.org/go-latex/latex v0.1.0
-## explicit; go 1.23.0
+# codeberg.org/go-latex/latex v0.2.0
+## explicit; go 1.24
 codeberg.org/go-latex/latex
 codeberg.org/go-latex/latex/ast
 codeberg.org/go-latex/latex/drawtex
@@ -27,8 +27,8 @@ codeberg.org/go-latex/latex/token
 # codeberg.org/go-pdf/fpdf v0.11.1
 ## explicit; go 1.21
 codeberg.org/go-pdf/fpdf
-# git.sr.ht/~sbinet/gg v0.6.0
-## explicit; go 1.22
+# git.sr.ht/~sbinet/gg v0.7.0
+## explicit; go 1.24
 git.sr.ht/~sbinet/gg
 # github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b
 ## explicit; go 1.15
@@ -36,10 +36,6 @@ github.com/ajstarks/svgo
 # github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 ## explicit
 github.com/braintree/manners
-# github.com/campoy/embedmd v1.0.0
-## explicit
-github.com/campoy/embedmd
-github.com/campoy/embedmd/embedmd
 # github.com/davecgh/go-spew v1.1.1
 ## explicit
 github.com/davecgh/go-spew/spew
@@ -72,11 +68,11 @@ github.com/pmezard/go-difflib/difflib
 ## explicit; go 1.20
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
-# golang.org/x/exp v0.0.0-20250811191247-51f88131bc50
-## explicit; go 1.23.0
+# golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a
+## explicit; go 1.25.0
 golang.org/x/exp/constraints
-# golang.org/x/image v0.30.0
-## explicit; go 1.23.0
+# golang.org/x/image v0.36.0
+## explicit; go 1.24.0
 golang.org/x/image/ccitt
 golang.org/x/image/draw
 golang.org/x/image/font
@@ -92,8 +88,8 @@ golang.org/x/image/math/fixed
 golang.org/x/image/tiff
 golang.org/x/image/tiff/lzw
 golang.org/x/image/vector
-# golang.org/x/text v0.28.0
-## explicit; go 1.23.0
+# golang.org/x/text v0.34.0
+## explicit; go 1.24.0
 golang.org/x/text/encoding
 golang.org/x/text/encoding/charmap
 golang.org/x/text/encoding/internal
@@ -112,8 +108,8 @@ golang.org/x/text/message
 golang.org/x/text/message/catalog
 golang.org/x/text/transform
 golang.org/x/text/unicode/norm
-# golang.org/x/time v0.12.0
-## explicit; go 1.23.0
+# golang.org/x/time v0.14.0
+## explicit; go 1.24.0
 golang.org/x/time/rate
 # gonum.org/v1/plot v0.16.0
 ## explicit; go 1.23.0

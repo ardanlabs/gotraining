@@ -66,7 +66,7 @@ func TestHash(t *testing.T) {
 
 			if h.Len() != 2 {
 				t.Errorf("\t%s\tTest %d:\tShould have the correct number of entries.", failed, testID)
-				t.Fatalf("\t\tTest %d:\tGot %q, Expected %q", testID, h.Len(), 2)
+				t.Fatalf("\t\tTest %d:\tGot %d, Expected %d", testID, h.Len(), 2)
 			}
 			t.Logf("\t%s\tTest %d:\tShould have the correct number of entries.", succeed, testID)
 
@@ -78,7 +78,7 @@ func TestHash(t *testing.T) {
 
 			if v != v1 {
 				t.Errorf("\t%s\tTest %d:\tShould have the correct value after retrieve.", failed, testID)
-				t.Fatalf("\t\tTest %d:\tGot %q, Expected %q", testID, v, v1)
+				t.Fatalf("\t\tTest %d:\tGot %d, Expected %d", testID, v, v1)
 			}
 			t.Logf("\t%s\tTest %d:\tShould have the correct value after retrieve.", succeed, testID)
 
@@ -93,7 +93,7 @@ func TestHash(t *testing.T) {
 
 			if v != v1b {
 				t.Errorf("\t%s\tTest %d:\tShould have the correct value after retrieve.", failed, testID)
-				t.Fatalf("\t\tTest %d:\tGot %q, Expected %q", testID, v, v1)
+				t.Fatalf("\t\tTest %d:\tGot %d, Expected %d", testID, v, v1b)
 			}
 			t.Logf("\t%s\tTest %d:\tShould have the correct value after retrieve.", succeed, testID)
 
@@ -121,8 +121,7 @@ func TestHash(t *testing.T) {
 			h.Do(fn)
 			if count != h.Len() {
 				t.Errorf("\t%s\tTest %d:\tShould be able to run Do %d times.", failed, testID, count)
-				t.Fatalf("\t\tTest %d:\tGot %q, Expected %q", testID, v, v1)
-				t.Fatalf("Do ran %d times, expected %d", count, h.Len())
+				t.Fatalf("\t\tTest %d:\tGot %d, Expected %d", testID, count, h.Len())
 			}
 			t.Logf("\t%s\tTest %d:\tShould be able to run Do %d times.", succeed, testID, count)
 		}

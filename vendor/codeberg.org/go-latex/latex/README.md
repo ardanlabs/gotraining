@@ -1,7 +1,7 @@
 # latex
 
 [![go.dev reference](https://pkg.go.dev/badge/codeberg.org/go-latex/latex)](https://pkg.go.dev/codeberg.org/go-latex/latex)
-[![Codeberg Release](https://img.shields.io/gitea/v/release/go-latex/latex?gitea_url=https%3A%2F%2Fcodeberg.org)](https://codeberg.org/go-latex/latex/releases)
+[![Codeberg Release](https://img.shields.io/gitea/v/release/go-latex/latex?gitea_url=https%3A%2F%2Fcodeberg.org%2F)](https://codeberg.org/go-latex/latex/releases)
 [![CI](https://codeberg.org/go-latex/latex/workflows/CI/badge.svg)](https://codeberg.org/go-latex/latex/actions)
 [![codecov](https://codecov.io/gh/go-latex/latex/branch/main/graph/badge.svg)](https://codecov.io/gh/go-latex/latex)
 [![GoDoc](https://godoc.org/codeberg.org/go-latex/latex?status.svg)](https://godoc.org/codeberg.org/go-latex/latex)

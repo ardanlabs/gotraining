@@ -11,20 +11,6 @@ import (
 	"math"
 )
 
-func floatingMax(x, y float32) float32 {
-	if x > y {
-		return x
-	}
-	return y
-}
-
-func floatingMin(x, y float32) float32 {
-	if x < y {
-		return x
-	}
-	return y
-}
-
 func floatingFloor(x float32) int32 { return int32(math.Floor(float64(x))) }
 func floatingCeil(x float32) int32  { return int32(math.Ceil(float64(x))) }
 
@@ -53,7 +39,7 @@ func (z *Rasterizer) floatingLineTo(bx, by float32) {
 	width := int32(z.size.X)
 
 	for ; y < yMax; y++ {
-		dy := floatingMin(float32(y+1), by) - floatingMax(float32(y), ay)
+		dy := min(float32(y+1), by) - max(float32(y), ay)
 
 		// The "float32" in expressions like "float32(foo*bar)" here and below
 		// look redundant, since foo and bar already have type float32, but are

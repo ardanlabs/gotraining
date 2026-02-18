@@ -721,7 +721,7 @@ func Decode(r io.Reader) (img image.Image, err error) {
 			switch d.firstVal(tCompression) {
 
 			// According to the spec, Compression does not have a default value,
-			// but some tools interpret a missing Compression value as none so we do
+			// but some tools interpret a missing Compression value as none, so we do
 			// the same.
 			case cNone, 0:
 				if b, ok := d.r.(*buffer); ok {

@@ -34,7 +34,7 @@ import (
 // Both implementations of line segmentation rasterization (see raster_fixed.go
 // and raster_floating.go) implement the same algorithm (in ideal, infinite
 // precision math) but they perform differently in practice. The fixed point
-// math version is roughtly 1.25x faster (on GOARCH=amd64) on the benchmarks,
+// math version is roughly 1.25x faster (on GOARCH=amd64) on the benchmarks,
 // but at sufficiently large scales, the computations will overflow and hence
 // show rendering artifacts. The floating point math version has more
 // consistent quality over larger scales, but it is significantly slower.
@@ -251,7 +251,7 @@ func (z *Rasterizer) CubeTo(bx, by, cx, cy, dx, dy float32) {
 // The reason for the subdivision by n is that I expect the "flatness"
 // computation to be semi-expensive (it's done once rather than on each
 // potential subdivision) and also because you'll often get fewer subdivisions.
-// Taking a circular arc as a simplifying assumption (ie a spherical cow),
+// Taking a circular arc as a simplifying assumption (i.e., a spherical cow),
 // where I get n, a recursive approach would get 2^⌈lg n⌉, which, if I haven't
 // made any horrible mistakes, is expected to be 33% more in the limit.
 func devSquared(ax, ay, bx, by, cx, cy float32) float32 {
