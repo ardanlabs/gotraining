@@ -15,10 +15,8 @@ ulimit -n 200000
 export GOPATH=$HOME/code/go
 export PATH=$PATH:$GOPATH/bin
 
-# Python Stuff
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PATH=$PATH:$HOME/.venv/bin
-test -d $HOME/.venv || uv venv $HOME/.venv > /dev/null 2>&1
+# Python Stuff: use Homebrew's Python for python and python3.
+export PATH="/opt/homebrew/opt/python/libexec/bin:/opt/homebrew/bin:$PATH"
 alias pip='python3 -m pip'
 
 # Rust Stuff
